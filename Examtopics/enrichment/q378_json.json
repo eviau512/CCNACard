@@ -1,0 +1,23 @@
+{
+  "id": 378,
+  "qid": "Q494",
+  "page_num": 101,
+  "type": "Single Choice",
+  "prompt": "Refer to the exhibit. An OSPF neighbor relationship must be configured using these guidelines: ✑R1 is only permitted to establish a neighbor with R2. ✑R1 will never participate in DR elections. ✑R1 will use a router-id of 10.1.1.1. Which configuration must be used?",
+  "image": "<len 26023>",
+  "answer_image": null,
+  "options": [
+    {
+      "label": "A",
+      "text": "B."
+    },
+    {
+      "label": "C",
+      "text": "D."
+    }
+  ],
+  "answer": [
+    "A"
+  ],
+  "explanation": "• Correct Answer: A. B.\n\n• Exhibit Analysis: Based on the exhibit topology and configuration parameters, A. B. matches the required operational state and routing/switching logic.\n\n• Distractor Evaluation: The remaining options (C) represent non-matching values, invalid syntax, or incorrect operational states for this scenario."
+}

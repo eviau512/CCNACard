@@ -1,0 +1,855 @@
+[
+  {
+    "id": 1282,
+    "qid": "Q1282",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two reasons for an engineer to configure a floating static route? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "to enable fallback static routing when the dynamic routing protocol fails"
+      },
+      {
+        "label": "B",
+        "text": "to route traffic differently based on the source IP of the packet"
+      },
+      {
+        "label": "C",
+        "text": "to automatically route traffic on a secondary path when the primary path goes down"
+      },
+      {
+        "label": "D",
+        "text": "to support load balancing via static routing"
+      },
+      {
+        "label": "E",
+        "text": "to control the return path of traffic that is sent from the router"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1283,
+    "qid": "Q1283",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. A router received these five routes from different routing information sources. Which two routes does the router install inIts routing table?(Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "OSPF route 10.0.0.0/30"
+      },
+      {
+        "label": "B",
+        "text": "IBGP route 10.0.0.0/30"
+      },
+      {
+        "label": "C",
+        "text": "OSPF route 10.0.0.0/16"
+      },
+      {
+        "label": "D",
+        "text": "EIGRP route 10.0.0.1/32"
+      },
+      {
+        "label": "E",
+        "text": "RIP route 10.0.0.0/30"
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1284,
+    "qid": "Q1284",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two minimum parameters must be configured on an active interface to enable OSPFV2 to operate? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "OSPF process ID"
+      },
+      {
+        "label": "B",
+        "text": "OSPF MD5 authentication key"
+      },
+      {
+        "label": "C",
+        "text": "OSPF stub flag"
+      },
+      {
+        "label": "D",
+        "text": "IPv6 address"
+      },
+      {
+        "label": "E",
+        "text": "OSPF area"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1285,
+    "qid": "Q1285",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. The loopback1 interface of the Atlanta router must reach the loopback3 interface of the Washington router. Which twoStatic host routes must be configured on the New York router? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ipv6 route 2000::3/128 s0/0/0"
+      },
+      {
+        "label": "B",
+        "text": "Ipv6 route 2000::1/128 s0/0/1"
+      },
+      {
+        "label": "C",
+        "text": "Ipv6 route 2000::1/128 2012::1"
+      },
+      {
+        "label": "D",
+        "text": "Ipv6 route 2000::1/128 2012::2"
+      },
+      {
+        "label": "E",
+        "text": "ipv6 route 2000::3/128 2023::3"
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1286,
+    "qid": "Q1286",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two actions influence the EIGRP route selection process? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The advertised distance is calculated by a downstream neighbor to inform the local router of the bandwidth on the link."
+      },
+      {
+        "label": "B",
+        "text": "The router calculates the feasible distance of all paths to the destination route."
+      },
+      {
+        "label": "C",
+        "text": "The router must use the advertised distance as the metric for any given route."
+      },
+      {
+        "label": "D",
+        "text": "The router calculates the best backup path to the destination route and assigns it as the feasible successor."
+      },
+      {
+        "label": "E",
+        "text": "The router calculates the reported distance by multiplying the delay on the exiting interface by 256."
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1287,
+    "qid": "Q1287",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two outcomes are predictable behaviors for HSRP? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The two routers negotiate one router as the active router and the other as the standby router."
+      },
+      {
+        "label": "B",
+        "text": "The two routers share the same interface IP address, and default gateway traffic is load-balanced between them."
+      },
+      {
+        "label": "C",
+        "text": "The two routers synchronize configurations to provide consistent packet forwarding."
+      },
+      {
+        "label": "D",
+        "text": "Each router has a different IP address, both routers act as the default gateway on the LAN, and traffic is load-balanced between them."
+      },
+      {
+        "label": "E",
+        "text": "The two routers share a virtual IP address that is used as the default gateway for devices on the LAN."
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1288,
+    "qid": "Q1288",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "R efer to the exhibit. An engineer is configuring the New York router to reach the Lo1 interface of the Atlanta router using interface Se0/0/0 asThe primary path.Which two commands must be configured on the New York router so that it reaches the Lo1 interface of the Atlanta router via WashingtonWhen the link betweenNew York and Atlanta goes down? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ipv6 route 2000::1/128 2012::1"
+      },
+      {
+        "label": "B",
+        "text": "Ipv6 route 2000::1/128 2012::1 5"
+      },
+      {
+        "label": "C",
+        "text": "Ipv6 route 2000::1/128 2012::2"
+      },
+      {
+        "label": "D",
+        "text": "Ipv6 route 2000::1/128 2023::2 5"
+      },
+      {
+        "label": "E",
+        "text": "Ipv6 route 2000::1/128 2023::3 5"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1289,
+    "qid": "Q1289",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which of the following dynamic routing protocols are Distance Vector routing protocols?Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "IS-IS"
+      },
+      {
+        "label": "B",
+        "text": "EIGRP"
+      },
+      {
+        "label": "C",
+        "text": "OSPF"
+      },
+      {
+        "label": "D",
+        "text": "BGP"
+      },
+      {
+        "label": "E",
+        "text": "RIP"
+      }
+    ],
+    "answer": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": 1290,
+    "qid": "Q1290",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two statements about exterior routing protocols are true? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "They determine the optimal within an autonomous system."
+      },
+      {
+        "label": "B",
+        "text": "They determine the optimal path between autonomous systems."
+      },
+      {
+        "label": "C",
+        "text": "BGP is the current standard exterior routing protocol."
+      },
+      {
+        "label": "D",
+        "text": "Most modern networking supports both EGP and BGP for external routing."
+      },
+      {
+        "label": "E",
+        "text": "Most modern network routers support both EGP and EIGRP for external routing."
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1291,
+    "qid": "Q1291",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The EIGRP administrative distance was manually changed from 90 to 170."
+      },
+      {
+        "label": "B",
+        "text": "There are 20 different network masks within the 10.0.0.0/8 network."
+      },
+      {
+        "label": "C",
+        "text": "Ten routes are equally load-balanced between Te0/1/0.100 and Te0/2/0.100."
+      },
+      {
+        "label": "D",
+        "text": "The 10.0.0.0/8 network was learned via external EIGRP."
+      },
+      {
+        "label": "E",
+        "text": "A static default route to 10.85.33.14 was de ned."
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1292,
+    "qid": "Q1292",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two circumstances can prevent two routers from establishing an OSPF neighbor adjacency? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "mismatched autonomous system numbers"
+      },
+      {
+        "label": "B",
+        "text": "an ACL blocking traffic from multicast address 224.0.0.10"
+      },
+      {
+        "label": "C",
+        "text": "mismatched process IDs"
+      },
+      {
+        "label": "D",
+        "text": "mismatched hello timers and dead timers"
+      },
+      {
+        "label": "E",
+        "text": "use of the same router ID on both devices"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1293,
+    "qid": "Q1293",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which three describe the reasons large OSPF networks use a hierarchical design? (Choose three.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "to speed up convergence"
+      },
+      {
+        "label": "B",
+        "text": "to reduce routing overhead"
+      },
+      {
+        "label": "C",
+        "text": "to lower costs by replacing routers with distribution layer switches"
+      },
+      {
+        "label": "D",
+        "text": "to decrease latency by increasing bandwidth"
+      },
+      {
+        "label": "E",
+        "text": "to confine network instability to single areas of the network"
+      },
+      {
+        "label": "F",
+        "text": "to reduce the complexity of router configuration"
+      }
+    ],
+    "answer": [
+      "A",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": 1294,
+    "qid": "Q1294",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. If RTR01 is configured as shown, which three addresses will be received by other routers that are running EIGRP on theNetwork? (Choose three.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.2.0"
+      },
+      {
+        "label": "B",
+        "text": "10.4.3.0"
+      },
+      {
+        "label": "C",
+        "text": "10.0.0.0"
+      },
+      {
+        "label": "D",
+        "text": "172.16.0.0"
+      },
+      {
+        "label": "E",
+        "text": "172.16.4.0"
+      },
+      {
+        "label": "F",
+        "text": "192.168.0.0"
+      }
+    ],
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1295,
+    "qid": "Q1295",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two statements about eBGP neighbor relationships are true? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The two devices must reside in different autonomous systems"
+      },
+      {
+        "label": "B",
+        "text": "Neighbors must be specifically declared in the configuration of each device"
+      },
+      {
+        "label": "C",
+        "text": "They can be created dynamically after the network statement is configured"
+      },
+      {
+        "label": "D",
+        "text": "The two devices must reside in the same autonomous system"
+      },
+      {
+        "label": "E",
+        "text": "The two devices must have matching timer settings"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1296,
+    "qid": "Q1296",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which statements describe the routing protocol OSPF? (Choose three.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It supports VLSM."
+      },
+      {
+        "label": "B",
+        "text": "It is used to route between autonomous systems."
+      },
+      {
+        "label": "C",
+        "text": "It confines network instability to one area of the network."
+      },
+      {
+        "label": "D",
+        "text": "It increases routing overhead on the network."
+      },
+      {
+        "label": "E",
+        "text": "It allows extensive control of routing updates."
+      },
+      {
+        "label": "F",
+        "text": "It is simpler to configure than RIP v2."
+      }
+    ],
+    "answer": [
+      "A",
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1297,
+    "qid": "Q1297",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. A network associate has configured OSPF with the command:City(config-router)# network 192.168.12.64 0.0.0.63 area 0After completing the configuration, the associate discovers that not all the interfaces are participating in OSPF. Which three of the interfacesShown in the exhibit will participate in OSPF according to this configuration statement? (Choose three.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "FastEthernet0 /0"
+      },
+      {
+        "label": "B",
+        "text": "FastEthernet0 /1"
+      },
+      {
+        "label": "C",
+        "text": "Serial0/0"
+      },
+      {
+        "label": "D",
+        "text": "Serial0/1.102"
+      },
+      {
+        "label": "E",
+        "text": "Serial0/1.103"
+      },
+      {
+        "label": "F",
+        "text": "Serial0/1.104"
+      }
+    ],
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1298,
+    "qid": "Q1298",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two statements are true about the loopback address that is configured on RouterB? (Choose two.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It ensures that data will be forwarded by RouterB."
+      },
+      {
+        "label": "B",
+        "text": "It provides stability for the OSPF process on RouterB."
+      },
+      {
+        "label": "C",
+        "text": "It specifies that the router ID for RouterB should be 10.0.0.1."
+      },
+      {
+        "label": "D",
+        "text": "It decreases the metric for routes that are advertised from RouterB."
+      },
+      {
+        "label": "E",
+        "text": "It indicates that RouterB should be elected the DR for the LAN."
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1299,
+    "qid": "Q1299",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "The OSPF Hello protocol performs which of the following tasks? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It provides dynamic neighbor discovery."
+      },
+      {
+        "label": "B",
+        "text": "It detects unreachable neighbors in 90 second intervals."
+      },
+      {
+        "label": "C",
+        "text": "It maintains neighbor relationships."
+      },
+      {
+        "label": "D",
+        "text": "It negotiates correctness parameters between neighboring interfaces."
+      },
+      {
+        "label": "E",
+        "text": "It uses timers to elect the router with the fastest links as the designated router."
+      },
+      {
+        "label": "F",
+        "text": "It broadcasts hello packets throughout the internetwork to discover all routers that are running OSPF."
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1300,
+    "qid": "Q1300",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two requirements for an HSRP group? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "exactly one active router"
+      },
+      {
+        "label": "B",
+        "text": "one or more standby routers"
+      },
+      {
+        "label": "C",
+        "text": "one or more backup virtual routers"
+      },
+      {
+        "label": "D",
+        "text": "exactly one standby active router"
+      },
+      {
+        "label": "E",
+        "text": "exactly one backup virtual router"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1301,
+    "qid": "Q1301",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two pieces of information can you learn by viewing the routing table? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "whether an ACL was applied inbound or outbound to an interface"
+      },
+      {
+        "label": "B",
+        "text": "the EIGRP or BGP autonomous system"
+      },
+      {
+        "label": "C",
+        "text": "whether the administrative distance was manually or dynamically configured"
+      },
+      {
+        "label": "D",
+        "text": "which neighbor adjacencies are established"
+      },
+      {
+        "label": "E",
+        "text": "the length of time that a route has been known"
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1302,
+    "qid": "Q1302",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "An engineer must configure an OSPF neighbor relationship between router R1 and R3. The authentication configuration has been configured And the connecting interfaces are in the same 192.168.1.0/30 subnet. What are the next two steps to complete the configuration? (Choose Two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure the interfaces as OSPF active on both sides"
+      },
+      {
+        "label": "B",
+        "text": "configure both interfaces with the same area ID"
+      },
+      {
+        "label": "C",
+        "text": "configure the hello and dead timers to match on both sides"
+      },
+      {
+        "label": "D",
+        "text": "configure the same process ID for the router OSPF process"
+      },
+      {
+        "label": "E",
+        "text": "configure the same router ID on both routing processes"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1303,
+    "qid": "Q1303",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. The New York router is configured with static routes pointing to the Atlanta and Washington sites.Which two tasks must be performed so that the Se0/0/0 interfaces on the Atlanta and Washington routers reach one another? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Configure the ipv6 route 2023::/126 2012::1 command on the Atlanta router."
+      },
+      {
+        "label": "B",
+        "text": "Configure the ipv6 route 2012::/126 2023::2 command on the Washington router."
+      },
+      {
+        "label": "C",
+        "text": "Configure the ipv6 route 2012::/126 2023::1 command on the Washington router."
+      },
+      {
+        "label": "D",
+        "text": "Configure the ipv6 route 2023::/126 2012::2 command on the Atlanta router."
+      },
+      {
+        "label": "E",
+        "text": "Configure the ipv6 route 2012::/126 s0/0/0 command on the Atlanta router."
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1304,
+    "qid": "Q1304",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the graphic. R1 is unable to establish an OSPF neighbor relationship with R3. What are possible reasons for this problem? (ChooseTwo.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "All of the routers need to be configured for backbone Area 1."
+      },
+      {
+        "label": "B",
+        "text": "R1 and R2 are the DR and BDR, so OSPF will not establish neighbor adjacency with R3."
+      },
+      {
+        "label": "C",
+        "text": "A static route has been configured from R1 to R3 and prevents the neighbor adjacency from being established."
+      },
+      {
+        "label": "D",
+        "text": "The hello and dead interval timers are not set to the same values on R1 and R3."
+      },
+      {
+        "label": "E",
+        "text": "EIGRP is also configured on these routers with a lower administrative distance."
+      },
+      {
+        "label": "F",
+        "text": "R1 and R3 are configured in different areas."
+      }
+    ],
+    "answer": [
+      "D",
+      "F"
+    ]
+  },
+  {
+    "id": 1305,
+    "qid": "Q1305",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two prefixes are included in this routing table entry? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.1.17"
+      },
+      {
+        "label": "B",
+        "text": "192.168.1.61"
+      },
+      {
+        "label": "C",
+        "text": "192.168.1.64"
+      },
+      {
+        "label": "D",
+        "text": "192.168.1.127"
+      },
+      {
+        "label": "E",
+        "text": "192.168.1.254"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1306,
+    "qid": "Q1306",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refe r to the exhibit. Which two configurations must the engineer apply on this network so that R1 becomes the DR? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "R3(config)#interface fastethernet 0/0 R3(config-if)#ip ospf priority 0"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#router ospf 1 R1(config-router)#router-id 192.168.100.1"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#interface fastethernet 0/0 R1(config-if)#ip ospf priority 200"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#interface fastethernet 0/0 R1(config-if)#ip ospf priority 0"
+      },
+      {
+        "label": "E",
+        "text": "R3(config)#interface fastethernet 0/0 R3(config-if)#ip ospf priority 200"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  }
+]

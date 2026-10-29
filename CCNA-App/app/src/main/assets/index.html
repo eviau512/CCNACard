@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>CCNA Practice Cards</title>
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="ios_simulator.css">
+</head>
+<body>
+
+  <!-- TOP APP BAR -->
+  <header>
+    <div class="header-left">
+      <!-- Weakness Button with title above and count badge below -->
+      <button class="weakness-btn" id="weaknessBtn" onclick="openWeaknessModal()" title="Weakness Assessment">
+        <span class="weakness-title">📊 Weakness</span>
+        <span class="weakness-count" id="weaknessBadge">0 weak</span>
+      </button>
+    </div>
+
+    <div class="header-center">
+      <div class="app-title-row">
+        <!-- 2D Blue Rounded Rectangle with Thick Border: Top & Bottom Left/Right Arrows with Cisco Stagger -->
+        <svg class="app-logo" viewBox="0 0 48 48" style="width: 26px; height: 26px;">
+          <rect x="3" y="3" width="42" height="42" rx="9" fill="#0096D6" stroke="#004578" stroke-width="4"/>
+          <!-- Upper Group: Left arrow lower (y=20), Right arrow higher (y=14) -->
+          <line x1="26" y1="14" x2="34" y2="14" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          <polygon points="38,14 33,10.5 33,17.5" fill="#fff"/>
+          <line x1="14" y1="20" x2="22" y2="20" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          <polygon points="10,20 15,16.5 15,23.5" fill="#fff"/>
+          <!-- Lower Group: Left arrow lower (y=34), Right arrow higher (y=28) -->
+          <line x1="26" y1="28" x2="34" y2="28" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          <polygon points="38,28 33,24.5 33,31.5" fill="#fff"/>
+          <line x1="14" y1="34" x2="22" y2="34" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          <polygon points="10,34 15,30.5 15,37.5" fill="#fff"/>
+        </svg>
+        <span class="app-title">CCNA</span>
+      </div>
+      <div class="session-stats" id="sessionStats">Mastered: 0 / 1,396</div>
+    </div>
+
+    <div class="header-right">
+      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Theme">🌙</button>
+      <button class="icon-btn" id="settingsBtn" onclick="openSettingsModal()" title="Settings">⚙️</button>
+    </div>
+  </header>
+
+  <!-- RETRY QUEUE BANNER -->
+  <div class="queue-banner" id="queueBanner">
+    <span id="queueBannerText">🔁 1 missed question scheduled to reappear shortly</span>
+  </div>
+
+  <!-- TARGETED DRILL BANNER -->
+  <div class="drill-banner" id="drillBanner">
+    <span id="drillBannerText">🎯 Focused Drill: OSPFv2 Routing</span>
+    <button class="drill-exit-btn" onclick="exitDrillMode()">Exit Drill</button>
+  </div>
+
+  <!-- MAIN CARD CONTAINER -->
+  <main id="cardContainer">
+    <div class="card" id="activeCard">
+      <!-- Top Badges -->
+      <div class="card-top">
+        <div class="card-tags">
+          <span class="badge badge-qid" id="cardQid">#1</span>
+          <span class="badge badge-domain" id="cardDomain">IP Connectivity</span>
+          <span class="badge badge-topic" id="cardTopic">OSPFv2</span>
+          <span class="badge badge-retry" id="cardRetryBadge" style="display:none;">Review</span>
+        </div>
+        <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()">★</button>
+      </div>
+
+      <!-- Prompt -->
+      <div class="prompt" id="cardPrompt">Loading CCNA question bank...</div>
+
+      <!-- Exhibit Image -->
+      <div class="exhibit-wrap" id="cardExhibitWrap" style="display:none;" onclick="zoomExhibit()">
+        <img class="exhibit-img" id="cardExhibitImg" alt="Network Topology Exhibit">
+        <div class="zoom-hint">🔍 Tap to Zoom</div>
+      </div>
+
+      <!-- Options List -->
+      <div class="options-list" id="cardOptionsList"></div>
+
+      <!-- IDK Button -->
+      <div class="idk-wrap" id="idkWrap">
+        <button class="idk-btn" id="idkBtn" onclick="handleIdk()">
+          <span>❓ I Don't Know (Mark as Weak Topic)</span>
+        </button>
+      </div>
+
+      <!-- Explanation Card -->
+      <div class="explanation-card" id="explanationCard">
+        <div class="exp-header">
+          <span>Official Rationale & Analysis</span>
+          <span class="exp-ans" id="expAnswer">Answer: B</span>
+        </div>
+        <div class="exp-text" id="expText"></div>
+        <div class="exp-misconception" id="expMisconception" style="display:none;">
+          <span>⚠️</span>
+          <span id="expMisconceptionText"></span>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="action-bar">
+        <button class="btn btn-primary" id="actionBtn" onclick="submitAnswer()">Check Answer</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- WEAKNESS ASSESSMENT MODAL -->
+  <div class="modal-overlay" id="weaknessModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">📊 Weakness Assessment</div>
+        <button class="modal-close" onclick="closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- 50 / 200 / 500 Window Tabs -->
+        <div class="window-tabs">
+          <button class="window-tab active" id="tab50" onclick="switchWindow(50)">Last 50</button>
+          <button class="window-tab" id="tab200" onclick="switchWindow(200)">Last 200</button>
+          <button class="window-tab" id="tab500" onclick="switchWindow(500)">Last 500</button>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-val" id="statAttempts">0</div>
+            <div class="stat-lbl">Attempts</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="statAccuracy">0%</div>
+            <div class="stat-lbl">Accuracy</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="statIdk">0</div>
+            <div class="stat-lbl">IDK Count</div>
+          </div>
+        </div>
+
+        <div style="font-weight: 700; font-size: 0.95rem; margin-top: 4px;">Top Vulnerable Knowledge Points</div>
+        <div class="weak-list" id="weakList">
+          <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 20px;">
+            Answer a few questions to generate your diagnostic profile.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">⚙️ Practice Settings</div>
+        <button class="modal-close" onclick="closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; gap: 8px;">
+          <span style="font-size:0.9rem; font-weight:600;">Jump to Question #:</span>
+          <div style="display:flex; gap:6px;">
+            <input type="number" id="jumpQidInput" placeholder="e.g. 1056" style="width:100px; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:0.85rem;">
+            <button class="btn btn-primary" style="padding:6px 14px; width:auto; font-size:0.85rem;" onclick="jumpToQuestion()">Go</button>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-bottom: 12px;">
+          <button class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; background:var(--bg-secondary); color:var(--primary); border:1px solid var(--primary);" onclick="jumpToType('drag')">🧩 Practice Drag & Drop</button>
+          <button class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="jumpToType('sim')">🛠️ Practice Lab Sims</button>
+        </div>
+        <hr style="border:0; border-top:1px solid var(--border-color); margin-bottom: 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+          <span>Shuffle Options (乱序选项):</span>
+          <input type="checkbox" id="shuffleOptionsToggle" checked onchange="updateShuffleOptions(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Retry interval (questions later):</span>
+            <span id="retryIntervalLabel" style="font-size:0.8rem; color:var(--primary); font-weight:700;">7 Qs (Default)</span>
+          </div>
+          <div class="retry-pills" id="retryPills">
+            <button type="button" class="retry-pill" data-val="3" onclick="updateRetryInterval(3)">3 Qs</button>
+            <button type="button" class="retry-pill" data-val="5" onclick="updateRetryInterval(5)">5 Qs</button>
+            <button type="button" class="retry-pill active" data-val="7" onclick="updateRetryInterval(7)">7 Qs ★</button>
+            <button type="button" class="retry-pill" data-val="10" onclick="updateRetryInterval(10)">10 Qs</button>
+            <button type="button" class="retry-pill" data-val="15" onclick="updateRetryInterval(15)">15 Qs</button>
+          </div>
+        </div>
+        <hr style="border:0; border-top:1px solid var(--border-color);">
+        <button class="btn btn-primary" style="background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="exportProgress()">📁 Export to Downloads (JSON)</button>
+        <button class="btn btn-primary" style="background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="triggerImportProgress()">📥 Import Records (JSON)</button>
+        <input type="file" id="importFile" accept=".json,application/json,text/plain" style="display:none;" onchange="importProgress(event)">
+        <button class="btn btn-primary" style="background:var(--danger-light); color:var(--danger); border:1px solid var(--danger);" onclick="openResetModal()">⚠️ Reset All Progress</button>
+        <div style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 12px;">CCNA Practice Cards v1.2.0 • IOS Lab Ready</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESET CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="resetConfirmModal" onclick="closeResetModal(event)">
+    <div class="modal-content reset-modal-content">
+      <div class="reset-icon-wrap">
+        <span class="reset-warning-icon">⚠️</span>
+      </div>
+      <div class="reset-modal-title">重置所有刷题进度</div>
+      <div class="reset-modal-desc">
+        此操作将清除所有已掌握状态、错题重练队列、弱项诊断数据及抽认卡书签。<br>
+        <span style="color: var(--danger); font-weight: 600;">操作不可逆，请谨慎确认！</span>
+      </div>
+      <div class="reset-actions">
+        <button type="button" class="btn-cancel-reset" onclick="closeResetModal()">取消保留</button>
+        <button type="button" class="btn-confirm-reset" onclick="confirmResetAllProgress()">确认清除全部记录</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img class="lightbox-img" id="lightboxImg" alt="Enlarged Exhibit">
+  </div>
+
+  <!-- Load bundled question bank JS synchronously before app.js -->
+  <script src="data/ccna_cards_data.js"></script>
+  <script src="ios_simulator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

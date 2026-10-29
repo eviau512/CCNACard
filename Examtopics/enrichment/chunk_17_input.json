@@ -1,0 +1,702 @@
+[
+  {
+    "id": 559,
+    "qid": "Q735",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the function of a server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It transmits packets between hosts in the same broadcast domain."
+      },
+      {
+        "label": "B",
+        "text": "It provides shared applications to end users."
+      },
+      {
+        "label": "C",
+        "text": "It routes traffic between Layer 3 devices."
+      },
+      {
+        "label": "D",
+        "text": "It reates security zones between trusted and untrusted networks."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 560,
+    "qid": "Q736",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which CRUD operation modifies an existing table or view?",
+    "options": [
+      {
+        "label": "A",
+        "text": "read"
+      },
+      {
+        "label": "B",
+        "text": "update"
+      },
+      {
+        "label": "C",
+        "text": "replace"
+      },
+      {
+        "label": "D",
+        "text": "create"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 561,
+    "qid": "Q737",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "In software-defined architectures, which plane is distributed and responsible for traffic forwarding?",
+    "options": [
+      {
+        "label": "A",
+        "text": "management plane"
+      },
+      {
+        "label": "B",
+        "text": "policy plane"
+      },
+      {
+        "label": "C",
+        "text": "data plane"
+      },
+      {
+        "label": "D",
+        "text": "control plane"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 563,
+    "qid": "Q739",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which configuration management mechanism uses TCP port 22 by default when communicating with managed nodes?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ansible"
+      },
+      {
+        "label": "B",
+        "text": "Python"
+      },
+      {
+        "label": "C",
+        "text": "Puppet"
+      },
+      {
+        "label": "D",
+        "text": "Chef"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 564,
+    "qid": "Q740",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What does an SDN controller use as a communication protocol to relay forwarding changes to a southbound API?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Java"
+      },
+      {
+        "label": "B",
+        "text": "REST"
+      },
+      {
+        "label": "C",
+        "text": "OpenFlow"
+      },
+      {
+        "label": "D",
+        "text": "XML"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 565,
+    "qid": "Q741",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What uses HTTP messages to transfer data to applications residing on different hosts?",
+    "options": [
+      {
+        "label": "A",
+        "text": "OpenStack"
+      },
+      {
+        "label": "B",
+        "text": "OpFlex"
+      },
+      {
+        "label": "C",
+        "text": "REST"
+      },
+      {
+        "label": "D",
+        "text": "OpenFlow"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 566,
+    "qid": "Q742",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which JSON data type is an unordered set of attribute-value pairs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "string"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "Boolean"
+      },
+      {
+        "label": "D",
+        "text": "object"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 567,
+    "qid": "Q743",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which protocol is used in Software defined Access (SDA) to provide a tunnel between two edge nodes in different fabrics?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Generic Router Encapsulation (GRE)"
+      },
+      {
+        "label": "B",
+        "text": "Virtual Local Area Network (VLAN)"
+      },
+      {
+        "label": "C",
+        "text": "Virtual Extensible LAN (VXLAN)"
+      },
+      {
+        "label": "D",
+        "text": "Point-to-Point Protocol (PPP)"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 568,
+    "qid": "Q744",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which plane is centralized by an SDN controller?",
+    "options": [
+      {
+        "label": "A",
+        "text": "management-plane"
+      },
+      {
+        "label": "B",
+        "text": "data-plane"
+      },
+      {
+        "label": "C",
+        "text": "services-plane"
+      },
+      {
+        "label": "D",
+        "text": "control-plane"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 569,
+    "qid": "Q745",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Where is the interface between the control plane and data plane within the software-defined architecture?",
+    "options": [
+      {
+        "label": "A",
+        "text": "application layer and the management layer"
+      },
+      {
+        "label": "B",
+        "text": "application layer and the infrastructure layer"
+      },
+      {
+        "label": "C",
+        "text": "control layer and the application layer"
+      },
+      {
+        "label": "D",
+        "text": "control layer and the infrastructure layer"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 570,
+    "qid": "Q746",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Why would a network administrator choose to implement automation in a network environment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "To simplify the process of maintaining a consistent configuration state across all devices"
+      },
+      {
+        "label": "B",
+        "text": "To centralize device information storage"
+      },
+      {
+        "label": "C",
+        "text": "To implement centralized user account management"
+      },
+      {
+        "label": "D",
+        "text": "To deploy the management plane separately from the rest of the network"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 571,
+    "qid": "Q749",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "In software-defined architecture, which plane handles switching for traffic through a Cisco router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "control"
+      },
+      {
+        "label": "B",
+        "text": "data"
+      },
+      {
+        "label": "C",
+        "text": "management"
+      },
+      {
+        "label": "D",
+        "text": "application"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 572,
+    "qid": "Q751",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What makes Cisco DNA Center different from traditional network management applications and their management of networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Its modular design allows the implementation of different versions to meet the specific needs of an organization."
+      },
+      {
+        "label": "B",
+        "text": "It only supports auto-discovery of network elements in a greenfield deployment."
+      },
+      {
+        "label": "C",
+        "text": "It omits support high availability of management functions when operating in cluster mode."
+      },
+      {
+        "label": "D",
+        "text": "It abstracts policy from the actual device configuration."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 573,
+    "qid": "Q752",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which API is used in controller-based architectures to interact with edge devices?",
+    "options": [
+      {
+        "label": "A",
+        "text": "southbound"
+      },
+      {
+        "label": "B",
+        "text": "overlay"
+      },
+      {
+        "label": "C",
+        "text": "northbound"
+      },
+      {
+        "label": "D",
+        "text": "underlay"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 574,
+    "qid": "Q754",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is represented beginning with line 1 and ending with line 5?",
+    "options": [
+      {
+        "label": "A",
+        "text": "object"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "key"
+      },
+      {
+        "label": "D",
+        "text": "array"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 576,
+    "qid": "Q756",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What differentiates device management enabled by Cisco DNA Center from traditional campus device management?",
+    "options": [
+      {
+        "label": "A",
+        "text": "CLI-oriented device"
+      },
+      {
+        "label": "B",
+        "text": "centralized"
+      },
+      {
+        "label": "C",
+        "text": "device-by-device hands-on"
+      },
+      {
+        "label": "D",
+        "text": "per-device"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 577,
+    "qid": "Q759",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How do servers connect to the network in a virtual environment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a cable connected to a physical switch on the network"
+      },
+      {
+        "label": "B",
+        "text": "wireless to an access point that is physically connected to the network"
+      },
+      {
+        "label": "C",
+        "text": "a virtual switch that links to an access point that is physically connected to the network"
+      },
+      {
+        "label": "D",
+        "text": "a software switch on a hypervisor that is physically connected to the network"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 578,
+    "qid": "Q760",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the function of the controller in a software-defined network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "forwarding packets"
+      },
+      {
+        "label": "B",
+        "text": "multicast replication at the hardware level"
+      },
+      {
+        "label": "C",
+        "text": "making routing decisions"
+      },
+      {
+        "label": "D",
+        "text": "fragmenting and reassembling packets"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 579,
+    "qid": "Q762",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a function of a southbound API?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Use orchestration to provision a virtual server configuration from a web server"
+      },
+      {
+        "label": "B",
+        "text": "Automate configuration changes between a server and a switching fabric"
+      },
+      {
+        "label": "C",
+        "text": "Manage flow control between an SDN controller and a switching fabric"
+      },
+      {
+        "label": "D",
+        "text": "Facilitate the information exchange between an SDN controller and application"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 580,
+    "qid": "Q763",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which script paradigm does Puppet use?",
+    "options": [
+      {
+        "label": "A",
+        "text": "recipes and cookbooks"
+      },
+      {
+        "label": "B",
+        "text": "playbooks and roles"
+      },
+      {
+        "label": "C",
+        "text": "strings and marionettes"
+      },
+      {
+        "label": "D",
+        "text": "manifests and modules"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 581,
+    "qid": "Q764",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which set of methods is supported with the REST API?",
+    "options": [
+      {
+        "label": "A",
+        "text": "GET, PUT, ERASE, CHANGE"
+      },
+      {
+        "label": "B",
+        "text": "GET, POST, MOD, ERASE"
+      },
+      {
+        "label": "C",
+        "text": "GET, PUT, POST, DELETE"
+      },
+      {
+        "label": "D",
+        "text": "GET, POST, ERASE, CHANGE"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 582,
+    "qid": "Q765",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which technology is appropriate for communication between an SDN controller end applications running over the network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Southbound API"
+      },
+      {
+        "label": "B",
+        "text": "REST API"
+      },
+      {
+        "label": "C",
+        "text": "NETCONF"
+      },
+      {
+        "label": "D",
+        "text": "OpenFlow"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 583,
+    "qid": "Q767",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the function of `off-the-shelf` switches in a controller-based network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "setting packet-handling policies"
+      },
+      {
+        "label": "B",
+        "text": "forwarding packets"
+      },
+      {
+        "label": "C",
+        "text": "providing a central view of the deployed network"
+      },
+      {
+        "label": "D",
+        "text": "making routing decisions"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 584,
+    "qid": "Q768",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which REST method updates an object in the Cisco DNA Center Intent API?",
+    "options": [
+      {
+        "label": "A",
+        "text": "CHANGE"
+      },
+      {
+        "label": "B",
+        "text": "UPDATE"
+      },
+      {
+        "label": "C",
+        "text": "POST"
+      },
+      {
+        "label": "D",
+        "text": "PUT"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 585,
+    "qid": "Q769",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How many JSON objects are represented?",
+    "options": [
+      {
+        "label": "A",
+        "text": "1"
+      },
+      {
+        "label": "B",
+        "text": "2"
+      },
+      {
+        "label": "C",
+        "text": "3"
+      },
+      {
+        "label": "D",
+        "text": "4"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

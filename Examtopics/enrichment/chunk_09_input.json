@@ -1,0 +1,706 @@
+[
+  {
+    "id": 302,
+    "qid": "Q409",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which route type does the routing protocol Code D represent in the output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "statically assigned route"
+      },
+      {
+        "label": "B",
+        "text": "route learned through EIGRP"
+      },
+      {
+        "label": "C",
+        "text": "724 route of a locally configured IP"
+      },
+      {
+        "label": "D",
+        "text": "internal BGP route"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 305,
+    "qid": "Q413",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router R2 is configured with multiple routes to reach network 10.1.1.0/24 from router R1. Which path is chosen by router R2 to reach the destination network 10.1.1.0/24?",
+    "options": [
+      {
+        "label": "A",
+        "text": "static"
+      },
+      {
+        "label": "B",
+        "text": "EIGRP"
+      },
+      {
+        "label": "C",
+        "text": "eBGP"
+      },
+      {
+        "label": "D",
+        "text": "OSPF"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 306,
+    "qid": "Q414",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the next hop address for traffic that is destined to host 10.0.1.5?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Loopback 0"
+      },
+      {
+        "label": "B",
+        "text": "10.0.1.4"
+      },
+      {
+        "label": "C",
+        "text": "10.0.1.3"
+      },
+      {
+        "label": "D",
+        "text": "10.0.1.50"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 307,
+    "qid": "Q415",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network administrator assumes a task to complete the connectivity between PC A and the File Server. Switch A and Switch B have been partially configured with VLANs 10, 11, 12, and 13. What is the next step in the configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Add PC A to VLAN 10 and the File Server to VLAN 11 for VLAN segmentation"
+      },
+      {
+        "label": "B",
+        "text": "Add VLAN 13 to the trunk links on Switch A and Switch B for VLAN propagation"
+      },
+      {
+        "label": "C",
+        "text": "Add a router on a stick between Switch A and Switch B allowing for Inter-VLAN routing"
+      },
+      {
+        "label": "D",
+        "text": "Add PC A to the same subnet as the File Server allowing for intra-VLAN communication"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 309,
+    "qid": "Q418",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The default-information originate command is configured under the R1 OSPF configuration. After testing, workstations on VLAN 20 at Site B cannot reach a DNS server on the Internet. Which action corrects the configuration issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Add the default-information originate command on R2."
+      },
+      {
+        "label": "B",
+        "text": "Add the always keyword to the default-information originate command on R1."
+      },
+      {
+        "label": "C",
+        "text": "configure the ip route 0.0.0.0 0.0.0.0 10.10.10.18 command on R1."
+      },
+      {
+        "label": "D",
+        "text": "configure the ip route 0.0.0.0 0.0.0.0 10.10.10.2 command on R2."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 311,
+    "qid": "Q420",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A user configured OSPF in a single area between two routers. A serial interface connecting R1 and R2 is running encapsulation PPP. By default, which OSPF network type is seen on this interface when the user types show ip ospf interface on R1 or R2?",
+    "options": [
+      {
+        "label": "A",
+        "text": "nonbroadcast"
+      },
+      {
+        "label": "B",
+        "text": "point-to-point"
+      },
+      {
+        "label": "C",
+        "text": "point-to-multipoint"
+      },
+      {
+        "label": "D",
+        "text": "broadcast"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 312,
+    "qid": "Q421",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which MAC address is recognized as a VRRP virtual address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "0000.5E00.010a"
+      },
+      {
+        "label": "B",
+        "text": "0005.3709.8968"
+      },
+      {
+        "label": "C",
+        "text": "0000.0C07.AC99"
+      },
+      {
+        "label": "D",
+        "text": "0007.C070.AB01"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 313,
+    "qid": "Q423",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A router running EIGRP has learned the same route from two different paths. Which parameter does the router use to select the best path?",
+    "options": [
+      {
+        "label": "A",
+        "text": "as-path"
+      },
+      {
+        "label": "B",
+        "text": "administrative distance"
+      },
+      {
+        "label": "C",
+        "text": "metric"
+      },
+      {
+        "label": "D",
+        "text": "cost"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 314,
+    "qid": "Q424",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "An engineer configured an OSPF neighbor as a designated router. Which state verifies the designated router is in the proper mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Init"
+      },
+      {
+        "label": "B",
+        "text": "2-way"
+      },
+      {
+        "label": "C",
+        "text": "Exchange"
+      },
+      {
+        "label": "D",
+        "text": "Full"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 317,
+    "qid": "Q428",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which command configures a floating static route to provide a backup to the primary link?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 209.165.200.224 255.255.255.224 209.165.202.129 254"
+      },
+      {
+        "label": "B",
+        "text": "ip route 209.165.201.0 255.255.255.224 209.165.202.130"
+      },
+      {
+        "label": "C",
+        "text": "ip route 0.0.0.0 0.0.0.0 209.165.200.224"
+      },
+      {
+        "label": "D",
+        "text": "ip route 0.0.0.0 0.0.0.0 209.165.202.131"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 319,
+    "qid": "Q430",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What is the effect when loopback interfaces and the configured router ID are absent during the OSPF Process configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The lowest IP address is incremented by 1 and selected as the router ID."
+      },
+      {
+        "label": "B",
+        "text": "The router ID 0.0.0.0 is selected and placed in the OSPF process."
+      },
+      {
+        "label": "C",
+        "text": "No router ID is set, and the OSPF protocol does not run."
+      },
+      {
+        "label": "D",
+        "text": "The highest up/up physical interface IP address is selected as the router ID."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 320,
+    "qid": "Q431",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the metric of the route to the 192.168.10.33/28 subnet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "84"
+      },
+      {
+        "label": "B",
+        "text": "110"
+      },
+      {
+        "label": "C",
+        "text": "128"
+      },
+      {
+        "label": "D",
+        "text": "192"
+      },
+      {
+        "label": "E",
+        "text": "193"
+      }
+    ],
+    "answer": [
+      "E"
+    ]
+  },
+  {
+    "id": 321,
+    "qid": "Q432",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. traffic sourced from the loopback0 interface is trying to connect via ssh to the host at 10.0.1.15. What is the next hop to the destination address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.0.7"
+      },
+      {
+        "label": "B",
+        "text": "192.168.0.4"
+      },
+      {
+        "label": "C",
+        "text": "192.168.0.40"
+      },
+      {
+        "label": "D",
+        "text": "192.168.3.5"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 322,
+    "qid": "Q433",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "When the active router in a VRRP group fails, which router assumes the role and forwards packets?",
+    "options": [
+      {
+        "label": "A",
+        "text": "forwarding"
+      },
+      {
+        "label": "B",
+        "text": "standby"
+      },
+      {
+        "label": "C",
+        "text": "backup"
+      },
+      {
+        "label": "D",
+        "text": "listening"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 324,
+    "qid": "Q436",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which virtual MAC address is used by VRRP group 1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "0504.0367.4921"
+      },
+      {
+        "label": "B",
+        "text": "0007.c061.bc01"
+      },
+      {
+        "label": "C",
+        "text": "0050.0c05.ad81"
+      },
+      {
+        "label": "D",
+        "text": "0000.5E00.0101"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 325,
+    "qid": "Q437",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of using First Hop Redundancy Protocol on a specific subnet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "forwards multicast hello messages between routers"
+      },
+      {
+        "label": "B",
+        "text": "sends the default route to the hosts on a network"
+      },
+      {
+        "label": "C",
+        "text": "ensures a loop-free physical topology"
+      },
+      {
+        "label": "D",
+        "text": "filters traffic based on destination IP addressing"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 326,
+    "qid": "Q438",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration issue is preventing the OSPF neighbor relationship from being established between the two routers?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1 has an incorrect network command for interface Gi1/0."
+      },
+      {
+        "label": "B",
+        "text": "R2 should have its network command in area 1."
+      },
+      {
+        "label": "C",
+        "text": "R1 interface Gi1/0 has a larger MTU size."
+      },
+      {
+        "label": "D",
+        "text": "R2 is using the passive-interface default command."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 327,
+    "qid": "Q439",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. When router R1 is sending traffic to IP address 10.56.192.1, which interface or next hop address does it use to route the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.56.0.1"
+      },
+      {
+        "label": "B",
+        "text": "0.0.0.0/0"
+      },
+      {
+        "label": "C",
+        "text": "Vlan57"
+      },
+      {
+        "label": "D",
+        "text": "10.56.128.19"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 328,
+    "qid": "Q440",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Load-balanced traffic is coming in from the WAN destined to a host at 172.16.1.190. Which next-hop is used by the router to forward the request?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.7.4"
+      },
+      {
+        "label": "B",
+        "text": "192.168.7.7"
+      },
+      {
+        "label": "C",
+        "text": "192.168.7.35"
+      },
+      {
+        "label": "D",
+        "text": "192.168.7.40"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 331,
+    "qid": "Q443",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer must configure R1 so that it sends all packets destined to the 10.0.0.0/24 network to R3, and all packets destined to PC1 to R2. Which configuration must the engineer implement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#ip route 10.0.0.0 255.255.255.0 172.16.0.2 R1(config)#ip route 10.0.0.5 255.255.255.255 192.168.0.2"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#ip route 10.0.0.0 255.255.0.0 172.16.0.2 R1(config)#ip route 10.0.0.5 255.255.255.255 192.168.0.2"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#ip route 10.0.0.0 255.255.255.0 192.168.0.2 R1(config)#ip route 10.0.0.5 255.255.255.255 172.16.0.2"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#ip route 10.0.0.0 255.255.0.0 192.168.0.2 R1(config)#ip route 10.0.0.5 255.255.255.0 172.16.0.2"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 332,
+    "qid": "Q444",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. All traffic enters the CPE router from interface Serial0/3 with an IP address of 192.168.50.1. Web traffic from the WAN is destined for a LAN network where servers are load-balanced. An IP packet with a destination address of the HTTP virtual IP of 192.168.1.250 must be forwarded. Which routing table entry does the router use?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.1.0/24 via 192.168.12.2"
+      },
+      {
+        "label": "B",
+        "text": "192.168.1.128/25 via 192.168.13.3"
+      },
+      {
+        "label": "C",
+        "text": "192.168.1.192/26 via 192.168.14.4"
+      },
+      {
+        "label": "D",
+        "text": "192.168.1.224/27 via 192.168.15.5"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 334,
+    "qid": "Q447",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which command configures OSPF on the point-to-point link between routers R1 and R2?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router-id 10.0.0.15"
+      },
+      {
+        "label": "B",
+        "text": "neighbor 10.1.2.0 cost 180"
+      },
+      {
+        "label": "C",
+        "text": "network 10.0.0.0 0.0.0.255 area 0"
+      },
+      {
+        "label": "D",
+        "text": "ip ospf priority 100"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 335,
+    "qid": "Q448",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer is in the process of establishing IP connectivity between two sites. Routers R1 and R2 are partially configured with IP addressing. Both routers have the ability to access devices on their respective LANs. Which command set configures the IP connectivity between devices located on both LANs in each site?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1 ip route 192.168.1.1 255.255.255.0 GigabitEthernet0/1 R2 ip route 10.1.1.1 255.255.255.0 GigabitEthernet0/1"
+      },
+      {
+        "label": "B",
+        "text": "R1 ip route 192.168.1.0 255.255.255.0 GigabitEthernet0/0 R2 ip route 10.1.1.1 255.255.255.0 GigabitEthernet0/0"
+      },
+      {
+        "label": "C",
+        "text": "R1 ip route 0.0.0.0 0.0.0.0 209.165.200.225 R2 ip route 0.0.0.0 0.0.0.0 209.165.200.226"
+      },
+      {
+        "label": "D",
+        "text": "R1 ip route 0.0.0.0 0.0.0.0 209.165.200.226 R2 ip route 0.0.0.0 0.0.0.0 209.165.200.225"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 336,
+    "qid": "Q449",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which next-hop IP address does Router1 use for packets destined to host 10.10.13.158?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.10.10.9"
+      },
+      {
+        "label": "B",
+        "text": "10.10.10.5"
+      },
+      {
+        "label": "C",
+        "text": "10.10.11.2"
+      },
+      {
+        "label": "D",
+        "text": "10.10.12.2"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 337,
+    "qid": "Q450",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Packets received by the router from BGP enter via a serial interface at 209.165.201.1. Each route is present within the routing table. Which interface is used to forward traffic with a destination IP of 10.1.1.19?",
+    "options": [
+      {
+        "label": "A",
+        "text": "F0/0"
+      },
+      {
+        "label": "B",
+        "text": "F0/1"
+      },
+      {
+        "label": "C",
+        "text": "F0/4"
+      },
+      {
+        "label": "D",
+        "text": "F0/3"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

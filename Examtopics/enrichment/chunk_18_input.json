@@ -1,0 +1,702 @@
+[
+  {
+    "id": 586,
+    "qid": "Q770",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which definition describes JWT in regard to REST API security?",
+    "options": [
+      {
+        "label": "A",
+        "text": "an encrypted JSON token that is used for authentication"
+      },
+      {
+        "label": "B",
+        "text": "an encrypted JSON token that is used for authorization"
+      },
+      {
+        "label": "C",
+        "text": "an encoded JSON token that is used to securely exchange information"
+      },
+      {
+        "label": "D",
+        "text": "an encoded JSON token that is used for authentication"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 587,
+    "qid": "Q771",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is identified by the word `switch` within line 2 of the JSON Schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "array"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "key"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 588,
+    "qid": "Q772",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which type of JSON data is shown?",
+    "options": [
+      {
+        "label": "A",
+        "text": "boolean"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "key"
+      },
+      {
+        "label": "D",
+        "text": "object"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 589,
+    "qid": "Q774",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which communication interaction takes place when a southbound API is used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "between the SDN controller and PCs on the network"
+      },
+      {
+        "label": "B",
+        "text": "between the SDN controller and switches and routers on the network"
+      },
+      {
+        "label": "C",
+        "text": "between the SDN controller and services and applications on the network"
+      },
+      {
+        "label": "D",
+        "text": "between network applications and switches and routers on the network"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 590,
+    "qid": "Q780",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How many objects keys, and JSON list values are present?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Three objects, two keys, and three JSON list values"
+      },
+      {
+        "label": "B",
+        "text": "Three objects, three keys, and two JSON list values"
+      },
+      {
+        "label": "C",
+        "text": "One object, three keys, and three JSON list values"
+      },
+      {
+        "label": "D",
+        "text": "One object, three keys, and two JSON list values"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 591,
+    "qid": "Q782",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is an expected outcome when network management automation is deployed?",
+    "options": [
+      {
+        "label": "A",
+        "text": "A distributed management plane must be used."
+      },
+      {
+        "label": "B",
+        "text": "Complexity increases when new device configurations are added."
+      },
+      {
+        "label": "C",
+        "text": "Custom applications are needed to configure network devices."
+      },
+      {
+        "label": "D",
+        "text": "Software upgrades are performed from a central controller."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 592,
+    "qid": "Q783",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is represented by `R1` and `SW1` within the JSON output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "object"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "key"
+      },
+      {
+        "label": "D",
+        "text": "array"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 593,
+    "qid": "Q785",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which HTTP status code is returned after a successful REST API request?",
+    "options": [
+      {
+        "label": "A",
+        "text": "200"
+      },
+      {
+        "label": "B",
+        "text": "301"
+      },
+      {
+        "label": "C",
+        "text": "404"
+      },
+      {
+        "label": "D",
+        "text": "500"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 594,
+    "qid": "Q786",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "With REST API, which standard HTTP header tells a server which media type is expected by the client?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Accept-Encoding: gzip. deflate"
+      },
+      {
+        "label": "B",
+        "text": "Accept-Patch: text/example; charset=utf-8"
+      },
+      {
+        "label": "C",
+        "text": "Content-Type: application/json; charset=utf-8"
+      },
+      {
+        "label": "D",
+        "text": "Accept: application/json"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 595,
+    "qid": "Q787",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How many objects are present in the given JSON-encoded data?",
+    "options": [
+      {
+        "label": "A",
+        "text": "One"
+      },
+      {
+        "label": "B",
+        "text": "Four"
+      },
+      {
+        "label": "C",
+        "text": "Seven"
+      },
+      {
+        "label": "D",
+        "text": "Nine"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 597,
+    "qid": "Q789",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the function of the controller in a software-defined network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "forwarding packets"
+      },
+      {
+        "label": "B",
+        "text": "multicast replication at the hardware level"
+      },
+      {
+        "label": "C",
+        "text": "setting packet-handling policies"
+      },
+      {
+        "label": "D",
+        "text": "fragmenting and reassembling packets"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 598,
+    "qid": "Q790",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer must configure NETCONF. After creating the configuration, the engineer gets output from the command show line but not from show running-config. Which command completes the configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Device(config)# netconf lock-time 500"
+      },
+      {
+        "label": "B",
+        "text": "Device(config)# netconf max-message 1000"
+      },
+      {
+        "label": "C",
+        "text": "Device(config)# no netconf ssh acl 1"
+      },
+      {
+        "label": "D",
+        "text": "Device(config)# netconf max-sessions 100"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 599,
+    "qid": "Q791",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which statement identifies the functionality of virtual machines?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Virtualized servers run most efficiently when they are physically connected to a switch that is separate from the hypervisor"
+      },
+      {
+        "label": "B",
+        "text": "The hypervisor can virtualize physical components including CPU, memory, and storage"
+      },
+      {
+        "label": "C",
+        "text": "Each hypervisor can support a single virtual machine and a single software switch"
+      },
+      {
+        "label": "D",
+        "text": "The hypervisor communicates on Layer 3 without the need for additional resources"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 600,
+    "qid": "Q792",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which network plane is centralized and manages routing decisions?",
+    "options": [
+      {
+        "label": "A",
+        "text": "management plane"
+      },
+      {
+        "label": "B",
+        "text": "data plane"
+      },
+      {
+        "label": "C",
+        "text": "policy plane"
+      },
+      {
+        "label": "D",
+        "text": "control plane"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 601,
+    "qid": "Q793",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a benefit of using private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Multiple companies can use the same addresses without conflicts."
+      },
+      {
+        "label": "B",
+        "text": "Direct connectivity is provided to internal hosts from outside an enterprise network."
+      },
+      {
+        "label": "C",
+        "text": "Communication to the internet is reachable without the use of NAT."
+      },
+      {
+        "label": "D",
+        "text": "All external hosts are provided with secure communication to the internet."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 602,
+    "qid": "Q794",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer must provide configured IP addressing details to investigate a firewall rule issue. Which subnet and mask identify what is configured on the en0 interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.8.0.0/16"
+      },
+      {
+        "label": "B",
+        "text": "10.8.64.0/18"
+      },
+      {
+        "label": "C",
+        "text": "10.8.128.0/19"
+      },
+      {
+        "label": "D",
+        "text": "10.8.138.0/24"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 603,
+    "qid": "Q796",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which element of a virtualization solution manages virtualized services and enables connections between virtualized services and external interfaces?",
+    "options": [
+      {
+        "label": "A",
+        "text": "software"
+      },
+      {
+        "label": "B",
+        "text": "network functionality"
+      },
+      {
+        "label": "C",
+        "text": "virtual machine"
+      },
+      {
+        "label": "D",
+        "text": "hardware"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 604,
+    "qid": "Q797",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which group of channels in the 802.11b/gin/ac/ax 2.4 GHz frequency bands are nonoverlapping channels?",
+    "options": [
+      {
+        "label": "A",
+        "text": "channels 1, 5, and 10"
+      },
+      {
+        "label": "B",
+        "text": "channels 1, 6, and 11"
+      },
+      {
+        "label": "C",
+        "text": "channels 1, 5, and 11"
+      },
+      {
+        "label": "D",
+        "text": "channels 1, 6, and 10"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 605,
+    "qid": "Q798",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a function of Layer 3 switches?",
+    "options": [
+      {
+        "label": "A",
+        "text": "They route traffic between devices in different VLANs."
+      },
+      {
+        "label": "B",
+        "text": "They transmit broadcast traffic when operating in Layer 3 mode exclusively."
+      },
+      {
+        "label": "C",
+        "text": "They move frames between endpoints limited to IP addresses."
+      },
+      {
+        "label": "D",
+        "text": "They forward Ethernet frames between VLANs using only MAC addresses,"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 606,
+    "qid": "Q800",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which cable type must be used to interconnect one switch using 1000 BASE-SX GBIC modules and another switch using 1000 BASE- SX SFP modules?",
+    "options": [
+      {
+        "label": "A",
+        "text": "LC to SC"
+      },
+      {
+        "label": "B",
+        "text": "SC to SC"
+      },
+      {
+        "label": "C",
+        "text": "LC to LC"
+      },
+      {
+        "label": "D",
+        "text": "SC to ST"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 607,
+    "qid": "Q802",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a benefit of a point-to-point leased line?",
+    "options": [
+      {
+        "label": "A",
+        "text": "low cost"
+      },
+      {
+        "label": "B",
+        "text": "full-mesh capability"
+      },
+      {
+        "label": "C",
+        "text": "simplicity of configuration"
+      },
+      {
+        "label": "D",
+        "text": "flexibility of design"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 608,
+    "qid": "Q803",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Why is TCP desired over UDP for applications that require extensive error checking, such as HTTPS?",
+    "options": [
+      {
+        "label": "A",
+        "text": "UDP uses sequencing data for packets to arrive in order, and TCP offers the capability to receive packets in random order."
+      },
+      {
+        "label": "B",
+        "text": "UDP uses flow control mechanisms for the delivery of packets, and TCP uses congestion control for efficient packet delivery."
+      },
+      {
+        "label": "C",
+        "text": "UDP reliably guarantees delivery of all packets, and TCP drops packets under heavy load."
+      },
+      {
+        "label": "D",
+        "text": "UDP operates without acknowledgments, and TCP sends an acknowledgment for every packet received."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 609,
+    "qid": "Q804",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which component controls and distributes physical resources for each virtual machine?",
+    "options": [
+      {
+        "label": "A",
+        "text": "hypervisor"
+      },
+      {
+        "label": "B",
+        "text": "OS"
+      },
+      {
+        "label": "C",
+        "text": "CPU"
+      },
+      {
+        "label": "D",
+        "text": "physical enclosure"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 610,
+    "qid": "Q805",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the role of nonoverlapping channels in a wireless environment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to increase bandwidth"
+      },
+      {
+        "label": "B",
+        "text": "to stabilize the RF environment"
+      },
+      {
+        "label": "C",
+        "text": "to allow for channel bonding"
+      },
+      {
+        "label": "D",
+        "text": "to reduce interference"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 611,
+    "qid": "Q807",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of the service-set identifier?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It identifies the wireless network to which an application must connect."
+      },
+      {
+        "label": "B",
+        "text": "It identifies the wired network to which a network device is connected."
+      },
+      {
+        "label": "C",
+        "text": "It identifies the wired network to which a user device is connected."
+      },
+      {
+        "label": "D",
+        "text": "It identifies a wireless network for a mobile device to connect."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

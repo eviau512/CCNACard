@@ -1,0 +1,702 @@
+[
+  {
+    "id": 80,
+    "qid": "Q111",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What provides centralized control of authentication and roaming in an enterprise network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a lightweight access point"
+      },
+      {
+        "label": "B",
+        "text": "a wireless LAN controller"
+      },
+      {
+        "label": "C",
+        "text": "a firewall"
+      },
+      {
+        "label": "D",
+        "text": "a LAN switch"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 81,
+    "qid": "Q112",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which set of 2 4 GHz nonoverlapping wireless channels is standard in the United States?",
+    "options": [
+      {
+        "label": "A",
+        "text": "channels 1, 6, 11, and 14"
+      },
+      {
+        "label": "B",
+        "text": "channels 2, 7, 9, and 11"
+      },
+      {
+        "label": "C",
+        "text": "channels 2, 7, and 11"
+      },
+      {
+        "label": "D",
+        "text": "channels 1, 6, and 11"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 82,
+    "qid": "Q113",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "A network engineer is installing an IPv6-only capable device. The client has requested that the device IP address be reachable only from the internal network. Which type of IPv6 address must the engineer assign?",
+    "options": [
+      {
+        "label": "A",
+        "text": "IPv4-compatible IPv6 address"
+      },
+      {
+        "label": "B",
+        "text": "unique local address"
+      },
+      {
+        "label": "C",
+        "text": "link-local address"
+      },
+      {
+        "label": "D",
+        "text": "aggregatable global address"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 83,
+    "qid": "Q114",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a requirement for nonoverlapping Wi-Fi channels?",
+    "options": [
+      {
+        "label": "A",
+        "text": "different security settings"
+      },
+      {
+        "label": "B",
+        "text": "discontinuous frequency ranges"
+      },
+      {
+        "label": "C",
+        "text": "unique SSIDs"
+      },
+      {
+        "label": "D",
+        "text": "different transmission speeds"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 84,
+    "qid": "Q115",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "A network engineer must implement an IPv6 configuration on the vlan 2000 interface to create a routable locally-unique unicast address that is blocked from being advertised to the internet. Which configuration must the engineer apply?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface vlan 2000 ipv6 address ff00:0000:aaaa::1234:2343/64"
+      },
+      {
+        "label": "B",
+        "text": "interface vlan 2000 ipv6 address fd00::1234:2343/64"
+      },
+      {
+        "label": "C",
+        "text": "interface vlan 2000 ipv6 address fe80:0000:aaaa::1234:2343/64"
+      },
+      {
+        "label": "D",
+        "text": "interface vlan 2000 ipv6 address fc00:0000:aaaa::a15d:1234:2343:8aca/64"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 85,
+    "qid": "Q117",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "When a switch receives a frame for a known destination MAC address, how is the frame handled?",
+    "options": [
+      {
+        "label": "A",
+        "text": "flooded to all ports except the one from which it originated"
+      },
+      {
+        "label": "B",
+        "text": "forwarded to the first available port"
+      },
+      {
+        "label": "C",
+        "text": "sent to the port identified for the known MAC address"
+      },
+      {
+        "label": "D",
+        "text": "broadcast to all ports"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 86,
+    "qid": "Q119",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the collapsed layer in collapsed core architectures?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Core and distribution"
+      },
+      {
+        "label": "B",
+        "text": "access and WAN"
+      },
+      {
+        "label": "C",
+        "text": "distribution and access"
+      },
+      {
+        "label": "D",
+        "text": "core and WAN"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 87,
+    "qid": "Q120",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of a SOHO network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "includes at least three tiers of devices to provide load balancing and redundancy"
+      },
+      {
+        "label": "B",
+        "text": "connects each switch to every other switch in the network"
+      },
+      {
+        "label": "C",
+        "text": "enables multiple users to share a single broadband connection"
+      },
+      {
+        "label": "D",
+        "text": "provides high throughput access for 1000 or more users"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 88,
+    "qid": "Q121",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the role of disaggregation in controller-based networking?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It divides the control-plane and data-plane functions."
+      },
+      {
+        "label": "B",
+        "text": "It streamlines traffic handling by assigning individual devices to perform either Layer 2 or Layer 3 functions"
+      },
+      {
+        "label": "C",
+        "text": "It summarizes the routes between the core and distribution layers of the network topology"
+      },
+      {
+        "label": "D",
+        "text": "It enables a network topology to quickly adjust from a ring network to a star network"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 89,
+    "qid": "Q122",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a function performed by a web server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "send and retrieve email from client devices"
+      },
+      {
+        "label": "B",
+        "text": "securely store files for FTP access"
+      },
+      {
+        "label": "C",
+        "text": "authenticate and authorize a user's identity"
+      },
+      {
+        "label": "D",
+        "text": "provide an application that is transmitted over HTTP"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 90,
+    "qid": "Q123",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Site A was recently connected to site B over a new single-mode fiber path. Users at site A report intermittent connectivity issues with applications hosted at site B What is the reason for the problem?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Physical network errors are being transmitted between the two sites."
+      },
+      {
+        "label": "B",
+        "text": "Heavy usage is causing high latency."
+      },
+      {
+        "label": "C",
+        "text": "The wrong cable type was used to make the connection."
+      },
+      {
+        "label": "D",
+        "text": "An incorrect type of transceiver has been inserted into a device on the link"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 91,
+    "qid": "Q124",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which protocol uses the SSL?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SSH"
+      },
+      {
+        "label": "B",
+        "text": "HTTPS"
+      },
+      {
+        "label": "C",
+        "text": "HTTP"
+      },
+      {
+        "label": "D",
+        "text": "Telnet"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 92,
+    "qid": "Q125",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Why is UDP more suitable than TCP for applications that require low latency such as VoIP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "UDP reliably guarantees delivery of all packets: TCP drops packets under heavy load"
+      },
+      {
+        "label": "B",
+        "text": "UDP uses sequencing data for packets to arrive in order TCP offers the capability to receive packets in random order"
+      },
+      {
+        "label": "C",
+        "text": "TCP uses congestion control for efficient packet delivery: UDP uses flow control mechanisms for the delivery of packets"
+      },
+      {
+        "label": "D",
+        "text": "TCP sends an acknowledgement for every packet received: UDP operates without acknowledgments"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 93,
+    "qid": "Q128",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which PoE mode enables powered-devices detection and guarantees power when the device detected?",
+    "options": [
+      {
+        "label": "A",
+        "text": "auto"
+      },
+      {
+        "label": "B",
+        "text": "static"
+      },
+      {
+        "label": "C",
+        "text": "dynamic"
+      },
+      {
+        "label": "D",
+        "text": "active"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 94,
+    "qid": "Q129",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The router has been configured with a super net to accommodate the requirements for 380 users on a Subnet. The requirement already considers 30% future growth. Which configuration verifies the IP subnet on router R4?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Subnet: 10.7.54.0 Subnet mask: 255.255.128.0 Broadcast address: 10.5.55.255 Usable IP address range: 10.7.54.1 10.7.55.254 \"€ג"
+      },
+      {
+        "label": "B",
+        "text": "Subnet: 10.7.54.0 Subnet mask: 255.255.255.0 Broadcast address: 10.7.54.255 Usable IP address range: 10.7.54.1 10.7.55.254 \"€ג"
+      },
+      {
+        "label": "C",
+        "text": "Subnet: 10.7.54.0 Subnet mask: 255.255.254.0 Broadcast address: 10.7.54.255 Usable IP address range: 10.7.54.1 10.7.55.254 \"€ג"
+      },
+      {
+        "label": "D",
+        "text": "Subnet: 10.7.54.0 Subnet mask: 255.255.254.0 Broadcast address: 10.7.55.255 Usable IP address range: 10.7.54.1 10.7.55.254 \"€ג"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 95,
+    "qid": "Q130",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. configurations for the switch and PCs are complete. Which configuration must be applied so that VLANs 2 and 3 communicate back and forth?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface GigabitEthernet0/0 ip address 10.10.2.10 255.255.252.0"
+      },
+      {
+        "label": "B",
+        "text": "interface GigabitEthernet0/0.10 encapsulation dot1Q 3 Ip address 10.10.2.10 255.255.254.0"
+      },
+      {
+        "label": "C",
+        "text": "interface GigabitEthernet0/0.3 encapsulation dot1Q 3 native Ip address 10.10.2.10 255.255.252.0"
+      },
+      {
+        "label": "D",
+        "text": "interface GigabitEthernet0/0.3 encapsulation dot1Q 10 Ip address 10.10.2.10 255.255.255.252"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 96,
+    "qid": "Q133",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "How is RFC 1918 addressing used in a network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "They are used to access the Internet from the internal network without conversion."
+      },
+      {
+        "label": "B",
+        "text": "They are used in place of public addresses for Increased security."
+      },
+      {
+        "label": "C",
+        "text": "They are used with NAT to preserve public IPv4 addresses."
+      },
+      {
+        "label": "D",
+        "text": "They are used by Internet Service Providers to route over the Internet."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 98,
+    "qid": "Q138",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which WAN topology has the highest degree of reliability?",
+    "options": [
+      {
+        "label": "A",
+        "text": "point-to-point"
+      },
+      {
+        "label": "B",
+        "text": "router-on-a-stick"
+      },
+      {
+        "label": "C",
+        "text": "full mesh"
+      },
+      {
+        "label": "D",
+        "text": "hub-and-spoke"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 99,
+    "qid": "Q140",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What causes a port to be placed in the err-disabled state?",
+    "options": [
+      {
+        "label": "A",
+        "text": "nothing plugged into the port"
+      },
+      {
+        "label": "B",
+        "text": "link flapping"
+      },
+      {
+        "label": "C",
+        "text": "latency"
+      },
+      {
+        "label": "D",
+        "text": "shutdown command issued on the port"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 100,
+    "qid": "Q142",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "A network engineer must configure an interface with IP address 10.10.10.145 and a subnet mask equivalent to 11111111.11111111.11111111.11111000. Which subnet mask must the engineer use?",
+    "options": [
+      {
+        "label": "A",
+        "text": "/29"
+      },
+      {
+        "label": "B",
+        "text": "/30"
+      },
+      {
+        "label": "C",
+        "text": "/27"
+      },
+      {
+        "label": "D",
+        "text": "/28"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 101,
+    "qid": "Q143",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The switches are connected via a Cat5 Ethernet cable that is tested successfully. The interfaces are configured as access ports and are both in a down status. What is the cause of the issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The speed settings on the switches are mismatched"
+      },
+      {
+        "label": "B",
+        "text": "The distance between the two switches is not supported by Cat5"
+      },
+      {
+        "label": "C",
+        "text": "The switches are configured with incompatible duplex settings"
+      },
+      {
+        "label": "D",
+        "text": "The portfast command is missing from the configuration"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 102,
+    "qid": "Q145",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "The address block 192.168.32.0/24 must be subnetted into smaller networks. The engineer must meet these requirements: ✑Create 8 new subnets. ✑Each subnet must accommodate 30 hosts. ✑Interface VLAN 10 must use the last usable IP in the first new subnet. ✑A Layer 3 interface is used. Which configuration must be applied to the interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "no switchport mode trunk ip address 192.168.32.97 255.255.255.224"
+      },
+      {
+        "label": "B",
+        "text": "switchport ip address 192.168.32.65 255.255.255.240"
+      },
+      {
+        "label": "C",
+        "text": "no switchport ip address 192.168.32.30 255.255.255.224"
+      },
+      {
+        "label": "D",
+        "text": "no switchport mode access ip address 192.168.32.62 255.255.255.240"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 103,
+    "qid": "Q149",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which property is shared by 10GBase-SR and 10GBase-LR interfaces?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Both use the single-mode fiber type."
+      },
+      {
+        "label": "B",
+        "text": "Both require UTP cable media for transmission."
+      },
+      {
+        "label": "C",
+        "text": "Both require fiber cable media for transmission."
+      },
+      {
+        "label": "D",
+        "text": "Both use the multimode fiber type."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 104,
+    "qid": "Q151",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which device permits or denies network traffic based on a set of rules?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switch"
+      },
+      {
+        "label": "B",
+        "text": "firewall"
+      },
+      {
+        "label": "C",
+        "text": "wireless controller"
+      },
+      {
+        "label": "D",
+        "text": "access point"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 105,
+    "qid": "Q152",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the role of a firewall in an enterprise network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "determines which packets are allowed to cross from unsecured to secured networks"
+      },
+      {
+        "label": "B",
+        "text": "processes unauthorized packets and allows passage to less secure segments of the network"
+      },
+      {
+        "label": "C",
+        "text": "forwards packets based on stateless packet inspection"
+      },
+      {
+        "label": "D",
+        "text": "explicitly denies all packets from entering an administrative domain"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

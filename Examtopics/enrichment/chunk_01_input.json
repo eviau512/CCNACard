@@ -1,0 +1,702 @@
+[
+  {
+    "id": 51,
+    "qid": "Q76",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "A network engineer must configure the router R1 GigabitEthernet1/1 interface to connect to the router R2 GigabitEthernet1/1 interface. For the configuration to be applied, the engineer must compress the address 2001:0db8:0000:0000:0500:000a:400F:583B. Which command must be issued on the interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address 2001::db8:0000::500:a:400F:583B"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 2001:db8:0::500:a:4F:583B"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001:db8::500:a:400F:583B"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address 2001:0db8::5:a:4F:583B"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 52,
+    "qid": "Q77",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a network appliance that checks the state of a packet to determine whether the packet is legitimate?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Layer 2 switch"
+      },
+      {
+        "label": "B",
+        "text": "LAN controller"
+      },
+      {
+        "label": "C",
+        "text": "load balancer"
+      },
+      {
+        "label": "D",
+        "text": "firewall"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 53,
+    "qid": "Q78",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a role of access points in an enterprise network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "integrate with SNMP in preventing DDoS attacks"
+      },
+      {
+        "label": "B",
+        "text": "serve as a first line of defense in an enterprise network"
+      },
+      {
+        "label": "C",
+        "text": "connect wireless devices to a wired network"
+      },
+      {
+        "label": "D",
+        "text": "support secure user logins to devices on the network"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 54,
+    "qid": "Q79",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "An implementer is preparing hardware for virtualization to create virtual machines on a host. What is needed to provide communication between hardware and virtual machines?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router"
+      },
+      {
+        "label": "B",
+        "text": "hypervisor"
+      },
+      {
+        "label": "C",
+        "text": "switch"
+      },
+      {
+        "label": "D",
+        "text": "straight cable"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 56,
+    "qid": "Q81",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "In which situation is private IPv4 addressing appropriate for a new subnet on the network of an organization?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The network has multiple endpoint listeners, and it is desired to limit the number of broadcasts."
+      },
+      {
+        "label": "B",
+        "text": "The ISP requires the new subnet to be advertised to the Internet for web services."
+      },
+      {
+        "label": "C",
+        "text": "There is limited unique address space, and traffic on the new subnet will stay local within the organization."
+      },
+      {
+        "label": "D",
+        "text": "traffic on the subnet must traverse a site-to-site VPN to an outside organization."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 57,
+    "qid": "Q83",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which 802.11 frame type is indicated by a probe response after a client sends a probe request?",
+    "options": [
+      {
+        "label": "A",
+        "text": "data"
+      },
+      {
+        "label": "B",
+        "text": "management"
+      },
+      {
+        "label": "C",
+        "text": "control"
+      },
+      {
+        "label": "D",
+        "text": "action"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 59,
+    "qid": "Q85",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. When PC-A sends traffic to PC-B, which network component is in charge of receiving the packet from PC-A, verifying the IP addresses, and forwarding the packet to PC-B?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router"
+      },
+      {
+        "label": "B",
+        "text": "Layer 2 switch"
+      },
+      {
+        "label": "C",
+        "text": "load balancer"
+      },
+      {
+        "label": "D",
+        "text": "firewall"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 60,
+    "qid": "Q86",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the maximum bandwidth of a T1 point-to-point connection?",
+    "options": [
+      {
+        "label": "A",
+        "text": "1.544 Mbps"
+      },
+      {
+        "label": "B",
+        "text": "2.048 Mbps"
+      },
+      {
+        "label": "C",
+        "text": "34.368 Mbps"
+      },
+      {
+        "label": "D",
+        "text": "43.7 Mbps"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 61,
+    "qid": "Q88",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of cloud-based network topology?",
+    "options": [
+      {
+        "label": "A",
+        "text": "onsite network services are provided with physical Layer 2 and Layer 3 components"
+      },
+      {
+        "label": "B",
+        "text": "wireless connections provide the sole access method to services"
+      },
+      {
+        "label": "C",
+        "text": "physical workstations are configured to share resources"
+      },
+      {
+        "label": "D",
+        "text": "services are provided by a public, private, or hybrid deployment"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 62,
+    "qid": "Q89",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which network action occurs within the data plane?",
+    "options": [
+      {
+        "label": "A",
+        "text": "reply to an incoming ICMP echo request"
+      },
+      {
+        "label": "B",
+        "text": "make a configuration change from an incoming NETCONF RPC"
+      },
+      {
+        "label": "C",
+        "text": "run routing protocols (OSPF, EIGRP, RIP, BGP)"
+      },
+      {
+        "label": "D",
+        "text": "compare the destination IP address to the IP routing table"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 63,
+    "qid": "Q90",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. R1 has just received a packet from host A that is destined to host B Which route in the routing table is used by R1 to reach host B?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.10.13.0/25 [1/0] via 10.10.10.2"
+      },
+      {
+        "label": "B",
+        "text": "10.10.13.0/25 [108/0] via 10.10.10.10"
+      },
+      {
+        "label": "C",
+        "text": "10.10.13.0/25 [110/2] via 10.10.10.6"
+      },
+      {
+        "label": "D",
+        "text": "10.10.13.0/25 [110/2] via 10.10.10.2"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 64,
+    "qid": "Q92",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What are network endpoints?",
+    "options": [
+      {
+        "label": "A",
+        "text": "support inter-VLAN connectivity"
+      },
+      {
+        "label": "B",
+        "text": "a threat to the network if they are compromised"
+      },
+      {
+        "label": "C",
+        "text": "act as routers to connect a user to the service provider network"
+      },
+      {
+        "label": "D",
+        "text": "enforce policies for campus-wide traffic going to the Internet"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 65,
+    "qid": "Q93",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The link between PC1 and the switch is up, but it is performing poorly. Which interface condition is causing the performance problem?",
+    "options": [
+      {
+        "label": "A",
+        "text": "There is an issue with the fiber on the switch interface."
+      },
+      {
+        "label": "B",
+        "text": "There is a duplex mismatch on the interface."
+      },
+      {
+        "label": "C",
+        "text": "There is an interface type mismatch."
+      },
+      {
+        "label": "D",
+        "text": "There is a speed mismatch on the interface."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 66,
+    "qid": "Q94",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Why was the RFC 1918 address space defined?",
+    "options": [
+      {
+        "label": "A",
+        "text": "conserve public IPv4 addressing"
+      },
+      {
+        "label": "B",
+        "text": "support the NAT protocol"
+      },
+      {
+        "label": "C",
+        "text": "preserve public IPv6 address space"
+      },
+      {
+        "label": "D",
+        "text": "reduce instances of overlapping IP addresses"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 68,
+    "qid": "Q98",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "A network administrator is setting up a new IPv6 network using the 64-bit address 2001:0EB8:00C1:2200:0001:0000:0000:0331/64. To simplify the configuration, the administrator has decided to compress the address. Which IP address must the administrator configure?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address 2001:EB8:C1:22:1::331/64"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 21:EB8:C1:2200:1::331/64"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001:EB8:C1:2200:1:0000:331/64"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address 2001:EB8:C1:2200:1::331/64"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 69,
+    "qid": "Q100",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is an appropriate use for private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to allow hosts inside to communicate in both directions with hosts outside the organization"
+      },
+      {
+        "label": "B",
+        "text": "on internal hosts that stream data solely to external resources"
+      },
+      {
+        "label": "C",
+        "text": "on the public-facing interface of a firewall"
+      },
+      {
+        "label": "D",
+        "text": "on hosts that communicate only with other internal hosts"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 70,
+    "qid": "Q101",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer is configuring the HO router. Which IPv6 address configuration must be applied to the router fa0/1 interface for the router to assign a unique 64-bit IPv6 address to itself?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address 2001:DB8:0:1:FFFF:C601:420F:7/64"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 2001:DB8:0:1:FE80:C601:420F:7/64"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001:DB8:0:1:C601:42FF:FE0F:7/64"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address 2001:DB8:0:1:C601:42FF:800F:7/64"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 71,
+    "qid": "Q102",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a similarity between 1000BASE-LX and 1000BASE-T standards?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Both use the same data-link header and trailer formats."
+      },
+      {
+        "label": "B",
+        "text": "Both cable types support RJ-45 connectors."
+      },
+      {
+        "label": "C",
+        "text": "Both support up to 550 meters between nodes."
+      },
+      {
+        "label": "D",
+        "text": "Both cable types support LR connectors."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 72,
+    "qid": "Q103",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The given Windows PC is requesting the IP address of the host at www.cisco.com. To which IP address is the request sent?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.1.253"
+      },
+      {
+        "label": "B",
+        "text": "192.168.1.100"
+      },
+      {
+        "label": "C",
+        "text": "192.168.1.226"
+      },
+      {
+        "label": "D",
+        "text": "192.168.1.254"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 73,
+    "qid": "Q104",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which function forwards frames to ports that have a matching destination MAC address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "frame flooding"
+      },
+      {
+        "label": "B",
+        "text": "frame filtering"
+      },
+      {
+        "label": "C",
+        "text": "frame pushing"
+      },
+      {
+        "label": "D",
+        "text": "frame switching"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 74,
+    "qid": "Q105",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which type of IPv6 address is similar to a unicast address but is assigned to multiple devices on the same network at the same time?",
+    "options": [
+      {
+        "label": "A",
+        "text": "global unicast address"
+      },
+      {
+        "label": "B",
+        "text": "link-local address"
+      },
+      {
+        "label": "C",
+        "text": "anycast address"
+      },
+      {
+        "label": "D",
+        "text": "multicast address"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 75,
+    "qid": "Q106",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "composed of up to 65,536 available addresses"
+      },
+      {
+        "label": "B",
+        "text": "issued by IANA in conjunction with an autonomous system number"
+      },
+      {
+        "label": "C",
+        "text": "used without tracking or registration"
+      },
+      {
+        "label": "D",
+        "text": "traverse the Internet when an outbound ACL is applied"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 77,
+    "qid": "Q108",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the function of a controller in controller-based networking?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It serves as the centralized management point of an SDN architecture"
+      },
+      {
+        "label": "B",
+        "text": "It is a pair of core routers that maintain all routing decisions for a campus"
+      },
+      {
+        "label": "C",
+        "text": "It centralizes the data plane for the network"
+      },
+      {
+        "label": "D",
+        "text": "It is the card on a core router that maintains all routing decisions for a campus."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 78,
+    "qid": "Q109",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Each router must be configured with the last usable IP address in the subnet. Which configuration fulfills this requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R7# interface FastEthernet1/0 ip address 10.88.31.127 255.255.255.192 R8# interface FastEthernet0/0 ip address 10.19.63.95 255.255.255.240 R9# interface FastEthernet1/1 ip address 10.23.98.159 255.255.255.224"
+      },
+      {
+        "label": "B",
+        "text": "R7# interface FastEthernet1/0 ip address 10.88.31.126 255.255.255.240 R8# interface FastEthernet0/0 ip address 10.19.63.94 255.255.255.192 R9# interface FastEthernet1/1 ip address 10.23.98.158 255.255.255.248"
+      },
+      {
+        "label": "C",
+        "text": "R7# interface FastEthernet1/0 ip address 10.88.31.127 255.255.255.240 R8# interface FastEthernet0/0 ip address 10.19.63.95 255.255.255.192 R9# interface FastEthernet1/1 ip address 10.23.98.159 255.255.255.248"
+      },
+      {
+        "label": "D",
+        "text": "R7# interface FastEthernet1/0 ip address 10.88.31.126 255.255.255.192 R8# interface FastEthernet0/0 ip address 10.19.63.94 255.255.255.240 R9# interface FastEthernet1/1 ip address 10.23.98.158 255.255.255.224"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 79,
+    "qid": "Q110",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "How do TCP and UDP fit into a query-responsible model?",
+    "options": [
+      {
+        "label": "A",
+        "text": "TCP avoids using sequencing and UDP avoids using acknowledgments"
+      },
+      {
+        "label": "B",
+        "text": "TCP establishes a connection prior to sending data, and UDP sends immediately"
+      },
+      {
+        "label": "C",
+        "text": "TCP encourages out-of-order packet delivery, and UDP prevents re-ordering"
+      },
+      {
+        "label": "D",
+        "text": "TCP uses error detection for packets, and UDP uses error recovery."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  }
+]

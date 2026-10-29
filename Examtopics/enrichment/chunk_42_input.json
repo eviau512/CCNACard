@@ -1,0 +1,530 @@
+[
+  {
+    "id": 1382,
+    "qid": "Q1382",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two reasons to conffigure PortFast on a switch port attached to an end host? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "to block another switch or host from communicating through the port"
+      },
+      {
+        "label": "B",
+        "text": "to enable the port to enter the forwarding state immediately when the host boots up"
+      },
+      {
+        "label": "C",
+        "text": "to prevent the port from participating in Spanning Tree Protocol operations"
+      },
+      {
+        "label": "D",
+        "text": "to protect the operation of the port from topology change processes"
+      },
+      {
+        "label": "E",
+        "text": "to limit the number of MAC addresses learned on the port to 1"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1383,
+    "qid": "Q1383",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two characteristics are representative of virtual machines (VMs)? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "multiple VMs operate on the same underlying hardware"
+      },
+      {
+        "label": "B",
+        "text": "Each VMs operating system depends on its hypervisor"
+      },
+      {
+        "label": "C",
+        "text": "A VM on a hypervisor is automatically interconnected to other VMs"
+      },
+      {
+        "label": "D",
+        "text": "A VM on an individual hypervisor shares resources equally"
+      },
+      {
+        "label": "E",
+        "text": "Each VM runs independently of any other VM in the same hypervisor"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1384,
+    "qid": "Q1384",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two types of attack are categorized as social engineering? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "phoning"
+      },
+      {
+        "label": "B",
+        "text": "malvertising"
+      },
+      {
+        "label": "C",
+        "text": "probing"
+      },
+      {
+        "label": "D",
+        "text": "pharming"
+      },
+      {
+        "label": "E",
+        "text": "phishing"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1385,
+    "qid": "Q1385",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two functions of a ffirewall within an enterprise? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It enables traffic ffiltering based on URLs."
+      },
+      {
+        "label": "B",
+        "text": "It serves as an endpoint for a site-to-site VPN in standalone mode."
+      },
+      {
+        "label": "C",
+        "text": "It provides support as an endpoint for a remote access VPN in multiple context mode."
+      },
+      {
+        "label": "D",
+        "text": "It offers Layer 2 services between hosts."
+      },
+      {
+        "label": "E",
+        "text": "It enables wireless devices to connect to the network."
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1386,
+    "qid": "Q1386",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "A network administrator is evaluating network security in the aftermath of an attempted ARP spoofing attack. If Port-channel1 is the uplink Interface of the access-layer switch toward the distribution-layer switch, which two configurations must the administrator configure on the Access- layer switch to provide adequate protection? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip dhcp snooping vlan 1-4094 ! Interface Port-channel1 Switchport protected Switchport port-security maximum 1"
+      },
+      {
+        "label": "B",
+        "text": "ip dhcp snooping vlan 1-4094 Ip dhcp snooping ! Interface Port-channel1 Ip dhcp snooping trust"
+      },
+      {
+        "label": "C",
+        "text": "ip dhcp snooping ! Interface Port-channel1 Switchport port-security maximum 1 Switchport port-security"
+      },
+      {
+        "label": "D",
+        "text": "ip arp inspection trust ! Interface Port-channel1 Switchport port-security maximum 4094 Switchport port-security Ip verify source mac-check"
+      },
+      {
+        "label": "E",
+        "text": "ip arp inspection vlan 1-4094 ! Interface Port-channel1 Ip arp inspection trust"
+      }
+    ],
+    "answer": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": 1387,
+    "qid": "Q1387",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two functions of DHCP servers? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "issue DHCPDISCOVER messages when added to the network"
+      },
+      {
+        "label": "B",
+        "text": "respond to client DHCPOFFER requests by Issuing an IP address"
+      },
+      {
+        "label": "C",
+        "text": "support centralized IP management"
+      },
+      {
+        "label": "D",
+        "text": "assign dynamic IP configurations to hosts in a network"
+      },
+      {
+        "label": "E",
+        "text": "prevent users from assigning their own IP addresses to hosts"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1388,
+    "qid": "Q1388",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. IPv6 must be implemented on R1 to the ISP. The uplink between R1 and the ISP must be configured with a manualAssignment, and the LAN interface must be self-provisioned. Both connections must use the applicable IPv6 networks. Which twoConfigurations must be applied to R1? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Interface Gi0/0 Ipv6 address 2001:db8:0F1B:FCCB:ACCE:FCED:ABCD:FA03:/127"
+      },
+      {
+        "label": "B",
+        "text": "Interface Gi0/0 Ipv6 address 2001:db8:0:AFFF::/64 eui-64"
+      },
+      {
+        "label": "C",
+        "text": "Interface Gi0/1 Ipv6 address 2001:db8:0F1B:FCCB:ACCE:FCED:ABCD:FA02:/127"
+      },
+      {
+        "label": "D",
+        "text": "Interface Gi0/0 Ipv6 address 2001:db8:1:AFFF::/64 eui-64"
+      },
+      {
+        "label": "E",
+        "text": "interface Gi0/1 Ipv6 address 2001:db8:0F1B:FCCB:ACCE:FCED:ABCD:FA00:/127"
+      }
+    ],
+    "answer": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": 1389,
+    "qid": "Q1389",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two capabilities provided by VRRP within a LAN network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "redundancy"
+      },
+      {
+        "label": "B",
+        "text": "granular QoS"
+      },
+      {
+        "label": "C",
+        "text": "load sharing"
+      },
+      {
+        "label": "D",
+        "text": "dynamic routing updates"
+      },
+      {
+        "label": "E",
+        "text": "bandwidth optimization"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1390,
+    "qid": "Q1390",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. An administrator is configuring a new WLAN for a wireless network that has these requirements:• Dual-band clients that connect to the WLAN must be directed to the 5-GHz spectrum.• Wireless clients on this WLAN must be able to apply VLAN settings on the returned RADIUS attributes.Which two actions meet these requirements? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable the Client Band Select option."
+      },
+      {
+        "label": "B",
+        "text": "Enable the Coverage Hole Detection option."
+      },
+      {
+        "label": "C",
+        "text": "Enable the Allow AAA Override option."
+      },
+      {
+        "label": "D",
+        "text": "Set the MFP Client Protection option to Required."
+      },
+      {
+        "label": "E",
+        "text": "Enable the Aironet IE option"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1391,
+    "qid": "Q1391",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two tasks support the physical access control element of a security program? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Deploy a video surveillance system"
+      },
+      {
+        "label": "B",
+        "text": "Run a workshop on corporate security policies"
+      },
+      {
+        "label": "C",
+        "text": "Implement badge access to critical locations"
+      },
+      {
+        "label": "D",
+        "text": "Develop slideshows about new security regulations"
+      },
+      {
+        "label": "E",
+        "text": "Disperse information about how to protect the organization's confidential data"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1392,
+    "qid": "Q1392",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "An administrator is configuring a Cisco Catalyst switch so that it will accept management connections only from hosts in the 203.0.113.0/24 Network. Other traffic passing through the switch must transit without interruption. Which two configurations must the engineer apply to the Router? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface range vlan 1 - 4094 Ip access-group Management out"
+      },
+      {
+        "label": "B",
+        "text": "line vty 0 15 Access-class Management in"
+      },
+      {
+        "label": "C",
+        "text": "ip access-list standard Management Permit 203.0.113.0 0.0.0.255"
+      },
+      {
+        "label": "D",
+        "text": "ip access-list standard Management Permit 203.0.113.0 255.255.255.0"
+      },
+      {
+        "label": "E",
+        "text": "ip access-list extended Management Permit tcp any range 22 23 203.0.113.0 0.0.0.255"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1393,
+    "qid": "Q1393",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two reasons to implement DHCP in a network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "manually control and configure IP addresses on network devices"
+      },
+      {
+        "label": "B",
+        "text": "Control the length of time an IP address is used by a network device"
+      },
+      {
+        "label": "C",
+        "text": "Reduce administration time in managing IP address ranges for clients"
+      },
+      {
+        "label": "D",
+        "text": "dynamic control over the best path to reach an IP address"
+      },
+      {
+        "label": "E",
+        "text": "access a website by name instead of by IP address"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1394,
+    "qid": "Q1394",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two statements distinguish authentication from accounting? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Only authentication supports user-activity audits."
+      },
+      {
+        "label": "B",
+        "text": "Only authentication challenges users for their credentials and returns a response."
+      },
+      {
+        "label": "C",
+        "text": "Only authentication validates \"who you are.\""
+      },
+      {
+        "label": "D",
+        "text": "Only authentication records the duration of a user's connection."
+      },
+      {
+        "label": "E",
+        "text": "Only authentication provides supporting information for billing users."
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1395,
+    "qid": "Q1395",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. A network engineer is configuring a WLAN to use a WPA2 PSK and allow only specific clients to join. Which two actionsMust be taken to complete the process? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable the OSEN Policy option."
+      },
+      {
+        "label": "B",
+        "text": "Enable the 802.1X option for Authentication Key Management."
+      },
+      {
+        "label": "C",
+        "text": "Enable the WPA2 Policy option."
+      },
+      {
+        "label": "D",
+        "text": "Enable the MAC Filtering option."
+      },
+      {
+        "label": "E",
+        "text": "Enable the CCKM option for Authentication Key Management."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1396,
+    "qid": "Q1396",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. An engineer is creating a secure preshared key based SSID using WPA2 for a wireless network running on 2.4 GHz and 5GHz. Which two tasks must the engineer perform to complete the process? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Select the 802.1x option for Auth Key Management"
+      },
+      {
+        "label": "B",
+        "text": "Select the AES (CCMP128) option for WPA2 WPA3 Encryption"
+      },
+      {
+        "label": "C",
+        "text": "Select the AES option for Auth Key Management"
+      },
+      {
+        "label": "D",
+        "text": "Select the PSK option for Auth Key Management"
+      },
+      {
+        "label": "E",
+        "text": "Select the WPA Policy option."
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1397,
+    "qid": "Q1397",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. An engineer is using the Cisco WLC GUI to configure a WLAN for WPA2 encryption with AES and preshared keyCisc0123456. After the engineer selects the WPA + WPA2 option from the Layer 2 Security drop-down list, which two tasks must they performTo complete the process? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Select CCKM from the Auth Key Mgmt drop-down list, set the PSK Format to Hex, and enter the key"
+      },
+      {
+        "label": "B",
+        "text": "Select PSK from the Auth Key Mgmt drop-down list, set the PSK Format to ASCII, and enter the key."
+      },
+      {
+        "label": "C",
+        "text": "Select ASCII from the PSK Format drop-down list, enter the key, and leave the Auth Key Mgmt setting blank"
+      },
+      {
+        "label": "D",
+        "text": "Select the WPA2 Policy and AES check boxes."
+      },
+      {
+        "label": "E",
+        "text": "Select the WPA2 Policy, AES, and TKIP check boxes"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  }
+]

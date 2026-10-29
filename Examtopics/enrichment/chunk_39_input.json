@@ -1,0 +1,832 @@
+[
+  {
+    "id": 1307,
+    "qid": "Q1307",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. The router R1 is in the process of being configured. Routers R2 and R3 are configured correctly for the new environment.Which two commands must be configured on R1 for PC1 to communicate to all PCs on the 10.10.10.0/24 network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ip route 10.10.10.0 255.255.255.0 192.168.2.3"
+      },
+      {
+        "label": "B",
+        "text": "Ip route 10.10.10.10 255.255.255.255 192.168.2.2"
+      },
+      {
+        "label": "C",
+        "text": "Ip route 10.10.10.10 255.255.255.255 g0/1"
+      },
+      {
+        "label": "D",
+        "text": "Ip route 10.10.10.8 255.255.255.248 g0/1"
+      },
+      {
+        "label": "E",
+        "text": "ip route 10.10.10.0 255.255.255.248 192.168.2.2"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1308,
+    "qid": "Q1308",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two commands, when configured on router R1, fulfill these requirements? (Choose two.)✑Packets toward the entire network 2001:db8:23::/64 must be forwarded through router R2.Packets toward host 2001:db8:23::14 preferably must be forwarded through R3.Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ipv6 route 2001:db8:23::/128 fd00:12::2"
+      },
+      {
+        "label": "B",
+        "text": "Ipv6 route 2001:db8:23::14/128 fd00:13::3"
+      },
+      {
+        "label": "C",
+        "text": "Ipv6 route 2001:db8:23::/64 fd00:12::2"
+      },
+      {
+        "label": "D",
+        "text": "Ipv6 route 2001:db8:23::14/64 fd00:12::2 200"
+      },
+      {
+        "label": "E",
+        "text": "ipv6 route 2001:db8:23::14/64 fd00:12::2"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1309,
+    "qid": "Q1309",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits of FHRPs? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "They allow encrypted traffic"
+      },
+      {
+        "label": "B",
+        "text": "They prevent loops in the Layer 2 network."
+      },
+      {
+        "label": "C",
+        "text": "They are able to bundle multiple ports to increase bandwidth"
+      },
+      {
+        "label": "D",
+        "text": "They enable automatic failover of the default gateway"
+      },
+      {
+        "label": "E",
+        "text": "They allow multiple devices to serve as a single virtual gateway for clients in the network"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1310,
+    "qid": "Q1310",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two roles of Domain Name Services (DNS)? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "builds a flat structure of DNS names for more efficient IP operations"
+      },
+      {
+        "label": "B",
+        "text": "encrypts network Traffic as it travels across a WAN by default"
+      },
+      {
+        "label": "C",
+        "text": "improves security by protecting IP addresses under Fully Qualified Domain Names (FQDNs)"
+      },
+      {
+        "label": "D",
+        "text": "enables applications to identify resources by name instead of IP address"
+      },
+      {
+        "label": "E",
+        "text": "allows a single host name to be shared across more than one IP address"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1311,
+    "qid": "Q1311",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "A network administrator enters the following command on a router: logging trap 3. What are three message types that will be sent to the Syslog server? (Choose three.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "informational"
+      },
+      {
+        "label": "B",
+        "text": "emergency"
+      },
+      {
+        "label": "C",
+        "text": "warning"
+      },
+      {
+        "label": "D",
+        "text": "critical"
+      },
+      {
+        "label": "E",
+        "text": "debug"
+      },
+      {
+        "label": "F",
+        "text": "error"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "F"
+    ]
+  },
+  {
+    "id": 1312,
+    "qid": "Q1312",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two roles of the Dynamic Host Configuration Protocol (DHCP)? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The DHCP server assigns IP addresses without requiring the client to renew them."
+      },
+      {
+        "label": "B",
+        "text": "The DHCP server leases client IP addresses dynamically."
+      },
+      {
+        "label": "C",
+        "text": "The DHCP client is able to request up to four DNS server addresses."
+      },
+      {
+        "label": "D",
+        "text": "The DHCP server offers the ability to exclude specific IP addresses from a pool of IP addresses."
+      },
+      {
+        "label": "E",
+        "text": "The DHCP client maintains a pool of IP addresses it is able to assign."
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1313,
+    "qid": "Q1313",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refe r to the exhibit. An engineer deploys a topology in which R1 obtains its IP configuration from DHCP. If the switch and DHCP serverConfigurations are complete and correct, which two sets of commands must be configured on R1 and R2 to complete the task? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)# interface fa0/0 R1(config-if)# ip helper-address 198.51.100.100"
+      },
+      {
+        "label": "B",
+        "text": "R2(config)# interface gi0/0 R2(config-if)# ip helper-address 198.51.100.100"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)# interface fa0/0 R1(config-if)# ip address dhcp R1(config-if)# no shutdown"
+      },
+      {
+        "label": "D",
+        "text": "R2(config)# interface gi0/0 R2(config-if)# ip address dhcp"
+      },
+      {
+        "label": "E",
+        "text": "R1(config)# interface fa0/0 R1(config-if)# ip helper-address 192.0.2.2"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1314,
+    "qid": "Q1314",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two actions are performed by the Weighted Random Early Detection mechanism? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It supports protocol discovery."
+      },
+      {
+        "label": "B",
+        "text": "It guarantees the delivery of high-priority packets."
+      },
+      {
+        "label": "C",
+        "text": "It can identify different ows with a high level of granularity."
+      },
+      {
+        "label": "D",
+        "text": "It can mitigate congestion by preventing the queue from filling up."
+      },
+      {
+        "label": "E",
+        "text": "It drops lower-priority packets before it drops higher-priority packets."
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1315,
+    "qid": "Q1315",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two tasks must be performed to configure NTP to a trusted server in client mode on a single network device? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable NTP authentication."
+      },
+      {
+        "label": "B",
+        "text": "Verify the time zone."
+      },
+      {
+        "label": "C",
+        "text": "Specify the IP address of the NTP server."
+      },
+      {
+        "label": "D",
+        "text": "Set the NTP server private key."
+      },
+      {
+        "label": "E",
+        "text": "Disable NTP broadcasts."
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1316,
+    "qid": "Q1316",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two pieces of information can you determine from the output of the show ntp status command? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "whether the NTP peer is statically configured"
+      },
+      {
+        "label": "B",
+        "text": "the IP address of the peer to which the clock is synchronized"
+      },
+      {
+        "label": "C",
+        "text": "the configured NTP servers"
+      },
+      {
+        "label": "D",
+        "text": "whether the clock is synchronized"
+      },
+      {
+        "label": "E",
+        "text": "the NTP version number of the peer"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1317,
+    "qid": "Q1317",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two QoS tools provide congestion management? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "CBWFQ"
+      },
+      {
+        "label": "B",
+        "text": "FRTS"
+      },
+      {
+        "label": "C",
+        "text": "CAR"
+      },
+      {
+        "label": "D",
+        "text": "PBR"
+      },
+      {
+        "label": "E",
+        "text": "PQ"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1318,
+    "qid": "Q1318",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two statements about NTP operations are true? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "NTP uses UDP over IP."
+      },
+      {
+        "label": "B",
+        "text": "Cisco routers can act as both NTP authoritative servers and NTP clients."
+      },
+      {
+        "label": "C",
+        "text": "Cisco routers can act only as NTP servers."
+      },
+      {
+        "label": "D",
+        "text": "Cisco routers can act only as NTP clients."
+      },
+      {
+        "label": "E",
+        "text": "NTP uses TCP over IP."
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1319,
+    "qid": "Q1319",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two commands must be added to update the configuration of router R1 so that it accepts only encryptedConnections? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Transport input ssh"
+      },
+      {
+        "label": "B",
+        "text": "Username CNAC secret R!41!3705926@"
+      },
+      {
+        "label": "C",
+        "text": "Crypto key generate rsa 1024"
+      },
+      {
+        "label": "D",
+        "text": "Line vty 0 4"
+      },
+      {
+        "label": "E",
+        "text": "ip ssh version 2"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1320,
+    "qid": "Q1320",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two events occur on the interface, if packets from an unknown Source address arrive after the interface learns theMaximum number of secure MAC address? (Choose two.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The security violation counter dose not increment"
+      },
+      {
+        "label": "B",
+        "text": "The port LED turns off"
+      },
+      {
+        "label": "C",
+        "text": "The interface is error-disabled"
+      },
+      {
+        "label": "D",
+        "text": "A syslog message is generated"
+      },
+      {
+        "label": "E",
+        "text": "The interface drops traffic from unknown MAC address"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1321,
+    "qid": "Q1321",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two statements about the interface that generated the output are true? (Choose two.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Learned MAC addresses are deleted after five minutes of inactivity"
+      },
+      {
+        "label": "B",
+        "text": "The interface is error-disabled if packets arrive from a new unknown source address"
+      },
+      {
+        "label": "C",
+        "text": "It has dynamically learned two secure MAC addresses"
+      },
+      {
+        "label": "D",
+        "text": "It has dynamically learned three secure MAC addresses"
+      },
+      {
+        "label": "E",
+        "text": "the security violation counter increments if packets arrive from a new unknown source address"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1322,
+    "qid": "Q1322",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "When configuring a WLAN with WPA2 PSK in the Cisco Wireless LAN Controller GUI, which two formats are available to select? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "decimal"
+      },
+      {
+        "label": "B",
+        "text": "ASCII"
+      },
+      {
+        "label": "C",
+        "text": "hexadecimal"
+      },
+      {
+        "label": "D",
+        "text": "binary"
+      },
+      {
+        "label": "E",
+        "text": "base64"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1323,
+    "qid": "Q1323",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "An engineer is asked to protect unused ports that are configured in the default VLAN on a switch. Which two steps will fulfill the request? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Configure the ports as trunk ports."
+      },
+      {
+        "label": "B",
+        "text": "Enable the Cisco Discovery Protocol."
+      },
+      {
+        "label": "C",
+        "text": "Configure the port type as access and place in VLAN 99."
+      },
+      {
+        "label": "D",
+        "text": "Administratively shut down the ports."
+      },
+      {
+        "label": "E",
+        "text": "Configure the ports in an EtherChannel."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1324,
+    "qid": "Q1324",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. An extended ACL has been configured and applied to router R2. The configuration failed to work as intended.Which two changes stop outbound traffic on TCP ports 25 and 80 to 10.0.20.0/26 from the 10.0.10.0/26 subnet while still allowing all otherTraffic? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Add aג€permit ip any anyג€ statement at the end of ACL 101 for allowed traffic."
+      },
+      {
+        "label": "B",
+        "text": "Add aג€permit ip any anyג€ statement to the beginning of ACL 101 for allowed traffic."
+      },
+      {
+        "label": "C",
+        "text": "The ACL must be moved to the Gi0/1 interface outbound on R2."
+      },
+      {
+        "label": "D",
+        "text": "The source and destination IPs must be swapped in ACL 101."
+      },
+      {
+        "label": "E",
+        "text": "The ACL must be configured the Gi0/2 interface inbound on R1."
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1325,
+    "qid": "Q1325",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "While examining excessive traffic on the network, it is noted that all incoming packets on an interface appear to be allowed even though an IPv4 ACL is applied to the interface. Which two misconfigurations cause this behavior? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The ACL is empty"
+      },
+      {
+        "label": "B",
+        "text": "A matching permit statement is too broadly defined"
+      },
+      {
+        "label": "C",
+        "text": "The packets fail to match any permit statement"
+      },
+      {
+        "label": "D",
+        "text": "A matching deny statement is too high in the access list"
+      },
+      {
+        "label": "E",
+        "text": "A matching permit statement is too high in the access list"
+      }
+    ],
+    "answer": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": 1326,
+    "qid": "Q1326",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "In which two ways does a password manager reduce the chance of a hacker stealing a user's password? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It encourages users to create stronger passwords"
+      },
+      {
+        "label": "B",
+        "text": "It uses an internal firewall to protect the password repository from unauthorized access"
+      },
+      {
+        "label": "C",
+        "text": "It stores the password repository on the local workstation with built-in antivirus and anti-malware functionality"
+      },
+      {
+        "label": "D",
+        "text": "It automatically provides a second authentication factor that is unknown to the original user"
+      },
+      {
+        "label": "E",
+        "text": "It protects against keystroke logging on a compromised device or web site"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1327,
+    "qid": "Q1327",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two recommendations for protecting network ports from being exploited when located in an office space outside of an IT closet? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "enable the PortFast feature on ports"
+      },
+      {
+        "label": "B",
+        "text": "configure static ARP entries"
+      },
+      {
+        "label": "C",
+        "text": "configure ports to a fixed speed"
+      },
+      {
+        "label": "D",
+        "text": "implement port-based authentication"
+      },
+      {
+        "label": "E",
+        "text": "shut down unused ports"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1328,
+    "qid": "Q1328",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two protocols must be disabled to increase security for management connections to a Wireless LAN Controller? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "HTTPS"
+      },
+      {
+        "label": "B",
+        "text": "SSH"
+      },
+      {
+        "label": "C",
+        "text": "HTTP"
+      },
+      {
+        "label": "D",
+        "text": "Telnet"
+      },
+      {
+        "label": "E",
+        "text": "TFTP"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1329,
+    "qid": "Q1329",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two commands must be configured on router R1 to enable the router to accept secure remote-access connections?(Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ip ssh pubkey-chain"
+      },
+      {
+        "label": "B",
+        "text": "Username cisco password 0 cisco"
+      },
+      {
+        "label": "C",
+        "text": "Crypto key generate rsa"
+      },
+      {
+        "label": "D",
+        "text": "Transport input telnet"
+      },
+      {
+        "label": "E",
+        "text": "login console"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1330,
+    "qid": "Q1330",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two components comprise part of a PKI? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "preshared key that authenticates connections"
+      },
+      {
+        "label": "B",
+        "text": "one or more CRLs"
+      },
+      {
+        "label": "C",
+        "text": "RSA token"
+      },
+      {
+        "label": "D",
+        "text": "CA that grants certificates"
+      },
+      {
+        "label": "E",
+        "text": "clear-text password that authenticates connections"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1331,
+    "qid": "Q1331",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "A network engineer is replacing the switches that belong to a managed-services client with new Cisco Catalyst switches. The new switches Will be configured for updated security standards including replacing. Telnet services with encrypted connections and doubling the modulus size from 1024. Which two commands must the engineer configure on The new switches? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "transport input ssh"
+      },
+      {
+        "label": "B",
+        "text": "transport input all"
+      },
+      {
+        "label": "C",
+        "text": "crypto key generate rsa modulus 2048"
+      },
+      {
+        "label": "D",
+        "text": "crypto key generate rsa general-keys modulus 1024"
+      },
+      {
+        "label": "E",
+        "text": "crypto key generate rsa usage-keys"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  }
+]

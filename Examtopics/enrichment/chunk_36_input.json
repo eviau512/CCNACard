@@ -1,0 +1,816 @@
+[
+  {
+    "id": 1039,
+    "qid": "Q1039",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Why choose Cisco DNA Center for automated lifecycle management?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to allow SSH access to ail nodes in the network"
+      },
+      {
+        "label": "B",
+        "text": "to provide software redundancy in the network"
+      },
+      {
+        "label": "C",
+        "text": "to perform upgrades without service interruption"
+      },
+      {
+        "label": "D",
+        "text": "to provide fast and accurate deployment of patches and updates"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1040,
+    "qid": "Q1040",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "What is the default interface for in-band wireless network management on a WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "out-of-band"
+      },
+      {
+        "label": "B",
+        "text": "redundant port"
+      },
+      {
+        "label": "C",
+        "text": "service port"
+      },
+      {
+        "label": "D",
+        "text": "wireless management"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1041,
+    "qid": "Q1041",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which factor must be considered during the implementation of an IPsec VPN?",
+    "options": [
+      {
+        "label": "A",
+        "text": "In IPsec tunnel mode, the entire original IP datagram is encrypted."
+      },
+      {
+        "label": "B",
+        "text": "IPsec transport mode increases GRE tunnel security over tunnel mode."
+      },
+      {
+        "label": "C",
+        "text": "In IPsec tunnel mode, only the IP payload is encrypted."
+      },
+      {
+        "label": "D",
+        "text": "IPsec transport mode leaves the Layer 4 header unencrypted for inspection."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1042,
+    "qid": "Q1042",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer assigns IP addressing to the current VLAN with three PCs. The con guration must also account for theExpansion of 30 additionalVLANS using the same Class C subnet for subnetting and host count. Which command set ful lls the request while reserving address spaceFor the expected growth?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 265 255.255.252"
+      },
+      {
+        "label": "B",
+        "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 255 255.255.248"
+      },
+      {
+        "label": "C",
+        "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 255 255.255.0"
+      },
+      {
+        "label": "D",
+        "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 255.255.255.128"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1235,
+    "qid": "Q1235",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "A frame that enters a switch fails the Frame Check Sequence. Which two interface counters are incremented? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "input errors"
+      },
+      {
+        "label": "B",
+        "text": "frame"
+      },
+      {
+        "label": "C",
+        "text": "giants"
+      },
+      {
+        "label": "D",
+        "text": "CRC"
+      },
+      {
+        "label": "E",
+        "text": "runts"
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1236,
+    "qid": "Q1236",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "When configuring IPv6 on an interface, which two IPv6 multicast groups are joined? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "2000::/3"
+      },
+      {
+        "label": "B",
+        "text": "2002::5"
+      },
+      {
+        "label": "C",
+        "text": "FC00::/7"
+      },
+      {
+        "label": "D",
+        "text": "FF02::1"
+      },
+      {
+        "label": "E",
+        "text": "FF02::2"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1237,
+    "qid": "Q1237",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two reasons that cause late collisions to increment on an Ethernet interface? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "when Carrier Sense Multiple Access/Collision Detection is used"
+      },
+      {
+        "label": "B",
+        "text": "when one side of the connection is configured for half-duplex"
+      },
+      {
+        "label": "C",
+        "text": "when the sending device waits 15 seconds before sending the frame again"
+      },
+      {
+        "label": "D",
+        "text": "when a collision occurs after the 32nd byte of a frame has been transmitted"
+      },
+      {
+        "label": "E",
+        "text": "when the cable length limits are exceeded"
+      }
+    ],
+    "answer": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": 1238,
+    "qid": "Q1238",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Several new coverage cells are required to improve the Wi-Fi network of an organization. Which two standard designs are recommended? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "5GHz provides increased network capacity with up to 23 nonoverlapping channels."
+      },
+      {
+        "label": "B",
+        "text": "5GHz channel selection requires an autonomous access point."
+      },
+      {
+        "label": "C",
+        "text": "Cells that overlap one another are configured to use nonoverlapping channels."
+      },
+      {
+        "label": "D",
+        "text": "Adjacent cells with overlapping channels use a repeater access point."
+      },
+      {
+        "label": "E",
+        "text": "For maximum throughput, the WLC is configured to dynamically set adjacent access points to the channel."
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1239,
+    "qid": "Q1239",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two differences between optical-fiber cabling and copper cabling? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "A BNC connector is used for fiber connections"
+      },
+      {
+        "label": "B",
+        "text": "The glass core component is encased in a cladding"
+      },
+      {
+        "label": "C",
+        "text": "The data can pass through the cladding"
+      },
+      {
+        "label": "D",
+        "text": "Light is transmitted through the core of the fiber"
+      },
+      {
+        "label": "E",
+        "text": "Fiber connects to physical interfaces using RJ-45 connections"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1240,
+    "qid": "Q1240",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two descriptions of three-tier network topologies? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The distribution layer runs Layer 2 and Layer 3 technologies"
+      },
+      {
+        "label": "B",
+        "text": "The network core is designed to maintain continuous connectivity when devices fail"
+      },
+      {
+        "label": "C",
+        "text": "The access layer manages routing between devices in different domains"
+      },
+      {
+        "label": "D",
+        "text": "The core layer maintains wired connections for each host"
+      },
+      {
+        "label": "E",
+        "text": "The core and distribution layers perform the same functions"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1241,
+    "qid": "Q1241",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "For what two purposes does the Ethernet protocol use physical addresses?Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "to uniquely identify devices at Layer 2"
+      },
+      {
+        "label": "B",
+        "text": "to allow communication with devices on a different network"
+      },
+      {
+        "label": "C",
+        "text": "to differentiate a Layer 2 frame from a Layer 3 packet"
+      },
+      {
+        "label": "D",
+        "text": "to establish a priority system to determine which device gets to transmit first"
+      },
+      {
+        "label": "E",
+        "text": "to allow communication between different devices on the same network"
+      },
+      {
+        "label": "F",
+        "text": "to allow detection of a remote device when its physical address is unknown"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1242,
+    "qid": "Q1242",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two statements about the purpose of the OSI model are accurate? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Defines the network functions that occur at each layer"
+      },
+      {
+        "label": "B",
+        "text": "Facilitates an understanding of how information travels throughout a network"
+      },
+      {
+        "label": "C",
+        "text": "Changes in one layer do not impact other layer"
+      },
+      {
+        "label": "D",
+        "text": "Ensures reliable data delivery through its layered approach"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1243,
+    "qid": "Q1243",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which three statements about MAC addresses are correct? (Choose three.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "To communicate with other devices on a network, a network device must have a unique MAC address"
+      },
+      {
+        "label": "B",
+        "text": "The MAC address is also referred to as the IP address"
+      },
+      {
+        "label": "C",
+        "text": "The MAC address of a device must be configured in the Cisco IOS CLI by a user with administrative privileges"
+      },
+      {
+        "label": "D",
+        "text": "A MAC address contains two main components, the first of which identifies the manufacturer of the hardware and the second of which uniquely identifies the hardware"
+      },
+      {
+        "label": "E",
+        "text": "An example of a MAC address is 0A:26:B8:D6:65:90"
+      },
+      {
+        "label": "F",
+        "text": "A MAC address contains two main components, the first of which identifies the network on which the host resides and the second of Which uniquely identifies the host on the network"
+      }
+    ],
+    "answer": [
+      "A",
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1244,
+    "qid": "Q1244",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two statements are true about the command ip route 172.16.3.0 255.255.255.0 192.168.2.4? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It establishes a static route to the 172.16.3.0 network."
+      },
+      {
+        "label": "B",
+        "text": "It establishes a static route to the 192.168.2.0 network."
+      },
+      {
+        "label": "C",
+        "text": "It configures the router to send any traffic for an unknown destination to the 172.16.3.0 network."
+      },
+      {
+        "label": "D",
+        "text": "It configures the router to send any traffic for an unknown destination out the interface with the address 192.168.2.4."
+      },
+      {
+        "label": "E",
+        "text": "It uses the default administrative distance."
+      },
+      {
+        "label": "F",
+        "text": "It is a route that would be used last if other routes to the same destination exist."
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1245,
+    "qid": "Q1245",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits of private IPv4 IP addresses? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "They are routed the same as public IP addresses."
+      },
+      {
+        "label": "B",
+        "text": "They are less costly than public IP addresses."
+      },
+      {
+        "label": "C",
+        "text": "They can be assigned to devices without Internet connections."
+      },
+      {
+        "label": "D",
+        "text": "They eliminate the necessity for NAT policies."
+      },
+      {
+        "label": "E",
+        "text": "They eliminate duplicate IP confiicts."
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1246,
+    "qid": "Q1246",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits that the UDP protocol provide for application traffic? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "UDP traffic has lower overhead than TCP traffic"
+      },
+      {
+        "label": "B",
+        "text": "UDP provides a built-in recovery mechanism to retransmit lost packets"
+      },
+      {
+        "label": "C",
+        "text": "The CTL field in the UDP packet header enables a three-way handshake to establish the connection"
+      },
+      {
+        "label": "D",
+        "text": "UDP maintains the connection state to provide more stable connections than TCP"
+      },
+      {
+        "label": "E",
+        "text": "The application can use checksums to verify the integrity of application data"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1247,
+    "qid": "Q1247",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two goals reasons to implement private IPv4 addressing on your network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Comply with PCI regulations"
+      },
+      {
+        "label": "B",
+        "text": "Conserve IPv4 address"
+      },
+      {
+        "label": "C",
+        "text": "Reduce the size of the forwarding table on network routers"
+      },
+      {
+        "label": "D",
+        "text": "Reduce the risk of a network security breach"
+      },
+      {
+        "label": "E",
+        "text": "Comply with local law"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1248,
+    "qid": "Q1248",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two WAN architecture options help a business scalability and reliability for the network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "asychronous routing"
+      },
+      {
+        "label": "B",
+        "text": "single-homed branches"
+      },
+      {
+        "label": "C",
+        "text": "dual-homed branches"
+      },
+      {
+        "label": "D",
+        "text": "static routing"
+      },
+      {
+        "label": "E",
+        "text": "dynamic routing"
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1249,
+    "qid": "Q1249",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two options are the best reasons to use an IPV4 private IP space? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "to enable intra-enterprise communication"
+      },
+      {
+        "label": "B",
+        "text": "to implement NAT"
+      },
+      {
+        "label": "C",
+        "text": "to connect applications"
+      },
+      {
+        "label": "D",
+        "text": "to conserve global address space"
+      },
+      {
+        "label": "E",
+        "text": "to manage routing overhead"
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1250,
+    "qid": "Q1250",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two functions of a server on a network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "handles requests from multiple workstations at the same time"
+      },
+      {
+        "label": "B",
+        "text": "achieves redundancy by exclusively using virtual server clustering"
+      },
+      {
+        "label": "C",
+        "text": "housed solely in a data center that is dedicated to a single client achieves redundancy by exclusively using virtual server clustering"
+      },
+      {
+        "label": "D",
+        "text": "runs the same operating system in order to communicate with other servers"
+      },
+      {
+        "label": "E",
+        "text": "runs applications that send and retrieve data for workstations that make requests"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1251,
+    "qid": "Q1251",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two functions are performed by the core layer in a three-tier architecture? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Provide uninterrupted forwarding service"
+      },
+      {
+        "label": "B",
+        "text": "Inspect packets for malicious activity"
+      },
+      {
+        "label": "C",
+        "text": "Ensure timely data transfer between layers"
+      },
+      {
+        "label": "D",
+        "text": "Provide direct connectivity for end user devices"
+      },
+      {
+        "label": "E",
+        "text": "Police traffic that is sent to the edge of the network"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1252,
+    "qid": "Q1252",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two functions of a Layer 2 switch? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "acts as a central point for association and authentication servers"
+      },
+      {
+        "label": "B",
+        "text": "selects the best route between networks on a WAN"
+      },
+      {
+        "label": "C",
+        "text": "moves packets within a VLAN"
+      },
+      {
+        "label": "D",
+        "text": "moves packets between different VLANs"
+      },
+      {
+        "label": "E",
+        "text": "makes forwarding decisions based on the MAC address of a packet"
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1253,
+    "qid": "Q1253",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two similarities between UTP Cat 5e and Cat 6a cabling? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Both support speeds up to 10 Gigabit."
+      },
+      {
+        "label": "B",
+        "text": "Both support speeds of at least 1 Gigabit."
+      },
+      {
+        "label": "C",
+        "text": "Both support runs of up to 55 meters."
+      },
+      {
+        "label": "D",
+        "text": "Both support runs of up to 100 meters."
+      },
+      {
+        "label": "E",
+        "text": "Both operate at a frequency of 500 MHz."
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1254,
+    "qid": "Q1254",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two network actions occur within the data plane? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Run routing protocols."
+      },
+      {
+        "label": "B",
+        "text": "Make a con guration change from an incoming NETCONF RPC."
+      },
+      {
+        "label": "C",
+        "text": "Add or remove an 802.1Q trunking header."
+      },
+      {
+        "label": "D",
+        "text": "Match the destination MAC address to the MAC address table."
+      },
+      {
+        "label": "E",
+        "text": "Reply to an incoming ICMP echo request."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1255,
+    "qid": "Q1255",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two characteristics of an SSID? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uniquely identifies a client in a WLAN."
+      },
+      {
+        "label": "B",
+        "text": "It is at most 32 characters long"
+      },
+      {
+        "label": "C",
+        "text": "It uniquely identifies an access point in a WLAN"
+      },
+      {
+        "label": "D",
+        "text": "It provides secured access to a WLAN."
+      },
+      {
+        "label": "E",
+        "text": "It can be hidden or broadcast in a WLAN."
+      }
+    ],
+    "answer": [
+      "B",
+      "E"
+    ]
+  }
+]

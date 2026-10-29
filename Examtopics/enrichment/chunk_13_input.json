@@ -1,0 +1,702 @@
+[
+  {
+    "id": 432,
+    "qid": "Q561",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "A network administrator must enable DHCP services between two sites. What must be configured for the router to pass DHCPDISCOVER messages on to the server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "DHCP Binding"
+      },
+      {
+        "label": "B",
+        "text": "a DHCP Relay Agent"
+      },
+      {
+        "label": "C",
+        "text": "DHCP Snooping"
+      },
+      {
+        "label": "D",
+        "text": "a DHCP Pool"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 433,
+    "qid": "Q562",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which level of severity must be set to get informational syslogs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "alert"
+      },
+      {
+        "label": "B",
+        "text": "critical"
+      },
+      {
+        "label": "C",
+        "text": "notice"
+      },
+      {
+        "label": "D",
+        "text": "debug"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 434,
+    "qid": "Q563",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "On workstations running Microsoft Windows, which protocol provides the default gateway for the device?",
+    "options": [
+      {
+        "label": "A",
+        "text": "STP"
+      },
+      {
+        "label": "B",
+        "text": "DHCP"
+      },
+      {
+        "label": "C",
+        "text": "SNMP"
+      },
+      {
+        "label": "D",
+        "text": "DNS"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 435,
+    "qid": "Q565",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration must be applied to the router that configures PAT to translate all addresses in VLAN 200 while allowing devices on VLAN 100 to use their own IP addresses?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Router1(config)#access-list 99 permit 192.168.100.32 0.0.0.31 Router1(config)#ip nat inside source list 99 interface gi1/0/0 overload Router1(config)#interface gi2/0/1.200 Router1(config)#ip nat inside Router1(config)#interface gi1/0/0 Router1(config)#ip nat outside"
+      },
+      {
+        "label": "B",
+        "text": "Router1(config)#access-list 99 permit 192.168.100.0 0.0.0.255 Router1(config)#ip nat inside source list 99 interface gi1/0/0 overload Router1(config)#interface gi2/0/1.200 Router1(config)#ip nat inside Router1(config)#interface gi1/0/0 Router1(config)#ip nat outside"
+      },
+      {
+        "label": "C",
+        "text": "Router1(config)#access-list 99 permit 209.165.201.2 255.255.255.255 Router1(config)#ip nat inside source list 99 interface gi1/0/0 overload Router1(config)#interface gi2/0/1.200 Router1(config)#ip nat inside Router1(config)#interface gi1/0/0 Router1(config)#ip nat Outside"
+      },
+      {
+        "label": "D",
+        "text": "Router1(config)#access- list 99 permit 209.165.201.2 0.0.0.0 Router1(config)#ip nat inside source list 99 interface gi1/0/0 overload Router1(config)#interface gi2/0/1.200 Router1(config)#ip nat inside Router1(config)#interface gi1/0/0 Router1(config)#ip nat outside"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 437,
+    "qid": "Q568",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "R1 as an NTP server must have: ✑NTP authentication enabled ✑NTP packets sourced from Interface loopback 0 ✑NTP stratum 2 ✑NTP packets only permitted to client IP 209.165.200.225 How should R1 be configured?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ntp authenticate ntp authentication-key 2 sha1 CISCO123 ntp source Loopback0 ntp access-group server-only 10 ntp master 2 ! access-list 10 permit udp host 209.165.200.225 any eq 123"
+      },
+      {
+        "label": "B",
+        "text": "ntp authenticate ntp authentication-key 2 md5 CISCO123 ntp interface Loopback0 ntp access-group server-only 10 ntp stratum 2 ! access-list 10 permit 209.165.200.225"
+      },
+      {
+        "label": "C",
+        "text": "ntp authenticate ntp authentication-key 2 md5 CISCO123 ntp source Loopback0 ntp access-group server-only 10 ntp master 2 ! access-list 10 permit 209.165.200.225"
+      },
+      {
+        "label": "D",
+        "text": "ntp authenticate ntp authentication-key 2 md5 CISCO123 ntp source Loopback0 ntp access-group server-only 10 ntp stratum 2 ! access-list 10 permit udp host 209.165.200.225 any eq 123"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 442,
+    "qid": "Q573",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The DHCP server and clients are connected to the same switch. What is the next step to complete the DHCP configuration to allow clients on VLAN 1 to receive addresses from the DHCP server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure the ip dhcp snooping trust command on the interface that is connected to the DHCP client."
+      },
+      {
+        "label": "B",
+        "text": "configure ip dhcp relay information option command on the interface that is connected to the DHCP server."
+      },
+      {
+        "label": "C",
+        "text": "configure ip dhcp snooping trust command on the interface that is connected to the DHCP server."
+      },
+      {
+        "label": "D",
+        "text": "configure the ip dhcp information option command on the interface that is connected to the DHCP client."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 443,
+    "qid": "Q574",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "A network analyst is tasked with configuring the date and time on a router using EXEC mode. The date must be set to January 1, 2020 and the time must be set to 12:00 am. Which command should be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "clock timezone"
+      },
+      {
+        "label": "B",
+        "text": "clock summer-time date"
+      },
+      {
+        "label": "C",
+        "text": "clock summer-time recurring"
+      },
+      {
+        "label": "D",
+        "text": "clock set"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 444,
+    "qid": "Q576",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which command creates a static NAT binding for a PC address of 10.1.1.1 to the public routable address 209.165.200.225 assigned to the PC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#ip nat inside source static 10.1.1.1 209.165.200.225"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#ip nat outside source static 209.165.200.225 10.1.1.1"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#ip nat inside source static 209.165.200.225 10.1.1.1"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#ip nat outside source static 10.1.1.1 209.165.200.225"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 445,
+    "qid": "Q577",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What prevents a workstation from receiving a DHCP address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "STP"
+      },
+      {
+        "label": "B",
+        "text": "VTP"
+      },
+      {
+        "label": "C",
+        "text": "802.1Q"
+      },
+      {
+        "label": "D",
+        "text": "DTP"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 446,
+    "qid": "Q578",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a feature of TFTP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "offers anonymous user login ability"
+      },
+      {
+        "label": "B",
+        "text": "uses two separate connections for control and data traffic"
+      },
+      {
+        "label": "C",
+        "text": "relies on the well-known TCP port 20 to transmit data"
+      },
+      {
+        "label": "D",
+        "text": "provides secure data transfer"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 447,
+    "qid": "Q579",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which QoS forwarding per-hop behavior changes a specific value in a packet header to set the class of service for the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "shaping"
+      },
+      {
+        "label": "B",
+        "text": "classification"
+      },
+      {
+        "label": "C",
+        "text": "policing"
+      },
+      {
+        "label": "D",
+        "text": "marking"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 448,
+    "qid": "Q580",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How should the configuration be updated to allow PC1 and PC2 access to the Internet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Modify the configured number of the second access list"
+      },
+      {
+        "label": "B",
+        "text": "Change the ip nat inside source command to use interface GigabitEthernet0/0"
+      },
+      {
+        "label": "C",
+        "text": "Remove the overload keyword from the ip nat inside source command"
+      },
+      {
+        "label": "D",
+        "text": "Add either the ip nat {inside|outside} command under both interfaces"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 449,
+    "qid": "Q581",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of the ip address dhcp command?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to configure an interface as a DHCP relay"
+      },
+      {
+        "label": "B",
+        "text": "to configure an interface as a DHCP client"
+      },
+      {
+        "label": "C",
+        "text": "to configure an interface as a DHCP helper"
+      },
+      {
+        "label": "D",
+        "text": "to configure an interface as a DHCP server"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 450,
+    "qid": "Q582",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration enables DHCP addressing for hosts connected to interface FastEthernet0/1 on router R4?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface FastEthernet0/1 ip helper-address 10.0.1.1 ! access-list 100 permit tcp host 10.0.1.1 eq 67 host 10.148.2.1"
+      },
+      {
+        "label": "B",
+        "text": "interface FastEthernet0/0 ip helper-address 10.0.1.1 ! access-list 100 permit udp host 10.0.1.1 eq bootps host 10.148.2.1"
+      },
+      {
+        "label": "C",
+        "text": "interface FastEthernet0/0 ip helper-address 10.0.1.1 ! access-list 100 permit host 10.0.1.1 host 10.148.2.1 eq bootps"
+      },
+      {
+        "label": "D",
+        "text": "interface FastEthernet0/1 ip helper-address 10.0.1.1 ! access-list 100 permit udp host 10.0.1.1 eq bootps host 10.148.2.1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 451,
+    "qid": "Q584",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "An engineer is configuring SSH version 2 exclusively on the R1 router. What is the minimum configuration required to permit remote management using the cryptographic protocol?",
+    "options": [
+      {
+        "label": "A",
+        "text": "hostname R1 service password-encryption crypto key generate rsa general-keys modulus 1024 username cisco privilege 15 password 0 cisco123 ip ssh version 2 line vty 0 15 transport input ssh login local"
+      },
+      {
+        "label": "B",
+        "text": "hostname R1 ip domain name cisco crypto key generate rsa general-keys modulus 1024 username cisco privilege 15 password 0 cisco123 ip ssh version 2 line vty 0 15 transport input ssh login local"
+      },
+      {
+        "label": "C",
+        "text": "hostname R1 crypto key generate rsa general-keys modulus 1024 username cisco privilege 15 password 0 cisco123 ip ssh version 2 line vty 0 15 transport input ssh login local"
+      },
+      {
+        "label": "D",
+        "text": "hostname R1 ip domain name cisco crypto key generate rsa general-keys modulus 1024 username cisco privilege 15 password 0 cisco123 ip ssh version 2 line vty 0 15 transport input all login local"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 452,
+    "qid": "Q585",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which per-hop traffic-control feature does an ISP implement to mitigate the potential negative effects of a customer exceeding its committed bandwidth?",
+    "options": [
+      {
+        "label": "A",
+        "text": "policing"
+      },
+      {
+        "label": "B",
+        "text": "queuing"
+      },
+      {
+        "label": "C",
+        "text": "marking"
+      },
+      {
+        "label": "D",
+        "text": "shaping"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 453,
+    "qid": "Q587",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which remote access protocol provides unsecured remote CLI access?",
+    "options": [
+      {
+        "label": "A",
+        "text": "console"
+      },
+      {
+        "label": "B",
+        "text": "Telnet"
+      },
+      {
+        "label": "C",
+        "text": "SSH"
+      },
+      {
+        "label": "D",
+        "text": "Bash"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 454,
+    "qid": "Q589",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which router or router group are NTP clients?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1"
+      },
+      {
+        "label": "B",
+        "text": "R2 and R3"
+      },
+      {
+        "label": "C",
+        "text": "R1, R3, and R4"
+      },
+      {
+        "label": "D",
+        "text": "R1, R2, and R3"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 455,
+    "qid": "Q590",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the next step to complete the implementation for the partial NAT configuration shown?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Modify the access list for the internal network on e0/1."
+      },
+      {
+        "label": "B",
+        "text": "Reconfigure the static NAT entries that overlap the NAT pool."
+      },
+      {
+        "label": "C",
+        "text": "Apply the ACL to the pool configuration."
+      },
+      {
+        "label": "D",
+        "text": "configure the NAT outside interface."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 456,
+    "qid": "Q591",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a syslog facility?",
+    "options": [
+      {
+        "label": "A",
+        "text": "host that is configured for the system to send log messages"
+      },
+      {
+        "label": "B",
+        "text": "password that authenticates a Network Management System to receive log messages"
+      },
+      {
+        "label": "C",
+        "text": "group of log messages associated with the configured severity level"
+      },
+      {
+        "label": "D",
+        "text": "set of values that represent the processes that can generate a log message"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 457,
+    "qid": "Q593",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A newly configured PC fails to connect to the internet by using TCP port 80 to www.cisco.com. Which setting must be modified for the connection to work?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Subnet Mask"
+      },
+      {
+        "label": "B",
+        "text": "DNS Servers"
+      },
+      {
+        "label": "C",
+        "text": "Default Gateway"
+      },
+      {
+        "label": "D",
+        "text": "DHCP Servers"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 459,
+    "qid": "Q595",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which QoS per-hop behavior changes the value of the ToS field in the IPv4 packet header?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Shaping"
+      },
+      {
+        "label": "B",
+        "text": "Policing"
+      },
+      {
+        "label": "C",
+        "text": "classification"
+      },
+      {
+        "label": "D",
+        "text": "Marking"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 460,
+    "qid": "Q596",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the function of FTP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Always operated without user connection validation"
+      },
+      {
+        "label": "B",
+        "text": "Uses block number to identify and mitigate data-transfer errors"
+      },
+      {
+        "label": "C",
+        "text": "Relies on the well-known UDO port 69 for data transfer"
+      },
+      {
+        "label": "D",
+        "text": "Uses two separate connections for control and data traffic"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 461,
+    "qid": "Q597",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How does TFTP operate in a network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Provides secure data transfer"
+      },
+      {
+        "label": "B",
+        "text": "Relies on the well-known TCP port 20 to transmit data"
+      },
+      {
+        "label": "C",
+        "text": "Uses block numbers to identify and mitigate data-transfer errors"
+      },
+      {
+        "label": "D",
+        "text": "Requires two separate connections for control and data traffic"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 463,
+    "qid": "Q599",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How does QoS optimize voice traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "by reducing bandwidth usage"
+      },
+      {
+        "label": "B",
+        "text": "by reducing packet loss"
+      },
+      {
+        "label": "C",
+        "text": "by differentiating voice and video traffic"
+      },
+      {
+        "label": "D",
+        "text": "by increasing jitter"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  }
+]

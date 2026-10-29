@@ -1,0 +1,706 @@
+[
+  {
+    "id": 763,
+    "qid": "Q1010",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which function generally performed by a traditional network device is replaced by a software-defined controller?",
+    "options": [
+      {
+        "label": "A",
+        "text": "building route tables and updating the forwarding table"
+      },
+      {
+        "label": "B",
+        "text": "encapsulation and decapsulation of packets in a data-link frame"
+      },
+      {
+        "label": "C",
+        "text": "changing the source or destination address during NAT operations"
+      },
+      {
+        "label": "D",
+        "text": "encryption and decryption for VPN link processing"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 764,
+    "qid": "Q1011",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What describes a northbound REST API for SDN?",
+    "options": [
+      {
+        "label": "A",
+        "text": "network-element-facing interface for GET, POST, PUT, and DELETE methods"
+      },
+      {
+        "label": "B",
+        "text": "application-facing interface for SNMP GET requests"
+      },
+      {
+        "label": "C",
+        "text": "application-facing interface for GET, POST, PUT, and DELETE methods"
+      },
+      {
+        "label": "D",
+        "text": "network-element-facing interface for the control and data planes"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 765,
+    "qid": "Q1012",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "When is the PUT method used within HTTP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to update a DNS server"
+      },
+      {
+        "label": "B",
+        "text": "when a nonidempotent operation is needed"
+      },
+      {
+        "label": "C",
+        "text": "to display a web site"
+      },
+      {
+        "label": "D",
+        "text": "when a read-only operation is required"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 766,
+    "qid": "Q1014",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the advantage of separating the control plane from the data plane within an SDN network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "limits data queries to the control plane"
+      },
+      {
+        "label": "B",
+        "text": "reduces cost"
+      },
+      {
+        "label": "C",
+        "text": "decreases overall network complexity"
+      },
+      {
+        "label": "D",
+        "text": "offloads the creation of virtual machines to the data plane"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 767,
+    "qid": "Q1015",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is missing from this output for it to be executed?",
+    "options": [
+      {
+        "label": "A",
+        "text": "double quotes (\" \") around the \"Cisco Devices\" string"
+      },
+      {
+        "label": "B",
+        "text": "exclamation point (!) at the beginning of each line"
+      },
+      {
+        "label": "C",
+        "text": "square bracket ( [ ) at the beginning"
+      },
+      {
+        "label": "D",
+        "text": "curly braket ( } ) at the end"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 768,
+    "qid": "Q1016",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a function of a northbound API in an SDN environment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It relies on global provisioning and configuration."
+      },
+      {
+        "label": "B",
+        "text": "It upgrades software and restores files."
+      },
+      {
+        "label": "C",
+        "text": "It supports distributed processing for configuration."
+      },
+      {
+        "label": "D",
+        "text": "It provides orchestration and network automation services."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 769,
+    "qid": "Q1017",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is an Ansible inventory?",
+    "options": [
+      {
+        "label": "A",
+        "text": "unit of Python code to be executed within Ansible"
+      },
+      {
+        "label": "B",
+        "text": "file that Defines the target devices upon which commands and tasks are executed"
+      },
+      {
+        "label": "C",
+        "text": "device with Ansible installed that manages target devices"
+      },
+      {
+        "label": "D",
+        "text": "collection of actions to perform on target devices, expressed in YAML format"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 770,
+    "qid": "Q1019",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a function of a northbound API?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It relies on global provisioning and configuration."
+      },
+      {
+        "label": "B",
+        "text": "It upgrades software and restores files."
+      },
+      {
+        "label": "C",
+        "text": "It supports distributed processing for configuration."
+      },
+      {
+        "label": "D",
+        "text": "It provides a path between an SDN controller and network applications."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 771,
+    "qid": "Q1020",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What does apple represent within the JSON data?",
+    "options": [
+      {
+        "label": "A",
+        "text": "array"
+      },
+      {
+        "label": "B",
+        "text": "object"
+      },
+      {
+        "label": "C",
+        "text": "number"
+      },
+      {
+        "label": "D",
+        "text": "string"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 772,
+    "qid": "Q1023",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A network architect is considering whether to implement Cisco DNA Center to deploy devices on a new network. The organization is focused on reducing the time it currently takes to deploy devices in a traditional campus design. For which reason would Cisco DNA Center be more appropriate than traditional management options?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cisco DNA Center supports deployment with a single pane of glass."
+      },
+      {
+        "label": "B",
+        "text": "Cisco DNA Center provides zero-touch provisioning to third-party devices."
+      },
+      {
+        "label": "C",
+        "text": "Cisco DNA Center reduces the need for analytics on third-party access points and devices."
+      },
+      {
+        "label": "D",
+        "text": "Cisco DNA Center minimizes the level of syslog output when reporting on Cisco devices."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 773,
+    "qid": "Q1025",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "In a cloud-computing environment, what is rapid elasticity?",
+    "options": [
+      {
+        "label": "A",
+        "text": "control and monitoring or resource consumption by the tenant"
+      },
+      {
+        "label": "B",
+        "text": "automatic adjustment of capacity based on need"
+      },
+      {
+        "label": "C",
+        "text": "pooling resources in a multitenant model based on need"
+      },
+      {
+        "label": "D",
+        "text": "self-service of computing resources by the tenant"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 774,
+    "qid": "Q1026",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which interface enables communication between a program on the controller and a program on the networking device?",
+    "options": [
+      {
+        "label": "A",
+        "text": "software virtual interface"
+      },
+      {
+        "label": "B",
+        "text": "tunnel interface"
+      },
+      {
+        "label": "C",
+        "text": "northbound interface"
+      },
+      {
+        "label": "D",
+        "text": "southbound interface"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 775,
+    "qid": "Q1027",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How many arrays are present in the JSON data?",
+    "options": [
+      {
+        "label": "A",
+        "text": "one"
+      },
+      {
+        "label": "B",
+        "text": "three"
+      },
+      {
+        "label": "C",
+        "text": "six"
+      },
+      {
+        "label": "D",
+        "text": "nine"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 776,
+    "qid": "Q1029",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which interface type enables an application running on a client to send data over an IP network to a server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "northbound interface"
+      },
+      {
+        "label": "B",
+        "text": "application programming interface"
+      },
+      {
+        "label": "C",
+        "text": "southbound interface"
+      },
+      {
+        "label": "D",
+        "text": "Representational State Transfer application programming interface"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 777,
+    "qid": "Q1031",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which QoS feature drops traffic that exceeds the committed access rate?",
+    "options": [
+      {
+        "label": "A",
+        "text": "policing"
+      },
+      {
+        "label": "B",
+        "text": "FIFO"
+      },
+      {
+        "label": "C",
+        "text": "shaping"
+      },
+      {
+        "label": "D",
+        "text": "weighted fair queuing"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 778,
+    "qid": "Q1032",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What does traffic shaping do?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It queues excess traffic"
+      },
+      {
+        "label": "B",
+        "text": "It sets QoS attributes within a packet"
+      },
+      {
+        "label": "C",
+        "text": "It organizes traffic into classes"
+      },
+      {
+        "label": "D",
+        "text": "It modifies the QoS attributes of a packet"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 779,
+    "qid": "Q1033",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A Cisco engineer is asked to update the configuration on switch 1 so that the EtherChannel stays up when one of the links fails. Which configuration meets this requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Switch1(config) # interface Fa0/0 Switch1(config-if) # lacp port-priority 100 Switch1(config) # interface Fa0/1 Switch1(config-if) # lacp port-priority 200"
+      },
+      {
+        "label": "B",
+        "text": "Switch1(config) # interface port-channel 1 Switch1(config-if) # port-channel min-links 1"
+      },
+      {
+        "label": "C",
+        "text": "Switch1(config) # interface Fa0/0 Switch1(config-if) # lacp port-priority 200 Switch1(config) # interface Fa0/1 Switch1(config-if) # lacp port-priority 100"
+      },
+      {
+        "label": "D",
+        "text": "Switch1(config) # interface port-channel 1 Switch1(config-if) # lacp max-bundle 1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 780,
+    "qid": "Q1035",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the benefit of using private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to enable secure connectivity over the Internet"
+      },
+      {
+        "label": "B",
+        "text": "to shield internal network devices from external access"
+      },
+      {
+        "label": "C",
+        "text": "to provide reliable connectivity between like devices"
+      },
+      {
+        "label": "D",
+        "text": "to be routable over an external network"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 781,
+    "qid": "Q1036",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Two switches have been implemented and all interfaces are at the default configuration level. A trunk link must be implemented between two switches with these requirements: • using an industry-standard trunking protocol • permitting VLANs 1-10 and denying other VLANs How must the interconnecting ports be configured?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport mode dynamic Channel-protocol lacp Switchport trunk allowed vlans 1-10"
+      },
+      {
+        "label": "B",
+        "text": "switchport mode trunk Switchport trunk allowed vlans 1-10 Switchport trunk native vlan 11"
+      },
+      {
+        "label": "C",
+        "text": "switchport mode trunk Switchport trunk encapsulation dot1q Switchport trunk allowed vlans 1-10"
+      },
+      {
+        "label": "D",
+        "text": "switchport mode dynamic desirable Channel-group 1 mode desirable Switchport trunk encapsulation isl Switchport trunk allowed vlan except 11-4094"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 782,
+    "qid": "Q1037",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. traffic that is flowing over interface TenGigabitEthemet0/0/0 experiences slow transfer speeds. What is the cause of this issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "speed conflict"
+      },
+      {
+        "label": "B",
+        "text": "queuing drops"
+      },
+      {
+        "label": "C",
+        "text": "duplex incompatibility"
+      },
+      {
+        "label": "D",
+        "text": "heavy traffic congestion"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 783,
+    "qid": "Q1039",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The iPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. Which address must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:10A0:ABFF:FECC:1 eui-64"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:1230:ABFF:FECC:1 eui-64"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:4347:31FF:FF47:0 eui-64"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:12A0:AB34:FFCC:1 eui-64"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 784,
+    "qid": "Q1042",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A network administrator wants the syslog server to filter incoming messages into different files based on their importance. Which filtering criteria must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "message body"
+      },
+      {
+        "label": "B",
+        "text": "level"
+      },
+      {
+        "label": "C",
+        "text": "facility"
+      },
+      {
+        "label": "D",
+        "text": "process ID"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 785,
+    "qid": "Q1044",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which interface or port on the WLC is the default for in-band device administration and communications between the controller and access points?",
+    "options": [
+      {
+        "label": "A",
+        "text": "console port"
+      },
+      {
+        "label": "B",
+        "text": "management interface"
+      },
+      {
+        "label": "C",
+        "text": "virtual interface"
+      },
+      {
+        "label": "D",
+        "text": "service port"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 786,
+    "qid": "Q1045",
+    "batch": "batch4",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. A network administrator configures the CPE to provide internet access to the company headquarters. traffic must be loadbalanced via ISP1 and ISP2 to ensure redundancy. Which two command sets must be configured on the CPE router? (Choose two.)",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 0.0.0.0 0.0.0.0 198.51.100.1 255 Ip route 0.0.0.0 0.0.0.0 203.0.113.1 255 Ip route 128.0.0.0 128.0.0.0 203.0.113.1"
+      },
+      {
+        "label": "B",
+        "text": "ip route 0.0.0.0 128.0.0.0 198.51.100.1 Ip route 128.0.0.0 128.0.0.0 203.0.113.1 Ip route 0.0.0.0 0.0.0.0 198.51.100.1 Ip route 0.0.0.0 0.0.0.0 203.0.113.1"
+      },
+      {
+        "label": "C",
+        "text": "ip route 0.0.0.0 0.0.0.0 198.51.100.1 Ip route 0.0.0.0 0.0.0.0 203.0.113.1"
+      },
+      {
+        "label": "D",
+        "text": "ip route 0.0.0.0 128.0.0.0 198.51.100.1 Ip route 128.0.0.0 128.0.0.0 203.0.113.1"
+      },
+      {
+        "label": "E",
+        "text": "ip route 0.0.0.0 0.0.0.0 198.51.100.1 Ip route 0.0.0.0 0.0.0.0 203.0.113.1 2"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 787,
+    "qid": "Q1046",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer updates the existing configuration on interface fastethernet1/1 switch SW1. It must establish an EtherChannel by using the same group designation with another vendor switch. Which configuration must be performed to complete the process?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface port-channel 2 Channel-group 2 mode desirable"
+      },
+      {
+        "label": "B",
+        "text": "interface fastethernet 1/1 Channel-group 2 mode on"
+      },
+      {
+        "label": "C",
+        "text": "interface fastethernet 1/1 Channel-group 2 mode active"
+      },
+      {
+        "label": "D",
+        "text": "interface port-channel 2 Channel-group 2 mode auto"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

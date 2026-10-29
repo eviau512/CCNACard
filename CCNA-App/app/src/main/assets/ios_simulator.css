@@ -1,0 +1,389 @@
+/* ==========================================================================
+   Virtual Cisco IOS Simulator Styles (ios_simulator.css)
+   Designed for CCNA 200-301 Hands-on Practice
+   ========================================================================== */
+
+.ios-sim-container {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 14px 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  transition: all 0.25s ease;
+}
+
+/* Fullscreen / Maximized Mode */
+.ios-sim-container.ios-fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  z-index: 99999 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* Header & Device Switcher Bar */
+.ios-sim-header {
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
+  user-select: none;
+}
+
+.ios-device-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 0;
+}
+.ios-device-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ios-tab-btn {
+  background: #21262d;
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.ios-tab-btn:active {
+  transform: scale(0.96);
+}
+
+.ios-tab-btn.active {
+  background: #1f6feb;
+  color: #ffffff;
+  border-color: #388bfd;
+  box-shadow: 0 0 8px rgba(31, 111, 235, 0.4);
+}
+
+.ios-tab-add-btn {
+  background: transparent;
+  color: #8b949e;
+  border: 1px dashed #30363d;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.ios-tab-add-btn:hover, .ios-tab-add-btn:active {
+  color: #58a6ff;
+  border-color: #58a6ff;
+}
+
+.ios-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ios-ctrl-btn {
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.74rem;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.ios-ctrl-btn:active {
+  background: #30363d;
+}
+
+/* Terminal Screen / Output Body */
+.ios-sim-screen {
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  height: 230px;
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ios-sim-container.ios-fullscreen .ios-sim-screen {
+  height: calc(100vh - 170px) !important;
+  height: calc(100dvh - 170px) !important;
+  font-size: 0.92rem;
+}
+
+.ios-line-output {
+  color: #c9d1d9;
+}
+.ios-line-input {
+  color: #79c0ff;
+  font-weight: 600;
+}
+.ios-line-system {
+  color: #8b949e;
+  font-style: italic;
+}
+.ios-line-error {
+  color: #ff7b72;
+}
+.ios-line-success {
+  color: #7ee787;
+}
+
+/* Mobile Virtual Keyboard Control Deck (Two-row keyboard) */
+.ios-keyboard-deck {
+  background: #161b22;
+  border-top: 1px solid #21262d;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 4px 6px;
+}
+
+.ios-touchbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 1px 0;
+}
+.ios-touchbar::-webkit-scrollbar {
+  display: none;
+}
+
+.ios-touch-key {
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.73rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+  transition: all 0.12s ease;
+}
+.ios-touch-key:active {
+  transform: scale(0.94);
+  background: #388bfd;
+  color: #ffffff;
+}
+
+/* Key Color Accents */
+.ios-touch-key.key-ctrl {
+  background: rgba(240, 136, 62, 0.15);
+  color: #f0883e;
+  border-color: rgba(240, 136, 62, 0.4);
+}
+.ios-touch-key.key-ctrl:active {
+  background: #f0883e;
+  color: #ffffff;
+}
+
+.ios-touch-key.key-danger {
+  background: rgba(248, 81, 73, 0.16);
+  color: #ff7b72;
+  border-color: rgba(248, 81, 73, 0.4);
+}
+.ios-touch-key.key-danger:active {
+  background: #f85149;
+  color: #ffffff;
+}
+
+.ios-touch-key.key-tab {
+  background: rgba(88, 166, 255, 0.15);
+  color: #58a6ff;
+  border-color: rgba(88, 166, 255, 0.4);
+}
+.ios-touch-key.key-tab:active {
+  background: #1f6feb;
+  color: #ffffff;
+}
+
+.ios-touch-key.key-help {
+  background: rgba(63, 185, 80, 0.15);
+  color: #3fb950;
+  border-color: rgba(63, 185, 80, 0.4);
+}
+.ios-touch-key.key-help:active {
+  background: #238636;
+  color: #ffffff;
+}
+
+.ios-touch-key.key-cmd {
+  color: #7ee787;
+  border-color: #238636;
+}
+.ios-touch-key.key-nav {
+  color: #d2a8ff;
+  border-color: #8957e5;
+}
+
+/* Input Command Row */
+.ios-input-row {
+  background: #0d1117;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-top: 1px solid #21262d;
+}
+
+.ios-prompt-label {
+  color: #58a6ff;
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: 0.86rem;
+  user-select: none;
+}
+
+.ios-cmd-input {
+  background: transparent;
+  border: none;
+  color: #f0f6fc;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 500;
+  outline: none;
+  flex: 1;
+  width: 100%;
+  padding: 2px 0;
+}
+
+.ios-cmd-input::placeholder {
+  color: #484f58;
+}
+
+.ios-send-btn {
+  background: #1f6feb;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.ios-send-btn:active {
+  background: #388bfd;
+}
+
+/* Reference Solution Panel */
+.ios-ref-panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin: 12px 0;
+  font-size: 0.88rem;
+}
+
+.ios-ref-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.ios-ref-code {
+  background: #090d16;
+  color: #38bdf8;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.ios-paste-ref-btn {
+  background: var(--bg-tertiary);
+  color: var(--primary);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.ios-paste-ref-btn:active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* Global Scratchpad Modal */
+.ios-scratchpad-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+.ios-scratchpad-modal.visible {
+  display: flex;
+}
+
+.ios-scratchpad-body {
+  width: 100%;
+  max-width: 720px;
+  height: 85vh;
+  height: 85dvh;
+  display: flex;
+  flex-direction: column;
+}

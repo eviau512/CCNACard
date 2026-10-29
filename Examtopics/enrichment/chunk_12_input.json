@@ -1,0 +1,714 @@
+[
+  {
+    "id": 398,
+    "qid": "Q515",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which command can you enter to determine the addresses that have been assigned on a DHCP Server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Show ip DHCP database."
+      },
+      {
+        "label": "B",
+        "text": "Show ip DHCP pool."
+      },
+      {
+        "label": "C",
+        "text": "Show ip DHCP binding."
+      },
+      {
+        "label": "D",
+        "text": "Show ip DHCP server statistic."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 399,
+    "qid": "Q516",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What is the authoritative source for an address lookup?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a recursive DNS search"
+      },
+      {
+        "label": "B",
+        "text": "the operating system cache"
+      },
+      {
+        "label": "C",
+        "text": "the ISP local cache"
+      },
+      {
+        "label": "D",
+        "text": "the browser cache"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 400,
+    "qid": "Q517",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which command is used to verify the DHCP relay agent address that has been set up on your Cisco IOS router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "show ip interface brief"
+      },
+      {
+        "label": "B",
+        "text": "show ip dhcp bindings"
+      },
+      {
+        "label": "C",
+        "text": "show ip route"
+      },
+      {
+        "label": "D",
+        "text": "show ip interface"
+      },
+      {
+        "label": "E",
+        "text": "show interface"
+      },
+      {
+        "label": "F",
+        "text": "show ip dhcp pool"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 401,
+    "qid": "Q518",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which type of information resides on a DHCP server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a list of the available IP addresses in a pool"
+      },
+      {
+        "label": "B",
+        "text": "a list of public IP addresses and their corresponding names"
+      },
+      {
+        "label": "C",
+        "text": "usernames and passwords for the end users in a domain"
+      },
+      {
+        "label": "D",
+        "text": "a list of statically assigned MAC addresses"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 402,
+    "qid": "Q520",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which Cisco IOS command will indicate that interface GigabitEthernet 0/0 is configured via DHCP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "show ip interface GigabitEthernet 0/0 dhcp"
+      },
+      {
+        "label": "B",
+        "text": "show interface GigabitEthernet 0/0"
+      },
+      {
+        "label": "C",
+        "text": "show ip interface dhcp"
+      },
+      {
+        "label": "D",
+        "text": "show ip interface GigabitEthernet 0/0"
+      },
+      {
+        "label": "E",
+        "text": "show ip interface GigabitEthernet 0/0 brief"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 403,
+    "qid": "Q521",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What will happen if you configure the logging trap debug command on a router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It causes the router to send messages with lower severity levels to the syslog server"
+      },
+      {
+        "label": "B",
+        "text": "It causes the router to send all messages with the severity levels Warning, Error, Critical, and Emergency to the syslog server"
+      },
+      {
+        "label": "C",
+        "text": "It causes the router to send all messages to the syslog server"
+      },
+      {
+        "label": "D",
+        "text": "It causes the router to stop sending all messages to the syslog server"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 406,
+    "qid": "Q526",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which function does an SNMP agent perform?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It sends information about MIB variables in response to requests from the NMS"
+      },
+      {
+        "label": "B",
+        "text": "It manages routing between Layer 3 devices in a network"
+      },
+      {
+        "label": "C",
+        "text": "It coordinates user authentication between a network device and a TACACS+ or RADIUS server"
+      },
+      {
+        "label": "D",
+        "text": "It requests information from remote network nodes about catastrophic system events"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 407,
+    "qid": "Q528",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which command must be entered when a device is configured as an NTP server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ntp peer"
+      },
+      {
+        "label": "B",
+        "text": "ntp master"
+      },
+      {
+        "label": "C",
+        "text": "ntp authenticate"
+      },
+      {
+        "label": "D",
+        "text": "ntp server"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 408,
+    "qid": "Q529",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What event has occurred if a router sends a notice level message to a syslog server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "A certificate has expired"
+      },
+      {
+        "label": "B",
+        "text": "An interface line has changed status"
+      },
+      {
+        "label": "C",
+        "text": "A TCP connection has been torn down"
+      },
+      {
+        "label": "D",
+        "text": "An ICMP connection has been built"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 409,
+    "qid": "Q532",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer configured NAT translations and has verified that the configuration is correct. Which IP address is the source IP after the NAT has taken place?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.4.4.4"
+      },
+      {
+        "label": "B",
+        "text": "10.4.4.5"
+      },
+      {
+        "label": "C",
+        "text": "172.23.103.10"
+      },
+      {
+        "label": "D",
+        "text": "172.23.104.4"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 410,
+    "qid": "Q533",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "If a notice-level message is sent to a syslog server, which event has occurred?",
+    "options": [
+      {
+        "label": "A",
+        "text": "A network device has restarted."
+      },
+      {
+        "label": "B",
+        "text": "A debug operation is running."
+      },
+      {
+        "label": "C",
+        "text": "A routing instance has flapped."
+      },
+      {
+        "label": "D",
+        "text": "An ARP inspection has failed."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 411,
+    "qid": "Q536",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the primary purpose of a First Hop Redundancy Protocol?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It allows directly connected neighbors to share configuration information"
+      },
+      {
+        "label": "B",
+        "text": "It reduces routing failures by allowing Layer 3 load balancing between OSPF neighbors that have the same link metric"
+      },
+      {
+        "label": "C",
+        "text": "It allows a router to use bridge priorities to create multiple loop-free paths to a single destination"
+      },
+      {
+        "label": "D",
+        "text": "It reduces routing failures by allowing more than one router to represent itself as the default gateway of a network"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 412,
+    "qid": "Q537",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "An engineer is configuring NAT to translate the source subnet of 10.10.0.0/24 to any one of three addresses: 192.168.3.1, 192.168.3.2, or 192.168.3.3. Which configuration should be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "enable configure terminal ip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 30 access-list 1 permit 10.10.0.0 0.0.0.255 ip nat outside destination list 1 pool mypool interface g1/1 ip nat inside interface g1/2 ip nat outside"
+      },
+      {
+        "label": "B",
+        "text": "enable configure terminal ip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 30 access-list 1 permit 10.10.0.0 0.0.0.254 ip nat inside source list 1 pool mypool interface g1/1 ip nat inside interface g1/2 ip nat outside"
+      },
+      {
+        "label": "C",
+        "text": "enable configure terminal ip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 30 route map permit 10.10.0.0 255.255.255.0 ip nat outside destination list 1 pool mypool interface g1/1 ip nat inside interface g1/2 ip nat outside"
+      },
+      {
+        "label": "D",
+        "text": "enable configure terminal ip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 30 access-list 1 permit 10.10.0.0 0.0.0.255 ip nat inside source list 1 pool mypool interface g1/1 ip nat inside interface g1/2 ip nat outside"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 413,
+    "qid": "Q538",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "When the active router in an HSRP group fails, which router assumes the role and forwards packets?",
+    "options": [
+      {
+        "label": "A",
+        "text": "forwarding"
+      },
+      {
+        "label": "B",
+        "text": "listening"
+      },
+      {
+        "label": "C",
+        "text": "standby"
+      },
+      {
+        "label": "D",
+        "text": "backup"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 414,
+    "qid": "Q539",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What protocol allows an engineer to back up 20 network router configurations globally while using the copy function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "TCP"
+      },
+      {
+        "label": "B",
+        "text": "SMTP"
+      },
+      {
+        "label": "C",
+        "text": "FTP"
+      },
+      {
+        "label": "D",
+        "text": "SNMP"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 419,
+    "qid": "Q546",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of traffic shaping?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to be a marking mechanism that identifies different flows"
+      },
+      {
+        "label": "B",
+        "text": "to provide fair queuing for buffered flows"
+      },
+      {
+        "label": "C",
+        "text": "to mitigate delays over slow links"
+      },
+      {
+        "label": "D",
+        "text": "to limit the bandwidth that a flow can use"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 420,
+    "qid": "Q547",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a function of TFTP in network operations?",
+    "options": [
+      {
+        "label": "A",
+        "text": "transfers IOS images from a server to a router for firmware upgrades"
+      },
+      {
+        "label": "B",
+        "text": "transfers a backup configuration file from a server to a switch using a username and password"
+      },
+      {
+        "label": "C",
+        "text": "transfers configuration files from a server to a router on a congested link"
+      },
+      {
+        "label": "D",
+        "text": "transfers files between file systems on a router"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 421,
+    "qid": "Q548",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a DHCP client?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a workstation that requests a domain name associated with its IP address"
+      },
+      {
+        "label": "B",
+        "text": "a host that is configured to request an IP address automatically"
+      },
+      {
+        "label": "C",
+        "text": "a server that dynamically assigns IP addresses to hosts."
+      },
+      {
+        "label": "D",
+        "text": "a router that statically assigns IP addresses to hosts."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 422,
+    "qid": "Q549",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Where does the configuration reside when a helper address is configured lo support DHCP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "on the router closest to the server"
+      },
+      {
+        "label": "B",
+        "text": "on the router closest to the client"
+      },
+      {
+        "label": "C",
+        "text": "on every router along the path"
+      },
+      {
+        "label": "D",
+        "text": "on the switch trunk interface"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 423,
+    "qid": "Q550",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What facilitates a Telnet connection between devices by entering the device name?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SNMP"
+      },
+      {
+        "label": "B",
+        "text": "DNS lookup"
+      },
+      {
+        "label": "C",
+        "text": "syslog"
+      },
+      {
+        "label": "D",
+        "text": "NTP"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 425,
+    "qid": "Q554",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which QoS tool is used to optimize voice traffic on a network that is primarily intended for data traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "WRED"
+      },
+      {
+        "label": "B",
+        "text": "FIFO"
+      },
+      {
+        "label": "C",
+        "text": "WFQ"
+      },
+      {
+        "label": "D",
+        "text": "PQ"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 427,
+    "qid": "Q556",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "When a client and server are not on the same physical network, which device is used to forward requests and replies between client and server for DHCP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "DHCPOFFER"
+      },
+      {
+        "label": "B",
+        "text": "DHCP relay agent"
+      },
+      {
+        "label": "C",
+        "text": "DHCP server"
+      },
+      {
+        "label": "D",
+        "text": "DHCPDISCOVER"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 428,
+    "qid": "Q557",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The ntp server 192.168.0.3 command has been configured on router 1 to make it an NTP client of router 2. Which command must be configured on router 2 so that it operates in server-only mode and relies only on its internal clock?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Router2(config)#ntp server 172.17.0.1"
+      },
+      {
+        "label": "B",
+        "text": "Router2(config)#ntp server 192.168.0.2"
+      },
+      {
+        "label": "C",
+        "text": "Router2(config)#ntp passive"
+      },
+      {
+        "label": "D",
+        "text": "Router2(config)#ntp master 4"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 429,
+    "qid": "Q558",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which protocol requires authentication to transfer a backup configuration file from a router to a remote server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "FTP"
+      },
+      {
+        "label": "B",
+        "text": "SMTP"
+      },
+      {
+        "label": "C",
+        "text": "TFTP"
+      },
+      {
+        "label": "D",
+        "text": "DTP"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 430,
+    "qid": "Q559",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which condition must be met before an NMS handles an SNMP trap from an agent?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The NMS must receive the same trap from two different SNMP agents to verify that it is reliable."
+      },
+      {
+        "label": "B",
+        "text": "The NMS must receive a trap and an inform message from the SNMP agent within a configured interval."
+      },
+      {
+        "label": "C",
+        "text": "The NMS software must be loaded with the MIB associated with the trap."
+      },
+      {
+        "label": "D",
+        "text": "The NMS must be configured on the same router as the SNMP agent."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

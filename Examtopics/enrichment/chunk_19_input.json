@@ -1,0 +1,702 @@
+[
+  {
+    "id": 612,
+    "qid": "Q808",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which is a fact related to FTP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It always operates without user authentication."
+      },
+      {
+        "label": "B",
+        "text": "It uses block numbers to identify and mitigate data-transfer errors."
+      },
+      {
+        "label": "C",
+        "text": "It uses two separate connections for control and data traffic."
+      },
+      {
+        "label": "D",
+        "text": "It relies on the well-known UDP port 69."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 613,
+    "qid": "Q809",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "How do UTP and STP cables compare?",
+    "options": [
+      {
+        "label": "A",
+        "text": "UTP cables provide faster and more reliable data transfer rates and STP cables are slower and less reliable."
+      },
+      {
+        "label": "B",
+        "text": "STP cables are shielded and protect against electromagnetic interference and UTP lacks the same protection against electromagnetic interference."
+      },
+      {
+        "label": "C",
+        "text": "STP cables are cheaper to procure and easier to install and UTP cables are more expensive and harder to install."
+      },
+      {
+        "label": "D",
+        "text": "UTP cables are less prone to crosstalk and interference and STP cables are more prone to crosstalk and interference."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 614,
+    "qid": "Q812",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which technology allows for multiple operating systems to be run on a single host computer?",
+    "options": [
+      {
+        "label": "A",
+        "text": "virtual routing and forwarding"
+      },
+      {
+        "label": "B",
+        "text": "virtual device contexts"
+      },
+      {
+        "label": "C",
+        "text": "network port ID virtualization"
+      },
+      {
+        "label": "D",
+        "text": "server virtualization"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 615,
+    "qid": "Q813",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Why would an administrator choose to implement an automated network management solution?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to reduce operational costs"
+      },
+      {
+        "label": "B",
+        "text": "to support simpler password policies"
+      },
+      {
+        "label": "C",
+        "text": "to enable “box by box” configuration and deployment"
+      },
+      {
+        "label": "D",
+        "text": "to limit recurrent management costs"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 616,
+    "qid": "Q814",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a function of the core and distribution layers in a collapsed-core architecture?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The router can support HSRP for Layer 2 redundancy in an IPv6 network."
+      },
+      {
+        "label": "B",
+        "text": "The core and distribution layers are deployed on two different devices to enable failover."
+      },
+      {
+        "label": "C",
+        "text": "The router operates on a single device or a redundant pair."
+      },
+      {
+        "label": "D",
+        "text": "The router must use IPv4 and IPv6 addresses at Layer 3."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 617,
+    "qid": "Q815",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What must be considered before deploying virtual machines?",
+    "options": [
+      {
+        "label": "A",
+        "text": "resource limitations, such as the number of CPU cores and the amount of memory"
+      },
+      {
+        "label": "B",
+        "text": "support for physical peripherals, such as monitors, keyboards, and mice"
+      },
+      {
+        "label": "C",
+        "text": "whether to leverage VSM to map multiple virtual processors to two or more virtual machines"
+      },
+      {
+        "label": "D",
+        "text": "location of the virtual machines within the data center environment"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 618,
+    "qid": "Q818",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a link-local all-nodes IPv6 multicast address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ff02:0:0:0:0:0:0:1"
+      },
+      {
+        "label": "B",
+        "text": "2004:33c:94d9:431e:255::"
+      },
+      {
+        "label": "C",
+        "text": "fffe:034:0dd:45d6:789e::"
+      },
+      {
+        "label": "D",
+        "text": "fe80:4433:034:0dd::2"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 619,
+    "qid": "Q819",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which is a reason to implement IPv4 private addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Comply with PCI regulations."
+      },
+      {
+        "label": "B",
+        "text": "Reduce the size of the forwarding table on network routers."
+      },
+      {
+        "label": "C",
+        "text": "Reduce the risk of a network security breach."
+      },
+      {
+        "label": "D",
+        "text": "Comply with local law."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 620,
+    "qid": "Q820",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which signal frequency appears 60 times per minute?",
+    "options": [
+      {
+        "label": "A",
+        "text": "1 Hz signal"
+      },
+      {
+        "label": "B",
+        "text": "1 GHz signal"
+      },
+      {
+        "label": "C",
+        "text": "60 Hz signal"
+      },
+      {
+        "label": "D",
+        "text": "60 GHz signal"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 621,
+    "qid": "Q821",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a function of spine-and-leaf architecture?",
+    "options": [
+      {
+        "label": "A",
+        "text": "offers predictable latency of the traffic path between end devices"
+      },
+      {
+        "label": "B",
+        "text": "mitigates oversubscription by adding a layer of leaf switches"
+      },
+      {
+        "label": "C",
+        "text": "exclusively sends multicast traffic between servers that are directly connected to the spine"
+      },
+      {
+        "label": "D",
+        "text": "limits payload size of traffic within the leaf layer"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 622,
+    "qid": "Q822",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a function of an endpoint?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It passes unicast communication between hosts in a network."
+      },
+      {
+        "label": "B",
+        "text": "It transmits broadcast traffic between devices in the same VLAN."
+      },
+      {
+        "label": "C",
+        "text": "It provides security between trusted and untrusted sections of the network."
+      },
+      {
+        "label": "D",
+        "text": "It is used directly by an individual user to access network services."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 623,
+    "qid": "Q823",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a function of MAC address learning?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is disabled by default on all interfaces connected to trunks."
+      },
+      {
+        "label": "B",
+        "text": "It increases security on the management VLAN."
+      },
+      {
+        "label": "C",
+        "text": "It is enabled by default on all VLANs and interfaces."
+      },
+      {
+        "label": "D",
+        "text": "It increases the potential for MAC address flooding."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 624,
+    "qid": "Q824",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which IPv6 address range is suitable for anycast addresses for distributed services such as DHCP or DNS?",
+    "options": [
+      {
+        "label": "A",
+        "text": "FF00:1/12"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:0234:ca3e::1/128"
+      },
+      {
+        "label": "C",
+        "text": "FE80::1/10"
+      },
+      {
+        "label": "D",
+        "text": "2002:db84:3f30:ca84:be76:2/64"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 625,
+    "qid": "Q825",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a similarity between OM3 and OM4 fiber optic cable?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Both have a 62.5 micron core diameter."
+      },
+      {
+        "label": "B",
+        "text": "Both have a 100 micron core diameter."
+      },
+      {
+        "label": "C",
+        "text": "Both have a 50 micron core diameter."
+      },
+      {
+        "label": "D",
+        "text": "Both have a 9 micron core diameter."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 626,
+    "qid": "Q826",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which device segregates a network into separate zones that have their own security policies?",
+    "options": [
+      {
+        "label": "A",
+        "text": "IPS"
+      },
+      {
+        "label": "B",
+        "text": "switch"
+      },
+      {
+        "label": "C",
+        "text": "access point"
+      },
+      {
+        "label": "D",
+        "text": "firewall"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 627,
+    "qid": "Q827",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the primary purpose of private address space?",
+    "options": [
+      {
+        "label": "A",
+        "text": "limit the number of nodes reachable via the Internet"
+      },
+      {
+        "label": "B",
+        "text": "simplify the addressing in the network"
+      },
+      {
+        "label": "C",
+        "text": "conserve globally unique address space"
+      },
+      {
+        "label": "D",
+        "text": "reduce network complexity"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 628,
+    "qid": "Q828",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of a collapsed-core network topology?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It enables all workstations in a SOHO environment to connect on a single switch with internet access."
+      },
+      {
+        "label": "B",
+        "text": "It enables the core and access layers to connect to one logical distribution device over an EtherChannel."
+      },
+      {
+        "label": "C",
+        "text": "It allows wireless devices to connect directly to the core layer, which enables faster data transmission."
+      },
+      {
+        "label": "D",
+        "text": "It allows the core and distribution layers to run as a single combined layer."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 629,
+    "qid": "Q830",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What occurs when overlapping Wi-Fi channels are implemented?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Users experience poor wireless network performance."
+      },
+      {
+        "label": "B",
+        "text": "Wireless devices are unable to distinguish between different SSIDs."
+      },
+      {
+        "label": "C",
+        "text": "The wireless network becomes vulnerable to unauthorized access."
+      },
+      {
+        "label": "D",
+        "text": "Network communications are open to eavesdropping."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 630,
+    "qid": "Q831",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An administrator received a call from a branch office regarding poor application performance hosted at the headquarters. Ethernet 1 is connected between Router1 and the LAN switch. What identifies the issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The MTU is not set to the default value."
+      },
+      {
+        "label": "B",
+        "text": "There is a duplex mismatch."
+      },
+      {
+        "label": "C",
+        "text": "The QoS policy is dropping traffic."
+      },
+      {
+        "label": "D",
+        "text": "The link is over utilized."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 631,
+    "qid": "Q833",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the functionality of the Cisco DNA Center?",
+    "options": [
+      {
+        "label": "A",
+        "text": "IP address pool distribution scheduler"
+      },
+      {
+        "label": "B",
+        "text": "data center network policy controller"
+      },
+      {
+        "label": "C",
+        "text": "console server that permits secure access to all network devices"
+      },
+      {
+        "label": "D",
+        "text": "software-defined controller for automation of devices and services"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 632,
+    "qid": "Q834",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration enables an EtherChannel to form dynamically between SW1 and SW2 by using an industry-standard protocol, and to support full IP connectivity between all PCs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1# Interface Gi0/1 Switchport Switchport mode access Channel-group 1 mode active ! Interface Gi0/2 Switchport Switchport mode access Channel-group 1 mode active SW2# Interface Gi0/1 Switchport Switchport mode access Channel-group 1 mode desirable ! Interface Gi0/2 Switchport Switchport mode access Channel-group 1 mode desirable"
+      },
+      {
+        "label": "B",
+        "text": "SW1# Interface Gi0/1 Switchport Switchport mode trunk Channel-group 1 mode on ! Interface Gi0/2 Switchport Switchport mode trunk Channel-group 1 mode auto SW2# Interface Gi0/1 Switchport Switchport mode trunk Channel-group 1 mode auto ! Interface Gi0/2 Switchport Switchport mode trunk Channel-group 1 mode on Interface port- channel 1 Switchport Switchport mode trunk"
+      },
+      {
+        "label": "C",
+        "text": "SW1# Interface Gi0/1 Switchport Switchport mode trunk Channel-group 1 mode active ! Interface Gi0/2 Switchport Switchport mode trunk Channel-group 1 mode active SW2# Interface Gi0/1 Switchport Switchport mode trunk Channel-group 1 mode passive ! Interface Gi0/2 Switchport Switchport mode trunk Channel-group 1 mode passive"
+      },
+      {
+        "label": "D",
+        "text": "SW1# Interface Gi0/1 Switchport Switchport mode trunk Channel-group 1 mode auto ! Interface Gi0/2 Switchport Switchport mode trunk Channel-group 1 mode auto SW2# Interface Gi0/1 Switchport Switchport mode trunk Channel-group 1 mode desirable ! Interface Gi0/2 Switchport Switchport mode trunk Channel-group 1 mode desirable"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 633,
+    "qid": "Q835",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which functionality is provided by the console connection on a Cisco WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "HTTP-based GUI connectivity"
+      },
+      {
+        "label": "B",
+        "text": "secure in-band connectivity for device administration"
+      },
+      {
+        "label": "C",
+        "text": "out-of-band management"
+      },
+      {
+        "label": "D",
+        "text": "unencrypted in-band connectivity for file transfers"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 634,
+    "qid": "Q836",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Host A switch interface is configured in VLAN 2. Host D sends a unicast packet destined for the IP address of host A What does the switch do when it receives the frame from host D?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It floods the frame out of every ports except the source port."
+      },
+      {
+        "label": "B",
+        "text": "It creates a broadcast storm."
+      },
+      {
+        "label": "C",
+        "text": "It shuts down the source port and places it in err-disable mode."
+      },
+      {
+        "label": "D",
+        "text": "It drops the frame from the MAC table of the switch."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 635,
+    "qid": "Q838",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "How does Rapid PVST+ create a fast loop-free network topology?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uses multiple active paths between end stations."
+      },
+      {
+        "label": "B",
+        "text": "It requires multiple links between core switches."
+      },
+      {
+        "label": "C",
+        "text": "It maps multiple VLANs into the same spanning-tree instance."
+      },
+      {
+        "label": "D",
+        "text": "It generates one spanning-tree instance for each VLAN."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 636,
+    "qid": "Q840",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer is configuring a wireless LAN with Web Passthrough Layer 3 Web Policy. Which action must the engineer take to complete the configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Set the Layer 2 Security to 802.1X."
+      },
+      {
+        "label": "B",
+        "text": "Enable TKIP and CCMP256 WPA2 Encryption."
+      },
+      {
+        "label": "C",
+        "text": "Enable the WPA Policy."
+      },
+      {
+        "label": "D",
+        "text": "Set the Layer 2 Security to None."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

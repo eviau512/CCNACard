@@ -1,0 +1,702 @@
+[
+  {
+    "id": 712,
+    "qid": "Q933",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which entry is the longest prefix match for host IP address 192.168.10.5?",
+    "options": [
+      {
+        "label": "A",
+        "text": "1"
+      },
+      {
+        "label": "B",
+        "text": "2"
+      },
+      {
+        "label": "C",
+        "text": "3"
+      },
+      {
+        "label": "D",
+        "text": "4"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 713,
+    "qid": "Q934",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How does router R1 handle traffic to 172.16.1.4 /30 subnet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It sends all traffic over the path via 172.16.9.5 using 172.16.4.4 as a backup."
+      },
+      {
+        "label": "B",
+        "text": "It sends all traffic over the path via 10.0.1.100."
+      },
+      {
+        "label": "C",
+        "text": "It sends all traffic over the path via 172.16.4.4."
+      },
+      {
+        "label": "D",
+        "text": "It load-balances traffic over 172.16.9.5 and 172.16.4.4"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 714,
+    "qid": "Q937",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which action is taken by the router when a packet is sourced from 10.10.10.2 and destined for 10.10.10.16?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It floods packets to all learned next hops."
+      },
+      {
+        "label": "B",
+        "text": "It uses a route that is similar to the destination address."
+      },
+      {
+        "label": "C",
+        "text": "It queues the packets waiting for the route to be learned."
+      },
+      {
+        "label": "D",
+        "text": "It discards the packets."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 715,
+    "qid": "Q939",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "An engineer must configure a core router with a floating static default route to the backup router at 10.200.0.2. Which command meets the requirements?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 0.0.0.0 0.0.0.0 10.200.0.2 1"
+      },
+      {
+        "label": "B",
+        "text": "ip route 0.0.0.0 0.0.0.0 10.200.0.2 10"
+      },
+      {
+        "label": "C",
+        "text": "ip route 0.0.0.0 0.0.0.0 10.200.0.2"
+      },
+      {
+        "label": "D",
+        "text": "ip route 0.0.0.0 0.0.0.0 10.200.0.2 floating"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 716,
+    "qid": "Q940",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After configuring a new static route on the CPE, the engineer entered this series of commands to verify that the new configuration is operating normally. When is the static default route installed into the routing table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "when a route to 203.0.113.1 is learned via BGP"
+      },
+      {
+        "label": "B",
+        "text": "when 203.0.113.1 is no longer reachable as a next hop"
+      },
+      {
+        "label": "C",
+        "text": "when the default route learned over external BGP becomes invalid"
+      },
+      {
+        "label": "D",
+        "text": "when the default route learned over external BGP changes its next hop"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 717,
+    "qid": "Q941",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Packets are flowing from 192.168.10.1 to the destination at IP address 192.168.20.75. Which next hop will the router select for the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.10.10.1"
+      },
+      {
+        "label": "B",
+        "text": "10.10.10.11"
+      },
+      {
+        "label": "C",
+        "text": "10.10.10.12"
+      },
+      {
+        "label": "D",
+        "text": "10.10.10.14"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 718,
+    "qid": "Q942",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A router received three destination prefixes: 10.0.0.0/8, 10.0.0.0/16, and 10.0.0.0/24. When the show ip route command is executed, which output does it return?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/8 [110/5] via 192.168.1.1, 0:01:00, Ethernet0 O E2 10.0.0.0/16[110/5] via 192.168.2.1, 0:01:00, Ethernet1 O E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+      },
+      {
+        "label": "B",
+        "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/8 [110/5] via 192.168.1.1, 0:01:00, Ethernet0"
+      },
+      {
+        "label": "C",
+        "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+      },
+      {
+        "label": "D",
+        "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/16[110/5] via 192.168.2.1, 0:01:00, Ethernet1 O E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 719,
+    "qid": "Q943",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. User traffic originating within site B is failing to reach an application hosted on IP address 192.168.0.10, which is located within site A What is determined by the routing table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The traffic is blocked by an implicit deny in an ACL on router2."
+      },
+      {
+        "label": "B",
+        "text": "The lack of a default route prevents delivery of the traffic."
+      },
+      {
+        "label": "C",
+        "text": "The traffic to 192.168.0.10 requires a static route to be configured in router1."
+      },
+      {
+        "label": "D",
+        "text": "The default gateway for site B is configured incorrectly."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 720,
+    "qid": "Q945",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the role of community strings in SNMP operations?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It translates alphanumeric MIB output values to numeric values."
+      },
+      {
+        "label": "B",
+        "text": "It passes the Active Directory username and password that are required for device access."
+      },
+      {
+        "label": "C",
+        "text": "It serves as a sequence tag on SNMP traffic messages."
+      },
+      {
+        "label": "D",
+        "text": "It serves as a password to protect access to MIB objects."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 721,
+    "qid": "Q946",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which syslog severity level is considered the most severe and results in the system being considered unusable?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Error"
+      },
+      {
+        "label": "B",
+        "text": "Emergency"
+      },
+      {
+        "label": "C",
+        "text": "Alert"
+      },
+      {
+        "label": "D",
+        "text": "Critical"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 722,
+    "qid": "Q947",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "The clients and DHCP server reside on different subnets. Which command must be used to forward requests and replies between clients on the 10.10.0.1/24 subnet and the DHCP server at 192.168.10.1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 192.168.10.1"
+      },
+      {
+        "label": "B",
+        "text": "ip dhcp address 192.168.10.1"
+      },
+      {
+        "label": "C",
+        "text": "ip default-gateway 192.168.10.1"
+      },
+      {
+        "label": "D",
+        "text": "ip helper-address 192.168.10.1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 723,
+    "qid": "Q948",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which command set configures ROUTER-1 to allow Internet access for users on the 192.168.1.0/24 subnet while using 209.165.202.129 for Port Address Translation?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip nat pool CCNA 192.168.0.0 192.168.1.255 netmask 255.255.255.0 Access-list 10 permit 192.168.0.0 0.0.0.255 ip nat inside source list 10 pool CCNA overload"
+      },
+      {
+        "label": "B",
+        "text": "ip nat pool CCNA 209.165.202.129 209.165.202.129 netmask 255.255.255.255 Access-list 10 permit 192.168.1.0 255.255.255.0 ip nat inside source list 10 pool CCNA overload"
+      },
+      {
+        "label": "C",
+        "text": "ip nat pool CCNA 192.168.0.0 192.168.1.255 netmask 255.255.255.0 Access-list 10 permit 192.168.0.0 255.255.255.0 ip nat inside source list 10 pool CCNA overload"
+      },
+      {
+        "label": "D",
+        "text": "ip nat pool CCNA 209.165.202.129 209.165.202.129 netmask 255.255.255.255 Access-list 10 permit 192.168.1.0 0.0.0.255 ip nat inside source list 10 pool CCNA overload"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 724,
+    "qid": "Q949",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which IP header field is changed by a Cisco device when QoS marking is enabled?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ECN"
+      },
+      {
+        "label": "B",
+        "text": "Header Checksum"
+      },
+      {
+        "label": "C",
+        "text": "Type of Service"
+      },
+      {
+        "label": "D",
+        "text": "DSCP"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 725,
+    "qid": "Q951",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which DSCP per-hop forwarding behavior is divided into subclasses based on drop probability?",
+    "options": [
+      {
+        "label": "A",
+        "text": "expedited"
+      },
+      {
+        "label": "B",
+        "text": "default"
+      },
+      {
+        "label": "C",
+        "text": "assured"
+      },
+      {
+        "label": "D",
+        "text": "class-selector"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 726,
+    "qid": "Q953",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A DHCP pool has been created with the name CONTROL. The pool uses the next to last usable IP address as the default gateway for the DHCP clients. The server is located at 172.16.32.15. What is the next step in the process for clients on the 192.168.52.0/24 subnet to reach the DHCP server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip helper-address 172.16.32.15"
+      },
+      {
+        "label": "B",
+        "text": "ip default-gateway 192.168.52.253"
+      },
+      {
+        "label": "C",
+        "text": "ip forward-protocol udp 137"
+      },
+      {
+        "label": "D",
+        "text": "ip detault-network 192.168.52.253"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 727,
+    "qid": "Q955",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of classifying network traffic in QoS?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configures traffic-matching rules on network devices"
+      },
+      {
+        "label": "B",
+        "text": "services traffic according to its class"
+      },
+      {
+        "label": "C",
+        "text": "identifies the type of traffic that will receive a particular treatment"
+      },
+      {
+        "label": "D",
+        "text": "writes the class identifier of a packet to a dedicated field in the packet header"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 728,
+    "qid": "Q957",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration enables DHCP addressing for hosts connected to interface FastEthernet0/1 on router R3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface FastEthernet0/1 Ip helper-address 10.0.1.1 ! Access-list 100 permit tcp host 10.0.1.1 eq 67 host 10.148.2.1"
+      },
+      {
+        "label": "B",
+        "text": "interface FastEthernet0/1 Ip helper-address 10.0.1.1 ! Access-list 100 permit udp host 10.0.1.1 eq 67 host 10.148.2.1"
+      },
+      {
+        "label": "C",
+        "text": "interface FastEthernet0/0 Ip helper-address 10.0.1.1 ! Access-list 100 permit host 10.0.1.1 host 10.148.2.1 eq bootps"
+      },
+      {
+        "label": "D",
+        "text": "interface FastEthernet0/1 Ip helper-address 10.0.1.1 ! Access-list 100 permit udp host 10.0.1.1 eq bootps host 10.148.2.1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 729,
+    "qid": "Q961",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of configuring different levels of syslog for different devices on the network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to set the severity of syslog messages from each device"
+      },
+      {
+        "label": "B",
+        "text": "to control the number of syslog messages from different devices that are stored locally"
+      },
+      {
+        "label": "C",
+        "text": "to identify the source from which each syslog message originated"
+      },
+      {
+        "label": "D",
+        "text": "to rate-limit messages for different severity levels from each device"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 731,
+    "qid": "Q964",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which minimum configuration items are needed to enable Secure Shell version 2 access to R15?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Router(config)#hostname R15 - R15(config)#ip domain-name cisco.com R15(config)#crypto key generate rsa general-keys modulus 1024 R15(config)#ip ssh version 2 - R15(config-line)#line vty 0 15 - R15(config-line)# transport input ssh"
+      },
+      {
+        "label": "B",
+        "text": "Router(config)#crypto key generate rsa general-keys modulus 1024 Router(config)#ip ssh version 2 - Router(config-line)#line vty 015 Router(config-line)# transport input ssh Router(contig)#ip ssh logging events R15(config)#ip ssh stricthostkeycheck"
+      },
+      {
+        "label": "C",
+        "text": "Router(config)#hostname R15 - R15(config)#crypto key generate rsa general-keys modulus 1024 R15(config-line)#line vty 0 15 - R15(config-line)# transport input ssh R15(config)#ip ssh source-interface Fa0/0 R15(config)#ip ssh stricthostkeycheck"
+      },
+      {
+        "label": "D",
+        "text": "Router(config)#ip domain-name cisco.com Router(config)#crypto key generate rsa general-keys modulus 1024 Router(contig)#ip ssh version 2 - Router(config-line)#line vty 0 15 Router(config-line)# transport input all Router(config)#ip ssh logging events"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 732,
+    "qid": "Q968",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a purpose of traffic shaping?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It enables policy-based routing."
+      },
+      {
+        "label": "B",
+        "text": "It enables dynamic flow identification."
+      },
+      {
+        "label": "C",
+        "text": "It provides best-effort service."
+      },
+      {
+        "label": "D",
+        "text": "It limits bandwidth usage."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 733,
+    "qid": "Q969",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "An engineering team asks an implementer to configure syslog for warning conditions and error conditions. Which command does the implementer configure to achieve the desired result?",
+    "options": [
+      {
+        "label": "A",
+        "text": "logging trap 5"
+      },
+      {
+        "label": "B",
+        "text": "logging trap 2"
+      },
+      {
+        "label": "C",
+        "text": "logging trap 3"
+      },
+      {
+        "label": "D",
+        "text": "logging trap 4"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 734,
+    "qid": "Q971",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which WLC management connection type is vulnerable to man-in-the-middle attacks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "console"
+      },
+      {
+        "label": "B",
+        "text": "Telnet"
+      },
+      {
+        "label": "C",
+        "text": "SSH"
+      },
+      {
+        "label": "D",
+        "text": "HTTPS"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 735,
+    "qid": "Q972",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer booted a new switch and applied this configuration via the console port. Which additional configuration must be applied to allow administrators to authenticate directly to global configuration mode via Telnet using a local username and password?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#username admin - R1(config-if)#line vty 0 4 - R1(config-line)#password [email protected] R1(config-line)#transport input telnet"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#username admin privilege 15 secret [email protected] R1(config-if)#line vty 0 4 - R1(config-line)#login local"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#username admin secret [email protected] R1(config-if)#line vty 0 4 - R1(config-line)#login local - R1(config)#enable secret [email protected]"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#username admin - R1(config-if)#line vty 0 4 - R1(config-line)#password [email protected]"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 736,
+    "qid": "Q973",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which type of encryption does WPA1 use for data protection?",
+    "options": [
+      {
+        "label": "A",
+        "text": "PEAP"
+      },
+      {
+        "label": "B",
+        "text": "TKIP"
+      },
+      {
+        "label": "C",
+        "text": "AES"
+      },
+      {
+        "label": "D",
+        "text": "EAP"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 737,
+    "qid": "Q974",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network administrator must permit traffic from the 10.10.0.0/24 subnet to the WAN on interface Serial0. What is the effect of the configuration as the administrator applies the command?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The router accepts all incoming traffic to Serial0 with the last octet of the source IP set to 0."
+      },
+      {
+        "label": "B",
+        "text": "The permit command fails and returns an error code."
+      },
+      {
+        "label": "C",
+        "text": "The router fails to apply the access list to the interface."
+      },
+      {
+        "label": "D",
+        "text": "The sourced traffic from IP range 10.0.0.0 - 10.0.0.255 is allowed on Serial0."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

@@ -1,0 +1,686 @@
+[
+  {
+    "id": 232,
+    "qid": "Q314",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which switch technology establishes a network connection immediately when it is plugged in?",
+    "options": [
+      {
+        "label": "A",
+        "text": "PortFast"
+      },
+      {
+        "label": "B",
+        "text": "BPDU guard"
+      },
+      {
+        "label": "C",
+        "text": "UplinkFast"
+      },
+      {
+        "label": "D",
+        "text": "BackboneFast"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 233,
+    "qid": "Q315",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which command on a port enters the forwarding state immediately when a PC is connected to it?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switch(config)#spanning-tree portfast default"
+      },
+      {
+        "label": "B",
+        "text": "switch(config)#spanning-tree portfast bpduguard default"
+      },
+      {
+        "label": "C",
+        "text": "switch(config-if)#spanning-tree portfast trunk"
+      },
+      {
+        "label": "D",
+        "text": "switch(config-if)#no spanning-tree portfast"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 234,
+    "qid": "Q316",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "If a switch port receives a new frame while it is actively transmitting a previous frame, how does it process the frames?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The new frame is delivered first, the previous frame is dropped, and a retransmission request is sent"
+      },
+      {
+        "label": "B",
+        "text": "The previous frame is delivered, the new frame is dropped, and a retransmission request is sent"
+      },
+      {
+        "label": "C",
+        "text": "The new frame is placed in a queue for transmission after the previous frame"
+      },
+      {
+        "label": "D",
+        "text": "The two frames are processed and delivered at the same time"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 235,
+    "qid": "Q317",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The entire MAC address table for SW1 is shown here: What does SW1 do when Br-4 sends a frame for Br-2",
+    "options": [
+      {
+        "label": "A",
+        "text": "It performs a lookup in the MAC address table for Br-4 and discards toe frame due to a missing entry."
+      },
+      {
+        "label": "B",
+        "text": "It floods the frame out or all ports except on the port where Br-2 is connected."
+      },
+      {
+        "label": "C",
+        "text": "It Inserts the source MAC address and port into the forwarding table and forwards the frame to Br-2."
+      },
+      {
+        "label": "D",
+        "text": "It maps the Layer 2 MAC address for Fa0/3 to the Layer 3 IP address and towards the frame."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 236,
+    "qid": "Q318",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which statement about Link Aggregation when implemented on a Cisco Wireless LAN Controller is true?",
+    "options": [
+      {
+        "label": "A",
+        "text": "To pass client traffic two or more ports must be configured"
+      },
+      {
+        "label": "B",
+        "text": "The EtherChannel must be configured inג€mode activeג€"
+      },
+      {
+        "label": "C",
+        "text": "When enabled, the WLC bandwidth drops to 500 Mbps"
+      },
+      {
+        "label": "D",
+        "text": "One functional physical port is needed to pass client traffic"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 237,
+    "qid": "Q319",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer is configuring an EtherChannel using LACP between Switches 1 and 2. Which configuration must be applied so that only Switch 1 sends LACP initiation packets?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B."
+      },
+      {
+        "label": "C",
+        "text": "D."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 238,
+    "qid": "Q320",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The entire Marketing-SW1 MAC address table is shown here: What does the switch do when PC-4 sends a frame to PC-1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It performs a lookup in the MAC address table and discards the frame due to a missing entry."
+      },
+      {
+        "label": "B",
+        "text": "It maps the Layer 2 MAC address to the Layer 3 IP address and forwards the frame."
+      },
+      {
+        "label": "C",
+        "text": "It inserts the source MAC address and port into the table and forwards the frame to PC-1."
+      },
+      {
+        "label": "D",
+        "text": "It floods the frame out of all ports except on the port where PC-1 is connected."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 239,
+    "qid": "Q321",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. All VLANs are present in the VLAN database. Which command sequence must be applied to complete the configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B."
+      },
+      {
+        "label": "C",
+        "text": "D."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 240,
+    "qid": "Q322",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root of a spanning tree for VLAN 10 if the primary switch fails and all links are of equal speed?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 241,
+    "qid": "Q323",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Host A sent a data frame destined for host D What does the switch do when it receives the frame from host A?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It floods the frame out of all ports except port Fa0/1"
+      },
+      {
+        "label": "B",
+        "text": "It experiences a broadcast storm"
+      },
+      {
+        "label": "C",
+        "text": "It shuts down the port Fa0/1 and places it in err-disable mode"
+      },
+      {
+        "label": "D",
+        "text": "It drops the frame from the switch CAM table"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 243,
+    "qid": "Q325",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which channel-group mode must be configured when multiple distribution interfaces connected to a WLC are bundled?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Channel-group mode passive."
+      },
+      {
+        "label": "B",
+        "text": "Channel-group mode on."
+      },
+      {
+        "label": "C",
+        "text": "Channel-group mode desirable."
+      },
+      {
+        "label": "D",
+        "text": "Channel-group mode active."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 244,
+    "qid": "Q326",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch become the root of a spanning tree for VLAN 20 if all links are of equal speed?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 245,
+    "qid": "Q327",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which Layer 2 switch function encapsulates packets for different VLANs so that the packets transverse the same port and maintain traffic separation between the VLANs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "VLAN marking"
+      },
+      {
+        "label": "B",
+        "text": "VLAN numbering"
+      },
+      {
+        "label": "C",
+        "text": "VLAN DSCP"
+      },
+      {
+        "label": "D",
+        "text": "VLAN tagging"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 246,
+    "qid": "Q328",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which value is the unique identifier that an access point uses to establish and maintain wireless connectivity to wireless network devices?",
+    "options": [
+      {
+        "label": "A",
+        "text": "VLAN ID"
+      },
+      {
+        "label": "B",
+        "text": "SSID"
+      },
+      {
+        "label": "C",
+        "text": "RFID"
+      },
+      {
+        "label": "D",
+        "text": "WLAN ID"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 247,
+    "qid": "Q329",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "An engineer must configure neighbor discovery between the company router and an ISP. What is the next step to complete the configuration if the ISP uses a third-party router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable LLDP globally."
+      },
+      {
+        "label": "B",
+        "text": "Disable CDP on gi0/0."
+      },
+      {
+        "label": "C",
+        "text": "Enable LLDP TLVs on the ISP router."
+      },
+      {
+        "label": "D",
+        "text": "Disable auto-negotiation."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 248,
+    "qid": "Q331",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What is a function of MAC learning on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "MAC address learning is disabled by default on all VLANs."
+      },
+      {
+        "label": "B",
+        "text": "Frames received for a destination MAC address not listed in the address table are dropped."
+      },
+      {
+        "label": "C",
+        "text": "The MAC address table is used to populate the ARP table."
+      },
+      {
+        "label": "D",
+        "text": "A static MAC address is manually added to the MAC table."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 249,
+    "qid": "Q332",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What does a switch do when it receives a frame whose destination MAC address is missing from the MAC address table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It changes the checksum of the frame to a value that indicates an invalid frame."
+      },
+      {
+        "label": "B",
+        "text": "It updates the CAM table with the destination MAC address of the frame."
+      },
+      {
+        "label": "C",
+        "text": "It appends the table with a static entry for the MAC and shuts down the port."
+      },
+      {
+        "label": "D",
+        "text": "It floods the frame unchanged across all remaining ports in the incoming VLAN."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 250,
+    "qid": "Q333",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "By default, how long will the switch continue to know a workstation MAC address after the workstation stops sending traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "200 seconds"
+      },
+      {
+        "label": "B",
+        "text": "300 seconds"
+      },
+      {
+        "label": "C",
+        "text": "600 seconds"
+      },
+      {
+        "label": "D",
+        "text": "900 seconds"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 251,
+    "qid": "Q334",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A project objective is to minimize the association time to the different access points as mobile devices move around the office. The ideal solution must cover numerous devices and device types, including laptops, mobile phones, tablets and wireless printers. What must be configured?",
+    "options": [
+      {
+        "label": "A",
+        "text": "802.11v BSS Max Idle Service"
+      },
+      {
+        "label": "B",
+        "text": "802.11v Disassociation Imminent"
+      },
+      {
+        "label": "C",
+        "text": "802.11ax BSS configure"
+      },
+      {
+        "label": "D",
+        "text": "802.11k neighbor List Dual Band"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 252,
+    "qid": "Q337",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A WLC sends alarms about a rogue AP, and the network administrator verifies that the alarms are caused by a legitimate autonomous AP. How must the alarms be stopped for the MAC address of the AP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Remove the AP from WLC management"
+      },
+      {
+        "label": "B",
+        "text": "Place the AP into manual containment."
+      },
+      {
+        "label": "C",
+        "text": "Manually remove the AP from Pending state."
+      },
+      {
+        "label": "D",
+        "text": "Set the AP Class Type to Friendly."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 253,
+    "qid": "Q338",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What is one reason to implement LAG on a Cisco WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to increase security and encrypt management frames"
+      },
+      {
+        "label": "B",
+        "text": "to enable connected switch ports to failover and use different VLANs"
+      },
+      {
+        "label": "C",
+        "text": "to provide link redundancy and load balancing"
+      },
+      {
+        "label": "D",
+        "text": "to allow for stateful and link-state failover"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 254,
+    "qid": "Q339",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "When an access point is seeking to join wireless LAN controller, which message is sent to the AP-Manager interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Discovery response"
+      },
+      {
+        "label": "B",
+        "text": "DHCP request"
+      },
+      {
+        "label": "C",
+        "text": "DHCP discover"
+      },
+      {
+        "label": "D",
+        "text": "Discovery request"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 255,
+    "qid": "Q340",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer configures the Cisco WLC to authenticate local wireless clients against a RADIUS server. Which task must be performed to complete the process?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Change the Support for CoA to Enabled"
+      },
+      {
+        "label": "B",
+        "text": "Select Enable next to Management"
+      },
+      {
+        "label": "C",
+        "text": "Select Enable next to Network User"
+      },
+      {
+        "label": "D",
+        "text": "Change the Server Status to Disabled"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 256,
+    "qid": "Q341",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "After installing a new Cisco ISE server which task must the engineer perform on the Cisco WLC to connect wireless clients on a specific VLAN based on their credentials?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Disable the LAG Mode on Next Reboot."
+      },
+      {
+        "label": "B",
+        "text": "Enable the Event Driven RRM."
+      },
+      {
+        "label": "C",
+        "text": "Enable the Allow AAA Override."
+      },
+      {
+        "label": "D",
+        "text": "Enable the Authorize MIC APs against auth-list or AAA"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 257,
+    "qid": "Q342",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router R1 is running three different routing protocols. Which route characteristic is used by the router to forward the packet that it receives for Destination IP 172.16.32.1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "longest prefix"
+      },
+      {
+        "label": "B",
+        "text": "administrative distance"
+      },
+      {
+        "label": "C",
+        "text": "cost"
+      },
+      {
+        "label": "D",
+        "text": "metric"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

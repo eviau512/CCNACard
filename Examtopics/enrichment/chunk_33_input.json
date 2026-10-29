@@ -1,0 +1,702 @@
+[
+  {
+    "id": 964,
+    "qid": "Q1291",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of an ESSID?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It allows multiple access points to provide a common network for client connections."
+      },
+      {
+        "label": "B",
+        "text": "It supports fast roaming features such as 802.11 r, 802.11k, and 802.11v."
+      },
+      {
+        "label": "C",
+        "text": "It serves as the wireless MAC address of the access point."
+      },
+      {
+        "label": "D",
+        "text": "It provides greater security than a standard SSID."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 965,
+    "qid": "Q1293",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does a hub handle a frame traveling to a known destination MAC address differently than a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The hub forwards the frame to all ports, and a switch forwards the frame to the known destination."
+      },
+      {
+        "label": "B",
+        "text": "The hub forwards the frame to all ports in the FIB table, and a switch forwards the frame the destination MAC is known."
+      },
+      {
+        "label": "C",
+        "text": "The hub forwards the frame using the information in the MAC table, and a switch uses data in its routing table."
+      },
+      {
+        "label": "D",
+        "text": "The hub forwards the frame only to the port connected to the known MAC address, and a switch forwards the frame to all ports."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 966,
+    "qid": "Q1294",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW 1 - Bridge Priority - 20480 - Mac-address 00:10:a1:71 :e3:35"
+      },
+      {
+        "label": "B",
+        "text": "SW 2 - Bridge Priority - 20480 - Mac-address 00:10:a1:54:4e:50"
+      },
+      {
+        "label": "C",
+        "text": "SW 3 - Bridge Priority - 57344 - Mac-address 00:10:a1:93:09:2d"
+      },
+      {
+        "label": "D",
+        "text": "SW 4 - Bridge Priority - 57344 - Mac-address 00:10:a1:57:61:80"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 967,
+    "qid": "Q1296",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "bad NIC"
+      },
+      {
+        "label": "B",
+        "text": "broadcast storm"
+      },
+      {
+        "label": "C",
+        "text": "duplex mismatch"
+      },
+      {
+        "label": "D",
+        "text": "high throughput"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 968,
+    "qid": "Q1297",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "F0/7"
+      },
+      {
+        "label": "B",
+        "text": "F0/6"
+      },
+      {
+        "label": "C",
+        "text": "F0/4"
+      },
+      {
+        "label": "D",
+        "text": "F0/5"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 969,
+    "qid": "Q1299",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which physical component is distributed among multiple virtual machines running on the same hypervisor?",
+    "options": [
+      {
+        "label": "A",
+        "text": "external storage"
+      },
+      {
+        "label": "B",
+        "text": "network interfaces"
+      },
+      {
+        "label": "C",
+        "text": "backplane network"
+      },
+      {
+        "label": "D",
+        "text": "hardware resources"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 970,
+    "qid": "Q1300",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "used on the external interface of a firewall"
+      },
+      {
+        "label": "B",
+        "text": "used by ISP's when only one IP is needed to connect to the internet"
+      },
+      {
+        "label": "C",
+        "text": "reduces the forwarding table on network routers"
+      },
+      {
+        "label": "D",
+        "text": "address space which is isolated from the internet"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 971,
+    "qid": "Q1302",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What causes a port to be placed in the err-disabled state?",
+    "options": [
+      {
+        "label": "A",
+        "text": "shutdown command issued on the port"
+      },
+      {
+        "label": "B",
+        "text": "port security violation"
+      },
+      {
+        "label": "C",
+        "text": "nothing plugged into the port"
+      },
+      {
+        "label": "D",
+        "text": "latency"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 972,
+    "qid": "Q1303",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:d945:91:12A0:AB34:FFCC:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:d945:91:11B0:ABFF:FECC:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:d945:91:4661:59FF:FF53:5"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:d945:91:1130:ABFF:FECC:1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 973,
+    "qid": "Q1304",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "reduces the forwarding table on network routers"
+      },
+      {
+        "label": "B",
+        "text": "allows communication across external internet boundaries"
+      },
+      {
+        "label": "C",
+        "text": "assigned by an enterprise organization to internal hosts"
+      },
+      {
+        "label": "D",
+        "text": "complies with Payment Card industry regulations"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 974,
+    "qid": "Q974",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Topic 1 Question #1305 Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW 1 - Bridge Priority - 8192 - Mac-address 00:10:a1:30:eb:38"
+      },
+      {
+        "label": "B",
+        "text": "SW 2 - Bridge Priority - 8192 - Mac-address 00:10:a1:80:fb:29"
+      },
+      {
+        "label": "C",
+        "text": "SW 3 - Bridge Priority - 24576 - Mac-address 00:10:a1:50:55:8f"
+      },
+      {
+        "label": "D",
+        "text": "SW 4 - Bridge Priority - 24576 - Mac-address 00:10:a1:90:7e:66"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 975,
+    "qid": "Q1306",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of a Layer 2 switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "responsible for sending data in a particular sequence"
+      },
+      {
+        "label": "B",
+        "text": "maintains stateful transaction information"
+      },
+      {
+        "label": "C",
+        "text": "makes forwarding decisions based on MAC addresses"
+      },
+      {
+        "label": "D",
+        "text": "filters based on a transport layer protocol"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 976,
+    "qid": "Q1307",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"switch\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "key"
+      },
+      {
+        "label": "B",
+        "text": "object"
+      },
+      {
+        "label": "C",
+        "text": "array"
+      },
+      {
+        "label": "D",
+        "text": "value"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 977,
+    "qid": "Q1308",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does encryption protect the wireless network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "via integrity checks to identify wireless forgery attacks in the frame"
+      },
+      {
+        "label": "B",
+        "text": "via an algorithm to change wireless data so that only the access point and client understand it"
+      },
+      {
+        "label": "C",
+        "text": "via specific ciphers to detect and prevent zero-day network attacks"
+      },
+      {
+        "label": "D",
+        "text": "via a policy to prevent unauthorized users from communicating on the wireless network"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 978,
+    "qid": "Q1311",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:d955:1697:1130:ABFF:FECC:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:d955:1697:4657:149F:FE65:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:d955:1697:11D8:BFFF:FE69:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:d955:1697:12D8:BAFE:FF01:1"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 979,
+    "qid": "Q1312",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"LB13\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "array"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "key"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 980,
+    "qid": "Q1313",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which type of JSON data is shown?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Boolean"
+      },
+      {
+        "label": "B",
+        "text": "string"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "sequence"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 981,
+    "qid": "Q1314",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "enables secure connectivity over the internet"
+      },
+      {
+        "label": "B",
+        "text": "allows communication across external internet boundaries"
+      },
+      {
+        "label": "C",
+        "text": "assigned by an enterprise organization to internal hosts"
+      },
+      {
+        "label": "D",
+        "text": "used by ISP's when only one IP is needed to connect to the internet"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 982,
+    "qid": "Q1315",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "A DHCP pool has been created with the name NOCC. The pool is using 192.168.20.0/24 and must use the next to last usable IP address as the Default gateway for the DHCP clients. What is the next step in the process?",
+    "options": [
+      {
+        "label": "A",
+        "text": "next-server 192.168.20.254"
+      },
+      {
+        "label": "B",
+        "text": "network 192.168.20.254 255.255.255.0 secondary"
+      },
+      {
+        "label": "C",
+        "text": "default-router 192.168.20.253"
+      },
+      {
+        "label": "D",
+        "text": "ip default-gateway 0.0.0.0 0.0.0.0 192.168.20.253"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 983,
+    "qid": "Q1316",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which Windows command is used instead of the route print command to display the contents of the IP routing table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipconfig"
+      },
+      {
+        "label": "B",
+        "text": "netstat -r"
+      },
+      {
+        "label": "C",
+        "text": "netstat -n"
+      },
+      {
+        "label": "D",
+        "text": "ifconfig"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 984,
+    "qid": "Q1317",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of frame switching?",
+    "options": [
+      {
+        "label": "A",
+        "text": "rewrites the source and destination MAC address"
+      },
+      {
+        "label": "B",
+        "text": "performs a lookup to learn the destination interface"
+      },
+      {
+        "label": "C",
+        "text": "sends a retransmission request when a new frame is received"
+      },
+      {
+        "label": "D",
+        "text": "inspects and drops frames from unknown destinations"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 985,
+    "qid": "Q1318",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The network engineer is confining router R2 as a replacement router on the network. After the initial configuration is applied, it Is determined that R2 failed to show R1 as a neighbor. Which configuration must be applied to R2 to complete the OSPF configuration and enable It to establish the neighbor relationship with R1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R2(config)#interface g0/0/0 - R2(config-if)#ip ospf hello-interval 10"
+      },
+      {
+        "label": "B",
+        "text": "R2(config)#router ospf 1 - R2(config-router)#router-id 192.168.1.1"
+      },
+      {
+        "label": "C",
+        "text": "R2(config)#router ospf 1 - R2(config-router)#network 192.168.1.0 255.255.255.0 area 2"
+      },
+      {
+        "label": "D",
+        "text": "R2(config)#interface g0/0/0 - R2(config-if)#ip ospf dead-interval 45"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 986,
+    "qid": "Q1319",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "allows easy file sharing between endpoints"
+      },
+      {
+        "label": "B",
+        "text": "identifies a wireless network"
+      },
+      {
+        "label": "C",
+        "text": "eliminates network piggybacking"
+      },
+      {
+        "label": "D",
+        "text": "requires the use of PoE for functionality"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 987,
+    "qid": "Q1320",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R1 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:1a44:41a4:C081:BFFF:FE4A:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:1a44:41a4:C801:BEFF:FE4A:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:1a44:41a4:4660:592F:FE65:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:1a44:41a4:C800:BAFE:FF00:1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 988,
+    "qid": "Q1321",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What does a router do when it is configured with the default DNS lookup settings, and a URL is entered on the CLI?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It continuously attempts to resolve the URL until the command is cancelled."
+      },
+      {
+        "label": "B",
+        "text": "It initiates a ping request to the URL."
+      },
+      {
+        "label": "C",
+        "text": "It prompts the user to specify the desired IP address."
+      },
+      {
+        "label": "D",
+        "text": "It attempts to query a DNS server on the network."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

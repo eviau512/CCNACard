@@ -1,0 +1,836 @@
+[
+  {
+    "id": 1256,
+    "qid": "Q1256",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are the two functions of SSIDs? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "uses the maximum of 32 alphanumeric characters"
+      },
+      {
+        "label": "B",
+        "text": "controls the speed of the Wi-Fi network"
+      },
+      {
+        "label": "C",
+        "text": "used exclusively with controller-based Wi-Fi networks"
+      },
+      {
+        "label": "D",
+        "text": "supports a single access point"
+      },
+      {
+        "label": "E",
+        "text": "broadcasts by default"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1257,
+    "qid": "Q1257",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two characteristics describe the access layer in a three-tier network architecture? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "serves as the network aggregation point"
+      },
+      {
+        "label": "B",
+        "text": "physical connection point for a LAN printer"
+      },
+      {
+        "label": "C",
+        "text": "designed to meet continuous redundant uptime requirements"
+      },
+      {
+        "label": "D",
+        "text": "layer at which a wireless access point connects to the wired network"
+      },
+      {
+        "label": "E",
+        "text": "provides a boundary between Layer 2 and Layer 3 communications"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1258,
+    "qid": "Q1258",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two IP addressing schemes provide internet access to users on the network while preserving the public IPv4 address space? (Choose Two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "IPv6 addressing"
+      },
+      {
+        "label": "B",
+        "text": "PAT with private internal addressing"
+      },
+      {
+        "label": "C",
+        "text": "single public Class A network"
+      },
+      {
+        "label": "D",
+        "text": "private networks only"
+      },
+      {
+        "label": "E",
+        "text": "custom addresses from ARIN"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1260,
+    "qid": "Q1260",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two cable types must be used to connect an access point to the WLC when 2.5-Gbps and 5-Gbps upload speeds are required? (Choose Two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "10GBASE-T"
+      },
+      {
+        "label": "B",
+        "text": "1000BASE-LX/LH"
+      },
+      {
+        "label": "C",
+        "text": "Cat 5e"
+      },
+      {
+        "label": "D",
+        "text": "Cat 5"
+      },
+      {
+        "label": "E",
+        "text": "Cat 3"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1261,
+    "qid": "Q1261",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two reasons to implement IPv4 private addressing on a network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "To enable internal applications to treat the private IPv4 addresses as unique"
+      },
+      {
+        "label": "B",
+        "text": "To facilitate renumbering when merging networks"
+      },
+      {
+        "label": "C",
+        "text": "To expand the routing table on the router"
+      },
+      {
+        "label": "D",
+        "text": "To provide protection from external denial-of-service attacks"
+      },
+      {
+        "label": "E",
+        "text": "To conserve global unique IPv4 addresses"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1262,
+    "qid": "Q1262",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two values or settings must be entered when configuring a new WLAN in the Cisco Wireless LAN Controller GUI? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "QoS settings"
+      },
+      {
+        "label": "B",
+        "text": "IP address of one or more access points"
+      },
+      {
+        "label": "C",
+        "text": "SSID"
+      },
+      {
+        "label": "D",
+        "text": "profile name"
+      },
+      {
+        "label": "E",
+        "text": "management interface settings"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1263,
+    "qid": "Q1263",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two command sequences must be configured on a switch to establish a Layer 3 EtherChannel with an open-standard protocol? (Choose Two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface GigabitEthernet0/0/1 channel-group 10 mode auto"
+      },
+      {
+        "label": "B",
+        "text": "interface GigabitEthernet0/0/1 channel-group 10 mode on"
+      },
+      {
+        "label": "C",
+        "text": "interface port-channel 10 no switchport ip address 172.16.0.1 255.255.255.0"
+      },
+      {
+        "label": "D",
+        "text": "interface GigabitEthernet0/0/1 channel-group 10 mode active"
+      },
+      {
+        "label": "E",
+        "text": "interface port-channel 10 switchport switchport mode trunk"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1264,
+    "qid": "Q1264",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two commands when used together create port channel 10? (Choose two.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Int range g0/0-1 channel-group 10 mode active"
+      },
+      {
+        "label": "B",
+        "text": "Int range g0/0-1 channel-group 10 mode desirable"
+      },
+      {
+        "label": "C",
+        "text": "Int range g0/0-1 channel-group 10 mode passive"
+      },
+      {
+        "label": "D",
+        "text": "Int range g0/0-1 channel-group 10 mode auto"
+      },
+      {
+        "label": "E",
+        "text": "int range g0/0-1 channel-group 10 mode on"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1265,
+    "qid": "Q1265",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two VLAN IDs indicate a default VLAN? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "0"
+      },
+      {
+        "label": "B",
+        "text": "1"
+      },
+      {
+        "label": "C",
+        "text": "1005"
+      },
+      {
+        "label": "D",
+        "text": "1006"
+      },
+      {
+        "label": "E",
+        "text": "4096"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1266,
+    "qid": "Q1266",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two pieces of information about a Cisco device can Cisco Discovery Protocol communicate? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "the native VLAN"
+      },
+      {
+        "label": "B",
+        "text": "the trunking protocol"
+      },
+      {
+        "label": "C",
+        "text": "the VTP domain"
+      },
+      {
+        "label": "D",
+        "text": "the spanning-tree priority"
+      },
+      {
+        "label": "E",
+        "text": "the spanning-tree protocol"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1267,
+    "qid": "Q1267",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "After you deploy a new WLAN controller on your network, which two additional tasks should you consider? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "deploy load balancers"
+      },
+      {
+        "label": "B",
+        "text": "configure additional vlans"
+      },
+      {
+        "label": "C",
+        "text": "configure multiple VRRP groups"
+      },
+      {
+        "label": "D",
+        "text": "deploy POE switches"
+      },
+      {
+        "label": "E",
+        "text": "configure additional security policies"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1268,
+    "qid": "Q1268",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two commands can you use to configure an actively negotiate EtherChannel? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "channel-group 10 mode on"
+      },
+      {
+        "label": "B",
+        "text": "channel-group 10 mode auto"
+      },
+      {
+        "label": "C",
+        "text": "channel-group 10 mode passive"
+      },
+      {
+        "label": "D",
+        "text": "channel-group 10 mode desirable"
+      },
+      {
+        "label": "E",
+        "text": "channel-group 10 mode active"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1269,
+    "qid": "Q1269",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two statements about VTP are true? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "All switches must be configured with the same VTP domain name"
+      },
+      {
+        "label": "B",
+        "text": "All switches must be configured to perform trunk negotiation"
+      },
+      {
+        "label": "C",
+        "text": "All switches must be configured with a unique VTP domain name"
+      },
+      {
+        "label": "D",
+        "text": "The VTP server must have the highest revision number in the domain"
+      },
+      {
+        "label": "E",
+        "text": "All switches must use the same VTP version"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1270,
+    "qid": "Q1270",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two reasons a network administrator would use CDP? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "to verify the type of cable interconnecting two devices"
+      },
+      {
+        "label": "B",
+        "text": "to determine the status of network services on a remote device"
+      },
+      {
+        "label": "C",
+        "text": "to obtain VLAN information from directly connected switches"
+      },
+      {
+        "label": "D",
+        "text": "to verify Layer 2 connectivity between two devices when Layer 3 fails"
+      },
+      {
+        "label": "E",
+        "text": "to obtain the IP address of a connected device in order to telnet to the device"
+      },
+      {
+        "label": "F",
+        "text": "to determine the status of the routing protocols between directly connected routers"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1271,
+    "qid": "Q1271",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits of using VTP in a switching environment? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It allows switches to read frame tags."
+      },
+      {
+        "label": "B",
+        "text": "It allows ports to be assigned to VLANs automatically."
+      },
+      {
+        "label": "C",
+        "text": "It maintains VLAN consistency across a switched network."
+      },
+      {
+        "label": "D",
+        "text": "It allows frames from multiple VLANs to use a single interface."
+      },
+      {
+        "label": "E",
+        "text": "It allows VLAN information to be automatically propagated throughout the switching environment."
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1272,
+    "qid": "Q1272",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which three statements are typical characteristics of VLAN arrangements? (Choose three.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "A new switch has no VLANs configured."
+      },
+      {
+        "label": "B",
+        "text": "Connectivity between VLANs requires a Layer 3 device."
+      },
+      {
+        "label": "C",
+        "text": "VLANs typically decrease the number of collision domains."
+      },
+      {
+        "label": "D",
+        "text": "Each VLAN uses a separate address space."
+      },
+      {
+        "label": "E",
+        "text": "A switch maintains a separate bridging table for each VLAN."
+      },
+      {
+        "label": "F",
+        "text": "VLANs cannot span multiple switches."
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1273,
+    "qid": "Q1273",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. What two conclusions should be made about this configuration? (Choose two.) Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The root port is FastEthernet 2/1"
+      },
+      {
+        "label": "B",
+        "text": "The designated port is FastEthernet 2/1"
+      },
+      {
+        "label": "C",
+        "text": "The spanning-tree mode is PVST+"
+      },
+      {
+        "label": "D",
+        "text": "This is a root bridge"
+      },
+      {
+        "label": "E",
+        "text": "The spanning-tree mode is Rapid PVST+"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1274,
+    "qid": "Q1274",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "The SW1 interface g0/1 is in the down/down state. What are two reasons for the interface condition? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "There is a protocol mismatch"
+      },
+      {
+        "label": "B",
+        "text": "There is a duplex mismatch"
+      },
+      {
+        "label": "C",
+        "text": "The interface is shut down"
+      },
+      {
+        "label": "D",
+        "text": "The interface is error-disabled"
+      },
+      {
+        "label": "E",
+        "text": "There is a speed mismatch"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1275,
+    "qid": "Q1275",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two conditions must be met before SSH operates normally on a Cisco IOS switch? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "IP routing must be enabled on the switch."
+      },
+      {
+        "label": "B",
+        "text": "A console password must be configured on the switch."
+      },
+      {
+        "label": "C",
+        "text": "Telnet must be disabled on the switch."
+      },
+      {
+        "label": "D",
+        "text": "The switch must be running a k9 (crypto) IOS image."
+      },
+      {
+        "label": "E",
+        "text": "The ip domain-name command must be configured on the switch."
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1276,
+    "qid": "Q1276",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits of using the PortFast feature? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enabled interfaces are automatically placed in listening state."
+      },
+      {
+        "label": "B",
+        "text": "Enabled interfaces wait 50 seconds before they move to the forwarding state."
+      },
+      {
+        "label": "C",
+        "text": "Enabled interfaces never generate topology change notifications."
+      },
+      {
+        "label": "D",
+        "text": "Enabled interfaces come up and move to the forwarding state immediately."
+      },
+      {
+        "label": "E",
+        "text": "Enabled interfaces that move to the learning state generate switch topology change notifications."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1277,
+    "qid": "Q1277",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "A network engineer must configure two new subnets using the address block 10.70.128.0/19 to meet these requirements: ✑The first subnet must support 24 hosts. ✑The second subnet must support 472 hosts. ✑Both subnets must use the longest subnet mask possible from the address block. Which two configurations must be used to configure the new subnets and meet a requirement to use the first available address in each subnet For the router interfaces? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface vlan 1148 ip address 10.70.148.1 255.255.254.0"
+      },
+      {
+        "label": "B",
+        "text": "interface vlan 3002 ip address 10.70.147.17 255.255.255.224"
+      },
+      {
+        "label": "C",
+        "text": "interface vlan 4722 ip address 10.70.133.17 255.255.255.192"
+      },
+      {
+        "label": "D",
+        "text": "interface vlan 1234 ip address 10.70.159.1 255.255.254.0"
+      },
+      {
+        "label": "E",
+        "text": "interface vlan 155 ip address 10.70.155.65 255.255.255.224"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1278,
+    "qid": "Q1278",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Aside from discarding, which two states does the switch port transition through while using RSTP (802.1w)? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "blocking"
+      },
+      {
+        "label": "B",
+        "text": "speaking"
+      },
+      {
+        "label": "C",
+        "text": "listening"
+      },
+      {
+        "label": "D",
+        "text": "learning"
+      },
+      {
+        "label": "E",
+        "text": "forwarding"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1279,
+    "qid": "Q1279",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two spanning-tree states are bypassed on an interface running PortFast? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "disabled"
+      },
+      {
+        "label": "B",
+        "text": "listening"
+      },
+      {
+        "label": "C",
+        "text": "learning"
+      },
+      {
+        "label": "D",
+        "text": "blocking"
+      },
+      {
+        "label": "E",
+        "text": "forwarding"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1280,
+    "qid": "Q1280",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. What are two conclusions about this configuration? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The spanning-tree mode is Rapid PVST+"
+      },
+      {
+        "label": "B",
+        "text": "This tea root bridge"
+      },
+      {
+        "label": "C",
+        "text": "The spanning-tree mode is PVST+"
+      },
+      {
+        "label": "D",
+        "text": "The designated port is FastEthernet 2/1"
+      },
+      {
+        "label": "E",
+        "text": "The root port is FastEthernet 2/1"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1281,
+    "qid": "Q1281",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two protocols are used by an administrator for authentication and configuration on access points? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "802.1Q"
+      },
+      {
+        "label": "B",
+        "text": "RADIUS"
+      },
+      {
+        "label": "C",
+        "text": "Kerberos"
+      },
+      {
+        "label": "D",
+        "text": "TACACS+"
+      },
+      {
+        "label": "E",
+        "text": "802.1x"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  }
+]

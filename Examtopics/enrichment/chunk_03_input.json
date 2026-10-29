@@ -1,0 +1,694 @@
+[
+  {
+    "id": 106,
+    "qid": "Q156",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An IP subnet must be configured on each router that provides enough addresses for the number of assigned hosts and anticipates no more than 10% growth for new hosts. Which configuration script must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B."
+      },
+      {
+        "label": "C",
+        "text": "D."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 107,
+    "qid": "Q157",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which action is taken by a switch port enabled for PoE power classification override?",
+    "options": [
+      {
+        "label": "A",
+        "text": "As power usage on a PoE switch port is checked data flow to the connected device is temporarily paused"
+      },
+      {
+        "label": "B",
+        "text": "When a powered device begins drawing power from a PoE switch port, a syslog message is generated"
+      },
+      {
+        "label": "C",
+        "text": "If a switch determines that a device is using less than the minimum configured power, it assumes the device has failed and disconnects it"
+      },
+      {
+        "label": "D",
+        "text": "Should a monitored port exceed the maximum administrative value for power, the port is shut down and err-disabled"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 109,
+    "qid": "Q159",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which action is taken by the data plane within a network device?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Constructs a routing table based on a routing protocol."
+      },
+      {
+        "label": "B",
+        "text": "Forwards traffic to the next hop."
+      },
+      {
+        "label": "C",
+        "text": "Looks up an egress interface in the forwarding information base."
+      },
+      {
+        "label": "D",
+        "text": "Provides CLI access to the network device."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 110,
+    "qid": "Q160",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the function of the control plane?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It exchanges routing table information."
+      },
+      {
+        "label": "B",
+        "text": "It provides CLI access to the network device."
+      },
+      {
+        "label": "C",
+        "text": "It looks up an egress interface in the forwarding information base."
+      },
+      {
+        "label": "D",
+        "text": "It forwards traffic to the next hop."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 111,
+    "qid": "Q162",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a benefit for external users who consume public cloud resources?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Implemented over a dedicated WAN"
+      },
+      {
+        "label": "B",
+        "text": "All hosted on physical servers"
+      },
+      {
+        "label": "C",
+        "text": "Accessed over the Internet"
+      },
+      {
+        "label": "D",
+        "text": "Located in the same data center as the users"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 112,
+    "qid": "Q163",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "An engineer must update the configuration on two PCs in two different subnets to communicate locally with each other. One PC is configured with IP address 192.168.25.128/25 and the other with 192.168.25.100/25. Which network mask must the engineer configure on both PCs to enable the communication?",
+    "options": [
+      {
+        "label": "A",
+        "text": "255.255.255.248"
+      },
+      {
+        "label": "B",
+        "text": "255.255.255.224"
+      },
+      {
+        "label": "C",
+        "text": "255.255.255.0"
+      },
+      {
+        "label": "D",
+        "text": "255.255.255.252"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 113,
+    "qid": "Q164",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which key function is provided by the data plane?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Originating packets"
+      },
+      {
+        "label": "B",
+        "text": "Exchanging routing table data"
+      },
+      {
+        "label": "C",
+        "text": "Making routing decisions"
+      },
+      {
+        "label": "D",
+        "text": "Forwarding traffic to the next hop"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 114,
+    "qid": "Q165",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "When should an engineer implement a collapsed-core architecture?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Only when using VSS technology"
+      },
+      {
+        "label": "B",
+        "text": "For small networks with minimal need for growth"
+      },
+      {
+        "label": "C",
+        "text": "For large networks that are connected to multiple remote sites"
+      },
+      {
+        "label": "D",
+        "text": "The access and distribution layers must be on the same device"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 115,
+    "qid": "Q166",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer assigns IP addressing to the current VLAN with three PCs. The configuration must also account for the expansion of 30 additional VLANS using the same Class C subnet for subnetting and host count. Which command set fulfills the request while reserving address space for the expected growth?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Switch(config)#interface vlan 10 Switch(config-if)#ip address 192.168.0.1 265 255.255.252"
+      },
+      {
+        "label": "B",
+        "text": "Switch(config)#interface vlan 10 Switch(config-if)#ip address 192.168.0.1 255 255.255.248"
+      },
+      {
+        "label": "C",
+        "text": "Switch(config)#interface vlan 10 Switch(config-if)#ip address 192.168.0.1 255 255.255.0"
+      },
+      {
+        "label": "D",
+        "text": "Switch(config)#interface vlan 10 Switch(config-if)#ip address 192.168.0.1 255.255.255.128"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 116,
+    "qid": "Q167",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "A client experiences slow throughput from a server that is directly connected to the core switch in a data center. A network engineer finds minimal latency on connections to the server, but data transfers are unreliable, and the output of the show interfaces counters errors command shows a high FCS-Err count on the interface that is connected to the server. What is the cause of the throughput issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a physical cable fault"
+      },
+      {
+        "label": "B",
+        "text": "a speed mismatch"
+      },
+      {
+        "label": "C",
+        "text": "high bandwidth usage"
+      },
+      {
+        "label": "D",
+        "text": "a cable that is too long"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 117,
+    "qid": "Q168",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the difference between 1000BASE-LX/LH and 1000BASE-ZX interfaces?",
+    "options": [
+      {
+        "label": "A",
+        "text": "1000BASE-LX/LH interoperates with multimode and single-mode fiber, and 1000BASE-ZX needs a conditioning patch cable with multimode."
+      },
+      {
+        "label": "B",
+        "text": "1000BASE-ZX interoperates with dual-rate 100M/1G 10Km SFP over multimode fiber, and 1000BASE-LX/LH supports only single-rate"
+      },
+      {
+        "label": "C",
+        "text": "1000BASE-ZX is supported on links up to 1000km, and 1000BASE-LX/LH operates over links up to 70 km"
+      },
+      {
+        "label": "D",
+        "text": "1000BASE- LX/LH is supported on links up to 10km, and 1000Base-ZX operates over links up to 70 km"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 118,
+    "qid": "Q170",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which concern is addressed with the use of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Lack of routing protocol support for CIDR and VLSM"
+      },
+      {
+        "label": "B",
+        "text": "Lack of security protocols at the network perimeter"
+      },
+      {
+        "label": "C",
+        "text": "Lack of available TCP/UDP ports per IPv5 address"
+      },
+      {
+        "label": "D",
+        "text": "Lack of available publicly routable unique IPv4 address"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 119,
+    "qid": "Q171",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the path for traffic sent from one user workstation to another workstation on a separate switch in a three-tier architecture model?",
+    "options": [
+      {
+        "label": "A",
+        "text": "accessג€\" coreג€\" access"
+      },
+      {
+        "label": "B",
+        "text": "accessג€\" distributionג€\" distributionג€\" access"
+      },
+      {
+        "label": "C",
+        "text": "accessג€\" coreג€\" distributionג€\" access"
+      },
+      {
+        "label": "D",
+        "text": "accessג€\" distributionג€\" coreג€\" distributionג€\" access"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 120,
+    "qid": "Q172",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the difference between IPv6 unicast and anycast addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "An individual IPv6 unicast address is supported on a single interface on one node, but an IPv6 anycast address is assigned to a group of interfaces on multiple nodes."
+      },
+      {
+        "label": "B",
+        "text": "IPv6 anycast nodes must be explicitly configured to recognize the anycast address, but IPv6 unicast nodes require no special configuration."
+      },
+      {
+        "label": "C",
+        "text": "IPv6 unicast nodes must be explicitly configured to recognize the unicast address, but IPv6 anycast nodes require no special configuration."
+      },
+      {
+        "label": "D",
+        "text": "Unlike an IPv6 anycast address, an IPv6 unicast address is assigned to a group of interfaces on multiple nodes."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 121,
+    "qid": "Q173",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Between which zones do wireless users expect to experience intermittent connectivity?",
+    "options": [
+      {
+        "label": "A",
+        "text": "between zones 1 and 2"
+      },
+      {
+        "label": "B",
+        "text": "between zones 2 and 5"
+      },
+      {
+        "label": "C",
+        "text": "between zones 3 and 4"
+      },
+      {
+        "label": "D",
+        "text": "between zones 3 and 6"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 122,
+    "qid": "Q174",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which WAN topology provides a combination of simplicity quality, and availability?",
+    "options": [
+      {
+        "label": "A",
+        "text": "partial mesh"
+      },
+      {
+        "label": "B",
+        "text": "full mesh"
+      },
+      {
+        "label": "C",
+        "text": "point-to-point"
+      },
+      {
+        "label": "D",
+        "text": "hub-and-spoke"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 123,
+    "qid": "Q177",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "How are the switches in a spine-and-leaf topology interconnected?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Each leaf switch is connected to one of the spine switches"
+      },
+      {
+        "label": "B",
+        "text": "Each leaf switch is connected to each spine switch."
+      },
+      {
+        "label": "C",
+        "text": "Each leaf switch is connected to two spine switches, making a loop."
+      },
+      {
+        "label": "D",
+        "text": "Each leaf switch is connected to a central leaf switch, then uplinked to a core spine switch."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 127,
+    "qid": "Q181",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch in this configuration will be elected as the root bridge? SW1: 0C:E0:38:41:86:07 - SW2: 0C:0E:15:22:05:97 - SW3: 0C:0E:15:1A:3C:9D - SW4: 0C:E0:18:A1:B3:19 -",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 128,
+    "qid": "Q183",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "An engineer needs to configure LLDP to send the port description type length value (TLV). Which command sequence must be implemented?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switch(config-if)#lldp port-description"
+      },
+      {
+        "label": "B",
+        "text": "switch#lldp port-description"
+      },
+      {
+        "label": "C",
+        "text": "switch(config-line)#lldp port-description"
+      },
+      {
+        "label": "D",
+        "text": "switch(config)#lldp port-description"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 129,
+    "qid": "Q184",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "S1"
+      },
+      {
+        "label": "B",
+        "text": "S2"
+      },
+      {
+        "label": "C",
+        "text": "S3"
+      },
+      {
+        "label": "D",
+        "text": "S4"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 130,
+    "qid": "Q185",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which configuration ensures that the switch is always the root for VLAN 750?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Switch(config)#spanning-tree vlan 750 priority 38418607"
+      },
+      {
+        "label": "B",
+        "text": "Switch(config)#spanning-tree vlan 750 priority 0"
+      },
+      {
+        "label": "C",
+        "text": "Switch(config)#spanning-tree vlan 750 root primary"
+      },
+      {
+        "label": "D",
+        "text": "Switch(config)#spanning-tree vlan 750 priority 614440"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 131,
+    "qid": "Q186",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After the switch configuration, the ping test fails between PC A and PC B Based on the output for switch 1, which error must be corrected?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The PCs are in the incorrect VLAN."
+      },
+      {
+        "label": "B",
+        "text": "All VLANs are not enabled on the trunk."
+      },
+      {
+        "label": "C",
+        "text": "Access mode is configured on the switch ports."
+      },
+      {
+        "label": "D",
+        "text": "There is a native VLAN mismatch."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 133,
+    "qid": "Q189",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which command provides this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "show ip route"
+      },
+      {
+        "label": "B",
+        "text": "show cdp neighbor"
+      },
+      {
+        "label": "C",
+        "text": "show ip interface"
+      },
+      {
+        "label": "D",
+        "text": "show interface"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 139,
+    "qid": "Q196",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Two switches are connected and using Cisco Dynamic Trunking Protocol. SW1 is set to Dynamic Auto and SW2 is set to Dynamic Desirable. What is the result of this configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The link becomes an access port."
+      },
+      {
+        "label": "B",
+        "text": "The link is in an error disabled state."
+      },
+      {
+        "label": "C",
+        "text": "The link is in a down state."
+      },
+      {
+        "label": "D",
+        "text": "The link becomes a trunk port."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 141,
+    "qid": "Q198",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which design element is a best practice when deploying an 802.11b wireless infrastructure?",
+    "options": [
+      {
+        "label": "A",
+        "text": "allocating nonoverlapping channels to access points that are in close physical proximity to one another"
+      },
+      {
+        "label": "B",
+        "text": "disabling TCP so that access points can negotiate signal levels with their attached wireless devices"
+      },
+      {
+        "label": "C",
+        "text": "configuring access points to provide clients with a maximum of 5 Mbps"
+      },
+      {
+        "label": "D",
+        "text": "setting the maximum data rate to 54 Mbps on the Cisco Wireless LAN Controller"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

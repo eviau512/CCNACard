@@ -1,0 +1,827 @@
+[
+  {
+    "id": 1332,
+    "qid": "Q1332",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two examples of multifactor authentication? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "single sign-on"
+      },
+      {
+        "label": "B",
+        "text": "soft tokens"
+      },
+      {
+        "label": "C",
+        "text": "passwords that expire"
+      },
+      {
+        "label": "D",
+        "text": "shared password repository"
+      },
+      {
+        "label": "E",
+        "text": "unique user knowledge"
+      }
+    ],
+    "answer": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": 1333,
+    "qid": "Q1333",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two practices are recommended for an acceptable security posture in a network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Use a cryptographic keychain to authenticate to network devices."
+      },
+      {
+        "label": "B",
+        "text": "Place internal email and file servers in a designated DMZ."
+      },
+      {
+        "label": "C",
+        "text": "Back up device configurations to encrypted USB drives for secure retrieval."
+      },
+      {
+        "label": "D",
+        "text": "Disable unused or unnecessary ports, interfaces, and services."
+      },
+      {
+        "label": "E",
+        "text": "Maintain network equipment in a secure location."
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1334,
+    "qid": "Q1334",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. What are the two steps an engineer must take to provide the highest encryption and authentication using domainCredentials from LDAP?(Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Select PSK under Authentication Key Management."
+      },
+      {
+        "label": "B",
+        "text": "Select Static-WEP + 802.1X on Layer 2 Security."
+      },
+      {
+        "label": "C",
+        "text": "Select WPA+WPA2 on Layer 2 Security."
+      },
+      {
+        "label": "D",
+        "text": "Select 802.1X from under Authentication Key Management."
+      },
+      {
+        "label": "E",
+        "text": "Select WPA Policy with TKIP Encryption."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1335,
+    "qid": "Q1335",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. An engineer is updating the management access configuration of switch SW1 to allow secured, encrypted remoteConfiguration. Which two commands or command sequences must the engineer apply to the switch? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1(config)#enable secret ccnaTest123"
+      },
+      {
+        "label": "B",
+        "text": "SW1(config)#username NEW secret R3mote123"
+      },
+      {
+        "label": "C",
+        "text": "SW1(config)#line vty 0 15 SW1(config-line)#transport input ssh"
+      },
+      {
+        "label": "D",
+        "text": "SW1(config)# crypto key generate rsa"
+      },
+      {
+        "label": "E",
+        "text": "SW1(config)# interface f0/1 SW1(confif-if)# switchport mode trunk"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1336,
+    "qid": "Q1336",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two wireless security standards use counter mode cipher block chaining Message Authentication Code Protocol for encryption and data Integrity? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Wi-Fi 6"
+      },
+      {
+        "label": "B",
+        "text": "WPA3"
+      },
+      {
+        "label": "C",
+        "text": "WEP"
+      },
+      {
+        "label": "D",
+        "text": "WPA2"
+      },
+      {
+        "label": "E",
+        "text": "WPA"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1337,
+    "qid": "Q1337",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two fundamentals of virtualization? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It allows logical network devices to move traffic between virtual machines and the rest of the physical network."
+      },
+      {
+        "label": "B",
+        "text": "It allows multiple operating systems and applications to run independently on one physical server."
+      },
+      {
+        "label": "C",
+        "text": "It allows a physical router to directly connect NICs from each virtual machine into the network."
+      },
+      {
+        "label": "D",
+        "text": "It requires that some servers, virtual machines, and network gear reside on the Internet."
+      },
+      {
+        "label": "E",
+        "text": "The environment must be configured with one hypervisor that serves solely as a network manager to monitor SNMP traffic."
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1338,
+    "qid": "Q1338",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits of network automation? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "reduced hardware footprint"
+      },
+      {
+        "label": "B",
+        "text": "reduced operational costs"
+      },
+      {
+        "label": "C",
+        "text": "faster changes with more reliable results"
+      },
+      {
+        "label": "D",
+        "text": "fewer network failures"
+      },
+      {
+        "label": "E",
+        "text": "increased network security"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1339,
+    "qid": "Q1339",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two encoding methods are supported by REST APIs? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "SGML"
+      },
+      {
+        "label": "B",
+        "text": "YAML"
+      },
+      {
+        "label": "C",
+        "text": "XML"
+      },
+      {
+        "label": "D",
+        "text": "JSON"
+      },
+      {
+        "label": "E",
+        "text": "EBCDIC"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1340,
+    "qid": "Q1340",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two capabilities of Cisco DNA Center make it more extensible as compared to traditional campus device management? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "REST APIs that allow for external applications to interact natively"
+      },
+      {
+        "label": "B",
+        "text": "adapters that support all families of Cisco IOS software"
+      },
+      {
+        "label": "C",
+        "text": "SDKs that support interaction with third-party network equipment"
+      },
+      {
+        "label": "D",
+        "text": "modular design that is upgradable as needed"
+      },
+      {
+        "label": "E",
+        "text": "customized versions for small, medium, and large enterprises"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1341,
+    "qid": "Q1341",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits of controller-based networking compared to traditional networking? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "controller-based increases network bandwidth usage, while traditional lightens the load on the network"
+      },
+      {
+        "label": "B",
+        "text": "controller-based reduces network configuration complexity, while traditional increases the potential for errors"
+      },
+      {
+        "label": "C",
+        "text": "controller-based allows for fewer network failures, while traditional increases failure rates"
+      },
+      {
+        "label": "D",
+        "text": "controller-based provides centralization of key IT functions, while traditional requires distributed management functions"
+      },
+      {
+        "label": "E",
+        "text": "controller-based inflates software costs, while traditional decreases individual licensing costs"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1342,
+    "qid": "Q1342",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two events occur automatically when a device is added to Cisco DNA Center? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "The device is placed into the Managed state."
+      },
+      {
+        "label": "B",
+        "text": "The device is placed into the Unmanaged state."
+      },
+      {
+        "label": "C",
+        "text": "The device is assigned to the Local site."
+      },
+      {
+        "label": "D",
+        "text": "The device is assigned to the Global site."
+      },
+      {
+        "label": "E",
+        "text": "The device is placed into the Provisioned state."
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1343,
+    "qid": "Q1343",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two components are needed to create an Ansible script that configures a VLAN on a switch? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "playbook"
+      },
+      {
+        "label": "B",
+        "text": "recipe"
+      },
+      {
+        "label": "C",
+        "text": "model"
+      },
+      {
+        "label": "D",
+        "text": "cookbook"
+      },
+      {
+        "label": "E",
+        "text": "task"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1344,
+    "qid": "Q1344",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two southbound APIs? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thrift"
+      },
+      {
+        "label": "B",
+        "text": "DSC"
+      },
+      {
+        "label": "C",
+        "text": "CORBA"
+      },
+      {
+        "label": "D",
+        "text": "NETCONF"
+      },
+      {
+        "label": "E",
+        "text": "OpenFlow"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1345,
+    "qid": "Q1345",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two REST API status-code classes represent errors? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "1XX"
+      },
+      {
+        "label": "B",
+        "text": "2XX"
+      },
+      {
+        "label": "C",
+        "text": "3XX"
+      },
+      {
+        "label": "D",
+        "text": "4XX"
+      },
+      {
+        "label": "E",
+        "text": "5XX"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1346,
+    "qid": "Q1346",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two characteristics of a public cloud implementation? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is owned and maintained by one party, but it is shared among multiple organizations"
+      },
+      {
+        "label": "B",
+        "text": "It enables an organization to fully customize how it deploys network resources"
+      },
+      {
+        "label": "C",
+        "text": "It provides services that are accessed over the Internet"
+      },
+      {
+        "label": "D",
+        "text": "It is a data center on the public Internet that maintains cloud services for only one company"
+      },
+      {
+        "label": "E",
+        "text": "It supports network resources from a centralized third-party provider and privately-owned virtual resources"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1347,
+    "qid": "Q1347",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two primary drivers support the need for network automation? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Increasing reliance on self-diagnostic and self-healing"
+      },
+      {
+        "label": "B",
+        "text": "Eliminating training needs"
+      },
+      {
+        "label": "C",
+        "text": "Policy-driven provisioning of resources"
+      },
+      {
+        "label": "D",
+        "text": "Reducing hardware footprint"
+      },
+      {
+        "label": "E",
+        "text": "Providing a single entry point for resource provisioning"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1348,
+    "qid": "Q1348",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two characteristics of a small office / home office connection environment? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It requires 10Gb ports on all uplinks."
+      },
+      {
+        "label": "B",
+        "text": "It supports between 1 and 50 users."
+      },
+      {
+        "label": "C",
+        "text": "It supports between 50 and 100 users."
+      },
+      {
+        "label": "D",
+        "text": "A router port connects to a broadband connection."
+      },
+      {
+        "label": "E",
+        "text": "It requires a core, distribution, and access layer architecture."
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1349,
+    "qid": "Q1349",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two advantages of implementing a controller-based architecture instead of traditional network architecture? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It allows for seamless connectivity to virtual machines."
+      },
+      {
+        "label": "B",
+        "text": "It increases security against denial-of-service attacks."
+      },
+      {
+        "label": "C",
+        "text": "It supports complex and high-scale IP addressing schemes."
+      },
+      {
+        "label": "D",
+        "text": "It enables configuration task automation."
+      },
+      {
+        "label": "E",
+        "text": "It provides increased scalability and management options."
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1350,
+    "qid": "Q1350",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two disadvantages of a full-mesh topology? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It requires complex configuration."
+      },
+      {
+        "label": "B",
+        "text": "It needs a high MTU between sites."
+      },
+      {
+        "label": "C",
+        "text": "It works only with BGP between sites."
+      },
+      {
+        "label": "D",
+        "text": "It has a high implementation cost."
+      },
+      {
+        "label": "E",
+        "text": "It must have point-to-point communication."
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1351,
+    "qid": "Q1351",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two facts that differentiate optical-fiber cabling from copper cabling? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is less expensive when purchasing patch cables."
+      },
+      {
+        "label": "B",
+        "text": "It carries electrical current further distances for PoE devices."
+      },
+      {
+        "label": "C",
+        "text": "It provides greater throughput options."
+      },
+      {
+        "label": "D",
+        "text": "It has a greater sensitivity to changes in temperature and moisture."
+      },
+      {
+        "label": "E",
+        "text": "It carries signals for longer distances."
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1352,
+    "qid": "Q1352",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two behaviors of a point-to-point WAN topology? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It leverages a dedicated connection."
+      },
+      {
+        "label": "B",
+        "text": "It provides direct connections betwaen each router in the topology."
+      },
+      {
+        "label": "C",
+        "text": "It delivers redundancy between the central office and branch offices."
+      },
+      {
+        "label": "D",
+        "text": "It uses a single router to route traffic between sites."
+      },
+      {
+        "label": "E",
+        "text": "It connects remote networks through a single line."
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1353,
+    "qid": "Q1353",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two characteristics of a controller-based network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uses Telnet to report system issues."
+      },
+      {
+        "label": "B",
+        "text": "The administrator can make con guration updates from the CLI."
+      },
+      {
+        "label": "C",
+        "text": "It uses northbound and southbound APIs to communicate between architectural layers."
+      },
+      {
+        "label": "D",
+        "text": "It decentralizes the control plane, which allows each device to make its own forwarding decisions."
+      },
+      {
+        "label": "E",
+        "text": "It moves the control plane to a central point."
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1354,
+    "qid": "Q1354",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. A Cisco engineer creates a new WLAN called lantest. Which two actions must be performedSo that only high-speed 2.4- Ghz clients connect? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable the Status option."
+      },
+      {
+        "label": "B",
+        "text": "Set the Radio Policy option to 802.11g Only."
+      },
+      {
+        "label": "C",
+        "text": "Set the Radio Policy option to 802.11a Only."
+      },
+      {
+        "label": "D",
+        "text": "Set the Interface/Interface Group(G) to an interface other than guest."
+      },
+      {
+        "label": "E",
+        "text": "Enable the Broadcast SSID option."
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1355,
+    "qid": "Q1355",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two functions does a WLC perform in the lightweight access-point architecture that an AP performs independently in an autonomous Architecture? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "managing RF channels, including transmission power"
+      },
+      {
+        "label": "B",
+        "text": "handling the association, authentication, and roaming of wireless clients"
+      },
+      {
+        "label": "C",
+        "text": "sending and processing beacon frames"
+      },
+      {
+        "label": "D",
+        "text": "encrypting and decrypting traffic that uses the WAP protocol family"
+      },
+      {
+        "label": "E",
+        "text": "preventing collisions between wireless clients on the same RF channel"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1356,
+    "qid": "Q1356",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "SIP-based Call Admission Control must be configured in the Cisco WLC GUI. SIP call-snooping ports are configured. Which two actions must be Completed next? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Set the QoS level to silver or greater for voice traffic."
+      },
+      {
+        "label": "B",
+        "text": "Configure two different QoS roles for data and voice traffic."
+      },
+      {
+        "label": "C",
+        "text": "Enable Media Session Snooping on the WLAN."
+      },
+      {
+        "label": "D",
+        "text": "Set the QoS level to platinum for voice traffic."
+      },
+      {
+        "label": "E",
+        "text": "Enable traffic shaping for the LAN interface of the WLC."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  }
+]

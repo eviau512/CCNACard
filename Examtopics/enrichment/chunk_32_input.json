@@ -1,0 +1,702 @@
+[
+  {
+    "id": 939,
+    "qid": "Q1251",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does IPsec provide secure networking for applications within an organization?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It takes advantage of FTP to secure file transfers between nodes on the network."
+      },
+      {
+        "label": "B",
+        "text": "It provides GRE tunnels to transmit traffic securely between network nodes."
+      },
+      {
+        "label": "C",
+        "text": "It enables sets of security associations between peers."
+      },
+      {
+        "label": "D",
+        "text": "It leverages TFTP providing secure file transfers among peers on the network."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 940,
+    "qid": "Q1252",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Network security team noticed that an increasing number of employees are becoming victims of phishing attacks. Which security program should Be implemented to mitigate the problem?",
+    "options": [
+      {
+        "label": "A",
+        "text": "email system patches"
+      },
+      {
+        "label": "B",
+        "text": "physical access control"
+      },
+      {
+        "label": "C",
+        "text": "software firewall enabled on all PCs"
+      },
+      {
+        "label": "D",
+        "text": "user awareness training"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 941,
+    "qid": "Q1253",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of frame switching?",
+    "options": [
+      {
+        "label": "A",
+        "text": "populates the ARP table with the egress port"
+      },
+      {
+        "label": "B",
+        "text": "drops received MAC addresses not listed in the address table"
+      },
+      {
+        "label": "C",
+        "text": "stores and forwards frames in a buffer and uses error checking"
+      },
+      {
+        "label": "D",
+        "text": "rewrites the source and destination MAC address"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 942,
+    "qid": "Q1254",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"R20\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "value"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "key"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 943,
+    "qid": "Q1255",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW3 - Bridge Priority - 28672 - Mac-address 00:10:a1:51:57:51"
+      },
+      {
+        "label": "B",
+        "text": "SW2 - Bridge Priority - 28672 - Mac-address 00:10:a1:82:03:94"
+      },
+      {
+        "label": "C",
+        "text": "SW1 - Bridge Priority - 12288 - Mac-address 00:10:a1:95:2b:77"
+      },
+      {
+        "label": "D",
+        "text": "SW4 - Bridge Priority - 12288 - Mac-address 00:10:a1:03:42:e8"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 944,
+    "qid": "Q1257",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of a Layer 2 switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "responsible for sending data in a particular sequence"
+      },
+      {
+        "label": "B",
+        "text": "uses routers to create collision domains"
+      },
+      {
+        "label": "C",
+        "text": "avoids MAC address storage for faster transmission"
+      },
+      {
+        "label": "D",
+        "text": "uses the data link layer for communications"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 945,
+    "qid": "Q1259",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "broadcast storm"
+      },
+      {
+        "label": "B",
+        "text": "queueing"
+      },
+      {
+        "label": "C",
+        "text": "bad NIC"
+      },
+      {
+        "label": "D",
+        "text": "duplex mismatch"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 946,
+    "qid": "Q1261",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented in line 3 within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "object"
+      },
+      {
+        "label": "B",
+        "text": "key"
+      },
+      {
+        "label": "C",
+        "text": "value"
+      },
+      {
+        "label": "D",
+        "text": "array"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 947,
+    "qid": "Q1262",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does MAC learning function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "restricts ports to a maximum of 10 dynamically-learned addresses"
+      },
+      {
+        "label": "B",
+        "text": "increases security on the management VLAN"
+      },
+      {
+        "label": "C",
+        "text": "drops received MAC addresses not listed in the address table"
+      },
+      {
+        "label": "D",
+        "text": "associates the MAC address with the port on which it is received"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 948,
+    "qid": "Q1264",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does MAC learning function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "enabled by default on all VLANs and interfaces"
+      },
+      {
+        "label": "B",
+        "text": "increases security on the management VLAN"
+      },
+      {
+        "label": "C",
+        "text": "sends frames with unknown destinations to a multicast group"
+      },
+      {
+        "label": "D",
+        "text": "inspects and drops frames from unknown destinations"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 949,
+    "qid": "Q1265",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of a Layer 2 switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "provides a single broadcast domain for all connected devices"
+      },
+      {
+        "label": "B",
+        "text": "tracks the number of active TCP connections"
+      },
+      {
+        "label": "C",
+        "text": "offers one collision domain for all connected devices"
+      },
+      {
+        "label": "D",
+        "text": "makes forwarding decisions based on MAC addresses"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 950,
+    "qid": "Q1269",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:bd69:1469:12D8:BAFE:FF01:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:bd69:1469:1130:ABFF:FECC:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:bd69:1469:4628:255F:FE32:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:bd69:1469:11BE:BFFF:FEB9:1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 951,
+    "qid": "Q1270",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of encryption in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "used to ensure data integrity"
+      },
+      {
+        "label": "B",
+        "text": "uses 802.1x as the standard encoding method"
+      },
+      {
+        "label": "C",
+        "text": "uses protocols such as TKIP and CCMP to secure data"
+      },
+      {
+        "label": "D",
+        "text": "only works with the 5Ghz frequency"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 952,
+    "qid": "Q1273",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW 1 - Bridge Priority - 61440 - Mac-address 00:10:a1:69:c9:28"
+      },
+      {
+        "label": "B",
+        "text": "SW2 - Bndge Priority - 61440 - Mac address 00:10:a1:27:81:6c"
+      },
+      {
+        "label": "C",
+        "text": "SW 3 - Bridge Priority - 53248 - Mac-address 00:10:a1:35:d9:86"
+      },
+      {
+        "label": "D",
+        "text": "SW 4 - Bridge Priority 53248 - Mac-address 00:10:a1:22:11:63"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 953,
+    "qid": "Q1274",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. PC A is communicating with another device at IP address 10.225.34.225. Through which router does router Y route the traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router A"
+      },
+      {
+        "label": "B",
+        "text": "router B"
+      },
+      {
+        "label": "C",
+        "text": "router C"
+      },
+      {
+        "label": "D",
+        "text": "router D"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 954,
+    "qid": "Q1276",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "G0/6"
+      },
+      {
+        "label": "B",
+        "text": "G0/3"
+      },
+      {
+        "label": "C",
+        "text": "G0/16"
+      },
+      {
+        "label": "D",
+        "text": "G0/23"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 955,
+    "qid": "Q1278",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which is a fact related to FTP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uses two separate connections for control and data traffic."
+      },
+      {
+        "label": "B",
+        "text": "It uses block numbers to identify and mitigate data-transfer errors."
+      },
+      {
+        "label": "C",
+        "text": "It always operates without user authentication."
+      },
+      {
+        "label": "D",
+        "text": "It relies on the well-known UDP port 69."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 956,
+    "qid": "Q1279",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the cause of the issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "shutdown command"
+      },
+      {
+        "label": "B",
+        "text": "wrong cable type"
+      },
+      {
+        "label": "C",
+        "text": "STP"
+      },
+      {
+        "label": "D",
+        "text": "port security"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 957,
+    "qid": "Q1280",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "PC1 tries to send traffic to newly installed PC2. The PC2 MAC address is not listed in the MAC address table of the switch, so the switch sends The packet to all ports in the same VLAN. Which switching concept does this describe?",
+    "options": [
+      {
+        "label": "A",
+        "text": "frame flooding"
+      },
+      {
+        "label": "B",
+        "text": "MAC address table"
+      },
+      {
+        "label": "C",
+        "text": "spanning-tree protocol"
+      },
+      {
+        "label": "D",
+        "text": "MAC address aging"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 958,
+    "qid": "Q1281",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R1 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:3bb8:3bb1:C810:B3FF:FF8B:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:3bb8:3bb1:C001:3BFE:FF81:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:3bb8:3bb4:6363:93FF:EF66:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:3bb8:3bb1:C801:B3FF:FEB8:1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 959,
+    "qid": "Q1283",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of a Layer 2 switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "transfers all frames received to every connected device"
+      },
+      {
+        "label": "B",
+        "text": "offers one collision domain for all connected devices"
+      },
+      {
+        "label": "C",
+        "text": "transmits exclusively at half duplex"
+      },
+      {
+        "label": "D",
+        "text": "supports segmentation using tagging protocols"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 960,
+    "qid": "Q1286",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which cable type must be used when connecting two like devices together using these criteria? • Pins 1 to 3 and 2 to 6 are required. • Auto detection MDI-X is unavailable.",
+    "options": [
+      {
+        "label": "A",
+        "text": "straight-through"
+      },
+      {
+        "label": "B",
+        "text": "console"
+      },
+      {
+        "label": "C",
+        "text": "crossover"
+      },
+      {
+        "label": "D",
+        "text": "rollover"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 961,
+    "qid": "Q1287",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "allows easy file sharing between endpoints"
+      },
+      {
+        "label": "B",
+        "text": "provides protection against spyware"
+      },
+      {
+        "label": "C",
+        "text": "associates a name to a wireless network"
+      },
+      {
+        "label": "D",
+        "text": "eliminates network piggybacking"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 962,
+    "qid": "Q1288",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which selections must be used on the WLC when implementing a RADIUS server for wireless authentication?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Client Exclusion and SSH"
+      },
+      {
+        "label": "B",
+        "text": "Network Access Control State and SSH"
+      },
+      {
+        "label": "C",
+        "text": "AAA Override and the IP address of the server"
+      },
+      {
+        "label": "D",
+        "text": "802.1x and the MAC address of the server"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 963,
+    "qid": "Q1290",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which port-security violation mode drops traffic from unknown MAC addresses and forwards an SNMP trap?",
+    "options": [
+      {
+        "label": "A",
+        "text": "shutdown VLAN"
+      },
+      {
+        "label": "B",
+        "text": "protect"
+      },
+      {
+        "label": "C",
+        "text": "restrict"
+      },
+      {
+        "label": "D",
+        "text": "shutdown"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

@@ -1,0 +1,702 @@
+[
+  {
+    "id": 889,
+    "qid": "Q1197",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the issue with the interface GigabitEthernet0/0/1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "port security"
+      },
+      {
+        "label": "B",
+        "text": "cable disconnect"
+      },
+      {
+        "label": "C",
+        "text": "high throughput"
+      },
+      {
+        "label": "D",
+        "text": "duplex mismatch"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 890,
+    "qid": "Q1198",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router R1 receives static routing updates from routersA,B,C,and D The network engineer wants R1 to advertise static Routes in OSPF area 1. Which summary address must be advertised in OSPF?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.1.41.0/25"
+      },
+      {
+        "label": "B",
+        "text": "10.1.40.0/24"
+      },
+      {
+        "label": "C",
+        "text": "10.1.40.0/25"
+      },
+      {
+        "label": "D",
+        "text": "10.1.40.0/23"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 891,
+    "qid": "Q1199",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "An on-site service desk technician must verify the IP address and DNS server information on a user’s Windows computer. Which command must The technician enter at the command prompt on the user’s computer?",
+    "options": [
+      {
+        "label": "A",
+        "text": "show interface"
+      },
+      {
+        "label": "B",
+        "text": "ipconfig /all"
+      },
+      {
+        "label": "C",
+        "text": "netstat -r"
+      },
+      {
+        "label": "D",
+        "text": "ifconfig -a"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 892,
+    "qid": "Q1200",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which type of IPv4 address must be assigned to a server to protect it from external access and allow only internal users access while restricting Internet access?",
+    "options": [
+      {
+        "label": "A",
+        "text": "private"
+      },
+      {
+        "label": "B",
+        "text": "public"
+      },
+      {
+        "label": "C",
+        "text": "global unicast"
+      },
+      {
+        "label": "D",
+        "text": "multicast"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 893,
+    "qid": "Q1201",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What differentiates the Cisco OfficeExtend AP mode from the Cisco FlexConnect AP mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "FlexConnect allows a personal SSID to be configured on the AP, and personal SSIDs are not supported with OfficeExtend."
+      },
+      {
+        "label": "B",
+        "text": "OfficeExtend does not support DTLS tunneling of traffic to the WLC, and FlexConnect tunnels traffic to the WLC with DTLS."
+      },
+      {
+        "label": "C",
+        "text": "FlexConnect must be deployed behind a router that NATs the client traffic, and OfficeExtend uses public IP sources."
+      },
+      {
+        "label": "D",
+        "text": "OfficeExtend mode requires indoor APs with internal antennas, and indoor and outdoor APs use FlexConnect mode."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 894,
+    "qid": "Q1202",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer is configuring a WLAN to connect with the 172.16.10.0/24 network on VLAN 20. The engineer wants to Limit the number of devices that connect to the WLAN on the USERWL SSID to 125. Which configuration must the engineer perform on the WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "In the Controller IPv6 configuration, set the Throttle value to 125."
+      },
+      {
+        "label": "B",
+        "text": "In the WLAN configuration, set the Maximum Allowed Clients value to 125."
+      },
+      {
+        "label": "C",
+        "text": "In the Management Software activation configuration, set the Clients value to 125."
+      },
+      {
+        "label": "D",
+        "text": "In the Advanced configuration, set the DTIM value to 125."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 895,
+    "qid": "Q1203",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An LACP EtherChannel between two directly connected switches is in the configuration process. Which command must be Configured on switch SW2s Gi0/1-2 interfaces to establish the channel to SW1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "channel-group 1 mode on"
+      },
+      {
+        "label": "B",
+        "text": "channel-group 1 mode desirable"
+      },
+      {
+        "label": "C",
+        "text": "channel-group 1 mode active"
+      },
+      {
+        "label": "D",
+        "text": "channel-group 1 mode auto"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 896,
+    "qid": "Q1204",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An administrator must connect SW_1 and the printer to the network. SW_2 requires DTP to be used for the connection to SW_1. The printer is configured as an access port with VLAN 5. Which set of commands completes the connectivity?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport mode dynamic auto Switchport private-vlan association host 5"
+      },
+      {
+        "label": "B",
+        "text": "switchport mode trunk Switchport trunk pruning vlan add 5"
+      },
+      {
+        "label": "C",
+        "text": "switchport mode dynamic desirable Switchport trunk allowed vlan add 5"
+      },
+      {
+        "label": "D",
+        "text": "switchport mode dynamic auto Switchport trunk encapsulation negotiate"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 897,
+    "qid": "Q1205",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which per-hop QoS behavior is R1 applying to incoming packets?",
+    "options": [
+      {
+        "label": "A",
+        "text": "marking"
+      },
+      {
+        "label": "B",
+        "text": "shaping"
+      },
+      {
+        "label": "C",
+        "text": "queuing"
+      },
+      {
+        "label": "D",
+        "text": "policing"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 898,
+    "qid": "Q1206",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is the role of the root port in a switched network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It replaces the designated port when the designated port fails."
+      },
+      {
+        "label": "B",
+        "text": "It replaces the designated port when the root port fails."
+      },
+      {
+        "label": "C",
+        "text": "It is the best path to the root from a nonroot switch."
+      },
+      {
+        "label": "D",
+        "text": "It is administratively disabled until a failover occurs."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 899,
+    "qid": "Q1207",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is the temporary state that switch ports always enter immediately after the boot process when Rapid PVST+ is used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "forwarding"
+      },
+      {
+        "label": "B",
+        "text": "listening"
+      },
+      {
+        "label": "C",
+        "text": "learning"
+      },
+      {
+        "label": "D",
+        "text": "discarding"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 900,
+    "qid": "Q1208",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is used to identify spurious DHCP servers?",
+    "options": [
+      {
+        "label": "A",
+        "text": "DHCPACK"
+      },
+      {
+        "label": "B",
+        "text": "DHCPREQUEST"
+      },
+      {
+        "label": "C",
+        "text": "DHCPOFFER"
+      },
+      {
+        "label": "D",
+        "text": "DHCPDISCOVER"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 901,
+    "qid": "Q1209",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A packet sourced from 10.10.10.1 is destined for 172.16.3.254. What is the subnet mask of the destination route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.0.0.0"
+      },
+      {
+        "label": "B",
+        "text": "255.255.254.0"
+      },
+      {
+        "label": "C",
+        "text": "255.255.255.0"
+      },
+      {
+        "label": "D",
+        "text": "255.255.255.255"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 902,
+    "qid": "Q1211",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What does the host do when using the IPv4 Preferred function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It forces the DNS server to provide the same IPv4 address at each renewal."
+      },
+      {
+        "label": "B",
+        "text": "It requests the same IPv4 address when it renews its lease with the DHCP server."
+      },
+      {
+        "label": "C",
+        "text": "It prefers a pool of addresses when renewing the IPv4 host IP address."
+      },
+      {
+        "label": "D",
+        "text": "It continues to use a statically assigned IPv4 address."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 903,
+    "qid": "Q1212",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is preventing host A from reaching the internet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "LAN and WAN network segments are different."
+      },
+      {
+        "label": "B",
+        "text": "The domain name server is unreachable."
+      },
+      {
+        "label": "C",
+        "text": "The default gateway should be the first usable IP address."
+      },
+      {
+        "label": "D",
+        "text": "IP address assignment is incorrect."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 904,
+    "qid": "Q1214",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which AP mode is used for capturing wireless traffic and forwarding that traffic to a PC that is running a packet analyzer?",
+    "options": [
+      {
+        "label": "A",
+        "text": "bridge"
+      },
+      {
+        "label": "B",
+        "text": "monitor"
+      },
+      {
+        "label": "C",
+        "text": "rouge detector"
+      },
+      {
+        "label": "D",
+        "text": "sniffer"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 905,
+    "qid": "Q1215",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:d955:1008:12D8:BAFE:FF01:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:d955:1008:4598:785F:FE25:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:d955:1008:1030:ABFF:FECC:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:d955:1008:10D8:BAFF:FEC2:1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 906,
+    "qid": "Q1217",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which components are contained within a virtual machine?",
+    "options": [
+      {
+        "label": "A",
+        "text": "physical resources, including the NIC, RAM, disk, and CPU"
+      },
+      {
+        "label": "B",
+        "text": "configuration files backed by physical resources from the Hypervisor"
+      },
+      {
+        "label": "C",
+        "text": "applications running on the Hypervisor"
+      },
+      {
+        "label": "D",
+        "text": "processes running on the Hypervisor and a guest OS"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 907,
+    "qid": "Q1218",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface IP address serves as the tunnel source for CAPWAP packets from the WLC to an AP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "service"
+      },
+      {
+        "label": "B",
+        "text": "trunk"
+      },
+      {
+        "label": "C",
+        "text": "AP-manager"
+      },
+      {
+        "label": "D",
+        "text": "virtual AP connection"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 908,
+    "qid": "Q1219",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What does a switch search for in the CAM table when forwarding a frame?",
+    "options": [
+      {
+        "label": "A",
+        "text": "source MAC address and aging time"
+      },
+      {
+        "label": "B",
+        "text": "destination MAC address and flush time"
+      },
+      {
+        "label": "C",
+        "text": "source MAC address and source port"
+      },
+      {
+        "label": "D",
+        "text": "destination MAC address and destination port"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 909,
+    "qid": "Q1220",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which port type does a lightweight AP use to connect to the wired network when configured in FlexConnect mode with local switching and VLAN Tagging?",
+    "options": [
+      {
+        "label": "A",
+        "text": "trunk"
+      },
+      {
+        "label": "B",
+        "text": "LAG"
+      },
+      {
+        "label": "C",
+        "text": "EtherChannel"
+      },
+      {
+        "label": "D",
+        "text": "access"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 910,
+    "qid": "Q1221",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. PC A is communicating with another device at IP address 10.227.151.255. Through which router does router Y route the Traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router A"
+      },
+      {
+        "label": "B",
+        "text": "router B"
+      },
+      {
+        "label": "C",
+        "text": "router C"
+      },
+      {
+        "label": "D",
+        "text": "router D"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 911,
+    "qid": "Q1222",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. VoIP is being implemented in the network using VLAN ID 73 and named \"VoIP\". Each user needs a Cisco IP phone at their Desk. Switchport e0/0 has been configured as an access port in the data VLAN. Cisco Discovery Protocol is enabled globally. Which command Sequence completed the configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "vlan73 Name VoIP E0/0 Switchport voice vlan dot1p"
+      },
+      {
+        "label": "B",
+        "text": "vlan 73 Name VoIP E0/0 Switchport trunk allowed vlan 72,73 Switchport voice vlan 73"
+      },
+      {
+        "label": "C",
+        "text": "vlan 73 Name VoIP E0/0 Switchport mode trunk Channel-group 73 mode active"
+      },
+      {
+        "label": "D",
+        "text": "vlan 73 Name VoIP E0/0 Switchport voice vlan 73"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 912,
+    "qid": "Q1223",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which IP route command created the best path for a packet destined for 10.10.10.3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 10.10.0.0 255.255.252.0 g0/0"
+      },
+      {
+        "label": "B",
+        "text": "ip route 10.10.10.0 255.255.255.240 g0/0"
+      },
+      {
+        "label": "C",
+        "text": "ip route 10.0.0.0 255.0.0.0 g0/0"
+      },
+      {
+        "label": "D",
+        "text": "ip route 10.10.10.1 255.255.255.255 g0/0"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 913,
+    "qid": "Q1224",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which cable type must be used when connecting a router and switch together using these criteria? • Pins 1 and 2 are receivers and pins 3 and 6 are transmitters. • Auto detection MDI-X is unavailable.",
+    "options": [
+      {
+        "label": "A",
+        "text": "crossover"
+      },
+      {
+        "label": "B",
+        "text": "rollover"
+      },
+      {
+        "label": "C",
+        "text": "console"
+      },
+      {
+        "label": "D",
+        "text": "straight-through"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

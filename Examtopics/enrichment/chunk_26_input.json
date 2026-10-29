@@ -1,0 +1,702 @@
+[
+  {
+    "id": 788,
+    "qid": "Q1048",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the recommended switch load-balancing mode for Cisco WLCs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "source-destination IP address"
+      },
+      {
+        "label": "B",
+        "text": "destination IP address"
+      },
+      {
+        "label": "C",
+        "text": "destination MAC address"
+      },
+      {
+        "label": "D",
+        "text": "source-destination MAC address"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 789,
+    "qid": "Q1049",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What must be considered when using 802.11a?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is chosen over 802.11b when a lower-cost solution is necessary"
+      },
+      {
+        "label": "B",
+        "text": "It is susceptible to interference from 2.4 GHz devices such as microwave ovens"
+      },
+      {
+        "label": "C",
+        "text": "It is compatible with 802.11b- and 802 11g-compliant wireless devices"
+      },
+      {
+        "label": "D",
+        "text": "It is used in place of 802.11b/g when many nonoverlapping channels are required"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 790,
+    "qid": "Q1050",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer configures interface fa0/1 on SW1 and SW2 to pass traffic from two different VLANs. For security reasons, company policy requires the native VLAN to be set to a nondefault value. Which configuration meets this requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Switch(config-if)#switchport mode trunk Switch(config-if)#switchport trunk encapsulation dot1q Switch(config-if)#switchport trunk allowed vlan 100,105 Switch(config- if)#switchport trunk native vlan 3"
+      },
+      {
+        "label": "B",
+        "text": "Switch(config-if)#switchport mode trunk Switch(config-if)#switchport trunk encapsulation isl Switch(config-if)#switchport trunk allowed vlan 100,105 Switch(config- if)#switchport trunk native vlan 1"
+      },
+      {
+        "label": "C",
+        "text": "Switch(config-if)#switchport mode dynamic Switch(config-if)#switchport access vlan 100,105 Switch(config-if)#switchport trunk native vlan 1"
+      },
+      {
+        "label": "D",
+        "text": "Switch(config-if)#switchport mode access Switch(config-if)#switchport trunk encapsulation dot1q Switch(config-if)#switchport access vlan 100,105 Switch(config- if)#switchport trunk native vlan 3"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 791,
+    "qid": "Q1051",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit A new VLAN and switch are added to the network. A remote engineer configures OldSwitch and must ensure that the configuration meets these requirements: • accommodates current configured VLANs • expands the range to include VLAN 20 • allows for IEEE standard support for virtual LANs Which configuration on the NewSwitch side of the link meets these requirements?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switch port mode dynamic Channel group 1 mode active Switchport trunk allowed vlan 5,10,15, 20"
+      },
+      {
+        "label": "B",
+        "text": "no switchport mode trunk Switchport trunk encapsulation isl Switchport mode access vlan 20"
+      },
+      {
+        "label": "C",
+        "text": "switchport nonegotiate No switchport trunk allowed vlan 5,10 Switchport trunk allowed vlan 5,10,15,20"
+      },
+      {
+        "label": "D",
+        "text": "no switchport trunk encapsulation isl Switchport trunk encapsulation dot1q Switchport trunk allowed vlan add 20"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 792,
+    "qid": "Q1053",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer is adding another physical interface as a new member to the existing Port-Channel1 bundle. Which command set must be configured on the new interface to complete the process?",
+    "options": [
+      {
+        "label": "A",
+        "text": "no switchport Channel group 1 mode active"
+      },
+      {
+        "label": "B",
+        "text": "no switchport Channel-group 1 mode on"
+      },
+      {
+        "label": "C",
+        "text": "switchport mode trunk Channel-group 1 mode active"
+      },
+      {
+        "label": "D",
+        "text": "switchport Switchport mode trunk"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 793,
+    "qid": "Q1055",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is occurring on this switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Frames are dropped after 16 failed transmission attempts"
+      },
+      {
+        "label": "B",
+        "text": "The internal transmit buffer is overloaded"
+      },
+      {
+        "label": "C",
+        "text": "A high number of frames smaller than 64 bytes are received"
+      },
+      {
+        "label": "D",
+        "text": "An excessive number of frames greater than 1518 bytes are received"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 794,
+    "qid": "Q1056",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit SW_1 and SW_12 represent two companies that are merging. They use separate network vendors. The VLANs on both sides have been migrated to share IP subnets. Which command sequence must be issued on both sides to join the two companies and pass all VLANs between the companies?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport mode trunk Switchport trunk encapsulation dot1q"
+      },
+      {
+        "label": "B",
+        "text": "switchport mode trunk Switchport trunk allowed vlan all Switchport dot1q ethertype 0800"
+      },
+      {
+        "label": "C",
+        "text": "switchport mode dynamic desirable Switchport trunk allowed vlan all Switchport trunk native vlan 7"
+      },
+      {
+        "label": "D",
+        "text": "switchport dynamic auto Switchport nonegotiate"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 795,
+    "qid": "Q1057",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "An engineer is configuring a switch port that is connected to a VoIP handset. Which command must the engineer configure to enable port security with a manually assigned MAC address of abcd.abcd.abcd on voice VLAN 4?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport port-security mac-address abcd.abcd.abcd vlan 4"
+      },
+      {
+        "label": "B",
+        "text": "switchport port-security mac-address abcd.abcd.abcd vlan voice"
+      },
+      {
+        "label": "C",
+        "text": "switchport port-security mac-address abcd.abcd.abcd"
+      },
+      {
+        "label": "D",
+        "text": "switchport port-security mac-address sticky abcd.abcd.abcd vlan 4"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 796,
+    "qid": "Q1062",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"LB20\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "value"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "key"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 797,
+    "qid": "Q1063",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is represented beginning with line 1 and ending with line 5 within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "key"
+      },
+      {
+        "label": "B",
+        "text": "object"
+      },
+      {
+        "label": "C",
+        "text": "array"
+      },
+      {
+        "label": "D",
+        "text": "value"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 798,
+    "qid": "Q1064",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"IDS\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "object"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "array"
+      },
+      {
+        "label": "D",
+        "text": "key"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 799,
+    "qid": "Q1065",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is represented in line 4 within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "object"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "key"
+      },
+      {
+        "label": "D",
+        "text": "value"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 800,
+    "qid": "Q1066",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"port\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "key"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "array"
+      },
+      {
+        "label": "D",
+        "text": "object"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 801,
+    "qid": "Q1067",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What provides connection redundancy, increased bandwidth, and load sharing between a wireless LAN controller and a Layer 2 switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "first hop redundancy"
+      },
+      {
+        "label": "B",
+        "text": "VLAN trunking"
+      },
+      {
+        "label": "C",
+        "text": "tunneling"
+      },
+      {
+        "label": "D",
+        "text": "link aggregation"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 802,
+    "qid": "Q1069",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "F0/5"
+      },
+      {
+        "label": "B",
+        "text": "F0/6"
+      },
+      {
+        "label": "C",
+        "text": "F0/12"
+      },
+      {
+        "label": "D",
+        "text": "F0/9"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 803,
+    "qid": "Q1070",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of an SSID?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It identifies an individual access point on a WLAN."
+      },
+      {
+        "label": "B",
+        "text": "It differentiates traffic entering access points."
+      },
+      {
+        "label": "C",
+        "text": "It provides network security."
+      },
+      {
+        "label": "D",
+        "text": "It identifies a WLAN."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 804,
+    "qid": "Q1073",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What describes the functionality of southbound APIs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "They enable communication between the controller and the network device."
+      },
+      {
+        "label": "B",
+        "text": "They communicate with the management plane."
+      },
+      {
+        "label": "C",
+        "text": "They use HTTP messages to communicate."
+      },
+      {
+        "label": "D",
+        "text": "They convey information from the controller to the SDN applications."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 805,
+    "qid": "Q1074",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer is verifying the settings on a new OSPF network. All OSPF configurations use the default values unless otherwise indicated. Which router does the engineer expect will be elected as the DR when all devices boot up simultaneously?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1"
+      },
+      {
+        "label": "B",
+        "text": "R2"
+      },
+      {
+        "label": "C",
+        "text": "R3"
+      },
+      {
+        "label": "D",
+        "text": "R4"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 806,
+    "qid": "Q1075",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which command must be entered so that the default gateway is automatically distributed when DHCP is configured on a router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "dns-server"
+      },
+      {
+        "label": "B",
+        "text": "default-router"
+      },
+      {
+        "label": "C",
+        "text": "ip helper-address"
+      },
+      {
+        "label": "D",
+        "text": "default-gateway"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 807,
+    "qid": "Q1077",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is the maximum number of concurrent Telnet sessions that a Cisco WLC supports?",
+    "options": [
+      {
+        "label": "A",
+        "text": "3"
+      },
+      {
+        "label": "B",
+        "text": "5"
+      },
+      {
+        "label": "C",
+        "text": "6"
+      },
+      {
+        "label": "D",
+        "text": "15"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 808,
+    "qid": "Q1078",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which 802.11 management frame type is sent when a client roams between access points on the same SSID?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Reassociation Request"
+      },
+      {
+        "label": "B",
+        "text": "Authentication Request"
+      },
+      {
+        "label": "C",
+        "text": "Association Request"
+      },
+      {
+        "label": "D",
+        "text": "Probe Request"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 809,
+    "qid": "Q1079",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a functionality of the control plane in the network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It looks up an egress interface in the forwarding information base."
+      },
+      {
+        "label": "B",
+        "text": "It forwards traffic to the next hop."
+      },
+      {
+        "label": "C",
+        "text": "It exchanges topology information with other routers."
+      },
+      {
+        "label": "D",
+        "text": "It provides CLI access to the network device."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 810,
+    "qid": "Q1080",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. All switches are configured with the default STP priorities. During the STP elections, which switch becomes the root bridge if All interfaces are in the same VLAN?",
+    "options": [
+      {
+        "label": "A",
+        "text": "MDF-DC-1: 0d:E0:43:96:02:30"
+      },
+      {
+        "label": "B",
+        "text": "MDF-DC-2: 0d:0E:18:1B:05:97"
+      },
+      {
+        "label": "C",
+        "text": "MDF-DC-4: 0d:E0:19:A1:B3:19"
+      },
+      {
+        "label": "D",
+        "text": "MDF-DC-3: 0d:0E:18:2A:3C:9D"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 811,
+    "qid": "Q1082",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"VPN11\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "key"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "value"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 812,
+    "qid": "Q1083",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which port type supports the spanning-tree portfast command without additional configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Layer 3 main interfaces"
+      },
+      {
+        "label": "B",
+        "text": "Layer 3 subinterfaces"
+      },
+      {
+        "label": "C",
+        "text": "trunk ports"
+      },
+      {
+        "label": "D",
+        "text": "access ports"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

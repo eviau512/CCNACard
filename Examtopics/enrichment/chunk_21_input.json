@@ -1,0 +1,702 @@
+[
+  {
+    "id": 662,
+    "qid": "Q870",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a reason to configure a trunk port that connects to a WLC distribution port?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Provide redundancy if there is a link failure for out-of-band management."
+      },
+      {
+        "label": "B",
+        "text": "Allow multiple VLANs to be used in the data path."
+      },
+      {
+        "label": "C",
+        "text": "Permit multiple VLANs to provide out-of-band management."
+      },
+      {
+        "label": "D",
+        "text": "Eliminate redundancy with a link failure in the data path."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 663,
+    "qid": "Q872",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A Cisco WLC administrator is creating a new wireless network with enhanced SSID security. The new network must operate at 2.4 Ghz with 54 Mbps of throughput. Which set of tasks must the administrator perform to complete the configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Uncheck the Broadcast SSID check box and set the Radio Policy to 802.11a/g only."
+      },
+      {
+        "label": "B",
+        "text": "Check the Broadcast SSID check box and set the Radio Policy to 802.11g only."
+      },
+      {
+        "label": "C",
+        "text": "Uncheck the Broadcast SSID check box and set the Radio Policy to 802.11g only."
+      },
+      {
+        "label": "D",
+        "text": "Check the Broadcast SSID check box and set the Radio Policy to 802.11a only."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 664,
+    "qid": "Q873",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which switching feature removes unused MAC addresses from the MAC address table, which allows new MAC addresses to be added?",
+    "options": [
+      {
+        "label": "A",
+        "text": "MAC address aging"
+      },
+      {
+        "label": "B",
+        "text": "MAC move"
+      },
+      {
+        "label": "C",
+        "text": "MAC address auto purge"
+      },
+      {
+        "label": "D",
+        "text": "dynamic MAC address learning"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 665,
+    "qid": "Q875",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The SW1 and SW2 Gi0/0 ports have been preconfigured. An engineer is given these requirements: • Allow all PCs to communicate with each other at Layer 3. • configure untagged traffic to use VLAN 5. • Disable VLAN 1 from being used. Which configuration set meets these requirements?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1# Interface Gi0/1 Switchport mode trunk Switchport trunk allowed vlan 5,7,9,108 Switchport trunk native vlan 5 Interface Gi0/2 Switchport mode trunk Switchport trunk allowed vlan 5,7,9,108 SW2# Interface Gi0/1 Switchport mode access Switchport access vlan 7 Interface Gi0/7 Switchport mode trunk Switchport trunk allowed vlan 7,9,108"
+      },
+      {
+        "label": "B",
+        "text": "SW1# Interface Gi0/1 Switchport mode trunk Switchport trunk allowed vlan 5,7,9,108 Switchport trunk native vlan 5 Interface Gi0/2 Switchport mode access Switchport trunk allowed vlan 7,9,108 SW2# Interface Gi0/1 Switchport mode access No switchport access vlan 1 Switchport access vlan 7 Interface Gi0/7 Switchport mode trunk Switchport trunk allowed vlan 7,9,108 Switchport trunk native vlan 5"
+      },
+      {
+        "label": "C",
+        "text": "SW#1 - Interface Gi0/1 Switchport mode trunk Switchport trunk allowed vlan 5,7,9,108 Switchport trunk native vlan 5 Interface Gi0/2 Switchport mode trunk Switchport trunk allowed vlan 5,7,9,108 SW2# Interface Gi0/1 Switchport mode access Switchport access vlan 7 Interface Gi0/7 Switchport mode trunk Switchport trunk allowed vlan 5,7,9,108 Switchport trunk native vlan 5"
+      },
+      {
+        "label": "D",
+        "text": "SW1# Interface Gi0/1 Switchport mode trunk Switchport trunk allowed vian 5,7,9,108 Interface Gi0/2 Switchport mode trunk Switchport trunk allowed vlan 7,9,108 SW2# Interface Gi0/1 Switchport mode trunk Switchport trunk allowed vlan 7 Interface Gi0/7 Switchport mode trunk Switchport trunk allowed vlan 5,7,9,108"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 666,
+    "qid": "Q876",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How must router A be configured so that it only sends Cisco Discovery Protocol information to router C?",
+    "options": [
+      {
+        "label": "A",
+        "text": "#config t Router A (config)#no cdp run - Router A (config)#interface gi0/0/1 Router A (config-if)#cdp enable -"
+      },
+      {
+        "label": "B",
+        "text": "#config t Router A (config)#cdp run - Router A (config)#interface gi0/0/0 Router A (config-if)#no cdp enable"
+      },
+      {
+        "label": "C",
+        "text": "#config t - Router A (config)#cdp run - Router A (config)#interface gi0/0/1 Router A (config-if)#cdp enable -"
+      },
+      {
+        "label": "D",
+        "text": "#config t Router A (config)#cdp run - Router A (config)#interface gi0/0/0 Router A (config-if)#cdp enable"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 667,
+    "qid": "Q877",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An administrator must turn off the Cisco Discovery Protocol on the port configured with address last usable address in the 10.0.0.0/30 subnet. Which command set meets the requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface gi0/1 No cdp enable"
+      },
+      {
+        "label": "B",
+        "text": "interface gi0/0 No cdp run"
+      },
+      {
+        "label": "C",
+        "text": "interface gi0/0 No cdp advertise-v2"
+      },
+      {
+        "label": "D",
+        "text": "interface gi0/1 Clear cdp table"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 668,
+    "qid": "Q878",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which WLC port connects to a switch to pass normal access-point traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "redundancy"
+      },
+      {
+        "label": "B",
+        "text": "service"
+      },
+      {
+        "label": "C",
+        "text": "console"
+      },
+      {
+        "label": "D",
+        "text": "distribution system"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 669,
+    "qid": "Q879",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which default condition must be considered when an encrypted mobility tunnel is used between two Cisco WLCs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The tunnel uses the IPses protocol for encapsulation."
+      },
+      {
+        "label": "B",
+        "text": "Control and data traffic encryption are enabled."
+      },
+      {
+        "label": "C",
+        "text": "The tunnel uses the EoIP protocol to transmit data traffic."
+      },
+      {
+        "label": "D",
+        "text": "TCP port 443 and UDP 21 are used."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 670,
+    "qid": "Q880",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After a recent internal security audit, the network administrator decided to block all P2P-capable devices from the selected SSID. Which configuration setting must the administrator apply?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Set the Wi-Fi Direct Client Policy to Not-Allow."
+      },
+      {
+        "label": "B",
+        "text": "Select a correctly configured Layer 2 ACL."
+      },
+      {
+        "label": "C",
+        "text": "Set the MFP Client Protection to Required."
+      },
+      {
+        "label": "D",
+        "text": "Set the P2P Block Action to Drop."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 671,
+    "qid": "Q881",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the primary purpose of a console port on a Cisco WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "in-band management via an asynchronous transport"
+      },
+      {
+        "label": "B",
+        "text": "in-band management via an IP transport"
+      },
+      {
+        "label": "C",
+        "text": "out-of-band management via an asynchronous transport"
+      },
+      {
+        "label": "D",
+        "text": "out-of-band management via an IP transport"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 672,
+    "qid": "Q882",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which port type does a lightweight AP use to connect to the wired network when it is configured in local mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "EtherChannel"
+      },
+      {
+        "label": "B",
+        "text": "access"
+      },
+      {
+        "label": "C",
+        "text": "LAG"
+      },
+      {
+        "label": "D",
+        "text": "trunk"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 673,
+    "qid": "Q883",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which step immediately follows receipt of the EAP success message when session resumption is disabled for an EAP-TLS connection?",
+    "options": [
+      {
+        "label": "A",
+        "text": "PMKID caching"
+      },
+      {
+        "label": "B",
+        "text": "four-way handshake"
+      },
+      {
+        "label": "C",
+        "text": "802.1X authentication"
+      },
+      {
+        "label": "D",
+        "text": "EAPOL-key frame"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 674,
+    "qid": "Q884",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. All interfaces are in the same VLAN. All switches are configured with the default STP priorities. During the STP elections, which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "MDF-DC-1: 08:E0:43:42:70:13"
+      },
+      {
+        "label": "B",
+        "text": "MDF-DC-2: 08:0E:18:22:05:97"
+      },
+      {
+        "label": "C",
+        "text": "MDF-DC-4: 08:E0:19:A1:B3:19"
+      },
+      {
+        "label": "D",
+        "text": "MDF-DC-3: 08:0E:18:1A:3C:9D"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 675,
+    "qid": "Q886",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a reason to implement LAG on a Cisco WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Allow for stateful failover between WLCs."
+      },
+      {
+        "label": "B",
+        "text": "Increase security by encrypting management frames."
+      },
+      {
+        "label": "C",
+        "text": "Increase the available throughput on the link."
+      },
+      {
+        "label": "D",
+        "text": "Enable the connected switch ports to use different Layer 2 configurations."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 676,
+    "qid": "Q887",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A wireless access point is needed and must meet these requirements: • “zero-touch” deployed and managed by a WLC • process only real-time MAC functionality • used in a split-MAC architecture Which access point type must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "mesh"
+      },
+      {
+        "label": "B",
+        "text": "autonomous"
+      },
+      {
+        "label": "C",
+        "text": "lightweight"
+      },
+      {
+        "label": "D",
+        "text": "cloud-based"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 677,
+    "qid": "Q888",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which interface is used for out-of-band management on a WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "management"
+      },
+      {
+        "label": "B",
+        "text": "virtual"
+      },
+      {
+        "label": "C",
+        "text": "dynamic"
+      },
+      {
+        "label": "D",
+        "text": "service port"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 678,
+    "qid": "Q889",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How does SW2 interact with other switches in this VTP domain?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It transmits and processes VTP updates from any VTP clients on the network on its trunk ports."
+      },
+      {
+        "label": "B",
+        "text": "It processes VTP updates from any VTP clients on the network on its access ports."
+      },
+      {
+        "label": "C",
+        "text": "It receives updates from all VTP servers and forwards all locally configured VLANs out all trunk ports."
+      },
+      {
+        "label": "D",
+        "text": "It forwards only the VTP advertisements that it receives on its trunk ports."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 679,
+    "qid": "Q890",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A network engineer is upgrading a small data center to host several new applications, including server backups that are expected to account for up to 90% of the bandwidth during peak times. The data center connects to the MPLS network provider via a primary circuit and a secondary circuit. How does the engineer inexpensively update the data center to avoid saturation of the primary circuit by traffic associated with the backups?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Assign traffic from the backup servers to a dedicated switch."
+      },
+      {
+        "label": "B",
+        "text": "Place the backup servers in a dedicated VLAN."
+      },
+      {
+        "label": "C",
+        "text": "Advertise a more specific route for the backup traffic via the secondary circuit."
+      },
+      {
+        "label": "D",
+        "text": "configure a dedicated circuit for the backup traffic."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 680,
+    "qid": "Q891",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer started to configure two directly-connected routers as shown. Which command sequence must the engineer configure on R2 so that the two routers become OSPF neighbors?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface GigabitEthernet0/1 Ip ospf 1 area 1"
+      },
+      {
+        "label": "B",
+        "text": "router ospf 1 Network 192.168.12.1 0.0.0.0 area 1"
+      },
+      {
+        "label": "C",
+        "text": "interface GigabitEthernet0/1 Ip ospf 1 area 0"
+      },
+      {
+        "label": "D",
+        "text": "router ospf 1 Network 192.168.12.0 0.0.0.127 area 0"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 681,
+    "qid": "Q892",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What does route 10.0.1.3/32 represent in the routing table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "all hosts in the 10.0.1.0 subnet"
+      },
+      {
+        "label": "B",
+        "text": "a single destination address"
+      },
+      {
+        "label": "C",
+        "text": "the source 10.0.1.100"
+      },
+      {
+        "label": "D",
+        "text": "the 10.0.0.0 network"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 682,
+    "qid": "Q893",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router R14 is in the process of being configured. Which configuration must be used to establish a host route to a PC 10?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 10.80.65.10 255.255.255.254 10.80.65.1"
+      },
+      {
+        "label": "B",
+        "text": "ip route 10.80.65.10 255.255.255.255 10.73.65.66"
+      },
+      {
+        "label": "C",
+        "text": "ip route 10.73.65.66 0.0.0.255 10.80.65.10"
+      },
+      {
+        "label": "D",
+        "text": "ip route 10.73.65.66 255.0.0.0 10.80.65.10"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 683,
+    "qid": "Q894",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which next-hop IP address has the least desirable metric when sourced from R1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.10.10.4"
+      },
+      {
+        "label": "B",
+        "text": "10.10.10.5"
+      },
+      {
+        "label": "C",
+        "text": "10.10.10.3"
+      },
+      {
+        "label": "D",
+        "text": "10.10.10.2"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 684,
+    "qid": "Q896",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The primary route across Gi0/0 is configured on both routers. A secondary route must be configured to establish connectivity between the workstation networks. Which command set must be configured to complete this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1 - Ip route 172.16.2.0 255.255.255.248 172.16.0.5 110 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.6 110"
+      },
+      {
+        "label": "B",
+        "text": "R1 - Ip route 172.16.2.0 255.255.255.240 172.16.0.2 113 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.1 114"
+      },
+      {
+        "label": "C",
+        "text": "R1 - Ip route 172.16.2.0 255.255.255.224 172.16.0.6 111 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.5 112"
+      },
+      {
+        "label": "D",
+        "text": "R1 - Ip route 172.16.2.0 255.255.255.240 172.16.0.5 89 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.6 89"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 685,
+    "qid": "Q899",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A public IPv6 address must be configured for internet access. Which command must be configured on the R2 WAN interface to the service provider?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address fe80::/10"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 2001:db8:433:37:7710:ffff:ffff:ffff/64 anycast"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001:db8:123:45::4/64"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address fe80::260:3EFF:FE11:6770 link-local"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 686,
+    "qid": "Q901",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer must configure router R1 with a host route to the server. Which command must the engineer configure?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#ip route 10.10.10.10 255.255.255.255 192.168.0.2"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#ip route 10.10.10.0 255.255.255.0 192.168.0.2"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#ip route 0.0.0.0 0.0.0.0 192.168.0.2"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#ip route 192.168.0.2 255.255.255.255 10.10.10.10"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

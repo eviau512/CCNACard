@@ -1,0 +1,702 @@
+[
+  {
+    "id": 813,
+    "qid": "Q1084",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"R29\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "array"
+      },
+      {
+        "label": "B",
+        "text": "key"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "value"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 814,
+    "qid": "Q1085",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented in line 2 within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "object"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "key"
+      },
+      {
+        "label": "D",
+        "text": "array"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 815,
+    "qid": "Q1094",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "is used without allocation from a regional internet authority"
+      },
+      {
+        "label": "B",
+        "text": "is used when traffic on the subnet must traverse a site-to-site VPN to an outside organization"
+      },
+      {
+        "label": "C",
+        "text": "reduces the forwarding table on network routers"
+      },
+      {
+        "label": "D",
+        "text": "provides unlimited address ranges"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 816,
+    "qid": "Q1095",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "bad NIC"
+      },
+      {
+        "label": "B",
+        "text": "high throughput"
+      },
+      {
+        "label": "C",
+        "text": "queueing"
+      },
+      {
+        "label": "D",
+        "text": "broadcast storm"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 817,
+    "qid": "Q1096",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "is used when the ISP requires the new subnet to be advertised to the internet for web services"
+      },
+      {
+        "label": "B",
+        "text": "provides unlimited address ranges"
+      },
+      {
+        "label": "C",
+        "text": "is used when the network has multiple endpoint listeners"
+      },
+      {
+        "label": "D",
+        "text": "alleviates the shortage of IPv4 addresses"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 818,
+    "qid": "Q1097",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "is used when traffic on the subnet must traverse a site-to-site VPN to an outside organization"
+      },
+      {
+        "label": "B",
+        "text": "allows endpoints to communicate across public network boundaries"
+      },
+      {
+        "label": "C",
+        "text": "is used on hosts that communicate only with other internal hosts"
+      },
+      {
+        "label": "D",
+        "text": "reduces network complexity"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 819,
+    "qid": "Q1098",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "traverses the internet when an outbound ACL is applied"
+      },
+      {
+        "label": "B",
+        "text": "alleviates the shortage of IPv4 addresses"
+      },
+      {
+        "label": "C",
+        "text": "is used when the ISP requires the new subnet to be advertised to the internet for web services"
+      },
+      {
+        "label": "D",
+        "text": "enables secure connectivity over the internet"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 820,
+    "qid": "Q1099",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "broadcast storm"
+      },
+      {
+        "label": "B",
+        "text": "duplex mismatch"
+      },
+      {
+        "label": "C",
+        "text": "high throughput"
+      },
+      {
+        "label": "D",
+        "text": "queueing"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 821,
+    "qid": "Q1100",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "is used when the ISP requires the new subnet to be advertised to the internet for web services"
+      },
+      {
+        "label": "B",
+        "text": "allows multiple companies to use the same addresses without conflict"
+      },
+      {
+        "label": "C",
+        "text": "is used on the external interface of a firewall"
+      },
+      {
+        "label": "D",
+        "text": "allows endpoints to communicate across public network boundaries"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 822,
+    "qid": "Q1104",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "identifies an access point on a WLAN"
+      },
+      {
+        "label": "B",
+        "text": "uses the password to connect to an access point"
+      },
+      {
+        "label": "C",
+        "text": "uses policies to prevent unauthorized users"
+      },
+      {
+        "label": "D",
+        "text": "uses a case-sensitive text string"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 823,
+    "qid": "Q1105",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "reduces network complexity"
+      },
+      {
+        "label": "B",
+        "text": "is used on hosts that communicate only with other internal hosts"
+      },
+      {
+        "label": "C",
+        "text": "simplifies the addressing in the network"
+      },
+      {
+        "label": "D",
+        "text": "reduces network maintenance costs"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 824,
+    "qid": "Q1106",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of encryption in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "identifies an access point on a WLAN"
+      },
+      {
+        "label": "B",
+        "text": "uses the password to connect to an access point"
+      },
+      {
+        "label": "C",
+        "text": "uses integrity checks to identify forgery attacks in the frame"
+      },
+      {
+        "label": "D",
+        "text": "uses authentication protocols to secure a network"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 825,
+    "qid": "Q1107",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "simplifies the addressing in the network"
+      },
+      {
+        "label": "B",
+        "text": "complies with PCI regulations"
+      },
+      {
+        "label": "C",
+        "text": "reduces the forwarding table on network routers"
+      },
+      {
+        "label": "D",
+        "text": "is used on hosts that communicate only with other internal hosts"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 826,
+    "qid": "Q1108",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "eliminates network piggybacking"
+      },
+      {
+        "label": "B",
+        "text": "prompts a user for a login ID"
+      },
+      {
+        "label": "C",
+        "text": "broadcasts a beacon signal to announce its presence by default"
+      },
+      {
+        "label": "D",
+        "text": "must include a combination of letters and numbers"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 827,
+    "qid": "Q1109",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of encryption in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "provides increased protection against spyware"
+      },
+      {
+        "label": "B",
+        "text": "prompts a user for a login ID"
+      },
+      {
+        "label": "C",
+        "text": "uses ciphers to detect and prevent zero-day network attacks"
+      },
+      {
+        "label": "D",
+        "text": "prevents the interception of data as it transits a network"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 828,
+    "qid": "Q1110",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "intercepts data threats before they attack a network"
+      },
+      {
+        "label": "B",
+        "text": "encodes connections at the sending and receiving ends"
+      },
+      {
+        "label": "C",
+        "text": "broadcasts a beacon signal to announce its presence by default"
+      },
+      {
+        "label": "D",
+        "text": "identifies an access point on a WLAN"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 829,
+    "qid": "Q1111",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. SW2 is replaced because of a hardware failure. A network engineer starts to configure SW2 by copying the fa0/1 interface configuration from SW1. Which command must be configured on the fa0/1 interface of SW2 to enable PC1 to connect to PC2?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport mode trunk"
+      },
+      {
+        "label": "B",
+        "text": "switchport trunk native vlan 10"
+      },
+      {
+        "label": "C",
+        "text": "switchport mode access"
+      },
+      {
+        "label": "D",
+        "text": "switchport trunk allowed remove 10"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 830,
+    "qid": "Q1113",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "composed of up to 65,536 available addresses"
+      },
+      {
+        "label": "B",
+        "text": "issued by IANA in conjunction with an autonomous system number"
+      },
+      {
+        "label": "C",
+        "text": "used without tracking or registration"
+      },
+      {
+        "label": "D",
+        "text": "traverse the Internet when an outbound ACL is applied"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 831,
+    "qid": "Q1116",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does MAC learning function on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "broadcasts frames to all ports without queueing"
+      },
+      {
+        "label": "B",
+        "text": "sends an ARP request to locate unknown destinations"
+      },
+      {
+        "label": "C",
+        "text": "adds unknown source MAC addresses to the address table"
+      },
+      {
+        "label": "D",
+        "text": "sends a retransmission request when a new frame is received"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 832,
+    "qid": "Q1117",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "broadcast storm"
+      },
+      {
+        "label": "B",
+        "text": "collisions"
+      },
+      {
+        "label": "C",
+        "text": "high throughput"
+      },
+      {
+        "label": "D",
+        "text": "duplex mismatch"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 833,
+    "qid": "Q1118",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "converts electrical current to radio waves"
+      },
+      {
+        "label": "B",
+        "text": "uses policies to prevent unauthorized users"
+      },
+      {
+        "label": "C",
+        "text": "broadcasts a beacon signal to announce its presence by default"
+      },
+      {
+        "label": "D",
+        "text": "prompts a user for a login ID"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 834,
+    "qid": "Q1120",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW3 - Bridge Priority - 57344 - Mac-address 0b:bb:e0:96:a3:86"
+      },
+      {
+        "label": "B",
+        "text": "SW2 - Bridge Priority - 57344 - Mac-address 00:b6:c5:17:8e:89"
+      },
+      {
+        "label": "C",
+        "text": "SW1 - Bridge Priority - 28672 - Mac-address 0c:d4:e9:1d:3c:24"
+      },
+      {
+        "label": "D",
+        "text": "SW4 - Bridge Priority - 28672 - Mac-address 0b:09:23:33:b8:91"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 835,
+    "qid": "Q1121",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "G0/9"
+      },
+      {
+        "label": "B",
+        "text": "G0/20"
+      },
+      {
+        "label": "C",
+        "text": "G0/16"
+      },
+      {
+        "label": "D",
+        "text": "G0/11"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 836,
+    "qid": "Q1122",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"fe5/42\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "array"
+      },
+      {
+        "label": "B",
+        "text": "object"
+      },
+      {
+        "label": "C",
+        "text": "value"
+      },
+      {
+        "label": "D",
+        "text": "key"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 837,
+    "qid": "Q1123",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW 1 - Bridge Priority - 32768 - Mac-address 0f:d7:9e:13:ab:82"
+      },
+      {
+        "label": "B",
+        "text": "SW 2 - Bridge Priority - 40960 - Mac-address 05:d8:33:09:8f:89"
+      },
+      {
+        "label": "C",
+        "text": "SW 3 - Bridge Priority - 32768 - Mac-address 01:1c:6c:66:b7:70"
+      },
+      {
+        "label": "D",
+        "text": "SW 4 - Bridge Priority - 40960 - Mac-address 04:44:97:51:63:17"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

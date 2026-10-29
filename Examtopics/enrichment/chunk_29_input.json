@@ -1,0 +1,694 @@
+[
+  {
+    "id": 864,
+    "qid": "Q1162",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which SNMP message type is reliable and precedes an acknowledgment response from the SNMP manager?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Get"
+      },
+      {
+        "label": "B",
+        "text": "Inform"
+      },
+      {
+        "label": "C",
+        "text": "Traps"
+      },
+      {
+        "label": "D",
+        "text": "Set"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 865,
+    "qid": "Q1163",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "provides unlimited address ranges"
+      },
+      {
+        "label": "B",
+        "text": "is used when the network has multiple endpoint listeners"
+      },
+      {
+        "label": "C",
+        "text": "reduces network complexity"
+      },
+      {
+        "label": "D",
+        "text": "alleviates the shortage of IPv4 addresses"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 866,
+    "qid": "Q1164",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "collisions"
+      },
+      {
+        "label": "B",
+        "text": "bad NIC"
+      },
+      {
+        "label": "C",
+        "text": "duplex mismatch"
+      },
+      {
+        "label": "D",
+        "text": "broadcast storm"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 867,
+    "qid": "Q1166",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does frame switching function on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "floods unknown destinations to all ports except the receiving port"
+      },
+      {
+        "label": "B",
+        "text": "buffers and forwards frames with less than 5 CRCs"
+      },
+      {
+        "label": "C",
+        "text": "forwards frames to a neighbor port using CDP"
+      },
+      {
+        "label": "D",
+        "text": "sends frames with unknown destinations to a multicast group"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 868,
+    "qid": "Q1167",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "F0/9"
+      },
+      {
+        "label": "B",
+        "text": "F0/16"
+      },
+      {
+        "label": "C",
+        "text": "F0/7"
+      },
+      {
+        "label": "D",
+        "text": "F0/24"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 869,
+    "qid": "Q1168",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of encryption in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "intercepts data threats before they attack a network"
+      },
+      {
+        "label": "B",
+        "text": "uses policies to prevent unauthorized users"
+      },
+      {
+        "label": "C",
+        "text": "must include a combination of letters and numbers"
+      },
+      {
+        "label": "D",
+        "text": "encodes and decodes data for authorized users"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 870,
+    "qid": "Q1169",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"firewall\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "value"
+      },
+      {
+        "label": "B",
+        "text": "key"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "array"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 871,
+    "qid": "Q1172",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW 3 - Bridge Priority - 45056 - Mac-address 02:f8:c4:07:b7:69"
+      },
+      {
+        "label": "B",
+        "text": "SW 2 - Bridge Priority - 49152 - Mac-address 0d:d6 43:23:ac:87"
+      },
+      {
+        "label": "C",
+        "text": "SW 4 - Bridge Priority - 49152 - Mac-address 03:be 04:5e:64:58"
+      },
+      {
+        "label": "D",
+        "text": "SW 1 - Bridge Priority - 45056 - Mac-address 09:e6:35:f4:38:29"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 872,
+    "qid": "Q1173",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a reason why a company would choose to use network automation in an enterprise?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Provide data services faster."
+      },
+      {
+        "label": "B",
+        "text": "Enable network segmentation."
+      },
+      {
+        "label": "C",
+        "text": "Mitigate spanning-tree loop avoidance."
+      },
+      {
+        "label": "D",
+        "text": "Implement granular QoS."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 873,
+    "qid": "Q1174",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A packet sourced from 172.16.32.254 is destined for 172.16.32.8. What is the subnet mask of the preferred destination Route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "255.255.224.0"
+      },
+      {
+        "label": "B",
+        "text": "255.255.255.0"
+      },
+      {
+        "label": "C",
+        "text": "255.255.255.192"
+      },
+      {
+        "label": "D",
+        "text": "255.255.255.252"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 874,
+    "qid": "Q1176",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R1 must be configured using the EUI-64 format. When configured which Ipv6 Address Is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:1006:1968:4564:877F:FE99:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:1006:1968:1119:BEFF:FE67:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:1006:1968:1130:ABFF:FECC:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:1006:1968:12D8:BAFE:FF01:1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 875,
+    "qid": "Q1177",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Users at a branch office are experiencing application performance issues, poor VoIP audio quality, and slow downloads. What is the cause of the issues?",
+    "options": [
+      {
+        "label": "A",
+        "text": "QoS queuing"
+      },
+      {
+        "label": "B",
+        "text": "interface configuration"
+      },
+      {
+        "label": "C",
+        "text": "broadcast storm"
+      },
+      {
+        "label": "D",
+        "text": "overutilization"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 876,
+    "qid": "Q1179",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "An engineer needs to configure an access point to forward all client traffic through a wireless controller. Which mode must be enabled to Accomplish this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "local"
+      },
+      {
+        "label": "B",
+        "text": "monitor"
+      },
+      {
+        "label": "C",
+        "text": "autonomous"
+      },
+      {
+        "label": "D",
+        "text": "rogue detector"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 877,
+    "qid": "Q1180",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "An Ethernet frame arrived at switch interface G0/1, but the destination MAC address is missing from the MAC address table. How does the switch Process the frame?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It sends an ARP request to attempt to locate the destination"
+      },
+      {
+        "label": "B",
+        "text": "It updates the destination to FFFF.FFFF.FFFF."
+      },
+      {
+        "label": "C",
+        "text": "It drops the frame and notifies the sending host."
+      },
+      {
+        "label": "D",
+        "text": "It floods the frame out of the remaining switch interfaces."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 878,
+    "qid": "Q1181",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "In which circumstance would a network architect decide to implement a global unicast subnet instead of a unique local unicast subnet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "when the subnet must be available only within an organization"
+      },
+      {
+        "label": "B",
+        "text": "when the subnet does not need to be routable"
+      },
+      {
+        "label": "C",
+        "text": "when the addresses on the subnet must be equivalent to private IPv4 addresses"
+      },
+      {
+        "label": "D",
+        "text": "when the subnet must be routable over the internet"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 879,
+    "qid": "Q1183",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does MAC learning function on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "associates the MAC address with the port on which it is received"
+      },
+      {
+        "label": "B",
+        "text": "rewrites the source and destination MAC address"
+      },
+      {
+        "label": "C",
+        "text": "broadcasts frames to all ports without queueing"
+      },
+      {
+        "label": "D",
+        "text": "sends an ARP request to locate unknown destinations"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 880,
+    "qid": "Q1184",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "G0/21"
+      },
+      {
+        "label": "B",
+        "text": "G0/4"
+      },
+      {
+        "label": "C",
+        "text": "G0/5"
+      },
+      {
+        "label": "D",
+        "text": "G0/16"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 881,
+    "qid": "Q1185",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "must include a combination of letters and numbers"
+      },
+      {
+        "label": "B",
+        "text": "uses policies to prevent unauthorized users"
+      },
+      {
+        "label": "C",
+        "text": "prompts a user for a login ID"
+      },
+      {
+        "label": "D",
+        "text": "associates a name to a WLAN"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 882,
+    "qid": "Q1187",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW 4 - Bridge Priority - 49152 - Mac-address 06:8e:bc:7e:5b:85"
+      },
+      {
+        "label": "B",
+        "text": "SW 3 - Bridge Priority - 49152 - Mac-address 0d:e4:96:da:ee:95"
+      },
+      {
+        "label": "C",
+        "text": "SW 1 - Bridge Priority - 36864 - Mac-address 05:a7:23:5b:52:25"
+      },
+      {
+        "label": "D",
+        "text": "SW 2 - Bridge Priority - 36864 - Mac-address 04:1e:c4:bf:02:55"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 883,
+    "qid": "Q1189",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "duplex mismatch"
+      },
+      {
+        "label": "B",
+        "text": "high throughput"
+      },
+      {
+        "label": "C",
+        "text": "bad NIC"
+      },
+      {
+        "label": "D",
+        "text": "broadcast storm"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 884,
+    "qid": "Q1191",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "used when traffic on a subnet must traverse a site-to-site VPN to an outside organization"
+      },
+      {
+        "label": "B",
+        "text": "supplies redundancy in the case of failure"
+      },
+      {
+        "label": "C",
+        "text": "alleviates the shortage of IPv4 addresses"
+      },
+      {
+        "label": "D",
+        "text": "reduces the forwarding table on network routers"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 885,
+    "qid": "Q1193",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is the operating mode and role of a backup port on a shared LAN segment in Rapid PVST+?",
+    "options": [
+      {
+        "label": "A",
+        "text": "learning mode and provides the shortest path toward the root bridge handling traffic away from the LAN"
+      },
+      {
+        "label": "B",
+        "text": "blocking mode and provides an alternate path toward the designated bridge"
+      },
+      {
+        "label": "C",
+        "text": "forwarding mode and provides the lowest-cost path to the root bridge for each VLAN"
+      },
+      {
+        "label": "D",
+        "text": "listening mode and provides an alternate path toward the root bridge"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 886,
+    "qid": "Q1194",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "A network architect is deciding whether to implement Cisco autonomous access points or lightweight access points. Which fact about firmware Updates must the architect consider?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Unlike lightweight access points, which require redundant WLCs to support firmware upgrades, autonomous access points require only one WLC."
+      },
+      {
+        "label": "B",
+        "text": "Unlike autonomous access points, lightweight access points require a WLC to implement remote firmware updates."
+      },
+      {
+        "label": "C",
+        "text": "Unlike lightweight access points, autonomous access points can recover automatically from a corrupt firmware update."
+      },
+      {
+        "label": "D",
+        "text": "Unlike autonomous access points, lightweight access points store a complete copy of the current firmware for backup."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 887,
+    "qid": "Q1195",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is the role of SNMP in the network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to monitor and manage network devices using a UDP underlay that operates on the application layer"
+      },
+      {
+        "label": "B",
+        "text": "to collect data directly from network devices using an SSL underlay that operates on the transport layer"
+      },
+      {
+        "label": "C",
+        "text": "to monitor network devices and functions using a TCP underlay that operates on the presentation layer"
+      },
+      {
+        "label": "D",
+        "text": "to collect telemetry and critical information from network devices using an SSH underlay that operates on the network layer"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 888,
+    "qid": "Q1196",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration enables SW2 to establish an LACP EtherChannel?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B."
+      },
+      {
+        "label": "C",
+        "text": "D."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

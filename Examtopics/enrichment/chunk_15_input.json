@@ -1,0 +1,702 @@
+[
+  {
+    "id": 499,
+    "qid": "Q647",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network administrator has been tasked with securing VTY access to a router. Which access-list entry accomplishes this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq telnet"
+      },
+      {
+        "label": "B",
+        "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq scp"
+      },
+      {
+        "label": "C",
+        "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq https"
+      },
+      {
+        "label": "D",
+        "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq ssh"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 500,
+    "qid": "Q649",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which security program element involves installing badge readers on data-center doors to allow workers to enter and exit based on their job roles?",
+    "options": [
+      {
+        "label": "A",
+        "text": "physical access control"
+      },
+      {
+        "label": "B",
+        "text": "biometrics"
+      },
+      {
+        "label": "C",
+        "text": "role-based access control"
+      },
+      {
+        "label": "D",
+        "text": "multifactor authentication"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 501,
+    "qid": "Q650",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which function is performed by DHCP snooping?",
+    "options": [
+      {
+        "label": "A",
+        "text": "listens to multicast traffic for packet forwarding"
+      },
+      {
+        "label": "B",
+        "text": "rate-limits certain traffic"
+      },
+      {
+        "label": "C",
+        "text": "propagates VLAN information between switches"
+      },
+      {
+        "label": "D",
+        "text": "provides DDoS mitigation"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 502,
+    "qid": "Q652",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which protocol is used for secure remote CLI access?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Telnet"
+      },
+      {
+        "label": "B",
+        "text": "HTTP"
+      },
+      {
+        "label": "C",
+        "text": "HTTPS"
+      },
+      {
+        "label": "D",
+        "text": "SSH"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 503,
+    "qid": "Q653",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which implementation provides the strongest encryption combination for the wireless environment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "WEP"
+      },
+      {
+        "label": "B",
+        "text": "WPA + TKIP"
+      },
+      {
+        "label": "C",
+        "text": "WPA + AES"
+      },
+      {
+        "label": "D",
+        "text": "WPA2 + AES"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 504,
+    "qid": "Q654",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What does physical access control regulate?",
+    "options": [
+      {
+        "label": "A",
+        "text": "access to networking equipment and facilities"
+      },
+      {
+        "label": "B",
+        "text": "access to servers to prevent malicious activity"
+      },
+      {
+        "label": "C",
+        "text": "access to specific networks based on business function"
+      },
+      {
+        "label": "D",
+        "text": "access to computer networks and file systems"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 505,
+    "qid": "Q655",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "A network engineer is asked to configure VLANS 2, 3, and 4 for a new implementation. Some ports must be assigned to the new VLANS with unused ports remaining. Which action should be taken for the unused ports?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure in a nondefault native VLAN"
+      },
+      {
+        "label": "B",
+        "text": "configure ports in the native VLAN"
+      },
+      {
+        "label": "C",
+        "text": "configure ports in a black hole VLAN"
+      },
+      {
+        "label": "D",
+        "text": "configure ports as access ports"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 506,
+    "qid": "Q656",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "When a WPA2-PSK WLAN is configured in the Wireless LAN Controller, what is the minimum number of characters that is required in ASCII format?",
+    "options": [
+      {
+        "label": "A",
+        "text": "6"
+      },
+      {
+        "label": "B",
+        "text": "8"
+      },
+      {
+        "label": "C",
+        "text": "12"
+      },
+      {
+        "label": "D",
+        "text": "18"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 507,
+    "qid": "Q657",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What mechanism carries multicast traffic between remote sites and supports encryption?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ISATAP"
+      },
+      {
+        "label": "B",
+        "text": "IPsec over ISATAP"
+      },
+      {
+        "label": "C",
+        "text": "GRE"
+      },
+      {
+        "label": "D",
+        "text": "GRE over IPsec"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 508,
+    "qid": "Q658",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An access-list is required to permit traffic from any host on interface Gi0/0 and deny traffic from interface Gi0/1. Which access list must be applied?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip access-list standard 99 permit 10.100.100.0 0.0.0.255 deny 192.168.0.0 0.0.255.255"
+      },
+      {
+        "label": "B",
+        "text": "ip access-list standard 99 permit 10.100.100.0 0.0.0.255 deny 192.168.0.0 0.255.255.255"
+      },
+      {
+        "label": "C",
+        "text": "ip access-list standard 199 permit 10.100.100.0 0.0.0.255 deny 192.168.0.0 0.255.255.255"
+      },
+      {
+        "label": "D",
+        "text": "ip access-list standard 199 permit 10.100.100.0 0.0.0.255 deny 192.168.0.0 0.0.255.255"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 510,
+    "qid": "Q661",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which action implements physical access control as part of the security program of an organization?",
+    "options": [
+      {
+        "label": "A",
+        "text": "setting up IP cameras to monitor key infrastructure"
+      },
+      {
+        "label": "B",
+        "text": "configuring a password for the console port"
+      },
+      {
+        "label": "C",
+        "text": "backing up syslogs at a remote location"
+      },
+      {
+        "label": "D",
+        "text": "configuring enable passwords on network devices"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 512,
+    "qid": "Q663",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "A Cisco engineer is configuring a factory-default router with these three passwords: ✑The user EXEC password for console access is p4ssw0rd1. ✑The user EXEC password for Telnet access is s3cr3t2. ✑The password for privileged EXEC mode is priv4t3p4ss. Which command sequence must the engineer configure?",
+    "options": [
+      {
+        "label": "A",
+        "text": "enable secret priv4t3p4ss ! line con 0 password p4ssw0rd1 ! line vty 0 15 password s3cr3t2"
+      },
+      {
+        "label": "B",
+        "text": "enable secret priv4t3p4ss ! line con 0 password p4ssw0rd1 login ! line vty 0 15 password s3cr3t2 login"
+      },
+      {
+        "label": "C",
+        "text": "enable secret priv4t3p4ss ! line con 0 password login p4ssw0rd1 ! line vty 0 15 password login s3cr3t2 login"
+      },
+      {
+        "label": "D",
+        "text": "enable secret privilege 15 priv4t3p4ss ! line con 0 password p4ssw0rd1 login ! line vty 0 15 password s3cr3t2 login"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 514,
+    "qid": "Q668",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Clients on the WLAN are required to use 802.11r. What action must be taken to meet the requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Under Protected Management Frames, set the PMF option to Required."
+      },
+      {
+        "label": "B",
+        "text": "Enable CCKM under Authentication Key Management."
+      },
+      {
+        "label": "C",
+        "text": "Set the Fast Transition option and the WPA gtk-randomize State to disable."
+      },
+      {
+        "label": "D",
+        "text": "Set the Fast Transition option to Enable and enable FT 802.1X under Authentication Key Management."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 516,
+    "qid": "Q670",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which encryption method is used by WPA3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "TKIP"
+      },
+      {
+        "label": "B",
+        "text": "AES"
+      },
+      {
+        "label": "C",
+        "text": "SAE"
+      },
+      {
+        "label": "D",
+        "text": "PSK"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 517,
+    "qid": "Q671",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which type of traffic is sent with pure IPsec?",
+    "options": [
+      {
+        "label": "A",
+        "text": "multicast traffic from a server at one site to hosts at another location"
+      },
+      {
+        "label": "B",
+        "text": "broadcast packets from a switch that is attempting to locate a MAC address at one of several remote sites"
+      },
+      {
+        "label": "C",
+        "text": "unicast messages from a host at a remote site to a server at headquarters"
+      },
+      {
+        "label": "D",
+        "text": "spanning-tree updates between switches that are at two different sites"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 518,
+    "qid": "Q672",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How does authentication differ from authorization?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Authentication is used to record what resource a user accesses, and authorization is used to determine what resources a user can access."
+      },
+      {
+        "label": "B",
+        "text": "Authentication verifies the identity of a person accessing a network, and authorization determines what resource a user can access."
+      },
+      {
+        "label": "C",
+        "text": "Authentication is used to determine what resources a user is allowed to access, and authorization is used to track what equipment is allowed access to the network."
+      },
+      {
+        "label": "D",
+        "text": "Authentication is used to verify a person's identity, and authorization is used to create syslog messages for logins."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 519,
+    "qid": "Q673",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "An engineer has configured the domain name, user name, and password on the local router. What is the next step to complete the configuration for a Secure Shell access RSA key?",
+    "options": [
+      {
+        "label": "A",
+        "text": "crypto key import rsa pem"
+      },
+      {
+        "label": "B",
+        "text": "crypto key generate rsa"
+      },
+      {
+        "label": "C",
+        "text": "crypto key zeroize rsa"
+      },
+      {
+        "label": "D",
+        "text": "crypto key pubkey-chain rsa"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 520,
+    "qid": "Q674",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which type if network attack overwhelms the target server by sending multiple packets to a port until the half-open TCP resources of the target are exhausted?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SYN flood"
+      },
+      {
+        "label": "B",
+        "text": "confirms"
+      },
+      {
+        "label": "C",
+        "text": "teardrop"
+      },
+      {
+        "label": "D",
+        "text": "amplification"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 521,
+    "qid": "Q677",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "After a recent security breach and a RADIUS failure, an engineer must secure the console port of each enterprise router with a local username and password. Which configuration must the engineer apply to accomplish this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "aaa new-model line con 0 password plaintextpassword privilege level 15"
+      },
+      {
+        "label": "B",
+        "text": "aaa new-model aaa authorization exec default local aaa authentication login default radius username localuser privilege 15 secret plaintextpassword"
+      },
+      {
+        "label": "C",
+        "text": "username localuser secret plaintextpassword line con 0 no login local privilege level 15"
+      },
+      {
+        "label": "D",
+        "text": "username localuser secret plaintextpassword line con 0 login authentication default privilege level 15"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 522,
+    "qid": "Q678",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which wireless security protocol relies on Perfect Forward Secrecy?",
+    "options": [
+      {
+        "label": "A",
+        "text": "WEP"
+      },
+      {
+        "label": "B",
+        "text": "WPA2"
+      },
+      {
+        "label": "C",
+        "text": "WPA"
+      },
+      {
+        "label": "D",
+        "text": "WPA3"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 523,
+    "qid": "Q679",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a zero-day exploit?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is when the network is saturated with malicious traffic that overloads resources and bandwidth."
+      },
+      {
+        "label": "B",
+        "text": "It is when an attacker inserts malicious code into a SQL server."
+      },
+      {
+        "label": "C",
+        "text": "It is when a new network vulnerability is discovered before a fix is available."
+      },
+      {
+        "label": "D",
+        "text": "It is when the perpetrator inserts itself in a conversation between two parties and captures or alters data."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 524,
+    "qid": "Q682",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which characteristic differentiates the concept of authentication from authorization and accounting?",
+    "options": [
+      {
+        "label": "A",
+        "text": "consumption-based billing"
+      },
+      {
+        "label": "B",
+        "text": "identity verification"
+      },
+      {
+        "label": "C",
+        "text": "user-activity logging"
+      },
+      {
+        "label": "D",
+        "text": "service limitations"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 525,
+    "qid": "Q683",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a function of Cisco Advanced Malware Protection for a Next-Generation IPS?",
+    "options": [
+      {
+        "label": "A",
+        "text": "inspecting specific files and file types for malware"
+      },
+      {
+        "label": "B",
+        "text": "authorizing potentially compromised wireless traffic"
+      },
+      {
+        "label": "C",
+        "text": "authenticating end users"
+      },
+      {
+        "label": "D",
+        "text": "URL filtering"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 526,
+    "qid": "Q684",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a feature of WPA?",
+    "options": [
+      {
+        "label": "A",
+        "text": "TKIP/MIC encryption"
+      },
+      {
+        "label": "B",
+        "text": "small Wi-Fi application"
+      },
+      {
+        "label": "C",
+        "text": "preshared key"
+      },
+      {
+        "label": "D",
+        "text": "802.1x authentication"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 527,
+    "qid": "Q686",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How does WPA3 improve security?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uses SAE for authentication."
+      },
+      {
+        "label": "B",
+        "text": "It uses RC4 for encryption."
+      },
+      {
+        "label": "C",
+        "text": "It uses TKIP for encryption."
+      },
+      {
+        "label": "D",
+        "text": "It uses a 4-way handshake for authentication."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

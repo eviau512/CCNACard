@@ -1,0 +1,702 @@
+[
+  {
+    "id": 738,
+    "qid": "Q976",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A network engineer must configure an access list on a new Cisco IOS router. The access list must deny HTTP traffic to network 10.125.128.32/27 from the 192.168.240.0/20 network, but it must allow the 192.168.240.0/20 network to reach the rest of the 10.0.0.0/8 network. Which configuration must the engineer apply?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip access-list extended deny_outbound 10 permit ip 192.168.240.0 255.255.240.0 10.0.0.0 255.0.0.0 20 deny tcp 192.168.240.0 255.255.240.0 10.125.128.32 255.255.255.224 eq 443 30 permit ip any any"
+      },
+      {
+        "label": "B",
+        "text": "ip access-list extended deny_outbound 10 deny tcp 192.168.240.0 0.0.15.255 10.125.128.32 0.0.0.31 eq 80 20 permit ip 192.168.240.0 0.0.15.255 10.0.0.0 0.255.255.255 30 deny ip any any log"
+      },
+      {
+        "label": "C",
+        "text": "ip access-list extended deny_outbound 10 deny tcp 10.125.128.32 255.255.255.224 192.168.240.0 255.255.240.0 eq 443 20 deny tcp 192.168.240.0 255.255.240.0 10.125.128.32 255.255.255.224 eq 443 30 permit ip 192.168.240.0 255.255.240.0 10.0.0.0 255.0.0.0"
+      },
+      {
+        "label": "D",
+        "text": "ip access-list extended deny_outbound 10 deny tcp 192.168.240.0 0.0.15.255 any eq 80 20 deny tcp 192.168.240.0 0.0.15.255 10.125.128.32 0.0.0.31 eq 80 30 permit ip 192.168.240.0 0.0.15.255 10.0.0.0 0.255.255.255"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 739,
+    "qid": "Q977",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the definition of backdoor malware?",
+    "options": [
+      {
+        "label": "A",
+        "text": "malicious code that is installed onto a computer to allow access by an unauthorized user"
+      },
+      {
+        "label": "B",
+        "text": "malicious program that is used to launch other malicious programs"
+      },
+      {
+        "label": "C",
+        "text": "malicious code that infects a user machine and then uses that machine to send spam"
+      },
+      {
+        "label": "D",
+        "text": "malicious code with the main purpose of downloading other malicious code"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 740,
+    "qid": "Q978",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What does WPA3 provide in wireless networking?",
+    "options": [
+      {
+        "label": "A",
+        "text": "backward compatibility with WPA and WPA2"
+      },
+      {
+        "label": "B",
+        "text": "safeguards against brute force attacks with SAE"
+      },
+      {
+        "label": "C",
+        "text": "increased security and requirement of a complex configuration"
+      },
+      {
+        "label": "D",
+        "text": "optional Protected Management Frame negotiation"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 741,
+    "qid": "Q979",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which global command encrypts all passwords in the running configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "service password-encryption"
+      },
+      {
+        "label": "B",
+        "text": "enable password-encryption"
+      },
+      {
+        "label": "C",
+        "text": "enable secret"
+      },
+      {
+        "label": "D",
+        "text": "password-encrypt"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 742,
+    "qid": "Q980",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network administrator is configuring a router for user access via SSH. The service-password encryption command has been issued. The configuration must meet these requirements: • Create the username as CCUser. • Create the password as NA!2$cc. • Encrypt the user password. What must be configured to meet the requirements?",
+    "options": [
+      {
+        "label": "A",
+        "text": "username CCUser privilege 10 password NA!2$cc"
+      },
+      {
+        "label": "B",
+        "text": "username CCUser privilege 15 password NA!2$$cc Enable secret 0 NA!2$$cc"
+      },
+      {
+        "label": "C",
+        "text": "username CCUser secret NA!2Sce"
+      },
+      {
+        "label": "D",
+        "text": "username CCUser password NA!2$$cc Enable password level 5 NA!2$$cc"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 743,
+    "qid": "Q982",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which type of security program is violated when a group of employees enters a building using the ID badge of only one person?",
+    "options": [
+      {
+        "label": "A",
+        "text": "intrusion detection"
+      },
+      {
+        "label": "B",
+        "text": "network authorization"
+      },
+      {
+        "label": "C",
+        "text": "physical access control"
+      },
+      {
+        "label": "D",
+        "text": "user awareness"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 744,
+    "qid": "Q984",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Local access for R4 must be established and these requirements must be met: • Only Telnet access is allowed. • The enable password must be stored securely. • The enable password must be applied in plain text. • Full access to R4 must be permitted upon successful login. Which configuration script meets the requirements?",
+    "options": [
+      {
+        "label": "A",
+        "text": "! Conf t ! Username test1 password testpass1 Enable secret level 15 0 Test123 ! Line vty 0 15 Login local Transport input telnet"
+      },
+      {
+        "label": "B",
+        "text": "! Config t ! Username test1 password testpass1 Enable password level 15 0 Test123 ! Line vty 0 15 Login local Transport input all"
+      },
+      {
+        "label": "C",
+        "text": "! Config t ! Username test1 password testpass1 Enable password level 1 7 Test123 ! Line vty 0 15 Accounting exec default Transport input all"
+      },
+      {
+        "label": "D",
+        "text": "! Config t ! Username test1 password testpass1 Enable secret level 1 0 Test123 ! Line vty 0 15 Login authentication Password Test123 Transport input telnet"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 745,
+    "qid": "Q985",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of RSA?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uses preshared keys for encryption."
+      },
+      {
+        "label": "B",
+        "text": "It is an asymmetric encryption algorithm."
+      },
+      {
+        "label": "C",
+        "text": "It is a symmetric decryption algorithm."
+      },
+      {
+        "label": "D",
+        "text": "It requires both sides to have identical keys for encryption."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 746,
+    "qid": "Q987",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is an enhancement implemented in WPA3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "applies 802.1x authentication and AES-128 encryption"
+      },
+      {
+        "label": "B",
+        "text": "employs PKI and RADIUS to identify access points"
+      },
+      {
+        "label": "C",
+        "text": "uses TKIP and per-packet keying"
+      },
+      {
+        "label": "D",
+        "text": "defends against deauthentication and disassociation attacks"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 747,
+    "qid": "Q988",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which action must be taken when password protection is implemented?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Use less than eight characters in length when passwords are complex."
+      },
+      {
+        "label": "B",
+        "text": "Include special characters and make passwords as long as allowed."
+      },
+      {
+        "label": "C",
+        "text": "Share passwords with senior IT management to ensure proper oversight."
+      },
+      {
+        "label": "D",
+        "text": "Store passwords as contacts on a mobile device with single-factor authentication."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 748,
+    "qid": "Q990",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "An engineer must configure R1 for a new user account. The account must meet these requirements: • It must be configured in the local database. • The username is engineer2. • It must use the strongest password configurable. Which command must the engineer configure on the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)# username engineer2 privilege 1 password 7 test2021"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)# username engineer2 secret 4 $$1$$b1Ju$kZbBS1Pyh4QzwXyZ"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)# username engineer2 algorithm-type scrypt secret test2021"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)# username engineer2 secret 5 password $$1$$b1Ju$kZbBS1Pyh4QzwXyZ"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 749,
+    "qid": "Q993",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of RSA?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uses preshared keys for encryption."
+      },
+      {
+        "label": "B",
+        "text": "It is a public-key cryptosystem."
+      },
+      {
+        "label": "C",
+        "text": "It is a private-key encryption algorithm."
+      },
+      {
+        "label": "D",
+        "text": "It requires both sides to have identical keys."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 750,
+    "qid": "Q994",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is used as a solution for protecting an individual network endpoint from attack?",
+    "options": [
+      {
+        "label": "A",
+        "text": "antivirus software"
+      },
+      {
+        "label": "B",
+        "text": "wireless controller"
+      },
+      {
+        "label": "C",
+        "text": "router"
+      },
+      {
+        "label": "D",
+        "text": "Cisco DNA Center"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 751,
+    "qid": "Q995",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which security method is used to prevent man-in-the-middle attacks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "authentication"
+      },
+      {
+        "label": "B",
+        "text": "anti-replay"
+      },
+      {
+        "label": "C",
+        "text": "authorization"
+      },
+      {
+        "label": "D",
+        "text": "accounting"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 752,
+    "qid": "Q996",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which cipher is supported for wireless encryption only with the WPA2 standard?",
+    "options": [
+      {
+        "label": "A",
+        "text": "RC4"
+      },
+      {
+        "label": "B",
+        "text": "AES"
+      },
+      {
+        "label": "C",
+        "text": "SHA"
+      },
+      {
+        "label": "D",
+        "text": "AES256"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 753,
+    "qid": "Q997",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. This ACL is configured to allow client access only to HTTP, HTTPS, and DNS services via UDP. The new administrator wants to add TCP access to the ONS service. Which configuration updates the ACL efficiently?",
+    "options": [
+      {
+        "label": "A",
+        "text": "no ip access-list extended Services Ip access-list extended Services 30 permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+      },
+      {
+        "label": "B",
+        "text": "ip access-list extended Services 35 permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+      },
+      {
+        "label": "C",
+        "text": "ip access-list extended Services Permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+      },
+      {
+        "label": "D",
+        "text": "no ip access-list extended Services Ip access-list extended Services Permit udp 10.0.0.0 0.255.255.255 any eq 53 Permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain deny ip any any log"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 754,
+    "qid": "Q998",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which WPA mode uses PSK authenticaton?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Local"
+      },
+      {
+        "label": "B",
+        "text": "Personal"
+      },
+      {
+        "label": "C",
+        "text": "Enterprise"
+      },
+      {
+        "label": "D",
+        "text": "Client"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 755,
+    "qid": "Q999",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "An engineer is configuring remote access to a router from IP subnet 10.139.58.0/28. The domain name, crypto keys, and SSH have been configured. Which configuration enables the traffic on the destination router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.252 Ip access-group 110 in Ip access-list extended 110 Permit tcp 10.139.58.0 0.0.0.15 host 10.122.49.1 eq 22"
+      },
+      {
+        "label": "B",
+        "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.240 Access-group 120 in Ip access-list extended 120 Permit tcp 10.139.58.0 255.255.255.248 any eq 22"
+      },
+      {
+        "label": "C",
+        "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.252 Ip access-group 105 in Ip access-list standard 105 Permit tcp 10.139.58.0 0.0.0.7 eq 22 host 10.122.49.1"
+      },
+      {
+        "label": "D",
+        "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.248 Ip access-group 10 in Ip access-list standard 10 Permit udp 10.139.58.0 0.0.0.7 host 10.122.49.1 eq 22"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 756,
+    "qid": "Q1000",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "To improve corporate security, an organization is planning to implement badge authentication to limit access to the data center. Which element of a security program is being deployed?",
+    "options": [
+      {
+        "label": "A",
+        "text": "user awareness"
+      },
+      {
+        "label": "B",
+        "text": "user training"
+      },
+      {
+        "label": "C",
+        "text": "physical access control"
+      },
+      {
+        "label": "D",
+        "text": "vulnerability verification"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 757,
+    "qid": "Q1002",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which benefit does Cisco DNA Center provide over traditional campus management?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cisco DNA Center automates HTTPS for secure web access, and traditional campus management uses HTTP."
+      },
+      {
+        "label": "B",
+        "text": "Cisco DNA Center leverages SNMPv3 for encrypted management, and traditional campus management uses SNMPv2."
+      },
+      {
+        "label": "C",
+        "text": "Cisco DNA Center leverages APIs, and traditional campus management requires manual data gathering."
+      },
+      {
+        "label": "D",
+        "text": "Cisco DNA Center automates SSH access for encrypted entry, and SSH is absent from traditional campus management."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 758,
+    "qid": "Q1003",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "How does Chef configuration management enforce a required device configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The Chef Infra Server uses its configured cookbook to push the required configuration to the remote device requesting updates."
+      },
+      {
+        "label": "B",
+        "text": "The installed agent on the device connects to the Chef Infra Server and pulls its required configuration from the cookbook."
+      },
+      {
+        "label": "C",
+        "text": "The Chef Infra Server uses its configured cookbook to alert each remote device when it is time for the device to pull a new configuration."
+      },
+      {
+        "label": "D",
+        "text": "The installed agent on the device queries the Chef Infra Server and the server responds by pushing the configuration from the cookbook."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 759,
+    "qid": "Q1004",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the PUT method within HTTP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It replaces data at the destination."
+      },
+      {
+        "label": "B",
+        "text": "It is a nonidempotent operation."
+      },
+      {
+        "label": "C",
+        "text": "It is a read-only operation."
+      },
+      {
+        "label": "D",
+        "text": "It displays a web site."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 760,
+    "qid": "Q1005",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which advantage does the network assurance capability of Cisco DNA Center provide over traditional campus management?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cisco DNA Center leverages YANG and NETCONF to assess the status of fabric and nonfabric devices, and traditional campus management uses CLI exclusively."
+      },
+      {
+        "label": "B",
+        "text": "Cisco DNA Center handles management tasks at the controller to reduce the load on infrastructure devices, and traditional campus management uses the data backbone."
+      },
+      {
+        "label": "C",
+        "text": "Cisco DNA Center automatically compares security postures among network devices, and traditional campus management needs manual comparisons."
+      },
+      {
+        "label": "D",
+        "text": "Cisco DNA Center correlates information from different management protocols to obtain insights, and traditional campus management requires manual analysis."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 761,
+    "qid": "Q1006",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. In which structure does the word “warning” directly reside?",
+    "options": [
+      {
+        "label": "A",
+        "text": "array"
+      },
+      {
+        "label": "B",
+        "text": "object"
+      },
+      {
+        "label": "C",
+        "text": "Boolean"
+      },
+      {
+        "label": "D",
+        "text": "string"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 762,
+    "qid": "Q1007",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the purpose of a southbound API in a controller-based networking architecture?",
+    "options": [
+      {
+        "label": "A",
+        "text": "facilitates communication between the controller and the applications"
+      },
+      {
+        "label": "B",
+        "text": "allows application developers to interact with the network"
+      },
+      {
+        "label": "C",
+        "text": "integrates a controller with other automation and orchestration tools"
+      },
+      {
+        "label": "D",
+        "text": "facilitates communication between the controller and the networking hardware"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+# Unselected external study materials & large media (video courses, notes, mock exams)
+/Jeremy-complete/
+/mock-test/
+/notes/
+/markdown/
+/Anki/
+/Packet-Tracer/
+
+# Android build outputs & caches
+CCNA-App/build/
+CCNA-App/.gradle/
+local.properties
+*.apk.idsig
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Development scratchpads & test temp files
+Examtopics/scratch/
+Examtopics/enrichment/*.txt
+Examtopics/enrichment/dump_*.py
+Examtopics/enrichment/inspect_*.py
+Examtopics/enrichment/check_*.py
+Examtopics/enrichment/test_script.py
+Examtopics/enrichment/q378_raw.txt
+Examtopics/enrichment/q494_out.txt
+*.log
+*.tmp
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.bak

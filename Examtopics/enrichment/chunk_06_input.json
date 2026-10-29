@@ -1,0 +1,702 @@
+[
+  {
+    "id": 206,
+    "qid": "Q285",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which type of port is used to connect the wired network when an autonomous AP maps two VLANs to its WLANs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "access"
+      },
+      {
+        "label": "B",
+        "text": "LAG"
+      },
+      {
+        "label": "C",
+        "text": "trunk"
+      },
+      {
+        "label": "D",
+        "text": "EtherChannel"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 207,
+    "qid": "Q286",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A network administrator needs to aggregate 4 ports into a single logical link which must negotiate layer 2 connectivity to ports on another switch. What must be configured when using active mode on both sides of the connection?",
+    "options": [
+      {
+        "label": "A",
+        "text": "LLDP"
+      },
+      {
+        "label": "B",
+        "text": "LACP"
+      },
+      {
+        "label": "C",
+        "text": "Cisco vPC"
+      },
+      {
+        "label": "D",
+        "text": "802 1q trunks"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 208,
+    "qid": "Q287",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer built a new L2 LACP EtherChannel between SW1 and SW2 and executed these show commands to verify the work establish an LACP port channel?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Change the channel-group mode on SW1 to desirable"
+      },
+      {
+        "label": "B",
+        "text": "Change the channel-group mode on SW1 to active or passive"
+      },
+      {
+        "label": "C",
+        "text": "Change the channel-group mode on SW2 to auto"
+      },
+      {
+        "label": "D",
+        "text": "configure the interface port-channel 1 command on both swtiches"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 209,
+    "qid": "Q288",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. For security reasons, automatic neighbor discovery must be disabled on the R5 Gi0/1 interface. These tasks must be completed: ✑Disable all neighbor discovery methods on R5 interface Gi0/1 ✑Permit neighbor discovery on R5 interface Gi0/2. ✑Verify there are no dynamically learned neighbors on R5 interface Gi0/1. ✑Display the IP address of R6's interface Gi0/2 Which configuration must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R5(config)#int Gi0/1 R5(config-if)#no cdp enable R5(config-if)#exit R5(config)#lldp run R5(config)#no cdp run R5#sh cdp neighbor detail R5#sh lldp neighbor"
+      },
+      {
+        "label": "B",
+        "text": "R5(config)#int Gi0/1 R5(config-if)#no cdp enable R5(config-if)#exit R5(config)#no lldp run R5(config)#cdp run R5#sh cdp neighbor R5#sh lldp neighbor"
+      },
+      {
+        "label": "C",
+        "text": "R5(config)#int Gi0/1 R5(config-if)#no cdp run R5(config-if)#exit R5(config)#lldp run R5(config)#cdp enable R5#sh cdp neighbor R5#sh lldp neighbor"
+      },
+      {
+        "label": "D",
+        "text": "R5(config)#int Gi0/1 R5(config-if)#no cdp enable R5(config-if)#exit R5(config)#no lldp run R5(config)#cdp run R5#sh cdp neighbor detail R5#sh lldp neighbor"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 210,
+    "qid": "Q291",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "An engineer is configuring data and voice services to pass through the same port. The designated switch interface fastethernet0/1 must transmit packets using the same priority for data when they are received from the access port of the IP phone. Which configuration must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface fastethernet0/1 switchport voice vlan dot1p"
+      },
+      {
+        "label": "B",
+        "text": "interface fastethernet0/1 switchport priority extend cos 7"
+      },
+      {
+        "label": "C",
+        "text": "interface fastethernet0/1 switchport voice vlan untagged"
+      },
+      {
+        "label": "D",
+        "text": "interface fastethernet0/1 switchport priority extend trust"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 211,
+    "qid": "Q292",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which change to the configuration on Switch2 allows the two switches to establish an EtherChannel?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Change the LACP mode to desirable"
+      },
+      {
+        "label": "B",
+        "text": "Change the protocol to PAgP and use auto mode"
+      },
+      {
+        "label": "C",
+        "text": "Change the LACP mode to active"
+      },
+      {
+        "label": "D",
+        "text": "Change the protocol to EtherChannel mode on"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 212,
+    "qid": "Q293",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer must configure the interface that connects to PC1 and secure it in a way that only PC1 is allowed to use the port. No VLAN tagging can be used except for a voice VLAN. Which command sequence must be entered to configure the switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1(config-if)#switchport mode dynamic auto SW1(config-if)#switchport port-security SW1(config-if)#switchport port-security violation restrict"
+      },
+      {
+        "label": "B",
+        "text": "SW1(config-if)#switchport mode nonegotiate SW1(config-if)#switchport port-security SW1(config-if)#switchport port-security maximum 1"
+      },
+      {
+        "label": "C",
+        "text": "SW1(config-if)#switchport mode access SW1(config-if)#switchport port-security SW1(config-if)#switchport port-security mac-address 0050.7966.6800"
+      },
+      {
+        "label": "D",
+        "text": "SW1(config-if)#switchport mode dynamic desirable SW1(config-if)#switchport port-security mac-address 0050.7966.6800 SW1(config-if)#switchport port-security mac- address sticky"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 213,
+    "qid": "Q294",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which protocol must be implemented to support separate authorization and authentication solutions for wireless APs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "RADIUS"
+      },
+      {
+        "label": "B",
+        "text": "TACACS+"
+      },
+      {
+        "label": "C",
+        "text": "802.1X"
+      },
+      {
+        "label": "D",
+        "text": "Kerberos"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 214,
+    "qid": "Q295",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which port type supports the spanning-tree portfast command without additional configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "trunk ports"
+      },
+      {
+        "label": "B",
+        "text": "Layer 3 sub interfaces"
+      },
+      {
+        "label": "C",
+        "text": "Layer 3 main interfaces"
+      },
+      {
+        "label": "D",
+        "text": "access ports"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 215,
+    "qid": "Q297",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A Cisco engineer must configure a single switch interface to meet these requirements: ✑Accept untagged frames and place them in VLAN 20 Accept tagged frames in VLAN 30 when CDP detects a Cisco IP phone Which command set must the engineer apply?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport mode dynamic desirable switchport access vlan 20 switchport trunk allowed vlan 30 switchport voice vlan 30"
+      },
+      {
+        "label": "B",
+        "text": "switchport mode access switchport access vlan 20 switchport voice vlan 30"
+      },
+      {
+        "label": "C",
+        "text": "switchport mode dynamic auto switchport trunk native vlan 20 switchport trunk allowed vlan 30 switchport voice vlan 30"
+      },
+      {
+        "label": "D",
+        "text": "switchport mode trunk switchport access vlan 20 switchport voice vlan 30"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 216,
+    "qid": "Q298",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What does a switch use to build its MAC address table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "VTP"
+      },
+      {
+        "label": "B",
+        "text": "DTP"
+      },
+      {
+        "label": "C",
+        "text": "ingress traffic"
+      },
+      {
+        "label": "D",
+        "text": "egress traffic"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 217,
+    "qid": "Q299",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The EtherChannel is configured with a speed of 1000 and duplex as full on both ends of channel group 1. What is the next step to configure the channel on switch A to respond to but not initiate LACP communication?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface range gigabitethernet0/0/0-15 channel-group 1 mode on"
+      },
+      {
+        "label": "B",
+        "text": "interface range gigabitethernet0/0/0-15 channel-group 1 mode desirable"
+      },
+      {
+        "label": "C",
+        "text": "interface port-channel 1 channel-group 1 mode auto"
+      },
+      {
+        "label": "D",
+        "text": "interface port-channel 1 channel-group 1 mode passive"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 218,
+    "qid": "Q300",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which command entered on a switch configured with Rapid PVST+ listens and learns for a specific time period?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switch(config)#spanning-tree vlan 1 priority 4096"
+      },
+      {
+        "label": "B",
+        "text": "switch(config)#spanning-tree vlan 1 hello-time 10"
+      },
+      {
+        "label": "C",
+        "text": "switch(config)#spanning-tree vlan 1 max-age 6"
+      },
+      {
+        "label": "D",
+        "text": "switch(config)#spanning-tree vlan 1 forward-time 20"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 219,
+    "qid": "Q301",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What must a network administrator consider when deciding whether to configure a new wireless network with APs in autonomous mode or APs running in cloud- based mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Autonomous mode APs are less dependent on an underlay but more complex to maintain than APs in cloud-based mode."
+      },
+      {
+        "label": "B",
+        "text": "Cloud-based mode APs relay on underlays and are more complex to maintain than APs in autonomous mode."
+      },
+      {
+        "label": "C",
+        "text": "Cloud-based mode APs are easy to deploy but harder to automate than APs in autonomous mode."
+      },
+      {
+        "label": "D",
+        "text": "Autonomous mode APs are easy to deploy and automate than APs in cloud-based mode."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 220,
+    "qid": "Q302",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "When a switch receives a frame for an unknown destination MAC address, how is the frame handled?",
+    "options": [
+      {
+        "label": "A",
+        "text": "flooded to all ports except the origination port"
+      },
+      {
+        "label": "B",
+        "text": "forwarded to the first available port"
+      },
+      {
+        "label": "C",
+        "text": "broadcast to all ports on the switch"
+      },
+      {
+        "label": "D",
+        "text": "inspected and dropped by the switch"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 221,
+    "qid": "Q303",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which state is bypassed in Rapid PVST+ when PortFast is enabled on a port?",
+    "options": [
+      {
+        "label": "A",
+        "text": "blocking"
+      },
+      {
+        "label": "B",
+        "text": "forwarding"
+      },
+      {
+        "label": "C",
+        "text": "learning"
+      },
+      {
+        "label": "D",
+        "text": "discarding"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 222,
+    "qid": "Q304",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What happens when a switch receives a frame with a destination MAC address that recently aged out?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The switch floods the frame to all ports in all VLANs except the port that received the frame."
+      },
+      {
+        "label": "B",
+        "text": "The switch floods the frame to all ports in the VLAN except the port that received the frame."
+      },
+      {
+        "label": "C",
+        "text": "The switch references the MAC address aging table for historical addresses on the port that received the frame."
+      },
+      {
+        "label": "D",
+        "text": "The switch drops the frame and learns the destination MAC address again from the port that received the frame."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 223,
+    "qid": "Q305",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What is a function of store-and forward switching?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It reduces latency by eliminating error checking within the frame"
+      },
+      {
+        "label": "B",
+        "text": "It produces an effective level of error-free network traffic using CRCs."
+      },
+      {
+        "label": "C",
+        "text": "It buffers frames and forwards regardless of errors within the frames."
+      },
+      {
+        "label": "D",
+        "text": "It forwards a frame by checking only the destination MAC address"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 224,
+    "qid": "Q306",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Switch AccSw1 has just been added to the network along with PC2. All VLANs have been implemented on AccSw2. How must the ports on AccSw2 be configured to establish Layer 2 connectivity between PC1 and PC2?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface GigabitEthernet1/2 switchport mode access switchport access vlan 2 ! interface GigabitEthernet1/24 switchport mode trunk"
+      },
+      {
+        "label": "B",
+        "text": "interface GigabitEthernet1/1 switchport mode access switchport access vlan 11 ! interface GigabitEthernet1/24 switchport mode trunk"
+      },
+      {
+        "label": "C",
+        "text": "interface GigabitEthernet1/24 switchport mode trunk switchport trunk allowed vlan 11, 12 ! interface GigabitEthernet1/1 switchport access vlan 11"
+      },
+      {
+        "label": "D",
+        "text": "interface GigabitEthernet1/2 switchport mode access switchport access vlan 12 ! interface GigabitEthernet1/24 switchport mode trunk switchport trunk allowed vlan 11, 12"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 226,
+    "qid": "Q308",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Switch A is newly configured. All VLANs are present in the VLAN database. The IP phone and PC A on Gi0/1 must be configured for the appropriate VLANs to establish connectivity between the PCs. Which command set fulfills the requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SwitchA(config-if)#switchport mode access SwitchA(config-if)#switchport access vlan 50 SwitchA(config-if)#switchport voice vlan 51"
+      },
+      {
+        "label": "B",
+        "text": "SwitchA(config-if)#switchport mode trunk SwitchA(config-if)#switchport trunk allowed vlan add 50, 51 SwitchA(config-if)#switchport voice vlan dot1p"
+      },
+      {
+        "label": "C",
+        "text": "SwitchA(config-if)#switchport mode trunk SwitchA(config-if)#switchport trunk allowed vlan 50, 51 SwitchA(config-if)#mis qos trust cos"
+      },
+      {
+        "label": "D",
+        "text": "SwitchA(config-if)#switchport mode access SwitchA(config-if)#switchport access vlan 50 SwitchA(config-if)#switchport voice vlan untagged"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 227,
+    "qid": "Q309",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Two new switches are being installed. The remote monitoring team uses the support network to monitor both switches. Which configuration is the next step to establish a Layer 2 connection between the two PCs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SwitchA(config)#interface GigabitEthernet0/1 SwitchA(config-if)#switchport access vlan 500 SwitchB(config)#interface GigabitEthernet0/1 SwitchB(config-if)#switchport access vlan 500"
+      },
+      {
+        "label": "B",
+        "text": "SwitchA(config)#interface GigabitEthernet0/1 SwitchA(config-if)#switchport mode trunk SwitchB(config)#interface GigabitEthernet0/1 SwitchB(config-if)#switchport mode trunk"
+      },
+      {
+        "label": "C",
+        "text": "SwitchA(config)#interface GigabitEthernet0/0 SwitchA(config-if)#switchport trunk allowed vlan 500, 550 SwitchB(config)#interface GigabitEthernet0/0 SwitchB(config- if)#switchport trunk allowed vlan 500, 550"
+      },
+      {
+        "label": "D",
+        "text": "SwitchA(config)#interface GigabitEthernet0/0 SwitchA(config-if)#spanning-tree portfast SwitchA(config-if)#spanning-tree bpduguard enable SwitchB(config)#interface GigabitEthernet0/0 SwitchB(config-if)#spanning-tree portfast SwitchB(config-if)#spanning-tree bpduguard Enable"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 228,
+    "qid": "Q310",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer is configuring a new Cisco switch, NewSW, to replace SW2. The details have been provided: ✑Switches SW1 and SW2 are third- party devices without support for trunk ports. ✑The existing connections must be maintained between PC1, PC2, and PC3. ✑Allow the switch to pass traffic from future VLAN 10. Which configuration must be applied?",
+    "options": [
+      {
+        "label": "A",
+        "text": "NewSW(config)#interface f0/0 NewSW(config-if)#switchport mode trunk NewSW(config-if)#switchport trunk native vlan 10 NewSW(config-if)#switchport trunk native vlan 10"
+      },
+      {
+        "label": "B",
+        "text": "NewSW(config)#interface f0/0 NewSW(config-if)#switchport mode access NewSW(config-if)#switchport trunk allowed vlan 2, 10 NewSW(config-if)#switchport trunk native vlan 2"
+      },
+      {
+        "label": "C",
+        "text": "NewSW(config)#interface f0/0 NewSW(config-if)#switchport mode access NewSW(config-if)#switchport trunk allowed vlan 2, 10 NewSW(config-if)#switchport trunk native vlan 10"
+      },
+      {
+        "label": "D",
+        "text": "NewSW(config)#interface f0/0 NewSW(config-if)#switchport mode trunk NewSW(config-if)#switchport trunk allowed vlan 2, 10 NewSW(config-if)#switchport trunk native vlan 2"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 229,
+    "qid": "Q311",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which WLC interface provides out-of-band management in the Cisco Unified Wireless Network Architecture?",
+    "options": [
+      {
+        "label": "A",
+        "text": "AP-Manager"
+      },
+      {
+        "label": "B",
+        "text": "service port"
+      },
+      {
+        "label": "C",
+        "text": "dynamic"
+      },
+      {
+        "label": "D",
+        "text": "virtual"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 230,
+    "qid": "Q312",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The network engineer is configuring a new WLAN and is told to use a setup password for authentication instead of the RADIUS servers. Which additional set of tasks must the engineer perform to complete the configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Disable PMF Enable PSK Enable 802.1x"
+      },
+      {
+        "label": "B",
+        "text": "Select WPA Policy Enable CCKM Enable PSK"
+      },
+      {
+        "label": "C",
+        "text": "Select WPA Policy Select WPA2 Policy Enable FT PSK"
+      },
+      {
+        "label": "D",
+        "text": "Select WPA2 Policy Disable PMF Enable PSK"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 231,
+    "qid": "Q313",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which mode must be set for Aps to communicate to a Wireless LAN Controller using the Control and Provisioning of Wireless Access Points (CAPWAP) protocol?",
+    "options": [
+      {
+        "label": "A",
+        "text": "route"
+      },
+      {
+        "label": "B",
+        "text": "bridge"
+      },
+      {
+        "label": "C",
+        "text": "lightweight"
+      },
+      {
+        "label": "D",
+        "text": "autonomous"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

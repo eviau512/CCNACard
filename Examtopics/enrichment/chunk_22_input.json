@@ -1,0 +1,702 @@
+[
+  {
+    "id": 687,
+    "qid": "Q902",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. IPv6 is being implemented within the enterprise. The command ipv6 unicast-routing is configured. Interface Gig0/0 on R1 must be configured to provide a dynamic assignment using the assigned IPv6 block. Which command accomplishes this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address 2001:DB8:FFFF:FCF3::64 link-local"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 2001:DB8:FFFF:FCF3::1/64"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001:DB8:FFFF:FCF3::64 eui-64"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address autoconfig 2001:DB8:FFFF:FCF2::/64"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 688,
+    "qid": "Q903",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. With which metric does router R1 learn the route to host 172.16.0.202?",
+    "options": [
+      {
+        "label": "A",
+        "text": "90"
+      },
+      {
+        "label": "B",
+        "text": "110"
+      },
+      {
+        "label": "C",
+        "text": "32445"
+      },
+      {
+        "label": "D",
+        "text": "3184439"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 689,
+    "qid": "Q904",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer must configure the link with these requirements: • Consume as few IP addresses as possible. • Leave at least two additional useable IP addresses for future growth. Which set of configurations must be applied?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.252 R2(config-if)#ip address 10.10.10.2 255.255.255.252"
+      },
+      {
+        "label": "B",
+        "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.240 R2(config-if)#ip address 10.10.10.12 255.255.255.240"
+      },
+      {
+        "label": "C",
+        "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.248 R2(config-if)#ip address 10.10.10.4 255.255.255.248"
+      },
+      {
+        "label": "D",
+        "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.0 R2(config-if)#ip address 10.10.10.5 255.255.255.0"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 690,
+    "qid": "Q906",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A static route must be configured on R86 to forward traffic for the 172.16.34.0/29 network, which resides on R14. Which command must be used to fulfill the request?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 10.73.65.65 255.255.255.248 172.16.34.0"
+      },
+      {
+        "label": "B",
+        "text": "ip route 172.16.34.0 255.255.255.248 10.73.65.65"
+      },
+      {
+        "label": "C",
+        "text": "ip route 172.16.34.0 0.0.0.7 10.73.65.64"
+      },
+      {
+        "label": "D",
+        "text": "ip route 172.16.34.0 255.255.224.0 10.73.65.66"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 691,
+    "qid": "Q907",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer must configure a floating static route on an external EIGRP network. The destination subnet is the /29 on the LAN interface of R86. Which command must be executed on R14?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 10.80.65.0 255.255.248.0 10.73.65.66 1"
+      },
+      {
+        "label": "B",
+        "text": "ip route 10.80.65.0 255.255.255.240 fa0/1 89"
+      },
+      {
+        "label": "C",
+        "text": "ip route 10.80.65.0 255.255.255.248 10.73.65.66 171"
+      },
+      {
+        "label": "D",
+        "text": "ip route 10.73.65.66 0.0.0.224 10.80.65.0 255"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 692,
+    "qid": "Q908",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the next-hop IP address for R2 so that PC2 reaches the application server via EIGRP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.30.1"
+      },
+      {
+        "label": "B",
+        "text": "10.10.10.6"
+      },
+      {
+        "label": "C",
+        "text": "10.10.10.5"
+      },
+      {
+        "label": "D",
+        "text": "192.168.20.1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 693,
+    "qid": "Q910",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An IPv6 address must be obtained automatically on the LAN interface on R1. Which command must be implemented to accomplish the task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address autocontig"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address dhcp"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address fe80::/10"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address 2001:db8:d8d2:1008:4332:45:0570::/64"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 694,
+    "qid": "Q911",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer is updating the configuration on router R1 to connect a new branch office to the company network. R2 has been configured correctly. Which command must the engineer configure so that devices at the new site communicate with the main office?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 172.25.25.1 255.255.255.255 g0/2"
+      },
+      {
+        "label": "B",
+        "text": "ip route 172.25.25.0 255.255.255.0 192.168.2.2"
+      },
+      {
+        "label": "C",
+        "text": "ip route 172.25.25.0 255.255.255.0 192.168.2.1"
+      },
+      {
+        "label": "D",
+        "text": "ip route 172.25.25.1 255.255.255.255 g0/1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 695,
+    "qid": "Q912",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A network engineer must migrate a router loopback interface to the IPv6 address space. If the current IPv4 address of the interface is 10.54.73.1/32, and the engineer configures IPv6 address 0:0:0:0:0:ffff:a36:4901, which prefix length must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "/64"
+      },
+      {
+        "label": "B",
+        "text": "/96"
+      },
+      {
+        "label": "C",
+        "text": "/124"
+      },
+      {
+        "label": "D",
+        "text": "/128"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 696,
+    "qid": "Q913",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A Cisco engineer notices that two OSPF neighbors are connected using a crossover Ethernet cable. The neighbors are taking too long to become fully adjacent. Which command must be issued under the interface configuration on each router to reduce the time required for the adjacency to reach the FULL state?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip ospf dead-interval 40"
+      },
+      {
+        "label": "B",
+        "text": "ip ospf network broadcast"
+      },
+      {
+        "label": "C",
+        "text": "ip ospf priority 0"
+      },
+      {
+        "label": "D",
+        "text": "ip ospf network point-to-point"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 697,
+    "qid": "Q914",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. PC A is communicating with another device at IP address 10.227.225.255. Through which router does router Y route the traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router A"
+      },
+      {
+        "label": "B",
+        "text": "router B"
+      },
+      {
+        "label": "C",
+        "text": "router C"
+      },
+      {
+        "label": "D",
+        "text": "router D"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 698,
+    "qid": "Q915",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A packet sourced from 10.10.10.32 is destined for the Internet. What is the administrative distance for the destination route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "0"
+      },
+      {
+        "label": "B",
+        "text": "1"
+      },
+      {
+        "label": "C",
+        "text": "2"
+      },
+      {
+        "label": "D",
+        "text": "32"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 699,
+    "qid": "Q916",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which format matches the modified EUI-64 IPv6 interface address for the network 2001:db8::/64?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8::5000:00ff:fe04:0000/64"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8::4332:5800:41ff:fe06:/64"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8::5000:0004:5678:0090/64"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8::5200:00ff:fe04:0000/64"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 700,
+    "qid": "Q917",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the benefit of using FHRP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "reduced ARP traffic on the network"
+      },
+      {
+        "label": "B",
+        "text": "balancing traffic across multiple gateways in proportion to their loads"
+      },
+      {
+        "label": "C",
+        "text": "higher degree of availability"
+      },
+      {
+        "label": "D",
+        "text": "reduced management overhead on network routers"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 701,
+    "qid": "Q918",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Why is a first-hop redundancy protocol implemented?",
+    "options": [
+      {
+        "label": "A",
+        "text": "to enable multiple switches to operate as a single unit"
+      },
+      {
+        "label": "B",
+        "text": "to provide load-sharing for a multilink segment"
+      },
+      {
+        "label": "C",
+        "text": "to prevent loops in a network"
+      },
+      {
+        "label": "D",
+        "text": "to protect against default gateway failures"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 702,
+    "qid": "Q919",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer executes the show ip route command on router D What is the next hop to network 192.168.1.0/24 and why?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The next hop is 10.0.2.1 because it uses distance vector routing."
+      },
+      {
+        "label": "B",
+        "text": "The next hop is 10.0.0.1 because it has a higher metric."
+      },
+      {
+        "label": "C",
+        "text": "The next hop is 10.0.2.1 because it is a link-state routing protocol."
+      },
+      {
+        "label": "D",
+        "text": "The next hop is 10.0.0.1 because it has a better administrative distance."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 703,
+    "qid": "Q920",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a similarity between global and unique local IPv6 addresses?",
+    "options": [
+      {
+        "label": "A",
+        "text": "They use the same process for subnetting."
+      },
+      {
+        "label": "B",
+        "text": "They are part of the multicast IPv6 group type."
+      },
+      {
+        "label": "C",
+        "text": "They are routable on the global internet."
+      },
+      {
+        "label": "D",
+        "text": "They are allocated by the same organization."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 704,
+    "qid": "Q921",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "An engineer must configure the IPv6 address 2001:0db8:0000:0000:0700:0003:400F:572B on the serial0/0 interface of the HQ router and wants to compress it for easier configuration. Which command must be issued on the router interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address 2001:db8::700:3:400F:572B"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 2001:db8:0::700:3:4F:572B"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001::db8:0000::700:3:400F:572B"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address 2001:0db8::7:3:4F:572B"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 705,
+    "qid": "Q922",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A packet that is sourced from 172.16.3.254 is destined for the IP address of GigabitEthernet0/0/0. What is the subnet mask of the destination route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.0.0.0"
+      },
+      {
+        "label": "B",
+        "text": "255.255.254.0"
+      },
+      {
+        "label": "C",
+        "text": "255.255.255.0"
+      },
+      {
+        "label": "D",
+        "text": "255.255.255.255"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 706,
+    "qid": "Q923",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The iPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. Which address must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:10A0:ABFF:FECC:1 eui-64"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:1230:ABFF:FECC:1 eui-64"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:4331:89FF:FF23:9 eui-64"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 address 2001:DB8:D8D2:1009:12A0:AB34:FFCC:1 eui-64"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 707,
+    "qid": "Q924",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. According to the output, which parameter set is validated using the routing table of R7?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R7 is missing a gateway of last resort. R7 is receiving routes that were redistributed in EIGRP. R7 will forward traffic destined to 10.90.8.0/24."
+      },
+      {
+        "label": "B",
+        "text": "R7 has a gateway of last resort available. R7 is receiving routes that were redistributed from BGP. R7 will drop traffic destined to 10.90.8.0/24."
+      },
+      {
+        "label": "C",
+        "text": "R7 is missing a gateway of last resort. R7 is receiving routes that were redistributed from BGP. R7 will forward traffic destined to 10.90.8.0/24."
+      },
+      {
+        "label": "D",
+        "text": "R7 has a gateway of last resort available. R7 is receiving routes that were redistributed in EIGRP. R7 will drop traffic destined to 10.90.8.0/24."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 708,
+    "qid": "Q925",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which type of IPv4 address type helps to conserve the globally unique address classes?",
+    "options": [
+      {
+        "label": "A",
+        "text": "loopback"
+      },
+      {
+        "label": "B",
+        "text": "multicast"
+      },
+      {
+        "label": "C",
+        "text": "private"
+      },
+      {
+        "label": "D",
+        "text": "public"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 709,
+    "qid": "Q929",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Routers R1 and R2 are configured with RIP as the dynamic routing protocol. A network engineer must configure R1 with a floating static route to service as a backup route to network 192.168.23. which command must the engineer configure on R1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 192.168.23.0 255.255.255.0 192.168,13.3 100"
+      },
+      {
+        "label": "B",
+        "text": "ip route 192.168.23.0 255.255.255.255 192.168.13.3 121"
+      },
+      {
+        "label": "C",
+        "text": "ip route 192.168.23.0 255.255.255.0 192.168.13.3 121"
+      },
+      {
+        "label": "D",
+        "text": "ip route 192.168.23.0 255.255.255.0 192.168.13.3"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 710,
+    "qid": "Q930",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "When deploying a new network that includes both Cisco and third-party network devices, which redundancy protocol avoids the interruption of network traffic if the default gateway router fails?",
+    "options": [
+      {
+        "label": "A",
+        "text": "VRRP"
+      },
+      {
+        "label": "B",
+        "text": "FHRP"
+      },
+      {
+        "label": "C",
+        "text": "GLBP"
+      },
+      {
+        "label": "D",
+        "text": "HSRP"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 711,
+    "qid": "Q932",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which Cisco proprietary protocol ensures traffic recovers immediately, transparently, and automatically when edge devices or access circuits fail?",
+    "options": [
+      {
+        "label": "A",
+        "text": "FHRP"
+      },
+      {
+        "label": "B",
+        "text": "VRRP"
+      },
+      {
+        "label": "C",
+        "text": "HSRP"
+      },
+      {
+        "label": "D",
+        "text": "SLB"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

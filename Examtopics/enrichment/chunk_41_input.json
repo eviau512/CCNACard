@@ -1,0 +1,827 @@
+[
+  {
+    "id": 1357,
+    "qid": "Q1357",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two features of PortFast? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Convergence is fast after a link failure."
+      },
+      {
+        "label": "B",
+        "text": "STP loops are mitigated for uplinks to other switches."
+      },
+      {
+        "label": "C",
+        "text": "Ports transition directly from the blocking state to the forwarding state."
+      },
+      {
+        "label": "D",
+        "text": "Ports operate normally without receiving BPDUs."
+      },
+      {
+        "label": "E",
+        "text": "Ports that connect to the backbone automatically detect indirect link failures."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1358,
+    "qid": "Q1358",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. A network engineer configures the CCNA WLAN so that clients must reauthenticate hourly and to limit the number ofSimultaneous connections to the WLAN to 10. Which two actions complete this configuration? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable the Wi-Fi Direct Clients Policy option"
+      },
+      {
+        "label": "B",
+        "text": "Enable the Enable Session Timeout option and set the value to 3600."
+      },
+      {
+        "label": "C",
+        "text": "Enable the Client Exclusion option and set the value to 3600."
+      },
+      {
+        "label": "D",
+        "text": "Set the Maximum Allowed Clients value to 10."
+      },
+      {
+        "label": "E",
+        "text": "Set the Maximum Allowed Clients Per AP Radio value to 10."
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1359,
+    "qid": "Q1359",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two port types used by a Cisco WLC for out-of-band management? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "service"
+      },
+      {
+        "label": "B",
+        "text": "console"
+      },
+      {
+        "label": "C",
+        "text": "management"
+      },
+      {
+        "label": "D",
+        "text": "distribution system"
+      },
+      {
+        "label": "E",
+        "text": "redundant"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1360,
+    "qid": "Q1360",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. The New York router must be configured so that traffic to 2000::1 is sent primarily via the Atlanta site, with a secondaryPath via Washington that has an administrative distance of 2. Which two commands must be configured on the New York router? (ChooseTwo.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ipv6 route 2000::1/128 2012::1"
+      },
+      {
+        "label": "B",
+        "text": "Ipv6 route 2000::1/128 2012::1 5"
+      },
+      {
+        "label": "C",
+        "text": "Ipv6 route 2000::1/128 2012::2"
+      },
+      {
+        "label": "D",
+        "text": "Ipv6 route 2000::1/128 2023::2 5"
+      },
+      {
+        "label": "E",
+        "text": "ipv6 route 2000::1/128 2023::3 2"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1361,
+    "qid": "Q1361",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two values does router R1 use to determine the best path to reach destinations in network 1.0.0.0/8? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "lowest cost to reach the next hop"
+      },
+      {
+        "label": "B",
+        "text": "highest administrative distance"
+      },
+      {
+        "label": "C",
+        "text": "lowest metric"
+      },
+      {
+        "label": "D",
+        "text": "highest metric"
+      },
+      {
+        "label": "E",
+        "text": "longest prefix match"
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1362,
+    "qid": "Q1362",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two purposes of HSRP? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "It provides a mechanism for diskless clients to autoconfigure their IP parameters during boot."
+      },
+      {
+        "label": "B",
+        "text": "It improves network availability by providing redundant gateways."
+      },
+      {
+        "label": "C",
+        "text": "It groups two or more routers to operate as one virtual router."
+      },
+      {
+        "label": "D",
+        "text": "It passes configuration information to hosts in a TCP/IP network."
+      },
+      {
+        "label": "E",
+        "text": "It helps hosts on the network to reach remote subnets without a default gateway."
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1363,
+    "qid": "Q1363",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits for using private IPv4 addressing? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "They allow for Internet access from IoT devices."
+      },
+      {
+        "label": "B",
+        "text": "They alleviate the shortage of public IPv4 addresses."
+      },
+      {
+        "label": "C",
+        "text": "They provide a layer of security from internet threats."
+      },
+      {
+        "label": "D",
+        "text": "They supply redundancy in the case of failure."
+      },
+      {
+        "label": "E",
+        "text": "They offer Internet connectivity to endpoints on private networks."
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1364,
+    "qid": "Q1364",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two benefits of private IPv4 addressing? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "propagates routing information to WAN links"
+      },
+      {
+        "label": "B",
+        "text": "provides unlimited address ranges"
+      },
+      {
+        "label": "C",
+        "text": "reuses addresses at multiple sites"
+      },
+      {
+        "label": "D",
+        "text": "conserves globally unique address space"
+      },
+      {
+        "label": "E",
+        "text": "provides external internet network connectivity"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1365,
+    "qid": "Q1365",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two IPv6 addresses are used to provide connectivity between two routers on a shared link? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "FF02::0001:FF00:0000/104"
+      },
+      {
+        "label": "B",
+        "text": "ff06:bb43:cc13:dd16:1bb:ff14:7545:234d"
+      },
+      {
+        "label": "C",
+        "text": "2002::512:1204b:1111::1/64"
+      },
+      {
+        "label": "D",
+        "text": "2001:701:104b:1111::1/64"
+      },
+      {
+        "label": "E",
+        "text": "::ffff:10.14.101.1/96"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1366,
+    "qid": "Q1366",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two values does router R1 use to identify valid routes for the R3 loopback address 1.1.1.3/32? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Lowest cost to reach the next hop"
+      },
+      {
+        "label": "B",
+        "text": "Highest administrative distance"
+      },
+      {
+        "label": "C",
+        "text": "Lowest metric"
+      },
+      {
+        "label": "D",
+        "text": "Highest metric"
+      },
+      {
+        "label": "E",
+        "text": "lowest administrative distance"
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1367,
+    "qid": "Q1367",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two features of the DHCP relay agent? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "assigns DNS locally and then forwards request to DHCP server"
+      },
+      {
+        "label": "B",
+        "text": "minimizes the necessary number of DHCP servers"
+      },
+      {
+        "label": "C",
+        "text": "permits one IP helper command under an individual Layer 3 interface"
+      },
+      {
+        "label": "D",
+        "text": "is configured under the Layer 3 interface of a router on the client subnet"
+      },
+      {
+        "label": "E",
+        "text": "allows only MAC-to-IP reservations to determine the local subnet of a client"
+      }
+    ],
+    "answer": [
+      "B",
+      "D"
+    ]
+  },
+  {
+    "id": 1368,
+    "qid": "Q1368",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two transport layer protocols carry syslog messages? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "IP"
+      },
+      {
+        "label": "B",
+        "text": "RTP"
+      },
+      {
+        "label": "C",
+        "text": "TCP"
+      },
+      {
+        "label": "D",
+        "text": "UDP"
+      },
+      {
+        "label": "E",
+        "text": "ARP"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1369,
+    "qid": "Q1369",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two features introduced in SNMPv2 provide the ability to retrieve large amounts of data in one request and acknowledge a trap using PDUs? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Get"
+      },
+      {
+        "label": "B",
+        "text": "GetNext"
+      },
+      {
+        "label": "C",
+        "text": "Set"
+      },
+      {
+        "label": "D",
+        "text": "GetBulk"
+      },
+      {
+        "label": "E",
+        "text": "Inform"
+      }
+    ],
+    "answer": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": 1370,
+    "qid": "Q1370",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Hostname CPE Service password-encryption Ip domain name ccna.cisco.com Ip name-server 198.51.100.210 Crypto key generate rsa modulus 1024 Username admin privilege 15 secret s0m3s3cr3t Line vty 0 4 Transport input ssh Login local Refer to the exhibit. An engineer executed the script and added commands that were not necessary for SSH and now must remove the Commands. Which two commands must be executed to correct the configuration? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "no ip name-serveer 198.51.100.210"
+      },
+      {
+        "label": "B",
+        "text": "no login local"
+      },
+      {
+        "label": "C",
+        "text": "no service password-encryption"
+      },
+      {
+        "label": "D",
+        "text": "no ip domain mame ccna.cisco.com"
+      },
+      {
+        "label": "E",
+        "text": "no hostname CPE"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1371,
+    "qid": "Q1371",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two actions are taken as the result of traffic policing? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "bursting"
+      },
+      {
+        "label": "B",
+        "text": "dropping"
+      },
+      {
+        "label": "C",
+        "text": "remarking"
+      },
+      {
+        "label": "D",
+        "text": "fragmentation"
+      },
+      {
+        "label": "E",
+        "text": "buffering"
+      }
+    ],
+    "answer": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": 1372,
+    "qid": "Q1372",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two server types support domain name to IP address resolution? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "authoritative"
+      },
+      {
+        "label": "B",
+        "text": "web"
+      },
+      {
+        "label": "C",
+        "text": "file transfer"
+      },
+      {
+        "label": "D",
+        "text": "resolver"
+      },
+      {
+        "label": "E",
+        "text": "ESX host"
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1373,
+    "qid": "Q1373",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. A network engineer started to configure port security on a new switch. These requirements must be met:• MAC addresses must be learned dynamically.• Log messages must be generated without disabling the interface when unwanted traffic is seen.Which two commands must be configured to complete this task? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW(config-if)#switchport port-security violation restrict"
+      },
+      {
+        "label": "B",
+        "text": "SW(config-if)#switchport port-security mac-address 0010.7B84.45E6"
+      },
+      {
+        "label": "C",
+        "text": "SW(config-if)#switchport port-security maximum 2"
+      },
+      {
+        "label": "D",
+        "text": "SW(config-if)#switchport port-security violation shutdown"
+      },
+      {
+        "label": "E",
+        "text": "SW(config-if)#switchport port-security mac-address sticky"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1374,
+    "qid": "Q1374",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two protocols within the IPsec suite? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "3DES"
+      },
+      {
+        "label": "B",
+        "text": "AES"
+      },
+      {
+        "label": "C",
+        "text": "ESP"
+      },
+      {
+        "label": "D",
+        "text": "TLS"
+      },
+      {
+        "label": "E",
+        "text": "AH"
+      }
+    ],
+    "answer": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": 1375,
+    "qid": "Q1375",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "What are two differences between WPA2 and WPA3 wireless security? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "WPA2 uses 192-bit key encryption, and WPA3 requires 256-bit key encryption."
+      },
+      {
+        "label": "B",
+        "text": "WPA3 uses AES for stronger protection than WPA2, which uses SAE."
+      },
+      {
+        "label": "C",
+        "text": "WPA2 uses 128-bit key encryption, and WPA3 supports 128-bit and 192-bit key encryption."
+      },
+      {
+        "label": "D",
+        "text": "WPA3 uses SAE for stronger protection than WPA2, which uses AES."
+      },
+      {
+        "label": "E",
+        "text": "WPA3 uses AES for stronger protection than WPA2, which uses TKIP."
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1376,
+    "qid": "Q1376",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two VPN technologies are recommended by Cisco for multiple branch offices and large-scale deployments? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "GETVPN"
+      },
+      {
+        "label": "B",
+        "text": "DMVPN"
+      },
+      {
+        "label": "C",
+        "text": "site-to-site VPN"
+      },
+      {
+        "label": "D",
+        "text": "clientless VPN"
+      },
+      {
+        "label": "E",
+        "text": "IPsec remote access"
+      }
+    ],
+    "answer": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 1377,
+    "qid": "Q1377",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two northbound APIs are found in a software-defined network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "REST"
+      },
+      {
+        "label": "B",
+        "text": "OpenFlow"
+      },
+      {
+        "label": "C",
+        "text": "SOAP"
+      },
+      {
+        "label": "D",
+        "text": "NETCONF"
+      },
+      {
+        "label": "E",
+        "text": "OpFlex"
+      }
+    ],
+    "answer": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": 1378,
+    "qid": "Q1378",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two HTTP methods are suitable for actions performed by REST-based APIs? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "REMOVE"
+      },
+      {
+        "label": "B",
+        "text": "REDIRECT"
+      },
+      {
+        "label": "C",
+        "text": "POST"
+      },
+      {
+        "label": "D",
+        "text": "GET"
+      },
+      {
+        "label": "E",
+        "text": "POP"
+      }
+    ],
+    "answer": [
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": 1379,
+    "qid": "Q1379",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Under the CRUD model, which two HTTP methods support the UPDATE operation? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "PATCH"
+      },
+      {
+        "label": "B",
+        "text": "DELETE"
+      },
+      {
+        "label": "C",
+        "text": "GET"
+      },
+      {
+        "label": "D",
+        "text": "POST"
+      },
+      {
+        "label": "E",
+        "text": "PUT"
+      }
+    ],
+    "answer": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": 1380,
+    "qid": "Q1380",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two protocols are supported on service-port interfaces? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "Telnet"
+      },
+      {
+        "label": "B",
+        "text": "SCP"
+      },
+      {
+        "label": "C",
+        "text": "TACACS+"
+      },
+      {
+        "label": "D",
+        "text": "SSH"
+      },
+      {
+        "label": "E",
+        "text": "RADIUS"
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": 1381,
+    "qid": "Q1381",
+    "batch": "batch7",
+    "type": "Multiple Choice",
+    "prompt": "Which two host addresses are reserved for private use within an enterprise network? (Choose two.)Q",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.172.76.200"
+      },
+      {
+        "label": "B",
+        "text": "12.17.1.20"
+      },
+      {
+        "label": "C",
+        "text": "172.15.2.250"
+      },
+      {
+        "label": "D",
+        "text": "172.31.255.100"
+      },
+      {
+        "label": "E",
+        "text": "192.169.32.10"
+      }
+    ],
+    "answer": [
+      "A",
+      "D"
+    ]
+  }
+]

@@ -1,0 +1,714 @@
+[
+  {
+    "id": 258,
+    "qid": "Q343",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router R1 Fa0/0 cannot ping router R3 Fa0/1. Which action must be taken in router R1 to help resolve the configuration issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "set the default gateway as 20.20.20.2"
+      },
+      {
+        "label": "B",
+        "text": "configure a static route with Fa0/1 as the egress interface to reach the 20.20.2.0/24 network"
+      },
+      {
+        "label": "C",
+        "text": "configure a static route with 10.10.10.2 as the next hop to reach the 20.20.20.0/24 network"
+      },
+      {
+        "label": "D",
+        "text": "set the default network as 20.20.20.0/24"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 259,
+    "qid": "Q344",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "By default, how does EIGRP determine the metric of a route for the routing table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It uses the bandwidth and delay values of the path to calculate the route metric."
+      },
+      {
+        "label": "B",
+        "text": "It uses a default metric of 10 for all routes that are learned by the router."
+      },
+      {
+        "label": "C",
+        "text": "It counts the number of hops between the receiving and destination routers and uses that value as the metric."
+      },
+      {
+        "label": "D",
+        "text": "It uses a reference bandwidth and the actual bandwidth of the connected link to calculate the route metric."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 260,
+    "qid": "Q345",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Router R1 must send all traffic without a matching routing-table entry to 192.168.1.1. Which configuration accomplishes this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1#config t R1(config)#ip routing R1(config)#ip route default-route 192.168.1.1"
+      },
+      {
+        "label": "B",
+        "text": "R1#config t R1(config)#ip routing R1(config)#ip route 192.168.1.1 0.0.0.0 0.0.0.0"
+      },
+      {
+        "label": "C",
+        "text": "R1#config t R1(config)#ip routing R1(config)#ip route 0.0.0.0 0.0.0.0 192.168.1.1"
+      },
+      {
+        "label": "D",
+        "text": "R1#config t R1(config)#ip routing R1(config)#ip default-gateway 192.168.1.1"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 261,
+    "qid": "Q346",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A packet is destined for 10.10.1.22. Which static route does the router choose to forward the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 10.10.1.0 255.255.255.240 10.10.255.1"
+      },
+      {
+        "label": "B",
+        "text": "ip route 10.10.1.20 255.255.255.252 10.10.255.1"
+      },
+      {
+        "label": "C",
+        "text": "ip route 10.10.1.16 255.255.255.252 10.10.255.1"
+      },
+      {
+        "label": "D",
+        "text": "ip route 10.10.1.20 255.255.255.254 10.10.255.1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 262,
+    "qid": "Q347",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How does the router manage traffic to 192.168.12.16?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It chooses the EIGRP route because it has the lowest administrative distance."
+      },
+      {
+        "label": "B",
+        "text": "It load-balances traffic between all three routes."
+      },
+      {
+        "label": "C",
+        "text": "It chooses the OSPF route because it has the longest prefix inclusive of the destination address."
+      },
+      {
+        "label": "D",
+        "text": "It selects the RIP route because it has the longest prefix inclusive of the destination address."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 263,
+    "qid": "Q349",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How does router R1 handle traffic to 192.168.10.16?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It selects the IS-IS route because it has the shortest prefix inclusive of the destination address"
+      },
+      {
+        "label": "B",
+        "text": "It selects the RIP route because it has the longest prefix inclusive of the destination address"
+      },
+      {
+        "label": "C",
+        "text": "It selects the OSPF route because it has the lowest cost"
+      },
+      {
+        "label": "D",
+        "text": "It selects the EIGRP route because it has the lowest administrative distance"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 264,
+    "qid": "Q351",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. To which device does Router1 send packets that are destined to host 10.10.13.165?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Router2"
+      },
+      {
+        "label": "B",
+        "text": "Router3"
+      },
+      {
+        "label": "C",
+        "text": "Router4"
+      },
+      {
+        "label": "D",
+        "text": "Router5"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 265,
+    "qid": "Q352",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "R1 has learned route 10.10.10.0/24 via numerous routing protocols. Which route is installed?",
+    "options": [
+      {
+        "label": "A",
+        "text": "route with the next hop that has the highest IP"
+      },
+      {
+        "label": "B",
+        "text": "route with the lowest cost"
+      },
+      {
+        "label": "C",
+        "text": "route with the lowest administrative distance"
+      },
+      {
+        "label": "D",
+        "text": "route with the shortest prefix length"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 266,
+    "qid": "Q354",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What commands are needed to add a sub-interface to Ethernet0/0 on R1 to allow for VLAN 20, with IP address 10.20.20.1/24?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#interface ethernet0/0 R1(config-if)#encapsulation dot1q 20 R1(config-if)#ip address 10.20.20.1 255.255.255.0"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#interface ethernet0/0.20 R1(config-if)#encapsulation dot1q 20 R1(config-if)#ip address 10.20.20.1 255.255.255.0"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#interface ethernet0/0.20 R1(config-if)#ip address 10.20.20.1 255.255.255.0"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#interface ethernet0/0 R1(config-if)#ip address 10.20.20.1 255.255.255.0"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 268,
+    "qid": "Q357",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After the configuration is applied, the two routers fail to establish an OSPF neighbor relationship. What is the reason for the problem?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The OSPF process IDs are mismatched"
+      },
+      {
+        "label": "B",
+        "text": "The network statement on Router1 is misconfigured"
+      },
+      {
+        "label": "C",
+        "text": "Router2 is using the default hello timer"
+      },
+      {
+        "label": "D",
+        "text": "The OSPF router IDs are mismatched"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 269,
+    "qid": "Q358",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which route type is configured to reach the Internet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "floating static route"
+      },
+      {
+        "label": "B",
+        "text": "host route"
+      },
+      {
+        "label": "C",
+        "text": "network route"
+      },
+      {
+        "label": "D",
+        "text": "default route"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 270,
+    "qid": "Q359",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which path is used by the router for Internet traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "209.165.200.0/27"
+      },
+      {
+        "label": "B",
+        "text": "0.0.0.0/0"
+      },
+      {
+        "label": "C",
+        "text": "10.10.13.0/24"
+      },
+      {
+        "label": "D",
+        "text": "10.10.10.0/28"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 271,
+    "qid": "Q360",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "When OSPF learns multiple paths to a network, how does it select a route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "For each existing interface, it adds the metric from the source router to the destination to calculate the route with the lowest bandwidth."
+      },
+      {
+        "label": "B",
+        "text": "It counts the number of hops between the source router and the destination to determine the route with the lowest metric."
+      },
+      {
+        "label": "C",
+        "text": "It divides a reference bandwidth of 100 Mbps by the actual bandwidth of the exiting interface to calculate the route with the lowest cost."
+      },
+      {
+        "label": "D",
+        "text": "It multiplies the active K values by 256 to calculate the route with the lowest metric."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 272,
+    "qid": "Q361",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "When a floating static route is configured, which action ensures that the backup route is used when the primary route fails?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The administrative distance must be higher on the primary route so that the backup route becomes secondary."
+      },
+      {
+        "label": "B",
+        "text": "The default-information originate command must be configured for the route to be installed into the routing table."
+      },
+      {
+        "label": "C",
+        "text": "The floating static route must have a lower administrative distance than the primary route so it is used as a backup."
+      },
+      {
+        "label": "D",
+        "text": "The floating static route must have a higher administrative distance than the primary route so it is used as a backup"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 280,
+    "qid": "Q372",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which action establishes the OSPF neighbor relationship without forming an adjacency?",
+    "options": [
+      {
+        "label": "A",
+        "text": "modify hello interval"
+      },
+      {
+        "label": "B",
+        "text": "modify process ID"
+      },
+      {
+        "label": "C",
+        "text": "modify priority"
+      },
+      {
+        "label": "D",
+        "text": "modify network type"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 284,
+    "qid": "Q377",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "You have configured a router with an OSPF router ID, but its IP address still reflects the physical interface. Which action can you take to correct the problem in the least disruptive way?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Reload the OSPF process"
+      },
+      {
+        "label": "B",
+        "text": "Specify a loopback address"
+      },
+      {
+        "label": "C",
+        "text": "Reboot the router"
+      },
+      {
+        "label": "D",
+        "text": "Save the router configuration"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 285,
+    "qid": "Q378",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which command should you enter to view the error log in an EIGRP for IPv6 environment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "show ipv6 eigrp neighbors"
+      },
+      {
+        "label": "B",
+        "text": "show ipv6 eigrp topology"
+      },
+      {
+        "label": "C",
+        "text": "show ipv6 eigrp traffic"
+      },
+      {
+        "label": "D",
+        "text": "show ipv6 eigrp events"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 286,
+    "qid": "Q379",
+    "batch": "batch2",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. Which two statements about the network environment of router R1 must be true? (Choose two.) Refer to the exhibit. Router R1 must be configured to reach the 10.0.3.0/24 network from the 10.0.1.0/24 segment. Which command must be used To configure the route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "route add 10.0.3.0 0.255.255.255 10.0.4.2"
+      },
+      {
+        "label": "B",
+        "text": "ip route 10.0.3.0 0.255.255.255 10.0.4.2"
+      },
+      {
+        "label": "C",
+        "text": "route add 10.0.3.0 mask 255.255.255.0 10.0.4.3"
+      },
+      {
+        "label": "D",
+        "text": "ip route 10.0.3.0 255.255.255.0 10.0.4.3"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 287,
+    "qid": "Q386",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. If R1 receives a packet destined to 172.16.1.1, to which IP address does it send the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.14.4"
+      },
+      {
+        "label": "B",
+        "text": "192.168.12.2"
+      },
+      {
+        "label": "C",
+        "text": "192.168.13.3"
+      },
+      {
+        "label": "D",
+        "text": "192.168.15.5"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 288,
+    "qid": "Q387",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. On R1 which routing protocol is in use on the route to 192.168.10.1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "RIP"
+      },
+      {
+        "label": "B",
+        "text": "OSPF"
+      },
+      {
+        "label": "C",
+        "text": "IGRP"
+      },
+      {
+        "label": "D",
+        "text": "EIGRP"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 289,
+    "qid": "Q388",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which Command do you enter so that R1 advertises the loopback0 interface to the BGP Peers?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Network 172.16.1.32 mask 255.255.255.224"
+      },
+      {
+        "label": "B",
+        "text": "Network 172.16.1.0 0.0.0.255"
+      },
+      {
+        "label": "C",
+        "text": "Network 172.16.1.32 255.255.255.224"
+      },
+      {
+        "label": "D",
+        "text": "Network 172.16.1.33 mask 255.255.255.224"
+      },
+      {
+        "label": "E",
+        "text": "Network 172.16.1.32 mask 0.0.0.31"
+      },
+      {
+        "label": "F",
+        "text": "Network 172.16.1.32 0.0.0.31"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 290,
+    "qid": "Q389",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to exhibit. What Administrative distance has route to 192.168.10.1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "1"
+      },
+      {
+        "label": "B",
+        "text": "90"
+      },
+      {
+        "label": "C",
+        "text": "110"
+      },
+      {
+        "label": "D",
+        "text": "120"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 293,
+    "qid": "Q394",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How will the router handle a packet destined for 192.0.2.156?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The router will forward the packet via either Serial0 or Serial1."
+      },
+      {
+        "label": "B",
+        "text": "The router will return the packet to its source."
+      },
+      {
+        "label": "C",
+        "text": "The router will forward the packet via Serial2."
+      },
+      {
+        "label": "D",
+        "text": "The router will drop the packet."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 294,
+    "qid": "Q396",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After you apply the given configurations to R1 and R2 you notice that OSPFv3 fails to start.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The area numbers on R1 and R2 are mismatched"
+      },
+      {
+        "label": "B",
+        "text": "The IPv6 network addresses on R1 and R2 are mismatched"
+      },
+      {
+        "label": "C",
+        "text": "The autonomous system numbers on R1 and R2 are mismatched"
+      },
+      {
+        "label": "D",
+        "text": "The router ids on R1 and R2 are mismatched"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 301,
+    "qid": "Q405",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "If all OSPF routers in a single area are configured with the same priority value, what value does a router use for the OSPF router ID in the absence of a loopback interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "the IP address of the first Fast Ethernet interface"
+      },
+      {
+        "label": "B",
+        "text": "the IP address of the console management interface"
+      },
+      {
+        "label": "C",
+        "text": "the highest IP address among its active interfaces"
+      },
+      {
+        "label": "D",
+        "text": "the lowest IP address among its active interfaces"
+      },
+      {
+        "label": "E",
+        "text": "the priority value until a loopback interface is configured"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

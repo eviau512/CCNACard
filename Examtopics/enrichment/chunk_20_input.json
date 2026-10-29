@@ -1,0 +1,702 @@
+[
+  {
+    "id": 637,
+    "qid": "Q841",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A network administrator plans an update to the WI-FI networks in multiple branch offices. Each location is configured with an SSID called “office”. The administrator wants every user who connects to the SSID at any location to have the same access level. What must be set the same on each network to meet the requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "radio policy"
+      },
+      {
+        "label": "B",
+        "text": "Profile name"
+      },
+      {
+        "label": "C",
+        "text": "NAS-ID configuration"
+      },
+      {
+        "label": "D",
+        "text": "security policies"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 638,
+    "qid": "Q842",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The P2P Blocking Action option is disabled on the WLC. The security team has a new requirement for each client to retain their assigned IP addressing as the clients move between locations in the campus network. Which action completes this configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable the Static IP Tunneling option."
+      },
+      {
+        "label": "B",
+        "text": "Disable the Coverage Hole Detection option."
+      },
+      {
+        "label": "C",
+        "text": "Set the P2P Blocking Action option to Forward-UpStream."
+      },
+      {
+        "label": "D",
+        "text": "Check the DHCP Addr. Assignment check box."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 639,
+    "qid": "Q843",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A multivendor network exists and the company is implementing VoIP over the network for the first time. Which configuration is needed to implement the neighbor discovery protocol on the interface and allow it to remain off for the remaining interfaces?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1(config)#lldp run - SW1(config)#interface gigabitethernet1/0/1 SW1(config-if)#lldp enable"
+      },
+      {
+        "label": "B",
+        "text": "SW1(config)#no cdp run - SW1(config)#interface gigabitethernet1/0/1 SW1(config-if)#lldp transmit - SW1(config-if)#lldp receive"
+      },
+      {
+        "label": "C",
+        "text": "SW1(contig)#lldp enable - SW1(config)#interface gigabitethernet1/0/1 SW1(config-if)#lldp run"
+      },
+      {
+        "label": "D",
+        "text": "SW1(config)#no cdp enable - SW1(config)#interface gigabitethernet1/0/1 SW1(config-if)#cdp run"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 640,
+    "qid": "Q844",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Routers R1, R2, and R3 use a protocol to identify the neighbors’ IP addresses, hardware platforms, and software versions. A network engineer must configure R2 to avoid sharing any neighbor information with R3, and maintain its relationship with R1. What action meets this requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure the no lldp receive command on g0/1."
+      },
+      {
+        "label": "B",
+        "text": "configure the no cdp run command globally."
+      },
+      {
+        "label": "C",
+        "text": "configure the no cdp enable command on g0/2."
+      },
+      {
+        "label": "D",
+        "text": "configure the no lldp run command globally."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 641,
+    "qid": "Q846",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network administrator configures an interface on a new switch so that it connects to interface Gi1/0/1 on switch Cat9300-1. Which configuration must be applied to the new interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport mode trunk Switchport trunk native vlan 321 Switchport trunk allowed vlan 100,200,300"
+      },
+      {
+        "label": "B",
+        "text": "switchport mode dynamic desirable Switchport trunk native vlan 321 Switchport trunk allowed vian 100,200,300"
+      },
+      {
+        "label": "C",
+        "text": "switchport trunk encapsulation dot1q Switchport trunk native vlan 321 Switchport trunk allowed vlan 100-300"
+      },
+      {
+        "label": "D",
+        "text": "switchport nonegotiate Switchport access vlan 321 Switchport trunk allowed vlan except 2-1001"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 642,
+    "qid": "Q847",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which command enables HTTP access to the Cisco WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "config network telnet enable"
+      },
+      {
+        "label": "B",
+        "text": "config network secureweb enable"
+      },
+      {
+        "label": "C",
+        "text": "config certificate generate webadmin"
+      },
+      {
+        "label": "D",
+        "text": "config network webmode enable"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 643,
+    "qid": "Q848",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which port state processes BPDUs, but does not forward packets or update the address database in Rapid PVST+?",
+    "options": [
+      {
+        "label": "A",
+        "text": "blocking"
+      },
+      {
+        "label": "B",
+        "text": "learning"
+      },
+      {
+        "label": "C",
+        "text": "listening"
+      },
+      {
+        "label": "D",
+        "text": "disabled"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 644,
+    "qid": "Q849",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A switch is forwarding a frame out of all interfaces except the interface that received the frame. What is the technical term for this process?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ARP"
+      },
+      {
+        "label": "B",
+        "text": "CDP"
+      },
+      {
+        "label": "C",
+        "text": "flooding"
+      },
+      {
+        "label": "D",
+        "text": "multicast"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 645,
+    "qid": "Q850",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Rapid PVST+ mode is on the same VLAN on each switch. Which switch becomes the root bridge and why?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW4, because its priority is highest and its MAC address is lower"
+      },
+      {
+        "label": "B",
+        "text": "SW1, because its priority is the lowest and its MAC address is higher"
+      },
+      {
+        "label": "C",
+        "text": "SW2, because its MAC address is the highest"
+      },
+      {
+        "label": "D",
+        "text": "SW3, because its priority is the highest"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 646,
+    "qid": "Q851",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which EtherChannel mode must be configured when using LAG on a WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "on"
+      },
+      {
+        "label": "B",
+        "text": "passive"
+      },
+      {
+        "label": "C",
+        "text": "active"
+      },
+      {
+        "label": "D",
+        "text": "auto"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 647,
+    "qid": "Q853",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which switch concept is used to create separate broadcast domains?",
+    "options": [
+      {
+        "label": "A",
+        "text": "STP"
+      },
+      {
+        "label": "B",
+        "text": "VTP"
+      },
+      {
+        "label": "C",
+        "text": "VLAN"
+      },
+      {
+        "label": "D",
+        "text": "CSMA/CD"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 648,
+    "qid": "Q854",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "How must a switch interface be configured when an AP is in FlexConnect mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "access port"
+      },
+      {
+        "label": "B",
+        "text": "EtherChannel"
+      },
+      {
+        "label": "C",
+        "text": "PoE port"
+      },
+      {
+        "label": "D",
+        "text": "trunk port"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 649,
+    "qid": "Q856",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is the root port in STP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is the port with the highest priority toward the root bridge."
+      },
+      {
+        "label": "B",
+        "text": "It is the port on the root switch that leads to the designated port on another switch."
+      },
+      {
+        "label": "C",
+        "text": "It is the port that is elected only when the root bridge has precisely one port on a single LAN segment."
+      },
+      {
+        "label": "D",
+        "text": "It is the port on a switch with the lowest cost to reach the root bridge."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 650,
+    "qid": "Q857",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "When a switch receives a frame from an unknown source MAC address, which action does the switch take with the frame?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It sends the frame to ports within the CAM table identified with an unknown source MAC address."
+      },
+      {
+        "label": "B",
+        "text": "It floods the frame out all interfaces, including the interface it was received on."
+      },
+      {
+        "label": "C",
+        "text": "It associates the source MAC address with the LAN port on which it was received and saves it to the MAC address table."
+      },
+      {
+        "label": "D",
+        "text": "It attempts to send the frame back to the source to ensure that the source MAC address is still available for transmissions."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 651,
+    "qid": "Q858",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "When the LAG configuration is updated on a Cisco WLC, which additional task must be performed when changes are complete?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Reboot the WLC."
+      },
+      {
+        "label": "B",
+        "text": "Flush all MAC addresses from the WLC."
+      },
+      {
+        "label": "C",
+        "text": "Re-enable the WLC interfaces."
+      },
+      {
+        "label": "D",
+        "text": "Re-associate the WLC with the access point."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 652,
+    "qid": "Q859",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer ts building a new Layer 2 LACP EtherChannel between SW1 and SW2, and they executed the given show commands to verify the work. Which additional task must be performed so that the switches successfully bundle the second member in the LACP port-channel?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure the switchport trunk allowed vlan 300 command on SW1 port-channel 1."
+      },
+      {
+        "label": "B",
+        "text": "configure the switchport trunk allowed vlan add 300 command on interface Fa0/2 on SW2."
+      },
+      {
+        "label": "C",
+        "text": "configure the switchport trunk allowed vlan add 300 command on SW1 port-channel 1."
+      },
+      {
+        "label": "D",
+        "text": "configure the switchport trunk allowed vlan 300 command on interface Fa0/2 on SW1."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 653,
+    "qid": "Q860",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. VLAN 23 is being implemented between SW1 and SW2. The command show interface ethernet0/0 switchport has been issued on SW1. Ethernet0/0 on SW1 is the uplink to SW2. Which command when entered on the uplink interface allows PC 1 and PC 2 to communicate without impact to the communication between PC 11 and PC 12?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport trunk allowed vlan 2-1001"
+      },
+      {
+        "label": "B",
+        "text": "switchport trunk allowed vlan 23"
+      },
+      {
+        "label": "C",
+        "text": "switchport trunk allowed vian add 23"
+      },
+      {
+        "label": "D",
+        "text": "switchport trunk allowed vian 22-23"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 654,
+    "qid": "Q861",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A network engineer starts to implement a new wireless LAN by configuring the authentication server and creating the dynamic interface. What must be performed next to complete the basic configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Create the new WLAN and bind the dynamic interface to it."
+      },
+      {
+        "label": "B",
+        "text": "configure high availability and redundancy for the access points."
+      },
+      {
+        "label": "C",
+        "text": "Enable Telnet and RADIUS access on the managoment interface."
+      },
+      {
+        "label": "D",
+        "text": "Install the management interface and add the management IP."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 655,
+    "qid": "Q862",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An architect is managing a wireless network with APs from several branch offices connecting to the WLC in the data center. There is a new requirement for a single WLAN to process the client data traffic without sending it to the WLC. Which action must be taken to Complete the request?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable local HTTP profiling."
+      },
+      {
+        "label": "B",
+        "text": "Enable FlexConnect Local Switching."
+      },
+      {
+        "label": "C",
+        "text": "Enable local DHCP profiling."
+      },
+      {
+        "label": "D",
+        "text": "Enable Disassociation Imminent."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 656,
+    "qid": "Q863",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What must be considered for a locally switched FlexConnect AP if the VLANs that are used by the AP and client access are different?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The APs must be connected to the switch with multiple links in LAG mode."
+      },
+      {
+        "label": "B",
+        "text": "The native VLAN must match the management VLAN of the AP."
+      },
+      {
+        "label": "C",
+        "text": "The switch port mode must be set to trunk."
+      },
+      {
+        "label": "D",
+        "text": "IEEE 802.1Q trunking must be disabled on the switch port."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 657,
+    "qid": "Q864",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Which command configures the Cisco WLC to prevent a serial session with the WLC CLI from being automatically logged out?",
+    "options": [
+      {
+        "label": "A",
+        "text": "config sessions maxsessions 0"
+      },
+      {
+        "label": "B",
+        "text": "config serial timeout 9600"
+      },
+      {
+        "label": "C",
+        "text": "config serial timeout 0"
+      },
+      {
+        "label": "D",
+        "text": "config sessions timeout 0"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 658,
+    "qid": "Q865",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "A Cisco engineer at a new branch office is configuring a wireless network with access points that connect to a controller that is based at corporate headquarters. Wireless client traffic must terminate at the branch office and access-point survivability is required in the event of a WAN outage. Which access point mode must be selected?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Lightweight with local switching disabled"
+      },
+      {
+        "label": "B",
+        "text": "FlexConnect with local switching enabled"
+      },
+      {
+        "label": "C",
+        "text": "officeExtend with high availability disabled"
+      },
+      {
+        "label": "D",
+        "text": "Local with AP fallback enabled"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 659,
+    "qid": "Q866",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is an advantage of using auto mode versus static mode for power allocation when an access point is connected to a PoE switch port?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Power policing is enabled at the same time."
+      },
+      {
+        "label": "B",
+        "text": "The default level is used for the access point."
+      },
+      {
+        "label": "C",
+        "text": "All four pairs of the cable are used."
+      },
+      {
+        "label": "D",
+        "text": "It detects the device is a powered device."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 660,
+    "qid": "Q867",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Wireless LAN access must be set up to force all clients from the NA WLAN to authenticate against the local database. The WLAN is configured for local EAP authentication. The time that users access the network must not be limited. Which action completes this configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Check the Guest User Role check box."
+      },
+      {
+        "label": "B",
+        "text": "Uncheck the Guest User check box."
+      },
+      {
+        "label": "C",
+        "text": "Set the Lifetime (seconds) value to 0."
+      },
+      {
+        "label": "D",
+        "text": "Clear the Lifetime (seconds) value."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 661,
+    "qid": "Q869",
+    "batch": "batch4",
+    "type": "Single Choice",
+    "prompt": "What is a specification for SSIDs?",
+    "options": [
+      {
+        "label": "A",
+        "text": "They must include one number and one letter."
+      },
+      {
+        "label": "B",
+        "text": "They are a Cisco proprietary security feature."
+      },
+      {
+        "label": "C",
+        "text": "They are case sensitive."
+      },
+      {
+        "label": "D",
+        "text": "They Define the VLAN on a switch."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

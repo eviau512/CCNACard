@@ -1,0 +1,702 @@
+[
+  {
+    "id": 838,
+    "qid": "Q1124",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A newly configured PC fails to connect to the internet by using TCP port 80 to www.cisco.com. Which setting must be Modified for the connection to work?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Subnet Mask"
+      },
+      {
+        "label": "B",
+        "text": "DNS Servers"
+      },
+      {
+        "label": "C",
+        "text": "Default Gateway"
+      },
+      {
+        "label": "D",
+        "text": "DHCP Servers"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 839,
+    "qid": "Q1126",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does frame switching function on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "rewrites the source and destination MAC address"
+      },
+      {
+        "label": "B",
+        "text": "forwards frames to a neighbor port using CDP"
+      },
+      {
+        "label": "C",
+        "text": "forwards known destinations to the destination port"
+      },
+      {
+        "label": "D",
+        "text": "is disabled by default on all interfaces and VLANs"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 840,
+    "qid": "Q1128",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "uses policies to prevent unauthorized users"
+      },
+      {
+        "label": "B",
+        "text": "identifies an access point on a WLAN"
+      },
+      {
+        "label": "C",
+        "text": "prompts a user for a login ID"
+      },
+      {
+        "label": "D",
+        "text": "associates a name to a WLAN"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 841,
+    "qid": "Q1129",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"port\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "value"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "key"
+      },
+      {
+        "label": "D",
+        "text": "object"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 842,
+    "qid": "Q1131",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "collisions"
+      },
+      {
+        "label": "B",
+        "text": "broadcast storm"
+      },
+      {
+        "label": "C",
+        "text": "duplex mismatch"
+      },
+      {
+        "label": "D",
+        "text": "queueing"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 843,
+    "qid": "Q1133",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer is configuring a new router on the network and applied this configuration. Which additional configuration allows the PC to obtain its IP address from a DHCP server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Configure the ip helper-address 172.16.2.2 command under interface Gi0/0."
+      },
+      {
+        "label": "B",
+        "text": "Configure the ip dhcp relay information command under interface Gi0/1"
+      },
+      {
+        "label": "C",
+        "text": "Configure the ip address dhcp command under interface Gi0/0"
+      },
+      {
+        "label": "D",
+        "text": "Configure the ip dhcp smart-relay command globally on the router."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 844,
+    "qid": "Q1136",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW4 - Bridge Priority - 8192 - Mac-address 05:4a:f7:06:33:22"
+      },
+      {
+        "label": "B",
+        "text": "SW2 - Bridge Priority - 8192 - Mac-address 05:52:bd:0c:be:69"
+      },
+      {
+        "label": "C",
+        "text": "SW3 - Bridge Priority - 61440 - Mac-address 06:15:2e:7f:20:58"
+      },
+      {
+        "label": "D",
+        "text": "SW4 - Bridge Priority - 61440 - Mac-address 0a:e5:03:a6:6e:37"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 845,
+    "qid": "Q1138",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of encryption in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "provides increased protection against spyware"
+      },
+      {
+        "label": "B",
+        "text": "uses policies to prevent unauthorized users"
+      },
+      {
+        "label": "C",
+        "text": "converts electrical current to radio waves"
+      },
+      {
+        "label": "D",
+        "text": "prevents the interception of data as it transits a network"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 846,
+    "qid": "Q1139",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "G0/9"
+      },
+      {
+        "label": "B",
+        "text": "G0/12"
+      },
+      {
+        "label": "C",
+        "text": "G0/19"
+      },
+      {
+        "label": "D",
+        "text": "G0/1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 847,
+    "qid": "Q1140",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which IPsec encryption mode is appropriate when the destination of a packet differs from the security termination point?",
+    "options": [
+      {
+        "label": "A",
+        "text": "transport"
+      },
+      {
+        "label": "B",
+        "text": "main"
+      },
+      {
+        "label": "C",
+        "text": "aggressive"
+      },
+      {
+        "label": "D",
+        "text": "tunnel"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 849,
+    "qid": "Q1143",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of an SSID in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "converts electrical current to radio waves"
+      },
+      {
+        "label": "B",
+        "text": "associates a name to a WLAN"
+      },
+      {
+        "label": "C",
+        "text": "uses a 4-way handshake for authentication"
+      },
+      {
+        "label": "D",
+        "text": "provides increased protection against spyware"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 850,
+    "qid": "Q1145",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "G0/10"
+      },
+      {
+        "label": "B",
+        "text": "G0/24"
+      },
+      {
+        "label": "C",
+        "text": "G0/5"
+      },
+      {
+        "label": "D",
+        "text": "G0/1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 851,
+    "qid": "Q1146",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "enables secure connectivity over the internet"
+      },
+      {
+        "label": "B",
+        "text": "complies with PCI regulations"
+      },
+      {
+        "label": "C",
+        "text": "provides an added level of protection against internet threats"
+      },
+      {
+        "label": "D",
+        "text": "is used on internal hosts that stream data solely to external resources"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 852,
+    "qid": "Q1148",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of private IPv4 addressing?",
+    "options": [
+      {
+        "label": "A",
+        "text": "is used when the ISP requires the new subnet to be advertised to the internet for web services"
+      },
+      {
+        "label": "B",
+        "text": "provides unlimited address ranges"
+      },
+      {
+        "label": "C",
+        "text": "is used when the network has multiple endpoint listeners"
+      },
+      {
+        "label": "D",
+        "text": "is used on hosts that communicate only with other internal hosts"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 853,
+    "qid": "Q1149",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The engineer configured the VLANs on the new AccSw2 switch. A router-on-a-stick is connected to both switches. How must The ports be configured on AccSw2 to establish full connectivity between the two switches and for Server1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface GigabitEthernet1/1 Switchport access vlan 11 ! Interface GigabitEthernet1/24 Switchport mode trunk Switchport trunk allowed vlan 10,11"
+      },
+      {
+        "label": "B",
+        "text": "interface GigabitEthernet1/3 Switchport mode access Switchport access vlan 10 ! Interface GigabitEthernet1/24 Switchport mode trunk Switchport trunk allowed vlan 2,10"
+      },
+      {
+        "label": "C",
+        "text": "interface GigabitEthernet1/3 Switchport mode access Switchport access vlan 10 ! Interface GigabitEthernet1/24 Switchport mode trunk"
+      },
+      {
+        "label": "D",
+        "text": "interface GigabitEthernet1/1 Switchport mode access Switchport access vlan 11 ! Interface GigabitEthernet1/24 Switchport mode trunk"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 854,
+    "qid": "Q1150",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does frame switching function on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "floods unknown destinations to all ports except the receiving port"
+      },
+      {
+        "label": "B",
+        "text": "modifies frames that contain a known source VLAN"
+      },
+      {
+        "label": "C",
+        "text": "rewrites the source and destination MAC address"
+      },
+      {
+        "label": "D",
+        "text": "buffers and forwards frames with less than 5 CRCs"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 855,
+    "qid": "Q1151",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which address will the client contact to renew their IP address when the current lease expires?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.25.103"
+      },
+      {
+        "label": "B",
+        "text": "192.168.25.1"
+      },
+      {
+        "label": "C",
+        "text": "192.168.25.100"
+      },
+      {
+        "label": "D",
+        "text": "192.168.25.254"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 856,
+    "qid": "Q1152",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW4 - Bridge Priority - 8192 - Mac-address 05:0f:e8:ed:b2:98"
+      },
+      {
+        "label": "B",
+        "text": "SW2 - Bridge Priority - 8192 - Mac-address 00:ac:f0:9b:dc:72"
+      },
+      {
+        "label": "C",
+        "text": "SW3 - Bridge Priority - 16384 - Mac-address 0e:6c:e4:b1:8a:57"
+      },
+      {
+        "label": "D",
+        "text": "SW4 - Bridge Priority - 16384 - Mac-address 0a:45:22:26:29:77"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 857,
+    "qid": "Q1154",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How is a configuration change made to a wireless AP in lightweight mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SSH connection to the management IP of the AP"
+      },
+      {
+        "label": "B",
+        "text": "CAPWAP/LWAPP connection via the parent WLC"
+      },
+      {
+        "label": "C",
+        "text": "EoIP connection via the parent WLC"
+      },
+      {
+        "label": "D",
+        "text": "HTTPS connection directly to the out-of-band address of the AP"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 858,
+    "qid": "Q1156",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which plane is centralized in software-defined networking?",
+    "options": [
+      {
+        "label": "A",
+        "text": "application"
+      },
+      {
+        "label": "B",
+        "text": "services"
+      },
+      {
+        "label": "C",
+        "text": "data"
+      },
+      {
+        "label": "D",
+        "text": "control"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 859,
+    "qid": "Q1157",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a service that is provided by a wireless controller?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It mitigates threats from the internet."
+      },
+      {
+        "label": "B",
+        "text": "It manages interference in a dense network."
+      },
+      {
+        "label": "C",
+        "text": "It provides Layer 3 routing between wired and wireless devices."
+      },
+      {
+        "label": "D",
+        "text": "It issues IP addresses to wired devices."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 860,
+    "qid": "Q1158",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "When more than one AP-Manager interface is provisioned on a wireless LAN controller, how is the request handled by the AP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The discovery response from the AP to the AP-Manager interface disables the WLAN port."
+      },
+      {
+        "label": "B",
+        "text": "The AP join request fails and must be configured statically on the AP-Manager interface."
+      },
+      {
+        "label": "C",
+        "text": "The AP-Manager with the fewest number of APs is used by the AP to join."
+      },
+      {
+        "label": "D",
+        "text": "The first AP-Manager interface to respond is chosen by the AP."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 861,
+    "qid": "Q1159",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented in line 2 within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "object"
+      },
+      {
+        "label": "B",
+        "text": "value"
+      },
+      {
+        "label": "C",
+        "text": "key"
+      },
+      {
+        "label": "D",
+        "text": "array"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 862,
+    "qid": "Q1160",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does MAC learning function on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "protects against denial of service attacks"
+      },
+      {
+        "label": "B",
+        "text": "sends frames with unknown destinations to a multicast group"
+      },
+      {
+        "label": "C",
+        "text": "adds unknown source MAC addresses to the address table"
+      },
+      {
+        "label": "D",
+        "text": "sends a retransmission request when a new frame is received"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 863,
+    "qid": "Q1161",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is represented by the word \"ge3/36\" within this JSON schema?",
+    "options": [
+      {
+        "label": "A",
+        "text": "value"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "key"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

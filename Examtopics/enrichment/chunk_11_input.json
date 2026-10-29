@@ -1,0 +1,694 @@
+[
+  {
+    "id": 367,
+    "qid": "Q481",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the subnet mask for route 172.16.4.0?",
+    "options": [
+      {
+        "label": "A",
+        "text": "255.255.255.192"
+      },
+      {
+        "label": "B",
+        "text": "255.255.254.0"
+      },
+      {
+        "label": "C",
+        "text": "255.255.248.0"
+      },
+      {
+        "label": "D",
+        "text": "255.255.240.0"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 368,
+    "qid": "Q482",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A static route must be configured on R14 to forward traffic for the 172.21.34.0/25 network that resides on R86. Which command must be used to fulfill the request?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 172.21.34.0 255.255.255.192 10.73.65.65"
+      },
+      {
+        "label": "B",
+        "text": "ip route 172.21.34.0 255.255.255.128 10.73.65.66"
+      },
+      {
+        "label": "C",
+        "text": "ip route 172.21.34.0 255.255.255.0 10.73.65.65"
+      },
+      {
+        "label": "D",
+        "text": "ip route 172.21.34.0 255.255.128.0 10.73.65.64"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 370,
+    "qid": "Q484",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. All interfaces are configured with duplex auto and ip ospf network broadcast. Which configuration allows routers R14 and R86 to form an OSPFv2 adjacency and act as a central point for exchanging OSPF information between routers?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R14# interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf priority 255 ip mtu 1500 router ospf 10 router-id 10.10.1.14 network 10.10.1.14 0.0.0.0 area 0 network 10.73.65.64 0.0.0.3 area 0 R86# interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip mtu 1400 router ospf 10 router-id 10.10.1.86 network 10.10.1.86 0.0.0.0 area 0 network 10.73.65.64 0.0.0.3 area 0"
+      },
+      {
+        "label": "B",
+        "text": "R14# interface Loopback0 ip ospf 10 area 0 interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf 10 area 0 ip mtu 1500 router ospf 10 ip ospf priority 255 router-id 10.10.1.14 R86# interface Loopback0 ip ospf 10 area 0 interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip ospf 10 area 0 ip mtu 1500 router ospf 10 router-id 10.10.1.86"
+      },
+      {
+        "label": "C",
+        "text": "R14# interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf priority 0 ip mtu 1500 router ospf 10 router-id 10.10.1.14 network 10.10.1.14 0.0.0.0 area 0 network 10.73.65.64 0.0.0.3 area 0 R86# interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip mtu 1500 router ospf 10 router-id 10.10.1.86 network 10.10.1.86 0.0.0.0 area 0 network 10.73.65.64 0.0.0.3 area 0"
+      },
+      {
+        "label": "D",
+        "text": "R14# interface Loopback0 ip ospf 10 area 0 interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf priority 255 ip ospf 10 area 0 ip mtu 1500 router ospf 10 router-id 10.10.1.14 R86# interface Loopback0 ip ospf 10 area 0 interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip ospf 10 area 0 ip mtu 1500 router ospf 10 router-id 10.10.1.86"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 371,
+    "qid": "Q485",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "A packet from a company's branch office is destined to host 172.31.0.1 at headquarters. The sending router has three possible matches in its routing table for the packet: prefixes 172.31.0.0/16, 172.31.0.0/24, and 172.31.0.0/25. How does the router handle the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It sends the traffic via prefix 172.31.0.0/24."
+      },
+      {
+        "label": "B",
+        "text": "It sends the traffic via prefix 172.31.0.0/16."
+      },
+      {
+        "label": "C",
+        "text": "It sends the traffic via prefix 172.31.0.0/25."
+      },
+      {
+        "label": "D",
+        "text": "It sends the traffic via the default gateway 0.0.0.0/0."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 372,
+    "qid": "Q486",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer is asked to configure router R1 so that it forms an OSPF single-area neighbor relationship with R2. Which command sequence must be implemented to configure the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router ospf 100 network 10.0.0.0 0.0.0.252 area0 network 10.0.1.0 0.0.0.255 area0"
+      },
+      {
+        "label": "B",
+        "text": "router ospf 100 network 10.0.0.0 0.0.0.3 area0 network 10.0.2.0 255.255.255.0 area0"
+      },
+      {
+        "label": "C",
+        "text": "router ospf 10 network 10.0.0.0 0.0.0.3 area0 network 10.0.1.0 0.0.0.255 area0"
+      },
+      {
+        "label": "D",
+        "text": "router ospf 10 network 10.0.0.0 0.0.0.3 area0 network 10.0.2.0 0.0.0.255 area0"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 373,
+    "qid": "Q487",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. All routers in the network are configured. R2 must be the DR. After the engineer connected the devices, R1 was elected as the DR. Which command sequence must be configured on R2 to be elected as the DR in the network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R2(config)#intergface gi0/0 R2(config-if)#ip ospf priority 100"
+      },
+      {
+        "label": "B",
+        "text": "R2(config)#router ospf 1 R2(config-router)#router-id 192.168.2.7"
+      },
+      {
+        "label": "C",
+        "text": "R2(config)#router ospf 1 R2(config-router)#router-id 10.100.100.100"
+      },
+      {
+        "label": "D",
+        "text": "R2(config)#intergface gi0/0 R2(config-if)#ip ospf priority 1"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 374,
+    "qid": "Q489",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the subnet mask of the route to the 10.10.13.160 prefix?",
+    "options": [
+      {
+        "label": "A",
+        "text": "255.255.255.240"
+      },
+      {
+        "label": "B",
+        "text": "255.255.255.128"
+      },
+      {
+        "label": "C",
+        "text": "255.255.248.0"
+      },
+      {
+        "label": "D",
+        "text": "255.255.255.248"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 376,
+    "qid": "Q492",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The image server and client A are running an application that transfers an extremely high volume of data between the two. An engineer is configuring a dedicated circuit between R1 and R2. Which set of commands must the engineer apply to the routers so that only traffic between the image server and client A is forces to use the new circuit?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#ip route 10.10.13.10 255.255.255.255 10.10.10.6 R2(config)#ip route 192.168.0.100 255.255.255.255 10.10.10.5"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#ip route 10.10.13.10 255.255.255.128 10.10.10.6 R2(config)#lp route 192.168.0.100 255.255.255.0 10.10.10.5"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#ip route 10.10.13.10 255.255.255.252 10.10.10.6 R2(config)#tp route 192.168.0.100 255.255.255.252 10.10.10.5"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#ip route 10.10.13.10 255.255.255.255 10.10.10.2 R2(config)#ip route 192.168.0.100 255.255.255.255 10.10.10.1"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 377,
+    "qid": "Q493",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer is checking the routing table in the main router to identify the path to a server on the network. Which route does the router use to reach the server at 192.168.2.2?",
+    "options": [
+      {
+        "label": "A",
+        "text": "S 192.168.0.0/20 [1/0] via 10.1.1.1"
+      },
+      {
+        "label": "B",
+        "text": "S 192.168.2.0/29 [1/0] via 10.1.1.1"
+      },
+      {
+        "label": "C",
+        "text": "S 192.168.2.0/28 [1/0] via 10.1.1.1"
+      },
+      {
+        "label": "D",
+        "text": "S 192.168.1.0/30 [1/0] via 10.1.1.1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 378,
+    "qid": "Q494",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An OSPF neighbor relationship must be configured using these guidelines: ✑R1 is only permitted to establish a neighbor with R2. ✑R1 will never participate in DR elections. ✑R1 will use a router-id of 10.1.1.1. Which configuration must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B."
+      },
+      {
+        "label": "C",
+        "text": "D."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 379,
+    "qid": "Q495",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the prefix length for the route that router1 will use to reach host A?",
+    "options": [
+      {
+        "label": "A",
+        "text": "/25"
+      },
+      {
+        "label": "B",
+        "text": "/27"
+      },
+      {
+        "label": "C",
+        "text": "/28"
+      },
+      {
+        "label": "D",
+        "text": "/29"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 380,
+    "qid": "Q496",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After applying this configuration to router R1, a network engineer is verifying the implementation. If all links are operating normally, and the engineer sends a series of packets from PC1 to PC3, how are the packets routed?",
+    "options": [
+      {
+        "label": "A",
+        "text": "They are distributed sent round robin to interfaces S0/0/0 and S0/0/1"
+      },
+      {
+        "label": "B",
+        "text": "They are routed to 10.0.0.2"
+      },
+      {
+        "label": "C",
+        "text": "They are routed to 192.168.100.2"
+      },
+      {
+        "label": "D",
+        "text": "They are routed to 172.16.20.2"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 381,
+    "qid": "Q497",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. When router R1 receives a packet with destination IP address 10.56.0.62, through which interface does it route the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Vlan58"
+      },
+      {
+        "label": "B",
+        "text": "Null0"
+      },
+      {
+        "label": "C",
+        "text": "Vlan59"
+      },
+      {
+        "label": "D",
+        "text": "Vlan60"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 382,
+    "qid": "Q498",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How much OSPF be configured on the GigabitEthernet0/0 interface of the neighbor device to achieve the destined neighbor relationship?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Router(config)#interface GigabitEthernet 0/0 Router(config-if)#ip ospf cost 5"
+      },
+      {
+        "label": "B",
+        "text": "Router(config)#interface GigabitEthernet 0/0 Router(config-if)#ip ospf priority 1"
+      },
+      {
+        "label": "C",
+        "text": "Router(config)#interface GigabitEthernet 0/0 Router(config-if)#ip ospf area 2"
+      },
+      {
+        "label": "D",
+        "text": "Router(config)#interface GigabitEthernet 0/0 Router(config-if)#ip ospf network point-to-point"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 383,
+    "qid": "Q499",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "An engineer just installed network 10.120.10.0/24. Which configuration must be applied to the R14 router to add the new network to its OSPF routing table?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Router ospf 100 Network 10.120.10.0 0.0.0.255 area 0"
+      },
+      {
+        "label": "B",
+        "text": "Router ospf 120 Network 10.120.10.0 255.255.255.0 area 0 Ip route 10.120.10.0 255.255.255.0 fa0/1"
+      },
+      {
+        "label": "C",
+        "text": "Router ospf 100 area 0 Network 10.120.10.0 0.0.0.255"
+      },
+      {
+        "label": "D",
+        "text": "Router ospf 100 Network 10.120.10.0 255.255.255.0 area 0"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 384,
+    "qid": "Q501",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What is the MAC address used with VRRP as a virtual address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "00-05-42-38-53-31"
+      },
+      {
+        "label": "B",
+        "text": "00-00-5E-00-01-0a"
+      },
+      {
+        "label": "C",
+        "text": "00-00-0C-07-AD-89"
+      },
+      {
+        "label": "D",
+        "text": "00-07-C0-70-AB-01"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 386,
+    "qid": "Q503",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Why implement VRRP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "To hand over to end users the autodiscovery of virtual gateways"
+      },
+      {
+        "label": "B",
+        "text": "To provide end users with a virtual gateway in a multivendor network"
+      },
+      {
+        "label": "C",
+        "text": "To leverage a weighting scheme to provide uninterrupted service"
+      },
+      {
+        "label": "D",
+        "text": "To detect link failures without the overhead of Bidirectional Forwarding Detection"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 387,
+    "qid": "Q504",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which type of address is shared by routers in a HSRP implementation and used by hosts on the subnet as their default gateway address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "multicast address"
+      },
+      {
+        "label": "B",
+        "text": "virtual IP address"
+      },
+      {
+        "label": "C",
+        "text": "loopback IP address"
+      },
+      {
+        "label": "D",
+        "text": "broadcast address"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 388,
+    "qid": "Q505",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "By default, which virtual MAC address does HSRP group 14 use?",
+    "options": [
+      {
+        "label": "A",
+        "text": "00:05:5e:19:0c:14"
+      },
+      {
+        "label": "B",
+        "text": "00:05:0c:07:ac:14"
+      },
+      {
+        "label": "C",
+        "text": "04:15:26:73:3c:0e"
+      },
+      {
+        "label": "D",
+        "text": "00:00:0c:07:ac:0e"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 391,
+    "qid": "Q508",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "What does the implementation of a first-hop redundancy protocol protect against on a network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "default gateway failure"
+      },
+      {
+        "label": "B",
+        "text": "BGP neighbor flapping"
+      },
+      {
+        "label": "C",
+        "text": "spanning-tree loops"
+      },
+      {
+        "label": "D",
+        "text": "root-bridge loss"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 392,
+    "qid": "Q509",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which feature or protocol is required for an IP SLA to measure UDP jitter?",
+    "options": [
+      {
+        "label": "A",
+        "text": "LLDP"
+      },
+      {
+        "label": "B",
+        "text": "EEM"
+      },
+      {
+        "label": "C",
+        "text": "CDP"
+      },
+      {
+        "label": "D",
+        "text": "NTP"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 393,
+    "qid": "Q510",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which feature is enabled by this configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "static NAT translation"
+      },
+      {
+        "label": "B",
+        "text": "a DHCP pool"
+      },
+      {
+        "label": "C",
+        "text": "a dynamic NAT address pool"
+      },
+      {
+        "label": "D",
+        "text": "PAT"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 394,
+    "qid": "Q511",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which NAT term is defined as a group of addresses available for NAT use?",
+    "options": [
+      {
+        "label": "A",
+        "text": "NAT pool"
+      },
+      {
+        "label": "B",
+        "text": "dynamic NAT"
+      },
+      {
+        "label": "C",
+        "text": "static NAT"
+      },
+      {
+        "label": "D",
+        "text": "one-way NAT"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 395,
+    "qid": "Q512",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which command can you enter to allow Telnet to be supported in addition to SSH?",
+    "options": [
+      {
+        "label": "A",
+        "text": "transport input telnet ssh"
+      },
+      {
+        "label": "B",
+        "text": "transport input telnet"
+      },
+      {
+        "label": "C",
+        "text": "no transport input telnet"
+      },
+      {
+        "label": "D",
+        "text": "privilege level 15"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 396,
+    "qid": "Q513",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After you apply the given configuration to a router, the DHCP clients behind the device cannot communicate with hosts outside of their subnet. Which action is most likely to correct the problem?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure the dns server on the same subnet as the clients"
+      },
+      {
+        "label": "B",
+        "text": "Activate the dhcp pool"
+      },
+      {
+        "label": "C",
+        "text": "Correct the subnet mask"
+      },
+      {
+        "label": "D",
+        "text": "configure the default gateway"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

@@ -1,0 +1,702 @@
+[
+  {
+    "id": 528,
+    "qid": "Q687",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a function of a Next-Generation IPS?",
+    "options": [
+      {
+        "label": "A",
+        "text": "correlates user activity with network events"
+      },
+      {
+        "label": "B",
+        "text": "serves as a controller within a controller-based network"
+      },
+      {
+        "label": "C",
+        "text": "integrates with a RADIUS server to enforce Layer 2 device authentication rules"
+      },
+      {
+        "label": "D",
+        "text": "makes forwarding decisions based on learned MAC addresses"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 529,
+    "qid": "Q690",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which IPsec transport mode encrypts the IP header and the payload?",
+    "options": [
+      {
+        "label": "A",
+        "text": "pipe"
+      },
+      {
+        "label": "B",
+        "text": "transport"
+      },
+      {
+        "label": "C",
+        "text": "control"
+      },
+      {
+        "label": "D",
+        "text": "tunnel"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 530,
+    "qid": "Q691",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is the default port-security behavior on a trunk link?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It places the port in the err-disabled state if it learns more than one MAC address."
+      },
+      {
+        "label": "B",
+        "text": "It causes a network loop when a violation occurs."
+      },
+      {
+        "label": "C",
+        "text": "It disables the native VLAN configuration as soon as port security is enabled."
+      },
+      {
+        "label": "D",
+        "text": "It places the port in the err-disabled state after 10 MAC addresses are statically configured."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 531,
+    "qid": "Q692",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which device separates networks by security domains?",
+    "options": [
+      {
+        "label": "A",
+        "text": "intrusion protection system"
+      },
+      {
+        "label": "B",
+        "text": "firewall"
+      },
+      {
+        "label": "C",
+        "text": "wireless controller"
+      },
+      {
+        "label": "D",
+        "text": "access point"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 532,
+    "qid": "Q693",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How are VLAN hopping attacks mitigated?",
+    "options": [
+      {
+        "label": "A",
+        "text": "manually implement trunk ports and disable DTP"
+      },
+      {
+        "label": "B",
+        "text": "configure extended VLANs"
+      },
+      {
+        "label": "C",
+        "text": "activate all ports and place in the default VLAN"
+      },
+      {
+        "label": "D",
+        "text": "enable dynamic ARP inspection"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 533,
+    "qid": "Q694",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which enhancements were implemented as part of WPA3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Forward secrecy and SAE in personal mode for secure initial key exchange"
+      },
+      {
+        "label": "B",
+        "text": "802.1x authentication and AES-128 encryption"
+      },
+      {
+        "label": "C",
+        "text": "AES-64 in personal mode and AES-128 in enterprise mode"
+      },
+      {
+        "label": "D",
+        "text": "TKIP encryption improving WEP and per-packet keying"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 534,
+    "qid": "Q695",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "When a site-to-site VPN is configured which IPsec mode provides encapsulation and encryption of the entire original IP packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "IPsec transport mode with AH"
+      },
+      {
+        "label": "B",
+        "text": "IPsec tunnel mode with AH"
+      },
+      {
+        "label": "C",
+        "text": "IPsec transport mode with ESP"
+      },
+      {
+        "label": "D",
+        "text": "IPsec tunnel mode with ESP"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 535,
+    "qid": "Q696",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "An engineer is configuring remote access to a router from IP subnet 10.139.58.0/28. The domain name, crypto keys, and SSH have been configured. Which configuration enables the traffic on the destination router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "line vty 0 15 access-class 120 in ! ip access-list extended 120 permit tcp 10.139.58.0 0.0.0.15 any eq 22"
+      },
+      {
+        "label": "B",
+        "text": "interface FastEthernet0/0 ip address 10.122.49.1 255.255.255.252 ip access-group 10 in ! ip access-list standard 10 permit udp 10.139.58.0 0.0.0.7 host 10.122.49.1 eq 22"
+      },
+      {
+        "label": "C",
+        "text": "interface FastEthernet0/0 ip address 10.122.49.1 255.255.255.252 ip access-group 110 in ! ip access-list standard 110 permit tcp 10.139.58.0 0.0.0.15 eq 22 host 10.122.49.1"
+      },
+      {
+        "label": "D",
+        "text": "line vty 0 15 access-group 120 in ! ip access-list extended 120 permit tcp 10.139.58.0 0.0.0.15 any eq 22"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 537,
+    "qid": "Q698",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which management security process is invoked when a user logs in to a network device using their username and password?",
+    "options": [
+      {
+        "label": "A",
+        "text": "authentication"
+      },
+      {
+        "label": "B",
+        "text": "auditing"
+      },
+      {
+        "label": "C",
+        "text": "accounting"
+      },
+      {
+        "label": "D",
+        "text": "authorization"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 538,
+    "qid": "Q700",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which enhancement is implemented in WPA3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "employs PKI to identify access points"
+      },
+      {
+        "label": "B",
+        "text": "applies 802.1x authentication"
+      },
+      {
+        "label": "C",
+        "text": "uses TKIP"
+      },
+      {
+        "label": "D",
+        "text": "protects against brute force attacks"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 539,
+    "qid": "Q702",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "SW1 supports connectivity for a lobby conference room and must be secured. The engineer must limit the connectivity from PC1 to the SW1 and SW2 network. The MAC addresses allowed must be limited to two. Which configuration secures the conference room connectivity?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface gi1/0/15 switchport port-security switchport port-security maximum 2"
+      },
+      {
+        "label": "B",
+        "text": "interface gi1/0/15 switchport port-security switchport port-security mac-address 0000.abcd.0004vlan 100"
+      },
+      {
+        "label": "C",
+        "text": "interface gi1/0/15 switchport port-security mac-address 0000.abcd.0004 vlan 100"
+      },
+      {
+        "label": "D",
+        "text": "interface gi1/0/15 switchport port-security mac-address 0000.abcd.0004 vlan 100 interface switchport secure-mac limit 2"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 540,
+    "qid": "Q704",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which port security violation mode allows from valid MAC addresses to pass but blocks traffic from invalid MAC addresses?",
+    "options": [
+      {
+        "label": "A",
+        "text": "restrict"
+      },
+      {
+        "label": "B",
+        "text": "shutdown"
+      },
+      {
+        "label": "C",
+        "text": "protect"
+      },
+      {
+        "label": "D",
+        "text": "shutdown VLAN"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 542,
+    "qid": "Q707",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "A network engineer is implementing a corporate SSID for WPA3-Personal security with a PSK. Which encryption cipher must be configured?",
+    "options": [
+      {
+        "label": "A",
+        "text": "CCMP128"
+      },
+      {
+        "label": "B",
+        "text": "GCMP256"
+      },
+      {
+        "label": "C",
+        "text": "CCMP256"
+      },
+      {
+        "label": "D",
+        "text": "GCMP128"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 543,
+    "qid": "Q708",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a practice that protects a network from VLAN hopping attacks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Implement port security on internet-facing VLANs"
+      },
+      {
+        "label": "B",
+        "text": "Enable dynamic ARP inspection"
+      },
+      {
+        "label": "C",
+        "text": "Assign all access ports to VLANs other than the native VLAN"
+      },
+      {
+        "label": "D",
+        "text": "configure an ACL to prevent traffic from changing VLANs"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 544,
+    "qid": "Q709",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "An administrator must use the password complexity not manufacturer-name command to prevent users from adding `Cisco` as a password. Which command must be issued before this command?",
+    "options": [
+      {
+        "label": "A",
+        "text": "login authentication my-auth-list"
+      },
+      {
+        "label": "B",
+        "text": "service password-encryption"
+      },
+      {
+        "label": "C",
+        "text": "password complexity enable"
+      },
+      {
+        "label": "D",
+        "text": "confreg 0x2142"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 546,
+    "qid": "Q711",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How do traditional campus device management and Cisco DNA Center device management differ in regards to deployment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Traditional campus device management allows a network to scale more quickly than with Cisco DNA Center device management."
+      },
+      {
+        "label": "B",
+        "text": "Cisco DNA Center device management can deploy a network more quickly than traditional campus device management."
+      },
+      {
+        "label": "C",
+        "text": "Cisco DNA Center device management can be implemented at a lower cost than most traditional campus device management options."
+      },
+      {
+        "label": "D",
+        "text": "Traditional campus device management schemes can typically deploy patches and updates more quickly than Cisco DNA Center device management."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 547,
+    "qid": "Q712",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which purpose does a northbound API serve in a controller-based networking architecture?",
+    "options": [
+      {
+        "label": "A",
+        "text": "facilitates communication between the controller and the applications"
+      },
+      {
+        "label": "B",
+        "text": "reports device errors to a controller"
+      },
+      {
+        "label": "C",
+        "text": "generates statistics for network hardware and traffic"
+      },
+      {
+        "label": "D",
+        "text": "communicates between the controller and the physical network hardware"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 548,
+    "qid": "Q713",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What benefit does controller-based networking provide versus traditional networking?",
+    "options": [
+      {
+        "label": "A",
+        "text": "allows configuration and monitoring of the network from one centralized point"
+      },
+      {
+        "label": "B",
+        "text": "provides an added layer of security to protect from DDoS attacks"
+      },
+      {
+        "label": "C",
+        "text": "combines control and data plane functionality on a single device to minimize latency"
+      },
+      {
+        "label": "D",
+        "text": "moves from a two-tier to a three-tier network architecture to provide maximum redundancy"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 549,
+    "qid": "Q714",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is an advantage of Cisco DNA Center versus traditional campus device management?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is designed primarily to provide network assurance."
+      },
+      {
+        "label": "B",
+        "text": "It supports numerous extensibility options, including cross-domain adapters and third-party SDKs."
+      },
+      {
+        "label": "C",
+        "text": "It supports high availability for management functions when operating in cluster mode."
+      },
+      {
+        "label": "D",
+        "text": "It enables easy autodiscovery of network elements in a brownfield deployment."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 550,
+    "qid": "Q717",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "How does Cisco DNA Center gather data from the network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Devices use the call-home protocol to periodically send data to the controller"
+      },
+      {
+        "label": "B",
+        "text": "Devices establish an IPsec tunnel to exchange data with the controller"
+      },
+      {
+        "label": "C",
+        "text": "The Cisco CLI Analyzer tool gathers data from each licensed network device and streams it to the controller"
+      },
+      {
+        "label": "D",
+        "text": "Network devices use different services like SNMP, syslog, and streaming telemetry to send data to the controller"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 553,
+    "qid": "Q726",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What software-defined architecture plane assists network devices with making packet-forwarding decisions by providing Layer 2 reachability and Layer 3 routing information?",
+    "options": [
+      {
+        "label": "A",
+        "text": "management plane"
+      },
+      {
+        "label": "B",
+        "text": "control plane"
+      },
+      {
+        "label": "C",
+        "text": "data plane"
+      },
+      {
+        "label": "D",
+        "text": "policy plane"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 554,
+    "qid": "Q728",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which type of API allows SDN controllers to dynamically make changes to the network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "northbound API"
+      },
+      {
+        "label": "B",
+        "text": "REST API"
+      },
+      {
+        "label": "C",
+        "text": "SOAP API"
+      },
+      {
+        "label": "D",
+        "text": "southbound API"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 556,
+    "qid": "Q731",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which option best describes an API?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a contract that describes how various components communicate and exchange data with each other"
+      },
+      {
+        "label": "B",
+        "text": "an architectural style (versus a protocol) for designing applications"
+      },
+      {
+        "label": "C",
+        "text": "a stateless client-server model"
+      },
+      {
+        "label": "D",
+        "text": "request a certain type of data by specifying the URL path that models the data"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 557,
+    "qid": "Q733",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which of the following is the JSON encoding of a dictionary or hash?",
+    "options": [
+      {
+        "label": "A",
+        "text": "{€גvalue€ג€:גkey€ג}"
+      },
+      {
+        "label": "B",
+        "text": "[€גvalue€ג€,גkey€ג]"
+      },
+      {
+        "label": "C",
+        "text": "{€גvalue€ג€,גkey€ג}"
+      },
+      {
+        "label": "D",
+        "text": "(€גvalue€ג€:גkey€ג)"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 558,
+    "qid": "Q734",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which role does a hypervisor provide for each virtual machine in server virtualization?",
+    "options": [
+      {
+        "label": "A",
+        "text": "infrastructure-as-a-service"
+      },
+      {
+        "label": "B",
+        "text": "Software-as-a-service"
+      },
+      {
+        "label": "C",
+        "text": "control and distribution of physical resources"
+      },
+      {
+        "label": "D",
+        "text": "services as a hardware controller"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  }
+]

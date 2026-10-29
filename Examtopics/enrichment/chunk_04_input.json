@@ -1,0 +1,702 @@
+[
+  {
+    "id": 142,
+    "qid": "Q199",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The network administrator wants VLAN 67 traffic to be untagged between Switch 1 and Switch 2, while all other VLANs are to remain tagged. Which command accomplishes this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport access vlan 67"
+      },
+      {
+        "label": "B",
+        "text": "switchport trunk allowed vlan 67"
+      },
+      {
+        "label": "C",
+        "text": "switchport private-vlan association host 67"
+      },
+      {
+        "label": "D",
+        "text": "switchport trunk native vlan 67"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 143,
+    "qid": "Q202",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An administrator is tasked with configuring a voice VLAN. What is the expected outcome when a Cisco phone is connected to the GigabitEthernet 3/1/4 port on a switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The phone and a workstation that is connected to the phone do not have VLAN connectivity."
+      },
+      {
+        "label": "B",
+        "text": "The phone sends and receives data in VLAN 50, but a workstation connected to the phone sends and receives data in VLAN 1."
+      },
+      {
+        "label": "C",
+        "text": "The phone sends and receives data in VLAN 50, but a workstation connected to the phone has no VLAN connectivity."
+      },
+      {
+        "label": "D",
+        "text": "The phone and a workstation that is connected to the phone send and receive data in VLAN 50."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 144,
+    "qid": "Q203",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which action is expected from SW1 when the untagged frame is received on the GigabitEthernet0/1 interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The frame is processed in VLAN 1"
+      },
+      {
+        "label": "B",
+        "text": "The frame is processed in VLAN 11"
+      },
+      {
+        "label": "C",
+        "text": "The frame is processed in VLAN 5"
+      },
+      {
+        "label": "D",
+        "text": "The frame is dropped"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 149,
+    "qid": "Q209",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which VLAN ID is associated with the default VLAN in the given environment?",
+    "options": [
+      {
+        "label": "A",
+        "text": "VLAN 1"
+      },
+      {
+        "label": "B",
+        "text": "VLAN 5"
+      },
+      {
+        "label": "C",
+        "text": "VLAN 10"
+      },
+      {
+        "label": "D",
+        "text": "VLAN 20"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 151,
+    "qid": "Q215",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "How does STP prevent forwarding loops at OSI Layer 2?",
+    "options": [
+      {
+        "label": "A",
+        "text": "TTL"
+      },
+      {
+        "label": "B",
+        "text": "MAC address forwarding"
+      },
+      {
+        "label": "C",
+        "text": "Collision avoidance"
+      },
+      {
+        "label": "D",
+        "text": "Port blocking"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 152,
+    "qid": "Q217",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which type does a port become when it receives the best BPDU on a bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The designated port"
+      },
+      {
+        "label": "B",
+        "text": "The backup port"
+      },
+      {
+        "label": "C",
+        "text": "The alternate port"
+      },
+      {
+        "label": "D",
+        "text": "The root port"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 153,
+    "qid": "Q218",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which value can you modify to configure a specific interface as the preferred forwarding interface?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The interface number"
+      },
+      {
+        "label": "B",
+        "text": "The port priority"
+      },
+      {
+        "label": "C",
+        "text": "The VLAN priority"
+      },
+      {
+        "label": "D",
+        "text": "The hello time"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 154,
+    "qid": "Q219",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which statement about Cisco Discovery Protocol is true?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is a Cisco-proprietary protocol."
+      },
+      {
+        "label": "B",
+        "text": "It runs on the network layer."
+      },
+      {
+        "label": "C",
+        "text": "It can discover information from routers, firewalls, and switches."
+      },
+      {
+        "label": "D",
+        "text": "It runs on the physical layer and the data link layer."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 156,
+    "qid": "Q224",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which statement about LLDP is true?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is a Cisco proprietary protocol."
+      },
+      {
+        "label": "B",
+        "text": "It is configured in global configuration mode."
+      },
+      {
+        "label": "C",
+        "text": "The LLDP update frequency is a fixed value."
+      },
+      {
+        "label": "D",
+        "text": "It runs over the transport layer."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 158,
+    "qid": "Q226",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which technology is used to improve web traffic performance by proxy caching?",
+    "options": [
+      {
+        "label": "A",
+        "text": "WSA"
+      },
+      {
+        "label": "B",
+        "text": "Firepower"
+      },
+      {
+        "label": "C",
+        "text": "ASA"
+      },
+      {
+        "label": "D",
+        "text": "FireSIGHT"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 159,
+    "qid": "Q227",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What criteria is used first during the root port selection process?",
+    "options": [
+      {
+        "label": "A",
+        "text": "local port ID"
+      },
+      {
+        "label": "B",
+        "text": "lowest path cost to the toot bridge"
+      },
+      {
+        "label": "C",
+        "text": "lowest neighbor's bridge ID"
+      },
+      {
+        "label": "D",
+        "text": "lowest neighbor's port ID"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 160,
+    "qid": "Q228",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which statement about VLAN configuration is true?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The switch must be in VTP server or transparent mode before you can configure a VLAN"
+      },
+      {
+        "label": "B",
+        "text": "The switch must be in config-vlan mode before you configure an extended VLAN"
+      },
+      {
+        "label": "C",
+        "text": "Dynamic inter-VLAN routing is supported on VLAN2 through VLAN 4064"
+      },
+      {
+        "label": "D",
+        "text": "A switch in VTP transparent mode save the VLAN databases to the running configuration only"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 161,
+    "qid": "Q230",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "A network engineer must create a diagram of a multivendor network. Which command must be configured on the Cisco devices so that the topology of the network is allowed to be mapped?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Device(config)#lldp run"
+      },
+      {
+        "label": "B",
+        "text": "Device(config)#cdp run"
+      },
+      {
+        "label": "C",
+        "text": "Device(config-if)#cdp enable"
+      },
+      {
+        "label": "D",
+        "text": "Device(config)#fl ow-sampler-map topology"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 162,
+    "qid": "Q231",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "How do AAA operations compare regarding user identification, user services, and access control?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Authorization provides access control, and authentication tracks user services"
+      },
+      {
+        "label": "B",
+        "text": "Authentication identifies users, and accounting tracks user services"
+      },
+      {
+        "label": "C",
+        "text": "Accounting tracks user services, and authentication provides access control"
+      },
+      {
+        "label": "D",
+        "text": "Authorization identifies users, and authentication provides access control"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 163,
+    "qid": "Q232",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is the difference between RADIUS and TACACS+?",
+    "options": [
+      {
+        "label": "A",
+        "text": "RADIUS logs all commands that are entered by the administrator, but TACACS+ logs only start, stop, and interim commands."
+      },
+      {
+        "label": "B",
+        "text": "TACACS+ separates authentication and authorization, and RADIUS merges them."
+      },
+      {
+        "label": "C",
+        "text": "TACACS+ encrypts only password information, and RADIUS encrypts the entire payload."
+      },
+      {
+        "label": "D",
+        "text": "RADIUS is most appropriate for dial authentication, but TACACS+ can be used for multiple types of authentication."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 164,
+    "qid": "Q233",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "What is a difference between local AP mode and FlexConnect AP mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Local AP mode creates two CAPWAP tunnels per AP to the WLC"
+      },
+      {
+        "label": "B",
+        "text": "Local AP mode causes the AP to behave as if it were an autonomous AP"
+      },
+      {
+        "label": "C",
+        "text": "FlexConnect AP mode fails to function if the AP loses connectivity with the WLC"
+      },
+      {
+        "label": "D",
+        "text": "FlexConnect AP mode bridges the traffic from the AP to the WLC when local switching is configured"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 167,
+    "qid": "Q238",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which state does the switch port move to when PortFast is enabled?",
+    "options": [
+      {
+        "label": "A",
+        "text": "blocking"
+      },
+      {
+        "label": "B",
+        "text": "listening"
+      },
+      {
+        "label": "C",
+        "text": "learning"
+      },
+      {
+        "label": "D",
+        "text": "forwarding"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 171,
+    "qid": "Q242",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. After the election process, what is the root bridge in the HQ LAN? Switch 1: 0C:E0:38:81:32:58 - Switch 2: 0C:0E:15:22:1A:61 - Switch 3: 0C:0E:15:1D:3C:9A - Switch 4: 0C:E0:19:A1:4D:16 -",
+    "options": [
+      {
+        "label": "A",
+        "text": "Switch 1"
+      },
+      {
+        "label": "B",
+        "text": "Switch 2"
+      },
+      {
+        "label": "C",
+        "text": "Switch 3"
+      },
+      {
+        "label": "D",
+        "text": "Switch 4"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 172,
+    "qid": "Q243",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "An engineer must establish a trunk link between two switches. The neighboring switch is set to trunk or desirable mode. What action should be taken?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure switchport nonegotiate"
+      },
+      {
+        "label": "B",
+        "text": "configure switchport mode dynamic desirable"
+      },
+      {
+        "label": "C",
+        "text": "configure switchport mode dynamic auto"
+      },
+      {
+        "label": "D",
+        "text": "configure switchport trunk dynamic desirable"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 173,
+    "qid": "Q244",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Which spanning-tree enhancement avoids the learning and listening states and immediately places ports in the forwarding state?",
+    "options": [
+      {
+        "label": "A",
+        "text": "BPDUfi lter"
+      },
+      {
+        "label": "B",
+        "text": "PortFast"
+      },
+      {
+        "label": "C",
+        "text": "Backbonefast"
+      },
+      {
+        "label": "D",
+        "text": "BPDUguard"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 174,
+    "qid": "Q245",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "How does the dynamically-learned MAC address feature function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The CAM table is empty until ingress traffic arrives at each port"
+      },
+      {
+        "label": "B",
+        "text": "Switches dynamically learn MAC addresses of each connecting CAM table."
+      },
+      {
+        "label": "C",
+        "text": "The ports are restricted and learn up to a maximum of 10 dynamically-learned addresses"
+      },
+      {
+        "label": "D",
+        "text": "It requires a minimum number of secure MAC addresses to be filled dynamically"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 176,
+    "qid": "Q247",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which command must be executed for Gi1/1 on SW1 to passively become a trunk port if Gi1/1 on SW2 is configured in desirable or trunk mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switchport mode dynamic auto"
+      },
+      {
+        "label": "B",
+        "text": "switchport mode dot1-tunnel"
+      },
+      {
+        "label": "C",
+        "text": "switchport mode dynamic desirable"
+      },
+      {
+        "label": "D",
+        "text": "switchport mode trunk"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 177,
+    "qid": "Q248",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The entire contents or the MAC address table are shown. Sales-4 sends a data frame to Sales-1. What does the switch do as it receives the frame from Sales-4?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Map the Layer 2 MAC address to the Layer 3 IP address and forward the frame."
+      },
+      {
+        "label": "B",
+        "text": "Insert the source MAC address and port into the forwarding table and forward the frame to Sales-1."
+      },
+      {
+        "label": "C",
+        "text": "Perform a lookup in the MAC address table and discard the frame due to a missing entry."
+      },
+      {
+        "label": "D",
+        "text": "Flood the frame out of all ports except on the port where Sales-1 is connected."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 178,
+    "qid": "Q249",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer must configure GigabitEthernet1/1 to accommodate voice and data traffic. Which configuration accomplishes this task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface gigabitethernet1/1 switchport mode access switchport access vlan 300 switchport voice vlan 400"
+      },
+      {
+        "label": "B",
+        "text": "interface gigabitethernet1/1 switchport mode trunk switchport trunk vlan 300 switchport trunk vlan 400"
+      },
+      {
+        "label": "C",
+        "text": "interface gigabitethernet1/1 switchport mode access switchport voice vlan 300 switchport access vlan 400"
+      },
+      {
+        "label": "D",
+        "text": "interface gigabitethernet1/1 switchport mode trunk switchport trunk vlan 300 switchport voice vlan 400"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 179,
+    "qid": "Q250",
+    "batch": "batch1",
+    "type": "Single Choice",
+    "prompt": "An engineer needs to add an old switch back into a network. To prevent the switch from corrupting the VLAN database, with action must be taken?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Add the switch in the VTP domain with a lower revision number."
+      },
+      {
+        "label": "B",
+        "text": "Add the switch in the VTP domain with a higher revision number."
+      },
+      {
+        "label": "C",
+        "text": "Add the switch with DTP set to dynamic desirable."
+      },
+      {
+        "label": "D",
+        "text": "Add the switch with DTP set to desirable."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

@@ -1,0 +1,686 @@
+[
+  {
+    "id": 464,
+    "qid": "Q600",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which QoS tool can you use to optimize voice traffic on a network that is primarily intended for data traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "WRED"
+      },
+      {
+        "label": "B",
+        "text": "FIFO"
+      },
+      {
+        "label": "C",
+        "text": "PQ"
+      },
+      {
+        "label": "D",
+        "text": "WFQ"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 465,
+    "qid": "Q601",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Users on existing VLAN 100 can reach sites on the Internet. Which action must the administrator take to establish connectivity to the Internet for users in VLAN 200?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Define a NAT pool on the router."
+      },
+      {
+        "label": "B",
+        "text": "configure the ip nat outside command on another interface for VLAN 200"
+      },
+      {
+        "label": "C",
+        "text": "configure static NAT translations for VLAN 200."
+      },
+      {
+        "label": "D",
+        "text": "Update the NAT_INSIDE_RANGES ACL."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 466,
+    "qid": "Q602",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "An organization secures its network with multi-factor authentication using an authenticator app on employee smartphones. How is the application secured in the case of a user's smartphone being lost or stolen?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The application requires the user to enter a PIN before it provides the second factor"
+      },
+      {
+        "label": "B",
+        "text": "The application requires an administrator password to reactivate after a configured interval"
+      },
+      {
+        "label": "C",
+        "text": "The application verifies that the user is in a specific location before it provides the second factor"
+      },
+      {
+        "label": "D",
+        "text": "The application challenges a user by requiring an administrator password to reactivate when the smartphone is rebooted"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 467,
+    "qid": "Q603",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which device performs stateful inspection of traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "switch"
+      },
+      {
+        "label": "B",
+        "text": "firewall"
+      },
+      {
+        "label": "C",
+        "text": "access point"
+      },
+      {
+        "label": "D",
+        "text": "wireless controller"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 468,
+    "qid": "Q604",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "A network administrator enabled port security on a switch interface connected to a printer. What is the next configuration action in order to allow the port to learn the MAC address of the printer and insert it into the table automatically?",
+    "options": [
+      {
+        "label": "A",
+        "text": "enable dynamic MAC address learning"
+      },
+      {
+        "label": "B",
+        "text": "implement static MAC addressing"
+      },
+      {
+        "label": "C",
+        "text": "enable sticky MAC addressing"
+      },
+      {
+        "label": "D",
+        "text": "implement auto MAC address learning"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 469,
+    "qid": "Q605",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer booted a new switch and applied this configuration via the console port. Which additional configuration must be applied to allow administrators to authenticate directly to enable privilege mode via Telnet using a local username and password?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#username admin R1(config-if)#line vty 0 4 R1(config-line)#password [email protected] R1(config-line)#transport input telnet"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#username admin privilege 15 secret [email protected] R1(config-if)#line vty 0 4 R1(config-line)#login local"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#username admin secret [email protected] R1(config-if)#line vty 0 4 R1(config-line)#login local R1(config)#enable secret [email protected]"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#username admin R1(config-if)#line vty 0 4 R1(config-line)#password [email protected]"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 470,
+    "qid": "Q606",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which effect does the aaa new-model configuration command have?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It enables AAA services on the device."
+      },
+      {
+        "label": "B",
+        "text": "It configures the device to connect to a RADIUS server for AAA."
+      },
+      {
+        "label": "C",
+        "text": "It associates a RADIUS server to the group."
+      },
+      {
+        "label": "D",
+        "text": "It configures a local user on the device."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 471,
+    "qid": "Q608",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which technology must be implemented to configure network device monitoring with the highest security?",
+    "options": [
+      {
+        "label": "A",
+        "text": "IP SLA"
+      },
+      {
+        "label": "B",
+        "text": "syslog"
+      },
+      {
+        "label": "C",
+        "text": "NetFlow"
+      },
+      {
+        "label": "D",
+        "text": "SNMPv3"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 472,
+    "qid": "Q610",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which statement about the interface that generated the output is true?",
+    "options": [
+      {
+        "label": "A",
+        "text": "A syslog message is generated when a violation occurs."
+      },
+      {
+        "label": "B",
+        "text": "One secure MAC address is manually configured on the interface."
+      },
+      {
+        "label": "C",
+        "text": "One secure MAC address is dynamically learned on the interface."
+      },
+      {
+        "label": "D",
+        "text": "Five secure MAC addresses are dynamically learned on the interface."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 478,
+    "qid": "Q620",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which configuration is needed to generate an RSA key for SSH on a router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure VTY access."
+      },
+      {
+        "label": "B",
+        "text": "configure the version of SSH."
+      },
+      {
+        "label": "C",
+        "text": "Assign a DNS domain name."
+      },
+      {
+        "label": "D",
+        "text": "Create a user with a password."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 480,
+    "qid": "Q624",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration for RTR-1 denies SSH access from PC-1 to any RTR-1 interface and allows all other traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B."
+      },
+      {
+        "label": "C",
+        "text": "D."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 481,
+    "qid": "Q626",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "The service password-encryption command is entered on a router. What is the effect of this configuration?",
+    "options": [
+      {
+        "label": "A",
+        "text": "restricts unauthorized users from viewing clear-text passwords in the running configuration"
+      },
+      {
+        "label": "B",
+        "text": "prevents network administrators from configuring clear-text passwords"
+      },
+      {
+        "label": "C",
+        "text": "protects the VLAN database from unauthorized PC connections on the switch"
+      },
+      {
+        "label": "D",
+        "text": "encrypts the password exchange when a VPN tunnel is established"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 482,
+    "qid": "Q627",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which WPA3 enhancement protects against hackers viewing traffic on the Wi-Fi network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SAE encryption"
+      },
+      {
+        "label": "B",
+        "text": "TKIP encryption"
+      },
+      {
+        "label": "C",
+        "text": "scrambled encryption key"
+      },
+      {
+        "label": "D",
+        "text": "AES encryption"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 483,
+    "qid": "Q628",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. If the network environment is operating normally, which type of device must be connected to interface fastethernet 0/1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "DHCP client"
+      },
+      {
+        "label": "B",
+        "text": "access point"
+      },
+      {
+        "label": "C",
+        "text": "router"
+      },
+      {
+        "label": "D",
+        "text": "PC"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 484,
+    "qid": "Q629",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An administrator configures four switches for local authentication using passwords that are stored as a cryptographic hash. The four switches must also support SSH access for administrators to manage the network infrastructure. Which switch is configured correctly to meet these requirements?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 487,
+    "qid": "Q632",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which type of wireless encryption is used for WPA2 in preshared key mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "AES-128"
+      },
+      {
+        "label": "B",
+        "text": "TKIP with RC4"
+      },
+      {
+        "label": "C",
+        "text": "AES-256"
+      },
+      {
+        "label": "D",
+        "text": "RC4"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 488,
+    "qid": "Q634",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which command prevents passwords from being stored in the configuration as plain text on a router or switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "enable secret"
+      },
+      {
+        "label": "B",
+        "text": "enable password"
+      },
+      {
+        "label": "C",
+        "text": "service password-encryption"
+      },
+      {
+        "label": "D",
+        "text": "username cisco password encrypt"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 489,
+    "qid": "Q635",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer must block access for all computers on VLAN 20 to the web server via HTTP. All other computers must be able to access the web server. Which configuration when applied to switch A accomplishes the task?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B."
+      },
+      {
+        "label": "C",
+        "text": "D."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 490,
+    "qid": "Q637",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which goal is achieved by the implementation of private IPv4 addressing on a network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "provides an added level of protection against Internet exposure"
+      },
+      {
+        "label": "B",
+        "text": "provides a reduction in size of the forwarding table on network routers"
+      },
+      {
+        "label": "C",
+        "text": "allows communication across the Internet to other private networks"
+      },
+      {
+        "label": "D",
+        "text": "allows servers and workstations to communicate across public network boundaries"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 491,
+    "qid": "Q638",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Which type of attack is mitigated by dynamic ARP inspection?",
+    "options": [
+      {
+        "label": "A",
+        "text": "DDoS"
+      },
+      {
+        "label": "B",
+        "text": "malware"
+      },
+      {
+        "label": "C",
+        "text": "man-in-the-middle"
+      },
+      {
+        "label": "D",
+        "text": "worm"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 492,
+    "qid": "Q639",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a function of a remote access VPN?",
+    "options": [
+      {
+        "label": "A",
+        "text": "establishes a secure tunnel between two branch sites"
+      },
+      {
+        "label": "B",
+        "text": "uses cryptographic tunneling to protect the privacy of data for multiple users simultaneously"
+      },
+      {
+        "label": "C",
+        "text": "used exclusively when a user is connected to a company's internal network"
+      },
+      {
+        "label": "D",
+        "text": "allows the users to access company internal network resources through a secure tunnel"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 495,
+    "qid": "Q643",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "What is a practice that protects a network from VLAN hopping attacks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable dynamic ARP inspection"
+      },
+      {
+        "label": "B",
+        "text": "configure an ACL to prevent traffic from changing VLANs"
+      },
+      {
+        "label": "C",
+        "text": "Change native VLAN to an unused VLAN ID"
+      },
+      {
+        "label": "D",
+        "text": "Implement port security on internet-facing VLANs"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 496,
+    "qid": "Q644",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "Where does a switch maintain DHCP snooping information?",
+    "options": [
+      {
+        "label": "A",
+        "text": "In the CAM table"
+      },
+      {
+        "label": "B",
+        "text": "In the frame forwarding database"
+      },
+      {
+        "label": "C",
+        "text": "In the MAC address table"
+      },
+      {
+        "label": "D",
+        "text": "In the binding database"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 497,
+    "qid": "Q645",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "A network administrator must configure SSH for remote access to router R1. The requirement is to use a public and private key pair to encrypt management traffic to and from the connecting client. Which configuration, when applied, meets the requirements?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1#enable R1#configure terminal R1(config)#ip domain-name cisco.com R1(config)#crypto key generate ec keysize 1024"
+      },
+      {
+        "label": "B",
+        "text": "R1#enable R1#configure terminal R1(config)#ip domain-name cisco.com R1(config)#crypto key generate ec keysize 2048"
+      },
+      {
+        "label": "C",
+        "text": "R1#enable R1#configure terminal R1(config)#ip domain-name cisco.com R1(config)#crypto key encrypt rsa name myKey"
+      },
+      {
+        "label": "D",
+        "text": "R1#enable R1#configure terminal R1(config)#ip domain-name cisco.com R1(config)#crypto key generate rsa modulus 1024"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 498,
+    "qid": "Q646",
+    "batch": "batch3",
+    "type": "Single Choice",
+    "prompt": "When a WLAN with WPA2 PSK is configured in the Wireless LAN Controller GUI, which format is supported?",
+    "options": [
+      {
+        "label": "A",
+        "text": "decimal"
+      },
+      {
+        "label": "B",
+        "text": "ASCII"
+      },
+      {
+        "label": "C",
+        "text": "unicode"
+      },
+      {
+        "label": "D",
+        "text": "base64"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  }
+]

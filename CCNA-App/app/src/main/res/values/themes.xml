@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.CCNA" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:statusBarColor">#0b0f19</item>
+        <item name="android:navigationBarColor">#0b0f19</item>
+    </style>
+</resources>

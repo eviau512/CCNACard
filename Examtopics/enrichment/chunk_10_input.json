@@ -1,0 +1,702 @@
+[
+  {
+    "id": 339,
+    "qid": "Q452",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the next hop for traffic entering R1 with a destination of 10.1.2.126?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.165.20.126"
+      },
+      {
+        "label": "B",
+        "text": "10.165.20.146"
+      },
+      {
+        "label": "C",
+        "text": "10.165.20.166"
+      },
+      {
+        "label": "D",
+        "text": "10.165.20.226"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 340,
+    "qid": "Q453",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which prefix did router R1 learn from internal EIGRP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "192.168.3.0/24"
+      },
+      {
+        "label": "B",
+        "text": "192.168.1.0/24"
+      },
+      {
+        "label": "C",
+        "text": "172.16.1.0/24"
+      },
+      {
+        "label": "D",
+        "text": "192.168.2.0/24"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 341,
+    "qid": "Q454",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. R5 is the current DR on the network, and R4 is the BDR. Their interfaces are flapping, so a network engineer wants the OSPF network to elect a different DR and BDR. Which set of configurations must the engineer implement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R4(config)#interface gi0/0 R4(config-if)#ip ospf priority 20 R5(config)#interface gi0/0 R5(config-if)#ip ospf priority 10"
+      },
+      {
+        "label": "B",
+        "text": "R5(config)#interface gi0/0 R5(config-if)#ip ospf priority 120 R4(config)#interface gi0/0 R4(config-if)#ip ospf priority 110"
+      },
+      {
+        "label": "C",
+        "text": "R3(config)#interface gi0/0 R3(config-if)#ip ospf priority 255 R2(config)#interface gi0/0 R2(config-if)#ip ospf priority 240"
+      },
+      {
+        "label": "D",
+        "text": "R2(config)#interface gi0/0 R2(config-if)#ip ospf priority 259 R3(config)#interface gi0/0 R3(config-if)#ip ospf priority 256"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 342,
+    "qid": "Q455",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Web traffic is coming in from the WAN interface. Which route takes precedence when the router is processing traffic destined for the LAN network at 10.0.10.0/24?",
+    "options": [
+      {
+        "label": "A",
+        "text": "via next-hop 10.0.1.5"
+      },
+      {
+        "label": "B",
+        "text": "via next-hop 10.0.1.4"
+      },
+      {
+        "label": "C",
+        "text": "via next-hop 10.0.1.50"
+      },
+      {
+        "label": "D",
+        "text": "via next-hop 10.0.1.100"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 343,
+    "qid": "Q456",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A packet sourced from 10.10.10.1 is destined for 10.10.8.14. What is the subnet mask of the destination route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "255.255.254.0"
+      },
+      {
+        "label": "B",
+        "text": "255.255.255.240"
+      },
+      {
+        "label": "C",
+        "text": "255.255.255.248"
+      },
+      {
+        "label": "D",
+        "text": "255.255.255.252"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 344,
+    "qid": "Q457",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. An engineer must configure router R2 so it is elected as the DR on the WAN subnet. Which command sequence must be configured?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface gigabitethernet0/0 ip address 10.0.0.34 255.255.255.248 ip ospf priority 0"
+      },
+      {
+        "label": "B",
+        "text": "interface gigabitethernet0/0 ip address 10.0.0.34 255.255.255.224 ip ospf priority 100"
+      },
+      {
+        "label": "C",
+        "text": "interface gigabitethernet0/0 ip address 10.0.1.1 255.255.255.0 ip ospf priority 255"
+      },
+      {
+        "label": "D",
+        "text": "interface gigabitethernet0/0 ip address 10.0.1.1 255.255.255.224 ip ospf priority 98"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 345,
+    "qid": "Q458",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "An engineer is configuring router R1 with an IPv6 static route for prefix 2019:C15C:0CAF:E001::/64. The next hop must be 2019:C15C:0CAF:E002::1. The route must be reachable via the R1 Gigabit 0/0 interface. Which command configures the designated route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config-if)#ip route 2019:C15C:0CAF:E001::/64 GigabitEthernet 0/0"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#ip route 2019:C15C:0CAF:E001::/64 GigabitEthernet 0/0"
+      },
+      {
+        "label": "C",
+        "text": "R1(config-if)#ipv6 route 2019:C15C:0CAF:E001::/64 2019:C15C:0CAF:E002::1"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#ipv6 route 2019:C15C:0CAF:E001::/64 2019:C15C:0CAF:E002::1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 346,
+    "qid": "Q459",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which IPv6 configuration is required for R17 to successfully ping the WAN interface on R18?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R17# ! no ip domain lookup ip cef ipv6 cef ! interface FastEthernet0/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:2::201/64 ! Interface FastEthernet1/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:3::201/64 ! no cdp log mismatch Duplex ipv6 route 2001:DB8:4::/64 2001:DB8:4::302"
+      },
+      {
+        "label": "B",
+        "text": "R17# ! no ip domain lookup ip cef ipv6 unicast-routing ! interface FastEthernet0/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:2::201/64 ! Interface FastEthernet1/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:3::201/64 ! no cdp log mismatch duplex ipv6 route 2001:DB8:4::/64 2001:DB8:3::301"
+      },
+      {
+        "label": "C",
+        "text": "R17# ! no ip domain lookup ip cef ! interface FastEthernet0/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:3::201/64 ! Interface FastEthernet1/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:2::201/64 ! no cdp log mismatch duplex ipv6 route 2001:DB8:4::/64 2001:DB8:5::101"
+      },
+      {
+        "label": "D",
+        "text": "R17# ! no ip domain lookup ip cef ipv6 unicast-routing ! interface FastEthernet0/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:2::201/64 ! Interface FastEthernet1/0 no ip address duplex auto speed auto ipv6 address 2001:DB8:3::201/64 ! no cdp log mismatch duplex ipv6 route 2001:DB8:4::/64 2001:DB8:2::201"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 348,
+    "qid": "Q461",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "OSPF must be configured between routers R1 and R2. Which OSPF configuration must be applied to router R1 to avoid a DR'BDR election?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router ospf 1 network 192.168.1.1 0.0.0.0 area 0 interface e1/1 ip address 192.168.1.1 255.255.255.252 ip ospf cost 0"
+      },
+      {
+        "label": "B",
+        "text": "router ospf 1 network 192.168.1.1 0.0.0.0 area 0 hello interval 15 interface e1/1 ip address 192.168.1.1 255.255.255.252"
+      },
+      {
+        "label": "C",
+        "text": "router ospf 1 network 192.168.1.1 0.0.0.0 area 0 interface e1/1 ip address 192.168.1.1 255.255.255.252 ip ospf network broadcast"
+      },
+      {
+        "label": "D",
+        "text": "router ospf 1 network 192.168.1.1 0.0.0.0 area 0 interface e1/1 ip address 192.168.1.1 255.255.255.252 ip ospf network point-to-point"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 350,
+    "qid": "Q463",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router R1 currently is configured to use R3 as the primary route to the internet, and the route uses the default administrative distance settings. A network engineer must configure R1 so that it uses R2 as a backup, but only if R3 goes down. Which command must the engineer configure on R1 so that it correctly uses R2 as a backup route, without changing the administrative distance configuration on the link to R3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 0.0.0.0 0.0.0.0 209.165.201.5.10"
+      },
+      {
+        "label": "B",
+        "text": "ip route 0.0.0.0 0.0.0.0 g0/1 1"
+      },
+      {
+        "label": "C",
+        "text": "ip route 0.0.0.0 0.0.0.0 209.165.200.226 1"
+      },
+      {
+        "label": "D",
+        "text": "ip route 0.0.0.0 0.0.0.0 g0/1 6"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 351,
+    "qid": "Q464",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which action must be taken to ensure that router A is elected as the DR for OSPF area 0?",
+    "options": [
+      {
+        "label": "A",
+        "text": "configure the router A interfaces with the highest OSPF priority value within the area"
+      },
+      {
+        "label": "B",
+        "text": "configure router B and router C as OSPF neighbors of router A"
+      },
+      {
+        "label": "C",
+        "text": "configure the OSPF priority on router A with the lowest value between the three routers."
+      },
+      {
+        "label": "D",
+        "text": "configure router A with a fixed OSPF router ID"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 352,
+    "qid": "Q465",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Packets received by the router from BGP enter via a serial interface at 209.165.201.10. Each route is present within the routing table. Which interface is used to forward traffic with a destination IP of 10.10 10 24?",
+    "options": [
+      {
+        "label": "A",
+        "text": "F0/10"
+      },
+      {
+        "label": "B",
+        "text": "F0/11"
+      },
+      {
+        "label": "C",
+        "text": "F0/12"
+      },
+      {
+        "label": "D",
+        "text": "F0/1"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 353,
+    "qid": "Q466",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. If OSPF is running on this network, how does Router2 handle traffic from Site B to 10.10.13.128/25 at Site A?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It sends packets out of interface Fa0/1."
+      },
+      {
+        "label": "B",
+        "text": "It sends packets out of interface Fa0/2."
+      },
+      {
+        "label": "C",
+        "text": "It load-balances traffic out of Fa0/1 and Fa0/2."
+      },
+      {
+        "label": "D",
+        "text": "It is unreachable and discards the traffic."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 354,
+    "qid": "Q467",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router R1 resides in OSPF Area 0. After updating the R1 configuration to influence the paths that it will use to direct traffic, an engineer verified that each of the four Gigabit interfaces has the same route to 10 10.0.0/16. Which interface will R1 choose to send traffic to reach the route?",
+    "options": [
+      {
+        "label": "A",
+        "text": "GigabitEthernet0/0"
+      },
+      {
+        "label": "B",
+        "text": "GigabitEthernet0/1"
+      },
+      {
+        "label": "C",
+        "text": "GigabitEthernet0/2"
+      },
+      {
+        "label": "D",
+        "text": "GigabitEthernet0/3"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 355,
+    "qid": "Q468",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which network prefix was learned via EIGRP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "172.160.0/16"
+      },
+      {
+        "label": "B",
+        "text": "207.165.200.0/24"
+      },
+      {
+        "label": "C",
+        "text": "192.168.1.0/24"
+      },
+      {
+        "label": "D",
+        "text": "192.168.2.0/24"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 356,
+    "qid": "Q469",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which command must be issued to enable a floating static default route on router A?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 0.0.0.0 0.0.0.0 192.168.1.2 10"
+      },
+      {
+        "label": "B",
+        "text": "ip route 0.0.0.0 0.0.0.0 192.168.1.2"
+      },
+      {
+        "label": "C",
+        "text": "ip default-gateway 192.168.2.1"
+      },
+      {
+        "label": "D",
+        "text": "ip route 0.0.0.0 0.0.0.0 192.168.2.1 10"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 357,
+    "qid": "Q470",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration allows routers R14 and R86 to form an OSPFv2 adjacency while acting as a central point for exchanging OSPF information between routers?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R14# interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf network broadcast ip ospf priority 0 ip mtu 1400 router ospf 10 router-id 10.10.1.14 network 10.10.1.14 0.0.0.0 area0 network 10.73.65.64 0.0.0.3 area0 R86# interface Loopback0 ip address 10.10.1.86 255.255.255.255 interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip ospf network broadcast ip mtu 1500 router ospf 10 router-id 10.10.1.86 network 10.10.1.86 0.0.0.0 area 0 network 10.73.65.64 0.0.0.3 area 0"
+      },
+      {
+        "label": "B",
+        "text": "R14# interface Loopback0 ip ospf 10 area 0 interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf network broadcast ip ospf 10 area 0 ip mtu 1500 router ospf 10 ip ospf priority 255 router-id 10.10.1 14 R86# interface Loopback0 ip ospf 10 area 0 interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip ospf network broadcast ip ospf 10 area 0 ip mtu 1500 router ospf 10 router-id 10.10.1.86"
+      },
+      {
+        "label": "C",
+        "text": "R14# interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf network broadcast ip ospf priority 255 ip mtu 1500 router ospf 10 router-id 10.10.1.14 network 10.10.1.14 0.0.0.0 area0 network 10.73.65.64 0.0.0.3 area0 R86# interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip ospf network broadcast ip mtu 1500 router ospf 10 router-id 10.10.1.86 network 10.10.1.86 0.0.0.0 area 0 network 10.73.65.64 0.0.0.3 area 0"
+      },
+      {
+        "label": "D",
+        "text": "R14# interface FastEthernet0/0 ip address 10.73.65.65 255.255.255.252 ip ospf network broadcast ip ospf priority 255 ip mtu 1500 router ospf 10 router-id 10.10.1.14 network 10.10.1.14 0.0.0.0 area0 network 10.73.65.64 0.0.0.3 area0 R86# interface FastEthernet0/0 ip address 10.73.65.66 255.255.255.252 ip ospf network broadcast ip mtu 1400 router ospf 10 router-id 10.10.1.86 network 10.10.1.86 0.0.0.0 area 0 network 10.73.65.64 0.0.0.3 area 0"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 358,
+    "qid": "Q471",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. When an administrator executes the show ip route command on router D to view its routing table, which value is displayed for the administrative distance for the route to network 192.168 1.0?",
+    "options": [
+      {
+        "label": "A",
+        "text": "110"
+      },
+      {
+        "label": "B",
+        "text": "120"
+      },
+      {
+        "label": "C",
+        "text": "170"
+      },
+      {
+        "label": "D",
+        "text": "90"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 359,
+    "qid": "Q472",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit Routers R1 and R2 have been configured with their respective LAN interfaces. The two circuits are operational and reachable across WAN. Which command set establishes failover redundancy if the primary circuit goes down?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.6 R2(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.5"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#ip route 10.10.13.10 255.255.255.255 10.10.10.2 R2(config)#ip route 192.168.0.100 255.255.255.255 10.10.10.1"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#ip route 10.10.13.10 255.255.255.255 10.10.10.6 R2(config)#ip route 192.168.0.100 255.255.255.255 10.10.10.5"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.6 2 R2(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.5 2"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 360,
+    "qid": "Q473",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. R1 learns all routes via OSPF. Which command configures a backup static route on R1 to reach the 192.168.20 0/24 network via R3?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#ip route 192.168.20.0 255.255.255.0 192.168.30.2 111"
+      },
+      {
+        "label": "B",
+        "text": "R1(config)#ip route 192.168.20.0 255.255.255.0 192.168.30.2 90"
+      },
+      {
+        "label": "C",
+        "text": "R1(config)#ip route 192.168.20.0 255.255.0.0 192.168.30.2"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#ip route 192.168.20.0 255.255.255.0 192.168.30.2"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 361,
+    "qid": "Q474",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. R1 has taken the DROTHER role in the OSPF DR/BDR election process. Which configuration must an engineer implement so that R1 is elected as the DR?",
+    "options": [
+      {
+        "label": "A",
+        "text": "R1(config)#interface FastEthernet 0/0 R1(config-if)#ip ospf priority 1 R1#clear ip ospf process"
+      },
+      {
+        "label": "B",
+        "text": "R3(config)#interface FastEthernet 0/1 R3(config-if)#ip ospf priority 200 R3#clear ip ospf process"
+      },
+      {
+        "label": "C",
+        "text": "R2(config)#interface FastEthernet 0/2 R2(config-if)#ip ospf priority 1 R2#clear ip ospf process"
+      },
+      {
+        "label": "D",
+        "text": "R1(config)#interface FastEthernet 0/0 R1(config-if)#ip ospf priority 200 R1#clear ip ospf process"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 362,
+    "qid": "Q475",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Which SDN plane forwards user-generated traffic?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Management plane"
+      },
+      {
+        "label": "B",
+        "text": "Control plane"
+      },
+      {
+        "label": "C",
+        "text": "Policy plane"
+      },
+      {
+        "label": "D",
+        "text": "Data plane"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 363,
+    "qid": "Q476",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "An application in the network is being scaled up from 300 servers to 600. Each server requires 3 network connections to support production, backup, and management traffic. Each connection resides on a different subnet. The router configuration for the production network must be configured first using a subnet in the 10.0.0.0/8 network. Which command must be configured on the interface of the router to accommodate the requirements and limit wasted IP address space?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip address 10.10.10.1 255.255.254.0"
+      },
+      {
+        "label": "B",
+        "text": "ip address 10.10.10.1 255.255.252.0"
+      },
+      {
+        "label": "C",
+        "text": "ip address 10.10.10.1 255.255.240.0"
+      },
+      {
+        "label": "D",
+        "text": "ip address 10.10.10.1 255.255.255.240"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 364,
+    "qid": "Q477",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which interface is chosen to forward traffic to the host at 192.168.0.55?",
+    "options": [
+      {
+        "label": "A",
+        "text": "GigabitEthernet0/3"
+      },
+      {
+        "label": "B",
+        "text": "Null0"
+      },
+      {
+        "label": "C",
+        "text": "GigabitEthernet0/1"
+      },
+      {
+        "label": "D",
+        "text": "GigabitEthernet0/2"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 365,
+    "qid": "Q478",
+    "batch": "batch2",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The administrator must configure a floating static default route that points to 2001:db8:1234:2::1 and replaces the current default route only if it fails. Which command must the engineer configure on the CPE?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ipv6 route ::/0 2001:db8:1234:2::1 3"
+      },
+      {
+        "label": "B",
+        "text": "ipv6 route ::/128 2001:db8:1234:2::1 3"
+      },
+      {
+        "label": "C",
+        "text": "ipv6 route ::/0 2001:db8:1234:2::1 1"
+      },
+      {
+        "label": "D",
+        "text": "ipv6 route ::/0 2001:db8:1234:2::1 2"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

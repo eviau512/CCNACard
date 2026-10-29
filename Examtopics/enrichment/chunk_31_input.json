@@ -1,0 +1,702 @@
+[
+  {
+    "id": 914,
+    "qid": "Q1225",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which protocol does a REST API use to communicate?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SSH"
+      },
+      {
+        "label": "B",
+        "text": "STP"
+      },
+      {
+        "label": "C",
+        "text": "SNMP"
+      },
+      {
+        "label": "D",
+        "text": "HTTP"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 915,
+    "qid": "Q1226",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface on the WLC is limited to one when LAG is in use?",
+    "options": [
+      {
+        "label": "A",
+        "text": "service"
+      },
+      {
+        "label": "B",
+        "text": "virtual"
+      },
+      {
+        "label": "C",
+        "text": "trunk"
+      },
+      {
+        "label": "D",
+        "text": "AP-manager"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 916,
+    "qid": "Q1227",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A newly configured PC fails to connect to the internet by using TCP port 80 to www.cisco.com. Which setting must be Modified for the connection to work?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Subnet Mask"
+      },
+      {
+        "label": "B",
+        "text": "DNS Servers"
+      },
+      {
+        "label": "C",
+        "text": "Default Gateway"
+      },
+      {
+        "label": "D",
+        "text": "DHCP Servers"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 917,
+    "qid": "Q1228",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which fact must the engineer consider when implementing syslog on a new network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Syslog defines the software or hardware component that triggered the message."
+      },
+      {
+        "label": "B",
+        "text": "There are 16 different logging levels (0-15)."
+      },
+      {
+        "label": "C",
+        "text": "The logging level defines the severity of a particular message."
+      },
+      {
+        "label": "D",
+        "text": "By default, all message levels are sent to the syslog server."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 918,
+    "qid": "Q1229",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "In what way does a network supervisor reduce maintenance costs while maintaining network integrity on a traditionally managed network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "They install an automated network-monitoring system to provide early warning of network issues."
+      },
+      {
+        "label": "B",
+        "text": "They employ additional network administrators to proactively manage the network."
+      },
+      {
+        "label": "C",
+        "text": "They use automation to centralize network-management tasks."
+      },
+      {
+        "label": "D",
+        "text": "They automate change-management processes that verify issue resolution."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 919,
+    "qid": "Q1230",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which type of wired port is required when an AP offers one unique SSID, passes client data and management traffic, and is in autonomous mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "trunk"
+      },
+      {
+        "label": "B",
+        "text": "default"
+      },
+      {
+        "label": "C",
+        "text": "access"
+      },
+      {
+        "label": "D",
+        "text": "LAG"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 920,
+    "qid": "Q1231",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A network engineer must configure the WLC to allow only DHCP and DNS packets for User1 and User2. Which configuration Must be used?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable Web Authentication for 802.1X standard in the Layer 2 Security configuration"
+      },
+      {
+        "label": "B",
+        "text": "Enable Fallback Policy with MAC filtering under the Layer 3 Security configuration"
+      },
+      {
+        "label": "C",
+        "text": "Enable Web policy and Authentication in the Layer 3 Security configuration."
+      },
+      {
+        "label": "D",
+        "text": "Enable Web Authentication under the AAA Server configuration on the WLAN."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 921,
+    "qid": "Q1232",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which connection type is used when an engineer connects to an AP without a configured IP address or dial-up number to manage the device?",
+    "options": [
+      {
+        "label": "A",
+        "text": "AUX"
+      },
+      {
+        "label": "B",
+        "text": "Ethernet"
+      },
+      {
+        "label": "C",
+        "text": "VIY"
+      },
+      {
+        "label": "D",
+        "text": "console"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 922,
+    "qid": "Q1233",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a function of a firewall on an enterprise network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It allows and denies ingress and egress traffic."
+      },
+      {
+        "label": "B",
+        "text": "It serves as a default gateway to hosts on the internet."
+      },
+      {
+        "label": "C",
+        "text": "It processes traffic based on stateless inspection."
+      },
+      {
+        "label": "D",
+        "text": "It acts as the intermediary device between the enterprise and its ISP."
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 923,
+    "qid": "Q1234",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which protocol is implemented when an organization must verify network performance, troubleshoot issues, and use an agent to communicate Between monitoring tools and end devices?",
+    "options": [
+      {
+        "label": "A",
+        "text": "FIP"
+      },
+      {
+        "label": "B",
+        "text": "NIP"
+      },
+      {
+        "label": "C",
+        "text": "NFS"
+      },
+      {
+        "label": "D",
+        "text": "SNMP"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 924,
+    "qid": "Q1235",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a difference between an IPv6 multicast address and an IPv6 anycast address?",
+    "options": [
+      {
+        "label": "A",
+        "text": "An IPv6 multicast address uses the prefix 2002::/15 and forwards to one destination, and an IPv6 anycast address uses the prefix ff00:/8 And forwards to any destination in a group."
+      },
+      {
+        "label": "B",
+        "text": "A packet sent to an IPv6 multicast address is delivered to one or more destinations at once, but a packet sent to an IPv6 anycast address is Routed to the closest interface with that address."
+      },
+      {
+        "label": "C",
+        "text": "IPV6 multicast addresses are used to transition from IPv4 to IPv6, and IPv6 anycast addresses are used for address aggregation in an IPv6- Only environment."
+      },
+      {
+        "label": "D",
+        "text": "An IPV6 multicast address is assigned to numerous interfaces within a subnet, but an IPv6 anycast address is used for a predefined group Of nodes in an all-IPv6 routers group."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 925,
+    "qid": "Q1236",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which syslog message logging level displays interface line protocol up/down events?",
+    "options": [
+      {
+        "label": "A",
+        "text": "informational"
+      },
+      {
+        "label": "B",
+        "text": "alerts"
+      },
+      {
+        "label": "C",
+        "text": "debugging"
+      },
+      {
+        "label": "D",
+        "text": "notifications"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 926,
+    "qid": "Q1237",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which device protects an internal network from the Internet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "router"
+      },
+      {
+        "label": "B",
+        "text": "firewall"
+      },
+      {
+        "label": "C",
+        "text": "access point"
+      },
+      {
+        "label": "D",
+        "text": "Layer 2 switch"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 927,
+    "qid": "Q1238",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which encryption mode is used when a packet is sent from a site-to-site VPN connection where the source and destination IP address portion of a Packet is unencrypted?",
+    "options": [
+      {
+        "label": "A",
+        "text": "PPTP"
+      },
+      {
+        "label": "B",
+        "text": "Secure Shell"
+      },
+      {
+        "label": "C",
+        "text": "Transport"
+      },
+      {
+        "label": "D",
+        "text": "PPPoE"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 928,
+    "qid": "Q1239",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a reason why an administrator would choose to implement an automated network management approach?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Enable \"box by box\" configuration and deployment."
+      },
+      {
+        "label": "B",
+        "text": "Decipher simple password policies."
+      },
+      {
+        "label": "C",
+        "text": "Reduce inconsistencies in the network configuration."
+      },
+      {
+        "label": "D",
+        "text": "Increase recurrent management costs."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 929,
+    "qid": "Q1240",
+    "batch": "batch5",
+    "type": "Multiple Choice",
+    "prompt": "Refer to the exhibit. The router R1 is in the process of being configured. Routers R2 and R3 are configured correctly for the new environment. Which two commands must be configured on R1 for PC1 to communicate to all PCs on the 10.10.10.0/24 network? (Choose two.)",
+    "options": [
+      {
+        "label": "A",
+        "text": "ip route 10.10.10.0 255.255.255.0 192.168.2.3 Ip route 10.10.10.10 255.255.255.255 192.168.2.2"
+      },
+      {
+        "label": "B",
+        "text": "ip route 10.10.10.0 255.255.255.0 192.168.2.2 Ip route 10.10.2.2 255.255.255.255 10.10.10.10"
+      },
+      {
+        "label": "C",
+        "text": "ip route 10.10.10.0 255.255.255.0 192.168.2.3 Ip route 10.10.10.8 255.255.255.252 g0/0"
+      },
+      {
+        "label": "D",
+        "text": "ip route 10.10.10.0 255.255.255.248 192.168.2.2 Ip route 10.10.2.8 255.255.255.252 g0/1"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 930,
+    "qid": "Q1241",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. A packet sourced from 172.18.33.2 is destined for 172.18.32.38. Where does the router forward the packet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.1.1.1"
+      },
+      {
+        "label": "B",
+        "text": "10.1.1.3"
+      },
+      {
+        "label": "C",
+        "text": "Loopback0"
+      },
+      {
+        "label": "D",
+        "text": "GigabitEthernet0/0"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 931,
+    "qid": "Q1243",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does a network administrator securely manage an AP in lightweight mode?",
+    "options": [
+      {
+        "label": "A",
+        "text": "using the AP GUI via an in-band SSH connection"
+      },
+      {
+        "label": "B",
+        "text": "using the CLI via an out-of-band connection"
+      },
+      {
+        "label": "C",
+        "text": "using the CLI via a virtual interface with SSH"
+      },
+      {
+        "label": "D",
+        "text": "using the WLC GUI via HTTPS"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 932,
+    "qid": "Q1244",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which type of protocol is VRRP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "allows two or more routers to act as a default gateway"
+      },
+      {
+        "label": "B",
+        "text": "uses Cisco-proprietary First Hop Redundancy Protocol"
+      },
+      {
+        "label": "C",
+        "text": "uses a destination IP address 224.0.0.102 for router-to-router communication"
+      },
+      {
+        "label": "D",
+        "text": "uses dynamic IP address assignment"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 933,
+    "qid": "Q1245",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The switch cat9k-acc-1 connects users to the campus LAN. Printing services are inaccessible through the network. Which interface issue is causing the connectivity problems?",
+    "options": [
+      {
+        "label": "A",
+        "text": "A bad checksum is causing Ethernet frames to drop."
+      },
+      {
+        "label": "B",
+        "text": "Excessive collisions are causing dropped frames."
+      },
+      {
+        "label": "C",
+        "text": "A large number of broadcast packets are resulting in a port reset."
+      },
+      {
+        "label": "D",
+        "text": "The interface output queue cannot process the Ethernet frames."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 934,
+    "qid": "Q1246",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which standard is required when more than one distribution system port and only one IP address are configured for a Cisco WLC?",
+    "options": [
+      {
+        "label": "A",
+        "text": "802.3ad"
+      },
+      {
+        "label": "B",
+        "text": "802.1q"
+      },
+      {
+        "label": "C",
+        "text": "802.1d"
+      },
+      {
+        "label": "D",
+        "text": "802.1af"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 935,
+    "qid": "Q1247",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which capability does TFTP provide?",
+    "options": [
+      {
+        "label": "A",
+        "text": "loads configuration files on systems without data storage devices"
+      },
+      {
+        "label": "B",
+        "text": "provides authentication for data communications over a private data network"
+      },
+      {
+        "label": "C",
+        "text": "provides encryption mechanisms for file transfer across a WAN"
+      },
+      {
+        "label": "D",
+        "text": "provides secure file access within the LAN"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 936,
+    "qid": "Q1248",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which action protects a network from VLAN hopping attacks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Implement port security on internet-facing VLANs."
+      },
+      {
+        "label": "B",
+        "text": "Change the native VLAN to an unused VLAN ID."
+      },
+      {
+        "label": "C",
+        "text": "Enable dynamic ARP inspection."
+      },
+      {
+        "label": "D",
+        "text": "Configure an ACL to prevent traffic from changing VLANs."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 937,
+    "qid": "Q1249",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What should a network administrator consider when deciding to implement automation?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Automated systems may have difficulty expanding network changes at scale."
+      },
+      {
+        "label": "B",
+        "text": "Network automation typically is limited to the configuration and management of virtual devices within a network."
+      },
+      {
+        "label": "C",
+        "text": "Network automation typically increases enterprise management operating costs."
+      },
+      {
+        "label": "D",
+        "text": "Manual changes frequently lead to configuration errors and inconsistencies."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 938,
+    "qid": "Q1250",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Company has decided to require multifactor authentication for all systems. Which set of parameters meets the requirement?",
+    "options": [
+      {
+        "label": "A",
+        "text": "personal 10-digit PIN and RSA certificate"
+      },
+      {
+        "label": "B",
+        "text": "complex password and personal 10-digit PIN"
+      },
+      {
+        "label": "C",
+        "text": "password of 8 to 15 characters and personal 12-digit PIN"
+      },
+      {
+        "label": "D",
+        "text": "fingerprint scanning and facial recognition"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  }
+]

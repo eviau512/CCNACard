@@ -1,0 +1,702 @@
+[
+  {
+    "id": 989,
+    "qid": "Q1322",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does MAC learning function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "overwrites the known source MAC address in the address table"
+      },
+      {
+        "label": "B",
+        "text": "enabled by default on all VLANs and interfaces"
+      },
+      {
+        "label": "C",
+        "text": "protects against denial of service attacks"
+      },
+      {
+        "label": "D",
+        "text": "forwards frames to a neighbor port using CDP"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 990,
+    "qid": "Q1324",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "How does MAC learning function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "sends a retransmission request when a new frame is received"
+      },
+      {
+        "label": "B",
+        "text": "enabled by default on all VLANs and interfaces"
+      },
+      {
+        "label": "C",
+        "text": "populates the ARP table with the egress port"
+      },
+      {
+        "label": "D",
+        "text": "protects against denial of service attacks"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 991,
+    "qid": "Q1326",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of frame switching?",
+    "options": [
+      {
+        "label": "A",
+        "text": "performs a lookup to learn the destination interface"
+      },
+      {
+        "label": "B",
+        "text": "disabled by default on all interfaces and VLANs"
+      },
+      {
+        "label": "C",
+        "text": "buffers and forwards frames with less than 5 CRCs"
+      },
+      {
+        "label": "D",
+        "text": "protects against denial of service attacks"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 992,
+    "qid": "Q1328",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a function of a Next-Generation IPS?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It analyzes and mitigates observed vulnerabilities in a network."
+      },
+      {
+        "label": "B",
+        "text": "It serves as a controller within a controller-based network"
+      },
+      {
+        "label": "C",
+        "text": "It integrates with a RADIUS server to enforce Layer 2 device authentication rules"
+      },
+      {
+        "label": "D",
+        "text": "It makes forwarding decisions based on learned MAC addresses"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 993,
+    "qid": "Q1330",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of encryption in wireless networks?",
+    "options": [
+      {
+        "label": "A",
+        "text": "prevents intercepted data from being easily read"
+      },
+      {
+        "label": "B",
+        "text": "uses a unidirectional handshake for authentication"
+      },
+      {
+        "label": "C",
+        "text": "intercepts data threats before they attack a network"
+      },
+      {
+        "label": "D",
+        "text": "uses integrity checks to identify forgery attacks"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 994,
+    "qid": "Q1331",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:9bb6:6bb9:C081:B6FF:FF4B:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:9bb6:6bb9:C001:6BFE:FF01:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:9bb6:6bb9:4679:824F:FE88:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:9bb6:6bb9:C801:B6FF:FEB8:1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 995,
+    "qid": "Q1332",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "What is a characteristic of a Layer 2 switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "tracks the number of active TCP connections"
+      },
+      {
+        "label": "B",
+        "text": "maintains stateful transaction information"
+      },
+      {
+        "label": "C",
+        "text": "filters based on a transport layer protocol"
+      },
+      {
+        "label": "D",
+        "text": "supports segmentation using tagging protocols"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 996,
+    "qid": "Q1333",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface is used to send traffic to the destination network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "F0/2"
+      },
+      {
+        "label": "B",
+        "text": "F0/20"
+      },
+      {
+        "label": "C",
+        "text": "F0/12"
+      },
+      {
+        "label": "D",
+        "text": "F0/10"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 997,
+    "qid": "Q1335",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which Rapid PVST+ feature should be configured on a switch port to immediately send traffic to a connected server as soon as it is active?",
+    "options": [
+      {
+        "label": "A",
+        "text": "portfast"
+      },
+      {
+        "label": "B",
+        "text": "uplinkfast"
+      },
+      {
+        "label": "C",
+        "text": "BPDU guard"
+      },
+      {
+        "label": "D",
+        "text": "loop guard"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 998,
+    "qid": "Q1339",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. PC1 regularly sends 1800 Mbps of traffic to the server. A network engineer needs to configure the EtherChannel to disable Port Channel 1 between SW1 and SW2 when the Ge0/0 and Ge0/1 ports on SW2 go down. Which configuration must the engineer apply to the Switch?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW2# configure terminal - SW2(config)# interface port-channel 4 SW2(config-if)# port-channel min-links 2"
+      },
+      {
+        "label": "B",
+        "text": "SW2# configure terminal - SW2(config)# interface port-channel 4 SW2(config-if)# lacp port-priority 32000"
+      },
+      {
+        "label": "C",
+        "text": "SW2# configure terminal - SW2(config)# interface port-channel 4 SW2(config-if)# lacp max-bundle 2"
+      },
+      {
+        "label": "D",
+        "text": "SW2# configure terminal - SW2(config)# lacp system-priority 32000"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 999,
+    "qid": "Q1341",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. PC1 tries to ping PC3 for the first time and sends out an ARP to S1. Which action is taken by S1?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It is flooded out every port except G0/0."
+      },
+      {
+        "label": "B",
+        "text": "It drops the frame."
+      },
+      {
+        "label": "C",
+        "text": "It forwards it out G0/3 only."
+      },
+      {
+        "label": "D",
+        "text": "It forwards it out interface G0/2 only."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1000,
+    "qid": "Q1342",
+    "batch": "batch5",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "duplex mismatch"
+      },
+      {
+        "label": "B",
+        "text": "high throughput"
+      },
+      {
+        "label": "C",
+        "text": "bad NIC"
+      },
+      {
+        "label": "D",
+        "text": "queueing"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1001,
+    "qid": "Q1343",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which set of commands must be applied to the two switches to configure an LACP Layer 2 EtherChannel?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode auto SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+      },
+      {
+        "label": "B",
+        "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode desirable SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+      },
+      {
+        "label": "C",
+        "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode on SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+      },
+      {
+        "label": "D",
+        "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode active SW2(config)#interface range f0/13 -14 SW2(config--range)#channel-group 1 mode passive"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1002,
+    "qid": "Q1345",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "How is noise defined in Wi-Fi?",
+    "options": [
+      {
+        "label": "A",
+        "text": "measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal"
+      },
+      {
+        "label": "B",
+        "text": "any interference that is not Wi-Fi traffic that degrades the desired signal"
+      },
+      {
+        "label": "C",
+        "text": "signals from other Wi-Fi networks that interfere with the local signal"
+      },
+      {
+        "label": "D",
+        "text": "ratio of signal-to-noise rating supplied by the wireless device"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1003,
+    "qid": "Q1346",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:8bb8:8bb1:C081:B8FF:FF4B:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:8bb8:8bb1:C001:8BFE:FF01:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:8bb8:8bb4:6792:43FF:EF87:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:8bb8:8bb1:C801:B8FF:FEB8:1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1004,
+    "qid": "Q1347",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "What is a characteristics of frame switching?",
+    "options": [
+      {
+        "label": "A",
+        "text": "floods unknown destinations to all ports except the receiving port"
+      },
+      {
+        "label": "B",
+        "text": "inspects and drops frames from unknown destinations"
+      },
+      {
+        "label": "C",
+        "text": "forwards frames to a neighbor port using CDP"
+      },
+      {
+        "label": "D",
+        "text": "protects against denial of service attacks"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1005,
+    "qid": "Q1005",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which interface condition is occurring in this output?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Duplex mismatch"
+      },
+      {
+        "label": "B",
+        "text": "High throughput"
+      },
+      {
+        "label": "C",
+        "text": "Bad NIC"
+      },
+      {
+        "label": "D",
+        "text": "Queueing"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1006,
+    "qid": "Q1006",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which set of commands must be applied to the two switches to configure an LACP Layer 2 EtherChannel?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1(config)#interface range f0/13 -14SW1(config-if-range)#channel-group 1 mode autoSW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+      },
+      {
+        "label": "B",
+        "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode desirable SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+      },
+      {
+        "label": "C",
+        "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode on SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+      },
+      {
+        "label": "D",
+        "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode active SW2(config)#interface range f0/13 -14 SW2(config--range)#channel-group 1 mode passive"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1007,
+    "qid": "Q1007",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "How is noise defined in Wi-Fi?",
+    "options": [
+      {
+        "label": "A",
+        "text": "measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal"
+      },
+      {
+        "label": "B",
+        "text": "any interference that is not Wi-Fi traffic that degrades the desired signal"
+      },
+      {
+        "label": "C",
+        "text": "signals from other Wi-Fi networks that interfere with the local signal"
+      },
+      {
+        "label": "D",
+        "text": "ratio of signal-to-noise rating supplied by the wireless device"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1008,
+    "qid": "Q1008",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured whichIpv6 address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:8bb8:8bb1:C081:B8FF:FF4B:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:8bb8:8bb1:C001:8BFE:FF01:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:8bb8:8bb4:6792:43FF:EF87:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:8bb8:8bb1:C801:B8FF:FEB8:1"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1009,
+    "qid": "Q1009",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "What is a characteristics of frame switching?",
+    "options": [
+      {
+        "label": "A",
+        "text": "floods unknown destinations to all ports except the receiving port"
+      },
+      {
+        "label": "B",
+        "text": "inspects and drops frames from unknown destinations"
+      },
+      {
+        "label": "C",
+        "text": "forwards frames to a neighbor port using CDP"
+      },
+      {
+        "label": "D",
+        "text": "protects against denial of service attacks"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1010,
+    "qid": "Q1010",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured whichIpv6 address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:9bb6:6bb9:C801:B6FF:FEB4:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:9bb6:6bb9:C001:6BFE:FF01:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:9bb6:6bb9:C081:B6FF:FF4B:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:9bb6:6bb9:4736:931F:FE37:1"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1011,
+    "qid": "Q1011",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the metric for the route to the 192.168.10.33 host?",
+    "options": [
+      {
+        "label": "A",
+        "text": "84"
+      },
+      {
+        "label": "B",
+        "text": "110"
+      },
+      {
+        "label": "C",
+        "text": "192"
+      },
+      {
+        "label": "D",
+        "text": "193"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1012,
+    "qid": "Q1012",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R1 must be configured using the EUI-64 format. When configured whichIpv6 address is produced by the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "2001:db8:8bb3:8bb1:C001:8BFE:FF31:1"
+      },
+      {
+        "label": "B",
+        "text": "2001:db8:8bb3:8bb1:C081:B8FF:FF3B:1"
+      },
+      {
+        "label": "C",
+        "text": "2001:db8:8bb3:8bb1:C801:B8FF:FEB3:1"
+      },
+      {
+        "label": "D",
+        "text": "2001:db8:8bb3:8bb4:7397:79FF:EF41:1"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1013,
+    "qid": "Q1013",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Re fer to the exhibit. A secondary route is required on router R1 to pass traffic to the LAN network on R2 if the primary link fails. WhichCommand must be entered to configure the router?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ip route 10.0.2.0 255.255.255.240 10.0.0.7 92"
+      },
+      {
+        "label": "B",
+        "text": "Ip route 10.0.2.0 255.255.255.240 10.0.0.6 91"
+      },
+      {
+        "label": "C",
+        "text": "Ip route 10.0.2.0 255.255.255.248 null0 93"
+      },
+      {
+        "label": "D",
+        "text": "Ip route 10.0.2.0 255.255.255.248 10.0.0.6 91"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]

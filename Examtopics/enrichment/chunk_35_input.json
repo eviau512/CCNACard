@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1014,
+    "qid": "Q1014",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. The LACP EtherChannel is configured, and the last change is to modify the interfaces on SwitchA to respond to packetsReceived, but not to initiate negotiation. The interface range gigabitethernet0/0/0-15 command is entered. What must be configured next?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SwitchA(config-if-range)#channel-group 1 mode auto"
+      },
+      {
+        "label": "B",
+        "text": "SwitchA(config-if-range)#channel-group 1 mode active"
+      },
+      {
+        "label": "C",
+        "text": "SwitchA(config-if-range)#channel-group 1 mode desirable"
+      },
+      {
+        "label": "D",
+        "text": "SwitchA(config-if-range)#channel-group 1 mode passive"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1015,
+    "qid": "Q1015",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Network services must be enabled on interface Gi1/0/34. Which configuration meets the needs for this implementation?",
+    "options": [
+      {
+        "label": "A",
+        "text": "interface Gi1/0/34 Switchport mode trunk Switchport Trunk allowed native vlan 400 Switchport Voice vlan 4041"
+      },
+      {
+        "label": "B",
+        "text": "interface Gi1/0/34 Switchport mode trunk Switchport Trunk allowed vlan 400, 4041 Switchport voice vlan 4041"
+      },
+      {
+        "label": "C",
+        "text": "interface Gi1/0/34 Switchport mode access Switchport Access vlan 400 Switchport voice vlan 4041"
+      },
+      {
+        "label": "D",
+        "text": "interface Gi1/0/34 Switchport mode access Switchport Access vlan 4041 Switchport voice vlan 400"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1016,
+    "qid": "Q1016",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. How will the device handle a packet destined to IP address 100.100.100.100?",
+    "options": [
+      {
+        "label": "A",
+        "text": "It will always prefer the static route over dynamic routes and choose the route S 100.100.0.0/16 [1/0] via 192.168.4.1."
+      },
+      {
+        "label": "B",
+        "text": "It will choose the route with the lowest metric,R 100.0.0.0/8 [120/2] via 192.168.3.1, 00:00:13, Ethernet0/3"
+      },
+      {
+        "label": "C",
+        "text": "It will choose the route with the highest metric, D 100.100.100.0/24 [90/435200] via 192.168.2.1, 00:00:13, Ethernet0/2."
+      },
+      {
+        "label": "D",
+        "text": "It will choose the route with the longest match, O 100.100.100.100/32 [110/21] via 192.168.1.1, 00:05:57, Ethernet0/1."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1017,
+    "qid": "Q1017",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refe r to the exhibit. Which switch in this configuration will be elected as the root bridge?SW1: 0C:E4:82:33:62:23 -SW2: 0C:0E:16:11:05:97 -SW3: 0C:E0:16:1A:3C:9D -SW4: 0C:00:18:A1:B3:19",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1018,
+    "qid": "Q1018",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch in this configuration will be elected as the root bridge?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1: 0C:4A:82.:65:62:72"
+      },
+      {
+        "label": "B",
+        "text": "SW2: 0C:0A:A8:1A:3C:9D"
+      },
+      {
+        "label": "C",
+        "text": "SW3: 0C:0A:18:81:B3:19"
+      },
+      {
+        "label": "D",
+        "text": "SW4: 0C:0A:05:22:05:97"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1019,
+    "qid": "Q1019",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. All routers in the network are configured correctly, and the expected routes are being exchanged among the routers.Which set of routes are learned from neighbors and installed on router 2?",
+    "options": [
+      {
+        "label": "A",
+        "text": "10.129.9.0/23 10..139.2.0/30 10..2.191.0/30 10..129.9.0/25"
+      },
+      {
+        "label": "B",
+        "text": "10.129.9.0/23 10..40.1.0/30 10..2.191.0/30 10..129.9.0/25"
+      },
+      {
+        "label": "C",
+        "text": "10.40.1.0/30 10..139.2.0/30 10..2.191.0/30 10..129.9.0/25"
+      },
+      {
+        "label": "D",
+        "text": "10.129.9.0/23 10..139.2.0/30 10..129.9.0/25 10..22.1.0/24"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1020,
+    "qid": "Q1020",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Router-WAN1 has a new connection via Gi0/0 to the ISP. Users running the web applications indicate that connectivity isUnstable to the internet. What is causing the interface issue?",
+    "options": [
+      {
+        "label": "A",
+        "text": "The receive buffer is full due to a broadcast storm."
+      },
+      {
+        "label": "B",
+        "text": "Frames are discarded due to a half-duplex negotiation."
+      },
+      {
+        "label": "C",
+        "text": "Broadcast packets are rejected because ARP timeout is enabled."
+      },
+      {
+        "label": "D",
+        "text": "Small frames less than 64 bytes are rejected due to size."
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1021,
+    "qid": "Q1021",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "A network engineer is configuring a new router at a branch office. The router is connected to an upstream WAN network that allows the branch To communicate with the head office. The central time server with IP address 172.24.54.8 is located behind a firewall at the head office. Which Command must the engineer configure so that the software clock of the new router synchronizes with the time server?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ntp server 172.24.54.8"
+      },
+      {
+        "label": "B",
+        "text": "ntp master 172.24.54.8"
+      },
+      {
+        "label": "C",
+        "text": "ntp peer 172.24.54.8"
+      },
+      {
+        "label": "D",
+        "text": "ntp client 172.24.54.8"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1022,
+    "qid": "Q1022",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which type of JSON data is represented?",
+    "options": [
+      {
+        "label": "A",
+        "text": "number"
+      },
+      {
+        "label": "B",
+        "text": "array"
+      },
+      {
+        "label": "C",
+        "text": "object"
+      },
+      {
+        "label": "D",
+        "text": "string"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1023,
+    "qid": "Q1023",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "What is the RFC 4627 default encoding for JSON text?",
+    "options": [
+      {
+        "label": "A",
+        "text": "UCS-2"
+      },
+      {
+        "label": "B",
+        "text": "GB18030"
+      },
+      {
+        "label": "C",
+        "text": "UTF-8"
+      },
+      {
+        "label": "D",
+        "text": "Hex"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1024,
+    "qid": "Q1024",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which configuration parameter is preventing host С from reaching the internet?",
+    "options": [
+      {
+        "label": "A",
+        "text": "IP address assignment"
+      },
+      {
+        "label": "B",
+        "text": "IP network mask"
+      },
+      {
+        "label": "C",
+        "text": "default gateway"
+      },
+      {
+        "label": "D",
+        "text": "automatic DNS"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1025,
+    "qid": "Q1025",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch in this configuration will be elected as the root bridge?SW1 0С:0A:05:22:05:97 -SW2 0С:4A:82:07:57:58 -SW3 0C:0A:A8:1A:3C:9D -SW4 0С:0A:18:A1:B3:19",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1026,
+    "qid": "Q1026",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which Rapid PVST+ port state does a port operate in without receiving BPDUs from neighbors or updating the address database?",
+    "options": [
+      {
+        "label": "A",
+        "text": "listening"
+      },
+      {
+        "label": "B",
+        "text": "forwarding"
+      },
+      {
+        "label": "C",
+        "text": "disabled"
+      },
+      {
+        "label": "D",
+        "text": "blocking"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1027,
+    "qid": "Q1027",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which protocol should be used to transfer large files on a company intranet that allows TCP 20 and 21 through the firewall?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SMTP"
+      },
+      {
+        "label": "B",
+        "text": "REST API"
+      },
+      {
+        "label": "C",
+        "text": "TFTP"
+      },
+      {
+        "label": "D",
+        "text": "FTP Most Voted"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1028,
+    "qid": "Q1028",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. What is the cause of poor performance on router R19?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Excessive collisions"
+      },
+      {
+        "label": "B",
+        "text": "Excessive CRC errors"
+      },
+      {
+        "label": "C",
+        "text": "Port oversubscription Most Voted"
+      },
+      {
+        "label": "D",
+        "text": "Speed and duplex mismatch"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1029,
+    "qid": "Q1029",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Why is UDP more suitable than TCP for applications that require low latency, such as VoIP?",
+    "options": [
+      {
+        "label": "A",
+        "text": "UDP uses sequencing data for packets to arrive in order, and TCP offers the capability to receive packets in random order."
+      },
+      {
+        "label": "B",
+        "text": "TCP uses congestion control for efficient packet delivery, and UDP uses flow control mechanisms for the delivery of packets"
+      },
+      {
+        "label": "C",
+        "text": "UDP reliably guarantees delivery of all packets, and TCP drops packets under heavy load."
+      },
+      {
+        "label": "D",
+        "text": "TCP sends an acknowledgment for every packet that is received, and UDP operates without acknowledgments. Most Voted"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1030,
+    "qid": "Q1030",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch in this configuration will be elected as the root bridge?SW1: 0С:0А:05:22:05:97 -SW2: 0C:0A:A8:1A:3C:9D -SW3: 0С:0А:18:81:ВЗ:19 -SW4: 0С:4А:82:56:35:78",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3 Most Voted"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1031,
+    "qid": "Q1031",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which alternative to password authentication is implemented to allow enterprise devices to log in to the corporate network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "90-day renewal policies"
+      },
+      {
+        "label": "B",
+        "text": "magic links"
+      },
+      {
+        "label": "C",
+        "text": "one-time passwords"
+      },
+      {
+        "label": "D",
+        "text": "digital certificates Most Voted"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1032,
+    "qid": "Q1032",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which authentication method requires the user to provide a physical attribute to authenticate successfully?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Biometric"
+      },
+      {
+        "label": "B",
+        "text": "Password"
+      },
+      {
+        "label": "C",
+        "text": "Multifactor"
+      },
+      {
+        "label": "D",
+        "text": "Certificate"
+      }
+    ],
+    "answer": [
+      "A"
+    ]
+  },
+  {
+    "id": 1033,
+    "qid": "Q1033",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch in this configuration will be elected as the root bridge?SW1 0С:E4:85:71:03:80 -SW2 0С:0E:1A:22:05:97 -SW3 0C:E0:A1:1A:3C:9D - SW4 0С:00:18:A1:B3:19",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1034,
+    "qid": "Q1034",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Refer to the exhibit. Which switch in this configuration will be elected as the root bridge?SW1 0С:B4:86:22:42:37 -SW2 0С:0B:15:22:05:97 -SW3 0C:0B:15:1A:3C:9D -SW4 0С:B0:18:A1:B3:19",
+    "options": [
+      {
+        "label": "A",
+        "text": "SW1"
+      },
+      {
+        "label": "B",
+        "text": "SW2"
+      },
+      {
+        "label": "C",
+        "text": "SW3"
+      },
+      {
+        "label": "D",
+        "text": "SW4"
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1035,
+    "qid": "Q1035",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which mechanism allows WPA3 to provide a higher degree of security than its predecessors?",
+    "options": [
+      {
+        "label": "A",
+        "text": "automatic device pairing"
+      },
+      {
+        "label": "B",
+        "text": "SAE password-based key exchange"
+      },
+      {
+        "label": "C",
+        "text": "certificate-based authentication"
+      },
+      {
+        "label": "D",
+        "text": "special-character support in preshared keys"
+      }
+    ],
+    "answer": [
+      "B"
+    ]
+  },
+  {
+    "id": 1036,
+    "qid": "Q1036",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which protocol does Ansible use to push modules to nodes in a network?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Telnet"
+      },
+      {
+        "label": "B",
+        "text": "Kerberos"
+      },
+      {
+        "label": "C",
+        "text": "SNMP"
+      },
+      {
+        "label": "D",
+        "text": "SSH"
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  },
+  {
+    "id": 1037,
+    "qid": "Q1037",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "Which function does an iterative DNS query serve in the domain name resolution process?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Obtain information directly from all root DNS servers configured within the scope."
+      },
+      {
+        "label": "B",
+        "text": "Encrypt communication automatically between DNS clients and servers."
+      },
+      {
+        "label": "C",
+        "text": "Allow a DNS client to contact several DNS servers until the correct information is found."
+      },
+      {
+        "label": "D",
+        "text": "Update records dynamically across multiple DNS servers at the same time."
+      }
+    ],
+    "answer": [
+      "C"
+    ]
+  },
+  {
+    "id": 1038,
+    "qid": "Q1038",
+    "batch": "batch6",
+    "type": "Single Choice",
+    "prompt": "What is the difference between controller-based networks and traditional networks as they relate to control-plane and/or data-plane Functions?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Controller-based networks centralize all important data-plane functions, and traditional networks distribute data-plane functions."
+      },
+      {
+        "label": "B",
+        "text": "Traditional networks centralize all important control-plane functions, and controller-based networks distribute control-plane functions."
+      },
+      {
+        "label": "C",
+        "text": "Traditional networks centralize all important data-plane functions, and controller-based networks distribute data-plane functions."
+      },
+      {
+        "label": "D",
+        "text": "Controller-based networks centralize all important control-plane functions, and traditional networks distribute control-plane functions."
+      }
+    ],
+    "answer": [
+      "D"
+    ]
+  }
+]
