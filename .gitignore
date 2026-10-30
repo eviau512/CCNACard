@@ -6,11 +6,13 @@
 /Anki/
 /Packet-Tracer/
 
-# Android build outputs & caches
+# Build deliverables & compiled artifacts (Published via GitHub Releases)
+Examtopics/output/
+*.apk
+*.apk.idsig
 CCNA-App/build/
 CCNA-App/.gradle/
 local.properties
-*.apk.idsig
 
 # Python cache & virtual environments
 __pycache__/

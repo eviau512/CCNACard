@@ -1,10 +1,10 @@
 # CCNACard — CCNA 200-301 Interactive Practice Cards & Virtual IOS Lab
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Version](https://img.shields.io/badge/Version-v1.2.0-blue.svg)](Examtopics/output/)
+[![Version](https://img.shields.io/badge/Version-v1.2.0-blue.svg)](https://github.com/eviau512/CCNACard/releases/tag/v1.2.0)
 [![Platform](https://img.shields.io/badge/Platform-Android%208.0%2B%20%7C%20Web-green.svg)](https://github.com/eviau512/CCNACard)
-[![Question Count](https://img.shields.io/badge/Questions-1%2C396%20Complete-orange.svg)](Examtopics/output/)
-[![Offline First](https://img.shields.io/badge/Offline-100%25%20Self--Contained-success.svg)](Examtopics/output/Examtopics_CCNA_200-301_Complete.html)
+[![Question Count](https://img.shields.io/badge/Questions-1%2C396%20Complete-orange.svg)](https://github.com/eviau512/CCNACard/releases)
+[![Releases](https://img.shields.io/badge/Download-GitHub%20Releases-brightgreen.svg)](https://github.com/eviau512/CCNACard/releases)
 
 **CCNACard** 是面向 Cisco CCNA 200-301 认证考试的智能交互式抽认卡与真实考场仿真练习平台。包含完整的 1,396 道 ExamTopics 真实题库，支持网页单文件离线秒开与原生 Android APK 安装。
 
@@ -42,25 +42,24 @@
 
 ---
 
-## 🚀 快速使用 (Quick Start)
+## 🚀 下载与使用 (Releases & Usage)
 
-### 方式 A：浏览器即开即用（免安装）
-直接双击或用现代浏览器（Chrome、Edge、Safari、Firefox）打开：
-```text
-Examtopics/output/Examtopics_CCNA_200-301_Complete.html
-```
-单文件聚合，包含全部 1,396 题数据与内嵌资源，断网环境亦可正常刷题。
+所有预编译产物均通过 **[GitHub Releases](https://github.com/eviau512/CCNACard/releases)** 发布：
 
-### 方式 B：Android 手机 / 平板安装
-在 release 产物目录中直接安装编译好的 APK：
-```bash
-# 当前最新版本 (v1.2.0，内嵌虚拟 IOS 实验控制台)
-Examtopics/output/CCNA_v1.2.0.apk
-```
+### 方式 A：Android 手机 / 平板安装（推荐）
+前往 [Releases 最新发布页](https://github.com/eviau512/CCNACard/releases/latest) 下载已签名 APK：
+- **[CCNA_v1.2.0.apk (最新版本，包含虚拟 IOS 模拟器)](https://github.com/eviau512/CCNACard/releases/latest/download/CCNA_v1.2.0.apk)**
+- [CCNA_v1.1.1.apk (历史归档版本)](https://github.com/eviau512/CCNACard/releases/tag/v1.1.1)
+
 或者通过 adb 一键安装到连接的设备：
 ```bash
-adb install -r Examtopics/output/CCNA.apk
+adb install -r CCNA_v1.2.0.apk
 ```
+
+### 方式 B：浏览器即开即用（免安装离线单文件）
+从 [Releases 资源列表](https://github.com/eviau512/CCNACard/releases/latest) 下载 `Examtopics_CCNA_200-301_Complete.html`：
+- 直接双击或用现代浏览器（Chrome、Edge、Safari、Firefox）打开。
+- 单文件聚合，包含全部 1,396 题数据与内嵌资源，断网环境亦可正常刷题。
 
 ---
 
@@ -107,12 +106,8 @@ CCNACard/
 ├── Examtopics/                          # 题库引擎与数据处理工具链
 │   ├── batch/                           # 200 题分卷 HTML 练习册 (Batch 1-7)
 │   ├── enrichment/                      # 题目分类映射与考纲知识点标签
-│   ├── output/                          # 最终交付物
-│   │   ├── Examtopics_CCNA_200-301_Complete.html # 1,396 题离线完整网页版
-│   │   ├── complete_q1_q1396.json       # 题库全量结构化 JSON 数据集
-│   │   ├── CCNA_v1.2.0.apk              # 当前版本安装包 (v1.2.0)
-│   │   └── CCNA_v1.1.1.apk              # 历史归档版本安装包
-│   └── scripts/                         # 自动化处理脚本 (PDF 提取/清洗/格式化)
+│   ├── scripts/                         # 自动化处理脚本 (PDF 提取/清洗/格式化)
+│   └── output/                          # 本地编译产物目录 (由 .gitignore 忽略，通过 Releases 发布)
 │
 ├── .gitignore                           # Git 忽略配置
 ├── LICENSE                              # CC BY-NC-SA 4.0 许可证
