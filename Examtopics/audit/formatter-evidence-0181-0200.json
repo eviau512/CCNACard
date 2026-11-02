@@ -1,0 +1,106 @@
+{
+  "method": "Execute unchanged App formatMarkdown on actual inline snippets",
+  "results": [
+    {
+      "id": 183,
+      "input": "`spanning-tree vlan <id> root primary`",
+      "html": "<code class=\"inline-code\">spanning-tree vlan <id> root primary</code>",
+      "html_parsed_text": "spanning-tree vlan  root primary",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 183,
+      "input": "`spanning-tree vlan <id> root primary`",
+      "html": "<code class=\"inline-code\">spanning-tree vlan <id> root primary</code>",
+      "html_parsed_text": "spanning-tree vlan  root primary",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 184,
+      "input": "`switchport trunk native vlan <id>`",
+      "html": "<code class=\"inline-code\">switchport trunk native vlan <id></code>",
+      "html_parsed_text": "switchport trunk native vlan ",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 193,
+      "input": "`switchport access vlan <Data_VLAN_ID>`",
+      "html": "<code class=\"inline-code\">switchport access vlan <Data_VLAN_ID></code>",
+      "html_parsed_text": "switchport access vlan ",
+      "element_names": [
+        "code",
+        "data_vlan_id"
+      ],
+      "lost_placeholder_names": [
+        "Data_VLAN_ID"
+      ]
+    },
+    {
+      "id": 193,
+      "input": "`switchport voice vlan <Voice_VLAN_ID>`",
+      "html": "<code class=\"inline-code\">switchport voice vlan <Voice_VLAN_ID></code>",
+      "html_parsed_text": "switchport voice vlan ",
+      "element_names": [
+        "code",
+        "voice_vlan_id"
+      ],
+      "lost_placeholder_names": [
+        "Voice_VLAN_ID"
+      ]
+    },
+    {
+      "id": 195,
+      "input": "`switchport trunk allowed vlan <vlan-list>`",
+      "html": "<code class=\"inline-code\">switchport trunk allowed vlan <vlan-list></code>",
+      "html_parsed_text": "switchport trunk allowed vlan ",
+      "element_names": [
+        "code",
+        "vlan-list"
+      ],
+      "lost_placeholder_names": [
+        "vlan-list"
+      ]
+    },
+    {
+      "id": 195,
+      "input": "`switchport trunk allowed vlan add <vlan-list>`",
+      "html": "<code class=\"inline-code\">switchport trunk allowed vlan add <vlan-list></code>",
+      "html_parsed_text": "switchport trunk allowed vlan add ",
+      "element_names": [
+        "code",
+        "vlan-list"
+      ],
+      "lost_placeholder_names": [
+        "vlan-list"
+      ]
+    },
+    {
+      "id": 200,
+      "input": "`24586 < 28682 < 32778 < 64000`",
+      "html": "<code class=\"inline-code\">24586 < 28682 < 32778 < 64000</code>",
+      "html_parsed_text": "24586 < 28682 < 32778 < 64000",
+      "element_names": [
+        "code"
+      ],
+      "lost_placeholder_names": []
+    }
+  ]
+}

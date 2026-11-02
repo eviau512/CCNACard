@@ -517,6 +517,7 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
     }}
 
     .opt-text {{
+      white-space: pre-wrap;
       font-size: 15px;
       color: var(--text-primary);
       line-height: 1.5;
@@ -1051,11 +1052,15 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
     function formatMarkdown(text) {{
       if (!text) return '';
 
+      function escapeCode(value) {{
+        return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }}
+
       // 1. Protect code blocks
       const codeBlocks = [];
       let out = text.replace(/```(?:[a-zA-Z0-9_-]+)?\\n?([\\s\\S]*?)```/g, (match, code) => {{
         const idx = codeBlocks.length;
-        codeBlocks.push(`<pre class="cli-block"><code>${{code.trim()}}</code></pre>`);
+        codeBlocks.push(`<pre class="cli-block"><code>${{escapeCode(code.trim())}}</code></pre>`);
         return `%%CODE_BLOCK_${{idx}}%%`;
       }});
 
@@ -1063,7 +1068,7 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
       const inlineCodes = [];
       out = out.replace(/`([^`]+)`/g, (match, code) => {{
         const idx = inlineCodes.length;
-        inlineCodes.push(`<code class="inline-code">${{code}}</code>`);
+        inlineCodes.push(`<code class="inline-code">${{escapeCode(code)}}</code>`);
         return `%%INLINE_CODE_${{idx}}%%`;
       }});
 
@@ -1168,16 +1173,16 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
       out = out.replace(/^(\\d+)\\.\\s+(.+)$/gm, '<div class="md-list-item"><strong class="md-num-label">$1.</strong> $2</div>');
       out = out.replace(/^[-*]\\s+(.+)$/gm, '<div class="md-list-item"><span class="list-bullet">•</span> $1</div>');
 
+      const filtered = out.split('\\n').map(l => l.trim()).filter(l => l.length > 0);
+      out = filtered.join('\\n');
+      out = out.replace(/(?<!>)\\n(?!<)/g, '<br>');
+
       for (let idx = 0; idx < inlineCodes.length; idx++) {{
         out = out.replace(new RegExp(`%%INLINE_CODE_${{idx}}%%`, 'g'), inlineCodes[idx]);
       }}
       for (let idx = 0; idx < codeBlocks.length; idx++) {{
         out = out.replace(new RegExp(`%%CODE_BLOCK_${{idx}}%%`, 'g'), codeBlocks[idx]);
       }}
-
-      const filtered = out.split('\\n').map(l => l.trim()).filter(l => l.length > 0);
-      out = filtered.join('\\n');
-      out = out.replace(/(?<!>)\\n(?!<)/g, '<br>');
 
       return out;
     }}
@@ -1367,7 +1372,7 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
             <div class="option-item ${{isSelected ? 'selected' : ''}} ${{stateClass}}"
                  onclick="toggleOption(${{q.id}}, '${{opt.label}}', ${{isMulti}})">
               <div class="opt-indicator">${{opt.label}}</div>
-              <div class="opt-text">${{opt.text}}</div>
+              <div class="opt-text">${{String(opt.text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}}</div>
             </div>
           `;
         }});

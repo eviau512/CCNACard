@@ -121,11 +121,15 @@ function exitDrillMode() {
 function formatMarkdown(text) {
   if (!text) return '';
 
+  function escapeCode(value) {
+    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   // 1. Protect code blocks
   const codeBlocks = [];
   let out = text.replace(/```(?:[a-zA-Z0-9_-]+)?\n?([\s\S]*?)```/g, (match, code) => {
     const idx = codeBlocks.length;
-    codeBlocks.push(`<pre class="cli-block"><code>${code.trim()}</code></pre>`);
+    codeBlocks.push(`<pre class="cli-block"><code>${escapeCode(code.trim())}</code></pre>`);
     return `%%CODE_BLOCK_${idx}%%`;
   });
 
@@ -133,7 +137,7 @@ function formatMarkdown(text) {
   const inlineCodes = [];
   out = out.replace(/`([^`]+)`/g, (match, code) => {
     const idx = inlineCodes.length;
-    inlineCodes.push(`<code class="inline-code">${code}</code>`);
+    inlineCodes.push(`<code class="inline-code">${escapeCode(code)}</code>`);
     return `%%INLINE_CODE_${idx}%%`;
   });
 
@@ -251,18 +255,18 @@ function formatMarkdown(text) {
   // Top-level item: - Item
   out = out.replace(/^[-*]\s+(.+)$/gm, '<div class="md-list-item"><span class="list-bullet">•</span> $1</div>');
 
-  // 10. Restore Inline code & Code blocks
+  // Clean prose while code is still protected, preserving CLI indentation.
+  const filtered = out.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  out = filtered.join('\n');
+  out = out.replace(/(?<!>)\n(?!<)/g, '<br>');
+
+  // 10. Restore escaped Inline code & Code blocks
   for (let idx = 0; idx < inlineCodes.length; idx++) {
     out = out.replace(new RegExp(`%%INLINE_CODE_${idx}%%`, 'g'), inlineCodes[idx]);
   }
   for (let idx = 0; idx < codeBlocks.length; idx++) {
     out = out.replace(new RegExp(`%%CODE_BLOCK_${idx}%%`, 'g'), codeBlocks[idx]);
   }
-
-  // 11. Clean line breaks outside of block tags
-  const filtered = out.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-  out = filtered.join('\n');
-  out = out.replace(/(?<!>)\n(?!<)/g, '<br>');
 
   return out;
 }

@@ -1,0 +1,167 @@
+[
+  {
+    "file": "CCNA-App/app/src/main/assets/app.js",
+    "results": [
+      {
+        "input": "`ip address <ip> <mask>`",
+        "html": "<code class=\"inline-code\">ip address <ip> <mask></code>",
+        "html_parsed_text": "ip address  ",
+        "element_names": [
+          "code",
+          "ip",
+          "mask"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`encapsulation dot1Q <vlan-id> [native]`",
+        "html": "<code class=\"inline-code\">encapsulation dot1Q <vlan-id> [native]</code>",
+        "html_parsed_text": "encapsulation dot1Q  [native]",
+        "element_names": [
+          "code",
+          "vlan-id"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`power inline consumption default <mW>`",
+        "html": "<code class=\"inline-code\">power inline consumption default <mW></code>",
+        "html_parsed_text": "power inline consumption default ",
+        "element_names": [
+          "code",
+          "mw"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`spanning-tree vlan <id> priority 0`",
+        "html": "<code class=\"inline-code\">spanning-tree vlan <id> priority 0</code>",
+        "html_parsed_text": "spanning-tree vlan  priority 0",
+        "element_names": [
+          "code",
+          "id"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "` < `",
+        "html": "<code class=\"inline-code\"> < </code>",
+        "html_parsed_text": " < ",
+        "element_names": [
+          "code"
+        ],
+        "lost_placeholder_names": false
+      }
+    ]
+  },
+  {
+    "file": "Examtopics/output/Examtopics_CCNA_200-301_Complete.html",
+    "results": [
+      {
+        "input": "`ip address <ip> <mask>`",
+        "html": "<code class=\"inline-code\">ip address <ip> <mask></code>",
+        "html_parsed_text": "ip address  ",
+        "element_names": [
+          "code",
+          "ip",
+          "mask"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`encapsulation dot1Q <vlan-id> [native]`",
+        "html": "<code class=\"inline-code\">encapsulation dot1Q <vlan-id> [native]</code>",
+        "html_parsed_text": "encapsulation dot1Q  [native]",
+        "element_names": [
+          "code",
+          "vlan-id"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`power inline consumption default <mW>`",
+        "html": "<code class=\"inline-code\">power inline consumption default <mW></code>",
+        "html_parsed_text": "power inline consumption default ",
+        "element_names": [
+          "code",
+          "mw"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`spanning-tree vlan <id> priority 0`",
+        "html": "<code class=\"inline-code\">spanning-tree vlan <id> priority 0</code>",
+        "html_parsed_text": "spanning-tree vlan  priority 0",
+        "element_names": [
+          "code",
+          "id"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "` < `",
+        "html": "<code class=\"inline-code\"> < </code>",
+        "html_parsed_text": " < ",
+        "element_names": [
+          "code"
+        ],
+        "lost_placeholder_names": false
+      }
+    ]
+  },
+  {
+    "file": "Examtopics/batch/Examtopics_Batch1_Q1-200.html",
+    "results": [
+      {
+        "input": "`ip address <ip> <mask>`",
+        "html": "<code class=\"inline-code\">ip address <ip> <mask></code>",
+        "html_parsed_text": "ip address  ",
+        "element_names": [
+          "code",
+          "ip",
+          "mask"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`encapsulation dot1Q <vlan-id> [native]`",
+        "html": "<code class=\"inline-code\">encapsulation dot1Q <vlan-id> [native]</code>",
+        "html_parsed_text": "encapsulation dot1Q  [native]",
+        "element_names": [
+          "code",
+          "vlan-id"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`power inline consumption default <mW>`",
+        "html": "<code class=\"inline-code\">power inline consumption default <mW></code>",
+        "html_parsed_text": "power inline consumption default ",
+        "element_names": [
+          "code",
+          "mw"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "`spanning-tree vlan <id> priority 0`",
+        "html": "<code class=\"inline-code\">spanning-tree vlan <id> priority 0</code>",
+        "html_parsed_text": "spanning-tree vlan  priority 0",
+        "element_names": [
+          "code",
+          "id"
+        ],
+        "lost_placeholder_names": true
+      },
+      {
+        "input": "` < `",
+        "html": "<code class=\"inline-code\"> < </code>",
+        "html_parsed_text": " < ",
+        "element_names": [
+          "code"
+        ],
+        "lost_placeholder_names": false
+      }
+    ]
+  }
+]

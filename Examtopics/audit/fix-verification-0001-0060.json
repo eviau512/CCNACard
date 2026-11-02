@@ -1,0 +1,39 @@
+{
+  "source_app_equal": true,
+  "count": 1396,
+  "corrected_ids": [
+    1,
+    5,
+    9,
+    10,
+    11,
+    18,
+    26,
+    27,
+    28,
+    29,
+    33,
+    40,
+    41,
+    42,
+    43,
+    50,
+    51,
+    52,
+    54,
+    56,
+    58,
+    60
+  ],
+  "reviewed_through": 240,
+  "remediation_verified_through": 60,
+  "renderer_evidence": "renderer-fix-verification.json",
+  "q41_source": "PDF page7 itself contains wrong exhibit; replaced with explicit no-NAT scenario and new vector diagram, not claimed original restored",
+  "practice_record_protection": {
+    "question_ids_preserved": true,
+    "localStorage_key": "ccna_app_state_v1",
+    "native_package": "moe.ccna.cards",
+    "history_and_storage_code_changed": false
+  },
+  "first_github_200_question_milestone_complete": false
+}

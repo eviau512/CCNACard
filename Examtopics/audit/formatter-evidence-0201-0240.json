@@ -1,0 +1,200 @@
+{
+  "method": "Execute unchanged App formatMarkdown on actual source snippets",
+  "results": [
+    {
+      "id": 202,
+      "input": "`channel-group <id> mode active`",
+      "html": "<code class=\"inline-code\">channel-group <id> mode active</code>",
+      "html_parsed_text": "channel-group  mode active",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 202,
+      "input": "`channel-group <id> mode passive`",
+      "html": "<code class=\"inline-code\">channel-group <id> mode passive</code>",
+      "html_parsed_text": "channel-group  mode passive",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 202,
+      "input": "`channel-group <id> mode desirable`",
+      "html": "<code class=\"inline-code\">channel-group <id> mode desirable</code>",
+      "html_parsed_text": "channel-group  mode desirable",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 202,
+      "input": "`channel-group <id> mode auto`",
+      "html": "<code class=\"inline-code\">channel-group <id> mode auto</code>",
+      "html_parsed_text": "channel-group  mode auto",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 202,
+      "input": "`channel-group <id> mode on`",
+      "html": "<code class=\"inline-code\">channel-group <id> mode on</code>",
+      "html_parsed_text": "channel-group  mode on",
+      "element_names": [
+        "code",
+        "id"
+      ],
+      "lost_placeholder_names": [
+        "id"
+      ]
+    },
+    {
+      "id": 204,
+      "input": "`cdp timer <seconds>`",
+      "html": "<code class=\"inline-code\">cdp timer <seconds></code>",
+      "html_parsed_text": "cdp timer ",
+      "element_names": [
+        "code",
+        "seconds"
+      ],
+      "lost_placeholder_names": [
+        "seconds"
+      ]
+    },
+    {
+      "id": 204,
+      "input": "`cdp holdtime <seconds>`",
+      "html": "<code class=\"inline-code\">cdp holdtime <seconds></code>",
+      "html_parsed_text": "cdp holdtime ",
+      "element_names": [
+        "code",
+        "seconds"
+      ],
+      "lost_placeholder_names": [
+        "seconds"
+      ]
+    },
+    {
+      "id": 205,
+      "input": "`config lag <enable|disable>`",
+      "html": "<code class=\"inline-code\">config lag <enable|disable></code>",
+      "html_parsed_text": "config lag ",
+      "element_names": [
+        "code",
+        "enable|disable"
+      ],
+      "lost_placeholder_names": [
+        "enable|disable"
+      ]
+    },
+    {
+      "id": 207,
+      "input": "`channel-group <num> mode active`",
+      "html": "<code class=\"inline-code\">channel-group <num> mode active</code>",
+      "html_parsed_text": "channel-group  mode active",
+      "element_names": [
+        "code",
+        "num"
+      ],
+      "lost_placeholder_names": [
+        "num"
+      ]
+    },
+    {
+      "id": 210,
+      "input": "`switchport priority extend cos <0-7>`",
+      "html": "<code class=\"inline-code\">switchport priority extend cos <0-7></code>",
+      "html_parsed_text": "switchport priority extend cos <0-7>",
+      "element_names": [
+        "code"
+      ],
+      "lost_placeholder_names": []
+    },
+    {
+      "id": 212,
+      "input": "`switchport port-security mac-address <MAC-Address>`",
+      "html": "<code class=\"inline-code\">switchport port-security mac-address <MAC-Address></code>",
+      "html_parsed_text": "switchport port-security mac-address ",
+      "element_names": [
+        "code",
+        "mac-address"
+      ],
+      "lost_placeholder_names": [
+        "MAC-Address"
+      ]
+    },
+    {
+      "id": 215,
+      "input": "`switchport access vlan <Data_VLAN>`",
+      "html": "<code class=\"inline-code\">switchport access vlan <Data_VLAN></code>",
+      "html_parsed_text": "switchport access vlan ",
+      "element_names": [
+        "code",
+        "data_vlan"
+      ],
+      "lost_placeholder_names": [
+        "Data_VLAN"
+      ]
+    },
+    {
+      "id": 215,
+      "input": "`switchport voice vlan <Voice_VLAN>`",
+      "html": "<code class=\"inline-code\">switchport voice vlan <Voice_VLAN></code>",
+      "html_parsed_text": "switchport voice vlan ",
+      "element_names": [
+        "code",
+        "voice_vlan"
+      ],
+      "lost_placeholder_names": [
+        "Voice_VLAN"
+      ]
+    },
+    {
+      "id": 239,
+      "input": "`switchport voice vlan <vlan-id>`",
+      "html": "<code class=\"inline-code\">switchport voice vlan <vlan-id></code>",
+      "html_parsed_text": "switchport voice vlan ",
+      "element_names": [
+        "code",
+        "vlan-id"
+      ],
+      "lost_placeholder_names": [
+        "vlan-id"
+      ]
+    }
+  ],
+  "table_control": {
+    "id": 213,
+    "input": "| 特性 | TACACS+ | RADIUS |\n|---|---|---|\n| 认证与授权 | **严格分离（Separate）** | **捆绑结合（Combined）** |\n| 传输层协议 | TCP 端口 49 | UDP 端口 1812/1813 |\n| 加密范围 | **全报文加密** | **仅加密密码字段** |\n| 主要应用 | 设备管理与命令授权 | 网络接入（802.1X/WiFi/VPN） |",
+    "html": "<div class=\"table-wrap\"><table class=\"md-table\"><thead><tr><th style=\"text-align:left;\">特性</th><th style=\"text-align:left;\">TACACS+</th><th style=\"text-align:left;\">RADIUS</th></tr></thead><tbody><tr><td style=\"text-align:left;\">认证与授权</td><td style=\"text-align:left;\"><strong>严格分离（Separate）</strong></td><td style=\"text-align:left;\"><strong>捆绑结合（Combined）</strong></td></tr><tr><td style=\"text-align:left;\">传输层协议</td><td style=\"text-align:left;\">TCP 端口 49</td><td style=\"text-align:left;\">UDP 端口 1812/1813</td></tr><tr><td style=\"text-align:left;\">加密范围</td><td style=\"text-align:left;\"><strong>全报文加密</strong></td><td style=\"text-align:left;\"><strong>仅加密密码字段</strong></td></tr><tr><td style=\"text-align:left;\">主要应用</td><td style=\"text-align:left;\">设备管理与命令授权</td><td style=\"text-align:left;\">网络接入（802.1X/WiFi/VPN）</td></tr></tbody></table></div>",
+    "element_counts": {
+      "div": 1,
+      "table": 1,
+      "thead": 1,
+      "tr": 5,
+      "th": 3,
+      "tbody": 1,
+      "td": 12,
+      "strong": 4
+    },
+    "html_parsed_text": "特性TACACS+RADIUS认证与授权严格分离（Separate）捆绑结合（Combined）传输层协议TCP 端口 49UDP 端口 1812/1813加密范围全报文加密仅加密密码字段主要应用设备管理与命令授权网络接入（802.1X/WiFi/VPN）"
+  }
+}
