@@ -511,7 +511,8 @@ main {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  white-space: pre-wrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .exp-misconception {
@@ -842,6 +843,156 @@ main {
 .bullet-dot {
   color: var(--accent-blue);
   font-size: 1.1rem;
+}
+
+/* MARKDOWN TABLES & ENHANCED FORMATTING */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card-bg-subtle, rgba(255, 255, 255, 0.02));
+  -webkit-overflow-scrolling: touch;
+}
+
+.md-table {
+  width: 100%;
+  min-width: 280px;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.md-table th {
+  background: rgba(0, 150, 214, 0.14);
+  color: var(--primary, #00b4d8);
+  font-weight: 700;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+[data-theme="light"] .md-table th {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.md-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.md-table tr:last-child td {
+  border-bottom: none;
+}
+
+.md-table tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+[data-theme="light"] .md-table tr:nth-child(even) td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.md-h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 16px 0 8px 0;
+}
+
+.md-h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 14px 0 6px 0;
+}
+
+.md-h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 12px 0 4px 0;
+}
+
+.md-list-item {
+  margin: 6px 0;
+  padding-left: 4px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.md-num-label {
+  color: var(--primary, #00b4d8);
+  margin-right: 4px;
+}
+
+.list-bullet {
+  color: var(--primary, #00b4d8);
+  margin-right: 6px;
+  font-weight: bold;
+}
+
+.md-sub-item {
+  margin: 4px 0 4px 20px;
+  padding-left: 4px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.sub-bullet {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+/* LATEX & MATH FORMATTING */
+.math-tex {
+  font-family: "Cambria Math", "Latin Modern Math", "STIX Two Math", Georgia, serif;
+  font-style: italic;
+  color: #38bdf8;
+  padding: 0 2px;
+  font-size: 0.96em;
+}
+
+[data-theme="light"] .math-tex {
+  color: #0284c7;
+}
+
+.math-tex sup, .math-tex sub {
+  font-size: 0.76em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.math-tex sup {
+  top: -0.5em;
+}
+
+.math-tex sub {
+  bottom: -0.25em;
+}
+
+.md-frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.85em;
+  margin: 0 3px;
+  line-height: 1.1;
+}
+
+.md-num {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.md-denom {
+  padding-top: 1px;
 }
 
 /* INTERACTIVE DRAG & DROP / MATCHING ENGINE */

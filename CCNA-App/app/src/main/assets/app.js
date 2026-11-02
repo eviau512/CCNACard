@@ -120,31 +120,151 @@ function exitDrillMode() {
 
 function formatMarkdown(text) {
   if (!text) return '';
-  // 1. Escape HTML
-  let out = text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
 
-  // 2. Code blocks ```cisco ... ``` or ```text ... ```
-  out = out.replace(/```(?:[a-zA-Z0-9_-]+)?\n?([\s\S]*?)```/g, (match, code) => {
-    return `<pre class="cli-block"><code>${code.trim()}</code></pre>`;
+  // 1. Protect code blocks
+  const codeBlocks = [];
+  let out = text.replace(/```(?:[a-zA-Z0-9_-]+)?\n?([\s\S]*?)```/g, (match, code) => {
+    const idx = codeBlocks.length;
+    codeBlocks.push(`<pre class="cli-block"><code>${code.trim()}</code></pre>`);
+    return `%%CODE_BLOCK_${idx}%%`;
   });
 
-  // 3. Inline code `...`
-  out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+  // 2. Protect inline code
+  const inlineCodes = [];
+  out = out.replace(/`([^`]+)`/g, (match, code) => {
+    const idx = inlineCodes.length;
+    inlineCodes.push(`<code class="inline-code">${code}</code>`);
+    return `%%INLINE_CODE_${idx}%%`;
+  });
 
-  // 4. Section headings starting with • or bullet points
+  // 3. Escape HTML
+  out = out.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // 4. LaTeX & Math parsing
+  function renderLatex(tex) {
+    let t = tex.trim();
+    // Symbol replacements
+    t = t.replace(/\\rightarrow/g, '→').replace(/\\to/g, '→')
+         .replace(/\\leftarrow/g, '←')
+         .replace(/\\Rightarrow/g, '⇒').replace(/\\Leftarrow/g, '⇐')
+         .replace(/\\leftrightarrow/g, '↔').replace(/\\Leftrightarrow/g, '⇔')
+         .replace(/\\geq/g, '≥').replace(/\\ge/g, '≥')
+         .replace(/\\leq/g, '≤').replace(/\\le/g, '≤')
+         .replace(/\\neq/g, '≠')
+         .replace(/\\approx/g, '≈')
+         .replace(/\\times/g, '×')
+         .replace(/\\div/g, '÷')
+         .replace(/\\pm/g, '±')
+         .replace(/\\oplus/g, '⊕')
+         .replace(/\\sum/g, '∑')
+         .replace(/\\cdot/g, '·')
+         .replace(/\\dots/g, '…').replace(/\\ldots/g, '…')
+         .replace(/\\min/g, 'min').replace(/\\max/g, 'max')
+         .replace(/\\left\(/g, '(').replace(/\\right\)/g, ')')
+         .replace(/\\left\[/g, '[').replace(/\\right\]/g, ']');
+    // \text{...}
+    t = t.replace(/\\text\{([^}]+)\}/g, '$1');
+    // \frac{A}{B}
+    t = t.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '<span class="md-frac"><span class="md-num">$1</span><span class="md-denom">$2</span></span>');
+    // superscripts & subscripts: X^{Y} -> X<sup>Y</sup>
+    t = t.replace(/\^\{([^}]+)\}/g, '<sup>$1</sup>');
+    t = t.replace(/\^([0-9a-zA-Z+=-]+)/g, '<sup>$1</sup>');
+    t = t.replace(/_\{([^}]+)\}/g, '<sub>$1</sub>');
+    t = t.replace(/_([0-9a-zA-Z+=-]+)/g, '<sub>$1</sub>');
+    return `<span class="math-tex">${t}</span>`;
+  }
+
+  // Render $...$ math
+  out = out.replace(/\$([^$\n]+)\$/g, (m, content) => renderLatex(content));
+
+  // 5. Markdown Tables
+  const lines = out.split('\n');
+  const newLines = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i].trim();
+    if (line.startsWith('|') && line.endsWith('|') && i + 1 < lines.length) {
+      const nextLine = lines[i + 1].trim();
+      if (nextLine.startsWith('|') && nextLine.endsWith('|') && /^\|(\s*:?-+:?\s*\|)+$/.test(nextLine)) {
+        // Table detected!
+        const headerCols = line.slice(1, -1).split('|').map(c => c.trim());
+        const alignCols = nextLine.slice(1, -1).split('|').map(c => c.trim());
+        const alignments = alignCols.map(ac => {
+          if (ac.startsWith(':') && ac.endsWith(':')) return 'center';
+          if (ac.endsWith(':')) return 'right';
+          return 'left';
+        });
+
+        const tableParts = ['<div class="table-wrap"><table class="md-table"><thead><tr>'];
+        headerCols.forEach((col, idx) => {
+          const align = alignments[idx] || 'left';
+          tableParts.push(`<th style="text-align:${align};">${col}</th>`);
+        });
+        tableParts.push('</tr></thead><tbody>');
+
+        let rIdx = i + 2;
+        while (rIdx < lines.length) {
+          const rowLine = lines[rIdx].trim();
+          if (rowLine.startsWith('|') && rowLine.endsWith('|')) {
+            const rowCols = rowLine.slice(1, -1).split('|').map(c => c.trim());
+            tableParts.push('<tr>');
+            rowCols.forEach((col, idx) => {
+              const align = alignments[idx] || 'left';
+              tableParts.push(`<td style="text-align:${align};">${col}</td>`);
+            });
+            tableParts.push('</tr>');
+            rIdx++;
+          } else {
+            break;
+          }
+        }
+        tableParts.push('</tbody></table></div>');
+        newLines.push(tableParts.join(''));
+        i = rIdx;
+        continue;
+      }
+    }
+    newLines.push(lines[i]);
+    i++;
+  }
+  out = newLines.join('\n');
+
+  // 6. Markdown Headings (#, ##, ###)
+  out = out.replace(/^###\s+(.+)$/gm, '<h4 class="md-h4">$1</h4>');
+  out = out.replace(/^##\s+(.+)$/gm, '<h3 class="md-h3">$1</h3>');
+  out = out.replace(/^#\s+(.+)$/gm, '<h2 class="md-h2">$1</h2>');
+
+  // 7. Section Bullets (• **...**: or • ...)
   out = out.replace(/^[•●■]\s*(.+)$/gm, '<div class="exp-bullet-heading"><span class="bullet-dot">•</span> $1</div>');
 
-  // 5. Convert line breaks (outside of <pre> tags)
-  const parts = out.split(/(<pre[\s\S]*?<\/pre>)/);
-  for (let i = 0; i < parts.length; i++) {
-    if (!parts[i].startsWith('<pre')) {
-      parts[i] = parts[i].replace(/\n/g, '<br>');
-    }
+  // 8. Bold & Italic (applied after bullet headings so heading bold works!)
+  out = out.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
+  out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  out = out.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+  out = out.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  // 9. List Items
+  // Sub-items (indented with 2+ spaces followed by - or * or _)
+  out = out.replace(/^\s{2,}[-*_]\s+(.+)$/gm, '<div class="md-sub-item"><span class="sub-bullet">▸</span> $1</div>');
+  // Numbered list: 1. Item
+  out = out.replace(/^(\d+)\.\s+(.+)$/gm, '<div class="md-list-item"><strong class="md-num-label">$1.</strong> $2</div>');
+  // Top-level item: - Item
+  out = out.replace(/^[-*]\s+(.+)$/gm, '<div class="md-list-item"><span class="list-bullet">•</span> $1</div>');
+
+  // 10. Restore Inline code & Code blocks
+  for (let idx = 0; idx < inlineCodes.length; idx++) {
+    out = out.replace(new RegExp(`%%INLINE_CODE_${idx}%%`, 'g'), inlineCodes[idx]);
   }
-  return parts.join('');
+  for (let idx = 0; idx < codeBlocks.length; idx++) {
+    out = out.replace(new RegExp(`%%CODE_BLOCK_${idx}%%`, 'g'), codeBlocks[idx]);
+  }
+
+  // 11. Clean line breaks outside of block tags
+  const filtered = out.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  out = filtered.join('\n');
+  out = out.replace(/(?<!>)\n(?!<)/g, '<br>');
+
+  return out;
 }
 
 function renderCurrentCard() {
