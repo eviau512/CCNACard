@@ -1,0 +1,148 @@
+{
+  "scope": "Manual Q361-Q370 fixes; delivery after Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 361,
+      "before_sha256": "b3f4dfc1db5394fcde9e48ced61f4195a0a5d7da867b2dab52b9c3faea270930",
+      "reason": "已看R1 DROTHER/R2 BDR/R3 DR共享10.10.10/24，邻居priority1。D提高R1并仅重置本机不保证抢占原DR，原文误称重置所有路由器。补全受控全网段重新初始化的前提，D只作为其中R1部分；恢复选项配置模式/换行并清除粗俗口诀。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 is currently DROTHER. In a maintenance window the engineer will coordinate a segment-wide reinitialization of R1, R2, and R3, so that all three participate in a fresh election with no existing DR/BDR declarations. R2 and R3 retain priority 1. Which listed configuration prepares R1 with the required higher priority and performs the local R1 reset as part of that coordinated procedure?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config)#interface FastEthernet 0/0\nR1(config-if)#ip ospf priority 1\nR1(config-if)# end\nR1# clear ip ospf process"
+          },
+          {
+            "label": "B",
+            "text": "R3(config)#interface FastEthernet 0/1\nR3(config-if)#ip ospf priority 200\nR3(config-if)# end\nR3# clear ip ospf process"
+          },
+          {
+            "label": "C",
+            "text": "R2(config)#interface FastEthernet 0/2\nR2(config-if)#ip ospf priority 1\nR2(config-if)# end\nR2# clear ip ospf process"
+          },
+          {
+            "label": "D",
+            "text": "R1(config)#interface FastEthernet 0/0\nR1(config-if)#ip ospf priority 200\nR1(config-if)# end\nR1# clear ip ospf process"
+          }
+        ],
+        "explanation": "D。在R1的Fa0/0设priority200，高于R2/R3的1；配合题设全网段协调重新初始化后的初次选举，R1可当DR。`end`返回特权模式后执行本机OSPF重置。A仍为1，不能凭较低RID保证初选胜出；B提高的是R3；C未提高R1。\n\n`clear ip ospf process`仅作用于执行命令的本机进程，不能重置所有路由器。若只在DROTHER R1上提高优先级再重启，R3的既有DR和R2的BDR仍可保留，R1不会自动抢占。当前角色也不能单独证明历史选举顺序。全网段重选可能中断邻接和业务，需计划维护；这里的本机步骤不能单独当作保证接管的完整操作。"
+      }
+    },
+    {
+      "id": 362,
+      "before_sha256": "61d379351862bd0462038679b77c1c198dcd2066aebd568f54ea37da75c6580a",
+      "reason": "D数据平面正确，但原解析把DNA Center/APIC都概括为集中控制路由/STP的控制平面，并绝对化控制平面从不处理用户报文。按功能解释Data/Control/Management，补SD-Access管理中心与LISP控制节点区分。 [S1]",
+      "updates": {
+        "explanation": "D，Data plane，也称forwarding plane。它按已安装的转发或流规则处理用户业务报文，执行查表、过滤、封装及选择出口等操作；可以由硬件或软件实现，不要求所有实现都靠ASIC或必达线速。\n\nA管理平面负责配置、监控和运维；B控制平面负责拓扑/可达性计算及生成转发状态；C策略平面表达或分发业务策略，实际按策略处理报文仍在转发路径执行。SDN的控制逻辑解耦与逻辑集中不表示所有协议计算都由同一管理服务器承担：例如SD-Access中Catalyst Center负责管理编排，LISP控制平面节点负责映射，VXLAN承载数据。少数异常/首包可能送控制软件处理，也不改变用户流量转发这一职责属于数据平面的答案。"
+      }
+    },
+    {
+      "id": 365,
+      "before_sha256": "5797594fc29fd291c88eba7b3f3104907319fe1b76ca3d7ee28a62d1bf54431f",
+      "reason": "已看ND::/0 [2/0] viaFE80及备NH所在C2001:DB8:1234:2/64；A::/0 AD3正确。原解析把相同AD2说成冲突异常不准确，改为不能建立严格主备偏好，并按本图显示AD2解释，补主撤回/备仍有效，不称无条件立即容灾。",
+      "updates": {
+        "explanation": "A，`ipv6 route ::/0 2001:db8:1234:2::1 3`。图中现有ND默认条目明确为`ND ::/0 [2/0]`，方括号第一项显示AD2；要使同/0静态保持次选，选择高于2的AD3。备下一跳位于图中的直连2001:db8:1234:2::/64。\n\nB的`::/128`只对应全零单地址，不是默认路由；C的AD1会优先于当前AD2；D同为2，没有表达严格高于主路由的备份偏好，不能据此称一定冲突或异常。只有主默认失效并撤回、备下一跳及后续路径仍有效时，浮动静态才具备接管条件；AD不直接检测远端服务或保证瞬时无丢包切换。"
+      }
+    },
+    {
+      "id": 366,
+      "before_sha256": "5994d52e26b41144a4d865fe17aa8d13d04d2bb64d5a6459fa41ad63bbb23df7",
+      "reason": "已看OldR/R2 RID同192.168.1.1且Hello10/Dead40相同，D移除手工RID是正确方向；图却同时DROTHER和DR/BDR同RID、2neighbors而adjacent0，不是可自洽正常状态。改编仅保留地址/RID/定时器诊断excerpt，明确OldR仅有效IPv4为.2以保证自动选择唯一ID；替换模板，恢复选项换行。 [S2]",
+      "updates": {
+        "prompt": "Refer to the revised diagnostic excerpt. OldR has a manually configured OSPF router ID of 192.168.1.1, duplicating R2. OldR has no loopbacks and its only eligible active IPv4 interface address is 192.168.1.2, which is unique. Other OSPF settings are compatible. Which command sequence removes the manual override before a planned local OSPF process restart?",
+        "options": [
+          {
+            "label": "A",
+            "text": "OldR(config)#interface g0/0/0\nOldR(config-if)#ip ospf hello-interval 15"
+          },
+          {
+            "label": "B",
+            "text": "OldR(config)#router ospf 1\nOldR(config-router)#network 192.168.1.0 255.255.255.0 area 2"
+          },
+          {
+            "label": "C",
+            "text": "OldR(config)#interface g0/0/0\nOldR(config-if)#ip ospf dead-interval 15"
+          },
+          {
+            "label": "D",
+            "text": "OldR(config)#router ospf 1\nOldR(config-router)#no router-id 192.168.1.1"
+          }
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDIwIiBoZWlnaHQ9IjQ2MyI+PHJlY3Qgd2lkdGg9IjE0MjAiIGhlaWdodD0iNDYzIiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjQiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCBkaWFnbm9zdGljIGV4Y2VycHQ8L3RleHQ+PHRleHQgeD0iMjQiIHk9Ijc4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5PbGRSIyBzaG93IGlwIG9zcGYgaW50ZXJmYWNlIEdpZ2FiaXRFdGhlcm5ldDAvMC8wPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIxMTEiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkdpZ2FiaXRFdGhlcm5ldDAvMC8wIGlzIHVwLCBsaW5lIHByb3RvY29sIGlzIHVwPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIxNDQiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgSW50ZXJuZXQgQWRkcmVzcyAxOTIuMTY4LjEuMi8yNCwgQXJlYSAwPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIxNzciIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgUHJvY2VzcyBJRCAxLCBSb3V0ZXIgSUQgMTkyLjE2OC4xLjEsIE5ldHdvcmsgVHlwZSBCUk9BRENBU1QsIENvc3Q6IDE8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjIxMCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBUaW1lciBpbnRlcnZhbHMgY29uZmlndXJlZCwgSGVsbG8gMTAsIERlYWQgNDAsIFdhaXQgNDAsIFJldHJhbnNtaXQgNTwvdGV4dD48dGV4dCB4PSIyNCIgeT0iMjQzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj48L3RleHQ+PHRleHQgeD0iMjQiIHk9IjI3NiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UjIjIHNob3cgaXAgb3NwZiBpbnRlcmZhY2UgR2lnYWJpdEV0aGVybmV0MC8wLzA8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjMwOSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+R2lnYWJpdEV0aGVybmV0MC8wLzAgaXMgdXAsIGxpbmUgcHJvdG9jb2wgaXMgdXA8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjM0MiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBJbnRlcm5ldCBBZGRyZXNzIDE5Mi4xNjguMS4xLzI0LCBBcmVhIDA8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjM3NSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBQcm9jZXNzIElEIDEsIFJvdXRlciBJRCAxOTIuMTY4LjEuMSwgTmV0d29yayBUeXBlIEJST0FEQ0FTVCwgQ29zdDogMTwvdGV4dD48dGV4dCB4PSIyNCIgeT0iNDA4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj4gIFRpbWVyIGludGVydmFscyBjb25maWd1cmVkLCBIZWxsbyAxMCwgRGVhZCA0MCwgV2FpdCA0MCwgUmV0cmFuc21pdCA1PC90ZXh0Pjwvc3ZnPg==",
+        "explanation": "D。在OldR的`router ospf 1`下执行`no router-id 192.168.1.1`，移除重复的手工RID；按题设无Loopback且唯一有效地址为192.168.1.2，计划重启后可自动选择该唯一RID。RID应在OSPF域内唯一，不要求等于邻居或互联口地址。\n\nA把Hello10改15，C把Dead40改15，都会破坏当前已一致的定时器；B把接口启用改到area2且把子网掩码误当wildcard，未解决重复RID。重启属于维护操作，会影响本机对应邻接和路由，应另行确认窗口；重置本机不会重置所有远端路由器。更明确的运维做法也可以是显式配置一个唯一RID，但这里问的是移除旧覆盖项。"
+      }
+    },
+    {
+      "id": 367,
+      "before_sha256": "a99ab9408c8e6cd9f5840f8f6ea56912bab37cf16be246ce37629d05c21e5fc0",
+      "reason": "原图C172.16.4.0/21不是合法边界（第三字节需8倍数）；L172.16.8.2/26不是Local/32，且图中C/21与另口C172.16.2/24重叠。改编互不重叠C172.16.0/21与C172.16.8/24、对应L/32，题干改合法前缀，C掩码248保留。",
+      "updates": {
+        "prompt": "Refer to the revised routing-table excerpt. What is the subnet mask of the connected route 172.16.0.0/21?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDIwIiBoZWlnaHQ9IjI5OCI+PHJlY3Qgd2lkdGg9IjE0MjAiIGhlaWdodD0iMjk4IiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjQiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCBkaWFnbm9zdGljIGV4Y2VycHQ8L3RleHQ+PHRleHQgeD0iMjQiIHk9Ijc4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMSMgc2hvdyBpcCByb3V0ZTwvdGV4dD48dGV4dCB4PSIyNCIgeT0iMTExIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5TKiAwLjAuMC4wLzAgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBTZXJpYWwwLzAvMDwvdGV4dD48dGV4dCB4PSIyNCIgeT0iMTQ0IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5DIDE3Mi4xNi44LjAvMjQgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjE3NyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TCAxNzIuMTYuOC4yLzMyIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMTcyLjE2LjAuMC8yMSBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDAvMC8xPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIyNDMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkwgMTcyLjE2LjQuMi8zMiBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDAvMC8xPC90ZXh0Pjwvc3ZnPg==",
+        "explanation": "C，255.255.248.0。/21由前两个完整字节16位加第三字节5位组成，第三字节11111000等于248，第四字节为0。该前缀覆盖172.16.0.0–172.16.7.255，图中接口主机地址172.16.4.2位于其中；另一个连接网络172.16.8.0/24不重叠。\n\nA为/26、B为/23、D为/20，均不是21位掩码。Local条目L只代表本机单个IPv4地址，使用/32，不能将它当接口子网掩码。/21第三字节网络号步长为8，4不是合法的/21网络边界。"
+      }
+    },
+    {
+      "id": 368,
+      "before_sha256": "4846a12b4484493c1570e4144fc03bb19fbdc836b9518947a61f09e0851038fa",
+      "reason": "已看/30可用.65本机/.66R86，B目的/25+NH.66正确；原解析泛称任何静态NH必须直连。改为本图对端的具体选择、允许有效独立递归，补D目的/17含host bits及NH为/30网络号两个错误。",
+      "updates": {
+        "explanation": "B，`ip route 172.21.34.0 255.255.255.128 10.73.65.66`。目的/25对应255.255.255.128；互联10.73.65.64/30中，.65为R14本机、.66为R86对端，故本图从R14经.66到远端网段。A用/26且指本机；C用/24且也指本机；D用/17不仅与目标不同，172.21.34.0还含该/17的主机位，下一跳.64又是互联/30网络号。\n\n本题选直连对端很明确；一般静态路由也能使用有有效独立递归路径的非直连下一跳，不能泛称所有静态下一跳必须是直连地址。端到端可达仍需R86知道目的网络并有正确回程。"
+      }
+    },
+    {
+      "id": 369,
+      "before_sha256": "36895a5fcdb846be3fc50e208cfc3ee36d086176308608e930f1799de7906872",
+      "reason": "已看R1/R2 Hello均15，Dead分别40/45，RID不同，point-to-point均相同；C改Dead40正确。模板没指出B改Hello10会新造不匹配，A area2/wildcard误用、D改RID不修定时器。全部选项恢复两行，按真实15秒而非默认10秒解释。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "R2(config)#router ospf 1\nR2(config-router)#network 192.168.1.0 255.255.255.0 area 2"
+          },
+          {
+            "label": "B",
+            "text": "R2(config)#interface g0/0/0\nR2(config-if)#ip ospf hello-interval 10"
+          },
+          {
+            "label": "C",
+            "text": "R2(config)#interface g0/0/0\nR2(config-if)#ip ospf dead-interval 40"
+          },
+          {
+            "label": "D",
+            "text": "R2(config)#router ospf 1\nR2(config-router)#router-id 192.168.1.2"
+          }
+        ],
+        "explanation": "C，把R2的Gi0/0/0 Dead间隔从45改为40。图中两端Hello均15秒，R1 Dead40、R2 Dead45，Hello报文中的定时器不匹配会妨碍邻居建立；Area0与point-to-point类型已一致，RID192.168.1.1和10.1.1.1也不同。\n\nB改Hello为10会使其与R1的15不一致，不能因以太网常见默认10就忽略实际配置；A的area2不符，而且network参数应使用wildcard而非照抄255.255.255.0子网掩码；D改成另一个唯一RID并不修复定时器差异。修正后还需其他认证、MTU、链路等条件满足，不能把所有缺邻居都归为定时器。"
+      }
+    },
+    {
+      "id": 370,
+      "before_sha256": "a19fff3eb9732e214af51880c8d622066774e55f78613496d207ef471f4106ec",
+      "reason": "已看同Q357互联/30和Lo地址；原题双数主体未明确谁必须DR，C仍可R86 DR并Full，故补R14必须DR、R86priority1、fresh选举和MTU检查条件。四段配置压平，恢复模式/换行，保留B错放priority与C为0干扰，D保留。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Loopback addresses are already assigned as shown; FastEthernet0/0 on both routers uses duplex auto and OSPF broadcast type. In an initial election with no existing DR/BDR, R14 must be DR and form a Full OSPFv2 adjacency with R86. R86 retains priority 1, MTU checking is enabled, and other neighbor settings agree. Which relevant configuration pair meets the requirements?",
+        "options": [
+          {
+            "label": "A",
+            "text": "! R14 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf priority 255\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.14\n network 10.10.1.14 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0\n exit\n! R86 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip mtu 1400\n exit\nrouter ospf 10\n router-id 10.10.1.86\n network 10.10.1.86 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0"
+          },
+          {
+            "label": "B",
+            "text": "! R14 relevant configuration\ninterface Loopback0\n ip ospf 10 area 0\n exit\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf 10 area 0\n ip mtu 1500\n exit\nrouter ospf 10\n ip ospf priority 255\n router-id 10.10.1.14\n exit\n! R86 relevant configuration\ninterface Loopback0\n ip ospf 10 area 0\n exit\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip ospf 10 area 0\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.86"
+          },
+          {
+            "label": "C",
+            "text": "! R14 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf priority 0\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.14\n network 10.10.1.14 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0\n exit\n! R86 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.86\n network 10.10.1.86 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0"
+          },
+          {
+            "label": "D",
+            "text": "! R14 relevant configuration\ninterface Loopback0\n ip ospf 10 area 0\n exit\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf priority 255\n ip ospf 10 area 0\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.14\n exit\n! R86 relevant configuration\ninterface Loopback0\n ip ospf 10 area 0\n exit\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip ospf 10 area 0\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.86"
+          }
+        ],
+        "explanation": "D。两个Fa0/0以.65/.66位于10.73.65.64/30，接口命令`ip ospf 10 area 0`启用同area0的OSPF；两端MTU1500相同，R14接口priority255高于R86的1，在题设初选中当DR。Loopback也通过接口方式启用，不要求必须使用进程network命令。\n\nA的MTU1500/1400在本题DBD校验启用时阻碍同步；B把接口命令`ip ospf priority`错放在router ospf进程下；C的R14 priority0虽可与作为DR的R86建立Full，却不能让R14担任要求的DR。MTU差异不是所有停滞的唯一原因，高优先级也不抢占已经存在的DR；正确结论依题设初选和其他条件一致。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "scope": [
+    201,
+    400
+  ],
+  "reviewed_count": 200,
+  "corrected_count": 174,
+  "question_count": 1396,
+  "ids_qids_preserved": true,
+  "source_verification": "milestone-0201-0400-source-verification.json",
+  "formatter_verification": "formatter-verification-0201-0400.json",
+  "all200_actual_formatter_outputs_agree": true,
+  "literal_code_fragments_preserved": 372,
+  "build_status": "passed",
+  "apk_sha256": "32ae61d93d30b124db546a657762eae23485a3c32b889bf4bb09fcfe4df0f911",
+  "personal_install_status": "success",
+  "same_signature_as_existing_app": true,
+  "certificate_sha256": "841c1869811eb0d41992c8c61ad6eba6cd88ac96baf9cae33b6a33e73a1c6855",
+  "install_user": 0,
+  "install_mode": "adb install --user 0 -r",
+  "island_installed_before": false,
+  "island_installed_after": false,
+  "existing_data_directory_metadata_preserved": true,
+  "all_ids_qids_and_state_key_unchanged": true,
+  "native_manifest_UI_logic_entrypoint_equal_installed_previous_version": true,
+  "uninstall_performed": false,
+  "data_clear_performed": false,
+  "practice_record_contents_directly_read": false,
+  "git_delivery": "Commit history and origin branch pointer are authoritative; no release.",
+  "after_delivery": "Wait for explicit user wakeup; keep goal active; do not review Q401."
+}

@@ -1,0 +1,26 @@
+{
+  "original_images_directly_viewed": [
+    381,
+    382,
+    383
+  ],
+  "new_images": [
+    381,
+    383
+  ],
+  "authored_exhibit_corrections": {
+    "381": "Resolved forwarding entries replace invalid overlapping connected-interface claims.",
+    "383": "Self-consistent diagram summary: right LAN .8/29 contains PC .10; explicit new local .1/24."
+  },
+  "answer_change": {
+    "385": {
+      "before": [
+        "B"
+      ],
+      "after": [
+        "D"
+      ]
+    }
+  },
+  "limitations": "Manual source/diagram review; not live IOS/VRRP traffic test."
+}

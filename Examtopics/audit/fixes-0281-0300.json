@@ -1,0 +1,192 @@
+{
+  "scope": "Manual corrections Q281-Q300; delivery deferred until Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 281,
+      "before_sha256": "3aa3a9b585a9772b152f13ca6d62592eae6a434570d3e8ba15758a535d8e1958",
+      "reason": "A/preempt正确，但原解析称立即且保证，未解释重启延迟/有效优先级与已存Active；B/D的standby10 version语法也不对。限定兼容已配置组10、恢复后有效优先级更高，说明优先级本身不强制抢占。 [S1]",
+      "updates": {
+        "prompt": "A Cisco IOS router rejoins an already configured HSRP group 10 after a reload. Its effective priority is higher than the current active router, the group settings are compatible, and all required delays have expired. Which interface command allows it to take over the active role?",
+        "explanation": "A，`standby 10 preempt`。HSRP默认不让后来恢复的高优先级成员仅因优先级更高就夺取仍在工作的Active角色；preempt允许该成员按优先级抢占。C只设置priority，不能替代抢占开关，且题目已给本机有效优先级更高。B/D写成带组号的version命令也不是此IOS版本配置语法；接口级`standby version 1`或`standby version 2`用于选择协议版本，本身不启用抢占。实际接管受preempt/reload delay、跟踪后的有效优先级及组状态影响，不能保证一启动就立即接管。若Active已失效，故障接管又不以preempt为必要条件。"
+      }
+    },
+    {
+      "id": 282,
+      "before_sha256": "1599bd6f372872434bdd4dd7f2afd7bf13a7b6f6ace418f134060d62374904ca",
+      "reason": "已看答案图，show standby含Priority95(configured120)，不是缺图。但未限定IOS时NX-OS的show hsrp也可查询，原解析纯模板没读出图字段。限定IOS/IOS XE，保留D，解释有效95与配置120及其他命令范围。 [S2]",
+      "updates": {
+        "prompt": "On a Cisco IOS or IOS XE router, which listed command displays detailed HSRP group information, including the local router's current priority?",
+        "explanation": "D，`show standby`。随答案给出的示例行是`Priority 95 (configured 120)`：当前有效优先级95，配置基值120；对象跟踪等可造成两者不同，不能只看configured数值。该命令还显示组、Active/Standby、虚拟IP及计时器等。A的`show hsrp`是其他系统如NX-OS常用的HSRP查看命令，因此题目明确IOS/IOS XE；B看会话，C看接口链路/计数，都不是本题完整HSRP组优先级查询。"
+      }
+    },
+    {
+      "id": 283,
+      "before_sha256": "a38e28e653ad3b0523e7f5578717a361bb789f15063defd8dd2a83b4fdd7b227",
+      "reason": "已看图R1=192.168.201.1、R2=.2、远网192.168.202/24；B末尾AD5非默认1，正确。原解析只说换数字，逐项未说明C/D把distance放错位置、A仍默认。重写具体参数意义，非所有非1值均一定有效/可作所需备份。 [S3]",
+      "updates": {
+        "explanation": "B。图中R1经互联192.168.201.0网段到R2，R2下一跳为192.168.201.2，其后连接目标192.168.202.0/24。IOS命令依次写目的网络、正常子网掩码、下一跳，再写可选管理距离：\n```text\nrouter1(config)# ip route 192.168.202.0 255.255.255.0 192.168.201.2 5\n```\n末尾5与普通静态路由默认AD1不同。A末尾显式1仍是默认值，不满足nondefault；C/D把1或5放在目的网络位置，未按该语法配置所需路由。该题只要求非默认AD，不代表AD5一定能给任意动态主路由作备份；是否浮动还须与同前缀主路由的实际AD比较，并确认下一跳有效。"
+      }
+    },
+    {
+      "id": 284,
+      "before_sha256": "b1ac2beb2d83923c94b327bf384754f097c504eee0ef400b5e04ccb469b03773",
+      "reason": "A重启受影响OSPF进程正确；原解析“完全不影响数据转发/其他协议”与几秒保证错误，另有无证据98%投票及所谓官方纠错说法。明确IOS已有进程采用旧RID，新router-id待重启，支持指定进程号以缩小范围；邻接/路由会收敛，可能影响业务。 [S4]",
+      "updates": {
+        "prompt": "A Cisco IOS router is already running OSPF with an automatically selected router ID. A new router-id has been configured under that process, but show ip ospf still displays the old value. Among these choices, how can the engineer apply the new ID with the smallest reset scope?",
+        "explanation": "A，重启受影响的OSPF进程。IOS在运行进程中配置新router-id后，通常需重启该进程才能应用；支持指定进程号的IOS可用`clear ip ospf <process-id> process`缩小范围，不指定进程号的`clear ip ospf process`会清除所有OSPF进程。B新增loopback不能覆盖已配置的手工RID，也不会仅因新地址出现就让旧运行RID抢占改变；C整机重启范围更大；D保存配置不会重启现有进程。进程重置会重建邻接并使相关路由重新收敛，可能影响业务，也可能间接影响依赖这些路由的其他会话，不能称完全不影响转发或保证几秒恢复。RID选择的接口优先规则属IOS实现，不能将其全归为RFC规定；"
+      }
+    },
+    {
+      "id": 285,
+      "before_sha256": "9df6f1517438dc232b929a41fb252a7718c3bfdc4e06f3d898131b8c88e8f647",
+      "reason": "D用于EIGRP IPv6内部事件日志正确，但原解析保证所有平台微秒时间戳及完整认证/错误记录，并称通用首选工具；官方命令说明是内部事件缓冲区，errmsg等细节依实现。改问内部event log，区分邻居/拓扑/计数，不承诺全量历史。 [S5]",
+      "updates": {
+        "prompt": "On a Cisco IOS release supporting the EIGRP for IPv6 diagnostic commands below, which command displays the internal EIGRP event log?",
+        "explanation": "D，`show ipv6 eigrp events`查看EIGRP for IPv6内部事件缓冲区，可用于分析协议事件及故障；可用过滤项和记录粒度依IOS实现，不能保证保留所有认证错误或完整历史。A/neighbors看当前邻居与相关状态，B/topology看拓扑/距离/后继路径，C/traffic看协议报文计数，均不等同事件日志。该events命令是深入诊断接口，不应把它描述为在所有问题中都优先于邻居、拓扑和连通性检查的通用首选，也不承诺固定微秒时间戳。"
+      }
+    },
+    {
+      "id": 286,
+      "before_sha256": "36b482f87193e9a8530ccf0a244428251688436dac91b3c2073be309240f9574",
+      "reason": "已看共享10.0.4/24、R3=.3连接10.0.3/24；题干把另一道Choose two拼入，type=Multiple Choice但只答D。移除串题改Single Choice，D保留。A/B不仅next-hop不同且掩码/CLI错误；不能笼统声称R2永远不能再转给R3，也须区分R1去程与完整回程。 [S3]",
+      "updates": {
+        "type": "Single Choice",
+        "prompt": "Refer to the exhibit. R1 is a Cisco IOS router. Which global configuration command adds a route on R1 for 10.0.3.0/24 using the directly attached R3 at 10.0.4.3 as the next hop?",
+        "explanation": "D，`ip route 10.0.3.0 255.255.255.0 10.0.4.3`。图中R1/R2/R3在共享10.0.4.0/24上分别为.1/.2/.3，10.0.3.0/24位于R3后，所需正常掩码为255.255.255.0。A/C的route add不是本题IOS全局静态路由语法；B虽用ip route，但0.255.255.255不是有效的连续正常子网掩码，也非目标/24的通配符掩码。A/B还没有按题目指定R3作为直接下一跳，但不能据此断言在任何其他配置下R2都不能再转给R3。配置R1去程不等于保证终端双向通信，还需回程、接口及终端网关正确。"
+      }
+    },
+    {
+      "id": 287,
+      "before_sha256": "7dfbecb65db3a6f6bd316f1d63723cbf4d3fe468179b00fa48fd7fef8c8ea8a5",
+      "reason": "已看原RIB，目标172.16.1.1不在直连.1.128/25，走O*E2默认via192.168.14.4，A正确。但解析将172.16/12私网中的/24说成C类、第二/第三字节自混。改为准确范围/默认解析，Loopback1主机项前提明确，删除分类误述。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Treat the displayed Loopback1 entry 172.16.16.1 as a /32 host route. Under normal destination-based forwarding, to which next-hop IP does R1 send a packet for 172.16.1.1?",
+        "explanation": "A，192.168.14.4。直连172.16.1.128/25覆盖172.16.1.128–172.16.1.255，不含目标172.16.1.1；Loopback1主机项172.16.16.1/32是另一地址；其他192.168.x.x明细也不匹配。于是选择O*E2默认0.0.0.0/0，经192.168.14.4、FastEthernet1/0。B/.12.2对应192.168.10.1/32，C/.13.3对应192.168.10.32/27，D/.15.5对应192.168.0.0/16，都没有覆盖目标。/25是把一个/24前缀拆成两半，不应把172.16地址称为历史C类；按前缀和地址计算即可，不依赖有类分类。"
+      }
+    },
+    {
+      "id": 289,
+      "before_sha256": "bd13c37789c2a9556f6bfa016397b25cb280b7d357148f2af4cde5bccab021e3",
+      "reason": "已看Loopback0 .33/27、BGP100、邻居192.168.12.2 remote-as100；A为所需.32/27 network命令。原解析将mask关键字泛化为所有BGP network命令必有，忽略合法classful省略形式。限定通告此精确连接前缀、会话/策略正常，区别RIB精确匹配与无mask情形。 [S6]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Loopback0 is up and its connected 172.16.1.32/27 route is installed. The IPv4 BGP session is established and outbound policy permits the prefix. Which network statement under router bgp 100 originates that exact connected prefix?",
+        "explanation": "A，`network 172.16.1.32 mask 255.255.255.224`。Loopback0地址172.16.1.33/27属于.32–.63，规范网络地址.32、掩码255.255.255.224。带mask的BGP network声明要求RIB有精确同前缀/同掩码，声明用于本地起源路由，不是在接口开启邻居。B/F采用无mask关键字的通配符式参数，C也少了此显式掩码形式所需的mask关键字，E使用无效正常掩码；D把有host bits的.33当/27网络地址。IOS也存在不带mask的classful network用法，其条件/auto-summary行为不同，不能泛称所有BGP network都必须写mask。通告还受会话、地址族及策略影响，本题已给相应条件。"
+      }
+    },
+    {
+      "id": 290,
+      "before_sha256": "4effa6168aeb8a794dcaafdb2ac8ef77622a1649baeb472057b27118acdacbee",
+      "reason": "已看本题独立RIB图，D主机项[90/52778]，B90正确。原解析要求关联前序Q288，不适合打乱刷题，并把AD值等同来源身份；重写只读本图括号第一数，其他数为常见默认而非不可调整。",
+      "updates": {
+        "explanation": "B，90。直接读取本题图中主机路由`D 192.168.10.1/32 [90/52778] via 192.168.12.2`，方括号第一数是AD，第二数52778是该路由度量；无需回看其他题。/32是对目标主机的精确匹配，比图中覆盖该地址的/24、/27、/16和默认都长。前导D标识EIGRP来源，默认内部EIGRP AD为90，但AD可配置，应以本条显示值为准。A/1常见于默认静态，C/110常见于默认OSPF，D/120常见于默认RIP；这些默认值不能单独充当不可变的协议身份标识。"
+      }
+    },
+    {
+      "id": 291,
+      "before_sha256": "5357554b0c921bafe4784e23d1a52dd8eace5678c382f2b691af8229a768166b",
+      "reason": "B的最高接口IP只在同优先级初选平局时决定；默认无preempt，后来的高IP不必替代现Active。原题default configuration未排除已有Active，模板又无理由排除本为首要因素的priority。补首次选举、priority均100、无现Active，问tie-break。 [S1]",
+      "updates": {
+        "prompt": "Several Cisco IOS routers initially elect an HSRP active router for a group with no active router yet. Every member has the default priority of 100 and tracking has not changed it. Which value breaks this priority tie?",
+        "explanation": "B，参与该HSRP组的接口IP地址，数值最高者在本次同优先级初选中胜出。一般先比有效priority，所以C不是普遍无关，而是题目已给所有成员同为默认100、无法再区分；A的loopback地址不是该接口级HSRP选举依据；D的tracking对象编号不作为平局比较值，虽然配置的跟踪可改变有效优先级。默认未启用preempt时，后来出现的较高IP成员不会仅凭IP更高就必然取代现有Active，所以题目明确没有既存Active。"
+      }
+    },
+    {
+      "id": 292,
+      "before_sha256": "321bb4d0b020b1e84118b5073534e4847f0498175e918e4f56c55daf60d3a6fd",
+      "reason": "A在已经初始化、唯一存活且接口up的组成员条件下正确。原长段英文语病/优先级150比较不成立，模板未区分失效接管与抢占。明确无需额外命令不等于无需基础HSRP配置；preempt/加priority不为最后存活者所必需。 [S1]",
+      "updates": {
+        "prompt": "A Cisco IOS router already has a valid, initialized HSRP group and an operational participating interface. All other routers in that group fail, leaving it as the only eligible member. What additional HSRP command is required for it to become active after failure detection and election?",
+        "explanation": "A，无需额外HSRP命令。在已经正确配置并初始化组、接口仍可运行的前提下，唯一合格存活成员可在故障检测/选举后成为Active。C/preempt用于在现Active仍工作时允许较高优先级成员取代它，不是失效接管的前提；D不必把优先级升到250才能由最后存活者接管；B的track不是这项接管所必需，所示命令还缺完整跟踪对象/接口参数。“无需额外配置”不表示可以没有基础组/VIP配置或接口已down，也不能保证无检测等待或业务无损。"
+      }
+    },
+    {
+      "id": 293,
+      "before_sha256": "eb6be9355938900407c69ad7bd89cdaad5908516fefd8afef47cfef570a06186",
+      "reason": "已看last-resort192.168.4.1与C192.168.4.0/24 Serial2，C正确。解析第二/第三字节混写，且声称只有无默认才丢包、有默认就绝不丢，忽略其他转发条件。重写本图路由决策而非绝对交付保证。",
+      "updates": {
+        "explanation": "C，Serial2。目标192.0.2.156不在所示10.x或192.168.x明细中，最后求助网关为192.168.4.1；查到192.168.4.0/24直接连接Serial2，因此按图示路由决策经Serial2交给该下一跳。A的Serial0/Serial1对应其他链路，不是默认网关所在出口；B不是把原数据包直接退回源；D在本题存在可解析默认且其他条件正常时不符合该查表结果。存在路由不等于任何情况下绝不丢包，TTL、过滤或链路故障等仍可能影响转发。本题第二字节是0与168的差异，不应误称第三字节168。"
+      }
+    },
+    {
+      "id": 294,
+      "before_sha256": "7ecdaeacc835426eaa58ae12f378ff427f8976b6a92c3d2f6d4cc1d23be8d3ea",
+      "reason": "已看Area0与3、RID172.16.1.1/172.16.3.3及不同GUA；A阻止邻接而非使本地OSPFv3进程不能启动，原题也缺明确问句。改问不能建立邻居，区分per-link/link-local与GUA子网相同的非必要性，示例接口命令用真实ipv6 ospf。 [S7]",
+      "updates": {
+        "prompt": "Refer to the exhibit. The directly connected R1 and R2 interfaces use the shown IPv6 OSPF configuration, but the routers do not form an OSPFv3 neighbor relationship. Which displayed mismatch prevents neighbor formation?",
+        "explanation": "A。R1接口为`ipv6 ospf 1 area 0`，R2为`ipv6 ospf 1 area 3`，同一链路的Area ID不一致，接收报文区域校验失败，因而不能形成邻居；这不等同于本地OSPF进程无法启动。B的全局IPv6前缀分别3001:DBB:13::/64和2001:DBB:12::/64不同，但本题普通直连链路的OSPFv3以link-local通信、按链路而非GUA子网建立邻居，GUA同前缀不是这一条件。C混淆EIGRP/BGP的AS号，图中OSPF进程号1仅本地有效；D的32位RID172.16.1.1与172.16.3.3不同正常，应保持唯一。仍须链路、本地地址、计时器和安全设置等相容，不能仅有同一二层介质就保证邻居。"
+      }
+    },
+    {
+      "id": 295,
+      "before_sha256": "d5abce6ded0692f9f834e891c85a5739e603f66f885dc76173837bca2e81465f",
+      "reason": "D/show ip ospf database正确，但整个LSDB示例粘成一段，Link count与下一IP粘连、行列不全。按原示例字段恢复Router/Net两表8行的代码块，不伪造现场输出；说明LSDB与neighbor/RIB区别，替换逐项模板。 [S8]",
+      "updates": {
+        "prompt": "On Cisco IOS, which command displays the OSPFv2 link-state database?",
+        "explanation": "D，`show ip ospf database`显示LSDB中的LSA集合，可按类型查看Router/Network等条目及通告者、年龄、序列号、校验和。示例：\n```text\nR2# show ip ospf database\n            OSPF Router with ID (2.2.2.2) (Process ID 1)\n\nRouter Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum Link count\n2.2.2.2          2.2.2.2          793 0x80000003 0x004F85 2\n10.4.4.4         10.4.4.4         776 0x80000004 0x005643 1\n111.111.111.111  111.111.111.111  755 0x80000005 0x0059CA 2\n133.133.133.133  133.133.133.133  775 0x80000005 0x00B5B1 2\n\nNet Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum\n10.1.1.1         111.111.111.111  794 0x80000001 0x001E8B\n10.2.2.3         133.133.133.133  812 0x80000001 0x004BA9\n10.4.4.1         111.111.111.111  755 0x80000001 0x007F16\n10.4.4.3         133.133.133.133  775 0x80000001 0x00C31F\n```\nA/B不是所需IOS命令结构。C意在邻居表（标准命令为`show ip ospf neighbor`），只显示邻居关系，不是LSDB。LSDB也不是show ip route中的最终路由表；SPF根据LSDB计算路由，不能把已选路由条目当作全部链路状态。示例展示了部分Router/Network LSA，实际LSDB内容依区域与拓扑而异。"
+      }
+    },
+    {
+      "id": 296,
+      "before_sha256": "a890704d92cff703928e4246b3ff90c88a1ad5876f63d124400df7511168ef76",
+      "reason": "已看三个子接口172.19.1/2/3.254/24，D正确：均已直连，不需为本机VLAN互访运行IGP。A/B/C两命令均压平，恢复换行并按协议解释“不必要”而非“命令均无效”，保留题设trunk/接口/网关正确的前提。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "These commands need to be added to the configuration:\nC-router(config)# router eigrp 123\nC-router(config-router)# network 172.19.0.0"
+          },
+          {
+            "label": "B",
+            "text": "These commands need to be added to the configuration:\nC-router(config)# router ospf 1\nC-router(config-router)# network 172.19.0.0 0.0.3.255 area 0"
+          },
+          {
+            "label": "C",
+            "text": "These commands need to be added to the configuration:\nC-router(config)# router rip\nC-router(config-router)# network 172.19.0.0"
+          },
+          {
+            "label": "D",
+            "text": "No further routing configuration is required."
+          }
+        ],
+        "explanation": "D。图中C-router的Fa0/0.1、.2、.3分别为VLAN1/2/3的172.19.1.254/24、172.19.2.254/24、172.19.3.254/24，题设接口/trunk及终端网关都正确且IP routing已工作，三个网络会作为直连路由存在。来自一个VLAN、去往另一直连VLAN的报文可由本机查表转发，无需先学远端路由。A的EIGRP、B的OSPF、C的RIP都可用于与其他路由器交换路由，但不是这三个本地VLAN互访所必需；不能把“不必添加”说成这些协议命令语法都无效。这里的no further routing configuration建立在题目已完成802.1Q封装、允许VLAN、接口up及正确网关的前提，不替代这些基础条件。"
+      }
+    },
+    {
+      "id": 297,
+      "before_sha256": "93d05a5ce406c8aa1e7157f4104fa5e06cfb422f75a96f030a4f1648e3778c04",
+      "reason": "已看四条/30：.16、.20、.24、.28，恰连续覆盖.16–.31；C=.16/28正确。解析用28-16=12估跨度且幂次/二进制损坏和多转义实体，未计最后/30的广播边界。改按共同4位或16地址并集，逐项排除A/B/D/E/F。",
+      "updates": {
+        "explanation": "C，192.168.25.16 255.255.255.240，即192.168.25.16/28。四条D路由均为/30，范围依次.16–.19、.20–.23、.24–.27、.28–.31，正好连续16个地址。最后一字节的网络号为：\n```text\n16 = 00010000\n20 = 00010100\n24 = 00011000\n28 = 00011100\n     0001xxxx  -> /28, addresses 16 through 31\n```\n前三字节24位加共同4位，得到/28；不能只用28-16=12而漏掉最后/30的.29–.31。A的.0/28仅到.15，B的.0/30仅到.3，D的.16/30只覆盖第一条，F的.28/30只覆盖最后一条；E的.28配/28有host bits，不是规范汇总网络地址（按/28归一化才是.16）。四条正好可合成一个/28，无需额外覆盖相邻网段。"
+      }
+    },
+    {
+      "id": 298,
+      "before_sha256": "3060dfaf9d12d1acf1a382c1bee7aba92049088061dcbd8cc362b749d271642c",
+      "reason": "已看Loopback0=172.16.5.1、Loopback1=10.154.154.1均up/up，C正确，但只有无手工RID仍不能排除先启动后改接口的旧RID。补首次选RID且接口预先就绪，具体比较loopbacks，清理amp实体及模板。 [S4]",
+      "updates": {
+        "prompt": "Refer to the exhibit. A Cisco IOS OSPFv2 process starts and automatically selects its router ID after all shown interfaces are up with these addresses. No router-id command is configured. Which router ID is selected?",
+        "explanation": "C，172.16.5.1。IOS自动选RID时先比较有效loopback中的地址；Loopback0=172.16.5.1，大于Loopback1=10.154.154.1，所以选前者。并非因为接口编号0比1优先。A/10.1.1.2为FastEthernet0/1，D/192.168.5.3为FastEthernet0/0，即使物理地址数值更大，也不能越过已有loopback优先级；B是较小的loopback。手工router-id若配置则优先，已运行进程也不会因后来新增接口地址立即抢占换RID；题目已限定本次启动选择及地址就绪。"
+      }
+    },
+    {
+      "id": 299,
+      "before_sha256": "1ecdd52749d672f90ae64ada779395d81e6b3e8bb6e49b77cccd72f6dbfe88c2",
+      "reason": "已看EIGRP AS100/200/300，A用于统一单AS域；B的DR不适用EIGRP，D的network10.0.0.0已可匹配B两个10.x接口。原问A与C直接交换updates易误解非直连成为邻居，也未排除多AS重分发设计。明确经B逐跳传播且不使用重分发，替换模板。 [S9]",
+      "updates": {
+        "prompt": "Refer to the exhibit. The design requires one classic EIGRP IPv4 domain, with routes propagated hop by hop from RouterA through RouterB to RouterC, without redistribution between EIGRP autonomous systems. All other neighbor requirements are met. Which change is needed?",
+        "explanation": "A。图中A/B/C分别运行EIGRP100/200/300，互联两端AS号不一致，不能形成所需同AS邻居。应让这三个参与单一域的进程采用一致AS；路由由A-B和B-C邻居逐跳传播，不是让不直连的A与C直接建立邻居。B错误：EIGRP不选DR，也不要求用loopback选DR。C的自动汇总设置影响通告前缀，不解决AS失配；D错误：经典`network 10.0.0.0`不带wildcard时按主类10/8匹配，B的10.1.1.2和10.2.2.2均已覆盖，不必机械地一个接口一条network。多AS加重分发是另一种可行设计，但题目已排除；AS/K值等一致也仍需接口、认证和可达性满足。"
+      }
+    },
+    {
+      "id": 300,
+      "before_sha256": "a40f63258c68adf3fb16d0c7c3c85e0e14d28792ab1264e9bca05727c1516d74",
+      "reason": "已看R1Hello5/Dead20与R2Hello10/Dead40，D正确；但R2接口地址写.2，与R1重复且与R2自称DR接口.1矛盾，原图不止单一故障。改编图明确R2=.1/24、保留计时器失配，不能冒称恢复原意；说明同Area0、进程号本地有效、BDR非前提。 [S8]",
+      "updates": {
+        "prompt": "Refer to the revised exhibit. R1 and R2 cannot establish an OSPFv2 adjacency on their common Ethernet link. Authentication and other unshown requirements match. Which displayed mismatch explains the problem?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9Ijc3MCIgdmlld0JveD0iMCAwIDEyODAgNzcwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3NzAiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iMzIiIHk9IjQwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjUiPlJldmlzZWQgZXhlcmNpc2UgLSBkaXN0aW5jdCBpbnRlcmZhY2UgSVBzOyBtaXNtYXRjaGVkIE9TUEYgdGltZXJzPC90ZXh0PjxyZWN0IHg9IjIwIiB5PSI2NiIgd2lkdGg9IjEyNDAiIGhlaWdodD0iMzEwIiByeD0iNiIgZmlsbD0iI2YwZjRmOCIvPjx0ZXh0IHg9IjM4IiB5PSIxMDIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjIiIHhtbDpzcGFjZT0icHJlc2VydmUiPlIxIyBzaG93IGlwIG9zcGYgaW50ZXJmYWNlIEV0aGVybmV0MDwvdGV4dD48dGV4dCB4PSIzOCIgeT0iMTM2IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj5FdGhlcm5ldDAgaXMgdXAsIGxpbmUgcHJvdG9jb2wgaXMgdXA8L3RleHQ+PHRleHQgeD0iMzgiIHk9IjE3MCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBJbnRlcm5ldCBBZGRyZXNzIDE5Mi4xNjguMS4yLzI0LCBBcmVhIDA8L3RleHQ+PHRleHQgeD0iMzgiIHk9IjIwNCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBQcm9jZXNzIElEIDEsIFJvdXRlciBJRCAxOTIuMTY4LjMxLjMzLCBOZXR3b3JrIFR5cGUgQlJPQURDQVNULCBDb3N0OiAxMDwvdGV4dD48dGV4dCB4PSIzOCIgeT0iMjM4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4gIFRyYW5zbWl0IERlbGF5IGlzIDEgc2VjLCBTdGF0ZSBEUiwgUHJpb3JpdHkgMTwvdGV4dD48dGV4dCB4PSIzOCIgeT0iMjcyIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4gIERlc2lnbmF0ZWQgUm91dGVyIChJRCkgMTkyLjE2OC4zMS4zMywgSW50ZXJmYWNlIGFkZHJlc3MgMTkyLjE2OC4xLjI8L3RleHQ+PHRleHQgeD0iMzgiIHk9IjMwNiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBObyBiYWNrdXAgZGVzaWduYXRlZCByb3V0ZXIgb24gdGhpcyBuZXR3b3JrPC90ZXh0Pjx0ZXh0IHg9IjM4IiB5PSIzNDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjIiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgVGltZXIgaW50ZXJ2YWxzIGNvbmZpZ3VyZWQsIEhlbGxvIDUsIERlYWQgMjAsIFdhaXQgMjAsIFJldHJhbnNtaXQgNTwvdGV4dD48cmVjdCB4PSIyMCIgeT0iNDE2IiB3aWR0aD0iMTI0MCIgaGVpZ2h0PSIzMTAiIHJ4PSI2IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iMzgiIHk9IjQ1MiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UjIjIHNob3cgaXAgb3NwZiBpbnRlcmZhY2UgRXRoZXJuZXQwPC90ZXh0Pjx0ZXh0IHg9IjM4IiB5PSI0ODYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjIiIHhtbDpzcGFjZT0icHJlc2VydmUiPkV0aGVybmV0MCBpcyB1cCwgbGluZSBwcm90b2NvbCBpcyB1cDwvdGV4dD48dGV4dCB4PSIzOCIgeT0iNTIwIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4gIEludGVybmV0IEFkZHJlc3MgMTkyLjE2OC4xLjEvMjQsIEFyZWEgMDwvdGV4dD48dGV4dCB4PSIzOCIgeT0iNTU0IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4gIFByb2Nlc3MgSUQgMiwgUm91dGVyIElEIDE5Mi4xNjguMzEuMTEsIE5ldHdvcmsgVHlwZSBCUk9BRENBU1QsIENvc3Q6IDEwPC90ZXh0Pjx0ZXh0IHg9IjM4IiB5PSI1ODgiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjIiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgVHJhbnNtaXQgRGVsYXkgaXMgMSBzZWMsIFN0YXRlIERSLCBQcmlvcml0eSAxPC90ZXh0Pjx0ZXh0IHg9IjM4IiB5PSI2MjIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjIiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgRGVzaWduYXRlZCBSb3V0ZXIgKElEKSAxOTIuMTY4LjMxLjExLCBJbnRlcmZhY2UgYWRkcmVzcyAxOTIuMTY4LjEuMTwvdGV4dD48dGV4dCB4PSIzOCIgeT0iNjU2IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4gIE5vIGJhY2t1cCBkZXNpZ25hdGVkIHJvdXRlciBvbiB0aGlzIG5ldHdvcms8L3RleHQ+PHRleHQgeD0iMzgiIHk9IjY5MCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBUaW1lciBpbnRlcnZhbHMgY29uZmlndXJlZCwgSGVsbG8gMTAsIERlYWQgNDAsIFdhaXQgNDAsIFJldHJhbnNtaXQgNTwvdGV4dD48L3N2Zz4=",
+        "explanation": "D。R1明确显示Hello5、Dead20；R2明确显示Hello10、Dead40，两端定时器失配，不能通过Hello参数校验。应让双方Hello/Dead都一致，不要只改其中一个。A错误：同为Area0且地址.1/.2都在192.168.1.0/24；B的priority1无需增大才能成为邻居，C的cost10也不是Hello配对条件。E错误：BDR由协议在适当网络上选举，不需要先人为添加另一设备才能形成邻接；分裂发现时两台各自显示DR且无BDR可由失配解释。F错误：进程号1与2仅本地有效，不要求相同；RID192.168.31.33与192.168.31.11不同正常。"
+      }
+    }
+  ]
+}

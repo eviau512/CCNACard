@@ -1,0 +1,17 @@
+{
+  "original_images_directly_viewed": [
+    372,
+    373,
+    374,
+    375
+  ],
+  "new_images": [
+    374,
+    375
+  ],
+  "authored_exhibit_corrections": {
+    "374": "Relevant valid excerpt without false classful counts.",
+    "375": "Two nonoverlapping /30 links with explicit R3 peer .6, and authored distractor A via R2. Not a recovered original."
+  },
+  "limitations": "Manual source/document review; not a live IOS test."
+}

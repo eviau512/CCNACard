@@ -1,0 +1,236 @@
+{
+  "scope": "Manual corrections Q201-Q220, second 200-question milestone",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 201,
+      "before_sha256": "8a325bf96b2e756d1312744dd3c697ef177f586bd423196eb148ff36eac01df8",
+      "reason": "已看本端两物理口active、Po1地址及down日志。active+passive可形成LACP，D符合“不主动发起”的意图；但原题写without negotiating，passive仍参与协商，并非无协商。应改为without initiating negotiation。图未给对端实际配置，CDP邻居和down日志也不能单独证明对端mode on，解析应把它作为D所暗示的情境，不当已验证故障原因。[X1]",
+      "updates": {
+        "prompt": "Refer to the exhibit. The local Layer 3 EtherChannel members use LACP active. The neighbor interfaces are up but currently use static mode on. Which change lets the neighbor respond to LACP without initiating negotiation?",
+        "explanation": "本端两成员已配LACP active；若对端当前为静态on，需改为passive，D满足“不主动发起但响应”的限定。passive仍参与LACP协商，并非完全无协商；active+passive可聚合，其他参数仍须兼容。A的IP不修复聚合协议不一致；B不能替代协议配置；C的auto属于PAgP。图中CDP可见和Po1 down本身不能唯一证明对端mode on，本题将对端静态配置作为明确附加条件。"
+      }
+    },
+    {
+      "id": 202,
+      "before_sha256": "698e236cd61794738cfbcf5e96cf31f30b32aba61dae1f982e976c58400fae68",
+      "reason": "已看G1/1–G1/3三链路图，同配active是四项中正确LACP模式；passive/passive不成，desirable为PAgP，on非LACP。但原选项Interface range G1/1 1/3和双引号乱码缺范围连接符，全部多命令压一行；解析默默修成带横杠的范围仍不规范，建议按平台写interface range gi1/1 - 3并分行。五处id模板被formatter吞掉；active仅满足协商条件，不保证任何参数下100%建链。[X1]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface range GigabitEthernet1/1 - 3\n switchport mode trunk\n channel-group 1 mode active\n no shutdown"
+          },
+          {
+            "label": "B",
+            "text": "interface range GigabitEthernet1/1 - 3\n switchport mode access\n channel-group 1 mode passive\n no shutdown"
+          },
+          {
+            "label": "C",
+            "text": "interface range GigabitEthernet1/1 - 3\n switchport mode trunk\n channel-group 1 mode desirable\n no shutdown"
+          },
+          {
+            "label": "D",
+            "text": "interface range GigabitEthernet1/1 - 3\n switchport mode access\n channel-group 1 mode on\n no shutdown"
+          }
+        ],
+        "explanation": "同一配置用于两端，LACP active+active可协商，所以A正确。B的passive+passive都不发起；C的desirable是PAgP；D的on为无协议静态聚合，不满足LACP。三成员Gi1/1至Gi1/3由合法interface range选择，接口/模式/channel-group/no shutdown分别输入。成功仍依赖物理连通、速率双工及其他聚合参数兼容，不是单凭active保证任何环境都100%成功。"
+      }
+    },
+    {
+      "id": 204,
+      "before_sha256": "c39edceb04d3b4a1558a88ee3e08978eebfcdd4c52ac84b30379b4eea9b9b075",
+      "reason": "已看show cdp为60秒发送、180秒holdtime；在Cat9300调timer10符合让邻居更快收到本机通告的意图，B正确，改邻居timer方向相反。解析两个seconds参数被HTML处理吞掉，需要修显示。CDP用组播MAC而非广播帧；不能将周期计时器等同所有平台首次发送的必等时间，CDP处理也不必等STP用户转发。PortFast连接路由器并非一概违背准则。[X2]",
+      "updates": {
+        "explanation": "在Cat9300本机配置cdp timer 10会把本机CDP周期通告改为10秒，使邻居更频繁获知它，因此B。holdtime告诉接收方未收到更新时保留本条目多久，不加快发送；在邻居改timer只加快邻居自己的通告，方向相反。PortFast影响STP边缘端口转发延迟，不控制CDP周期，连接路由器也不是一概禁止。CDP目的MAC为组播01:00:0c:cc:cc:cc，不是广播；首次通告行为不能仅由默认周期推成固定必等60秒。"
+      }
+    },
+    {
+      "id": 205,
+      "before_sha256": "7be5186cdacfe40596c392df73a1ff2bd14a0c4d0553c48b23f287a981e1f514",
+      "reason": "AireOS更改LAG后保存并重启，C有文档支持；但同一解析称其可对接LACP/Static，AireOS此LAG不支持LACP/PAgP，应对端mode on。文档还明确禁用LAG后接口移至port1、需配置所有接口主/备端口，不能因B只提management就断言B完全不是要求。控制器出向端口通常沿用入向端口，不应泛称内部任意五元组动态哈希。限定AireOS平台，重写排除理由；enable/disable模板显示丢失。[X3]",
+      "updates": {
+        "prompt": "On a traditional Cisco AireOS WLC, which requirement applies after enabling LAG or changing its LAG configuration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The incoming and outgoing ports for traffic flow must be specified if LAG is enabled."
+          },
+          {
+            "label": "B",
+            "text": "After LAG is disabled, no logical interface ever needs its primary or secondary port mapping checked."
+          },
+          {
+            "label": "C",
+            "text": "The controller must be rebooted after enabling or reconfiguring LAG"
+          },
+          {
+            "label": "D",
+            "text": "Multiple untagged interfaces on the same port must be supported"
+          }
+        ],
+        "explanation": "题设AireOS控制器改变LAG状态后须保存并重启才生效，C正确。A错在启用LAG后不需为每逻辑接口另指定主备物理端口；B错在说禁用后所有接口都无需重映射，文档要求核对/配置主备端口；D的多个untagged逻辑接口不是这一要求。此AireOS LAG为静态聚合，不支持LACP/PAgP，交换机端通常用mode on。不要把其他WLC平台的动态聚合能力泛化到这里，也不能把所有WLC转发都说成任意五元组哈希。"
+      }
+    },
+    {
+      "id": 207,
+      "before_sha256": "f133e01af3fb833c85e0f2942b26fb5e46e7285ed735dc1aeb11aff8c5220a4d",
+      "reason": "两端active协商四口聚合对应LACP，B正确；LLDP发现、vPC跨设备聚合架构、dot1q标签不是此协商协议。解析channel-group num参数被formatter当HTML元素，实际显示丢失；应修转义。passive不主动发起不等于形成后永不发送LACPDU；建链仍需成员参数兼容。[X1]",
+      "updates": {
+        "explanation": "两端mode active对应LACP，选B；至少一端主动且其余参数兼容时才能协商聚合。passive响应对端，不主动发起，但建链后仍会发LACPDU。LLDP只做邻居发现；vPC描述跨设备聚合架构，不是active/passive协商协议名；802.1Q用于VLAN标签，不负责成员绑定。四成员应在物理接口下加入channel-group，而非把配置作用域误放到逻辑Port-channel。"
+      }
+    },
+    {
+      "id": 209,
+      "before_sha256": "d56f9623ed115a4aadb1e2599ba041bd620059403c4edd0525280d91927c0e5b",
+      "reason": "已看R5Gi0/1外网、Gi0/2连R6Gi0/2。D关闭Gi0/1 CDP、全局关LLDP、保留其他口CDP及detail，符合意图。四组选项的多模式命令压平，缺分行/代码显示。另须说明CDP detail显示被通告的管理地址，不保证总是R6连接口Gi0/2地址；要显示该口IP须保证其被选作通告地址或另验证配置。旧缓存老化/清表与当前无发送也需区分，不能无条件承诺输出已符合四项要求。[X2][X18]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Disable CDP and LLDP discovery on R5 Gi0/1, permit CDP on R5 Gi0/2, and display R6's advertised IP address using a detailed neighbor command. R5 Gi0/2 retains default CDP interface settings, R6 advertises its Gi0/2 address, and obsolete cache entries have expired. Which sequence meets these requirements?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R5(config)#int Gi0/1\nR5(config-if)#no cdp enable\nR5(config-if)#exit\nR5(config)#lldp run\nR5(config)#no cdp run\nR5(config)#end\nR5#sh cdp neighbor detail\nR5#sh lldp neighbor"
+          },
+          {
+            "label": "B",
+            "text": "R5(config)#int Gi0/1\nR5(config-if)#no cdp enable\nR5(config-if)#exit\nR5(config)#no lldp run\nR5(config)#cdp run\nR5(config)#end\nR5#sh cdp neighbor\nR5#sh lldp neighbor"
+          },
+          {
+            "label": "C",
+            "text": "R5(config)#int Gi0/1\nR5(config-if)#no cdp run\nR5(config-if)#exit\nR5(config)#lldp run\nR5(config)#cdp enable\nR5(config)#end\nR5#sh cdp neighbor\nR5#sh lldp neighbor"
+          },
+          {
+            "label": "D",
+            "text": "R5(config)#int Gi0/1\nR5(config-if)#no cdp enable\nR5(config-if)#exit\nR5(config)#no lldp run\nR5(config)#cdp run\nR5(config)#end\nR5#sh cdp neighbor detail\nR5#sh lldp neighbor"
+          }
+        ],
+        "explanation": "D在Gi0/1关闭CDP，全局关闭LLDP，保留全局CDP及Gi0/2默认CDP，再用detail查看地址。A全局关闭CDP且启用LLDP，不能达到给定接口要求；B少detail，简表不含IP；C把run/enable配置模式混淆。CDP detail显示被通告地址，不保证总是连接口IP，本题明确R6通告Gi0/2地址。显示验证应在旧缓存已清理/老化后进行；这里的“邻居发现”特指CDP/LLDP，不是禁用IPv6正常工作的NDP。"
+      }
+    },
+    {
+      "id": 210,
+      "before_sha256": "8614cda69d1a02b6c2b7e33a4036dd094f737fa1828194aedda369a550695d47",
+      "reason": "priority extend trust指示电话保留PC接入口CoS，D正确；cos7重标，不是保留；voice dot1p/untagged控制话音封装。四选项interface和配置命令被压一行，需分行。末尾0-7以数字开头，不会被HTMLParser当标签，已实测保留，不误报参数丢失。电话信任扩展与交换机QoS trust是不同配置，不能据此说交换机默认信任所有电话；未标记话音不等于完全无法QoS。[X4]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface fastethernet0/1\n switchport voice vlan dot1p"
+          },
+          {
+            "label": "B",
+            "text": "interface fastethernet0/1\n switchport priority extend cos 7"
+          },
+          {
+            "label": "C",
+            "text": "interface fastethernet0/1\n switchport voice vlan untagged"
+          },
+          {
+            "label": "D",
+            "text": "interface fastethernet0/1\n switchport priority extend trust"
+          }
+        ],
+        "explanation": "switchport priority extend trust指示Cisco电话保留其PC接入口收到的802.1p CoS，所以D正确。cos 7会覆盖原优先级；voice vlan dot1p/untagged控制话音封装，不设置PC侧信任扩展。该电话指令与交换机自身QoS trust不同，不能据此宣称交换机默认信任全部电话流量。配置在Fa0/1下逐行输入；未标记语音仍可能使用IP DSCP等QoS，不等于所有优先级功能消失。"
+      }
+    },
+    {
+      "id": 212,
+      "before_sha256": "0887edd92b7f6529418f6c3aa72c3486dd2aa8cb8706b35b0a5cdd108643c5fe",
+      "reason": "已看PC1 MAC0050.7966.6800，C的静态access+port-security+静态MAC正确（默认maximum1）。B写switchport mode nonegotiate是无效语法，真实命令为switchport nonegotiate，解析漏辨还解释其效果；D的静态MAC与启用sticky并不天然冲突，错在动态模式/缺启用等条件。三条以上命令选项压平，MAC-Address模板又被吞；恢复代码并修排除理由。MAC绑定限制源地址，不能保证不可冒充PC1。[X5][X6]",
+      "updates": {
+        "prompt": "Refer to the exhibit. An engineer must configure the interface that connects to PC1 and secure it in a way that only PC1 is allowed to use the port. No VLAN tagging can be used except for a voice VLAN. Which command sequence must be entered to configure the switch? Assume the default maximum of one secure MAC address, no existing secure entries, and a Cisco IOS platform that requires static access/trunk mode for port security.",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config-if)#switchport mode dynamic auto\nSW1(config-if)#switchport port-security\nSW1(config-if)#switchport port-security violation restrict"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config-if)#switchport mode nonegotiate\nSW1(config-if)#switchport port-security\nSW1(config-if)#switchport port-security maximum 1"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config-if)#switchport mode access\nSW1(config-if)#switchport port-security\nSW1(config-if)#switchport port-security mac-address 0050.7966.6800"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config-if)#switchport mode dynamic desirable\nSW1(config-if)#switchport port-security mac-address 0050.7966.6800\nSW1(config-if)#switchport port-security mac-address sticky"
+          }
+        ],
+        "explanation": "默认maximum1且无已有安全地址时，C先固定access，启用port-security，再静态指定0050.7966.6800，只接受这一源MAC。A/D用dynamic模式不满足该平台端口安全要求，A也未绑定PC1，D还缺启用port-security。B原样switchport mode nonegotiate不是有效IOS语法，正确独立命令是switchport nonegotiate；即使只限制maximum1，也不能保证第一个接入MAC就是PC1。静态地址与sticky配置本身可共存，并非天然语法冲突；MAC可被冒用，不能称其等同强身份认证。"
+      }
+    },
+    {
+      "id": 213,
+      "before_sha256": "1e245b789febe4f4cb5b652bfe39419cfd86edd5362089a140cc19424d030f08",
+      "reason": "认证授权分离意图为TACACS+，B可保留，但应明确AP/WLC的管理员设备访问，不将其当无线终端802.1X后端的通用替代。解析/对照表把TACACS+写成“全报文加密”，头部仍明文且RFC8907称传统机制为obfuscation而非现代加密。RADIUS仅密码保护须限定经典UDP实现，不能排除安全传输及授权扩展。表格实际formatter能生成3列表，未缺表。[X7]",
+      "updates": {
+        "prompt": "For administrator access to wireless infrastructure, which AAA protocol is designed to separate authentication from authorization transactions, including command authorization?",
+        "explanation": "TACACS+把认证、授权和计费事务分离，适合本题管理员设备访问的独立授权，B正确。经典RADIUS通常在认证响应中携授权属性；802.1X是网络接入框架，不是这里的设备命令授权协议；Kerberos主要提供票据认证，不替代此设备AAA工作流。RFC8907将传统TACACS+ body保护称为obfuscation，头部明文，不能称全报文现代强加密。RADIUS的密码隐藏说法也须限定基础UDP实现，不能忽略TLS/DTLS等安全传输。"
+      }
+    },
+    {
+      "id": 215,
+      "before_sha256": "c64bdf88255dbdcb218060e978db6dab68b011540e9ea15085e8f159d4915287",
+      "reason": "未标记数据20、话音tag30对应B的access20+voice30，解释核心正确。四组选项多条switchport压成一行；解析两处Data_VLAN/Voice_VLAN参数被当HTML标签而消失。需真实分行及转义。access和trunk相关参数可同时保存在配置中，不能称A的trunk allowed与voice命令必然语法互斥；D的access20不决定运行trunk时的native分类。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode dynamic desirable\n switchport access vlan 20\n switchport trunk allowed vlan 30\n switchport voice vlan 30"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode access\n switchport access vlan 20\n switchport voice vlan 30"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode dynamic auto\n switchport trunk native vlan 20\n switchport trunk allowed vlan 30\n switchport voice vlan 30"
+          },
+          {
+            "label": "D",
+            "text": "switchport mode trunk\n switchport access vlan 20\n switchport voice vlan 30"
+          }
+        ],
+        "prompt": "A Cisco engineer must configure a single switch interface to meet these requirements: ✑Accept untagged frames and place them in VLAN 20 Accept tagged frames in VLAN 30 when CDP detects a Cisco IP phone Which command set must the engineer apply? The interface must be explicitly configured as a static access port with the usual auxiliary voice-VLAN feature.",
+        "explanation": "B固定access模式，把未标记数据归VLAN20，并通过voice vlan30向电话通告tag30语音要求。D为trunk时access20不控制native分类，默认native通常不是20；C配置trunk native/allowed不能替代本题固定access20；A使用动态协商而非所需静态接入模式。trunk和access相关参数可以同时保存在配置里，不代表命令语法必然互斥；本题按实际运行模式和要求比较。"
+      }
+    },
+    {
+      "id": 217,
+      "before_sha256": "0772ff607b253f7d0fb2cca4fe1174489fbf7075b79c0531af930bfca23c8ed7",
+      "reason": "已看两交换机Ge0/0/0–15图。需求respond not initiate确为passive，但D进入interface port-channel1后执行channel-group，作用域错误，不能配置成员聚合；C同错且auto为PAgP。应在实际物理成员interface range下配mode passive后才保留D；A/B模式不符。当前无原样正确命令序列，解析承认语法错却以“官方题库核心关键词”豁免不可接受。所有选项还缺命令换行；16口能同时active的数量须按平台核实。[X1]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface range GigabitEthernet0/0/0 - 15\n channel-group 1 mode on"
+          },
+          {
+            "label": "B",
+            "text": "interface range GigabitEthernet0/0/0 - 15\n channel-group 1 mode desirable"
+          },
+          {
+            "label": "C",
+            "text": "interface range GigabitEthernet0/0/0 - 15\n channel-group 1 mode auto"
+          },
+          {
+            "label": "D",
+            "text": "interface range GigabitEthernet0/0/0 - 15\n channel-group 1 mode passive"
+          }
+        ],
+        "prompt": "Refer to the exhibit. The EtherChannel is configured with a speed of 1000 and duplex as full on both ends of channel group 1. What is the next step to configure the channel on switch A to respond to but not initiate LACP communication? Assume the shown physical interface range exists and is supported as eligible LACP members on this platform.",
+        "explanation": "在图示物理成员接口范围下配置channel-group1 mode passive，D才正确响应而不主动发起LACP。A的on不运行LACP，B desirable和C auto属于PAgP，均不满足。channel-group用于把物理接口加入组，不能在interface Port-channel1下再执行该成员绑定命令。图示范围为平台支持的候选成员；同时active的数量和standby限制依平台，不应由16个候选口推成16条链路全部同时active。"
+      }
+    },
+    {
+      "id": 218,
+      "before_sha256": "9e687cb52ad3fe7fe813f885be536575159b78b72b3ceaf8c4652f9dcc33b18a",
+      "reason": "forward-time控制计时过渡，D为意图答案；但Rapid PVST+/RSTP只有Discarding/Learning/Forwarding，不能说命令无条件令每端口Listening20+Learning20。快速协商成功/edge不按两个完整等待运行，fallback也应区分实际状态名与802.1D兼容行为。设定计时器必须由根桥有效参数主导，非在任意非根交换机本地配就改变全VLAN时序。需补版本/链路/根桥条件。[X9]",
+      "updates": {
+        "prompt": "On the VLAN 1 root bridge, which command sets the forward-delay timer to 20 seconds for timer-based transitions when required by Rapid PVST+ compatibility behavior?",
+        "explanation": "forward-time配置forward-delay计时器，D设置VLAN1为20秒。priority决定BID优先级，hello-time是BPDU发送周期，max-age是信息老化，不能替代forward delay。Rapid PVST+/RSTP只有Discarding、Learning和Forwarding状态；edge或成功快速协商不必等待两个完整计时周期。计时兼容过渡时才依赖这些时延，且应由根桥有效参数主导，不能声称任意非根本地命令都会让全网每口Listening20加Learning20。"
+      }
+    }
+  ]
+}

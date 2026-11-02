@@ -1,0 +1,25 @@
+{
+  "sources": {
+    "SLA": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_sla_udp_jitter-xe.html",
+    "DHCP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-mt/dhcp-15-mt-book/config-dhcp-server.html",
+    "commands": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr/command/ipaddr-cr-book/ipaddr-r1.html",
+    "VTY": "https://www.cisco.com/c/en/us/td/docs/ios/termserv/command/reference/tsv_book/tsv_s1.html",
+    "NAT": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/nat/nat-configuration-guide/nat.html",
+    "DNS": "https://www.rfc-editor.org/rfc/rfc1034.html",
+    "helper": "https://www.cisco.com/E-Learning/bulk/public/tac/cim/cib/using_cisco_ios_software/cmdrefs/show_ip_interface.htm"
+  },
+  "original_images_directly_viewed": [
+    393,
+    396,
+    397
+  ],
+  "new_images": [
+    393
+  ],
+  "authored_exhibit_corrections": {
+    "393": "Add required netmask keyword and use valid .10–.50 hosts; not recovered original."
+  },
+  "q392_scope": "accurate one-way latency, not generic jitter",
+  "q399_authored_option": "A now authoritative zone server; original recursive search not authoritative source",
+  "limitations": "Manual document/source review, no live IOS/DHCP/DNS lab."
+}

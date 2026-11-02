@@ -1,0 +1,62 @@
+{
+  "scope": [
+    376,
+    380
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 4,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 155,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "literal_code_fragments_preserved": 35,
+  "q376_source_destination_cases": [
+    {
+      "router": 1,
+      "source": "192.168.0.100",
+      "destination": "10.10.13.10",
+      "dedicated": true
+    },
+    {
+      "router": 1,
+      "source": "192.168.0.101",
+      "destination": "10.10.13.10",
+      "dedicated": false
+    },
+    {
+      "router": 1,
+      "source": "192.168.0.100",
+      "destination": "10.10.13.11",
+      "dedicated": false
+    },
+    {
+      "router": 2,
+      "source": "10.10.13.10",
+      "destination": "192.168.0.100",
+      "dedicated": true
+    },
+    {
+      "router": 2,
+      "source": "10.10.13.11",
+      "destination": "192.168.0.100",
+      "dedicated": false
+    },
+    {
+      "router": 2,
+      "source": "10.10.13.10",
+      "destination": "192.168.0.101",
+      "dedicated": false
+    }
+  ],
+  "q378_R2_unicast_multicast89_allowed": true,
+  "q379_table_reuses_visually_checked_Q374": true,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q400",
+  "source_sha256": "017eaabe83cecc72eb41dae7cd8577a5088418ca6a6300597295a0db9eb2d18f",
+  "app_bundle_sha256": "91385facf7744b5086ad01fc7ad5d7500bb4193ed3897980280aded1a93a9da2",
+  "limitations": "Source/formatter and independent classification checks, not live IOS PBR/OSPF lab."
+}

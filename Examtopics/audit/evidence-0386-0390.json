@@ -1,0 +1,11 @@
+{
+  "original_images_directly_viewed": [
+    389
+  ],
+  "q388_group_decimal": 14,
+  "q388_group_hex": "0e",
+  "q389_source_image_transit_prefix": "10.0.20.0/24",
+  "q389_source_prompt_transit_prefix_was": "10.0.20.0/26",
+  "q390_corrected_conditions": "exact same prefix; equal AD/cost; valid installed multipath; no policy override",
+  "limitations": "Manual source/document review, not live FHRP or CEF tests."
+}

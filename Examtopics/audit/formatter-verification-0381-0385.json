@@ -1,0 +1,40 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    381,
+    382,
+    383,
+    384,
+    385
+  ],
+  "code_results": [
+    {
+      "id": 382,
+      "kind": "code",
+      "input": "`ip ospf network point-to-point`",
+      "expected": "ip ospf network point-to-point",
+      "html": "<code class=\"inline-code\">ip ospf network point-to-point</code>"
+    },
+    {
+      "id": 382,
+      "kind": "code",
+      "input": "`ip ospf area 2`",
+      "expected": "ip ospf area 2",
+      "html": "<code class=\"inline-code\">ip ospf area 2</code>"
+    },
+    {
+      "id": 382,
+      "kind": "code",
+      "input": "`ip ospf <process-id> area <area-id>`",
+      "expected": "ip ospf <process-id> area <area-id>",
+      "html": "<code class=\"inline-code\">ip ospf &lt;process-id&gt; area &lt;area-id&gt;</code>"
+    },
+    {
+      "id": 383,
+      "kind": "code",
+      "input": "`ip ospf 100 area 0`",
+      "expected": "ip ospf 100 area 0",
+      "html": "<code class=\"inline-code\">ip ospf 100 area 0</code>"
+    }
+  ]
+}

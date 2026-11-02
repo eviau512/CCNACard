@@ -1,0 +1,139 @@
+{
+  "scope": "Manual review Q271-Q280; milestone remains Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 271,
+      "before_sha256": "310236cc59743ce2f0b262e9232e306b6d6c5b854ef4d1970904ef21e0d73bac",
+      "reason": "C意图为默认OSPF cost，但单个出口除法不等于整条路径累计cost；接口bandwidth配置值也非实时实际吞吐。未限定同类OSPF路径，不能把所有类型一律只比cost。补Cisco默认、同前缀intra-area路径，C写接口cost累加；删协议永远追求最高带宽的保证。 [S1][S2]",
+      "updates": {
+        "prompt": "A Cisco IOS router has multiple eligible OSPF intra-area paths for the same destination prefix. Default reference bandwidth is used and no interface cost is explicitly configured. How is the preferred path determined?",
+        "options": [
+          {
+            "label": "A",
+            "text": "For each existing interface, it adds the metric from the source router to the destination to calculate the route with the lowest bandwidth."
+          },
+          {
+            "label": "B",
+            "text": "It counts the number of hops between the source router and the destination to determine the route with the lowest metric."
+          },
+          {
+            "label": "C",
+            "text": "It calculates each outgoing-interface cost from the default 100 Mbps reference bandwidth and the configured interface bandwidth, sums costs along each intra-area path, and prefers the lowest total cost."
+          },
+          {
+            "label": "D",
+            "text": "It multiplies the active K values by 256 to calculate the route with the lowest metric."
+          }
+        ],
+        "explanation": "C。默认参考带宽为100Mbps，接口自动cost由参考带宽除以接口bandwidth值计算，取整数且最小为1；一条同区域路径的cost是沿路径出接口cost累加，最低总值优先，相同总值可在实现允许的路径数内ECMP。bandwidth是接口通告/配置参数，不是实时吞吐测量，可与物理速率不同；ip ospf cost可显式覆盖，本题排除。A说优选最低带宽不是规则；B的跳数更符合RIP；D的K值与经典缩放来自EIGRP，不是OSPF。不同OSPF路由类型还存在类型优先级，不能把跨类型选择一概简化为比一个cost数值。"
+      }
+    },
+    {
+      "id": 272,
+      "before_sha256": "aa35a627d775919cb87cbc59067be5242ecbd7e792514f56f337afc761ce970b",
+      "reason": "D/备份AD更高正确；原解析保证主链路物理故障后备份立刻接管，忽略主路由可能未撤回及备份下一跳有效性，AD255还不入表。明确同一完整前缀/主路由撤回/备份仍可用；解释高于主但小于255和必要时追踪，不承诺零延迟。 [S3]",
+      "updates": {
+        "prompt": "A floating static route is intended to back up an installed primary route for exactly the same destination prefix. Assume the primary route is withdrawn after failure and the backup next hop remains independently reachable. Which administrative-distance relationship makes the static route a backup rather than the normal first choice?",
+        "explanation": "D。对同一完整前缀，较小AD的有效候选优先入表；浮动静态应设置比主路由更高、但小于255的AD。主路由撤回后，备份仍可解析至有效出口时才可入表。例如以AD110的OSPF为主，可为同前缀静态设置120。A/C把主备大小关系颠倒；B的default-information originate用于协议通告默认路由，不是本地静态入表所必需。高AD本身不检测端到端故障：若主路由仍留表，就不会仅因远端业务不通而自动切换，可能另需tracking/IP SLA等机制；也不能保证无丢包或瞬时完成。"
+      }
+    },
+    {
+      "id": 273,
+      "before_sha256": "d1a43e770cefa511c4d7e581889620be09dac5ee21cfa9a227b5662d6a96ffec",
+      "reason": "已看图Hello10/Dead40、Neighbor Count3/Adjacent3，C正确。原解释把point-to-multipoint也算默认10/40、从邻居3推出整个OSPF域仅4台，且残留多次转义amp实体及损坏URL。重写局部链路证据；DR/BDR不单独排除NBMA，不能泛称见DR必broadcast。 [S2][S4]",
+      "updates": {
+        "explanation": "C。图中Timer intervals configured明确为Hello10、Dead40，这与普通Cisco IOS广播以太网默认值一致。A的point-to-point不进行DR/BDR选举，而本输出显示DR与BDR；但仅见DR/BDR也不能在所有OSPF类型中唯一证明broadcast，因为NBMA同样选举。B错误：显示OSPF定时器和邻居邻接状态，接口正在参与。D把其他统计误作邻居数：Neighbor Count=3，Adjacent neighbor count=3；last flood scan maximum6不是6个邻居。该接口上观察到3个邻居加本机，不能由此推断整个OSPF域只有4台路由器。不同网络类型默认定时器需分别查验，不能把point-to-multipoint一概当10/40。"
+      }
+    },
+    {
+      "id": 274,
+      "before_sha256": "aa18d28fea26008f8b9c93461981510ec7325e064e37d9603f7134764a35029e",
+      "reason": "C默认Ethernet broadcast正确，开头一句有效但后续四选项全为无差别模板，未说明物理两节点也不自动变point-to-point、另外类型与介质/显式覆盖的区别。用简洁具体机制替换模板，限定Cisco IOS普通routed GigabitEthernet默认。 [S4]",
+      "updates": {
+        "prompt": "On Cisco IOS, OSPFv2 is enabled on a normal routed GigabitEthernet interface. No ip ospf network override is configured. What is its default OSPF network type?",
+        "explanation": "C，broadcast。普通以太网为支持多路访问/广播的介质，IOS默认采用OSPF broadcast类型，按该类型执行DR/BDR选举。即使物理上只接两台路由器，也不会因此自动改为point-to-point。A/point-to-multipoint用于将多个邻居按点到多点方式处理，需相应配置；B/point-to-point常见于PPP/HDLC串行等点到点介质，也可在Ethernet显式覆盖；D/nonbroadcast适用于不能依赖广播发现的网络类型，不是普通GigabitEthernet默认。应以show ip ospf interface中的Network Type核对，而不是只看拓扑连线数量。"
+      }
+    },
+    {
+      "id": 275,
+      "before_sha256": "72e7f6cf8e870838f070b4be3c21f15452cbb7643fc15961fe7931b07f5f2343",
+      "reason": "C正确意图为同前缀跨协议AD，但同destination未明确相同掩码；逐项模板也没说明DUAL/EIGRP、metric与RIP hop count的区别。补完整同前缀且有效候选，重写入表与LPM阶段区别。 [S5]",
+      "updates": {
+        "prompt": "A Cisco router receives eligible routes to exactly the same network prefix and mask from two different routing protocols. Which attribute normally selects the preferred source for installation in the routing table?",
+        "explanation": "C，administrative distance。对于相同网络前缀和掩码，路由器用AD比较路由来源，较小的有效候选通常优先入RIB。A/DUAL是EIGRP内部的路径计算算法；B/metric在相应协议内部比较路径，不同协议的度量单位不能直接横比；D/hop count是RIP等协议使用的度量，不能成为所有跨协议竞争的统一依据。不同掩码的前缀可同时存在，转发报文时比较最长匹配；这与当前同前缀的入表选择是不同阶段。"
+      }
+    },
+    {
+      "id": 276,
+      "before_sha256": "7f2c6def42edc5e8fd0139ee474b685258495df316009c59686aebf1e57814cc",
+      "reason": "B/90仅适用于默认内部EIGRP；若EIGRP是外部重分发AD170，则OSPF110胜。原题未限定internal/default AD，解析将全部EIGRP都说90。补相同完整前缀、内部EIGRP与默认AD，再解释A20=eBGP/C110=OSPF/D115=IS-IS。 [S5]",
+      "updates": {
+        "prompt": "A Cisco IOS router learns eligible routes for exactly the same destination prefix and mask from OSPF and internal EIGRP. All administrative distances are at their defaults. What administrative distance belongs to the route preferred for installation?",
+        "explanation": "B，90。默认内部EIGRP的AD为90，小于OSPF的110，因此内部EIGRP来源优先。A/20是常见默认eBGP距离，D/115为IS-IS，并非题中候选；C/110属于OSPF，在此竞争中落选。EIGRP不能不分来源一律写90：默认外部EIGRP为170，若题目换成外部EIGRP与OSPF竞争，则OSPF110更优。AD也可人为调整，本题已明确默认且内部路由。"
+      }
+    },
+    {
+      "id": 277,
+      "before_sha256": "40d0ce48d37aa7b022dbb2fc78bd9295615f8746ba1fac410b7ad5de86aaddb3",
+      "reason": "已看图现O10.10.13.0/25 [110/2] via10.10.10.1 Gi0/0，若新eBGP同前缀有效且默认AD20，应该新路经Gi0/1入表，C而非标D；原英文也支持C但模板反说D。原图last-resort头10.10.11.2又与底行静态via10.10.10.1矛盾。重绘明确相关初始路由/拓扑的练习图，答案改C，不推断回程不对称。 [S5]",
+      "updates": {
+        "prompt": "Refer to the revised exhibit showing the relevant initial R1 routes. A new MPLS circuit on R1 Gi0/1 learns a valid best eBGP route for exactly 10.10.13.0/25, with a reachable next hop through that interface. All administrative distances are at their defaults and no routing policy changes them. What happens to R1's installed route for that prefix?",
+        "answer": [
+          "C"
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAwIiBoZWlnaHQ9Ijc0MCIgdmlld0JveD0iMCAwIDExMDAgNzQwIj48cmVjdCB3aWR0aD0iMTEwMCIgaGVpZ2h0PSI3NDAiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iNTUwIiB5PSIzOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI3IiBmaWxsPSIjMTAyYTQzIj5SZXZpc2VkIGV4ZXJjaXNlIC0gdG9wb2xvZ3kgYW5kIHJlbGV2YW50IGluaXRpYWwgUjEgcm91dGVzPC90ZXh0PjxwYXRoIGQ9Ik0yOTAsMTM1IEw4MDAsMTM1IE0yMDAsMTcwIEw0NjAsMzMwIE04OTAsMTcwIEw2NDAsMzMwIE01NTAsMzcwIEw1NTAsNDE1IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MjdkOTgiIHN0cm9rZS13aWR0aD0iNCIvPjxyZWN0IHg9IjExMCIgeT0iMTAwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjcwIiByeD0iOCIgZmlsbD0iI2UzZjJmZCIgc3Ryb2tlPSIjMTc2YjlhIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAuMCIgeT0iMTI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMxMDJhNDMiPlJvdXRlcjE8L3RleHQ+PHRleHQgeD0iMjAwLjAiIHk9IjE1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE5IiBmaWxsPSIjMTAyYTQzIj5BUyAyMDAwPC90ZXh0PjxyZWN0IHg9IjgwMCIgeT0iMTAwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjcwIiByeD0iOCIgZmlsbD0iI2UzZjJmZCIgc3Ryb2tlPSIjMTc2YjlhIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSI4OTAuMCIgeT0iMTI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMxMDJhNDMiPk1QTFM8L3RleHQ+PHRleHQgeD0iODkwLjAiIHk9IjE1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE5IiBmaWxsPSIjMTAyYTQzIj5BUyAxMDAwPC90ZXh0PjxyZWN0IHg9IjQ2MCIgeT0iMzAwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjcwIiByeD0iOCIgZmlsbD0iI2UzZjJmZCIgc3Ryb2tlPSIjMTc2YjlhIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSI1NTAuMCIgeT0iMzI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMxMDJhNDMiPlJvdXRlcjI8L3RleHQ+PHRleHQgeD0iNTUwLjAiIHk9IjM1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE5IiBmaWxsPSIjMTAyYTQzIj5BUyAzMDAwPC90ZXh0PjxyZWN0IHg9IjQyMCIgeT0iNDE1IiB3aWR0aD0iMjYwIiBoZWlnaHQ9IjgwIiByeD0iOCIgZmlsbD0iI2UzZjJmZCIgc3Ryb2tlPSIjMTc2YjlhIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSI1NTAuMCIgeT0iNDQzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMxMDJhNDMiPlNpdGUgQSAtIFZMQU4yNTwvdGV4dD48dGV4dCB4PSI1NTAuMCIgeT0iNDcxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTkiIGZpbGw9IiMxMDJhNDMiPjEwLjEwLjEzLjAvMjU8L3RleHQ+PHJlY3QgeD0iNDAiIHk9IjIxMCIgd2lkdGg9IjM4MCIgaGVpZ2h0PSI3MCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSI3MDAiIHk9IjIxMCIgd2lkdGg9IjMxMCIgaGVpZ2h0PSI3MCIgZmlsbD0id2hpdGUiLz48dGV4dCB4PSI1NTAiIHk9Ijk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMxMDJhNDMiPk5ldyBSMSBHaTAvMSAtIDEwLjEwLjEyLjAvMzA8L3RleHQ+PHRleHQgeD0iNTUwIiB5PSIxMjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOSIgZmlsbD0iIzEwMmE0MyI+UjEgLjEgLyBNUExTIC4yPC90ZXh0Pjx0ZXh0IHg9IjIyNSIgeT0iMjM4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTkiIGZpbGw9IiMxMDJhNDMiPlIxIEdpMC8wIC0gMTAuMTAuMTAuMC8zMDwvdGV4dD48dGV4dCB4PSIyMjUiIHk9IjI2NCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE5IiBmaWxsPSIjMTAyYTQzIj5SMSAuMiAvIFJvdXRlcjIgLjE8L3RleHQ+PHRleHQgeD0iODUwIiB5PSIyMzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzEwMmE0MyI+MTAuMTAuMTQuMC8zMDwvdGV4dD48dGV4dCB4PSI4NTAiIHk9IjI2NCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE5IiBmaWxsPSIjMTAyYTQzIj5NUExTIC4yIC8gUm91dGVyMiAuMTwvdGV4dD48cmVjdCB4PSIzMCIgeT0iNTM1IiB3aWR0aD0iMTA0MCIgaGVpZ2h0PSIxNzUiIHJ4PSI4IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iNTUwIiB5PSI1NzEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZmlsbD0iIzEwMmE0MyI+UmVsZXZhbnQgUjEgcm91dGVzIGJlZm9yZSB0aGUgbmV3IGVCR1Agcm91dGUgaXMgaW5zdGFsbGVkPC90ZXh0Pjx0ZXh0IHg9IjUyIiB5PSI2MjUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjMiPkMgMTAuMTAuMTAuMC8zMCBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48dGV4dCB4PSI1MiIgeT0iNjY4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIzIj5PIDEwLjEwLjEzLjAvMjUgWzExMC8yXSB2aWEgMTAuMTAuMTAuMSwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjwvc3ZnPg==",
+        "explanation": "C。原来同一10.10.13.0/25由OSPF提供，经10.10.10.1、Gi0/0，AD110；新有效eBGP来源默认AD20更低，因此RIB改为eBGP经Gi0/1。D错误：OSPF信息可以保留在其协议数据库中，但不会因此继续作为本题RIB首选。A不能把不同AD的这两个来源当作跨协议ECMP；B需要回程路径信息，单凭R1正向选择无法证明一定不对称。这里前缀和掩码完全相同才比较AD；若前缀长度不同，不能用这次比较替代转发时的最长匹配。"
+      },
+      "accepted_intermediate_sha256": [
+        "37ac3e82b55b435e8d5efa8ebbe2ccce858d924c000b7adc84a5befc36b76363"
+      ]
+    },
+    {
+      "id": 278,
+      "before_sha256": "001d54d086c2552e482436d04dac56f68051cb44ab1a60089cf97711d94e0c2f",
+      "reason": "已看图：只有O10.10.13.0/25经Fa0/1与Fa0/2等价路径，覆盖.0–.127；目标.128/25不在其中，且无last-resort。D方向正确，但逐项解释全模板、未解释已显示的ECMP为何不适用于另一半子网。保留D，具体写无匹配/无默认、ECMP只针对已有前缀。",
+      "updates": {
+        "explanation": "D。Router2显示的OSPF前缀是10.10.13.0/25，范围10.10.13.0至10.10.13.127；目的子网10.10.13.128/25位于另一半（.128–.255），不被该条覆盖。图示直连网络也不覆盖目的，且Gateway of last resort is not set，故按当前表没有匹配路由可转发。A/B各单选一个接口都缺路由依据；C虽然图中.0/25有两条等价路径（[110/11]经10.10.10.9 Fa0/2、10.10.10.13 Fa0/1），ECMP只作用于匹配该前缀的流量，不能把另一个.128/25也交给它们。需学到/配置覆盖目标的有效路由或合适默认路由才能改变该结果。"
+      }
+    },
+    {
+      "id": 279,
+      "before_sha256": "9fccaa572f0e6826ed6cba3aab4ac600c92527ca1a61f965419fb4c587e8911f",
+      "reason": "B的共享VIP/虚拟MAC正确，v1/v2模式也正确；但解析说Standby必须通过抢占机制接管失效Active，混淆故障接管与高优先级夺回，且普通泛洪不必然广播风暴。明确hold超时等触发接管不以preempt为前提，preempt用于现Active仍在时主动取代。 [S6]",
+      "updates": {
+        "explanation": "B。HSRP组向LAN主机提供虚拟IP及相应虚拟MAC，主机把VIP作为默认网关；正常由Active承担该网关流量，Standby监测并在Active失效或退出后接管虚拟身份，主机无需改网关。默认虚拟MAC常见v1为0000.0c07.acXX、v2为0000.0c9f.fXXX。故障接管不以启用preempt为前提；preempt用于较高优先级成员在现有Active仍工作时主动取代它，例如恢复后的主设备夺回角色。收敛期间仍可能丢包。A的二层泛洪不是HSRP冗余机制，普通受控泛洪也不必然产生风暴；C/D描述路由多路径/等价负载分担，不是共享默认网关身份的接管。"
+      }
+    },
+    {
+      "id": 280,
+      "before_sha256": "37f9576f4ddbb6b84479152ee72998e3b2ebd22dd1c713ea337eca8d3d97c704",
+      "reason": "已看R1 Hello10/Dead40、R2 Hello20/Dead80，Area1/Broadcast/priority1同类，RID不同正常，A意图需同时匹配Hello和Dead。原问题要求只邻居不邻接，与两节点可选DR/BDR后形成Full不符；单改Hello也不证明Dead一致。改问修复显示的阻碍，A明确匹配两计时器，删无证据官方标准答案/历史背景说法。 [S2]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which change directly fixes the displayed parameter mismatch preventing R1 and R2 from establishing an OSPF neighbor relationship? Assume the link, authentication, and other required settings are correct.",
+        "options": [
+          {
+            "label": "A",
+            "text": "Make both the Hello and Dead intervals match on the two connected OSPF interfaces."
+          },
+          {
+            "label": "B",
+            "text": "modify process ID"
+          },
+          {
+            "label": "C",
+            "text": "modify priority"
+          },
+          {
+            "label": "D",
+            "text": "modify network type"
+          }
+        ],
+        "explanation": "A。R1 Gi0/0显示Hello10/Dead40，R2显示Hello20/Dead80；两项均应匹配，可显式将R2改为10/40：\n```text\nR2(config)# interface GigabitEthernet0/0\nR2(config-if)# ip ospf hello-interval 10\nR2(config-if)# ip ospf dead-interval 40\n```\nB的Process ID均100且仅本地有效；C的priority1用于DR/BDR选举，不能消除Hello/Dead失配；D两端本来都是BROADCAST，没有显示网络类型矛盾。两地址10.201.24.8/28和10.201.24.1/28同子网，Area均1、RID分别192.168.1.1和172.16.1.1，RID不同正常。计时器修复能恢复建立邻居的必要条件，并不保证停在2-Way而不形成Full；广播网中两个DROther之间可只保持2-Way，而与DR/BDR的邻接还会进行数据库同步。"
+      },
+      "accepted_intermediate_sha256": [
+        "f223affe1266d4599eea06ad7e5595dc6d00a807f27d73d8188c74b5e74a4015"
+      ]
+    }
+  ]
+}

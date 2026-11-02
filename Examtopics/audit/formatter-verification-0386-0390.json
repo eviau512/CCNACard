@@ -1,0 +1,124 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    386,
+    387,
+    388,
+    389,
+    390
+  ],
+  "code_results": [
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`00:00:0c:07:ac:XX`",
+      "expected": "00:00:0c:07:ac:XX",
+      "html": "<code class=\"inline-code\">00:00:0c:07:ac:XX</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`0000.0c07.acXX`",
+      "expected": "0000.0c07.acXX",
+      "html": "<code class=\"inline-code\">0000.0c07.acXX</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`00:00:0c`",
+      "expected": "00:00:0c",
+      "html": "<code class=\"inline-code\">00:00:0c</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`07:ac`",
+      "expected": "07:ac",
+      "html": "<code class=\"inline-code\">07:ac</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`XX`",
+      "expected": "XX",
+      "html": "<code class=\"inline-code\">XX</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`0e`",
+      "expected": "0e",
+      "html": "<code class=\"inline-code\">0e</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`0E`",
+      "expected": "0E",
+      "html": "<code class=\"inline-code\">0E</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`00:00:0c:07:ac:0e`",
+      "expected": "00:00:0c:07:ac:0e",
+      "html": "<code class=\"inline-code\">00:00:0c:07:ac:0e</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`00:00:0c:07:ac:`",
+      "expected": "00:00:0c:07:ac:",
+      "html": "<code class=\"inline-code\">00:00:0c:07:ac:</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`0e`",
+      "expected": "0e",
+      "html": "<code class=\"inline-code\">0e</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`14`",
+      "expected": "14",
+      "html": "<code class=\"inline-code\">14</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`0e`",
+      "expected": "0e",
+      "html": "<code class=\"inline-code\">0e</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`00:05:0c`",
+      "expected": "00:05:0c",
+      "html": "<code class=\"inline-code\">00:05:0c</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`0000.0c07.ac + 组号Hex`",
+      "expected": "0000.0c07.ac + 组号Hex",
+      "html": "<code class=\"inline-code\">0000.0c07.ac + 组号Hex</code>"
+    },
+    {
+      "id": 388,
+      "kind": "code",
+      "input": "`0e`",
+      "expected": "0e",
+      "html": "<code class=\"inline-code\">0e</code>"
+    },
+    {
+      "id": 389,
+      "kind": "code",
+      "input": "`ip route 10.0.15.0 255.255.255.0 10.0.20.3`",
+      "expected": "ip route 10.0.15.0 255.255.255.0 10.0.20.3",
+      "html": "<code class=\"inline-code\">ip route 10.0.15.0 255.255.255.0 10.0.20.3</code>"
+    }
+  ]
+}

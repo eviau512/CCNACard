@@ -1,0 +1,154 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/23862-duplicate-router-id-ospf.html",
+    "S2": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "S3": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html",
+    "S4": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13692-21.html",
+    "S5": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9400/software/release/16-8/command_reference/b_168_9400_cr/b_168_9400_cr_chapter_010001.html"
+  },
+  "original_images_directly_viewed": [
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310
+  ],
+  "answer_image_included": [
+    308
+  ],
+  "routing_calculations": [
+    {
+      "id": 303,
+      "destination": "172.16.0.14",
+      "ranges": [
+        {
+          "prefix": "172.16.3.0/24",
+          "first": "172.16.3.0",
+          "last": "172.16.3.255",
+          "matches": false
+        },
+        {
+          "prefix": "172.16.3.0/28",
+          "first": "172.16.3.0",
+          "last": "172.16.3.15",
+          "matches": false
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "0.0.0.0/0"
+    },
+    {
+      "id": 304,
+      "destination": "172.16.3.14",
+      "ranges": [
+        {
+          "prefix": "172.16.3.0/24",
+          "first": "172.16.3.0",
+          "last": "172.16.3.255",
+          "matches": true
+        },
+        {
+          "prefix": "172.16.3.0/28",
+          "first": "172.16.3.0",
+          "last": "172.16.3.15",
+          "matches": true
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "172.16.3.0/28"
+    },
+    {
+      "id": 306,
+      "destination": "10.0.1.5",
+      "ranges": [
+        {
+          "prefix": "10.0.1.0/24",
+          "first": "10.0.1.0",
+          "last": "10.0.1.255",
+          "matches": true
+        },
+        {
+          "prefix": "10.0.1.3/32",
+          "first": "10.0.1.3",
+          "last": "10.0.1.3",
+          "matches": false
+        },
+        {
+          "prefix": "10.0.1.4/32",
+          "first": "10.0.1.4",
+          "last": "10.0.1.4",
+          "matches": false
+        },
+        {
+          "prefix": "10.0.1.5/32",
+          "first": "10.0.1.5",
+          "last": "10.0.1.5",
+          "matches": true
+        }
+      ],
+      "winner": "10.0.1.5/32"
+    },
+    {
+      "id": 310,
+      "destination": "172.16.0.202",
+      "ranges": [
+        {
+          "prefix": "172.16.0.0/24",
+          "first": "172.16.0.0",
+          "last": "172.16.0.255",
+          "matches": true
+        },
+        {
+          "prefix": "172.16.0.128/25",
+          "first": "172.16.0.128",
+          "last": "172.16.0.255",
+          "matches": true
+        },
+        {
+          "prefix": "172.16.0.192/29",
+          "first": "172.16.0.192",
+          "last": "172.16.0.199",
+          "matches": false
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "172.16.0.128/25"
+    }
+  ],
+  "q307_both_interfaces_in_same_prefix": true,
+  "revised_images": [
+    302,
+    304,
+    310
+  ],
+  "image_correction_basis": {
+    "302": "Explicitly authored connected172.16.0/16 matching unchanged next-hop172.16.0.2; original172.160 retained in original image.",
+    "304": "Explicit uniform207.165.200 next-hops/connected subnets.",
+    "310": "Explicit uniform209.165.200 next-hops/connected subnets including default next-hop."
+  },
+  "limitations": "No live IOS command execution, per-question phone UI screenshots, or claims that authored exhibit corrections recover original source intent.",
+  "revised_diagrams_visually_checked": [
+    302,
+    304,
+    310
+  ]
+}

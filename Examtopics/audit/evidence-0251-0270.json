@@ -1,0 +1,238 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/c9800-best-practices.html",
+    "S2": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/201015-802-11v-Basic-Service-Set-BSS-on-AireO.html",
+    "S3": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wireless_intrusion_detection_system.html",
+    "S4": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/ports_and_interfaces.html",
+    "S5": "https://www.cisco.com/c/en/us/support/docs/wireless/5500-series-wireless-controllers/119286-lap-notjoin-wlc-tshoot.html",
+    "S6": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/olh/wlc-olh/secc.html",
+    "S7": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/aaa_administration.html",
+    "S8": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/command/iri-cr-book/iri-cr-a1.html",
+    "S9": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/118974-technote-eigrp-00.html",
+    "S10": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "S11": "https://www.cisco.com/c/en/us/support/docs/lan-switching/inter-vlan-routing/14976-50.html",
+    "S12": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/23862-duplicate-router-id-ospf.html",
+    "S13": "https://www.rfc-editor.org/rfc/rfc2328.html"
+  },
+  "original_images_directly_viewed": [
+    255,
+    257,
+    258,
+    262,
+    263,
+    264,
+    266,
+    267,
+    268,
+    269,
+    270
+  ],
+  "routing_calculations": [
+    {
+      "id": 257,
+      "destination": "172.16.32.1",
+      "ranges": [
+        {
+          "prefix": "172.16.32.0/27",
+          "first": "172.16.32.0",
+          "last": "172.16.32.31",
+          "matches": true
+        },
+        {
+          "prefix": "172.16.32.0/19",
+          "first": "172.16.32.0",
+          "last": "172.16.63.255",
+          "matches": true
+        },
+        {
+          "prefix": "172.16.32.0/24",
+          "first": "172.16.32.0",
+          "last": "172.16.32.255",
+          "matches": true
+        }
+      ],
+      "winner": "172.16.32.0/27"
+    },
+    {
+      "id": 261,
+      "destination": "10.10.1.22",
+      "ranges": [
+        {
+          "prefix": "10.10.1.0/28",
+          "first": "10.10.1.0",
+          "last": "10.10.1.15",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.1.20/30",
+          "first": "10.10.1.20",
+          "last": "10.10.1.23",
+          "matches": true
+        },
+        {
+          "prefix": "10.10.1.16/30",
+          "first": "10.10.1.16",
+          "last": "10.10.1.19",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.1.20/31",
+          "first": "10.10.1.20",
+          "last": "10.10.1.21",
+          "matches": false
+        }
+      ],
+      "winner": "10.10.1.20/30"
+    },
+    {
+      "id": 262,
+      "destination": "192.168.12.16",
+      "ranges": [
+        {
+          "prefix": "192.168.12.0/24",
+          "first": "192.168.12.0",
+          "last": "192.168.12.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.12.0/27",
+          "first": "192.168.12.0",
+          "last": "192.168.12.31",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.12.0/28",
+          "first": "192.168.12.0",
+          "last": "192.168.12.15",
+          "matches": false
+        }
+      ],
+      "winner": "192.168.12.0/27"
+    },
+    {
+      "id": 263,
+      "destination": "192.168.10.16",
+      "ranges": [
+        {
+          "prefix": "192.168.10.0/24",
+          "first": "192.168.10.0",
+          "last": "192.168.10.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.10.0/27",
+          "first": "192.168.10.0",
+          "last": "192.168.10.31",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.10.0/23",
+          "first": "192.168.10.0",
+          "last": "192.168.11.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.0.0/13",
+          "first": "192.168.0.0",
+          "last": "192.175.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "192.168.10.0/27"
+    },
+    {
+      "id": 264,
+      "destination": "10.10.13.165",
+      "ranges": [
+        {
+          "prefix": "10.10.13.0/25",
+          "first": "10.10.13.0",
+          "last": "10.10.13.127",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.13.128/28",
+          "first": "10.10.13.128",
+          "last": "10.10.13.143",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.13.144/28",
+          "first": "10.10.13.144",
+          "last": "10.10.13.159",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.13.160/29",
+          "first": "10.10.13.160",
+          "last": "10.10.13.167",
+          "matches": true
+        },
+        {
+          "prefix": "10.10.13.208/29",
+          "first": "10.10.13.208",
+          "last": "10.10.13.215",
+          "matches": false
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "10.10.13.160/29"
+    },
+    {
+      "id": 270,
+      "destination": "198.51.100.10",
+      "ranges": [
+        {
+          "prefix": "209.165.200.224/27",
+          "first": "209.165.200.224",
+          "last": "209.165.200.255",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.10.0/28",
+          "first": "10.10.10.0",
+          "last": "10.10.10.15",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.11.0/30",
+          "first": "10.10.11.0",
+          "last": "10.10.11.3",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.12.0/30",
+          "first": "10.10.12.0",
+          "last": "10.10.12.3",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.13.0/24",
+          "first": "10.10.13.0",
+          "last": "10.10.13.255",
+          "matches": false
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "0.0.0.0/0"
+    }
+  ],
+  "q263_original_prefix_normalized": "192.168.0.0/13",
+  "replacement_diagrams": [
+    263
+  ],
+  "limitations": "No real AP roaming measurements, live IOS commands, or per-question phone UI screenshots. Initial questions retain fingerprints in index; fixes are explicit authored corrections.",
+  "revised_diagrams_visually_checked": [
+    263
+  ]
+}

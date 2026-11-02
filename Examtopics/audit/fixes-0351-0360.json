@@ -1,0 +1,172 @@
+{
+  "scope": "Manual Q351-Q360 fixes; delivery after Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 351,
+      "before_sha256": "02bd9a03dc672ade7ee595a5cfca2543cf68c7a13375a5e92964e53826d47633",
+      "reason": "已看A-B192.168.2/24、A-C192.168.1/24、B-C192.168.3/24三个独立网段，并非整个area一个DR。改为A连接的两个广播段各自初选为DR，A选项按每接口的同段邻居比较，补非抢占条件。",
+      "updates": {
+        "prompt": "Refer to the exhibit. All three Ethernet links use OSPF broadcast network type in area 0. During fresh initial elections with both endpoints present and no existing DR/BDR, which action ensures Router A becomes DR on each of the two segments directly connected to Router A?",
+        "options": [
+          {
+            "label": "A",
+            "text": "configure each Router A interface with a strictly higher nonzero OSPF priority than the other router on that interface's broadcast segment"
+          },
+          {
+            "label": "B",
+            "text": "configure router B and router C as OSPF neighbors of router A"
+          },
+          {
+            "label": "C",
+            "text": "configure the OSPF priority on router A with the lowest value between the three routers."
+          },
+          {
+            "label": "D",
+            "text": "configure router A with a fixed OSPF router ID"
+          }
+        ],
+        "explanation": "A。A-B的192.168.2.0/24与A-C的192.168.1.0/24分别选举DR/BDR；在A的两个相关接口分别设置严格高于同段对端的非零优先级，可在题设初选中当选。B-C的192.168.3.0/24另有选举，A没有接口在其中，不能成为该段DR。\n\nDR是广播/NBMA网段角色，不是整个area唯一的角色。优先级范围0–255，0不参选，同优先级再比RID；即便配255，也须高于对端而非与255打平。B手动指定邻居不决定优先级，C反向降低竞争力，D固定RID也不保证优先级胜出。对已经存在的DR，提高优先级不产生抢占；应区别初选与维护中的受控重选。"
+      }
+    },
+    {
+      "id": 352,
+      "before_sha256": "073cb32e29a6b28d7ac31501483632a2536d134f0d663234e6b5edf6297deae7",
+      "reason": "已看同10.10.10/24的三EIGRP和两OSPF候选，B/F0/11度量144优于1441；原题却声称全在RIB不自洽。明确抽象候选度量表、内部EIGRP默认AD、无variance/更明细/PBR，恢复目的IP点分，解释原始候选与RIB/转发的层次区别。",
+      "updates": {
+        "prompt": "Refer to the illustrative table of learned candidates for 10.10.10.0/24; the metric values are abstract comparison values, not a claim that all entries are installed in the RIB. EIGRP routes are internal, default ADs apply, and no unequal-cost sharing, more-specific route, or PBR applies. Which interface is selected for destination 10.10.10.24?",
+        "explanation": "B，F0/11。三条内部EIGRP候选中，F0/11的度量144低于F0/10和F0/12的1441，故为该协议的最佳路径。该相同完整/24的内部EIGRP默认AD90又低于OSPF的110，最终采用EIGRP候选。OSPF的20/30与EIGRP度量不是相同单位，不能直接用20小于144来选OSPF。D/F0/1不在表中。\n\n表描述学习到的候选，不表示普通RIB同时安装五条非等价路径；EIGRP内部选路、不同来源竞争入表与实际转发查表属于不同环节。入接口/来源为BGP的数据也不会把目的选路改为自动优先BGP，转发仍依已安装的有效目的路由。"
+      }
+    },
+    {
+      "id": 353,
+      "before_sha256": "16b0b963f7c5c92ef7d386bedb7f7f51e7c207f4d1ab24293fc0502c4203f609",
+      "reason": "已看10.10.13.0/25双OSPF等价经.9/.13，C三互联/30，无默认；目标.128/25完全不匹配，D正确。原解析把发ICMP Type3Code0说成必然，实际受配置、抑制和限速；改具体目标主机.130及条件化ICMP说明。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Using the displayed Router2 routing table with no default route or PBR, how does Router2 handle traffic from Site B to host 10.10.13.130 in Site A subnet 10.10.13.128/25?",
+        "explanation": "D，丢弃。表中OSPF10.10.13.0/25覆盖.0–.127，不含目标10.10.13.130；所需的10.10.13.128/25覆盖.128–.255。两条下一跳虽对前半/25等价，也不能用于不匹配的后半。三个10.10.10.x/30连接网络同样不含目标，且Gateway of last resort is not set。A/B单出口和C负载分担均先要求存在匹配路由，此处不成立。对允许发送错误报告的单播包，路由器可能返回ICMP不可达，但其发送受接口配置、报文类型及限速等影响，不能把每次丢弃都等同必然发送某个固定ICMP码。"
+      }
+    },
+    {
+      "id": 354,
+      "before_sha256": "0741d656a70a13bd085c87384c2d395fb2354383bf20c394c9300b31bd4e9837",
+      "reason": "已看参考100000Mbps，Gi0/0 BW1000000kbps、Gi0/1 10000000kbps、Gi0/2手工100、Gi0/3手工1000。B本地cost10最小，但下游cost及OSPF路径类型未给；补四条同类intra-area且后续cost相同，解释bandwidth仅逻辑参数不是物理升级。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 has four otherwise eligible intra-area OSPF paths to 10.10.0.0/16. The remaining cost beyond each local outgoing interface is identical, with no other preferred route or policy. Which interface gives the lowest total OSPF cost?",
+        "explanation": "B，Gi0/1。参考带宽为100000Mbps，即100000000kbps；Gi0/0的bandwidth1000000kbps得到cost100，Gi0/1的10000000kbps得到10，Gi0/2与Gi0/3手工cost分别100和1000。手工`ip ospf cost`覆盖自动计算；由于后续开销相同且都是同类intra-area路径，总开销仍以Gi0/1最小。\n\n接口bandwidth是用于度量等功能的逻辑值，不会把物理Gigabit口升级成10Gbps。若其他路由路径类型不同或下游开销不同，仅凭本地接口cost不足以确定出口，不能泛称OSPF在所有情形都无条件只比较这四个本地数。"
+      }
+    },
+    {
+      "id": 355,
+      "before_sha256": "9da2f850494a367a3c9f884809668688b6d1908d4bae61711f8de1d84d57f0fc",
+      "reason": "已看D192.168.2/24，D正确；图混207和209下一跳、RIP下一跳297.165.200.250非法，另有残缺无前缀行。改编全用207且连接/30有效的完整相关路由表，A残缺172.160.0/16恢复为172.16.0.0/16；保留原图和指纹，不声称恢复原始缺行。",
+      "updates": {
+        "prompt": "Refer to the revised routing-table excerpt. Which listed network prefix was learned via EIGRP?",
+        "options": [
+          {
+            "label": "A",
+            "text": "172.16.0.0/16"
+          },
+          {
+            "label": "B",
+            "text": "207.165.200.0/24"
+          },
+          {
+            "label": "C",
+            "text": "192.168.1.0/24"
+          },
+          {
+            "label": "D",
+            "text": "192.168.2.0/24"
+          }
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAwIiBoZWlnaHQ9IjUwOCI+PHJlY3Qgd2lkdGg9IjE0MDAiIGhlaWdodD0iNTA4IiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjQiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSBjb25zaXN0ZW50IGluc3RhbGxlZCByb3V0aW5nLXRhYmxlIGV4Y2VycHQ8L3RleHQ+PHRleHQgeD0iMjQiIHk9Ijc4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMSMgc2hvdyBpcCByb3V0ZTwvdGV4dD48dGV4dCB4PSIyNCIgeT0iMTEyIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5TKiAwLjAuMC4wLzAgWzEvMF0gdmlhIDIwNy4xNjUuMjAwLjI1NCwgU2VyaWFsMC8wLzE8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjE0NiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAxNzIuMTYuMS4wLzI0IGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgRmFzdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIxODAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkwgMTcyLjE2LjEuMS8zMiBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIEZhc3RFdGhlcm5ldDAvMDwvdGV4dD48dGV4dCB4PSIyNCIgeT0iMjE0IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SIDE3Mi4xNi4yLjAvMjQgWzEyMC8yXSB2aWEgMjA3LjE2NS4yMDAuMjUwLCBTZXJpYWwwLzAvMDwvdGV4dD48dGV4dCB4PSIyNCIgeT0iMjQ4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5PIDE5Mi4xNjguMS4wLzI0IFsxMTAvNDQzN10gdmlhIDIwNy4xNjUuMjAwLjI1NCwgU2VyaWFsMC8wLzE8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjI4MiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+RCAxOTIuMTY4LjIuMC8yNCBbOTAvODQ0MzddIHZpYSAyMDcuMTY1LjIwMC4yNTQsIFNlcmlhbDAvMC8xPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIzMTYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPlMgMjA3LjE2NS4yMDAuMjQ0LzMwIFsxLzBdIHZpYSAyMDcuMTY1LjIwMC4yNTQsIFNlcmlhbDAvMC8xPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSIzNTAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMjA3LjE2NS4yMDAuMjQ4LzMwIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgU2VyaWFsMC8wLzA8L3RleHQ+PHRleHQgeD0iMjQiIHk9IjM4NCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TCAyMDcuMTY1LjIwMC4yNDkvMzIgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBTZXJpYWwwLzAvMDwvdGV4dD48dGV4dCB4PSIyNCIgeT0iNDE4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5DIDIwNy4xNjUuMjAwLjI1Mi8zMCBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDAvMC8xPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSI0NTIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkwgMjA3LjE2NS4yMDAuMjUzLzMyIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgU2VyaWFsMC8wLzE8L3RleHQ+PC9zdmc+",
+        "explanation": "D，192.168.2.0/24。该条以D开头，表示EIGRP，且无EX后缀为内部路由；[90/84437]中的默认AD90与之相符。C选项192.168.1.0/24的代码O表示OSPF。A的172.16.0.0/16和B的207.165.200.0/24均没有作为完整前缀的EIGRP条目出现；它们下面的具体子网要逐条看来源，不能把主类父网当作自动存在的汇总路由。图中172.16.2/24的R表示RIP；C为直连，L为本机接口主机路由，S*为候选静态默认。AD可配置，识别协议首先看完整来源码，不是见到90就忽略其他上下文。"
+      }
+    },
+    {
+      "id": 356,
+      "before_sha256": "729c3e7f92420e74a846a9cbb6f875ae33acd3ae218148e9219b7045db7f6a6f",
+      "reason": "已看主viaB192.168.2.2AD1、备viaC192.168.1.2，A正确。原解析断言任何NH必须直连及ECMP固定双向转发过度，改为本图直连对端、备路由有效/主撤回条件，区别ip default-gateway用于禁用路由的设备而非只能二层交换机。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Router A already uses Router B (192.168.2.2) as its primary static default with AD 1. Router C (192.168.1.2) remains a valid alternate next hop. Which command adds a default route that stays secondary while the primary is valid and becomes eligible after that primary route is withdrawn?",
+        "explanation": "A，`ip route 0.0.0.0 0.0.0.0 192.168.1.2 10`。同为/0，AD10高于主路由1，因而不抢主路径；主路由撤回且备下一跳仍有效时才接管。B省略AD也使用1，可能形成等价路径，未表达严格主备；C的`ip default-gateway`用于未启用IP路由时的设备网关，不是启用路由的A所需静态路由；D的192.168.2.1是A本机接口地址，非对端。\n\n这里使用C的直连接口地址最清楚；一般静态下一跳也可通过有效独立路由递归解析，不能泛化成永远必须直连。AD本身不监测远端服务，物理链路仍up而主路由未撤回时，备份不会单凭业务失败自动浮出。"
+      }
+    },
+    {
+      "id": 357,
+      "before_sha256": "8c5baae0d3fed868de14c8cd3c5d4c3c8f6ff64a7d4e836e433bb62b32449d21",
+      "reason": "已看Fa0/0互联.65/.66、Lo.14/.86；C为唯一两MTU1500且R14接口priority255的完整组合。四段配置压平、area0和RID10.10.1 14缺分隔，恢复换行/规范全局与接口模式，保留B把priority错放进程的实质干扰。明确fresh选举、R86pri1和MTU校验；不泛称全部EXSTART都由MTU造成。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Loopback addresses are already assigned as shown. During an initial election with no existing DR/BDR, R14 must be DR on the broadcast link and form a Full OSPFv2 adjacency with R86. R86 retains interface priority 1; MTU checking is enabled and all other neighbor settings agree. Which relevant configuration pair meets these requirements?",
+        "options": [
+          {
+            "label": "A",
+            "text": "! R14 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf network broadcast\n ip ospf priority 0\n ip mtu 1400\n exit\nrouter ospf 10\n router-id 10.10.1.14\n network 10.10.1.14 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0\n exit\n! R86 relevant configuration\ninterface Loopback0\n ip address 10.10.1.86 255.255.255.255\n exit\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip ospf network broadcast\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.86\n network 10.10.1.86 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0"
+          },
+          {
+            "label": "B",
+            "text": "! R14 relevant configuration\ninterface Loopback0\n ip ospf 10 area 0\n exit\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf network broadcast\n ip ospf 10 area 0\n ip mtu 1500\n exit\nrouter ospf 10\n ip ospf priority 255\n router-id 10.10.1.14\n exit\n! R86 relevant configuration\ninterface Loopback0\n ip ospf 10 area 0\n exit\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip ospf network broadcast\n ip ospf 10 area 0\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.86"
+          },
+          {
+            "label": "C",
+            "text": "! R14 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf network broadcast\n ip ospf priority 255\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.14\n network 10.10.1.14 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0\n exit\n! R86 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip ospf network broadcast\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.86\n network 10.10.1.86 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0"
+          },
+          {
+            "label": "D",
+            "text": "! R14 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.65 255.255.255.252\n ip ospf network broadcast\n ip ospf priority 255\n ip mtu 1500\n exit\nrouter ospf 10\n router-id 10.10.1.14\n network 10.10.1.14 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0\n exit\n! R86 relevant configuration\ninterface FastEthernet0/0\n ip address 10.73.65.66 255.255.255.252\n ip ospf network broadcast\n ip mtu 1400\n exit\nrouter ospf 10\n router-id 10.10.1.86\n network 10.10.1.86 0.0.0.0 area 0\n network 10.73.65.64 0.0.0.3 area 0"
+          }
+        ],
+        "explanation": "C。两端Fa0/0的.65/.66属于10.73.65.64/30，network语句在area0启用OSPF；MTU均1500，R14接口priority255高于R86的1，在题设初选中当DR。既有Loopback地址与手工RID保持一致，手工RID本身并不强制要求有同值接口。\n\nA的MTU1400/1500在本题启用DBD MTU校验时阻碍数据库同步，且R14 priority0不能担DR；D也有MTU差异。B把`ip ospf priority 255`放在router ospf进程下，该设置应在接口模式下，因此不是完整有效的所需配置。MTU不匹配是ExStart/Exchange停滞的常见原因，不能由状态单独断定，`mtu-ignore`也不是修复真实承载能力的通用办法。高优先级不抢占已存在DR，所以必须注意这里的初选条件。"
+      }
+    },
+    {
+      "id": 358,
+      "before_sha256": "09e1b7e222f0fc11a6c642759f63f38042c84fc81600f482aedd189124ccb2b4",
+      "reason": "已看RIPv2经B分别重发布进OSPF/EIGRP、C为Area1至0ABR；原答案D90与自身解析结论A110冲突。补唯一RIP来源且无EIGRP本地network起源/汇总/AD修改等条件，正确改A。OSPF外部110优于外部EIGRP170，OSPF跨普通area不改变来源成内部EIGRP；去无证据官方考试判分叙事。 [S1]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Router B learns 192.168.1.0/24 only through RIPv2 and redistributes it as an external route into both OSPF and EIGRP 100. Router D receives both candidates for that exact prefix, with default ADs and no other origin, summary, or preference override. What administrative distance is shown for the selected route on D?",
+        "answer": [
+          "A"
+        ],
+        "explanation": "A，110。源前缀由RIP进入B后，重发布到EIGRP100成为外部EIGRP，默认AD170，而非内部EIGRP90；重发布到OSPF的外部路由默认AD110，经C的普通Area1/Area0边界传播到D后仍按OSPF来源参与选择。对同192.168.1.0/24，110小于170，因此D的RIB选OSPF。\n\nB/120是RIP的默认AD，但D未直接学到RIP候选；C/170是落选的外部EIGRP来源；D/90适用于内部EIGRP，不适用于题设唯一由RIP重发布的路由。AD是本地路由来源偏好，不是沿途累加度量，也不是从RIP继承120；默认值可配置，本题明确未修改。"
+      }
+    },
+    {
+      "id": 359,
+      "before_sha256": "a46d1a96724915db48e93fb9274b031138d40930079480cd8aa9db2b94360615",
+      "reason": "已看双电路主.1/.2、备.5/.6和双向AD1默认，D高AD2正确；选项R1/R2命令压平。补两个/30对端完整地址/严格主备所有LAN目标、主路由实际撤回；解释/32会更明细抢主路由，不只因AD1。去ECMP等于每包双发、AD2压制AD1及无缝切换说法。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Primary circuit endpoints are R1 10.10.10.1/30 and R2 10.10.10.2/30; secondary endpoints are R1 10.10.10.5/30 and R2 10.10.10.6/30. The displayed primary defaults use AD 1. Which command set keeps those defaults preferred for remote LAN destinations normally and supplies backup defaults after the primary routes are withdrawn, assuming the secondary and return paths remain valid?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.6\nR2(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.5"
+          },
+          {
+            "label": "B",
+            "text": "R1(config)#ip route 10.10.13.10 255.255.255.255 10.10.10.2\nR2(config)#ip route 192.168.0.100 255.255.255.255 10.10.10.1"
+          },
+          {
+            "label": "C",
+            "text": "R1(config)#ip route 10.10.13.10 255.255.255.255 10.10.10.6\nR2(config)#ip route 192.168.0.100 255.255.255.255 10.10.10.5"
+          },
+          {
+            "label": "D",
+            "text": "R1(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.6 2\nR2(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.5 2"
+          }
+        ],
+        "explanation": "D。R1备默认经10.10.10.6、R2经10.10.10.5，AD2均高于已有主默认AD1，主路由有效时仍走主，主路由撤回后可使用备线。A也走备线但默认AD1，未建立严格主备偏好，可能形成等价路径；ECMP并不等于每包复制两份发送。B的/32仍走主线，无备线路径；C的/32虽经备线，却比主/0更明细，会在正常时就改变这两个主机的路径，也不能覆盖整个远端LAN。\n\nAD1优先于AD2，不能把数值更大的备份说成压制主路由。默认路由互指仅适合本题已明确的两个LAN目标，其他未知目的可能循环。线路故障是否令主路由撤回取决于接口/递归/跟踪，AD不提供独立故障检测，也不保证无丢包切换。"
+      }
+    },
+    {
+      "id": 360,
+      "before_sha256": "25040968390945a7a2a1d830a13f783c552d58a7fd01393861bd42885067d2ec",
+      "reason": "已看R1-R3直连192.168.30/24，A/24AD111正确；原C目的192.168.20.0配/16有host bits，不能只说安装一条范围宽的路由。纠正CLI行为并补OSPF同/24默认110及备下一跳在撤路后仍有效，修复IP空格。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 normally learns 192.168.20.0/24 through OSPF with default AD 110. R3 at 192.168.30.2 remains reachable and able to forward if that OSPF route is withdrawn. Which command adds a static backup for the same /24 via R3 without replacing OSPF during normal operation?",
+        "explanation": "A。`ip route 192.168.20.0 255.255.255.0 192.168.30.2 111`与OSPF是同一/24，AD111高于110，正常不替代OSPF；该OSPF条目撤回且R3仍有效时，可由静态接管。B的AD90低于110，会优先于正常OSPF；D省略AD默认为1，也抢主路径。C的192.168.20.0配255.255.0.0含主机位，不是合法的192.168.0.0/16网络前缀，不能说它正常安装成一条较宽路由；且没有表达同/24浮动要求。下一跳可达及R3后续/回程路径仍是备份可工作的必要条件，不能保证连接R3的链路也断掉时仍可走它。"
+      }
+    }
+  ]
+}

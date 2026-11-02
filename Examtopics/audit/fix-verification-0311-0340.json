@@ -1,0 +1,62 @@
+{
+  "scope": [
+    311,
+    340
+  ],
+  "reviewed_count": 30,
+  "corrected_question_count": 26,
+  "question_count": 1396,
+  "ids_and_qids_preserved": true,
+  "all_current_batch_corrections_equal_manual_manifests": 119,
+  "unchanged_outside_manifests": true,
+  "master_app_batch2_equal": true,
+  "embedded_html_batch2_master_equal_source": true,
+  "app_logic_storage_key_native_code_unchanged": true,
+  "all_30_formatter_outputs_agree_app_batch2_master": true,
+  "literal_code_fragments_preserved": 93,
+  "multiline_options_restored": [
+    330,
+    331,
+    335
+  ],
+  "answer_changes_verified": {
+    "314": [
+      "D"
+    ],
+    "321": [
+      "A"
+    ]
+  },
+  "q338_same_prefix_model": {
+    "normal": {
+      "prefix": "10.1.1.0/24",
+      "origin": "OSPF",
+      "AD": 110
+    },
+    "after_primary_withdrawn": {
+      "prefix": "10.1.1.0/24",
+      "origin": "static",
+      "AD": 125
+    },
+    "old_host_route_while_primary_up": {
+      "prefix": "10.1.1.10/32",
+      "origin": "old host static",
+      "AD": 125
+    }
+  },
+  "revised_diagrams_visually_checked": [
+    316,
+    321,
+    328,
+    332,
+    339,
+    340
+  ],
+  "source_sha256": "49d5c1ad8a92b78cb4d42dff6bbaa74d393fc59be98b32ddd30400a961865902",
+  "app_bundle_sha256": "a4232b0f519d55373e797f250ec1dd1484859c2e8a280c1ca13231c7ed7339ed",
+  "next_question": 341,
+  "compile_install_commit": "pending Q400 milestone per user instruction",
+  "phone_access_this_turn": false,
+  "release_created": false,
+  "limitations": "Manual source/formatter/address-model checks, not live forwarding or per-question phone UI tests."
+}

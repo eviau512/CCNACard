@@ -1,0 +1,98 @@
+{
+  "scope": [
+    341,
+    370
+  ],
+  "reviewed_count": 30,
+  "corrected_question_count": 28,
+  "question_count": 1396,
+  "ids_and_qids_preserved": true,
+  "all_current_batch_corrections_equal_manual_manifests": 147,
+  "unchanged_outside_manifests": true,
+  "master_app_batch2_equal": true,
+  "embedded_html_equal_source": true,
+  "app_logic_storage_key_native_code_unchanged": true,
+  "all_30_formatter_outputs_agree": true,
+  "literal_code_fragments_preserved": 45,
+  "multiline_options_checked": 41,
+  "q349_actual_acl_match_cases": [
+    {
+      "source": "10.1.1.1",
+      "destination": "172.16.2.10",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "deny",
+      "actual": "deny"
+    },
+    {
+      "source": "10.1.1.2",
+      "destination": "172.16.2.2",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "permit",
+      "actual": "permit"
+    },
+    {
+      "source": "10.1.1.1",
+      "destination": "172.16.2.10",
+      "protocol": "tcp",
+      "type": null,
+      "expected": "permit",
+      "actual": "permit"
+    },
+    {
+      "source": "192.168.1.20",
+      "destination": "172.16.2.10",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "permit",
+      "actual": "permit"
+    },
+    {
+      "source": "10.1.1.254",
+      "destination": "172.16.2.10",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "deny",
+      "actual": "deny"
+    },
+    {
+      "source": "10.1.0.1",
+      "destination": "172.16.2.10",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "permit",
+      "actual": "permit"
+    },
+    {
+      "source": "10.1.1.1",
+      "destination": "172.16.2.10",
+      "protocol": "icmp",
+      "type": "echo-reply",
+      "expected": "permit",
+      "actual": "permit"
+    }
+  ],
+  "answer_changes_verified": {
+    "358": [
+      "A"
+    ]
+  },
+  "q345_fully_specified_ipv6_next_hop_checked": true,
+  "q350_backup_interface_peer_AD_checked": true,
+  "q367_connected_prefixes_valid_and_nonoverlapping": true,
+  "revised_diagrams_visually_checked": [
+    342,
+    343,
+    355,
+    366,
+    367
+  ],
+  "source_sha256": "d9a1edb60bfd87b32bc19d573a94e4ab60ed92886f47ffc5d974ced48355310c",
+  "app_bundle_sha256": "4ea221882fd2a474815b9997ad31e28636b3d91abe2e7902b7cfc64c9c61610f",
+  "next_question": 371,
+  "compile_install_commit": "pending Q400 milestone per user instruction",
+  "phone_access_this_turn": false,
+  "release_created": false,
+  "limitations": "Manual source/document/formatter and independent address/ACL checks, not live IOS traffic or per-question phone UI tests."
+}

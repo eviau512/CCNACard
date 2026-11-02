@@ -1,0 +1,67 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-12/iri-xe-16-12-book/ip6-route-static-xe.html",
+    "S2": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html",
+    "S3": "https://www.rfc-editor.org/rfc/rfc2328.html",
+    "S4": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "S5": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/command/iri-cr-book/iri-cr-a1.html"
+  },
+  "original_images_directly_viewed": [
+    341,
+    342,
+    343,
+    344,
+    346,
+    347,
+    349,
+    350
+  ],
+  "new_images": [
+    342,
+    343
+  ],
+  "authored_exhibit_corrections": {
+    "342": "Recast conflicting simultaneous RIB entries as explicit valid route candidates, no unsupported interface mapping.",
+    "343": "Restore L10.10.10.3/32 and remove erroneous parent counts; all original route entries retained."
+  },
+  "authored_option_changes": {
+    "345": "D fully specifies interface and IPv6 next hop",
+    "349": "C explicit routing plus echo ACL; A authored routing-only distractor",
+    "350": "D fully specifies R2 Ethernet next hop; A authored valid NH+AD distractor"
+  },
+  "q349_acl_expected_cases": [
+    {
+      "source": "10.1.1.1",
+      "destination": "172.16.2.10",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "deny"
+    },
+    {
+      "source": "10.1.1.2",
+      "destination": "172.16.2.2",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "permit"
+    },
+    {
+      "source": "10.1.1.1",
+      "destination": "172.16.2.10",
+      "protocol": "tcp",
+      "type": null,
+      "expected": "permit"
+    },
+    {
+      "source": "192.168.1.20",
+      "destination": "172.16.2.10",
+      "protocol": "icmp",
+      "type": "echo",
+      "expected": "permit"
+    }
+  ],
+  "limitations": "Manual document/source/diagram review; no live IOS or phone UI/traffic test.",
+  "revised_diagrams_visually_checked": [
+    342,
+    343
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "scope": [
+    371,
+    375
+  ],
+  "reviewed_count": 5,
+  "corrected_question_count": 4,
+  "question_count": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_manifest_changes": 151,
+  "master_app_batch_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "literal_code_fragments_preserved": 43,
+  "q375_independent_RIB_LPM_cases": [
+    {
+      "option": "A",
+      "target_peer": "192.168.1.2",
+      "other_peer": "192.168.1.2",
+      "satisfies": false
+    },
+    {
+      "option": "B",
+      "target_peer": "192.168.1.2",
+      "other_peer": "192.168.1.2",
+      "satisfies": false
+    },
+    {
+      "option": "C",
+      "target_peer": "192.168.1.6",
+      "other_peer": "192.168.1.6",
+      "satisfies": false
+    },
+    {
+      "option": "D",
+      "target_peer": "192.168.1.6",
+      "other_peer": "192.168.1.2",
+      "satisfies": true
+    }
+  ],
+  "q375_host_AD115_still_beats_network_AD110": true,
+  "revised_diagrams_visually_checked": [
+    374,
+    375
+  ],
+  "source_sha256": "519a5b1d37d20e2b2772340d3ca40b2f03868ed8d5fd64d9aa2b9213f3b2e8a7",
+  "app_bundle_sha256": "e97c2e75ae670e8cc6f15a7f9cf6d5d49a7d93ddb1ad45f5c3030b35e7e3eb88",
+  "next_question": 376,
+  "delivery": "pending Q400",
+  "phone_access": false,
+  "release_created": false,
+  "limitations": "Source/formatter/address model verification; not live IOS or phone UI tests."
+}

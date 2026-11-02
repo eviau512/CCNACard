@@ -1,0 +1,191 @@
+{
+  "scope": "Manual corrections Q251-Q270, second 200-question milestone",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 251,
+      "before_sha256": "236f9e77d8daaefc6859109bc232a8667aaaad08256d1454bab80697f25a1b7c",
+      "reason": "原题泛称减少多类型设备关联时间，未给客户端k/v能力，B与D对应不同优化环节，不能证明B唯一；解析把Disassociation Imminent说成保证全设备无缝漫游，并把D的真实功能排除。明确目标为已支持802.11k双频终端的扫描缩短/双频邻居报告，答案改D；解释v到期可断连而非通用保证。 [S1][S2]",
+      "updates": {
+        "prompt": "A roaming project aims to reduce the channel-scanning time before reassociation. The target clients have been verified to support 802.11k and both 2.4 GHz and 5 GHz. Which feature supplies neighboring AP/channel information for both bands to help meet this goal?",
+        "answer": [
+          "D"
+        ],
+        "explanation": "D，802.11k双频邻居列表。支持的客户端可取得候选AP及信道信息，减少盲扫；dual-band reporting可同时报告相关2.4/5GHz候选。这针对漫游中的扫描开销，不保证所有设备都支持或每次都更快，部署前需验证客户端能力及实际效果。A/BSS Max Idle用于允许一定空闲周期而保持关联；B/802.11v Disassociation Imminent是BTM请求的即将解除关联提示，到期可能强制断连，不能保证无缝漫游，也不能替代邻居报告；C不是本题邻居列表机制。802.11r主要减少重认证/密钥协商开销，k/v/r作用不同，可配合但不应混为一个必然适用于所有终端的功能。"
+      }
+    },
+    {
+      "id": 252,
+      "before_sha256": "46e4d023af8a1266fed31aa7439891d04c08a277a6c4d7e6d3b619c9f9b9c6f6",
+      "reason": "D/Friendly方向正确，但解析保证所有Syslog/SNMP报警绝对停止，未区分Friendly的Alert/Internal/External及通知策略。明确AireOS已确认的内部合法AP，Friendly/Internal；不能把所有未纳管设备一概判恶意，也不应为停止误报启用containment。 [S3]",
+      "updates": {
+        "prompt": "An AireOS WLC reports a rogue AP. The administrator verifies that its MAC belongs to an authorized autonomous AP in the company lab and wants to acknowledge it as a known internal AP instead of treating it as an unknown threat. Which AP Class Type should be selected?",
+        "explanation": "D，Friendly。对已确认的内部合法自主AP，应标记为Friendly并采用适当的Internal状态/友好MAC记录，避免继续作为未知威胁处理；Friendly AP不能被contain。它仍可保留在监控清单中，具体通知还受状态和通知策略控制，不能把Friendly泛化为屏蔽一切Syslog/SNMP事件。A错误：自主AP本来就不由该WLC管理，移除管理关系不是确认合法身份。B手动containment是抑制操作，会干扰被批准的业务。C仅处理暂存状态没有表达该MAC已被批准为友好设备。应先核实归属再分类，不能仅因设备未纳管或来自邻网就断定恶意。"
+      }
+    },
+    {
+      "id": 253,
+      "before_sha256": "96f472eb96c319880de38df3ff92258995ba56ccfa63ab52338e3da6f14de591",
+      "reason": "C正确，但未开LAG并非所有逻辑接口完全不能备端口；AireOS动态接口可有primary/secondary。解析还保证毫秒级无损、单流带宽无限增加，均非LAG必然性质。改为成员冗余与聚合吞吐、哈希分流，区别SSO及加密。 [S4]",
+      "updates": {
+        "explanation": "C。LAG将多个兼容物理成员组成逻辑聚合链路，提供成员链路冗余和跨流量的负载分担；一个成员失效时，仍有可用成员且配置正确即可转移流量。可增加多流量总吞吐，但哈希可能不均衡，单个流通常仍受单成员带宽限制，不能保证零丢包或固定毫秒级切换。未启用LAG时，AireOS的某些逻辑接口可配置primary/secondary端口，不能说一律没有端口备份。A错误：聚合本身不加密管理帧；B错误：成员应保持一致VLAN配置，不靠故障时更换VLAN实现冗余；D的控制器状态同步/SSO属于控制器高可用功能，不能由本机端口聚合替代。"
+      }
+    },
+    {
+      "id": 254,
+      "before_sha256": "36033d96ceedc2fb781ee17a9b79cf85e85ea601d6d4244d0c633b3f783cb47c",
+      "reason": "经典AireOS分离接口流程中Discovery Request先到management，随后向响应通告的AP-manager发送Join Request；原题指定AP-manager却无Join Request选项，D的解释将两接口混为一谈。题干改为management上的发现请求，保留D，并解释可合并接口但不能混用阶段。 [S5]",
+      "updates": {
+        "prompt": "In the classic AireOS lightweight-AP discovery process, which message does an AP send to a candidate WLC management interface before selecting a controller and sending a join request?",
+        "explanation": "D，Discovery Request。AP获得地址后，通过配置/缓存、DHCP Option43、DNS或本地发现等方式取得候选控制器地址，再发送发现请求；控制器回Discovery Response。在传统management与AP-manager分离的流程中，先访问management地址做发现，响应通告AP-manager地址，AP随后向所选AP-manager发Join Request。某些平台让management同时承担AP-manager角色，地址可相同，但Discovery与Join仍是不同阶段。A是WLC返回的方向；B/C是DHCP获取地址阶段的请求，不是控制器发现消息。不能把向独立AP-manager发的Join Request误写成Discovery Request。"
+      }
+    },
+    {
+      "id": 255,
+      "before_sha256": "94cc0314b49f4192fe40cd5ec7679a5df9f2190462b3dae645947b99a511c43f",
+      "reason": "已看GUI：服务器Enabled，Network User/Management未选，C为全局网络认证用途选择。但官方说明WLAN显式指定AAA服务器可不勾全局Network User，原解析“绝不会”错误。题干补未在WLAN单独选服务器、使用全局列表；C保留并明确例外。 [S6]",
+      "updates": {
+        "prompt": "Refer to the AireOS exhibit. The WLAN uses the global RADIUS server list for wireless-client authentication; no RADIUS server is explicitly selected under that WLAN's AAA Servers settings. Connectivity, shared secrets, and WLAN security are otherwise configured correctly. Which change makes the enabled server eligible for network-user authentication?",
+        "explanation": "C。图中Server Status已为Enabled，而Network User未勾选；在题目指定使用全局服务器列表、未为WLAN单独指定AAA服务器的情况下，应勾选Network User，使该条目作为无线网络用户认证服务器。A/CoA用于后续动态授权变更，不是基本RADIUS认证的必要条件；B/Management面向WLC管理员认证；D禁用服务器与目标相反。AireOS允许在WLAN的AAA Servers页面显式选择服务器，因此不能把未选全局Network User说成任何配置下都绝不向此服务器发客户端认证请求；还需服务器可达、共享密钥及认证策略匹配。"
+      }
+    },
+    {
+      "id": 258,
+      "before_sha256": "7c7d985b0f789d796b7ea8b3d6517840fd9c065c10df86577ae05afe16d41cd1",
+      "reason": "已看三路由器和RIB：R1仅直连10.10.10/24，R3已具返回10.10.10/24的静态路由，C补R1前往20.20.20/24 via10.10.10.2正确。但末尾声称静态下一跳必须直连、跨跳不能成立，忽略可递归解析下一跳。重写为本图邻接R2最直接，保留递归机制限定。 [S8]",
+      "updates": {
+        "explanation": "C。图中R1只有10.10.10.0/24直连且未设默认路由，无法把目的20.20.20.2交给R2；R2连接10.10.10.0/24和20.20.20.0/24，R3已有10.10.10.0/24经20.20.20.1的返回路由。在R1加入：\n```text\nR1(config)# ip route 20.20.20.0 255.255.255.0 10.10.10.2\n```\n即可补上本图缺少的去程，其他接口/转发条件正常时可双向ping。A把远端R3当本地默认网关且不补有效路由；B目标写成20.20.2.0/24，出接口也错，应经R1 Fa0/0；D不能凭空建立到远端的可达路径。此处选邻接R2的10.10.10.2最直接；一般静态路由也可用可递归解析的非直连下一跳，前提是解析能终止于有效出接口且不自递归，不能概括为下一跳永远必须直连。"
+      }
+    },
+    {
+      "id": 259,
+      "before_sha256": "f85bd89b04e4f7f6a0e2b3f002d1b3eea7d6f1783a0b6c987ea983d76ee3e5cb",
+      "reason": "A/默认带宽+延迟正确，但解析将MTU列入度量参数、通式分母括号错误且LaTeX的left已损成≤ft。删错误通式，给经典默认K值、明确带宽最小/延迟累加与单位，纯文本公式保留，MTU与hop count不计复合度量。 [S9]",
+      "updates": {
+        "explanation": "A。默认K值为K1=1、K3=1，K2=K4=K5=0，因此经典EIGRP复合度量由路径最小带宽和累积延迟决定：\n```text\nBW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)\n```\n带宽项取瓶颈带宽，不是相加；延迟沿路径累加，使用接口通告/配置值，并非实时测速。MTU与hop count可随路由信息携带或用于限制，但不计入该复合度量公式。B的统一10不是EIGRP默认度量，C的逐跳计数更符合RIP，D的参考带宽与接口带宽之比更接近OSPF cost。宽度量实现的缩放/单位不同，应按相应平台查看；本题选择带宽和延迟，不把所有EIGRP数值公式一概写成经典32位形式。"
+      }
+    },
+    {
+      "id": 260,
+      "before_sha256": "52006b7de9a58463ca405dac4f81e9c10ad35aec6b4be8b700eb82707c8bedfa",
+      "reason": "C默认路由正确，但四组CLI源全压成一行，需恢复模式/命令分行。补192.168.1.1可解析且转发开启的前提，区别default-gateway；模板参数全局renderer已保护，不把已修问题再算当前丢失。 [S8]",
+      "updates": {
+        "prompt": "On a Cisco IOS router, IPv4 routing is enabled and next-hop address 192.168.1.1 is reachable through an existing route. Which configuration installs a static default route to send packets with no more-specific matching route to that next hop?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R1#config t\nR1(config)#ip routing\nR1(config)#ip route default-route 192.168.1.1"
+          },
+          {
+            "label": "B",
+            "text": "R1#config t\nR1(config)#ip routing\nR1(config)#ip route 192.168.1.1 0.0.0.0 0.0.0.0"
+          },
+          {
+            "label": "C",
+            "text": "R1#config t\nR1(config)#ip routing\nR1(config)#ip route 0.0.0.0 0.0.0.0 192.168.1.1"
+          },
+          {
+            "label": "D",
+            "text": "R1#config t\nR1(config)#ip routing\nR1(config)#ip default-gateway 192.168.1.1"
+          }
+        ],
+        "explanation": "C。IPv4默认前缀是0.0.0.0/0，目的网络和掩码均为0，再指定可解析下一跳192.168.1.1：\n```text\nR1# configure terminal\nR1(config)# ip routing\nR1(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.1\n```\n默认路由仍参与最长匹配，只在没有更明细匹配时被选用。A的default-route不是此IOS ip route语法；B把目的地址、掩码和下一跳顺序写错，非规范默认路由；D的ip default-gateway用于关闭IP路由时设备自身的网关，不为已启用路由的转发流量安装所需默认路由。静态路由要实际生效，还需下一跳能解析到有效出口。"
+      }
+    },
+    {
+      "id": 263,
+      "before_sha256": "5dbb961435c3cb7479d765d37e4b9e9066528b8da58e64f7e43c981f40687bd7",
+      "reason": "已看四条show ip route：i L1写192.168.10.0/13带host bits，不是IOS规范网络前缀，解释照抄。改编为规范192.168.0.0/13并重绘完整路由表，仍覆盖目标.10.16且RIP /27最长，B不变。不要将原错误行当真实IOS规范输出。",
+      "updates": {
+        "prompt": "Refer to the revised routing-table exhibit with normalized IPv4 network prefixes. All shown routes are installed. Under normal destination-based forwarding, how does R1 handle traffic to 192.168.10.16?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTUwIiBoZWlnaHQ9IjM4MCIgdmlld0JveD0iMCAwIDExNTAgMzgwIj48cmVjdCB3aWR0aD0iMTE1MCIgaGVpZ2h0PSIzODAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTEzMCIgaGVpZ2h0PSIzNjAiIGZpbGw9IiNmNGY3ZmEiIHN0cm9rZT0iIzQ4NjU4MSIvPjx0ZXh0IHg9IjM0IiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0Ij5SZXZpc2VkIGV4ZXJjaXNlIC0gbm9ybWFsaXplZCBJUHY0IHJvdXRlIHByZWZpeGVzPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPlIxIyBzaG93IGlwIHJvdXRlPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIxNDMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPi4uLjwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTg2IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjI0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5EICAgIDE5Mi4xNjguMTAuMC8yNCBbOTAvMjY3OTMyNl0gdmlhIDE5Mi4xNjguMS4xPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyMjkiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPlIgICAgMTkyLjE2OC4xMC4wLzI3IFsxMjAvM10gdmlhIDE5Mi4xNjguMS4yPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyNzIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gICAgMTkyLjE2OC4xMC4wLzIzIFsxMTAvMl0gdmlhIDE5Mi4xNjguMS4zPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIzMTUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPmkgTDEgMTkyLjE2OC4wLjAvMTMgIFsxMTUvMzBdIHZpYSAxOTIuMTY4LjEuNDwvdGV4dD48L3N2Zz4=",
+        "explanation": "B，RIP的192.168.10.0/27覆盖.0至.31，包含目标192.168.10.16。EIGRP .10.0/24、OSPF .10.0/23与IS-IS 192.168.0.0/13也覆盖目标，但前缀分别为24、23和13，比27短。数据转发在已安装路由中取最长匹配；A用最短前缀相反，C不能跨协议直接比cost，D的AD90不能压过更明细/27。AD用于不同来源对同一完整前缀的入表竞争。/13的规范网络地址是192.168.0.0而非192.168.10.0，范围192.168.0.0至192.175.255.255。"
+      }
+    },
+    {
+      "id": 264,
+      "before_sha256": "99101881e5d758406949532f70a11c01f6102c7595c154f14f2fdfa48c38020b",
+      "reason": "已看图，.165命中OSPF .160/29 via10.10.10.5 Gi0/1，对应Router3，B正确。图同时有S*默认，原解析“唯一匹配”需区分更明细与默认：默认也匹配，只因/29更长而落选。改写逐项范围和出接口证据。",
+      "updates": {
+        "explanation": "B，Router3。目的10.10.13.165落在10.10.13.160/29（.160–.167），其OSPF条目经10.10.10.5、出GigabitEthernet0/1；拓扑该段10.10.10.4/30连接Router3。图中S*0.0.0.0/0也匹配目标，但/29更长，优先于默认，不能说路由表只有一个匹配。其他OSPF前缀：.0/25到.127，.128/28到.143，.144/28到.159，.208/29为.208–.215，都不含.165。A/Router2连接10.10.10.0/30，C/Router4连接.8/30，D/Router5连接.12/30，都不是本条目下一跳10.10.10.5所对应的设备。"
+      }
+    },
+    {
+      "id": 265,
+      "before_sha256": "b89f1259e5aa8f786287649a099ea500d7fda5e4a164c4ed5d3ddaad9bfa6acc",
+      "reason": "C/同10.10.10.0/24跨协议比AD正确。解析称Cost为OSPF私有、把OSPF DR RID与下一跳IP大小混用，均非准确术语。重写只比较同前缀AD，其他前缀不靠短掩码入表，平局/有效性不虚构。 [S10]",
+      "updates": {
+        "explanation": "C。对完全相同的10.10.10.0/24，各有效路由来源竞争入表时，Cisco用管理距离AD比较来源可信度，较小者优先。不同协议的metric单位/算法不同，不能以数值直接横比。A的下一跳IP大小不是这种跨来源入表规则；B的cost是度量概念，OSPF使用cost但并非其私有协议术语，也不能代替跨协议AD；D本题所有前缀长度相同，没有按更短前缀决定入表的依据。不同长度前缀可共存，转发时再取最长匹配。若题目另给同AD平局、无效下一跳等条件，还需相应规则；此处考查的是基本同前缀跨来源优先级。"
+      }
+    },
+    {
+      "id": 266,
+      "before_sha256": "589f58c57367a42669dfbb78d3475c8811f251f75ee27d76b3d5d76524b9087e",
+      "reason": "已看R1/SW1/SW2：B子接口+dot1q20正确，但CLI源全部压平且B/C提示符错误应config-subif。图SW1 E0/1仅allowed vlan10，若声称配置后VLAN20端到端畅通则错误。明确仅补R1本地子接口，列出后续trunk需放行20；物理口多IP并非协议绝对禁止。 [S11]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which commands add the local 802.1Q VLAN 20 subinterface 10.20.20.1/24 on R1 Ethernet0/0? Assume the parent interface is enabled; changes needed on switch trunks are a separate step.",
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config)#interface ethernet0/0\nR1(config-if)#encapsulation dot1q 20\nR1(config-if)#ip address 10.20.20.1 255.255.255.0"
+          },
+          {
+            "label": "B",
+            "text": "R1(config)#interface ethernet0/0.20\nR1(config-subif)#encapsulation dot1q 20\nR1(config-subif)#ip address 10.20.20.1 255.255.255.0"
+          },
+          {
+            "label": "C",
+            "text": "R1(config)#interface ethernet0/0.20\nR1(config-subif)#ip address 10.20.20.1 255.255.255.0"
+          },
+          {
+            "label": "D",
+            "text": "R1(config)#interface ethernet0/0\nR1(config-if)#ip address 10.20.20.1 255.255.255.0"
+          }
+        ],
+        "explanation": "B：进入Ethernet0/0.20子接口，先绑定802.1Q VLAN20，再配10.20.20.1/24：\n```text\nR1(config)# interface Ethernet0/0.20\nR1(config-subif)# encapsulation dot1q 20\nR1(config-subif)# ip address 10.20.20.1 255.255.255.0\n```\n子接口号.20便于管理，不要求必与VLAN ID相同；实际VLAN由encapsulation指定。A在此平台物理主口下配置子接口封装，层级错误；C新建子接口却未配置封装，不能据此承载带标签VLAN20；D只给物理口配地址，没有建立所需VLAN20子接口。图中SW1 Ethernet0/1只允许VLAN10，故仅补R1并不使VLAN20端到端互通，还须在相应trunk允许VLAN20、确认VLAN/端口状态及终端网关；这不改变本题只问R1本地子接口的B。物理接口可支持secondary IP等配置，不能用“一个物理接口绝不能有多个IP”解释子接口的必要性。"
+      }
+    },
+    {
+      "id": 267,
+      "before_sha256": "569c87f6e35771fed6402dbe47ca1393ad4cfd4fefa8222c6f6acfc3f96ce9d2",
+      "reason": "已看brief：Loopback0=172.16.15.10 up/up，192.168.0.1是Gi1/0而非loopback。C在首次自动选择时正确，但仅brief不足以排除手工RID/旧运行RID，原解析只有模板。补新启OSPF且无router-id、接口均已存在，按具体接口逐项解释并说明不自动抢占。 [S12]",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 starts its OSPFv2 process for the first time after all shown interfaces and addresses are configured. No router-id command is configured. Which address does it automatically select as its OSPF router ID?",
+        "explanation": "C，172.16.15.10。首次自动选择时，IOS先取有效loopback地址中的最高值；仅无loopback时才从其他有效接口地址选择。图中唯一Loopback0为172.16.15.10、up/up，因此优先于物理Gi1/0的192.168.0.1，尽管后者数值更大。A/10.10.1.10在Gi2/0，B/10.10.10.20在Gi3/0，D/192.168.0.1在Gi1/0，均不是loopback。手工router-id若存在则优先；已运行进程的RID不会仅因后来增加更大地址自动抢占改变，不能只凭当前brief推断历史RID。题目已限定首次启动且无手工RID，故无需假设隐藏运行状态。"
+      }
+    },
+    {
+      "id": 268,
+      "before_sha256": "6ae905a74bd36561caf172f3021eaeb76de07971e0a7718783aacb9991c2e818",
+      "reason": "已看配置：Router1 hello5，Router2默认Ethernet hello10，C正确。原解析凭hello5断言dead自动变20、又把MTU列成Hello内匹配参数；应只用已证明Hello不等，Dead独立核验，MTU属后续数据库交换。process1000/1001本地有效，RID1.1.1.1/2.2.2.2应不同。 [S13]",
+      "updates": {
+        "explanation": "C。图中Router1 Gi1/1显式ip ospf hello-interval 5；Router2未修改普通广播以太网Hello，默认10秒，两端Hello不同已经足以使收到的Hello校验失败。应核对并匹配两端Hello与Dead；图未给show ip ospf interface输出，不能只凭hello-interval5就宣称Dead已自动联动到20。A的进程号1000/1001仅本地有效，不要求相同；B的network10.10.10.0 0.0.0.3 area0匹配10.10.10.1/30接口；D的RID1.1.1.1与2.2.2.2不同是正常且应唯一。Router2虽然passive-interface default，已对Gi1/1 no passive-interface。区域、适用的掩码/选项和认证也需相容；MTU检查主要在后续数据库描述交换阶段，不能列成Hello报文本身必须一致的字段。"
+      }
+    },
+    {
+      "id": 269,
+      "before_sha256": "64481bd9c2033b1f1d9be1e83afb65b16267726df0262c37547b8a7ba8afa5a9",
+      "reason": "已看B*0/0 [20/0] via10.10.10.18，D正确，确为默认非静态。解析一处将network route写/1–/30、结尾写/1–/31自相矛盾，/31可为网络前缀。统一分类、默认只兜底不保证全部Internet无条件走默认。",
+      "updates": {
+        "explanation": "D，默认路由。图中Gateway of last resort指向10.10.10.18，实际条目为B*0.0.0.0/0 [20/0] via10.10.10.18。/0覆盖全部IPv4地址并在无更明细匹配时兜底，星号表示候选默认，B表示BGP来源。A浮动静态需为静态且配置较高AD作备份，本条不是S；B主机路由为/32，不是/0；C在本题分类中指特定网络/子网，常见/1至/31，/31不能排除在网络前缀之外。默认路由可由静态或动态来源产生；仅见默认指向Internet，不代表有更明细匹配时也忽略最长匹配。"
+      }
+    },
+    {
+      "id": 270,
+      "before_sha256": "bfc05c7b273993f78cad273d6bc429e51692b6be0696b8917d507ff6c5e702ec",
+      "reason": "已看默认S* via10.10.11.2 Fa2/0与MPLS B209.165.200.224/27，B正确。解析称边缘不可能有完整路由表、所有Internet必经默认均过度；A .0/27也不等于图.224/27。补目的198.51.100.10、按本图查表，指出更明细覆盖时会优先及A不一致。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Router1 receives a packet for Internet destination 198.51.100.10. No policy routing is configured. Which listed route prefix is selected from the shown routing table?",
+        "explanation": "B，0.0.0.0/0。198.51.100.10不在图示直连10.10.10.0/28、10.10.11.0/30、10.10.12.0/30、OSPF10.10.13.0/24或BGP209.165.200.224/27中，因此匹配S*默认，经10.10.11.2和FastEthernet2/0送向Internet。A给的是209.165.200.0/27，与图示.224/27也不同，且两者都不含此目的；C/D为内部网络，不含目的。应依据具体地址和最长匹配，不是把所有Internet地址无条件交给默认：若有更明细公网路由则它可优先。边缘设备是否能承载完整路由表依容量与设计，本图不需要也不能推出一概不可能。"
+      }
+    },
+    {
+      "id": 261,
+      "before_sha256": "dbd6a273bbb371d13e8a92f17c1430fd574c8fea55502f5ba3355f9813dbf44e",
+      "reason": "B和四项范围计算正确，但解析把FIB/RIB一并称硬件转发表，混淆控制平面的路由信息库与数据平面转发表。改为在已安装有效路由中做最长匹配，并明确RIB/FIB角色；仍保留B及四个完整单行ip route。",
+      "updates": {
+        "explanation": "B。目的10.10.1.22只被所列10.10.1.20/30覆盖：A的10.10.1.0/28范围.0–.15；B的.20/30范围.20–.23；C的.16/30范围.16–.19；D的.20/31范围.20–.21。/31可用于点到点链路，但它仍不包含.22。假定这些候选有效安装、下一跳10.10.255.1可解析，选择B转发。若有多个匹配前缀则取最长者，本题只有B匹配，不能单纯看哪项掩码最长。RIB是控制平面的路由信息库，FIB是据已选路由构建的数据平面转发表，不能把两者都称硬件表；具体转发也可由硬件或软件实现。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "scope": "Manual Q386-Q390; delivery Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 386,
+      "before_sha256": "a23b47e7a240e30b78282cf8c100c3865a08bbf5b09eb4152844195d1d263eae",
+      "reason": "B标准多厂商虚拟网关正确；原解析保证毫秒级无缝、必须VRRP及priority仅1–254均过度，忽略owner255/0通告与原生亚秒计时。按实际FHRP职责重写，不承诺全部厂商版本互通。",
+      "updates": {
+        "explanation": "B。VRRP是标准的第一跳冗余协议，可在支持兼容版本/地址族的多厂商设备之间提供虚拟网关。主机使用虚拟IP，组内Active负责转发、Backup在故障后接替。是否互通及接替速度仍取决于实现、定时器、链路和配置，不能保证任意设备毫秒级无丢包，也不是多厂商网络唯一可能的设计。\n\nA不是让用户自行发现网关，VIP通常仍由管理配置或相应主机配置机制提供；C的加权分配不是VRRP单实例的基本转发模式；D也不是VRRP的主要目的，通告超时与接口跟踪/BFD等故障感知机制需按平台设计，亚秒级VRRP通告本身也可用于快速接替。VRRP优先级除普通1–254外，地址拥有者使用255，0用于表示放弃当前转发责任的通告，不能把范围一概写成1–254。"
+      }
+    },
+    {
+      "id": 387,
+      "before_sha256": "a33ea3dca84560ecc2951132978d7fc31a2e25ed8215062fb875fad87c1d71e2",
+      "reason": "B虚拟IP正确且选项清楚；原解析声称PC只能一个静态网关且standby立即无缝接替过度，改为本HSRP组角色与稳定VIP，无需改主机网关但可能短暂中断。",
+      "updates": {
+        "explanation": "B，virtual IP address。HSRP组共享虚拟网关IP及相应虚拟MAC，主机把VIP作为该子网的默认网关；Active承担组的转发与ARP响应，Standby在检测到故障后可接替。主机因此通常无需把默认网关改成另一台设备的物理接口IP，但接替仍可能有短暂丢包，不能保证立即无缝。\n\nA的组播地址用于协议通告，不是主机所用单播网关地址；C的Loopback是另一类接口地址，不是该HSRP组共享的网关对象；D的广播地址也不能承担所问网关。这里描述的是HSRP组提供稳定VIP的机制，不意味着所有主机系统只能配置一个静态网关，或所有终端必须使用这个组。"
+      }
+    },
+    {
+      "id": 389,
+      "before_sha256": "d4d5a962b469307c5ba0b7954488c84fd2b7e9893e219de637936236d539fef4",
+      "reason": "已直接看唯一原图：互联10.0.20.0/24，R1.1/R2.2/R3.3，R3LAN10.0.15/24；题干把互联写/26与图不一致。统一/24并明确回程，D保留，模板替换为本地/远端与NH自指逐项说明。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 has LAN 10.0.0.64/26 and an operational interface 10.0.20.1/24 on the shared transit network. R3 is reachable at 10.0.20.3 and has LAN 10.0.15.0/24; downstream and return routing are correct. Which R1 command adds a static route for the complete R3 LAN?",
+        "explanation": "D，`ip route 10.0.15.0 255.255.255.0 10.0.20.3`。目的为R3的完整/24，下一跳是共享互联网上的R3对端.3；R1的本机地址是.1。A配置的是R1已经直连的10.0.0.64/26，没有提供远端R3 LAN的路线；B虽目的/24正确，却指本机.1；C同时只有/26而非完整/24，并也指本机。静态路线负责本机去程选择，不能单凭这条命令保证下游和回程，因此题目已明确其他方向有效。"
+      }
+    },
+    {
+      "id": 390,
+      "before_sha256": "759ba1c3a4b4130e3b034eb5a823a33e0631accf366a0f666f46a628dc5d9ef6",
+      "reason": "静态路由不属于同OSPF进程，且两route缺同前缀/AD/有效性条件不能直接断言ECMP。保留静态路径主题，明确两条同前缀同AD且已安装/允许至少2路径，D保留；区分流分担和每包轮询，不套所有平台默认4。",
+      "updates": {
+        "prompt": "A router has two valid static routes for the exact same destination prefix and mask, with equal administrative distance and forwarding cost but different next hops. Both are installed, at least two equal-cost paths are permitted, and no overriding policy applies. How can the router use these paths for forwarding traffic to the destination?",
+        "explanation": "D，在这两条已安装等价路径之间分担流量。静态路线由全局静态配置提供，不是配置在某个OSPF进程内部；本题明确同完整前缀、相同偏好且两条已安装，才满足等价多路径条件。A路由年龄、B下一跳IP数值和C下一跳MAC数值都不是这里选择唯一出口的规则。\n\n负载分担不代表每个流或有限一串包必定平均交替。常见CEF按源/目的等字段散列，同一流可能持续走同一路径；实际行为取决于平台与配置。若一条AD更高、下一跳不可达、路径数限制为1或有更明细/策略覆盖，便不能由“两条配置”推定同时使用；最大路径默认值也不应泛称所有平台都是4。"
+      }
+    }
+  ]
+}

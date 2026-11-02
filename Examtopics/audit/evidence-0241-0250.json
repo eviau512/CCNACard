@@ -1,0 +1,72 @@
+{
+  "review_date": "2026-11-02",
+  "ids": [
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250
+  ],
+  "original_images_viewed": [
+    241,
+    242,
+    244
+  ],
+  "replacement_svg_preview_paths": [
+    "exhibits/q242-corrected-preview.png",
+    "exhibits/q244-corrected-preview.png"
+  ],
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/stp/stp-configuration-guide/m-stp.html",
+    "S2": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/ports_and_interfaces.html",
+    "S3": "https://www.cisco.com/c/en/us/support/docs/lan-switching/8021q/17056-741-4.html",
+    "S4": "https://www.cisco.com/c/en/us/support/docs/interfaces-modules/security-modules-routers-switches/116586-config-ap-00.html",
+    "S5": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9400/software/release/16-12/configuration_guide/int_hw/b_1612_int_and_hw_9400_cg/configuring_lldp__lldp_med__and_wired_location_service.html",
+    "S6": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+  },
+  "bridge_id_calculations": {
+    "Q242": {
+      "vlan": 10,
+      "base": [
+        32768,
+        24576,
+        28672,
+        61440
+      ],
+      "displayed": [
+        32778,
+        24586,
+        28682,
+        61450
+      ],
+      "winner": "Switch 2"
+    },
+    "Q244": {
+      "vlan": 20,
+      "base": [
+        24576,
+        28672,
+        32768,
+        61440
+      ],
+      "displayed": [
+        24596,
+        28692,
+        32788,
+        61460
+      ],
+      "winner": "SW1"
+    },
+    "original_64000_mod_4096": 2560
+  },
+  "limitations": "No per-question device UI screenshots or live network CLI tests. New valid diagram values are authored exercise corrections, not recovered originals.",
+  "replacement_diagrams_visually_checked": [
+    242,
+    244
+  ]
+}

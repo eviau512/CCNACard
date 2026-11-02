@@ -1,0 +1,34 @@
+{
+  "scope": [
+    381,
+    385
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 160,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "literal_code_fragments_preserved": 4,
+  "answer_changes": {
+    "385": [
+      "D"
+    ]
+  },
+  "q381_independent_LPM_checked": true,
+  "q383_PC_in_revised_subnet": true,
+  "q384_VRID_hex_checked": true,
+  "revised_diagrams_visually_checked": [
+    381,
+    383
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q400",
+  "source_sha256": "0221e373e9ea2aefd2633a0048a619ac1f9e147da81e68bf91ea22dd41fd4693",
+  "app_bundle_sha256": "7d3019c3130c092b928f3b5574fa1e5a4cd743d6b0e8c66e0c85c91b8d758152",
+  "limitations": "Source/formatter/address checks, not live IOS/VRRP traffic tests."
+}

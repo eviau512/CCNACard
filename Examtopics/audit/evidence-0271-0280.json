@@ -1,0 +1,58 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-a1.html",
+    "S2": "https://www.rfc-editor.org/rfc/rfc2328.html",
+    "S3": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/command/iri-cr-book/iri-cr-a1.html",
+    "S4": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13689-17.html",
+    "S5": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "S6": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+  },
+  "original_images_directly_viewed": [
+    273,
+    277,
+    278,
+    280
+  ],
+  "q273_observed": {
+    "hello": 10,
+    "dead": 40,
+    "neighbors": 3,
+    "adjacent": 3
+  },
+  "q277_same_prefix_ad": {
+    "old_OSPF": 110,
+    "new_eBGP": 20,
+    "prefix": "10.10.13.0/25",
+    "new_answer": "C"
+  },
+  "q278_ranges": {
+    "installed": "10.10.13.0/25",
+    "first": "10.10.13.0",
+    "last": "10.10.13.127",
+    "target": "10.10.13.128/25",
+    "overlap": false
+  },
+  "q280_observed": {
+    "R1": {
+      "hello": 10,
+      "dead": 40,
+      "area": 1,
+      "network": "BROADCAST",
+      "priority": 1
+    },
+    "R2": {
+      "hello": 20,
+      "dead": 80,
+      "area": 1,
+      "network": "BROADCAST",
+      "priority": 1
+    }
+  },
+  "new_diagrams": [
+    277
+  ],
+  "limitations": "Manual protocol analysis and original-image inspection; no real IOS, gateway failover, or per-question device UI test.",
+  "revised_diagrams_visually_checked": [
+    277
+  ]
+}

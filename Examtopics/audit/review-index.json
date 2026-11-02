@@ -3,19 +3,19 @@
   "status": "active",
   "review_date": "2026-11-02",
   "source": "Examtopics\\output\\complete_q1_q1396.json",
-  "source_sha256": "7b5fb784fc330f31defa145b2e47a08f822f25094f7c03f1aa693975b63df329",
-  "app_bundle_sha256": "313a67f6503961ec2233b7840fee2bbbefdfc4f2e93c85f7aeaf7eaddbbf8cb1",
+  "source_sha256": "c3896d3c16316878884f6562d82617e827307358ad5c5d17987723684d05b803",
+  "app_bundle_sha256": "6ef838c9dc40454ec1c42061e1889b11fe320ff91d8929dfc0b0bb87fdcfc305",
   "total_questions": 1396,
-  "reviewed_count": 240,
+  "reviewed_count": 400,
   "status_counts": {
-    "问题": 108,
-    "通过": 113,
-    "歧义": 19
+    "问题": 242,
+    "通过": 128,
+    "歧义": 30
   },
-  "next_question_id": 241,
-  "unreviewed_count": 1156,
+  "next_question_id": 401,
+  "unreviewed_count": 996,
   "production_data_modified": true,
-  "method": "逐题阅读与语义审查；Q1-Q240已有图片直接查看、图片引用与代码块完整性全覆盖。实际执行App formatter并HTML解析，包含参数丢失、数字参数负对照和表格对照；未按关键词/长度自动批准，未宣称逐题UI截图或真机测试。",
+  "method": "逐题语义、图片/代码完整性审查至Q400；全部已有图片含答案图直接查看。人工决定修订，执行App/分卷/完整HTML实际formatter并解析代码，独立地址/ACL模型核对；未按关键词自动通过，未宣称逐题真机UI或网络CLI实验。",
   "records": [
     {
       "id": 1,
@@ -5467,10 +5467,18 @@
         "assessment": "本端两物理口active、Po1 IP与down日志完整，未提供对端run不能凭空补造；接口转录可另整理代码块但图已足够。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "8a325bf96b2e756d1312744dd3c697ef177f586bd423196eb148ff36eac01df8",
+      "current_question_sha256": "23bb48bfa80c56e082d37be34ebad57f81710ec2fadb1efccc774607d68d5b95",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     },
     {
       "id": 202,
@@ -5490,10 +5498,18 @@
         "assessment": "三链路图完整；范围横杠缺失、双引号乱码、多命令压平，五条id模板还被HTML吞掉。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "698e236cd61794738cfbcf5e96cf31f30b32aba61dae1f982e976c58400fae68",
+      "current_question_sha256": "dddd9a713e3753bdb85295dd9f6c8f74dce482b02131d9a173b3cdc38c67336d",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
     },
     {
       "id": 203,
@@ -5536,10 +5552,18 @@
         "assessment": "show cdp 60/180及v2可读；解析两处seconds模板消失。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "c39edceb04d3b4a1558a88ee3e08978eebfcdd4c52ac84b30379b4eea9b9b075",
+      "current_question_sha256": "0713520e17ea4bb9fd5316890bc9557ffa6b7c34abf952ade42d6feca27fc009",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 205,
@@ -5559,10 +5583,18 @@
         "assessment": "LAG概念不依图；config lag的enable/disable参数变成HTML元素。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "7be5186cdacfe40596c392df73a1ff2bd14a0c4d0553c48b23f287a981e1f514",
+      "current_question_sha256": "ee5951249093942928cad2e299c3b9b496c05f4fdc679dec435f53f370236792",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "C"
+        ]
+      }
     },
     {
       "id": 206,
@@ -5605,10 +5637,18 @@
         "assessment": "无图依赖；channel-group num模板丢参数名。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "f133e01af3fb833c85e0f2942b26fb5e46e7285ed735dc1aeb11aff8c5220a4d",
+      "current_question_sha256": "4cf6ec68fc07f88b4fcb01b5c63bf87b659ff33fde77b4491a11b5bca8ec186d",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 208,
@@ -5651,10 +5691,18 @@
         "assessment": "外网R5/R6及Gi0/1、Gi0/2图完整；全部多模式配置与show命令在选项中压一行。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "d56f9623ed115a4aadb1e2599ba041bd620059403c4edd0525280d91927c0e5b",
+      "current_question_sha256": "2f1d73164ddb4954a2951f22143accbe5d5b48506400b87ca67717f5c47f3e99",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     },
     {
       "id": 210,
@@ -5674,10 +5722,18 @@
         "assessment": "四项均含interface加配置，缺两行显示；0-7模板经HTML解析仍可见，不误报HTML丢参数。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "8614cda69d1a02b6c2b7e33a4036dd094f737fa1828194aedda369a550695d47",
+      "current_question_sha256": "ca05326f6e47b6fe64ed3d9896b14895fa592a5ba2de063ee8f795de5453fe75",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     },
     {
       "id": 211,
@@ -5720,10 +5776,18 @@
         "assessment": "PC1 MAC图中可读；多CLI选项压平，解析MAC-Address模板丢失。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "0887edd92b7f6529418f6c3aa72c3486dd2aa8cb8706b35b0a5cdd108643c5fe",
+      "current_question_sha256": "0d3348bfa863080609241638df90ac3164e4f00f6a99d5187424ccd83d6bc78b",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "C"
+        ]
+      }
     },
     {
       "id": 213,
@@ -5743,10 +5807,18 @@
         "assessment": "AAA概念不依图；原Markdown比较表实际生成table，表头3列、4数据行齐全，内容技术问题见主报告。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "1e245b789febe4f4cb5b652bfe39419cfd86edd5362089a140cc19424d030f08",
+      "current_question_sha256": "026c210198e5dc9acc9cffa316c97a7373d34d5f6775d56b60fa88b0cb77c527",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 214,
@@ -5789,10 +5861,18 @@
         "assessment": "三至四条命令选项压平；Data_VLAN/Voice_VLAN模板丢参数。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "c64bdf88255dbdcb218060e978db6dab68b011540e9ea15085e8f159d4915287",
+      "current_question_sha256": "e50f2b66e67864624175235c3a1caf2f745a352b2d751030e0c5bd2498f7913b",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 216,
@@ -5835,10 +5915,18 @@
         "assessment": "双交换机Ge0/0/0–15图在；每项interface和channel-group压一行，D作用域错误不是加围栏就能修。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "0772ff607b253f7d0fb2cca4fe1174489fbf7075b79c0531af930bfca23c8ed7",
+      "current_question_sha256": "4a6de1f5d73703f534f63cdd7fe2b584f5fa7e06591f70a28c7c657ae1a84858",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     },
     {
       "id": 218,
@@ -5858,10 +5946,18 @@
         "assessment": "四项各单条STP参数命令，不缺代码块；RSTP时序问题见主报告。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "9e687cb52ad3fe7fe813f885be536575159b78b72b3ceaf8c4652f9dcc33b18a",
+      "current_question_sha256": "8a8faa581fdc8fca49921751fad61f8bdc4b2f1b70f5f1f6de839cb03047a53d",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0201-0220.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     },
     {
       "id": 219,
@@ -5973,10 +6069,18 @@
         "assessment": "存储转发机制无依图，差错保证错误不属于图片/代码缺失。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "d63fbd5a2cb649160121636568996d8ff1efe97561f525065edc8623aed1240f",
+      "current_question_sha256": "7b97acfd891da6f5142b3232f5860e6a29b57961d59f5305211ef83f51739202",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 224,
@@ -5996,10 +6100,18 @@
         "assessment": "g1/1、g1/24与完整Staff11/Guests12 VLAN表在；长配置选项压平。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "3ddd6339d8a884a300f53fd7dce6296ba6ec384976a39c6419588180d121adda",
+      "current_question_sha256": "7e8ae4f4b3952f90b723cc302d35b4023679fadc344b7614aeb5549f278344b6",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 225,
@@ -6019,10 +6131,18 @@
         "assessment": "show lldp及额外命令参考图均在；每项两条全局命令被压一行。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "5e2b700c3a5fd65fd652a60427004977bdb10cd85d02f235bae57fc80e0e1117",
+      "current_question_sha256": "542ec225e5bdb33fedce767b11ff3df0db7060f327b77f61bcfeeec41487580c",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 226,
@@ -6042,10 +6162,18 @@
         "assessment": "Data50/Voice51与双端电话下挂PC图齐；三条命令选项压平，mis疑似mls笔误需核源。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "281892f080d215b0f2249cc8a594508e90ded70b5266d1cc608d296bdbca76f0",
+      "current_question_sha256": "3a0c3a453d73c3c44d3eecbe1386a649576e062a077f8f75524e03aa7aebf358",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
     },
     {
       "id": 227,
@@ -6065,10 +6193,18 @@
         "assessment": "两边run与两PC图齐；所有双交换机配置序列压平。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "1134397b28ed563dc4fd07fe409db271a10821e600a977d742e94e678a1e71ff",
+      "current_question_sha256": "4918f1d741bad076f58232d509a30fb5b6803605d04e026a3fd75afb9fd37fc0",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
     },
     {
       "id": 228,
@@ -6088,10 +6224,18 @@
         "assessment": "SW1 access2、替换箭头及未来10主机图完整；多命令选项压平，A还重复相同行，非缺图。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "b0e930d33eef23d97d39cc8feb6065b53f15a67c25d3293248800a0db8c7cbd7",
+      "current_question_sha256": "3062513f1f4fb72b28cf603a29b72747137d56ccf51cdbae93846f3a673fc478",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     },
     {
       "id": 229,
@@ -6111,16 +6255,24 @@
         "assessment": "WLC带外管理概念题无代码/图片需求。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "32b240ee0477981c09742ddce769f793a2b58d9b404c48e1904bff1de2a8f3d3",
+      "current_question_sha256": "7659da45f8dda5557fe387bdead4601b2d200ae14c19ebe41153fe7662e13d9e",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 230,
       "original_qid": "Q312",
       "current_answer": [
-        "B"
+        "D"
       ],
       "status": "问题",
       "assessment": "已看PMF Required、WPA/WPA2及各AKM均未勾。普通WPA2-PSK意图更接近D；B加CCKM/WPA却不处理PMF Required及对应AKM，不能以未经验证“历史官方B”维持。解析称D是唯一现代可用组合、PSK必须关PMF也错：PMF可与PSK配合，WPA3更要求PMF；FT-PSK本身同样基于预共享密钥，不是不能密码认证。应明确控制器版本/客户端兼容条件，再统一题干、选项与答案，删除虚构评分论证。[X14]",
@@ -6134,10 +6286,18 @@
         "assessment": "WLC原截图完整，可见PMF Required及各WPA/AKM勾选状态；多项GUI操作不是CLI代码块缺失。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "c9f988e767852d267546c50865554a116c116073c8c1bcf52a025f1b6b5843a6",
+      "current_question_sha256": "f96447daf417ebd9a69f00131e5014888b70a163733b72773ea0b4b9b2269782",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     },
     {
       "id": 231,
@@ -6157,10 +6317,18 @@
         "assessment": "AP架构选项不依图；解析对应另一组选项是内容错配。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "26c823a5fc9de61d12c74f8926f1a59ce1d3c686659a6dba08ab650780889b7b",
+      "current_question_sha256": "72eaa6786294fd7ecbee1ab18410bd4629e879a534a00b1fedfaed1f55028127",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "C"
+        ]
+      }
     },
     {
       "id": 232,
@@ -6180,10 +6348,18 @@
         "assessment": "PortFast技术分类无图依赖。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "093ebcd11f57ca3ce3a29b40ce95a1b6733622e313b2ea51ce060680150833b8",
+      "current_question_sha256": "cd4f78547417c490d213d0f605ee64a06bd3286ec001e49803aafb786d86f04c",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
     },
     {
       "id": 233,
@@ -6203,10 +6379,18 @@
         "assessment": "单条命令已带配置模式提示，未缺代码。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "339272eef3d3e31ee138b2e9f14a993ae2468214bf9afe4d325093f125dab0be",
+      "current_question_sha256": "4dea88e20869c6c9cb5a5afb1c9a257e7b61cb5fc290ac3d08b6b2a774f14ef9",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
     },
     {
       "id": 234,
@@ -6226,10 +6410,18 @@
         "assessment": "场景缺明确egress条件，但不一定需要图/代码；可直接修题干。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "a3192b81736a4bbf1dd90be7980d7f49c94784c15adead8e9fb6e8863a60b913",
+      "current_question_sha256": "baca14d5d0695198698eef269371d9bcfc07f75d71fbd436e91c281bbd85d114",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "C"
+        ]
+      }
     },
     {
       "id": 235,
@@ -6249,10 +6441,18 @@
         "assessment": "VLAN50四主机拓扑和完整三条MAC表均在；组播源地址是图内技术数据错误，不误报缺表。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "1bc8080f29238defb76b8a744e07477afa363d18d03c66c3bbaa6c759c8980dc",
+      "current_question_sha256": "929d11de3a5ec2b6fec8cf73aa0a26e15970d772ed73dc720290d1a045a9a436",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "C"
+        ]
+      }
     },
     {
       "id": 236,
@@ -6295,10 +6495,18 @@
         "assessment": "两端Po1/成员access2图在；源选项有换行，但普通选项容器折叠两设备命令。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "71dce733d83a5f8aa02261e74aebaa77d3794ef7a6ac9e2a799d0842282effb9",
+      "current_question_sha256": "cd04b62016ffc91d965f0f2c5ec43af38995bc440f0e5f0c960193190e98db01",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
     },
     {
       "id": 238,
@@ -6318,10 +6526,18 @@
         "assessment": "VLAN101拓扑与完整MAC表在，Gi1/4缺项可见；PC2组播MAC问题不等于缺图。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "21ea687d0f2fd21ddca9b466368e48614ddea75b67c20d584a3814135f9c975e",
+      "current_question_sha256": "99cef81445821bb3b0732cbfaf8f6f1a5a52cce7472116700b47c927a566be9f",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "C"
+        ]
+      }
     },
     {
       "id": 239,
@@ -6341,10 +6557,18 @@
         "assessment": "原Fa0/1 access15和Voice10图完整；源选项有三/四行但显示折叠，解析vlan-id模板被吞；正确A解释有围栏仍不能替代选项。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "cf9a83dbe234fa7939df581c7f30de2b5b765038d0c1163871da70c25beb2086",
+      "current_question_sha256": "df448a1570a36565c349a6f28210baffee3afe6246bc860128698d3a305be5af",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
     },
     {
       "id": 240,
@@ -6364,10 +6588,4858 @@
         "assessment": "四BID数值与DMZ拓扑在，SW4的系统ID不一致为内容错误，没有缺关键图。",
         "report": "presentation-0201-0240.md"
       },
-      "current_question_sha256": "8be909a92be93479de29a575a96773b947037a09cd0947d11af32d99f49c867c",
+      "current_question_sha256": "b86ff1820ca4c6fde2f6a49ecd9a7474067cbad27edcfb4cae06de37a06198cd",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0221-0240.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 241,
+      "original_qid": "Q323",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "通过",
+      "assessment": "已直接查看图：A/B/C有VLAN2动态表项，D未出现，四端口星形拓扑无环。A的源地址学习/刷新与未知D目的泛洪解释正确；A限本图同VLAN可转发的Fa0/2–4，非跨VLAN泛洪。B单次泛洪不等于风暴，C无保护触发条件，D混淆帧与CAM映射。保留原文。",
+      "question_sha256": "5ba36ed67f7bc88129faba227894e1fcd88a5a463e47ad7ed56fdec76f5677b1",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "MAC表与四主机图完整可读，D未学习是表中真实缺项；非缺关键图。无多行配置。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "5ba36ed67f7bc88129faba227894e1fcd88a5a463e47ad7ed56fdec76f5677b1"
+    },
+    {
+      "id": 242,
+      "original_qid": "Q324",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看四BID：24586最低，答案B正确；SW4给定64000的低12位2560与其余VLAN10不一致，不能作为同实例有效字段。解析除通用规则外未用实际数值比较，逐项均为模板。改编有效VLAN10练习，将SW4字段明确改为61450并重绘，不冒称原始值恢复；逐项写数值。 [S1]",
+      "question_sha256": "a00d670d372240c48bd1e7ca601e3db301debd0a66c3afdb86de3785c3fe00dd",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "四交换机拓扑与BID表都在，非法同实例优先级属于数据错误，未误报缺图。新图另作视觉核验。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "376f93b4050c045f6645fa9370fe01957d50a5f53cbff4f0ac566b3c73978030",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 243,
+      "original_qid": "Q325",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "on适用于题意中的AireOS静态LAG，但题干未指定平台；不能推广所有WLC。解析把passive也说成不断主动发协商、又断言全机必断网。限定AireOS静态LAG，分别说明active/passive/desirable与on。已有内联命令经全局renderer转义，不另判缺代码。 [S2]",
+      "question_sha256": "de8b24f6092c55103812fe300b05a1c3bbf9cb3de1e0fa6016366ec6c1ff6e96",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "单条channel-group内联命令完整；全局转义已修复参数，不需多行块。平台条件问题另列主报告。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "d843e340d353d805e8074c5dad4cfe1b67de3f0dbcc2ebeea98974a026037667",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 244,
+      "original_qid": "Q326",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看VLAN20图：24596<28692<32788<64000，A的排序意图明确；SW4低12位不等于20。解析凭优先级猜已配root primary/secondary，且误述SW4默认值。改编SW4=61460有效练习、重绘BID图；只按BID选举，不虚构命令。 [S1]",
+      "question_sha256": "9e1d7e0bdd91273d3fb7c14c594e9cf06f6d60deaa78b0a22ba5395b1fdf597a",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "VLAN20拓扑与四BID完整，64000数据错误另列；重绘有效示例而非冒称恢复原图。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "8d86484f5c15fc484c7ac9f0e4ecfbab9f063bb65275df84ec4dcadccf5d9d4b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 245,
+      "original_qid": "Q327",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D/tagging正确，但解析将加标签写成帧离开access端口进入trunk，混淆交换机入向access与出向trunk；还保证完美安全隔离。明确在trunk出向发送时加802.1Q标签、默认native例外和FCS重算，VLAN划分不是完整安全保障。A不是本题封装名，B仅编号，C为IP QoS。 [S3]",
+      "question_sha256": "2805b205b39690fcec0725fef2836422ffa41af46ff212b76158493143fa488b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "802.1Q机制文字题无必需图或CLI；未按题材强行添加图片。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "9b89134444984d306b134ceca9762f17c4eaabb34c721e7fdef3757b4e5d5428",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 246,
+      "original_qid": "Q328",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B是无线网络名称，但题干与解析将SSID当唯一标识，忽略不同网络可同名/多AP共享SSID；SSID与BSSID需区别，WLAN ID范围也不可跨平台一概512。改问客户端选择的配置网络名，删除唯一性与范围绝对论。 [S4]",
+      "question_sha256": "dd79a3ee72898a1ca9e791170306ab24aeeccbd42cf5b8c309e319fd5ba50029",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "SSID/BSSID术语题无展示引用或代码块需求。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "465ea1b653477f346f934351c9ae09b4f537199b7261f60cc33c6f8ca4b8e443",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 247,
+      "original_qid": "Q329",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "歧义",
+      "assessment": "仅说第三方ISP无法确定下一步：本地/对端LLDP全局与接口状态均缺。解析又假设所有第三方不支持CDP、工程师不能配置ISP，均非题给证据。补对端已就绪、本地接口tx/rx允许但全局未启用，A才唯一；B不能启LLDP，C在既定条件已满足，D与发现无关。 [S5]",
+      "question_sha256": "9ff486dce8f1e0cc7dc10381a8b7e033abc78944daf47514b7ede5bf0ed7e607",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "lldp run/no cdp enable为单条内联，完整。缺配置前提为语义歧义，可用题干文字补足。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "551d41db2cddd1711f846d91e2070cbde494620b4ca70ad52058040bebfdce74",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 248,
+      "original_qid": "Q331",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D是静态MAC手工配置，并非动态learning功能；其他选项都不正确，原题无直接切题答案。将题干改为MAC表构建/管理的正确陈述以保留D。删静态表自动防源MAC伪造、永久保存running-config等错误保证；与port-security区分，并说明保存配置。 [S6]",
+      "question_sha256": "2c1c010a996d5a7cd419e048aa398a86e693c4dff0246e96a497355bb021c660",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "静态MAC单行模板命令源存在；实际formatter已支持尖括号转义，不是当前展示丢参。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "6cb0ae0eaa2ab3718f08aa0a7399b3d95a652548349cb89e28a9a3b3e5ac6b25",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 249,
+      "original_qid": "Q332",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D泛洪方向正确，但unchanged和解析完全不变/绝不重算FCS过度：出向access/trunk标签可不同。限定正常有效未知单播且无额外抑制，D改为同VLAN其余可转发端口；MAC/载荷保持而tag/FCS按出向变化。A不是未知目的的处理，不能说所有设备永不stomp错误CRC。 [S3][S6]",
+      "question_sha256": "af2a0d9866654238c5294d1e3f5660265dc606df535f15238e0d247688195a50",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "未知单播流程可用现有文字完整表达，无图/CLI引用缺失。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "1d5669b32fc2161475d88c82477dca58e0ef341e86dcc18bb74bb18a01778fd6",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 250,
+      "original_qid": "Q333",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B是常见IOS Catalyst默认动态老化300秒；解析把拔线和静默同为必等300秒，忽略链路down/拓扑事件清表；600/900是可配置值而非虚构。限定平台、动态项、链路保持up且无拓扑事件，解释从最后源学习刷新起计。 [S6]",
+      "question_sha256": "268f4098d61975ef4e26a31b613869e435a9584380d5f5acad1650daf97f4970",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0241-0250.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "aging-time单条内联命令存在；renderer保护参数。无多行压平。",
+        "report": "presentation-0241-0250.md"
+      },
+      "current_question_sha256": "b1dfda88c9ced3796e2f0913cf4912ad90c2f9cf070200e00775fd8effb89fa2",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0241-0250.json",
+        "verification": "fix-verification-0201-0250.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 251,
+      "original_qid": "Q334",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "歧义",
+      "assessment": "原题泛称减少多类型设备关联时间，未给客户端k/v能力，B与D对应不同优化环节，不能证明B唯一；解析把Disassociation Imminent说成保证全设备无缝漫游，并把D的真实功能排除。明确目标为已支持802.11k双频终端的扫描缩短/双频邻居报告，答案改D；解释v到期可断连而非通用保证。 [S1][S2]",
+      "question_sha256": "236f9e77d8daaefc6859109bc232a8667aaaad08256d1454bab80697f25a1b7c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念/配置功能题无必需配图或多行CLI引用。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "414e7ca58dbb1101d1af5d40bde85dcc953874f3c8092b3d09586f595d7081ff",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 252,
+      "original_qid": "Q337",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D/Friendly方向正确，但解析保证所有Syslog/SNMP报警绝对停止，未区分Friendly的Alert/Internal/External及通知策略。明确AireOS已确认的内部合法AP，Friendly/Internal；不能把所有未纳管设备一概判恶意，也不应为停止误报启用containment。 [S3]",
+      "question_sha256": "46e4d023af8a1266fed31aa7439891d04c08a277a6c4d7e6d3b619c9f9b9c6f6",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念/配置功能题无必需配图或多行CLI引用。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "123f4686f3a267fcdf594dc82b2140b3bb8081d515754d581e6f2519ac295b12",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 253,
+      "original_qid": "Q338",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C正确，但未开LAG并非所有逻辑接口完全不能备端口；AireOS动态接口可有primary/secondary。解析还保证毫秒级无损、单流带宽无限增加，均非LAG必然性质。改为成员冗余与聚合吞吐、哈希分流，区别SSO及加密。 [S4]",
+      "question_sha256": "96f472eb96c319880de38df3ff92258995ba56ccfa63ab52338e3da6f14de591",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念/配置功能题无必需配图或多行CLI引用。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "4d2bcca7529426882f2394c5bf426e42e1cb3036f4b84f4a8368aff668fcb09f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 254,
+      "original_qid": "Q339",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "经典AireOS分离接口流程中Discovery Request先到management，随后向响应通告的AP-manager发送Join Request；原题指定AP-manager却无Join Request选项，D的解释将两接口混为一谈。题干改为management上的发现请求，保留D，并解释可合并接口但不能混用阶段。 [S5]",
+      "question_sha256": "36033d96ceedc2fb781ee17a9b79cf85e85ea601d6d4244d0c633b3f783cb47c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念/配置功能题无必需配图或多行CLI引用。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "76b3ee630fe60e49cfebf6494e38eb6ddeb56a4131a6bf9b265e419920aee475",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 255,
+      "original_qid": "Q340",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看GUI：服务器Enabled，Network User/Management未选，C为全局网络认证用途选择。但官方说明WLAN显式指定AAA服务器可不勾全局Network User，原解析“绝不会”错误。题干补未在WLAN单独选服务器、使用全局列表；C保留并明确例外。 [S6]",
+      "question_sha256": "94cc0314b49f4192fe40cd5ec7679a5df9f2190462b3dae645947b99a511c43f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "RADIUS GUI图完整可读，Enabled和未选Network User均已直接确认。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "a212cacec4d30db0af240199bbe0c7e3198f26bc8b4dd4d2f71d6de9cee240ea",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 256,
+      "original_qid": "Q341",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "通过",
+      "assessment": "C/Allow AAA Override正确，对应依据RADIUS身份授权覆盖WLAN默认VLAN。解析列64=13、65=6、81组标识并区分LAG、RRM和MIC AP授权，足以解释选项；ISE采用AD是工作流例，不将其当所有部署的强制依赖。完整部署仍需RADIUS/目标VLAN可用。 [S7]",
+      "question_sha256": "bbde138dcdf58560ca2bb6ece264cc1c2bd00e4adab0993c3717ee716ffc4c0c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念/配置功能题无必需配图或多行CLI引用。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "bbde138dcdf58560ca2bb6ece264cc1c2bd00e4adab0993c3717ee716ffc4c0c"
+    },
+    {
+      "id": 257,
+      "original_qid": "Q342",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "通过",
+      "assessment": "已看路由表：D /27 [90/2888597172]、O /19 [110/292094]、R /24 [120/2]均包含172.16.32.1，/27最长，下一跳20.1.1.1。A正确，AD入表与跨协议metric不能直接比的区分成立。独立地址计算另留证据。",
+      "question_sha256": "d4f2cac701b1235b1066e6329683a17da36b05ef385d21331b8f7f845e695d86",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "三条路由CLI图片完整，前缀/AD/metric/下一跳可读，无文本配置块缺失。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "d4f2cac701b1235b1066e6329683a17da36b05ef385d21331b8f7f845e695d86"
+    },
+    {
+      "id": 258,
+      "original_qid": "Q343",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看三路由器和RIB：R1仅直连10.10.10/24，R3已具返回10.10.10/24的静态路由，C补R1前往20.20.20/24 via10.10.10.2正确。但末尾声称静态下一跳必须直连、跨跳不能成立，忽略可递归解析下一跳。重写为本图邻接R2最直接，保留递归机制限定。 [S8]",
+      "question_sha256": "7c7d985b0f789d796b7ea8b3d6517840fd9c065c10df86577ae05afe16d41cd1",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "三路由器拓扑与全部路由表均在图，返回路由可见；单行配置命令完整。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "7fef6cfc476c21ee02522b9811c32da64b116a3a8cb1c1485829390030b49cef",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 259,
+      "original_qid": "Q344",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A/默认带宽+延迟正确，但解析将MTU列入度量参数、通式分母括号错误且LaTeX的left已损成≤ft。删错误通式，给经典默认K值、明确带宽最小/延迟累加与单位，纯文本公式保留，MTU与hop count不计复合度量。 [S9]",
+      "question_sha256": "f85bd89b04e4f7f6a0e2b3f002d1b3eea7d6f1783a0b6c987ea983d76ee3e5cb",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "原LaTeX通式left损为≤ft，且分数括号错误；用完整纯文本代码公式替换。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "8ce9d23c471494e0a4238bfcb1b72eee91a10f136db4c5cbea22230619842389",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 260,
+      "original_qid": "Q345",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C默认路由正确，但四组CLI源全压成一行，需恢复模式/命令分行。补192.168.1.1可解析且转发开启的前提，区别default-gateway；模板参数全局renderer已保护，不把已修问题再算当前丢失。 [S8]",
+      "question_sha256": "52006b7de9a58463ca405dac4f81e9c10ad35aec6b4be8b700eb82707c8bedfa",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四选项的config t、ip routing、ip route/default-gateway多条命令压一行，恢复换行。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "5761e0859490cd2e37eb8703b1cb527cf61795c6de557cb73efd4ba8352da30c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 261,
+      "original_qid": "Q346",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B和四项范围计算正确，但解析把FIB/RIB一并称硬件转发表，混淆控制平面的路由信息库与数据平面转发表。改为在已安装有效路由中做最长匹配，并明确RIB/FIB角色；仍保留B及四个完整单行ip route。",
+      "question_sha256": "dbd6a273bbb371d13e8a92f17c1430fd574c8fea55502f5ba3355f9813dbf44e",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "四条ip route各自为完整单行，保留即可。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "a7f1c311f7328e8fead2c23a68782e1b948cd93f42b5a6797f61bed34b30b024",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 262,
+      "original_qid": "Q347",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "通过",
+      "assessment": "已看图三条前缀：EIGRP /24和RIP /27包含192.168.12.16，OSPF .0/28只到.15。选D/RIP；解析明确先匹配再比长度，不能按最小AD或三个不同前缀ECMP。",
+      "question_sha256": "51d255dfc9bee2c8d2d12e5faebd9543d11d5fa495424b628f665bdc5f7713f8",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "三条候选前缀原图直接查看，表格够用无缺关键CLI。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "51d255dfc9bee2c8d2d12e5faebd9543d11d5fa495424b628f665bdc5f7713f8"
+    },
+    {
+      "id": 263,
+      "original_qid": "Q349",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看四条show ip route：i L1写192.168.10.0/13带host bits，不是IOS规范网络前缀，解释照抄。改编为规范192.168.0.0/13并重绘完整路由表，仍覆盖目标.10.16且RIP /27最长，B不变。不要将原错误行当真实IOS规范输出。",
+      "question_sha256": "5dbb961435c3cb7479d765d37e4b9e9066528b8da58e64f7e43c981f40687bd7",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "四条完整路由表图在；/13非规范地址属于内容错误，新图另作预览核验。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "761b490328b96a8fd35bb3e9423d6354d6e08075272dbee3ede7e1dbf3e54d38",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 264,
+      "original_qid": "Q351",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看图，.165命中OSPF .160/29 via10.10.10.5 Gi0/1，对应Router3，B正确。图同时有S*默认，原解析“唯一匹配”需区分更明细与默认：默认也匹配，只因/29更长而落选。改写逐项范围和出接口证据。",
+      "question_sha256": "99101881e5d758406949532f70a11c01f6102c7595c154f14f2fdfa48c38020b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "拓扑、出接口和五条OSPF明细及默认路由都完整可读。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "6b6f5003957dbd6bab7b9997cf81d2df9d3d88dc093e842b71d5e8cd534fa69e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 265,
+      "original_qid": "Q352",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C/同10.10.10.0/24跨协议比AD正确。解析称Cost为OSPF私有、把OSPF DR RID与下一跳IP大小混用，均非准确术语。重写只比较同前缀AD，其他前缀不靠短掩码入表，平局/有效性不虚构。 [S10]",
+      "question_sha256": "b89f1259e5aa8f786287649a099ea500d7fda5e4a164c4ed5d3ddaad9bfa6acc",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念/配置功能题无必需配图或多行CLI引用。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "d319c7cf2b200d72b5ca9267ec13117106b89480f9cb2706b288a7c7b7f3bb03",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 266,
+      "original_qid": "Q354",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看R1/SW1/SW2：B子接口+dot1q20正确，但CLI源全部压平且B/C提示符错误应config-subif。图SW1 E0/1仅allowed vlan10，若声称配置后VLAN20端到端畅通则错误。明确仅补R1本地子接口，列出后续trunk需放行20；物理口多IP并非协议绝对禁止。 [S11]",
+      "question_sha256": "589f58c57367a42669dfbb78d3475c8811f251f75ee27d76b3d5d76524b9087e",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "R1与两交换机配置图完整；四CLI选项全压平，恢复分行与子接口提示符。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "34dbda8c08888039dcaac12d7907655a701a33d9b0ddcd8b83759357935cfc6e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 267,
+      "original_qid": "Q355",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看brief：Loopback0=172.16.15.10 up/up，192.168.0.1是Gi1/0而非loopback。C在首次自动选择时正确，但仅brief不足以排除手工RID/旧运行RID，原解析只有模板。补新启OSPF且无router-id、接口均已存在，按具体接口逐项解释并说明不自动抢占。 [S12]",
+      "question_sha256": "569c87f6e35771fed6402dbe47ca1393ad4cfd4fefa8222c6f6acfc3f96ce9d2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "完整brief的接口地址/status/protocol在图，缺OSPF首次启动前提属语义问题。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "ce80a7ff44b889b7a17e0b6bdb2839bcc955b9073060c6f20a8d2c29bfffeb06",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 268,
+      "original_qid": "Q357",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看配置：Router1 hello5，Router2默认Ethernet hello10，C正确。原解析凭hello5断言dead自动变20、又把MTU列成Hello内匹配参数；应只用已证明Hello不等，Dead独立核验，MTU属后续数据库交换。process1000/1001本地有效，RID1.1.1.1/2.2.2.2应不同。 [S13]",
+      "question_sha256": "6ae905a74bd36561caf172f3021eaeb76de07971e0a7718783aacb9991c2e818",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两端完整OSPF相关命令在图，Hello5与未改Hello清楚；不需要猜隐藏Dead字段。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "0431cd2e53db80b37b94a3ec0779ba935725bedeeeb6bfee457aae02fe44f971",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 269,
+      "original_qid": "Q358",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看B*0/0 [20/0] via10.10.10.18，D正确，确为默认非静态。解析一处将network route写/1–/30、结尾写/1–/31自相矛盾，/31可为网络前缀。统一分类、默认只兜底不保证全部Internet无条件走默认。",
+      "question_sha256": "64481bd9c2033b1f1d9be1e83afb65b16267726df0262c37547b8a7ba8afa5a9",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "Internet拓扑和B*0/0整行在，主机/网络分类错属于内容非缺图。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "15940b8ca60ac7e1699b3ae2f7299796c698efac029c498c9bd7301ee53ee7ac",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 270,
+      "original_qid": "Q359",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看默认S* via10.10.11.2 Fa2/0与MPLS B209.165.200.224/27，B正确。解析称边缘不可能有完整路由表、所有Internet必经默认均过度；A .0/27也不等于图.224/27。补目的198.51.100.10、按本图查表，指出更明细覆盖时会优先及A不一致。",
+      "question_sha256": "bfc05c7b273993f78cad273d6bc429e51692b6be0696b8917d507ff6c5e702ec",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0251-0270.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两设备路由表、三出口拓扑均在；A前缀差异与过度解释属于内容。",
+        "report": "presentation-0251-0270.md"
+      },
+      "current_question_sha256": "1abad663df4fd7917ceccc73d023fb278b356cfec686a963504eb070cb7c9875",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0251-0270.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 271,
+      "original_qid": "Q360",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C意图为默认OSPF cost，但单个出口除法不等于整条路径累计cost；接口bandwidth配置值也非实时实际吞吐。未限定同类OSPF路径，不能把所有类型一律只比cost。补Cisco默认、同前缀intra-area路径，C写接口cost累加；删协议永远追求最高带宽的保证。 [S1][S2]",
+      "question_sha256": "310236cc59743ce2f0b262e9232e306b6d6c5b854ef4d1970904ef21e0d73bac",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题无需补图或多行配置；无代码引用缺失。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "0fea6948947ab5340bbb8f2c197c4a913aafb36e4e9e720d26d76d32b1c5e180",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 272,
+      "original_qid": "Q361",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D/备份AD更高正确；原解析保证主链路物理故障后备份立刻接管，忽略主路由可能未撤回及备份下一跳有效性，AD255还不入表。明确同一完整前缀/主路由撤回/备份仍可用；解释高于主但小于255和必要时追踪，不承诺零延迟。 [S3]",
+      "question_sha256": "aa35a627d775919cb87cbc59067be5242ecbd7e792514f56f337afc761ce970b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题无需补图或多行配置；无代码引用缺失。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "41567d0242ec5755c71fb17a299e35734f8ba62e31dbd8152bff35f2d6e0fd6c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 273,
+      "original_qid": "Q362",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看图Hello10/Dead40、Neighbor Count3/Adjacent3，C正确。原解释把point-to-multipoint也算默认10/40、从邻居3推出整个OSPF域仅4台，且残留多次转义amp实体及损坏URL。重写局部链路证据；DR/BDR不单独排除NBMA，不能泛称见DR必broadcast。 [S2][S4]",
+      "question_sha256": "d1a43e770cefa511c4d7e581889620be09dac5ee21cfa9a227b5662d6a96ffec",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "已有接口输出完整可读；解析残留amp;amp;amp实体和拆坏URL，重写清理。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "b43dbe839d78760322389c86215fac72725df76889c79a0b0a003ca8f5af93a5",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 274,
+      "original_qid": "Q363",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C默认Ethernet broadcast正确，开头一句有效但后续四选项全为无差别模板，未说明物理两节点也不自动变point-to-point、另外类型与介质/显式覆盖的区别。用简洁具体机制替换模板，限定Cisco IOS普通routed GigabitEthernet默认。 [S4]",
+      "question_sha256": "aa18d28fea26008f8b9c93461981510ec7325e064e37d9603f7134764a35029e",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题无需补图或多行配置；无代码引用缺失。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "1899832e251d497cade9925343e168ed4da634976361f7bfdc3d39e1dab180b2",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 275,
+      "original_qid": "Q364",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C正确意图为同前缀跨协议AD，但同destination未明确相同掩码；逐项模板也没说明DUAL/EIGRP、metric与RIP hop count的区别。补完整同前缀且有效候选，重写入表与LPM阶段区别。 [S5]",
+      "question_sha256": "72e7f6cf8e870838f070b4be3c21f15452cbb7643fc15961fe7931b07f5f2343",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题无需补图或多行配置；无代码引用缺失。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "7b21062796d950487a30d1e09d1df1b50a7eceeadeafc66512442756f052f20f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 276,
+      "original_qid": "Q365",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "歧义",
+      "assessment": "B/90仅适用于默认内部EIGRP；若EIGRP是外部重分发AD170，则OSPF110胜。原题未限定internal/default AD，解析将全部EIGRP都说90。补相同完整前缀、内部EIGRP与默认AD，再解释A20=eBGP/C110=OSPF/D115=IS-IS。 [S5]",
+      "question_sha256": "7f2c6def42edc5e8fd0139ee474b685258495df316009c59686aebf1e57814cc",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题无需补图或多行配置；无代码引用缺失。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "bbb02bdaf0537678f1a73f5681da5423b2e61a15066f8b15105a8eb8fce3d720",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 277,
+      "original_qid": "Q366",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看图现O10.10.13.0/25 [110/2] via10.10.10.1 Gi0/0，若新eBGP同前缀有效且默认AD20，应该新路经Gi0/1入表，C而非标D；原英文也支持C但模板反说D。原图last-resort头10.10.11.2又与底行静态via10.10.10.1矛盾。重绘明确相关初始路由/拓扑的练习图，答案改C，不推断回程不对称。 [S5]",
+      "question_sha256": "40d0ce48d37aa7b022dbb2fc78bd9295615f8746ba1fac410b7ad5de86aaddb3",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原拓扑及RIB都在；网关头与默认行矛盾属内容错误，新图改编并预览，不误报缺图。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "499945b100cf149f345a78914573f031bf2fb8ada084e1998c4eaab7bf1d2685",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 278,
+      "original_qid": "Q368",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看图：只有O10.10.13.0/25经Fa0/1与Fa0/2等价路径，覆盖.0–.127；目标.128/25不在其中，且无last-resort。D方向正确，但逐项解释全模板、未解释已显示的ECMP为何不适用于另一半子网。保留D，具体写无匹配/无默认、ECMP只针对已有前缀。",
+      "question_sha256": "001d54d086c2552e482436d04dac56f68051cb44ab1a60089cf97711d94e0c2f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "双链路和Router2四子网RIB完整；已有两个下一跳与无默认可直接核验。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "c5eebd9c2f73bf681f0e88ea0ed30a5b6677a9cc27885201bc7716bb4d0b5bfc",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 279,
+      "original_qid": "Q371",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B的共享VIP/虚拟MAC正确，v1/v2模式也正确；但解析说Standby必须通过抢占机制接管失效Active，混淆故障接管与高优先级夺回，且普通泛洪不必然广播风暴。明确hold超时等触发接管不以preempt为前提，preempt用于现Active仍在时主动取代。 [S6]",
+      "question_sha256": "9fccaa572f0e6826ed6cba3aab4ac600c92527ca1a61f965419fb4c587e8911f",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "虚拟MAC模式为完整单行内联，无参数丢失；preempt问题属于机制。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "79d63891d55d7532abfe6f4595bc4013a6aa3789509051289cbe3e585fb4b9e9",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 280,
+      "original_qid": "Q372",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看R1 Hello10/Dead40、R2 Hello20/Dead80，Area1/Broadcast/priority1同类，RID不同正常，A意图需同时匹配Hello和Dead。原问题要求只邻居不邻接，与两节点可选DR/BDR后形成Full不符；单改Hello也不证明Dead一致。改问修复显示的阻碍，A明确匹配两计时器，删无证据官方标准答案/历史背景说法。 [S2]",
+      "question_sha256": "37f9576f4ddbb6b84479152ee72998e3b2ebd22dd1c713ea337eca8d3d97c704",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0271-0280.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两端show ip ospf interface图完整，计时器/area/network/RID/priority可读；不需猜未显示输出。",
+        "report": "presentation-0271-0280.md"
+      },
+      "current_question_sha256": "e3c19e2da40feab56e20319a37f42d9d604842255dbc2f30fcd13f17b0fdb38a",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0271-0280.json",
+        "verification": "fix-verification-0251-0280.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 281,
+      "original_qid": "Q373",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A/preempt正确，但原解析称立即且保证，未解释重启延迟/有效优先级与已存Active；B/D的standby10 version语法也不对。限定兼容已配置组10、恢复后有效优先级更高，说明优先级本身不强制抢占。 [S1]",
+      "question_sha256": "3aa3a9b585a9772b152f13ca6d62592eae6a434570d3e8ba15758a535d8e1958",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单条命令完整，无必需图片或多行CLI缺失。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "6b2361db3ebf6c0d57e830134d3ef972ee35cc9ed12dcd6fbdc6aeac5d5e68e6",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 282,
+      "original_qid": "Q374",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "歧义",
+      "assessment": "已看答案图，show standby含Priority95(configured120)，不是缺图。但未限定IOS时NX-OS的show hsrp也可查询，原解析纯模板没读出图字段。限定IOS/IOS XE，保留D，解释有效95与配置120及其他命令范围。 [S2]",
+      "question_sha256": "1599bd6f372872434bdd4dd7f2afd7bf13a7b6f6ace418f134060d62374904ca",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "答案配图存在并直接查看，Priority95(configured120)可辨；题干无需图即可答命令，不误报缺图。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "62d32fc08b8ececc6ce876110ccdc85b304ddf5cbd72e0c2461efc247b5c0447",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 283,
+      "original_qid": "Q375",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看图R1=192.168.201.1、R2=.2、远网192.168.202/24；B末尾AD5非默认1，正确。原解析只说换数字，逐项未说明C/D把distance放错位置、A仍默认。重写具体参数意义，非所有非1值均一定有效/可作所需备份。 [S3]",
+      "question_sha256": "a38e28e653ad3b0523e7f5578717a361bb789f15063defd8dd2a83b4fdd7b227",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两路由器地址拓扑齐全，四选项各为一条ip route，无需人为拆行。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "993e26da081190c25338366d6643bb6cc0d5c0793709c4b9feb4c53084f726e6",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 284,
+      "original_qid": "Q377",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A重启受影响OSPF进程正确；原解析“完全不影响数据转发/其他协议”与几秒保证错误，另有无证据98%投票及所谓官方纠错说法。明确IOS已有进程采用旧RID，新router-id待重启，支持指定进程号以缩小范围；邻接/路由会收敛，可能影响业务。 [S4]",
+      "question_sha256": "b1ac2beb2d83923c94b327bf384754f097c504eee0ef400b5e04ccb469b03773",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单条命令完整，无必需图片或多行CLI缺失。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "86ca43e2f9b0e260e508c02fa0da70e79facc232f1a581715152ee43a6f72972",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 285,
+      "original_qid": "Q378",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D用于EIGRP IPv6内部事件日志正确，但原解析保证所有平台微秒时间戳及完整认证/错误记录，并称通用首选工具；官方命令说明是内部事件缓冲区，errmsg等细节依实现。改问内部event log，区分邻居/拓扑/计数，不承诺全量历史。 [S5]",
+      "question_sha256": "9df6f1517438dc232b929a41fb252a7718c3bfdc4e06f3d898131b8c88e8f647",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单条命令完整，无必需图片或多行CLI缺失。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "a8c8f3c8ea5f4ddf185456bc325a48905837fa6bd928f916de30d88d630cc821",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 286,
+      "original_qid": "Q379",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看共享10.0.4/24、R3=.3连接10.0.3/24；题干把另一道Choose two拼入，type=Multiple Choice但只答D。移除串题改Single Choice，D保留。A/B不仅next-hop不同且掩码/CLI错误；不能笼统声称R2永远不能再转给R3，也须区分R1去程与完整回程。 [S3]",
+      "question_sha256": "36b482f87193e9a8530ccf0a244428251688436dac91b3c2073be309240f9574",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "共享子网与三个LAN原图齐全，串题及题型为内容问题，非缺图。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "5d8520ec7decbab23fc7164234e232f8b828fad2eb7e751cd47ed9cd97aa173b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 287,
+      "original_qid": "Q386",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看原RIB，目标172.16.1.1不在直连.1.128/25，走O*E2默认via192.168.14.4，A正确。但解析将172.16/12私网中的/24说成C类、第二/第三字节自混。改为准确范围/默认解析，Loopback1主机项前提明确，删除分类误述。",
+      "question_sha256": "7dfbecb65db3a6f6bd316f1d63723cbf4d3fe468179b00fa48fd7fef8c8ea8a5",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "完整相关RIB和默认网关可读；省略字段的host项在题干明确，不伪造接口截图。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "5b6a51ce43015a8748fadc44056f5d273f03c13e4af32bc085de7309af64ba8f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 288,
+      "original_qid": "Q387",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "通过",
+      "assessment": "已看当前题图，不依赖别题：192.168.10.1/32行首D，[90/52778]经192.168.12.2。D/EIGRP与图例一致，/32优于同图/24、/27、/16及默认。解析逐项RIP=R、OSPF=O、历史IGRP=I正确，无需修改。",
+      "question_sha256": "ba4a12342f6c07d590f7bfb5cf2ed63e766d9d2126f9f979f25dbb65d551e1c6",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "本题自带完整代码图例与/32行，可独立判断，不依赖相邻题。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "ba4a12342f6c07d590f7bfb5cf2ed63e766d9d2126f9f979f25dbb65d551e1c6"
+    },
+    {
+      "id": 289,
+      "original_qid": "Q388",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看Loopback0 .33/27、BGP100、邻居192.168.12.2 remote-as100；A为所需.32/27 network命令。原解析将mask关键字泛化为所有BGP network命令必有，忽略合法classful省略形式。限定通告此精确连接前缀、会话/策略正常，区别RIB精确匹配与无mask情形。 [S6]",
+      "question_sha256": "bd13c37789c2a9556f6bfa016397b25cb280b7d357148f2af4cde5bccab021e3",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "Loopback/接口/BGP配置图完整且缩进可读，六选项为单行命令。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "6bd01c9e1e8e2c6f56d0164aa8309ec22dfdef035682c264fdc4e5a634ce7370",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 290,
+      "original_qid": "Q389",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看本题独立RIB图，D主机项[90/52778]，B90正确。原解析要求关联前序Q288，不适合打乱刷题，并把AD值等同来源身份；重写只读本图括号第一数，其他数为常见默认而非不可调整。",
+      "question_sha256": "4effa6168aeb8a794dcaafdb2ac8ef77622a1649baeb472057b27118acdacbee",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "本题独立图片含协议图例和[90/52778]行，无需前题图片。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "27a252f41acf3c8eb198fde5aeaeb7a9d70798dca2962558eb91a548f1ab5050",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 291,
+      "original_qid": "Q390",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "歧义",
+      "assessment": "B的最高接口IP只在同优先级初选平局时决定；默认无preempt，后来的高IP不必替代现Active。原题default configuration未排除已有Active，模板又无理由排除本为首要因素的priority。补首次选举、priority均100、无现Active，问tie-break。 [S1]",
+      "question_sha256": "5357554b0c921bafe4784e23d1a52dd8eace5678c382f2b691af8229a768166b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单条命令完整，无必需图片或多行CLI缺失。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "fa2a5f6934d9427cd99b6994c014eb229ac9fa091a61dab7eef2d87a5f3cfe90",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 292,
+      "original_qid": "Q392",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A在已经初始化、唯一存活且接口up的组成员条件下正确。原长段英文语病/优先级150比较不成立，模板未区分失效接管与抢占。明确无需额外命令不等于无需基础HSRP配置；preempt/加priority不为最后存活者所必需。 [S1]",
+      "question_sha256": "321bb4d0b020b1e84118b5073534e4847f0498175e918e4f56c55daf60d3a6fd",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单条命令完整，无必需图片或多行CLI缺失。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "5af84c956c9de3efb51952202a280fea5161f27a2895f0fb9be0f1f3a4ee2750",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 293,
+      "original_qid": "Q394",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看last-resort192.168.4.1与C192.168.4.0/24 Serial2，C正确。解析第二/第三字节混写，且声称只有无默认才丢包、有默认就绝不丢，忽略其他转发条件。重写本图路由决策而非绝对交付保证。",
+      "question_sha256": "eb6be9355938900407c69ad7bd89cdaad5908516fefd8afef47cfef570a06186",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "last-resort及全部相关Serial路由表可读，默认/出口证据齐全。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "0cb2836f7fa751b904679b9a5ddf987246b9f1a97aaa84898decb7cb3049ad41",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 294,
+      "original_qid": "Q396",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看Area0与3、RID172.16.1.1/172.16.3.3及不同GUA；A阻止邻接而非使本地OSPFv3进程不能启动，原题也缺明确问句。改问不能建立邻居，区分per-link/link-local与GUA子网相同的非必要性，示例接口命令用真实ipv6 ospf。 [S7]",
+      "question_sha256": "7ecdaeacc835426eaa58ae12f378ff427f8976b6a92c3d2f6d4cc1d23be8d3ea",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两端IPv6配置完整，Area0/3及RID可直接确认；命题措辞属内容问题。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "f68c0a33ca926b0a31e643703b1fe47cebfaad5cce5d20c379c1aba30ac36782",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 295,
+      "original_qid": "Q397",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D/show ip ospf database正确，但整个LSDB示例粘成一段，Link count与下一IP粘连、行列不全。按原示例字段恢复Router/Net两表8行的代码块，不伪造现场输出；说明LSDB与neighbor/RIB区别，替换逐项模板。 [S8]",
+      "question_sha256": "d5abce6ded0692f9f834e891c85a5739e603f66f885dc76173837bca2e81465f",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "LSDB原示例输出粘行，Router/Net表头与8条记录需恢复多行代码块。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "3f181cc38f77394215a70ed734f07d03eb2956f5e3b6ab01cbd52a6601afa939",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 296,
+      "original_qid": "Q399",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看三个子接口172.19.1/2/3.254/24，D正确：均已直连，不需为本机VLAN互访运行IGP。A/B/C两命令均压平，恢复换行并按协议解释“不必要”而非“命令均无效”，保留题设trunk/接口/网关正确的前提。",
+      "question_sha256": "a890704d92cff703928e4246b3ff90c88a1ad5876f63d124400df7511168ef76",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "ROAS拓扑、三个网关信息齐全；A/B/C多命令选项压平，需分行。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "c2ae9b068ba1bbbeffb9fb664fe0cd9895addbed698cf4ef47582b5f1654ab0e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 297,
+      "original_qid": "Q400",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看四条/30：.16、.20、.24、.28，恰连续覆盖.16–.31；C=.16/28正确。解析用28-16=12估跨度且幂次/二进制损坏和多转义实体，未计最后/30的广播边界。改按共同4位或16地址并集，逐项排除A/B/D/E/F。",
+      "question_sha256": "93d05a5ce406c8aa1e7157f4104fa5e06cfb422f75a96f030a4f1648e3778c04",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四条/30原图齐全；解析损坏的幂次/二进制/实体需以完整二进制块重写。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "c1786fab3bdd9ac45c4fbbadd91da3aa6461a3e50d7ac18ec6ec70c4ef5aeb81",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 298,
+      "original_qid": "Q401",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看Loopback0=172.16.5.1、Loopback1=10.154.154.1均up/up，C正确，但只有无手工RID仍不能排除先启动后改接口的旧RID。补首次选RID且接口预先就绪，具体比较loopbacks，清理amp实体及模板。 [S4]",
+      "question_sha256": "3060dfaf9d12d1acf1a382c1bee7aba92049088061dcbd8cc362b749d271642c",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "brief原图含两个up loopback，解析残留转义amp实体，重写清理。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "1e91139cf02d9ebc1b277f9bab834fdfef7f713c1992353ea6e06167394e46ca",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 299,
+      "original_qid": "Q402",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看EIGRP AS100/200/300，A用于统一单AS域；B的DR不适用EIGRP，D的network10.0.0.0已可匹配B两个10.x接口。原问A与C直接交换updates易误解非直连成为邻居，也未排除多AS重分发设计。明确经B逐跳传播且不使用重分发，替换模板。 [S9]",
+      "question_sha256": "1ecdd52749d672f90ae64ada779395d81e6b3e8bb6e49b77cccd72f6dbfe88c2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "三路由器AS和network命令原图可读，非缺图/缺CLI。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "8107e1bae523a5705f84d9e944466e94838b6eb15a42cfeef491cf1b4b62bc49",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 300,
+      "original_qid": "Q403",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看R1Hello5/Dead20与R2Hello10/Dead40，D正确；但R2接口地址写.2，与R1重复且与R2自称DR接口.1矛盾，原图不止单一故障。改编图明确R2=.1/24、保留计时器失配，不能冒称恢复原意；说明同Area0、进程号本地有效、BDR非前提。 [S8]",
+      "question_sha256": "a40f63258c68adf3fb16d0c7c3c85e0e14d28792ab1264e9bca05727c1516d74",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0281-0300.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两端OSPF输出均在，R2地址矛盾为内容错误；新图另行检查预览。",
+        "report": "presentation-0281-0300.md"
+      },
+      "current_question_sha256": "5a4358b876c37d988bb3b53ace20b475371888dd2639b4f3248514b0fa2cdef9",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0281-0300.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 301,
+      "original_qid": "Q405",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C为IOS自动RID意图，但原题无loopback不等于未手工router-id；解析自行补此前提，还将IOS选择算法称RFC2328统一要求。限定启动自动选择且无手工RID，解释接口priority用于DR而非RID。 [S1]",
+      "question_sha256": "19f10bc91ae302e169bcf9bac4cbb8a2e83bd13669ebcff7672d9c34bcec939a",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念或完整RIB图，无缺代码块/必需图片。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "ec8040d6506075e24159127b533eb4337ec5bc64af1970663dd8c9a367d5acfa",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 302,
+      "original_qid": "Q409",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看3路由图：D192.168.0/24 [90/30720] via172.16.0.2，B正确；C行却写172.160.0.0/16，不覆盖该下一跳，原解释还照抄。选项C出现724乱码。改编直连172.16.0.0/16自洽练习图，C改为明确的local/32干扰项，解释D与S/L/B区别。",
+      "question_sha256": "2db150d3dc9408e95cafbcc6fba6b24f4a759463ac05d941dbbf4d706c68c048",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "相关三行路由图可读；选项724是可见乱码需重写。172.160与next-hop不一致属内容，新图另预览。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "1eadd2972f2be3fe059b206450017338e9d84e4b2198b067fe9fa3ee639fb0b4",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 303,
+      "original_qid": "Q411",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看S*0/0经209.165.200.246 Serial0/1/0，目标172.16.0.14不匹配.3.0/24或.3.0/28，D正确。原解析仅泛称default且逐项模板，不说明确切出口/其余选项对应前缀，重写具体查表。",
+      "question_sha256": "5b9882a2a1e1f98dc2705f84076b68cbcd0ac020b3b39e7c50344201a7ea4449",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "完整默认和相关172/209前缀及串口出接口可读。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "b8c64de36da970a8fb76fa5fedc73328502892905c81ad89e84fa34adce42252",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 304,
+      "original_qid": "Q412",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看表：.3.0/24与.3.0/28均匹配目标.3.14，/28经207.165.200.254 Serial0/0/1，D正确。原解析写182.16.3.0/28；图默认209而其余明细/直连207混用且无209可解析路由。改编统一207的自洽表，不猜源真实地址，保留D并具体算范围。",
+      "question_sha256": "e58a4bf5df077404ccf5a72b6059a7236a08c559763921eafa4342a5d73c2cd2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原表完整，207/209与182是内容错误，新自洽表另检查，不误称缺图。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "975b036fb2c7fad7ca8a0ce7e6453b3830a42aaf5c51c169ad05e1e69bda6293",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 305,
+      "original_qid": "Q413",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看R2静态10.1.1/24 via192.168.0.1默认AD1，A正确。图R2的OSPF network误写192.168.1.2，且片段并未证明R1实际具有/通告目标，不能说所有协议已形成可用路径或仅因重复内部EIGRP RID就必然不邻接。明确静态可解析且其他候选默认AD，分别说明RIB选择不保证R1端到端可达。 [S2]",
+      "question_sha256": "beecf3de9a00c00c5585d567dcd439e8865223a6ce73a1b3fecbf3872075a9ab",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两路由器配置图完整，静态/各协议命令均可读；保留其他配置缺陷作为片段现实，不宣称其全已学到路由。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "5bc361d19a19d2462d0e87a7ff4c1fd66597e113e37253e5abef369e31c1fa3b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 306,
+      "original_qid": "Q414",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看/24直连与O10.0.1.5/32 [110/5] via10.0.1.50，D正确。原解析称LPM发生在AD判定之前，混淆控制平面安装与数据平面转发的时间阶段。改为在已安装有效路由里取/32，AD已在同前缀入表竞争中起作用。 [S2]",
+      "question_sha256": "3111840d500dddd98dea0b934f478be39dd08a03f0f346aadb07fde29dc71816",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "完整/24和三/32图可直接核验，Serial0和loopback映射清楚。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "0cf6c0fa68866afc271b9825fc054fbeb08332d5f8c29d366e09895ee8553776",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 307,
+      "original_qid": "Q415",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看两端均VLAN13，地址.0.10/23与.1.20/23同网。A Gi0/1显式allowed10-12漏13，B Gi0/1未限制allowed，默认已允许全部；原解析称两端都必须加13不准确。B选项改为在A增加并验证B已允许，保留其他VLAN；解释allowed不等于VTP创建/传播数据库。 [S3]",
+      "question_sha256": "3bc50340252266aa77227718ecdc7e6b16f033e40897d609e8886c1ec9253422",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "终端/23、VLAN13端口及两端trunk相关配置齐全；B未显式限制allowed本身不是缺代码。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "bac4430cccc8af6ae55a265b151934fbd15b256974dfb49a1f09cf6a12d0e16f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 308,
+      "original_qid": "Q417",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "通过",
+      "assessment": "已直接查看答案AD表，内部EIGRP90比OSPF110、IS-IS115、RIP120小，B正确。原解析区分外部EIGRP170，并明确同完整前缀；Normal语境按默认AD，表缺IS-IS的115已由正文补足，不误报缺表。",
+      "question_sha256": "2795e67d63295823a912b5daff11f171c96284dfdef3b80c4f21592db01d29f0",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "答案配图为AD表且已直接查看；正文补充IS-IS/外部EIGRP，非缺图。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "2795e67d63295823a912b5daff11f171c96284dfdef3b80c4f21592db01d29f0"
+    },
+    {
+      "id": 309,
+      "original_qid": "Q418",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看R1无last-resort、ISP下一跳.18可达，C补静态默认并使普通default-information originate有本地路由依据，正确。原解析泛称任何形式都严格需本地默认/无静态必不能转发，忽略always/route-map与更明细出口；D下一跳10.10.10.2其实是正确R1地址，不能仅凭架构偏好否定。按图缺失出口解释，限定普通Area0命令形式。 [S4]",
+      "question_sha256": "60f1204c6d54da6c8e750fa666d73313e88534369cd57301adde8d036a29ef48",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两端run/RIB与ISP拓扑可读，default缺失真实，不是图片没加载。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "6d2ccf7cc478341a68a7e7d48988c8c17d8db586b52697103830fc31cf3ea9ba",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 310,
+      "original_qid": "Q419",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看S172.16.0.0/24 [1/0]、O.128/25 [110/38443]、D.192/29 [90/3184439]；.202不在.192–.199，/25胜且metric38443，C正确。原解析不解释/29为何不匹配或110为何是AD；图下一跳207但直连209混用。改编统一209相关路由图，明确范围/AD与metric。",
+      "question_sha256": "edf4bed54582d5221a0bfc11c0ba6415f5c2b04dd6e97d18976f3f375e953cb6",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0301-0310.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "所有目标前缀和[AD/metric]在图；下一跳不一致属于内容错误，新图另预览。",
+        "report": "presentation-0301-0310.md"
+      },
+      "current_question_sha256": "db7ac0c8d25399bc9894277c55955a033aea88953358fa10ceff08ba82df0178",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0301-0310.json",
+        "verification": "fix-verification-0281-0310.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 311,
+      "original_qid": "Q420",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "通过",
+      "assessment": "普通IOS默认PPP串口为point-to-point，B正确；与Ethernet broadcast、Frame Relay物理口常见NBMA以及显式point-to-multipoint区分充分，无CLI/配图缺失。类型表按普通默认部署理解，不推广为所有平台/覆盖配置或priority0仍必选出DR。",
+      "question_sha256": "66acf42f31c51b98c6091c13f20c8c7b346e28afd857bea745ca9385cc79c429",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "66acf42f31c51b98c6091c13f20c8c7b346e28afd857bea745ca9385cc79c429"
+    },
+    {
+      "id": 312,
+      "original_qid": "Q421",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A为IPv4 VRRP VRID0a=10正确；C的HSRP末尾99是十六进制153而非99。D不是无效MAC，只是不符VRRP保留格式；B也不能仅凭地址断言烧录BIA。GLBP组号不止一个字节，删错误xxyy泛化，按IPv4/IPv6标准分别说明。 [S1]",
+      "question_sha256": "ec61f7c7e0bbed33b8cf84e585933e2a3967c8b5b517a41a94ad853093b8b1ef",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "7912232310ea80cfa7d7f84d16f143fca4dd6b33f07492751f5bd334b47f3d40",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 313,
+      "original_qid": "Q423",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C/metric正确，但把所有EIGRP AD都当恒90、FD等同当前路径metric、Cost当OSPF独占及通式严重乱码均错误。限定同前缀有效内部路径，给经典默认带宽/延迟公式，说明DUAL与历史FD，不把所有候选机械按最低数值当无环。 [S2]",
+      "question_sha256": "b114594348c859a2577d9eb790702f0a13340f95c0b3ee53c7034505103b37b6",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "复合公式的times/left/right已损坏，恢复完整纯文本公式代码块。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "fc46cb6abac98f77ff8649b2848531e6167f5437d9ba33a5f7bc4a8f0c305aad",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 314,
+      "original_qid": "Q424",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "原B/2-way与DR邻居正常同步不符，解析自己承认FULL/DR却借无证据官方判分坚持B。明确从DROther验证与已选DR的同步邻接，改答案D/Full；2-Way只表示双向Hello，两个DROther可稳定保持，不能证明与DR已Full。 [S3]",
+      "question_sha256": "8595544f2014ff2326d844c567ee55b0028157327ce9b6a370858516e23f4d68",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "85e2b3e500ce1d6132ed12041a91d56c8c6ba1c202d31ed6b2fef0c82ed5376c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 315,
+      "original_qid": "Q425",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看四条192.168.16.0前缀/21、/24、/26、/27都匹配.16.2，D/27正确。逐项解释是空模板未说明它们并非不匹配、只是更短。重写具体范围与/27 via192.168.1.4，不按跨协议AD选。",
+      "question_sha256": "da86dda4e76ff6034d71719332a3a624063bdaedef4c3ee49c9371a24b39a01a",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "四前缀/AD/metric/next-hop原图完整可读，非缺图。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "46c1a8e2d5054d71d05ea71aa01697cdd64636a01f64988ba76d588600b12a2b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 316,
+      "original_qid": "Q426",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D/AD120不替代现OSPF110正确，但图默认经10.12.0.1，直连却写10.0.0.0/24/local10.0.0.2，头部subnets计数也不符。改编C10.12.0.0/24与本地.2的自洽图；D改为保留配置作为较差候选而非丢弃命令，说明主路撤回/备份有效前提。",
+      "question_sha256": "cb1e1f85c6d7909a28c78056501f020792f024ba276bc7372f77de2f9c93d3d9",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原表字段齐全但地址/计数矛盾属内容，新图另作视觉核验。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "d2f1acd16bec33ceac1529d51f35cfadc49e9650a204b188d8b837b8bac4b340",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 317,
+      "original_qid": "Q428",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "歧义",
+      "assessment": "已看AD254的209.165.200.224/27当前就在RIB；高AD/27不会给较短/0作同前缀AD备份，原题没有主路前缀。A可重现该高AD配置，但不能仅看254断言备用已隐藏。补该/27低AD主路已撤回、现高AD路由生效与next-hop可解析，A保持；255不入表且不保证无缝。",
+      "question_sha256": "8d01e733b948e98900152f741eb518a550ea2c50dabe35446090140f1a295e85",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "三静态条目含AD254清楚，主路未给是条件歧义非缺图。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "b4e260bcec60f453410af8ff77166329e1820671ac0c345852bd00b02cd2ff4e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 318,
+      "original_qid": "Q429",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "歧义",
+      "assessment": "已看Atlanta/Washington都以Serial0/0/0接NY，A意图正确，但所有ipv6 route::/0都缺token空格。E的NY loopback2000::2并非因不够直观就错，独立可达递归下一跳可用；明确两边无该host独立路由，不能让新/0自递归。恢复A/B/E合法分词，C保留错误前缀作干扰。 [S4]",
+      "question_sha256": "4588e40339efcea70bd138528929af39db2e473f78b76b95076094192d397fea",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "拓扑和IPv6地址表完整；命令route::/0粘连需恢复合法空格分词。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "adf10fcb50a7a06fedb8febf89d26558e96ad82a38aaaa0b0be2f34374ff31fa",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 319,
+      "original_qid": "Q430",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "歧义",
+      "assessment": "D在仍有至少一个有效IPv4接口时成立；原题只排除loopback/手工RID，并没排除全部接口无IP/down时C。补该条件与首次启动，删loopback永不down和把IOS接口选择顺序全归RFC的说法。 [S5]",
+      "question_sha256": "33c6686a8271b280c18d86d25558547b21ff0c7b6c20de3b90d047fd5b38259c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "a19fb910f01e050c571bcae95ba7df72cfbb62c0eb148e2f9c3d180524f8eaae",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 320,
+      "original_qid": "Q431",
+      "current_answer": [
+        "E"
+      ],
+      "reviewed_answer": [
+        "E"
+      ],
+      "status": "问题",
+      "assessment": "已看O IA192.168.10.32/28 [110/193]，E正确。题干把host.33/28称subnet不规范；解析把.0/27称较宽候选却未说明其.0–.31根本不匹配.33。改问主机所选路由度量，按图排除192并区分AD110/默认84/其他128。",
+      "question_sha256": "2647ecec2341cc15725951b4ad579e1706836fe89a15f942228b22cbceaa1476",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "完整RIB与原解释已有相关三行代码块；host/subnet命名及匹配逻辑属内容。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "d7450f4085fd0c1fc5527fdfc385960e210f92fa81f141ad9245e872e9a95003",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "E"
+        ]
+      }
+    },
+    {
+      "id": 321,
+      "original_qid": "Q432",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看/28 via192.168.0.7与/24 via.4，目的.15仍匹配/28；原B错误，广播/SSH不能使路由器跳过长前缀改走短前缀，改A。原表还同时显示同一10.0.1/24的C和O、父标题计数不符，重绘明确已安装候选/可达next-hop的练习图；只问lookup不保证SSH成功，不猜目的真实LAN掩码。 [S6]",
+      "question_sha256": "bba9825640b0c63209c2fe43ab38be51a5f6ff0a945f1f29d627e59675092516",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原RIB完整可读，重复同前缀C/O与计数错为内容，新图明确有效候选并预览。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "0571c6fc3ee8a0f9ab4b01e3e7079f9d2d78ab0239075ae739344806b729147e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 322,
+      "original_qid": "Q433",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C/Backup正确，但旧Master术语与现RFC9568的Active未区分，且宣称当前主用必为最高优先级/立即无损接管过度。保留Backup故障接管，说明新旧名称、检测/选举和可能丢包，不混同HSRP Standby。 [S1]",
+      "question_sha256": "8a722281d53f4d22eafbdacf77e81376e5ff31b848c056ed1b7b8f43b2cfa1a8",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "6ef08151438ffb846e2aaa32fa996323d6c940edec7df712eebe437d096210f4",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 323,
+      "original_qid": "Q434",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C为普通Ethernet IPv4重封装正确，但原题泛称任何网络，PPP等并无MAC。解析又将IP校验和规则推广IPv6、并称路由器绝不改IP与前面NAT例外矛盾。限定无NAT/隧道/MPLS的以太网转发，说明MAC出接口/下一跳、IPv4 TTL/header checksum变化。",
+      "question_sha256": "622ffb7bc6911f710d1c25398c6c9297aaa9363d0a08567104e5d101a17d4c3c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "6fc1acf4e79dcb9a63d4eb426cea3f2d488736cce5105cc6af2d6d53abb2daed",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 324,
+      "original_qid": "Q436",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D/IPv4 VRRP组1正确；A首字节05的I/G位1，是组播而非原文随机单播。B不能由数值断言硬件MAC；GLBP组号字段也被错误缩为1字节。限定IPv4，重写保留前缀与十六进制组号，IPv6另列.02，不编造其他MAC来源。 [S1]",
+      "question_sha256": "2cb9b887dc385eef8ebb7635a41a19518d5333b97359907bde41b1f0ff2eabdf",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "c38d40c5408e72568e8c24ef6a5e83170baafc3812a7efbda25e8f7929d26088",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 325,
+      "original_qid": "Q437",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "题问FHRP目的，四原选项均未准确说默认网关冗余；A的组播Hello交换是机制而非目的，解析凭虚构官方标准硬选。将A改成提供可接管的虚拟默认网关，保留A索引；区分心跳、主机获网关、STP逻辑防环与ACL，不声称所有主机绝不接收任何路由信息。 [S7]",
+      "question_sha256": "9d732d981469396a66ede45014bbb3a2ffe1b957bc08e98e4a1e101f4bcc72e7",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "1974aca3717b078a2fc9715a8fb9628e83715ecd6ae91e4cb7e7424f3658255e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 326,
+      "original_qid": "Q438",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看R1mtu1600/R2默认假设1500、两侧no passive例外和area0/network精确匹配，C正确。但MTU主要阻止Full数据库同步，不是完全不能发现邻居；两边一定各卡哪一状态也不能硬断言。明确R2有效MTU1500/检查启用，区分Hello与DBD，并说明mtu-ignore不是修复真实承载MTU。 [S8]",
+      "question_sha256": "b12446ef543f928f60797528a748e000505dc314ddae7691847ba5b9ec3c8150",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两侧run完整且MTU/area/passive例外可读；原解释两个代码块源完整。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "2dc491800fad94c76060ffad6631f9bc536536583d1b235cf5ef77e1391484e2",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 327,
+      "original_qid": "Q439",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "通过",
+      "assessment": "已看C10.56.0/17、C10.56.128/18、各local/32和S*via10.56.0.1。目标10.56.192.1超出前两块，A的下一跳正确且通过Vlan56可达；B是前缀非接口/next-hop，C/D不能用。本题解析完整，保留。",
+      "question_sha256": "93a780ed1989a0249fbba4199b8b03c8e8e8a3215fc652c926d82d5e523c8dc0",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "两直连范围、local项及默认next-hop完整，无缺图/CLI。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "93a780ed1989a0249fbba4199b8b03c8e8e8a3215fc652c926d82d5e523c8dc0"
+    },
+    {
+      "id": 328,
+      "original_qid": "Q440",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看O172.16.1.184/29 via192.168.7.35，C正确，.190在.184–.191。原C172.16.0/16Loopback0与C172.16.1/24Serial0重叠且next-hop相关直连没给，改编不含重叠直连的自洽相关路由图；说明.0/28不匹配与LPM非时间上先于AD。",
+      "question_sha256": "b28c688ff670d241f0dccd2940b0efb77efa8b99a48952e750f16aae96510c58",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图全部目标相关行可读，重叠直连属内容错误，新图另检查。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "49c6e523fb8794842e80b622a69ab42275a4e97129a905bfa525f7d57ab574b4",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 329,
+      "original_qid": "Q441",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A的网关冗余正确，但原文保证任意硬件/链路故障后几秒无中断，未区分检测条件或仅上游坏而LAN通告仍正常的情况。使用Active/旧Master/Backup术语，说明检测后接管、时延和可能丢包；不将VRRP当端到端负载均衡。 [S1]",
+      "question_sha256": "d4b19ccd2d7e42d476d6898d1dd329fab75060c5e6bda12aa9e79f2c4e911b87",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "概念题/单行命令齐全，无必需配图或多行CLI引用。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "2dc477e6f36183fd54f07a199379cdf02b7774d4db1fee4a4742b19b28fbc1fc",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 330,
+      "original_qid": "Q442",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看R3 Gi0/1在共享10.0.4/24，D优先级100可在新选举胜过R299/R11。但OSPF DR不抢占，原题没说初选，不能保证改优先级立即取代现DR；四选项两命令也压一行。补同一新选举无既有角色，恢复换行，具体排除错接口与priority0。 [S3]",
+      "question_sha256": "9f58a8f212997bb1721eaf99c79c65ab737bb5b4a7d3845ec8bc5cdd601ff556",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0311-0330.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "三路由器接口/子网图齐全；四选项interface与priority命令全压平，恢复分行。",
+        "report": "presentation-0311-0330.md"
+      },
+      "current_question_sha256": "da939666ff72a4fba4fbfdf6cd62335ae91589cd67a2a76382be8e76c9df29b0",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0311-0330.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 331,
+      "original_qid": "Q443",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看R2互联172.16/24、R3互联192.168/24、PC1=.5，C网络路由+host特例意图正确，但题说所有/24流量又说PC1例外须明确，图没给对端.2的具体地址。补有效next-hop条件，四组选项恢复两命令换行，D的.5/24地址/掩码不一致是拒绝而非形成路由冲突。",
+      "question_sha256": "6b069765bb6a5980340d13ea36389733da55cfea51d74e126c2d88be2cb3117a",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四选项两条ip route被压成一行，恢复两行；拓扑齐全。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "ec3c38b95c353f53a36ccb6a06aa17f8b52f061106deded6766b60d3c9b70683",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 332,
+      "original_qid": "Q444",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看四个匹配前缀/24–/27，D via192.168.15.5正确；图父标题却说3subnets3masks而实际4条4mask。重绘相关有效路由excerpt去错误计数，限定普通目的查表，解释HTTP/VIP/入接口不改变本题LPM。",
+      "question_sha256": "9a0b6b40722320e82c5218e99329cf35f1e08ccdd30ff9e73285e71aebd7e980",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "06ce61070a9350cc795eac95dea12966ae7e7a68d6dd16e7033488ce22b1c45e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 333,
+      "original_qid": "Q445",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "歧义",
+      "assessment": "已看neighbor RID172.1.1.1、IP172.16.32.1、EXCHANGE/-，A/校准MTU是合理排查，但仅状态停滞两小时不能证明MTU必不匹配或mtu-ignore必成功。补进一步检查确认该阻碍，区分字段MTU检查与DBD实际尺寸/其他故障，保留A。 [S1]",
+      "question_sha256": "2a9ac9d6924b1c5b324a65875db536a3365432a15a47f857143f0cd23b5046ee",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "14232a7423440b525349f28be8a57100376cda2b9fae25738a1d3ce3cf715dbf",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 334,
+      "original_qid": "Q447",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "通过",
+      "assessment": "已看Serial0/1 .1/.2在10.0.0.0/30，C的0.0.0.255虽比/30宽但正确匹配两接口，不能错以必须用0.0.0.3。其余RID/neighbor/priority不完成该启用，原解析具体充分，无需修改。",
+      "question_sha256": "a31dfddc704fc06352fd9b499b154f935e1a75319722a68ff862ec2110bb1737",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "a31dfddc704fc06352fd9b499b154f935e1a75319722a68ff862ec2110bb1737"
+    },
+    {
+      "id": 335,
+      "original_qid": "Q448",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看R1=.225/R2=.226，R1 LAN192.168.1/24、R2LAN10.1.1/24，D正确。原解析说下一跳必须直连、指以太口就一定黑洞以及双向默认万无一失均过度；两默认可使未知目标环路。四组选项压平，恢复分路由器/模式换行，并具体指出host bits和自指问题。 [S2]",
+      "question_sha256": "203f7317ab53553c1e840fdfa5b11de4be4063b623ebe99faad209cb044c37db",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四选项R1/R2配置压平且无模式提示，恢复分路由器/换行。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "de19e46653c5e9bd5f277588f5fed2449ada7442cb6fc1399140c9060e7b2377",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 336,
+      "original_qid": "Q449",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "通过",
+      "assessment": "已看五OSPF明细及默认：10.10.13.158匹配.144/28（.144–.159）经10.10.10.9 Gi0/2，A正确；.128/28、.160/29等都不匹配，默认虽匹配但更短。解析地址/出口吻合，MPLS与R5互联前缀不同，未因缩略图误报重复子网。",
+      "question_sha256": "24253740c128d92e82244b033b1793623789074d36da3193985e462a938ede9f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "24253740c128d92e82244b033b1793623789074d36da3193985e462a938ede9f"
+    },
+    {
+      "id": 337,
+      "original_qid": "Q450",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看表两OSPF同10.1.1/24分别metric30/40，同时称全部在RIB并不符合普通OSPF同类路径优选。改为已学习候选表，先OSPF30优先40，再LPM选RIP.16/28出F0/0，A保留；解释F0/3.1.0/26不含目标。",
+      "question_sha256": "6109df4c4378cdae08abf3b1b51b42d1a643858abf7d9ba248663a2545a06d0d",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "dc6b4e164433d751c0e2c61f248c977309c2856f5088f4ba252cb036c7f7c9e4",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 338,
+      "original_qid": "Q451",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看正常OSPF路由是10.1.1.0/24 AD110，原A为/32 AD125，会因/32更明细抢过OSPF/24，不是真正浮动备份；原四项无正确满足组合。将A改相同/24、next-hop172.16.2.2、AD125，限定OSPF撤路而链路/回程仍有效，不冒称物理链路故障后同链路静态仍通。 [S2]",
+      "question_sha256": "15695638f35f75f74902d05569afdb2af40d722b72bd50376a1530daeb2a67f7",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "ff80aff1f898a341c399b218c3e2bbb2cf3dcaefe0ba00d886695ecefce5cbed",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 339,
+      "original_qid": "Q452",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看D10.1.2.0/25经10.165.20.126，A正确；但源父标题写同/24 subnetted而条目含/25，另一父标题下又混10.1.12/28，均非准确IOS分组。重绘相关路由excerpt去错头，纠正“无脑挑最长”须先匹配目标，明确静态/28不含10.1.2.126。",
+      "question_sha256": "5979fd8c4accd5c26411e674f6ba361dd3f37b292f9f38260099df4485f5d408",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "0645367f52348438ec400cc1005dba156686182f29f628d056abed752a904f4e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 340,
+      "original_qid": "Q453",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看D192.168.2/24 [90/184437]，D正确；图把EIGRP外部写EX、OSPF外部写E1，缺D/O主体代码，且next-hop207.165.200.200无相应直连/默认。改编合法D EX/O E1并补对应有效连接网段的表，重写默认AD说明，不将孤立EX/E1当IOS完整前导。",
+      "question_sha256": "1fca2049bd7ad622feada44207cfcb7312e857c4ff72f37aee0a094b6a35934f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0331-0340.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有完整拓扑/表格直接查看，无缺失的必需配图或CLI。",
+        "report": "presentation-0331-0340.md"
+      },
+      "current_question_sha256": "f87c34e3552e0fc3ea4fcba10414282fec408dbfdfdffa65a67ae057a591ac8a",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0331-0340.json",
+        "verification": "fix-verification-0311-0340.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 341,
+      "original_qid": "Q454",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看五路由器共享172.16.10/24、R5 DR/R4 BDR、Pri1。C优先级255/240合法，但不抢占，DR故障先由现有BDR接替，不能从接口抖动保证R3/R2当选。明确所有节点参与无既有DR/BDR的受控初次选举；四组选项恢复分行，去掉隔离不稳定路由器和从当前角色倒推启动顺序的断言。",
+      "question_sha256": "88d6b42b4014ba0a2c09c3e0d1883e1ae9ee16e486b91a1d80e4a23bbbd7abb5",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压成一行，已逐项恢复模式/配置换行；原图完整。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "de1650ffa5c789852684b605ed5dc101b54551803cd403dacca6c1ab4b67f608",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 342,
+      "original_qid": "Q455",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看同10.0.10/24的O110与D90均被当show ip route当前路径，普通RIB不会如此并存。重绘已学习候选表，明确有效递归下一跳与同完整前缀竞争；A保留，区分RIB下一跳字段和后续递归的最终二层邻居。",
+      "question_sha256": "cad7beff786a6793ad982c0d83bccf8e2269455f639231f69f7e56e69a0e4bd5",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有原图直接查看，无缺失的必需图片或多命令文本。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "bac3c31cfe646ec68f3e128e3f4ba2c4285bdd5366c7d87994789480653e047f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 343,
+      "original_qid": "Q456",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看目标10.10.8.14确实选10.10.8.0/28，B/255.255.255.240正确；原图L10.10.10.3.32丢失斜线，父标题称2条2掩码而实际3条3掩码。重绘合法相关路由excerpt，不因答案正确而放过CLI图中文字错误。",
+      "question_sha256": "83396a84aaf28425caf0bd2822ef2a2e4b82e31f14d39e08260e9154a81589f9",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "图中主机路由前缀分隔符写成.32，修订图恢复/32并去错计数。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "15f06d08b6ddbb8ca03f81b95d7fcd93961e7840301571b786d83a9427b9a3ce",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 344,
+      "original_qid": "Q457",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "歧义",
+      "assessment": "已看WAN10.0.0.32/27、R1.33优先级99，B的R2.34/27优先级100正确，但不抢占已存在DR。补全两端均参与初次选举、其他OSPF条件满足，恢复四组三行配置。",
+      "question_sha256": "3c310c1a01cfe754e4c47ea77582dec1946825e4061ba4c4e337d3052c75b398",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压成一行，已逐项恢复模式/配置换行；原图完整。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "9dc8c300d6013f0e12557bc54b393d097b16cae06931fcb609479151213c1d7b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 345,
+      "original_qid": "Q458",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原D仅给全局IPv6下一跳，无法显式保证固定Gi0/0。D改成出口+下一跳完全指定静态路由，补接口已启IPv6/up及对端on-link；不依赖IOS是否可从子模式自动解析父模式命令来判C错。 [S1]",
+      "question_sha256": "d54688e16e86b2c21aa88ca98761194ac9cce1f0dddeea482a1ab57d7e49516b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "无图片依赖；四个单命令完整，问题属于配置未满足约束。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "c9d78076c44ddc7763e8a1a7f16eed1dca12ed625699cae686fe8d14cabe0739",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 346,
+      "original_qid": "Q459",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看R18 WAN是与R17同链路的DB8:3::301；原题却用远端Marketing/64静态路线解释on-link ping，并把本机发起ping混同IPv6转发。改为PC1经R17转发到Marketing PC2，补Fa2/回程等条件，保留B，恢复全部四段配置，不再断言任何静态NH必须直连。 [S1]",
+      "question_sha256": "002e1c97888e7d0ae6d92bbff87e2f3da5c1daaed189e176132f3dbcbedfc5d9",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压成一行，已逐项恢复模式/配置换行；原图完整。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "d6bd98c4ab12814518058d1be2ece8d703bca633e9ae08d700a6cb5f98ba6cd1",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 347,
+      "original_qid": "Q460",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看G1/0主ISP、G1/1备ISP；A正确但原文模板没核对B命令顺序、C/D假关键字，也没明确图外192.168.0.2。补主链路对端可达、备默认AD更高的条件，解释浮动依赖主路由撤回，不自带端到端检测。",
+      "question_sha256": "2f3fb117f311b5c98948031520576b8adac7b08b1e8767ccd9894475f7592014",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有原图直接查看，无缺失的必需图片或多命令文本。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "7749d2f1da2fa801e55f906b84cad48b063240966343c9d81789ba6e250ed929",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 348,
+      "original_qid": "Q461",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D的point-to-point免DR选举正确，但四组选项全部压平；题干DR'BDR拼写及仅配R1缺对端条件。恢复配置含进程到接口exit，补R2一致p2p/Area0，去固定40秒与保证大幅收敛加速的泛化。",
+      "question_sha256": "70ad464d8d3be0529cbe50650f9d76bb2909d65faf05f52df908d4051a4424c8",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压成一行，已逐项恢复模式/配置换行；本题无需图片。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "dd8562e99d60ef3fd9d40cacef717aecd5643aa6d3cb693424260fc4c1befed0",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 349,
+      "original_qid": "Q462",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看Mgmt10.1.1/24、R1.5→R2.15、GW172.16.2.10及server.2。原C仅host路由不构成ping访问策略，且Ethernet出口型依赖Proxy ARP；原解析把不写NH误当过滤机制。保留策略目标，C改明确next-hop路由+Mgmt入口扩展ACL拒绝到GW的echo，permit其他IP。A改编为合法仅路由干扰项，不冒称找回原分隔符。 [S2]",
+      "question_sha256": "ce7c9bc93efa24eb92741da18c78eb3ad86765617d17e3005e119a97e4f7cd3c",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有原图直接查看，无缺失的必需图片或多命令文本。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "6128c362f23b145449b16989877aae35871763af921e7ff51c7235ffc74b870b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 350,
+      "original_qid": "Q463",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看R2.230经G0/1、R3.5经G0/2、R1本地.226。原D出口型Ethernet默认依赖Proxy ARP，不能保证因AD高就端到端可达；D改出口+R2 NH+AD6。A五字段改编为R3 NH加AD10干扰项。明确主路由撤回且备路径有效，不宣称任何R3故障自动无缝倒换。",
+      "question_sha256": "98f1997d75636dd9d64861e15142e76d4996a6124e050dee1e1ce87137c4ab3b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0341-0350.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有原图直接查看，无缺失的必需图片或多命令文本。",
+        "report": "presentation-0341-0350.md"
+      },
+      "current_question_sha256": "c66f1856ac1c5fad69f4166c5d6ee7ff26f5391c59afed73a0b9625d4d933df8",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0341-0350.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 351,
+      "original_qid": "Q464",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看A-B192.168.2/24、A-C192.168.1/24、B-C192.168.3/24三个独立网段，并非整个area一个DR。改为A连接的两个广播段各自初选为DR，A选项按每接口的同段邻居比较，补非抢占条件。",
+      "question_sha256": "02bd9a03dc672ade7ee595a5cfca2543cf68c7a13375a5e92964e53826d47633",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图直接查看，必需信息和文字选项完整。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "062f25fdc99e8c803073297a8b19b21b5468b4ead41afc66f0941dc0babac1de",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 352,
+      "original_qid": "Q465",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看同10.10.10/24的三EIGRP和两OSPF候选，B/F0/11度量144优于1441；原题却声称全在RIB不自洽。明确抽象候选度量表、内部EIGRP默认AD、无variance/更明细/PBR，恢复目的IP点分，解释原始候选与RIB/转发的层次区别。",
+      "question_sha256": "073cb32e29a6b28d7ac31501483632a2536d134f0d663234e6b5edf6297deae7",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图直接查看，必需信息和文字选项完整。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "889239f0509c27e5d5cd5db41add14c184d8a7ae7dc4cd94d27a7a50da7de475",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 353,
+      "original_qid": "Q466",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看10.10.13.0/25双OSPF等价经.9/.13，C三互联/30，无默认；目标.128/25完全不匹配，D正确。原解析把发ICMP Type3Code0说成必然，实际受配置、抑制和限速；改具体目标主机.130及条件化ICMP说明。",
+      "question_sha256": "16b0b963f7c5c92ef7d386bedb7f7f51e7c207f4d1ab24293fc0502c4203f609",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图直接查看，必需信息和文字选项完整。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "3b31446760e2972ccbf4ac4b9730d3a01bf37501491d9245568faca53853a36f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 354,
+      "original_qid": "Q467",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "歧义",
+      "assessment": "已看参考100000Mbps，Gi0/0 BW1000000kbps、Gi0/1 10000000kbps、Gi0/2手工100、Gi0/3手工1000。B本地cost10最小，但下游cost及OSPF路径类型未给；补四条同类intra-area且后续cost相同，解释bandwidth仅逻辑参数不是物理升级。",
+      "question_sha256": "0741d656a70a13bd085c87384c2d395fb2354383bf20c394c9300b31bd4e9837",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图直接查看，必需信息和文字选项完整。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "e83ae105bca79b80cda651c3f3e18207f619ec85806e713a3c9b520f1e2a7f86",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 355,
+      "original_qid": "Q468",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看D192.168.2/24，D正确；图混207和209下一跳、RIP下一跳297.165.200.250非法，另有残缺无前缀行。改编全用207且连接/30有效的完整相关路由表，A残缺172.160.0/16恢复为172.16.0.0/16；保留原图和指纹，不声称恢复原始缺行。",
+      "question_sha256": "9da2f850494a367a3c9f884809668688b6d1908d4bae61711f8de1d84d57f0fc",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "原表有无前缀残缺行及非法IP，改编完整相关路由excerpt；A地址缺分隔。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "7d333647995a243fb873d1529a215ca1590c6cf3655d4be628c3fc0633babb1c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 356,
+      "original_qid": "Q469",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看主viaB192.168.2.2AD1、备viaC192.168.1.2，A正确。原解析断言任何NH必须直连及ECMP固定双向转发过度，改为本图直连对端、备路由有效/主撤回条件，区别ip default-gateway用于禁用路由的设备而非只能二层交换机。",
+      "question_sha256": "729c3e7f92420e74a846a9cbb6f875ae33acd3ae218148e9219b7045db7f6a6f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图直接查看，必需信息和文字选项完整。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "5173749ee39723ecff3ca4d2e99c78b119d4a3304678bba49045d7aff4633f59",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 357,
+      "original_qid": "Q470",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看Fa0/0互联.65/.66、Lo.14/.86；C为唯一两MTU1500且R14接口priority255的完整组合。四段配置压平、area0和RID10.10.1 14缺分隔，恢复换行/规范全局与接口模式，保留B把priority错放进程的实质干扰。明确fresh选举、R86pri1和MTU校验；不泛称全部EXSTART都由MTU造成。",
+      "question_sha256": "8c5baae0d3fed868de14c8cd3c5d4c3c8f6ff64a7d4e836e433bb62b32449d21",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四组双设备配置压平并有area0/RID点分缺失，恢复可逐行阅读的配置excerpt；故意错放的priority保留。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "56d2d4ac807b6bc21d67a5c95b16015a2e1f9231cae78f4d98f31a74b866a840",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 358,
+      "original_qid": "Q471",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看RIPv2经B分别重发布进OSPF/EIGRP、C为Area1至0ABR；原答案D90与自身解析结论A110冲突。补唯一RIP来源且无EIGRP本地network起源/汇总/AD修改等条件，正确改A。OSPF外部110优于外部EIGRP170，OSPF跨普通area不改变来源成内部EIGRP；去无证据官方考试判分叙事。 [S1]",
+      "question_sha256": "09e1b7e222f0fc11a6c642759f63f38042c84fc81600f482aedd189124ccb2b4",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图直接查看，必需信息和文字选项完整。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "e4ed4184f34dd98b6c964eeb47f4e70e2501ed67631bcb317ca4306652a29459",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 359,
+      "original_qid": "Q472",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看双电路主.1/.2、备.5/.6和双向AD1默认，D高AD2正确；选项R1/R2命令压平。补两个/30对端完整地址/严格主备所有LAN目标、主路由实际撤回；解释/32会更明细抢主路由，不只因AD1。去ECMP等于每包双发、AD2压制AD1及无缝切换说法。",
+      "question_sha256": "a46d1a96724915db48e93fb9274b031138d40930079480cd8aa9db2b94360615",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四组选项双设备命令压平，恢复R1/R2两行。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "f40c4bc3367871148738357997e379fd451c0ffdca9c3469f41e2481b3ec488c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 360,
+      "original_qid": "Q473",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看R1-R3直连192.168.30/24，A/24AD111正确；原C目的192.168.20.0配/16有host bits，不能只说安装一条范围宽的路由。纠正CLI行为并补OSPF同/24默认110及备下一跳在撤路后仍有效，修复IP空格。",
+      "question_sha256": "25040968390945a7a2a1d830a13f783c552d58a7fd01393861bd42885067d2ec",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0351-0360.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图直接查看，必需信息和文字选项完整。",
+        "report": "presentation-0351-0360.md"
+      },
+      "current_question_sha256": "9b161c855d0e4b9db24c70f7c8099c851cbbdd2d67012549efeadd33397cd874",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0351-0360.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 361,
+      "original_qid": "Q474",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看R1 DROTHER/R2 BDR/R3 DR共享10.10.10/24，邻居priority1。D提高R1并仅重置本机不保证抢占原DR，原文误称重置所有路由器。补全受控全网段重新初始化的前提，D只作为其中R1部分；恢复选项配置模式/换行并清除粗俗口诀。",
+      "question_sha256": "b3f4dfc1db5394fcde9e48ced61f4195a0a5d7da867b2dab52b9c3faea270930",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压平，恢复逐设备/模式换行。已有原图完整。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "d90f2c272953b958bf1124d74436d3f5fc717252fcca1f98ddce8845c0912ced",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 362,
+      "original_qid": "Q475",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D数据平面正确，但原解析把DNA Center/APIC都概括为集中控制路由/STP的控制平面，并绝对化控制平面从不处理用户报文。按功能解释Data/Control/Management，补SD-Access管理中心与LISP控制节点区分。 [S1]",
+      "question_sha256": "61d379351862bd0462038679b77c1c198dcd2066aebd568f54ea37da75c6580a",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字问题无必需图或缺失CLI。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "93646b9f2e4ee5b0fccc8d6ca70eb79441fa2da321c52d7d5cf5a544e174a646",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 363,
+      "original_qid": "Q476",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "通过",
+      "assessment": "无图依赖。600台每台三个不同子网连接，生产子网仅600+网关1个地址，不是1800；/23仅510、/22有1022、/20浪费、/28仅14。10.10.10.1属于10.10.8.0/22有效主机，B及原解析正确完整。",
+      "question_sha256": "468151cc5d3fce4ba0df1886df4a0ac4aeee787528b33699e139c9f60c1c9dd9",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字问题无必需图或缺失CLI。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "468151cc5d3fce4ba0df1886df4a0ac4aeee787528b33699e139c9f60c1c9dd9"
+    },
+    {
+      "id": 364,
+      "original_qid": "Q477",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "通过",
+      "assessment": "已看S192.168.0/24 AD100 via10.0.12.2，较O/23及D/16更明细；NH在C10.0.12/24出Gi0/1，C正确。Null0仅默认，已有更明细时不用，原解析给逐条匹配与递归出口，无需修改。",
+      "question_sha256": "513e468768a41722ff00ef5009d662d6dfe19b8f0557d134e876986c475be6a1",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有原图直接查看，所需信息完整。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "513e468768a41722ff00ef5009d662d6dfe19b8f0557d134e876986c475be6a1"
+    },
+    {
+      "id": 365,
+      "original_qid": "Q478",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看ND::/0 [2/0] viaFE80及备NH所在C2001:DB8:1234:2/64；A::/0 AD3正确。原解析把相同AD2说成冲突异常不准确，改为不能建立严格主备偏好，并按本图显示AD2解释，补主撤回/备仍有效，不称无条件立即容灾。",
+      "question_sha256": "5797594fc29fd291c88eba7b3f3104907319fe1b76ca3d7ee28a62d1bf54431f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有原图直接查看，所需信息完整。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "fbc12cd94f5047f835c0f299820eafbb55a21275a59ec9ca7b4bac062b1f7466",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 366,
+      "original_qid": "Q479",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看OldR/R2 RID同192.168.1.1且Hello10/Dead40相同，D移除手工RID是正确方向；图却同时DROTHER和DR/BDR同RID、2neighbors而adjacent0，不是可自洽正常状态。改编仅保留地址/RID/定时器诊断excerpt，明确OldR仅有效IPv4为.2以保证自动选择唯一ID；替换模板，恢复选项换行。 [S2]",
+      "question_sha256": "5994d52e26b41144a4d865fe17aa8d13d04d2bb64d5a6459fa41ad63bbb23df7",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压平，恢复逐设备/模式换行。原图不自洽，另改编诊断excerpt。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "600fced590ba212da595018ed9a61f466ef0a309c3e147512312be80da336a69",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 367,
+      "original_qid": "Q481",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "原图C172.16.4.0/21不是合法边界（第三字节需8倍数）；L172.16.8.2/26不是Local/32，且图中C/21与另口C172.16.2/24重叠。改编互不重叠C172.16.0/21与C172.16.8/24、对应L/32，题干改合法前缀，C掩码248保留。",
+      "question_sha256": "a99ab9408c8e6cd9f5840f8f6ea56912bab37cf16be246ce37629d05c21e5fc0",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "图中Local路由误用/26，改为合法/32；相关网络边界及重叠同步修正。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "2fa8a41aa43d9fe91b5ae46a4e84ab394ea88c34b21dfa8431ccdbe3873321f7",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 368,
+      "original_qid": "Q482",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看/30可用.65本机/.66R86，B目的/25+NH.66正确；原解析泛称任何静态NH必须直连。改为本图对端的具体选择、允许有效独立递归，补D目的/17含host bits及NH为/30网络号两个错误。",
+      "question_sha256": "4846a12b4484493c1570e4144fc03bb19fbdc836b9518947a61f09e0851038fa",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "已有原图直接查看，所需信息完整。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "2aaa31c7af1094b60868965228ced7755e79d270b2d490093725c3dd160daad2",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 369,
+      "original_qid": "Q483",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看R1/R2 Hello均15，Dead分别40/45，RID不同，point-to-point均相同；C改Dead40正确。模板没指出B改Hello10会新造不匹配，A area2/wildcard误用、D改RID不修定时器。全部选项恢复两行，按真实15秒而非默认10秒解释。",
+      "question_sha256": "36895a5fcdb846be3fc50e208cfc3ee36d086176308608e930f1799de7906872",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压平，恢复逐设备/模式换行。已有原图完整。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "95e7769da6aae1344295433f0d6ef8dcc51568b4c9c5f67873de7f227a479070",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 370,
+      "original_qid": "Q484",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看同Q357互联/30和Lo地址；原题双数主体未明确谁必须DR，C仍可R86 DR并Full，故补R14必须DR、R86priority1、fresh选举和MTU检查条件。四段配置压平，恢复模式/换行，保留B错放priority与C为0干扰，D保留。",
+      "question_sha256": "a19fff3eb9732e214af51880c8d622066774e55f78613496d207ef471f4106ec",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0361-0370.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "多命令选项压平，恢复逐设备/模式换行。已有原图完整。",
+        "report": "presentation-0361-0370.md"
+      },
+      "current_question_sha256": "6a3fa8fc8490cfc008fbce2e4175315e902bcf949057f4ece12cd8d6844fe745",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0361-0370.json",
+        "verification": "fix-verification-0341-0370.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 371,
+      "original_qid": "Q485",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "通过",
+      "assessment": "纯文字三前缀均匹配172.31.0.1，已安装/25最长，C正确；原解析包含范围及其他选项排除，无需修改。",
+      "question_sha256": "a5b5ea7d006d994b730e941a2abb7cf4e4d65f9a987929d2d7c8ce1109c1fad4",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0371-0375.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "文字题无图依赖。",
+        "report": "presentation-0371-0375.md"
+      },
+      "current_question_sha256": "a5b5ea7d006d994b730e941a2abb7cf4e4d65f9a987929d2d7c8ce1109c1fad4"
+    },
+    {
+      "id": 372,
+      "original_qid": "Q486",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看R1 LAN10.0.1/24、R2 LAN10.0.2/24和互联10.0.0/30；原题仅要邻居，B/D也在互联口启用OSPF，C不唯一。补同时启用R1本地LAN需求，恢复全部配置换行和area 0分隔，解释进程号本地意义。",
+      "question_sha256": "cfec57c16171641185f5980fd0662fba5fe613ee431c23c600e28f2500092369",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0371-0375.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四组选项压平、area0缺分隔，恢复三行。",
+        "report": "presentation-0371-0375.md"
+      },
+      "current_question_sha256": "2d92cdd27a271403503fdf84fe8e9b7b403807b422381e4e1fce27de383ca0e7",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0371-0375.json",
+        "verification": "fix-verification-0371-0375.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 373,
+      "original_qid": "Q487",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看R1既有DR/R3 BDR、RIDs .8/.6/.4/.1；仅提高R2priority100不抢占，补受控初次重新选举条件，修intergface拼写及配置换行，不倒推历史角色必由RID大小造成。",
+      "question_sha256": "a2896d71d486b4ef249f0c9e546965178e59562c36d92eb8698d418d84c2b4e4",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0371-0375.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "intergface拼写错误且两命令压平，恢复。",
+        "report": "presentation-0371-0375.md"
+      },
+      "current_question_sha256": "ac2a7e9a3a3af98b3e82234cbf25c2c9b14eb24e578e37875bd25f152690037c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0371-0375.json",
+        "verification": "fix-verification-0371-0375.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 374,
+      "original_qid": "Q489",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看10.10.13.160/29故D/248正确；源图8条10网路由有5种掩码却称4，其他父标题也混乱。改编相关合法OSPF/连接条目excerpt，去错计数，保留原图，不误报缺图。",
+      "question_sha256": "e5da9e3249d440eb0a892c34b545d39a1fac1f486b85b57cd27c7ed440a3e01b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0371-0375.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图内容齐全但计数错误，作为内容修订。",
+        "report": "presentation-0371-0375.md"
+      },
+      "current_question_sha256": "0bae9d5961fbecead1938eb5f603e3f72d1c1e7bdba655202c9954aa590a8bdf",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0371-0375.json",
+        "verification": "fix-verification-0371-0375.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 375,
+      "original_qid": "Q491",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看OSPF/24 AD110 via.2；选项地址/AD粘连，原解析称OSPF115错误，且A的/32AD115照样胜过/24，原A/D均可选；图还在R1两接口配置重叠192.168.1/24。改编两个独立/30、R3新NH.6；A改经R2的主机路线干扰，D经R3的/32，B/C仍为整个/24，不冒称恢复原图。",
+      "question_sha256": "8e55640217142dca475ee721c3602597a59feb297cf900602a7879f177392b77",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0371-0375.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四选项IP/AD和mask/NH粘连，修为独立参数；拓扑内容矛盾另行改编。",
+        "report": "presentation-0371-0375.md"
+      },
+      "current_question_sha256": "3976cd9f832840f15bdae111f19e6385346bf722dc7fbe6cc9b3fd2d7107e6e1",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0371-0375.json",
+        "verification": "fix-verification-0371-0375.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 376,
+      "original_qid": "Q492",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "原图主10.10.10.0/30，原解析写错10.0.10；/32只按目的不能保证仅A与server这一源目的对用新线。需保留pair-only目标并补PBR/ACL而非继续宣称两host route足够。选项lp/tp拼写和换行也需修。",
+      "question_sha256": "0884eb88d657d01d384dc31c83452cea3063be330a098bee1a9e15317a1be6b8",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0376-0380.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "双设备配置压平且lp/tp错字；恢复命令，A改编源目的对匹配PBR。",
+        "report": "presentation-0376-0380.md"
+      },
+      "current_question_sha256": "e3f101d647af4ce37660ad2a35692a02d4393807595bab7d8815738e568abf82",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0376-0380.json",
+        "verification": "fix-verification-0376-0380.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 377,
+      "original_qid": "Q493",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "通过",
+      "assessment": "图C10.1.1.0/30/L.2/32与四静态完整有效，192.168.2.2选/29 B，原解析具体充分，待记录通过。",
+      "question_sha256": "f8223fed48bfe1f7ce41001e9a8fb6be814d0d4cb926c7a55da9d9db5e9ebeb9",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0376-0380.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "完整路由图已直接查看，无缺代码/图。",
+        "report": "presentation-0376-0380.md"
+      },
+      "current_question_sha256": "f8223fed48bfe1f7ce41001e9a8fb6be814d0d4cb926c7a55da9d9db5e9ebeb9"
+    },
+    {
+      "id": 378,
+      "original_qid": "Q494",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "image仅极小裁剪文字Gat，缺真正拓扑；A仅允许R2→224.0.0.5的89，阻断建立邻接必需的单播DBD等。需给完整自洽范围并允许R2协议89到所需单播/组播，拒其他；不能只以Hello邻居出现证明Full。原解析虚构5项/禁止Loopback条件。",
+      "question_sha256": "9df28e95fce078be25fd15b8daedc6111ac473e844f1e90a19c51ccb61fcfc59",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0376-0380.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "原图只有Gat裁片，无可用拓扑，改为具备全部地址/接口/范围的自包含文字题，移除无用裁片。",
+        "report": "presentation-0376-0380.md"
+      },
+      "current_question_sha256": "cb61683ac885d81f957a1d143b785e6d5805e19fea99a00a0274482a24517ae9",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0376-0380.json",
+        "verification": "fix-verification-0376-0380.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 379,
+      "original_qid": "Q495",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "与Q374同源8条5种掩码误称4，相关前缀可改编同类excerpt+明确HostA10.10.13.214；D/29正确，原unique匹配还需区别default也匹配。",
+      "question_sha256": "c11f611f4393f720161ba7aac8f5228cf13f3f44781025c81878f5b2e86d5ea0",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0376-0380.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图完整但计数错误属内容修订；用已检查的相关合法表替换。",
+        "report": "presentation-0376-0380.md"
+      },
+      "current_question_sha256": "378c7b3d75712eb511cf7ac1af247b0cafac9f675188c210c49c5b2314089e0c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0376-0380.json",
+        "verification": "fix-verification-0376-0380.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 380,
+      "original_qid": "Q496",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "图两静态/0 AD1/20，D经172.16.20.2正确；原解析错误声称仅物理down才可激活备线，需改主路由撤回且backup有效，避免ECMP必轮询/物理断唯一触发泛化。",
+      "question_sha256": "6c6b0772803a8995d6e7b8d13860048761e50e90fd015cf79332c43f2beede90",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0376-0380.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图和两条命令完整，解析内容问题另修。",
+        "report": "presentation-0376-0380.md"
+      },
+      "current_question_sha256": "2ad6d92acf7f3c1ce39be0f71c1581de93352d5b6e71c0ecc2b56db4b593ef7f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0376-0380.json",
+        "verification": "fix-verification-0376-0380.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 381,
+      "original_qid": "Q497",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看/26 Vlan58覆盖.62，A正确；图C到Null0及多个VLAN重叠连接网段不成立，父计数也不符。改编合法已安装解析后转发表，不冒称原图C路由正常。",
+      "question_sha256": "c0e3bd4073890ce0d203f245ed014ec719a4ecba885bb969f07b2a4095c26e9d",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0381-0385.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图已直接查看，内容问题另修。",
+        "report": "presentation-0381-0385.md"
+      },
+      "current_question_sha256": "367410f80bfa874a6768fa3dd6c0685cce10eea1deb1070bf86b8a5e2058ff1f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0381-0385.json",
+        "verification": "fix-verification-0381-0385.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 382,
+      "original_qid": "Q498",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看FULL/DR到FULL/-，D方向正确；需两端一致p2p，不由一个邻居输出证明任意设备显示priority恒0，点到多点也可FULL/-。补双节点/本地已改条件，恢复命令换行，C缺process-id本身不完整，不声称有效改area后固定停Down/Init。",
+      "question_sha256": "d2dbf6a8d4762908a1cdd68c1e51a933c37454a8bb0320920fda4e9630710353",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0381-0385.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四个双命令选项压平，恢复换行。",
+        "report": "presentation-0381-0385.md"
+      },
+      "current_question_sha256": "5b893da619e6222f840de20abde3112892de779dd3f0839e6c948930aaae71d8",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0381-0385.json",
+        "verification": "fix-verification-0381-0385.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 383,
+      "original_qid": "Q499",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看互联10.73.65.64/30及OSPF100Area0，A启用本地LAN正确；图右PC.10不属10.80.65.0/29，改编为.8/29，左明确Fa0/1.1。原解析错称255.255.255.0 wildcard语法必拒，改为不匹配该接口；本地直连保留C而非变O。",
+      "question_sha256": "ada5260a6f7fca4fd4a68bec453401dfd5199d25f2fc70bb4c9619b66feee43e",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0381-0385.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "四配置压平，恢复层级/换行。",
+        "report": "presentation-0381-0385.md"
+      },
+      "current_question_sha256": "a054291dea927a5a87bfad40375a4f8a8664070d36eb3ee65842a0fb9b6870ce",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0381-0385.json",
+        "verification": "fix-verification-0381-0385.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 384,
+      "original_qid": "Q501",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B为IPv4VRRP VRID10，正确；原解析把任意其他MAC认定随机物理卡/推断来源且GLBP组字段不准确。限定IPv4，按标准格式/十六进制解释，去不必要错泛化。",
+      "question_sha256": "d9f501f8cdd17f48513c9fa03278586ac9881160490db39a15a8447ad6c3e703",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0381-0385.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，无必需缺图。",
+        "report": "presentation-0381-0385.md"
+      },
+      "current_question_sha256": "f4866f6f0da06fa0030735e1ab23f27da9ae8623d55f05a0bc80a36808f1fafe",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0381-0385.json",
+        "verification": "fix-verification-0381-0385.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 385,
+      "original_qid": "Q502",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "原B全厂商互通且增加Cisco安全功能并非VRRP保证，D稳定虚拟MAC支持网关故障接替正确。答案B改D，替换模板并说明跨厂商需版本/地址族兼容，不承担STP功能。",
+      "question_sha256": "5ce19f702dbbe111e8a04dd96e8861e901af90593a03f44a01fce37214c5bb75",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0381-0385.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，无必需缺图。",
+        "report": "presentation-0381-0385.md"
+      },
+      "current_question_sha256": "c7ef3611a1d62b0201de2cbe98b9957fdf8328065cd11da5fcd32e9f957ddb12",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0381-0385.json",
+        "verification": "fix-verification-0381-0385.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 386,
+      "original_qid": "Q503",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B标准多厂商虚拟网关正确；原解析保证毫秒级无缝、必须VRRP及priority仅1–254均过度，忽略owner255/0通告与原生亚秒计时。按实际FHRP职责重写，不承诺全部厂商版本互通。",
+      "question_sha256": "a23b47e7a240e30b78282cf8c100c3865a08bbf5b09eb4152844195d1d263eae",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0386-0390.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "无必需图/代码缺失。",
+        "report": "presentation-0386-0390.md"
+      },
+      "current_question_sha256": "580b5ee637cec1f9f755fd014721cb22ec1e01ddd73040a5a127610a08755915",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0386-0390.json",
+        "verification": "fix-verification-0386-0390.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 387,
+      "original_qid": "Q504",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B虚拟IP正确且选项清楚；原解析声称PC只能一个静态网关且standby立即无缝接替过度，改为本HSRP组角色与稳定VIP，无需改主机网关但可能短暂中断。",
+      "question_sha256": "a33ea3dca84560ecc2951132978d7fc31a2e25ed8215062fb875fad87c1d71e2",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0386-0390.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "无必需图/代码缺失。",
+        "report": "presentation-0386-0390.md"
+      },
+      "current_question_sha256": "d9fba165edadaca7b604b693680261ed30930ecba8de50ebd173887436865eac",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0386-0390.json",
+        "verification": "fix-verification-0386-0390.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 388,
+      "original_qid": "Q505",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "通过",
+      "assessment": "纯文字，传统默认HSRPv1前缀0000.0c07.ac加组号14=0e，D正确；B前缀00:05错误且14hex为20，原解析完成换算与干扰排除，无必需图/代码遗漏。",
+      "question_sha256": "d90ee6d07db2f151adb23fc11bb6eee57e36f11c563d87274dad0702ee5a7879",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0386-0390.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "无必需图/代码缺失。",
+        "report": "presentation-0386-0390.md"
+      },
+      "current_question_sha256": "d90ee6d07db2f151adb23fc11bb6eee57e36f11c563d87274dad0702ee5a7879"
+    },
+    {
+      "id": 389,
+      "original_qid": "Q506",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已直接看唯一原图：互联10.0.20.0/24，R1.1/R2.2/R3.3，R3LAN10.0.15/24；题干把互联写/26与图不一致。统一/24并明确回程，D保留，模板替换为本地/远端与NH自指逐项说明。",
+      "question_sha256": "d4d5a962b469307c5ba0b7954488c84fd2b7e9893e219de637936236d539fef4",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0386-0390.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图完整直接查看；掩码矛盾属于内容问题。",
+        "report": "presentation-0386-0390.md"
+      },
+      "current_question_sha256": "2cb27e65f7e3450a1aeaad79f2cf21ecc60f02e2264045b6c82e4bfa912f3f73",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0386-0390.json",
+        "verification": "fix-verification-0386-0390.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 390,
+      "original_qid": "Q507",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "静态路由不属于同OSPF进程，且两route缺同前缀/AD/有效性条件不能直接断言ECMP。保留静态路径主题，明确两条同前缀同AD且已安装/允许至少2路径，D保留；区分流分担和每包轮询，不套所有平台默认4。",
+      "question_sha256": "759ba1c3a4b4130e3b034eb5a823a33e0631accf366a0f666f46a628dc5d9ef6",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0386-0390.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "无必需图/代码缺失。",
+        "report": "presentation-0386-0390.md"
+      },
+      "current_question_sha256": "7365dc6934435b6e8923ca72485069c27fd89c39732fc71c035dfb7c933022dc",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0386-0390.json",
+        "verification": "fix-verification-0386-0390.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 391,
+      "original_qid": "Q508",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A默认网关故障正确，但原文把上联故障默认自动接管、整个子网瘫痪及BGP故障固定处方泛化，改网关角色可用性与上游跟踪条件。",
+      "question_sha256": "88c6db870da1a92b66eec1ae4c0a425f27519c4291d083c7a0fa24fb506cf85e",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，必需命令/信息完整。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "90d15ef500f9ae431d8cb760234f9b253dda3d1689a7007ea271c5a38791e395",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 392,
+      "original_qid": "Q509",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原题UDP jitter泛称NTP必需不成立，Cisco要求准确单向delay时钟同步；改明确测UDP jitter操作的one-way latency。区分1967控制通道和配置的UDP测试端口，D保留。",
+      "question_sha256": "9c11e053049d744c6abdb419c8cf768768fa7ddc89737e8e41d1312dc86f535b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，必需命令/信息完整。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "acb95ce6dae2390db4e2c8ce30a34d072b039b3bc4835c1f2382b91a216d5b4a",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 393,
+      "original_qid": "Q510",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看ip nat pool cisco10.1.1.0–.50后直接mask，缺netmask关键字，且.0是/24网络号。改编.10–.50有效pool命令；只定义池不等于已配置动态NAT/PAT，题问创建何对象，C保留。",
+      "question_sha256": "d8cc3661d25bebc0f9392b55afed531e7a76a8542deff1387314acaa73279387",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "问题",
+        "assessment": "原图NAT命令缺netmask关键字，改编有效单行命令。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "e6ae15755c884053ba873454bce7f41440a1f87803c2f7459c1aeea3f778bdc3",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 394,
+      "original_qid": "Q511",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A NATpool正确；原解析把池限为公网地址、one-way NAT生造均不严谨，改可供转换的集合，映射方式不是地址集合定义。",
+      "question_sha256": "e86f38a767e6804d020239872f72ee41dc724145f5904daa26a07755c1ec70cb",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，必需命令/信息完整。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "f92e3ff56e06a216816b0d280c6fe78139e2ab16ea22f88e34e28d2ab2b9678f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 395,
+      "original_qid": "Q512",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A两协议允许正确；原解析称no transport input telnet必语法错不符Cisco命令参考。改为no形式不能表达此许可列表，说明VTY模式及其他登录前提。",
+      "question_sha256": "6557b757be444a8dd36b3dd2cacc36b4f7c280a2ef94bc575cc039470496346e",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，必需命令/信息完整。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "a754b0675a9d9774bd513ea52bfac726ce37b85a3787fe3f9cf0738d022ff9fe",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 396,
+      "original_qid": "Q513",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "已看DHCPpool /27、DNS/NetBIOS，确缺default-router，D最可能正确。原文把每个跨网目的都必经default、补配置即立刻生效过度；补网关示例需有效/排除并续租，不能伪称源图已给.1。",
+      "question_sha256": "b4f0d46740baeb66e01d49e13c7a521e524256da2102ed4ed78181186b9b25e6",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图完整直接查看；内容修订见主报告。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "961ae7c9690772d47d79a0ca848d19c38d32c0d462131125ffe6da7d9784c76a",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 397,
+      "original_qid": "Q514",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看Ping与GratuitousARP两冲突记录；A分配隔离规则正确但模板未区别服务端ping/客户端ARP报告及人工clear；E日志可在物理冲突消除后仍在，不能无条件判其事实错误。明确问可分配性而非日志寿命，解释解决后清标记。",
+      "question_sha256": "59082a1bbfc3a98468ca139dfd264e48630adb9a95a4b9033fcb4f2ae70b3a51",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "原图完整直接查看；内容修订见主报告。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "0f5d87a51247a4ac68696b4ebf30f3119d2a7b8dc507c5525237111ae61ace28",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 398,
+      "original_qid": "Q515",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C binding正确；原解析否认show ip dhcp database存在错误，Cisco命令参考明列其为database agent信息。所有选项去句末点/规范全称，D statistics用于计数非绑定，不依赖缩写是否可接受判错。",
+      "question_sha256": "d40a8c2d50458767c339842fe2700e33e9577eab3a6171419a24212567cf47f9",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，必需命令/信息完整。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "664cf15ad91e9cbf91e34bd64b7f8c3da2cf36b6cbf91dcac9fafd2182bddd99",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 399,
+      "original_qid": "Q516",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "递归不是权威源，且可用缓存，原四选无正确权威服务器。A改为该zone权威DNS服务器，保留A字母；解释区分权威/递归与缓存、DNSSEC非自动隐含，不能宣称递归必穿透缓存。",
+      "question_sha256": "5bc5032f3cf4b0383dabe4181b929eb7ffef20d0cd24baead4808441043f4c50",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，必需命令/信息完整。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "35269c957ef6369cc560c09f73933b991bf751e1a5e4225b4bbd775d015a47c9",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 400,
+      "original_qid": "Q517",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D show ip interface可看Helper正确；原文称唯一官方命令、全部DHCPREQUEST广播、helper目的等于giaddr/源地址的固定泛化有误。明确问接口配置的DHCP服务器helper目的，区别中继接口giaddr；可另看running-config，保留D。",
+      "question_sha256": "ad822b507838b5748af208152978b415163f8f9dda4b5861b2a756073f73bacf",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "review-0391-0400.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "纯文字题，必需命令/信息完整。",
+        "report": "presentation-0391-0400.md"
+      },
+      "current_question_sha256": "43b457e1877698ddb6b854ceb133ea4b3f0eab917d90a7b83fcfa5bb05200cf9",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "fixes-0391-0400.json",
+        "verification": "fix-verification-0391-0400.json",
+        "current_answer": [
+          "D"
+        ]
+      }
     }
   ],
   "batch_status_counts": {
@@ -6400,10 +11472,73 @@
       "歧义": 2,
       "问题": 27,
       "通过": 11
+    },
+    "review-0241-0250.md": {
+      "通过": 1,
+      "问题": 8,
+      "歧义": 1
+    },
+    "review-0251-0270.md": {
+      "歧义": 1,
+      "问题": 16,
+      "通过": 3
+    },
+    "review-0271-0280.md": {
+      "问题": 9,
+      "歧义": 1
+    },
+    "review-0281-0300.md": {
+      "问题": 17,
+      "歧义": 2,
+      "通过": 1
+    },
+    "review-0301-0310.md": {
+      "问题": 9,
+      "通过": 1
+    },
+    "review-0311-0330.md": {
+      "通过": 2,
+      "问题": 15,
+      "歧义": 3
+    },
+    "review-0331-0340.md": {
+      "问题": 7,
+      "歧义": 1,
+      "通过": 2
+    },
+    "review-0341-0350.md": {
+      "问题": 9,
+      "歧义": 1
+    },
+    "review-0351-0360.md": {
+      "问题": 9,
+      "歧义": 1
+    },
+    "review-0361-0370.md": {
+      "问题": 8,
+      "通过": 2
+    },
+    "review-0371-0375.md": {
+      "通过": 1,
+      "问题": 4
+    },
+    "review-0376-0380.md": {
+      "问题": 4,
+      "通过": 1
+    },
+    "review-0381-0385.md": {
+      "问题": 5
+    },
+    "review-0386-0390.md": {
+      "问题": 4,
+      "通过": 1
+    },
+    "review-0391-0400.md": {
+      "问题": 10
     }
   },
-  "current_scope_fully_reviewed_count": 240,
-  "presentation_reviewed_count": 240,
+  "current_scope_fully_reviewed_count": 400,
+  "presentation_reviewed_count": 400,
   "presentation_reviewed_ids": [
     1,
     2,
@@ -6644,18 +11779,178 @@
     237,
     238,
     239,
-    240
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    262,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310,
+    311,
+    312,
+    313,
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    326,
+    327,
+    328,
+    329,
+    330,
+    331,
+    332,
+    333,
+    334,
+    335,
+    336,
+    337,
+    338,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    350,
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    359,
+    360,
+    361,
+    362,
+    363,
+    364,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370,
+    371,
+    372,
+    373,
+    374,
+    375,
+    376,
+    377,
+    378,
+    379,
+    380,
+    381,
+    382,
+    383,
+    384,
+    385,
+    386,
+    387,
+    388,
+    389,
+    390,
+    391,
+    392,
+    393,
+    394,
+    395,
+    396,
+    397,
+    398,
+    399,
+    400
   ],
   "presentation_review_pending_previously_reviewed_ids": [],
-  "next_action": "处理Q201–Q400：先回补已审Q201–Q240，再从Q241逐题审查并直接修复；到Q400统一commit、编译和个人空间保留数据覆盖安装，不发release。",
+  "next_action": "本批编译与个人空间覆盖安装已验证；核对GitHub推送后停止工作，等待用户明确唤醒，目标保持active，不审Q401。",
   "presentation_status_counts": {
-    "通过": 200,
-    "问题": 36,
+    "通过": 325,
+    "问题": 71,
     "改进": 4
   },
   "initial_source_sha256": "7ac75984b0c84d413306b3dfd498947a1944ef07124a5b94a9e8c6cbb01a414e",
   "initial_app_bundle_sha256": "cc213f7da30ad41b9b7f6d9ddc3a0fadc822d38c7734c4749d1340c64dcb39fa",
-  "remediation_verified_through_id": 200,
+  "remediation_verified_through_id": 400,
   "resolved_question_ids": [
     1,
     5,
@@ -6754,7 +12049,181 @@
     196,
     197,
     199,
-    200
+    200,
+    201,
+    202,
+    204,
+    205,
+    207,
+    209,
+    210,
+    212,
+    213,
+    215,
+    217,
+    218,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    237,
+    238,
+    239,
+    240,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    258,
+    259,
+    260,
+    261,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    289,
+    290,
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    309,
+    310,
+    312,
+    313,
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    326,
+    328,
+    329,
+    330,
+    331,
+    332,
+    333,
+    335,
+    337,
+    338,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    350,
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    359,
+    360,
+    361,
+    362,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370,
+    372,
+    373,
+    374,
+    375,
+    376,
+    378,
+    379,
+    380,
+    381,
+    382,
+    383,
+    384,
+    385,
+    386,
+    387,
+    389,
+    390,
+    391,
+    392,
+    393,
+    394,
+    395,
+    396,
+    397,
+    398,
+    399,
+    400
   ],
   "github_milestone": {
     "batch_size": 200,
@@ -6781,5 +12250,26 @@
   "next_commit_target_ids": [
     201,
     400
-  ]
+  ],
+  "stop_after_current_milestone": {
+    "last_question_id": 400,
+    "required_delivery": [
+      "commit",
+      "push",
+      "compile",
+      "personal_user_0_same_signature_in_place_install"
+    ],
+    "then": "停止工作并等待用户明确唤醒；目标保持active，不调用paused；自动目标续作不视为用户唤醒。",
+    "user_instruction": "审查到400之后并完成编译、推送后，先暂停任务，等待唤醒（试一下不暂停目标）"
+  },
+  "current_batch_delivery": {
+    "target_ids": [
+      201,
+      400
+    ],
+    "status": "build_and_personal_install_verified",
+    "verification": "milestone-0201-0400-verification.json",
+    "git_delivery": "Commit history and origin branch pointer authoritative",
+    "stop_after_verified_push": true
+  }
 }

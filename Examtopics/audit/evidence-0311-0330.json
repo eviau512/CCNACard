@@ -1,0 +1,227 @@
+{
+  "sources": {
+    "S1": "https://www.rfc-editor.org/rfc/rfc9568.html",
+    "S2": "https://www.rfc-editor.org/rfc/rfc7868.html",
+    "S3": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13688-16.html",
+    "S4": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ip6-route-static-xe.html",
+    "S5": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/23862-duplicate-router-id-ospf.html",
+    "S6": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "S7": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/network-services/network-services/m_fhp-hsrp-0.html",
+    "S8": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html",
+    "S9": "https://www.cisco.com/en/US/docs/ios/12_2t/12_2t15/feature/guide/ft_glbp.html"
+  },
+  "original_images_directly_viewed": [
+    315,
+    316,
+    317,
+    318,
+    320,
+    321,
+    326,
+    327,
+    328,
+    330
+  ],
+  "address_calculations": [
+    {
+      "id": 315,
+      "destination": "192.168.16.2",
+      "ranges": [
+        {
+          "prefix": "192.168.16.0/21",
+          "first": "192.168.16.0",
+          "last": "192.168.23.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.16.0/24",
+          "first": "192.168.16.0",
+          "last": "192.168.16.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.16.0/26",
+          "first": "192.168.16.0",
+          "last": "192.168.16.63",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.16.0/27",
+          "first": "192.168.16.0",
+          "last": "192.168.16.31",
+          "matches": true
+        }
+      ],
+      "winner": "192.168.16.0/27"
+    },
+    {
+      "id": 320,
+      "destination": "192.168.10.33",
+      "ranges": [
+        {
+          "prefix": "192.168.10.32/28",
+          "first": "192.168.10.32",
+          "last": "192.168.10.47",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.10.0/27",
+          "first": "192.168.10.0",
+          "last": "192.168.10.31",
+          "matches": false
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "192.168.10.32/28"
+    },
+    {
+      "id": 321,
+      "destination": "10.0.1.15",
+      "ranges": [
+        {
+          "prefix": "10.0.1.0/28",
+          "first": "10.0.1.0",
+          "last": "10.0.1.15",
+          "matches": true
+        },
+        {
+          "prefix": "10.0.1.0/24",
+          "first": "10.0.1.0",
+          "last": "10.0.1.255",
+          "matches": true
+        },
+        {
+          "prefix": "10.0.1.3/32",
+          "first": "10.0.1.3",
+          "last": "10.0.1.3",
+          "matches": false
+        },
+        {
+          "prefix": "10.0.1.190/32",
+          "first": "10.0.1.190",
+          "last": "10.0.1.190",
+          "matches": false
+        }
+      ],
+      "winner": "10.0.1.0/28"
+    },
+    {
+      "id": 327,
+      "destination": "10.56.192.1",
+      "ranges": [
+        {
+          "prefix": "10.56.0.0/17",
+          "first": "10.56.0.0",
+          "last": "10.56.127.255",
+          "matches": false
+        },
+        {
+          "prefix": "10.56.128.0/18",
+          "first": "10.56.128.0",
+          "last": "10.56.191.255",
+          "matches": false
+        },
+        {
+          "prefix": "10.56.0.19/32",
+          "first": "10.56.0.19",
+          "last": "10.56.0.19",
+          "matches": false
+        },
+        {
+          "prefix": "10.56.128.19/32",
+          "first": "10.56.128.19",
+          "last": "10.56.128.19",
+          "matches": false
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "0.0.0.0/0"
+    },
+    {
+      "id": 328,
+      "destination": "172.16.1.190",
+      "ranges": [
+        {
+          "prefix": "172.16.1.184/29",
+          "first": "172.16.1.184",
+          "last": "172.16.1.191",
+          "matches": true
+        },
+        {
+          "prefix": "172.16.1.0/28",
+          "first": "172.16.1.0",
+          "last": "172.16.1.15",
+          "matches": false
+        },
+        {
+          "prefix": "172.16.1.0/24",
+          "first": "172.16.1.0",
+          "last": "172.16.1.255",
+          "matches": true
+        },
+        {
+          "prefix": "172.16.1.3/32",
+          "first": "172.16.1.3",
+          "last": "172.16.1.3",
+          "matches": false
+        },
+        {
+          "prefix": "172.16.3.0/24",
+          "first": "172.16.3.0",
+          "last": "172.16.3.255",
+          "matches": false
+        }
+      ],
+      "winner": "172.16.1.184/29"
+    }
+  ],
+  "hex_group_checks": {
+    "0a": 10,
+    "99": 153
+  },
+  "q324_first_octet_I_G_bit": 1,
+  "answer_changes": {
+    "314": {
+      "before": [
+        "B"
+      ],
+      "after": [
+        "D"
+      ]
+    },
+    "321": {
+      "before": [
+        "B"
+      ],
+      "after": [
+        "A"
+      ]
+    }
+  },
+  "revised_images": [
+    316,
+    321,
+    328
+  ],
+  "authored_exhibit_corrections": {
+    "316": "Connect gateway10.12.0.1 to explicitly given10.12.0/24; remove invalid source count.",
+    "321": "Remove duplicate same-prefix C/O active entry, supply valid192.168.0/24 adjacency; keep destination.15.",
+    "328": "Remove overlapping loopback/physical connected nets and provide192.168.7/24 adjacency."
+  },
+  "limitations": "No actual neighbor/DR, static-recursion or VRRP failover measurements. New exhibits are explicit exercises rather than claimed restorations of unavailable source intent.",
+  "revised_diagrams_visually_checked": [
+    316,
+    321,
+    328
+  ]
+}

@@ -1,0 +1,313 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    371,
+    372,
+    373,
+    374,
+    375
+  ],
+  "code_results": [
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`172.31.0.1`",
+      "expected": "172.31.0.1",
+      "html": "<code class=\"inline-code\">172.31.0.1</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`172.31.0.0/16`",
+      "expected": "172.31.0.0/16",
+      "html": "<code class=\"inline-code\">172.31.0.0/16</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`172.31.0.0/24`",
+      "expected": "172.31.0.0/24",
+      "html": "<code class=\"inline-code\">172.31.0.0/24</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`172.31.0.0/25`",
+      "expected": "172.31.0.0/25",
+      "html": "<code class=\"inline-code\">172.31.0.0/25</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/25`",
+      "expected": "/25",
+      "html": "<code class=\"inline-code\">/25</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/25`",
+      "expected": "/25",
+      "html": "<code class=\"inline-code\">/25</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/24`",
+      "expected": "/24",
+      "html": "<code class=\"inline-code\">/24</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/16`",
+      "expected": "/16",
+      "html": "<code class=\"inline-code\">/16</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`172.31.0.0/25`",
+      "expected": "172.31.0.0/25",
+      "html": "<code class=\"inline-code\">172.31.0.0/25</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/24`",
+      "expected": "/24",
+      "html": "<code class=\"inline-code\">/24</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/25`",
+      "expected": "/25",
+      "html": "<code class=\"inline-code\">/25</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/16`",
+      "expected": "/16",
+      "html": "<code class=\"inline-code\">/16</code>"
+    },
+    {
+      "id": 371,
+      "kind": "code",
+      "input": "`/0`",
+      "expected": "/0",
+      "html": "<code class=\"inline-code\">/0</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`show ip route`",
+      "expected": "show ip route",
+      "html": "<code class=\"inline-code\">show ip route</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`O <目的网段>/<前缀长度>`",
+      "expected": "O <目的网段>/<前缀长度>",
+      "html": "<code class=\"inline-code\">O &lt;目的网段&gt;/&lt;前缀长度&gt;</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`O 10.10.13.160/29 [110/2] via 10.10.10.1, 00:00:04, GigabitEthernet0/0`",
+      "expected": "O 10.10.13.160/29 [110/2] via 10.10.10.1, 00:00:04, GigabitEthernet0/0",
+      "html": "<code class=\"inline-code\">O 10.10.13.160/29 [110/2] via 10.10.10.1, 00:00:04, GigabitEthernet0/0</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`O`",
+      "expected": "O",
+      "html": "<code class=\"inline-code\">O</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`10.10.13.160/29`",
+      "expected": "10.10.13.160/29",
+      "html": "<code class=\"inline-code\">10.10.13.160/29</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`[110/2]`",
+      "expected": "[110/2]",
+      "html": "<code class=\"inline-code\">[110/2]</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`via 10.10.10.1`",
+      "expected": "via 10.10.10.1",
+      "html": "<code class=\"inline-code\">via 10.10.10.1</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`GigabitEthernet0/0`",
+      "expected": "GigabitEthernet0/0",
+      "html": "<code class=\"inline-code\">GigabitEthernet0/0</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`255.255.255.`",
+      "expected": "255.255.255.",
+      "html": "<code class=\"inline-code\">255.255.255.</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`11111000`",
+      "expected": "11111000",
+      "html": "<code class=\"inline-code\">11111000</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`256 - 2^3 = 256 - 8 = 248`",
+      "expected": "256 - 2^3 = 256 - 8 = 248",
+      "html": "<code class=\"inline-code\">256 - 2^3 = 256 - 8 = 248</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`255.255.255.248`",
+      "expected": "255.255.255.248",
+      "html": "<code class=\"inline-code\">255.255.255.248</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`10.10.13.160/29`",
+      "expected": "10.10.13.160/29",
+      "html": "<code class=\"inline-code\">10.10.13.160/29</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`255.255.255.248`",
+      "expected": "255.255.255.248",
+      "html": "<code class=\"inline-code\">255.255.255.248</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`10.10.13.128/28`",
+      "expected": "10.10.13.128/28",
+      "html": "<code class=\"inline-code\">10.10.13.128/28</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`10.10.13.144/28`",
+      "expected": "10.10.13.144/28",
+      "html": "<code class=\"inline-code\">10.10.13.144/28</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/25`",
+      "expected": "/25",
+      "html": "<code class=\"inline-code\">/25</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`10.10.13.0/25`",
+      "expected": "10.10.13.0/25",
+      "html": "<code class=\"inline-code\">10.10.13.0/25</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/21`",
+      "expected": "/21",
+      "html": "<code class=\"inline-code\">/21</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`.240`",
+      "expected": ".240",
+      "html": "<code class=\"inline-code\">.240</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`.248`",
+      "expected": ".248",
+      "html": "<code class=\"inline-code\">.248</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`/30`",
+      "expected": "/30",
+      "html": "<code class=\"inline-code\">/30</code>"
+    },
+    {
+      "id": 374,
+      "kind": "code",
+      "input": "`.252`",
+      "expected": ".252",
+      "html": "<code class=\"inline-code\">.252</code>"
+    }
+  ]
+}

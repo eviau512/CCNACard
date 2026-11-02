@@ -1,0 +1,197 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html",
+    "S2": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "S3": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/command/iri-cr-book/iri-cr-a1.html"
+  },
+  "original_images_directly_viewed": [
+    331,
+    332,
+    333,
+    334,
+    335,
+    336,
+    337,
+    338,
+    339,
+    340
+  ],
+  "address_calculations": [
+    {
+      "id": 331,
+      "destination": "10.0.0.5",
+      "ranges": [
+        {
+          "prefix": "10.0.0.0/24",
+          "first": "10.0.0.0",
+          "last": "10.0.0.255",
+          "matches": true
+        },
+        {
+          "prefix": "10.0.0.5/32",
+          "first": "10.0.0.5",
+          "last": "10.0.0.5",
+          "matches": true
+        }
+      ],
+      "winner": "10.0.0.5/32"
+    },
+    {
+      "id": 332,
+      "destination": "192.168.1.250",
+      "ranges": [
+        {
+          "prefix": "192.168.1.0/24",
+          "first": "192.168.1.0",
+          "last": "192.168.1.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.1.128/25",
+          "first": "192.168.1.128",
+          "last": "192.168.1.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.1.192/26",
+          "first": "192.168.1.192",
+          "last": "192.168.1.255",
+          "matches": true
+        },
+        {
+          "prefix": "192.168.1.224/27",
+          "first": "192.168.1.224",
+          "last": "192.168.1.255",
+          "matches": true
+        }
+      ],
+      "winner": "192.168.1.224/27"
+    },
+    {
+      "id": 336,
+      "destination": "10.10.13.158",
+      "ranges": [
+        {
+          "prefix": "10.10.13.0/25",
+          "first": "10.10.13.0",
+          "last": "10.10.13.127",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.13.128/28",
+          "first": "10.10.13.128",
+          "last": "10.10.13.143",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.13.144/28",
+          "first": "10.10.13.144",
+          "last": "10.10.13.159",
+          "matches": true
+        },
+        {
+          "prefix": "10.10.13.160/29",
+          "first": "10.10.13.160",
+          "last": "10.10.13.167",
+          "matches": false
+        },
+        {
+          "prefix": "10.10.13.208/29",
+          "first": "10.10.13.208",
+          "last": "10.10.13.215",
+          "matches": false
+        },
+        {
+          "prefix": "0.0.0.0/0",
+          "first": "0.0.0.0",
+          "last": "255.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "10.10.13.144/28"
+    },
+    {
+      "id": 337,
+      "destination": "10.1.1.19",
+      "ranges": [
+        {
+          "prefix": "10.1.1.16/28",
+          "first": "10.1.1.16",
+          "last": "10.1.1.31",
+          "matches": true
+        },
+        {
+          "prefix": "10.1.1.0/24",
+          "first": "10.1.1.0",
+          "last": "10.1.1.255",
+          "matches": true
+        },
+        {
+          "prefix": "10.1.0.0/26",
+          "first": "10.1.0.0",
+          "last": "10.1.0.63",
+          "matches": false
+        },
+        {
+          "prefix": "10.0.0.0/8",
+          "first": "10.0.0.0",
+          "last": "10.255.255.255",
+          "matches": true
+        }
+      ],
+      "winner": "10.1.1.16/28"
+    },
+    {
+      "id": 339,
+      "destination": "10.1.2.126",
+      "ranges": [
+        {
+          "prefix": "10.1.2.0/24",
+          "first": "10.1.2.0",
+          "last": "10.1.2.255",
+          "matches": true
+        },
+        {
+          "prefix": "10.1.2.0/25",
+          "first": "10.1.2.0",
+          "last": "10.1.2.127",
+          "matches": true
+        },
+        {
+          "prefix": "10.1.3.0/25",
+          "first": "10.1.3.0",
+          "last": "10.1.3.127",
+          "matches": false
+        },
+        {
+          "prefix": "10.1.12.112/28",
+          "first": "10.1.12.112",
+          "last": "10.1.12.127",
+          "matches": false
+        }
+      ],
+      "winner": "10.1.2.0/25"
+    }
+  ],
+  "q338_primary_prefix": "10.1.1.0/24",
+  "q338_corrected_backup_prefix": "10.1.1.0/24",
+  "q338_old_host_route_would_override_ospf_network": true,
+  "q338_primary_AD": 110,
+  "q338_backup_AD": 125,
+  "new_images": [
+    332,
+    339,
+    340
+  ],
+  "authored_exhibit_corrections": {
+    "332": "Four relevant installed prefixes, removed false3subnets3masks heading.",
+    "339": "Relevant D/S plus valid connected next-hop network; removed inconsistent classful parent headings.",
+    "340": "Full D EX/O E1 codes, plus explicitly reachable207.165.200.200 and.254."
+  },
+  "limitations": "Source review and independent address arithmetic, not live command/traffic/MTU failover tests.",
+  "revised_diagrams_visually_checked": [
+    332,
+    339,
+    340
+  ]
+}

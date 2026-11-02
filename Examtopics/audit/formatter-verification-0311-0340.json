@@ -1,0 +1,693 @@
+{
+  "targets": [
+    "CCNA-App\\app\\src\\main\\assets\\app.js",
+    "Examtopics\\batch\\Examtopics_Batch2_Q201-400.html",
+    "Examtopics\\output\\Examtopics_CCNA_200-301_Complete.html"
+  ],
+  "question_ids": [
+    311,
+    312,
+    313,
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    326,
+    327,
+    328,
+    329,
+    330,
+    331,
+    332,
+    333,
+    334,
+    335,
+    336,
+    337,
+    338,
+    339,
+    340
+  ],
+  "outputs_agree": true,
+  "code_results": [
+    {
+      "id": 311,
+      "kind": "code",
+      "input": "`neighbor`",
+      "expected": "neighbor",
+      "html": "<code class=\"inline-code\">neighbor</code>"
+    },
+    {
+      "id": 311,
+      "kind": "code",
+      "input": "`point-to-point`",
+      "expected": "point-to-point",
+      "html": "<code class=\"inline-code\">point-to-point</code>"
+    },
+    {
+      "id": 311,
+      "kind": "code",
+      "input": "`show ip ospf interface serialX/X`",
+      "expected": "show ip ospf interface serialX/X",
+      "html": "<code class=\"inline-code\">show ip ospf interface serialX/X</code>"
+    },
+    {
+      "id": 311,
+      "kind": "code",
+      "input": "`Network Type POINT_TO_POINT, Cost: ...`",
+      "expected": "Network Type POINT_TO_POINT, Cost: ...",
+      "html": "<code class=\"inline-code\">Network Type POINT_TO_POINT, Cost: ...</code>"
+    },
+    {
+      "id": 311,
+      "kind": "code",
+      "input": "`ip ospf network point-to-multipoint`",
+      "expected": "ip ospf network point-to-multipoint",
+      "html": "<code class=\"inline-code\">ip ospf network point-to-multipoint</code>"
+    },
+    {
+      "id": 313,
+      "kind": "code",
+      "input": "```text\nBW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)\n\n```",
+      "expected": "BW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)",
+      "html": "<pre class=\"cli-block\"><code>BW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)</code></pre>"
+    },
+    {
+      "id": 317,
+      "kind": "code",
+      "input": "`ip route 209.165.200.224 255.255.255.224 209.165.202.129 254`",
+      "expected": "ip route 209.165.200.224 255.255.255.224 209.165.202.129 254",
+      "html": "<code class=\"inline-code\">ip route 209.165.200.224 255.255.255.224 209.165.202.129 254</code>"
+    },
+    {
+      "id": 318,
+      "kind": "code",
+      "input": "`ipv6 route ::/0 Serial0/0/0`",
+      "expected": "ipv6 route ::/0 Serial0/0/0",
+      "html": "<code class=\"inline-code\">ipv6 route ::/0 Serial0/0/0</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`0.0.0.0/0`",
+      "expected": "0.0.0.0/0",
+      "html": "<code class=\"inline-code\">0.0.0.0/0</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.192.1`",
+      "expected": "10.56.192.1",
+      "html": "<code class=\"inline-code\">10.56.192.1</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.0.0/17`",
+      "expected": "10.56.0.0/17",
+      "html": "<code class=\"inline-code\">10.56.0.0/17</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`/17`",
+      "expected": "/17",
+      "html": "<code class=\"inline-code\">/17</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`255.255.128.0`",
+      "expected": "255.255.128.0",
+      "html": "<code class=\"inline-code\">255.255.128.0</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.0.0 ~ 10.56.127.255`",
+      "expected": "10.56.0.0 ~ 10.56.127.255",
+      "html": "<code class=\"inline-code\">10.56.0.0 ~ 10.56.127.255</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.128.0/18`",
+      "expected": "10.56.128.0/18",
+      "html": "<code class=\"inline-code\">10.56.128.0/18</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`/18`",
+      "expected": "/18",
+      "html": "<code class=\"inline-code\">/18</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`255.255.192.0`",
+      "expected": "255.255.192.0",
+      "html": "<code class=\"inline-code\">255.255.192.0</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.128.0 ~ 10.56.191.255`",
+      "expected": "10.56.128.0 ~ 10.56.191.255",
+      "html": "<code class=\"inline-code\">10.56.128.0 ~ 10.56.191.255</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.192.1`",
+      "expected": "10.56.192.1",
+      "html": "<code class=\"inline-code\">10.56.192.1</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`/32`",
+      "expected": "/32",
+      "html": "<code class=\"inline-code\">/32</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.0.19/32`",
+      "expected": "10.56.0.19/32",
+      "html": "<code class=\"inline-code\">10.56.0.19/32</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.128.19/32`",
+      "expected": "10.56.128.19/32",
+      "html": "<code class=\"inline-code\">10.56.128.19/32</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.192.1`",
+      "expected": "10.56.192.1",
+      "html": "<code class=\"inline-code\">10.56.192.1</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`S* 0.0.0.0/0 [1/0] via 10.56.0.1`",
+      "expected": "S* 0.0.0.0/0 [1/0] via 10.56.0.1",
+      "html": "<code class=\"inline-code\">S* 0.0.0.0/0 [1/0] via 10.56.0.1</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`Gateway of last resort is 10.56.0.1 to network 0.0.0.0`",
+      "expected": "Gateway of last resort is 10.56.0.1 to network 0.0.0.0",
+      "html": "<code class=\"inline-code\">Gateway of last resort is 10.56.0.1 to network 0.0.0.0</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.192.1`",
+      "expected": "10.56.192.1",
+      "html": "<code class=\"inline-code\">10.56.192.1</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`Vlan56`",
+      "expected": "Vlan56",
+      "html": "<code class=\"inline-code\">Vlan56</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`Vlan57`",
+      "expected": "Vlan57",
+      "html": "<code class=\"inline-code\">Vlan57</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.0.1`",
+      "expected": "10.56.0.1",
+      "html": "<code class=\"inline-code\">10.56.0.1</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`0.0.0.0/0`",
+      "expected": "0.0.0.0/0",
+      "html": "<code class=\"inline-code\">0.0.0.0/0</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`Vlan57`",
+      "expected": "Vlan57",
+      "html": "<code class=\"inline-code\">Vlan57</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.128.0/18`",
+      "expected": "10.56.128.0/18",
+      "html": "<code class=\"inline-code\">10.56.128.0/18</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.191.255`",
+      "expected": "10.56.191.255",
+      "html": "<code class=\"inline-code\">10.56.191.255</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.192.1`",
+      "expected": "10.56.192.1",
+      "html": "<code class=\"inline-code\">10.56.192.1</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`10.56.128.19`",
+      "expected": "10.56.128.19",
+      "html": "<code class=\"inline-code\">10.56.128.19</code>"
+    },
+    {
+      "id": 327,
+      "kind": "code",
+      "input": "`/32`",
+      "expected": "/32",
+      "html": "<code class=\"inline-code\">/32</code>"
+    },
+    {
+      "id": 331,
+      "kind": "code",
+      "input": "`ip route 10.0.0.0 255.255.255.0 192.168.0.2`",
+      "expected": "ip route 10.0.0.0 255.255.255.0 192.168.0.2",
+      "html": "<code class=\"inline-code\">ip route 10.0.0.0 255.255.255.0 192.168.0.2</code>"
+    },
+    {
+      "id": 331,
+      "kind": "code",
+      "input": "`ip route 10.0.0.5 255.255.255.255 172.16.0.2`",
+      "expected": "ip route 10.0.0.5 255.255.255.255 172.16.0.2",
+      "html": "<code class=\"inline-code\">ip route 10.0.0.5 255.255.255.255 172.16.0.2</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`network`",
+      "expected": "network",
+      "html": "<code class=\"inline-code\">network</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`router ospf <process-id>`",
+      "expected": "router ospf <process-id>",
+      "html": "<code class=\"inline-code\">router ospf &lt;process-id&gt;</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`network <ip-address> <wildcard-mask> area <area-id>`",
+      "expected": "network <ip-address> <wildcard-mask> area <area-id>",
+      "html": "<code class=\"inline-code\">network &lt;ip-address&gt; &lt;wildcard-mask&gt; area &lt;area-id&gt;</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`0`",
+      "expected": "0",
+      "html": "<code class=\"inline-code\">0</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`1`",
+      "expected": "1",
+      "html": "<code class=\"inline-code\">1</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.0/30`",
+      "expected": "10.0.0.0/30",
+      "html": "<code class=\"inline-code\">10.0.0.0/30</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.1`",
+      "expected": "10.0.0.1",
+      "html": "<code class=\"inline-code\">10.0.0.1</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.2`",
+      "expected": "10.0.0.2",
+      "html": "<code class=\"inline-code\">10.0.0.2</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`network 10.0.0.0 0.0.0.255 area 0`",
+      "expected": "network 10.0.0.0 0.0.0.255 area 0",
+      "html": "<code class=\"inline-code\">network 10.0.0.0 0.0.0.255 area 0</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`0.0.0.255`",
+      "expected": "0.0.0.255",
+      "html": "<code class=\"inline-code\">0.0.0.255</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.`",
+      "expected": "10.0.0.",
+      "html": "<code class=\"inline-code\">10.0.0.</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.1`",
+      "expected": "10.0.0.1",
+      "html": "<code class=\"inline-code\">10.0.0.1</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.2`",
+      "expected": "10.0.0.2",
+      "html": "<code class=\"inline-code\">10.0.0.2</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.0 ~ 10.0.0.255`",
+      "expected": "10.0.0.0 ~ 10.0.0.255",
+      "html": "<code class=\"inline-code\">10.0.0.0 ~ 10.0.0.255</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`network 10.0.0.0 0.0.0.255 area 0`",
+      "expected": "network 10.0.0.0 0.0.0.255 area 0",
+      "html": "<code class=\"inline-code\">network 10.0.0.0 0.0.0.255 area 0</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.1`",
+      "expected": "10.0.0.1",
+      "html": "<code class=\"inline-code\">10.0.0.1</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`10.0.0.2`",
+      "expected": "10.0.0.2",
+      "html": "<code class=\"inline-code\">10.0.0.2</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`router-id 10.0.0.15`",
+      "expected": "router-id 10.0.0.15",
+      "html": "<code class=\"inline-code\">router-id 10.0.0.15</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`neighbor`",
+      "expected": "neighbor",
+      "html": "<code class=\"inline-code\">neighbor</code>"
+    },
+    {
+      "id": 334,
+      "kind": "code",
+      "input": "`ip ospf priority 100`",
+      "expected": "ip ospf priority 100",
+      "html": "<code class=\"inline-code\">ip ospf priority 100</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.158`",
+      "expected": "10.10.13.158",
+      "html": "<code class=\"inline-code\">10.10.13.158</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.0/25`",
+      "expected": "10.10.13.0/25",
+      "html": "<code class=\"inline-code\">10.10.13.0/25</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`/25`",
+      "expected": "/25",
+      "html": "<code class=\"inline-code\">/25</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`255.255.255.128`",
+      "expected": "255.255.255.128",
+      "html": "<code class=\"inline-code\">255.255.255.128</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.0 ~ 10.10.13.127`",
+      "expected": "10.10.13.0 ~ 10.10.13.127",
+      "html": "<code class=\"inline-code\">10.10.13.0 ~ 10.10.13.127</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.128/28`",
+      "expected": "10.10.13.128/28",
+      "html": "<code class=\"inline-code\">10.10.13.128/28</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`255.255.255.240`",
+      "expected": "255.255.255.240",
+      "html": "<code class=\"inline-code\">255.255.255.240</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.128 ~ 10.10.13.143`",
+      "expected": "10.10.13.128 ~ 10.10.13.143",
+      "html": "<code class=\"inline-code\">10.10.13.128 ~ 10.10.13.143</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.144/28`",
+      "expected": "10.10.13.144/28",
+      "html": "<code class=\"inline-code\">10.10.13.144/28</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`255.255.255.240`",
+      "expected": "255.255.255.240",
+      "html": "<code class=\"inline-code\">255.255.255.240</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.144`",
+      "expected": "10.10.13.144",
+      "html": "<code class=\"inline-code\">10.10.13.144</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`144 + 16 - 1 = 159`",
+      "expected": "144 + 16 - 1 = 159",
+      "html": "<code class=\"inline-code\">144 + 16 - 1 = 159</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.159`",
+      "expected": "10.10.13.159",
+      "html": "<code class=\"inline-code\">10.10.13.159</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.145 ~ 10.10.13.158`",
+      "expected": "10.10.13.145 ~ 10.10.13.158",
+      "html": "<code class=\"inline-code\">10.10.13.145 ~ 10.10.13.158</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.158`",
+      "expected": "10.10.13.158",
+      "html": "<code class=\"inline-code\">10.10.13.158</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.160/29`",
+      "expected": "10.10.13.160/29",
+      "html": "<code class=\"inline-code\">10.10.13.160/29</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.160 ~ 10.10.13.167`",
+      "expected": "10.10.13.160 ~ 10.10.13.167",
+      "html": "<code class=\"inline-code\">10.10.13.160 ~ 10.10.13.167</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.208/29`",
+      "expected": "10.10.13.208/29",
+      "html": "<code class=\"inline-code\">10.10.13.208/29</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.208 ~ 10.10.13.215`",
+      "expected": "10.10.13.208 ~ 10.10.13.215",
+      "html": "<code class=\"inline-code\">10.10.13.208 ~ 10.10.13.215</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`O 10.10.13.144/28 [110/2] via 10.10.10.9, 00:01:57, GigabitEthernet0/2`",
+      "expected": "O 10.10.13.144/28 [110/2] via 10.10.10.9, 00:01:57, GigabitEthernet0/2",
+      "html": "<code class=\"inline-code\">O 10.10.13.144/28 [110/2] via 10.10.10.9, 00:01:57, GigabitEthernet0/2</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.10.9`",
+      "expected": "10.10.10.9",
+      "html": "<code class=\"inline-code\">10.10.10.9</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.158`",
+      "expected": "10.10.13.158",
+      "html": "<code class=\"inline-code\">10.10.13.158</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.144/28`",
+      "expected": "10.10.13.144/28",
+      "html": "<code class=\"inline-code\">10.10.13.144/28</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.10.9`",
+      "expected": "10.10.10.9",
+      "html": "<code class=\"inline-code\">10.10.10.9</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.10.5`",
+      "expected": "10.10.10.5",
+      "html": "<code class=\"inline-code\">10.10.10.5</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.128/28`",
+      "expected": "10.10.13.128/28",
+      "html": "<code class=\"inline-code\">10.10.13.128/28</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.160/29`",
+      "expected": "10.10.13.160/29",
+      "html": "<code class=\"inline-code\">10.10.13.160/29</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.11.2`",
+      "expected": "10.10.11.2",
+      "html": "<code class=\"inline-code\">10.10.11.2</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.12.2`",
+      "expected": "10.10.12.2",
+      "html": "<code class=\"inline-code\">10.10.12.2</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`209.165.X.X`",
+      "expected": "209.165.X.X",
+      "html": "<code class=\"inline-code\">209.165.X.X</code>"
+    },
+    {
+      "id": 336,
+      "kind": "code",
+      "input": "`10.10.13.X`",
+      "expected": "10.10.13.X",
+      "html": "<code class=\"inline-code\">10.10.13.X</code>"
+    },
+    {
+      "id": 338,
+      "kind": "code",
+      "input": "`ip route 10.1.1.0 255.255.255.0 172.16.2.2 125`",
+      "expected": "ip route 10.1.1.0 255.255.255.0 172.16.2.2 125",
+      "html": "<code class=\"inline-code\">ip route 10.1.1.0 255.255.255.0 172.16.2.2 125</code>"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "scope": "Manual Q341-Q350 fixes; delivery after Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 341,
+      "before_sha256": "88d6b42b4014ba0a2c09c3e0d1883e1ae9ee16e486b91a1d80e4a23bbbd7abb5",
+      "reason": "已看五路由器共享172.16.10/24、R5 DR/R4 BDR、Pri1。C优先级255/240合法，但不抢占，DR故障先由现有BDR接替，不能从接口抖动保证R3/R2当选。明确所有节点参与无既有DR/BDR的受控初次选举；四组选项恢复分行，去掉隔离不稳定路由器和从当前角色倒推启动顺序的断言。",
+      "updates": {
+        "prompt": "Refer to the exhibit showing the current R5 DR and R4 BDR. The engineer plans a controlled fresh election in a maintenance window: all five routers participate before selection, with no existing DR or BDR declarations. R1, R4, and R5 retain priority 1. Which configuration makes R3 the new DR and R2 the new BDR for that election?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R4(config)#interface gi0/0\nR4(config-if)#ip ospf priority 20\nR5(config)#interface gi0/0\nR5(config-if)#ip ospf priority 10"
+          },
+          {
+            "label": "B",
+            "text": "R5(config)#interface gi0/0\nR5(config-if)#ip ospf priority 120\nR4(config)#interface gi0/0\nR4(config-if)#ip ospf priority 110"
+          },
+          {
+            "label": "C",
+            "text": "R3(config)#interface gi0/0\nR3(config-if)#ip ospf priority 255\nR2(config)#interface gi0/0\nR2(config-if)#ip ospf priority 240"
+          },
+          {
+            "label": "D",
+            "text": "R2(config)#interface gi0/0\nR2(config-if)#ip ospf priority 259\nR3(config)#interface gi0/0\nR3(config-if)#ip ospf priority 256"
+          }
+        ],
+        "explanation": "C。R3接口优先级255最高，R2为240次高，其余为1；在题设没有既有DR/BDR的初次选举中，选R3为DR、R2为BDR。四组选项均作用于共享广播网Gi0/0。A/B仍让R4/R5优先；D的259和256超出0–255范围。优先级0表示不具备DR/BDR资格，同优先级再看RID。\n\n修改优先级本身不抢占现有角色；当前DR失败时，既有BDR通常先升为DR，不能仅凭接口抖动断言最高新优先级者立即成为DR。图中当前角色也不能单独证明原来的启动/选举顺序。维护性重选可能中断邻接，应安排窗口；不担任DR/BDR的R4/R5仍是网络参与者，并未因此被隔离。"
+      }
+    },
+    {
+      "id": 342,
+      "before_sha256": "cad7beff786a6793ad982c0d83bccf8e2269455f639231f69f7e56e69a0e4bd5",
+      "reason": "已看同10.0.10/24的O110与D90均被当show ip route当前路径，普通RIB不会如此并存。重绘已学习候选表，明确有效递归下一跳与同完整前缀竞争；A保留，区分RIB下一跳字段和后续递归的最终二层邻居。",
+      "updates": {
+        "prompt": "Refer to the revised table of learned route candidates, not a list of simultaneously installed routes. All next hops are valid and recursively resolvable. With default administrative distances, which listed next hop belongs to the preferred RIB route for LAN prefix 10.0.10.0/24?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMzAwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDEzMDAgMjkwIj48cmVjdCB3aWR0aD0iMTMwMCIgaGVpZ2h0PSIyOTAiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iMzAiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSBsZWFybmVkIHJvdXRlIGNhbmRpZGF0ZXMgKG5vdCBzaW11bHRhbmVvdXMgUklCIGVudHJpZXMpPC90ZXh0PjxyZWN0IHg9IjE2IiB5PSI2MCIgd2lkdGg9IjEyNjgiIGhlaWdodD0iMjE0IiByeD0iNiIgZmlsbD0iI2YwZjRmOCIvPjx0ZXh0IHg9IjMwIiB5PSI5OSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UHJlZml4ICAgICAgICAgICAgICBTb3VyY2UgICAgICAgICAgQUQgICAgTWV0cmljICAgIE5leHQgaG9wPC90ZXh0Pjx0ZXh0IHg9IjMwIiB5PSIxMzUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPjEwLjAuMTAuMC8yNCAgICAgICAgT1NQRiAgICAgICAgICAgIDExMCAgIDEwICAgICAgICAxMC4wLjEuNDwvdGV4dD48dGV4dCB4PSIzMCIgeT0iMTcxIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj4xMC4wLjEwLjAvMjQgICAgICAgIEludGVybmFsIEVJR1JQICAgOTAgICAxMCAgICAgICAgMTAuMC4xLjU8L3RleHQ+PHRleHQgeD0iMzAiIHk9IjIwNyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+MTAuMC4xLjUvMzIgICAgICAgICBPU1BGICAgICAgICAgICAgMTEwICAgIDUgICAgICAgIDEwLjAuMS41MDwvdGV4dD48dGV4dCB4PSIzMCIgeT0iMjQzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj4xMC4wLjEuMy8zMiAgICAgICAgIE9TUEYgICAgICAgICAgICAxMTAgIDEwMCAgICAgICAgMTAuMC4xLjEwMDwvdGV4dD48L3N2Zz4=",
+        "explanation": "A，10.0.1.5。OSPF和内部EIGRP竞争的是同一完整前缀10.0.10.0/24，默认AD分别110和90，故内部EIGRP优先入RIB。B的10.0.1.4属于未胜出的OSPF候选。C/D分别属于10.0.1.5/32、10.0.1.3/32，不是所问LAN前缀的候选下一跳字段。\n\n路由的下一跳字段可能还需递归解析；例如到10.0.1.5的主机路由可使实际递归路径继续经过10.0.1.50，这不把LAN路由本身的下一跳字段改为C。AD用于同完整前缀的路由来源选择；不应跨不同前缀比较AD，或认为跨协议相同数字的metric可直接比较。"
+      }
+    },
+    {
+      "id": 343,
+      "before_sha256": "83396a84aaf28425caf0bd2822ef2a2e4b82e31f14d39e08260e9154a81589f9",
+      "reason": "已看目标10.10.8.14确实选10.10.8.0/28，B/255.255.255.240正确；原图L10.10.10.3.32丢失斜线，父标题称2条2掩码而实际3条3掩码。重绘合法相关路由excerpt，不因答案正确而放过CLI图中文字错误。",
+      "updates": {
+        "prompt": "Refer to the revised routing-table excerpt. A packet sourced from 10.10.10.1 is destined for 10.10.8.14. What is the subnet mask of the selected destination route?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMzAwIiBoZWlnaHQ9IjM2MiIgdmlld0JveD0iMCAwIDEzMDAgMzYyIj48cmVjdCB3aWR0aD0iMTMwMCIgaGVpZ2h0PSIzNjIiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iMzAiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCBpbnN0YWxsZWQgcm91dGluZy10YWJsZSBlbnRyaWVzPC90ZXh0PjxyZWN0IHg9IjE2IiB5PSI2MCIgd2lkdGg9IjEyNjgiIGhlaWdodD0iMjg2IiByeD0iNiIgZmlsbD0iI2YwZjRmOCIvPjx0ZXh0IHg9IjMwIiB5PSI5OSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAxMC4xMC44LjAvMjggaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzAvMjwvdGV4dD48dGV4dCB4PSIzMCIgeT0iMTM1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5DIDEwLjEwLjEwLjAvMjQgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzAvMDwvdGV4dD48dGV4dCB4PSIzMCIgeT0iMTcxIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5MIDEwLjEwLjEwLjMvMzIgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzAvMDwvdGV4dD48dGV4dCB4PSIzMCIgeT0iMjA3IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5TIDE3Mi4xNi4xLjMzLzMyIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgR2lnYWJpdEV0aGVybmV0MC8wLzE8L3RleHQ+PHRleHQgeD0iMzAiIHk9IjI0MyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAxNzIuMTYuMi4wLzIzIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgR2lnYWJpdEV0aGVybmV0MC8wLzE8L3RleHQ+PHRleHQgeD0iMzAiIHk9IjI3OSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TCAxNzIuMTYuMi4xLzMyIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgR2lnYWJpdEV0aGVybmV0MC8wLzE8L3RleHQ+PHRleHQgeD0iMzAiIHk9IjMxNSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UyogMC4wLjAuMC8wIFsxLzBdIHZpYSAxNzIuMTYuMi4yPC90ZXh0Pjwvc3ZnPg==",
+        "explanation": "B，255.255.255.240。10.10.8.0/28覆盖10.10.8.0–10.10.8.15，目标.14属于它，也是该常规子网最后一个可用主机地址。/28的末字节为11110000，即240。10.10.10.0/24及本机10.10.10.3/32不含该目的，172.16.x.x条目也不匹配；默认路由虽匹配但长度0小于28。普通目的路由查找不因为源地址10.10.10.1而改选源网段。A为/23、C为/29、D为/30，均不是选中条目的掩码。"
+      }
+    },
+    {
+      "id": 344,
+      "before_sha256": "3c310c1a01cfe754e4c47ea77582dec1946825e4061ba4c4e337d3052c75b398",
+      "reason": "已看WAN10.0.0.32/27、R1.33优先级99，B的R2.34/27优先级100正确，但不抢占已存在DR。补全两端均参与初次选举、其他OSPF条件满足，恢复四组三行配置。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 and R2 will both participate in a fresh initial OSPF DR/BDR election on the broadcast WAN subnet, with no existing DR or BDR. R1 has priority 99; other adjacency parameters are compatible. Which R2 command sequence uses the planned WAN address and makes R2 the DR?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface gigabitethernet0/0\n ip address 10.0.0.34 255.255.255.248\n ip ospf priority 0"
+          },
+          {
+            "label": "B",
+            "text": "interface gigabitethernet0/0\n ip address 10.0.0.34 255.255.255.224\n ip ospf priority 100"
+          },
+          {
+            "label": "C",
+            "text": "interface gigabitethernet0/0\n ip address 10.0.1.1 255.255.255.0\n ip ospf priority 255"
+          },
+          {
+            "label": "D",
+            "text": "interface gigabitethernet0/0\n ip address 10.0.1.1 255.255.255.224\n ip ospf priority 98"
+          }
+        ],
+        "explanation": "B。WAN为10.0.0.32/27，掩码255.255.255.224，可用地址.33–.62；R1是.33，R2按图用.34。R2优先级100大于R1的99，在题设初次选举中胜出。A掩码/29不符规划且优先级0不参与DR/BDR；C/D的10.0.1.1属于错误网段，D的98还低于99。修改成较高优先级不能抢占已经存在的DR，因此题目明确是在无现有角色的初次选举中比较。"
+      }
+    },
+    {
+      "id": 345,
+      "before_sha256": "d54688e16e86b2c21aa88ca98761194ac9cce1f0dddeea482a1ab57d7e49516b",
+      "reason": "原D仅给全局IPv6下一跳，无法显式保证固定Gi0/0。D改成出口+下一跳完全指定静态路由，补接口已启IPv6/up及对端on-link；不依赖IOS是否可从子模式自动解析父模式命令来判C错。 [S1]",
+      "updates": {
+        "prompt": "R1 must install an IPv6 static route for 2019:C15C:0CAF:E001::/64 that explicitly specifies both GigabitEthernet0/0 and next hop 2019:C15C:0CAF:E002::1. That next hop is on this IPv6-enabled, operational interface; IPv6 forwarding is enabled. Which command, shown in global configuration mode, defines the required fully specified route?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config-if)#ip route 2019:C15C:0CAF:E001::/64 GigabitEthernet 0/0"
+          },
+          {
+            "label": "B",
+            "text": "R1(config)#ip route 2019:C15C:0CAF:E001::/64 GigabitEthernet 0/0"
+          },
+          {
+            "label": "C",
+            "text": "R1(config-if)#ipv6 route 2019:C15C:0CAF:E001::/64 2019:C15C:0CAF:E002::1"
+          },
+          {
+            "label": "D",
+            "text": "R1(config)# ipv6 route 2019:C15C:0CAF:E001::/64 GigabitEthernet0/0 2019:C15C:0CAF:E002::1"
+          }
+        ],
+        "explanation": "D。完全指定静态路由同时写目的前缀、出接口和下一跳：\n```text\nR1(config)# ipv6 route 2019:C15C:0CAF:E001::/64 GigabitEthernet0/0 2019:C15C:0CAF:E002::1\n```\n仅写下一跳的递归静态路由由现有路由决定出口，不能在命令中固定Gi0/0。A/B使用IPv4的`ip route`，不适用于这个IPv6前缀；C既未显示全局配置形式，也未包含要求的出接口。判断不依赖某版本IOS是否允许在子模式输入父模式命令；关键是D完整指定了题目要求的两个转发参数。"
+      }
+    },
+    {
+      "id": 346,
+      "before_sha256": "002e1c97888e7d0ae6d92bbff87e2f3da5c1daaed189e176132f3dbcbedfc5d9",
+      "reason": "已看R18 WAN是与R17同链路的DB8:3::301；原题却用远端Marketing/64静态路线解释on-link ping，并把本机发起ping混同IPv6转发。改为PC1经R17转发到Marketing PC2，补Fa2/回程等条件，保留B，恢复全部四段配置，不再断言任何静态NH必须直连。 [S1]",
+      "updates": {
+        "prompt": "Refer to the exhibit. R17 must forward IPv6 traffic from PC1 (2001:DB8:5::104) to Marketing PC2 (2001:DB8:4::302) through R18. R17 FastEthernet2/0, the PCs' default gateways, all other links, and R18's return route are already correct. No other R17 IPv6 forwarding or remote-prefix routes are configured. Which relevant R17 configuration excerpt completes this requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R17# show running-config\n!\nno ip domain lookup\nip cef\nipv6 cef\n!\ninterface FastEthernet0/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:2::201/64\n!\ninterface FastEthernet1/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:3::201/64\n!\nno cdp log mismatch duplex\nipv6 route 2001:DB8:4::/64 2001:DB8:4::302"
+          },
+          {
+            "label": "B",
+            "text": "R17# show running-config\n!\nno ip domain lookup\nip cef\nipv6 unicast-routing\n!\ninterface FastEthernet0/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:2::201/64\n!\ninterface FastEthernet1/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:3::201/64\n!\nno cdp log mismatch duplex\nipv6 route 2001:DB8:4::/64 2001:DB8:3::301"
+          },
+          {
+            "label": "C",
+            "text": "R17# show running-config\n!\nno ip domain lookup\nip cef\n!\ninterface FastEthernet0/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:3::201/64\n!\ninterface FastEthernet1/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:2::201/64\n!\nno cdp log mismatch duplex\nipv6 route 2001:DB8:4::/64 2001:DB8:5::101"
+          },
+          {
+            "label": "D",
+            "text": "R17# show running-config\n!\nno ip domain lookup\nip cef\nipv6 unicast-routing\n!\ninterface FastEthernet0/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:2::201/64\n!\ninterface FastEthernet1/0\n no ip address\n duplex auto\n speed auto\n ipv6 address 2001:DB8:3::201/64\n!\nno cdp log mismatch duplex\nipv6 route 2001:DB8:4::/64 2001:DB8:2::201"
+          }
+        ],
+        "explanation": "B。PC1的流量需要R17进行IPv6路由转发，因此启用`ipv6 unicast-routing`。Fa0/0应在2001:DB8:2::/64，Fa1/0在2001:DB8:3::/64；到远端Marketing的2001:DB8:4::/64应经R18的Fa1/0地址2001:DB8:3::301：\n```text\nipv6 unicast-routing\nipv6 route 2001:DB8:4::/64 2001:DB8:3::301\n```\nA缺转发开关，并把远端PC2作为没有独立递归路径的下一跳；C还交换了两互联口地址，下一跳也无有效解析；D指向R17本机Fa0/0地址。静态下一跳可以递归解析，并非一律强制直连，但不能凭空假设本题未配置的递归路径。R17本机ping直连R18的WAN接口2001:DB8:3::301与此不同，不需这条远端/64路由，不能用来证明整个转发配置必要。"
+      }
+    },
+    {
+      "id": 347,
+      "before_sha256": "2f3fb117f311b5c98948031520576b8adac7b08b1e8767ccd9894475f7592014",
+      "reason": "已看G1/0主ISP、G1/1备ISP；A正确但原文模板没核对B命令顺序、C/D假关键字，也没明确图外192.168.0.2。补主链路对端可达、备默认AD更高的条件，解释浮动依赖主路由撤回，不自带端到端检测。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The primary ISP peer 192.168.0.2 is reachable through Router1 GigabitEthernet1/0. A separate backup default route through GigabitEthernet1/1 has a higher administrative distance. Which listed command defines the primary next-hop default route using its normal static administrative distance?",
+        "explanation": "A。`ip route 0.0.0.0 0.0.0.0 192.168.0.2`配置经主ISP的默认路由，省略AD时普通静态默认使用1。已配置的同/0备份路由AD较高，主路由有效时不优先。B把地址放在接口前；IPv4完全指定形式应把出接口放在下一跳前。C的`floating`不是浮动静态关键字，要通过较高的数字AD实现；D的`tracked`也不是正确的跟踪参数，支持的跟踪配置使用`track`加对象号等语法。备份接管要求主路由实际撤出：若仅远端业务故障、主下一跳仍可解析，单靠AD不检测端到端存活，需要另外的监测/跟踪设计。"
+      }
+    },
+    {
+      "id": 348,
+      "before_sha256": "70ad464d8d3be0529cbe50650f9d76bb2909d65faf05f52df908d4051a4424c8",
+      "reason": "D的point-to-point免DR选举正确，但四组选项全部压平；题干DR'BDR拼写及仅配R1缺对端条件。恢复配置含进程到接口exit，补R2一致p2p/Area0，去固定40秒与保证大幅收敛加速的泛化。",
+      "updates": {
+        "prompt": "R1 and R2 are directly connected by Ethernet. R2 already uses 192.168.1.2/30, OSPF area 0, and point-to-point OSPF network type; other neighbor settings are compatible. Which R1 configuration enables OSPF on Ethernet1/1 and avoids a DR/BDR election on this link?",
+        "options": [
+          {
+            "label": "A",
+            "text": "router ospf 1\n network 192.168.1.1 0.0.0.0 area 0\n exit\ninterface Ethernet1/1\n ip address 192.168.1.1 255.255.255.252\n ip ospf cost 0"
+          },
+          {
+            "label": "B",
+            "text": "router ospf 1\n network 192.168.1.1 0.0.0.0 area 0\n hello interval 15\n exit\ninterface Ethernet1/1\n ip address 192.168.1.1 255.255.255.252"
+          },
+          {
+            "label": "C",
+            "text": "router ospf 1\n network 192.168.1.1 0.0.0.0 area 0\n exit\ninterface Ethernet1/1\n ip address 192.168.1.1 255.255.255.252\n ip ospf network broadcast"
+          },
+          {
+            "label": "D",
+            "text": "router ospf 1\n network 192.168.1.1 0.0.0.0 area 0\n exit\ninterface Ethernet1/1\n ip address 192.168.1.1 255.255.255.252\n ip ospf network point-to-point"
+          }
+        ],
+        "explanation": "D。`network 192.168.1.1 0.0.0.0 area 0`匹配R1本地接口地址，在该接口启用area0的OSPF；接口下`ip ospf network point-to-point`使此双节点链路不选举DR/BDR，并与R2类型一致。C仍是broadcast，会选举角色；A的cost不决定网络类型，且IOS接口cost0不合法；B的`hello interval 15`不是OSPF进程下正确语法，接口命令是`ip ospf hello-interval`，调定时器本身也不取消选举。免选举不等于任何网络都保证固定幅度的收敛提速，邻接仍需完成数据库交换。"
+      }
+    },
+    {
+      "id": 349,
+      "before_sha256": "ce7c9bc93efa24eb92741da18c78eb3ad86765617d17e3005e119a97e4f7cd3c",
+      "reason": "已看Mgmt10.1.1/24、R1.5→R2.15、GW172.16.2.10及server.2。原C仅host路由不构成ping访问策略，且Ethernet出口型依赖Proxy ARP；原解析把不写NH误当过滤机制。保留策略目标，C改明确next-hop路由+Mgmt入口扩展ACL拒绝到GW的echo，permit其他IP。A改编为合法仅路由干扰项，不冒称找回原分隔符。 [S2]",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 must route management PCs (10.1.1.0/24) to server 172.16.2.2 through R2 (192.168.1.15). It must also explicitly block ICMP echo requests from those PCs to the server's gateway 172.16.2.10 while permitting their other IP traffic, including server access. Interfaces and R2 return routing are correct, and no conflicting ACL is present. Which R1 command set implements both routing and this filtering policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config)# ip route 172.16.2.0 255.255.255.0 192.168.1.15"
+          },
+          {
+            "label": "B",
+            "text": "R1(config)#ip route 172.16.2.2 255.255.255.248 gi0/1"
+          },
+          {
+            "label": "C",
+            "text": "R1(config)# ip route 172.16.2.0 255.255.255.0 192.168.1.15\nR1(config)# ip access-list extended MGMT_SERVER_GW\nR1(config-ext-nacl)# deny icmp 10.1.1.0 0.0.0.255 host 172.16.2.10 echo\nR1(config-ext-nacl)# permit ip any any\nR1(config-ext-nacl)# exit\nR1(config)# interface GigabitEthernet0/1\nR1(config-if)# ip access-group MGMT_SERVER_GW in"
+          },
+          {
+            "label": "D",
+            "text": "R1(config)#ip route 172.16.2.0 255.255.255.0 192.168.1.5"
+          }
+        ],
+        "explanation": "C。先用明确的R2下一跳提供172.16.2.0/24路由，再在管理网流量进入R1的Gi0/1方向应用扩展ACL。第一条拒绝源10.1.1.0/24、目的host172.16.2.10的ICMP echo，第二条`permit ip any any`避免隐含拒绝把服务器访问和其他IP也阻断。\n\nA只有网络路由，不提供所需访问限制；B的172.16.2.2与/29不构成规范网络前缀，且Gi0/1是管理LAN；D下一跳192.168.1.5是R1本机。主机路由缺少其他目的的路由不等于显式安全策略，后续增加默认路由即可改变其可达性；只指定Ethernet出口也不会自动过滤ping，并可能依赖Proxy ARP。这里拒绝的是echo请求，不是所有ICMP或服务器网关的所有协议。"
+      }
+    },
+    {
+      "id": 350,
+      "before_sha256": "98f1997d75636dd9d64861e15142e76d4996a6124e050dee1e1ce87137c4ab3b",
+      "reason": "已看R2.230经G0/1、R3.5经G0/2、R1本地.226。原D出口型Ethernet默认依赖Proxy ARP，不能保证因AD高就端到端可达；D改出口+R2 NH+AD6。A五字段改编为R3 NH加AD10干扰项。明确主路由撤回且备路径有效，不宣称任何R3故障自动无缝倒换。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 has a primary static default route via R3 (209.165.201.5) with default AD 1. If this primary route is withdrawn after an uplink failure or configured tracking event, R1 must use R2 as a backup. The R2 path and return routing remain operational. Which command supplies that backup without changing the primary route's AD?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip route 0.0.0.0 0.0.0.0 209.165.201.5 10"
+          },
+          {
+            "label": "B",
+            "text": "ip route 0.0.0.0 0.0.0.0 g0/1 1"
+          },
+          {
+            "label": "C",
+            "text": "ip route 0.0.0.0 0.0.0.0 209.165.200.226 1"
+          },
+          {
+            "label": "D",
+            "text": "ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/1 209.165.200.230 6"
+          }
+        ],
+        "explanation": "D。备份/0显式指定通向R2的Gi0/1和对端209.165.200.230，AD6大于主静态AD1，因此主/0有效时不优先；主路由撤回且备路径仍有效时可接管。Ethernet上同时指定下一跳，可避免把所有远端目的当作本地邻居逐一ARP并依赖对端Proxy ARP。A仍经R3，AD10虽高却不是R2备用路径；B的AD1与主路由相同，不提供严格主备优先级，可能形成等价路径；C指本机.226且AD也为1。高AD不自动探测R3端到端存活，若主路由仍安装则备份不因远端业务故障自行生效，也不保证无丢包倒换。"
+      }
+    }
+  ]
+}

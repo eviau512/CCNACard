@@ -1,0 +1,91 @@
+{
+  "scope": "Manual Q381-Q385; delivery Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 381,
+      "before_sha256": "c0e3bd4073890ce0d203f245ed014ec719a4ecba885bb969f07b2a4095c26e9d",
+      "reason": "已看/26 Vlan58覆盖.62，A正确；图C到Null0及多个VLAN重叠连接网段不成立，父计数也不符。改编合法已安装解析后转发表，不冒称原图C路由正常。",
+      "updates": {
+        "prompt": "Refer to the revised table of installed, resolved forwarding entries. These are not overlapping connected-interface address assignments. With ordinary destination lookup, which interface does R1 select for 10.56.0.62?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDUwIiBoZWlnaHQ9IjI3MCI+PHJlY3Qgd2lkdGg9IjE0NTAiIGhlaWdodD0iMjcwIiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjUiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSBjb25zaXN0ZW50IHJlbGV2YW50IGluZm9ybWF0aW9uPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSI3OCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+SW5zdGFsbGVkIGRlc3RpbmF0aW9uIHByZWZpeCAgICAgUmVzb2x2ZWQgZWdyZXNzPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIxMTMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPjEwLjU2LjAuMC8xNiAgICAgICAgICAgICAgICAgICAgTnVsbDA8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjE0OCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+MTAuNTYuMC4wLzE3ICAgICAgICAgICAgICAgICAgICBWbGFuNTk8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjE4MyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+MTAuNTYuMC4wLzI0ICAgICAgICAgICAgICAgICAgICBWbGFuNjA8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjIxOCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+MTAuNTYuMC4wLzI2ICAgICAgICAgICAgICAgICAgICBWbGFuNTg8L3RleHQ+PC9zdmc+",
+        "explanation": "A，Vlan58。四个已安装前缀均包含10.56.0.62；/26范围10.56.0.0–10.56.0.63，比/24、/17和/16都长，故用Vlan58。目标.62也是该常规/26的最后一个可用主机地址。Null0仅对应较短/16，不会覆盖有效更明细路线；Vlan59和Vlan60也因前缀较短落选。表中是已解析出口的转发条目，允许不同来源的重叠目的路由，不表示能把这些重叠子网直接配置到同一普通路由器的多个VLAN接口。"
+      }
+    },
+    {
+      "id": 382,
+      "before_sha256": "d2dbf6a8d4762908a1cdd68c1e51a933c37454a8bb0320920fda4e9630710353",
+      "reason": "已看FULL/DR到FULL/-，D方向正确；需两端一致p2p，不由一个邻居输出证明任意设备显示priority恒0，点到多点也可FULL/-。补双节点/本地已改条件，恢复命令换行，C缺process-id本身不完整，不声称有效改area后固定停Down/Init。",
+      "updates": {
+        "prompt": "Refer to the current and desired neighbor displays. This Ethernet link has exactly two routers. The local end has already been changed to OSPF point-to-point type; other settings match. Which configuration on the neighbor's GigabitEthernet0/0 completes the same network-type change and removes DR/BDR roles?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Router(config)#interface GigabitEthernet 0/0\nRouter(config-if)#ip ospf cost 5"
+          },
+          {
+            "label": "B",
+            "text": "Router(config)#interface GigabitEthernet 0/0\nRouter(config-if)#ip ospf priority 1"
+          },
+          {
+            "label": "C",
+            "text": "Router(config)#interface GigabitEthernet 0/0\nRouter(config-if)#ip ospf area 2"
+          },
+          {
+            "label": "D",
+            "text": "Router(config)#interface GigabitEthernet 0/0\nRouter(config-if)#ip ospf network point-to-point"
+          }
+        ],
+        "explanation": "D，在邻居接口配置`ip ospf network point-to-point`，与本地一致后该双节点链路不选DR/BDR，邻接可显示Full/-。这里根据无DR角色及明确的双节点类型需求判断，不把某一个输出的Pri0泛化成所有版本必定如此；point-to-multipoint等无DR类型也可能显示Full/-。\n\nA只改cost，B只改priority且1是常见默认值，均不取消广播网络的选举。C的`ip ospf area 2`缺少接口启用命令所需process-id，不是完整的`ip ospf <process-id> area <area-id>`形式；改变area也不是消除DR角色的方法。仅把一端设p2p不保证完整稳定邻接，其他定时器、认证与MTU等条件仍需满足。"
+      }
+    },
+    {
+      "id": 383,
+      "before_sha256": "ada5260a6f7fca4fd4a68bec453401dfd5199d25f2fc70bb4c9619b66feee43e",
+      "reason": "已看互联10.73.65.64/30及OSPF100Area0，A启用本地LAN正确；图右PC.10不属10.80.65.0/29，改编为.8/29，左明确Fa0/1.1。原解析错称255.255.255.0 wildcard语法必拒，改为不匹配该接口；本地直连保留C而非变O。",
+      "updates": {
+        "prompt": "Refer to the revised topology summary. R14 already runs OSPF process 100 in area 0. Its new operational FastEthernet0/1 has address 10.120.10.1/24. Which configuration enables OSPF on that interface in the existing process and area so that the LAN can be advertised?",
+        "options": [
+          {
+            "label": "A",
+            "text": "router ospf 100\n network 10.120.10.0 0.0.0.255 area 0"
+          },
+          {
+            "label": "B",
+            "text": "router ospf 120\n network 10.120.10.0 255.255.255.0 area 0\n exit\nip route 10.120.10.0 255.255.255.0 FastEthernet0/1"
+          },
+          {
+            "label": "C",
+            "text": "router ospf 100\n area 0\n network 10.120.10.0 0.0.0.255"
+          },
+          {
+            "label": "D",
+            "text": "router ospf 100\n network 10.120.10.0 255.255.255.0 area 0"
+          }
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDUwIiBoZWlnaHQ9IjI3MCI+PHJlY3Qgd2lkdGg9IjE0NTAiIGhlaWdodD0iMjcwIiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjUiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSBjb25zaXN0ZW50IHJlbGV2YW50IGluZm9ybWF0aW9uPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSI3OCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UjE0IExvb3BiYWNrMCAxMC4xMC4xLjE0LzMyOyBSODYgTG9vcGJhY2swIDEwLjEwLjEuODYvMzI8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjExMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UjE0IEZhMC8wIDEwLjczLjY1LjY1LzMwIC0tLSBSODYgRmEwLzAgMTAuNzMuNjUuNjYvMzA8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjE0OCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+RXhpc3RpbmcgT1NQRjogcHJvY2VzcyAxMDAsIGFyZWEgMDwvdGV4dD48dGV4dCB4PSIyNSIgeT0iMTgzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMTQgRmEwLzEgMTAuMTIwLjEwLjEvMjQgLS0tIG5ldyBMQU4gMTAuMTIwLjEwLjAvMjQ8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjIxOCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+Ujg2IEZhMC8xIDEwLjgwLjY1LjkvMjkgLS0tIExBTiAxMC44MC42NS44LzI5LCBQQzEwIDEwLjgwLjY1LjEwLzI5PC90ZXh0Pjwvc3ZnPg==",
+        "explanation": "A。进程100下用network10.120.10.0和wildcard0.0.0.255匹配本地10.120.10.1，在该接口启用area0的OSPF并可通告LAN。R14本机的这条网络路由仍是C直连，不会因为启用OSPF而在本机变成O；远端邻居才能把通告学为OSPF路线。\n\nD的255.255.255.0作为wildcard并非必然语法报错，但它固定最后字节必须为0，不能匹配接口.1。B也有该匹配错误，另开进程120且给本机LAN加静态并不能替代要求的启用；进程号是本地标识，此处之所以用100是题目明确要求已有进程。C的area0单独命令及缺area参数的network语句不完整。接口方式`ip ospf 100 area 0`也是可用方法，但不在选项中。"
+      }
+    },
+    {
+      "id": 384,
+      "before_sha256": "d9f501f8cdd17f48513c9fa03278586ac9881160490db39a15a8447ad6c3e703",
+      "reason": "B为IPv4VRRP VRID10，正确；原解析把任意其他MAC认定随机物理卡/推断来源且GLBP组字段不准确。限定IPv4，按标准格式/十六进制解释，去不必要错泛化。",
+      "updates": {
+        "prompt": "Which listed MAC address is the standard IPv4 VRRP virtual MAC for VRID 10?",
+        "explanation": "B，00-00-5E-00-01-0A。IPv4 VRRP标准虚拟MAC格式为00-00-5E-00-01-{VRID}，最后一字节为组号；十进制10写成十六进制0A。IPv6 VRRP使用00-00-5E-00-02-{VRID}，因此应先区分地址族。A/C/D都不符合所问IPv4 VRRP格式，不能仅凭其他MAC值认定它一定来自某块物理网卡或推断其实际用途。"
+      }
+    },
+    {
+      "id": 385,
+      "before_sha256": "5ce19f702dbbe111e8a04dd96e8861e901af90593a03f44a01fce37214c5bb75",
+      "reason": "原B全厂商互通且增加Cisco安全功能并非VRRP保证，D稳定虚拟MAC支持网关故障接替正确。答案B改D，替换模板并说明跨厂商需版本/地址族兼容，不承担STP功能。",
+      "updates": {
+        "answer": [
+          "D"
+        ],
+        "explanation": "D。VRRP以共享的虚拟网关IP和虚拟MAC提供第一跳冗余，当前转发设备失败后可由备用接替，主机不必把网关ARP映射改成另一台设备的物理MAC；网络仍可能通过通告更新交换机转发表，接替也并非保证完全无丢包。\n\nVRRP是标准协议，适合支持兼容版本和地址族的多厂商设备部署，但B额外声称兼容所有厂商并提供Cisco专有安全增强，不能成立。A的多台Cisco设备并非选择VRRP的特有理由；C的二层无环路径属于STP等机制的职责，不由VRRP保证。部署仍需核对设备支持、组号、虚拟地址及相关参数。"
+      }
+    }
+  ]
+}

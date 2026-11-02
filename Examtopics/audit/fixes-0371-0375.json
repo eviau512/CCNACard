@@ -1,0 +1,97 @@
+{
+  "scope": "Manual Q371-Q375; deliver at Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 372,
+      "before_sha256": "cfec57c16171641185f5980fd0662fba5fe613ee431c23c600e28f2500092369",
+      "reason": "已看R1 LAN10.0.1/24、R2 LAN10.0.2/24和互联10.0.0/30；原题仅要邻居，B/D也在互联口启用OSPF，C不唯一。补同时启用R1本地LAN需求，恢复全部配置换行和area 0分隔，解释进程号本地意义。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R2 already runs OSPF area 0 on the inter-router link; all other neighbor requirements are compatible. Which R1 configuration both forms the single-area neighbor relationship with R2 and enables OSPF on R1's local 10.0.1.0/24 LAN interface?",
+        "options": [
+          {
+            "label": "A",
+            "text": "router ospf 100\n network 10.0.0.0 0.0.0.252 area 0\n network 10.0.1.0 0.0.0.255 area 0"
+          },
+          {
+            "label": "B",
+            "text": "router ospf 100\n network 10.0.0.0 0.0.0.3 area 0\n network 10.0.2.0 255.255.255.0 area 0"
+          },
+          {
+            "label": "C",
+            "text": "router ospf 10\n network 10.0.0.0 0.0.0.3 area 0\n network 10.0.1.0 0.0.0.255 area 0"
+          },
+          {
+            "label": "D",
+            "text": "router ospf 10\n network 10.0.0.0 0.0.0.3 area 0\n network 10.0.2.0 0.0.0.255 area 0"
+          }
+        ],
+        "explanation": "C。10.0.0.0配wildcard0.0.0.3匹配R1互联口10.0.0.1；10.0.1.0配0.0.0.255匹配R1本地LAN，两者在area0启用OSPF。network命令匹配本机接口，不是把任意远端网段直接注入路由表。\n\nA的0.0.0.252固定最低两位为00，不匹配互联口.1；B/D虽然第一条可启用互联口、形成邻居，但没有启用R1的10.0.1/24 LAN，不满足两个要求。B还将子网掩码误当wildcard；D的10.0.2/24是R2侧LAN。OSPF进程号10/100是本地标识，不要求两端相同，不能用进程号排除选项。"
+      }
+    },
+    {
+      "id": 373,
+      "before_sha256": "a2896d71d486b4ef249f0c9e546965178e59562c36d92eb8698d418d84c2b4e4",
+      "reason": "已看R1既有DR/R3 BDR、RIDs .8/.6/.4/.1；仅提高R2priority100不抢占，补受控初次重新选举条件，修intergface拼写及配置换行，不倒推历史角色必由RID大小造成。",
+      "updates": {
+        "prompt": "Refer to the exhibit showing the current DR/BDR. The engineer plans a controlled fresh election in which all four routers participate with no existing DR/BDR declarations; R1, R3, and R4 retain priority 1. Which R2 configuration ensures that R2 wins that new DR election?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R2(config)#interface gi0/0\nR2(config-if)#ip ospf priority 100"
+          },
+          {
+            "label": "B",
+            "text": "R2(config)#router ospf 1\nR2(config-router)#router-id 192.168.2.7"
+          },
+          {
+            "label": "C",
+            "text": "R2(config)#router ospf 1\nR2(config-router)#router-id 10.100.100.100"
+          },
+          {
+            "label": "D",
+            "text": "R2(config)#interface gi0/0\nR2(config-if)#ip ospf priority 1"
+          }
+        ],
+        "explanation": "A。R2的Gi0/0设priority100，严格高于另外三台的1，在题设全员参与且无既有角色的初选中当DR。D仍为1，RID192.168.2.1低于R1的.8；B改.7仍低于.8，C改10.100.100.100也低于192.168.2.8。\n\nOSPF不抢占既有DR，提高优先级本身不会替换当前R1；仅在R2重置进程也不能保证清除远端DR/BDR。本题明确另行协调重新选举，维护过程可能中断业务。当前角色不能单独证明历史选举顺序，优先级相同仅在相应选举比较时再用RID裁决。"
+      }
+    },
+    {
+      "id": 374,
+      "before_sha256": "e5da9e3249d440eb0a892c34b545d39a1fac1f486b85b57cd27c7ed440a3e01b",
+      "reason": "已看10.10.13.160/29故D/248正确；源图8条10网路由有5种掩码却称4，其他父标题也混乱。改编相关合法OSPF/连接条目excerpt，去错计数，保留原图，不误报缺图。",
+      "updates": {
+        "prompt": "Refer to the revised relevant routing-table excerpt. What is the subnet mask of the route to 10.10.13.160?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDIwIiBoZWlnaHQ9IjMzMyI+PHJlY3Qgd2lkdGg9IjE0MjAiIGhlaWdodD0iMzMzIiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjUiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCB0b3BvbG9neSBhbmQgcm91dGUgaW5mb3JtYXRpb248L3RleHQ+PHRleHQgeD0iMjUiIHk9Ijc4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Sb3V0ZXIxIyBzaG93IGlwIHJvdXRlPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIxMTIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMTAuMTAuMTAuMC8yOCBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48dGV4dCB4PSIyNSIgeT0iMTQ2IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5PIDEwLjEwLjEzLjAvMjUgWzExMC8yXSB2aWEgMTAuMTAuMTAuMSwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIxODAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gMTAuMTAuMTMuMTI4LzI4IFsxMTAvMl0gdmlhIDEwLjEwLjEwLjEsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48dGV4dCB4PSIyNSIgeT0iMjE0IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5PIDEwLjEwLjEzLjE0NC8yOCBbMTEwLzJdIHZpYSAxMC4xMC4xMC4xLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjI0OCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TyAxMC4xMC4xMy4xNjAvMjkgWzExMC8yXSB2aWEgMTAuMTAuMTAuMSwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIyODIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gMTAuMTAuMTMuMjA4LzI5IFsxMTAvMl0gdmlhIDEwLjEwLjEwLjEsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48L3N2Zz4="
+      }
+    },
+    {
+      "id": 375,
+      "before_sha256": "8e55640217142dca475ee721c3602597a59feb297cf900602a7879f177392b77",
+      "reason": "已看OSPF/24 AD110 via.2；选项地址/AD粘连，原解析称OSPF115错误，且A的/32AD115照样胜过/24，原A/D均可选；图还在R1两接口配置重叠192.168.1/24。改编两个独立/30、R3新NH.6；A改经R2的主机路线干扰，D经R3的/32，B/C仍为整个/24，不冒称恢复原图。",
+      "updates": {
+        "prompt": "Refer to the revised topology and routing excerpt. R1 currently reaches 10.10.2.0/24 through R2. All shown peer addresses, downstream forwarding, and return routes are valid. Which command makes only destination 10.10.2.1 use R3 while other destinations in that /24 continue to use R2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip route 10.10.2.1 255.255.255.255 192.168.1.2 115"
+          },
+          {
+            "label": "B",
+            "text": "ip route 10.10.2.0 255.255.255.0 192.168.1.6 115"
+          },
+          {
+            "label": "C",
+            "text": "ip route 10.10.2.0 255.255.255.0 192.168.1.6 100"
+          },
+          {
+            "label": "D",
+            "text": "ip route 10.10.2.1 255.255.255.255 192.168.1.6 100"
+          }
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDIwIiBoZWlnaHQ9IjQ2OSI+PHJlY3Qgd2lkdGg9IjE0MjAiIGhlaWdodD0iNDY5IiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjUiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCB0b3BvbG9neSBhbmQgcm91dGUgaW5mb3JtYXRpb248L3RleHQ+PHRleHQgeD0iMjUiIHk9Ijc4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMSBHaTAvMCAxOTIuMTY4LjEuMS8zMCAtLS0gUjIgMTkyLjE2OC4xLjIvMzA8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjExMiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UjEgR2kwLzEgMTkyLjE2OC4xLjUvMzAgLS0tIFIzIDE5Mi4xNjguMS42LzMwPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIxNDYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPlIyIExBTiAxMC4xMC4yLjMvMjQgYW5kIFIzIExBTiAxMC4xMC4yLjQvMjQgc2hhcmUgdGhlIHNlcnZlciBMQU4uPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIxODAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPlNlcnZlciBhZGRyZXNzZXM6IDEwLjEwLjIuMSBhbmQgMTAuMTAuMi4yPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIyMTQiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPjwvdGV4dD48dGV4dCB4PSIyNSIgeT0iMjQ4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMSMgc2hvdyBpcCByb3V0ZSAxMC4xMC4yLjE8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjI4MiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+Um91dGluZyBlbnRyeSBmb3IgMTAuMTAuMi4wLzI0PC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIzMTYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgS25vd24gdmlhICZxdW90O29zcGYgMSZxdW90OywgZGlzdGFuY2UgMTEwLCBtZXRyaWMgMiwgdHlwZSBpbnRyYSBhcmVhPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIzNTAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgTGFzdCB1cGRhdGUgZnJvbSAxOTIuMTY4LjEuMiBvbiBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjM4NCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ICBSb3V0aW5nIERlc2NyaXB0b3IgQmxvY2tzOjwvdGV4dD48dGV4dCB4PSIyNSIgeT0iNDE4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj4gICogMTkyLjE2OC4xLjIsIHZpYSBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PC9zdmc+",
+        "explanation": "D。新增到10.10.2.1的/32主机路由，经R3的有效对端192.168.1.6；其余10.10.2.x不匹配/32，仍走OSPF/24经R2。主机路由比/24更明细，因此即使把它的AD改成115，也仍可在有效安装后优先转发该主机；不需要因OSPF而强求AD低于110。\n\nA的/32指向R2，未让目标改走R3；B是/24 AD115，劣于同/24 OSPF110，不能建立所需主机特例；C的/24 AD100会替换整个OSPF/24，使其他主机也走R3。OSPF默认AD是110，115是IS-IS常见默认值，不要混淆。不同长度前缀的转发用最长匹配，同完整前缀竞争入表才比较AD。"
+      }
+    }
+  ]
+}
