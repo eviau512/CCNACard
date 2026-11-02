@@ -1,0 +1,60 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html",
+    "S2": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-i1.html",
+    "S3": "https://www.rfc-editor.org/rfc/rfc2328.html",
+    "S4": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-12/iri-xe-16-12-book/ip6-route-static-xe.html"
+  },
+  "original_images_directly_viewed": [
+    361,
+    364,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370
+  ],
+  "new_images": [
+    366,
+    367
+  ],
+  "authored_exhibit_corrections": {
+    "366": "Keep duplicate RID/interface/timer evidence; omit contradictory role/count fields, explicitly give unique auto-RID eligibility.",
+    "367": "Replace invalid/overlapping connected prefixes and non-/32 Local route with valid nonoverlapping /21 and /24 and matching Local/32."
+  },
+  "q363_capacity_checks": {
+    "23": {
+      "usable": 510,
+      "prefix": "10.10.10.0/23"
+    },
+    "22": {
+      "usable": 1022,
+      "prefix": "10.10.8.0/22"
+    },
+    "20": {
+      "usable": 4094,
+      "prefix": "10.10.0.0/20"
+    },
+    "28": {
+      "usable": 14,
+      "prefix": "10.10.10.0/28"
+    }
+  },
+  "q364_selected_prefix": "192.168.0.0/24",
+  "q364_recursive_interface": "GigabitEthernet0/1",
+  "q369_hello_both_seconds": 15,
+  "q369_dead_before": [
+    40,
+    45
+  ],
+  "q369_dead_after": [
+    40,
+    40
+  ],
+  "limitations": "Manual source/document/diagram/address checks, not live IOS or phone UI tests.",
+  "revised_diagrams_visually_checked": [
+    366,
+    367
+  ]
+}

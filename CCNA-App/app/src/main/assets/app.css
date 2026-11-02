@@ -439,6 +439,7 @@ main {
 }
 
 .opt-text {
+  white-space: pre-wrap;
   font-size: 0.96rem;
   line-height: 1.5;
   color: var(--text-primary);

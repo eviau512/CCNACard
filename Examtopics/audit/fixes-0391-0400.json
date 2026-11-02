@@ -1,0 +1,130 @@
+{
+  "scope": "Manual Q391-Q400; second200-question delivery required",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 391,
+      "before_sha256": "88c6db870da1a92b66eec1ae4c0a425f27519c4291d083c7a0fa24fb506cf85e",
+      "reason": "A默认网关故障正确，但原文把上联故障默认自动接管、整个子网瘫痪及BGP故障固定处方泛化，改网关角色可用性与上游跟踪条件。",
+      "updates": {
+        "explanation": "A，默认网关故障。FHRP在多台设备间维护虚拟第一跳网关，使当前承担网关角色的设备不可用时，可由其他成员接替，主机通常不用更改网关地址。它保护网关可用性，不等于保证任何链路故障都自动切换或完全无丢包。\n\n若只是网关上游线路失效而协议通告仍正常，可能需要额外接口/对象跟踪才能调整角色；整个LAN内部通信也不必因默认网关失效而停止。B的BGP邻居稳定性、C的二层环路和D的生成树根桥重选分别由相应路由/生成树机制处理，不是FHRP直接解决的目标。"
+      }
+    },
+    {
+      "id": 392,
+      "before_sha256": "9c11e053049d744c6abdb419c8cf768768fa7ddc89737e8e41d1312dc86f535b",
+      "reason": "原题UDP jitter泛称NTP必需不成立，Cisco要求准确单向delay时钟同步；改明确测UDP jitter操作的one-way latency。区分1967控制通道和配置的UDP测试端口，D保留。",
+      "updates": {
+        "prompt": "Which listed protocol can synchronize the source and responder clocks so that an IP SLA UDP jitter operation can report accurate one-way delay (latency)?",
+        "explanation": "D，NTP提供时钟同步，使两端时间戳能用于准确单向时延测量。Cisco对UDP jitter操作的准确one-way delay提出同步要求；这不表示所有RTT或jitter统计都必须先有NTP，固定时钟偏移对时延差的影响也不同于绝对单向时延。\n\nA的LLDP和C的CDP发现直连邻居，不同步测量时钟；B的EEM是事件自动化工具，也不提供该时基。IP SLA的控制通道可使用UDP1967，实际UDP测试目的端口由操作配置，不能把1967一概说成所有探测数据的默认端口。同步精度还需满足测量所需，不能保证任意NTP环境都达到微秒精度。"
+      }
+    },
+    {
+      "id": 393,
+      "before_sha256": "d8cc3661d25bebc0f9392b55afed531e7a76a8542deff1387314acaa73279387",
+      "reason": "已看ip nat pool cisco10.1.1.0–.50后直接mask，缺netmask关键字，且.0是/24网络号。改编.10–.50有效pool命令；只定义池不等于已配置动态NAT/PAT，题问创建何对象，C保留。",
+      "updates": {
+        "prompt": "Refer to the revised valid configuration command. Which object does this command define?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDUwIiBoZWlnaHQ9IjE1MCI+PHJlY3Qgd2lkdGg9IjE0NTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjQiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSB2YWxpZCBOQVQgcG9vbCBkZWZpbml0aW9uPC90ZXh0Pjx0ZXh0IHg9IjI0IiB5PSI5NSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMiI+UjEoY29uZmlnKSMgaXAgbmF0IHBvb2wgY2lzY28gMTAuMS4xLjEwIDEwLjEuMS41MCBuZXRtYXNrIDI1NS4yNTUuMjU1LjA8L3RleHQ+PC9zdmc+",
+        "explanation": "C，一个NAT地址池。`ip nat pool cisco 10.1.1.10 10.1.1.50 netmask 255.255.255.0`定义名为cisco的转换地址集合，使用/24内的有效主机地址.10–.50。这里使用私有地址也可以定义NAT池，具体部署是否应使用公网地址取决于转换目的和路由环境。\n\nA静态转换需要相应固定映射命令；B的DHCP池使用`ip dhcp pool`；D的PAT不能仅由池定义判断，通常还需带overload的源转换规则等配置。同一池也可以被PAT规则引用。单独创建pool并未完成ACL关联、inside/outside接口和转换规则，不能宣称现在已经实际执行动态NAT。"
+      }
+    },
+    {
+      "id": 394,
+      "before_sha256": "e86f38a767e6804d020239872f72ee41dc724145f5904daa26a07755c1ec70cb",
+      "reason": "A NATpool正确；原解析把池限为公网地址、one-way NAT生造均不严谨，改可供转换的集合，映射方式不是地址集合定义。",
+      "updates": {
+        "explanation": "A，NAT pool是供NAT使用的一组可选转换地址。例如`ip nat pool <name> <start-ip> <end-ip> netmask <mask>`定义地址范围。用于互联网inside-global地址的池常采用可路由公网地址，但NAT也可用于私网/重叠地址等环境，所以池本身不必一概定义为公网地址集合。\n\nB dynamic NAT描述动态建立映射的机制，C static NAT描述固定映射，均不是所问的地址集合对象。D one-way NAT也不是这一集合的名称；不需要把所有其他语境中出现的该术语都断言为生造，按题目定义识别pool即可。"
+      }
+    },
+    {
+      "id": 395,
+      "before_sha256": "6557b757be444a8dd36b3dd2cacc36b4f7c280a2ef94bc575cc039470496346e",
+      "reason": "A两协议允许正确；原解析称no transport input telnet必语法错不符Cisco命令参考。改为no形式不能表达此许可列表，说明VTY模式及其他登录前提。",
+      "updates": {
+        "prompt": "On Cisco IOS VTY lines currently allowing SSH, which line-configuration command explicitly permits both Telnet and SSH?",
+        "explanation": "A，`transport input telnet ssh`将所配置VTY线路的入站协议列表设为同时包含Telnet和SSH。B只列Telnet，不能表达同时保留SSH；C的no形式并非用于新增这两个许可协议，不能把Cisco文档支持的no transport input语法一概判作不存在；D privilege level15调整权限级别，不选择入站传输协议。\n\n协议列表许可不等于已具备所有登录条件，SSH服务、认证及可用VTY仍须正确。此命令只作用于选中的线路范围，不应据此声称整台设备所有VTY都已配置。"
+      }
+    },
+    {
+      "id": 396,
+      "before_sha256": "b4f0d46740baeb66e01d49e13c7a521e524256da2102ed4ed78181186b9b25e6",
+      "reason": "已看DHCPpool /27、DNS/NetBIOS，确缺default-router，D最可能正确。原文把每个跨网目的都必经default、补配置即立刻生效过度；补网关示例需有效/排除并续租，不能伪称源图已给.1。",
+      "updates": {
+        "explanation": "D，给DHCP池补充正确的default-router选项最符合所示缺项。图中有network192.168.10.0/27、domain-name、DNS与NetBIOS服务器，却未给客户端默认网关。无其他到远端目的的主机路由时，客户端通常依默认路由把跨网流量交给网关。\n\n应在池下配置`default-router <该客户端子网的有效网关IP>`，并确保该地址确为可用三层接口/VIP、不会被错误分配；原图未给实际网关，不能擅自断言一定是.1。已拿到租约的客户端还需更新DHCP参数，其他路由/回程也须正常，补服务器配置不会令所有旧客户端立即刷新。A的DNS可在远端；B不是修复此缺项的独立激活动作；C的/27本身合法，没有证据说明掩码需改。"
+      }
+    },
+    {
+      "id": 397,
+      "before_sha256": "59082a1bbfc3a98468ca139dfd264e48630adb9a95a4b9033fcb4f2ae70b3a51",
+      "reason": "已看Ping与GratuitousARP两冲突记录；A分配隔离规则正确但模板未区别服务端ping/客户端ARP报告及人工clear；E日志可在物理冲突消除后仍在，不能无条件判其事实错误。明确问可分配性而非日志寿命，解释解决后清标记。",
+      "updates": {
+        "prompt": "Refer to the Cisco IOS DHCP conflict table. Which option describes the allocation rule for an address marked as conflicting, rather than how long its log entry remains visible?",
+        "explanation": "A，冲突地址从可分配资源中隔离，避免继续租给客户端；这里的removed不是删除整个network池定义。图中172.16.1.32由Ping检测，172.16.1.64由GratuitousARP相关机制报告，均不能继续当正常空闲地址发放。服务器可用ping探测，客户端也可做ARP检测并报告地址冲突，不应把所有探测都描述成服务器自己发GARP。\n\n管理员应先查明并解决冲突，再按需要用`clear ip dhcp conflict <address>`清除标记，使地址可重新分配；不要只清标记而保留真实占用。B若指仍作为可分配地址则不正确；C/D只认一种检测方式也不成立。E谈的是日志显示：即使实际冲突消失，记录仍可能待人工清除，因此不能简单断言E描述的现象永不发生，但它不是题目所问的分配隔离规则。"
+      }
+    },
+    {
+      "id": 398,
+      "before_sha256": "d40a8c2d50458767c339842fe2700e33e9577eab3a6171419a24212567cf47f9",
+      "reason": "C binding正确；原解析否认show ip dhcp database存在错误，Cisco命令参考明列其为database agent信息。所有选项去句末点/规范全称，D statistics用于计数非绑定，不依赖缩写是否可接受判错。",
+      "updates": {
+        "prompt": "On a Cisco IOS DHCP server, which command lists individual assigned client IP-address bindings?",
+        "options": [
+          {
+            "label": "A",
+            "text": "show ip dhcp database"
+          },
+          {
+            "label": "B",
+            "text": "show ip dhcp pool"
+          },
+          {
+            "label": "C",
+            "text": "show ip dhcp binding"
+          },
+          {
+            "label": "D",
+            "text": "show ip dhcp server statistics"
+          }
+        ],
+        "explanation": "C，`show ip dhcp binding`列出地址与客户端标识/硬件地址、租约及绑定类型等明细，用于核对已分配客户端地址。A的`show ip dhcp database`确实存在，用于查看DHCP database agent等数据库保存活动信息，不能因它不是绑定清单就声称命令不存在。B的pool看地址池容量、子网及租用汇总，不是逐客户端绑定；D的server statistics看报文等计数，不是具体租约映射。命令大小写通常不敏感，是否允许某个缩写也不改变这些功能的区别。"
+      }
+    },
+    {
+      "id": 399,
+      "before_sha256": "5bc5032f3cf4b0383dabe4181b929eb7ffef20d0cd24baead4808441043f4c50",
+      "reason": "递归不是权威源，且可用缓存，原四选无正确权威服务器。A改为该zone权威DNS服务器，保留A字母；解释区分权威/递归与缓存、DNSSEC非自动隐含，不能宣称递归必穿透缓存。",
+      "updates": {
+        "prompt": "Which source holds authoritative DNS data for an address lookup in a zone, rather than merely a cached copy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "an authoritative DNS server for the relevant zone"
+          },
+          {
+            "label": "B",
+            "text": "the operating system cache"
+          },
+          {
+            "label": "C",
+            "text": "the ISP local cache"
+          },
+          {
+            "label": "D",
+            "text": "the browser cache"
+          }
+        ],
+        "explanation": "A，该区域的权威DNS服务器依据所托管zone数据回答记录查询。B的操作系统缓存、C的ISP缓存和D的浏览器缓存保存临时副本，不因返回地址就成为该zone的权威数据源。\n\n递归解析器可以直接用有效缓存回答，也可能为客户端向DNS层级进行查询；“递归查询”是解析服务方式，不是权威来源，也不保证绕过缓存。权威服务器也不必替客户端进行递归。权威与密码学验证是不同概念，普通DNS权威应答并不自动意味着记录已签名或经DNSSEC验证；缓存有效期内的副本也不必然错误。"
+      }
+    },
+    {
+      "id": 400,
+      "before_sha256": "ad822b507838b5748af208152978b415163f8f9dda4b5861b2a756073f73bacf",
+      "reason": "D show ip interface可看Helper正确；原文称唯一官方命令、全部DHCPREQUEST广播、helper目的等于giaddr/源地址的固定泛化有误。明确问接口配置的DHCP服务器helper目的，区别中继接口giaddr；可另看running-config，保留D。",
+      "updates": {
+        "prompt": "Which listed Cisco IOS command displays the helper-address destination configured on a client-facing interface for DHCP relay?",
+        "explanation": "D，`show ip interface [interface-id]`可显示Helper address字段，核对该接口的中继目的地址。该目的通常是DHCP服务器地址，要与DHCP报文中的giaddr区别：giaddr通常标识客户端侧中继接口的子网，用于服务器选择地址池，不是helper目的字段。\n\nA brief只显示接口IP与状态概览；B的binding是服务器客户端绑定，C是路由表，E是接口状态/计数等，F是DHCP服务器池，均不是所问helper字段。也可以通过running-config核对配置，所以D不是所有诊断方式中的唯一命令。客户端初始发现通常广播，但DHCPREQUEST在不同租约阶段可为广播或单播，不能把所有REQUEST都说成广播；中继源地址等细节也可能受平台配置影响。"
+      }
+    }
+  ]
+}

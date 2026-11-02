@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "file": "CCNA-App/app/src/main/assets/app.js",
+      "input": "`ip address <ip> <mask>`",
+      "html": "<code class=\"inline-code\">ip address &lt;ip&gt; &lt;mask&gt;</code>"
+    },
+    {
+      "file": "CCNA-App/app/src/main/assets/app.js",
+      "input": "`config lag <enable|disable>`",
+      "html": "<code class=\"inline-code\">config lag &lt;enable|disable&gt;</code>"
+    },
+    {
+      "file": "CCNA-App/app/src/main/assets/app.js",
+      "input": "`switchport priority extend cos <0-7>`",
+      "html": "<code class=\"inline-code\">switchport priority extend cos &lt;0-7&gt;</code>"
+    },
+    {
+      "file": "CCNA-App/app/src/main/assets/app.js",
+      "input": "```text\ninterface Gi0/1\n  description A < B & C > D\n  ip address <ip> <mask>\n```",
+      "html": "<pre class=\"cli-block\"><code>interface Gi0/1\n  description A &lt; B &amp; C &gt; D\n  ip address &lt;ip&gt; &lt;mask&gt;</code></pre>"
+    },
+    {
+      "file": "Examtopics/batch/Examtopics_Batch1_Q1-200.html",
+      "input": "`ip address <ip> <mask>`",
+      "html": "<code class=\"inline-code\">ip address &lt;ip&gt; &lt;mask&gt;</code>"
+    },
+    {
+      "file": "Examtopics/batch/Examtopics_Batch1_Q1-200.html",
+      "input": "`config lag <enable|disable>`",
+      "html": "<code class=\"inline-code\">config lag &lt;enable|disable&gt;</code>"
+    },
+    {
+      "file": "Examtopics/batch/Examtopics_Batch1_Q1-200.html",
+      "input": "`switchport priority extend cos <0-7>`",
+      "html": "<code class=\"inline-code\">switchport priority extend cos &lt;0-7&gt;</code>"
+    },
+    {
+      "file": "Examtopics/batch/Examtopics_Batch1_Q1-200.html",
+      "input": "```text\ninterface Gi0/1\n  description A < B & C > D\n  ip address <ip> <mask>\n```",
+      "html": "<pre class=\"cli-block\"><code>interface Gi0/1\n  description A &lt; B &amp; C &gt; D\n  ip address &lt;ip&gt; &lt;mask&gt;</code></pre>"
+    },
+    {
+      "file": "Examtopics/output/Examtopics_CCNA_200-301_Complete.html",
+      "input": "`ip address <ip> <mask>`",
+      "html": "<code class=\"inline-code\">ip address &lt;ip&gt; &lt;mask&gt;</code>"
+    },
+    {
+      "file": "Examtopics/output/Examtopics_CCNA_200-301_Complete.html",
+      "input": "`config lag <enable|disable>`",
+      "html": "<code class=\"inline-code\">config lag &lt;enable|disable&gt;</code>"
+    },
+    {
+      "file": "Examtopics/output/Examtopics_CCNA_200-301_Complete.html",
+      "input": "`switchport priority extend cos <0-7>`",
+      "html": "<code class=\"inline-code\">switchport priority extend cos &lt;0-7&gt;</code>"
+    },
+    {
+      "file": "Examtopics/output/Examtopics_CCNA_200-301_Complete.html",
+      "input": "```text\ninterface Gi0/1\n  description A < B & C > D\n  ip address <ip> <mask>\n```",
+      "html": "<pre class=\"cli-block\"><code>interface Gi0/1\n  description A &lt; B &amp; C &gt; D\n  ip address &lt;ip&gt; &lt;mask&gt;</code></pre>"
+    }
+  ]
+}

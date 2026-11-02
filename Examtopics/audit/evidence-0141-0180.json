@@ -1,0 +1,90 @@
+{
+  "source_unchanged": true,
+  "reviewed_ids": [
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180
+  ],
+  "exhibits_directly_viewed": [
+    142,
+    143,
+    144,
+    149,
+    150,
+    166,
+    171,
+    176,
+    177,
+    178
+  ],
+  "q147_official_corrective_evidence": "Cisco CDPv2: unnumbered CDP interface may advertise IP from another interface; see V3",
+  "q150_unresolved": "SW2 native100 excluded from allowed5-20; exact platform/runtime behavior not tested, not silently rekeyed",
+  "q157_missing_referenced_figure": {
+    "has_image": false,
+    "has_answer_image": false,
+    "reference_in_explanation": true
+  },
+  "q177_image_contains_only_topology": "Visually inspected; no promised MAC table; no answer_image provided",
+  "q178_option_layout": {
+    "A": {
+      "contains_newline": false,
+      "original": "interface gigabitethernet1/1 switchport mode access switchport access vlan 300 switchport voice vlan 400"
+    },
+    "B": {
+      "contains_newline": false,
+      "original": "interface gigabitethernet1/1 switchport mode trunk switchport trunk vlan 300 switchport trunk vlan 400"
+    },
+    "C": {
+      "contains_newline": false,
+      "original": "interface gigabitethernet1/1 switchport mode access switchport voice vlan 300 switchport access vlan 400"
+    },
+    "D": {
+      "contains_newline": false,
+      "original": "interface gigabitethernet1/1 switchport mode trunk switchport trunk vlan 300 switchport voice vlan 400"
+    }
+  },
+  "presentation_renderer_evidence": {
+    "app_js_line": 367,
+    "operation": "txt.textContent = opt.text",
+    "css_selector": ".opt-text",
+    "css_preserves_code_whitespace": false,
+    "verification": "static source inspection; no runtime UI screenshot asserted"
+  }
+}

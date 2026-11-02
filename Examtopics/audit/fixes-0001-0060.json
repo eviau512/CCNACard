@@ -1,0 +1,350 @@
+{
+  "scope": "Manual corrections within the first 200-question milestone; partial Q1-Q60 pass",
+  "preserve_question_ids": true,
+  "preserve_practice_storage": true,
+  "corrections": [
+    {
+      "id": 1,
+      "before_sha256": "dd20188070a9718f64b8c8a121f83e4ef197aa7d5a83596cd9f20a4365011350",
+      "reason": "已看图。10.10.13.10 匹配 OSPF 10.10.13.0/25，B 正确；解析却写经 GigabitEthernet0/0，实际图中为下一跳 10.10.10.1、出 FastEthernet0/1。改正接口，保留最长匹配及其他路由类型的解释。",
+      "updates": {
+        "explanation": "目的地址10.10.13.10匹配10.10.13.0/25，选用该网络路由（B）。图中该OSPF路由下一跳为10.10.10.1，出接口FastEthernet0/1。先比较目的前缀长度；仅在同一前缀的候选路由之间比较管理距离等属性。默认路由为/0，主机路由为/32，floating static是提高管理距离的备用静态路由，本题命中的条目不属于后三者。"
+      }
+    },
+    {
+      "id": 5,
+      "before_sha256": "c023dea1b577abaa9eb10467bf0867733fbc1ba5a4276cc363a8a34e65045427",
+      "reason": "加 leaf 并连接所有 spine 的答案正确，但解析把这种连接方式直接等同于 non-blocking full mesh；全互连是 leaf–spine 两层之间，并不保证上下行带宽没有超售。应改为两层间全互连，是否无阻塞由容量规划决定。[S5]",
+      "updates": {
+        "explanation": "新增接入口应增加leaf并连接每一台spine，因此选C。leaf–spine两层之间全互连可提供多条等价路径；增加spine主要增加fabric容量。连接单个spine不能保留该拓扑的路径冗余。是否无阻塞还取决于上下行带宽及超售比，不能仅由拓扑全互连保证。"
+      }
+    },
+    {
+      "id": 9,
+      "before_sha256": "2f0157362886db762873bfebaff8d2846e7b08d8ac3906e533eba1a85d2578a9",
+      "reason": "当前无正确选项：A 的 .3/30 是广播；B/C 均为 /29；D 写的是 225.255.255.252，二进制不连续，非有效子网掩码。解析默默按 255.255.255.252 解答而未指出文本错误。建议核对来源后把 D 的 225 改成 255，再保留 D。",
+      "updates": {
+        "prompt": "An engineer must configure a /30 subnet between two routers. Which usable IP address and subnet mask combination meets this requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface e0/0\n description to XX-AXXX:XXXXX\n ip address 10.2.1.3 255.255.255.252"
+          },
+          {
+            "label": "B",
+            "text": "interface e0/0\n description to XX-AXXX:XXXXX\n ip address 192.168.1.1 255.255.255.248"
+          },
+          {
+            "label": "C",
+            "text": "interface e0/0\n description to XX-AXXX:XXXXX\n ip address 172.16.1.4 255.255.255.248"
+          },
+          {
+            "label": "D",
+            "text": "interface e0/0\n description to XX-AXXX:XXXXX\n ip address 209.165.201.2 255.255.255.252"
+          }
+        ],
+        "explanation": "/30掩码为255.255.255.252，每子网4个地址，普通点到点子网有2个可用主机地址。D的209.165.201.2属于209.165.201.0/30，是可用主机；A的10.2.1.3是10.2.1.0/30广播地址。B/C的255.255.255.248为/29，不满足题目指定的/30。"
+      }
+    },
+    {
+      "id": 10,
+      "before_sha256": "f00d020d1d64d32f46cf79099284372fa096da77a90a6e857768b53b3e4d784d",
+      "reason": "B 是唯一 RFC1918 地址，范围计算正确；但“无需访问 Internet 即可通信”本身并不要求私网地址，公网地址也可用于离线网络。题干应明确问 RFC1918 内部私有地址，而不是由是否联网推断地址类型。[S4]",
+      "updates": {
+        "prompt": "Which listed network is entirely within an RFC 1918 private IPv4 address block?",
+        "explanation": "RFC1918私网范围是10.0.0.0/8、172.16.0.0/12、192.168.0.0/16。172.28.0.0/16完整位于172.16–172.31范围，所以B正确。172.9和209.165.201不属于这些私网块，192.0.0.0/8也不是RFC1918块。是否接入Internet本身不能决定一个地址是不是私网地址。"
+      }
+    },
+    {
+      "id": 11,
+      "before_sha256": "9fbc25ecd83b63a4fde35aabefa3b9222f08d4c63f7456fc8bccf9b39d165d26",
+      "reason": "已看图。真实配置为 192.168.16.143/28；网络 .128、广播 .143。解析却用 192.168.1.31、网络 .16 进行论证。方法和 D 正确，但引用了另一道题的数据，必须按原图重写。",
+      "updates": {
+        "explanation": "图中接口尝试配置192.168.16.143/28，掩码255.255.255.240，块大小16。该子网从192.168.16.128到192.168.16.143，网络地址为.128，可用主机.129–.142，.143为广播地址，所以D正确。私网属性不是报错原因；/28是有效掩码，但该广播地址不能分配给普通接口。"
+      }
+    },
+    {
+      "id": 18,
+      "before_sha256": "0cfba9d20fafe0e7668c3ea68e0f9fb6b5f7a143e0f066f02f7d940e163cb1b8",
+      "reason": "解析讨论 no shutdown 和手动 ipv6 address，与如何根据 MAC 生成全局地址无关。应讲 SLAAC 从 RA 学 /64 前缀，经典 IOS 用 modified EUI-64 生成 IID；同时声明现代 SLAAC 不保证使用 MAC IID。题目默认经典 IOS/EUI-64 场景时 C 可保留。[S2][S3]",
+      "updates": {
+        "prompt": "On a Cisco IOS interface configured to use modified EUI-64 interface identifiers, which action enables automatic global unicast IPv6 addressing using a prefix learned from router advertisements and the interface MAC address?",
+        "explanation": "在本题限定的经典IOS modified EUI-64场景中，接口启用SLAAC（如ipv6 address autoconfig）后，从RA学习/64前缀，再根据MAC形成64位IID，选C。modified EUI-64在48位MAC中间插入FFFE并翻转U/L位。显式链路本地地址不等同全局地址，禁用EUI-64不能达到指定目标，stateful DHCPv6由服务器分配地址。现代SLAAC也可使用稳定随机或隐私IID，不能概括为所有SLAAC地址都来自MAC。"
+      }
+    },
+    {
+      "id": 26,
+      "before_sha256": "d72be42d7a13541969f281f322bb1229ed8ab0f54f364eb1fad8360af903f060",
+      "reason": "已看图。现有 .0/28、.16/28、.64/26；解析却称 .0/27 已在用。两 /28 合起来占 .0–.31，空闲 .32–.63 才是新 /27。D 正确；C 的 .48 不是 /27 网络边界，还应明确排除。",
+      "updates": {
+        "explanation": "新办公室20名用户需至少20个主机地址；/28只有14个，/27有30个，因此应选/27。图中现有10.10.225.0/28和.16/28占用.0–.31，.64/26占用.64–.127，空闲的.32–.63正好是10.10.225.32/27，选D。A/B容量不足；C的.48不是/27网络边界，会落入.32/27内，不能用作该网络的规范网络地址。"
+      }
+    },
+    {
+      "id": 27,
+      "before_sha256": "db4c937f9a49e66a233c2b7a6a99a1c9982e6f6fe7cfb69d0b0e9ee48056db40",
+      "reason": "标准考点是不同 leaf 之间经一个 spine 的路径长度一致；同一 leaf 上端点的路径较短。原题“Each device”过宽，应限定不同 leaf，解析还把均匀跳数等同 uniform bandwidth，容量/超售仍影响带宽。[S5]",
+      "updates": {
+        "prompt": "In a standard two-tier leaf–spine fabric, what characterizes the paths between endpoints attached to different leaf switches?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Each link between leaf switches allows for higher bandwidth."
+          },
+          {
+            "label": "B",
+            "text": "It provides greater predictability on STP blocked ports."
+          },
+          {
+            "label": "C",
+            "text": "It provides variable latency."
+          },
+          {
+            "label": "D",
+            "text": "Endpoints on different leaf switches are separated by the same number of switching hops."
+          }
+        ],
+        "explanation": "在标准两层leaf–spine拓扑中，每台leaf连接全部spine；连接不同leaf的两个终端经过源leaf、一个spine和目标leaf，交换机跳数一致，D正确。相同leaf上的本地流量路径更短，不能对所有任意设备对泛称等跳数。标准fabric不靠STP阻塞这些路由链路，同跳数也不保证带宽或实际延迟完全相同。"
+      }
+    },
+    {
+      "id": 28,
+      "before_sha256": "9378bf8381a0cbcefb47e0cb2d740e9ad64dc51d7b0fcf185782839e9b0e6e0e",
+      "reason": "/23 满足最多 320 用户，掩码选择正确；但题目要求可执行的 SVI 命令，B 中 192.168.0.0/23 是网络地址，不能赋给接口。其他候选也均用该网络地址。建议命令改用 192.168.0.1；解析必须指出掩码与接口可用地址是两个条件。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "ip address 192.168.0.1 255.255.0.0"
+          },
+          {
+            "label": "B",
+            "text": "ip address 192.168.0.1 255.255.254.0"
+          },
+          {
+            "label": "C",
+            "text": "ip address 192.168.0.1 255.255.255.128"
+          },
+          {
+            "label": "D",
+            "text": "ip address 192.168.0.1 255.255.255.224"
+          }
+        ],
+        "explanation": "8层每层最多40名用户，共320名；还需SVI等少量地址。/23提供510个可用主机地址，足够且比/16节省；/25仅126个、/27仅30个均不足。因此B正确。192.168.0.0/23是网络地址，不能作为SVI主机地址，配置使用可用的192.168.0.1/23。"
+      }
+    },
+    {
+      "id": 29,
+      "before_sha256": "419be55cd37d89b690c2b44c7aa58ea8d49e18d848b0de075dacf7a373b8a37b",
+      "reason": "late collision 答案正确；解析将 64 字节 slot time 解释为 preamble + header，混淆时隙与帧组成。删除括号，按经典 10/100 Mb 半双工的 512 bit-times 解释，避免无条件泛化到千兆载波扩展。",
+      "updates": {
+        "prompt": "On a classic 10/100-Mb/s half-duplex Ethernet link, a collision is detected after the first 512 bit-times of frame transmission. Which specific counter increments?",
+        "explanation": "经典10/100 Mb/s半双工以太网的碰撞时隙为512 bit-times，即64字节时间。在帧开始发送超过该碰撞窗口后才检测到碰撞，计入late collision（C）。这64字节时间不是“前导码加帧头”的组成定义。runt是过短帧，CRC是校验错误；一般collision计数不能表达这里强调的超时隙碰撞。全双工链路不正常使用CSMA/CD，出现碰撞应检查双工不匹配、介质等原因。"
+      }
+    },
+    {
+      "id": 33,
+      "before_sha256": "58f4698e90c69f9357629a61497ee006b3cd43b76d1c28fa87fcc1fdb6837250",
+      "reason": "A 的频段引导机制正确，但题干指定 voice quality，官方指南反而警告语音/视频 WLAN 使用 Band Select 可能损害漫游。当前解析完全遗漏关键限制，不能无条件把 A 推荐为语音方案。建议题干改为普通双频数据客户端，或增加 5GHz-only 等合适选项。[S8]",
+      "updates": {
+        "prompt": "A wireless administrator wants to encourage dual-band data clients on a WLAN to use the less-congested 5-GHz band. The WLAN does not carry latency-sensitive voice or video. Which feature provides this band steering?",
+        "explanation": "Band Select通过影响双频客户端的2.4GHz探测响应，鼓励其选择5GHz，A符合题中普通双频数据客户端的频段引导需求。DTIM控制缓冲广播/组播的交付提示，RX-SOP调整接收阈值，AAA override下发用户策略，都不是这个频段引导功能。Band Select可能增加连接/漫游延迟，不应将它无条件推荐给语音或视频WLAN。"
+      }
+    },
+    {
+      "id": 40,
+      "before_sha256": "c29408de531f9cfdb0331fe1d4cf476f2a1f72a05584bdd10d8692f1a1df7c69",
+      "reason": "ULA 固定前七位 1111110；本地分配 L=1 后首字节才是 FD=11111101。现有解析说明了差别，但题干未限定 locally assigned，且 B=FC 容易诱导混淆。建议问“本地分配 ULA 的首 8 位”，保留 D；不能简单宣布 D 错改 B。[S6]",
+      "updates": {
+        "prompt": "What are the first eight bits of a locally assigned IPv6 Unique Local Address (L=1)?",
+        "explanation": "ULA块FC00::/7固定前7位为1111110。本地分配的ULA将第8位L置1，故首字节为11111101（FD），选D。11111100（FC）对应L=0，不是本题指定的本地分配形式；FF开头用于IPv6多播。"
+      }
+    },
+    {
+      "id": 41,
+      "before_sha256": "b9201215ee7554c0a34e5638c9fe431dca6acd56da891da217d34cc71493cf74",
+      "reason": "已看图并核尺寸。图与 Q38 完全相同，是一个路由器、多个 Host 和重叠 192.168.1.0/24，没有 PC1/PC2/R2 或 192.168.10.10/20.10。一般无 NAT 时端到端 IP 不变的解析正确，但根本无法从这张图验证 C，应恢复对应原图后复核。",
+      "updates": {
+        "prompt": "Refer to the exhibit. PC1 (192.168.10.10) sends an IPv4 packet to PC2 (192.168.20.10) through R1 and R2. No NAT or tunneling is configured. What are the source and destination IP addresses when the packet arrives at R2 interface Gi0/0?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NjAiIGhlaWdodD0iMjMwIiB2aWV3Qm94PSIwIDAgOTYwIDIzMCI+PHJlY3Qgd2lkdGg9Ijk2MCIgaGVpZ2h0PSIyMzAiIGZpbGw9IiNmOGZhZmMiLz48ZyBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTE1MCAxMDBIMzQwTTQyMCAxMDBINjAwTTY4MCAxMDBIODQwIi8+PC9nPjxnIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIgc3Ryb2tlLXdpZHRoPSIyIj48cmVjdCB4PSI0MCIgeT0iNjUiIHdpZHRoPSIxMTAiIGhlaWdodD0iNzAiIHJ4PSI4Ii8+PHJlY3QgeD0iMzQwIiB5PSI2NSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjcwIiByeD0iOCIvPjxyZWN0IHg9IjYwMCIgeT0iNjUiIHdpZHRoPSI4MCIgaGVpZ2h0PSI3MCIgcng9IjgiLz48cmVjdCB4PSI4NDAiIHk9IjY1IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjcwIiByeD0iOCIvPjwvZz48ZyBmaWxsPSIjMGYxNzJhIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMiI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iOTUiIHk9IjEwOCI+UEMxPC90ZXh0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjM4MCIgeT0iMTA4Ij5SMTwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI2NDAiIHk9IjEwOCI+UjI8L3RleHQ+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iODkwIiB5PSIxMDgiPlBDMjwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSIxMzAiIHk9IjE3NSI+MTkyLjE2OC4xMC4xMDwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI4MjAiIHk9IjE3NSI+MTkyLjE2OC4yMC4xMDwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1NjUiIHk9IjUzIj5HaTAvMCAoaW5ncmVzcyBvbiBSMik8L3RleHQ+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNDgwIiB5PSIyMTUiPk9yZGluYXJ5IElQdjQgcm91dGluZzsgbm8gTkFUIG9yIHR1bm5lbDwvdGV4dD48L2c+PC9zdmc+",
+        "explanation": "无NAT或隧道改写的普通IPv4路由过程中，端到端源/目的IP保持PC1和PC2地址，因此C为192.168.10.10到192.168.20.10。路由器转发时会递减TTL并重算IPv4头校验和；在以太网链路间重新封装时MAC地址随下一跳改变。不能用路由器链路IP替换原端点IP。"
+      },
+      "accepted_intermediate_sha256": [
+        "20a8e5277b71a9346fd3c312f68df061b9efd56e76317ac95e6d6d1865fe5a01"
+      ]
+    },
+    {
+      "id": 42,
+      "before_sha256": "7b6564baa9ebb2b39175e633dda1eae589588575aece43b8fe9cf859bb1d45c0",
+      "reason": "SFP 可热插拔，C 正确；解析把设备无需关机等同于替换时 without downtime。拔掉承载流量的模块会断该链路，只有冗余切换等条件下才可能业务不中断。应写设备可保持运行、受影响端口短暂中断。",
+      "updates": {
+        "explanation": "SFP模块可热插拔，支持在设备继续运行时更换，因此C强调相对较小的服务影响。拔下正在传输的模块仍会中断该物理链路；只有额外冗余及成功切换等条件下，业务才可能保持连续。光衰减器用于降低过强接收功率而非增强信号；单模/多模及铜缆支持依赖具体模块，不能把所有SFP概括成同一介质、100Mb/s半双工。"
+      }
+    },
+    {
+      "id": 43,
+      "before_sha256": "90187cf0a4a3d5250f421ea14b63b17d3379deb639d1df5147f23302826e0ecc",
+      "reason": "合并 core/distribution 后既可执行路由策略，也可应用 ACL/安全策略；当前解析自己同时列出二者，不能排除 C。Cisco 分层资料支持策略分布于多个层级。应改成多选 A/C 或收窄问题，而不是编造 C 无法在 collapsed core 实施的理由。[S9]",
+      "updates": {
+        "prompt": "Which two functions can the collapsed core/distribution layer perform in a two-tier campus architecture? (Choose two.)",
+        "type": "Multiple Choice",
+        "answer": [
+          "A",
+          "C"
+        ],
+        "explanation": "Collapsed core把分布层与核心层合并，因此既承担路由汇聚/路由策略，也可执行ACL等安全策略，A和C均正确。B是第一层中继器行为，不是合并核心的策略功能；D连接终端属于接入层。不能因为两层架构就排除合并层的安全策略能力。",
+        "options": [
+          {
+            "label": "A",
+            "text": "enforcing routing policies"
+          },
+          {
+            "label": "B",
+            "text": "Repeating electrical signals without inspecting Layer 2 or Layer 3 headers."
+          },
+          {
+            "label": "C",
+            "text": "applying security policies"
+          },
+          {
+            "label": "D",
+            "text": "attaching users to the edge of the network"
+          }
+        ]
+      },
+      "accepted_intermediate_sha256": [
+        "545849c27c2dbad19a23eb43b2227aa74b3095d112c296aa74f0a7c94ab431b4"
+      ]
+    },
+    {
+      "id": 50,
+      "before_sha256": "c23709fec5ce6dd0ba19f817e1a97315c653f622fd651aca48f8bd7c5a2427bd",
+      "reason": "已看图。实际接口 TenGigabitEthernet1/0；图只显示 SiteA reliability166/255、SiteB255/255，未显示 CRC/frame/input error 计数或两次采样。解析写 GigabitEthernet0/1 且声称看见计数递增，属于捏造图片证据。A 是最合适推断，但需明确仅从低 reliability 推断近期错误，不能声称图中直接证明计数增长。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Shortly after SiteA was connected to SiteB over a new single-mode fiber path, users at SiteA report intermittent connectivity issues with applications hosted at SiteB. Which finding is most consistent with the reliability values shown?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Recent interface errors on the SiteA link are indicated."
+          },
+          {
+            "label": "B",
+            "text": "High usage is causing high latency."
+          },
+          {
+            "label": "C",
+            "text": "An incorrect SFP media type was used at SiteA."
+          },
+          {
+            "label": "D",
+            "text": "The sites were connected with the wrong cable type."
+          }
+        ],
+        "explanation": "图中SiteA的TenGigabitEthernet1/0 reliability为166/255，SiteB为255/255。较低reliability提示近期链路错误，四项中A最符合，但单张输出未给两次CRC/input error采样，不能直接证明错误计数此刻递增。应继续采样show interfaces及光功率/介质状态，排查具体物理原因。图不足以单独确定SFP类型或光纤类型错误，也不支持仅凭高利用率解释。"
+      }
+    },
+    {
+      "id": 51,
+      "before_sha256": "6938ad31383ca63a9e78961784aaaa3c94f4c410f0e0f685b13b3fbdd75084fb",
+      "reason": "C 压缩后的地址数值正确；所有命令均缺少静态全局地址所需的 /prefix-length，题干也没有给前缀，故不能称命令完整可执行。解析还错称 ::“只能且必须出现一次”；合法 IPv6 可完全不用 ::，保留前导零也不等于语法非法。改成单纯地址压缩题，或补给 /64，并区分 RFC4291 合法格式与 RFC5952 规范输出。[S2][S10]",
+      "updates": {
+        "prompt": "A network engineer must configure the router R1 GigabitEthernet1/1 interface to connect to the router R2 GigabitEthernet1/1 interface. For the configuration to be applied, the engineer must compress the address 2001:0db8:0000:0000:0500:000a:400F:583B. Which command must be issued on the interface? The link uses a /64 prefix.",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001::db8:0000::500:a:400F:583B/64"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:db8:0::500:a:4F:583B/64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001:db8::500:a:400F:583B/64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address 2001:0db8::5:a:4F:583B/64"
+          }
+        ],
+        "explanation": "原地址分组为2001:0db8:0000:0000:0500:000a:400F:583B。可省每组前导零，将连续两个零组压为一次::，得到2001:db8::500:a:400f:583b；加题干指定/64后C正确。A使用两次::无效；B/D改变了非零位数值。合法地址可不使用::，但一旦使用至多一次；RFC5952建议小写及最长零段压缩。"
+      }
+    },
+    {
+      "id": 52,
+      "before_sha256": "b34fba1d663f977a6b649b31bc249b9666e29e6e082f44d3dbbf8f5d0d49108b",
+      "reason": "firewall 答案正确，状态表解释充分；但“L2 switch 根本不解析上层 IP 报头”过度绝对化，启用 DAI、IP ACL、QoS 等功能的交换设备可检查 L3/L4 字段。改为常规 L2 转发依据 MAC，区别于会话状态检测，不要用绝对否定排除。",
+      "updates": {
+        "explanation": "状态防火墙维护连接/会话状态，结合策略判断报文是否属于允许的会话，所以D符合题意。普通二层交换转发主要查MAC表，LAN控制器偏向集中无线管理，负载均衡器主要分配业务流量。交换设备也可能具备IP ACL、DAI、QoS等上层字段检查功能，不能据此说它们根本不解析IP。"
+      }
+    },
+    {
+      "id": 54,
+      "before_sha256": "5e1ea005fba11c7bc560875db7b8c19d8fad93ac54b5278b0437870cfaac53f3",
+      "reason": "hypervisor 答案正确，但解析说 VM 无法直接读写硬件、所有 CPU 指令与 I/O 均需转换，忽略硬件辅助执行及 PCI passthrough/SR-IOV。应保留资源抽象/协调作用，删除绝对断言；裸金属与 hosted 的分类也不能简化成所有 VM 操作必经软件逐条转译。[S11]",
+      "updates": {
+        "explanation": "Hypervisor负责为虚拟机呈现/分配虚拟CPU、内存和I/O资源，协调VM与宿主硬件的访问，因此B正确。路由器、交换机和网线可支持网络连接，却不管理VM执行与资源隔离。现代虚拟化可利用硬件辅助执行、直通或SR-IOV，并非每条CPU指令和每次I/O都必须被软件逐条转换。"
+      }
+    },
+    {
+      "id": 56,
+      "before_sha256": "caf6382f103281aed0ec9f3752ef70d301209ca92f472f7f0482441c3d192f6e",
+      "reason": "C 是最明确的典型场景，然而解析为排 D 而暗示私网地址不适合 site-to-site VPN、通常需要双向 NAT，这是错误泛化：非重叠私网可直接经 VPN 互通，只在重叠等条件才需重编号或 NAT。又把运营商过滤写成全部 ISP 均绝对执行，并称公网服务需通过 IGP 通告全网，概念不准确。建议保留 C、说明 D 缺少两端地址规划条件而非贬为不推荐场景。[S4]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "The network has multiple endpoint listeners, and it is desired to limit the number of broadcasts."
+          },
+          {
+            "label": "B",
+            "text": "The ISP requires the new subnet to be advertised to the Internet for web services."
+          },
+          {
+            "label": "C",
+            "text": "There is limited unique address space, and traffic on the new subnet will stay local within the organization."
+          },
+          {
+            "label": "D",
+            "text": "The proposed private subnet overlaps the partner network across a site-to-site VPN, and neither NAT nor renumbering is permitted."
+          }
+        ],
+        "explanation": "C明确给出本组织内部使用且公网IPv4空间有限，适合RFC1918编址。A的广播范围由VLAN/子网结构决定，不因私网/公网属性自动缩小；B需在公网直接路由时应使用可全球路由的地址。VPN本身也可承载非重叠私网，不能泛称私网不适合site-to-site VPN；修订后的D明确给出与伙伴重叠且不允许NAT/重编号，不能直接复用该重叠私网。"
+      }
+    },
+    {
+      "id": 58,
+      "before_sha256": "83e174f9dcf8888b936f47095195092cb8d6ce8319e35764416bd023b4e8fe4b",
+      "reason": "存在明显模板填充：“转发、容灾冗余或安全防护效果”“命令集与关键参数”等与题无关；三条干扰项仅重复非匹配项，未分别指出 UDP 不重传/不握手及速率无必然大小关系。B 为意图答案，但“UDP 速率更高”不是协议保证；应按无内建连接/确认重传、开销较低重写题干选项和完整解析。[S1]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "TCP transmits data at a higher rate and ensures packet delivery. UDP retransmits lost data to ensure applications receive the data on the remote end."
+          },
+          {
+            "label": "B",
+            "text": "TCP establishes a connection before sending application data and provides reliable ordered delivery. UDP sends datagrams without an inherent delivery or ordering guarantee."
+          },
+          {
+            "label": "C",
+            "text": "UDP sets up a connection between both devices before transmitting data. TCP uses the three-way handshake to transmit data with a reliable connection."
+          },
+          {
+            "label": "D",
+            "text": "UDP is used for multicast and broadcast communication. TCP is used for unicast communication and transmits data at a higher rate with error checking."
+          }
+        ],
+        "explanation": "TCP在传送应用字节流前建立连接，内建序号、确认、重传和流量控制；UDP为无连接数据报，不提供内建交付保证或重传，B正确。UDP头部较小并不保证实际传输速率总比TCP高，应用仍可在UDP之上实现可靠机制。A把UDP说成负责重传错误；C反置UDP建连；D将TCP速率较高当成保证，也不成立。"
+      }
+    },
+    {
+      "id": 60,
+      "before_sha256": "13b97c9a9c8f427cd84507878a4cc9bd8d114da117812c169eaf50e181af13dd",
+      "reason": "T1=193 bit×8000=1.544Mbps 推导正确；但干扰项 D 实际是43.7，解析擅自把它写成“43.7 / 44.736”并都归为 T3。T3 标准为44.736Mbps，43.7并不是该标准。应按真实选项排除，不能偷换成正确速率。",
+      "updates": {
+        "explanation": "T1线路速率为1.544Mb/s：每帧24个8bit信道加1bit帧同步，共193bit，每秒8000帧，193×8000=1,544,000bit/s，因此A正确（用户信道合计1.536Mb/s）。2.048Mb/s为E1，34.368Mb/s为E3；43.7Mb/s不等于T3的44.736Mb/s，不能把D偷换成T3标准速率。"
+      }
+    }
+  ]
+}

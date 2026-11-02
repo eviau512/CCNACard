@@ -1,0 +1,305 @@
+{
+  "scope": "Manual corrections Q221-Q240, second 200-question milestone",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 223,
+      "before_sha256": "d63fbd5a2cb649160121636568996d8ff1efe97561f525065edc8623aed1240f",
+      "reason": "存储转发先收整帧再校验FCS、丢检测到的CRC错误，B方向正确。但CRC不能保证发现所有可能比特错误；直通是转发开始早于完整FCS到达，不等于完全不做CRC检查，Cisco直通设备可在后续检测/计数并stomp CRC。应删“任何差错/绝不传播/完全不校验”的保证式说法，按时序区别重写；giant也需按MTU/jumbo配置判断。[X11]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It reduces latency by eliminating error checking within the frame"
+          },
+          {
+            "label": "B",
+            "text": "It checks the complete received frame before forwarding and can discard frames with detected CRC errors."
+          },
+          {
+            "label": "C",
+            "text": "It buffers frames and forwards regardless of errors within the frames."
+          },
+          {
+            "label": "D",
+            "text": "It forwards a frame by checking only the destination MAC address"
+          }
+        ],
+        "explanation": "存储转发先接收完整帧，再检查FCS/CRC后决定是否转发，检测到的CRC错误可在入向丢弃，B正确。A取消检查不符合此机制；C无视检测错误继续转发错误；D只读目的MAC就开始转发更接近直通时序。CRC有漏检可能，不能保证发现所有比特错误。直通也可在后续计算CRC、计数或stomp错误FCS，只是发出部分帧可能早于完整校验，不等于永远不做校验；超长帧还需按MTU/jumbo配置判断。"
+      }
+    },
+    {
+      "id": 224,
+      "before_sha256": "3ddd6339d8a884a300f53fd7dce6296ba6ec384976a39c6419588180d121adda",
+      "reason": "已看Staff11、Guests12、两PC g1/1、互联g1/24，B显式access11+trunk符合。C虽省略mode access，但默认dynamic auto对普通PC可运行access，已有access模式时也可工作；限制allowed11/12本身不违反仅两PC互通需求，不能据“不必要”排除。应补端口初始状态/必须禁DTP等条件以使B唯一，不擅改为C。四组多接口配置压平，需要命令块。",
+      "updates": {
+        "prompt": "Refer to the exhibit. AccSw1 and its Staff VLAN 11 PC1 are operational. PC2 has been added on AccSw2 Gi1/1, which still has its default dynamic mode. All VLANs exist. Which configuration explicitly sets PC2's port to static access VLAN 11 and makes Gi1/24 a trunk?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface GigabitEthernet1/2\n switchport mode access\n switchport access vlan 2\n!\ninterface GigabitEthernet1/24\n switchport mode trunk"
+          },
+          {
+            "label": "B",
+            "text": "interface GigabitEthernet1/1\n switchport mode access\n switchport access vlan 11\n!\ninterface GigabitEthernet1/24\n switchport mode trunk"
+          },
+          {
+            "label": "C",
+            "text": "interface GigabitEthernet1/24\n switchport mode trunk\n switchport trunk allowed vlan 11, 12\n!\ninterface GigabitEthernet1/1\n switchport access vlan 11"
+          },
+          {
+            "label": "D",
+            "text": "interface GigabitEthernet1/2\n switchport mode access\n switchport access vlan 12\n!\ninterface GigabitEthernet1/24\n switchport mode trunk\n switchport trunk allowed vlan 11, 12"
+          }
+        ],
+        "explanation": "AccSw1的Staff11连接PC1；PC2在AccSw2 Gi1/1，应显式设access并加入11，互联Gi1/24设trunk，B符合。A/D配置错主机接口或VLAN。C若已有合适access状态可在技术上工作，但本题明确该新口为默认动态模式且要求显式静态access，C没有完成这一要求；它还限制allowed11/12，不能当作本题必须做的操作。不能仅因“不必要”就说allowed列表技术上无效。"
+      }
+    },
+    {
+      "id": 225,
+      "before_sha256": "5e2b700c3a5fd65fd652a60427004977bdb10cd85d02f235bae57fc80e0e1117",
+      "reason": "已看show lldp与附带timer命令参考图（答案图只解释timer，未缺完整原图）。60秒发送、TTL180秒为B；holdtime是通告给邻居的有效期，不是本机固定每180秒才刷新。两条命令选项原样连成一行，缺分行/代码容器。lldp timer1在该平台常低于5秒最小值，解析只说流量泛滥不够准确，LLDP为链路本地发现，不是全网转发的广播风暴。[X12]",
+      "updates": {
+        "prompt": "On the Cisco IOS switch shown, set the LLDP advertisement interval to 60 seconds and the advertised information lifetime to 180 seconds. The platform supports lldp timer values from 5 to 254 seconds. Which configuration is correct?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch2(config)#lldp timer 60\nSwitch2(config)#lldp tlv-select 180"
+          },
+          {
+            "label": "B",
+            "text": "Switch2(config)#lldp timer 60\nSwitch2(config)#lldp holdtime 180"
+          },
+          {
+            "label": "C",
+            "text": "Switch2(config)#lldp timer 1\nSwitch2(config)#lldp holdtime 3"
+          },
+          {
+            "label": "D",
+            "text": "Switch2(config)#lldp timer 1\nSwitch2(config)#lldp tlv-select 3"
+          }
+        ],
+        "explanation": "每分钟发送为lldp timer60；通告邻居保留该信息180秒为holdtime180，选B。这是每次接收通告后重置的TTL，不是本机只每180秒才刷新。A/D的tlv-select选择字段，不接受计时值；C使用1/3秒不符合要求，且本题IOS平台timer最小5秒，timer1无效。LLDP是链路本地发现，不应把小周期夸成会在全网转发的广播风暴。"
+      }
+    },
+    {
+      "id": 226,
+      "before_sha256": "281892f080d215b0f2249cc8a594508e90ded70b5266d1cc608d296bdbca76f0",
+      "reason": "已看Data50/Voice51与电话下挂PC，A的access50+voice51正确。四组配置压平且C的mis qos原文疑为mls qos笔误；需修选项格式并核源。解析把trunk概括为任何终端层绝不可用、untagged语音等同完全失去QoS，过度且不准确；应按本题要求voice51 tagged排除B/D，不把隔离和队列保障混为一事。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "SwitchA(config-if)#switchport mode access\nSwitchA(config-if)#switchport access vlan 50\nSwitchA(config-if)#switchport voice vlan 51"
+          },
+          {
+            "label": "B",
+            "text": "SwitchA(config-if)#switchport mode trunk\nSwitchA(config-if)#switchport trunk allowed vlan add 50, 51\nSwitchA(config-if)#switchport voice vlan dot1p"
+          },
+          {
+            "label": "C",
+            "text": "SwitchA(config-if)#switchport mode trunk\nSwitchA(config-if)#switchport trunk allowed vlan 50, 51\nSwitchA(config-if)#mls qos trust cos"
+          },
+          {
+            "label": "D",
+            "text": "SwitchA(config-if)#switchport mode access\nSwitchA(config-if)#switchport access vlan 50\nSwitchA(config-if)#switchport voice vlan untagged"
+          }
+        ],
+        "explanation": "图示数据50、话音51，A的access50+voice51匹配：PC未标记数据归50，电话按通告标记51。B的dot1p使用优先级标签VLAN0，不是话音51；C只配trunk allowed和QoS信任，不配置本题要求的数据/话音接入关系；D令话音untagged，不能让它归独立51。终端trunk并非绝对禁用，untagged也不等于不能使用DSCP等QoS；本题按指定VLAN映射而非安全口号比较。"
+      }
+    },
+    {
+      "id": 227,
+      "before_sha256": "1134397b28ed563dc4fd07fe409db271a10821e600a977d742e94e678a1e71ff",
+      "reason": "已看两边Gi0/0 trunk、Gi0/1 access+PortFast/BPDUguard，确实未配access vlan。A把Sales PC划入500符合命名意图；但当前两PC都在默认VLAN1且trunk默认也允许1，不能声称未配500本身必然阻止二层通信。题干须明确要求Sales VLAN500隔离/归属，A才是必要步骤。两交换机长配置选项压平；已有图完整，问题不在缺图。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The two Sales PCs must belong to Sales VLAN 500, while the Support VLAN 550 configuration is preserved. The inter-switch Gi0/0 trunks already allow these VLANs; the PC-facing Gi0/1 ports are access ports with no explicit access VLAN. Which change places both PCs in Sales VLAN 500?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SwitchA(config)#interface GigabitEthernet0/1\nSwitchA(config-if)#switchport access vlan 500\nSwitchB(config)#interface GigabitEthernet0/1\nSwitchB(config-if)#switchport access vlan 500"
+          },
+          {
+            "label": "B",
+            "text": "SwitchA(config)#interface GigabitEthernet0/1\nSwitchA(config-if)#switchport mode trunk\nSwitchB(config)#interface GigabitEthernet0/1\nSwitchB(config-if)#switchport mode trunk"
+          },
+          {
+            "label": "C",
+            "text": "SwitchA(config)#interface GigabitEthernet0/0\nSwitchA(config-if)#switchport trunk allowed vlan 500, 550\nSwitchB(config)#interface GigabitEthernet0/0\nSwitchB(config-if)#switchport trunk allowed vlan 500, 550"
+          },
+          {
+            "label": "D",
+            "text": "SwitchA(config)#interface GigabitEthernet0/0\nSwitchA(config-if)#spanning-tree portfast\nSwitchA(config-if)#spanning-tree bpduguard enable\nSwitchB(config)#interface GigabitEthernet0/0\nSwitchB(config-if)#spanning-tree portfast\nSwitchB(config-if)#spanning-tree bpduguard Enable"
+          }
+        ],
+        "explanation": "两端Gi0/0已有trunk且默认允许全部VLAN，Gi0/1已有access但默认归1。要把Sales两PC明确放入500且不改Support550，A在两主机口加access vlan500正确。原来两PC同在1并不必然不能通信，缺的是本题明确的业务归属。B改主机口trunk不能把普通未标记PC归500；C限制上联允许列表不改主机归属；D给互联启用BPDUguard会因交换机BPDU触发关闭。"
+      }
+    },
+    {
+      "id": 228,
+      "before_sha256": "b0e930d33eef23d97d39cc8feb6065b53f15a67c25d3293248800a0db8c7cbd7",
+      "reason": "已看旧SW1 access2、NewSW替SW2及未来10主机。D可将本端trunk native2允许2/10，兼容对端未标记VLAN2并准备本端10，但只升级一端不能使不支持trunk/VLAN标签的SW1同时隔离传送未来VLAN10。应明确“仅准备NewSW端口，未来对端也升级”，或改为支持802.1Q但不支持DTP，不能承诺无条件完整双VLAN互通。选项A重复native10，且漏allowed并不默认阻止VLAN10（trunk默认允许全）；所有配置压平。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Replace SW2 with NewSW. SW1 currently sends VLAN 2 untagged on an access port; preserve that connectivity now and prepare NewSW for tagged VLAN 10 later. SW1 will be upgraded for 802.1Q before VLAN 10 is deployed. Native tagging is disabled and STP permits VLAN 2. Which NewSW configuration provides this local preparation?",
+        "options": [
+          {
+            "label": "A",
+            "text": "NewSW(config)#interface f0/0\nNewSW(config-if)#switchport mode trunk\nNewSW(config-if)#switchport trunk allowed vlan 2,10\nNewSW(config-if)#switchport trunk native vlan 10"
+          },
+          {
+            "label": "B",
+            "text": "NewSW(config)#interface f0/0\nNewSW(config-if)#switchport mode access\nNewSW(config-if)#switchport trunk allowed vlan 2, 10\nNewSW(config-if)#switchport trunk native vlan 2"
+          },
+          {
+            "label": "C",
+            "text": "NewSW(config)#interface f0/0\nNewSW(config-if)#switchport mode access\nNewSW(config-if)#switchport trunk allowed vlan 2, 10\nNewSW(config-if)#switchport trunk native vlan 10"
+          },
+          {
+            "label": "D",
+            "text": "NewSW(config)#interface f0/0\nNewSW(config-if)#switchport mode trunk\nNewSW(config-if)#switchport trunk allowed vlan 2, 10\nNewSW(config-if)#switchport trunk native vlan 2"
+          }
+        ],
+        "explanation": "D把NewSW端口设trunk、允许2/10且native2，当前VLAN2以untagged与旧SW1的access2互通，并只为未来tag10准备本端能力。VLAN10真正跨链路隔离传送前，题干要求对端也升级支持802.1Q，不能靠只换一端实现。A的native10会把旧端未标记VLAN2归错；B/C仍access，trunk参数不控制该运行模式，也未显式把access口归2。题干限定无native tagging且STP允许VLAN2，避免把配置准备等同所有运行条件都自动满足。"
+      }
+    },
+    {
+      "id": 229,
+      "before_sha256": "32b240ee0477981c09742ddce769f793a2b58d9b404c48e1904bff1de2a8f3d3",
+      "reason": "CUWN/AireOS带外管理service port，B正确。但解析称1.1.1.1为静态预留IP；它是已投入使用的公网DNS地址，不应当作未使用虚拟接口地址建议。应按Cisco指南选择未使用、不在现网路由的地址，并区分AireOS服务/AP-manager/virtual接口和9800管理VRF/WMI架构，不能笼统等同。[X3][X13]",
+      "updates": {
+        "prompt": "On a traditional Cisco AireOS controller in the Cisco Unified Wireless Network Architecture, which dedicated port provides out-of-band management?",
+        "explanation": "在题设传统AireOS CUWN控制器上，service port用于带外管理，B正确。AP-manager处理AP相关带内通信，dynamic映射客户端WLAN/VLAN，virtual用于Web认证等逻辑功能，都不是专用带外物理管理端口。AireOS与9800的管理VRF/WMI架构不能笼统等同。虚拟接口地址应按该平台指南选未使用且不在现网路由中的地址；1.1.1.1已是公网DNS地址，不能称为保留未使用地址。"
+      }
+    },
+    {
+      "id": 230,
+      "before_sha256": "c9f988e767852d267546c50865554a116c116073c8c1bcf52a025f1b6b5843a6",
+      "reason": "已看PMF Required、WPA/WPA2及各AKM均未勾。普通WPA2-PSK意图更接近D；B加CCKM/WPA却不处理PMF Required及对应AKM，不能以未经验证“历史官方B”维持。解析称D是唯一现代可用组合、PSK必须关PMF也错：PMF可与PSK配合，WPA3更要求PMF；FT-PSK本身同样基于预共享密钥，不是不能密码认证。应明确控制器版本/客户端兼容条件，再统一题干、选项与答案，删除虚构评分论证。[X14]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Configure a conventional WPA2-AES preshared-key WLAN for legacy clients that support neither PMF nor 802.11r. Do not use RADIUS or CCKM. Which listed security combination should be selected before entering the supplied PSK?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Disable PMF Enable PSK Enable 802.1x"
+          },
+          {
+            "label": "B",
+            "text": "Select WPA Policy Enable CCKM Enable PSK"
+          },
+          {
+            "label": "C",
+            "text": "Select WPA Policy Select WPA2 Policy Enable FT PSK"
+          },
+          {
+            "label": "D",
+            "text": "Select WPA2 Policy and AES; disable the currently required PMF for these legacy clients; enable PSK."
+          }
+        ],
+        "answer": [
+          "D"
+        ],
+        "explanation": "题干限定普通WPA2-AES PSK客户端且不支持PMF/FT，给定组合中D选择WPA2/AES、PSK并禁用当前Required PMF最符合。A保留802.1X不符合不用RADIUS的此方案；B的WPA/CCKM不是所需普通WPA2-PSK组合；C的FT-PSK不适合题设不支持FT的客户端。不是所有PSK都必须禁用PMF：支持PMF的PSK客户端可另配PMF，Optional也可作为兼容方案，WPA3还有不同要求；不能以所谓历史判分维持错误B。配置后还需输入给定PSK。"
+      }
+    },
+    {
+      "id": 231,
+      "before_sha256": "26c823a5fc9de61d12c74f8926f1a59ce1d3c686659a6dba08ab650780889b7b",
+      "reason": "实际选项A route、B bridge、C lightweight、D autonomous；解析却逐项解释A Bridge/B FlexConnect/C Local/D Sniffer，是明显题解错配。C字母虽对，但不能称选项C内容为Local；Lightweight为架构/映像类别，Local/Flex/Bridge等是其可用运行模式，多个模式可用CAPWAP。按实际四选项重写，保留lightweight的C。无需补图即可修复。",
+      "updates": {
+        "prompt": "Which AP architecture, contrasted with autonomous operation, uses CAPWAP to join and receive configuration from an external Cisco Wireless LAN Controller?",
+        "explanation": "相对于autonomous独立架构，lightweight AP通过CAPWAP加入WLC并接受集中配置，C正确。route不是这里的AP架构名称；bridge是可能在受管AP上使用的桥接/回传角色，不能代替管理架构类别；autonomous不使用这种外部WLC管理架构。Local、FlexConnect、Bridge、Sniffer等具体运行角色不能擅自替换原来的route/bridge/lightweight/autonomous四项；多种轻量AP角色都可用CAPWAP。"
+      }
+    },
+    {
+      "id": 232,
+      "before_sha256": "093ebcd11f57ca3ce3a29b40ce95a1b6733622e313b2ea51ce060680150833b8",
+      "reason": "A PortFast为终端端口快速进入Forwarding的意图正确，UplinkFast/BackboneFast与BPDUguard也区分清楚。但解析把初次link-up的Blocking必等20秒、后续15+15列成固定顺序，混入间接故障max-age等待；不是每次插线都耗50秒。立即是跳过STP转发延迟，不是物理协商/DHCP/端到端业务0秒完成。应修时间线和保证措辞。[X9]",
+      "updates": {
+        "prompt": "Which switch feature skips the usual STP listening/learning delay on a host-facing edge port after the physical link comes up?",
+        "explanation": "PortFast让合适的主机边缘端口在物理link-up后跳过传统Listening/Learning等待，A正确。BPDUguard是收BPDU后的保护动作；UplinkFast针对上联直连故障，BackboneFast针对间接故障的传统STP加速，不是终端link-up功能。常规Listening15秒加Learning15秒；额外max-age等待与故障情景有关，并非每次插线都必须50秒。跳过STP延迟也不保证物理协商、DHCP和端到端业务都0秒完成。"
+      }
+    },
+    {
+      "id": 233,
+      "before_sha256": "339272eef3d3e31ee138b2e9f14a993ae2468214bf9afe4d325093f125dab0be",
+      "reason": "A全局PortFast default可使非trunk端口快速转发，但原题问on a port且未限制全局。Cisco明确spanning-tree portfast trunk在access模式也启用PortFast，因此C不能被解析以“在access无效”排除；A/C皆有依据。no spanning-tree portfast是恢复继承默认，不等于总是显式禁用，全局default开启时仍可生效。需限定“全局默认启用所有非trunk端口”后才使A唯一，并修C/D解释。[X8]",
+      "updates": {
+        "prompt": "Which global command enables PortFast by default on all nontrunking switch ports so host ports can enter forwarding promptly after link-up?",
+        "explanation": "题干明确全局默认启用所有非trunk端口，A的spanning-tree portfast default符合。B只在已是PortFast的端口启BPDUguard；C是单接口设置，虽带trunk参数也可对access模式启用PortFast，但不是全局默认命令；D恢复接口默认，不等于总是显式禁用，可能继承全局default。不能以“C在access无效”或“no始终禁用”当排除理由。"
+      }
+    },
+    {
+      "id": 234,
+      "before_sha256": "a3192b81736a4bbf1dd90be7980d7f49c94784c15adead8e9fb6e8863a60b913",
+      "reason": "C符合“新帧需要从同一个正在发送的出端口发出”的缓冲场景，但题干仅说端口receives while transmitting；全双工以太网可同时接收和发送，不能从这句话推出接收帧必须排同一出队列。解析自行加了fabric送至busy egress的条件，应写入题干。未给双工/帧去向/队列是否满，不能把正常全双工双向收发否定为碰撞，也不能保证所有拥塞必只在buffer满才丢包。保留C意图，补条件。[X15]",
+      "updates": {
+        "prompt": "A new frame has been selected for an ordinary non-preemptive Ethernet output port that is still transmitting an earlier frame. Buffer space is available and no policy requires a drop. How is the new frame handled?",
+        "explanation": "新帧已被交换矩阵选中从同一忙碌出端口发送，且有可用缓冲、无帧抢占，故C入出向队列等待前帧结束。A/B的二层交换机主动请求重传不是普通Ethernet转发机制；D不能让同一非抢占出端口同时发两帧。全双工端口仍可同时接收和发送不同方向帧，所以必须明确这里说的是同一出向调度，而不是把正常双向收发说成碰撞。其他拥塞策略也可在队列未耗尽前丢弃，本题已给出可入队条件。"
+      }
+    },
+    {
+      "id": 235,
+      "before_sha256": "1bc8080f29238defb76b8a744e07477afa363d18d03c66c3bbaa6c759c8980dc",
+      "reason": "已看完整表与图，Br4入Fa0/2、Br2接Fa0/3，当前缺源口记录，学习源并向Fa0/3转发的C为意图。表中Br2的010a.7a17.45bc首字节01的I/G位为1，是组播地址，不能作为普通主机动态学习的单播源MAC。应恢复有效Br2单播MAC，勿把此表称为正常已知单播硬件结果；算法解释可保留。不是缺MAC表图。[X16]",
+      "updates": {
+        "prompt": "Refer to the exhibit showing valid host MAC addresses and the initial complete MAC address table. All shown ports forward VLAN 50. What does SW1 do when Br-4 sends a frame to Br-2?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDQwIiBoZWlnaHQ9IjUzMCIgdmlld0JveD0iMCAwIDEwNDAgNTMwIj48cmVjdCB3aWR0aD0iMTA0MCIgaGVpZ2h0PSI1MzAiIGZpbGw9IiNmOGZhZmMiLz48cmVjdCB4PSI0MjAiIHk9IjMwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjY4IiByeD0iMTAiIGZpbGw9IiNiZmRiZmUiIHN0cm9rZT0iIzFlNDBhZiIvPjx0ZXh0IHg9IjUyMCIgeT0iNzMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIzIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TVzE8L3RleHQ+PHBhdGggZD0iTTUyMCA5OEwxMzAgMTc0IiBzdHJva2U9IiM2NDc0OGIiIHN0cm9rZS13aWR0aD0iMyIvPjxyZWN0IHg9IjE1IiB5PSIxNzQiIHdpZHRoPSIyMzAiIGhlaWdodD0iNzAiIHJ4PSI4IiBmaWxsPSIjZGJlYWZlIiBzdHJva2U9IiMxZTQwYWYiLz48dGV4dCB4PSIxMzAiIHk9IjE2MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkZhMC8xPC90ZXh0Pjx0ZXh0IHg9IjEzMCIgeT0iMjAzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QnItMTwvdGV4dD48dGV4dCB4PSIxMzAiIHk9IjIyOSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjAwMGMuODU5MC5iYjdkPC90ZXh0PjxwYXRoIGQ9Ik01MjAgOThMMzkwIDE3NCIgc3Ryb2tlPSIjNjQ3NDhiIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIyNzUiIHk9IjE3NCIgd2lkdGg9IjIzMCIgaGVpZ2h0PSI3MCIgcng9IjgiIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIvPjx0ZXh0IHg9IjM5MCIgeT0iMTYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RmEwLzM8L3RleHQ+PHRleHQgeD0iMzkwIiB5PSIyMDMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Cci0yPC90ZXh0Pjx0ZXh0IHg9IjM5MCIgeT0iMjI5IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MDAwYS43YTE3LjQ1YmM8L3RleHQ+PHBhdGggZD0iTTUyMCA5OEw2NTAgMTc0IiBzdHJva2U9IiM2NDc0OGIiIHN0cm9rZS13aWR0aD0iMyIvPjxyZWN0IHg9IjUzNSIgeT0iMTc0IiB3aWR0aD0iMjMwIiBoZWlnaHQ9IjcwIiByeD0iOCIgZmlsbD0iI2RiZWFmZSIgc3Ryb2tlPSIjMWU0MGFmIi8+PHRleHQgeD0iNjUwIiB5PSIxNjAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GYTAvNDwvdGV4dD48dGV4dCB4PSI2NTAiIHk9IjIwMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJyLTM8L3RleHQ+PHRleHQgeD0iNjUwIiB5PSIyMjkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj43YWE3LjQwNDEuMDUyNTwvdGV4dD48cGF0aCBkPSJNNTIwIDk4TDkxMCAxNzQiIHN0cm9rZT0iIzY0NzQ4YiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iNzk1IiB5PSIxNzQiIHdpZHRoPSIyMzAiIGhlaWdodD0iNzAiIHJ4PSI4IiBmaWxsPSIjZGJlYWZlIiBzdHJva2U9IiMxZTQwYWYiLz48dGV4dCB4PSI5MTAiIHk9IjE2MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkZhMC8yPC90ZXh0Pjx0ZXh0IHg9IjkxMCIgeT0iMjAzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QnItNDwvdGV4dD48dGV4dCB4PSI5MTAiIHk9IjIyOSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjAyMDAuMDAwMC4wMDA0PC90ZXh0Pjx0ZXh0IHg9IjUyMCIgeT0iMjg2IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VkxBTiA1MCDigJQgSW5pdGlhbCBjb21wbGV0ZSBkeW5hbWljIE1BQyB0YWJsZTwvdGV4dD48cmVjdCB4PSI4MCIgeT0iMzA5IiB3aWR0aD0iODgwIiBoZWlnaHQ9IjE4MSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjNjQ3NDhiIi8+PHRleHQgeD0iMTEwIiB5PSIzNDMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5WTEFOPC90ZXh0Pjx0ZXh0IHg9IjI0MCIgeT0iMzQzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+TUFDIEFkZHJlc3M8L3RleHQ+PHRleHQgeD0iNjEwIiB5PSIzNDMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5UeXBlPC90ZXh0Pjx0ZXh0IHg9IjgwMCIgeT0iMzQzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+UG9ydDwvdGV4dD48dGV4dCB4PSIxMTAiIHk9IjM4NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPjUwPC90ZXh0Pjx0ZXh0IHg9IjI0MCIgeT0iMzg1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+MDAwYy44NTkwLmJiN2Q8L3RleHQ+PHRleHQgeD0iNjEwIiB5PSIzODUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5EWU5BTUlDPC90ZXh0Pjx0ZXh0IHg9IjgwMCIgeT0iMzg1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+RmEwLzE8L3RleHQ+PHRleHQgeD0iMTEwIiB5PSI0MjMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj41MDwvdGV4dD48dGV4dCB4PSIyNDAiIHk9IjQyMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPjAwMGEuN2ExNy40NWJjPC90ZXh0Pjx0ZXh0IHg9IjYxMCIgeT0iNDIzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+RFlOQU1JQzwvdGV4dD48dGV4dCB4PSI4MDAiIHk9IjQyMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPkZhMC8zPC90ZXh0Pjx0ZXh0IHg9IjExMCIgeT0iNDYxIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+NTA8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSI0NjEiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj43YWE3LjQwNDEuMDUyNTwvdGV4dD48dGV4dCB4PSI2MTAiIHk9IjQ2MSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPkRZTkFNSUM8L3RleHQ+PHRleHQgeD0iODAwIiB5PSI0NjEiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5GYTAvNDwvdGV4dD48L3N2Zz4=",
+        "options": [
+          {
+            "label": "A",
+            "text": "It looks up the source Br-4 entry and discards the frame because that entry is missing."
+          },
+          {
+            "label": "B",
+            "text": "It floods the frame out all ports except the Br-2 port."
+          },
+          {
+            "label": "C",
+            "text": "It learns the source MAC and ingress port, then forwards the frame to the known Br-2 port."
+          },
+          {
+            "label": "D",
+            "text": "It converts the Layer 2 destination MAC into a Layer 3 IP address before forwarding."
+          }
+        ],
+        "explanation": "图中修订为合法单播MAC：Br2的000a.7a17.45bc已在Fa0/3，Br4的0200.0000.0004从Fa0/2进入但初表未记录。交换机学习源MAC/端口/VLAN50，再对已知目的从Fa0/3单播，C正确。A不能因未知源而直接丢；B即使未知目的也应排除入端口而非目的端口；D不属于普通二层MAC查表过程。原01开头组播地址不能作为正常动态学习的主机源MAC，图已改为明确有效的练习数据。"
+      }
+    },
+    {
+      "id": 237,
+      "before_sha256": "71dce733d83a5f8aa02261e74aebaa77d3794ef7a6ac9e2a799d0842282effb9",
+      "reason": "已看E1/1-2、Po1均access2。只让SW1发起对应SW1 active/SW2 passive，B与解释核心正确；“不主动”不等于响应侧永不发送控制帧。源选项已经以换行区分两交换机命令，但App选项textContent加普通空白样式会折叠换行，不能认定已正确按设备分行；需保留空白/分块显示。[X1]",
+      "updates": {
+        "explanation": "只让Switch1主动发起LACP，应配Switch1 active、Switch2 passive，B。响应侧仍发送LACPDU，不主动发起不等于永远不发送报文。A的on不运行LACP；C发起方反了；D两端passive通常无法启动。命令应在对应物理成员接口下配置，图中的Po1和成员access2参数须保持兼容。源选项原有分设备换行，现App已支持保留这些换行，不需再把两条CLI合为一行。"
+      }
+    },
+    {
+      "id": 238,
+      "before_sha256": "21ea687d0f2fd21ddca9b466368e48614ddea75b67c20d584a3814135f9c975e",
+      "reason": "已看完整MAC表，PC4入Gi1/4无表项、PC1在Gi1/0，C学习源并转发为意图，解析的目标端口吻合。另表中3986.3986.3986的首字节39为组播，却列DYNAMIC并放在普通PC2口，不能通过正常单播源学习得到。需修这一图中表项，虽不改变本题PC4到PC1的答案，也不能忽略无效展示数据。[X16]",
+      "updates": {
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDQwIiBoZWlnaHQ9IjUzMCIgdmlld0JveD0iMCAwIDEwNDAgNTMwIj48cmVjdCB3aWR0aD0iMTA0MCIgaGVpZ2h0PSI1MzAiIGZpbGw9IiNmOGZhZmMiLz48cmVjdCB4PSI0MjAiIHk9IjMwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjY4IiByeD0iMTAiIGZpbGw9IiNiZmRiZmUiIHN0cm9rZT0iIzFlNDBhZiIvPjx0ZXh0IHg9IjUyMCIgeT0iNzMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIzIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NYXJrZXRpbmctU1cxPC90ZXh0PjxwYXRoIGQ9Ik01MjAgOThMMTMwIDE3NCIgc3Ryb2tlPSIjNjQ3NDhiIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIxNSIgeT0iMTc0IiB3aWR0aD0iMjMwIiBoZWlnaHQ9IjcwIiByeD0iOCIgZmlsbD0iI2RiZWFmZSIgc3Ryb2tlPSIjMWU0MGFmIi8+PHRleHQgeD0iMTMwIiB5PSIxNjAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5HaTEvMDwvdGV4dD48dGV4dCB4PSIxMzAiIHk9IjIwMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBDLTE8L3RleHQ+PHRleHQgeD0iMTMwIiB5PSIyMjkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4wMDBhLjAwMGEuMDAwYTwvdGV4dD48cGF0aCBkPSJNNTIwIDk4TDM5MCAxNzQiIHN0cm9rZT0iIzY0NzQ4YiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjc1IiB5PSIxNzQiIHdpZHRoPSIyMzAiIGhlaWdodD0iNzAiIHJ4PSI4IiBmaWxsPSIjZGJlYWZlIiBzdHJva2U9IiMxZTQwYWYiLz48dGV4dCB4PSIzOTAiIHk9IjE2MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkdpMS8yPC90ZXh0Pjx0ZXh0IHg9IjM5MCIgeT0iMjAzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UEMtMjwvdGV4dD48dGV4dCB4PSIzOTAiIHk9IjIyOSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjM4ODYuMzk4Ni4zOTg2PC90ZXh0PjxwYXRoIGQ9Ik01MjAgOThMNjUwIDE3NCIgc3Ryb2tlPSIjNjQ3NDhiIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSI1MzUiIHk9IjE3NCIgd2lkdGg9IjIzMCIgaGVpZ2h0PSI3MCIgcng9IjgiIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIvPjx0ZXh0IHg9IjY1MCIgeT0iMTYwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R2kxLzM8L3RleHQ+PHRleHQgeD0iNjUwIiB5PSIyMDMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5QQy0zPC90ZXh0Pjx0ZXh0IHg9IjY1MCIgeT0iMjI5IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MDBkMC4wMGQwLjAwZDA8L3RleHQ+PHBhdGggZD0iTTUyMCA5OEw5MTAgMTc0IiBzdHJva2U9IiM2NDc0OGIiIHN0cm9rZS13aWR0aD0iMyIvPjxyZWN0IHg9Ijc5NSIgeT0iMTc0IiB3aWR0aD0iMjMwIiBoZWlnaHQ9IjcwIiByeD0iOCIgZmlsbD0iI2RiZWFmZSIgc3Ryb2tlPSIjMWU0MGFmIi8+PHRleHQgeD0iOTEwIiB5PSIxNjAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5HaTEvNDwvdGV4dD48dGV4dCB4PSI5MTAiIHk9IjIwMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBDLTQ8L3RleHQ+PHRleHQgeD0iOTEwIiB5PSIyMjkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4wMjAwLjAwMDAuMDAwNDwvdGV4dD48dGV4dCB4PSI1MjAiIHk9IjI4NiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlZMQU4gMTAxIOKAlCBJbml0aWFsIGNvbXBsZXRlIGR5bmFtaWMgTUFDIHRhYmxlPC90ZXh0PjxyZWN0IHg9IjgwIiB5PSIzMDkiIHdpZHRoPSI4ODAiIGhlaWdodD0iMTgxIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiM2NDc0OGIiLz48dGV4dCB4PSIxMTAiIHk9IjM0MyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPlZMQU48L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIzNDMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5NQUMgQWRkcmVzczwvdGV4dD48dGV4dCB4PSI2MTAiIHk9IjM0MyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPlR5cGU8L3RleHQ+PHRleHQgeD0iODAwIiB5PSIzNDMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5Qb3J0PC90ZXh0Pjx0ZXh0IHg9IjExMCIgeT0iMzg1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+MTAxPC90ZXh0Pjx0ZXh0IHg9IjI0MCIgeT0iMzg1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+MDAwYS4wMDBhLjAwMGE8L3RleHQ+PHRleHQgeD0iNjEwIiB5PSIzODUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5EWU5BTUlDPC90ZXh0Pjx0ZXh0IHg9IjgwMCIgeT0iMzg1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+R2kxLzA8L3RleHQ+PHRleHQgeD0iMTEwIiB5PSI0MjMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj4xMDE8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSI0MjMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj4zODg2LjM5ODYuMzk4NjwvdGV4dD48dGV4dCB4PSI2MTAiIHk9IjQyMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPkRZTkFNSUM8L3RleHQ+PHRleHQgeD0iODAwIiB5PSI0MjMiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMGYxNzJhIj5HaTEvMjwvdGV4dD48dGV4dCB4PSIxMTAiIHk9IjQ2MSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPjEwMTwvdGV4dD48dGV4dCB4PSIyNDAiIHk9IjQ2MSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPjAwZDAuMDBkMC4wMGQwPC90ZXh0Pjx0ZXh0IHg9IjYxMCIgeT0iNDYxIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzBmMTcyYSI+RFlOQU1JQzwvdGV4dD48dGV4dCB4PSI4MDAiIHk9IjQ2MSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMwZjE3MmEiPkdpMS8zPC90ZXh0Pjwvc3ZnPg==",
+        "prompt": "Refer to the exhibit with valid host MAC addresses and the initial complete table. All shown ports forward VLAN 101. What does Marketing-SW1 do when PC-4 sends a frame to PC-1?",
+        "explanation": "PC4从Gi1/4进入，初始表没有它的源MAC；PC1的000a.000a.000a在Gi1/0，故先学习PC4再向Gi1/0单播，C正确。A不能只因未知源丢弃，B不是普通二层转发，D错误地排除了目的而非入端口且目的已知无需泛洪。原PC2的39开头地址I/G位为1，不能作为正常动态单播源学习条目；修订图明确使用38开头合法单播示例，保留原端口/已知关系，不宣称是在恢复未知原值。"
+      }
+    },
+    {
+      "id": 239,
+      "before_sha256": "cf9a83dbe234fa7939df581c7f30de2b5b765038d0c1163871da70c25beb2086",
+      "reason": "已看Fa0/1已access vlan15，图标voice10，A补mode access+voice10正确，不需要重复access15。源选项已有三行，但App会折叠；解析虽有正确配置围栏，voice vlan参数模板未转义仍会消失。B并没有显式mode trunk，解析不能说B/D都执行了该命令；普通trunk不代表天然丧失CDP或硬件QoS。修显示与干扰项论据。",
+      "updates": {
+        "explanation": "图中Fa0/1已保存access vlan15，A补静态access及voice10，使PC未标记数据归15、电话话音按10标记，正确。B只改native/allowed且没有mode trunk，也没有本题voice通告配置，不能说它已经执行trunk；D强制普通trunk不保留题中数据/话音接入关系；C的Private VLAN是另一功能。Trunk本身并非自动丧失CDP或QoS，需按此配置中的具体VLAN/运行模式排除。源选项和解析配置块的换行由已修的显示器保留。"
+      }
+    },
+    {
+      "id": 240,
+      "before_sha256": "8be909a92be93479de29a575a96773b947037a09cd0947d11af32d99f49c867c",
+      "reason": "已看图和四个BID：SW2=24586最低为原根，失效后SW3=28682小于SW1=32778/SW4给定64000，因此C为意图，不取决于等链路速率。图未展示任何root secondary命令，不能编称已预配备根、也不应称SW1或SW2都可能是原根。SW4优先级64000低12位2560与其他VLAN10不符，应核回同实例有效BID；保留C数值排序意图，不猜新值。[X17]",
+      "updates": {
+        "prompt": "Refer to the exhibit. All switches run STP for VLAN 10 and the priority fields shown include VLAN ID 10. SW2, the original root, has failed. Which remaining connected switch becomes root?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDQwIiBoZWlnaHQ9IjQ0MCIgdmlld0JveD0iMCAwIDEwNDAgNDQwIj48cmVjdCB3aWR0aD0iMTA0MCIgaGVpZ2h0PSI0NDAiIGZpbGw9IiNmOGZhZmMiLz48cGF0aCBkPSJNMjQwIDE3NVYyNDVNNDQ1IDMwNUg1OTUiIHN0cm9rZT0iIzQ3NTU2OSIgc3Ryb2tlLXdpZHRoPSI0Ii8+PHBhdGggZD0iTTQ0NSAxMDBINTk1TTgwMCAxNzVWMjQ1IiBzdHJva2U9IiM5NGEzYjgiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWRhc2hhcnJheT0iOSA3Ii8+PHRleHQgeD0iNTIwIiB5PSIzMiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlZMQU4gMTAg4oCUIFNXMiBoYXMgZmFpbGVkOyB0aGUgb3RoZXIgdGhyZWUgc3dpdGNoZXMgcmVtYWluIGNvbm5lY3RlZDwvdGV4dD48cmVjdCB4PSIzNSIgeT0iNTUiIHdpZHRoPSI0MTAiIGhlaWdodD0iMTIwIiByeD0iMTAiIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIvPjx0ZXh0IHg9IjI0MCIgeT0iODciIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjI1IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TVzE8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIxMjIiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qcmlvcml0eSBmaWVsZDogMzI3Nzg8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIxNTUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4wMDE4LjE4NDMuM2NiMDwvdGV4dD48cmVjdCB4PSI1OTUiIHk9IjU1IiB3aWR0aD0iNDEwIiBoZWlnaHQ9IjEyMCIgcng9IjEwIiBmaWxsPSIjZTJlOGYwIiBzdHJva2U9IiMxZTQwYWYiLz48dGV4dCB4PSI4MDAiIHk9Ijg3IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNSIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+U1cyIChmYWlsZWQpPC90ZXh0Pjx0ZXh0IHg9IjgwMCIgeT0iMTIyIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UHJpb3JpdHkgZmllbGQ6IDI0NTg2PC90ZXh0Pjx0ZXh0IHg9IjgwMCIgeT0iMTU1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MDA0YS4xM2U5LjM5MTI8L3RleHQ+PHJlY3QgeD0iMzUiIHk9IjI0NSIgd2lkdGg9IjQxMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0iI2RiZWFmZSIgc3Ryb2tlPSIjMWU0MGFmIi8+PHRleHQgeD0iMjQwIiB5PSIyNzciIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjI1IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TVzM8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIzMTIiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qcmlvcml0eSBmaWVsZDogMjg2ODI8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4wMDIyLjU1Y2YuY2MwMDwvdGV4dD48cmVjdCB4PSI1OTUiIHk9IjI0NSIgd2lkdGg9IjQxMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0iI2RiZWFmZSIgc3Ryb2tlPSIjMWU0MGFmIi8+PHRleHQgeD0iODAwIiB5PSIyNzciIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjI1IiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TVzQ8L3RleHQ+PHRleHQgeD0iODAwIiB5PSIzMTIiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qcmlvcml0eSBmaWVsZDogNjE0NTA8L3RleHQ+PHRleHQgeD0iODAwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4wMDIyLjY2ZWQuYTI5ZjwvdGV4dD48L3N2Zz4=",
+        "explanation": "给定同一VLAN10 priority字段为32778、24586、28682、61450。原根SW2最低但已失效，剩余SW3的28682最低，故C。根选择先比较BID优先级，不由链路等速与否决定。28682对应base28672加VLAN10，但这并不能证明曾执行root secondary宏；不应编造图中未显示的命令。修订SW4为明确合法的VLAN10 priority示例61450，避免原64000低12位与实例不一致。"
+      }
+    }
+  ]
+}

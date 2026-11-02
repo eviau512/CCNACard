@@ -1,0 +1,277 @@
+{
+  "scope": "Manual corrections Q141-Q180 within first 200 milestone",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 147,
+      "before_sha256": "23a6d66560a3f8e2e85df56a9cb8b2b6d586fd45f77a2aa4ceedca4282778598",
+      "reason": "Cisco文档明确：CDP启用接口没配置IP时，可通告设备另一接口的IP。题干只说该接口无IP，解析却改成邻居整机无IP，从而误选C；在有其他编号接口的常见IOS情境应为B。若整机确无可通告地址，C才成立。应改答案并解释接口与设备管理地址的区别，或收窄题干为整机无地址；标题/总结还错归WLC/AP专题。[V3]",
+      "updates": {
+        "prompt": "On a Cisco IOS neighbor, the interface running CDP has no IP address, but another interface has an IP address available for advertisement. What can CDP use for that neighbor's address information?",
+        "answer": [
+          "B"
+        ],
+        "explanation": "CDP工作在数据链路层，不要求每个启用CDP的接口都有IP。Cisco IOS可通告设备另一个编号接口的地址，本题明确存在另一个可通告IP，因此B正确。A不是无IP接口的必然结果；C只有整机没有可通告地址等条件时才可能成立，D把地址缺失夸成全部信息缺失。CDP detail中的管理地址不一定等于与本机直连端口的地址。"
+      }
+    },
+    {
+      "id": 148,
+      "before_sha256": "979d1e5ea6e98f5ce8798502eb81e7c3ea8d9c5eb0da08c10640e19728c11ac7",
+      "reason": "passive响应对端LACP、不主动发起协商，A正确；但解析开头把on同时列为LACP和PAgP模式，混淆静态聚合与协议协商，后面的CLI帮助又与此前说法冲突。on不运行这两个协商协议；active/passive属于LACP，auto/desirable属于PAgP。应纠正分类、清理乱码及模板，保留A。[V4]",
+      "updates": {
+        "explanation": "LACP passive模式在检测到对端LACP后参与协商而不主动发起，选A。active主动发起LACP；desirable/auto是PAgP的主动/被动意愿，不能与LACP混称；on为静态强制聚合，不运行LACP或PAgP。active+passive或active+active可形成LACP，passive+passive通常不能启动；响应侧仍会发送LACPDU，不能把“不主动发起”写成永不发控制报文。"
+      }
+    },
+    {
+      "id": 150,
+      "before_sha256": "856e82a5dc0a83c85c4796fd83f47d0ccb290fec38c5405d0dc287829ffb4d07",
+      "reason": "已看图：SW1 native10，SW2 native100，但SW2 allowed仅5-20，未包含100。untagged帧在接收端的PVID分类与最终允许转发/丢弃不是同一步；解析只说native错配导致归100，完全未核对allowed列表、VLAN100是否存在及PVST不一致阻塞。B不能仅凭这段简化逻辑被称为完整运行结论，C也有配置上的依据。应补平台/实际show状态或实验核验，或把100纳入allowed并限定问PVID分类；目前不据跨厂商行为直接擅改为C。[V1]",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW1 sends a VLAN 10 frame untagged. Which configured native VLAN/PVID on SW2 identifies the VLAN classification for that untagged frame? Consider classification only, before allowed-list, VLAN-state or STP forwarding decisions.",
+        "options": [
+          {
+            "label": "A",
+            "text": "VLAN 10"
+          },
+          {
+            "label": "B",
+            "text": "VLAN 100"
+          },
+          {
+            "label": "C",
+            "text": "No VLAN classification is made because every untagged frame is invalid."
+          },
+          {
+            "label": "D",
+            "text": "VLAN 1"
+          }
+        ],
+        "explanation": "图中SW1的native是10，SW2的native/PVID是100。仅问未标记帧的PVID归类时，SW2使用100，所以B。归类不等于最终转发成功：SW2 allowed5–20不包含100，还需核对VLAN存在、tagging及STP/PVID不一致状态，流量可能被后续条件阻断。本题不再把归类100说成必然送达VLAN100，也未用跨平台推测强行决定最终丢弃行为。"
+      }
+    },
+    {
+      "id": 151,
+      "before_sha256": "ab36b71ebc0d4790c600fe95f5f15b21b9b57dc8b070314423a4b38dd77e4c3e",
+      "reason": "STP阻塞冗余用户转发路径，D正确且解释了BPDU/不学习用户MAC。排除C时却把半双工Ethernet CSMA/CD叫作Collision avoidance；CD是Collision Detection，CA才是Avoidance。应准确区分共享介质协调与拓扑防环；IP TTL只是限制循环报文寿命，不阻止路由环路形成。",
+      "updates": {
+        "explanation": "STP通过把部分冗余二层端口置于不转发用户流量的状态，形成无环的活动拓扑，选D。阻塞端口仍可处理必要BPDU。A的IP TTL限制三层报文循环寿命，不是二层防环机制；B仅依据MAC转发不能消除物理环路；C的collision avoidance是介质争用概念，不能代替拓扑去环。半双工以太网CSMA/CD中的CD是Collision Detection，而无线CSMA/CA中的CA才是Avoidance。"
+      }
+    },
+    {
+      "id": 154,
+      "before_sha256": "0121315abd47808691ff547eb9c665616e22528ba028dad8c177c7463993237b",
+      "reason": "A的Cisco专有/L2判断正确，但解析声称ASA支持受限CDP、只因安全规范默认禁用，是错误设备能力说明。Cisco正式文档明确ASA不支持CDP；ASA文档里的CDP URLs常指证书吊销分发点，不能混成Cisco Discovery Protocol。对C应按支持协议的设备能力解释，而非编造受限支持或把专有等同第三方绝不能实现；清理过于绝对的默认开启说法。[V5]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It is a Cisco-proprietary protocol."
+          },
+          {
+            "label": "B",
+            "text": "It runs on the network layer."
+          },
+          {
+            "label": "C",
+            "text": "It discovers all neighboring devices even when they do not implement CDP."
+          },
+          {
+            "label": "D",
+            "text": "It runs on the physical layer and the data link layer."
+          }
+        ],
+        "explanation": "CDP为Cisco专有的数据链路层发现协议，A正确。B把它说成网络层错误；D把协议运行层次说成同时物理层错误。修订C声称不实现CDP也可被其发现，忽略双方协议支持。某些设备如ASA不支持CDP，不能编称受限支持且仅默认禁用；ASA证书文档的CDP URLs还可指CRL Distribution Point，不是Cisco Discovery Protocol。"
+      }
+    },
+    {
+      "id": 157,
+      "before_sha256": "55258a7e609d32842af71e7498f9bd12368ad9e8bcdf455af3bcfe646e19b186",
+      "reason": "C只适合明确legacy LWAPP的WLC/AP环境；题目未限定版本，解析将所有lightweight AP通信都概括为LWAPP。Cisco控制器5.2起以CAPWAP取代LWAPP，现有CCNA题库应说明历史背景或把选项更新为CAPWAP。按新增图片完整性检查，解析引用as shown in the below figure，但image/answer_image均空，所称下图缺失。也应解释SSID区分WLAN而非独立客户端，WLC不只注册单AP。[V6]",
+      "updates": {
+        "prompt": "Which function describes a modern Cisco Wireless LAN Controller's control relationship with multiple lightweight access points?",
+        "options": [
+          {
+            "label": "A",
+            "text": "register with a single access point that controls traffic between wired and wireless endpoints"
+          },
+          {
+            "label": "B",
+            "text": "use SSIDs to distinguish between wireless clients"
+          },
+          {
+            "label": "C",
+            "text": "Exchange CAPWAP control messages with lightweight access points and distribute their configuration."
+          },
+          {
+            "label": "D",
+            "text": "monitor activity on wireless and wired LANs"
+          }
+        ],
+        "explanation": "现代WLC通过CAPWAP与多个lightweight AP建立控制关系并下发配置，因此C正确。A把AP/WLC主从关系及数量反置；B的SSID用于标识WLAN/服务集，不是逐个客户端唯一标识；D泛指两个LAN的活动监视，未描述题目所问WLC与受管AP的控制关系。早期部署用LWAPP，Cisco控制器5.2起采用CAPWAP，不能在无版本限定的现代题目把LWAPP概括为唯一协议。本题为文字原理题，不再引用不存在的“下图”。"
+      }
+    },
+    {
+      "id": 160,
+      "before_sha256": "c47dde967d75d1052c9f5cf8d7bc2aabe58b69ec11cc8065336b5df9fa8824bf",
+      "reason": "A在只讨论传统server/client/transparent时是意图答案，但未限定平台/版本且“必须server或transparent”排除了同样允许本地配置的VTP off。v3还要区分primary/secondary和数据库持久化，不宜说所有client绝不存NVRAM。应限定legacy三模式或补off/版本条件；创建extended VLAN的CLI视图与VTP数据库权限是两个问题，不能混用。[V8]",
+      "updates": {
+        "prompt": "On a legacy Cisco switch using VTP version 2 with only server, client and transparent modes available, which statement about local creation of normal-range VLANs is true?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The switch must be in VTP server or transparent mode to create a normal-range VLAN locally."
+          },
+          {
+            "label": "B",
+            "text": "VTP client mode permits local creation of normal-range VLANs."
+          },
+          {
+            "label": "C",
+            "text": "VTP automatically performs routing between all VLANs in its database."
+          },
+          {
+            "label": "D",
+            "text": "VTP transparent mode advertises every local VLAN edit as a server database change."
+          }
+        ],
+        "explanation": "在题设仅有server/client/transparent三模式的legacy VTP v2模型中，可本地创建普通范围VLAN的是server或transparent，A正确。client不能本地创建，故B错误；VTP分发VLAN数据库，不自动执行跨VLAN路由，C错误；transparent不把本地更改作为服务器同步发布，D错误。其他平台还可能有off，VTP v3另有primary/secondary等区别；不能将本题收窄模型的结论泛化为全部版本。"
+      }
+    },
+    {
+      "id": 163,
+      "before_sha256": "e867c75a2c2712986735be77023d7e526a5d5582a39212378a71acd3487aff2f",
+      "reason": "B的经典AAA分离/组合差异正确；但解析将legacy TACACS+全body“高强度加密”当成安全保证。RFC8907明确该MD5/XOR方式称obfuscation，不满足现代加密标准，固定12字节header明文。RADIUS“只密密码”也须限定基础UDP/RFC2865情境，不能覆盖TLS/DTLS等传输扩展。应保留AAA结构比较，删除强加密承诺，并准确区分报文混淆和安全传输。[V9]",
+      "updates": {
+        "explanation": "传统AAA对比中，TACACS+将认证和授权分离，经典RADIUS在认证响应中携带授权属性，因此B正确。A/C颠倒两者典型管理/保护行为；D把RADIUS用途限于dial过窄，它广泛用于网络接入。RFC8907称TACACS+的MD5/XOR body保护为obfuscation，12字节header仍明文，不能声称高强度全报文加密。RADIUS“只保护密码”也须限定基础UDP实现，TLS/DTLS等安全传输另论。"
+      }
+    },
+    {
+      "id": 166,
+      "before_sha256": "c084051e02857cb2f8035ba5fae90d77ced45d391184a25492cbad423af124ae",
+      "reason": "已看图，enable password=cisco123、enable secret=testing1234，若从user EXEC执行enable，secret优先，D成立。但同图本地用户ciscoadmin被授予privilege15，AAA login default local后该用户通常直接进特权EXEC，不会按题意再次要求enable密码。题干未说明接入身份/起始模式。解析只粘贴console密码回退及模板，没对照四个候选或解释privilege15。建议明确从权限低于15的user EXEC提权，讲清登录密码与enable secret的不同。[V12]",
+      "updates": {
+        "prompt": "Refer to the exhibit. An engineer is already in a user EXEC session below privilege 15 and issues enable. No separate AAA enable-authentication method is applied. This is not the privilege-15 ciscoadmin login. Which configured password is used?",
+        "explanation": "从权限低于15的现有user EXEC会话执行enable、且无另设AAA enable认证时，enable secret优先于enable password。图中secret为testing1234，故D；cisco123是被secret优先覆盖的enable password。用户登录密码与enable提权密码不是同一件事，default是方法列表名也不是密码。同图privilege15的ciscoadmin登录通常直接进入特权模式，所以题干明确排除了那种起始会话。"
+      }
+    },
+    {
+      "id": 167,
+      "before_sha256": "44b1d757d0a0f97020d4fcec0bb248132eb5c810ab2aac2d246553f9f6b1d00e",
+      "reason": "D及跳过listening/learning正确；解析把15秒分别分配给Blocking→Listening和Listening→Learning，遗漏Learning→Forwarding的实际学习驻留期，应改为Listening驻留15秒、Learning再驻留15秒。还宣称终端端口绝不可能形成环路，忽略主机软件桥接/误接线；PortFast不是关STP或绝对0时延保证。应修正流程与前提，保留D。[V13]",
+      "updates": {
+        "explanation": "PortFast端口在link-up时尽快进入Forwarding，选D，跳过传统STP的Listening和Learning等待。默认正常计时迁移是在Listening驻留15秒，再在Learning驻留15秒，不是给Blocking→Listening和Listening→Learning各分配15秒后就转发。PortFast不关闭STP，仍处理BPDU；主机软件桥接或误接线也可能形成环路，不能保证终端接口永不成环。"
+      }
+    },
+    {
+      "id": 170,
+      "before_sha256": "ee10998ad7ab9861da784d83b391d3d5695954d42e2a2100214ed17d6e05d5df",
+      "reason": "意图答案B符合dynamic desirable主动协商的定义，但整段解析除了重复选项，只有“标准规范/转发/容灾/安全效果”等通用模板，完全没解释DTP状态机。应说明desirable主动提议、auto被动意愿、trunk静态固定状态、nonegotiate关闭协商，并注意静态trunk默认也可能发送DTP，不能靠模板把A无条件说成不发送。建议题干明确动态主动协商而非仅“发起trunk”。[V15]",
+      "updates": {
+        "prompt": "Which interface command selects the DTP dynamic mode that actively proposes trunk formation, rather than statically forcing trunk mode?",
+        "explanation": "题干要求主动进行DTP动态协商，dynamic desirable符合，B正确。dynamic auto为被动意愿；nonegotiate抑制DTP；mode trunk固定本地trunk运行模式，不能等同题中所问动态协商模式，且默认仍可能发DTP。desirable通常能与对端auto/desirable协商成功，但仍需链路/封装等条件兼容，不应以通用模板代替模式差别。"
+      }
+    },
+    {
+      "id": 171,
+      "before_sha256": "abd5eb51ae707ac723a746b249416b6ddbd62645a9a36c44fe98e31629a4ed25",
+      "reason": "已看图，四交换机HQ LAN和两路由器，没有BID priority或VLAN实例配置。相同priority前提下Switch3最低MAC：0E<E0、1D<22，C推导正确；但只给MAC不能证明root身份，解析把默认相等假设当已知。应在题干补全部使用默认优先级/同STP实例，或给完整BID；与Q127同类。[V13]",
+      "updates": {
+        "prompt": "Refer to the exhibit. After the election process, what is the root bridge in the HQ LAN? Switch 1: 0C:E0:38:81:32:58 - Switch 2: 0C:0E:15:22:1A:61 - Switch 3: 0C:0E:15:1D:3C:9A - Switch 4: 0C:E0:19:A1:4D:16 - All four switches participate in the same STP instance and use equal bridge priorities.",
+        "explanation": "题干补明同一实例和相同优先级后，比较MAC：Switch2/3的第二字节0E低于Switch1/4的E0，再比较第四字节，Switch3的1D低于Switch2的22，因此C。优先级不同则必须先比较优先级，不能用MAC最小替代完整BID比较。图中路由器不因此参与该二层根桥选举。"
+      }
+    },
+    {
+      "id": 172,
+      "before_sha256": "ac4ed08cfb1e3c2f4ffe69fd0376d0297cc4b5312df4ab057d09ad697ea66944",
+      "reason": "邻居为trunk或desirable时，本地dynamic desirable（B）或dynamic auto（C）都能形成trunk。题干没要求passively，解析自己承认B能工作，再以auto更合理/更安全/题库互补配对为由排除，没有足够依据。应加“被动”条件（如Q176），或改多选B/C；不要把C更安全当普遍最佳实践。[V15]",
+      "updates": {
+        "prompt": "An engineer must allow an interface to become a trunk passively using DTP. The neighbor is configured as desirable, or as trunk with DTP enabled. Which local command meets the passive-negotiation requirement?",
+        "explanation": "本题补充“被动协商”，因此本端应为dynamic auto，C正确。对端trunk或desirable在DTP允许时能使auto成为trunk。B的desirable也可能建成trunk，但它主动提议，不符合被动限定；A的nonegotiate不是动态配对模式；D的switchport trunk dynamic desirable不是正确mode语法。实际工程常显式配置trunk并按需关闭DTP，不能把auto泛称永远更安全。"
+      }
+    },
+    {
+      "id": 175,
+      "before_sha256": "643f2633a757870959aac9f2bb066e692ec38af2ac2e601dbdaace75d7154e7e",
+      "reason": "与Q130相同：priority0不能保证always root，另一桥同priority0且MAC更小仍胜出。解析还称root primary遇已有更低priority便不会生效，忽略宏通常会根据当前root调低本机priority（受最小值约束）。A/D是非法优先级值，不只是大而不优。应限定最低完整BID的条件、纠正宏行为及非法值，删去泛用模板。[V13]",
+      "updates": {
+        "prompt": "When using Rapid PVST+, which command explicitly sets the lowest legal base bridge priority for VLAN 200?",
+        "options": [
+          {
+            "label": "A",
+            "text": "spanning-tree vlan 200 priority 61440"
+          },
+          {
+            "label": "B",
+            "text": "spanning-tree vlan 200 priority 0"
+          },
+          {
+            "label": "C",
+            "text": "spanning-tree vlan 200 root primary"
+          },
+          {
+            "label": "D",
+            "text": "spanning-tree vlan 200 priority 32768"
+          }
+        ],
+        "explanation": "显式最低合法base priority为0，故B。A的61440、D的32768均高于0，C root primary是按当前根优先级计算的一次性宏，不等于固定设置最低值。即便priority0，另一台同实例桥若也是0且MAC更小仍会胜出，不能称永久保证root；所有有效配置仍按完整BID选举。"
+      }
+    },
+    {
+      "id": 177,
+      "before_sha256": "849fcf439329bdda9a1ee663723700828a4b91f34f5223fc030465977b8681e3",
+      "reason": "已看完整当前图片，只有VLAN10、Sales1-4及Gi1/0/1-4拓扑，根本没有题干所称完整MAC表。解析却宣称图明确记录Sales1对应Gi1/0/1，属于无依据补造表项。源学习动作与B相符，但目标已知的定向单播/未知的泛洪不能由此图验证；应恢复MAC表图片再核转发。不能因为B最终也可能涵盖泛洪送达就宣称图已证明已知单播。",
+      "updates": {
+        "prompt": "Refer to the exhibit showing the initial complete MAC address table and host MAC addresses. All ports shown are forwarding in VLAN 10. Sales-4 sends a frame to Sales-1. What does the switch do?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjUyMCIgdmlld0JveD0iMCAwIDEwMDAgNTIwIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI1MjAiIGZpbGw9IiNmOGZhZmMiLz48cmVjdCB4PSI0MjAiIHk9IjM1IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjY1IiByeD0iMTAiIGZpbGw9IiNiZmRiZmUiIHN0cm9rZT0iIzFlNDBhZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iNTAwIiB5PSI3NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiPlNhbGVzLVNXPC90ZXh0PjxwYXRoIGQ9Ik01MDAgMTAwTDEyNSAxNzUiIHN0cm9rZT0iIzY0NzQ4YiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjAiIHk9IjE3NSIgd2lkdGg9IjIxMCIgaGVpZ2h0PSI2OCIgcng9IjgiIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIvPjx0ZXh0IHg9IjEyNSIgeT0iMTY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyI+R2kxLzAvMTwvdGV4dD48dGV4dCB4PSIxMjUiIHk9IjIwMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjEiPlNhbGVzLTE8L3RleHQ+PHRleHQgeD0iMTI1IiB5PSIyMjciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTciPjAyMDAuMDAwMC4wMDAxPC90ZXh0PjxwYXRoIGQ9Ik01MDAgMTAwTDM3NSAxNzUiIHN0cm9rZT0iIzY0NzQ4YiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjcwIiB5PSIxNzUiIHdpZHRoPSIyMTAiIGhlaWdodD0iNjgiIHJ4PSI4IiBmaWxsPSIjZGJlYWZlIiBzdHJva2U9IiMxZTQwYWYiLz48dGV4dCB4PSIzNzUiIHk9IjE2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciPkdpMS8wLzI8L3RleHQ+PHRleHQgeD0iMzc1IiB5PSIyMDMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIj5TYWxlcy0yPC90ZXh0Pjx0ZXh0IHg9IjM3NSIgeT0iMjI3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjE3Ij4wMjAwLjAwMDAuMDAwMjwvdGV4dD48cGF0aCBkPSJNNTAwIDEwMEw2MjUgMTc1IiBzdHJva2U9IiM2NDc0OGIiIHN0cm9rZS13aWR0aD0iMyIvPjxyZWN0IHg9IjUyMCIgeT0iMTc1IiB3aWR0aD0iMjEwIiBoZWlnaHQ9IjY4IiByeD0iOCIgZmlsbD0iI2RiZWFmZSIgc3Ryb2tlPSIjMWU0MGFmIi8+PHRleHQgeD0iNjI1IiB5PSIxNjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3Ij5HaTEvMC8zPC90ZXh0Pjx0ZXh0IHg9IjYyNSIgeT0iMjAzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSI+U2FsZXMtMzwvdGV4dD48dGV4dCB4PSI2MjUiIHk9IjIyNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNyI+MDIwMC4wMDAwLjAwMDM8L3RleHQ+PHBhdGggZD0iTTUwMCAxMDBMODc1IDE3NSIgc3Ryb2tlPSIjNjQ3NDhiIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSI3NzAiIHk9IjE3NSIgd2lkdGg9IjIxMCIgaGVpZ2h0PSI2OCIgcng9IjgiIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIvPjx0ZXh0IHg9Ijg3NSIgeT0iMTY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyI+R2kxLzAvNDwvdGV4dD48dGV4dCB4PSI4NzUiIHk9IjIwMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjEiPlNhbGVzLTQ8L3RleHQ+PHRleHQgeD0iODc1IiB5PSIyMjciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTciPjAyMDAuMDAwMC4wMDA0PC90ZXh0Pjx0ZXh0IHg9IjUwMCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiI+VkxBTiAxMCDigJQgSW5pdGlhbCBjb21wbGV0ZSBkeW5hbWljIE1BQyB0YWJsZTwvdGV4dD48cmVjdCB4PSI3MCIgeT0iMzA1IiB3aWR0aD0iODYwIiBoZWlnaHQ9IjE3NSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjNjQ3NDhiIi8+PHRleHQgeD0iMTA1IiB5PSIzMzciIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIj5WTEFOPC90ZXh0Pjx0ZXh0IHg9IjIzMCIgeT0iMzM3IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+TUFDIEFkZHJlc3M8L3RleHQ+PHRleHQgeD0iNTkwIiB5PSIzMzciIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIj5UeXBlPC90ZXh0Pjx0ZXh0IHg9Ijc2MCIgeT0iMzM3IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+UG9ydDwvdGV4dD48dGV4dCB4PSIxMDUiIHk9IjM3OSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMwZjE3MmEiPjEwPC90ZXh0Pjx0ZXh0IHg9IjIzMCIgeT0iMzc5IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+MDIwMC4wMDAwLjAwMDE8L3RleHQ+PHRleHQgeD0iNTkwIiB5PSIzNzkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIj5EWU5BTUlDPC90ZXh0Pjx0ZXh0IHg9Ijc2MCIgeT0iMzc5IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+R2kxLzAvMTwvdGV4dD48dGV4dCB4PSIxMDUiIHk9IjQxNyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMwZjE3MmEiPjEwPC90ZXh0Pjx0ZXh0IHg9IjIzMCIgeT0iNDE3IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+MDIwMC4wMDAwLjAwMDI8L3RleHQ+PHRleHQgeD0iNTkwIiB5PSI0MTciIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIj5EWU5BTUlDPC90ZXh0Pjx0ZXh0IHg9Ijc2MCIgeT0iNDE3IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+R2kxLzAvMjwvdGV4dD48dGV4dCB4PSIxMDUiIHk9IjQ1NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMwZjE3MmEiPjEwPC90ZXh0Pjx0ZXh0IHg9IjIzMCIgeT0iNDU1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+MDIwMC4wMDAwLjAwMDM8L3RleHQ+PHRleHQgeD0iNTkwIiB5PSI0NTUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMGYxNzJhIj5EWU5BTUlDPC90ZXh0Pjx0ZXh0IHg9Ijc2MCIgeT0iNDU1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzBmMTcyYSI+R2kxLzAvMzwvdGV4dD48L3N2Zz4=",
+        "explanation": "补全的初始MAC表已有Sales1的0200.0000.0001→Gi1/0/1，但没有Sales4记录。Sales4从Gi1/0/4发帧后，交换机学习源0200.0000.0004与入端口/VLAN10，再查目的Sales1并由Gi1/0/1单播转发，故B。A的MAC到IP映射不是普通二层转发；C不能因未知源就丢弃；D即使未知目的也应排除入端口而非Sales1端口，且本题目的已有表项。该表为明确补全的练习数据，不是从缺失原表推断出的记录。"
+      },
+      "accepted_intermediate_sha256": [
+        "6fa9cdedb62ca45105ad7b17b56de1d695fcaf6a7d5a83f94fd0e0abe35d052a"
+      ]
+    },
+    {
+      "id": 178,
+      "before_sha256": "198fb15dafbe38aeb9c8ec9090890679c2b2e2ba34f2afe3f99a365d78db8b25",
+      "reason": "已看图，数据VLAN300、话音VLAN400、Gi1/1，A的access300+voice400技术内容吻合；C反置，B/D还含无效switchport trunk vlan语法。按本轮新增代码块检查，四组选项均把interface及多个switchport命令压成一行，缺命令换行/代码块；App选项用textContent且.opt-text没有保留换行样式，不能靠往选项加Markdown围栏解决。解释虽有正确四行配置块，不能代替可比较的选项配置块。应恢复选项分行并支持相应显示；保留A技术答案，别泛称所有话机绝不能接trunk。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface gigabitethernet1/1\n switchport mode access\n switchport access vlan 300\n switchport voice vlan 400"
+          },
+          {
+            "label": "B",
+            "text": "interface gigabitethernet1/1\n switchport mode trunk\n switchport trunk vlan 300\n switchport trunk vlan 400"
+          },
+          {
+            "label": "C",
+            "text": "interface gigabitethernet1/1\n switchport mode access\n switchport voice vlan 300\n switchport access vlan 400"
+          },
+          {
+            "label": "D",
+            "text": "interface gigabitethernet1/1\n switchport mode trunk\n switchport trunk vlan 300\n switchport voice vlan 400"
+          }
+        ],
+        "explanation": "图中数据VLAN300、话音VLAN400，Gi1/1的access300+voice400符合，A正确。C把数据/话音VLAN颠倒；B/D包含无效switchport trunk vlan语法，也未给出正确的本题接入配置。普通电话+PC的双VLAN接入口仍为access，话音按配置打tag400，PC未标记数据归300。不能泛称任何电话或终端都绝不支持trunk；本题只比较给定方案。命令在interface下逐行执行。"
+      }
+    },
+    {
+      "id": 179,
+      "before_sha256": "c2b52cf8eb7ec742122ea84f0081d76c1ea383963a2f833c7e30bb64923a7a48",
+      "reason": "legacy VTP1/2旧交换机入网先清零revision、保证不以较新旧库覆盖生产，A意图正确。但解析称一收到更高revision summary就无条件立即全文覆盖：summary主要携域/revision等，仍有advertisement request/subset及验证过程，不能等同完整数据库内容。也未限定v1/v2，v3有primary等不同机制，切换transparent或改域的清零行为需按平台验证。应保留安全操作方向，按版本说明流程，删去“一秒无条件洗白”等夸张承诺。[V8]",
+      "updates": {
+        "prompt": "An old switch is being reintroduced into a legacy VTP version 1/2 domain. Which revision-number precaution helps prevent its stale VLAN database from replacing the current domain database?",
+        "explanation": "legacy VTP v1/v2网络中，旧交换机带较高revision且有过期VLAN数据库可能影响域内数据库，应隔离并按平台流程重置/核对revision，使其低于现有有效库再接入，因此A。B相反；C/D为DTP中继协商概念，不处理VTP数据库新旧关系。summary携带域/revision等摘要，并非收到即无条件全文替换，还涉及验证、request/subset交换。VTP v3的primary等机制另论，重置方法和保存行为应按实际版本确认。"
+      }
+    },
+    {
+      "id": 180,
+      "before_sha256": "90b2d7d03f1146a1c82cef89f979e34d0b90a61b2d257ce737e8fe62232af44c",
+      "reason": "B是基于端口身份准入的意图答案，但802.1X自身不执行终端健康评估/修复，那是ISE等NAC与posture agent的额外能力。解析错误地说MAB根本不能结合状态修复；Cisco正式ISE方案可将MAB和posture流程结合。EAPOL之外绝对阻断全部也需考虑low-impact/open/preauth ACL模式。应区分认证机制、授权策略、posture/remediation，题干补明确802.1X supplicant/身份认证条件；不能把B当作独立完成修复的技术。[V16]",
+      "updates": {
+        "prompt": "Client devices have IEEE 802.1X supplicants. Which technology provides credential-based, port-based identity authentication before normal network access, while a separate NAC/posture system performs any required health remediation?",
+        "explanation": "题干明确有802.1X supplicant并要求基于用户/设备凭据的端口准入认证，B正确。802.11n是无线PHY标准，MAB按MAC识别且不提供同等凭据证明，IP Source Guard验证源IP绑定，都不替代802.1X身份认证。健康评估与修复是ISE等NAC/posture组件的额外能力，不由802.1X单独完成；MAB也能与ISE posture方案结合，不能绝对否认其修复集成能力。"
+      }
+    }
+  ]
+}

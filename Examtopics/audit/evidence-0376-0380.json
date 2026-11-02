@@ -1,0 +1,15 @@
+{
+  "original_images_directly_viewed": [
+    376,
+    377,
+    378,
+    379,
+    380
+  ],
+  "authored_changes": {
+    "376": "Retain strict source-destination-pair policy, replace A with bidirectional ingress PBR.",
+    "378": "Remove unusable crop; full self-contained question and A allows R2 unicast/multicast89.",
+    "379": "Reuse visually checked Q374 relevant valid routing excerpt; HostA address explicit in prompt."
+  },
+  "limitations": "Manual source review and later models, not live PBR/OSPF lab."
+}

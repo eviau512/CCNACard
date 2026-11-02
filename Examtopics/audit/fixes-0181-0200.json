@@ -1,0 +1,227 @@
+{
+  "scope": "Manual corrections Q181-Q200 within first 200 milestone",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 181,
+      "before_sha256": "aa761c3bf042ed83a6e9b9ec8022a4b3f36bf71ac2716db39df1f51c04c5d5df",
+      "reason": "B符合Cisco AP通过CDP协商功率的意图，IGMP/AWPP/IPv6 NDP不承担此任务。但解析把初始IEEE classification叫“二层分类”，实际是电压/电流签名的物理层机制；又称NDP替代SLAAC，实际NDP的RA支持SLAAC。应区分物理检测/分类、启动后的CDP/LLDP预算协商，不泛称所有厂商AP都只靠CDP。[W1][W2][W16]",
+      "updates": {
+        "prompt": "After initial PoE detection and power-up, which listed Layer 2 protocol can a Cisco access point use to negotiate its power requirement with a connected Cisco switch?",
+        "explanation": "本题限定Cisco AP启动后的二层功率协商，CDP可通告所需功率并由交换机调整预算，B正确。PoE初始检测/分类依电阻、电压/电流签名在物理层完成，不是靠尚未启动的CDP引导上电；不同设备也可用LLDP等协商。IGMP管理组播成员，AWPP用于mesh路径，IPv6 NDP用于邻居/路由器发现并支持SLAAC，都不是这里的功率申请协议。"
+      }
+    },
+    {
+      "id": 182,
+      "before_sha256": "66fa59792a8d7c85bbc7ff29fc96f45d4a549190bb6a1ee00041c6c80e53b01d",
+      "reason": "D是PMF+association comeback的意图答案。但SA teardown protection是Cisco文档明列的真实机制，并非解析所称生造概念；C错在把SA Query等待响应与Comeback重试等待混淆。防护针对已关联且协商PMF的STA，不能宣称泛洪攻击者必被强制限流；密码学完整性也不应叫数字签名。计时单位需限定版本/UI：AireOS8.7 GUI正文写ms、同页CLI写seconds，9800 17.9明确1–10秒；不能无条件把数值10解释为10ms。保留D意图，补平台和单位后再确认题干。[W3][W4][W5]",
+      "updates": {
+        "prompt": "On a Cisco Catalyst 9800 WLC running IOS XE 17.9, protect an already associated PMF-capable client from spoofed association requests. The Association Comeback Timer field is measured in seconds. Which steps set the association retry interval to 10 seconds?",
+        "explanation": "在题设9800 IOS XE17.9平台，PMF的association comeback timer以秒为单位，配置10表示10秒；D的启用PMF并设置Comeback符合。已协商PMF的STA再次发起关联时，SA teardown保护结合临时拒绝和SA Query，保护原有安全关联。SA teardown是真实机制，并非虚构；C错误在用SA Query timeout代替客户端关联重试等待。MAC过滤不能验证伪造源，802.1X本身也不是此重试定时器。PMF完整性保护不是数字签名，不能承诺强制恶意攻击者遵守重试等待。"
+      }
+    },
+    {
+      "id": 183,
+      "before_sha256": "c5a7e88ddd13c34fb51cab53e2199256af6772fccf8a5eab2491155c1b690195",
+      "reason": "已看四交换机VLAN5拓扑。题干614440及39391170均超出BID优先级字段范围/合法配置范围，图也没有替代值；解析擅把前者修为61440、后者猜成32768，不能据此宣布原数据有效。C priority0最有利，但“permanent”仍不能排除今后同priority更小MAC、设备失效等情况。应恢复准确数值并收窄为给定配置下选根，不能发明Branch2数值。代码模板的id还被formatter当HTML标签吞掉。[W6][W7]",
+      "updates": {
+        "prompt": "Refer to the exhibit. The four switches are connected and participate in VLAN 5 STP. Their explicitly configured base priorities are Branch-1: 61440; Branch-2: 40960; Branch-3: 0; Branch-4: 24576. Which switch is elected root with these current settings?",
+        "explanation": "题干明确四桥的合法base priority：61440、40960、0、24576。Branch3的0最低，同VLAN5实际BID优先级部分为5，低于其他桥，因此C当选当前根，不需MAC比较。原root primary宏不是永久root声明；另一桥同为priority0且MAC更小、或拓扑/设备状态变化都可能改变结果。应比较明确的当前配置，不能把超范围数值或“永久保证”当成合法STP事实。"
+      }
+    },
+    {
+      "id": 184,
+      "before_sha256": "49f4aa0189758c065f6f3057684983c818b639cd2fa2db69ef762a5ffb914234",
+      "reason": "默认802.1Q、native未被全局强制tag的前提下，D指定VLAN10为native，技术答案及access/allowed/trunk区别正确。新增显示检查实际复现解析末尾命令中的id未转义而消失，应修formatter；不把它误记为题库少写了参数。说明native tagging例外，避免“唯有”被理解为任何配置都无条件untagged。",
+      "updates": {
+        "prompt": "An interface already operates as an IEEE 802.1Q trunk, and native VLAN tagging is disabled. Which command makes VLAN 10 the VLAN whose ordinary data frames leave that trunk untagged?",
+        "explanation": "已经是802.1Q trunk且未启用native VLAN tagging时，switchport trunk native vlan 10指定VLAN10为native，其普通出向数据默认不打802.1Q标签，D正确。A仅指定封装，B仅限制允许列表，C仅固定trunk模式，都没有指定哪个VLAN为native。若另行启用native tagging，标签行为会改变，所以题干明确排除该配置。"
+      }
+    },
+    {
+      "id": 188,
+      "before_sha256": "ec8f38c63fbc611b0cc1689180844b77a40cdd20ee2fafc7b1714a34ca7d46e8",
+      "reason": "A确为依赖WLC集中配置/管理的lightweight架构，核心解释有效。但排除repeater时断言必须一个射频接收、另一个射频发射，并断言repeater不具备集中管控架构，均过度泛化；Cisco Meraki的受管mesh repeater可同radio服务客户端和回传，也可用其他radio。“WLC接管全部业务运行逻辑”还与split-MAC本身的本地实时职责不符。应按控制架构与桥接/中继角色两个维度解释，保留A。[W10]",
+      "updates": {
+        "prompt": "Which AP architecture uses a centralized wireless LAN controller for management, roaming coordination and SSID configuration, as contrasted with autonomous AP management?",
+        "explanation": "Lightweight描述由WLC集中管理/下发SSID及协调漫游的AP架构，A正确；Autonomous主要自行管理配置。Bridge和repeater描述桥接/回传/扩展覆盖的角色，不是与lightweight同一层次的管理架构分类，它们也可能受控制器或云管理。Repeater并非必须一个radio收、另一个radio发，具体设备可同radio或异radio回传；split-MAC还在AP保留本地实时处理，不能说全部业务逻辑一概由WLC执行。"
+      }
+    },
+    {
+      "id": 189,
+      "before_sha256": "4ab978c2cd60099b1044e2920a3e386d7688dc1084079ab134910f99aade1294",
+      "reason": "已看图：两端access13、主机同192.168.0.0/23，SwitchA trunk仅10-12，增加13且保留现有列表的技术命令是switchport trunk allowed vlan add 13。但四个选项全写truck，原样都非有效IOS命令。解析虽承认笔误，却仍称原C完全符合规范。应统一改trunk后保留C；图完整，无需另造拓扑。[W11]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport trunk allowed vlan 12"
+          },
+          {
+            "label": "B",
+            "text": "switchport trunk allowed vlan none"
+          },
+          {
+            "label": "C",
+            "text": "switchport trunk allowed vlan add 13"
+          },
+          {
+            "label": "D",
+            "text": "switchport trunk allowed vlan remove 10-11"
+          }
+        ],
+        "explanation": "两主机都在VLAN13且同属192.168.0.0/23，SwitchA现trunk仅允许10–12。C的switchport trunk allowed vlan add 13仅追加13，保留其他允许VLAN。A直接设置12会覆盖列表且不放13；B清空允许列表；D删除10/11仍不加入13。IOS关键字是trunk，已统一修正原truck拼写，不能把原样无效命令说成可执行。"
+      }
+    },
+    {
+      "id": 192,
+      "before_sha256": "3cd9a1a9f84e14cc3690d67cc76bd58cd39422a0d24f2aa98b26e8efdc26f9dc",
+      "reason": "已看两端mode trunk，native999/99，允许列表默认；native不匹配本身不阻止trunk形成。但B把不同native VLAN必然合并并通流说得过满：Cisco PVST+可检测PVID不一致并阻塞相应VLAN端口，既不是err-disable，也不是VLAN shutdown。图未给STP模式/状态或禁用条件，解析忽略保护行为。应限定仅讨论untagged的VLAN归类，或补STP实际状态后重写选项；不盲改成A/C。[W12]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which statement correctly describes the trunk formation and potential VLAN classification issue? Final user-data forwarding remains subject to STP and filtering.",
+        "options": [
+          {
+            "label": "A",
+            "text": "The trunk does not form, and the ports go into an err-disabled status."
+          },
+          {
+            "label": "B",
+            "text": "The trunk can form; an untagged frame sent as SW1 native VLAN 999 is classified using SW2 native VLAN 99, subject to STP and filtering."
+          },
+          {
+            "label": "C",
+            "text": "The trunk forms, but VLAN 99 and VLAN 999 are in a shutdown state."
+          },
+          {
+            "label": "D",
+            "text": "The trunk does not form, but VLAN 99 and VLAN 999 are allowed to traverse the link."
+          }
+        ],
+        "explanation": "两端均mode trunk，native不一致并不自动阻止trunk形成。若SW1把其native999数据未标记送出，SW2按本端native99归类，B准确描述这种配置风险。最终是否转发还受allowed列表、VLAN状态及STP影响；Cisco PVST+可因PVID不一致阻塞相关VLAN端口，不能把逻辑归类差异说成必然合并且畅通。阻塞状态也不等于接口err-disable或VLAN shutdown，因此其他给定说法不成立。"
+      }
+    },
+    {
+      "id": 193,
+      "before_sha256": "69b5f4d401d76eb8ffe16586ba87ed6c8c0154840550bf4269f93ba391533e79",
+      "reason": "已看图VLAN8 Data、9 Voice、Gi1/1接PC2、Gi1/3接话机再接PC1；A的access8+voice9技术配置正确，D反置，B/C还含无效trunk vlan语法。四组选项含多接口/多条命令却压一行，缺实际分行/代码显示；解析虽有逐行inline文本，不替代可比较的选项块。Data_VLAN_ID/Voice_VLAN_ID模板还被formatter吞掉，应同时修复显示。不要泛称PC绝不支持802.1Q。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface gigabitethernet1/1\n switchport mode access\n switchport access vlan 8\n!\ninterface gigabitethernet1/3\n switchport mode access\n switchport access vlan 8\n switchport voice vlan 9"
+          },
+          {
+            "label": "B",
+            "text": "interface gigabitethernet1/1\n switchport mode access\n switchport access vlan 8\n!\ninterface gigabitethernet1/3\n switchport mode trunk\n switchport trunk vlan 8\n switchport voice vlan 9"
+          },
+          {
+            "label": "C",
+            "text": "interface gigabitethernet1/1\n switchport mode access\n switchport access vlan 9\n!\ninterface gigabitethernet1/3\n switchport mode trunk\n switchport trunk vlan 8\n switchport trunk vlan 9"
+          },
+          {
+            "label": "D",
+            "text": "interface gigabitethernet1/1\n switchport mode access\n switchport access vlan 8\n!\ninterface gigabitethernet1/3\n switchport mode access\n switchport voice vlan 8\n switchport access vlan 9"
+          }
+        ],
+        "explanation": "图中Data8、Voice9；Gi1/1接PC2，Gi1/3接Phone1并下挂PC1。A把两接口数据置access8，并在Gi1/3加voice9，满足要求。D颠倒数据/话音；B/C不仅改变接入模式，还含缺allowed等关键字的trunk vlan无效命令，C还把PC2置VLAN9。命令按接口和行分开，不应把整段当一条IOS输入；无需声称所有PC都不能处理VLAN标签。"
+      }
+    },
+    {
+      "id": 194,
+      "before_sha256": "a55e6ff7dcd962440bdd66ab456b4b3061e4cc565afc84a20b1e9838efb01536",
+      "reason": "已看WLC图：WPA2/AES、PSK已勾，802.1X未勾，FT关闭。按现有PSK认证增加802.11r应选C（Enable FT + FT PSK）；B需要额外变更认证体系，题干没要求或提供RADIUS条件。解析承认图示支持C却援引未经证明的“历年真实考试/官方判分”，不能当技术依据。删此类断言，建议答案C，或把图明确改为802.1X配置后才保留B。FT减少漫游认证开销，不保证所有场景必然低于50ms。[W13]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Keep the existing WPA2-AES preshared-key authentication and add IEEE 802.11r support for compatible clients roaming between floors. Which change matches the current authentication method?",
+        "answer": [
+          "C"
+        ],
+        "explanation": "图中WPA2/AES及PSK已启用、802.1X未选。保留现有PSK认证而增加802.11r，需启用Fast Transition并选择FT PSK，故C。B改为FT802.1X需要相应企业认证体系，不符合保留PSK；A禁AES无助于快速漫游，D的CCKM不是802.11r标准FT。FT减少漫游认证开销，但不对任意环境保证固定低于50ms或绝对无中断。不能以未经验证的考试评分传闻覆盖图示配置。"
+      }
+    },
+    {
+      "id": 195,
+      "before_sha256": "3770ee6ff92e7ce94b69281b864645f3316ec335191c2ee63d3d5c8f86682b8b",
+      "reason": "已看图现有1,100-103，新增104，D的add保留原列表正确。解析称剔除VLAN1必导致CDP/VTP/PAgP异常，与Cisco VLAN1 minimization文档相反：允许列表移除VLAN1后这些特定控制报文仍可收发。A会丢VLAN1用户流量/改变原列表，但不能用错误控制报文理由排除；此外两处vlan-list参数被formatter吞掉。[W11]",
+      "updates": {
+        "explanation": "现有允许VLAN1、100–103，新增104且保留列表应选D的add104。A覆盖成100–104，移除了VLAN1用户流量；B只留下104；C重置为all，放宽原有过滤范围，均未保留原允许集合加104的精确结果。移除VLAN1用户允许项不代表CDP/VTP/PAgP等特定控制报文也一并消失，Cisco有VLAN1 minimization例外；不要用错误控制协议理由排除A。"
+      }
+    },
+    {
+      "id": 196,
+      "before_sha256": "472675d17c89ee3f999a4ae5aa018598003139078158be1c51fdb02b1aa0f790",
+      "reason": "centralized/local模式AP以CAPWAP集中转发，交换机接入口通常access，建议答案C；不能因为多个SSID就要求AP有线链路承载各client VLAN。Cisco部署指南明确Local/Centralized用access，FlexConnect本地多VLAN才常需trunk。解析一面承认C的技术结论、一面要求按未经证明的“官方判分”选B，是直接误导，应删除该应试指令并统一答案与原理。trunk也可承载AP管理流量，但题干的must trunk不成立。[W14][W15]",
+      "updates": {
+        "prompt": "A lightweight AP uses Local mode with all client traffic centrally switched through CAPWAP. Its management traffic is untagged in one VLAN. Which switchport mode is normally sufficient without configuring VLAN trunking?",
+        "answer": [
+          "C"
+        ],
+        "explanation": "Local/集中交换时，AP把各WLAN客户端数据封装在CAPWAP中，经自身管理VLAN送至WLC，普通access端口足够，C正确。trunk也能承载管理VLAN，但不是此场景必需；多个SSID不等于AP有线端必须传多个client VLAN。FlexConnect本地交换多个VLAN时才常需trunk。WLAN dynamic/management是WLC逻辑接口概念，不是该交换机端口的运行模式。"
+      }
+    },
+    {
+      "id": 197,
+      "before_sha256": "d6d194f9ea3844b142d6b9ac602fbfc9eb7b7fcdac9eac1f13339b372e80d6e1",
+      "reason": "已看全部拓扑，SW4–SW11需承载14/108，SW11–SW9需14，已配SW1上联保留。B补全相关trunk并允许必要VLAN，技术上符合；C漏SW11 Gi0/2，且SW11 Gi0/1只14与SW9 Gi0/2只108互不对应，不能保障PC9 VLAN108等流量。建议B并明确主机口已配条件，不能用“历史官方C”维持明知有缺陷的答案。全选项长配置被压一行，另有Gi/0/2拼写，须恢复各设备接口段和命令换行。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW1 and the SW4/SW9 uplinks to SW1 are configured. All VLANs and all host-facing access ports are correctly configured, including PC2/PC7 in VLAN 14 and PC3/PC9 in VLAN 108. Which configuration completes the remaining inter-switch links so PC2 reaches PC7 while preserving PC3-to-PC9 traffic and the existing uplinks?",
+        "options": [
+          {
+            "label": "A",
+            "text": "! SW4\ninterface Gi0/7\n switchport mode trunk\n switchport trunk allowed vlan 108\n!\ninterface Gi0/2\n switchport mode access\n switchport access vlan 14\n! SW11\ninterface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 14,108\n!\ninterface Gi0/1\n switchport mode trunk\n switchport trunk allowed vlan 14,108\n! SW9\ninterface Gi0/2\n switchport mode access\n switchport access vlan 14"
+          },
+          {
+            "label": "B",
+            "text": "! SW4\ninterface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 14,108\n! SW11\ninterface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 14,108\n!\ninterface Gi0/1\n switchport mode trunk\n switchport trunk allowed vlan 14,108\n! SW9\ninterface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 14"
+          },
+          {
+            "label": "C",
+            "text": "! SW4\ninterface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 14\n! SW11\ninterface Gi0/1\n switchport mode trunk\n switchport trunk allowed vlan 14\n! SW9\ninterface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 108"
+          },
+          {
+            "label": "D",
+            "text": "! SW4\ninterface Gi0/2\n switchport mode access\n switchport access vlan 14\n! SW11\ninterface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 14\n!\ninterface Gi0/0\n switchport mode access\n switchport access vlan 14\n!\ninterface Gi0/1\n switchport mode trunk\n! SW9\ninterface Gi0/2\n switchport mode access\n switchport access vlan 14"
+          }
+        ],
+        "answer": [
+          "B"
+        ],
+        "explanation": "SW4–SW11需承载VLAN14及108（PC3到PC9），SW11–SW9需VLAN14（PC2到PC7）。B补全两端所需trunk并允许对应VLAN，同时不改已配SW1上联，故B。C漏配SW11 Gi0/2，并使SW11 Gi0/1只14而SW9 Gi0/2只108，不匹配；A把SW4 Gi0/2变access14并改Gi0/7，不能保留多VLAN需求；D在SW4至SW11段也无法承载108。设备名用注释分块，interface及switchport逐行配置，不再保留Gi/0/2误拼或压平命令。"
+      }
+    },
+    {
+      "id": 199,
+      "before_sha256": "32a3c5461b06774deab2d69f3b79d12d901f95dd70bd6b850a7bfdc59db26735",
+      "reason": "已看run和MAC表：Fa0/1 access2，Fa0/2保存access2但运行trunk且allowed3。C恢复access后原access2生效，技术答案正确。但选项所有多行配置被压一行；解析逐行inline转录可供阅读，不能代替选项代码块，建议恢复分行。删“PC绝不能收发802.1Q、直连终端严禁trunk”等泛化，按本题普通untagged主机与native/allowed不匹配解释。未实测具体平台入向学习/丢弃顺序，不据此宣称硬件已验证。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)#interface fa0/2\nSW1(config-if)#no switchport access vlan 2\nSW1(config-if)#no switchport trunk allowed vlan 3\nSW1(config-if)#switchport trunk allowed vlan 2"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)#interface fa0/2\nSW1(config-if)#no switchport access vlan 2\nSW1(config-if)#switchport trunk native vlan 2\nSW1(config-if)#switchport trunk allowed vlan 3"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)#interface fa0/2\nSW1(config-if)#no switchport mode trunk\nSW1(config-if)#no switchport trunk allowed vlan 3\nSW1(config-if)#switchport mode access"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)#interface fa0/1\nSW1(config-if)#no switchport access vlan 2\nSW1(config-if)#switchport access vlan 3\nSW1(config-if)#switchport trunk allowed vlan 2"
+          }
+        ],
+        "explanation": "Fa0/2运行trunk且allowed3，保存的access vlan2并未决定其trunk分类；普通未标记PC2不能依该配置与access2的PC1正常互通。C清除错误trunk配置并设access，原access2生效，正确。A仍trunk且未使native匹配普通PC；B虽改native2却未放通VLAN2的正常trunk业务，不能替代本题access修复；D修改正常的PC1端口并改到3，方向错误。PC也可配置标签能力，不应把“任何终端永不能用trunk”当成普遍定律。"
+      }
+    },
+    {
+      "id": 200,
+      "before_sha256": "fdc4bde482588d2fa528c91db7974cb4aff88654c530661eae5fb05af6d2254b",
+      "reason": "已看HQ四交换机拓扑，B在给定数字中最小（24586），比较方法与答案意图正确。但前三个有效BID优先级均指VLAN10，Switch4却写64000，其低12位为2560，不属于相同VLAN10实例；MAC 4e15.8403.08f仅11位十六进制，缺一位。解析用“约为61440级”掩盖无效/不一致数据。应恢复Switch4完整BID，不能猜缺失MAC位或假装它符合VLAN10。数值比较中的独立小于号不是HTML标签，实测仍可读。[W6]",
+      "updates": {
+        "prompt": "Refer to the exhibit. All four switches participate in VLAN 10 STP. Their complete priority fields, including VLAN ID 10, are Switch 1: 32778; Switch 2: 24586; Switch 3: 28682; Switch 4: 61450. Which switch is root? The priorities are distinct, so no MAC-address tie-break is required.",
+        "explanation": "在题干给定同一VLAN10的有效priority字段中，24586（base24576+10）最小，所以Switch2/B为根，不必比较MAC。其他为32778、28682、61450，分别对应base32768、28672、61440加10，均符合该实例。原Switch4的64000及缺位MAC无法作为正常VLAN10完整BID，修订场景只提供足以唯一决定答案的合法priority字段，不猜测丢失MAC位。"
+      }
+    }
+  ]
+}

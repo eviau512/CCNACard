@@ -1,0 +1,32 @@
+{
+  "scope": [
+    251,
+    280
+  ],
+  "reviewed_count": 30,
+  "corrected_question_count": 27,
+  "question_count": 1396,
+  "ids_and_qids_preserved": true,
+  "unchanged_questions_outside_all_201_280_manifests": true,
+  "master_app_batch2_equal": true,
+  "app_logic_storage_key_native_code_unchanged": true,
+  "formatter_three_targets_agree": true,
+  "literal_code_fragments_preserved": 19,
+  "multiline_config_options_verified": [
+    260,
+    266
+  ],
+  "revised_diagrams_visually_checked": [
+    263,
+    277
+  ],
+  "source_sha256": "d93955b034a6f51a9e7f9c2b53270568405bf913c4a911e364e0be8f3000496f",
+  "app_bundle_sha256": "9f6f85a6cbafb04ccf62849ab989f246517185c5a5e8a9e9bad061be7f6f4186",
+  "current_reviewed_through": 280,
+  "next_question": 281,
+  "milestone_delivery": "pending Q400: commit/push/compile/personal-space data-preserving install",
+  "compile_or_install_this_turn": false,
+  "release_created": false,
+  "limitations": "Source and formatter verification, not live network lab or per-question device UI test.",
+  "all_65_current_batch_corrections_equal_manifests": true
+}

@@ -1,0 +1,62 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html",
+    "S2": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/command/fhp-cr-book/fhp-s1.html",
+    "S3": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/command/iri-cr-book/iri-cr-a1.html",
+    "S4": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/23862-duplicate-router-id-ospf.html",
+    "S5": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/command/ire-cr-book/ire-s1.html",
+    "S6": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/19345-bgp-noad.html",
+    "S7": "https://www.rfc-editor.org/rfc/rfc5340.html",
+    "S8": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-s1.html",
+    "S9": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/118974-technote-eigrp-00.html"
+  },
+  "original_images_directly_viewed": [
+    282,
+    283,
+    286,
+    287,
+    288,
+    289,
+    290,
+    293,
+    294,
+    296,
+    297,
+    298,
+    299,
+    300
+  ],
+  "answer_image_included": [
+    282
+  ],
+  "q282_observed_priority": {
+    "effective": 95,
+    "configured": 120
+  },
+  "q289_connected_prefix": "172.16.1.32/27",
+  "q297_independent_aggregation": {
+    "input": [
+      "192.168.25.16/30",
+      "192.168.25.20/30",
+      "192.168.25.24/30",
+      "192.168.25.28/30"
+    ],
+    "collapsed": [
+      "192.168.25.16/28"
+    ],
+    "address_union_size": 16
+  },
+  "q298_up_loopbacks": [
+    "172.16.5.1",
+    "10.154.154.1"
+  ],
+  "q300_original_conflict": "Both Internet Address lines say .2; R2 DR Interface address says .1. New exercise explicitly uses R2 .1; not claimed recovered original.",
+  "new_diagrams": [
+    300
+  ],
+  "q295_restored_original_sample_rows": 8,
+  "limitations": "No live device commands, per-question phone UI screenshots, real convergence measurements, or validation of sample LSA checksums against unavailable LSA bodies.",
+  "revised_diagrams_visually_checked": [
+    300
+  ]
+}

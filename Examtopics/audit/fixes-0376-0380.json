@@ -1,0 +1,79 @@
+{
+  "scope": "Manual Q376-Q380; deliver at Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 376,
+      "before_sha256": "0884eb88d657d01d384dc31c83452cea3063be330a098bee1a9e15317a1be6b8",
+      "reason": "原图主10.10.10.0/30，原解析写错10.0.10；/32只按目的不能保证仅A与server这一源目的对用新线。需保留pair-only目标并补PBR/ACL而非继续宣称两host route足够。选项lp/tp拼写和换行也需修。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On both R1 and R2, GigabitEthernet0/0 is the LAN-facing interface. Existing default routes use the primary 10.10.10.0/30 circuit. Only transit IP packets between Client A (192.168.0.100) and the image server (10.10.13.10), in either direction, must use the dedicated 10.10.10.4/30 circuit; other source/destination combinations must keep ordinary routing. All links and return paths work, PBR is supported, and ACL 101/route-map IMAGE_PAIR are unused. Which configuration pair implements this policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "! R1 configuration\naccess-list 101 permit ip host 192.168.0.100 host 10.10.13.10\nroute-map IMAGE_PAIR permit 10\n match ip address 101\n set ip next-hop 10.10.10.6\n exit\ninterface GigabitEthernet0/0\n ip policy route-map IMAGE_PAIR\n exit\n! R2 configuration\naccess-list 101 permit ip host 10.10.13.10 host 192.168.0.100\nroute-map IMAGE_PAIR permit 10\n match ip address 101\n set ip next-hop 10.10.10.5\n exit\ninterface GigabitEthernet0/0\n ip policy route-map IMAGE_PAIR\n exit"
+          },
+          {
+            "label": "B",
+            "text": "R1(config)#ip route 10.10.13.10 255.255.255.128 10.10.10.6\nR2(config)#ip route 192.168.0.100 255.255.255.0 10.10.10.5"
+          },
+          {
+            "label": "C",
+            "text": "R1(config)#ip route 10.10.13.10 255.255.255.252 10.10.10.6\nR2(config)#ip route 192.168.0.100 255.255.255.252 10.10.10.5"
+          },
+          {
+            "label": "D",
+            "text": "R1(config)#ip route 10.10.13.10 255.255.255.255 10.10.10.2\nR2(config)#ip route 192.168.0.100 255.255.255.255 10.10.10.1"
+          }
+        ],
+        "explanation": "A，使用按源和目的匹配的PBR。R1的ACL101仅匹配Client A到server，route-map指定专线对端10.10.10.6；R2反向匹配server到Client A，指定10.10.10.5。策略应用在流量进入的LAN口Gi0/0，不是专线出口。未匹配的流量按普通路由表转发；ACL在此用于route-map分类，隐含不匹配不是接口丢包规则。\n\n仅配置两条目的/32会把其他源到这些目的主机的包也送入专线，因此不能满足严格源目的对限制。B/C除不匹配源外，给出的目标地址与/25、/24或/30掩码还含主机位，不能当合法网络路由解释；D的/32仍指主线.2/.1，不会转到专线。本题只要求链路正常时的分流，不据此保证专线故障仍强制走不可用下一跳。"
+      }
+    },
+    {
+      "id": 378,
+      "before_sha256": "9df28e95fce078be25fd15b8daedc6111ac473e844f1e90a19c51ccb61fcfc59",
+      "reason": "image仅极小裁剪文字Gat，缺真正拓扑；A仅允许R2→224.0.0.5的89，阻断建立邻接必需的单播DBD等。需给完整自洽范围并允许R2协议89到所需单播/组播，拒其他；不能只以Hello邻居出现证明Full。原解析虚构5项/禁止Loopback条件。",
+      "updates": {
+        "prompt": "R1 uses FastEthernet0/0 (10.100.1.1/30) for its only OSPF-enabled transit interface, connected to R2 at 10.100.1.2/30 in area 0. R2 has a unique router ID and is DR-eligible; other neighbor settings agree. Which relevant R1 configuration permits OSPF packets only from R2 on this interface, allows both multicast and unicast OSPF needed for Full adjacency, makes R1 ineligible for DR/BDR, and sets its router ID to 10.1.1.1?",
+        "image": "",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface FastEthernet0/0\n ip address 10.100.1.1 255.255.255.252\n ip ospf priority 0\n ip access-group 102 in\nrouter ospf 10\n log-adjacency-changes\n network 10.1.1.1 0.0.0.0 area 0\n network 10.100.1.0 0.0.0.3 area 0\n router-id 10.1.1.1\naccess-list 102 permit 89 host 10.100.1.2 any\naccess-list 102 deny 89 any any\naccess-list 102 permit ip any any"
+          },
+          {
+            "label": "B",
+            "text": "interface Loopback0\n ip address 10.1.1.1 255.255.255.255\ninterface FastEthernet0/0\n ip address 10.100.1.1 255.255.255.252\n ip ospf priority 100\n ip access-group 102 in\nrouter ospf 10\n log-adjacency-changes\n network 10.1.1.1 0.0.0.0 area 0\n network 10.100.1.0 0.0.0.3 area 0\n router-id 10.1.1.1\naccess-list 102 permit 88 host 10.100.1.2 host 224.0.0.5\naccess-list 102 deny 88 any any\naccess-list 102 permit ip any any"
+          },
+          {
+            "label": "C",
+            "text": "interface FastEthernet0/0\n ip address 10.100.1.1 255.255.255.252\n ip ospf priority 100\n ip access-group 102 in\nrouter ospf 10\n log-adjacency-changes\n network 10.1.1.1 0.0.0.0 area 0\n network 10.100.1.0 0.0.0.3 area 0\n router-id 10.1.1.1\naccess-list 102 permit 89 host 10.100.1.2 host 224.0.0.5\naccess-list 102 deny 89 any any\naccess-list 102 permit ip any any"
+          },
+          {
+            "label": "D",
+            "text": "interface FastEthernet0/0\n ip address 10.100.1.1 255.255.255.252\n ip ospf priority 0\n ip access-group 102 in\nrouter ospf 10\n log-adjacency-changes\n network 10.1.1.1 0.0.0.0 area 0\n network 10.100.1.0 0.0.0.3 area 0\n router-id 10.1.1.1\naccess-list 102 permit 88 host 10.100.1.2 host 224.0.0.5\naccess-list 102 deny 88 any any\naccess-list 102 permit ip any any"
+          }
+        ],
+        "explanation": "A。OSPF的IP协议号是89；入口ACL先允许源10.100.1.2的协议89到所需单播/组播目的，再拒绝其他协议89，最后放行其他IP。只允许224.0.0.5的Hello不足以建立Full邻接：数据库交换等还需要单播OSPF，因此不能把全部其他目的的R2 OSPF都拒绝。\n\n接口priority0使R1不具备DR/BDR资格，进程下router-id10.1.1.1显式指定唯一RID，不要求必须配置同值Loopback。B/C的priority100仍可参选；B/D过滤的是EIGRP协议88，之后permit ip any any仍会放行OSPF89，不能限制其他OSPF源。C虽使用89，但也只有组播许可且参选。题目没有禁止Loopback或额外五项条件；network10.1.1.1只有存在匹配本地接口时才会在该接口启用OSPF，不会凭空创建接口。普通源IP ACL也不等于抵抗源地址伪造的OSPF身份认证。"
+      }
+    },
+    {
+      "id": 379,
+      "before_sha256": "c11f611f4393f720161ba7aac8f5228cf13f3f44781025c81878f5b2e86d5ea0",
+      "reason": "与Q374同源8条5种掩码误称4，相关前缀可改编同类excerpt+明确HostA10.10.13.214；D/29正确，原unique匹配还需区别default也匹配。",
+      "updates": {
+        "prompt": "Refer to the revised relevant routing-table excerpt. Host A has address 10.10.13.214. What prefix length does Router1 use to reach Host A by ordinary destination-based routing?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDIwIiBoZWlnaHQ9IjMzMyI+PHJlY3Qgd2lkdGg9IjE0MjAiIGhlaWdodD0iMzMzIiBmaWxsPSIjZjNmNmZhIi8+PHRleHQgeD0iMjUiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCB0b3BvbG9neSBhbmQgcm91dGUgaW5mb3JtYXRpb248L3RleHQ+PHRleHQgeD0iMjUiIHk9Ijc4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Sb3V0ZXIxIyBzaG93IGlwIHJvdXRlPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIxMTIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMTAuMTAuMTAuMC8yOCBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48dGV4dCB4PSIyNSIgeT0iMTQ2IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5PIDEwLjEwLjEzLjAvMjUgWzExMC8yXSB2aWEgMTAuMTAuMTAuMSwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIxODAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gMTAuMTAuMTMuMTI4LzI4IFsxMTAvMl0gdmlhIDEwLjEwLjEwLjEsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48dGV4dCB4PSIyNSIgeT0iMjE0IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5PIDEwLjEwLjEzLjE0NC8yOCBbMTEwLzJdIHZpYSAxMC4xMC4xMC4xLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMjUiIHk9IjI0OCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TyAxMC4xMC4xMy4xNjAvMjkgWzExMC8yXSB2aWEgMTAuMTAuMTAuMSwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjI1IiB5PSIyODIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gMTAuMTAuMTMuMjA4LzI5IFsxMTAvMl0gdmlhIDEwLjEwLjEwLjEsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48L3N2Zz4=",
+        "explanation": "D，/29。10.10.13.208/29覆盖.208–.215，包含目标.214；/25的.0–.127、两个/28的.128–.143和.144–.159、另一个/29的.160–.167均不包含它。下一跳10.10.10.1位于连接10.10.10.0/28。\n\nA/C对应的所示前缀不匹配，B的/27不是该目标的所示路由。判断要先核对地址范围，再比较匹配前缀长度；如果另有默认路由，它也匹配但比/29短，不影响这条更明细路线。.214是这个常规/29子网最后一个可用主机地址，.215才是广播地址。"
+      }
+    },
+    {
+      "id": 380,
+      "before_sha256": "6c6b0772803a8995d6e7b8d13860048761e50e90fd015cf79332c43f2beede90",
+      "reason": "图两静态/0 AD1/20，D经172.16.20.2正确；原解析错误声称仅物理down才可激活备线，需改主路由撤回且backup有效，避免ECMP必轮询/物理断唯一触发泛化。",
+      "updates": {
+        "explanation": "D，经172.16.20.2。两条候选都是/0，第一条省略AD，普通静态默认AD1；第二条经10.0.0.2显式AD20。题设链路正常且无其他更优策略时，R1优选AD1的主默认，PC1到PC3沿R3方向转发。\n\nA不是这两个不同AD默认的负载分担结果，且即便有等价路由也不能直接推定逐包轮询；B是备默认的下一跳；C的192.168.100.2在R2–R3互联网上，不是此R1默认配置的对端。备路线需要主路由撤回且自身下一跳仍有效才接管，触发不限于某一物理串口down，也可能涉及递归可达性或另行配置的跟踪；AD本身不检测全部端到端故障。RIB保存路由选择，FIB用于转发，不能把两个名称当作完全相同的表。"
+      }
+    }
+  ]
+}

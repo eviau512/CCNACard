@@ -1,0 +1,312 @@
+{
+  "scope": "Manual corrections Q61-Q100 within first 200 milestone",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 61,
+      "before_sha256": "c10c66a1f185ec2aad47c9ae1a42d4a0cc0bb04972226312469d489e18ced054",
+      "reason": "D 的部署模式分类正确，NIST 也定义 community cloud；但解析排除 A 时把云的核心特征写成必须多租户、虚拟化和远程托管，与前文承认 private cloud 可在本地部署矛盾。云模型不等于必须异地托管/必须使用 VM；A 不是区分云的特有特征，而不是本地物理设备与云互斥。应按按需自服务、资源池、弹性等标准解释。[T1]",
+      "updates": {
+        "explanation": "D列出的public/private/hybrid均为云部署模型；NIST另定义community cloud。云的核心特征包括按需自服务、广泛网络访问、资源池、快速弹性和可计量服务。A的现场二/三层物理设备也可支撑私有云，但不是云特有的部署描述；云不要求必须异地托管或使用虚拟机。B仅无线错误，云可经有线访问；C仅工作站共享资源，未体现云的服务模型。"
+      }
+    },
+    {
+      "id": 66,
+      "before_sha256": "8b888c2e40c1f3a84bc714a9344eece8cd9b7617bdcc9a25c0abb327c5797260",
+      "reason": "节约公网IPv4的答案及私网复用原理正确；解析历史叙述却说1996年RFC1918为“后续CIDR研发”争取时间，CIDR的RFC1518/1519已于1993年发布。应删除倒置因果，说明私网编址与CIDR/NAT等共同缓解地址消耗，保留A。[T3][T4]",
+      "updates": {
+        "explanation": "RFC1918让不同组织可复用10/8、172.16/12、192.168/16为内部主机编址，减少全球唯一公网IPv4地址需求，故A正确。NAT可配合私网访问公网，但不是RFC1918地址块存在的唯一目的；文档不针对IPv6，也不保证不同组织的私网不重叠。不要倒置时间：CIDR的RFC1518/1519于1993年发布，早于1996年的RFC1918，不能说后者为CIDR后续研发争取时间。"
+      }
+    },
+    {
+      "id": 67,
+      "before_sha256": "510f5973b4d2871486d13eb37816484feddf88e60821babd7b47b93850c9929a",
+      "reason": "A符合小规模/降成本的collapsed-core适用场景；解析标题、总结却是“企业无线、AP模式与WLC”，与有线园区分层问题不符。三条干扰项分析只重复非匹配模板，没有说明大规模/剧增需求为何更适合独立core，以及冗余不专属于某层数。需重写专题及逐项理由；不能因开头有一段相关英文就判为完整解析。[T5]",
+      "updates": {
+        "explanation": "Collapsed core把核心层和分布层合并，减少设备和管理开销，通常适合规模较小、成本敏感的园区，选A。B的高可用性依赖冗余设计，两层也能做冗余，不能单凭抗硬件故障就决定层数。C的大规模灵活扩展、D的预期剧增则更需要评估独立核心、故障域与容量，不能只按当前小规模选择最省设备的结构。"
+      }
+    },
+    {
+      "id": 68,
+      "before_sha256": "923e87980e876dc2468cb32b008e7b88ab27f727e44533c0bd0845c054744c64",
+      "reason": "D与原地址展开值一致且/64配置格式正确；题干把完整IPv6称为“64-bit address”，实际地址128位、网络前缀64位。C为7个hextet且没有::，是语法无效，不只是未做到最短压缩。解析还凭空引用题干未出现的shortest possible。应纠正位数，按地址数值与语法排除C；若引用RFC5952规范输出，还应使用小写。[T6]",
+      "updates": {
+        "prompt": "A network administrator is setting up a new IPv6 network using the 128-bit address 2001:0EB8:00C1:2200:0001:0000:0000:0331/64. To simplify the configuration, the administrator has decided to compress the address. Which IP address must the administrator configure?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:eb8:c1:22:1::331/64"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 21:eb8:c1:2200:1::331/64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001:eb8:c1:2200:1:0000:331/64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address 2001:eb8:c1:2200:1::331/64"
+          }
+        ],
+        "explanation": "IPv6地址总长128位，/64描述网络前缀长度。省略各组前导零并用一次::替代第6、7组两个零组，可得2001:eb8:c1:2200:1::331/64，选D。A把2200改为22，B把2001改为21，都改变数值。C只有7个hextet且没有::，并非合法完整IPv6文本，不只是压缩不够短。合法IPv6不强制使用::；RFC5952规范输出推荐小写及压缩最长零段。"
+      }
+    },
+    {
+      "id": 69,
+      "before_sha256": "b5be004b7e4220a1ca0aec9eaaeb296fbd48717b82ebe76bc8f82399f66194c9",
+      "reason": "D是明确无须转换的内部通信场景，但题干没限制无NAT/代理/VPN，A/B在相应边界配置下也是私网地址的常见用途，不能仅以“不够纯粹”排除。解析又把私网编址当作天然安全屏障、把防火墙WAN接口必须公网地址绝对化，忽略上级NAT/运营商私有传输。建议限定无需地址转换、仅组织内部通信，并明确安全依赖策略。[T4]",
+      "updates": {
+        "prompt": "Without NAT, an application proxy, or a tunnel, which use of RFC 1918 addressing supports the stated communication requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "On hosts that must communicate directly with hosts on the public Internet."
+          },
+          {
+            "label": "B",
+            "text": "On internal hosts that must stream directly to public Internet resources."
+          },
+          {
+            "label": "C",
+            "text": "On an interface that must have a globally routable IPv4 address."
+          },
+          {
+            "label": "D",
+            "text": "On hosts that communicate only with other internal hosts."
+          }
+        ],
+        "explanation": "题干限定不用NAT、代理、隧道而且外部资源在公共Internet，私网主机最直接适用于只与内部主机通信的D。A/B若要访问公共Internet，通常需边界转换/代理等额外机制；C的全球可路由接口不能靠RFC1918地址获得全球唯一可达性。私网并非天然安全屏障，访问控制仍需防火墙/ACL。经专线或VPN的非重叠私网互通也很常见，但不属于本题限定场景。"
+      }
+    },
+    {
+      "id": 70,
+      "before_sha256": "08a756d90737561c57609e9994bb1b99c5d6abc5cbebe08a5169806443909896",
+      "reason": "已看图。MAC确为C601.420F.0007，插入FFFE后还必须翻转首字节U/L位：C6 XOR 02 = C4，IID应为C401:42FF:FE0F:7，完整地址2001:DB8:0:1:C401:42FF:FE0F:7/64。所有选项都没给该地址，故当前无正确EUI-64选项。解析虽承认翻位，却以“官方标准得分项”为由忽略，没有官方答案证明，必须删除这种辩护并修正C。题干还把128位地址称64位且没有明确说基于MAC派生，建议一并改写。[T7]",
+      "updates": {
+        "prompt": "Refer to the exhibit. The HO router Fa0/1 MAC address is C601.420F.0007 and its prefix is 2001:db8:0:1::/64. Which IPv6 address results from modified EUI-64 interface-ID generation?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:DB8:0:1:FFFF:C601:420F:7/64"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:DB8:0:1:FE80:C601:420F:7/64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001:db8:0:1:c401:42ff:fe0f:7/64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address 2001:DB8:0:1:C601:42FF:800F:7/64"
+          }
+        ],
+        "explanation": "图中MAC为C6:01:42:0F:00:07。先在中间插入FF:FE，得到C6:01:42:FF:FE:0F:00:07；再翻转首字节U/L位，C6 XOR 02=C4，IID为c401:42ff:fe0f:7。加2001:db8:0:1::/64前缀后C正确。A错误插入FFFF，B插入FE80而非中间FFFE，D含错误的80字节且未翻转U/L位。生成的是128位IPv6地址，其中IID占64位，不能为迁就原标答省略翻位。"
+      }
+    },
+    {
+      "id": 71,
+      "before_sha256": "7dbc5961017d19b207adef5a34145dcd48ac86bcbed08a01bfa7bf5633fd3ec3",
+      "reason": "A正确：LX与T的MAC帧头/FCS格式一致。解析却把Preamble/SFD算进数据链路MAC header，应区分物理发送前导字段与从目的MAC起始的MAC帧；把IEEE1000BASE-LX标准距离5km与Cisco LX/LH扩展10km并列为同一标准也不准确。补清标准与厂商扩展、仅比较相同封装情况下的帧格式。[T8]",
+      "updates": {
+        "explanation": "1000BASE-LX与1000BASE-T使用不同物理介质/编码，但相同以太网封装下的MAC帧头、FCS帧尾格式一致，选A。LX使用光纤，T通常使用RJ-45铜缆，故B错误；铜缆T的标准距离为100m，不是二者均550m。LR是光PHY名称的一部分而非通用连接器类型，D错误。前导码和SFD用于物理同步，应与从目的MAC起始的MAC帧区分；标准LX和厂商LX/LH扩展的距离也不能混称一个标准值。"
+      }
+    },
+    {
+      "id": 75,
+      "before_sha256": "27a0952b529632d8b47ca3b36df998a4ea05520cd1cab333ccbba69aa940f102",
+      "reason": "C免注册及地址数计算正确，但解析宣称“所有公网边缘路由器都会默认阻断私网”“公网首跳必丢”，把管理政策误说成地址类型带来的转发硬限制。RFC1918要求适当过滤/不应公网通告，不代表每台路由器自动如此；也不能说互联网承载私网通信只能NAT而忽略隧道等。应以不分配全球唯一性、无需RIR注册解释C，并提醒内部仍需IPAM管理。[T4]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "composed of up to 65,536 available addresses"
+          },
+          {
+            "label": "B",
+            "text": "issued by IANA in conjunction with an autonomous system number"
+          },
+          {
+            "label": "C",
+            "text": "May be used internally without external address-allocation registration; internal address management is still needed."
+          },
+          {
+            "label": "D",
+            "text": "traverse the Internet when an outbound ACL is applied"
+          }
+        ],
+        "explanation": "RFC1918地址供组织内部使用，无需向RIR申请全球唯一分配或外部注册，C正确；组织内部仍需IPAM和地址冲突管理。三个私网块的总数远多于65,536，A错误；不随AS号授予，B错误；ACL仅控制许可流量，不会使私网地址自动具备全球可路由性，D错误。公网通常不提供其全球可达性，边界过滤需要实际配置，不是所有路由器都由地址格式自动丢弃。"
+      }
+    },
+    {
+      "id": 76,
+      "before_sha256": "3029da9528eed698d9f0d71dc2e3fab640219ff97c982faf8278169b494a1933",
+      "reason": "C的终端录入数据并上传文件服务器符合角色；解析只列终端示例，后续大段“转发、容灾、安全效果”“标准命令集”模板，与问题无关。应逐项说明A为AP、B为接入交换/连接基础设施、D为L3路由，C为流量端点，不用重复选项冒充解释。",
+      "updates": {
+        "explanation": "终端是产生或接收应用数据的端点，例如用户录入数据并上传文件服务器，C正确。A提供无线接入是AP的基础设施角色；B把客户端/服务器接入网络主要描述交换接入设备；D跨VLAN转发属于路由器或三层交换机。不能用转发/容灾等通用模板代替这些不同职责。"
+      }
+    },
+    {
+      "id": 77,
+      "before_sha256": "f29d03f0318ba547910dd96dec3fe470095bb8c1d86d2e9ddfa722b4510b94ef",
+      "reason": "控制器是集中管理点，A正确；解析把Catalyst Center、APIC、vManage/vSmart等一律说成集中所有控制面，底层设备仅保留纯数据面，是错误泛化。Cisco SD-Access仍有IS-IS/OSPF underlay及LISP控制节点；SD-WAN vManage是管理面、vSmart是控制面。传统网络也可自动化配置，并非必须逐台手动登录。应讲逻辑集中与产品职责，删除“一律完全剥离”的断言。[T9][T10]",
+      "updates": {
+        "explanation": "Controller作为逻辑集中管理/策略编排点，A符合控制器网络的通用角色。B/D把控制器限定成核心路由器或其板卡，过窄；C把数据面集中化混淆了集中控制和实际流量转发。具体产品分工不同：SD-WAN的vManage偏管理、vSmart偏控制；SD-Access的underlay仍可分布式路由，LISP控制节点也不等于Catalyst Center。逻辑集中不代表每台设备失去全部本地控制功能。"
+      }
+    },
+    {
+      "id": 78,
+      "before_sha256": "949e1ed3988757575afb7d45b4fe74c386be76df1bd1872e50f7924f8fcd77bd",
+      "reason": "技术核验仍成立：R7/R8/R9最后可用分别.126/.94/.158，掩码.192/.240/.224，D正确，原解析充分。用户新增代码块范围后补查发现四选项把三个路由器的interface/ip address配置全部压成一段，缺少分设备、多行代码布局；App与当前HTML选项普通容器不保留代码格式。应恢复命令行边界及代码显示，不改变D的技术答案。详见presentation-0001-0140.md。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "R7#\ninterface FastEthernet1/0\n ip address 10.88.31.127 255.255.255.192\n\nR8#\ninterface FastEthernet0/0\n ip address 10.19.63.95 255.255.255.240\n\nR9#\ninterface FastEthernet1/1\n ip address 10.23.98.159 255.255.255.224"
+          },
+          {
+            "label": "B",
+            "text": "R7#\ninterface FastEthernet1/0\n ip address 10.88.31.126 255.255.255.240\n\nR8#\ninterface FastEthernet0/0\n ip address 10.19.63.94 255.255.255.192\n\nR9#\ninterface FastEthernet1/1\n ip address 10.23.98.158 255.255.255.248"
+          },
+          {
+            "label": "C",
+            "text": "R7#\ninterface FastEthernet1/0\n ip address 10.88.31.127 255.255.255.240\n\nR8#\ninterface FastEthernet0/0\n ip address 10.19.63.95 255.255.255.192\n\nR9#\ninterface FastEthernet1/1\n ip address 10.23.98.159 255.255.255.248"
+          },
+          {
+            "label": "D",
+            "text": "R7#\ninterface FastEthernet1/0\n ip address 10.88.31.126 255.255.255.192\n\nR8#\ninterface FastEthernet0/0\n ip address 10.19.63.94 255.255.255.240\n\nR9#\ninterface FastEthernet1/1\n ip address 10.23.98.158 255.255.255.224"
+          }
+        ],
+        "explanation": "分别按每个子网计算最后可用地址：R7为10.88.31.126/26，广播.127；R8为10.19.63.94/28，广播.95；R9为10.23.98.158/27，广播.159。因此D的地址及掩码全部对应图示。A把广播地址赋接口；B的地址虽为目标最后主机，但三处掩码不符；C同时存在广播/掩码问题。设备标题仅区分配置归属，interface与ip address应分行输入。"
+      }
+    },
+    {
+      "id": 82,
+      "before_sha256": "75648927b375604c06fbe0b8ff18fe9981018a18acffb079b5e7ef31acc84a8b",
+      "reason": "B是预期内部跨子网编址类型，ULA/LLA前缀区分正确；但题干只说internal，解析擅自补出“必须跨不同路由器和子网”，并称ULA绝不可公网访问、GUA违背内部安全需求。ULA通常不在公网通告，但类型本身不是防火墙，GUA也能通过策略仅内网可达。建议显式要求内部跨子网、无需公网前缀，解析区分编址与访问控制。[T11]",
+      "updates": {
+        "prompt": "An IPv6 device must be reachable across several routed internal subnets without using the organization's globally allocated IPv6 prefix. Which address type is intended for this internal addressing plan?",
+        "explanation": "题干要求内部跨路由子网且不使用组织公网前缀，应选B的Unique Local Address（ULA，fc00::/7，本地分配常用fd00::/8）。link-local只在当前链路有效，不由路由器转发，不能满足跨子网；IPv4-compatible地址不是此用途，GUA用于全球唯一编址而非题目指定本地前缀。ULA通常不在公网通告，但并不自动配置防火墙；内部可达性及禁止外部通告需边界策略实现。"
+      }
+    },
+    {
+      "id": 84,
+      "before_sha256": "8bc3f942eee4f4d6f4ef1af6bf728484573fa2c689ff6378eed34abc1deb4f13",
+      "reason": "B是给定选项里本地分配ULA的正确地址类型；解析称D的fc00:0000:aaaa::a15d:1234:2343:8aca展开超过8组，实际7个显式hextet，::补1组，格式合法，应因L=0当前未定义本地分配用途排除，不能说语法无效。RFC4193并没把L=0指定为“未来集中注册”；fd00::的40位Global ID全0也不能代表已正确执行伪随机生成/保证独立站点唯一。还应说明Internet过滤需边界政策，不是赋地址命令自动设置。[T11]",
+      "updates": {
+        "prompt": "Which configuration uses the locally assigned IPv6 Unique Local Address format for VLAN 2000? Internet advertisement filtering will be configured separately.",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface vlan 2000\n ipv6 address ff00:0000:aaaa::1234:2343/64"
+          },
+          {
+            "label": "B",
+            "text": "interface vlan 2000\n ipv6 address fd00::1234:2343/64"
+          },
+          {
+            "label": "C",
+            "text": "interface vlan 2000\n ipv6 address fe80:0000:aaaa::1234:2343/64"
+          },
+          {
+            "label": "D",
+            "text": "interface vlan 2000\n ipv6 address fc00:0000:aaaa::a15d:1234:2343:8aca/64"
+          }
+        ],
+        "explanation": "本地分配ULA的L位为1，首字节FD，B的fd00::1234:2343/64属于该类型。A的FF为多播；C的FE80属于链路本地，不能用于一般跨子网路由。D的fc00:0000:aaaa::a15d:1234:2343:8aca在语法上有7个显式hextet，::补一个零组，格式合法，但L=0目前未定义为本地分配形式，不是题目要求。示例B仅用于识别地址类型，实际部署应按RFC4193生成合适Global ID，并配置路由过滤，赋ULA本身不会自动阻止对外通告。"
+      }
+    },
+    {
+      "id": 88,
+      "before_sha256": "1c4685e84006c76b48f1d9849ee699874061d2d6995b3515be7a1b8d405decae",
+      "reason": "disaggregation区分control/data功能，A正确；解析再次把逻辑解耦说成所有设备控制功能彻底迁至Catalyst Center/APIC、只留ASIC。与Cisco实际SD-Access管理面、LISP控制节点、分布式underlay职责不符。也把FIB的生成直接说成在ASIC中完成，混淆控制面生成与硬件存储/查表。应区分抽象SDN模型、具体协议和产品职责。[T9][T10]",
+      "updates": {
+        "explanation": "Disaggregation将控制面决策和数据面转发功能逻辑解耦，A正确。控制面可计算并下发路由/策略，数据面按已安装的FIB/规则查表转发；不能说ASIC自己承担所有FIB生成。B按L2/L3设备分工不是控制/数据面分离；C路由汇总、D环到星拓扑变化也不是定义。具体控制器产品可同时保留本地协议与分布式underlay，不应把抽象解耦等同全部控制功能移至某一管理产品。"
+      }
+    },
+    {
+      "id": 90,
+      "before_sha256": "425deb7d044308965c0520ea780b2c4468f5bff20243ac2a9171cefe8f54ec96",
+      "reason": "已看图。SiteA SFP-SR、SiteB SFP-LR，距离7KM且题干单模，D指出选型不匹配；1/255负载不支持拥塞，基础判定正确。但解析凭空论断850nm与1310nm不匹配的7km链路能因“两端激光强行激发”处在临界up、产生高误码；图反而两端reliability255/255，没有错误计数。应以波长/介质/距离不兼容说明，承认图中的up叙述与真实互通条件不一致，不能编造物理机制调和。[T12]",
+      "updates": {
+        "prompt": "Refer to the planned 7-km single-mode link diagram. Which hardware-selection error must be corrected for standards-compliant operation?",
+        "explanation": "7km单模光纤应选相互兼容的单模长距收发器。SiteA选SR（常见850nm、多模短距），SiteB选LR（常见1310nm、单模10km），因此D指出模块选择不匹配。应为SiteA选择与线路、对端兼容的LR等适用模块，而不是把7km线路改成多模。A/B未说明具体硬件不兼容，C也不符合本题已选定的7km单模路径。图为部署前选型示意，不宣称异波长组合已经up或已有实测CRC增长。",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iMjUwIiB2aWV3Qm94PSIwIDAgOTAwIDI1MCI+PHJlY3Qgd2lkdGg9IjkwMCIgaGVpZ2h0PSIyNTAiIGZpbGw9IiNmOGZhZmMiLz48cGF0aCBkPSJNMzUwIDEwNUg1NTAiIHN0cm9rZT0iIzY0NzQ4YiIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHJlY3QgeD0iNTAiIHk9IjU1IiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjEwNSIgcng9IjEwIiBmaWxsPSIjZGJlYWZlIiBzdHJva2U9IiMxZTQwYWYiIHN0cm9rZS13aWR0aD0iMiIvPjxyZWN0IHg9IjU1MCIgeT0iNTUiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTA1IiByeD0iMTAiIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGcgZmlsbD0iIzBmMTcyYSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPjx0ZXh0IHg9IjIwMCIgeT0iODkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiPlNpdGUgQTwvdGV4dD48dGV4dCB4PSIyMDAiIHk9IjEyOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMCI+U0ZQLVNSIC8gODUwIG5tIC8gTU1GPC90ZXh0Pjx0ZXh0IHg9IjcwMCIgeT0iODkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiPlNpdGUgQjwvdGV4dD48dGV4dCB4PSI3MDAiIHk9IjEyOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMCI+U0ZQLUxSIC8gMTMxMCBubSAvIFNNRjwvdGV4dD48dGV4dCB4PSI0NTAiIHk9IjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIwIj43IGttIHNpbmdsZS1tb2RlPC90ZXh0Pjx0ZXh0IHg9IjQ1MCIgeT0iMjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIj5SZXZpZXcgdGhlIHRyYW5zY2VpdmVyIGNob2ljZXMgYmVmb3JlIGRlcGxveW1lbnQuPC90ZXh0PjwvZz48L3N2Zz4="
+      },
+      "accepted_intermediate_sha256": [
+        "c9855441a784a007bb8bde395ce1838e21699b51c46fff843d34545e1f4f7958"
+      ]
+    },
+    {
+      "id": 92,
+      "before_sha256": "f240b4bb3d51175b333779ce0224c1e2857d4d6118d6aa1c5ff71cf788bfa588",
+      "reason": "D为命题意图，但“TCP acknowledges every packet”不符合累计/延迟ACK，且纯ACK不要求ACK-of-ACK；RFC9293建议正常数据至少每两个满段发确认而非每包一个。解析还说TCP保障报文绝对不丢、UDP确保最低延迟，均过度保证。应把D改成TCP使用ACK与重传、UDP不内建这些机制，并解释可靠有序交付/队头阻塞的时延代价，而非把错误选项称完全正确。[T13]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "UDP reliably guarantees delivery of all packets: TCP drops packets under heavy load"
+          },
+          {
+            "label": "B",
+            "text": "UDP uses sequencing data for packets to arrive in order TCP offers the capability to receive packets in random order"
+          },
+          {
+            "label": "C",
+            "text": "TCP uses congestion control for efficient packet delivery: UDP uses flow control mechanisms for the delivery of packets"
+          },
+          {
+            "label": "D",
+            "text": "TCP uses acknowledgments and retransmission for reliable ordered delivery; UDP has no built-in delivery acknowledgments or retransmission."
+          }
+        ],
+        "explanation": "TCP用序号、ACK和重传提供可靠有序字节流；丢包后的重传与按序交付可能造成实时语音不希望等待的延迟。UDP本身不建连接、不发送交付ACK或重传，适合由实时应用自行处理少量丢失，故修订后的D正确。TCP可累计/延迟ACK，并非每个包都单独ACK，纯ACK也无需ACK-of-ACK；TCP不保证物理报文绝不丢，UDP也不保证最低延迟。A/B反置可靠性/排序，C把流量控制错误归给UDP。"
+      }
+    },
+    {
+      "id": 95,
+      "before_sha256": "0b700f6e19a40d19d0e6d3c7a4bb766757e4d64f3d52374aa7eaeb36e27736db",
+      "reason": "技术核验仍成立：VLAN2已有dot1Q2及10.10.10.10/24，VLAN3为10.10.2.1/23、native10，B封装3、10.10.2.10/23正确，子接口.10不必等于VLAN号。新增完整性补查发现选项的多条配置压成一行，且解析中的ip address <ip> <mask>及dot1Q <vlan-id>模板经实际formatter生成未转义HTML标签，导致参数名在HTML文本解析中消失。需恢复选项多行代码及正确转义，不更换B的技术答案。详见presentation-0001-0140.md与formatter-evidence.json。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface GigabitEthernet0/0\n ip address 10.10.2.10 255.255.252.0"
+          },
+          {
+            "label": "B",
+            "text": "interface GigabitEthernet0/0.10\n encapsulation dot1Q 3\n ip address 10.10.2.10 255.255.254.0"
+          },
+          {
+            "label": "C",
+            "text": "interface GigabitEthernet0/0.3\n encapsulation dot1Q 3 native\n ip address 10.10.2.10 255.255.252.0"
+          },
+          {
+            "label": "D",
+            "text": "interface GigabitEthernet0/0.3\n encapsulation dot1Q 10\n ip address 10.10.2.10 255.255.255.252"
+          }
+        ],
+        "explanation": "图中VLAN2已由Gi0/0.2的dot1Q2及10.10.10.10/24服务。VLAN3主机10.10.2.1/23需要同网段10.10.2.10/23，且封装应为dot1Q3，所以B正确。子接口.10仅是本地编号，不必等于VLAN号。A未终结VLAN3标签且掩码/22不符；C将VLAN3设为native，但交换机native为10，且/22不符；D绑定VLAN10，/30也不包含该PC。配置必须分行，不能把interface、encapsulation和ip address当一条命令。"
+      }
+    },
+    {
+      "id": 96,
+      "before_sha256": "5b761fc8f4e7a64025668700ea2b4e3c813f2b3d31f8c2abbc1a182c4d0be1fa",
+      "reason": "私网配合NAT节约公网IPv4，C正确且解析明确RFC1918不是安全标准；但同时错误断言私网报文在任何ISP首跳必被丢弃、核心绝不允许路由，并把BCP38等同于自动无条件过滤全部私网。地址的可转发性与不应在公网通告/部署过滤规范不是同一件事；应改成公网通常不提供其全球可达性，直连公网访问需适当转换/代理等，避免机制硬限制的误解。[T4]",
+      "updates": {
+        "explanation": "私网与NAT/PAT配合可让多个内部节点共享少量公网IPv4地址，C正确。A未给转换/代理等机制，不能据私网地址直接获得全球可达性；B把地址规划当成安全控制，私网并非防火墙；D不是私网块的全球路由用途。RFC1918规范其内部复用与不应公开传播的边界行为，但路由器仍可配置转发这些地址，并非每台ISP设备天然在首跳自动丢弃。也可通过隧道/专线承载私网，需区分公网外层和内部地址。"
+      }
+    },
+    {
+      "id": 97,
+      "before_sha256": "13659b4d7e22c1834e1dddc188f1465e2a9d1ec38f955735605969a79acb876c",
+      "reason": "已看图。接口up/full1000；3,612,699 input errors与CRC同数，只有67 broadcasts、负载1/255；给定候选中线缆/物理链路故障C最合适，不能仅从单快照证明唯一根因或当前递增。解析只用一句a large number of input errors and CRC errors加整段泛用模板，没引用实际计数、没排除bandwidth参数不改变线速、没分析D速率不匹配通常导致无法up。应基于这些证据重写并说明进一步查线缆/接口诊断。[T2]",
+      "updates": {
+        "explanation": "图中接口up、full-duplex、1000Mb/s，input errors与CRC均为3,612,699，只有67个广播且负载1/255，四项中C的线缆/物理连接问题最符合。A无大量广播证据；B的bandwidth参考参数本身不改变物理协商线速；D若实际物理速率不匹配通常难以保持图示正常up。单一累计快照不能证明错误当前继续增长或唯一根因，应复测计数并检查线缆、连接器和接口诊断。"
+      }
+    }
+  ]
+}

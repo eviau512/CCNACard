@@ -1,0 +1,250 @@
+{
+  "scope": "Manual corrections Q311-Q330; next delivery Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 312,
+      "before_sha256": "ec61f7c7e0bbed33b8cf84e585933e2a3967c8b5b517a41a94ad853093b8b1ef",
+      "reason": "A为IPv4 VRRP VRID0a=10正确；C的HSRP末尾99是十六进制153而非99。D不是无效MAC，只是不符VRRP保留格式；B也不能仅凭地址断言烧录BIA。GLBP组号不止一个字节，删错误xxyy泛化，按IPv4/IPv6标准分别说明。 [S1]",
+      "updates": {
+        "prompt": "Which listed MAC address has the standard VRRP virtual-router format for IPv4?",
+        "explanation": "A，0000.5e00.010a。IPv4 VRRP标准虚拟MAC为00-00-5e-00-01-{VRID}，末字节0a是十六进制，代表组号10；IPv6 VRRP使用00-00-5e-00-02-{VRID}。C的0000.0c07.ac99符合HSRPv1格式，组号0x99=153，不是十进制99。B/D不符合这里的VRRP保留前缀，但都是可表达的48位地址，不能因此称无效、随机编造或断言一定为硬件烧录BIA。GLBP是另一种FHRP，组号可扩展到1023，不能用只容纳一字节组号的0007.b400.xxyy概括全部格式。"
+      }
+    },
+    {
+      "id": 313,
+      "before_sha256": "b114594348c859a2577d9eb790702f0a13340f95c0b3ee53c7034505103b37b6",
+      "reason": "C/metric正确，但把所有EIGRP AD都当恒90、FD等同当前路径metric、Cost当OSPF独占及通式严重乱码均错误。限定同前缀有效内部路径，给经典默认带宽/延迟公式，说明DUAL与历史FD，不把所有候选机械按最低数值当无环。 [S2]",
+      "updates": {
+        "prompt": "An EIGRP router compares eligible internal paths for exactly the same prefix within one EIGRP domain, using default settings. Which listed routing value is used to prefer the best path?",
+        "explanation": "C，metric。EIGRP使用自身的复合路径度量选择可用successor，DUAL同时负责保持无环；并非仅取任意邻居报告的最小数而忽略可行性。经典默认K1=K3=1、其余为0，带宽项取路径瓶颈、延迟项累加：\n```text\nBW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)\n```\nFD用于可行性判断，是自上次Active到Passive后记录的最低距离，不总等于当前某条路径metric。A/AS_PATH是BGP属性；B/AD用于相同完整前缀的来源入表竞争，本题内部默认AD相同，不能区分路径，外部EIGRP/自定义AD则另当别论；D/cost是泛称，常用于OSPF，但不是某协议独占词，本题准确选EIGRP metric。宽度量的缩放还需按实现区分。"
+      }
+    },
+    {
+      "id": 314,
+      "before_sha256": "8595544f2014ff2326d844c567ee55b0028157327ce9b6a370858516e23f4d68",
+      "reason": "原B/2-way与DR邻居正常同步不符，解析自己承认FULL/DR却借无证据官方判分坚持B。明确从DROther验证与已选DR的同步邻接，改答案D/Full；2-Way只表示双向Hello，两个DROther可稳定保持，不能证明与DR已Full。 [S3]",
+      "updates": {
+        "prompt": "On an OSPF broadcast network, an engineer checks a DROther router's neighbor entry for the elected DR. Which neighbor state confirms that their adjacency has completed database synchronization?",
+        "answer": [
+          "D"
+        ],
+        "explanation": "D，Full。从DROther查看已选DR，正常同步完成的条目通常显示FULL/DR：斜杠前是邻居状态，后面是对端在该链路的角色。B/2-Way只表示双向Hello已被识别，两个DROther可正常停在2-WAY/DROTHER，但与DR的正常同步邻接应继续至Full。A/Init仍未确认双向关系；C/Exchange正在交换数据库摘要，是中间阶段。DR/BDR的选举与Full邻接完成不是同一件事，不能以“2-Way是选举阶段”代替本题的同步验证。"
+      }
+    },
+    {
+      "id": 315,
+      "before_sha256": "da86dda4e76ff6034d71719332a3a624063bdaedef4c3ee49c9371a24b39a01a",
+      "reason": "已看四条192.168.16.0前缀/21、/24、/26、/27都匹配.16.2，D/27正确。逐项解释是空模板未说明它们并非不匹配、只是更短。重写具体范围与/27 via192.168.1.4，不按跨协议AD选。",
+      "updates": {
+        "explanation": "D，192.168.16.0/27，经图中192.168.1.4。目标192.168.16.2同时位于A的/21（192.168.16.0–192.168.23.255）、B的/24（.16.0–.16.255）、C的/26（.16.0–.16.63）与D的/27（.16.0–.16.31）。它们都匹配，前三项不是“不匹配”，而是在已安装路由里前缀比27短。转发取最长匹配，不会跨这些不同长度前缀以EIGRP90、OSPF110、IS-IS115或RIP120的AD大小推翻/27。"
+      }
+    },
+    {
+      "id": 316,
+      "before_sha256": "cb1e1f85c6d7909a28c78056501f020792f024ba276bc7372f77de2f9c93d3d9",
+      "reason": "D/AD120不替代现OSPF110正确，但图默认经10.12.0.1，直连却写10.0.0.0/24/local10.0.0.2，头部subnets计数也不符。改编C10.12.0.0/24与本地.2的自洽图；D改为保留配置作为较差候选而非丢弃命令，说明主路撤回/备份有效前提。",
+      "updates": {
+        "prompt": "Refer to the revised exhibit. The existing OSPF default remains eligible, and backup next hop 10.13.0.1 is reachable. What happens when the router is configured with ip route 0.0.0.0 0.0.0.0 10.13.0.1 120?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It starts sending traffic without a specific matching entry in the routing table to GigabitEthernet0/1."
+          },
+          {
+            "label": "B",
+            "text": "It immediately replaces the existing OSPF route in the routing table with the newly configured static route."
+          },
+          {
+            "label": "C",
+            "text": "It starts load-balancing traffic between the two default routes."
+          },
+          {
+            "label": "D",
+            "text": "It keeps the static route configured as a less-preferred backup and continues using the OSPF default while that route remains eligible."
+          }
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjM2MiIgdmlld0JveD0iMCAwIDEyODAgMzYyIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIzNjIiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iMzIiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjUiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCBpbnN0YWxsZWQgcm91dGVzIGFuZCB2YWxpZCBuZXh0IGhvcHM8L3RleHQ+PHJlY3QgeD0iMTYiIHk9IjYwIiB3aWR0aD0iMTI0OCIgaGVpZ2h0PSIyODYiIHJ4PSI2IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iMzQiIHk9Ijk5IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMSMgc2hvdyBpcCByb3V0ZTwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTM1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5HYXRld2F5IG9mIGxhc3QgcmVzb3J0IGlzIDEwLjEyLjAuMSB0byBuZXR3b3JrIDAuMC4wLjA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjE3MSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TypFMiAwLjAuMC4wLzAgWzExMC8xXSB2aWEgMTAuMTIuMC4xLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjIwNyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAxMC4xMi4wLjAvMjQgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjI0MyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TCAxMC4xMi4wLjIvMzIgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjI3OSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAxMC4xMy4wLjAvMjQgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzE8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjMxNSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TCAxMC4xMy4wLjIvMzIgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzE8L3RleHQ+PC9zdmc+",
+        "explanation": "D。两个候选都是0.0.0.0/0，现有OSPF AD110低于新静态AD120，故继续使用OSPF经10.12.0.1和Gi0/0；新命令保留在配置中作为较差候选，不是被丢弃。A不会立即改用Gi0/1；B的“静态总优先”忽略了已显式改成120；C不能仅凭同为默认就跨不同AD作ECMP。若OSPF默认撤回且没有其他更优默认，静态下一跳10.13.0.1仍可解析时才可能入表接管，故障检测/收敛并非无条件瞬间完成。若省略120，普通静态默认AD1才通常优于110。"
+      }
+    },
+    {
+      "id": 317,
+      "before_sha256": "8d01e733b948e98900152f741eb518a550ea2c50dabe35446090140f1a295e85",
+      "reason": "已看AD254的209.165.200.224/27当前就在RIB；高AD/27不会给较短/0作同前缀AD备份，原题没有主路前缀。A可重现该高AD配置，但不能仅看254断言备用已隐藏。补该/27低AD主路已撤回、现高AD路由生效与next-hop可解析，A保持；255不入表且不保证无缝。",
+      "updates": {
+        "prompt": "Refer to the routing-table excerpt. The high-distance route for 209.165.200.224/27 is now installed because its lower-distance primary route for that exact prefix has been withdrawn. All shown next hops remain reachable. Which command reproduces this floating-static backup configuration?",
+        "explanation": "A。父标题表明目标209.165.200.224/27，条目[254/0]的254是AD，via209.165.202.129是下一跳，故命令为`ip route 209.165.200.224 255.255.255.224 209.165.202.129 254`。B配置另一个209.165.201.0/27且默认AD1；C以目标网络地址作默认下一跳，未配置本题目标前缀或高AD；D重现AD1的普通默认。浮动备份须与相同完整前缀的主路比较：高AD的/27仍会比/0更明细，不能说它仅因AD254就给默认路由作备用。图中它已入表，题目明确较低AD同前缀主路已撤回。可入表静态距离应小于255，配置255不是有效备用，也不能保证无损切换。"
+      }
+    },
+    {
+      "id": 318,
+      "before_sha256": "4588e40339efcea70bd138528929af39db2e473f78b76b95076094192d397fea",
+      "reason": "已看Atlanta/Washington都以Serial0/0/0接NY，A意图正确，但所有ipv6 route::/0都缺token空格。E的NY loopback2000::2并非因不够直观就错，独立可达递归下一跳可用；明确两边无该host独立路由，不能让新/0自递归。恢复A/B/E合法分词，C保留错误前缀作干扰。 [S4]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Atlanta and Washington each connect to New York over an operational point-to-point Serial0/0/0 interface. New York already has return routes to both sites. Neither edge router has an existing route resolving New York Loopback2 address 2000::2. Which same command on both edge routers supplies the missing IPv6 default route?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 route ::/0 Serial0/0/0"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 route ::/0 Serial0/0/1"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 route :0/0 Serial0/0/0"
+          },
+          {
+            "label": "D",
+            "text": "ip route 0.0.0.0 0.0.0.0 Serial0/0/0"
+          },
+          {
+            "label": "E",
+            "text": "ipv6 route ::/0 2000::2"
+          }
+        ],
+        "explanation": "A，`ipv6 route ::/0 Serial0/0/0`。IPv6默认前缀为::/0；两端边缘路由器通往NY的本地接口均Serial0/0/0，在题设点到点链路可用出接口形式。B的Serial0/0/1不是图中这两台边缘路由器的NY上联；C的:0/0无效；D是IPv4命令。E使用NY远端loopback2000::2作为递归下一跳，本题明确没有独立路径可解析该地址，不能靠这条新/0自我递归来生效。并非IPv6静态永远不能使用非直连全局下一跳：若有独立可解析路径可以采用递归形式。恢复route与::/0间的空格属于必要CLI分词，不可写作route::/0。"
+      }
+    },
+    {
+      "id": 319,
+      "before_sha256": "33c6686a8271b280c18d86d25558547b21ff0c7b6c20de3b90d047fd5b38259c",
+      "reason": "D在仍有至少一个有效IPv4接口时成立；原题只排除loopback/手工RID，并没排除全部接口无IP/down时C。补该条件与首次启动，删loopback永不down和把IOS接口选择顺序全归RFC的说法。 [S5]",
+      "updates": {
+        "prompt": "A Cisco IOS OSPFv2 process starts with no configured router-id and no loopback interfaces. At least one physical interface has a usable IPv4 address and is up/up. Which address is automatically selected as its router ID?",
+        "explanation": "D，合格物理接口中数值最高的IPv4地址。IOS通常按手工router-id、有效loopback最高地址、其他有效接口最高地址的顺序选择，本题排除了前两种并保证第三种存在。A没有最低地址加1的规则，B不会以全零RID代替有效选择；C只在没有其他合格地址等条件下才可能发生，已被题目排除。接口选择顺序是IOS规则，不应全称为RFC规定；loopback也可被administratively shutdown，不能说永不down，已运行RID通常也不随后来地址变化自动抢占改变。"
+      }
+    },
+    {
+      "id": 320,
+      "before_sha256": "2647ecec2341cc15725951b4ad579e1706836fe89a15f942228b22cbceaa1476",
+      "reason": "已看O IA192.168.10.32/28 [110/193]，E正确。题干把host.33/28称subnet不规范；解析把.0/27称较宽候选却未说明其.0–.31根本不匹配.33。改问主机所选路由度量，按图排除192并区分AD110/默认84/其他128。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is the metric of the route selected for destination host 192.168.10.33?",
+        "explanation": "E，193。主机192.168.10.33落在192.168.10.32/28（.32–.47），图中该O IA路由为[110/193]，括号前110是AD，后193才是metric。D的192属于192.168.10.0/27（.0–.31），并不包含.33，不能说只是比/28略宽所以落选；A的84属于默认，也匹配但比/28短；C的128属于另一个192.168.20.0前缀；B混淆AD与metric。192.168.10.33/28可描述一个接口地址，但规范子网网络号是192.168.10.32/28，不能把.33称为该subnet的网络地址。"
+      }
+    },
+    {
+      "id": 321,
+      "before_sha256": "bba9825640b0c63209c2fe43ab38be51a5f6ff0a945f1f29d627e59675092516",
+      "reason": "已看/28 via192.168.0.7与/24 via.4，目的.15仍匹配/28；原B错误，广播/SSH不能使路由器跳过长前缀改走短前缀，改A。原表还同时显示同一10.0.1/24的C和O、父标题计数不符，重绘明确已安装候选/可达next-hop的练习图；只问lookup不保证SSH成功，不猜目的真实LAN掩码。 [S6]",
+      "updates": {
+        "prompt": "Refer to the revised routing-table excerpt. A packet sourced from Loopback0 is destined to 10.0.1.15. All listed next hops are valid; no policy routing applies. Which next hop is selected by the normal destination-prefix lookup, regardless of whether a later SSH connection succeeds?",
+        "answer": [
+          "A"
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjM2MiIgdmlld0JveD0iMCAwIDEyODAgMzYyIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIzNjIiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iMzIiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjUiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCBpbnN0YWxsZWQgcm91dGVzIGFuZCB2YWxpZCBuZXh0IGhvcHM8L3RleHQ+PHJlY3QgeD0iMTYiIHk9IjYwIiB3aWR0aD0iMTI0OCIgaGVpZ2h0PSIyODYiIHJ4PSI2IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iMzQiIHk9Ijk5IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMSMgc2hvdyBpcCByb3V0ZTwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTM1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5DIDE5Mi4xNjguMy41LzMyIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgTG9vcGJhY2swPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIxNzEiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMTkyLjE2OC4wLjAvMjQgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjIwNyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TyAxMC4wLjEuMy8zMiBbMTEwLzEwMF0gdmlhIDE5Mi4xNjguMC40MCwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyNDMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gMTAuMC4xLjE5MC8zMiBbMTEwLzVdIHZpYSAxOTIuMTY4LjAuMzUsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMjc5IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5PIDEwLjAuMS4wLzI0IFsxMTAvMTBdIHZpYSAxOTIuMTY4LjAuNCwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIzMTUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkQgMTAuMC4xLjAvMjggWzkwLzEwXSB2aWEgMTkyLjE2OC4wLjcsIEdpZ2FiaXRFdGhlcm5ldDAvMDwvdGV4dD48L3N2Zz4=",
+        "explanation": "A，192.168.0.7。10.0.1.15在10.0.1.0/28的地址范围.0–.15内，也在/24内，但/28更长，因此按该条选择下一跳。B是较短/24的下一跳；C/.40属于不匹配的10.0.1.3/32；D/.3.5是本机源loopback，不是该目的的next hop。普通目的路由查表不会因SSH使用TCP或把前缀末地址视为广播，就跳过更长路由改走/24。远端/28可以是通告前缀，不能只从路由摘要推断真实终端所在链路的子网掩码；若在实际目的链路确实是广播地址或被过滤，业务可能失败，但也不能据此推出B的短前缀回退。"
+      }
+    },
+    {
+      "id": 322,
+      "before_sha256": "8a722281d53f4d22eafbdacf77e81376e5ff31b848c056ed1b7b8f43b2cfa1a8",
+      "reason": "C/Backup正确，但旧Master术语与现RFC9568的Active未区分，且宣称当前主用必为最高优先级/立即无损接管过度。保留Backup故障接管，说明新旧名称、检测/选举和可能丢包，不混同HSRP Standby。 [S1]",
+      "updates": {
+        "explanation": "C，Backup。VRRP备用成员在检测主用失效并完成选举/状态转换后接管虚拟路由器的转发责任；不保证零丢包或无任何检测等待。旧文献将主用称Master，现VRRPv3 RFC9568用Active，备用仍称Backup。B的Standby是HSRP常用备用角色名，A/forwarding和D/listening不是本题VRRP备用角色。当前主用不应无条件描述为永远具有所有在线成员中的最高配置优先级，抢占设置、地址所有者及收敛过程会影响实际角色。"
+      }
+    },
+    {
+      "id": 323,
+      "before_sha256": "622ffb7bc6911f710d1c25398c6c9297aaa9363d0a08567104e5d101a17d4c3c",
+      "reason": "C为普通Ethernet IPv4重封装正确，但原题泛称任何网络，PPP等并无MAC。解析又将IP校验和规则推广IPv6、并称路由器绝不改IP与前面NAT例外矛盾。限定无NAT/隧道/MPLS的以太网转发，说明MAC出接口/下一跳、IPv4 TTL/header checksum变化。",
+      "updates": {
+        "prompt": "A router forwards an ordinary IPv4 packet between Ethernet links to an adjacent next-hop router, without NAT, tunneling, or MPLS. Which listed action describes the new Ethernet encapsulation?",
+        "explanation": "C。路由器去除入向二层封装，为出向Ethernet重新封装：源MAC为本机出接口MAC，目的MAC为下一跳在该链路上的MAC；若最终主机直连，目的MAC可为最终主机。题设无NAT/隧道等，原IPv4源/目的地址保持，但TTL减1并相应更新IPv4头校验和，不能说整个三层头不变。A的额外“源路由器MAC标签”不是这种正常封装；B改成接口IP/邻居IP不符合普通路由；D的源/目的标签也不是Ethernet MAC重封装。PPP等链路未必有Ethernet MAC，IPv6也没有IPv4头校验和，故本题明确协议/介质而不泛称任何路由转发。"
+      }
+    },
+    {
+      "id": 324,
+      "before_sha256": "2cb9b887dc385eef8ebb7635a41a19518d5333b97359907bde41b1f0ff2eabdf",
+      "reason": "D/IPv4 VRRP组1正确；A首字节05的I/G位1，是组播而非原文随机单播。B不能由数值断言硬件MAC；GLBP组号字段也被错误缩为1字节。限定IPv4，重写保留前缀与十六进制组号，IPv6另列.02，不编造其他MAC来源。 [S1]",
+      "updates": {
+        "prompt": "Which standard virtual MAC address is used by IPv4 VRRP group (VRID) 1?",
+        "explanation": "D，0000.5e00.0101。IPv4 VRRP使用00-00-5e-00-01-{VRID}，组1的末字节是0x01；IPv6对应00-00-5e-00-02-{VRID}。A的首字节05最低位为1，是组播MAC而非原解释所称单播，且不符该VRRP虚拟单播格式。B/C也不符保留前缀，不能仅凭它们长得像设备地址就断言一定是硬件烧录MAC。其他FHRP有各自格式，GLBP组号并不只容纳一字节，不能用0007.b400.XXYY概括所有组。"
+      }
+    },
+    {
+      "id": 325,
+      "before_sha256": "9d732d981469396a66ede45014bbb3a2ffe1b957bc08e98e4a1e101f4bcc72e7",
+      "reason": "题问FHRP目的，四原选项均未准确说默认网关冗余；A的组播Hello交换是机制而非目的，解析凭虚构官方标准硬选。将A改成提供可接管的虚拟默认网关，保留A索引；区分心跳、主机获网关、STP逻辑防环与ACL，不声称所有主机绝不接收任何路由信息。 [S7]",
+      "updates": {
+        "prompt": "What is the primary purpose of using a First Hop Redundancy Protocol on an IPv4 LAN subnet?",
+        "options": [
+          {
+            "label": "A",
+            "text": "provides a redundant virtual default gateway that another eligible router can take over when the active gateway fails"
+          },
+          {
+            "label": "B",
+            "text": "sends the default route to the hosts on a network"
+          },
+          {
+            "label": "C",
+            "text": "ensures a loop-free physical topology"
+          },
+          {
+            "label": "D",
+            "text": "filters traffic based on destination IP addressing"
+          }
+        ],
+        "explanation": "A。FHRP让多个路由器共同提供可接管的虚拟默认网关身份，降低单个首跳网关故障对主机的影响。Hello/Advertisement用于成员检测和角色协调，是实现手段而非协议的最终目的，也不是让路由器跨网络转发这些控制报文。B不是FHRP分发路由表给主机的主要功能，主机默认网关可由静态配置或DHCP等获得；C的二层逻辑防环属STP等机制，STP也不是消除所有物理连线环；D是ACL/防火墙过滤功能。FHRP本身不保证任何上游故障都被发现，也不等于无损切换。"
+      }
+    },
+    {
+      "id": 326,
+      "before_sha256": "b12446ef543f928f60797528a748e000505dc314ddae7691847ba5b9ec3c8150",
+      "reason": "已看R1mtu1600/R2默认假设1500、两侧no passive例外和area0/network精确匹配，C正确。但MTU主要阻止Full数据库同步，不是完全不能发现邻居；两边一定各卡哪一状态也不能硬断言。明确R2有效MTU1500/检查启用，区分Hello与DBD，并说明mtu-ignore不是修复真实承载MTU。 [S8]",
+      "updates": {
+        "prompt": "Refer to the exhibit. R2 has an effective IP MTU of 1500 bytes, and OSPF DBD MTU checking is enabled on both routers. Which displayed configuration difference prevents the adjacency from reaching Full?",
+        "explanation": "C。R1 Gi1/0配置mtu1600，R2 Gi2/0有效MTU1500；在默认DBD检查下，较小接收端会拒绝通告大于本地MTU的数据库描述报文，可能使同步停在ExStart/Exchange。它们仍可能已通过Hello成为邻居，不能说一定完全无邻居，也不能固定断言哪一端始终卡哪一状态。A的精确network192.168.0.1 0.0.0.0匹配R1接口，B改Area1反会与现Area0不符，D已被no passive-interface Gi2/0例外解除。通常应使实际链路/接口MTU相容；ip ospf mtu-ignore可跳过特定检查，但不自动提高链路实际可承载帧长，不能当作修复所有MTU问题。"
+      }
+    },
+    {
+      "id": 328,
+      "before_sha256": "b28c688ff670d241f0dccd2940b0efb77efa8b99a48952e750f16aae96510c58",
+      "reason": "已看O172.16.1.184/29 via192.168.7.35，C正确，.190在.184–.191。原C172.16.0/16Loopback0与C172.16.1/24Serial0重叠且next-hop相关直连没给，改编不含重叠直连的自洽相关路由图；说明.0/28不匹配与LPM非时间上先于AD。",
+      "updates": {
+        "prompt": "Refer to the revised relevant routing-table entries. Under normal destination-based forwarding, which next hop is selected for a packet destined to 172.16.1.190?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjM2MiIgdmlld0JveD0iMCAwIDEyODAgMzYyIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIzNjIiIGZpbGw9IndoaXRlIi8+PHRleHQgeD0iMzIiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjUiPlJldmlzZWQgZXhlcmNpc2UgLSByZWxldmFudCBpbnN0YWxsZWQgcm91dGVzIGFuZCB2YWxpZCBuZXh0IGhvcHM8L3RleHQ+PHJlY3QgeD0iMTYiIHk9IjYwIiB3aWR0aD0iMTI0OCIgaGVpZ2h0PSIyODYiIHJ4PSI2IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iMzQiIHk9Ijk5IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SMSMgc2hvdyBpcCByb3V0ZTwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTM1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5DIDE5Mi4xNjguNy4wLzI0IGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIxNzEiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMTcyLjE2LjEuMC8yNCBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjIwNyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TyAxNzIuMTYuMS4zLzMyIFsxMTAvMTAwXSB2aWEgMTkyLjE2OC43LjQwLCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjI0MyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TyAxNzIuMTYuMS4xODQvMjkgWzExMC81XSB2aWEgMTkyLjE2OC43LjM1LCBHaWdhYml0RXRoZXJuZXQwLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjI3OSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TyAxNzIuMTYuMy4wLzI0IFsxMTAvMTBdIHZpYSAxOTIuMTY4LjcuNCwgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIzMTUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkQgMTcyLjE2LjEuMC8yOCBbOTAvMTBdIHZpYSAxOTIuMTY4LjcuNywgR2lnYWJpdEV0aGVybmV0MC8wPC90ZXh0Pjwvc3ZnPg==",
+        "explanation": "C，192.168.7.35，经图中172.16.1.184/29。该/29覆盖.184–.191，含目的.190；也有直连172.16.1.0/24匹配，但/29更长。B的.1.0/28仅覆盖.0–.15，不含.190；A/.7.4对应172.16.3.0/24，D/.7.40对应172.16.1.3/32，均不匹配当前目的。数据平面在有效已安装路由中作最长匹配，不能说它在时间上先于控制平面的AD入表判断；也不能用较短/不同前缀的AD0或90去推翻本次/29选择。"
+      }
+    },
+    {
+      "id": 329,
+      "before_sha256": "d4b19ccd2d7e42d476d6898d1dd329fab75060c5e6bda12aa9e79f2c4e911b87",
+      "reason": "A的网关冗余正确，但原文保证任意硬件/链路故障后几秒无中断，未区分检测条件或仅上游坏而LAN通告仍正常的情况。使用Active/旧Master/Backup术语，说明检测后接管、时延和可能丢包；不将VRRP当端到端负载均衡。 [S1]",
+      "updates": {
+        "explanation": "A。VRRP为同一LAN上的多个路由器提供一个虚拟默认网关，由主用Active（旧文献Master）承担转发，Backup在检测失效并完成转换后接管，主机可继续使用同一虚拟网关。检测/收敛有时延，也可能丢包，不能保证几秒内绝对无中断；若只是上游路径坏而本地VRRP通告仍正常，还需额外跟踪/设计才能识别，不能说任何链路故障都会自动切换。B的多跳端到端路由负载分担不是其单组基本用途；C二层防环不是VRRP，也不是所有流量都必须交根桥转发；D动态路由表交换由相应路由协议负责，VRRP控制消息用于维护虚拟网关角色。"
+      }
+    },
+    {
+      "id": 330,
+      "before_sha256": "9f58a8f212997bb1721eaf99c79c65ab737bb5b4a7d3845ec8bc5cdd601ff556",
+      "reason": "已看R3 Gi0/1在共享10.0.4/24，D优先级100可在新选举胜过R299/R11。但OSPF DR不抢占，原题没说初选，不能保证改优先级立即取代现DR；四选项两命令也压一行。补同一新选举无既有角色，恢复换行，具体排除错接口与priority0。 [S3]",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1, R2, and R3 participate together in a fresh DR/BDR election on 10.0.4.0/24, with no previously elected DR or BDR. R1 has default OSPF interface priority 1; R2 has priority 99. Which commands on R3 make it the preferred DR candidate for that segment?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R3(config)#interface Gig0/0\nR3(config-if)#ip ospf priority 100"
+          },
+          {
+            "label": "B",
+            "text": "R3(config)#interface Gig0/0\nR3(config-if)#ip ospf priority 1"
+          },
+          {
+            "label": "C",
+            "text": "R3(config)#interface Gig0/1\nR3(config-if)#ip ospf priority 0"
+          },
+          {
+            "label": "D",
+            "text": "R3(config)#interface Gig0/1\nR3(config-if)#ip ospf priority 100"
+          }
+        ],
+        "explanation": "D。在R3连接共享10.0.4.0/24的GigabitEthernet0/1下配置ip ospf priority100，使其在本次新选举中优于R2的99和R1的1。A/B操作Gi0/0，它连接本地10.0.3.0/24，不是图中共享段；B还只是默认priority1。C在正确接口设0，会使该接口无资格当DR或BDR，而不是最高优先。OSPF优先级相同才继续用RID破平；DR/BDR选举不抢占，已有稳定角色时单改100不会保证立即取代DR，因此题目明确是无既有角色的新选举。"
+      }
+    }
+  ]
+}

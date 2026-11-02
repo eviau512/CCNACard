@@ -1,0 +1,113 @@
+{
+  "scope": "Manual per-question review Q241-Q250; no milestone delivery before Q400",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 242,
+      "before_sha256": "a00d670d372240c48bd1e7ca601e3db301debd0a66c3afdb86de3785c3fe00dd",
+      "reason": "已看四BID：24586最低，答案B正确；SW4给定64000的低12位2560与其余VLAN10不一致，不能作为同实例有效字段。解析除通用规则外未用实际数值比较，逐项均为模板。改编有效VLAN10练习，将SW4字段明确改为61450并重绘，不冒称原始值恢复；逐项写数值。 [S1]",
+      "updates": {
+        "prompt": "Refer to the revised exhibit. All four switches participate in the same PVST+ instance for VLAN 10. The table shows each switch's complete displayed priority field (including the extended system ID) and bridge MAC. Which switch becomes the root bridge?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjY2MCIgdmlld0JveD0iMCAwIDEwMDAgNjYwIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI2NjAiIGZpbGw9IndoaXRlIi8+PGcgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj48dGV4dCB4PSI1MDAiIHk9IjM4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI2IiBmaWxsPSIjMTAyYTQzIj5WTEFOIDEwIC0gYnJpZGdlIElEIGVsZWN0aW9uIChyZXZpc2VkIGV4ZXJjaXNlKTwvdGV4dD48cGF0aCBkPSJNMjUwLDEzNSBMNzUwLDEzNSIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNMjUwLDEzNSBMMjUwLDMwMCIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNNzUwLDEzNSBMNzUwLDMwMCIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNMjUwLDMwMCBMNzUwLDMwMCIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cmVjdCB4PSIxNjAiIHk9IjExMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI1NSIgcng9IjgiIGZpbGw9IiNlM2YyZmQiIHN0cm9rZT0iIzE3NmI5YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMjUwIiB5PSIxNDUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlN3aXRjaCAxPC90ZXh0PjxyZWN0IHg9IjY2MCIgeT0iMTEwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjU1IiByeD0iOCIgZmlsbD0iI2UzZjJmZCIgc3Ryb2tlPSIjMTc2YjlhIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSI3NTAiIHk9IjE0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+U3dpdGNoIDI8L3RleHQ+PHJlY3QgeD0iMTYwIiB5PSIyNzUiIHdpZHRoPSIxODAiIGhlaWdodD0iNTUiIHJ4PSI4IiBmaWxsPSIjZTNmMmZkIiBzdHJva2U9IiMxNzZiOWEiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IHg9IjI1MCIgeT0iMzEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj5Td2l0Y2ggMzwvdGV4dD48cmVjdCB4PSI2NjAiIHk9IjI3NSIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI1NSIgcng9IjgiIGZpbGw9IiNlM2YyZmQiIHN0cm9rZT0iIzE3NmI5YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iNzUwIiB5PSIzMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlN3aXRjaCA0PC90ZXh0Pjx0ZXh0IHg9IjUwMCIgeT0iMzgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMTAyYTQzIj5EaXNwbGF5ZWQgcHJpb3JpdHkgPSBjb25maWd1cmVkIGJhc2UgcHJpb3JpdHkgKyBWTEFOIElEPC90ZXh0PjxyZWN0IHg9IjUwIiB5PSI0MDIiIHdpZHRoPSI5MDAiIGhlaWdodD0iMjI1IiByeD0iOCIgZmlsbD0iI2YwZjRmOCIvPjx0ZXh0IHg9IjIwMCIgeT0iNDM3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj5Td2l0Y2g8L3RleHQ+PHRleHQgeD0iNDY1IiB5PSI0MzciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPkRpc3BsYXllZCBwcmlvcml0eTwvdGV4dD48dGV4dCB4PSI3NzAiIHk9IjQzNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+QnJpZGdlIE1BQzwvdGV4dD48dGV4dCB4PSIyMDAiIHk9IjQ3OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+U3dpdGNoIDE8L3RleHQ+PHRleHQgeD0iNDY1IiB5PSI0NzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPjMyNzc4PC90ZXh0Pjx0ZXh0IHg9Ijc3MCIgeT0iNDc4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj4wMDE4LjE4NGUuM2MwMDwvdGV4dD48dGV4dCB4PSIyMDAiIHk9IjUyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+U3dpdGNoIDI8L3RleHQ+PHRleHQgeD0iNDY1IiB5PSI1MjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPjI0NTg2PC90ZXh0Pjx0ZXh0IHg9Ijc3MCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj4wMDFhLmUzZmYuYTY4MDwvdGV4dD48dGV4dCB4PSIyMDAiIHk9IjU2MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+U3dpdGNoIDM8L3RleHQ+PHRleHQgeD0iNDY1IiB5PSI1NjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPjI4NjgyPC90ZXh0Pjx0ZXh0IHg9Ijc3MCIgeT0iNTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj4wMDIyLjU1Y2YuY2MwMDwvdGV4dD48dGV4dCB4PSIyMDAiIHk9IjYwNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+U3dpdGNoIDQ8L3RleHQ+PHRleHQgeD0iNDY1IiB5PSI2MDQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPjYxNDUwPC90ZXh0Pjx0ZXh0IHg9Ijc3MCIgeT0iNjA0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj4wZTQxLjQ1MDMuMDA0ZjwvdGV4dD48L2c+PC9zdmc+",
+        "explanation": "同一VLAN内比较完整Bridge ID，先比较优先级字段，再在该字段相同时比较桥MAC。VLAN10的字段分别为32778、24586、28682、61450；它们是配置基值32768、24576、28672、61440加10。Switch 2的24586最低，故B正确；A、C、D都已有更大的优先级字段，不必再比MAC。链路速率/到根开销影响后续端口角色，不决定谁的BID最低。不能仅从数值倒推出曾配置root primary或secondary宏。"
+      },
+      "accepted_intermediate_sha256": [
+        "cdc42b41899ae6b64a7b212854fb45552082c5ac52431c9916e88654a7e54492"
+      ]
+    },
+    {
+      "id": 243,
+      "before_sha256": "de8b24f6092c55103812fe300b05a1c3bbf9cb3de1e0fa6016366ec6c1ff6e96",
+      "reason": "on适用于题意中的AireOS静态LAG，但题干未指定平台；不能推广所有WLC。解析把passive也说成不断主动发协商、又断言全机必断网。限定AireOS静态LAG，分别说明active/passive/desirable与on。已有内联命令经全局renderer转义，不另判缺代码。 [S2]",
+      "updates": {
+        "prompt": "An AireOS wireless LAN controller is configured to use static LAG on its distribution ports. Which channel-group mode must be configured on the connected switch member interfaces to bundle those links?",
+        "explanation": "本题明确为AireOS静态LAG。该控制器的此LAG不协商LACP或PAgP，因此交换机成员接口应使用静态channel-group模式on，B正确。A/passive只响应LACP，D/active主动发起LACP，C/desirable主动使用PAgP，均不能与不运行这些聚合协议的对端协商成所需通道。命令形式为`channel-group <id> mode on`，应在物理成员接口/接口范围下配置，并满足速率、VLAN/trunk等一致性要求。不能把该结论推广到所有WLC平台，也不能把passive说成持续主动发起协商；失败后的端口行为依平台与配置而定。"
+      }
+    },
+    {
+      "id": 244,
+      "before_sha256": "9e1d7e0bdd91273d3fb7c14c594e9cf06f6d60deaa78b0a22ba5395b1fdf597a",
+      "reason": "已看VLAN20图：24596<28692<32788<64000，A的排序意图明确；SW4低12位不等于20。解析凭优先级猜已配root primary/secondary，且误述SW4默认值。改编SW4=61460有效练习、重绘BID图；只按BID选举，不虚构命令。 [S1]",
+      "updates": {
+        "prompt": "Refer to the revised exhibit. All four switches are active in the same PVST+ instance for VLAN 20. The displayed priority fields include the VLAN ID, and all links have equal speed. Which switch becomes the root bridge for VLAN 20?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjY2MCIgdmlld0JveD0iMCAwIDEwMDAgNjYwIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI2NjAiIGZpbGw9IndoaXRlIi8+PGcgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj48dGV4dCB4PSI1MDAiIHk9IjM4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI2IiBmaWxsPSIjMTAyYTQzIj5WTEFOIDIwIC0gYnJpZGdlIElEIGVsZWN0aW9uIChyZXZpc2VkIGV4ZXJjaXNlKTwvdGV4dD48cGF0aCBkPSJNMjUwLDEzNSBMNzUwLDEzNSIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNMjUwLDEzNSBMMjUwLDMwMCIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNNzUwLDEzNSBMNzUwLDMwMCIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNMjUwLDMwMCBMNzUwLDMwMCIgc3Ryb2tlPSIjNjI3ZDk4IiBzdHJva2Utd2lkdGg9IjQiLz48cmVjdCB4PSIxNjAiIHk9IjExMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI1NSIgcng9IjgiIGZpbGw9IiNlM2YyZmQiIHN0cm9rZT0iIzE3NmI5YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMjUwIiB5PSIxNDUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlNXMTwvdGV4dD48cmVjdCB4PSI2NjAiIHk9IjExMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI1NSIgcng9IjgiIGZpbGw9IiNlM2YyZmQiIHN0cm9rZT0iIzE3NmI5YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iNzUwIiB5PSIxNDUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlNXMjwvdGV4dD48cmVjdCB4PSIxNjAiIHk9IjI3NSIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI1NSIgcng9IjgiIGZpbGw9IiNlM2YyZmQiIHN0cm9rZT0iIzE3NmI5YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMjUwIiB5PSIzMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlNXMzwvdGV4dD48cmVjdCB4PSI2NjAiIHk9IjI3NSIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI1NSIgcng9IjgiIGZpbGw9IiNlM2YyZmQiIHN0cm9rZT0iIzE3NmI5YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iNzUwIiB5PSIzMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlNXNDwvdGV4dD48dGV4dCB4PSI1MDAiIHk9IjM4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzEwMmE0MyI+RGlzcGxheWVkIHByaW9yaXR5ID0gY29uZmlndXJlZCBiYXNlIHByaW9yaXR5ICsgVkxBTiBJRDwvdGV4dD48cmVjdCB4PSI1MCIgeT0iNDAyIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjIyNSIgcng9IjgiIGZpbGw9IiNmMGY0ZjgiLz48dGV4dCB4PSIyMDAiIHk9IjQzNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+U3dpdGNoPC90ZXh0Pjx0ZXh0IHg9IjQ2NSIgeT0iNDM3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj5EaXNwbGF5ZWQgcHJpb3JpdHk8L3RleHQ+PHRleHQgeD0iNzcwIiB5PSI0MzciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPkJyaWRnZSBNQUM8L3RleHQ+PHRleHQgeD0iMjAwIiB5PSI0NzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlNXMTwvdGV4dD48dGV4dCB4PSI0NjUiIHk9IjQ3OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+MjQ1OTY8L3RleHQ+PHRleHQgeD0iNzcwIiB5PSI0NzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPjAwMTguMTg0ZS4zYzAwPC90ZXh0Pjx0ZXh0IHg9IjIwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj5TVzI8L3RleHQ+PHRleHQgeD0iNDY1IiB5PSI1MjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPjI4NjkyPC90ZXh0Pjx0ZXh0IHg9Ijc3MCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj4wMDRhLjEzZTkuNjkwMDwvdGV4dD48dGV4dCB4PSIyMDAiIHk9IjU2MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+U1czPC90ZXh0Pjx0ZXh0IHg9IjQ2NSIgeT0iNTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIxIiBmaWxsPSIjMTAyYTQzIj4zMjc4ODwvdGV4dD48dGV4dCB4PSI3NzAiIHk9IjU2MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+MDAyMi41NWNmLmRkMDA8L3RleHQ+PHRleHQgeD0iMjAwIiB5PSI2MDQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPlNXNDwvdGV4dD48dGV4dCB4PSI0NjUiIHk9IjYwNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMSIgZmlsbD0iIzEwMmE0MyI+NjE0NjA8L3RleHQ+PHRleHQgeD0iNzcwIiB5PSI2MDQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjEiIGZpbGw9IiMxMDJhNDMiPjAwNDEuMzk2ZC42OTBmPC90ZXh0PjwvZz48L3N2Zz4=",
+        "explanation": "根桥由同实例最小Bridge ID决定。图中VLAN20优先级字段为SW1=24596、SW2=28692、SW3=32788、SW4=61460，分别等于24576、28672、32768、61440加20。SW1最小，选A；B/C/D的字段更大，无须比较桥MAC。等链路速率不是选根条件，路径开销用于根选出后的路径/端口角色选择。不能仅凭24576和28672基值声称已运行root primary/secondary宏。"
+      },
+      "accepted_intermediate_sha256": [
+        "2e609de3a0867fd9afcde7ab97478d11cb9f199db9ada9201c8d500eaaa8ea26"
+      ]
+    },
+    {
+      "id": 245,
+      "before_sha256": "2805b205b39690fcec0725fef2836422ffa41af46ff212b76158493143fa488b",
+      "reason": "D/tagging正确，但解析将加标签写成帧离开access端口进入trunk，混淆交换机入向access与出向trunk；还保证完美安全隔离。明确在trunk出向发送时加802.1Q标签、默认native例外和FCS重算，VLAN划分不是完整安全保障。A不是本题封装名，B仅编号，C为IP QoS。 [S3]",
+      "updates": {
+        "prompt": "Which Layer 2 mechanism identifies Ethernet frames from different VLANs when they traverse the same IEEE 802.1Q trunk port?",
+        "explanation": "D，VLAN tagging。交换机在出向802.1Q trunk发送需打标签的帧时，在源MAC之后插入4字节标签，供对端识别所属VLAN；这不是从access出端口先发出再进入本机trunk。普通C-tag的TPID为0x8100，TCI含PCP、DEI和12位VID。常规trunk默认对native VLAN数据帧不打标签，具体仍受native tagging等配置影响。插入/移除标签会改变帧，需按新帧内容计算FCS。A的marking不如D准确指称本题封装机制；B只是编号；C的DSCP是IP层QoS字段，不能承担802.1Q VLAN识别。VLAN提供二层逻辑分隔，安全效果还依赖正确配置与访问控制，并非单靠标签保证。"
+      }
+    },
+    {
+      "id": 246,
+      "before_sha256": "dd79a3ee72898a1ca9e791170306ab24aeeccbd42cf5b8c309e319fd5ba50029",
+      "reason": "B是无线网络名称，但题干与解析将SSID当唯一标识，忽略不同网络可同名/多AP共享SSID；SSID与BSSID需区别，WLAN ID范围也不可跨平台一概512。改问客户端选择的配置网络名，删除唯一性与范围绝对论。 [S4]",
+      "updates": {
+        "prompt": "Which value is the configured wireless network name that a Wi-Fi client uses to select a service set when connecting to an access point?",
+        "explanation": "B，SSID（Service Set Identifier）是客户端通常看到并选择的无线网络名称，最大长度为32字节，区分大小写。它不是全球唯一标识：不同网络可以使用同名SSID，同一个扩展服务集内的多个AP也可共享SSID。BSSID是标识具体基本服务集的48位MAC形式标识，与网络名称SSID不同。A/VLAN ID用于VLAN划分，可与WLAN业务映射；C/RFID是射频识别技术；D/WLAN ID是控制器上的管理索引，其范围依平台/版本，不能代替客户端选择的SSID。选择同名网络也不证明其可信，建立连接还需满足认证与安全策略。"
+      }
+    },
+    {
+      "id": 247,
+      "before_sha256": "9ff486dce8f1e0cc7dc10381a8b7e033abc78944daf47514b7ede5bf0ed7e607",
+      "reason": "仅说第三方ISP无法确定下一步：本地/对端LLDP全局与接口状态均缺。解析又假设所有第三方不支持CDP、工程师不能配置ISP，均非题给证据。补对端已就绪、本地接口tx/rx允许但全局未启用，A才唯一；B不能启LLDP，C在既定条件已满足，D与发现无关。 [S5]",
+      "updates": {
+        "prompt": "An engineer must enable LLDP neighbor discovery between a company Cisco IOS router and an ISP third-party router. The ISP router already transmits and receives LLDP on the connected interface. On the company router, the connected interface permits LLDP transmit and receive, but LLDP is globally disabled. Which next step is required on the company router?",
+        "explanation": "A。题目已给定对端LLDP就绪、本地接口允许收发但全局关闭，因此在本地全局配置执行`lldp run`是缺少的步骤。LLDP是IEEE 802.1AB多厂商链路层发现协议，但实际发现需要两端及相应接口支持并启用。B仅关闭CDP不能启动LLDP；C在本题对端已收发LLDP的条件下不是缺少步骤；D的速率/双工自动协商不用于启用邻居发现。不能仅凭第三方品牌断言绝不支持CDP，也不能以题目未给出的运营商管理权限作为技术排除依据。"
+      }
+    },
+    {
+      "id": 248,
+      "before_sha256": "2c1c010a996d5a7cd419e048aa398a86e693c4dff0246e96a497355bb021c660",
+      "reason": "D是静态MAC手工配置，并非动态learning功能；其他选项都不正确，原题无直接切题答案。将题干改为MAC表构建/管理的正确陈述以保留D。删静态表自动防源MAC伪造、永久保存running-config等错误保证；与port-security区分，并说明保存配置。 [S6]",
+      "updates": {
+        "prompt": "Which statement correctly describes how a conventional Layer 2 switch builds or manages its MAC address table?",
+        "explanation": "D正确：管理员可以手工配置静态MAC表项，例如`mac address-table static <mac-address> vlan <vlan-id> interface <interface-id>`。这属于表项管理，不是从流量动态学习。动态学习通常从入向帧的源MAC建立或刷新VLAN/MAC/端口映射，并受老化计时控制；A所说默认全部关闭错误。B把正常未知单播处理说成一律丢弃，默认应在同VLAN合格端口泛洪。C把二层MAC转发表与IP到MAC的ARP缓存混淆，单凭MAC/端口映射不能生成IP映射。静态转发表项通常不按动态老化时间删除，但要按平台要求保存配置才能跨重启保留；普通静态MAC配置不等于启用port-security，也不能自动防止源MAC伪造。"
+      }
+    },
+    {
+      "id": 249,
+      "before_sha256": "af2a0d9866654238c5294d1e3f5660265dc606df535f15238e0d247688195a50",
+      "reason": "D泛洪方向正确，但unchanged和解析完全不变/绝不重算FCS过度：出向access/trunk标签可不同。限定正常有效未知单播且无额外抑制，D改为同VLAN其余可转发端口；MAC/载荷保持而tag/FCS按出向变化。A不是未知目的的处理，不能说所有设备永不stomp错误CRC。 [S3][S6]",
+      "updates": {
+        "prompt": "A Layer 2 switch receives a valid unicast Ethernet frame whose destination MAC has no entry in that VLAN. Assume normal forwarding with no additional unknown-unicast suppression or filtering. What does the switch do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It changes the checksum of the frame to a value that indicates an invalid frame."
+          },
+          {
+            "label": "B",
+            "text": "It updates the CAM table with the destination MAC address of the frame."
+          },
+          {
+            "label": "C",
+            "text": "It appends the table with a static entry for the MAC and shuts down the port."
+          },
+          {
+            "label": "D",
+            "text": "It floods copies to the other eligible forwarding ports in the incoming VLAN, excluding the ingress port."
+          }
+        ],
+        "explanation": "D正确。目的MAC查表未命中形成未知单播，交换机向同一VLAN中除入端口外的其他合格转发端口复制泛洪，不向其他VLAN或STP阻塞端口泛洪。动态学习/刷新取自收到帧的源MAC，因此B不能仅凭未知目的确定其位置。A故意把FCS标为无效不是未知目的的正常处理；某些直通设备在检测到输入CRC错误后stomp错误FCS是另一种场景，不能泛称交换机绝不如此。C的静态添加/关闭端口无触发依据。普通二层转发保留源/目的MAC和载荷，但出向access/trunk可能移除/加入VLAN标签并相应重算FCS，不能保证整个线上帧每一位完全不变。"
+      }
+    },
+    {
+      "id": 250,
+      "before_sha256": "268f4098d61975ef4e26a31b613869e435a9584380d5f5acad1650daf97f4970",
+      "reason": "B是常见IOS Catalyst默认动态老化300秒；解析把拔线和静默同为必等300秒，忽略链路down/拓扑事件清表；600/900是可配置值而非虚构。限定平台、动态项、链路保持up且无拓扑事件，解释从最后源学习刷新起计。 [S6]",
+      "updates": {
+        "prompt": "On a Cisco IOS Catalyst switch with the default dynamic MAC aging time, a workstation stops transmitting frames. Its link remains up, and no topology change, manual clearing, or other flush event occurs. What is the default configured aging interval for its dynamic MAC entry after the last learning refresh?",
+        "explanation": "B，默认动态MAC老化间隔为300秒（5分钟）。收到该工作站源MAC的合格入向帧会刷新动态学习；持续无刷新时，表项按老化机制到期。题目限定链路保持up且无其他清表事件，因为拔线导致端口down或拓扑变化等可能提前清除表项，不能一概说拔线后还必须等满300秒。可用`show mac address-table aging-time`查看，并按平台用`mac address-table aging-time <seconds>`调整；200、600、900等可作为配置值，但不是本题指定平台的默认值。普通静态表项不使用此动态老化计时，其他交换机系列的默认值也应查相应文档。"
+      }
+    }
+  ]
+}

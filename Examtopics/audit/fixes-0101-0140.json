@@ -1,0 +1,398 @@
+{
+  "scope": "Manual corrections Q101-Q140 within first 200 milestone",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 102,
+      "before_sha256": "8c9d77b03e70bf1ba9ad5770d545246c1ee82854a8ff0a2c277061efeace920e",
+      "reason": "数学正确：/24切8个/27、每段30个可用IP，首段最后主机192.168.32.30。但题干指定interface VLAN10即SVI，解析却把它当物理routed port并要求no switchport；SVI与物理口转换不是同一配置。D原文掩码为255.255.255.240，解析擅自改成255.255.254.240后判畸形；.62在其实际/28下属于.48/28的末主机，不应混用/27说明D。应先统一接口类型，再更正逐项排除理由；不能声称C当前完整满足SVI命令要求。[U2]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface Vlan10\n ip address 192.168.32.97 255.255.255.224"
+          },
+          {
+            "label": "B",
+            "text": "interface Vlan10\n ip address 192.168.32.65 255.255.255.240"
+          },
+          {
+            "label": "C",
+            "text": "interface Vlan10\n ip address 192.168.32.30 255.255.255.224"
+          },
+          {
+            "label": "D",
+            "text": "interface Vlan10\n ip address 192.168.32.62 255.255.255.240"
+          }
+        ],
+        "explanation": "/24划为8段需借3位，得到8个/27，各有30个可用主机。第一段192.168.32.0/27范围.0–.31，最后可用.30，所以C正确。题干是interface Vlan10（SVI），直接在该逻辑三层接口配置IP，不使用物理口的no switchport。A的.97不在首段，B/D为/28仅14个可用主机；D的.62是.48/28最后主机，不是首个/27的最后主机。"
+      }
+    },
+    {
+      "id": 105,
+      "before_sha256": "21a9d74cfb69f7e836fd4b7ff94ee9a4b544a26ce62edca845f46d686fa7f302",
+      "reason": "A准确概括跨信任边界的访问控制；解析为排C却称现代防火墙绝非stateless、无状态过滤仅属于路由器ACL，这是错误技术分类。实际防火墙产品可同时具有stateless与stateful引擎，C不如A完整，但不能靠否认stateless firewall来排除。应解释主要安全角色与检查实现方式的区别。[U4]",
+      "updates": {
+        "explanation": "防火墙的主要角色是按安全策略控制不同信任域之间哪些流量可通过，A正确。B允许未经授权流量不符合安全控制目标；D无条件拒绝全部也不是一般企业需求。C只描述一种检查实现，不能代表整体角色；实际产品可以有stateful和stateless过滤，不能说无状态防火墙不存在。策略还可用于双向流量及多个安全域，而不限于从外向内。"
+      }
+    },
+    {
+      "id": 106,
+      "before_sha256": "8f4e16286d237552820a76651e2bfef78d3dd0cac5246b379f2b2b42f3330bd5",
+      "reason": "已看图，实际主机数是R7=923、R8=225、R9=3641。按向上取整预留10%分别需1016、248、4006（若另加网关各再加1），最小/22、/24、/20仍成立，C正确。解析却写约920～1000、约3600及约1015/4000，未真正逐图算数；1000再加10%甚至超出/22。选项A与D逐字相同，也应清理。建议用精确输入/ceil计算，并在题干明确最小够用以排除更大子网。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R7 serves 923 hosts, R8 serves 225 hosts, and R9 serves 3641 hosts. Reserve addresses for 10% growth (round upward) plus one router-interface address on each LAN. Which script uses the smallest adequate subnet for each LAN?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R7#configure terminal\ninterface Fa1/0\nip address 10.1.56.1 255.255.192.0\nno shutdown\nR8#configure terminal\ninterface Fa0/0\nip address 10.9.32.1 255.255.224.0\nno shutdown\nR9#configure terminal\ninterface Fa1/1\nip address 10.23.96.1 255.255.128.0\nno shutdown"
+          },
+          {
+            "label": "B",
+            "text": "R7#configure terminal\ninterface Fa1/0\nip address 10.1.56.1 255.255.240.0\nno shutdown\nR8#configure terminal\ninterface Fa0/0\nip address 10.9.32.1 255.255.224.0\nno shutdown\nR9#configure terminal\ninterface Fa1/1\nip address 10.23.96.1 255.255.192.0\nno shutdown"
+          },
+          {
+            "label": "C",
+            "text": "R7#configure terminal\ninterface Fa1/0\nip address 10.1.56.1 255.255.252.0\nno shutdown\nR8#configure terminal\ninterface Fa0/0\nip address 10.9.32.1 255.255.255.0\nno shutdown\nR9#configure terminal\ninterface Fa1/1\nip address 10.23.96.1 255.255.240.0\nno shutdown"
+          },
+          {
+            "label": "D",
+            "text": "R7#configure terminal\ninterface Fa1/0\n ip address 10.1.56.1 255.255.254.0\n no shutdown\n\nR8#configure terminal\ninterface Fa0/0\n ip address 10.9.32.1 255.255.255.128\n no shutdown\n\nR9#configure terminal\ninterface Fa1/1\n ip address 10.23.96.1 255.255.248.0\n no shutdown"
+          }
+        ],
+        "explanation": "按图中R7=923、R8=225、R9=3641计算，预留10%后向上取整分别需1016、248、4006个终端地址；各再加一个路由接口地址为1017、249、4007。最小够用子网依次/22（1022可用）、/24（254可用）、/20（4094可用），所以C正确。A/B给的子网过大，不满足最节省地址；修订D依次/23、/25、/21，容量均不足。所有网络地址边界与题中接口IP匹配，配置按设备分段输入。"
+      }
+    },
+    {
+      "id": 107,
+      "before_sha256": "ccd96846cdbe51a04811902ab87dea3bc3fbe0b033a50f656d116348f41fd777",
+      "reason": "D的PoE超administrative maximum后关端口/err-disable有官方classification override章节支持；解析额外称只有电流完全归零且阻抗断开才停电，忽略PD必须持续满足Maintain Power Signature，低于规定电流/签名条件也可能被判断开。PoE class是分类电流过程，不能与25kΩ检测签名混为“硬件特征电阻宣告class”；具体syslog也不应凭空保证某一固定字符串。保留D，按MPS与本平台policing机制改写附带解释。[U5][U6]",
+      "updates": {
+        "explanation": "在本题平台的PoE classification override/policing机制中，监控功率超过administrative maximum时关闭端口并置err-disabled，选D；恢复方式依该平台策略配置。A的数据暂停不是这一超额动作，B的开始耗电syslog也不是该功能定义。C所说任意最低配置功率不能代替PD的Maintain Power Signature：设备需持续满足规定的MPS条件，否则可能被检测为断开。检测用的约25kΩ签名与分类电流过程不同，不能混成同一个硬件class电阻；也不能保证只有完全零电流才停止供电。"
+      }
+    },
+    {
+      "id": 109,
+      "before_sha256": "17eabc361fd27147e2e2e08b49a23f439f0d7b128e68584569da8ee60485298f",
+      "reason": "B转发到下一跳、C查FIB确定出接口均属于数据平面，单选不成立；解析自己承认依赖FIB，再用“更核心/官方权威基准”排除C，没有技术或官方答案依据。Q110解析也把同一句FIB查找明确判作数据平面。应改为多选B/C，或替换C为控制面生成FIB；不能由选项抽象层级不同制造真假区别。[U7]",
+      "updates": {
+        "prompt": "Which two actions are performed by the data plane within a network device? (Choose two.)",
+        "type": "Multiple Choice",
+        "answer": [
+          "B",
+          "C"
+        ],
+        "explanation": "B向下一跳转发和C查FIB找出接口都是数据平面逐包处理，故本题为B/C双选。A通过路由协议构建路由表属于控制面，D的CLI访问属于管理面。控制面准备/下发转发信息，数据面使用它；两种数据面动作只是描述粒度不同，不能用“更核心”排除C。"
+      }
+    },
+    {
+      "id": 111,
+      "before_sha256": "e686fe41ac9a344b2054aef55586ea68fe0af14c0da5b2f244c3a5596826cd35",
+      "reason": "Internet访问是普通外部公有云用户的便利，C最佳。但B“物理服务器承载”不是公有云独有的用户收益，并不意味着事实错误；解析以云必须VM/容器来排B、以同数据中心与公有云背道而驰来排D，仍把资源抽象与物理/地理位置混淆。云可以提供裸金属服务，消费者也可能与公有云设施同址。应说这些不构成所问普遍优势，而不是捏造架构限制。[U8]",
+      "updates": {
+        "explanation": "外部用户可经Internet访问公有云资源，C是普遍便利。A的专用WAN是可选连接方案，不是所有外部消费者都必须部署。B的物理服务器是基础设施事实而非公有云特有用户收益，云也可提供裸金属服务；D同址并非公有云的普遍访问优势，也不能说消费者绝不可能与云设施同数据中心。云的抽象服务不代表不存在底层物理设备。"
+      }
+    },
+    {
+      "id": 112,
+      "before_sha256": "efdd1bb8791eda3190ae1e6cea8bfc2c178cddbf4d7c51d4caa3f25e89b8f277",
+      "reason": "/24确能把.100与.128都纳入可用范围，C正确且解析末尾指出还需同L2域。但初始192.168.25.128/25是网络地址，不能作为普通PC有效配置，应明确指出题干已有配置错误；D原文完整为255.255.255.252，解析却写成255.255.252并判无效，是再次偷换原选项。应按真实/30容量与网段排除D。",
+      "updates": {
+        "prompt": "Two PCs on the same Layer 2 VLAN have been misconfigured as 192.168.25.128/25 and 192.168.25.100/25. Keep their address values and correct both masks so that each is a valid host in the same subnet. Which mask must be used?",
+        "explanation": "两PC需处于同一二层域，并将地址置于共同有效子网。/24使192.168.25.100及.128都位于192.168.25.0/24的可用范围，C正确。原.128/25是192.168.25.128/25网络地址，原配置本身就不适合作为PC主机地址。A /29、B /27、D /30均不能让两地址成为同一可用主机子网；D的255.255.255.252是有效/30掩码，不应篡写成缺段后再判无效。"
+      }
+    },
+    {
+      "id": 113,
+      "before_sha256": "39941679afb0aaef8070f83c3a40c3c622bef7e40ec43d24eb058e9842d673c3",
+      "reason": "D是数据面主要职能，逐包处理流程对题；但解析把CEF等同于完全不用CPU的硬件ASIC流水线。CEF可由软件实现，也可分布式/硬件加速，逻辑数据面并不由是否跑ASIC定义。应写控制面建立FIB/adjacency，数据面按平台实现查表转发，删除无条件“CEF不需主CPU、都线速”保证。[U7]",
+      "updates": {
+        "explanation": "数据平面的主要任务是依据已安装的转发表将流量交给下一跳，D正确。交换路由表数据、计算路由并生成FIB属于控制面；设备自身发起的管理/控制报文也不是这里所问的逐包转发主功能。CEF描述使用FIB/adjacency的转发机制，可由软件执行或硬件/分布式加速，不能把“数据面”定义为一律只在ASIC且绝不使用CPU。"
+      }
+    },
+    {
+      "id": 115,
+      "before_sha256": "a14e12de426366fa6c88e0e194d0c6fd9f3dc674445c9fe4e7290d4f7d110219",
+      "reason": "已看图192.168.0.0/24和3台PC。当前+30新增=31个子网；/29给32段、每段6主机，含SVI共4地址足够，B意图正确。但B实际命令是255 255.255.248，空格不能当点分十进制“简写”，该命令不可执行；A还有265，C同样缺点号。应修复选项文本再判B为正确可执行命令，不能由解析静默补点。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch(config)#interface vlan 10\nSwitch(config-if)#ip address 192.168.0.1 255.255.255.252"
+          },
+          {
+            "label": "B",
+            "text": "Switch(config)#interface vlan 10\nSwitch(config-if)#ip address 192.168.0.1 255.255.255.248"
+          },
+          {
+            "label": "C",
+            "text": "Switch(config)#interface vlan 10\nSwitch(config-if)#ip address 192.168.0.1 255.255.255.0"
+          },
+          {
+            "label": "D",
+            "text": "Switch(config)#interface vlan 10\nSwitch(config-if)#ip address 192.168.0.1 255.255.255.128"
+          }
+        ],
+        "explanation": "当前1个VLAN再加30个，共需31段；/24借5位成为32个/29，每段6个可用主机，足够3台PC及1个SVI，因此B。/30仅2个可用主机，不够；/24没有切分，/25只有2段，无法容纳31个VLAN。所有掩码必须用完整点分十进制，空格不是点号简写；配置应先进入SVI再另行设置IP。"
+      }
+    },
+    {
+      "id": 116,
+      "before_sha256": "c9c2c9e9c356a5a2d4daec3ccc88a92758ee1ef8eebdc8bbfdd5a8ee0decc626",
+      "reason": "高FCS错误支持物理介质/收发路径异常，A是笼统最佳候选，但D线缆超长同样可导致衰减/FCS错误，题干没有长度依据。解析擅自假设数据中心内直连必然仅数米并断言换线立即解决，既不能排D也未排除模块/NIC/干扰等物理原因。建议补充线长合规或坏线检测结果，或把D替换为与FCS无关的选项；FCS一致也不严格证明无任何比特错误。",
+      "updates": {
+        "prompt": "A client experiences slow throughput from a server that is directly connected to the core switch in a data center. A network engineer finds minimal latency on connections to the server, but data transfers are unreliable, and the output of the show interfaces counters errors command shows a high FCS-Err count on the interface that is connected to the server. The cable length is within specification, and replacing only that cable with a known-good cable stops the errors. What was the cause of the throughput issue?",
+        "explanation": "高FCS-Err说明收到的帧校验失败，支持物理收发路径问题。题目补充线长合规且同端口更换已知良好线缆后错误停止，因此A的原线缆故障最有依据；D超长已排除。B速率不匹配通常不能保持预期正常链路，C高利用率可拥塞但不直接造成此类FCS校验错误。实际排障还应检查连接器、收发器、NIC与干扰，不能仅凭累计FCS就断言唯一根因。"
+      }
+    },
+    {
+      "id": 118,
+      "before_sha256": "d1deb324375e339f5921fe1268205b4bda9c60fc625549627ad6977d325c5a0b",
+      "reason": "D“公网唯一IPv4不足”正确，私网复用解释对题；但排除C时附加“每IP始终有65535 TCP/UDP端口、端口并未匮乏”并不严谨。端口字段16位含0，共65536编码（0保留），TCP/UDP各有命名空间；NAT/PAT端口池也确实可能耗尽。正确排C理由应是RFC1918解决IP地址空间而非传输层端口，不是端口绝不会匮乏。IPv5为原选项文字，若怀疑源OCR应单独核对，不能擅改。[U10]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Lack of routing protocol support for CIDR and VLSM"
+          },
+          {
+            "label": "B",
+            "text": "Lack of security protocols at the network perimeter"
+          },
+          {
+            "label": "C",
+            "text": "Lack of available TCP/UDP port numbers per IPv4 address"
+          },
+          {
+            "label": "D",
+            "text": "Lack of available publicly routable unique IPv4 address"
+          }
+        ],
+        "explanation": "RFC1918允许内部主机复用私网地址，减少对全球唯一公网IPv4地址的需求，D正确。CIDR/VLSM由地址规划和路由支持决定，A不是该地址块解决的问题；安全边界还需协议/策略，B错误。传输端口与IP地址空间是不同资源，私网地址不增加每个地址的TCP/UDP端口字段。端口号是16位（包括保留的0），TCP/UDP各有命名空间，PAT池也可能耗尽，不能以“端口永不匮乏”来排除C。"
+      }
+    },
+    {
+      "id": 119,
+      "before_sha256": "50ccdfb3425ec7e35c1a3af0241e49bc1aaddc5da224cf9979204a3f3537dfa1",
+      "reason": "D成立需两端处在不同distribution blocks；题干仅说另一交换机，同一汇聚块两接入交换机的流量可在汇聚层转回，不必过core。解析把未给条件“跨建筑/跨汇聚块”补入，又错误地把distribution互联一概说成仅心跳、绝不承载用户流量。应补拓扑/不同汇聚块条件后保留D，不能凭三层架构字样断言每次通信都上下走全程。[U11]",
+      "updates": {
+        "prompt": "In a three-tier campus, two workstations attach to access switches in different distribution blocks. The blocks interconnect through the core, with no direct inter-block distribution link. What is the normal traffic path between the workstations?",
+        "explanation": "题干明确两终端位于不同分布块、块间经核心互连，路径为源access→源distribution→core→目标distribution→目标access，D正确。A/C跳过必要分布层；B未经过本题用于互连不同块的核心。若两接入交换机在同一分布块，流量可能在分布层返回，不必穿核心，所以这一拓扑条件必须明确；分布层互联也不能一概说成只传心跳。"
+      }
+    },
+    {
+      "id": 120,
+      "before_sha256": "6f7f962488c6d5dacd0a0d7584a72122d6c0c45dd5a5ef138875ac19e10cfb05",
+      "reason": "A给出标准unicast/anycast接口基数差异；但RFC4291明确要求被分配anycast的节点显式知道该地址是anycast，B前半正是此要求，普通unicast无需anycast特殊声明的后半也不能仅因“不谈接口基数”判错。解析称B不是核心区别，不构成排除依据；还误称追加anycast关键字会自动指示IGP通告主机路由，仍需相应路由配置。建议重写B为明确错误的命题，并区分地址标识、DAD和路由通告。[U12]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "An individual IPv6 unicast address is supported on a single interface on one node, but an IPv6 anycast address is assigned to a group of interfaces on multiple nodes."
+          },
+          {
+            "label": "B",
+            "text": "IPv6 anycast never requires a node to recognize an address as anycast, but every unicast address must be specially declared as anycast."
+          },
+          {
+            "label": "C",
+            "text": "IPv6 unicast nodes must be explicitly configured to recognize the unicast address, but IPv6 anycast nodes require no special configuration."
+          },
+          {
+            "label": "D",
+            "text": "Unlike an IPv6 anycast address, an IPv6 unicast address is assigned to a group of interfaces on multiple nodes."
+          }
+        ],
+        "explanation": "Unicast标识单个接口，anycast把同一地址分配给多个接口，按路由选择送至其中一个通常为路由代价最近的实例，A正确。节点必须知道其地址用于anycast，但该事实不能当成错误干扰项，因此将B改成明确错误的“anycast没有这种识别要求”。C颠倒配置认知要求，D颠倒接口基数。给接口声明anycast并不自动替代IGP/BGP的通告配置；DAD等行为还需按协议与平台区分。"
+      }
+    },
+    {
+      "id": 121,
+      "before_sha256": "8bc4967529a283828c85627e808bd94a59afc4182037a3df8702a80c4383a407",
+      "reason": "已直接看图例和所有Zone图案。Zone1=Ch1、2=Ch6、3=Ch11、4=Ch11、5=Ch6、6=Ch11、7=Ch1、8=Ch6。解析错读Zone5为Ch1、Zone6为Ch6，以此排除B/D；实际上2/5、3/6也同频且图上覆盖重叠，所以B/C/D均有同频竞争风险，C不唯一。应重画/修复信道图再验唯一性。CCI意味着共享空口竞争，不保证必掉线/CRC暴增；不能把正常CSMA/CA退避说成必然严重冲突。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which three listed pairs have overlapping coverage on the same channel and therefore share airtime contention? (Choose three.)",
+        "type": "Multiple Choice",
+        "answer": [
+          "B",
+          "C",
+          "D"
+        ],
+        "explanation": "按图例：Zone1/7用信道1，Zone2/5/8用信道6，Zone3/4/6用信道11。所列相邻覆盖中，2/5、3/4、3/6都同频，故B/C/D为三选；1/2是1与6，不是同信道。重叠同频覆盖导致共享空口竞争/退避并可能降低容量，但不保证必然间歇断连或产生CRC错误。应按图中真正信道分类，不能把Zone5读为1或Zone6读为6。"
+      }
+    },
+    {
+      "id": 122,
+      "before_sha256": "417b3499f87177901fdd23210562bcbc55f648a73b6935de06d5e4b96dd6cd0e",
+      "reason": "未限定两个站点、独享专线、SLA或冗余程度，simplicity/quality/availability不足以唯一推出point-to-point。解析把P2P拓扑等同于运营商独享高SLA线路，再无依据承诺无抖动/可用性高；单P2P链路没有路径冗余，partial mesh也常用于复杂度与可用性折中。应给明确两站点和专线需求，或改问最简单拓扑，不宜直接把C换A。",
+      "updates": {
+        "prompt": "An organization needs the simplest WAN topology for one direct circuit between exactly two sites, with no intermediate hub. Which topology fits this requirement?",
+        "explanation": "只有两个指定站点需要单一直连电路，最简单的逻辑拓扑为point-to-point，选C。partial/full mesh面向多个节点间不同冗余连接，hub-and-spoke经中心汇聚多个分支。P2P这个拓扑名称本身不保证专享带宽、无抖动、SLA或高可用；单电路仍是单点故障，性能和冗余须另行设计。"
+      }
+    },
+    {
+      "id": 123,
+      "before_sha256": "646d926a4189a86b72cc1ba3793341947ad28b8b846914808c7a73d892ae55fa",
+      "reason": "B是标准二层leaf-spine拓扑规则，但解析由全互连+ECMP直接推出无阻塞且“任何spine故障不会孤岛”，需要至少双spine、独立链路和容量前提；并把所有Cisco/VXLAN拓扑的leaf-leaf连接一概禁止，忽略vPC peer-link等产品实现。应限定抽象标准拓扑、区别冗余与无超售，以及产品例外；保留B的核心规则。",
+      "updates": {
+        "prompt": "In the standard two-tier leaf–spine fabric model, how are the leaf and spine layers interconnected?",
+        "explanation": "标准两层leaf–spine拓扑中，每台leaf连接每台spine，B正确。A只接一个spine不符合全互连；C将spine数固定为2且把有冗余路径等同未受控二层环路；D引入中心leaf，不是标准两层结构。至少两个spine和独立链路才有相应故障冗余；是否无阻塞还取决于带宽/超售，不能由全互连单独保证。产品上的vPC peer-link等例外不改变本题抽象fabric规则。"
+      }
+    },
+    {
+      "id": 124,
+      "before_sha256": "638eaafe8e96f0619702b6ae8b2641f8c844e856b3f4a05260ba5444065354ea",
+      "reason": "PortFast在linkup跳过listening/learning进入forwarding，D为预期概括。B说重启时会立即forward，并没有“仅重启时”限定；解析自行添加“仅”再排除，逻辑不成立。重启后接口linkup正是生效时机之一。建议B改成仅reload才生效或其他明确错误行为。解析还应区分边缘端口启动延迟与全网STP重收敛，PortFast不等于禁发BPDU。[U13]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It immediately enables the port in the listening state."
+          },
+          {
+            "label": "B",
+            "text": "It takes effect only after a switch reload and never on an ordinary interface link-up."
+          },
+          {
+            "label": "C",
+            "text": "It enables BPDU messages."
+          },
+          {
+            "label": "D",
+            "text": "It skips the usual listening/learning delay so an edge port can forward promptly after link-up."
+          }
+        ],
+        "explanation": "PortFast使接终端的edge端口在link-up时跳过传统Listening/Learning等待并尽快转发，D准确描述其主要效果。A仍进入Listening并未加速至目标状态；修订B说只有reload才生效错误，普通插拔link-up也可生效；C不是开关BPDU的定义。PortFast并未关闭STP，仍处理BPDU，也不是保证全网络瞬间完成重收敛。"
+      }
+    },
+    {
+      "id": 125,
+      "before_sha256": "3136914c5403ed5fee6d9c638e7e70917ccfb80e2745f677c65f7474c9069628",
+      "reason": "PortFast接交换机有在STP收敛前短暂形成环路的风险，不能说其关闭STP或永久不能检测环路；单条无环链路也不必然广播风暴。D应改成“可能在检测/阻塞前临时形成转发环路”。B实际描述需另启BPDU Guard，A不是PortFast职责，C是VTP，解析却全部只写模板，未讲区别。应完整解释仍处理BPDU、edge状态和Guard，不能将D原文无条件当正确机制。[U13]",
+      "updates": {
+        "prompt": "What risk can arise if PortFast is enabled on an inter-switch link that participates in a redundant Layer 2 topology?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Root port choice and spanning-tree recalculation are accelerated when a switch link goes down."
+          },
+          {
+            "label": "B",
+            "text": "After spanning-tree converges, PortFast shuts down any port that receives BPDUs."
+          },
+          {
+            "label": "C",
+            "text": "VTP is allowed to propagate VLAN configuration information from switch to switch automatically."
+          },
+          {
+            "label": "D",
+            "text": "The port can temporarily forward before STP detects and blocks a loop, increasing the risk of a broadcast storm."
+          }
+        ],
+        "explanation": "将PortFast误用于连接另一交换机的冗余拓扑，可能在STP识别并阻塞环路前临时开始转发，因此D描述风险而非必然结果。PortFast不关闭STP，仍收发/处理BPDU，收到BPDU后可失去edge状态。B的err-disable需要另外启用BPDU Guard；A更接近其他STP收敛增强，C是VTP管理功能。单条无环链路不必然广播风暴。"
+      }
+    },
+    {
+      "id": 127,
+      "before_sha256": "9282f543d0728eaa899af30dc25dc8ba7ad05293f38568382a98547ae27e145e",
+      "reason": "已看图，只有四交换机互联图，没有priority配置。仅在同一STP实例、优先级相同前提下SW3 MAC最低：第二字节0E<E0，第四字节1A<22。解析凭空说“均默认”，需补入题干，或提供所有BID/配置后再唯一选C。不能让未给出的优先级条件被MAC比较掩盖。[U15]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which switch in this configuration will be elected as the root bridge? SW1: 0C:E0:38:41:86:07 - SW2: 0C:0E:15:22:05:97 - SW3: 0C:0E:15:1A:3C:9D - SW4: 0C:E0:18:A1:B3:19 - All four switches participate in the same STP instance with equal bridge priorities.",
+        "explanation": "题干补明所有桥在同一STP实例且优先级相等，因此比较MAC。SW2/SW3的第二字节0E小于SW1/SW4的E0；再比第四字节，SW3的1A小于SW2的22，故SW3/C胜出。根桥先比优先级（含同实例系统ID），只有相等时才比MAC，不能仅见最小MAC就忽略优先级条件。"
+      }
+    },
+    {
+      "id": 128,
+      "before_sha256": "90bee74a48bd2fceb60f1af344f6ac8f43c3e6bbf1ae79b45b6d7971e99997a9",
+      "reason": "在常见Cisco IOS/IOS XE题设语境，发送可选port-description TLV使用全局lldp tlv-select port-description；选项全都漏tlv-select，不能仅看(config)#就说D命令完全正确。解析称lldp port-description是标准命令、tlv-select只是某些版本替代，未提供对应平台依据。应统一平台并修正四组选项中的命令；也不能把所有Cisco产品TLV配置都说成只能全局，CBS等平台支持接口级选择。[U16]",
+      "updates": {
+        "prompt": "On a Cisco IOS/IOS XE switch using global lldp tlv-select syntax, which command enables advertisement of the port-description TLV?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switch(config-if)#lldp tlv-select port-description"
+          },
+          {
+            "label": "B",
+            "text": "switch#lldp tlv-select port-description"
+          },
+          {
+            "label": "C",
+            "text": "switch(config-line)#lldp tlv-select port-description"
+          },
+          {
+            "label": "D",
+            "text": "switch(config)#lldp tlv-select port-description"
+          }
+        ],
+        "explanation": "本题限定Cisco IOS/IOS XE，发送port-description可选TLV使用全局配置命令lldp tlv-select port-description，因此D正确。接口、特权EXEC、line配置模式都不是本命令所在视图，A/B/C模式不符；另需已全局启用LLDP并允许相应接口发送。不要把漏了tlv-select的lldp port-description当成该平台标准语法，也不要外推所有Cisco产品都只有相同配置作用域。"
+      }
+    },
+    {
+      "id": 129,
+      "before_sha256": "5d3fc3e02830b1801d37e2d64aaf608f37668902aee5399bbf94a0a4844071fa",
+      "reason": "已看图，按抽象比较30000<32768且BB<CC可得S2/B，解析算术正确。但图中30000不符合现代Cisco PVST+扩展系统ID下4096递增优先级配置，BB和DD首字节I/G位为1，也不是正常桥的单播基MAC。若仅作legacy抽象BID比较须明确，不能称现代Cisco真实配置；建议重画有效priority如28672，使用单播MAC且维持大小关系。不要因此直接把根桥改成S3。[U15]",
+      "updates": {
+        "prompt": "Refer to the exhibit. All switches run PVST+ for VLAN 1. The diagram lists configured base priorities (before adding VLAN ID 1) and bridge MAC addresses. Which switch becomes the root bridge?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5ODAiIGhlaWdodD0iNDcwIiB2aWV3Qm94PSIwIDAgOTgwIDQ3MCI+PHJlY3Qgd2lkdGg9Ijk4MCIgaGVpZ2h0PSI0NzAiIGZpbGw9IiNmOGZhZmMiLz48ZyBzdHJva2U9IiM2NDc0OGIiIHN0cm9rZS13aWR0aD0iNCI+PHBhdGggZD0iTTQ5MCAxMjBMMTU1IDE4ME00OTAgMTIwTDgyNSAxODBNMTU1IDI4MEw0OTAgMzQwTTgyNSAyODBMNDkwIDM0MCIvPjwvZz48cmVjdCB4PSIzNTUiIHk9IjIwIiB3aWR0aD0iMjcwIiBoZWlnaHQ9IjEwMCIgcng9IjEwIiBmaWxsPSIjZGJlYWZlIiBzdHJva2U9IiMxZTQwYWYiIHN0cm9rZS13aWR0aD0iMiIvPjxnIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI0OTAiIHk9IjQ3IiBmb250LXNpemU9IjIzIj5TNDwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI0OTAiIHk9Ijc0IiBmb250LXNpemU9IjE4Ij5CYXNlIHByaW9yaXR5OiAzMjc2ODwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI0OTAiIHk9IjEwMCIgZm9udC1zaXplPSIxNyI+REM6REQ6REQ6REQ6REQ6REQ8L3RleHQ+PC9nPjxyZWN0IHg9IjIwIiB5PSIxODAiIHdpZHRoPSIyNzAiIGhlaWdodD0iMTAwIiByeD0iMTAiIGZpbGw9IiNkYmVhZmUiIHN0cm9rZT0iIzFlNDBhZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGcgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjE1NSIgeT0iMjA3IiBmb250LXNpemU9IjIzIj5TMTwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSIxNTUiIHk9IjIzNCIgZm9udC1zaXplPSIxOCI+QmFzZSBwcmlvcml0eTogMzI3Njg8L3RleHQ+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMTU1IiB5PSIyNjAiIGZvbnQtc2l6ZT0iMTciPkFBOkFBOkFBOkFBOkFBOkFBPC90ZXh0PjwvZz48cmVjdCB4PSI2OTAiIHk9IjE4MCIgd2lkdGg9IjI3MCIgaGVpZ2h0PSIxMDAiIHJ4PSIxMCIgZmlsbD0iI2RiZWFmZSIgc3Ryb2tlPSIjMWU0MGFmIiBzdHJva2Utd2lkdGg9IjIiLz48ZyBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iODI1IiB5PSIyMDciIGZvbnQtc2l6ZT0iMjMiPlMzPC90ZXh0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjgyNSIgeT0iMjM0IiBmb250LXNpemU9IjE4Ij5CYXNlIHByaW9yaXR5OiAyODY3MjwvdGV4dD48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI4MjUiIHk9IjI2MCIgZm9udC1zaXplPSIxNyI+Q0M6Q0M6Q0M6Q0M6Q0M6Q0M8L3RleHQ+PC9nPjxyZWN0IHg9IjM1NSIgeT0iMzQwIiB3aWR0aD0iMjcwIiBoZWlnaHQ9IjEwMCIgcng9IjEwIiBmaWxsPSIjZGJlYWZlIiBzdHJva2U9IiMxZTQwYWYiIHN0cm9rZS13aWR0aD0iMiIvPjxnIGZpbGw9IiMwZjE3MmEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI0OTAiIHk9IjM2NyIgZm9udC1zaXplPSIyMyI+UzI8L3RleHQ+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNDkwIiB5PSIzOTQiIGZvbnQtc2l6ZT0iMTgiPkJhc2UgcHJpb3JpdHk6IDI4NjcyPC90ZXh0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ5MCIgeT0iNDIwIiBmb250LXNpemU9IjE3Ij5CQTpCQjpCQjpCQjpCQjpCQjwvdGV4dD48L2c+PC9zdmc+",
+        "explanation": "修订图使用同一VLAN1下的合法4096步长base priority，以及单播桥MAC。S2/S3均28672，优于S1/S4的32768；同优先级再比MAC，S2的BA小于S3的CC，所以S2/B为根。实际BID优先级部分还加同一系统扩展ID1，不改变排序。原30000及BB/DD组播桥MAC不能当现代Cisco正常配置，已替换为保留原比较意图的有效例子。"
+      },
+      "accepted_intermediate_sha256": [
+        "589c03afe2161e9acc365637f0ad89a6f2acb6bad8d4ebee442450c0659c6e47"
+      ]
+    },
+    {
+      "id": 130,
+      "before_sha256": "a5cec48b3dd06840216bfa78969fa7ce996fe9c0b260ff8f2ee39bf38fbd5481",
+      "reason": "priority0确为最低可配置优先级，但同一VLAN还有另一桥priority0且MAC更小，就会输掉根桥，故题干always不能被B绝对保证，解析“无可撼动”错误。应限定其他交换机priority更高、或让本机完整BID最低并配置适当RootGuard等策略。root primary是一次性计算宏也不能自动永久保根；不能用承认“同0最强梯队”取代唯一获胜条件。[U15]",
+      "updates": {
+        "prompt": "Which explicit priority configuration sets the lowest legal base priority for VLAN 750?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch(config)#spanning-tree vlan 750 priority 32768"
+          },
+          {
+            "label": "B",
+            "text": "Switch(config)#spanning-tree vlan 750 priority 0"
+          },
+          {
+            "label": "C",
+            "text": "Switch(config)#spanning-tree vlan 750 root primary"
+          },
+          {
+            "label": "D",
+            "text": "Switch(config)#spanning-tree vlan 750 priority 61440"
+          }
+        ],
+        "explanation": "最低合法base priority为0，显式命令为B。A的32768为常见默认，D的61440较高；C的root primary是根据当前根优先级进行一次性调整的宏，不表示总是设置为绝对0。最低priority并不永久保证root：另一桥priority同为0且MAC更小仍可能胜出，应比较完整BID，必要时另设计Root Guard等保护。"
+      }
+    },
+    {
+      "id": 131,
+      "before_sha256": "5a3bcddd71050dae3bd3ac459797196246f2e63a1f30e19498e6b7568283c9d5",
+      "reason": "已看两侧完整输出，native1与99、allowed50-100、trunk模式均与解析一致，D指出实际错配。但图没给CDP告警或STP状态，不能声称已直接触发阻塞；解析把PVID不一致写成Type Inconsistent，二者是不同故障类别。输出还显示Administrative Native VLAN tagging: enabled，数据帧标签行为需结合平台/全局配置核验，不宜无条件套全部native流量untagged。保留D，补show spanning-tree inconsistentports与tagging核查，按证据区分事实/可能机理。[U17]",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which configuration mismatch is directly visible in the switchport output and must be corrected before further end-to-end troubleshooting?",
+        "explanation": "输出直接显示两端native VLAN分别1和99，属于D的native VLAN mismatch，应先统一；trunk及allowed50–100字段不支持C所谓access模式。现有图未提供CDP日志或STP运行状态，不能宣称已经看到PVID不一致阻塞。PVID-inconsistent与type-inconsistent不是同一故障类别；还需核对图中的native tagging设置、VLAN存在/允许列表及show spanning-tree inconsistentports后再说明具体丢包路径。"
+      }
+    },
+    {
+      "id": 135,
+      "before_sha256": "646ff08f58cf646141d1eb4068f831c490e7a9cd00f2bc807da1f0e8ec825c3a",
+      "reason": "lightweight受WLC管理配置/固件，B为架构分类的意图答案；但解析绝对宣称所有LAP不能独立于WLC工作，与Q132 FlexConnect standalone能力直接冲突。bridge为可受WLC管理的AP工作模式、Mobility Express为嵌入式控制器方案，不应只用统一非匹配模板混排不同分类层次。建议题干问相对autonomous的架构类型，并解释AP模式及失联条件。[U18]",
+      "updates": {
+        "prompt": "Which AP architecture, contrasted with autonomous operation, uses CAPWAP to join and receive configuration from a Cisco Wireless LAN Controller?",
+        "explanation": "相对于autonomous独立AP，lightweight架构的AP通过CAPWAP加入WLC并由其集中管理，B正确。Bridge是可在受管AP上使用的工作角色，不能仅因bridge一词就说它必然不受WLC管理；Mobility Express是嵌入式控制器方案，分类层次不同；autonomous自行配置管理。Lightweight中FlexConnect可在满足条件时失联本地交换，不是所有AP一失去WLC就完全停止服务。"
+      }
+    },
+    {
+      "id": 139,
+      "before_sha256": "5d843b2cc4609048742be0ac76a2fa27b6dfe7b91cf580db6deee20e8b9d70d0",
+      "reason": "desirable+auto协商trunk，D正确。但解析称auto绝不发送DTP、只有auto+auto才access，及DTP不存在任何err-disable情况，均过度/错误：被动意愿不等于无DTP报文；显式access等组合也可不成trunk；IOS有dtp-flap检测原因。应给真实协商矩阵、平台条件及nonegotiate区别，不要写“绝不可能”或贬损式口诀。[U20]",
+      "updates": {
+        "explanation": "在两端支持并启用DTP且其他链路参数兼容的题设中，desirable主动提议，auto表示被动意愿，组合可协商trunk，因此D。auto+auto通常保持access；显式access也不会因对端desirable自动成为trunk。被动意愿不等于接口绝不发送DTP状态报文，nonegotiate才用于抑制DTP；还存在dtp-flap等err-disable检测原因，但本题没有相应故障证据，不应把普通auto/desirable组合判成down或err-disabled。"
+      }
+    }
+  ]
+}

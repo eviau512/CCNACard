@@ -1,0 +1,57 @@
+{
+  "sources": {
+    "S1": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8606-redist.html",
+    "S2": "https://www.rfc-editor.org/rfc/rfc2328.html",
+    "S3": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html",
+    "S4": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/command/iri-cr-book/iri-cr-a1.html"
+  },
+  "original_images_directly_viewed": [
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    359,
+    360
+  ],
+  "new_images": [
+    355
+  ],
+  "authored_exhibit_corrections": {
+    "355": "Recast consistent207.165.200 next hops/connected networks; remove unrecoverable blank-prefix line, correct illegal297 value by authored valid peer. Not a recovered original."
+  },
+  "q354_costs": {
+    "Gi0/0": 100,
+    "Gi0/1": 10,
+    "Gi0/2": 100,
+    "Gi0/3": 1000
+  },
+  "q353_destination": "10.10.13.130",
+  "q353_not_in_installed_ospf": "True",
+  "q358_candidates": [
+    {
+      "origin": "OSPF external",
+      "AD": 110
+    },
+    {
+      "origin": "EIGRP external",
+      "AD": 170
+    }
+  ],
+  "q358_selected_AD": 110,
+  "q358_answer_change": {
+    "before": [
+      "D"
+    ],
+    "after": [
+      "A"
+    ]
+  },
+  "limitations": "Manual document/diagram/source review, not a live IOS or phone UI test.",
+  "revised_diagrams_visually_checked": [
+    355
+  ]
+}

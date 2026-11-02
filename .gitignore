@@ -41,3 +41,11 @@ Thumbs.db
 .vscode/
 *.swp
 *.bak
+
+# Local phone installation checks are not project source artifacts
+Examtopics/audit/personal-install-verification.json
+Examtopics/audit/*.local.json
+Examtopics/audit/*.local.json
+
+# Local phone installation checks are not project source artifacts
+Examtopics/audit/personal-install-verification.json

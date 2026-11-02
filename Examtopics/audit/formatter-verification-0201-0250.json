@@ -1,0 +1,468 @@
+{
+  "targets": [
+    "CCNA-App\\app\\src\\main\\assets\\app.js",
+    "Examtopics\\batch\\Examtopics_Batch2_Q201-400.html",
+    "Examtopics\\output\\Examtopics_CCNA_200-301_Complete.html"
+  ],
+  "question_ids": [
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250
+  ],
+  "outputs_agree": true,
+  "code_results": [
+    {
+      "id": 206,
+      "input": "`switchport mode trunk`",
+      "expected": "switchport mode trunk",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">switchport mode trunk</code>"
+    },
+    {
+      "id": 208,
+      "input": "`channel-group 1 mode on`",
+      "expected": "channel-group 1 mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode on</code>"
+    },
+    {
+      "id": 208,
+      "input": "`channel-group 1 mode active`",
+      "expected": "channel-group 1 mode active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode active</code>"
+    },
+    {
+      "id": 208,
+      "input": "`mode on`",
+      "expected": "mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mode on</code>"
+    },
+    {
+      "id": 208,
+      "input": "`mode active`",
+      "expected": "mode active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mode active</code>"
+    },
+    {
+      "id": 208,
+      "input": "`on`",
+      "expected": "on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">on</code>"
+    },
+    {
+      "id": 208,
+      "input": "`active`",
+      "expected": "active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">active</code>"
+    },
+    {
+      "id": 208,
+      "input": "`active`",
+      "expected": "active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">active</code>"
+    },
+    {
+      "id": 208,
+      "input": "`passive`",
+      "expected": "passive",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">passive</code>"
+    },
+    {
+      "id": 208,
+      "input": "`channel-group 1 mode on`",
+      "expected": "channel-group 1 mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode on</code>"
+    },
+    {
+      "id": 208,
+      "input": "`channel-group 1 mode active`",
+      "expected": "channel-group 1 mode active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode active</code>"
+    },
+    {
+      "id": 208,
+      "input": "`channel-group 1 mode passive`",
+      "expected": "channel-group 1 mode passive",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode passive</code>"
+    },
+    {
+      "id": 208,
+      "input": "`desirable`",
+      "expected": "desirable",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">desirable</code>"
+    },
+    {
+      "id": 208,
+      "input": "`auto`",
+      "expected": "auto",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">auto</code>"
+    },
+    {
+      "id": 208,
+      "input": "`channel-group 1 mode ...`",
+      "expected": "channel-group 1 mode ...",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode ...</code>"
+    },
+    {
+      "id": 208,
+      "input": "`interface Port-channel 1`",
+      "expected": "interface Port-channel 1",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">interface Port-channel 1</code>"
+    },
+    {
+      "id": 211,
+      "input": "`show etherchannel summary`",
+      "expected": "show etherchannel summary",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">show etherchannel summary</code>"
+    },
+    {
+      "id": 211,
+      "input": "`show etherchannel summary`",
+      "expected": "show etherchannel summary",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">show etherchannel summary</code>"
+    },
+    {
+      "id": 211,
+      "input": "`Po1(SD)`",
+      "expected": "Po1(SD)",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">Po1(SD)</code>"
+    },
+    {
+      "id": 211,
+      "input": "`LACP`",
+      "expected": "LACP",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">LACP</code>"
+    },
+    {
+      "id": 211,
+      "input": "`Fa0/1(I)`",
+      "expected": "Fa0/1(I)",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">Fa0/1(I)</code>"
+    },
+    {
+      "id": 211,
+      "input": "`Fa0/2(I)`",
+      "expected": "Fa0/2(I)",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">Fa0/2(I)</code>"
+    },
+    {
+      "id": 211,
+      "input": "`S`",
+      "expected": "S",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">S</code>"
+    },
+    {
+      "id": 211,
+      "input": "`D`",
+      "expected": "D",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">D</code>"
+    },
+    {
+      "id": 211,
+      "input": "`I`",
+      "expected": "I",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">I</code>"
+    },
+    {
+      "id": 211,
+      "input": "`channel-group 1 mode passive`",
+      "expected": "channel-group 1 mode passive",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode passive</code>"
+    },
+    {
+      "id": 211,
+      "input": "`channel-group 1 mode passive`",
+      "expected": "channel-group 1 mode passive",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode passive</code>"
+    },
+    {
+      "id": 211,
+      "input": "`passive`",
+      "expected": "passive",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">passive</code>"
+    },
+    {
+      "id": 211,
+      "input": "`active`",
+      "expected": "active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">active</code>"
+    },
+    {
+      "id": 211,
+      "input": "`passive`",
+      "expected": "passive",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">passive</code>"
+    },
+    {
+      "id": 211,
+      "input": "`channel-group 1 mode active`",
+      "expected": "channel-group 1 mode active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group 1 mode active</code>"
+    },
+    {
+      "id": 211,
+      "input": "`(I)`",
+      "expected": "(I)",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">(I)</code>"
+    },
+    {
+      "id": 211,
+      "input": "`(P)`",
+      "expected": "(P)",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">(P)</code>"
+    },
+    {
+      "id": 211,
+      "input": "`(SU)`",
+      "expected": "(SU)",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">(SU)</code>"
+    },
+    {
+      "id": 211,
+      "input": "`desirable`",
+      "expected": "desirable",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">desirable</code>"
+    },
+    {
+      "id": 211,
+      "input": "`mode on`",
+      "expected": "mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mode on</code>"
+    },
+    {
+      "id": 214,
+      "input": "`switchport mode access`",
+      "expected": "switchport mode access",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">switchport mode access</code>"
+    },
+    {
+      "id": 214,
+      "input": "`spanning-tree portfast`",
+      "expected": "spanning-tree portfast",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">spanning-tree portfast</code>"
+    },
+    {
+      "id": 214,
+      "input": "`spanning-tree portfast`",
+      "expected": "spanning-tree portfast",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">spanning-tree portfast</code>"
+    },
+    {
+      "id": 214,
+      "input": "`trunk`",
+      "expected": "trunk",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">trunk</code>"
+    },
+    {
+      "id": 214,
+      "input": "`spanning-tree portfast trunk`",
+      "expected": "spanning-tree portfast trunk",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">spanning-tree portfast trunk</code>"
+    },
+    {
+      "id": 214,
+      "input": "`no switchport`",
+      "expected": "no switchport",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">no switchport</code>"
+    },
+    {
+      "id": 214,
+      "input": "`spanning-tree portfast`",
+      "expected": "spanning-tree portfast",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">spanning-tree portfast</code>"
+    },
+    {
+      "id": 214,
+      "input": "`trunk`",
+      "expected": "trunk",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">trunk</code>"
+    },
+    {
+      "id": 214,
+      "input": "`spanning-tree portfast`",
+      "expected": "spanning-tree portfast",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">spanning-tree portfast</code>"
+    },
+    {
+      "id": 214,
+      "input": "`spanning-tree portfast trunk`",
+      "expected": "spanning-tree portfast trunk",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">spanning-tree portfast trunk</code>"
+    },
+    {
+      "id": 214,
+      "input": "`trunk`",
+      "expected": "trunk",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">trunk</code>"
+    },
+    {
+      "id": 214,
+      "input": "`spanning-tree portfast trunk`",
+      "expected": "spanning-tree portfast trunk",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">spanning-tree portfast trunk</code>"
+    },
+    {
+      "id": 220,
+      "input": "`[源 MAC, 入端口, VLAN]`",
+      "expected": "[源 MAC, 入端口, VLAN]",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">[源 MAC, 入端口, VLAN]</code>"
+    },
+    {
+      "id": 236,
+      "input": "`channel-group X mode on`",
+      "expected": "channel-group X mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group X mode on</code>"
+    },
+    {
+      "id": 236,
+      "input": "`mode active`",
+      "expected": "mode active",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mode active</code>"
+    },
+    {
+      "id": 236,
+      "input": "`mode on`",
+      "expected": "mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mode on</code>"
+    },
+    {
+      "id": 236,
+      "input": "`mode on`",
+      "expected": "mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mode on</code>"
+    },
+    {
+      "id": 243,
+      "input": "`channel-group <id> mode on`",
+      "expected": "channel-group <id> mode on",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">channel-group &lt;id&gt; mode on</code>"
+    },
+    {
+      "id": 247,
+      "input": "`lldp run`",
+      "expected": "lldp run",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">lldp run</code>"
+    },
+    {
+      "id": 248,
+      "input": "`mac address-table static <mac-address> vlan <vlan-id> interface <interface-id>`",
+      "expected": "mac address-table static <mac-address> vlan <vlan-id> interface <interface-id>",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mac address-table static &lt;mac-address&gt; vlan &lt;vlan-id&gt; interface &lt;interface-id&gt;</code>"
+    },
+    {
+      "id": 250,
+      "input": "`show mac address-table aging-time`",
+      "expected": "show mac address-table aging-time",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">show mac address-table aging-time</code>"
+    },
+    {
+      "id": 250,
+      "input": "`mac address-table aging-time <seconds>`",
+      "expected": "mac address-table aging-time <seconds>",
+      "kind": "code",
+      "html": "<code class=\"inline-code\">mac address-table aging-time &lt;seconds&gt;</code>"
+    }
+  ]
+}

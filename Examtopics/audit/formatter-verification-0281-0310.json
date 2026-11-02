@@ -1,0 +1,392 @@
+{
+  "targets": [
+    "CCNA-App\\app\\src\\main\\assets\\app.js",
+    "Examtopics\\batch\\Examtopics_Batch2_Q201-400.html",
+    "Examtopics\\output\\Examtopics_CCNA_200-301_Complete.html"
+  ],
+  "question_ids": [
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310
+  ],
+  "outputs_agree": true,
+  "code_results": [
+    {
+      "id": 281,
+      "kind": "code",
+      "input": "`standby 10 preempt`",
+      "expected": "standby 10 preempt",
+      "html": "<code class=\"inline-code\">standby 10 preempt</code>"
+    },
+    {
+      "id": 281,
+      "kind": "code",
+      "input": "`standby version 1`",
+      "expected": "standby version 1",
+      "html": "<code class=\"inline-code\">standby version 1</code>"
+    },
+    {
+      "id": 281,
+      "kind": "code",
+      "input": "`standby version 2`",
+      "expected": "standby version 2",
+      "html": "<code class=\"inline-code\">standby version 2</code>"
+    },
+    {
+      "id": 282,
+      "kind": "code",
+      "input": "`show standby`",
+      "expected": "show standby",
+      "html": "<code class=\"inline-code\">show standby</code>"
+    },
+    {
+      "id": 282,
+      "kind": "code",
+      "input": "`Priority 95 (configured 120)`",
+      "expected": "Priority 95 (configured 120)",
+      "html": "<code class=\"inline-code\">Priority 95 (configured 120)</code>"
+    },
+    {
+      "id": 282,
+      "kind": "code",
+      "input": "`show hsrp`",
+      "expected": "show hsrp",
+      "html": "<code class=\"inline-code\">show hsrp</code>"
+    },
+    {
+      "id": 283,
+      "kind": "code",
+      "input": "```text\nrouter1(config)# ip route 192.168.202.0 255.255.255.0 192.168.201.2 5\n\n```",
+      "expected": "router1(config)# ip route 192.168.202.0 255.255.255.0 192.168.201.2 5",
+      "html": "<pre class=\"cli-block\"><code>router1(config)# ip route 192.168.202.0 255.255.255.0 192.168.201.2 5</code></pre>"
+    },
+    {
+      "id": 284,
+      "kind": "code",
+      "input": "`clear ip ospf <process-id> process`",
+      "expected": "clear ip ospf <process-id> process",
+      "html": "<code class=\"inline-code\">clear ip ospf &lt;process-id&gt; process</code>"
+    },
+    {
+      "id": 284,
+      "kind": "code",
+      "input": "`clear ip ospf process`",
+      "expected": "clear ip ospf process",
+      "html": "<code class=\"inline-code\">clear ip ospf process</code>"
+    },
+    {
+      "id": 285,
+      "kind": "code",
+      "input": "`show ipv6 eigrp events`",
+      "expected": "show ipv6 eigrp events",
+      "html": "<code class=\"inline-code\">show ipv6 eigrp events</code>"
+    },
+    {
+      "id": 286,
+      "kind": "code",
+      "input": "`ip route 10.0.3.0 255.255.255.0 10.0.4.3`",
+      "expected": "ip route 10.0.3.0 255.255.255.0 10.0.4.3",
+      "html": "<code class=\"inline-code\">ip route 10.0.3.0 255.255.255.0 10.0.4.3</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`show ip route`",
+      "expected": "show ip route",
+      "html": "<code class=\"inline-code\">show ip route</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`C`",
+      "expected": "C",
+      "html": "<code class=\"inline-code\">C</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`S`",
+      "expected": "S",
+      "html": "<code class=\"inline-code\">S</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`R`",
+      "expected": "R",
+      "html": "<code class=\"inline-code\">R</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`O`",
+      "expected": "O",
+      "html": "<code class=\"inline-code\">O</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`i`",
+      "expected": "i",
+      "html": "<code class=\"inline-code\">i</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`B`",
+      "expected": "B",
+      "html": "<code class=\"inline-code\">B</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`D`",
+      "expected": "D",
+      "html": "<code class=\"inline-code\">D</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`D`",
+      "expected": "D",
+      "html": "<code class=\"inline-code\">D</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`I`",
+      "expected": "I",
+      "html": "<code class=\"inline-code\">I</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`D`",
+      "expected": "D",
+      "html": "<code class=\"inline-code\">D</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`EX`",
+      "expected": "EX",
+      "html": "<code class=\"inline-code\">EX</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`192.168.10.1`",
+      "expected": "192.168.10.1",
+      "html": "<code class=\"inline-code\">192.168.10.1</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`D 192.168.10.1/32 [90/52778] via 192.168.12.2, 00:03:44, FastEthernet0/0`",
+      "expected": "D 192.168.10.1/32 [90/52778] via 192.168.12.2, 00:03:44, FastEthernet0/0",
+      "html": "<code class=\"inline-code\">D 192.168.10.1/32 [90/52778] via 192.168.12.2, 00:03:44, FastEthernet0/0</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`D`",
+      "expected": "D",
+      "html": "<code class=\"inline-code\">D</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`192.168.10.1`",
+      "expected": "192.168.10.1",
+      "html": "<code class=\"inline-code\">192.168.10.1</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`D`",
+      "expected": "D",
+      "html": "<code class=\"inline-code\">D</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`R`",
+      "expected": "R",
+      "html": "<code class=\"inline-code\">R</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`O`",
+      "expected": "O",
+      "html": "<code class=\"inline-code\">O</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`I`",
+      "expected": "I",
+      "html": "<code class=\"inline-code\">I</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`D`",
+      "expected": "D",
+      "html": "<code class=\"inline-code\">D</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`O`",
+      "expected": "O",
+      "html": "<code class=\"inline-code\">O</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`R`",
+      "expected": "R",
+      "html": "<code class=\"inline-code\">R</code>"
+    },
+    {
+      "id": 288,
+      "kind": "code",
+      "input": "`B`",
+      "expected": "B",
+      "html": "<code class=\"inline-code\">B</code>"
+    },
+    {
+      "id": 289,
+      "kind": "code",
+      "input": "`network 172.16.1.32 mask 255.255.255.224`",
+      "expected": "network 172.16.1.32 mask 255.255.255.224",
+      "html": "<code class=\"inline-code\">network 172.16.1.32 mask 255.255.255.224</code>"
+    },
+    {
+      "id": 290,
+      "kind": "code",
+      "input": "`D 192.168.10.1/32 [90/52778] via 192.168.12.2`",
+      "expected": "D 192.168.10.1/32 [90/52778] via 192.168.12.2",
+      "html": "<code class=\"inline-code\">D 192.168.10.1/32 [90/52778] via 192.168.12.2</code>"
+    },
+    {
+      "id": 294,
+      "kind": "code",
+      "input": "`ipv6 ospf 1 area 0`",
+      "expected": "ipv6 ospf 1 area 0",
+      "html": "<code class=\"inline-code\">ipv6 ospf 1 area 0</code>"
+    },
+    {
+      "id": 294,
+      "kind": "code",
+      "input": "`ipv6 ospf 1 area 3`",
+      "expected": "ipv6 ospf 1 area 3",
+      "html": "<code class=\"inline-code\">ipv6 ospf 1 area 3</code>"
+    },
+    {
+      "id": 295,
+      "kind": "code",
+      "input": "```text\nR2# show ip ospf database\n            OSPF Router with ID (2.2.2.2) (Process ID 1)\n\nRouter Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum Link count\n2.2.2.2          2.2.2.2          793 0x80000003 0x004F85 2\n10.4.4.4         10.4.4.4         776 0x80000004 0x005643 1\n111.111.111.111  111.111.111.111  755 0x80000005 0x0059CA 2\n133.133.133.133  133.133.133.133  775 0x80000005 0x00B5B1 2\n\nNet Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum\n10.1.1.1         111.111.111.111  794 0x80000001 0x001E8B\n10.2.2.3         133.133.133.133  812 0x80000001 0x004BA9\n10.4.4.1         111.111.111.111  755 0x80000001 0x007F16\n10.4.4.3         133.133.133.133  775 0x80000001 0x00C31F\n\n```",
+      "expected": "R2# show ip ospf database\n            OSPF Router with ID (2.2.2.2) (Process ID 1)\n\nRouter Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum Link count\n2.2.2.2          2.2.2.2          793 0x80000003 0x004F85 2\n10.4.4.4         10.4.4.4         776 0x80000004 0x005643 1\n111.111.111.111  111.111.111.111  755 0x80000005 0x0059CA 2\n133.133.133.133  133.133.133.133  775 0x80000005 0x00B5B1 2\n\nNet Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum\n10.1.1.1         111.111.111.111  794 0x80000001 0x001E8B\n10.2.2.3         133.133.133.133  812 0x80000001 0x004BA9\n10.4.4.1         111.111.111.111  755 0x80000001 0x007F16\n10.4.4.3         133.133.133.133  775 0x80000001 0x00C31F",
+      "html": "<pre class=\"cli-block\"><code>R2# show ip ospf database\n            OSPF Router with ID (2.2.2.2) (Process ID 1)\n\nRouter Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum Link count\n2.2.2.2          2.2.2.2          793 0x80000003 0x004F85 2\n10.4.4.4         10.4.4.4         776 0x80000004 0x005643 1\n111.111.111.111  111.111.111.111  755 0x80000005 0x0059CA 2\n133.133.133.133  133.133.133.133  775 0x80000005 0x00B5B1 2\n\nNet Link States (Area 0)\nLink ID          ADV Router       Age Seq#       Checksum\n10.1.1.1         111.111.111.111  794 0x80000001 0x001E8B\n10.2.2.3         133.133.133.133  812 0x80000001 0x004BA9\n10.4.4.1         111.111.111.111  755 0x80000001 0x007F16\n10.4.4.3         133.133.133.133  775 0x80000001 0x00C31F</code></pre>"
+    },
+    {
+      "id": 295,
+      "kind": "code",
+      "input": "`show ip ospf database`",
+      "expected": "show ip ospf database",
+      "html": "<code class=\"inline-code\">show ip ospf database</code>"
+    },
+    {
+      "id": 295,
+      "kind": "code",
+      "input": "`show ip ospf neighbor`",
+      "expected": "show ip ospf neighbor",
+      "html": "<code class=\"inline-code\">show ip ospf neighbor</code>"
+    },
+    {
+      "id": 297,
+      "kind": "code",
+      "input": "```text\n16 = 00010000\n20 = 00010100\n24 = 00011000\n28 = 00011100\n     0001xxxx  -> /28, addresses 16 through 31\n\n```",
+      "expected": "16 = 00010000\n20 = 00010100\n24 = 00011000\n28 = 00011100\n     0001xxxx  -> /28, addresses 16 through 31",
+      "html": "<pre class=\"cli-block\"><code>16 = 00010000\n20 = 00010100\n24 = 00011000\n28 = 00011100\n     0001xxxx  -&gt; /28, addresses 16 through 31</code></pre>"
+    },
+    {
+      "id": 299,
+      "kind": "code",
+      "input": "`network 10.0.0.0`",
+      "expected": "network 10.0.0.0",
+      "html": "<code class=\"inline-code\">network 10.0.0.0</code>"
+    },
+    {
+      "id": 305,
+      "kind": "code",
+      "input": "`ip route 10.1.1.0 255.255.255.0 192.168.0.1`",
+      "expected": "ip route 10.1.1.0 255.255.255.0 192.168.0.1",
+      "html": "<code class=\"inline-code\">ip route 10.1.1.0 255.255.255.0 192.168.0.1</code>"
+    },
+    {
+      "id": 307,
+      "kind": "code",
+      "input": "```text\nSwitchA(config)# interface GigabitEthernet0/1\nSwitchA(config-if)# switchport trunk allowed vlan add 13\n\n```",
+      "expected": "SwitchA(config)# interface GigabitEthernet0/1\nSwitchA(config-if)# switchport trunk allowed vlan add 13",
+      "html": "<pre class=\"cli-block\"><code>SwitchA(config)# interface GigabitEthernet0/1\nSwitchA(config-if)# switchport trunk allowed vlan add 13</code></pre>"
+    },
+    {
+      "id": 308,
+      "kind": "code",
+      "input": "`IS-IS`",
+      "expected": "IS-IS",
+      "html": "<code class=\"inline-code\">IS-IS</code>"
+    },
+    {
+      "id": 308,
+      "kind": "code",
+      "input": "`RIP`",
+      "expected": "RIP",
+      "html": "<code class=\"inline-code\">RIP</code>"
+    },
+    {
+      "id": 308,
+      "kind": "code",
+      "input": "`OSPF`",
+      "expected": "OSPF",
+      "html": "<code class=\"inline-code\">OSPF</code>"
+    },
+    {
+      "id": 309,
+      "kind": "code",
+      "input": "`ip route 0.0.0.0 0.0.0.0 10.10.10.18`",
+      "expected": "ip route 0.0.0.0 0.0.0.0 10.10.10.18",
+      "html": "<code class=\"inline-code\">ip route 0.0.0.0 0.0.0.0 10.10.10.18</code>"
+    }
+  ]
+}

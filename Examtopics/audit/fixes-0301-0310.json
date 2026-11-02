@@ -1,0 +1,123 @@
+{
+  "scope": "Manual review Q301-Q310; Q400 delivery milestone unchanged",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 301,
+      "before_sha256": "19f10bc91ae302e169bcf9bac4cbb8a2e83bd13669ebcff7672d9c34bcec939a",
+      "reason": "C为IOS自动RID意图，但原题无loopback不等于未手工router-id；解析自行补此前提，还将IOS选择算法称RFC2328统一要求。限定启动自动选择且无手工RID，解释接口priority用于DR而非RID。 [S1]",
+      "updates": {
+        "prompt": "A Cisco IOS OSPFv2 process starts with no manually configured router-id and no active loopback interface. Which value is automatically selected as the router ID? The OSPF interface priorities happen to be equal on all routers.",
+        "explanation": "C，自动选择时使用本机其他有效接口中的最高IPv4地址。IOS通常先取手工router-id，再取有效loopback中的最高地址，最后才比较其他有效接口地址；本题已排除前两种。接口priority影响广播/NBMA上的DR/BDR选举，不代替32位RID。A不按第一个FastEthernet接口编号，B普通串行console没有作为这种接口地址的IPv4，D选最低与规则相反，E不能用priority数值临时充当RID。该自动选择顺序是IOS实现规则，不是所有OSPF实现必须照搬的RFC接口算法；已运行进程也不因后来新增地址就自动抢占换RID。"
+      }
+    },
+    {
+      "id": 302,
+      "before_sha256": "2db150d3dc9408e95cafbcc6fba6b24f4a759463ac05d941dbbf4d706c68c048",
+      "reason": "已看3路由图：D192.168.0/24 [90/30720] via172.16.0.2，B正确；C行却写172.160.0.0/16，不覆盖该下一跳，原解释还照抄。选项C出现724乱码。改编直连172.16.0.0/16自洽练习图，C改为明确的local/32干扰项，解释D与S/L/B区别。",
+      "updates": {
+        "prompt": "Refer to the revised Cisco IOS routing-table excerpt. What does protocol code D identify?",
+        "options": [
+          {
+            "label": "A",
+            "text": "statically assigned route"
+          },
+          {
+            "label": "B",
+            "text": "route learned through EIGRP"
+          },
+          {
+            "label": "C",
+            "text": "a local /32 host route for an interface IP address"
+          },
+          {
+            "label": "D",
+            "text": "internal BGP route"
+          }
+        ],
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjI0OSIgdmlld0JveD0iMCAwIDEyODAgMjQ5Ij48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIyNDkiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTYiIHk9IjYwIiB3aWR0aD0iMTI0OCIgaGVpZ2h0PSIxNzMiIHJ4PSI2IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iMzIiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjUiPlJldmlzZWQgZXhlcmNpc2UgLSBjb25zaXN0ZW50IHJlbGV2YW50IHJvdXRpbmctdGFibGUgZW50cmllczwvdGV4dD48dGV4dCB4PSIzNCIgeT0iOTkiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPlIxIyBzaG93IGlwIHJvdXRlPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIxMzUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMTAuMC4wLjAvMjQgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBGYXN0RXRoZXJuZXQwLzE8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjE3MSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAxNzIuMTYuMC4wLzE2IGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgRmFzdEV0aGVybmV0MC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyMDciIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkQgMTkyLjE2OC4wLjAvMjQgWzkwLzMwNzIwXSB2aWEgMTcyLjE2LjAuMiwgRmFzdEV0aGVybmV0MC8wPC90ZXh0Pjwvc3ZnPg==",
+        "explanation": "B，通过EIGRP学习的路由。D是IOS路由表的EIGRP代码，图中该条为192.168.0.0/24，经172.16.0.2和FastEthernet0/0，[90/30720]显示AD90及度量30720。A静态通常用S，C本地接口主机路由用L，直连网络用C；D选项的iBGP仍用B，不是D。EIGRP外部路由常显示D EX，不能把所有D相关AD都固定为90。图示直连172.16.0.0/16覆盖该下一跳，字段关系自洽；真正判断协议来源首先看代码，不是靠猜度量数值。"
+      }
+    },
+    {
+      "id": 303,
+      "before_sha256": "5b9882a2a1e1f98dc2705f84076b68cbcd0ac020b3b39e7c50344201a7ea4449",
+      "reason": "已看S*0/0经209.165.200.246 Serial0/1/0，目标172.16.0.14不匹配.3.0/24或.3.0/28，D正确。原解析仅泛称default且逐项模板，不说明确切出口/其余选项对应前缀，重写具体查表。",
+      "updates": {
+        "explanation": "D，209.165.200.246经Serial0/1/0。图中172.16明细只有172.16.3.0/24和172.16.3.0/28，都不含目的172.16.0.14，因此选择S*0.0.0.0/0 [1/0] via209.165.200.246；该下一跳落在直连209.165.200.244/30，出口Serial0/1/0。A的.250/Serial0/0/0用于172.16.3.0/24；C的.254/Serial0/0/1用于172.16.3.0/28；B把.254与Serial0/0/0错误配对。目的IP仍为172.16.0.14，选项给的是下一跳和出口，不是更改数据包最终目的IP。"
+      }
+    },
+    {
+      "id": 304,
+      "before_sha256": "e58a4bf5df077404ccf5a72b6059a7236a08c559763921eafa4342a5d73c2cd2",
+      "reason": "已看表：.3.0/24与.3.0/28均匹配目标.3.14，/28经207.165.200.254 Serial0/0/1，D正确。原解析写182.16.3.0/28；图默认209而其余明细/直连207混用且无209可解析路由。改编统一207的自洽表，不猜源真实地址，保留D并具体算范围。",
+      "updates": {
+        "prompt": "Refer to the revised routing table. Under normal destination-based forwarding, which next hop and interface does R1 select for host 172.16.3.14?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjUwMSIgdmlld0JveD0iMCAwIDEyODAgNTAxIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI1MDEiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTYiIHk9IjYwIiB3aWR0aD0iMTI0OCIgaGVpZ2h0PSI0MjUiIHJ4PSI2IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iMzIiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjUiPlJldmlzZWQgZXhlcmNpc2UgLSBjb25zaXN0ZW50IHJlbGV2YW50IHJvdXRpbmctdGFibGUgZW50cmllczwvdGV4dD48dGV4dCB4PSIzNCIgeT0iOTkiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPlIxIyBzaG93IGlwIHJvdXRlPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIxMzUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkdhdGV3YXkgb2YgbGFzdCByZXNvcnQgaXMgMjA3LjE2NS4yMDAuMjQ2IHRvIG5ldHdvcmsgMC4wLjAuMDwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTcxIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5TKiAwLjAuMC4wLzAgWzEvMF0gdmlhIDIwNy4xNjUuMjAwLjI0NiwgU2VyaWFsMC8xLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjIwNyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UyAxNzIuMTYuMy4wLzI0IFsxLzBdIHZpYSAyMDcuMTY1LjIwMC4yNTAsIFNlcmlhbDAvMC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyNDMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gMTcyLjE2LjMuMC8yOCBbMTEwLzg0NDM3XSB2aWEgMjA3LjE2NS4yMDAuMjU0LCBTZXJpYWwwLzAvMTwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMjc5IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5DIDIwNy4xNjUuMjAwLjI0NC8zMCBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDAvMS8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIzMTUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkwgMjA3LjE2NS4yMDAuMjQ1LzMyIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgU2VyaWFsMC8xLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjM1MSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAyMDcuMTY1LjIwMC4yNDgvMzAgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBTZXJpYWwwLzAvMDwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMzg3IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5MIDIwNy4xNjUuMjAwLjI0OS8zMiBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDAvMC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSI0MjMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMjA3LjE2NS4yMDAuMjUyLzMwIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgU2VyaWFsMC8wLzE8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjQ1OSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TCAyMDcuMTY1LjIwMC4yNTMvMzIgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBTZXJpYWwwLzAvMTwvdGV4dD48L3N2Zz4=",
+        "explanation": "D，207.165.200.254经Serial0/0/1。172.16.3.14同时匹配172.16.3.0/24（.0–.255）、172.16.3.0/28（.0–.15）及默认；/28最长，选OSPF条目的下一跳与出口。A的.246是默认下一跳，只有无更明细匹配时使用；C的.250经Serial0/0/0属于较短/24；B把.254配到错误出口。OSPF AD110不妨碍其更明细/28用于本次转发，不能用静态AD1压过另一长度前缀，也不能将目标前缀写成182.16.3.0。"
+      }
+    },
+    {
+      "id": 305,
+      "before_sha256": "beecf3de9a00c00c5585d567dcd439e8865223a6ce73a1b3fecbf3872075a9ab",
+      "reason": "已看R2静态10.1.1/24 via192.168.0.1默认AD1，A正确。图R2的OSPF network误写192.168.1.2，且片段并未证明R1实际具有/通告目标，不能说所有协议已形成可用路径或仅因重复内部EIGRP RID就必然不邻接。明确静态可解析且其他候选默认AD，分别说明RIB选择不保证R1端到端可达。 [S2]",
+      "updates": {
+        "prompt": "Refer to the configuration excerpt. R2 Gi1/1 is up, its configured static next hop is reachable, and administrative distances are not changed. Which listed source is preferred on R2 for 10.1.1.0/24 over any otherwise eligible dynamic candidates for that exact prefix?",
+        "explanation": "A，static。R2的`ip route 10.1.1.0 255.255.255.0 192.168.0.1`未指定distance，默认AD1；在同完整前缀的有效候选间，1低于eBGP20、内部EIGRP90和OSPF110，故静态优先。图中R2的OSPF network写192.168.1.2而接口是192.168.0.2，片段并不能证明此接口已加入OSPF；也不能仅凭R1的network声明就断言目标已存在并由所有协议成功通告。重复内部EIGRP router ID是不良设计，但不能简单当作内部邻接必然不成立的通用依据。这里比较的是R2已可解析的静态首选，不保证R1随后确实能到达目标或所有端到端业务已通。"
+      }
+    },
+    {
+      "id": 306,
+      "before_sha256": "3111840d500dddd98dea0b934f478be39dd08a03f0f346aadb07fde29dc71816",
+      "reason": "已看/24直连与O10.0.1.5/32 [110/5] via10.0.1.50，D正确。原解析称LPM发生在AD判定之前，混淆控制平面安装与数据平面转发的时间阶段。改为在已安装有效路由里取/32，AD已在同前缀入表竞争中起作用。 [S2]",
+      "updates": {
+        "explanation": "D，10.0.1.50。图中直连10.0.1.0/24与OSPF10.0.1.5/32都覆盖目标10.0.1.5，但/32更长，按该条[110/5]的下一跳10.0.1.50、Serial0转发。B/10.0.1.4是另一/32的下一跳，C/10.0.1.3也对应另一个主机，均不匹配当前目的；A/Loopback0对应1.0.0.0/8。不能说LPM在时间上发生于AD判定之前：控制平面先对同一完整前缀的候选选择/安装路由，数据平面随后对已安装前缀取最长匹配。直连/24的AD0不拿来与OSPF/32的AD110决定本次跨前缀转发。"
+      }
+    },
+    {
+      "id": 307,
+      "before_sha256": "3bc50340252266aa77227718ecdc7e6b16f033e40897d609e8886c1ec9253422",
+      "reason": "已看两端均VLAN13，地址.0.10/23与.1.20/23同网。A Gi0/1显式allowed10-12漏13，B Gi0/1未限制allowed，默认已允许全部；原解析称两端都必须加13不准确。B选项改为在A增加并验证B已允许，保留其他VLAN；解释allowed不等于VTP创建/传播数据库。 [S3]",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Add PC A to VLAN 10 and the File Server to VLAN 11 for VLAN segmentation"
+          },
+          {
+            "label": "B",
+            "text": "Add VLAN 13 to Switch A's trunk allowed list and verify that the Switch B trunk also permits it."
+          },
+          {
+            "label": "C",
+            "text": "Add a router on a stick between Switch A and Switch B allowing for Inter-VLAN routing"
+          },
+          {
+            "label": "D",
+            "text": "Add PC A to the same subnet as the File Server allowing for intra-VLAN communication"
+          }
+        ],
+        "explanation": "B。PC A=192.168.0.10/23与服务器192.168.1.20/23同属192.168.0.0/23（.0.0–.1.255），接入端口也都在VLAN13，因此此通信无需额外跨VLAN路由。图中Switch A Gi0/1只允许10-12，必须保留原列表并增加13：\n```text\nSwitchA(config)# interface GigabitEthernet0/1\nSwitchA(config-if)# switchport trunk allowed vlan add 13\n```\nSwitch B Gi0/1没有限制allowed，默认已允许所有VLAN，应验证而非断言它也缺13；仍须VLAN13存在且链路/STP正常。A将两端改放不同VLAN会拆开广播域；C增加ROAS不解决这个同VLAN漏放；D两端原本已是同一/23。allowed列表控制此trunk承载哪些VLAN，不等于创建VLAN或自动通过VTP传播数据库。"
+      }
+    },
+    {
+      "id": 309,
+      "before_sha256": "60f1204c6d54da6c8e750fa666d73313e88534369cd57301adde8d036a29ef48",
+      "reason": "已看R1无last-resort、ISP下一跳.18可达，C补静态默认并使普通default-information originate有本地路由依据，正确。原解析泛称任何形式都严格需本地默认/无静态必不能转发，忽略always/route-map与更明细出口；D下一跳10.10.10.2其实是正确R1地址，不能仅凭架构偏好否定。按图缺失出口解释，限定普通Area0命令形式。 [S4]",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 uses the plain default-information originate command in OSPF area 0, without always or a route map. VLAN 20 clients at Site B cannot reach the Internet DNS server. The ISP next hop, return path, and DNS service are otherwise working. Which action fixes the missing routing configuration?",
+        "explanation": "C，在R1配置`ip route 0.0.0.0 0.0.0.0 10.10.10.18`。图中R1显示未设最后求助网关，而ISP对端.18属于其直连10.10.10.16/30；该静态默认同时提供缺少的未知Internet目的出口，并为本题普通default-information originate提供本地默认依据，从而向正常OSPF区域通告默认。A在R2originate不能补R1出网路由；B的always能改变通告条件，却不会给R1创建数据平面出口，按本表仍不能送DNS流量；D指向10.10.10.2确实是R1的内侧地址，不能因“违背架构”就说语法/下一跳无效，但只在R2加默认仍未补R1缺口。此处限定无route-map的常用形式，其他条件通告变体规则可不同；Type5默认也不是无条件泛洪进stub/NSSA等所有区域。"
+      }
+    },
+    {
+      "id": 310,
+      "before_sha256": "edf4bed54582d5221a0bfc11c0ba6415f5c2b04dd6e97d18976f3f375e953cb6",
+      "reason": "已看S172.16.0.0/24 [1/0]、O.128/25 [110/38443]、D.192/29 [90/3184439]；.202不在.192–.199，/25胜且metric38443，C正确。原解析不解释/29为何不匹配或110为何是AD；图下一跳207但直连209混用。改编统一209相关路由图，明确范围/AD与metric。",
+      "updates": {
+        "prompt": "Refer to the revised routing table. What is the metric of the selected route for destination host 172.16.0.202?",
+        "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjUzNyIgdmlld0JveD0iMCAwIDEyODAgNTM3Ij48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI1MzciIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTYiIHk9IjYwIiB3aWR0aD0iMTI0OCIgaGVpZ2h0PSI0NjEiIHJ4PSI2IiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iMzIiIHk9IjM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjUiPlJldmlzZWQgZXhlcmNpc2UgLSBjb25zaXN0ZW50IHJlbGV2YW50IHJvdXRpbmctdGFibGUgZW50cmllczwvdGV4dD48dGV4dCB4PSIzNCIgeT0iOTkiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPlIxIyBzaG93IGlwIHJvdXRlPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIxMzUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkdhdGV3YXkgb2YgbGFzdCByZXNvcnQgaXMgMjA5LjE2NS4yMDAuMjQ2IHRvIG5ldHdvcmsgMC4wLjAuMDwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTcxIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5TKiAwLjAuMC4wLzAgWzEvMF0gdmlhIDIwOS4xNjUuMjAwLjI0NiwgU2VyaWFsMC8xLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjIwNyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UyAxNzIuMTYuMC4wLzI0IFsxLzBdIHZpYSAyMDkuMTY1LjIwMC4yNTAsIFNlcmlhbDAvMC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyNDMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPk8gMTcyLjE2LjAuMTI4LzI1IFsxMTAvMzg0NDNdIHZpYSAyMDkuMTY1LjIwMC4yNTQsIFNlcmlhbDAvMC8xPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyNzkiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkQgMTcyLjE2LjAuMTkyLzI5IFs5MC8zMTg0NDM5XSB2aWEgMjA5LjE2NS4yMDAuMjU0LCBTZXJpYWwwLzAvMTwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMzE1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5DIDIwOS4xNjUuMjAwLjI0NC8zMCBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDAvMS8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIzNTEiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkwgMjA5LjE2NS4yMDAuMjQ1LzMyIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgU2VyaWFsMC8xLzA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjM4NyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QyAyMDkuMTY1LjIwMC4yNDgvMzAgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBTZXJpYWwwLzAvMDwvdGV4dD48dGV4dCB4PSIzNCIgeT0iNDIzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj5MIDIwOS4xNjUuMjAwLjI0OS8zMiBpcyBkaXJlY3RseSBjb25uZWN0ZWQsIFNlcmlhbDAvMC8wPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSI0NTkiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPkMgMjA5LjE2NS4yMDAuMjUyLzMwIGlzIGRpcmVjdGx5IGNvbm5lY3RlZCwgU2VyaWFsMC8wLzE8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjQ5NSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+TCAyMDkuMTY1LjIwMC4yNTMvMzIgaXMgZGlyZWN0bHkgY29ubmVjdGVkLCBTZXJpYWwwLzAvMTwvdGV4dD48L3N2Zz4=",
+        "explanation": "C，38443。目的.202在172.16.0.128/25的.128–.255内，也匹配172.16.0.0/24及默认；但不在EIGRP172.16.0.192/29的.192–.199内。先排除不匹配的/29，再选最长有效/25，其OSPF条目[110/38443]中110是AD，38443才是metric。A的0来自较短静态/默认条目，不是本次所选度量；B混淆AD与metric；D的3184439属于不覆盖目的的EIGRP/29，不能只因它前缀更长就选。表中的相关下一跳均由对应209.165.200.x/30直连项覆盖。"
+      }
+    }
+  ]
+}

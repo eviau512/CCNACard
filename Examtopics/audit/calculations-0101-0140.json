@@ -1,0 +1,81 @@
+{
+  "q102": {
+    "subnets": 8,
+    "first": "192.168.32.0/27",
+    "last_host": "192.168.32.30",
+    "D_mask_as_written": "no switchport mode access ip address 192.168.32.62 255.255.255.240"
+  },
+  "q106": {
+    "R7": {
+      "exhibit_hosts": 923,
+      "hosts_with_10_percent_ceil": 1016,
+      "capacity": 1022,
+      "prefix": 22
+    },
+    "R8": {
+      "exhibit_hosts": 225,
+      "hosts_with_10_percent_ceil": 248,
+      "capacity": 254,
+      "prefix": 24
+    },
+    "R9": {
+      "exhibit_hosts": 3641,
+      "hosts_with_10_percent_ceil": 4006,
+      "capacity": 4094,
+      "prefix": 20
+    },
+    "A_equals_D": true
+  },
+  "q112": {
+    "initial_128_is_network_address": true,
+    "after_change_network": "192.168.25.0/24"
+  },
+  "q115": {
+    "subnets_29_in_24": 32,
+    "hosts_per_29": 6,
+    "required_vlans": 31,
+    "hosts_with_gateway": 4,
+    "literal_B": "Switch(config)#interface vlan 10 Switch(config-if)#ip address 192.168.0.1 255 255.255.248"
+  },
+  "q121_visual_notes": {
+    "zone_to_channel": {
+      "1": 1,
+      "2": 6,
+      "3": 11,
+      "4": 11,
+      "5": 6,
+      "6": 11,
+      "7": 1,
+      "8": 6
+    },
+    "candidate_cochannel_pairs": {
+      "B": [
+        2,
+        5
+      ],
+      "C": [
+        3,
+        4
+      ],
+      "D": [
+        3,
+        6
+      ]
+    },
+    "method": "Direct visual inspection of current embedded exhibit; mapping is a review finding, not automated image recognition."
+  },
+  "q127_lowest_MAC_if_equal_priority": "SW3",
+  "q129": {
+    "30000_mod_4096": 1328,
+    "BB_group_bit": 1,
+    "DD_group_bit": 1
+  },
+  "q138": {
+    "partner_state_hex": "0x3c",
+    "binary": "00111100",
+    "activity_bit": 0,
+    "synchronization_bit": true,
+    "collecting_bit": true,
+    "distributing_bit": true
+  }
+}

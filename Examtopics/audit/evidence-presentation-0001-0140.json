@@ -1,0 +1,60 @@
+{
+  "scope": "presentation backfill Q1-Q140",
+  "semantic_question_hashes_unchanged": true,
+  "problem_ids": [
+    9,
+    41,
+    78,
+    84,
+    95,
+    102,
+    106,
+    107,
+    115,
+    130
+  ],
+  "improvement_ids": [
+    63,
+    72,
+    94,
+    138
+  ],
+  "new_primary_status_changes": [
+    {
+      "id": 78,
+      "from": "通过",
+      "to": "问题",
+      "reason": "flattened multi-router configuration choices"
+    },
+    {
+      "id": 95,
+      "from": "通过",
+      "to": "问题",
+      "reason": "flattened configuration choices and unescaped parameter placeholders"
+    }
+  ],
+  "reproduction": "formatter-evidence.json",
+  "renderer_files": [
+    {
+      "path": "CCNA-App/app/src/main/assets/app.js",
+      "sha256": "54d8f33227618da09450219b67181be782a92da4d43761fb4efd7ae5ac0c539d"
+    },
+    {
+      "path": "CCNA-App/app/src/main/assets/app.css",
+      "sha256": "9257173bd88a79304fe9c90a010da5731aa0bfa2f89586443abb3b1b8ab023fe"
+    },
+    {
+      "path": "Examtopics/scripts/build_all_html.py",
+      "sha256": "bb9d2c725f444a4de5cc940a7651d26d4a011dc66a923795aa667171eb6066d7"
+    },
+    {
+      "path": "Examtopics/output/Examtopics_CCNA_200-301_Complete.html",
+      "sha256": "a79111a66f9023e100daf961399606c56cafd07ede0d6cd6ec1a03097bad46ca"
+    },
+    {
+      "path": "Examtopics/batch/Examtopics_Batch1_Q1-200.html",
+      "sha256": "640e374068f39f5f704702a9c993d68c1ee2ec0752d18eb7604f8997e280b1f8"
+    }
+  ],
+  "verification_limit": "Production formatter execution plus HTML parsing, static CSS inspection. No claim of browser screenshots or live IOS testing."
+}

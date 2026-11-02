@@ -1,0 +1,257 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    376,
+    377,
+    378,
+    379,
+    380
+  ],
+  "code_results": [
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.2`",
+      "expected": "192.168.2.2",
+      "html": "<code class=\"inline-code\">192.168.2.2</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`S 192.168.0.0/20 [1/0] via 10.1.1.1`",
+      "expected": "S 192.168.0.0/20 [1/0] via 10.1.1.1",
+      "html": "<code class=\"inline-code\">S 192.168.0.0/20 [1/0] via 10.1.1.1</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.0.0`",
+      "expected": "192.168.0.0",
+      "html": "<code class=\"inline-code\">192.168.0.0</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.15.255`",
+      "expected": "192.168.15.255",
+      "html": "<code class=\"inline-code\">192.168.15.255</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/20`",
+      "expected": "/20",
+      "html": "<code class=\"inline-code\">/20</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`S 192.168.1.0/30 [1/0] via 10.1.1.1`",
+      "expected": "S 192.168.1.0/30 [1/0] via 10.1.1.1",
+      "html": "<code class=\"inline-code\">S 192.168.1.0/30 [1/0] via 10.1.1.1</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.1.0`",
+      "expected": "192.168.1.0",
+      "html": "<code class=\"inline-code\">192.168.1.0</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.1.3`",
+      "expected": "192.168.1.3",
+      "html": "<code class=\"inline-code\">192.168.1.3</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.2`",
+      "expected": "192.168.2.2",
+      "html": "<code class=\"inline-code\">192.168.2.2</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`S 192.168.2.0/28 [1/0] via 10.1.1.1`",
+      "expected": "S 192.168.2.0/28 [1/0] via 10.1.1.1",
+      "html": "<code class=\"inline-code\">S 192.168.2.0/28 [1/0] via 10.1.1.1</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.0`",
+      "expected": "192.168.2.0",
+      "html": "<code class=\"inline-code\">192.168.2.0</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.15`",
+      "expected": "192.168.2.15",
+      "html": "<code class=\"inline-code\">192.168.2.15</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`S 192.168.2.0/29 [1/0] via 10.1.1.1`",
+      "expected": "S 192.168.2.0/29 [1/0] via 10.1.1.1",
+      "html": "<code class=\"inline-code\">S 192.168.2.0/29 [1/0] via 10.1.1.1</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.0`",
+      "expected": "192.168.2.0",
+      "html": "<code class=\"inline-code\">192.168.2.0</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.7`",
+      "expected": "192.168.2.7",
+      "html": "<code class=\"inline-code\">192.168.2.7</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/20`",
+      "expected": "/20",
+      "html": "<code class=\"inline-code\">/20</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.2`",
+      "expected": "192.168.2.2",
+      "html": "<code class=\"inline-code\">192.168.2.2</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.0/29`",
+      "expected": "192.168.2.0/29",
+      "html": "<code class=\"inline-code\">192.168.2.0/29</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.1`",
+      "expected": "192.168.2.1",
+      "html": "<code class=\"inline-code\">192.168.2.1</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.6`",
+      "expected": "192.168.2.6",
+      "html": "<code class=\"inline-code\">192.168.2.6</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/20`",
+      "expected": "/20",
+      "html": "<code class=\"inline-code\">/20</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/20`",
+      "expected": "/20",
+      "html": "<code class=\"inline-code\">/20</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/28`",
+      "expected": "/28",
+      "html": "<code class=\"inline-code\">/28</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`/29`",
+      "expected": "/29",
+      "html": "<code class=\"inline-code\">/29</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.1.0/30`",
+      "expected": "192.168.1.0/30",
+      "html": "<code class=\"inline-code\">192.168.1.0/30</code>"
+    },
+    {
+      "id": 377,
+      "kind": "code",
+      "input": "`192.168.2.2`",
+      "expected": "192.168.2.2",
+      "html": "<code class=\"inline-code\">192.168.2.2</code>"
+    }
+  ]
+}

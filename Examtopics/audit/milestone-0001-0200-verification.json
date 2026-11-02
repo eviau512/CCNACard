@@ -1,0 +1,64 @@
+{
+  "question_count": 1396,
+  "ids_and_original_qids_preserved": true,
+  "reviewed_batch": [
+    1,
+    200
+  ],
+  "all_original_flagged_items_covered": 98,
+  "unchanged_questions_outside_correction_manifest": true,
+  "batch1_source_app_equality": true,
+  "actual_formatter_agrees_in_three_targets": 200,
+  "literal_code_fragments_preserved": 197,
+  "q70_computed_modified_eui64": "2001:db8:0:1:c401:42ff:fe0f:7",
+  "q106_independent_capacity_calculation": [
+    {
+      "hosts": 923,
+      "required_with_growth_and_gateway": 1017,
+      "minimum_prefix": 22
+    },
+    {
+      "hosts": 225,
+      "required_with_growth_and_gateway": 249,
+      "minimum_prefix": 24
+    },
+    {
+      "hosts": 3641,
+      "required_with_growth_and_gateway": 4007,
+      "minimum_prefix": 20
+    }
+  ],
+  "new_diagrams_visually_checked": [
+    41,
+    90,
+    129,
+    177
+  ],
+  "no_release": true,
+  "compile_and_install_status": "passed",
+  "compile_install_schedule": "once_per_200_question_milestone",
+  "build": {
+    "result": "passed",
+    "apk_size": 20252344,
+    "apk_sha256": "444429ed05439d0caeb4dd51f9c1abeebad10a28110c914ada7c947dd1cf5a92",
+    "embedded_assets_equal_current_workspace": true,
+    "signature_v2_v3_verified": true,
+    "package_and_native_storage_origin_unchanged": true
+  },
+  "installation": {
+    "result": "passed",
+    "personal_space_only": true,
+    "island_not_installed": true,
+    "in_place_update": true,
+    "same_signature": true,
+    "existing_data_directory_identifiers_unchanged": true,
+    "uninstall_or_clear_data": false,
+    "question_ids_and_storage_key_preserved": true,
+    "quiz_record_values_directly_read": false
+  },
+  "syntax_checks": {
+    "app_js": "passed",
+    "all_seven_batch_js_and_json": "passed",
+    "git_diff_check": "passed"
+  }
+}

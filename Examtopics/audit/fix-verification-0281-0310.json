@@ -1,0 +1,37 @@
+{
+  "scope": [
+    281,
+    310
+  ],
+  "reviewed_count": 30,
+  "corrected_question_count": 28,
+  "question_count": 1396,
+  "ids_and_qids_preserved": true,
+  "all_current_batch_corrections_equal_manual_manifests": 93,
+  "unchanged_outside_manifests": true,
+  "master_app_batch2_equal": true,
+  "app_logic_storage_key_native_code_unchanged": true,
+  "all_30_formatter_outputs_agree_app_batch2_master": true,
+  "literal_code_fragments_preserved": 50,
+  "q295_sample_rows_preserved": 8,
+  "multiline_options_restored": [
+    296
+  ],
+  "single_answer_type_corrected": [
+    286
+  ],
+  "revised_diagrams_visually_checked": [
+    300,
+    302,
+    304,
+    310
+  ],
+  "source_sha256": "ff5d228fadcd00de1b98cbd6f16a13d3ee1d6fafbf3c81fe429ac6c532a90cfa",
+  "app_bundle_sha256": "834093ab332ca34e9b07998d12eb1849fe8d9c8ed75e6aecba5222c83963e25d",
+  "next_question": 311,
+  "compile_install_commit": "pending Q400 milestone per user instruction",
+  "phone_access_this_turn": false,
+  "release_created": false,
+  "limitations": "Manual review and source/formatter checks, not live network or per-question phone UI tests.",
+  "embedded_batch2_and_master_html_data_equal_current_json": true
+}

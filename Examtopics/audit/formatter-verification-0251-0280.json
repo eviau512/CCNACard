@@ -1,0 +1,175 @@
+{
+  "targets": [
+    "CCNA-App\\app\\src\\main\\assets\\app.js",
+    "Examtopics\\batch\\Examtopics_Batch2_Q201-400.html",
+    "Examtopics\\output\\Examtopics_CCNA_200-301_Complete.html"
+  ],
+  "question_ids": [
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    262,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280
+  ],
+  "outputs_agree": true,
+  "code_results": [
+    {
+      "id": 257,
+      "kind": "code",
+      "input": "`172.16.32.0/27`",
+      "expected": "172.16.32.0/27",
+      "html": "<code class=\"inline-code\">172.16.32.0/27</code>"
+    },
+    {
+      "id": 257,
+      "kind": "code",
+      "input": "`172.16.32.0/19`",
+      "expected": "172.16.32.0/19",
+      "html": "<code class=\"inline-code\">172.16.32.0/19</code>"
+    },
+    {
+      "id": 257,
+      "kind": "code",
+      "input": "`172.16.32.0/24`",
+      "expected": "172.16.32.0/24",
+      "html": "<code class=\"inline-code\">172.16.32.0/24</code>"
+    },
+    {
+      "id": 257,
+      "kind": "code",
+      "input": "`172.16.32.1`",
+      "expected": "172.16.32.1",
+      "html": "<code class=\"inline-code\">172.16.32.1</code>"
+    },
+    {
+      "id": 258,
+      "kind": "code",
+      "input": "```text\nR1(config)# ip route 20.20.20.0 255.255.255.0 10.10.10.2\n\n```",
+      "expected": "R1(config)# ip route 20.20.20.0 255.255.255.0 10.10.10.2",
+      "html": "<pre class=\"cli-block\"><code>R1(config)# ip route 20.20.20.0 255.255.255.0 10.10.10.2</code></pre>"
+    },
+    {
+      "id": 259,
+      "kind": "code",
+      "input": "```text\nBW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)\n\n```",
+      "expected": "BW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)",
+      "html": "<pre class=\"cli-block\"><code>BW = 10^7 / minimum_path_bandwidth_in_kbps\nDLY = sum_of_outgoing_interface_delays_in_microseconds / 10\nclassic_metric = 256 * (BW + DLY)</code></pre>"
+    },
+    {
+      "id": 260,
+      "kind": "code",
+      "input": "```text\nR1# configure terminal\nR1(config)# ip routing\nR1(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.1\n\n```",
+      "expected": "R1# configure terminal\nR1(config)# ip routing\nR1(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.1",
+      "html": "<pre class=\"cli-block\"><code>R1# configure terminal\nR1(config)# ip routing\nR1(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.1</code></pre>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.16`",
+      "expected": "192.168.12.16",
+      "html": "<code class=\"inline-code\">192.168.12.16</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.0/24`",
+      "expected": "192.168.12.0/24",
+      "html": "<code class=\"inline-code\">192.168.12.0/24</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.0/27`",
+      "expected": "192.168.12.0/27",
+      "html": "<code class=\"inline-code\">192.168.12.0/27</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.0/28`",
+      "expected": "192.168.12.0/28",
+      "html": "<code class=\"inline-code\">192.168.12.0/28</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.16/28`",
+      "expected": "192.168.12.16/28",
+      "html": "<code class=\"inline-code\">192.168.12.16/28</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.16`",
+      "expected": "192.168.12.16",
+      "html": "<code class=\"inline-code\">192.168.12.16</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.16`",
+      "expected": "192.168.12.16",
+      "html": "<code class=\"inline-code\">192.168.12.16</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.0`",
+      "expected": "192.168.12.0",
+      "html": "<code class=\"inline-code\">192.168.12.0</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.15`",
+      "expected": "192.168.12.15",
+      "html": "<code class=\"inline-code\">192.168.12.15</code>"
+    },
+    {
+      "id": 262,
+      "kind": "code",
+      "input": "`192.168.12.16`",
+      "expected": "192.168.12.16",
+      "html": "<code class=\"inline-code\">192.168.12.16</code>"
+    },
+    {
+      "id": 266,
+      "kind": "code",
+      "input": "```text\nR1(config)# interface Ethernet0/0.20\nR1(config-subif)# encapsulation dot1q 20\nR1(config-subif)# ip address 10.20.20.1 255.255.255.0\n\n```",
+      "expected": "R1(config)# interface Ethernet0/0.20\nR1(config-subif)# encapsulation dot1q 20\nR1(config-subif)# ip address 10.20.20.1 255.255.255.0",
+      "html": "<pre class=\"cli-block\"><code>R1(config)# interface Ethernet0/0.20\nR1(config-subif)# encapsulation dot1q 20\nR1(config-subif)# ip address 10.20.20.1 255.255.255.0</code></pre>"
+    },
+    {
+      "id": 280,
+      "kind": "code",
+      "input": "```text\nR2(config)# interface GigabitEthernet0/0\nR2(config-if)# ip ospf hello-interval 10\nR2(config-if)# ip ospf dead-interval 40\n\n```",
+      "expected": "R2(config)# interface GigabitEthernet0/0\nR2(config-if)# ip ospf hello-interval 10\nR2(config-if)# ip ospf dead-interval 40",
+      "html": "<pre class=\"cli-block\"><code>R2(config)# interface GigabitEthernet0/0\nR2(config-if)# ip ospf hello-interval 10\nR2(config-if)# ip ospf dead-interval 40</code></pre>"
+    }
+  ]
+}

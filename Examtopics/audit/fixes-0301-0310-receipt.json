@@ -1,0 +1,27 @@
+{
+  "manifest": "fixes-0301-0310.json",
+  "applied_ids": [
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    309,
+    310
+  ],
+  "corrected_question_sha256": {
+    "301": "ec8040d6506075e24159127b533eb4337ec5bc64af1970663dd8c9a367d5acfa",
+    "302": "1eadd2972f2be3fe059b206450017338e9d84e4b2198b067fe9fa3ee639fb0b4",
+    "303": "b8c64de36da970a8fb76fa5fedc73328502892905c81ad89e84fa34adce42252",
+    "304": "975b036fb2c7fad7ca8a0ce7e6453b3830a42aaf5c51c169ad05e1e69bda6293",
+    "305": "5bc361d19a19d2462d0e87a7ff4c1fd66597e113e37253e5abef369e31c1fa3b",
+    "306": "0cf6c0fa68866afc271b9825fc054fbeb08332d5f8c29d366e09895ee8553776",
+    "307": "bac4430cccc8af6ae55a265b151934fbd15b256974dfb49a1f09cf6a12d0e16f",
+    "309": "6d2ccf7cc478341a68a7e7d48988c8c17d8db586b52697103830fc31cf3ea9ba",
+    "310": "db7ac0c8d25399bc9894277c55955a033aea88953358fa10ceff08ba82df0178"
+  },
+  "source_sha256": "ff5d228fadcd00de1b98cbd6f16a13d3ee1d6fafbf3c81fe429ac6c532a90cfa",
+  "app_bundle_sha256": "834093ab332ca34e9b07998d12eb1849fe8d9c8ed75e6aecba5222c83963e25d"
+}

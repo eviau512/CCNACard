@@ -1,0 +1,255 @@
+{
+  "reviewed_ids": [
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240
+  ],
+  "source_sha256": "7ac75984b0c84d413306b3dfd498947a1944ef07124a5b94a9e8c6cbb01a414e",
+  "app_bundle_sha256": "cc213f7da30ad41b9b7f6d9ddc3a0fadc822d38c7734c4749d1340c64dcb39fa",
+  "source_unchanged": true,
+  "app_equal_all_reviewed": true,
+  "questions_with_exhibits_directly_viewed": [
+    201,
+    202,
+    204,
+    208,
+    209,
+    211,
+    212,
+    217,
+    224,
+    225,
+    226,
+    227,
+    228,
+    230,
+    235,
+    237,
+    238,
+    239,
+    240
+  ],
+  "exhibit_count": 20,
+  "exhibit_fingerprints": {
+    "q201_image.jpg": "c8c8f22ffd91206ff4976e2e0027be9cb2d5451971d80e49a4215efcc84a8f6d",
+    "q202_image.jpg": "3f0c15b960d18632a390ee2698bf868506f22c0f1d4a8b60d49bb296b001aa6b",
+    "q204_image.jpg": "be5d2830a45d00faf74f3a57802b80e10ada44797a756b19ddae71091e392f91",
+    "q208_image.jpg": "95a5f69d85e9b06ddd949e361fce10c261f333ec7a286023d67e28cd9a521002",
+    "q209_image.jpg": "a05505e343ddf1b962788899f02b1dfe307000ec2bc2593dcbf433a98b1ba509",
+    "q211_image.jpg": "ffedb7d9ee9c69b0e85e6b207a2310304b503203d835acce36b916e824af8a8c",
+    "q212_image.jpg": "1c5f784b0da7b1bf33da1272d5172fedd6a196e5b91b3d0c6c8013b499345a6c",
+    "q217_image.jpg": "af11ea898db07e44a46fbbd1d84f1601f7272381d857373664a1dc3eca7cea66",
+    "q224_image.jpg": "9d79f32f40e865f978f745cbece84392b71585b298bc828d7b592876827ac39a",
+    "q225_image.jpg": "c1821d5a3b03ded192573d71a4c9dc710e5db371975c1dbe4e6c95923d7d5b90",
+    "q225_answer_image.jpg": "12e4c9bfbf5ae073cbaac83ffd2212ab7408adb3d0d4abbee1518833d485b460",
+    "q226_image.jpg": "7f4dde5ad541169afad86005920c00a1069243773d8b6edb8c3326aaf46c6dd7",
+    "q227_image.jpg": "c40601e8afdd1bef8ee674df6d51573870f63e095ef0a786bbb18d8432c8b731",
+    "q228_image.jpg": "70d05fcbd2a9ec5c40cec940f36e3d8c50a99f0a50f98ec5e5eafbd62b785982",
+    "q230_image.jpg": "aabf32b9103d80442ccb9fd4abf7bafe46635c8c13eba54e61593cbb77994d76",
+    "q235_image.jpg": "d8c022506ef26989ed930c98e1705c313329fb9215a872a5f4b8f921e6ac707c",
+    "q237_image.jpg": "5a1dcb5b93ed8bafc56f9f8aa074a5d5ad5fd16867c80d4f2f55acdd23ca65a1",
+    "q238_image.jpg": "df635dfacce9695971860cd4ba4a72be067a7f02d6f50640c636980736194c8b",
+    "q239_image.jpg": "c3f1e8c0b48201d5ab680200050623837baf3ba7443713a91ab73ac2259cdcb1",
+    "q240_image.jpg": "b48d8552116beaf34fc60506c433bc698306ddd268a31afd6dd69b9d6e5b5020"
+  },
+  "visual_notes": {
+    "201": "本端两物理口active、Po1 IP与down日志完整，未提供对端run不能凭空补造；接口转录可另整理代码块但图已足够。",
+    "202": "三链路图完整；范围横杠缺失、双引号乱码、多命令压平，五条id模板还被HTML吞掉。",
+    "204": "show cdp 60/180及v2可读；解析两处seconds模板消失。",
+    "208": "双交换机两链路、双方Fa0/1-2 run完整；图中on/active和allowed列表可读。",
+    "209": "外网R5/R6及Gi0/1、Gi0/2图完整；全部多模式配置与show命令在选项中压一行。",
+    "211": "summary标志、两端passive配置均齐，未缺故障判断输出。",
+    "212": "PC1 MAC图中可读；多CLI选项压平，解析MAC-Address模板丢失。",
+    "217": "双交换机Ge0/0/0–15图在；每项interface和channel-group压一行，D作用域错误不是加围栏就能修。",
+    "224": "g1/1、g1/24与完整Staff11/Guests12 VLAN表在；长配置选项压平。",
+    "225": "show lldp及额外命令参考图均在；每项两条全局命令被压一行。",
+    "226": "Data50/Voice51与双端电话下挂PC图齐；三条命令选项压平，mis疑似mls笔误需核源。",
+    "227": "两边run与两PC图齐；所有双交换机配置序列压平。",
+    "228": "SW1 access2、替换箭头及未来10主机图完整；多命令选项压平，A还重复相同行，非缺图。",
+    "230": "WLC原截图完整，可见PMF Required及各WPA/AKM勾选状态；多项GUI操作不是CLI代码块缺失。",
+    "235": "VLAN50四主机拓扑和完整三条MAC表均在；组播源地址是图内技术数据错误，不误报缺表。",
+    "237": "两端Po1/成员access2图在；源选项有换行，但普通选项容器折叠两设备命令。",
+    "238": "VLAN101拓扑与完整MAC表在，Gi1/4缺项可见；PC2组播MAC问题不等于缺图。",
+    "239": "原Fa0/1 access15和Voice10图完整；源选项有三/四行但显示折叠，解析vlan-id模板被吞；正确A解释有围栏仍不能替代选项。",
+    "240": "四BID数值与DMZ拓扑在，SW4的系统ID不一致为内容错误，没有缺关键图。"
+  },
+  "calculations": {
+    "mac_source_checks": {
+      "q235_Br2": {
+        "mac": "010a.7a17.45bc",
+        "first_octet": 1,
+        "ig_bit": 1,
+        "normal_unicast_source": false
+      },
+      "q238_PC2": {
+        "mac": "3986.3986.3986",
+        "first_octet": 57,
+        "ig_bit": 1,
+        "normal_unicast_source": false
+      }
+    },
+    "q240_priorities": {
+      "SW1": 32778,
+      "SW2": 24586,
+      "SW3": 28682,
+      "SW4": 64000
+    },
+    "q240_current_root_by_given_numbers": "SW2",
+    "q240_after_SW2_fails_by_given_numbers": "SW3",
+    "q240_system_ids": {
+      "SW1": 10,
+      "SW2": 10,
+      "SW3": 10,
+      "SW4": 2560
+    }
+  },
+  "presentation_problem_ids": [
+    202,
+    204,
+    205,
+    207,
+    209,
+    210,
+    212,
+    215,
+    217,
+    224,
+    225,
+    226,
+    227,
+    228,
+    237,
+    239
+  ],
+  "source_option_newline_counts": {
+    "202": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "209": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "210": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "212": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "215": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "217": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "224": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "225": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "226": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "227": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "228": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "237": {
+      "A": 1,
+      "B": 1,
+      "C": 1,
+      "D": 1
+    },
+    "239": {
+      "A": 2,
+      "B": 2,
+      "C": 3,
+      "D": 2
+    }
+  },
+  "formatter_evidence": "formatter-evidence-0201-0240.json",
+  "option_renderer": {
+    "js": "CCNA-App/app/src/main/assets/app.js:367",
+    "css": "CCNA-App/app/src/main/assets/app.css:441",
+    "finding": "textContent写入；opt-text及继承容器无pre/pre-wrap设置，普通空白折叠；代码围栏不在选项中解析",
+    "app_js_sha256": "54d8f33227618da09450219b67181be782a92da4d43761fb4efd7ae5ac0c539d",
+    "app_css_sha256": "9257173bd88a79304fe9c90a010da5731aa0bfa2f89586443abb3b1b8ab023fe"
+  },
+  "limitations": [
+    "没有运行真实设备或网络仿真",
+    "未验证实际考试官方评分，不能以题库争议答案替代技术结论",
+    "Q201题干without negotiating歧义保留",
+    "Q234未给帧去向/双工，egress排队仅条件推理"
+  ]
+}

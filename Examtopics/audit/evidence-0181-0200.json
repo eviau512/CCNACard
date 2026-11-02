@@ -1,0 +1,99 @@
+{
+  "reviewed_ids": [
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200
+  ],
+  "source_sha256": "7ac75984b0c84d413306b3dfd498947a1944ef07124a5b94a9e8c6cbb01a414e",
+  "app_bundle_sha256": "cc213f7da30ad41b9b7f6d9ddc3a0fadc822d38c7734c4749d1340c64dcb39fa",
+  "source_unchanged": true,
+  "app_equal_all_reviewed": true,
+  "exhibits_directly_viewed": [
+    183,
+    187,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    197,
+    198,
+    199,
+    200
+  ],
+  "exhibit_fingerprints": {
+    "183": "82947640f5403d19fb1a6345cbc49a8f456f4ffa66f2558d73444821018b467e",
+    "187": "d72d3c76c968bdc752a435eb61c89e7b7b1df3ace5d357dd51dcb5e75f4f4c60",
+    "189": "b7a339b38606f37cf743a73698978f74eb2f20addc7b29c978a5517a1466a31e",
+    "190": "628549934c865ae3dce295619218abc72dcbc1ddc9a57d95765467925376920e",
+    "192": "59a9535089ec3ff3d457555116cfadce113eee13efa19e76358f2e2c5727631a",
+    "193": "34b3ee850afa2a8d9f6f16d24642e34ea11917f318bdeeee80c93fa3e0e93cc8",
+    "194": "706cc6ca46d7d5f61aee419ac5a98c0e422021a3b03a06ec8c01738eb9577f03",
+    "195": "d229b022d85f0d91eb55fb28960df1de4c02a012169ddddbd44713f5990e7253",
+    "197": "a889de07556ca102c3addfaa5e20fd4c218345b9d552854fb389447698af7aed",
+    "198": "e78613901747785a6ea0d4617a5087e94ca6e1d2d0edfbc7a899297d0f12ccc2",
+    "199": "1d1928ad1db6fb439bb7599a847fce02d02d4731b4f496006b2a800ee21ba3c8",
+    "200": "3b45a8a48f2a8f7e28216647cf672953e5f6c884a4ea2327cd4a1619fff40241"
+  },
+  "visual_findings": {
+    "183": "VLAN5四桥拓扑齐全，数值位于题干但有错；解析id参数未转义变HTML标签。",
+    "187": "Gi1/0包含duplex/speed/negotiation/lldp收发的截图齐全；单命令全局lldp run已在解析。",
+    "189": "双交换机、两主机地址与access13/trunk10-12配置均在；truck笔误见主报告，非缺少多行块。",
+    "190": "原图四行配置完整，解析也有四行text围栏。",
+    "192": "原图两端native999/99和trunk配置均在，STP运行条件不足见主报告，不能误报缺图。",
+    "193": "Data8/Voice9与Gi1/1、Gi1/3拓扑在；多接口选项压成一行，解析Data_VLAN_ID/Voice_VLAN_ID参数又被HTML解析吞掉。",
+    "194": "原WLC截图可读，PSK勾选、802.1X未勾、FT关闭清晰；未缺决定答案的图。",
+    "195": "1,100-103到104拓扑在；两条解析模板的vlan-list参数被当HTML标签。",
+    "197": "完整SW1/SW4/SW9/SW11及PC拓扑在；四个长配置选项压平，缺设备/接口/命令分行及代码显示，不能仅在textContent里塞围栏。",
+    "198": "LLDP条目包含远端系统名、端口、Management IP，单条候选命令齐全。",
+    "199": "run、MAC表和PC拓扑齐全；选项多条CLI压一行，解析正确C的围栏不能代替选项分行。",
+    "200": "HQ拓扑在，BID已写题干但Switch4字段有错；单独小于号比较式作为负对照保持可见，不误报成HTML参数丢失。"
+  },
+  "calculations": {
+    "q189_same_subnet": true,
+    "q183_invalid_priorities": [
+      614440,
+      39391170
+    ],
+    "q200_switch4_mac_hex_digits": 11,
+    "q200_switch4_priority_system_id": 2560,
+    "q200_other_switch_system_ids": [
+      10,
+      10,
+      10
+    ]
+  },
+  "formatter_evidence": "formatter-evidence-0181-0200.json",
+  "presentation_problem_ids": [
+    183,
+    184,
+    193,
+    195,
+    197,
+    199
+  ],
+  "limitations": [
+    "未运行真机CLI/仿真或数据包测试",
+    "未验证实际考试评分或所谓官方标答",
+    "Q182具体计时单位待明确平台/版本，不能混用",
+    "Q192不假定已关闭PVST保护或已发生通流"
+  ]
+}

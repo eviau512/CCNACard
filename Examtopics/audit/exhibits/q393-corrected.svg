@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="150"><rect width="1450" height="150" fill="#f3f6fa"/><text x="24" y="35" font-family="Arial" font-size="24">Revised exercise - valid NAT pool definition</text><text x="24" y="95" font-family="monospace" font-size="22">R1(config)# ip nat pool cisco 10.1.1.10 10.1.1.50 netmask 255.255.255.0</text></svg>
