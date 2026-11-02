@@ -66,7 +66,7 @@ function saveState() {
 }
 
 async function loadQuestionData() {
-  const bundle = window.CCNA_QUESTIONS_DATA || window.ccnaCardsData || (typeof ccnaCardsData !== 'undefined' ? ccnaCardsData : null);
+  const bundle = window.CCNA_CARDS_DATA || window.CCNA_QUESTIONS_DATA || window.ccnaCardsData || (typeof ccnaCardsData !== 'undefined' ? ccnaCardsData : null);
   if (bundle && Array.isArray(bundle) && bundle.length > 0) {
     allQuestions = bundle;
     console.log(`Loaded ${allQuestions.length} CCNA questions from script bundle.`);
