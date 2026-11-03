@@ -1,0 +1,40 @@
+{
+  "scope": "Manual Q421-Q425; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 421,
+      "before_sha256": "6b6343e8bc191c7002b2427046c59977c520d92a6df6d0c04142eed27dd3e979",
+      "reason": "B自动请求正确；原解析泛称每次接入/重置都DISCOVER向全网广播，忽略INIT-REBOOT直接REQUEST及续租单播。保留简单角色定义，准确区分新发现与复用已有租约。",
+      "updates": {
+        "explanation": "B，配置为通过DHCP自动请求IP地址及相关参数的主机/接口是DHCP客户端。它可以是PC、移动设备、打印机，也可以是启用DHCP客户端功能的路由器接口；角色由请求配置的行为决定，不由硬件名称决定。\n\nA按已有IP查询名称通常属于DNS反向解析；C是分配方服务器；D描述的路由器分配/保留地址也不是请求方客户端。客户端无可用配置时可广播DHCPDISCOVER寻找服务器，但不是每次接入都必须从DISCOVER开始：INIT-REBOOT可先请求复用旧地址，续租阶段也可单播DHCPREQUEST。广播范围是本地广播域，通过中继才可与远端服务器交互，不是自动向整个互联网广播。"
+      }
+    },
+    {
+      "id": 422,
+      "before_sha256": "f0ddb7f15c3a3a1c1bec00a14bf8ee8040ec39b83e0e4dc46a509e54aa990a21",
+      "reason": "B客户端侧中继正确；原题lo拼写及解析绝对仅默认网关、所有REQUEST广播/全部limitedbroadcast无条件丢弃、固定IP源均过度。明确通常单中继部署，面向客户端广播域三层接口，区分SVI/子接口与二层trunk。",
+      "updates": {
+        "prompt": "In a typical single-relay Cisco IOS deployment with clients and their DHCP server on different subnets, where is ip helper-address configured to receive and relay the clients' initial broadcasts?",
+        "explanation": "B，配置在连接客户端广播域的三层接口上，即选项中客户端侧最近的路由设备。它可以是路由器物理接口、802.1Q子接口或三层交换机的SVI，关键是能接收该子网的客户端广播，不是按地理距离判断，也不必将中继概念等同于某个唯一默认网关地址。\n\nhelper目的通常指DHCP服务器，客户端侧接口接收广播后把请求中继到服务器，giaddr通常帮助服务器识别客户端子网；报文源地址等可受平台/配置影响。A服务器侧才配置通常接收不到未被中继的远端客户端广播；C普通单播中间路由无需逐跳配helper；D的二层trunk端口只是承载VLAN帧，不是放置该三层配置的接口，SVI/路由子接口则不同。此题针对初始广播，并不表示所有DHCPREQUEST都广播或所有设备都只支持这一种中继拓扑。"
+      }
+    },
+    {
+      "id": 423,
+      "before_sha256": "f3a1f7384af4fe753e9eade4673fc39490b7deaf3bc97bf961da7bfaf12ce897",
+      "reason": "B DNSlookup正确；原解析声称任何按名Telnet必须网络DNS且无DNS必失败，忽略静态iphost与缓存。说明四选项中名称解析功能，连接还需TCP/服务/访问权限，不编造唯一错误提示。",
+      "updates": {
+        "explanation": "B，DNS lookup可将输入的设备主机名解析为IP地址，再由Telnet建立到该地址的连接。SNMP用于设备管理，syslog用于日志，NTP用于时间同步，均不提供所问的名称到地址查找功能。\n\nDNS不是任何按名称连接的唯一实现：Cisco IOS也可利用本地`ip host`静态映射或有效缓存，无需每次都发送网络DNS查询。使用外部DNS时需有可用的名称服务器/解析配置；解析成功后还必须有网络可达性、目标Telnet服务和访问授权。名称解析只负责确定地址，不自动保证会话建立，也不能概括所有失败都返回同一种固定报错。"
+      }
+    },
+    {
+      "id": 425,
+      "before_sha256": "25602f63c8c2e01000d593ba7c5891da5909eaa8e27910ec2fbd16374f275bee",
+      "reason": "D PQ对应所列严格优先正确；原解析称零排队、所有语音固定150ms底线、WFQ加权轮询及WRED必慢启动均过度。保留经典队列比较，说明非抢占发送/串行化、饥饿风险、LLQ限额和实际业务预算。",
+      "updates": {
+        "prompt": "Among the listed classic QoS tools, which provides strict-priority scheduling for classified voice traffic sharing a congested link with ordinary data?",
+        "explanation": "D，PQ（Priority Queuing）。严格优先调度优先服务高优先级队列，适当分类的实时语音因此不必在普通数据队列后按同一FIFO顺序等待，通常可降低拥塞造成的排队时延。\n\n这不等于零等待或抢占已经发到链路上的包：语音仍可能等正在发送的较大帧完成、其他高优先包以及物理串行化，实际端到端预算也受编解码、路径等影响。持续高优先流量可使低队列饥饿，现代设计常用带合理限额/保护的LLQ等机制，而不是无条件推荐不限速PQ。\n\nA WRED是拥塞避免/队列管理，不提供该严格优先服务；它利用可响应丢包/ECN的流量反馈，不能一概说每次丢包都触发TCP慢启动。B FIFO按到达次序，不区分类别；C WFQ提供加权公平调度，与简单加权轮询并非同一算法，也不提供PQ式严格优先。常见语音时延/抖动建议是规划目标，不是所有业务统一的硬性底线，QoS也不凭空增加链路容量。"
+      }
+    }
+  ]
+}

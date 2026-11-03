@@ -1,0 +1,24 @@
+{
+  "sources": {
+    "syslog": "https://www.rfc-editor.org/rfc/rfc5424.html",
+    "DNS": "https://www.rfc-editor.org/rfc/rfc1035.html",
+    "policing": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html",
+    "DSCP": "https://www.rfc-editor.org/rfc/rfc2474.html",
+    "ECN": "https://www.rfc-editor.org/rfc/rfc3168.html",
+    "FTP": "https://www.rfc-editor.org/rfc/rfc959.html",
+    "TFTP": "https://www.rfc-editor.org/rfc/rfc1350.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q457_image.jpg"
+  ],
+  "q456_PRI_encoding": "ASCII decimal in angle brackets; not fixed 8-bit binary",
+  "q457_observed": {
+    "pc": "10.2.2.2",
+    "mask": "255.255.255.248",
+    "gateway": "10.2.2.1",
+    "dns": "0.0.0.0",
+    "dhcp_enabled_visible": false
+  },
+  "q457_extra_conditions": "Direct IPv4 connectivity and no cache/hosts are explicit added scenario assumptions, not screenshot evidence",
+  "limitations": "Manual document/exhibit review; not live DNS/FTP/syslog/QoS testing."
+}

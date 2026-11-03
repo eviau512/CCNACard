@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "ASA默认策略": "https://www.cisco.com/c/en/us/td/docs/security/asa/asa919/configuration/firewall/asa-919-firewall-config/access-rules.html",
+    "VLAN trunk": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html",
+    "双标签": "https://www.cisco.com/c/dam/en/us/td/docs/solutions/CVD/Oct2015/CVD-Campus_LAN_L2_Access_Simplified_Dist_Deployment-Oct2015.pdf",
+    "WPA3": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_wpa3.html",
+    "ESP": "https://www.rfc-editor.org/rfc/rfc4303.html",
+    "VTY access-class": "https://www.cisco.com/c/en/us/support/docs/ip/telnet/116101-problem-telnet-00.html"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual source review; no live ASA, DTP, WPA3, IPsec or IOS tests."
+}

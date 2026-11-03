@@ -1,0 +1,77 @@
+{
+  "scope": "Manual Q551-Q555; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 551,
+      "before_sha256": "e7208eef26f5e7f2744fde8b336ec4440d33214676a3d138e08ea2617b9de49f",
+      "reason": "only断言不成立，原解析为模板套话；改为典型SDN逻辑集中控制与转发分工。",
+      "updates": {
+        "prompt": "Which statement describes a common controller-based SDN architecture?",
+        "options": [
+          {
+            "label": "A",
+            "text": "An SDN controller can provide logically centralized control while devices perform forwarding."
+          },
+          {
+            "label": "B",
+            "text": "Traditional networks cannot use any centralized management tools."
+          },
+          {
+            "label": "C",
+            "text": "Controller-based networks require every packet to be forwarded through the controller."
+          },
+          {
+            "label": "D",
+            "text": "A logically centralized controller must always be one physical server."
+          }
+        ],
+        "explanation": "A。SDN可把控制逻辑与转发功能分离，由逻辑集中的控制器对多个转发设备提供控制；物理上可由多个控制器实例组成。\n\nB传统网络也能使用集中网管或脚本；C普通数据包通常由转发设备按规则处理，并非每包都经控制器；D逻辑集中不意味着单一物理服务器。原选项说“只有控制器网络才分离控制与数据平面”过于绝对，不同传统设备也可在功能或实现上分离这些平面。"
+      }
+    },
+    {
+      "id": 553,
+      "before_sha256": "00cc3ca59539042620f3c0684e421e5057b566324a4157ec3c88a9fd1c9da660",
+      "reason": "控制平面答案正确，但把ARP、MAC学习及FIB生成一概描述为固定实现，需区分架构功能与平台实现。",
+      "updates": {
+        "explanation": "B。控制平面负责维护或分发可达性与路由等信息，并为转发平面的决策提供依据；例如路由协议可交换网络可达性，控制逻辑可计算并安装相应转发状态。\n\nC数据平面依据已安装规则处理和转发报文；A管理平面支持配置与监控；D策略层可描述业务意图，但并非本题询问的提供路由与可达性信息的基本平面。不同设备对MAC学习、ARP处理、FIB生成和硬件卸载的分工各异，不能把每一种协议或动作固定归为某一具体进程。"
+      }
+    },
+    {
+      "id": 554,
+      "before_sha256": "2e00512024d5262d6119dde1caefb51e3f8c720aba2ae3f5ffb8c8466041022a",
+      "reason": "REST可用于南向，方向与接口风格不是互斥类别；明确询问控制器面向设备的方向。",
+      "updates": {
+        "prompt": "Which directional interface connects an SDN controller to network devices so the controller can directly apply forwarding or configuration changes?",
+        "explanation": "D。南向接口面向网络基础设施，控制器可借此向受管物理或虚拟设备下发配置或转发状态；具体机制依产品而异，例如OpenFlow或NETCONF/RESTCONF等。\n\nA北向接口连接控制器与上层应用，应用可通过它请求网络变化，但不属于题目所问的控制器到设备方向。B REST与C SOAP描述接口风格或协议，不是北向/南向的互斥方向分类；例如RESTCONF也可用作南向配置接口。"
+      }
+    },
+    {
+      "id": 555,
+      "before_sha256": "93b4524faeeb759cd9347cbdf65e9c0a1fd4e7b37bab4c11c6d1acb1b4993d08",
+      "reason": "JSON可用于存储信息，原B与C均为真，解析含损坏示例和套话；更换错误干扰项并给合法例子。",
+      "updates": {
+        "prompt": "Which statement about JSON syntax is true?",
+        "options": [
+          {
+            "label": "A",
+            "text": "requires angle-bracket tags to represent every value"
+          },
+          {
+            "label": "B",
+            "text": "used to describe structured data that includes arrays"
+          },
+          {
+            "label": "C",
+            "text": "requires every array element to be a string"
+          },
+          {
+            "label": "D",
+            "text": "requires all object keys to be unquoted"
+          }
+        ],
+        "explanation": "B。JSON可表示包含数组的结构化数据；对象使用双引号名称与冒号表示成员，数组使用方括号且可以包含多种合法JSON值。例如：\n\n```json\n{\"name\":\"John\",\"age\":30,\"cars\":[\"Fiat\",\"BMW\",\"Ford\"]}\n```\n\nA角括号标签不是JSON必需语法；C数组元素可以是字符串、数字、对象、数组、布尔值或null，不限字符串；D对象名称必须是双引号字符串。原C“用于存储信息”也是真实用途，因此原题不具唯一答案；存储与交换都是JSON常见用途。"
+      }
+    }
+  ]
+}

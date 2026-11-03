@@ -1,0 +1,15 @@
+{
+  "manifest": "fixes-0451-0455.json",
+  "applied_ids": [
+    451,
+    454
+  ],
+  "corrected_question_sha256": {
+    "451": "ac6c3283a839dc7d7326975ac5dc01c24c33badf51e898630cfbc72ad954f7e0",
+    "452": "ef1f937e781ea7f48400662f4522d3eb7ad826f7cd5539032964be6d372f864f",
+    "454": "ac1a5fd3db5e5a9b40274adb9b14170ae95100bbf30ee94def67d67e91294ec4",
+    "455": "6e223781a212d346ebe7b9783afd4500201d7dad843bb09a85410435730bdcac"
+  },
+  "source_sha256": "545741a663f5eeb778e2335244734891b37b8305f52cbbb590889f9f4b510f64",
+  "app_bundle_sha256": "a942849ef7cc6f9e1afc10cf459601622fa684cf2143fc4e5905afafb6301bd2"
+}

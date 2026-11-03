@@ -1,0 +1,49 @@
+{
+  "scope": "Manual Q561-Q565; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 561,
+      "before_sha256": "7614c7c54571acb6006314bca73c4b9530af6b62d019c4926fe70ae484fc367e",
+      "reason": "数据平面可运行于硬件或软件，逻辑集中控制可物理分布；原解析要求ASIC线速及控制器绝不能转发过于绝对。",
+      "updates": {
+        "explanation": "C。数据平面依据已有转发状态处理实际流量，可分布在多个交换机、路由器或虚拟转发节点。它可以由专用硬件、通用处理器或二者结合实现，不保证任何实现都线速或一定采用ASIC。\n\nD控制平面负责提供控制决策和状态，控制器逻辑集中仍可由物理分布的实例实现；A管理平面侧重配置和监控；B策略层表达策略意图。某些特例下报文可送控制器处理，不能据此否认一般数据转发由数据平面承担。"
+      }
+    },
+    {
+      "id": 562,
+      "before_sha256": "9ff33df984a297f244b41ff837b5ceb193487d2587932d6d15552dcfdcb3d35a",
+      "reason": "已查看原图：cisco_ospf_vrf资源R1 default，原解析误称cisco_interface Ethernet1/1；按图补代码。",
+      "updates": {
+        "explanation": "D。图示是Puppet风格的资源声明，资源类型为`cisco_ospf_vrf`，标题为`R1 default`，属性与值通过`=>`关联。按图意将弯引号转为可复制的直引号：\n\n```puppet\ncisco_ospf_vrf { \"R1 default\":\n  ensure => 'present',\n  auto_cost => '100',\n}\n```\n\nA Ansible常用YAML playbook；B JSON对象使用双引号名称与冒号，不能直接使用该资源声明语法；C Chef通常以Ruby DSL书写资源。单一符号不是所有语言独有的证明，应结合资源类型、标题和属性结构识别。原解析将图中资源误写为接口配置，已更正。"
+      }
+    },
+    {
+      "id": 563,
+      "before_sha256": "56e2821bc1951c80a5780d276dcc0d4816dc13ed1ff46f333a81ede168f844dd",
+      "reason": "Ansible默认SSH成立，但不保证任意SSH设备即可管理，Puppet/Chef也有其他运行模式。",
+      "updates": {
+        "prompt": "For typical Ansible management of a Unix-like remote host using the default SSH connection, which configuration management tool uses TCP port 22 by default?",
+        "explanation": "A。Ansible常用默认SSH连接插件远程管理目标，SSH默认TCP 22；实际端口、凭据、连接插件和目标支持可配置。无需在目标上常驻Ansible专用代理，并不表示任何可SSH设备都必然支持所需模块和权限。\n\nB Python是编程语言而非此题所列配置管理工具；C Puppet常见agent/server模式使用HTTPS及默认8140；D Chef常见client/server模式使用HTTPS。它们也有其他部署或执行模式，不应说Puppet或Chef永远不能使用SSH。"
+      }
+    },
+    {
+      "id": 564,
+      "before_sha256": "4f54b58ff057884dd51863c2913707ef50704c27912880f3d9cd9896fc32c922",
+      "reason": "OpenFlow下发流表正确，但REST架构可用于南向，修正接口风格与协议的混淆。",
+      "updates": {
+        "prompt": "Which protocol can an SDN controller use to add or change flow-table entries on an OpenFlow-capable switch?",
+        "explanation": "C。OpenFlow定义控制器与支持该协议的交换机之间的消息，可增加、修改或删除流表项，进而改变匹配流量的处理。设备及控制器必须支持并正确配置该协议。\n\nA Java是编程语言；D XML是数据标记格式；B REST是架构风格而不是此题所描述的OpenFlow流表控制协议。REST风格的接口也可能用于南向设备配置，例如RESTCONF，因此不能仅因方向就把所有REST接口排除。"
+      }
+    },
+    {
+      "id": 565,
+      "before_sha256": "4a2a7d015890c3cab22307ab5a9a7ebb4359964ff1e7390ce6b5a3ecc3a45749",
+      "reason": "OpenStack也可以使用HTTP，REST是架构风格而非HTTP专属协议；限定所问架构风格。",
+      "updates": {
+        "prompt": "Which architectural style is commonly used to design web APIs that exchange resource representations using HTTP requests and responses?",
+        "explanation": "C。REST是一种针对分布式超媒体系统的架构风格，常见RESTful Web API使用HTTP请求和响应传递资源表示，例如JSON或XML。REST并不是具体的HTTP协议，也不意味着所有HTTP服务都自动符合REST约束。\n\nA OpenStack是云基础设施平台，其组件也可能提供HTTP API；B OpFlex和D OpenFlow分别服务于特定网络策略或转发控制场景，不是题目所问的通用Web架构风格。原题仅问“什么使用HTTP”，OpenStack也可能符合，现已限定架构风格；防火墙是否允许HTTP/HTTPS取决于网络策略。"
+      }
+    }
+  ]
+}

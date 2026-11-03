@@ -1,0 +1,25 @@
+{
+  "sources": {
+    "CPU_ACL": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_access_control_lists.html",
+    "MFA_token": "https://help.access.securid.com/EN_US/Content/Production/ngx_c_hardware_token.html",
+    "SSH": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/security-vpn/security-vpn/m_sec-secure-shell-v2-0.html",
+    "WPA2": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/67134-wpa2-config.html",
+    "ACL": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/security/acls/acls-configuration-guide/access-control-lists.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q480_image.jpg"
+  ],
+  "q480_router_addresses": [
+    "172.16.1.62",
+    "192.168.1.1",
+    "192.168.2.1",
+    "192.168.3.1"
+  ],
+  "q480_single_ingress": "GigabitEthernet0/0",
+  "q480_answer_change": [
+    "B",
+    "A"
+  ],
+  "q477_original_D": "PIN+possession can satisfy MFA; replaced, not falsely rejected",
+  "limitations": "Manual source/document/exhibit review; not live WLC/MFA/SSH/WPA2/router testing."
+}

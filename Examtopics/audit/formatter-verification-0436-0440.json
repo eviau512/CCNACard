@@ -1,0 +1,19 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    436,
+    437,
+    438,
+    439,
+    440
+  ],
+  "code_results": [
+    {
+      "id": 439,
+      "kind": "code",
+      "input": "`ip domain-name domain`",
+      "expected": "ip domain-name domain",
+      "html": "<code class=\"inline-code\">ip domain-name domain</code>"
+    }
+  ]
+}

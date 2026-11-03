@@ -1,0 +1,26 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    416,
+    417,
+    418,
+    419,
+    420
+  ],
+  "code_results": [
+    {
+      "id": 416,
+      "kind": "code",
+      "input": "```text\nR1(config)# ip nat inside source list 1 interface GigabitEthernet0/0 overload\n\n```",
+      "expected": "R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0 overload",
+      "html": "<pre class=\"cli-block\"><code>R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0 overload</code></pre>"
+    },
+    {
+      "id": 420,
+      "kind": "code",
+      "input": "`copy tftp: flash:`",
+      "expected": "copy tftp: flash:",
+      "html": "<code class=\"inline-code\">copy tftp: flash:</code>"
+    }
+  ]
+}

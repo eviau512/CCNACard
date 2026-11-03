@@ -1,0 +1,31 @@
+{
+  "sources": {
+    "RADIUS": "https://www.rfc-editor.org/rfc/rfc2865.html",
+    "OWE": "https://www.rfc-editor.org/rfc/rfc8110.html",
+    "FT": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/80211r-ft/b-80211r-dg.html",
+    "PMF": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/212576-configure-802-11w-management-frame-prote.html",
+    "WLC_security": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html",
+    "IOS_passwords": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/security-vpn/security-vpn/m_sec-cfg-sec-4cli-0.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q514_image.jpg",
+    "exhibits/q515_image.jpg"
+  ],
+  "q514_observed": {
+    "FT": "Adaptive",
+    "legacy_8021x": true,
+    "FT_8021x": false
+  },
+  "q515_observed": {
+    "WPA": false,
+    "WPA2": true,
+    "AES": true,
+    "PMF": "Disabled"
+  },
+  "q515_answer_change": [
+    "B",
+    "C"
+  ],
+  "q511_hiding": "MD5-derived XOR is reversible with required shared materials, not one-way encryption",
+  "limitations": "Manual source/document/exhibit review; not live RADIUS/console/OWE/FT/PMF tests."
+}

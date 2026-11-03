@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "password_storage": "https://www.cisco.com/c/en/us/about/trust-center/resilient-infrastructure/protecting-secrets.html",
+    "IOS_passwords": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/security-vpn/security-vpn/m_sec-cfg-sec-4cli-0.html",
+    "WPA3": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_wpa3.html",
+    "DAI": "https://www.cisco.com/c/en/us/td/docs/switches/connectedgrid/cgsswitch_master/software/configuration/guide/security/Security/sec_dynarp.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q483_image.jpg",
+    "exhibits/q484_image.jpg",
+    "exhibits/q485_image.jpg"
+  ],
+  "q484_replacement": "Correct global/line configuration modes in full text snippets; SSH prerequisites are explicit added scenario conditions",
+  "q483_trust_is_not_device_discovery": true,
+  "q482_SAE_does_not_replace_four_way_handshake": true,
+  "limitations": "Manual source/document/exhibit review; not live password, WPA3, DAI or SSH tests."
+}

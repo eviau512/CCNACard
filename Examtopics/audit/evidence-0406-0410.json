@@ -1,0 +1,21 @@
+{
+  "sources": {
+    "NTP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/configuration/15-mt/bsm-15-mt-book/bsm-time-calendar-set.html",
+    "syslog": "https://www.cisco.com/c/en/us/td/docs/routers/7300/troubleshooting/7301_troubleshooting_guides/7301_troubleshooting_and_config_notes/7411note.html",
+    "SNMP": "https://www.rfc-editor.org/rfc/rfc3416.html",
+    "NAT": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html"
+  },
+  "original_images_directly_viewed": [
+    409
+  ],
+  "q409_selected_tuple": {
+    "inside_local": "10.4.4.5:45507",
+    "inside_global": "172.23.104.4:45507",
+    "outside": "172.23.103.10:80"
+  },
+  "syslog_mnemonics": {
+    "408": "LINEPROTO-5-UPDOWN",
+    "410": "SYS-5-RESTART"
+  },
+  "limitations": "Manual source/document review, not live NTP/SNMP/NAT lab."
+}

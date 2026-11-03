@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "MFA_policy": "https://duo.com/docs/policy",
+    "port_security": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup2T/15_2_sy_swcg_2T/port_security.html",
+    "AAA": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-mt/sec-usr-aaa-15-mt-book/configuring_authentication.html",
+    "local_users": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst_digital_building_series_switches/software/15-2_7_e/configuration_guide/b_1527e_consolidated_cdb_cg/m_sec_locala_cg.html",
+    "stateful_firewall": "https://www.cisco.com/c/en/us/td/docs/security/asa/asa923/configuration/general/asa-923-general-config/intro-intro.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q469_image.jpg"
+  ],
+  "q469_replacement": "Complete management SVI/VTY exhibit; active VLAN and connectivity explicitly supplied; not claimed from original image",
+  "q468_disambiguation": "Requires automatic running-config insertion, not merely table learning",
+  "q470_unchanged": true,
+  "limitations": "Manual source/document/exhibit review; not live smartphone, firewall, switch or authentication tests."
+}

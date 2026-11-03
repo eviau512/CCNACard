@@ -1,0 +1,19 @@
+{
+  "sources": {
+    "DHCP_relay": "https://www.rfc-editor.org/rfc/rfc2131.html",
+    "snooping": "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-host-configuration-protocol-dhcp-dhcpv6/217055-operate-and-troubleshoot-dhcp-snooping.html",
+    "PortFast": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q442_image.jpg"
+  ],
+  "q442_observations": {
+    "vlan": 1,
+    "trust_list_empty": true,
+    "untrusted_drop_counter": 32,
+    "processed": 34,
+    "port_id_shown": false
+  },
+  "q443_q444_unchanged": true,
+  "limitations": "Manual source/document/exhibit review; not live IOS or DHCP/STP tests."
+}

@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    461,
+    462,
+    463,
+    464,
+    465
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 465,
+      "kind": "code",
+      "input": "```text\ninterface GigabitEthernet0/0\n ip address 209.165.200.225 255.255.255.224\n ip nat outside\n!\ninterface GigabitEthernet0/1.100\n encapsulation dot1Q 100\n ip address 10.10.10.1 255.255.255.0\n ip nat inside\n!\ninterface GigabitEthernet0/1.200\n encapsulation dot1Q 200\n ip address 10.10.20.1 255.255.255.0\n ip nat inside\n!\nip access-list standard NAT_INSIDE_RANGES\n permit 10.10.10.0 0.0.0.255\n!\nip nat inside source list NAT_INSIDE_RANGES interface GigabitEthernet0/0 overload\n\n```",
+      "expected": "interface GigabitEthernet0/0\n ip address 209.165.200.225 255.255.255.224\n ip nat outside\n!\ninterface GigabitEthernet0/1.100\n encapsulation dot1Q 100\n ip address 10.10.10.1 255.255.255.0\n ip nat inside\n!\ninterface GigabitEthernet0/1.200\n encapsulation dot1Q 200\n ip address 10.10.20.1 255.255.255.0\n ip nat inside\n!\nip access-list standard NAT_INSIDE_RANGES\n permit 10.10.10.0 0.0.0.255\n!\nip nat inside source list NAT_INSIDE_RANGES interface GigabitEthernet0/0 overload",
+      "html": "<pre class=\"cli-block\"><code>interface GigabitEthernet0/0\n ip address 209.165.200.225 255.255.255.224\n ip nat outside\n!\ninterface GigabitEthernet0/1.100\n encapsulation dot1Q 100\n ip address 10.10.10.1 255.255.255.0\n ip nat inside\n!\ninterface GigabitEthernet0/1.200\n encapsulation dot1Q 200\n ip address 10.10.20.1 255.255.255.0\n ip nat inside\n!\nip access-list standard NAT_INSIDE_RANGES\n permit 10.10.10.0 0.0.0.255\n!\nip nat inside source list NAT_INSIDE_RANGES interface GigabitEthernet0/0 overload</code></pre>"
+    },
+    {
+      "id": 465,
+      "kind": "code",
+      "input": "```text\nip access-list standard NAT_INSIDE_RANGES\n permit 10.10.20.0 0.0.0.255\n\n```",
+      "expected": "ip access-list standard NAT_INSIDE_RANGES\n permit 10.10.20.0 0.0.0.255",
+      "html": "<pre class=\"cli-block\"><code>ip access-list standard NAT_INSIDE_RANGES\n permit 10.10.20.0 0.0.0.255</code></pre>"
+    }
+  ]
+}

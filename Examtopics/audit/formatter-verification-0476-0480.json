@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    476,
+    477,
+    478,
+    479,
+    480
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 478,
+      "kind": "code",
+      "input": "`ip domain name example.com`",
+      "expected": "ip domain name example.com",
+      "html": "<code class=\"inline-code\">ip domain name example.com</code>"
+    },
+    {
+      "id": 478,
+      "kind": "code",
+      "input": "`ip ssh version 2`",
+      "expected": "ip ssh version 2",
+      "html": "<code class=\"inline-code\">ip ssh version 2</code>"
+    }
+  ]
+}

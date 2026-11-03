@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "JSON": "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "SD-Access设计": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html",
+    "transit": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-sda-deployment.html",
+    "SDN": "https://opennetworking.org/sdn-definition/"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual documentation review; no live SD-Access or automation tests."
+}

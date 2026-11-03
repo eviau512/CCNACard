@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "SNMP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-0s/nm-snmp-cfg-snmp-support.html",
+    "NTP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/command/bsm-cr-book/m_bsm-cr-n1.html",
+    "local_clock_ACL": "https://www.cisco.com/c/en/us/support/docs/security-vpn/public-key-infrastructure-pki/211333-IOS-PKI-Deployment-Guide-Initial-Design.pdf",
+    "RSA": "https://www.cisco.com/c/en/us/td/docs/ios/12_2/security/command/reference/srfike.html",
+    "FTP": "https://www.rfc-editor.org/rfc/rfc959.html",
+    "shaping": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html"
+  },
+  "original_images_directly_viewed": [],
+  "q437_correct_keyword": "serve-only",
+  "q437_local_reference_acl": "127.127.7.1",
+  "q436_explicit_version": "v3",
+  "q438_q440_unchanged": true,
+  "limitations": "Manual source/document review, not live IOS authentication/NTP/SSH tests."
+}

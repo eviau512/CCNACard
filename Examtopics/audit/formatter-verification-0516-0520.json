@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    516,
+    517,
+    518,
+    519,
+    520
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 519,
+      "kind": "code",
+      "input": "`crypto key generate rsa`",
+      "expected": "crypto key generate rsa",
+      "html": "<code class=\"inline-code\">crypto key generate rsa</code>"
+    },
+    {
+      "id": 519,
+      "kind": "code",
+      "input": "`crypto key import rsa pem`",
+      "expected": "crypto key import rsa pem",
+      "html": "<code class=\"inline-code\">crypto key import rsa pem</code>"
+    },
+    {
+      "id": 519,
+      "kind": "code",
+      "input": "`crypto key zeroize rsa`",
+      "expected": "crypto key zeroize rsa",
+      "html": "<code class=\"inline-code\">crypto key zeroize rsa</code>"
+    },
+    {
+      "id": 519,
+      "kind": "code",
+      "input": "`crypto key pubkey-chain rsa`",
+      "expected": "crypto key pubkey-chain rsa",
+      "html": "<code class=\"inline-code\">crypto key pubkey-chain rsa</code>"
+    }
+  ]
+}

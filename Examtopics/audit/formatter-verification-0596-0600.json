@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    596,
+    597,
+    598,
+    599,
+    600
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 598,
+      "kind": "code",
+      "input": "`netconf max-message 1000`",
+      "expected": "netconf max-message 1000",
+      "html": "<code class=\"inline-code\">netconf max-message 1000</code>"
+    },
+    {
+      "id": 598,
+      "kind": "code",
+      "input": "`show running-config`",
+      "expected": "show running-config",
+      "html": "<code class=\"inline-code\">show running-config</code>"
+    },
+    {
+      "id": 598,
+      "kind": "code",
+      "input": "`netconf ma-message 10`",
+      "expected": "netconf ma-message 10",
+      "html": "<code class=\"inline-code\">netconf ma-message 10</code>"
+    },
+    {
+      "id": 598,
+      "kind": "code",
+      "input": "`netconf max-message 10`",
+      "expected": "netconf max-message 10",
+      "html": "<code class=\"inline-code\">netconf max-message 10</code>"
+    }
+  ]
+}

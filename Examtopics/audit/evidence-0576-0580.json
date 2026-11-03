@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "SDN": "https://opennetworking.org/sdn-definition/",
+    "OpenFlow": "https://opennetworking.org/wp-content/uploads/2014/10/openflow-switch-v1.3.4.pdf",
+    "Puppet": "https://help.puppet.com/core/current/Content/PuppetCore/modules_fundamentals.htm"
+  },
+  "original_images_directly_viewed": [],
+  "q580_unchanged": true,
+  "limitations": "Manual architecture and documentation review; not live controller or hypervisor tests."
+}

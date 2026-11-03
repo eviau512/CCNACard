@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "JWT": "https://www.rfc-editor.org/rfc/rfc7519.html",
+    "JWS": "https://www.rfc-editor.org/rfc/rfc7515.html",
+    "JSON": "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "SDN": "https://opennetworking.org/sdn-definition/"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q587_image.jpg",
+    "exhibits/q588_image.jpg",
+    "exhibits/q590_image.jpg"
+  ],
+  "limitations": "Manual documentation and image review; not live JWT or SDN tests."
+}

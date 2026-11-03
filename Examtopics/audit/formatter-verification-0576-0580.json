@@ -1,0 +1,20 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    576,
+    577,
+    578,
+    579,
+    580
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 580,
+      "kind": "code",
+      "input": "`.pp`",
+      "expected": ".pp",
+      "html": "<code class=\"inline-code\">.pp</code>"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "scope": "Manual Q526-Q530; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 526,
+      "before_sha256": "721809c5404c2b1314f014c2b94ca640efd58098c019a091df87704382ad3d10",
+      "reason": "WPA亦可使用PSK及802.1X，原题并非单选；限定旧硬件兼容的数据保护机制，区分MIC与加密。",
+      "updates": {
+        "prompt": "Which data protection mechanism was characteristic of the original WPA transition design for compatibility with legacy RC4-capable wireless hardware?",
+        "options": [
+          {
+            "label": "A",
+            "text": "TKIP with the Michael message integrity check"
+          },
+          {
+            "label": "B",
+            "text": "small Wi-Fi application"
+          },
+          {
+            "label": "C",
+            "text": "preshared key"
+          },
+          {
+            "label": "D",
+            "text": "802.1x authentication"
+          }
+        ],
+        "explanation": "A。初代WPA为兼容旧硬件使用TKIP及Michael消息完整性校验；TKIP包含每包密钥混合等机制，Michael是完整性校验而不是加密算法。重放保护涉及序列计数等机制，不应把MIC单独说成能防止所有重放或篡改。\n\nB不是有关的数据保护机制；C预共享密钥（PSK）是Personal认证方式，D 802.1X是Enterprise接入认证框架，二者都可以与WPA有关，但不回答本题限定的数据保护机制。原题笼统问WPA的特征，C和D也可能成立。\n\nTKIP不是WPA独占，某些WPA2兼容部署也支持它；它已属过时方案，不应据此推荐新部署。"
+      }
+    },
+    {
+      "id": 527,
+      "before_sha256": "58f61007a5cf89adefdcfad96818433478bb19c53c24d8543fc85b6530c32269",
+      "reason": "原解析错误声称SAE取代四次握手并使所有口令攻击不可能；限定Personal，区分认证与后续握手。",
+      "updates": {
+        "prompt": "How does WPA3-Personal improve password authentication compared with traditional WPA2-Personal PSK?",
+        "explanation": "A。WPA3-Personal使用SAE进行基于口令的认证与密钥交换；在正确实现和适当安全假设下，相比传统PSK握手更能抵抗利用被动捕获材料进行的离线口令猜测，并具有针对后来口令泄露的前向保密性质。弱口令、主动尝试、实现缺陷及终端失陷仍可能带来风险。\n\nSAE认证成功后仍使用四次握手来协商和安装会话密钥；D将四次握手当作WPA3独有的认证改进不成立，不能说SAE取消了它。B的RC4和C的TKIP是旧方案，而不是WPA3-Personal的安全改进；某些旧WPA2兼容部署仍可使用TKIP。题目限定Personal，不能把SAE套用于所有Enterprise认证。"
+      }
+    },
+    {
+      "id": 528,
+      "before_sha256": "3f77fbddeeb5c21de001c074284ed5dfa4bac1b278f7b1a5d7b9d107b162d1a3",
+      "reason": "传统IPS仅看L3/L4和NGIPS必能即时定位用户均属泛化；身份关联需要可用的上下文和配置。",
+      "updates": {
+        "explanation": "A。NGIPS可结合检测到的网络事件与可用的用户、主机和应用上下文，帮助分析哪些活动与威胁事件相关。用户关联依赖身份源、IP到用户映射、时间和相应策略配置；NAT、共享地址、过期映射或加密流量等均可能限制可见性，不能保证自动、实时确定责任人。\n\nB的网络集中控制角色与入侵检测/防御职责不同；C描述交换机配合RADIUS/NAC实施802.1X等接入认证，D描述交换机依据学习的MAC地址转发。实际产品可集成其他系统，但这不改变各选项所描述的主要功能。\n\nNGIPS可以依据策略告警或在线阻断；传统IPS也可能检查应用层和使用不同检测方法，不能一概说只能看IP、端口或静态签名。"
+      }
+    },
+    {
+      "id": 529,
+      "before_sha256": "28f099c98e48c2a671e30d0901a821c4dab21486739a44b6eaec714812c515e1",
+      "reason": "原题混称transport mode，且声称隧道必定加密；限定ESP启用保密并解释外层可见。",
+      "updates": {
+        "prompt": "With ESP confidentiality enabled, which IPsec encapsulation mode protects the original IP header and payload inside an encrypted payload and adds a new outer IP header?",
+        "explanation": "D。ESP隧道模式将原始IP包作为内部内容封装，启用保密性时加密原始IP头及其载荷，并添加用于转发的外层IP头。外层头、ESP部分字段以及流量大小和时间等元数据仍可能可见，不能说所有信息都隐藏。\n\nB传输模式保留原始IP头用于转发，在ESP启用保密性时保护其上层载荷；A pipe和C control不是此处比较的IPsec封装模式。IPsec隧道本身不保证加密：AH不提供保密性，ESP也可配置为不提供保密性，因此本题明确限定ESP加密已启用。"
+      }
+    },
+    {
+      "id": 530,
+      "before_sha256": "5bd1bcb1188f1dbd3c4accd3bf41c024550e8b3b16a4bb050d7385c35a2dccaf",
+      "reason": "原题没有启用端口安全和平台前提；第二个源MAC触发违规，不是已学习后才违规。",
+      "updates": {
+        "prompt": "On a switch that supports port security on a static trunk, port security is enabled with a maximum of one secure MAC address and shutdown violation mode. One secure MAC address is already learned. What happens when a frame with a second, different source MAC address causes a security violation?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The violation places the interface in the err-disabled state."
+          },
+          {
+            "label": "B",
+            "text": "It causes a network loop when a violation occurs."
+          },
+          {
+            "label": "C",
+            "text": "It disables the native VLAN configuration as soon as port security is enabled."
+          },
+          {
+            "label": "D",
+            "text": "It places the port in the err-disabled state after 10 MAC addresses are statically configured."
+          }
+        ],
+        "explanation": "A。题设已启用端口安全，且最大数为1、违规模式为shutdown。达到上限后收到不匹配的源MAC帧会触发违规并使接口进入err-disabled；不是先成功学习第二个地址再判断违规。不同平台及VLAN的具体限制应查对应版本文档。\n\nB违规本身不会直接造成网络环路；C启用端口安全不会因此自动删除native VLAN配置；D把静态配置十个地址误当作此题的第二个源地址违规，且静态配置不能忽略所设最大数限制。\n\n端口安全并非trunk默认自动启用，trunk支持情况因平台和配置而异。此题明确给出启用状态及参数，不能仅凭链路是trunk就推断发生违规。"
+      }
+    }
+  ]
+}

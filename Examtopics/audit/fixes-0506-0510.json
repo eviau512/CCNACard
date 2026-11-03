@@ -1,0 +1,51 @@
+{
+  "scope": "Manual Q506-Q510; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 507,
+      "before_sha256": "f4484a0bfcb2fce431637e1e5bb0962a521e4ba2db8fb4d79a640cd55892b61c",
+      "reason": "核心D正确，但IPsec原生绝不支持组播/ISATAP组合非标准不存在等泛化。限定IPv4站点需求，说明GRE先封装、IPsec配置加密，协议与产品限制分别看。",
+      "updates": {
+        "prompt": "Which listed tunneling mechanism can carry IPv4 multicast between remote sites across a unicast IPv4 WAN while also providing IPsec encryption for the encapsulated traffic?",
+        "explanation": "D，GRE over IPsec先把站点间的组播等载荷封装为GRE/IP报文，再以配置为加密保护的IPsec处理封装后报文。GRE负责隧道承载能力，IPsec负责所选策略下的机密性/完整性等保护，两个角色不同。\n\nC GRE本身不提供密码学加密/认证，单独GRE不满足加密要求；A ISATAP是IPv6经IPv4的站内过渡机制，不是此IPv4组播站点保护方案。B把IPsec与ISATAP名称组合也没有给出所需的GRE封装路径，不应据此否认所有可能的协议组合实现。\n\n某些传统基于策略的IPsec产品不能直接转发所需组播，因此常组合GRE；但不能把产品限制写成整个IPsec架构永远不支持任何组播。实际还需支持相关功能的平台、路由、MTU及正确IPsec算法配置，并非只出现两个名称就保证隧道已工作。"
+      }
+    },
+    {
+      "id": 508,
+      "before_sha256": "dfe80624d6a1b4d11b417457ff9d956302dd6b5ed517417dc3393af70955a0f6",
+      "reason": "原A/B均permit同一/24后implicit deny all，其许可效果等同，不能以B宽deny排错。补其他来源放行、末尾permit any，并恢复所有配置换行，范围差异可验证。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Select a standard IPv4 ACL definition for a downstream filtering point traversed by both source networks. Permit sources in the Gi0/0 subnet 10.100.100.0/24, deny only sources in the Gi0/1 subnet 192.168.0.0/16, and permit all other sources. This IOS uses the standard numeric ACL identifier ranges 1–99 and 1300–1999. Starting in global configuration mode, which definition meets the policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip access-list standard 99\n permit 10.100.100.0 0.0.0.255\n deny 192.168.0.0 0.0.255.255\n permit any\nexit"
+          },
+          {
+            "label": "B",
+            "text": "ip access-list standard 99\n permit 10.100.100.0 0.0.0.255\n deny 192.168.0.0 0.255.255.255\n permit any\nexit"
+          },
+          {
+            "label": "C",
+            "text": "ip access-list standard 199\n permit 10.100.100.0 0.0.0.255\n deny 192.168.0.0 0.255.255.255\n permit any\nexit"
+          },
+          {
+            "label": "D",
+            "text": "ip access-list standard 199\n permit 10.100.100.0 0.0.0.255\n deny 192.168.0.0 0.0.255.255\n permit any\nexit"
+          }
+        ],
+        "explanation": "A，99是题设合法标准编号，先permit10.100.100.0/24，deny192.168.0.0/16（wildcard0.0.255.255），最后permit any保留其他来源。标准ACL匹配的是源IP，不会直接识别“从哪个接口来”；共同过滤位置及源网段关系已由题干给定，应用位置仍需按实际拓扑配置。\n\nB用0.255.255.255会匹配192.0.0.0/8，例如192.0.2.1也被误拒，违反只拒192.168/16；C/D的199不属于题设标准数字ACL范围，不是此模式的合法标准编号。此结论限定数字标识语法，不混用任意字符串ACL名称的讨论。\n\n原A/B都只有相同permit/24后接deny，再由隐含deny拒绝所有其他地址，两者实际允许集合相同；不能仅凭显式deny范围不同就推出许可结果不同。修订新增“其余来源放行”的明确需求及permit any，使范围差异影响真实策略。ACL只定义还需绑定，不能说仅创建表就自动过滤两个入口。"
+      }
+    },
+    {
+      "id": 509,
+      "before_sha256": "08f2aae85321a5f89c3ff21685bea47894573fe9011625b8fa545dcfa4d9b1f9",
+      "reason": "原解析模板，未限定传统UDP RADIUS，属性隐藏不等于所有报文保密；明确无TLS/IPsec，区分AAA与传输confidentiality，提及安全传输扩展。",
+      "updates": {
+        "prompt": "A WLC uses traditional RADIUS over UDP without TLS, IPsec or another secure transport. Which listed property is not provided for the complete RADIUS packet contents by that transport?",
+        "explanation": "D，完整RADIUS报文内容的机密性。传统UDP RADIUS并不加密整个报文；可隐藏某些密码属性不等于用户名、其他属性及全部元数据都被加密。不能把某一属性保护扩大成完整传输保密，也不必说所有属性始终都明文或只有一种属性可受保护。\n\nA authorization、B authentication、C accounting是RADIUS相关AAA功能类别，具体WLC支持与已配策略另论；它们不是“将全部RADIUS包内容加密”的同义词。RADIUS认证和授权常结合属性返回，也不等于与TACACS+所有逐命令授权能力完全相同。\n\nRADIUS over TLS等安全传输可提供额外保护，题目已明确排除，不能笼统说所有RADIUS部署永远没有机密性。WLC管理者到WLC的SSH/HTTPS连接与WLC到AAA服务器的RADIUS路径也是不同链路，不能因一段加密就推断另一段也加密。"
+      }
+    }
+  ]
+}

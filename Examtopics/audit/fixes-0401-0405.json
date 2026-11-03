@@ -1,0 +1,67 @@
+{
+  "scope": "Manual Q401-Q405; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 401,
+      "before_sha256": "b71e93abdf0515339cd3b28de4f83edd5d1bd45d13c4e4f51f89230f1a2c9afa",
+      "reason": "A可用池正确；DHCP可保存MAC/client-id预留与绑定，不应因D而泛称不保存MAC，DNS也不局限公网。按服务主要职责与转发表区别重写。",
+      "updates": {
+        "explanation": "A。DHCP服务器维护池范围、可分配地址状态、租约和客户端绑定，用于决定能给客户端租出哪些IP，并提供网关/DNS等选项。DNS服务器主要维护名称与地址记录，用户认证凭据通常由目录或AAA服务管理，这不是DHCP的分配职责。\n\nD所述静态MAC清单不是地址池可用资源的定义，但不能据此声称DHCP不保存MAC：服务器可按MAC或client-id建立保留/手工绑定。那是客户端到IP的分配关系，与交换机按MAC、VLAN和端口进行二层转发的表不同。DNS记录也可用于私有地址，不仅限于公网IP。"
+      }
+    },
+    {
+      "id": 402,
+      "before_sha256": "757434e8006ee3d938952e6154ff0d089c5a4c3eb9c3cc1671018326a7cce52a",
+      "reason": "D详细IP输出正确；brief的Method也能显示DHCP，接口后brief语法支持不能统一否认。限定完整接口IP属性输出，去固定首行示例及所有平台错误断言，保留D。",
+      "updates": {
+        "prompt": "Which listed Cisco IOS command displays detailed IP properties for GigabitEthernet0/0, including its address-allocation method and IP service settings, rather than only a brief interface summary?",
+        "explanation": "D，`show ip interface GigabitEthernet0/0`查看该接口的完整IP属性，可核对地址确定方式和其他IP服务设置。已通过DHCP获取地址时，相应平台输出可显示地址由DHCP确定；具体字段位置和措辞依版本，不应虚构必在首行出现的固定格式。\n\nA/C把dhcp当作这条show命令的相应关键字，不是所需详细接口形式；B的普通show interface主要显示接口运行、链路和计数信息。E要求brief摘要，不提供题目要求的完整IP属性；brief输出的Method列本身也能帮助辨别DHCP来源，不能泛称只有详细命令才能判断，也不能在未限定平台时一概断言接口后brief必定非法。"
+      }
+    },
+    {
+      "id": 403,
+      "before_sha256": "3da49f6a5faec09397cd553a942d065939739bda385d82d34a5a039fdd3799b4",
+      "reason": "C等级0–7全选正确；需已有host/启用日志等前提，阈值不自动启用所有debug命令。B漏Alert1，原解析错说准确覆盖0–4；A低severity语义模糊，改明确only6/7干扰。",
+      "updates": {
+        "prompt": "A router has remote syslog logging enabled, a reachable syslog host, and no additional message filters. What is the complete severity range permitted by configuring logging trap debugging?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It sends only severity 6 and 7 messages to the syslog server."
+          },
+          {
+            "label": "B",
+            "text": "It causes the router to send all messages with the severity levels Warning, Error, Critical, and Emergency to the syslog server"
+          },
+          {
+            "label": "C",
+            "text": "It causes the router to send all messages to the syslog server"
+          },
+          {
+            "label": "D",
+            "text": "It causes the router to stop sending all messages to the syslog server"
+          }
+        ],
+        "explanation": "C，允许已产生的0–7全部严重性等级通过该远程syslog门限。Debugging是7，门限包含该数字及所有更小数字：0 Emergency、1 Alert、2 Critical、3 Error、4 Warning、5 Notification、6 Informational、7 Debugging。\n\nA只含6/7，不完整；B列出的0/2/3/4不仅缺5–7，还漏1 Alert；D停止发送与设置门限相反。命令只调整日志输出阈值，不自动开启所有debug生成器，不等于记录每个数据包，也不保证忽略其他限速/丢失；题目已明确远端日志启用及无额外过滤。"
+      }
+    },
+    {
+      "id": 404,
+      "before_sha256": "014430a0100c73852b236f325795abea657f219feddded4ae8172ce93b89bb87",
+      "reason": "B SNMP正确；原模板及乱码没说明CONFIG-COPY-MIB SET写权限、复制操作状态和文件传输协议区别，改具体管理备份机制。",
+      "updates": {
+        "explanation": "B，SNMP。支持的Cisco IOS设备可通过CISCO-CONFIG-COPY-MIB暴露配置复制操作；管理站以具有相应写权限的SNMP SET设置源/目的、文件服务器等对象并触发复制，再检查操作状态。这可由管理程序逐设备执行，完成多台路由器的备份，而不需要逐台交互登录。\n\nSNMP负责通过MIB管理复制任务，配置文件本身可由该设备支持的TFTP或其他传输方式发送；不能把MIB对象访问等同于整个文件必通过SNMP载荷传送。还须确认设备/MIB支持、授权与文件服务器可达，单有只读SNMP监控不足以执行写操作。ARP用于邻居地址解析，SMTP用于邮件，CDP用于直连设备发现，均不是IOS MIB访问协议。"
+      }
+    },
+    {
+      "id": 405,
+      "before_sha256": "46eb7b5797101887f8f58c99d83000f0a7cb6ee8cf6bd7fce2c17c6c23c6f8c0",
+      "reason": "A接口ip address dhcp正确；模板未说明接口模式或client子命令仅参数，补完整配置块及client/relay/server职责。",
+      "updates": {
+        "prompt": "Which Cisco IOS interface-configuration command enables the router interface to obtain its IPv4 address as a DHCP client?",
+        "explanation": "A，`ip address dhcp`。在支持DHCP客户端的三层接口下配置，例如：\n```text\nRouter(config)# interface GigabitEthernet0/0\nRouter(config-if)# ip address dhcp\nRouter(config-if)# no shutdown\n```\n该接口随后可向服务器请求地址/租约，能否成功仍取决于链路、服务器及策略。`ip dhcp client`前缀下可有客户端标识等附加参数，但单独B不是取代ip address dhcp的启用命令；C的ip helper-address用于中继客户端请求，D的ip dhcp pool用于服务器地址池。客户端、中继和服务器是不同职责，同一路由器也可在不同场景承担多种职责。"
+      }
+    }
+  ]
+}

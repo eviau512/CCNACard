@@ -1,0 +1,76 @@
+{
+  "scope": "Manual Q521-Q525; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 521,
+      "before_sha256": "3e528957b7293aa3a4bb060e7475a546223e60b1a39a0cee5eb013f70fe0ab48",
+      "reason": "原D绑定default但未定义local/defaultAAA条件，不能保证RADIUS故障回退；原B还缺group语法。改完整独立console local列表，不修改远程默认策略，不把privilege15当认证必需。",
+      "updates": {
+        "prompt": "AAA is already enabled on a classic Cisco IOS router. Its console currently uses a default RADIUS-only login method list, RADIUS is unavailable, no local users exist, and no separate console authorization policy interferes. Starting in global configuration mode, which configuration makes console login use the new localuser account with secret plaintextpassword independently of RADIUS, without changing the existing remote-login default method list?",
+        "options": [
+          {
+            "label": "A",
+            "text": "line console 0\n password plaintextpassword\n login\nexit"
+          },
+          {
+            "label": "B",
+            "text": "username localuser secret plaintextpassword\naaa authentication login CONSOLE_LOCAL group radius\nline console 0\n login authentication CONSOLE_LOCAL\nexit"
+          },
+          {
+            "label": "C",
+            "text": "username localuser secret plaintextpassword\naaa authentication login CONSOLE_LOCAL local\nline vty 0 15\n login authentication CONSOLE_LOCAL\nexit"
+          },
+          {
+            "label": "D",
+            "text": "username localuser secret plaintextpassword\naaa authentication login CONSOLE_LOCAL local\nline console 0\n login authentication CONSOLE_LOCAL\nexit"
+          }
+        ],
+        "explanation": "D，创建本地用户，定义命名登录方法列表`aaa authentication login CONSOLE_LOCAL local`，再在console0绑定`login authentication CONSOLE_LOCAL`。这份专用列表只用本地库，不依赖RADIUS可用性，也不改远程线路原来的default列表。secret示例值是教学凭据，不把默认存储类型一概称为强哈希。\n\nA只有线路口令，不创建本地用户名或完成本题AAA本地库选择；B列表仍只有group radius，本地用户存在也不会自动被该列表调用；C把正确local列表应用在VTY而非console，不满足所问目标且改了错误线路。\n\n原D仅绑定default，没有显示default包含local就不能证明自动回退。RADIUS/TACACS+方法列表回退还需区分服务器不可用与明确拒绝认证，不能把坏口令拒绝一概转成本地登录。此题要求本地console认证，不要求直接授予privilege15，后者属于另一权限决策，不应被当成必需认证步骤。"
+      }
+    },
+    {
+      "id": 522,
+      "before_sha256": "7b9ac67f2c242ad8f92f7cbdc3c8b24020bd5af4e5f292401094f1fc5ee0cec9",
+      "reason": "把所有WPA2Enterprise等同共享PSK及全无线唯一PFS错误；限定Personal代际比较，解释SAE前向保密与实际会话密钥泄漏不同。",
+      "updates": {
+        "prompt": "Compared with traditional WPA/WPA2-Personal PSK authentication, which listed Wi-Fi generation introduces SAE-based Personal authentication with forward secrecy against later disclosure of the shared password?",
+        "explanation": "D，WPA3-Personal采用SAE进行口令认证密钥交换；在适用的正确实现与安全假设下，后来只获知共享口令不应足以恢复先前捕获会话的密钥。这是前向保密的关键意义，而非保证每一种信息泄漏都不影响历史数据。\n\nWPA/WPA2-Personal传统PSK与捕获的相关握手材料可使已知PSK下的有关会话密钥被恢复；不能把这个共享PSK模型套到所有WPA2-Enterprise EAP方法，企业模式是否具备相应性质需看实际认证/密钥交换。A WEP也不是所问SAE代际增强。\n\n前向保密不表示长期口令与认证完全无关，也不保护已直接泄漏的会话密钥或被攻破终端上的明文。题目限定Personal比较，不宣称所有WPA3模式均使用SAE，或其他任何无线/上层协议都绝无前向保密能力。"
+      }
+    },
+    {
+      "id": 523,
+      "before_sha256": "8426b8d90128f7588bb13c3abae30854a263e4c0f02c14d77352d81a882d1bf1",
+      "reason": "C只是漏洞被发现不等于exploit，解析混淆概念且称签名系统必不能阻断、必须特定产品不成立；C改利用代码/技术，去单靠无补丁就零日及防御绝对论。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It is when the network is saturated with malicious traffic that overloads resources and bandwidth."
+          },
+          {
+            "label": "B",
+            "text": "It is when an attacker inserts malicious code into a SQL server."
+          },
+          {
+            "label": "C",
+            "text": "Code or a technique that exploits a previously unknown vulnerability before an effective vendor fix is available."
+          },
+          {
+            "label": "D",
+            "text": "It is when the perpetrator inserts itself in a conversation between two parties and captures or alters data."
+          }
+        ],
+        "explanation": "C，zero-day exploit指利用此前未知漏洞的代码、方法或手段，通常发生在供应商尚无有效修复的窗口。漏洞（vulnerability）是缺陷，利用（exploit）是利用该缺陷的手段；只说发现新漏洞不能直接等同已存在或已发生利用。\n\nA描述流量洪泛等DoS现象；B描述SQL相关注入手法，D描述中间人截获/篡改，均不是零日的定义。它们和零日并非永远互斥：某个注入漏洞也可能曾未知，但不能仅凭攻击类别就判定是否零日。已经长期公开的漏洞仅因某台设备没装补丁，也不能自动称作零日。\n\n未知具体漏洞并不意味着所有现有控制必然失效；通用输入验证、最小权限、隔离、行为检测或既有规则可能减少某些利用风险。也不能说只有某一个沙箱/NGFW产品才可防御，或任何一类产品都能保证识别全部零日。"
+      }
+    },
+    {
+      "id": 525,
+      "before_sha256": "075703a9165aebe24b8432fb970549c0369fca6b369492c9380340231f59a3e2",
+      "reason": "网络AMP与Secure Endpoint混称，所有未知文件自动沙箱及回溯必确认感染不成立；按文件策略/支持类型/许可和采集条件解释，B非功能不必说安全系统绝不会误放行。",
+      "updates": {
+        "explanation": "A，AMP for Firepower/NGIPS中的网络文件恶意软件检测，可按文件策略对支持的特定文件类型进行识别、信誉/处置查询及相应分析，帮助检测或阻止文件携带的恶意代码。它是网络路径上的功能，不应把它与终端代理产品Secure Endpoint完全当成同一部署组件。\n\n云查询、本地分析、文件采集/动态沙箱提交及后续处置变化等能力取决于平台、许可、文件类型、策略、可见性和连接条件。未知文件不会在所有配置下自动送沙箱，回溯处置变化也不等于即时证明哪台主机已感染；需要相应事件、轨迹或终端证据。网络上无法解密或不能解析的流量也不是仅凭启用AMP就必可分析。\n\nB授权流量、C终端用户认证不是此反恶意软件模块的核心任务；不能把B排除理由写成安全设备绝不可能误放行威胁。D URL过滤可与文件防护协同，但按URL/站点分类的功能与对文件本身判定恶意软件不同。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "SDN": "https://opennetworking.org/sdn-definition/",
+    "JSON": "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "RESTCONF": "https://www.rfc-editor.org/rfc/rfc8040.html"
+  },
+  "original_images_directly_viewed": [],
+  "q552_unchanged": true,
+  "limitations": "Manual documentation and JSON syntax review; no live SDN tests."
+}

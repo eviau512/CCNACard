@@ -1,0 +1,20 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    566,
+    567,
+    568,
+    569,
+    570
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 566,
+      "kind": "code",
+      "input": "`{\"name\":\"R1\"}`",
+      "expected": "{\"name\":\"R1\"}",
+      "html": "<code class=\"inline-code\">{\"name\":\"R1\"}</code>"
+    }
+  ]
+}

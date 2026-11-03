@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    496,
+    497,
+    498,
+    499,
+    500
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 496,
+      "kind": "code",
+      "input": "`show ip dhcp snooping binding`",
+      "expected": "show ip dhcp snooping binding",
+      "html": "<code class=\"inline-code\">show ip dhcp snooping binding</code>"
+    },
+    {
+      "id": 497,
+      "kind": "code",
+      "input": "`configure terminal`",
+      "expected": "configure terminal",
+      "html": "<code class=\"inline-code\">configure terminal</code>"
+    },
+    {
+      "id": 497,
+      "kind": "code",
+      "input": "`crypto key generate rsa modulus 2048`",
+      "expected": "crypto key generate rsa modulus 2048",
+      "html": "<code class=\"inline-code\">crypto key generate rsa modulus 2048</code>"
+    },
+    {
+      "id": 499,
+      "kind": "code",
+      "input": "`deny ip any any log`",
+      "expected": "deny ip any any log",
+      "html": "<code class=\"inline-code\">deny ip any any log</code>"
+    }
+  ]
+}

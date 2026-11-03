@@ -1,0 +1,153 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    466,
+    467,
+    468,
+    469,
+    470
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 468,
+      "kind": "code",
+      "input": "```text\nswitchport port-security mac-address sticky\n\n```",
+      "expected": "switchport port-security mac-address sticky",
+      "html": "<pre class=\"cli-block\"><code>switchport port-security mac-address sticky</code></pre>"
+    },
+    {
+      "id": 468,
+      "kind": "code",
+      "input": "`copy running-config startup-config`",
+      "expected": "copy running-config startup-config",
+      "html": "<code class=\"inline-code\">copy running-config startup-config</code>"
+    },
+    {
+      "id": 469,
+      "kind": "code",
+      "input": "```text\nhostname R1\n!\ninterface Vlan10\n ip address 10.100.20.42 255.255.255.0\n no shutdown\n!\nline vty 0 4\n transport input telnet\n login\n\n```",
+      "expected": "hostname R1\n!\ninterface Vlan10\n ip address 10.100.20.42 255.255.255.0\n no shutdown\n!\nline vty 0 4\n transport input telnet\n login",
+      "html": "<pre class=\"cli-block\"><code>hostname R1\n!\ninterface Vlan10\n ip address 10.100.20.42 255.255.255.0\n no shutdown\n!\nline vty 0 4\n transport input telnet\n login</code></pre>"
+    },
+    {
+      "id": 469,
+      "kind": "code",
+      "input": "`username admin privilege 15 secret 0 LabOnly123!`",
+      "expected": "username admin privilege 15 secret 0 LabOnly123!",
+      "html": "<code class=\"inline-code\">username admin privilege 15 secret 0 LabOnly123!</code>"
+    },
+    {
+      "id": 469,
+      "kind": "code",
+      "input": "`login local`",
+      "expected": "login local",
+      "html": "<code class=\"inline-code\">login local</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`line console 0`",
+      "expected": "line console 0",
+      "html": "<code class=\"inline-code\">line console 0</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`line vty 0 4`",
+      "expected": "line vty 0 4",
+      "html": "<code class=\"inline-code\">line vty 0 4</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`password`",
+      "expected": "password",
+      "html": "<code class=\"inline-code\">password</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`login local`",
+      "expected": "login local",
+      "html": "<code class=\"inline-code\">login local</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa new-model`",
+      "expected": "aaa new-model",
+      "html": "<code class=\"inline-code\">aaa new-model</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa new-model`",
+      "expected": "aaa new-model",
+      "html": "<code class=\"inline-code\">aaa new-model</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa authentication login default ...`",
+      "expected": "aaa authentication login default ...",
+      "html": "<code class=\"inline-code\">aaa authentication login default ...</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa new-model`",
+      "expected": "aaa new-model",
+      "html": "<code class=\"inline-code\">aaa new-model</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`radius server <name>`",
+      "expected": "radius server <name>",
+      "html": "<code class=\"inline-code\">radius server &lt;name&gt;</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa new-model`",
+      "expected": "aaa new-model",
+      "html": "<code class=\"inline-code\">aaa new-model</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa group server radius <group-name>`",
+      "expected": "aaa group server radius <group-name>",
+      "html": "<code class=\"inline-code\">aaa group server radius &lt;group-name&gt;</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`server name`",
+      "expected": "server name",
+      "html": "<code class=\"inline-code\">server name</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa new-model`",
+      "expected": "aaa new-model",
+      "html": "<code class=\"inline-code\">aaa new-model</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`username <name> secret <password>`",
+      "expected": "username <name> secret <password>",
+      "html": "<code class=\"inline-code\">username &lt;name&gt; secret &lt;password&gt;</code>"
+    },
+    {
+      "id": 470,
+      "kind": "code",
+      "input": "`aaa new-model`",
+      "expected": "aaa new-model",
+      "html": "<code class=\"inline-code\">aaa new-model</code>"
+    }
+  ]
+}

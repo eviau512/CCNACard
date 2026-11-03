@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    571,
+    572,
+    573,
+    574,
+    575
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 574,
+      "kind": "code",
+      "input": "```text\n[\n  {\"switch\":\"3750\",\"port\":\"e2\"},\n  {\"router\":\"2951\",\"port\":\"e20\"},\n  {\"switch\":\"3750\",\"port\":\"e23\"}\n]\n\n```",
+      "expected": "[\n  {\"switch\":\"3750\",\"port\":\"e2\"},\n  {\"router\":\"2951\",\"port\":\"e20\"},\n  {\"switch\":\"3750\",\"port\":\"e23\"}\n]",
+      "html": "<pre class=\"cli-block\"><code>[\n  {\"switch\":\"3750\",\"port\":\"e2\"},\n  {\"router\":\"2951\",\"port\":\"e20\"},\n  {\"switch\":\"3750\",\"port\":\"e23\"}\n]</code></pre>"
+    },
+    {
+      "id": 574,
+      "kind": "code",
+      "input": "`e2`",
+      "expected": "e2",
+      "html": "<code class=\"inline-code\">e2</code>"
+    },
+    {
+      "id": 574,
+      "kind": "code",
+      "input": "`e20`",
+      "expected": "e20",
+      "html": "<code class=\"inline-code\">e20</code>"
+    },
+    {
+      "id": 574,
+      "kind": "code",
+      "input": "`e23`",
+      "expected": "e23",
+      "html": "<code class=\"inline-code\">e23</code>"
+    }
+  ]
+}

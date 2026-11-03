@@ -1,0 +1,69 @@
+{
+  "scope": [
+    491,
+    495
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 87,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 4,
+  "q493_packet_model": [
+    {
+      "label": "A",
+      "deleted_sequence": 10,
+      "cases": 54,
+      "mismatches": 5,
+      "retained_sequences": [
+        20,
+        30,
+        40
+      ]
+    },
+    {
+      "label": "B",
+      "deleted_sequence": 40,
+      "cases": 54,
+      "mismatches": 2,
+      "retained_sequences": [
+        10,
+        20,
+        30
+      ]
+    },
+    {
+      "label": "C",
+      "deleted_sequence": 30,
+      "cases": 54,
+      "mismatches": 17,
+      "retained_sequences": [
+        10,
+        20,
+        40
+      ]
+    },
+    {
+      "label": "D",
+      "deleted_sequence": 20,
+      "cases": 54,
+      "mismatches": 0,
+      "retained_sequences": [
+        10,
+        30,
+        40
+      ]
+    }
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "4bb244663b6c3e36419895b0677dc0245c838b176b37987f023f4d5ba9bd3326",
+  "app_bundle_sha256": "cbe47c85beb9f37bd0451d74b41ce8ec0f76f8cbf92b989752f0109d5507ee02",
+  "limitations": "Manual source/document/exhibit/formatter and representative ACL deletion/packet model; not live DAI/VPN/ACL/SNMP/VLAN tests."
+}

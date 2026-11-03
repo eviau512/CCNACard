@@ -1,0 +1,83 @@
+{
+  "scope": "Manual Q546-Q550; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 546,
+      "before_sha256": "8dbbfee70fb166a3dc36c3578d7e18f244be7d96f38c5fd0e63f3c9b107c6f74",
+      "reason": "自动部署可提速但不保证数量级改进或无中断升级；成本和设备形式依具体方案。",
+      "updates": {
+        "explanation": "B。Cisco DNA Center（后称Catalyst Center）可借助集中模板、配置编排和支持设备的Plug and Play上线等功能，减少重复的逐台手工操作，因此在合适部署条件下可以加快批量交付。实际速度取决于设备兼容性、规划、网络发现、测试和现有自动化水平。\n\nA和D把传统逐台手工方式说成通常更快，不是本题所强调的自动化优势；传统网络也可以使用脚本或管理系统自动化。C的成本不能单凭架构断言，硬件、许可证、运维和规模均会影响总成本。镜像升级可能需要重启或维护窗口，不能保证所有升级对业务无感。"
+      }
+    },
+    {
+      "id": 547,
+      "before_sha256": "5337a5f87aff23685a723121e89bfeb48fbaa11280a0ab1c1b943680da1b1293",
+      "reason": "北向接口方向正确，但并非统一REST或仅限物理设备的南向接口；补采集与API提供区别。",
+      "updates": {
+        "explanation": "A。北向API连接控制器与上层应用或自动化程序，使应用能够读取控制器提供的状态、提交意图或调用其他公开能力。具体接口与认证方式取决于产品，REST/HTTPS只是常见实现，不意味着所有北向API都相同。\n\nD控制器与受管物理或虚拟网络设备之间的通信通常称为南向；B设备向控制器报告错误属于设备侧数据收集，C硬件与流量统计的产生和采集本身也不是北向API的定义。采集到的事件或统计结果之后可以经北向API提供给应用。"
+      }
+    },
+    {
+      "id": 548,
+      "before_sha256": "a64893d095cf4c6ce17934decf35f565d4db126702377f534f38d813c8077c06",
+      "reason": "传统管理也可集中，控制器不保证覆盖所有设备或仅使用某种拓扑；修正绝对化描述。",
+      "updates": {
+        "explanation": "A。控制器可以提供逻辑集中的配置、策略和监控入口，帮助对受支持且已纳管的设备统一操作；逻辑集中可以由多个物理节点共同实现，也不保证所有设备、数据或故障都被实时覆盖。传统网络管理平台同样可能提供集中视图和自动化。\n\nB专用DDoS防护不是所有控制器架构自带的能力；C把控制与转发合并并宣称必然降低延迟，不符合本题所考查的控制器与转发分工；D指定两层变三层并保证最大冗余不是控制器架构的必然要求。控制器网络可以采用不同拓扑和不同程度的分布式控制。"
+      }
+    },
+    {
+      "id": 549,
+      "before_sha256": "a0cab76f1dd2c5ff36ccbbb51e317dd1d04b5ba7df3d1e3ad95049c2aac8daca",
+      "reason": "高可用与存量设备发现也可能是平台优势，原题无法仅据是否独有排除；限定外部集成并改选项。",
+      "updates": {
+        "prompt": "An organization wants an external IT service-management application to obtain network information and react to supported Cisco DNA Center events. Which platform capability best supports this integration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It requires all external applications to configure each network device directly."
+          },
+          {
+            "label": "B",
+            "text": "It exposes APIs and event notifications for integration with external applications."
+          },
+          {
+            "label": "C",
+            "text": "It guarantees management of every third-party network device without compatibility checks."
+          },
+          {
+            "label": "D",
+            "text": "It disables authentication for all automated API requests."
+          }
+        ],
+        "explanation": "B。平台可提供经过认证和授权的API及事件通知，例如使用REST接口读取受支持的资源，或按配置向外部webhook发送事件，以便IT服务管理系统触发相应工作流。具体API、事件、版本及许可需查对应文档。\n\nA绕过控制器逐台配置并非题目要求的集成接口；C第三方设备可管理范围受兼容性和功能支持限制，不能保证覆盖全部设备；D不符合安全要求，API需要认证并受权限控制。原题的高可用和存量网络发现也可能是有效优势，仅以“传统系统可能也有”不能证明它们错误，现限定外部应用集成这一目标。"
+      }
+    },
+    {
+      "id": 550,
+      "before_sha256": "d4425f15352359aeb62bdf433cb59471fbae0d2516aa07fb766a74a71e2283d8",
+      "reason": "SNMP轮询不是设备主动推送；NetFlow与模型驱动遥测不应混为一谈，采集能力依设备配置。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Devices use the call-home protocol to periodically send data to the controller"
+          },
+          {
+            "label": "B",
+            "text": "Devices establish an IPsec tunnel to exchange data with the controller"
+          },
+          {
+            "label": "C",
+            "text": "The Cisco CLI Analyzer tool gathers data from each licensed network device and streams it to the controller"
+          },
+          {
+            "label": "D",
+            "text": "It collects data using services such as SNMP polling and traps, syslog, and supported streaming telemetry."
+          }
+        ],
+        "explanation": "D。Cisco DNA Center/Catalyst Center可根据设备能力和配置结合多种数据源：控制器通过SNMP轮询获取部分指标，设备也可发送SNMP trap、syslog或支持的流式遥测；NetFlow等其他来源可按功能与配置使用。不同机制的方向、周期和数据范围不同，并非所有设备都会持续以亚秒级上报。\n\nA Call Home用于支持和诊断等用途，不是题目所问的通用数据采集组合；B IPsec不是每台设备与控制器采集数据的必需机制；C CLI Analyzer是独立工具，并非该控制器的通用采集架构。模型驱动遥测与NetFlow/IPFIX都是可用的数据来源，但不能简单视为同一种协议或机制。"
+      }
+    }
+  ]
+}

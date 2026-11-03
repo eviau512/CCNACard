@@ -1,0 +1,48 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    486,
+    487,
+    488,
+    489,
+    490
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 488,
+      "kind": "code",
+      "input": "`service password-encryption`",
+      "expected": "service password-encryption",
+      "html": "<code class=\"inline-code\">service password-encryption</code>"
+    },
+    {
+      "id": 488,
+      "kind": "code",
+      "input": "`enable secret`",
+      "expected": "enable secret",
+      "html": "<code class=\"inline-code\">enable secret</code>"
+    },
+    {
+      "id": 488,
+      "kind": "code",
+      "input": "`enable password`",
+      "expected": "enable password",
+      "html": "<code class=\"inline-code\">enable password</code>"
+    },
+    {
+      "id": 488,
+      "kind": "code",
+      "input": "`username cisco password encrypt`",
+      "expected": "username cisco password encrypt",
+      "html": "<code class=\"inline-code\">username cisco password encrypt</code>"
+    },
+    {
+      "id": 489,
+      "kind": "code",
+      "input": "```text\nip routing\n!\ninterface Vlan10\n ip address 10.10.0.1 255.255.255.0\n!\ninterface Vlan20\n ip address 10.20.0.1 255.255.255.0\n!\ninterface Vlan30\n ip address 10.30.0.1 255.255.255.0\n\n```",
+      "expected": "ip routing\n!\ninterface Vlan10\n ip address 10.10.0.1 255.255.255.0\n!\ninterface Vlan20\n ip address 10.20.0.1 255.255.255.0\n!\ninterface Vlan30\n ip address 10.30.0.1 255.255.255.0",
+      "html": "<pre class=\"cli-block\"><code>ip routing\n!\ninterface Vlan10\n ip address 10.10.0.1 255.255.255.0\n!\ninterface Vlan20\n ip address 10.20.0.1 255.255.255.0\n!\ninterface Vlan30\n ip address 10.30.0.1 255.255.255.0</code></pre>"
+    }
+  ]
+}

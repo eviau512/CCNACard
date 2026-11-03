@@ -1,0 +1,300 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    591,
+    592,
+    593,
+    594,
+    595
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "```text\n{\n  \"Routers\": [\"R1\", \"R2\", \"R3\"],\n  \"Switches\": [\"SW1\", \"SW2\", \"SW3\"]\n}\n\n```",
+      "expected": "{\n  \"Routers\": [\"R1\", \"R2\", \"R3\"],\n  \"Switches\": [\"SW1\", \"SW2\", \"SW3\"]\n}",
+      "html": "<pre class=\"cli-block\"><code>{\n  \"Routers\": [\"R1\", \"R2\", \"R3\"],\n  \"Switches\": [\"SW1\", \"SW2\", \"SW3\"]\n}</code></pre>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`R1`",
+      "expected": "R1",
+      "html": "<code class=\"inline-code\">R1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`SW1`",
+      "expected": "SW1",
+      "html": "<code class=\"inline-code\">SW1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`{}`",
+      "expected": "{}",
+      "html": "<code class=\"inline-code\">{}</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"Routers\"`",
+      "expected": "\"Routers\"",
+      "html": "<code class=\"inline-code\">\"Routers\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"Switches\"`",
+      "expected": "\"Switches\"",
+      "html": "<code class=\"inline-code\">\"Switches\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`[]`",
+      "expected": "[]",
+      "html": "<code class=\"inline-code\">[]</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"R1\"`",
+      "expected": "\"R1\"",
+      "html": "<code class=\"inline-code\">\"R1\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"R2\"`",
+      "expected": "\"R2\"",
+      "html": "<code class=\"inline-code\">\"R2\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"SW1\"`",
+      "expected": "\"SW1\"",
+      "html": "<code class=\"inline-code\">\"SW1\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`R1`",
+      "expected": "R1",
+      "html": "<code class=\"inline-code\">R1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`SW1`",
+      "expected": "SW1",
+      "html": "<code class=\"inline-code\">SW1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`R1`",
+      "expected": "R1",
+      "html": "<code class=\"inline-code\">R1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"Routers\"`",
+      "expected": "\"Routers\"",
+      "html": "<code class=\"inline-code\">\"Routers\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`SW1`",
+      "expected": "SW1",
+      "html": "<code class=\"inline-code\">SW1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"Switches\"`",
+      "expected": "\"Switches\"",
+      "html": "<code class=\"inline-code\">\"Switches\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`{}`",
+      "expected": "{}",
+      "html": "<code class=\"inline-code\">{}</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`R1`",
+      "expected": "R1",
+      "html": "<code class=\"inline-code\">R1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`SW1`",
+      "expected": "SW1",
+      "html": "<code class=\"inline-code\">SW1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"Routers\"`",
+      "expected": "\"Routers\"",
+      "html": "<code class=\"inline-code\">\"Routers\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`\"Switches\"`",
+      "expected": "\"Switches\"",
+      "html": "<code class=\"inline-code\">\"Switches\"</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`R1`",
+      "expected": "R1",
+      "html": "<code class=\"inline-code\">R1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`SW1`",
+      "expected": "SW1",
+      "html": "<code class=\"inline-code\">SW1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`[\"R1\", \"R2\", \"R3\"]`",
+      "expected": "[\"R1\", \"R2\", \"R3\"]",
+      "html": "<code class=\"inline-code\">[\"R1\", \"R2\", \"R3\"]</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`R1`",
+      "expected": "R1",
+      "html": "<code class=\"inline-code\">R1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`SW1`",
+      "expected": "SW1",
+      "html": "<code class=\"inline-code\">SW1</code>"
+    },
+    {
+      "id": 592,
+      "kind": "code",
+      "input": "`[ ... ]`",
+      "expected": "[ ... ]",
+      "html": "<code class=\"inline-code\">[ ... ]</code>"
+    },
+    {
+      "id": 594,
+      "kind": "code",
+      "input": "`Accept: application/json`",
+      "expected": "Accept: application/json",
+      "html": "<code class=\"inline-code\">Accept: application/json</code>"
+    },
+    {
+      "id": 594,
+      "kind": "code",
+      "input": "`Content-Type`",
+      "expected": "Content-Type",
+      "html": "<code class=\"inline-code\">Content-Type</code>"
+    },
+    {
+      "id": 594,
+      "kind": "code",
+      "input": "`Accept-Encoding`",
+      "expected": "Accept-Encoding",
+      "html": "<code class=\"inline-code\">Accept-Encoding</code>"
+    },
+    {
+      "id": 594,
+      "kind": "code",
+      "input": "`Accept-Patch`",
+      "expected": "Accept-Patch",
+      "html": "<code class=\"inline-code\">Accept-Patch</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "```text\n{\"aaaUser\":{\"attributes\":{\"pwd\":\"password1\",\"firstName\":\"Abraham\",\"lastName\":\"Lincoln\",\"phone\":\"5555551212\",\"email\":\"test@cisco.com\"},\"children\":[{\"aaaUserDomain\":{\"attributes\":{\"name\":\"ExampleCisco\"},\"children\":[{\"aaaUserRole\":{\"attributes\":{\"name\":\"admin\"}}}]}}]}}\n\n```",
+      "expected": "{\"aaaUser\":{\"attributes\":{\"pwd\":\"password1\",\"firstName\":\"Abraham\",\"lastName\":\"Lincoln\",\"phone\":\"5555551212\",\"email\":\"test@cisco.com\"},\"children\":[{\"aaaUserDomain\":{\"attributes\":{\"name\":\"ExampleCisco\"},\"children\":[{\"aaaUserRole\":{\"attributes\":{\"name\":\"admin\"}}}]}}]}}",
+      "html": "<pre class=\"cli-block\"><code>{\"aaaUser\":{\"attributes\":{\"pwd\":\"password1\",\"firstName\":\"Abraham\",\"lastName\":\"Lincoln\",\"phone\":\"5555551212\",\"email\":\"test@cisco.com\"},\"children\":[{\"aaaUserDomain\":{\"attributes\":{\"name\":\"ExampleCisco\"},\"children\":[{\"aaaUserRole\":{\"attributes\":{\"name\":\"admin\"}}}]}}]}}</code></pre>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`aaaUser`",
+      "expected": "aaaUser",
+      "html": "<code class=\"inline-code\">aaaUser</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`attributes`",
+      "expected": "attributes",
+      "html": "<code class=\"inline-code\">attributes</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`children`",
+      "expected": "children",
+      "html": "<code class=\"inline-code\">children</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`aaaUserDomain`",
+      "expected": "aaaUserDomain",
+      "html": "<code class=\"inline-code\">aaaUserDomain</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`attributes`",
+      "expected": "attributes",
+      "html": "<code class=\"inline-code\">attributes</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`children`",
+      "expected": "children",
+      "html": "<code class=\"inline-code\">children</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`aaaUserRole`",
+      "expected": "aaaUserRole",
+      "html": "<code class=\"inline-code\">aaaUserRole</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`attributes`",
+      "expected": "attributes",
+      "html": "<code class=\"inline-code\">attributes</code>"
+    },
+    {
+      "id": 595,
+      "kind": "code",
+      "input": "`children`",
+      "expected": "children",
+      "html": "<code class=\"inline-code\">children</code>"
+    }
+  ]
+}

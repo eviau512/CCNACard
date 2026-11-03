@@ -1,0 +1,26 @@
+{
+  "scope": [
+    596,
+    600
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 184,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 4,
+  "images_directly_viewed": [
+    598
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "fcac5421839b532bf77daa8e14da2502f2cf6ff2b3be35df4dbae09c90ab832c",
+  "app_bundle_sha256": "a4b4487cc4defcd6645150ff3338819746f01dd1f9ed31bc7457b1202a216c45",
+  "limitations": "Manual documentation, image and formatter checks; no live NETCONF or SDN tests."
+}

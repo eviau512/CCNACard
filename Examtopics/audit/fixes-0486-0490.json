@@ -1,0 +1,88 @@
+{
+  "scope": "Manual Q486-Q490; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 486,
+      "before_sha256": "e0badd90b71d3be53a648e3eb8722e3bbab0889b3f03ac2f41a094494498ce5f",
+      "reason": "原解析模板未区别IKE控制与IPsec数据；限定IPsec站点VPN，补ESP常见承载及MD5不是传输协议，不把所有站点VPN一概IPsec。",
+      "updates": {
+        "prompt": "In an IPsec site-to-site VPN, which listed technology protects and carries the user-data traffic, as distinct from the IKE negotiation?",
+        "explanation": "A，IPsec是保护IP层用户流量的体系，常见站点隧道用ESP封装用户数据，并按协商策略提供加密/完整性等服务。隧道模式可把站点间原始IP包封装在外层IP包中；不是说IPsec是TCP/UDP那样的传输层协议。\n\nB IKEv1与D IKEv2用于对等身份认证、协商及维护安全关联/密钥等控制功能，不承载每一份普通业务数据；C MD5是散列算法，不是用户数据封装或传输协议，出现于某些历史认证机制也不改变其类别。\n\n题目限定IPsec站点VPN，不把其他VPN技术排除为不可能；IPsec具体是否提供机密性仍取决于使用的安全协议和算法配置，不能仅见VPN/IPsec名称就断定所有选项及场景均已加密。"
+      }
+    },
+    {
+      "id": 487,
+      "before_sha256": "312fcf45380b50d423d454ca64071579ae1b1537fd79690b594d1a0d50833644",
+      "reason": "解析A称AES-CCMP但选项A是AES128，BCD错写WEP/RC4/TKIP-MIC均对不上；重写为CCMP128用128位AES，并去所有WPA3=GCMP及绝对防篡改说法。",
+      "updates": {
+        "prompt": "For WPA2-Personal using the standard CCMP-128 data-protection suite, which listed encryption algorithm and key size are used?",
+        "explanation": "A，CCMP-128使用128位密钥的AES；CCMP结合计数器模式的数据加密与CBC-MAC完整性机制，并有相应重放保护。PSK说明认证/密钥建立方式，不是把AES密钥长度改为256位。\n\nB TKIP with RC4是旧的TKIP方案，D单独RC4也不是本题CCMP；C AES256是AES的另一密钥长度，但不等于题设明确的CCMP128套件。原解析把BCD写成其他根本未列出的选项，现已按实际四项解释。\n\n历史设备可能提供兼容或混合模式，不能说所有标为WPA2的流量都必然协商同一套件；本题已明确CCMP128。不将WPA3简化为一律AES-GCMP，也不把正常密码学机制说成所有实现和攻击下绝对无懈可击。"
+      }
+    },
+    {
+      "id": 488,
+      "before_sha256": "19e14538cffe430e6239526fcf721af5e095faa627fc52de9780d996a179e993",
+      "reason": "解析A/B/D标签与实际选项错配，且把全部秘密自动Type7与强Type5泛化；明确经典IOS支持字段，D的encrypt是字面口令而非加密开关。",
+      "updates": {
+        "prompt": "On classic Cisco IOS, which listed global command obfuscates supported plaintext password fields across the configuration using reversible Type 7 encoding?",
+        "explanation": "C，`service password-encryption`对支持的password字段提供Type7可逆混淆，减少运行配置中直接暴露明文口令。它不是强密码哈希，也不保证所有协议秘密、任意字符串或所有平台都自动转换为Type7；启动配置仍需正常保存。\n\nA `enable secret`为特权口令使用支持的单向secret存储，只作用于该项，不是跨支持字段的全局混淆开关；B `enable password`设置特权口令，单凭该前缀不意味着已安全编码。D `username cisco password encrypt`中的encrypt可被解析为字面口令值，不能把这个英文词当作启用全局加密的关键字。\n\n原解析错把A说成enable password、B说成username secret、D说成enable secret，已逐项对齐。Type7值可被还原，不能代替配置访问控制和SSH传输保护；单向哈希也有强弱差异，不把旧Type5一概称为当前强安全。"
+      }
+    },
+    {
+      "id": 489,
+      "before_sha256": "d85b8c456edc35f75cf06953045458a1439919f370a1a44fe58dfe7b3c2f55b0",
+      "reason": "原图SVI IP全为/24网络地址.0，不能当合法网关；改有效SVI文字展品，恢复ACL退出模式，区别SVI只过滤路由入口而非全部二层业务。",
+      "updates": {
+        "image": null,
+        "prompt": "Use this corrected topology/configuration exhibit. Switch A is the IPv4 gateway for VLANs 10, 20 and 30. VLAN10 and VLAN20 PCs connect to A; a trunk connects A to Switch B, which has the VLAN30 web server 10.30.0.100/24. VLANs, trunks, SVIs and routing are operational. All routed IPv4 traffic from each VLAN enters its SVI on A, with no alternate gateway or pre-existing wwwblock ACL. Which configuration, starting in privileged EXEC mode, blocks only VLAN20 HTTP (TCP80) access to the server while allowing other IPv4 traffic through this ACL?\n\nSwitch A relevant gateway configuration:\n```text\nip routing\n!\ninterface Vlan10\n ip address 10.10.0.1 255.255.255.0\n!\ninterface Vlan20\n ip address 10.20.0.1 255.255.255.0\n!\ninterface Vlan30\n ip address 10.30.0.1 255.255.255.0\n```",
+        "options": [
+          {
+            "label": "A",
+            "text": "configure terminal\nip access-list extended wwwblock\n permit ip any any\n deny tcp any host 10.30.0.100 eq 80\nexit\ninterface Vlan20\n ip access-group wwwblock in\nend"
+          },
+          {
+            "label": "B",
+            "text": "configure terminal\nip access-list extended wwwblock\n permit ip any any\n deny tcp any host 10.30.0.100 eq 80\nexit\ninterface Vlan30\n ip access-group wwwblock in\nend"
+          },
+          {
+            "label": "C",
+            "text": "configure terminal\nip access-list extended wwwblock\n deny tcp any host 10.30.0.100 eq 80\nexit\ninterface Vlan10\n ip access-group wwwblock in\nend"
+          },
+          {
+            "label": "D",
+            "text": "configure terminal\nip access-list extended wwwblock\n deny tcp any host 10.30.0.100 eq 80\n permit ip any any\nexit\ninterface Vlan20\n ip access-group wwwblock in\nend"
+          }
+        ],
+        "explanation": "D，把deny TCP目的10.30.0.100:80放在permit ip any any之前，并在Vlan20入方向应用。只有从VLAN20进入路由的报文受此ACL匹配；其他VLAN没有被这个绑定过滤。显式permit保留VLAN20的其他IPv4通信。\n\nA第一条permit已放行所有IPv4包，后面的deny不会命中；B同样顺序错误，而且Vlan30入方向不是VLAN20请求进入三层路由的位置。C绑定Vlan10且没有permit尾项，所经该SVI的IPv4报文最终都会被拒绝，影响错误的来源，而非阻断VLAN20请求。不能把这说成同时切断该VLAN的一切二层帧或同VLAN通信。\n\n原图把/24网段地址.0标为SVI IP，修订展品改为合法.1网关并明确路由位置。选项补exit后才进入interface模式。ACL按第一条匹配执行；它控制报文许可，不保证HTTP服务本身存在，也不扩展到HTTPS/TCP443或其他网关路径。"
+      }
+    },
+    {
+      "id": 490,
+      "before_sha256": "062c6f923bb267c71ce520d993f967f6ff35ed5d32513b83d68437bbb176dbe1",
+      "reason": "私有地址不是强制安全边界，运营商不会由地址属性自动无条件丢全部包；改问RFC1918公共路由范围，说明NAT/代理/隧道及防火墙分工。",
+      "updates": {
+        "prompt": "Which statement correctly describes the public-Internet routing scope of RFC 1918 private IPv4 addressing?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The private addresses are not intended to be advertised or routed across the public Internet."
+          },
+          {
+            "label": "B",
+            "text": "provides a reduction in size of the forwarding table on network routers"
+          },
+          {
+            "label": "C",
+            "text": "allows communication across the Internet to other private networks"
+          },
+          {
+            "label": "D",
+            "text": "allows servers and workstations to communicate across public network boundaries"
+          }
+        ],
+        "explanation": "A，RFC1918范围为10.0.0.0/8、172.16.0.0/12及192.168.0.0/16，供私有网络复用，不作为全球唯一公共路由地址通告和使用。这限制直接公共寻址的适用范围，但不是地址本身强制执行的防火墙。\n\nB路由/转发表规模还取决于子网规划、拓扑与汇总，改成私网地址不会自动让所有内部路由表变小。C/D跨公共网络通信需要另外的连接机制，不能由选用私有地址单独获得；例如受控NAT、应用代理或隧道可参与不同设计，不能说唯有NAT一种途径。\n\nRFC提出路由和边界过滤要求，不意味着每台运营商路由器实际都会无条件丢掉任何带私有源/目的的包；实现错误、路由泄漏或覆盖网络需分别考虑。端口映射、主动出站会话、代理及其他连接仍可能暴露内部服务，安全控制应由访问策略、防火墙和服务配置承担，而不是把私有IP或NAT等同绝对隔离。"
+      }
+    }
+  ]
+}

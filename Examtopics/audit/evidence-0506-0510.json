@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "PSK": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_wlan_security.html",
+    "GRE_IPsec": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/gre/gre-configuration-guide/m-gre-over-ipsec.html",
+    "IPsec_architecture": "https://www.rfc-editor.org/rfc/rfc4301.html",
+    "RADIUS": "https://www.rfc-editor.org/rfc/rfc2865.html",
+    "RADIUS_TLS": "https://www.rfc-editor.org/rfc/rfc6614.html",
+    "ACL": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/security/acls/acls-configuration-guide/access-control-lists.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q508_image.jpg"
+  ],
+  "q508_original_AB_same_permitted_set": "Both permit only 10.100.100.0/24 because of implicit deny",
+  "q508_fix": "Explicit other-sources permit makes /16 versus /8 consequential",
+  "q506_q510_unchanged": true,
+  "limitations": "Manual source/document/exhibit review; not live PSK/GRE/IPsec/ACL/RADIUS/camera tests."
+}

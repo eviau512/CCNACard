@@ -1,0 +1,104 @@
+{
+  "scope": "Manual Q491-Q495; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 491,
+      "before_sha256": "984eff20526a154ad0268388ca8f51ad9d09b35ea90ac91b822fd59e2548af05",
+      "reason": "答案C正确但所有主机无条件接受ARP、总由ASIC硬件丢弃并粉碎全部MITM均过度；限定DAI缓解ARP投毒路径，不等于抗所有中间人或通用恶意软件。",
+      "updates": {
+        "explanation": "C，DAI缓解通过ARP欺骗/缓存投毒重定向局域网通信而形成的中间人攻击。攻击者可能伪造网关或终端的IP到MAC映射，使流量经过攻击者；DAI在启用VLAN中的不可信入口校验ARP绑定，不合法者被拒绝。\n\nARP本身缺少强身份认证，但具体操作系统是否、何时更新ARP缓存有各自策略，不能说所有收到的ARP应答均无条件覆盖。DAI也不等于消除所有中间人路径：可信入口、绑定数据准确性及覆盖范围仍重要，不能假定所有平台都用相同硬件处理、每次丢弃都必记录同样日志。\n\nA DDoS是更广泛的拒绝服务攻击类别，DAI不是通用DDoS清洗；B malware和D worm需要终端、应用及其他安全控制，DAI不负责扫描清除它们。某次攻击可能同时利用多种手法，但此题所问是DAI直接针对的ARP投毒中间人路径。DHCP snooping可提供绑定基础，若要进一步限制普通IP报文源伪造，还需相应IP Source Guard等功能，不能把它们混为一个开关。"
+      }
+    },
+    {
+      "id": 492,
+      "before_sha256": "d448dff575aa350498e5a7e19a00a7c4ca83a581ec927503a37d67357c6978f6",
+      "reason": "原B可描述网关同时服务多用户，原解析擅改为共用一个隧道排错；改B明确要求共用身份/隧道，并说明多会话与授权边界，去必分配私IP/必MFA泛化。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "establishes a secure tunnel between two branch sites"
+          },
+          {
+            "label": "B",
+            "text": "requires all remote users to share one authenticated user identity and one tunnel"
+          },
+          {
+            "label": "C",
+            "text": "used exclusively when a user is connected to a company's internal network"
+          },
+          {
+            "label": "D",
+            "text": "allows the users to access company internal network resources through a secure tunnel"
+          }
+        ],
+        "explanation": "D，远程访问VPN让经过认证且获授权的用户/终端通过受保护连接访问企业内部资源，常用于出差、居家或其他远程环境。访问仍受路由、分流和用户授权策略限制，不是连接成功就等同拥有整个内网全部权限。\n\nA是典型网关到网关的站点互联描述；B错误：远程访问网关可以同时维护多个用户的独立会话，不要求所有人共用一个身份和隧道。原B只说同时保护多用户隐私，可以成立，不能擅自解释成多用户混用单隧道后判错，现已改成明确错误的要求。C的exclusively不成立，远程访问不是仅在已接入内网时才能用。\n\n客户端VPN常分配虚拟地址并建立IPsec/TLS等连接；不同远程访问或浏览器应用访问方式未必向终端提供同样的完整三层地址/可达范围。MFA可作为策略加强认证，但不是VPN定义中自动存在的步骤，不能把所有实现都描述成必经MFA、必获私有IP或同一种客户端。"
+      }
+    },
+    {
+      "id": 493,
+      "before_sha256": "14a56899ab84bc159463df61f599e79ae36cc17d5338ee1ebcdc3fd0e6d9e757",
+      "reason": "原图ACL把运维网段放目的侧，与题设源网段相反；no access-list整行可能删整ACL，模板未解释。改带序号文字展品，源10.20.1/25、管理目的10.20.2/24，no20只删遮蔽ACE。",
+      "updates": {
+        "image": null,
+        "prompt": "Use this corrected ACL exhibit on Cisco IOS supporting sequence-number editing of ACL 2699. The operations clients are 10.20.1.0/25 and the routers to manage are in 10.20.2.0/24. All these SSH requests enter GigabitEthernet0/1; routing, return traffic and SSH services are otherwise working. The intended policy permits their TCP22 traffic, keeps other traffic to the management subnet denied, and preserves the existing 10.10.1.0/24 rules. Starting at Router(config-ext-nacl)# for ACL 2699, which single command removes the shadowing ACE while retaining every other entry?\n\n```text\ninterface GigabitEthernet0/1\n ip address 192.168.1.2 255.255.255.0\n ip access-group 2699 in\n!\nip access-list extended 2699\n 10 deny icmp any 10.10.1.0 0.0.0.255 echo\n 20 deny ip 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255\n 30 permit ip any 10.10.1.0 0.0.0.255\n 40 permit tcp 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255 eq 22\n```",
+        "options": [
+          {
+            "label": "A",
+            "text": "no 10"
+          },
+          {
+            "label": "B",
+            "text": "no 40"
+          },
+          {
+            "label": "C",
+            "text": "no 30"
+          },
+          {
+            "label": "D",
+            "text": "no 20"
+          }
+        ],
+        "explanation": "D，`no 20`只删除序号20的广泛IP拒绝，保留10、30和40。原先运维源10.20.1.0/25到管理目的10.20.2.0/24的SSH先命中20而被拒，无法到达40的TCP22许可；删除20后该流量命中40，其他未许可管理流量仍受隐含deny约束。\n\nA删除ICMP echo限制，且SSH仍被20挡住；B删除所需SSH许可；C删除10.10.1.0/24普通IP许可，同时SSH仍被20挡住，均不满足。规则按第一条匹配，单纯把另一许可追加在20后面也不会越过它。\n\n原图把10.20.1放在目的地址侧，与题设运维客户端来源矛盾，已明确改编源/目的及管理子网。编辑需在支持序号的ACL配置模式执行；不推荐把`no access-list 2699 ...`整行当作普遍删除单条规则的方式，旧编号ACL语法可能删除整个表，不能声称原D在所有IOS上安全完成单ACE删除。"
+      }
+    },
+    {
+      "id": 494,
+      "before_sha256": "c82b9e6f324bdad6eafa7502ddf446067295c531b9358195350f51a6310750ca",
+      "reason": "原题未要求保持合法流量且日志/通知因平台不同不宜单独定C；补保留端口运行与未来违规条件，明确已有SNMP通知前提，restrict与shutdown区别。",
+      "updates": {
+        "prompt": "For future port-security violations, a switch port must drop frames from excess source MAC addresses, increment its violation counter and generate the supported SNMP notification, while continuing to forward permitted traffic instead of becoming err-disabled. SNMP notification and receiver settings are already configured. Which interface command selects the required violation mode?",
+        "explanation": "C，`switchport port-security violation restrict`选择restrict模式。违规源帧被丢弃，违规计数递增并按平台通知机制及已配置SNMP设置发出通知，合法流量仍可继续经过端口。配置模式影响后续行为，不会凭空补发所有过去违规的通知。\n\nB protect也丢弃违规帧，但不满足所问计数/通知；D shutdown使端口进入err-disabled，不满足继续转发合法流量的要求，不能仅用是否有日志/Trap来跨平台排除。A的violation access不是所列IOS端口安全违规模式语法。\n\n通知的目的服务器、可达性及具体Trap配置与违规模式是不同配置事项。此处明确这些前提已满足，也不把生成通知等同远端一定接收到或将restrict误解为放行所有未授权MAC。"
+      }
+    },
+    {
+      "id": 495,
+      "before_sha256": "1c17755a8fdbce9a119147ee9ff74579d4f30cfe734eb18e20f3dcfc7056615b",
+      "reason": "原解析把unused native或tag命令说成绝对瓦解全部VLAN hopping，攻击者无法构造标签不成立；限定经典双标签风险，强调用户不接native和双端一致，不能替代DTP治理。",
+      "updates": {
+        "prompt": "Which listed practice helps mitigate classic double-tagging VLAN hopping on 802.1Q trunks?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Enable dynamic ARP inspection"
+          },
+          {
+            "label": "B",
+            "text": "configure an ACL to prevent traffic from changing VLANs"
+          },
+          {
+            "label": "C",
+            "text": "Use a dedicated native VLAN on trunks that is not assigned to any user access port."
+          },
+          {
+            "label": "D",
+            "text": "Implement port security on internet-facing VLANs"
+          }
+        ],
+        "explanation": "C，给trunk使用专用native VLAN，并让普通用户接入口不属于该VLAN，可减少经典双标签路径所依赖的用户VLAN与native VLAN重合。trunk两端应保持一致，不能只改一端而引入native VLAN不匹配。\n\n这不是攻击者无法构造某个VLAN标签的密码学保证，也不等于修改一个ID就消除所有VLAN hopping。支持的平台可考虑native VLAN打标等补充措施，但语法与行为须按平台核实；防DTP交换机欺骗还需正确固定接入口模式、控制协商及trunk允许范围。\n\nA DAI验证ARP绑定，不是双标签封装的直接治理；B普通IP ACL可以控制路由访问，却不等于阻止所有二层VLAN hopping；D端口安全主要限制安全MAC学习/接入，不直接提供本题所问的native VLAN隔离。二层/三层控制可组合使用，不应把任何一个说成无条件覆盖所有攻击。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "scope": [
+    446,
+    450
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 4,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 44,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "literal_code_fragments_preserved": 13,
+  "q449_unchanged": true,
+  "q450_option_model": [
+    {
+      "label": "A",
+      "ace_syntax_valid": true,
+      "relay_reply_permitted_before_deny": false,
+      "client_ingress_helper": true,
+      "meets_both": false
+    },
+    {
+      "label": "B",
+      "ace_syntax_valid": true,
+      "relay_reply_permitted_before_deny": true,
+      "client_ingress_helper": false,
+      "meets_both": false
+    },
+    {
+      "label": "C",
+      "ace_syntax_valid": false,
+      "relay_reply_permitted_before_deny": false,
+      "client_ingress_helper": false,
+      "meets_both": false
+    },
+    {
+      "label": "D",
+      "ace_syntax_valid": true,
+      "relay_reply_permitted_before_deny": true,
+      "client_ingress_helper": true,
+      "meets_both": true
+    }
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "c5be8b7d798fb6d928ba5f4832375af65c132358a94bfdf25463147660c590dc",
+  "app_bundle_sha256": "76e6ec53b9299e1d9cc2d3b04b9f3c99199e4bb7e23786ee087ad6441c5d0d13",
+  "limitations": "Manual source/document/exhibit/formatter and abstract ACL/helper model, not live IOS or DHCP tests."
+}

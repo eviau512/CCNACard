@@ -1,0 +1,67 @@
+{
+  "scope": "Manual Q411-Q415; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 411,
+      "before_sha256": "731d8712bea84e451718055b28a74a6300e9a9f430bf8c3fec7665f8ee0dbc94",
+      "reason": "D网关冗余正确，但原解析将GLBP也说成单虚拟MAC，且保证全无感毫秒切换。改共同稳定虚拟IP、按协议区分多MAC/角色；上联故障可能需跟踪。",
+      "updates": {
+        "explanation": "D。FHRP让多台设备共同提供稳定的虚拟默认网关，某个承担网关角色的成员失效后可由其他成员接替，降低第一跳单点故障风险。主机通常把默认网关指向虚拟IP，无需随成员接替改成另一个物理IP。\n\n协议实现并不完全相同：HSRP/VRRP通常为某个虚拟路由器维护虚拟MAC，GLBP则可用同一虚拟IP配多个虚拟MAC分担主机流量，不能把所有FHRP都说成单一虚拟MAC或相同Active/Standby状态机。故障检测/接替可能短暂丢包，上游故障还可能需要跟踪机制。A邻居信息/配置交换、B OSPF等价路径、C二层生成树都不是终端默认网关冗余这一目的。"
+      }
+    },
+    {
+      "id": 412,
+      "before_sha256": "9bcc45ce87f6a30a496dfce65ff0944b6158c46a49e148539570e1156af1fd6a",
+      "reason": "原四池prefix30含.3广播地址，不能提供要求三个有效地址。改所有池为/29，保留D正确方向/完整ACL；所有命令恢复分行及接口exit。A/C outside destination不是所需inside source，不臆造支持/动作；B wildcard254仅偶地址。",
+      "updates": {
+        "prompt": "A Cisco IOS router uses GigabitEthernet1/1 as inside and GigabitEthernet1/2 as outside. It must dynamically translate source hosts in 10.10.0.0/24 to one of three valid pool addresses, 192.168.3.1 through 192.168.3.3, without port overloading. The pool range is routed appropriately and other interface/return settings are correct. Which configuration should be used?",
+        "options": [
+          {
+            "label": "A",
+            "text": "enable\nconfigure terminal\nip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 29\naccess-list 1 permit 10.10.0.0 0.0.0.255\nip nat outside destination list 1 pool mypool\ninterface GigabitEthernet1/1\n ip nat inside\n exit\ninterface GigabitEthernet1/2\n ip nat outside\n exit"
+          },
+          {
+            "label": "B",
+            "text": "enable\nconfigure terminal\nip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 29\naccess-list 1 permit 10.10.0.0 0.0.0.254\nip nat inside source list 1 pool mypool\ninterface GigabitEthernet1/1\n ip nat inside\n exit\ninterface GigabitEthernet1/2\n ip nat outside\n exit"
+          },
+          {
+            "label": "C",
+            "text": "enable\nconfigure terminal\nip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 29\nroute map permit 10.10.0.0 255.255.255.0\nip nat outside destination list 1 pool mypool\ninterface GigabitEthernet1/1\n ip nat inside\n exit\ninterface GigabitEthernet1/2\n ip nat outside\n exit"
+          },
+          {
+            "label": "D",
+            "text": "enable\nconfigure terminal\nip nat pool mypool 192.168.3.1 192.168.3.3 prefix-length 29\naccess-list 1 permit 10.10.0.0 0.0.0.255\nip nat inside source list 1 pool mypool\ninterface GigabitEthernet1/1\n ip nat inside\n exit\ninterface GigabitEthernet1/2\n ip nat outside\n exit"
+          }
+        ],
+        "explanation": "D。/29网络192.168.3.0的可用主机地址为.1–.6，所以池中.1、.2、.3均有效。ACL1的0.0.0.255匹配完整10.10.0.0/24，inside source关联把该内部源映射到mypool，两接口角色也与题意一致。没有overload时是有限一对一动态映射，不表示整个/24的所有主机都能同时获得这三个地址。\n\nB的wildcard254最低位固定0，仅匹配偶数主机地址；A/C未配置要求的inside source方向，C的route map语句也不是有效route-map配置且未正确建立ACL1。不能因出现outside destination字样就编造其在所有IOS上的有效功能。若池掩码为/30，.3将是192.168.3.0/30广播地址，不能称包含三个可用主机地址。NAT池使用私有地址在私有路由环境中可以成立，不应一概声称Global必须公网。"
+      }
+    },
+    {
+      "id": 413,
+      "before_sha256": "9932edd21b37ae2363a4828560f8b501e6177c436b9a2dc491504b20da74deb4",
+      "reason": "C standby正确，原文误引RFC7868（EIGRP），绝对无缝/10秒及虚拟MAC接管表述泛化。改HSRP standby检测接管、可短暂中断；区分VRRP新RFC9568 Active/Backup与旧Master术语。",
+      "updates": {
+        "explanation": "C，standby。HSRP组的Standby监视当前Active，检测其失效后可转为Active并承担虚拟网关转发。组内其他Listen/Speak设备随后可参与确定新的Standby；A forwarding和D backup不是这里要求的HSRP备用角色名称，B listening也不是已选定的直接接替者。\n\n检测与切换取决于定时器及协议事件，经典默认hello3秒/hold10秒不等于任何故障必在固定10秒且完全无丢包接替；虚拟IP/MAC的稳定性减少主机改配置的需要，交换机仍可能需要重新学习MAC所在端口。HSRP的早期描述见RFC2281，RFC7868描述EIGRP，不应误引为HSRP标准。VRRP备用角色叫Backup，旧文档称转发角色Master，现行RFC9568使用Active术语；应按具体协议辨认，不能只靠日常“backup”含义选D。"
+      }
+    },
+    {
+      "id": 414,
+      "before_sha256": "178de333529c7d3a398ff80349f14f27007b4edefecddfed4addfeb170eb9935",
+      "reason": "原题仅copy功能不足唯一排FTP；补明确通过CONFIG-COPY-MIB远程管理操作。D SNMP保留，去CLI不能自动化及唯SNMP能编排绝对说法，区分MIB源目的对象类型与文件传输协议。",
+      "updates": {
+        "prompt": "An engineer must remotely initiate and monitor configuration-copy backup operations on 20 Cisco IOS routers through CISCO-CONFIG-COPY-MIB objects. Which listed management protocol accesses these objects?",
+        "explanation": "D，SNMP。具有适当写权限的管理站可用SetRequest创建/设置配置复制表项、指定源/目的文件类型及传输参数并触发任务，再读取ccCopyState等状态监控结果。源/目的文件类型与TFTP/FTP/SCP等传输协议是不同的MIB参数，支持项须按具体设备实现确认。\n\nA TCP是传输层协议，B SMTP用于邮件；C FTP可用于实际传送备份文件，但不是访问该SNMP MIB对象的管理协议。选择SNMP是因为题设明确通过MIB操作，不代表其他自动化方法不能备份20台设备：脚本化CLI/其他管理接口也可能实现备份，不能把交互copy命令说成完全无法自动化。只读监控权限不足以写入触发任务，还需服务器可达等条件。"
+      }
+    },
+    {
+      "id": 415,
+      "before_sha256": "f5d594cabdcb44c71f3a035197d0ca32cc204f66401869f7e4046607889efea0",
+      "reason": "NAT设备的publicIP不自动等于InsideGlobal，原问缺被代表主机和方向。明确inside-source NAT外侧代表内部主机的public地址，C唯一；重写四地址术语和E/F非标准标签。",
+      "updates": {
+        "prompt": "In inside-source NAT used for Internet access, what term identifies the public translated address representing an inside host to the outside network?",
+        "explanation": "C，inside global。Inside指被代表的是内部主机，Global指其在NAT外侧呈现的地址；题目明确该Internet访问场景使用公网转换地址。Inside local是该内部主机在内侧使用的地址，Outside global是外部主机在外侧的地址，Outside local是外部主机在内侧呈现的地址。\n\n因此A/B指外部主机身份，D是内部转换前身份；E/F并非这套四地址术语的标准标签。不能仅问“NAT设备的公网IP”就一律认作inside global：地址角色必须结合被代表主机、映射及方向判定。其他NAT部署也可能用私有地址作为inside global，Global不在所有环境都意味着公网。"
+      }
+    }
+  ]
+}

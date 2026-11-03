@@ -1,0 +1,34 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    581,
+    582,
+    583,
+    584,
+    585
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 583,
+      "kind": "code",
+      "input": "`off-the-shelf`",
+      "expected": "off-the-shelf",
+      "html": "<code class=\"inline-code\">off-the-shelf</code>"
+    },
+    {
+      "id": 584,
+      "kind": "code",
+      "input": "`/dna/intent/api/v1/site/{siteId}`",
+      "expected": "/dna/intent/api/v1/site/{siteId}",
+      "html": "<code class=\"inline-code\">/dna/intent/api/v1/site/{siteId}</code>"
+    },
+    {
+      "id": 585,
+      "kind": "code",
+      "input": "```text\n{\n  \"SW1\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW2\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW3\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW4\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"]\n}\n\n```",
+      "expected": "{\n  \"SW1\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW2\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW3\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW4\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"]\n}",
+      "html": "<pre class=\"cli-block\"><code>{\n  \"SW1\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW2\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW3\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW4\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"]\n}</code></pre>"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "scope": "Manual Q466-Q470; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 466,
+      "before_sha256": "40e0aa829da9990a1dbe860f48b3de1a202734bfb8d159c9a50947c584369429",
+      "reason": "无指定产品不能断定所有验证器强制独立PIN；失窃也不等于MFA彻底攻破。改为组织启用的本地解锁控制，说明只能减风险与需撤销丢失因素。",
+      "updates": {
+        "prompt": "An organization deploys an authenticator that supports PIN-protected access to its second-factor function. Which listed local control should it enable to reduce unauthorized use of that function if an employee's smartphone is lost or stolen?",
+        "explanation": "A，在应用提供第二因素前要求用户解锁，例如题设支持的PIN控制。这样单纯拿到手机不等于立刻能查看验证码或批准请求；实际实现可能使用应用独立PIN，也可能调用设备PIN或生物识别，取决于产品和已启用策略，不能声称所有验证器都原生强制独立PIN。\n\nB/D要求管理员按时间或每次重启输入密码，并不是题设的用户本地解锁控制；C地理位置可作为补充策略，但设备在允许地点丢失仍可满足位置条件，不能替代用户验证。也不应说这些额外企业策略技术上永远不可能实现。\n\n本地解锁是降低风险，不保证已被攻破设备上的秘密绝对安全；手机丢失也不自动证明攻击者已经拥有密码等其他登录因素。应通过组织的恢复流程报告丢失并撤销相关注册/会话或重新绑定因素，不能只依赖PIN继续信任遗失设备。"
+      }
+    },
+    {
+      "id": 467,
+      "before_sha256": "4e31130de2f2a9a13f4ce94d6710986000a1497e75df7aab432d64627d92e198",
+      "reason": "原解析UDP/ICMP均写IP:port错误，ICMP无传输端口；不能说所有设备形态都绝无状态功能或回包一概自动放行。保留B按主要角色解释策略与状态。",
+      "updates": {
+        "prompt": "Which listed device role is primarily associated with maintaining connection-state information to enforce traffic-inspection policies?",
+        "explanation": "B，状态防火墙维护连接/会话状态，并结合访问策略判断报文是否允许及是否属于已有通信。TCP可跟踪连接建立和终止等状态；UDP虽无TCP式握手，也可按地址、端口和超时维护临时会话。ICMP没有TCP/UDP端口，检查会依据类型、代码、请求/回复关联以及适用的identifier/sequence等信息，不能把它描述为源IP:端口到目的IP:端口。\n\n已允许通信的匹配回包可依据状态处理，但具体协议检查、超时、其他规则和功能仍会影响结果；不是只要有出站包就无条件放行所有入站，状态表也不证明内容绝对安全。\n\nA交换机主要转发二/三层流量，C AP主要提供无线接入，D控制器主要管理无线网络；本题按主要角色选择firewall。复合设备或特定平台可集成状态防火墙功能，不能据设备外形断言其永不可能检查状态。静态ACL通常逐包匹配，不能替代完整连接状态机。"
+      }
+    },
+    {
+      "id": 468,
+      "before_sha256": "3bed554a0cbc74d6af989ddeccaa49c9605a8929d915750bfb29b79d0c3571fa",
+      "reason": "原table automatically不能区分默认动态学习与sticky，解析自行补持久化不成立；题干明确running-config及保存后重启保留，去动态链路变化必清空与永久固化断言。",
+      "updates": {
+        "prompt": "Port security is already enabled on a switch access port connected to a printer. The administrator wants the printer MAC address to be learned automatically and also added to running-config, so it can be retained across a restart after saving the configuration. Which learning mode should be enabled?",
+        "explanation": "C，sticky安全MAC学习。在已启用端口安全的接口下配置：\n```text\nswitchport port-security mac-address sticky\n```\n\n端口从允许学习的入站源MAC形成sticky secure条目，并把相应地址加入running-config；支持的平台也可把已动态学习的安全地址转为sticky。要重启后保留，还需保存运行配置，例如`copy running-config startup-config`。地址并非永久不可更改，后续配置、清除及平台支持的老化行为仍需考虑。\n\nA动态安全MAC也能自动进入安全地址表，所以原题仅说“学入table”不足以唯一选C；关键补充需求是自动写入运行配置。B手工静态绑定不能满足自动学习要求；D只是含糊描述，不是独立于dynamic/sticky的标准学习模式名称，不应仅凭英文措辞不是CLI命令就排除所有概念选项。\n\n学习还受安全地址上限、已有条目及违规状态约束，不能保证任何接入设备都被接受；应确认打印机确实发送流量以及学习到的是预期MAC。"
+      }
+    },
+    {
+      "id": 469,
+      "before_sha256": "ddc428b64c436b7147705420d8e7a02a0647282232c7a86f98b5ede2480954d6",
+      "reason": "原图switchport下ip address无效；选项提示符config-if#line vty模式错误、全部命令压平且凭据成为email脱敏标记。改有效SVI展品、明确Telnet可达及无AAA，恢复命令。",
+      "updates": {
+        "image": null,
+        "prompt": "Use this corrected management configuration exhibit for a Cisco IOS switch. VLAN 10 is active, its SVI is up and reachable, and Telnet reaches VTY lines 0–4. AAA is not enabled, no local users exist, and no other authorization or privilege settings apply. Starting in global configuration mode, which additional configuration lets a local username/password login enter privilege level 15 directly, without a separate enable step?\n\n```text\nhostname R1\n!\ninterface Vlan10\n ip address 10.100.20.42 255.255.255.0\n no shutdown\n!\nline vty 0 4\n transport input telnet\n login\n```",
+        "options": [
+          {
+            "label": "A",
+            "text": "username admin\nline vty 0 4\n password LabOnly123!\n transport input telnet"
+          },
+          {
+            "label": "B",
+            "text": "username admin privilege 15 secret 0 LabOnly123!\nline vty 0 4\n login local"
+          },
+          {
+            "label": "C",
+            "text": "username admin secret 0 LabOnly123!\nline vty 0 4\n login local\nexit\nenable secret 0 LabEnable123!"
+          },
+          {
+            "label": "D",
+            "text": "username admin\nline vty 0 4\n password LabOnly123!"
+          }
+        ],
+        "explanation": "B，`username admin privilege 15 secret 0 LabOnly123!`为本地账户指定15级，VTY上的`login local`调用本地用户库；在题设无其他AAA/授权覆盖时，登录直接进入15级EXEC。secret后的0在该示例语法表示输入的是未加密文本，由设备按支持方式存储secret，不意味着Telnet链路得到加密。示例凭据仅用于题目。\n\nA/D设置的是线路password，既没有把VTY改为本地用户名认证，也没有给账户指定15级；C启用local认证但账户默认1级，配置enable secret仅提供后续enable提权凭据，不能使首次登录直接15级。C需先exit退出线路模式才能执行全局enable secret。\n\n原图在二层switchport下配置IP不完整，已改为有效的管理SVI相关展品；链路/VLAN/可达性由题干明确给定，不能假设只配SVI地址就一定可达。题目保留Telnet认证语法考点，实际安全管理宜使用SSH；本地secret保护配置存储与远程传输保密性是两回事。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "scope": "Manual Q556-Q560; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 556,
+      "before_sha256": "eb39c1b9e2f870f809d85a13e808fca77e90cd59fec353584996fb25bf11e51b",
+      "reason": "API契约答案正确，但解析将端点、HTTP输入输出等当作所有API必有，并保证跨平台稳定。",
+      "updates": {
+        "explanation": "A。API是软件组件可通过哪些操作、输入输出及约定相互交互的接口；把它理解为调用方与提供方之间的契约有助于区分接口和内部实现。具体API可能是本地库函数，也可能是网络服务，不一定具有URL、HTTP状态码或跨平台兼容性。\n\nB描述REST等架构风格，而非所有API的定义；C无状态客户端—服务器是某些架构约束，并非所有API必备；D描述一种通过URL请求资源的具体用法，不能概括全部API。"
+      }
+    },
+    {
+      "id": 557,
+      "before_sha256": "0ba31e25d88699e7db8c97554c7c1a5ebc5ff867b91e622f5222c632a9eb2d6e",
+      "reason": "A是JSON对象但实际key为value，解析含编码乱码，需按实际键和值说明。",
+      "updates": {
+        "explanation": "A。JSON对象使用大括号，其中成员名称是双引号字符串，名称与值之间用冒号分隔；`{\"value\": \"key\"}`是有效对象，名称是字符串`value`，对应的值是字符串`key`。名称恰好叫value不会让语法无效。\n\nB是有效JSON数组而非对象；C大括号内没有名称与值之间的冒号，D使用JSON对象不支持的圆括号，二者都不是有效JSON。多个对象成员之间以逗号分隔；数组元素也以逗号分隔。"
+      }
+    },
+    {
+      "id": 558,
+      "before_sha256": "a3c344cce5e893ecf0cee116ef2fce67f6c30e39f0c0a029a14514c49fce4123",
+      "reason": "Hypervisor资源控制答案正确，解析绝对保证隔离与公平、不耗尽资源，需限定。",
+      "updates": {
+        "explanation": "C。Hypervisor或虚拟机监视器将底层计算、内存及I/O资源抽象并分配给虚拟机，提供调度和隔离机制；具体设备模拟、直通和资源限制取决于平台与配置。隔离和配额有助于减少相互影响，但不能保证没有漏洞或资源争用。\n\nA IaaS是提供基础设施资源的服务模型，可能使用虚拟化技术但不是hypervisor本身；B SaaS交付应用服务；D的“硬件控制器”不能准确概括虚拟机资源抽象和调度的主要职责。"
+      }
+    },
+    {
+      "id": 559,
+      "before_sha256": "3d410ad46dc06ec0796eebf2b3a01b1d83bc8054ddff335621bac7721e2a2ea4",
+      "reason": "服务器提供应用为正确角色，但可承载路由、防火墙等软件，修正排他断言和选项拼写。",
+      "updates": {
+        "prompt": "In a typical client-server network, which function is characteristic of an application server?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It transmits packets between hosts in the same broadcast domain."
+          },
+          {
+            "label": "B",
+            "text": "It provides shared applications to end users."
+          },
+          {
+            "label": "C",
+            "text": "It routes traffic between Layer 3 devices."
+          },
+          {
+            "label": "D",
+            "text": "It creates security zones between trusted and untrusted networks."
+          }
+        ],
+        "explanation": "B。应用服务器向客户端提供共享应用或相关服务，例如Web应用；服务器也可提供文件、数据库等其他服务。\n\nA同一VLAN内按MAC转发通常由二层交换功能承担；C跨IP网络转发是路由功能；D以策略控制安全区域之间的通信是防火墙功能。这里按主要角色区分，不意味着一台服务器绝不能运行软件路由器或防火墙，也不保证任意服务器服务自动安全或高可用。"
+      }
+    },
+    {
+      "id": 560,
+      "before_sha256": "87e409619b853d8b444358d421a148292e7dc9609c7918676dcf0447e3d3db01",
+      "reason": "CRUD Update修改已有数据而非必然改变表结构，视图可更新性和HTTP映射受实现限制。",
+      "updates": {
+        "prompt": "Which CRUD operation modifies an existing data record, rather than changing the table schema?",
+        "explanation": "B。CRUD中的Update修改已有数据记录，例如在可更新的表中用SQL `UPDATE`修改列值；是否能通过某个视图更新其底层数据取决于数据库和视图定义。修改表结构通常属于DDL，例如`ALTER TABLE`，不能仅凭CRUD Update推断。\n\nA Read读取已有数据；D Create创建新数据；C Replace不是CRUD缩写中的独立操作类别，虽然一些系统或HTTP接口可提供替换操作。HTTP GET、POST、PUT、PATCH、DELETE常被用于实现类似操作，但资源设计、方法语义及幂等性由具体协议和接口决定，不能视为与SQL的一一强制映射。"
+      }
+    }
+  ]
+}

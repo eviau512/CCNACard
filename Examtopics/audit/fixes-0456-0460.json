@@ -1,0 +1,68 @@
+{
+  "scope": "Manual Q456-Q460; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 456,
+      "before_sha256": "4280702ccdc958bf7f10cef1a0c87bf56840d1cfd2fe7594483d67e848e3d589",
+      "reason": "D正确但PRI不是固定8位字段；RFC5424为尖括号内1–3位十进制文本。改普通可显示公式，区分facility分类与具体进程标识。",
+      "updates": {
+        "prompt": "In the numeric PRI encoding of an RFC-style syslog message, what does the facility code represent?",
+        "explanation": "D，facility是消息来源类别的数值代码，例如kernel、user-level、mail、daemon及local0到local7；不是某个特定进程的唯一ID，也不是严重程度。RFC5424另有APP-NAME和PROCID等字段描述应用及进程。\n\n优先值计算为：PRI值 = facility × 8 + severity。facility范围0–23，severity范围0–7，组合值0–191。在线消息PRI部分使用尖括号包围的1–3位十进制ASCII数字，而非固定8位二进制报头字段。例如local7的facility23与severity5组合成189，编码为`<189>`。\n\nA是接收日志的主机/collector，B是认证凭据，均非facility；C描述严重级别的分组，混淆了facility与severity。收集端可按这两个属性分类或过滤日志。Cisco文本消息中的模块标识与RFC数字facility也应按各自格式区分，不能把所有同类数字facility当成同一个实际进程。"
+      }
+    },
+    {
+      "id": 457,
+      "before_sha256": "1ebd842b8cf3737cede0bfbcd52c797600d6d555fd9c97565a62ae84927ff49d",
+      "reason": "图完整且DNS0.0.0.0是待修项；原解析断言必先查询UDP53、立即失败及DHCP0.0.0.0证明静态均过度。补无缓存/hosts且已验证直接IPv4可达前提，避免以同网段证明整体可达。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The PC can reach the intended IPv4 web server directly on TCP port 80, but cannot resolve www.cisco.com. No hosts-file entry or cached answer is available, and the application uses the configured DNS resolver. Which displayed setting must be corrected?",
+        "explanation": "B，DNS Servers显示0.0.0.0，没有指定可用解析器。题干补充直接IPv4服务器连接已成功、无hosts或缓存且应用使用配置的DNS，因此应设置网络允许且可达的DNS解析器来解析域名，而不是随意更改掩码或网关。配置解析器后仍应验证其能回答所需域名，不把某个公共DNS地址当成所有环境通用的修复。\n\n图中PC10.2.2.2配255.255.255.248，即10.2.2.0/29；可用主机.1–.6，网关10.2.2.1与PC同网段。这支持A/C不是截图中明显错误，真正的可达性由题干额外测试条件确认，单凭同网段不能证明互联网路由已正确。\n\nD的DHCP服务器字段不是静态地址主机联网必须手填的参数；仅凭其0.0.0.0也不足以证明整个DHCP启用状态，因为图未显示该状态。DNS解析可使用缓存、hosts及其他机制，经典DNS既可UDP也可TCP53，不能说每次访问都必须先发UDP查询。IPv4访问跨网段时可能早已缓存网关MAC，甚至查询远端DNS本身就需要网关转发，所以原来的固定“DNS后才ARP”顺序不成立。本题不测试真实网站当前是否开放HTTP。"
+      }
+    },
+    {
+      "id": 458,
+      "before_sha256": "607cc802a0b493b41c7cd83eb2388113acd56199f57772a2b19552d6f77f40f1",
+      "reason": "把policing称为queuing method且解析是模板；补不符合流量合同的动作，区分CBWFQ/LLQ调度及shaping延后，保留B。",
+      "updates": {
+        "prompt": "Which QoS traffic-control mechanism meters a flow against a configured traffic profile and applies drop or remark actions to nonconforming packets, rather than buffering the excess for later transmission?",
+        "explanation": "B，policing。计量器根据速率及允许突发等配置判断是否符合合同，再按conform/exceed等策略执行发送、丢弃或重标记。不是只看某个瞬间速率高就必丢；也不为超额报文安排整形等待队列。\n\nA CBWFQ是按业务类别分配队列和调度资源，C LLQ增加严格优先调度；LLQ的实现可含防止优先类过量占用的policing，但题设直接问计量并drop/remark的机制，名称是policing，而非把LLQ等同流量监管。D shaping通常缓冲超额并延后发送，有限队列也可能溢出丢包；存在丢包并不能单独区分两者。\n\n原题把policing叫作queuing method不准确，已改为traffic-control mechanism。监管本身不提供超额等待队列，不等于设备完全没有队列、处理时延或资源开销。"
+      }
+    },
+    {
+      "id": 459,
+      "before_sha256": "cb308abc02a13af474eb5b39a02faff55a078b3a56480e6be8173a410e7b5780",
+      "reason": "把marking称PHB，与Q447同类术语错误；改问直接写DSCP操作，区分6位DSCP及2位ECN，policer也可remark但直接动作仍marking。",
+      "updates": {
+        "prompt": "Which QoS operation directly writes a chosen DSCP value into the IPv4 header to identify a packet's traffic class?",
+        "explanation": "D，marking直接写入或重写DSCP。IPv4原ToS字节在DiffServ/ECN用法下包含6位DSCP与2位ECN；更改业务类别标记不代表可以随意把ECN拥塞通知位一并覆盖。DSCP表示配置的类别，节点按本地映射选择相应逐跳转发行为，不自动授予带宽或保证端到端优先级。\n\nC classification识别匹配并归类，本身不改报头；A shaping通过延后发送来控制输出速率；B policing计量合同符合性，可包含remark动作，但实际写字段这一直接动作仍叫marking。不能说只有某种设备功能才能改DSCP，也不能把policing一律说成只会丢包。\n\nPHB指节点施加的可观察转发行为，marking是设置供策略使用的标记操作；原题把marking本身称作一种PHB，已纠正。"
+      }
+    },
+    {
+      "id": 460,
+      "before_sha256": "db03cc79db06b7bb7be5cefa087062c5a1c7962082e4b80adba8db4e1a14f4f2",
+      "reason": "C含UDO错字；原解析所有数据连接文件后必关、FTP只20和TFTP全程69等泛化。修端口/复用细节，B明确TFTP编号DATA/ACK而非否认FTP存在block模式。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Always operated without user connection validation"
+          },
+          {
+            "label": "B",
+            "text": "Uses UDP DATA/ACK block numbers as its basic file-transfer reliability mechanism"
+          },
+          {
+            "label": "C",
+            "text": "Uses UDP port 69 for initial file read/write requests"
+          },
+          {
+            "label": "D",
+            "text": "Uses two separate connections for control and data traffic"
+          }
+        ],
+        "explanation": "D，FTP用独立TCP控制连接传递命令/回复，另用数据连接传送文件或目录列表。控制连接通常发往服务器TCP21；主动模式通常由服务器数据端口20发起，被动模式由客户端连接服务器协商的数据端口，不能把所有数据连接都固定成20。\n\n控制会话可跨多次数据操作保持。常见stream模式通过关闭数据连接表示传输结束；RFC959也定义block/compressed等模式，数据连接可跨多文件复用，因此“每次文件后必立即关闭”不是所有FTP模式通则。\n\nA的always错误：FTP有USER/PASS等认证交互，匿名访问是可配置方式，不代表所有FTP都无需验证。B描述TFTP以UDP DATA/ACK及块号确认的基础机制；FTP通常依赖TCP可靠字节流，不因FTP也有block传输模式就等同TFTP块号协议。C也是TFTP初始请求的UDP69，不是FTP；TFTP后续使用双方TID传输端口，不保证全程服务器端口69。"
+      }
+    }
+  ]
+}

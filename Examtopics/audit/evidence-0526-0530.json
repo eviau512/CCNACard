@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "WPA": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/67134-wpa2-config.html",
+    "WPA3": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_wpa3.html",
+    "NGIPS": "https://www.cisco.com/c/en/us/td/docs/security/firepower/70/configuration/guide/fpmc-config-guide-v70/working_with_discovery_events.html",
+    "ESP": "https://www.rfc-editor.org/rfc/rfc4303.html",
+    "port_security": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9500/software/release/17-15/configuration_guide/sec/b_1715_sec_9500_cg/port_security.html"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual review against documentation; not live wireless, IPS, IPsec or switch tests."
+}

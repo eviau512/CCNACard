@@ -1,0 +1,104 @@
+{
+  "scope": "Manual Q536-Q540; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 536,
+      "before_sha256": "d3ba155bea85f88467fdfdd0f3793743e36e56ec49d9883917b595b4b747dcc5",
+      "reason": "A创建路由表和C作路由决策均可能属于控制平面，解析还引用了不相干的另一组选项；限定路径选择并改干扰项。",
+      "updates": {
+        "prompt": "In an SDN architecture with logically centralized control, which function can the controller perform for multiple network nodes?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Looks up each packet in the locally installed forwarding table"
+          },
+          {
+            "label": "B",
+            "text": "Discards a message due filtering"
+          },
+          {
+            "label": "C",
+            "text": "Makes a routing decision"
+          },
+          {
+            "label": "D",
+            "text": "Provides protocol access for remote access devices"
+          }
+        ],
+        "explanation": "C。SDN控制器可以根据网络视图和策略作出路径或路由决策，并通过南向接口配置转发设备。逻辑集中不代表只能有一台物理控制器，实际实现也可能将部分控制功能留在设备上。\n\nA逐包查本地转发表和B按已安装规则丢弃报文属于转发平面执行；D提供远程访问服务不是题目所问的路径控制。原A写创建IP路由表，与C路由决策都可能属于控制平面，因此原单选题存在歧义；原解析还错误引用另一组control/data/management plane选项。"
+      }
+    },
+    {
+      "id": 537,
+      "before_sha256": "c0418b44b5103d6f8655e12713c2536b9ead17f40b43efa40bf70509a2db5a52",
+      "reason": "认证答案正确，但记账并非默认记录所有命令，授权和记账顺序与内容依配置而异。",
+      "updates": {
+        "explanation": "A。使用用户名和密码验证用户声明的身份属于authentication（认证）。系统可以用本地数据库或已配置的AAA服务核验凭据。\n\nD authorization决定经过识别的用户或会话能做什么；C accounting按配置记录会话、资源或操作信息，供计费或审计；B auditing是对记录及行为的检查，不是核验密码的名称。实际启用哪些环节、何时记录及是否记录命令取决于平台和策略，不能假设每次登录都会自动记录全部操作。"
+      }
+    },
+    {
+      "id": 538,
+      "before_sha256": "3162bf8c62a06339feb1e38df134579691198b740f5908878053d1db5897b2f4",
+      "reason": "D未限定暴力破解类型且解析声称彻底防御弱口令攻击；限定SAE抵抗离线猜测。",
+      "updates": {
+        "prompt": "Which WPA3-Personal enhancement improves resistance to password guessing compared with traditional WPA2-Personal PSK?",
+        "options": [
+          {
+            "label": "A",
+            "text": "employs PKI to identify access points"
+          },
+          {
+            "label": "B",
+            "text": "applies 802.1x authentication"
+          },
+          {
+            "label": "C",
+            "text": "uses TKIP"
+          },
+          {
+            "label": "D",
+            "text": "uses SAE in Personal mode to resist offline password guessing from passively captured exchanges"
+          }
+        ],
+        "explanation": "D。WPA3-Personal采用SAE进行口令认证密钥交换；在正确实现及适当安全假设下，它改进了对利用被动捕获交换材料进行离线口令猜测的抵抗能力。它不保证简单口令、主动猜测、实现缺陷或失陷终端绝对安全，也不取消后续四次握手。\n\nA PKI并不是所有WPA3-Personal接入点的通用要求；B 802.1X在此前的企业无线网络中已有应用，并非此处Personal模式的新改进；C TKIP是旧方案。原D只说防暴力破解过于宽泛，现明确攻击条件。"
+      }
+    },
+    {
+      "id": 539,
+      "before_sha256": "a3ad995510400482803157340ed725d377fc02e97ff80c04c3ad765bada9d4f1",
+      "reason": "已查看拓扑：PC1连接SW1 Gi1/0/15，VLAN100；选项CLI被压平，补静态access既有状态和数量限制条件。",
+      "updates": {
+        "prompt": "In the diagram, SW1 Gi1/0/15 is already a static access port in VLAN 100 with no port-security configuration or existing secure MAC addresses. Which configuration enables port security on that port and limits it to two secure MAC addresses?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface gi1/0/15\n switchport port-security\n switchport port-security maximum 2\nexit"
+          },
+          {
+            "label": "B",
+            "text": "interface gi1/0/15\n switchport port-security\n switchport port-security maximum 1\nexit"
+          },
+          {
+            "label": "C",
+            "text": "interface gi1/0/15\n switchport port-security\n switchport port-security maximum 3\nexit"
+          },
+          {
+            "label": "D",
+            "text": "interface gi1/0/15\n switchport port-security maximum 2\nexit"
+          }
+        ],
+        "explanation": "A。图中PC1经Gi1/0/15接入SW1，端口位于VLAN100。`switchport port-security`启用该端口安全功能，`switchport port-security maximum 2`将端口最大安全MAC数量设为2；题设已给出静态access和无既有安全地址等条件。\n\nB上限为1，C上限为3；D仅设置数量而未执行题设所要求的启用命令。此配置限制数量，不是只允许图中PC1的MAC，也不能凭数量限制保证设备身份真实，MAC地址可以伪造；若需固定地址或特定违规动作须另行配置。平台限制及trunk支持应查相应版本文档。"
+      }
+    },
+    {
+      "id": 540,
+      "before_sha256": "15334e2b3166c49b6af9623339fde9987e4371a12b0da1433fd547203190912a",
+      "reason": "protect与restrict均能放行安全MAC并丢弃违规源；限定不增加违规计数并按平台区分。",
+      "updates": {
+        "prompt": "On a Cisco Catalyst platform where protect mode does not increment the violation counter, which port-security violation mode drops frames from unknown source MAC addresses after the limit is reached while allowing secure MAC traffic and leaving the violation counter unchanged?",
+        "explanation": "C protect。在题设平台，达到安全地址上限后，未知源MAC帧被丢弃，已授权源仍可转发，且protect不增加安全违规计数器。\n\nA restrict对违规帧的转发行为相似，但会增加违规计数，并可产生告警；原题仅描述放行合法MAC、丢弃非法MAC时A和C均可能符合，不能凭没有提及告警就排除A。B shutdown会使整个接口进入err-disabled；D shutdown VLAN在支持的平台针对发生违规的VLAN处理，其功能和支持范围因平台而异。日志、SNMP与特殊MAC移动行为也依设备版本和配置而定。"
+      }
+    }
+  ]
+}

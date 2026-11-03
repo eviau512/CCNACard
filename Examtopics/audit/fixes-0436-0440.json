@@ -1,0 +1,69 @@
+{
+  "scope": "Manual Q436-Q440; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 436,
+      "before_sha256": "0528b1fb090d4437a60eb8c7e6044fe4c3ef07716268bb4072ce596bad4847fa",
+      "reason": "原A只snmp-server user不能普遍推出v3，IOS命令参考也支持v1/v2c；示例密码长度及安全级别泛化不必要。A补明确v3用户，说明noAuthNoPriv也可v3，community未被所有版本废弃。",
+      "updates": {
+        "prompt": "Which listed Cisco IOS command explicitly configures an SNMPv3 user?",
+        "options": [
+          {
+            "label": "A",
+            "text": "snmp-server user monitor GROUP1 v3"
+          },
+          {
+            "label": "B",
+            "text": "snmp-server host"
+          },
+          {
+            "label": "C",
+            "text": "snmp-server enable traps"
+          },
+          {
+            "label": "D",
+            "text": "snmp-server community"
+          }
+        ],
+        "explanation": "A，命令中的v3显式选择SNMPv3，配置monitor用户属于GROUP1；实际部署还应有匹配组与访问权限。不能单凭snmp-server user前缀就在所有IOS上断定v3，相关语法也可以含v1/v2c。\n\nB host与C enable traps跨多个版本使用，若没有明确版本参数不能只凭前缀推断v3；D community是v1/v2c的团体名配置，不是所问的v3用户。v3并不自动表示已启用认证和加密：可选noAuthNoPriv、authNoPriv、authPriv等安全级别，算法与具体语法依设备版本支持；应查看完整命令而非笼统说所有v3必加密或community已被所有IOS废弃。"
+      }
+    },
+    {
+      "id": 437,
+      "before_sha256": "529a53ff4bec644e18526bb0c201e141b6bc88142d689f3f7c79e77bdb84aa7c",
+      "reason": "四组选项server-only均非经典IOS关键字，应serve-only，原无完整正确配置。C改serve-only、补trusted-key2及允许127.127.7.1的peer ACL供本地master选择，保留C；恢复所有命令换行，A/D标准ACL10不能写UDP协议端口，避免以SHA1跨平台不支持作为唯一排除。",
+      "updates": {
+        "prompt": "On classic Cisco IOS supporting the shown MD5 symmetric-key syntax, R1 must use its local software clock at stratum 2, enable NTP authentication with key 2, and set Loopback0 as its NTP source. Loopback0 is already up and reachable; the authorized external client 209.165.200.225 queries that address using the matching key. No upstream associations or other NTP access groups exist. Which configuration permits time service only to that external client while allowing the local reference-clock association?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ntp authenticate\nntp authentication-key 2 sha1 CISCO123\nntp source Loopback0\nntp access-group serve-only 10\nntp master 2\naccess-list 10 permit udp host 209.165.200.225 any eq 123"
+          },
+          {
+            "label": "B",
+            "text": "ntp authenticate\nntp authentication-key 2 md5 CISCO123\nntp interface Loopback0\nntp access-group serve-only 10\nntp stratum 2\naccess-list 10 permit 209.165.200.225"
+          },
+          {
+            "label": "C",
+            "text": "ntp authenticate\nntp authentication-key 2 md5 CISCO123\nntp source Loopback0\nntp access-group serve-only 10\nntp master 2\naccess-list 10 permit 209.165.200.225\nntp trusted-key 2\naccess-list 20 permit host 127.127.7.1\nntp access-group peer 20"
+          },
+          {
+            "label": "D",
+            "text": "ntp authenticate\nntp authentication-key 2 md5 CISCO123\nntp source Loopback0\nntp access-group serve-only 10\nntp stratum 2\naccess-list 10 permit udp host 209.165.200.225 any eq 123"
+          }
+        ],
+        "explanation": "C。ntp master2提供stratum2本地参考；ntp sourceLoopback0设置来源，authenticate/authentication-key和trusted-key2配置相应密钥机制。serve-only10才是此IOS的NTP访问组关键字，ACL10省略wildcard时精确匹配客户端209.165.200.225。\n\n对本地master还单独以peer20允许127.127.7.1这个本地参考关联，避免启用访问限制后连本地时钟来源也被排除；它不是增加另一个外部授时客户端。两张标准ACL只匹配源IP，不应写UDP端口。A/D把扩展ACL格式写进标准ACL10，D还用ntp stratum；B的ntp interface及ntp stratum也不是所需经典IOS命令。不能仅凭其他版本是否支持SHA1来判A，协议/算法支持应按平台核实。IP访问限制和密钥认证是不同机制；这份源地址ACL不等同防止源地址伪造的通用保证，本地时钟层级也不保证绝对授时精度。"
+      }
+    },
+    {
+      "id": 439,
+      "before_sha256": "829a44128b7c99a2df136bc5be1946c141382070e2a30997bd2ce1f55bfd2a61",
+      "reason": "原交换机/路由器混称且绝对所有RSA生成必需domain，忽略显式label命名方案。限定经典IOS默认hostname+domain命名、无显式label，C保留；D为生成操作本身，非前置命令。",
+      "updates": {
+        "prompt": "A switch uses the classic Cisco IOS workflow in which an unnamed RSA key pair is named from the configured hostname and IP domain name. The hostname is already set, and no explicit key label is being supplied. Which listed additional command completes that naming prerequisite before RSA key generation?",
+        "explanation": "C，`ip domain-name domain`提供IP域名，配合已设置hostname用于题设默认RSA密钥命名流程。这里的domain是示例域名值，应替换为设备所需名称；这不是要求先到互联网注册或完成DNS查询。\n\nA密码和B SSH认证重试参数不完成密钥命名；D已经是生成RSA密钥的操作，不是所问的前置域名配置。不能把此经典未指定标签流程泛化成所有平台所有RSA生成都必须先配domain：显式label等方案可能有不同要求。生成密钥也不自动完成整个SSH服务、认证和VTY访问配置；选项D的旧示例1024不作为本题对新部署密钥长度的推荐。"
+      }
+    }
+  ]
+}

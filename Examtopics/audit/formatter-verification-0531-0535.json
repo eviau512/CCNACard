@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    531,
+    532,
+    533,
+    534,
+    535
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 535,
+      "kind": "code",
+      "input": "`access-class 10 in`",
+      "expected": "access-class 10 in",
+      "html": "<code class=\"inline-code\">access-class 10 in</code>"
+    },
+    {
+      "id": 535,
+      "kind": "code",
+      "input": "`transport input ssh`",
+      "expected": "transport input ssh",
+      "html": "<code class=\"inline-code\">transport input ssh</code>"
+    }
+  ]
+}

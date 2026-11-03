@@ -1,0 +1,13 @@
+{
+  "sources": {
+    "SDN": "https://opennetworking.org/sdn-definition/",
+    "Puppet": "https://help.puppet.com/core/current/Content/PuppetCore/lang_resource_syntax.htm",
+    "Ansible": "https://docs.ansible.com/projects/ansible/latest/plugins/connection.html",
+    "OpenFlow": "https://opennetworking.org/wp-content/uploads/2014/10/openflow-switch-v1.3.4.pdf",
+    "RESTCONF": "https://www.rfc-editor.org/rfc/rfc8040.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q562_image.jpg"
+  ],
+  "limitations": "Manual documentation and diagram review; not live Puppet, Ansible or SDN tests."
+}

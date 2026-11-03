@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "SSH": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/security-vpn/security-vpn/m_sec-secure-shell-v2-0.html",
+    "policing": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html",
+    "Telnet": "https://www.rfc-editor.org/rfc/rfc854.html",
+    "SSH_architecture": "https://www.rfc-editor.org/rfc/rfc4251.html",
+    "NTP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/command/bsm-cr-book/m_bsm-cr-n1.html",
+    "NAT": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13772-12.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q454_image.jpg",
+    "exhibits/q455_image.jpg"
+  ],
+  "q454_remote_client_routers": [
+    "R1",
+    "R2",
+    "R3"
+  ],
+  "q455_outside_interfaces_empty": true,
+  "q455_pool_count": 10,
+  "q453_unchanged": true,
+  "limitations": "Manual document/exhibit review, not live SSH/NTP/NAT/QoS tests."
+}

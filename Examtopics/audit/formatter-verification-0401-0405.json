@@ -1,0 +1,40 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    401,
+    402,
+    403,
+    404,
+    405
+  ],
+  "code_results": [
+    {
+      "id": 402,
+      "kind": "code",
+      "input": "`show ip interface GigabitEthernet0/0`",
+      "expected": "show ip interface GigabitEthernet0/0",
+      "html": "<code class=\"inline-code\">show ip interface GigabitEthernet0/0</code>"
+    },
+    {
+      "id": 405,
+      "kind": "code",
+      "input": "```text\nRouter(config)# interface GigabitEthernet0/0\nRouter(config-if)# ip address dhcp\nRouter(config-if)# no shutdown\n\n```",
+      "expected": "Router(config)# interface GigabitEthernet0/0\nRouter(config-if)# ip address dhcp\nRouter(config-if)# no shutdown",
+      "html": "<pre class=\"cli-block\"><code>Router(config)# interface GigabitEthernet0/0\nRouter(config-if)# ip address dhcp\nRouter(config-if)# no shutdown</code></pre>"
+    },
+    {
+      "id": 405,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 405,
+      "kind": "code",
+      "input": "`ip dhcp client`",
+      "expected": "ip dhcp client",
+      "html": "<code class=\"inline-code\">ip dhcp client</code>"
+    }
+  ]
+}

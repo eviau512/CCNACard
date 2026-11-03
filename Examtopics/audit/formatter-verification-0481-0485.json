@@ -1,0 +1,55 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    481,
+    482,
+    483,
+    484,
+    485
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 481,
+      "kind": "code",
+      "input": "`service password-encryption`",
+      "expected": "service password-encryption",
+      "html": "<code class=\"inline-code\">service password-encryption</code>"
+    },
+    {
+      "id": 483,
+      "kind": "code",
+      "input": "`ip arp inspection trust`",
+      "expected": "ip arp inspection trust",
+      "html": "<code class=\"inline-code\">ip arp inspection trust</code>"
+    },
+    {
+      "id": 484,
+      "kind": "code",
+      "input": "```text\nline vty 0 15\n no login local\n password cisco\nexit\n\n```",
+      "expected": "line vty 0 15\n no login local\n password cisco\nexit",
+      "html": "<pre class=\"cli-block\"><code>line vty 0 15\n no login local\n password cisco\nexit</code></pre>"
+    },
+    {
+      "id": 484,
+      "kind": "code",
+      "input": "```text\nusername admin1 password abcd1234\nusername admin2 password abcd1234\nline vty 0 15\n login local\nexit\n\n```",
+      "expected": "username admin1 password abcd1234\nusername admin2 password abcd1234\nline vty 0 15\n login local\nexit",
+      "html": "<pre class=\"cli-block\"><code>username admin1 password abcd1234\nusername admin2 password abcd1234\nline vty 0 15\n login local\nexit</code></pre>"
+    },
+    {
+      "id": 484,
+      "kind": "code",
+      "input": "```text\nusername admin1 secret abcd1234\nusername admin2 secret abcd1234\nline vty 0 15\n login local\nexit\n\n```",
+      "expected": "username admin1 secret abcd1234\nusername admin2 secret abcd1234\nline vty 0 15\n login local\nexit",
+      "html": "<pre class=\"cli-block\"><code>username admin1 secret abcd1234\nusername admin2 secret abcd1234\nline vty 0 15\n login local\nexit</code></pre>"
+    },
+    {
+      "id": 484,
+      "kind": "code",
+      "input": "```text\nusername admin1 secret abcd1234\nusername admin2 secret abcd1234\nline console 0\n login local\nexit\n\n```",
+      "expected": "username admin1 secret abcd1234\nusername admin2 secret abcd1234\nline console 0\n login local\nexit",
+      "html": "<pre class=\"cli-block\"><code>username admin1 secret abcd1234\nusername admin2 secret abcd1234\nline console 0\n login local\nexit</code></pre>"
+    }
+  ]
+}

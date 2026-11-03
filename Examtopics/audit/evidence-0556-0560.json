@@ -1,0 +1,9 @@
+{
+  "sources": {
+    "JSON": "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "HTTP": "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "IaaS": "https://csrc.nist.gov/pubs/sp/800/145/final"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual documentation and JSON syntax review; no live database or hypervisor tests."
+}

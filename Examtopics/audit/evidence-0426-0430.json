@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "passive": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/global_traffic_forwarding_configurations.html",
+    "FTP": "https://www.rfc-editor.org/rfc/rfc959.html",
+    "NTP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/configuration/15-mt/bsm-15-mt-book/bsm-time-calendar-set.html",
+    "DHCP": "https://www.rfc-editor.org/rfc/rfc2131.html",
+    "SNMP": "https://www.rfc-editor.org/rfc/rfc3416.html"
+  },
+  "original_images_directly_viewed": [
+    428
+  ],
+  "q428_local_reference_stratum": 4,
+  "q428_expected_client_stratum": 5,
+  "old_passive_client_URL_redirected_to_product_page": true,
+  "limitations": "Manual source/document review, not live WLC/NTP/FTP/SNMP tests."
+}

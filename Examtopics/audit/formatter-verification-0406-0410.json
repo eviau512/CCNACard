@@ -1,0 +1,19 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    406,
+    407,
+    408,
+    409,
+    410
+  ],
+  "code_results": [
+    {
+      "id": 407,
+      "kind": "code",
+      "input": "`ntp master [stratum]`",
+      "expected": "ntp master [stratum]",
+      "html": "<code class=\"inline-code\">ntp master [stratum]</code>"
+    }
+  ]
+}

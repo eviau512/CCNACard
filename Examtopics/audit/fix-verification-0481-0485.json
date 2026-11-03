@@ -1,0 +1,41 @@
+{
+  "scope": [
+    481,
+    485
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 77,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 6,
+  "q484_snippet_modes": [
+    {
+      "switch": "SW1",
+      "modes_valid": true
+    },
+    {
+      "switch": "SW2",
+      "modes_valid": true
+    },
+    {
+      "switch": "SW3",
+      "modes_valid": true
+    },
+    {
+      "switch": "SW4",
+      "modes_valid": true
+    }
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "2edc1b580f3f75f50a3d51d74a67118c6458513f509cfd03406403f064c07a5b",
+  "app_bundle_sha256": "805ae8582adf65569b49ba9fefe783326dca0d7c779e5ec7d5a7be72364408e3",
+  "limitations": "Manual source/document/exhibit and actual formatter checks plus simple CLI mode transitions; not live password, WPA3, DAI or SSH tests."
+}

@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "snooping": "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-host-configuration-protocol-dhcp-dhcpv6/217055-operate-and-troubleshoot-dhcp-snooping.html",
+    "SSH": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/security-vpn/security-vpn/m_sec-secure-shell-v2-0.html",
+    "WLC_PSK": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_wlan_security.html",
+    "ACL": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/security/acls/acls-configuration-guide/access-control-lists.html",
+    "RBAC": "https://csrc.nist.gov/glossary/term/role_based_access_control"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q499_image.jpg"
+  ],
+  "q499_explicit_terminal_deny": true,
+  "q499_edit": "Replace original Telnet ACE at its position before deny, not append",
+  "q496_field_count": 6,
+  "q500_RBAC_can_apply_to_physical_access": true,
+  "limitations": "Manual source/document/exhibit review; not live DHCP/SSH/WLC/ACL/door-control tests."
+}

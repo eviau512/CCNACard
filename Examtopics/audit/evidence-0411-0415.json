@@ -1,0 +1,18 @@
+{
+  "sources": {
+    "GLBP": "https://www.cisco.com/en/US/docs/ios/12_2t/12_2t15/feature/guide/ft_glbp.html",
+    "HSRP": "https://www.rfc-editor.org/rfc/rfc2281.html",
+    "wrong_reference_EIGRP": "https://www.rfc-editor.org/rfc/rfc7868.html",
+    "MIB": "https://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15217-copy-configs-snmp.html",
+    "NAT": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html"
+  },
+  "original_images_directly_viewed": [],
+  "q412_original_pool_prefix": 30,
+  "q412_corrected_pool_prefix": 29,
+  "q412_pool_hosts": [
+    "192.168.3.1",
+    "192.168.3.2",
+    "192.168.3.3"
+  ],
+  "limitations": "Manual source and independent address checks, not live IOS NAT/FHRP tests."
+}

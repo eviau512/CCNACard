@@ -1,0 +1,33 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    431,
+    432,
+    433,
+    434,
+    435
+  ],
+  "code_results": [
+    {
+      "id": 431,
+      "kind": "code",
+      "input": "`ntp server 192.168.1.1`",
+      "expected": "ntp server 192.168.1.1",
+      "html": "<code class=\"inline-code\">ntp server 192.168.1.1</code>"
+    },
+    {
+      "id": 431,
+      "kind": "code",
+      "input": "`ntp master`",
+      "expected": "ntp master",
+      "html": "<code class=\"inline-code\">ntp master</code>"
+    },
+    {
+      "id": 432,
+      "kind": "code",
+      "input": "`ip helper-address <DHCP-Server-IP>`",
+      "expected": "ip helper-address <DHCP-Server-IP>",
+      "html": "<code class=\"inline-code\">ip helper-address &lt;DHCP-Server-IP&gt;</code>"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "HTTP": "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "JSON": "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "升级": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/3-2-x/user-guide/cisco-catalyst-center-user-guide-3-2-x/m_manage_network_devices.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q592_image.jpg",
+    "exhibits/q595_image.jpg"
+  ],
+  "unchanged": [
+    592,
+    593
+  ],
+  "q595_answer_change": "C to D",
+  "limitations": "Manual documentation and image review; no live controller or HTTP tests."
+}

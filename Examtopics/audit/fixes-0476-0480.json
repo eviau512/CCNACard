@@ -1,0 +1,89 @@
+{
+  "scope": "Manual Q476-Q480; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 476,
+      "before_sha256": "51e505d7061993d5710a9557b5e318bcf2ddfdbd51569e2575d846cd797b1d29",
+      "reason": "原解析模板且未限定AireOS。补CPU ACL控制到CPU管理访问、来源/服务匹配，区分AAA与Flex业务ACL，不推广旧平台方向规则。",
+      "updates": {
+        "prompt": "On a Cisco AireOS wireless LAN controller, which listed ACL feature restricts traffic reaching the controller CPU, including management access from selected source networks?",
+        "explanation": "B，CPU ACL应用于控制器CPU的访问路径，可按源网络、协议和服务等条件限制到控制器的管理访问；创建匹配规则后还需把ACL应用到正确CPU访问范围。它不是仅开启一个名字就自动识别所有允许管理员网络。\n\nA TACACS与D RADIUS是AAA相关协议，可承担认证/授权等功能，但不是题问按报文来源网络执行CPU流量过滤的ACL功能；不能说它们完全不能参与管理访问安全。C Flex ACL主要服务FlexConnect相关业务流量策略，与此控制器CPU管理访问范围不同。\n\n题目限定AireOS，具体IPv4/IPv6、wired/wireless范围及规则处理按版本文档核对，不能把旧平台说明推广到所有WLC或IOS XE控制器。应用管理过滤前应确保所需管理与控制流量有匹配许可，避免把管理路径也拒绝。"
+      }
+    },
+    {
+      "id": 477,
+      "before_sha256": "11e9bd51ef168648dd50f6d77daab4aae27caafb67f6c692493f1854c87c8626",
+      "reason": "原D的PIN加RSA令牌可为多因素，不能按单选C直接否定；改D仅连续PINless令牌码、B仅同类持有因素，具体解释不同因素而非不同屏幕。",
+      "updates": {
+        "prompt": "Which action set uses two different authentication factor categories: knowledge and possession?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The user enters a user name and password, and then re-enters the credentials on a second screen."
+          },
+          {
+            "label": "B",
+            "text": "The user presents two PIN-less hardware tokens, without a password or biometric check."
+          },
+          {
+            "label": "C",
+            "text": "The user enters a password, then approves the matching login request in an authenticator on their registered mobile device."
+          },
+          {
+            "label": "D",
+            "text": "The user enters two consecutive codes from the same PIN-less token, without any other factor."
+          }
+        ],
+        "explanation": "C，口令是所知因素，注册设备上的认证器为持有因素；对相应登录请求的批准证明所需持有凭据，而非随意点击任何通知。用户名通常是标识符，不单独算另一个秘密因素。\n\nA在第二屏重输同一用户名口令仍只有所知因素；B即使用两枚令牌也仍是同一持有类别；D同一PINless令牌的连续码不凭空增加所知或生物因素。两个步骤、两个代码、两个设备不必然等于两类因素。\n\n原D描述向RSA令牌输入PIN再提交令牌码，这种PIN加持有令牌的组合可以是多因素，不能为保留单选C就声称它无效。现已把D改为明确仅持有因素的场景。具体产品也可能采用多因素认证器整合多个因素，关键是验证了什么，而不是界面个数。"
+      }
+    },
+    {
+      "id": 478,
+      "before_sha256": "a0e9da47bcd894d99d526e014e325247cc257dcabee8e7a729e5512824c38622",
+      "reason": "域名是默认未命名RSA流程要求，非所有label流程不可逾越；SSH version2也不必绝对密钥后才能配。限定默认命名并纠正模式/顺序。",
+      "updates": {
+        "prompt": "A Cisco IOS router uses the default hostname/domain-name naming workflow for an unnamed RSA key pair. Its hostname is already set, no domain name or RSA key exists, and no explicit key label is supplied. Which listed configuration supplies the missing naming prerequisite?",
+        "explanation": "C，配置IP域名，例如在全局配置模式使用`ip domain name example.com`，配合已有hostname完成题设默认RSA密钥命名条件，再执行平台支持的RSA生成命令。域名值是设备配置的一部分，不等于必须先做互联网DNS查询或注册该名称。\n\nA VTY配置控制远程线路接入，不是此密钥命名前提；B的`ip ssh version 2`选择SSH版本，不提供域名；D本地账户用于后续身份认证，不是生成设备密钥的数学或命名条件。可以按平台允许的顺序先配置部分SSH/VTY参数，不能笼统规定version2只准在生成密钥后执行。\n\n结论限定默认未指定label的流程；显式命名keypair并绑定SSH等其他支持方式不一定要求同样hostname/domain前提。RSA生成是在相应配置模式执行，不把特权EXEC与全局配置模式混称。生成密钥也未完成全部SSH服务与访问控制设置。"
+      }
+    },
+    {
+      "id": 479,
+      "before_sha256": "8b0ed9d39b4294fa732cd442b3c0409d148028b9e767e43ecc0102cbd088aa66",
+      "reason": "原解析模板且AES是算法，WPA2对应CCMP套件需说明；限定所列选项并解释PSK与数据加密分工，去无限最强安全表述。",
+      "updates": {
+        "explanation": "B。题目限定WPA2-PSK及给定选项，AES对应通常配置界面所说的AES/CCMP：CCMP使用AES实现无线数据的保密与完整性保护。PSK描述预共享密钥认证/密钥建立方式，AES/CCMP描述数据保护，二者不是同一个配置维度。\n\nA WEP是旧无线保护方案，不是此WPA2-PSK的AES/CCMP选择；C RC4是WEP/TKIP相关的流密码算法，不是AES；D TKIP是基于RC4的旧方案，不能当成与AES/CCMP同等的WPA2保护选择。保留TKIP/AES混合兼容并不意味着所有客户端都使用AES。\n\n此结论是这些选项与指定WPA2场景内的比较，不声称AES一个词就证明所有无线部署安全。共享口令强度、设备实现及具体认证模式仍影响实际防护，也不把WPA2题目改成另一个认证标准的问题。"
+      }
+    },
+    {
+      "id": 480,
+      "before_sha256": "02b9a5fc556b601afd81b3580abe390e3f37771b40a1650d1a18f5fc8eb93687",
+      "reason": "原解析虚构未画出的冗余链路排除A，A的deny any实际还挡PC转发SSH；VTY扩展ACL支持又受平台限制。改编明确接口ACL任务，A精确四个本机地址，B过宽，C端口23，D方向反，答案B改A。",
+      "updates": {
+        "prompt": "Refer to the exhibit. All IPv4 traffic from PC-1 enters RTR-1 through GigabitEthernet0/0. An unused ACL 100 must be applied to that interface to deny PC-1 SSH (TCP 22) connections to the four shown RTR-1 addresses only. Other traffic, including PC-1 SSH traffic forwarded to other hosts, must remain permitted by this ACL. No VTY changes are requested. Which configuration meets the requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "access-list 100 deny tcp host 172.16.1.33 host 172.16.1.62 eq 22\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.1.1 eq 22\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.2.1 eq 22\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.3.1 eq 22\naccess-list 100 permit ip any any\ninterface GigabitEthernet0/0\n ip access-group 100 in"
+          },
+          {
+            "label": "B",
+            "text": "access-list 100 deny tcp host 172.16.1.33 any eq 22\naccess-list 100 permit ip any any\ninterface GigabitEthernet0/0\n ip access-group 100 in"
+          },
+          {
+            "label": "C",
+            "text": "access-list 100 deny tcp host 172.16.1.33 host 172.16.1.62 eq 23\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.1.1 eq 23\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.2.1 eq 23\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.3.1 eq 23\naccess-list 100 permit ip any any\ninterface GigabitEthernet0/0\n ip access-group 100 in"
+          },
+          {
+            "label": "D",
+            "text": "access-list 100 deny tcp host 172.16.1.33 host 172.16.1.62 eq 22\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.1.1 eq 22\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.2.1 eq 22\naccess-list 100 deny tcp host 172.16.1.33 host 192.168.3.1 eq 22\naccess-list 100 permit ip any any\ninterface GigabitEthernet0/0\n ip access-group 100 out"
+          }
+        ],
+        "answer": [
+          "A"
+        ],
+        "explanation": "A，四条deny分别匹配PC-1源172.16.1.33到RTR-1的G0/0地址172.16.1.62和三个Loopback地址192.168.1.1、192.168.2.1、192.168.3.1的TCP目的22。随后permit ip any any保留其他IPv4报文。ACL应用在PC报文进入的G0/0入方向，既检查发往该入口本机地址的报文，也检查从这里进入而目的为本机Loopback的报文。\n\nB的目的any过宽，会把PC-1发往其他转发主机的SSH也拒绝；C匹配TCP23即Telnet，未拒绝所需SSH；D用G0/0出方向，不检查题设PC进入的这些请求，不能实现入口限制。这里讨论ACL允许/拒绝，不保证其他路由或服务本身一定可达。\n\n原题以VTY方案B为标答，但解析用图中不存在的冗余入口排除接口方案，依据不足；VTY扩展ACL的具体支持及匹配语义也应核实平台。现改为明确且可逐报文验证的接口ACL任务，修订选项后答案为A，保留原图四地址与SSH端口考点，不把VTY和转发面控制混为一谈。"
+      }
+    }
+  ]
+}

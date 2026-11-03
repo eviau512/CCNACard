@@ -1,0 +1,89 @@
+{
+  "scope": "Manual Q511-Q515; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 511,
+      "before_sha256": "66cf04fb6a4366017675b665bc4cf7f0308e3b402646b50e3af85fa2534c4255",
+      "reason": "原把RADIUS密码隐藏称单向MD5加密，且Request Authenticator笼统当完整性；重写User-Password的MD5派生/XOR可恢复隐藏，限定传统UDP及所列字段。",
+      "updates": {
+        "prompt": "In a traditional RADIUS Access-Request containing a User-Password attribute, without TLS or another encrypted transport, which listed item is hidden by the RFC 2865 password-protection procedure?",
+        "explanation": "B，User-Password属性使用共享秘密和Request Authenticator等材料经MD5派生的结果与填充后的密码块异或，实现密码隐藏；掌握共享秘密及相应报文材料的服务器可恢复它，不是“单向MD5加密后无法还原”。这也不等于现代完整报文加密。\n\nD用户名和A普通授权/服务属性不是此用户密码隐藏过程的对象。C的Access-Request Request Authenticator是头部16字节随机/不可预测值，参与密码隐藏等计算，本身不作为被加密密码字段；不要混淆Request/Response Authenticator和Message-Authenticator等不同作用。\n\n题目限定该传统属性与所列选项，不声称所有RADIUS认证方式都会携带User-Password，也不把某些属性隐藏说成完整包保密。无需把TACACS+的历史报文体保护类比为现代强加密或声称全世界RADIUS只有这一种受保护属性。"
+      }
+    },
+    {
+      "id": 512,
+      "before_sha256": "af75b0885dec634d43128faf455e4459428877289abeba67232a561a7c7524b6",
+      "reason": "所有选项压平，默认login行为不能跨平台假定；补明确no login/VTY支持与可达前提，恢复exit模式，去Type5强安全及password login必语法错断言。",
+      "updates": {
+        "prompt": "A classic Cisco IOS router supports VTY lines 0–15 and already has working Telnet connectivity. AAA is disabled, and both console and VTY lines currently have no login configured. Starting in global configuration mode, select the sequence that enables line-password authentication with console password p4ssw0rd1, VTY password s3cr3t2, and privileged EXEC secret priv4t3p4ss.",
+        "options": [
+          {
+            "label": "A",
+            "text": "enable secret priv4t3p4ss\nline console 0\n password p4ssw0rd1\nexit\nline vty 0 15\n password s3cr3t2\nexit"
+          },
+          {
+            "label": "B",
+            "text": "enable secret priv4t3p4ss\nline console 0\n password p4ssw0rd1\n login\nexit\nline vty 0 15\n password s3cr3t2\n login\nexit"
+          },
+          {
+            "label": "C",
+            "text": "enable secret priv4t3p4ss\nline console 0\n password login p4ssw0rd1\nexit\nline vty 0 15\n password login s3cr3t2\n login\nexit"
+          },
+          {
+            "label": "D",
+            "text": "enable secret privilege 15 priv4t3p4ss\nline console 0\n password p4ssw0rd1\n login\nexit\nline vty 0 15\n password s3cr3t2\n login\nexit"
+          }
+        ],
+        "explanation": "B，enable secret设置特权EXEC口令，console/VTY各自password设置所需线路口令，login调用线路口令认证；exit明确从线路回到全局模式再进入下一组线路。已给定无AAA及no login初始状态，不能把各平台出厂VTY默认行为一概而论。\n\nA缺login，不满足题设从no login启用口令认证。C把login接在password后面，不是独立启用线路login，可能被当作口令内容或因语法不合而拒绝，且不是所要求的精确口令。D把privilege15夹在secret后面不是所需enable secret口令配置；若指定等级，支持语法应按level关键字，而不是把privilege15当成口令前缀。\n\nsecret实际存储类型依平台和配置决定，不能把旧Type5称作普遍强安全。此题保留Telnet线路语法考点，Telnet传输不因设置secret而自动加密；并不宣称这是完整安全远程管理方案。"
+      }
+    },
+    {
+      "id": 513,
+      "before_sha256": "cdf265163a354ae169f3d7e304b79187de4feebcb0c438cd060f43572f3552a5",
+      "reason": "原OWE防中间人矛盾于无认证；传统开放WiFi也可承载TLS数据，不能说全部应用内容明文。明确OWE仅空口无认证加密、非主动MITM万能防护。",
+      "updates": {
+        "explanation": "B，OWE为不要求共享口令的无线接入协商加密密钥，对空口数据提供机会性加密，主要降低被动窃听风险。Wi-Fi Enhanced Open采用相关机制；无需把OWE简单等同于所有WPA3认证模式。\n\nA错误：OWE不提供对接入点/用户身份的认证保证，因此不能防止所有主动中间人、伪造热点或钓鱼。DH协商后的链路加密与验证对方身份是两个问题；仍需正确的上层TLS及服务身份验证。C不是压缩，D不是WEP。\n\n传统未加密WiFi缺少链路层数据加密，但上层HTTPS等内容仍可能加密，不能说所有空口应用内容都必然明文。OWE保护无线链路也不等于整条互联网路径端到端保密。"
+      }
+    },
+    {
+      "id": 514,
+      "before_sha256": "399fa4a6cdf0985c318ec596acf85c878d9e51bbeefb31dfe34bd13032b327c9",
+      "reason": "原称必每次完整EAP、FT必50ms及全局开关错误；图Adaptive且legacy8021X已选，严格FT-only需FT8021X并去nonFT认证。补客户端支持与作用范围。",
+      "updates": {
+        "prompt": "Refer to the exhibit. This WPA2-Enterprise WLAN must admit only clients using 802.11r FT authentication; all intended clients and APs support it and other prerequisites are met. Which change removes the shown adaptive/legacy authentication behavior and meets the FT-only requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Under Protected Management Frames, set the PMF option to Required."
+          },
+          {
+            "label": "B",
+            "text": "Enable CCKM under Authentication Key Management."
+          },
+          {
+            "label": "C",
+            "text": "Set the Fast Transition option and the WPA gtk-randomize State to disable."
+          },
+          {
+            "label": "D",
+            "text": "Set Fast Transition to Enable and use FT 802.1X as the only 802.1X AKM, disabling non-FT 802.1X if it remains selected."
+          }
+        ],
+        "explanation": "D。图中Fast Transition为Adaptive、普通8021X已选而FT8021X未选；严格FT-only策略应启用FT并选择FT8021X，且不保留non-FT8021X作为可协商替代。若允许非FT客户端共存，单纯启用FT功能未必等同要求所有客户端使用它。配置作用于该WLAN，不是一个自动改全控制器所有WLAN的开关。\n\nA PMF对应802.11w管理帧保护，不完成FT认证；B CCKM是另一快速漫游机制，不等同IEEE802.11r；C禁用FT不满足。不能笼统说CCKM与FT在所有平台/所有配置都永远不能共存，实际支持应核实。\n\nFT密钥层次帮助漫游时复用初始认证建立的信任，减少重认证开销。传统企业网络也可能使用密钥缓存等优化，并非每次漫游必重新完整EAP；实际切换时间受覆盖、客户端和实现影响，802.11r不保证每次都小于固定50ms。"
+      }
+    },
+    {
+      "id": 515,
+      "before_sha256": "dafbe679d2b6b057236c9a6a4ccc6878a3ac6d8b30066dec2693673dc44c5e1e",
+      "reason": "图WPA2/AES已启用而PMF Disabled，标答B误把WPA标签当WPA2前提；改C PMF Required并明确定所有客户端，区分robust管理帧、组播完整性与所有管理帧加密。",
+      "updates": {
+        "prompt": "Refer to the exhibit. WPA2 with AES/CCMP and the required compatible AKM settings are already configured, and clients support PMF. Which shown setting must be changed to require 802.11w protection for all clients associating with this WLAN?",
+        "answer": [
+          "C"
+        ],
+        "explanation": "C，把PMF从图中的Disabled设为Required，要求关联客户端协商受保护管理帧；不支持所需PMF的客户端不能按此策略加入。图中WPA2 Policy和AES/CCMP已选，因此无需启用标成WPA Policy的旧WPA项，原标答B错误。其他兼容AKM和平台前提已由题干给定，不能说截图展示了被裁掉的全部设置。\n\nA Fast Transition对应802.11r快速漫游；D MAC过滤不提供管理帧密码学保护。802.11w/PMF主要保护规定的robust管理帧，例如适用的解除认证、断开关联及robust action帧，不是所有管理/控制帧都自动加密。组播/广播robust管理帧主要依赖完整性与重放保护，不应一律宣称具有机密性。\n\nPMF可缓解伪造相关管理帧攻击，但不能阻止射频干扰或一切拒绝服务。需要允许不支持客户端时Optional是另一策略，本题明确要求全部客户端，所以选择Required。"
+      }
+    }
+  ]
+}

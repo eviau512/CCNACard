@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "DHCP": "https://www.rfc-editor.org/rfc/rfc2131.html",
+    "DNS_local": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_vrf_aware_dns.html",
+    "Syslog": "https://www.rfc-editor.org/rfc/rfc5424.html",
+    "QoS": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-scheduling.html"
+  },
+  "original_images_directly_viewed": [],
+  "q424_severity_name": "Informational",
+  "q424_severity_value": 6,
+  "q421_protocol_states_checked": [
+    "INIT/SELECTING",
+    "INIT-REBOOT",
+    "RENEWING"
+  ],
+  "limitations": "Manual source/document review, not live DHCP/DNS/QoS tests."
+}

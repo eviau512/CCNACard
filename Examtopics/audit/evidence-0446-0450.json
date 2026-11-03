@@ -1,0 +1,22 @@
+{
+  "sources": {
+    "TFTP": "https://www.rfc-editor.org/rfc/rfc1350.html",
+    "FTP": "https://www.rfc-editor.org/rfc/rfc959.html",
+    "DiffServ": "https://www.rfc-editor.org/rfc/rfc2475.html",
+    "DHCP": "https://www.rfc-editor.org/rfc/rfc2131.html",
+    "NAT": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13772-12.html",
+    "ACL_sequence": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q448_image.jpg",
+    "exhibits/q450_image.jpg"
+  ],
+  "q450_original_exhibit_has_explicit_deny": true,
+  "q450_sequence_numbers": "New explicit scenario condition, not visible in original image",
+  "q450_relay_reply_udp_ports": [
+    67,
+    67
+  ],
+  "q449_unchanged": true,
+  "limitations": "Manual document/exhibit and source checks, not live IOS/DHCP tests."
+}

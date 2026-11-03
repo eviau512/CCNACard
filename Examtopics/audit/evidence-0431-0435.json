@@ -1,0 +1,22 @@
+{
+  "sources": {
+    "NTP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/command/bsm-cr-book/m_bsm-cr-n1.html",
+    "ACL": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html",
+    "DHCP": "https://www.rfc-editor.org/rfc/rfc2131.html",
+    "IPv4_router_option": "https://www.rfc-editor.org/rfc/rfc2132.html",
+    "syslog": "https://www.rfc-editor.org/rfc/rfc5424.html"
+  },
+  "original_images_directly_viewed": [
+    435
+  ],
+  "q431_normal_upstream_stratum": 2,
+  "q431_local_reference_default": 8,
+  "q433_thresholds": {
+    "A": 1,
+    "B": 2,
+    "C": 5,
+    "D": 7
+  },
+  "q435_explicit_existing_inside_interface": "GigabitEthernet2/0/1.100",
+  "limitations": "Manual source/document and later ACL checks, not live IOS tests."
+}

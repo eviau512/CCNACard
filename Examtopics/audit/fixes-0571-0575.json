@@ -1,0 +1,83 @@
+{
+  "scope": "Manual Q571-Q575; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 571,
+      "before_sha256": "713f73d65ac44555fc016d854a01f2df6a43480e13fbab5a5f476eec47bb7d95",
+      "reason": "数据平面答案正确，但CEF/ASIC并非所有平台和每个数据包的唯一处理方式。",
+      "updates": {
+        "explanation": "B。数据平面负责对经过路由器的业务报文执行转发处理，例如依据转发状态查找出接口并按需要重写链路层头部。具体软件、硬件、CEF及异常报文处理取决于平台和配置，不必假设所有报文均经同一ASIC路径。\n\nA控制平面维护或计算路由等转发依据；C管理平面提供配置与监控；D应用层提供应用功能。控制或管理流量本身也需要被处理，功能划分不等于这些组件永不接触报文。"
+      }
+    },
+    {
+      "id": 572,
+      "before_sha256": "801362cbe7f140c355d8eb27c20e8fc8442fc7a289dd3f69b912a4caedeb3e83",
+      "reason": "策略抽象有效但传统管理也能自动化；原解析把集群高可用及纳管覆盖说成绝对，修正语法。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Its modular design allows the implementation of different versions to meet the specific needs of an organization."
+          },
+          {
+            "label": "B",
+            "text": "It only supports auto-discovery of network elements in a greenfield deployment."
+          },
+          {
+            "label": "C",
+            "text": "It cannot support management high availability in a cluster."
+          },
+          {
+            "label": "D",
+            "text": "It abstracts policy from the actual device configuration."
+          }
+        ],
+        "explanation": "D。Cisco DNA Center/Catalyst Center可以提供策略和意图抽象，再基于支持的设备及工作流生成相应配置，减少管理员逐项编写设备命令的需要；实际配置、兼容性和策略效果仍需规划验证。传统网管或脚本也可能支持部分抽象和自动化，这不是独占能力。\n\nB只支持全新网络自动发现的说法错误，已部署设备也可在兼容条件下被发现和纳管；C某些支持的集群部署可提供高可用，不代表任何故障都绝无影响；A不同版本本身不能说明策略抽象这一特征。"
+      }
+    },
+    {
+      "id": 573,
+      "before_sha256": "62e8fa7236f9d143760bfa2f5cab790c81e21bc24036daa048426b87f0e20203",
+      "reason": "南向接口描述正确，但underlay不一定只是物理网络、东向接口命名依架构；去绝对化。",
+      "updates": {
+        "explanation": "A。在控制器架构中，控制器与受管网络设备交互的接口通常称为南向接口，例如使用支持的OpenFlow、NETCONF或其他设备接口。控制器向上与应用交互的接口通常称为北向接口（C）。\n\nB overlay指承载在另一网络之上的逻辑网络；D underlay是为overlay提供连接与可达性的底层网络，二者不是本题所问的接口方向。underlay可以包含物理与虚拟组件；支持的具体协议和设备范围依产品而异。"
+      }
+    },
+    {
+      "id": 574,
+      "before_sha256": "d09d229a38de8df6b7e01c1452225357a4ad60faf27a5aee3aa8f66bce5849f1",
+      "reason": "已查看原图，方括号表示数组但数组也是JSON值；图中e2/e20/e23无引号且末尾逗号，原解析误称合法JSON。",
+      "updates": {
+        "prompt": "In the exhibit, what is the intended outer container from line 1 through line 5, as indicated by its square brackets?",
+        "options": [
+          {
+            "label": "A",
+            "text": "object"
+          },
+          {
+            "label": "B",
+            "text": "string"
+          },
+          {
+            "label": "C",
+            "text": "key"
+          },
+          {
+            "label": "D",
+            "text": "array"
+          }
+        ],
+        "explanation": "D。原图第1行和第5行用方括号包围三项，因此意图表示数组；每项外层花括号意图表示对象。数组本身也是一种JSON值，原B仅写value时并非完全错误，现改为string以明确比较类型。\n\n原图中的`e2`、`e20`、`e23`未用字符串双引号包围，末项之后还有逗号；排版引号亦须规范化，因此原图不能直接作为严格JSON解析。保留原图用于判断意图，等价的合法示例如下：\n\n```json\n[\n  {\"switch\":\"3750\",\"port\":\"e2\"},\n  {\"router\":\"2951\",\"port\":\"e20\"},\n  {\"switch\":\"3750\",\"port\":\"e23\"}\n]\n```\n\nA对象对应内部花括号，B字符串和C键都不是整个外层容器。"
+      }
+    },
+    {
+      "id": 575,
+      "before_sha256": "dc1b249de2e2743cb386276aa6b0c8092b9f6536e5a0adf2a382f4a9e1f67851",
+      "reason": "GET对应读取，但CRUD与HTTP方法不是强制一一映射，补充语义。",
+      "updates": {
+        "explanation": "B。HTTP GET请求获取目标资源的当前表示，常用于CRUD中的Read（读取）操作。实际返回的数据和权限取决于接口及服务器状态。\n\nA Create创建数据，C Delete删除，D Update修改已有数据；API常使用POST、DELETE、PUT或PATCH实现这些操作，但CRUD与HTTP方法并不是对所有接口都强制一一对应的表。GET是安全方法，不应被设计为请求用户期望的状态修改。"
+      }
+    }
+  ]
+}

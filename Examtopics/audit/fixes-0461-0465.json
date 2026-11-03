@@ -1,0 +1,50 @@
+{
+  "scope": "Manual Q461-Q465; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 461,
+      "before_sha256": "5e38a020856516bd26c32d4fffd0e1c1a8e9cf005be9197c8d01ec3a12eb0851",
+      "reason": "核心C正确，但原解析把初始69泛化整个传输、所有数据块固定512且最后短块等同成功，未区分DATA/ACK与终止ACK。限定基础RFC1350并补扩展边界。",
+      "updates": {
+        "explanation": "C，基础RFC1350 TFTP通过DATA和ACK中的16位块号关联数据与确认，结合超时重传处理丢失报文及识别重复。基础模式是停等：确认当前DATA块后再发送下一块；块号不是内容校验码，也不提供密码学防篡改保障。\n\n基础数据块最多512字节，最后DATA的有效数据长度小于512；文件长度恰为512整数倍时，还需零长度DATA表示结束。接收最后DATA后仍应发送对应ACK，发送方收到该确认才完成正常交换，不能把短包出现就等同双方都成功。协商blocksize或windowsize等扩展会改变数据大小或窗口行为，不能把基础规则推广到全部扩展。\n\nA错误：基础TFTP没有加密与用户认证；B错误：TFTP用UDP，初始RRQ/WRQ目的端口69，后续使用双方选择的TID端口，不是全程服务器69，也不用TCP20。D是FTP式独立控制/数据TCP连接架构，基础TFTP不要求这两条连接。"
+      }
+    },
+    {
+      "id": 462,
+      "before_sha256": "4ba4d3359fe205b23324fd1c237e9c70be2e6a1557d98e2c86ac402a46168cf0",
+      "reason": "通用模板且无条件信任电话，声称trunk收到标签必strip从而丢CoS不准确；补受管理电话与不可信PC条件，具体解释边缘分类标记及逐链路标签。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The IP phone attached to SW1 is a managed endpoint whose voice markings comply with policy; the PC attached to SW2 is untrusted and may set arbitrary markings. Which plan establishes an appropriate QoS trust boundary as close to these sources as practical?",
+        "explanation": "A。对已确认受管理且符合策略的IP电话流量，SW1可以信任相应标记；对不可信PC，SW2在接入入口分类并按策略标记，防止终端自行设置高优先级抢占资源。信任依据是管理和验证条件，不是设备画成电话就自动可信；若电话后还接PC，也需分别处理其数据流量。\n\nB/C先信任全部接入标记，直到MLS1/R1才统一重标记，把不可信标记带入网络过深，也不能据此说所有可信电话标记都必须重写。D直接信任两边所有标记，不符合PC不可信条件。交换机处理后的可信标记可供后续节点按策略使用，但不意味着无需监控或限额。\n\n802.1Q的PCP/CoS属于每条二层链路的标签，IP DSCP属于IP头字段；二者映射及保留取决于配置和出链路。不能笼统说所有trunk输入都把CoS永久丢弃，或只要信任电话就一定获得端到端QoS保证。"
+      }
+    },
+    {
+      "id": 463,
+      "before_sha256": "bc3561f55ec29f566a09fb2efea6794664dac49003f0f6b3be8de31a5212d389",
+      "reason": "原解析LLQ永远优先且彻底避免丢包错误，语音带宽仅codec也漏封装；明确拥塞保护可减损失但不是保证，去未渲染公式和泛化指标。",
+      "updates": {
+        "prompt": "During congestion on a shared data network, which listed performance improvement can correctly provisioned QoS provide for admitted voice traffic?",
+        "explanation": "B，正确分类、容量规划及优先调度可减少语音因拥塞造成的丢包，并降低排队时延及抖动。语音对迟到和丢失敏感，但具体编码、分包周期和业务模型不同，不能说所有语音都固定恒定带宽或只有codec比特率。实际链路占用还包含RTP/UDP/IP及二层等开销。\n\nLLQ可为语音提供严格优先服务，并结合带宽约束保护其他类别；仍可能因超额policing、队列满、链路故障或供给不足丢包。正在发送的数据帧通常不能被普通优先队列中断，所以不是永远零等待或彻底无丢包。\n\nA不是单靠调度产生的编码压缩效果；C分类是识别语音/视频并实施不同处理的手段，题目问的是性能结果；D增加抖动会恶化实时语音。QoS管理已有资源，不会凭空创造链路容量，仍需合适的呼叫准入和端到端设计。"
+      }
+    },
+    {
+      "id": 464,
+      "before_sha256": "2d1bcc2d5333bf7764b4495e98df189c2dda15898a77cdb55cf3e28153ebc371",
+      "reason": "PQ不能抢占已发送大帧或保证零等待；WFQ不宜简单等同轮询，WRED不只处理TCP且LLQ非绝对无损。保留C，解释容量与饥饿约束。",
+      "updates": {
+        "explanation": "C，四个选项中PQ（优先队列）可将匹配语音放入高优先队列，在下一次调度时优先服务，减少其在大量数据报文后排队的机会。传统严格PQ持续有高优先流时可能使低优先流饥饿；现代LLQ将优先队列与按类带宽等机制结合，需合理约束负载。\n\n优先调度通常不能中断链路上已开始发送的数据帧，不等于抢占已发送字节，也不保证零时延、零抖动或无丢包；低速链路的大帧序列化等待仍可能需要专门分片/交织等机制。\n\nA WRED主要通过按平均队长及丢弃优先级提前丢包/相应标记进行拥塞避免，不提供此严格优先服务；它不是只能对TCP起作用，但语音一般不靠随机早丢获得低时延。B FIFO按先来先服务，无专门语音优先。D WFQ按流及权重分配服务，能改善小流公平性，但普通WFQ不等于严格优先PQ，也不应简单说成普通轮询。题目比较给出的工具，不把PQ当成无需容量规划的万能方案。"
+      }
+    },
+    {
+      "id": 465,
+      "before_sha256": "7970337d21a86fef91b867e523d583829675087b8bef10753350d665bf80ca1c",
+      "reason": "原图只父口inside，解析称子接口自动继承，无法据此证明子接口NAT角色完整；改自包含文字配置明确两子口inside，再考ACL覆盖。去NAT ACL拒绝必丢报文和静态NAT永远不适用泛化。",
+      "updates": {
+        "image": null,
+        "prompt": "Use the following corrected, complete relevant NAT configuration exhibit. VLAN 100 already has Internet access. Both VLANs have correct trunks, gateways and routing, and no other NAT rules or filtering interfere. Which action adds VLAN 200 (10.10.20.0/24) to the existing interface-overload PAT policy while preserving VLAN 100?\n\n```text\ninterface GigabitEthernet0/0\n ip address 209.165.200.225 255.255.255.224\n ip nat outside\n!\ninterface GigabitEthernet0/1.100\n encapsulation dot1Q 100\n ip address 10.10.10.1 255.255.255.0\n ip nat inside\n!\ninterface GigabitEthernet0/1.200\n encapsulation dot1Q 200\n ip address 10.10.20.1 255.255.255.0\n ip nat inside\n!\nip access-list standard NAT_INSIDE_RANGES\n permit 10.10.10.0 0.0.0.255\n!\nip nat inside source list NAT_INSIDE_RANGES interface GigabitEthernet0/0 overload\n```",
+        "explanation": "D，在现有NAT_INSIDE_RANGES标准ACL中增加VLAN200网段：\n```text\nip access-list standard NAT_INSIDE_RANGES\n permit 10.10.20.0 0.0.0.255\n```\n\n修订展品明确在两个承载三层网关的子接口分别配置ip nat inside，G0/0为outside；不能仅凭父接口inside就认定所有子接口继承。原图的不完整角色配置已由自包含文字展品替换，保留证据。\n\n目前ACL只匹配10.10.10.0/24，新增许可使10.10.20.0/24也符合已有PAT规则，同时保留VLAN100许可。NAT选择ACL的未匹配表示不按此规则转换，不等于接口过滤ACL直接丢弃所有这些报文。\n\nA不需要另建地址池，已有策略使用G0/0接口地址overload；B不应把新增内网子接口改成outside；C静态NAT可用于其他设计，但不是把该子网加入现有PAT策略的动作，不能说静态NAT对所有客户端场景都绝对不适用。其他网络前提已在题干给定。"
+      }
+    }
+  ]
+}

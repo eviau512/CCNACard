@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "AAA": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-mt/sec-usr-aaa-15-mt-book/configuring_authentication.html",
+    "WPA3": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_wpa3.html",
+    "zero_day": "https://csrc.nist.gov/glossary/term/Zero_Day_Attack",
+    "network_malware": "https://www.cisco.com/c/en/us/td/docs/security/firepower/670/configuration/guide/fpmc-config-guide-v67/file_policies_and_advanced_malware_protection.html"
+  },
+  "original_images_directly_viewed": [],
+  "q524_unchanged": true,
+  "q521_correct_list": "CONSOLE_LOCAL local, explicitly bound to console 0",
+  "q523_vulnerability_vs_exploit_clarified": true,
+  "q525_dynamic_submission_depends_on_policy": true,
+  "limitations": "Manual document/source review; not live AAA/WPA3/exploit or malware analysis tests."
+}

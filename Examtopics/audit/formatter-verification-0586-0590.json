@@ -1,0 +1,111 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    586,
+    587,
+    588,
+    589,
+    590
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 587,
+      "kind": "code",
+      "input": "`switch`",
+      "expected": "switch",
+      "html": "<code class=\"inline-code\">switch</code>"
+    },
+    {
+      "id": 587,
+      "kind": "code",
+      "input": "`switch`",
+      "expected": "switch",
+      "html": "<code class=\"inline-code\">switch</code>"
+    },
+    {
+      "id": 587,
+      "kind": "code",
+      "input": "`3750`",
+      "expected": "3750",
+      "html": "<code class=\"inline-code\">3750</code>"
+    },
+    {
+      "id": 587,
+      "kind": "code",
+      "input": "`e2`",
+      "expected": "e2",
+      "html": "<code class=\"inline-code\">e2</code>"
+    },
+    {
+      "id": 587,
+      "kind": "code",
+      "input": "`e20`",
+      "expected": "e20",
+      "html": "<code class=\"inline-code\">e20</code>"
+    },
+    {
+      "id": 587,
+      "kind": "code",
+      "input": "`e23`",
+      "expected": "e23",
+      "html": "<code class=\"inline-code\">e23</code>"
+    },
+    {
+      "id": 587,
+      "kind": "code",
+      "input": "`{\"switch\":\"3750\",\"port\":\"e2\"}`",
+      "expected": "{\"switch\":\"3750\",\"port\":\"e2\"}",
+      "html": "<code class=\"inline-code\">{\"switch\":\"3750\",\"port\":\"e2\"}</code>"
+    },
+    {
+      "id": 588,
+      "kind": "code",
+      "input": "`Employee’s name`",
+      "expected": "Employee’s name",
+      "html": "<code class=\"inline-code\">Employee’s name</code>"
+    },
+    {
+      "id": 588,
+      "kind": "code",
+      "input": "`Arthur`",
+      "expected": "Arthur",
+      "html": "<code class=\"inline-code\">Arthur</code>"
+    },
+    {
+      "id": 588,
+      "kind": "code",
+      "input": "`{\"Employee’s name\":\"Arthur\"}`",
+      "expected": "{\"Employee’s name\":\"Arthur\"}",
+      "html": "<code class=\"inline-code\">{\"Employee’s name\":\"Arthur\"}</code>"
+    },
+    {
+      "id": 590,
+      "kind": "code",
+      "input": "```text\n{\n  \"Test_Questions\": [\"Automation\", \"Configuration\"],\n  \"Test_Exam_Level\": [\"CCNA\", \"CCNP\"],\n  \"Test_Response\": [\"Correct\", \"Incorrect\"]\n}\n\n```",
+      "expected": "{\n  \"Test_Questions\": [\"Automation\", \"Configuration\"],\n  \"Test_Exam_Level\": [\"CCNA\", \"CCNP\"],\n  \"Test_Response\": [\"Correct\", \"Incorrect\"]\n}",
+      "html": "<pre class=\"cli-block\"><code>{\n  \"Test_Questions\": [\"Automation\", \"Configuration\"],\n  \"Test_Exam_Level\": [\"CCNA\", \"CCNP\"],\n  \"Test_Response\": [\"Correct\", \"Incorrect\"]\n}</code></pre>"
+    },
+    {
+      "id": 590,
+      "kind": "code",
+      "input": "`Test_Questions`",
+      "expected": "Test_Questions",
+      "html": "<code class=\"inline-code\">Test_Questions</code>"
+    },
+    {
+      "id": 590,
+      "kind": "code",
+      "input": "`Test_Exam_Level`",
+      "expected": "Test_Exam_Level",
+      "html": "<code class=\"inline-code\">Test_Exam_Level</code>"
+    },
+    {
+      "id": 590,
+      "kind": "code",
+      "input": "`Test_Response`",
+      "expected": "Test_Response",
+      "html": "<code class=\"inline-code\">Test_Response</code>"
+    }
+  ]
+}

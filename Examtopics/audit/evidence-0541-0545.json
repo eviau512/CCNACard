@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "ISE门户证书": "https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/216191-troubleshoot-common-cisco-ise-guest-acce.html",
+    "WPA3套件": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/c9800-best-practices.html",
+    "双标签": "https://www.cisco.com/c/dam/en/us/td/docs/solutions/CVD/Oct2015/CVD-Campus_LAN_L2_Access_Simplified_Dist_Deployment-Oct2015.pdf",
+    "密码命令": "https://www.cisco.com/c/en/us/support/docs/smb/switches/cisco-small-business-300-series-managed-switches/smb5563-configure-password-settings-on-a-switch-through-the-command.html",
+    "IaaS": "https://csrc.nist.gov/pubs/sp/800/145/final"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual document review; not live ISE, wireless, switch or cloud tests."
+}

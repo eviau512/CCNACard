@@ -1,0 +1,73 @@
+{
+  "scope": [
+    521,
+    525
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 4,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 113,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 2,
+  "q524_unchanged": true,
+  "q521_list_binding_model": [
+    {
+      "label": "A",
+      "console_list": "default",
+      "console_methods": [
+        "group",
+        "radius"
+      ],
+      "new_local_user_present": false,
+      "console_local_login": false,
+      "remote_binding_unchanged": true,
+      "meets_requirements": false
+    },
+    {
+      "label": "B",
+      "console_list": "CONSOLE_LOCAL",
+      "console_methods": [
+        "group",
+        "radius"
+      ],
+      "new_local_user_present": true,
+      "console_local_login": false,
+      "remote_binding_unchanged": true,
+      "meets_requirements": false
+    },
+    {
+      "label": "C",
+      "console_list": "default",
+      "console_methods": [
+        "group",
+        "radius"
+      ],
+      "new_local_user_present": true,
+      "console_local_login": false,
+      "remote_binding_unchanged": false,
+      "meets_requirements": false
+    },
+    {
+      "label": "D",
+      "console_list": "CONSOLE_LOCAL",
+      "console_methods": [
+        "local"
+      ],
+      "new_local_user_present": true,
+      "console_local_login": true,
+      "remote_binding_unchanged": true,
+      "meets_requirements": true
+    }
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "ef0e006c0a6942a4df45a82b85bcc83845d94ca0a2d2e2a6e832434dfec435c5",
+  "app_bundle_sha256": "0ed9ac3e218aabb02c69505d18d8e83be49ad2953e07b1665b0af3c900863b06",
+  "limitations": "Manual document/source and actual formatter checks plus abstract AAA list/binding resolution; not live AAA/WPA3/exploit or malware analysis tests."
+}

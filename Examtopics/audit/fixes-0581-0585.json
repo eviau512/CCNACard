@@ -1,0 +1,49 @@
+{
+  "scope": "Manual Q581-Q585; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 581,
+      "before_sha256": "92e6214a3db24068b5ea6bb72eee35ce47fadb32cbb318a5b30cac7da2546e36",
+      "reason": "四种方法是标准HTTP方法但并非每个REST接口都全部支持；幂等不表示响应相同。",
+      "updates": {
+        "prompt": "Which set contains four commonly used standard HTTP methods for web APIs?",
+        "explanation": "C。GET、PUT、POST和DELETE都是标准HTTP方法，常用于Web API中的读取、提交、替换及删除操作；某个具体资源不一定支持全部方法，还可能支持PATCH等其他方法。\n\nA、B、D中的ERASE、CHANGE或MOD不是这些常用标准方法。HTTP方法可通过扩展定义，不能仅凭单词断言任何私有实现都不可能使用。幂等指重复相同请求的预期效果与一次相同，并不要求每次响应相同；POST通常不保证幂等。"
+      }
+    },
+    {
+      "id": 582,
+      "before_sha256": "9918b3dc04b5fdec37af3c049e3b77629f25fce7e351c2572158d456ef67c8ff",
+      "reason": "题干end笔误，REST是常见北向实现但非唯一选择，接口能力依产品。",
+      "updates": {
+        "prompt": "Which technology can an SDN controller expose as a northbound interface for applications running over the network?",
+        "explanation": "B。控制器可提供REST风格的Web API，使上层应用通过HTTP等方式查询状态或提交请求；具体端点、认证和功能取决于控制器实现。北向接口不一定只有REST，也不必统一使用JSON。\n\nA南向接口通常面向受管基础设施；C NETCONF和D OpenFlow常用于控制器与设备交互，不是本题中最直接的应用集成选择。方向描述的是接口在架构中的角色，不能说某种协议在所有实现中只能用于一个方向。"
+      }
+    },
+    {
+      "id": 583,
+      "before_sha256": "416e6de7095ed4f92be617e25e9e24511a20e8fc8d0bb9d4f2728a417b96b306",
+      "reason": "交换机转发答案正确，off-the-shelf不必然是白盒或完全无本地控制。",
+      "updates": {
+        "explanation": "B。在经典控制器网络模型中，交换机承担数据平面的报文转发，可依据已安装的转发状态处理流量。控制器或其他控制组件可提供较集中的网络视图与策略，但实际设备仍可能具备本地协议、管理或控制能力。\n\nA制定全局策略、C提供集中视图及D全局路径决策更贴近控制或管理层的典型职责。off-the-shelf只表示现成商用设备，不必然等于白盒，也不保证完全没有本地控制或以某一速率转发。"
+      }
+    },
+    {
+      "id": 584,
+      "before_sha256": "284d1593791980d558f14f83c63257d971d02bcf60d2210b52017d99b2d4bbf7",
+      "reason": "POST也可触发更新，原题无端点限定；引用Cisco 2.3.7.5 Update Site的PUT具体端点。",
+      "updates": {
+        "prompt": "Cisco Catalyst Center Intent API version 2.3.7.5 documents an Update Site operation at `/dna/intent/api/v1/site/{siteId}`. Which HTTP method does that documented operation use?",
+        "explanation": "D。Cisco针对2.3.7.5版本的Update Site接口文档将该指定端点定义为HTTP PUT，用于更新指定站点。调用前仍需遵循文档的认证、请求体和版本要求。\n\nA CHANGE和B UPDATE不是此端点所列方法；C POST不用于文档中的这一Update Site操作。其他API或其他端点也可能使用POST处理更新或动作，不能将PUT说成所有更新操作唯一允许的方法。"
+      }
+    },
+    {
+      "id": 585,
+      "before_sha256": "dc826d195c38616a4e714e866885f8c40110a8526f28a33d25d97a8a9c976fa1",
+      "reason": "已查看原图为一个对象包含SW1–SW4四个数组，原解析错引另一题并虚构官方答案理由。",
+      "updates": {
+        "explanation": "A。原图最外层只有一对花括号，表示一个对象；对象包含SW1、SW2、SW3、SW4四个名称，每个名称对应一个包含两个接口字符串的数组。数组不是对象，故对象数为1，不是4。\n\n将图中的排版引号规范化后，结构可写为：\n\n```json\n{\n  \"SW1\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW2\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW3\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"],\n  \"SW4\": [\"Ten-GigabitEthernet0/0\", \"Ten-GigabitEthernet0/1\"]\n}\n```\n\nB、C、D的2、3、4均不是图中对象数量。原解析错误引用了另一道题的数组图，并将不存在的“官方命题意图”作为依据；本题答案直接由本图结构确定。"
+      }
+    }
+  ]
+}

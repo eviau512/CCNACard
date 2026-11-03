@@ -1,0 +1,51 @@
+{
+  "scope": "Manual Q426-Q430; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 426,
+      "before_sha256": "bc0faa1c1c906e0e505e1772a63185df9876915700df3b6824f109ec361938f2",
+      "reason": "仅静态IP打印机不必在所有WiFi启被动客户端；补AireOS WLC尚未知IP且打印机不主动发IP流量/其他WLAN条件满足，C保留。原7.4链接已重定向产品页，以8.10有效文档核查，替换模板。",
+      "updates": {
+        "prompt": "On a supported Cisco AireOS controller WLAN, a static-IP wireless printer associates but remains silent and does not send IP traffic that lets the controller learn its address. Other WLAN prerequisites are met, and wired clients need ARP exchange to reach it. Which WLAN feature supports this passive-client behavior?",
+        "explanation": "C，passive client。该功能针对已关联但不主动提供可供学习IP信息的设备，使相应WLC部署能让必要ARP请求/响应到达无线客户端并建立所需信息；打印机、秤等静态且安静的设备是常见场景。只说明打印机使用静态IP不足以证明任何WiFi都必须启此功能，具体前提和转发行为依控制器版本、WLAN及AP模式而异。\n\nA client exclusion用于隔离/排除客户端，不解决其被动IP学习；B强制DHCP与保持静态IP的场景不同；D static IP tunneling不是本题ARP/IP学习问题的对应功能。不要泛称WLC永远只能从DHCP学习任何静态客户端地址，也不能把开启单一选项当作替代其他WLAN/VLAN和转发配置的万能修复。"
+      }
+    },
+    {
+      "id": 427,
+      "before_sha256": "25bd42711b62be733150a0590d79af2f070e44166958091cfbb6c55f11a40771",
+      "reason": "B中继正确；原解析把广播隔离描述成物理属性/所有广播必丢弃且转发称网桥。按不同IP子网的客户端广播中继解释，不把异地物理位置本身等同必须中继。",
+      "updates": {
+        "prompt": "When DHCP clients and their server are on different IP subnets, which role relays initial client requests and server replies across the subnet boundary?",
+        "explanation": "B，DHCP relay agent。客户端初始发现通常局限于本地广播域，中继在客户端侧接收请求并把它送向远端服务器，再按DHCP中继流程把响应转交客户端。路由器或三层交换机等可提供此角色，例如在相应客户端侧IP接口配置helper地址。\n\nA DHCPOFFER和D DHCPDISCOVER是消息类型，不是中继设备角色；C是提供地址和配置的服务器，不是所问中间转发者。关键是IP子网与广播域边界，不是物理距离不同就一定需要中继；单播续租等阶段也不必每次重复初始广播流程。中继不是透明二层网桥，不应把其工作说成任意广播都会无条件被所有路由器丢弃的物理定律。"
+      }
+    },
+    {
+      "id": 428,
+      "before_sha256": "4fb0bec93038716d7f319f882139ddb773b06c1dfc209726aed441cab4b9a85a",
+      "reason": "已看R1.2/R2.3及R2Loop172.17.0.1，D master4正确；命令不会删除已有server/peer或保证停止所有请求。补无其他授时关联场景，软件时钟参考非保证硬件精度。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Router1 uses ntp server 192.168.0.3. Router2 has no other upstream NTP server/peer associations or external reference source. Which command makes Router2 offer its local software clock at stratum 4 as the reference for Router1?",
+        "explanation": "D，`ntp master 4`允许R2在没有外部同步源的题设条件下使用本地软件时钟作为参考，对下游提供stratum4时间；R1成功同步后通常为stratum5。图中R2互联地址192.168.0.3是R1所指服务器，Loopback172.17.0.1本身不是外部时钟源。\n\nA/B的ntp server会让R2尝试使用指定上游，与此本地来源要求不同；C passive不是建立指定stratum本地参考的命令。ntp master不会自动删除已有server/peer关联，也不保证设备从此绝不向上游发请求；若存在有效更优外源，选源行为仍受已有配置影响。因此不能把它泛称强制且互斥的server-only开关。配置层级也不让本地时钟自动获得对应绝对精度，隔离授时仍需校准和合理规划。"
+      }
+    },
+    {
+      "id": 429,
+      "before_sha256": "4c42d7b49660f817531e263dcd62fe357589f7447825d2baf8894ccf5ca6abc0",
+      "reason": "A FTP支持账号认证备份正确；原文强制USER/PASS、数据总TCP20、TFTP任何人可读写、必须预配凭据均过度。限定需账号登录的服务器，说明匿名/服务器策略与主动/被动数据连接。",
+      "updates": {
+        "prompt": "A remote backup server requires an account login using a username and password. Which listed file-transfer protocol supports transferring a Cisco router configuration to that server with those credentials?",
+        "explanation": "A，FTP支持基于账号的登录与文件传输，可用于路由器把配置备份到要求凭据的FTP服务器。B SMTP用于邮件，C基础TFTP没有内建用户名/密码登录，D DTP用于交换端口trunk协商，不是此处所问的文件传输。\n\n不能泛称所有FTP会话都强制同一USER/PASS步骤：是否要求密码、是否允许匿名及目录写权限取决于服务器策略。FTP控制连接通常使用TCP21；数据连接另建，主动模式可涉及服务器TCP20，被动模式使用协商端口，不能说数据一律走20。基础TFTP虽无账号认证，服务器仍可用ACL、文件权限或网络隔离限制访问，不能断言任何可达设备都能任意读写。FTP认证本身也不等于加密。"
+      }
+    },
+    {
+      "id": 430,
+      "before_sha256": "4b64ccfcfb29bc89b3e32ad069c2f42d4292933723d8817de30446d89b1f9da5",
+      "reason": "C MIB支持语义解码正确，不是接收/存储/数字OID处理前提。题目限定基于MIB显示vendor通知名称/对象含义；修162目的端口、ASN.1编码、Inform非保证可靠和NMS/agent共存禁断言。",
+      "updates": {
+        "prompt": "An NMS uses MIB-based symbolic decoding to display a vendor-specific SNMP trap's notification name and defined object meanings. Which listed resource must be available to that decoder?",
+        "explanation": "C，需要对应MIB模块定义及必要依赖，才能按该模块把通知/对象OID解释为名称、类型和语义。OID在线上是SNMP编码的一部分，点分数字是常见显示形式，不是每个报文都直接传一段点分文本。MIB不一定为每条通知规定应用中的告警严重性，事件分级/关联也可由NMS策略决定。\n\n这不表示没加载MIB就无法接收、存储或用数字OID匹配Trap；自定义解析器也可有内建定义。常见SNMP通知发送到接收方UDP162，不能把162一概当作代理源端口。A不必等两代理相同告警，B也不必捆绑Trap和Inform；Inform是需应答的确认通知机制，仍不保证绝对送达。D同机部署不是必要条件，管理端与代理是逻辑角色，也不能断言它们永远不能共存于同一设备。"
+      }
+    }
+  ]
+}

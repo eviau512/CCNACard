@@ -1,0 +1,264 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    441,
+    442,
+    443,
+    444,
+    445
+  ],
+  "code_results": [
+    {
+      "id": 441,
+      "kind": "code",
+      "input": "```text\ninterface GigabitEthernet0/0\n ip helper-address 192.0.2.10\n\n```",
+      "expected": "interface GigabitEthernet0/0\n ip helper-address 192.0.2.10",
+      "html": "<pre class=\"cli-block\"><code>interface GigabitEthernet0/0\n ip helper-address 192.0.2.10</code></pre>"
+    },
+    {
+      "id": 441,
+      "kind": "code",
+      "input": "`ip helper-address <DHCP-server-IP>`",
+      "expected": "ip helper-address <DHCP-server-IP>",
+      "html": "<code class=\"inline-code\">ip helper-address &lt;DHCP-server-IP&gt;</code>"
+    },
+    {
+      "id": 441,
+      "kind": "code",
+      "input": "`ip dhcp relay`",
+      "expected": "ip dhcp relay",
+      "html": "<code class=\"inline-code\">ip dhcp relay</code>"
+    },
+    {
+      "id": 441,
+      "kind": "code",
+      "input": "`ip dhcp pool`",
+      "expected": "ip dhcp pool",
+      "html": "<code class=\"inline-code\">ip dhcp pool</code>"
+    },
+    {
+      "id": 441,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 442,
+      "kind": "code",
+      "input": "`ip dhcp snooping trust`",
+      "expected": "ip dhcp snooping trust",
+      "html": "<code class=\"inline-code\">ip dhcp snooping trust</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`Router>`",
+      "expected": "Router>",
+      "html": "<code class=\"inline-code\">Router&gt;</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`Router#`",
+      "expected": "Router#",
+      "html": "<code class=\"inline-code\">Router#</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`Router(config)#`",
+      "expected": "Router(config)#",
+      "html": "<code class=\"inline-code\">Router(config)#</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`clock set <hh:mm:ss> <day> <month> <year>`",
+      "expected": "clock set <hh:mm:ss> <day> <month> <year>",
+      "html": "<code class=\"inline-code\">clock set &lt;hh:mm:ss&gt; &lt;day&gt; &lt;month&gt; &lt;year&gt;</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`<hh:mm:ss> <month> <day> <year>`",
+      "expected": "<hh:mm:ss> <month> <day> <year>",
+      "html": "<code class=\"inline-code\">&lt;hh:mm:ss&gt; &lt;month&gt; &lt;day&gt; &lt;year&gt;</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`clock set 00:00:00 1 Jan 2020`",
+      "expected": "clock set 00:00:00 1 Jan 2020",
+      "html": "<code class=\"inline-code\">clock set 00:00:00 1 Jan 2020</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`Router(config)# clock timezone <zone-name> <offset-hours>`",
+      "expected": "Router(config)# clock timezone <zone-name> <offset-hours>",
+      "html": "<code class=\"inline-code\">Router(config)# clock timezone &lt;zone-name&gt; &lt;offset-hours&gt;</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`Router(config)# clock summer-time <zone-name> recurring ...`",
+      "expected": "Router(config)# clock summer-time <zone-name> recurring ...",
+      "html": "<code class=\"inline-code\">Router(config)# clock summer-time &lt;zone-name&gt; recurring ...</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`clock set`",
+      "expected": "clock set",
+      "html": "<code class=\"inline-code\">clock set</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`Router(config)#`",
+      "expected": "Router(config)#",
+      "html": "<code class=\"inline-code\">Router(config)#</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`clock timezone CST 8`",
+      "expected": "clock timezone CST 8",
+      "html": "<code class=\"inline-code\">clock timezone CST 8</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`clock set`",
+      "expected": "clock set",
+      "html": "<code class=\"inline-code\">clock set</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`clock timezone/summer-time`",
+      "expected": "clock timezone/summer-time",
+      "html": "<code class=\"inline-code\">clock timezone/summer-time</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`clock set`",
+      "expected": "clock set",
+      "html": "<code class=\"inline-code\">clock set</code>"
+    },
+    {
+      "id": 443,
+      "kind": "code",
+      "input": "`configure terminal`",
+      "expected": "configure terminal",
+      "html": "<code class=\"inline-code\">configure terminal</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`ip nat inside source static <inside-local-ip> <inside-global-ip>`",
+      "expected": "ip nat inside source static <inside-local-ip> <inside-global-ip>",
+      "html": "<code class=\"inline-code\">ip nat inside source static &lt;inside-local-ip&gt; &lt;inside-global-ip&gt;</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`inside local IP`",
+      "expected": "inside local IP",
+      "html": "<code class=\"inline-code\">inside local IP</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`inside global IP`",
+      "expected": "inside global IP",
+      "html": "<code class=\"inline-code\">inside global IP</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`10.1.1.1`",
+      "expected": "10.1.1.1",
+      "html": "<code class=\"inline-code\">10.1.1.1</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`209.165.200.225`",
+      "expected": "209.165.200.225",
+      "html": "<code class=\"inline-code\">209.165.200.225</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`ip nat inside source static 10.1.1.1 209.165.200.225`",
+      "expected": "ip nat inside source static 10.1.1.1 209.165.200.225",
+      "html": "<code class=\"inline-code\">ip nat inside source static 10.1.1.1 209.165.200.225</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`ip nat inside source static <local-ip> <global-ip>`",
+      "expected": "ip nat inside source static <local-ip> <global-ip>",
+      "html": "<code class=\"inline-code\">ip nat inside source static &lt;local-ip&gt; &lt;global-ip&gt;</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`10.1.1.1`",
+      "expected": "10.1.1.1",
+      "html": "<code class=\"inline-code\">10.1.1.1</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`209.165.200.225`",
+      "expected": "209.165.200.225",
+      "html": "<code class=\"inline-code\">209.165.200.225</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`ip nat outside source static`",
+      "expected": "ip nat outside source static",
+      "html": "<code class=\"inline-code\">ip nat outside source static</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`outside source static`",
+      "expected": "outside source static",
+      "html": "<code class=\"inline-code\">outside source static</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`209.165.200.225`",
+      "expected": "209.165.200.225",
+      "html": "<code class=\"inline-code\">209.165.200.225</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`10.1.1.1`",
+      "expected": "10.1.1.1",
+      "html": "<code class=\"inline-code\">10.1.1.1</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`outside source static`",
+      "expected": "outside source static",
+      "html": "<code class=\"inline-code\">outside source static</code>"
+    },
+    {
+      "id": 444,
+      "kind": "code",
+      "input": "`ip nat inside source static`",
+      "expected": "ip nat inside source static",
+      "html": "<code class=\"inline-code\">ip nat inside source static</code>"
+    }
+  ]
+}

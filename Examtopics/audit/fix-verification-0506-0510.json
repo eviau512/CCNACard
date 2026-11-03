@@ -1,0 +1,56 @@
+{
+  "scope": [
+    506,
+    510
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 3,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 100,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 0,
+  "q508_wildcard_model": [
+    {
+      "label": "A",
+      "valid_standard_number": true,
+      "cases": 9,
+      "mismatching_addresses": []
+    },
+    {
+      "label": "B",
+      "valid_standard_number": true,
+      "cases": 9,
+      "mismatching_addresses": [
+        "192.0.2.1",
+        "192.169.0.1"
+      ]
+    },
+    {
+      "label": "C",
+      "valid_standard_number": false,
+      "cases": 9,
+      "mismatching_addresses": [
+        "192.0.2.1",
+        "192.169.0.1"
+      ]
+    },
+    {
+      "label": "D",
+      "valid_standard_number": false,
+      "cases": 9,
+      "mismatching_addresses": []
+    }
+  ],
+  "q506_q510_unchanged": true,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "d609174265c3fa00201ed3ed3e5b49870dd5f9eb1f3ed1291c3fe168d6256762",
+  "app_bundle_sha256": "ada75ed0cb732d1ed4d65f737cb07b632c899b3dd752fd42d63bf4f7c3558f24",
+  "limitations": "Manual source/document/exhibit/formatter and representative wildcard policy model; not live PSK/GRE/IPsec/ACL/RADIUS/camera tests."
+}

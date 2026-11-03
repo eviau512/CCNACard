@@ -1,0 +1,59 @@
+{
+  "scope": "Manual Q576-Q580; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 576,
+      "before_sha256": "157ad1a0c7750c1b4555896bf940ecbdd77920c60fbd0c692af90c21e7eada9d",
+      "reason": "传统网管也可集中，题目应比较逐台手动与平台集中管理而非将集中性当独占。",
+      "updates": {
+        "prompt": "Compared with logging in to each device individually, which management approach can Cisco DNA Center provide for supported devices?",
+        "explanation": "B。Cisco DNA Center/Catalyst Center可提供集中入口，用于发现、配置和监控受支持且已纳管的设备，帮助减少逐台手工操作。覆盖范围取决于平台、设备版本及配置，不保证纳管网络中的所有设备。\n\nA、C、D描述逐台CLI或人工处理，而不是题设所强调的集中管理方式。传统网络管理工具也可以集中监控或批量配置，因此不能把集中管理说成该产品独有。"
+      }
+    },
+    {
+      "id": 577,
+      "before_sha256": "a425d98fa616d524e3f9c29147c3075c66aa735b384744f2da8ca6e6da3aa7e2",
+      "reason": "vSwitch是常见连接但并非唯一方式，原解析错误声称无线绝无可能；限定所描述的拓扑。",
+      "updates": {
+        "prompt": "In a virtualized server, a VM uses a virtual NIC attached to a hypervisor software switch whose uplink is a physical NIC. Which option describes its connection to the external network?",
+        "explanation": "D。题设路径为VM虚拟网卡连接软件虚拟交换机，交换机经宿主机物理网卡上联外部网络；物理链路再连接相应网络设备。\n\nA只描述物理线缆，缺少VM与虚拟交换机的关联；B、C不是题设的虚拟交换机到物理网卡路径。虚拟化还有直通或其他网络连接方式，某些宿主机也可能使用无线，不能把该示例当作所有环境唯一架构。"
+      }
+    },
+    {
+      "id": 578,
+      "before_sha256": "809fa65984731bcf53ed4acd9f0aa85d14c84966247e882f8ca95d8528065677",
+      "reason": "SDN路由决策可由控制器承担，但转发实现不必为ASIC、控制器也可处理部分包。",
+      "updates": {
+        "explanation": "C。SDN控制器可以维护网络视图并执行或协调路径与路由决策，然后通过支持的南向接口影响设备的转发状态；具体职责取决于控制器和网络设计，部分控制功能也可能保留在设备中。\n\nA普通业务报文转发、B硬件组播复制及D分片或重组属于数据处理功能，不是此题所问的控制器主要决策作用。转发平面可以由硬件或软件实现，特殊报文也可能送到控制器处理，不应声称控制器绝不能接触数据包。"
+      }
+    },
+    {
+      "id": 579,
+      "before_sha256": "47c3439ca67f842cd872361a75d8c03df210d276b31eb0da9b0dcc16377b3ce9",
+      "reason": "server可能承载控制器，B描述宽泛；限定控制器管理流表的南向接口。",
+      "updates": {
+        "prompt": "In an SDN architecture, which function describes a southbound interface between the controller and its managed switches?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Use orchestration to provision a virtual server configuration from a web server"
+          },
+          {
+            "label": "B",
+            "text": "Render a web page in an end-user browser"
+          },
+          {
+            "label": "C",
+            "text": "Manage flow control between an SDN controller and a switching fabric"
+          },
+          {
+            "label": "D",
+            "text": "Facilitate the information exchange between an SDN controller and application"
+          }
+        ],
+        "explanation": "C。南向接口连接控制器与受管网络设备；在支持OpenFlow的场景中，控制器可通过它安装或修改流表项，影响交换网络的转发。不同南向协议提供的能力不同，不能把NETCONF、OpFlex等一律说成直接操作OpenFlow流表。\n\nD描述控制器与应用之间的北向信息交换；A虚拟服务器编排和B浏览器网页呈现并非此处的控制器到交换机接口。原B只写server与fabric之间的配置变更，而控制器本身也可能运行在服务器上，因而方向不够明确。"
+      }
+    }
+  ]
+}

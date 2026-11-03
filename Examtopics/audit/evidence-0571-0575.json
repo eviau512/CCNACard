@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "SDN": "https://opennetworking.org/sdn-definition/",
+    "API": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/Catalyst-Center-Platform-Documentation/3_1_x/user_guide/b-cisco-catalyst-center-platform-ug-3-1-x/b-dnac-platform-ug-3-1-x-chapter-01.html",
+    "JSON": "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "HTTP": "https://www.rfc-editor.org/rfc/rfc9110.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q574_image.jpg"
+  ],
+  "limitations": "Manual documentation and diagram review; not live network or controller tests."
+}

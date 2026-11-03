@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    501,
+    502,
+    503,
+    504,
+    505
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 501,
+      "kind": "code",
+      "input": "`ip dhcp snooping limit rate <pps>`",
+      "expected": "ip dhcp snooping limit rate <pps>",
+      "html": "<code class=\"inline-code\">ip dhcp snooping limit rate &lt;pps&gt;</code>"
+    },
+    {
+      "id": 505,
+      "kind": "code",
+      "input": "`shutdown`",
+      "expected": "shutdown",
+      "html": "<code class=\"inline-code\">shutdown</code>"
+    },
+    {
+      "id": 505,
+      "kind": "code",
+      "input": "`switchport mode access`",
+      "expected": "switchport mode access",
+      "html": "<code class=\"inline-code\">switchport mode access</code>"
+    },
+    {
+      "id": 505,
+      "kind": "code",
+      "input": "`switchport access vlan <parking-id>`",
+      "expected": "switchport access vlan <parking-id>",
+      "html": "<code class=\"inline-code\">switchport access vlan &lt;parking-id&gt;</code>"
+    }
+  ]
+}

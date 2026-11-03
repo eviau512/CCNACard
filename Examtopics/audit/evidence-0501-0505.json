@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "snooping": "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-host-configuration-protocol-dhcp-dhcpv6/217055-operate-and-troubleshoot-dhcp-snooping.html",
+    "SSH": "https://www.rfc-editor.org/rfc/rfc4253.html",
+    "WPA2": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/67134-wpa2-config.html",
+    "unused_VLAN": "https://www.cisco.com/c/en/us/support/docs/smb/routers/cisco-rv-series-small-business-routers/1778-tz-VLAN-Best-Practices-and-Security-Tips-for-Cisco-Business-Routers.html",
+    "physical_access": "https://csrc.nist.gov/glossary/term/physical_access_control"
+  },
+  "original_images_directly_viewed": [],
+  "q502_distinct_crypto_roles": true,
+  "q504_logical_server_access_option_clarified": true,
+  "q505_scope": "VLAN membership choice, with interface shutdown as complementary step",
+  "limitations": "Manual document/source review; not live DHCP/SSH/WLAN/physical-access/switch tests."
+}

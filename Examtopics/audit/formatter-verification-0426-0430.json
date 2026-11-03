@@ -1,0 +1,19 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    426,
+    427,
+    428,
+    429,
+    430
+  ],
+  "code_results": [
+    {
+      "id": 428,
+      "kind": "code",
+      "input": "`ntp master 4`",
+      "expected": "ntp master 4",
+      "html": "<code class=\"inline-code\">ntp master 4</code>"
+    }
+  ]
+}

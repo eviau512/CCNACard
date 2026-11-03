@@ -1,0 +1,65 @@
+{
+  "scope": "Manual Q451-Q455; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 451,
+      "before_sha256": "bab31aead543c95048c589ebae15a54fc630f54852b0a1e66bd2c8308c2f6643",
+      "reason": "四组SSH配置压平；原解析泛化domain必需和privilege15必需，推荐旧1024。补默认RSA命名、初始空状态及VTY支持条件，统一2048并去非必要privilege15。",
+      "updates": {
+        "prompt": "R1 uses the Cisco IOS hostname/domain-name workflow for an unnamed RSA key pair, supports the shown 2048-bit syntax and VTY lines 0–15, and has no existing domain name, RSA keys, local users or AAA configuration. IP connectivity is already working. Starting in global configuration mode, which configuration enables local-user remote CLI login while allowing only SSH version 2 on all VTY lines?",
+        "options": [
+          {
+            "label": "A",
+            "text": "hostname R1\nservice password-encryption\ncrypto key generate rsa general-keys modulus 2048\nusername cisco secret 0 ExamOnly123!\nip ssh version 2\nline vty 0 15\n transport input ssh\n login local"
+          },
+          {
+            "label": "B",
+            "text": "hostname R1\nip domain name example.com\ncrypto key generate rsa general-keys modulus 2048\nusername cisco secret 0 ExamOnly123!\nip ssh version 2\nline vty 0 15\n transport input ssh\n login local"
+          },
+          {
+            "label": "C",
+            "text": "hostname R1\ncrypto key generate rsa general-keys modulus 2048\nusername cisco secret 0 ExamOnly123!\nip ssh version 2\nline vty 0 15\n transport input ssh\n login local"
+          },
+          {
+            "label": "D",
+            "text": "hostname R1\nip domain name example.com\ncrypto key generate rsa general-keys modulus 2048\nusername cisco secret 0 ExamOnly123!\nip ssh version 2\nline vty 0 15\n transport input all\n login local"
+          }
+        ],
+        "explanation": "B。题设使用默认未指定label的RSA命名流程：hostname加domain完成命名条件，生成密钥后启用SSHv2；本地用户配合VTY的`login local`认证，`transport input ssh`限制线路只接收SSH，`ip ssh version 2`限制SSH协议版本。所有VTY均纳入配置且IP可达已由题干给定。\n\nA/C缺少此默认命名流程所需domain；A的`service password-encryption`不补域名或RSA条件。D用`transport input all`允许其他远程传输，因此不符合只允许SSHv2。\n\n域名/hostname要求限定于本题默认流程；显式命名RSA keypair并绑定SSH等其他流程可有不同条件。本地用户不必`privilege 15`才能获得远程CLI，外部AAA也可以替代本题local认证。选项中的secret和用户名仅为教学示例，实际凭据应独立设置。2048是本题明确支持的示例，不把旧768/1024说成跨平台的当前部署标准，也不声称这几行涵盖所有管理访问策略。"
+      },
+      "accepted_intermediate_sha256": [
+        "38246d3714b7641c493702540d794ee1c92562fac5274a595778e440945ddbc4"
+      ]
+    },
+    {
+      "id": 452,
+      "before_sha256": "e4fc52084015a3b1fb20d7025f91738819835681bb34d6cb4c59f19838b48cf0",
+      "reason": "ISP角色本身不能唯一排除shaping；补不缓存超额的合同执行条件，纠正policing零延迟/零资源及ISP不能整形的绝对说法。",
+      "updates": {
+        "prompt": "An ISP must enforce a customer's committed traffic profile by dropping or remarking nonconforming packets as they arrive, without buffering the excess for later transmission. Which traffic-control feature performs this function?",
+        "explanation": "A，policing按配置的流量合同及计量器判断是否符合，随后按策略发送、丢弃或重标记报文。令牌桶同时允许一定突发，不能简单把任意瞬间高于CIR的数据都认定为超额。关键是该动作不把超额报文存入整形队列以等待未来发送。\n\nD shaping通过队列推迟发送来平滑输出，与题设无超额等待队列不同；但ISP也能部署整形，不能只凭设备属于ISP就排除。B queuing决定等待报文的调度，不等于此合同计量及不符合动作；C marking改头字段，可以作为policer的动作，但单独标记不是合同计量机制。\n\n“不为超额整形排队”不等于整台设备零内存、零处理时延、没有其他队列；流量仍可能在其他处理环节排队。客户侧整形常用于适配上游policer，但也有其他部署组合，不能记成ISP必丢且客户只能整形。"
+      }
+    },
+    {
+      "id": 454,
+      "before_sha256": "2b9510be873c90453aafd3def96e12a1e5fcc419501bfe1428bfb32a30e874de",
+      "reason": "D所列配置客户端集合正确，但配置ntp server不证明实际同步，master不是向下游授时必需命令；区分配置角色与选源状态。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Based on the shown ntp server commands, which routers are explicitly configured as clients of a remote NTP server? (The question asks about configured roles, not successful synchronization.)",
+        "explanation": "D：R1、R2、R3。R1含`ntp server 209.165.200.225`，R2/R3均含`ntp server 172.16.0.1`；这些命令显式配置向远程服务器建立客户端关联。R4只显示`ntp master 7`，未显示本题所问的远程server关联。A遗漏R2/R3，B遗漏R1，C误加R4且漏R2。\n\nR1/R3同时有ntp master，并不消除它们配置的远程客户端角色。ntp master使本地软件时钟可作为参考；普通已同步NTP节点也能给下游服务，并非都要配master才可当服务器。配置角色不证明设备最终选择了哪一来源或已同步，尤其本地参考可能参与选源；应查看`show ntp associations`、`show ntp status`以及可达性和认证状态。\n\n这里按图中完整相关配置识别显式远程客户端，不把“没有ntp server就绝对不可能作客户端”泛化到broadcast client等其他NTP工作模式，也不把master内部本地参考当成本题远程客户端。"
+      },
+      "accepted_intermediate_sha256": [
+        "3e8c1197b0c9c73dd091094eb6ed41599568d646fbfe6a6ee36fcc888d3ae421"
+      ]
+    },
+    {
+      "id": 455,
+      "before_sha256": "1caaa3935a62bf25853ca812c96a8705820e577978f33dfd2005d03eb0f00da0",
+      "reason": "原图显示outside列表空，D正确；原解析把零计数等同引擎彻底瘫痪并泛化物理接口，修成经典NAT已知缺项，不能据零命中证明没流量或唯一根因。",
+      "updates": {
+        "explanation": "D，在实际连接外部网络的三层接口下配置`ip nat outside`，完成图示经典inside/outside动态NAT的接口角色。图中未给出该外部接口编号，应先根据真实拓扑确认，不能假定就是某个未显示接口。\n\n依据逐项核对：Ethernet0/1地址为10.0.12.2/24，ACL LAN许可10.0.12.0、wildcard0.0.0.255；统计已列Inside interfaces:Ethernet0/1，Outside interfaces为空。Dynamic mappings已列access-list LAN pool NATPOOL，池为198.51.100.11到198.51.100.20、/24，包含10个可用池地址。这里没有静态转换证据。\n\nA的ACL匹配已覆盖该内网，无需因题设修改；B没有输出支持静态条目重叠；C所要求的ACL/池关联已经显示。D针对明确缺少的外部角色，而不是重新创建绑定。\n\n零活动转换及零Hits本身不能证明唯一故障，也可能尚无匹配流量；外部角色补齐后还应核对路由、回程、池地址可达性并以实际匹配流量验证。这一诊断限定图示经典NAT，不是所有NAT模式都用相同角色命令，接口也不必仅限物理口。"
+      }
+    }
+  ]
+}

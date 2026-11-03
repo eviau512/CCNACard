@@ -1,0 +1,103 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    446,
+    447,
+    448,
+    449,
+    450
+  ],
+  "code_results": [
+    {
+      "id": 448,
+      "kind": "code",
+      "input": "```text\ninterface GigabitEthernet0/0\n ip nat inside\nexit\ninterface GigabitEthernet0/1\n ip nat outside\n\n```",
+      "expected": "interface GigabitEthernet0/0\n ip nat inside\nexit\ninterface GigabitEthernet0/1\n ip nat outside",
+      "html": "<pre class=\"cli-block\"><code>interface GigabitEthernet0/0\n ip nat inside\nexit\ninterface GigabitEthernet0/1\n ip nat outside</code></pre>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address <ip-address> <subnet-mask>`",
+      "expected": "ip address <ip-address> <subnet-mask>",
+      "html": "<code class=\"inline-code\">ip address &lt;ip-address&gt; &lt;subnet-mask&gt;</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip helper-address <server-ip>`",
+      "expected": "ip helper-address <server-ip>",
+      "html": "<code class=\"inline-code\">ip helper-address &lt;server-ip&gt;</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip helper-address`",
+      "expected": "ip helper-address",
+      "html": "<code class=\"inline-code\">ip helper-address</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip dhcp pool <name>`",
+      "expected": "ip dhcp pool <name>",
+      "html": "<code class=\"inline-code\">ip dhcp pool &lt;name&gt;</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address 192.168.1.1 255.255.255.0`",
+      "expected": "ip address 192.168.1.1 255.255.255.0",
+      "html": "<code class=\"inline-code\">ip address 192.168.1.1 255.255.255.0</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip address dhcp`",
+      "expected": "ip address dhcp",
+      "html": "<code class=\"inline-code\">ip address dhcp</code>"
+    },
+    {
+      "id": 449,
+      "kind": "code",
+      "input": "`ip helper-address 10.1.1.1`",
+      "expected": "ip helper-address 10.1.1.1",
+      "html": "<code class=\"inline-code\">ip helper-address 10.1.1.1</code>"
+    }
+  ]
+}

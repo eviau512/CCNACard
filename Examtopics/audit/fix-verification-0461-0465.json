@@ -1,0 +1,35 @@
+{
+  "scope": [
+    461,
+    465
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 58,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 2,
+  "q465_explicit_interface_roles": {
+    "GigabitEthernet0/0": [
+      "outside"
+    ],
+    "GigabitEthernet0/1.100": [
+      "inside"
+    ],
+    "GigabitEthernet0/1.200": [
+      "inside"
+    ]
+  },
+  "q465_ACL_address_cases": 1024,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "486a675842a25f4ab30824f44d075997d5c8c929ee16e34bdf3b896e07d833f3",
+  "app_bundle_sha256": "74201fa71452fd02e0d636d3172a315376bdffc71ab5b3b3d70b025d1edba08f",
+  "limitations": "Manual source/document/exhibit/formatter, interface-role and address-selection checks; not live NAT/QoS/TFTP tests."
+}

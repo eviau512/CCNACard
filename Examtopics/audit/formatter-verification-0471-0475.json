@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    471,
+    472,
+    473,
+    474,
+    475
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 473,
+      "kind": "code",
+      "input": "`ip arp inspection vlan 2`",
+      "expected": "ip arp inspection vlan 2",
+      "html": "<code class=\"inline-code\">ip arp inspection vlan 2</code>"
+    },
+    {
+      "id": 473,
+      "kind": "code",
+      "input": "`ip arp inspection trust`",
+      "expected": "ip arp inspection trust",
+      "html": "<code class=\"inline-code\">ip arp inspection trust</code>"
+    }
+  ]
+}

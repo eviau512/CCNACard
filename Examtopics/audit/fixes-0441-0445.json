@@ -1,0 +1,32 @@
+{
+  "scope": "Manual Q441-Q445; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 441,
+      "before_sha256": "5ca4eb752267d46fe1f5e6e4f068ef54903ac231c3a095cb70f011b4f548785a",
+      "reason": "原解析为无实质机制的通用模板；补IOS IPv4客户端侧helper目的、giaddr及其他选项作用。",
+      "updates": {
+        "prompt": "On Cisco IOS, which listed interface command specifies the destination DHCP server for IPv4 relay on the interface facing the DHCP clients? (Supply the server IP address after the command.)",
+        "explanation": "D，`ip helper-address <DHCP-server-IP>`在面向客户端的三层接口指定DHCP中继目的服务器。客户端最初广播寻找服务器，路由器不按普通路由直接转发该广播；中继将请求送往配置的服务器，并使用giaddr帮助服务器识别客户端所在子网。服务器须有对应地址池，双向路由和访问策略也须允许相关通信。\n\n例如G0/0是客户端网段三层接口，192.0.2.10是可达的示例服务器地址：\n```text\ninterface GigabitEthernet0/0\n ip helper-address 192.0.2.10\n```\n\nA的`ip dhcp relay`只是某些平台中继功能命令的前缀，未指定本题所需helper目的地址，不能据此说所有该前缀命令都不存在。B的`ip dhcp pool`创建本机DHCP服务器地址池；C的`ip address dhcp`让接口充当DHCP客户端。这些均不完成题设的中继目的配置。示例不代表仅有两行就配置好了接口IP及所有网络条件。"
+      }
+    },
+    {
+      "id": 442,
+      "before_sha256": "1af829c3075946ab9d3d1021f0317124ca4a46a302d31ff961f488dc1eac59bd",
+      "reason": "原解析把所有上联都必须trust及客户端端口绝对规则泛化，并仅凭汇总计数断言全部Offer/ACK已丢；改为结合已知合法服务器路径判断。",
+      "updates": {
+        "explanation": "C，在连接合法DHCP服务器的交换机接口下配置`ip dhcp snooping trust`。图中VLAN1的DHCP snooping已配置且运行，trust接口列表为空，因此合法服务器回复从默认不信任入口进入时会被阻止。统计中Received on untrusted ports为32，与此故障一致；汇总计数本身没有指出端口或每个报文类型，不能仅凭32就断言全部Offer/ACK的具体来源和数量。\n\n信任的是来自授权服务器方向的入口。图中未给端口号，需在实际拓扑中确认服务器连接口后配置；不能无条件将所有上联口都设为trusted。信任也不代表绕过网络中全部其他安全机制。普通客户端接入口应保持不信任，以阻止其冒充服务器；A信任客户端口无法修复已知服务器入口问题，还扩大了被允许发送服务器报文的范围。\n\nB涉及中继信息Option82，不能替代snooping入口信任配置；图示Option82插入已禁用，题目所问是同一交换机VLAN1客户端接受合法服务器回复。D所列信息选项也不完成服务器端口信任。无需为同一广播域的这一步配置跨子网helper。"
+      }
+    },
+    {
+      "id": 445,
+      "before_sha256": "cbbd4d0936cba70c302aa1413d22574a49d3e89d30a3348c14cf3ffc1b05d95c",
+      "reason": "无故障条件时VLAN/中继错误也可能阻断DHCP；限定经典802.1D初始Listening/Learning延迟，去APIPA必然诊断和PortFast保证全部DHCP成功的说法。",
+      "updates": {
+        "prompt": "A workstation is connected to an access port running traditional IEEE 802.1D without PortFast. After link-up, its initial DHCP packets are not forwarded while the port passes through Listening and Learning. Which listed protocol causes this startup forwarding delay?",
+        "explanation": "A，题干明确传统802.1D端口启动时经历Listening和Learning，尚未转发普通用户流量，初期DHCP请求因此不能到达服务器。经典默认forward-delay为15秒，两个阶段合计约30秒；这不是所有STP版本、所有拓扑或所有故障统一固定的等待时间。\n\n客户端可能重试并在端口进入Forwarding后获得租约，是否超时取决于客户端行为。出现169.254/16地址本身不能唯一诊断为STP，也不意味着客户端永久放弃DHCP。对确认只连接终端的合适边缘端口启用PortFast可消除这类启动延迟；PortFast并未关闭STP，也不能修复服务器宕机、VLAN错误或其他DHCP故障，不应在普通交换机互联口随意启用。\n\nB VTP管理VLAN数据库信息，C 802.1Q定义VLAN相关机制，D DTP协商中继；它们不解释题设Listening/Learning状态。但在其他场景中，VLAN或中继配置错误同样可能导致DHCP不可达，因此原来不带条件的“什么阻止获得地址”不足以唯一选STP。"
+      }
+    }
+  ]
+}

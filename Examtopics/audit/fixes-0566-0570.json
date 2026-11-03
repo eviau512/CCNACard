@@ -1,0 +1,47 @@
+{
+  "scope": "Manual Q566-Q570; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 566,
+      "before_sha256": "6eb519e8d2210cf0b2b888a49f5cb52cd5c74074a99292c841a42a536ca6a015",
+      "reason": "对象答案正确，但数组可包含对象和属性值，数值前导零表述需区分合法零。",
+      "updates": {
+        "explanation": "D。JSON对象是无序的名称/值对集合，名称为字符串，语法如`{\"name\":\"R1\"}`；成员之间用逗号分隔。名称应唯一，重复名称的处理在不同实现之间可能不一致。\n\nB数组是有序值序列，元素可以是对象、数组、字符串、数字、布尔值或null，因此数组内部也可以包含具有属性的对象，只是数组本身不是无序名称/值对集合。A字符串表示文本，C布尔值为true或false。JSON数字允许0、-0和小数，但非零整数部分不能加多余前导零。"
+      }
+    },
+    {
+      "id": 567,
+      "before_sha256": "43b5b751a947135f0bd2819952422c9ea60119b72e8be0415eb0d0897fcfcc13",
+      "reason": "原题把不同fabric一概视为边缘节点直接VXLAN，实际跨站点依transit和border设计；限定站点内overlay。",
+      "updates": {
+        "prompt": "Within a Cisco SD-Access fabric site, which encapsulation carries overlay user traffic between fabric edge nodes across an IP underlay?",
+        "explanation": "C。SD-Access fabric数据平面使用VXLAN在IP underlay上封装用户流量；控制平面使用LISP相关映射，策略信息可通过相应扩展携带。VXLAN封装与underlay的IP可达性、MTU及平台配置都有关。\n\nA GRE是另一种封装，不是此处所问的fabric overlay；B VLAN提供二层标识，不是此处的IP隧道封装；D PPP是链路层协议。原题把不同fabric之间都称为edge直接隧道过于笼统：跨站点路径涉及border与transit，SD-Access transit可使用VXLAN，而IP transit可在边界移除或添加fabric封装，不能一概而论。"
+      }
+    },
+    {
+      "id": 568,
+      "before_sha256": "ce00cb9c24381716a3becb46d1c41a63f937bd9e02de6041f70372bf6ac72761",
+      "reason": "逻辑集中不等于所有控制均移出设备或物理单节点，转发也可由软件实现。",
+      "updates": {
+        "explanation": "D。在经典SDN模型中，控制逻辑可由控制器提供逻辑集中的网络视图和决策，控制器再通过南向接口影响转发设备。逻辑集中不等于必须有单台物理设备，实际网络还可能在设备上保留部分控制功能。\n\nB数据平面负责处理和转发业务流量，可由硬件或软件实现；A管理平面支持配置和监控，也可以集中管理；C服务平面并非题目所问的控制逻辑。某些控制报文或特殊流量可由控制器处理，不能声称所有数据都绝不经过它。"
+      }
+    },
+    {
+      "id": 569,
+      "before_sha256": "5955b0d9af1aa2766645e2197f86fd35bd9be541578f87edcafd091535b105e9",
+      "reason": "南向接口答案正确，但不能绝对禁止其他程序直接配置设备或声称都线速。",
+      "updates": {
+        "explanation": "D。在经典三层SDN模型中，控制层与基础设施层之间是南向接口，用于控制器与转发设备交换配置、状态或流表信息；控制层与应用层之间通常称为北向接口。\n\nC是应用层到控制层而非控制到数据平面的边界；A和B也不是题设模型中所问的相邻层边界。OpenFlow、NETCONF或RESTCONF可用于特定南向交互，支持情况依具体系统而异；实际网络可能存在其他管理路径，不能说应用程序在任何架构下都无法直接访问设备。转发设备也不一定为硬件线速。"
+      }
+    },
+    {
+      "id": 570,
+      "before_sha256": "e047192db9e49f5ff16cd6b2321e7bf758a408175bce9e4a667e2c68a819aaab",
+      "reason": "自动化能帮助一致性但不保证完全消除漂移和错误，也可协助清单或账户管理。",
+      "updates": {
+        "explanation": "A。以模板、版本控制、自动检查和受控部署管理配置，有助于减少重复操作并使设备配置更符合各自适用的基线；一致不等于所有设备必须拥有完全相同的配置。自动化脚本、输入或目标模型出错仍可能批量造成故障，也不能保证彻底消除配置漂移，需配合验证与审计。\n\nB集中存储设备信息可由清单系统支持，C集中用户账户管理可由身份系统支持；自动化也可与二者集成，但A最直接描述批量配置一致性的收益。D带外或独立管理网络是可选择的架构，不是实施自动化的必然要求。"
+      }
+    }
+  ]
+}

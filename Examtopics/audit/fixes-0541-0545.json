@@ -1,0 +1,68 @@
+{
+  "scope": "Manual Q541-Q545; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 541,
+      "before_sha256": "a2c23b4e3b039da0620107bb3d170ea73d8dcead6691d8006f530382e56cc254",
+      "reason": "证书错误可能由名称或有效期等多种原因造成；限定内部CA不受访客信任及证书其余条件正确。",
+      "updates": {
+        "prompt": "A Cisco ISE guest portal uses a valid server certificate for the correct portal hostname, but it is signed by a private CA trusted only by managed employee devices. Contractors use unmanaged devices that do not trust that CA. The organization cannot change contractor trust stores, and all devices trust a particular public CA. Which change addresses the trust error for both groups?",
+        "explanation": "B。将ISE门户使用的服务器证书替换为双方设备均信任的公共CA签发的证书，并配置完整证书链、匹配门户域名及有效期，可解决题设的CA信任问题。安装位置是提供HTTPS门户的ISE服务，证书与私钥需正确关联。\n\nA仍使用未被访客信任的内部CA；C、D向访客设备安装证书违背题设，而且应区分服务器证书与受信任CA证书。现实中证书错误也可能来自域名不匹配、过期、缺少中间证书或设备时钟错误；仅换公共CA不能保证解决所有错误，也不能假设所有设备都信任某家CA。"
+      }
+    },
+    {
+      "id": 542,
+      "before_sha256": "06425e2df9812debeaabc65f326b73380abfcaef556d87e41b1ee0a2558fc68b",
+      "reason": "不同WPA3 Personal套件和版本可支持GCMP256，原题将CCMP128说成唯一选择并混淆PSK和SAE；限定兼容场景。",
+      "updates": {
+        "prompt": "A Cisco WLAN deployment uses WPA3-Personal SAE and must support clients that implement CCMP-128 but do not support the other listed ciphers. Which cipher should the WLAN offer for those clients?",
+        "explanation": "A。题设客户端只支持所列套件中的CCMP-128，因此WLAN应提供CCMP-128；SAE是Personal模式的口令认证密钥交换，CCMP是数据保护套件，两者作用不同。B GCMP-256、C CCMP-256及D GCMP-128都不满足这些客户端的题设能力。\n\n不要把CCMP-128写成所有WPA3-Personal部署永远唯一可用的密码套件：平台、软件版本、AKM和客户端能力不同，某些较新的Personal组合也支持GCMP-256。传统WPA2 PSK认证与WPA3 SAE也不应混成同一种握手。"
+      }
+    },
+    {
+      "id": 543,
+      "before_sha256": "217824818ac3c1b10609c240d6b62aa77335c561b2a651d3bb616c18bb9d9fa2",
+      "reason": "native VLAN隔离针对双标签，非所有VLAN hopping；不应宣称所有ACL只能工作于三层。",
+      "updates": {
+        "prompt": "Which practice helps mitigate a double-tagging VLAN hopping attack involving an untagged native VLAN on a trunk?",
+        "explanation": "C。将接入端口与相关trunk使用的native VLAN分离，例如为trunk指定不分配给普通终端的专用native VLAN，可以破坏常见双标签攻击所需的条件。可结合平台支持的native VLAN打标签及对两端一致配置的检查。\n\n此措施针对所描述的双标签路径；防止DTP交换机伪装还需显式设置端口角色并处理动态协商。A端口安全侧重安全MAC限制，B动态ARP检查侧重ARP报文，均不替代此native VLAN设计；D笼统地说用ACL阻止VLAN改变，未给出可实施的针对性配置。某些平台也有二层或VLAN ACL，不能一概说ACL只能处理三层。"
+      }
+    },
+    {
+      "id": 544,
+      "before_sha256": "6634b57fe48096b4fb01caa7e0be3cc30f33067d8ac2f66d0d1257e536e7d3a8",
+      "reason": "Cisco SG350X文档使用passwords复数，默认已启用；原题命令及必须预先执行的说法不成立。",
+      "updates": {
+        "prompt": "On a Cisco SG350X switch, password complexity enforcement was explicitly disabled. Which global configuration command re-enables enforcement of the configured complexity rules, including the manufacturer-name rule?",
+        "options": [
+          {
+            "label": "A",
+            "text": "login authentication my-auth-list"
+          },
+          {
+            "label": "B",
+            "text": "service password-encryption"
+          },
+          {
+            "label": "C",
+            "text": "passwords complexity enable"
+          },
+          {
+            "label": "D",
+            "text": "confreg 0x2142"
+          }
+        ],
+        "explanation": "C。该系列使用复数命令`passwords complexity enable`启用复杂度规则；相关属性命令可配置不重复厂商名等条件。题设明确功能此前已关闭，故需要重新启用。Cisco文档指出该功能在此系列默认启用，不能把该命令描述为所有设备配置具体规则前都必须执行的操作，平台和软件版本也可能不同。\n\nA用于将认证方法列表应用到线路，B是密码显示/存储混淆相关配置，D是配置寄存器恢复相关操作；它们都不是该平台的复杂度启用命令。原题把passwords误写为password，并将默认状态及配置顺序说成绝对规则。"
+      }
+    },
+    {
+      "id": 545,
+      "before_sha256": "55c5cf166d13c61a2d202f4b06fa653f01ea4c9c712e9b3d2cfec04e13745020",
+      "reason": "答案IaaS正确但解析包含不相关套话，补充各服务模型和OS责任边界。",
+      "updates": {
+        "explanation": "D。IaaS提供计算、存储和网络等基础资源，客户通常能在提供商支持的虚拟机上选择或安装并管理操作系统及其应用；可用镜像、导入自定义镜像和许可仍由服务商具体规定。\n\nA PaaS主要提供受管理的应用开发和运行平台，客户一般管理应用而非底层操作系统；C SaaS提供现成应用；B NaaS侧重按服务使用网络能力，本身不是安装自选虚拟机操作系统的典型服务模型。不同产品的实际责任划分应看合同和产品功能。"
+      }
+    }
+  ]
+}

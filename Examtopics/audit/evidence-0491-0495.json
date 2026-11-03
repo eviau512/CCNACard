@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "DAI": "https://www.cisco.com/c/en/us/td/docs/switches/connectedgrid/cgsswitch_master/software/configuration/guide/security/Security/sec_dynarp.html",
+    "RA_VPN": "https://docs.manage.security.cisco.com/cdfmc/t_configure-ravpn-policy.html",
+    "ACL_sequence": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html",
+    "port_security": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9500/software/release/17-15/configuration_guide/sec/b_1715_sec_9500_cg/port_security.html",
+    "VLAN_hopping": "https://www-stg.ciscopress.com/articles/article.asp?p=2928193&seqNum=4"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q493_image.jpg"
+  ],
+  "q493_replacement": "Explicit source operations /25, destination management /24, numbered ACE editing; original destination-role contradiction retained as audit evidence",
+  "q493_delete_sequence": 20,
+  "q492_original_B": "Multiuser simultaneous VPN protection can be true; replaced, not falsely rejected",
+  "limitations": "Manual document/exhibit review; not live DAI/VPN/ACL/SNMP/VLAN tests."
+}

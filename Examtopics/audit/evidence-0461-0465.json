@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "TFTP": "https://www.rfc-editor.org/rfc/rfc1350.html",
+    "trust_boundary": "https://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Campus/Borderless_Campus_Network_1-0/Borderless_Campus_1-0_Design_Guide/BN_Campus_QoS.html",
+    "voice_QoS": "https://www.cisco.com/c/en/us/td/docs/ios/solutions_docs/qos_solutions/QoSVoIP/QoSVoIP.html",
+    "queueing": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_conmgt/configuration/xe-17/qos-conmgt-xe-17-book/qos-conmgt-oview.html",
+    "NAT": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_nat/configuration/xe-2/nat-xe-2-book/iadnat-addr-consv.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q462_image.jpg",
+    "exhibits/q465_image.jpg"
+  ],
+  "q465_replacement": "Complete text exhibit explicitly marks both logical subinterfaces inside; original picture retained only as audit evidence",
+  "q462_trust_conditions": "Explicit managed phone/untrusted PC assumptions",
+  "limitations": "Manual document/exhibit review, not live NAT/QoS/TFTP tests."
+}

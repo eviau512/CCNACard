@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    491,
+    492,
+    493,
+    494,
+    495
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 493,
+      "kind": "code",
+      "input": "```text\ninterface GigabitEthernet0/1\n ip address 192.168.1.2 255.255.255.0\n ip access-group 2699 in\n!\nip access-list extended 2699\n 10 deny icmp any 10.10.1.0 0.0.0.255 echo\n 20 deny ip 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255\n 30 permit ip any 10.10.1.0 0.0.0.255\n 40 permit tcp 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255 eq 22\n\n```",
+      "expected": "interface GigabitEthernet0/1\n ip address 192.168.1.2 255.255.255.0\n ip access-group 2699 in\n!\nip access-list extended 2699\n 10 deny icmp any 10.10.1.0 0.0.0.255 echo\n 20 deny ip 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255\n 30 permit ip any 10.10.1.0 0.0.0.255\n 40 permit tcp 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255 eq 22",
+      "html": "<pre class=\"cli-block\"><code>interface GigabitEthernet0/1\n ip address 192.168.1.2 255.255.255.0\n ip access-group 2699 in\n!\nip access-list extended 2699\n 10 deny icmp any 10.10.1.0 0.0.0.255 echo\n 20 deny ip 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255\n 30 permit ip any 10.10.1.0 0.0.0.255\n 40 permit tcp 10.20.1.0 0.0.0.127 10.20.2.0 0.0.0.255 eq 22</code></pre>"
+    },
+    {
+      "id": 493,
+      "kind": "code",
+      "input": "`no 20`",
+      "expected": "no 20",
+      "html": "<code class=\"inline-code\">no 20</code>"
+    },
+    {
+      "id": 493,
+      "kind": "code",
+      "input": "`no access-list 2699 ...`",
+      "expected": "no access-list 2699 ...",
+      "html": "<code class=\"inline-code\">no access-list 2699 ...</code>"
+    },
+    {
+      "id": 494,
+      "kind": "code",
+      "input": "`switchport port-security violation restrict`",
+      "expected": "switchport port-security violation restrict",
+      "html": "<code class=\"inline-code\">switchport port-security violation restrict</code>"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    556,
+    557,
+    558,
+    559,
+    560
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 557,
+      "kind": "code",
+      "input": "`{\"value\": \"key\"}`",
+      "expected": "{\"value\": \"key\"}",
+      "html": "<code class=\"inline-code\">{\"value\": \"key\"}</code>"
+    },
+    {
+      "id": 557,
+      "kind": "code",
+      "input": "`value`",
+      "expected": "value",
+      "html": "<code class=\"inline-code\">value</code>"
+    },
+    {
+      "id": 557,
+      "kind": "code",
+      "input": "`key`",
+      "expected": "key",
+      "html": "<code class=\"inline-code\">key</code>"
+    },
+    {
+      "id": 560,
+      "kind": "code",
+      "input": "`UPDATE`",
+      "expected": "UPDATE",
+      "html": "<code class=\"inline-code\">UPDATE</code>"
+    },
+    {
+      "id": 560,
+      "kind": "code",
+      "input": "`ALTER TABLE`",
+      "expected": "ALTER TABLE",
+      "html": "<code class=\"inline-code\">ALTER TABLE</code>"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    536,
+    537,
+    538,
+    539,
+    540
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 539,
+      "kind": "code",
+      "input": "`switchport port-security`",
+      "expected": "switchport port-security",
+      "html": "<code class=\"inline-code\">switchport port-security</code>"
+    },
+    {
+      "id": 539,
+      "kind": "code",
+      "input": "`switchport port-security maximum 2`",
+      "expected": "switchport port-security maximum 2",
+      "html": "<code class=\"inline-code\">switchport port-security maximum 2</code>"
+    }
+  ]
+}

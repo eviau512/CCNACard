@@ -1,0 +1,68 @@
+{
+  "scope": "Manual Q416-Q420; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 416,
+      "before_sha256": "81a5d7551b023f9ec82e453ca363293127dd18be1fcde8d7c8208cdb1c684a13",
+      "reason": "D overload正确；英文示例ip nat被跨行拆断，解析模板未具体区分source/pool/static，还把所有StaticNAT都说成地址级1:1（有静态端口映射）。恢复可读配置块并具体解释。",
+      "updates": {
+        "explanation": "D，overload启用端口复用形式的NAT/PAT，使多个内部主机能共享一个外侧转换地址。设备借助传输层端口等会话标识区分流并维护映射，返回流量按对应状态送回内部主机；支持的ICMP等流量也可能使用相应标识，并非所有报文都有TCP/UDP端口。\n\n例如以下全局命令引用已有ACL1并使用已配置外侧接口地址：\n```text\nR1(config)# ip nat inside source list 1 interface GigabitEthernet0/0 overload\n```\n完整部署还需正确的ACL、inside/outside接口与路由。A source只表明转换对象方向，B static表示静态映射类别，C pool引用地址集合，都不是题目所问的动态复用关键字。不要将所有静态NAT都说成只能地址级1:1，静态端口映射也可存在。复用容量仍受可用端口、会话状态和设备资源限制。"
+      }
+    },
+    {
+      "id": 417,
+      "before_sha256": "4ccccd224bbc3679582ea8d3d56e41f0b70c8df808aa90f0814341e0a0d2953f",
+      "reason": "C IPSLA正确；原模板没有指标/主动测量与EEM区别，误用policing/shaping主题。补RTT/单向delay/jitter/loss与业务阈值评估、DSCP代表性边界。",
+      "updates": {
+        "explanation": "C，IP SLA通过主动探测获得网络性能数据，帮助判断所测路径能否满足业务服务质量要求。不同操作可测RTT、准确单向时延、时延变化jitter、丢包和连通性等，应把测量结果与该业务阈值比较；准确单向时延还涉及两端时钟同步等前提。\n\nLLDP/CDP主要发现直连邻居和能力，不提供所问的端到端性能测量；EEM用于事件检测及触发自动操作，可消费IP SLA等状态，但不能把EEM本身当作对应探测机制。IP SLA不自动配置QoS队列、监管或整形，也不证明所有真实业务都达标；探测包大小、频率、路径及DSCP等要能代表所评估流量。"
+      }
+    },
+    {
+      "id": 418,
+      "before_sha256": "070eaa1a7183ccc0caac1c4af89483316f395436e755fceffc9e28a637ec5fdb",
+      "reason": "C LLQ正确，但原主题误贴WLC，泛称所有视频必须priority且固定20%开销没有条件。限定问严格优先排队机制，区别EF PHB，说明交互/流媒体与平台策略、限额不同。",
+      "updates": {
+        "prompt": "Which listed QoS queuing/scheduling mechanism provides strict-priority service for a properly classified delay-sensitive interactive voice/video class?",
+        "explanation": "C，low-latency queuing（LLQ）在相应队列体系中提供严格优先服务，使符合策略的实时交互流量在拥塞时获得较低排队时延和抖动。应合理规划优先类带宽、突发及超额处理，避免其他类别饥饿；它不保证无拥塞丢包或消除链路串行化时延。\n\nA policing是超额流量丢弃/重标记等速率监管，不是优先队列；B轮询调度不等同严格优先；D expedited forwarding描述DiffServ每跳行为/标记语义，不能直接当作题目所问的具体LLQ调度机制。视频类型和平台策略各异，交互视频、视频会议、流媒体未必同队列，不能要求所有视频一律进priority，也没有适用于所有封装的固定20%开销规则。"
+      }
+    },
+    {
+      "id": 419,
+      "before_sha256": "22cc05008814b9d833b1e94d9f5280d1bd5c3ff4a4fbb239a5a1115917e1e822",
+      "reason": "原B公平排队不是shaping主要目的，原解析称必须WFQ及90%社区/官方判分无证据。改D限制配置流量速率并平滑突发，解释shaping可有限缓存溢出丢包，整形速率非每瞬间硬上限。",
+      "updates": {
+        "answer": [
+          "D"
+        ],
+        "explanation": "D，限制被整形流量可使用的发送速率并平滑突发。整形器按配置速率/突发额度调度发送，暂不能发送的超额包可先缓存等待，而不是像无缓冲的policer那样仅按规则立即丢弃或重标记。其速率约束可作用于某类、某流量集合或接口，具体看策略，不等于每个瞬间都以完全恒定速率发送。\n\nA是分类标记，B是排队调度公平性，不是整形的定义目的；整形可与不同队列策略组合，并不必须使用WFQ或保证所有流公平。C也不是整形的直接目的，缓存可能增加排队时延；合理整形可能改善下游拥塞，但不能据此保证降低任何慢链路时延。缓存有限，溢出或队列管理仍可丢包，不能说整形超额包永不丢弃。"
+      }
+    },
+    {
+      "id": 420,
+      "before_sha256": "ee8db01c1cd8f198f32adbef9724559960feb92b94ef5d35a9940ccaa035b6a4",
+      "reason": "A镜像传输可用，C拥塞链路上也可传配置，原解析性能差不等于功能不可能。C改为声称TFTP自带TCP拥塞控制的明确错误干扰；保留A，补基本512/stopwait及blocksize/windowsize协商扩展，copy下载不自动完成升级。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "transfers IOS images from a server to a router for firmware upgrades"
+          },
+          {
+            "label": "B",
+            "text": "transfers a backup configuration file from a server to a switch using a username and password"
+          },
+          {
+            "label": "C",
+            "text": "provides TCP-style congestion control while transferring configuration files over UDP"
+          },
+          {
+            "label": "D",
+            "text": "transfers files between file systems on a router"
+          }
+        ],
+        "explanation": "A，TFTP可把IOS镜像从服务器传到路由器存储中，作为升级或恢复的一部分。例如`copy tftp: flash:`用于传文件；后续仍需校验镜像、兼容性和启动配置等，不能说下载完就已完成升级。\n\nB所述用户名/密码不是基础TFTP协议提供的认证机制；C声称TFTP在UDP上传输却提供TCP式拥塞控制不正确；D同一路由器本地文件系统之间的复制通常由本地文件操作完成，不需要TFTP网络传输。TFTP能传配置文件，即使链路拥塞也不能说绝对无法传，只是丢包/超时可能显著影响性能。初始请求发到UDP69，随后使用协商的传输标识端口；基础协议采用512字节块与停等确认，支持双方可另协商blocksize和windowsize扩展，不能把所有TFTP实现都限定为永远单个512字节块。"
+      }
+    }
+  ]
+}

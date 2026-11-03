@@ -1,0 +1,49 @@
+{
+  "scope": "Manual Q596-Q600; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 596,
+      "before_sha256": "11a0a27b3defd3d02c9fb675d307b78581507929e9ff1bbed799a363d46da628",
+      "reason": "答案方向正确，原解析为无关套话且B拓扑发现也是部分能力，应问主要用途。",
+      "updates": {
+        "prompt": "Which option best describes a primary purpose of Cisco DNA Center?",
+        "explanation": "A。Cisco DNA Center/Catalyst Center用于集中发现、部署、配置和监控支持的网络设备，并可配合策略、认证及安全配置管理网络；实际安全效果依权限、设备兼容及配置而定。\n\nB发现网络并生成拓扑可作为平台的一部分能力，但不能概括其完整主要用途；C数据中心物理门禁不是其主要职责；D自主接入点的三层服务不是该控制器的总体目的。"
+      }
+    },
+    {
+      "id": 597,
+      "before_sha256": "f84ba62625911c71a5d8f4d767eb4a71bae4c7062dc6a3e2dfc33862fde8cd6a",
+      "reason": "控制器策略答案正确，但不是全部控制协议均集中或所有转发依赖ASIC。",
+      "updates": {
+        "explanation": "C。SDN控制器可维护网络视图并制定或下发数据包处理相关策略，以影响受管设备的转发；具体策略能力及控制逻辑依实现而异。控制逻辑可以逻辑集中而物理分布，部分协议功能也可保留在设备中。\n\nA普通报文转发、B硬件组播复制及D分片重组是数据处理功能，不是本题所问的主要控制职责。数据平面可以由软件或硬件实现，某些报文也可能由控制器处理。"
+      }
+    },
+    {
+      "id": 598,
+      "before_sha256": "0f6428d3495fc9a8311b1f7bb609f1108fb596ada4caae72da28e7b3bea5a9d1",
+      "reason": "已看原图，ma-message拼写不完整；Cisco文档限制接收消息，原解析错误声称限制发出结果并保证故障原因。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On the documented classic Cisco IOS NETCONF implementation, an administrator intends to change the maximum size of messages RECEIVED in a NETCONF session from 10 kB to 1000 kB. Which command sets that limit?",
+        "explanation": "B。Cisco对应命令参考将`netconf max-message 1000`定义为把NETCONF会话中接收消息的最大大小设为1000 kB；这是接收方向的限制，不能据此断言设备发出的`show running-config`结果被截断或该设置必然解决原题故障。\n\n图中最后一行印为`netconf ma-message 10`，与文档中的完整命令`netconf max-message 10`拼写不同；不能假设图中输入一定成功，实际应检查设备支持、运行配置和错误信息。原题仅提供show line有输出、show running-config无输出，证据不足以确定原因；现限定目标为修改接收消息上限。\n\nA涉及锁定时间，C涉及SSH ACL，D涉及会话数，均不设置所问消息大小。该命令的适用版本及资源影响应查设备文档。"
+      }
+    },
+    {
+      "id": 599,
+      "before_sha256": "5e8cec0cd1251ffcb04bc34d866f7629ec3797834cc2fe4e716a08946ffa3a57",
+      "reason": "hypervisor可虚拟化资源，不能保证绝对隔离或虚拟交换始终最高效。",
+      "updates": {
+        "explanation": "B。Hypervisor可将CPU、内存和存储等资源抽象并分配给多个虚拟机，同时提供隔离与调度机制；具体资源配置、性能与隔离效果依平台而定。\n\nA某种物理连接不必然在所有工作负载中最有效率；C一台hypervisor通常可以支持多个虚拟机及虚拟交换机，具体数量受资源和实现限制；D虚拟化与三层通信仍依赖底层计算、网络及配置资源。虚拟交换机可使同主机VM互联，但不能保证所有场景性能最高或完全免受资源争用。"
+      }
+    },
+    {
+      "id": 600,
+      "before_sha256": "fafedb07b4b0ec9d6087bde74a3741cd357eed2a686d48be0823a23c9a2fea68",
+      "reason": "控制平面可逻辑集中，原解析将policy plane称虚构并假定所有转发线速硬件，需修正。",
+      "updates": {
+        "prompt": "In a common SDN model, which plane can be logically centralized to manage routing decisions?",
+        "explanation": "D。控制平面提供路由与可达性决策；在经典SDN模型中，相应控制逻辑可由逻辑集中的控制器承担或协调。逻辑集中可由多个物理实例实现，具体协议也可能部分保留在设备上。\n\nB数据平面使用转发状态处理流量，可用硬件或软件实现；A管理平面用于配置和监控；C策略平面可表达策略意图，但不是此题所问的路由控制平面。策略平面是某些架构中的真实概念，不能称为虚构术语。"
+      }
+    }
+  ]
+}

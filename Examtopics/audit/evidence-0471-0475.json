@@ -1,0 +1,26 @@
+{
+  "sources": {
+    "SNMP_USM": "https://www.rfc-editor.org/rfc/rfc3414.html",
+    "syslog_TLS": "https://www.rfc-editor.org/rfc/rfc5425.html",
+    "port_security": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup2T/15_2_sy_swcg_2T/port_security.html",
+    "DAI": "https://www.cisco.com/c/en/us/td/docs/switches/connectedgrid/cgsswitch_master/software/configuration/guide/security/Security/sec_dynarp.html",
+    "AAA": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-mt/sec-usr-aaa-15-mt-book/configuring_authentication.html",
+    "awareness": "https://dir.texas.gov/information-security/security-services/security-awareness-training",
+    "port_security_platform_difference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9500/software/release/17-15/configuration_guide/sec/b_1715_sec_9500_cg/port_security.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q472_image.jpg",
+    "exhibits/q473_image.jpg"
+  ],
+  "q472_observed": {
+    "maximum": 5,
+    "total": 1,
+    "configured": 1,
+    "sticky": 0,
+    "violation_count": 0,
+    "mode": "Shutdown"
+  },
+  "q472_log_option": "Replaced with explicit leaves-port-operational claim; no universal syslog behavior assumed",
+  "q473_default_trust": "Explicit scenario condition; enabling VLAN DAI does not reset configured trusted ports",
+  "limitations": "Manual source/document/exhibit review; not live SNMP/DAI/port-security or phishing tests."
+}

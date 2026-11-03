@@ -1,0 +1,54 @@
+{
+  "scope": [
+    496,
+    500
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 92,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 4,
+  "q497_all_options_multiline": true,
+  "q499_replacement_model": [
+    {
+      "label": "A",
+      "port_token": "23",
+      "supported_numeric_port": true,
+      "cases": 16,
+      "mismatches": 2
+    },
+    {
+      "label": "B",
+      "port_token": "scp",
+      "supported_numeric_port": false,
+      "cases": 16,
+      "mismatches": 1
+    },
+    {
+      "label": "C",
+      "port_token": "443",
+      "supported_numeric_port": true,
+      "cases": 16,
+      "mismatches": 2
+    },
+    {
+      "label": "D",
+      "port_token": "22",
+      "supported_numeric_port": true,
+      "cases": 16,
+      "mismatches": 0
+    }
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "4c31f2853287c77dcdbccd7dbd09ba740bbdef3cf7a9c661c426cb0e4a9ea5cf",
+  "app_bundle_sha256": "89561f26f7e59371ad221fbcfb490d6575c8cd823727dac06b4d41d32072e60a",
+  "limitations": "Manual source/document/exhibit/formatter and representative replacement-ACE model; not live DHCP/SSH/WLC/ACL/door-control tests."
+}

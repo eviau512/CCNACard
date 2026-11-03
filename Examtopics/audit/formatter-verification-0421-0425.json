@@ -1,0 +1,26 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    421,
+    422,
+    423,
+    424,
+    425
+  ],
+  "code_results": [
+    {
+      "id": 423,
+      "kind": "code",
+      "input": "`ip host`",
+      "expected": "ip host",
+      "html": "<code class=\"inline-code\">ip host</code>"
+    },
+    {
+      "id": 424,
+      "kind": "code",
+      "input": "`Informational`",
+      "expected": "Informational",
+      "html": "<code class=\"inline-code\">Informational</code>"
+    }
+  ]
+}

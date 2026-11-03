@@ -1,0 +1,50 @@
+{
+  "scope": "Manual Q406-Q410; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 406,
+      "before_sha256": "be917433cb3d19bbdf92b0f3acb8a639fd2f8cfb432514cb07204561fbf23a2f",
+      "reason": "A响应NMS对象读取正确；代理不必驻留OS内核，Inform本身是需响应通知，不能泛称agent永不发送任何request或SNMP完全不能管理路由对象。重写功能边界与读写/通知。",
+      "updates": {
+        "explanation": "A。SNMP代理在被管理设备上实现受管对象的访问，收到获准的NMS读取请求后，返回相应OID对象实例的值。管理站可用Get/GetNext，以及相应版本支持的GetBulk读取；获授权的Set还可修改可写对象。MIB描述对象及其语义，不应把它简单当成独立保存全部实时数值的数据库文件。\n\nB的实际路由计算/转发和C的TACACS+/RADIUS用户认证不是这里所问的代理轮询响应职责，尽管SNMP可以暴露相应状态或可写管理对象。D把向远端请求灾难事件信息说成代理的基本功能，不符题意；代理可主动发Trap或需确认的Inform通知，并非一概只被动收请求。实现也不要求必须是运行在操作系统内核中的守护进程。"
+      }
+    },
+    {
+      "id": 407,
+      "before_sha256": "d85e8980d99f8992fd4bbf40bec6e8f268b33196e4e7d6ab38d3405ec5651b76",
+      "reason": "B ntpmaster针对无上游本地时钟来源正确，不是任何NTP服务器都必须配。限定隔离无外源场景，说明同步上游的设备也可向下游授时，非互斥客户/服务器身份。",
+      "updates": {
+        "prompt": "An isolated Cisco IOS router must offer its local software clock as an NTP reference to downstream clients even without synchronization to an external time source. Which listed command enables this local reference role?",
+        "explanation": "B，`ntp master [stratum]`在无外部时间源同步时允许设备以本地软件时钟充当参考源；省略层级时经典IOS通常使用stratum8，下游成功同步后通常为9。本地参考不等于时钟本身已精准，应按隔离网络的实际授时要求设置和校准。\n\nA ntp peer指定对等关联，C ntp authenticate启用认证机制，D ntp server指定本机要从哪个上游同步，均不是此处显式使用本地参考时钟的命令。一般“作为NTP服务器”不一定需要ntp master：已同步至有效上游的设备也可向下游提供时间。同一设备可以同时向上游同步、向下游授时，不能把NTP客户端和服务器身份强行互斥。"
+      }
+    },
+    {
+      "id": 408,
+      "before_sha256": "f280c88e500bc8384e1e094f90db59ed67fa7921c861864e721eaf27ff6b1ec0",
+      "reason": "severity5本身不唯一决定接口事件；原文所有物理up/down必LINK5错误（常有LINK3），且ICMP连接可为防火墙状态表术语。增加具体LINEPROTO-5-UPDOWN日志，再按明确事件选B。",
+      "updates": {
+        "prompt": "A Cisco IOS syslog message reads \"%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to down\". Which listed event does this notice-level message report?",
+        "explanation": "B，接口的line protocol状态改变。消息中的LINEPROTO与UPDOWN给出事件类型，数字5表示Notification/Notice，即正常但重要的条件。仅凭等级5无法确定具体事件；这里是日志标识及文本共同指向接口状态变化。\n\nA证书、C TCP和D ICMP状态都不是这条LINEPROTO消息的事件对象。不能泛称所有物理链路变化都为5级：平台/事件可出现LINK-3-UPDOWN或LINK-5-CHANGED等不同标识，实际以日志内数字为准。ICMP本身无TCP式握手，但状态防火墙仍可能记录ICMP连接状态，不能只因D用connection一词就断言任何相关日志都不存在。是否发到远端还取决于日志启用、门限及过滤，接口变化并不保证必发送。"
+      }
+    },
+    {
+      "id": 409,
+      "before_sha256": "4036a3ddfaa7da5bd7e648288867eea72d2dc4e92c131005ebf36803a32aa6e9",
+      "reason": "已看两行InsideGlobal.3/.4对应Local10.4.4.4/.5，原题未限定会话，靠选项只含.4推断。补第二条HTTP10.4.4.5:45507→172.23.103.10:80，D正确；172.23/16是私有地址，Global不保证公网。",
+      "updates": {
+        "prompt": "Refer to the NAT translation table. For the outbound TCP session from inside host 10.4.4.5:45507 to 172.23.103.10:80, what source IP appears after inside-source NAT on the outside side?",
+        "explanation": "D，172.23.104.4。所问第二行把Inside local10.4.4.5:45507映射成Inside global172.23.104.4:45507；Outside local/global均为目的172.23.103.10:80，本例未改目的地址。A的10.4.4.4属于另一条会话的内部源，B是本会话转换前源，C是服务器目的，不是转换后源。\n\nNAT表有两条映射，必须先按给定会话选择行，不能仅因选项只出现一个Inside global就假定所有包都用它。这里172.23.104.4仍属RFC1918私有172.16.0.0/12范围；Global指相对NAT外侧的地址身份，不保证一定是可在公网路由的地址，Local也不必在所有部署都为私有。"
+      }
+    },
+    {
+      "id": 410,
+      "before_sha256": "09d1eeb78f28a2c3f90e851ae1be79196b27cf0e7ba657c7f6af8c9e368f54f6",
+      "reason": "仅Notice无法排除C（OSPF-5-ADJCHG也是5），原解析自己承认却硬说不是核心定义。补SYS-5-RESTART标识唯一A，区分RELOAD请求与已经RESTART，去无证据官方题库断言与debug绝对等级。",
+      "updates": {
+        "prompt": "A Cisco IOS syslog entry contains \"%SYS-5-RESTART: System restarted -- Cisco IOS Software\". Which listed event is reported by this notice-level message?",
+        "explanation": "A，设备系统已重新启动。SYS为设施、5为Notice/Notification等级、RESTART为事件标识，文本System restarted进一步确定事件。仅有“Notice级”不足以唯一选A，其他设施例如OSPF邻接变化也可能产生5级日志。\n\nB描述debug操作，C描述路由实例抖动，D描述ARP检查，均不是这条SYS-5-RESTART的具体事件。SYS-5-RELOAD若只显示重载请求，不代表重启已完成，应与此RESTART区别；日志也不能单独证明所有接口与业务已恢复正常。严重性应按具体消息/平台判定，不应因其他选项不合当前标识就把它们绝对归为某个固定等级。"
+      }
+    }
+  ]
+}

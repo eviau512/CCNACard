@@ -1,0 +1,106 @@
+{
+  "scope": "Manual Q481-Q485; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 481,
+      "before_sha256": "43b803bffa6062582502f9d12fd9a6ae2bf0fea57e4e70590c09f5c334bea35c",
+      "reason": "A措辞易把混淆当访问控制；原解析所有密码都Type7、startup自动更新及Type5称强哈希不准确。限定经典IOS支持的password字段，区分配置混淆/访问/传输安全。",
+      "updates": {
+        "prompt": "On classic Cisco IOS using Type 7 for service password-encryption, what is the effect of enabling this command?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Obfuscates supported plaintext password fields in the running configuration using reversible Type 7 encoding."
+          },
+          {
+            "label": "B",
+            "text": "prevents network administrators from configuring clear-text passwords"
+          },
+          {
+            "label": "C",
+            "text": "protects the VLAN database from unauthorized PC connections on the switch"
+          },
+          {
+            "label": "D",
+            "text": "encrypts the password exchange when a VPN tunnel is established"
+          }
+        ],
+        "explanation": "A，`service password-encryption`把支持的明文password字段以Type7可逆形式混淆，使配置输出不直接显示那些口令原文。它不是限制谁能读取配置的访问控制，也不是强密码哈希；拿到Type7值的人仍可能恢复口令。\n\n不能把作用扩大成“所有秘密都转成Type7”：secret等字段采用各自支持的存储机制，部分平台还支持其他可逆加密类型。运行配置变化也需按正常方式保存才进入startup-config，不能说执行本命令就已保存启动配置。\n\nB错误：管理员仍可输入口令，不因本命令而禁止明文输入；C不是VLAN或终端接入控制；D不是VPN或SSH/Telnet传输保护，配置文件混淆不使链路自动加密。对本地认证口令应区分可逆password与单向secret，不能把旧Type5仅因是哈希就称为当前强保护；算法和部署选择须按平台能力核实。"
+      }
+    },
+    {
+      "id": 482,
+      "before_sha256": "0a05ddfb429029a77c0f6742f6c6b71d808aaac83b57cc64d6a1d628105cb33c",
+      "reason": "SAE不是数据cipher、不取代四次握手，不能说绝对阻止所有监听或WPA2知道密码就自动解所有历史流量。改问WPA3-Personal认证密钥建立增强并解释前向保密边界。",
+      "updates": {
+        "prompt": "Which WPA3-Personal authentication and key-establishment enhancement provides forward secrecy compared with WPA2-Personal PSK authentication?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SAE authenticated key exchange"
+          },
+          {
+            "label": "B",
+            "text": "TKIP encryption"
+          },
+          {
+            "label": "C",
+            "text": "scrambled encryption key"
+          },
+          {
+            "label": "D",
+            "text": "AES encryption"
+          }
+        ],
+        "explanation": "A，SAE（Simultaneous Authentication of Equals）是口令认证的密钥交换机制，不是给用户数据逐包加密的对称cipher。WPA3-Personal通过SAE建立密钥材料，之后仍执行四次握手来确认/派生相应会话密钥，不是用SAE取消四次握手。\n\n在正确实现及适用安全假设下，SAE抵抗被动捕获后反复离线猜口令，并提供前向保密：以后泄露口令本身不应足以恢复过去已捕获会话的密钥。WPA2-PSK弱口令结合所需握手材料可能被离线猜测，已知PSK配合相应握手也可能恢复有关会话密钥，但不是只知道口令就自动解密全部用户全部历史数据。\n\nD AES是WPA2也使用的数据加密算法，不是所问的新认证密钥交换增强；B TKIP是旧数据保护方案，不是SAE；C不是此机制标准名称。SAE不保证终端被攻破、主动钓鱼、错误配置或其他攻击下仍绝对安全，也不把所有WPA3模式都等同Personal的SAE。"
+      }
+    },
+    {
+      "id": 483,
+      "before_sha256": "6d050d8a7945adcdf7e6efc585e130734d42e96bc5522cdc8350f71d1767c224",
+      "reason": "仅trust无法必须推导设备类型，静态ARP ACL也可允许路由器不可信入口；改问既定信任网关政策下预期连接，去全上联/服务器必信任泛化。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The administrator's design trusts the gateway uplink while keeping ordinary user-facing ports subject to DAI checks. Which listed device role is the intended connection for FastEthernet0/1 under this design?",
+        "explanation": "C，按题干明确的“信任网关上联”设计，所列角色中路由器是预期连接。图中`ip arp inspection trust`让Fa0/1收到的ARP绕过DAI验证；它是管理策略，不是自动发现邻居设备的证据，所以单凭该命令不能证明实际接着什么设备。\n\nA普通DHCP客户端、D PC及B承载普通用户接入的AP不属于题设网关信任角色。实际AP/路由器可以集成其他功能，是否应信任仍依拓扑、安全边界和ARP验证来源决定，不能只看设备名称。\n\nDAI对启用VLAN中的不可信入口检查ARP绑定，默认不可信不等于所有报文都丢弃。静态网关也可通过适当静态ARP ACL等验证策略在不可信入口工作，并非所有路由器/上联/服务器端口都必须trust。可信入口只是绕过DAI，不代表绕过STP、其他ACL或一切安全机制，不能表述为所有ARP均无条件转发成功。"
+      }
+    },
+    {
+      "id": 484,
+      "before_sha256": "1b384d10fb7d0748c0e36f57578c14cd386d97e0aca80a4572d28d40d659f524",
+      "reason": "原图line vty/console提示符模式错误，片段不含SSH前提，原解析却称完备且Type5强安全。改正确模式文字展品、明确已具SSH前提和经典password/secret存储行为。",
+      "updates": {
+        "image": null,
+        "prompt": "Use the corrected configuration snippets below. All four switches already have working IP connectivity, domain/key/SSH-server prerequisites and SSH permitted on VTY lines 0–15. AAA is disabled and no other authentication settings override the snippets. On this classic IOS version, username password stores plaintext or reversible Type 7, while username secret stores a one-way hash. Which switch both uses hashed local user passwords and selects the local user database for VTY login?\n\nSW1 (start in global configuration mode):\n```text\nline vty 0 15\n no login local\n password cisco\nexit\n```\n\nSW2 (start in global configuration mode):\n```text\nusername admin1 password abcd1234\nusername admin2 password abcd1234\nline vty 0 15\n login local\nexit\n```\n\nSW3 (start in global configuration mode):\n```text\nusername admin1 secret abcd1234\nusername admin2 secret abcd1234\nline vty 0 15\n login local\nexit\n```\n\nSW4 (start in global configuration mode):\n```text\nusername admin1 secret abcd1234\nusername admin2 secret abcd1234\nline console 0\n login local\nexit\n```",
+        "explanation": "C，SW3的两个用户使用secret存储单向哈希，并在VTY0–15下用login local选择本地用户数据库。SSH服务、可达性及允许的transport等前提已在题干另行给定；这些片段本身并不是完整SSH部署。\n\nSW1是线路口令且未选择本地用户库，不满足本地用户名认证及用户secret要求；SW2选择了local但用户用password，在题设经典IOS存储行为下不满足哈希要求；SW4虽有secret用户，login local却仅配置在console，未为VTY完成本地认证选择。\n\n原图的line命令模式提示符有误，已换为从全局配置开始的逐行片段。示例口令用于辨认语法，不作为生产凭据。secret的实际类型随平台和命令选择变化，哈希也不能保证弱口令不可猜；Type5等旧哈希不能一概称为强安全。题目限定无AAA覆盖，其他AAA部署可用方法列表实现本地认证，并非任何环境都必须使用同一个login local命令。"
+      }
+    },
+    {
+      "id": 485,
+      "before_sha256": "b743773dcecc19793d195d35faa5beaa878047a48a3fc9707029282b8fff6ea9",
+      "reason": "原A泛指全交换机all ingress超出DAI VLAN/端口范围，原解析模板。限定默认不可信Fa0/1 VLAN5，具绑定验证条件，补DAI入方向检查及其他选项解释。",
+      "updates": {
+        "prompt": "Refer to the exhibit. FastEthernet0/1 retains the default DAI-untrusted setting, the required valid binding information is available, and the interface is operational with no rate-limit violation. Which statement describes the configured ARP inspection behavior?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ARP frames received on FastEthernet0/1 in VLAN 5 are dropped if their sender IP-to-MAC bindings fail DAI validation."
+          },
+          {
+            "label": "B",
+            "text": "All ARP packets are dropped by the switch."
+          },
+          {
+            "label": "C",
+            "text": "Egress traffic is passed only if the destination is a DHCP server."
+          },
+          {
+            "label": "D",
+            "text": "All ingress and egress traffic is dropped because the interface is untrusted."
+          }
+        ],
+        "explanation": "A。图中全局为VLAN5–10启用DAI，Fa0/1设为access VLAN5且题设明确保持DAI不可信。该口收到的ARP请求/回复按相应绑定信息验证，发送方IP/MAC映射不合法时丢弃；符合验证的ARP不因“不可信”三个字一概丢弃。\n\nB把检查误读成所有ARP都拒绝；C把DAI与目的为DHCP服务器的出站过滤混淆；D把不可信误读成所有入/出站流量都丢弃，均不成立。DHCP snooping绑定可作为DAI依据，但DAI检查的是ARP，不是要求其目的必须为DHCP服务器。\n\n此处描述启用VLAN且不可信入口上的入方向检查，不把范围扩大为交换机所有VLAN、可信端口或所有出站流量。若验证数据缺失或ARP速率违规，可出现额外丢弃/err-disable问题，本题已明确排除，不能据这些配置行就保证完整网络必然可达。"
+      }
+    }
+  ]
+}

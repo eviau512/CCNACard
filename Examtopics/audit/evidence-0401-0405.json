@@ -1,0 +1,19 @@
+{
+  "sources": {
+    "DHCP/interfaces": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr/command/ipaddr-cr-book/ipaddr-r1.html",
+    "MIB": "https://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15217-copy-configs-snmp.html",
+    "logging": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/configuration/15-s/bsm-15-s-book/bsm-troubleshooting.html"
+  },
+  "original_images_directly_viewed": [],
+  "q403_inclusive_severity_range": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "limitations": "Manual source/document review, not live IOS/SNMP/DHCP tests."
+}

@@ -1,0 +1,96 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    451,
+    452,
+    453,
+    454,
+    455
+  ],
+  "code_results": [
+    {
+      "id": 451,
+      "kind": "code",
+      "input": "`login local`",
+      "expected": "login local",
+      "html": "<code class=\"inline-code\">login local</code>"
+    },
+    {
+      "id": 451,
+      "kind": "code",
+      "input": "`transport input ssh`",
+      "expected": "transport input ssh",
+      "html": "<code class=\"inline-code\">transport input ssh</code>"
+    },
+    {
+      "id": 451,
+      "kind": "code",
+      "input": "`ip ssh version 2`",
+      "expected": "ip ssh version 2",
+      "html": "<code class=\"inline-code\">ip ssh version 2</code>"
+    },
+    {
+      "id": 451,
+      "kind": "code",
+      "input": "`service password-encryption`",
+      "expected": "service password-encryption",
+      "html": "<code class=\"inline-code\">service password-encryption</code>"
+    },
+    {
+      "id": 451,
+      "kind": "code",
+      "input": "`transport input all`",
+      "expected": "transport input all",
+      "html": "<code class=\"inline-code\">transport input all</code>"
+    },
+    {
+      "id": 451,
+      "kind": "code",
+      "input": "`privilege 15`",
+      "expected": "privilege 15",
+      "html": "<code class=\"inline-code\">privilege 15</code>"
+    },
+    {
+      "id": 454,
+      "kind": "code",
+      "input": "`ntp server 209.165.200.225`",
+      "expected": "ntp server 209.165.200.225",
+      "html": "<code class=\"inline-code\">ntp server 209.165.200.225</code>"
+    },
+    {
+      "id": 454,
+      "kind": "code",
+      "input": "`ntp server 172.16.0.1`",
+      "expected": "ntp server 172.16.0.1",
+      "html": "<code class=\"inline-code\">ntp server 172.16.0.1</code>"
+    },
+    {
+      "id": 454,
+      "kind": "code",
+      "input": "`ntp master 7`",
+      "expected": "ntp master 7",
+      "html": "<code class=\"inline-code\">ntp master 7</code>"
+    },
+    {
+      "id": 454,
+      "kind": "code",
+      "input": "`show ntp associations`",
+      "expected": "show ntp associations",
+      "html": "<code class=\"inline-code\">show ntp associations</code>"
+    },
+    {
+      "id": 454,
+      "kind": "code",
+      "input": "`show ntp status`",
+      "expected": "show ntp status",
+      "html": "<code class=\"inline-code\">show ntp status</code>"
+    },
+    {
+      "id": 455,
+      "kind": "code",
+      "input": "`ip nat outside`",
+      "expected": "ip nat outside",
+      "html": "<code class=\"inline-code\">ip nat outside</code>"
+    }
+  ]
+}

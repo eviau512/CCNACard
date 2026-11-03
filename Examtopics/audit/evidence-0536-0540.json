@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "SDN": "https://opennetworking.org/sdn-definition/",
+    "AAA": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-mt/sec-usr-aaa-15-mt-book/configuring_authentication.html",
+    "WPA3": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_wpa3.html",
+    "port_security": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9400/software/release/16-10/configuration_guide/sec/b_1610_sec_9400_cg/b_1610_sec_9400_cg_chapter_011100.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q539_image.jpg"
+  ],
+  "limitations": "Manual source and diagram review; not live network tests."
+}

@@ -1,0 +1,52 @@
+{
+  "scope": "Manual Q591-Q595; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 591,
+      "before_sha256": "0681afcbefd3d7517776af4e292b11339a197c2979cd26e4d7609c8d06f8eb45",
+      "reason": "自动化不要求中央控制器或必然包含升级功能，限定支持集中升级的场景。",
+      "updates": {
+        "prompt": "An organization deploys a centralized network-management platform that supports automated software image management. Which outcome can this platform provide for supported devices?",
+        "explanation": "D。具备镜像管理功能的平台可以从集中入口安排支持设备的软件升级，包括镜像分发及按工作流执行检查；设备兼容性、维护窗口、重启和故障处理仍需规划。\n\nA自动化不要求必须采用分布式管理平面；B新增设备配置不必然增加复杂度；C不一定需要自行开发应用。自动化也不一定采用中央控制器或提供升级功能，因此题干明确给出该平台能力；传统网络同样可能用脚本实现批量操作。"
+      }
+    },
+    {
+      "id": 594,
+      "before_sha256": "693716ca6572e66fe5ef985f438faa15d0c7273c56905dceae5b45dc969a40db",
+      "reason": "Accept表示可接受媒体类型，不保证返回200或必定406；修正Accept-Encoding逗号。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Accept-Encoding: gzip, deflate"
+          },
+          {
+            "label": "B",
+            "text": "Accept-Patch: text/example; charset=utf-8"
+          },
+          {
+            "label": "C",
+            "text": "Content-Type: application/json; charset=utf-8"
+          },
+          {
+            "label": "D",
+            "text": "Accept: application/json"
+          }
+        ],
+        "explanation": "D。客户端在请求中使用`Accept: application/json`表达可接受或偏好的响应媒体类型，具体协商结果仍依服务器实现和资源而定；不能保证支持该类型就必定返回200，也不能保证不匹配时服务器总是返回406。\n\nC `Content-Type`描述发送方消息内容的媒体类型，请求和响应均可使用；A `Accept-Encoding`表达可接受的内容编码，如gzip或deflate；B `Accept-Patch`用于公布资源支持的PATCH文档媒体类型，不是请求所需的响应媒体类型。"
+      }
+    },
+    {
+      "id": 595,
+      "before_sha256": "d0e67d0e14431b3be97e45c9a17db92e950aeee9b5f03d0f0b38466692c0dcd5",
+      "reason": "已直接查看原图，原解析遗漏aaaUserDomain和aaaUserRole的值对象；实际9个对象，答案C改D。",
+      "updates": {
+        "answer": [
+          "D"
+        ],
+        "explanation": "D。图中共有9个对象，按嵌套位置逐层数：\n\n1. 根对象；2. `aaaUser`的值对象；3. 其`attributes`对象；4. 外层`children`数组元素对象；5. `aaaUserDomain`的值对象；6. 其`attributes`对象；7. 内层`children`数组元素对象；8. `aaaUserRole`的值对象；9. 其`attributes`对象。两个`children`数组本身不算对象。\n\n原解析遗漏了第5和第8个对象，错误得到7，因此答案由C改为D。按图还原、便于检查的JSON如下（字符串是题图中的示例值）：\n\n```json\n{\"aaaUser\":{\"attributes\":{\"pwd\":\"password1\",\"firstName\":\"Abraham\",\"lastName\":\"Lincoln\",\"phone\":\"5555551212\",\"email\":\"test@cisco.com\"},\"children\":[{\"aaaUserDomain\":{\"attributes\":{\"name\":\"ExampleCisco\"},\"children\":[{\"aaaUserRole\":{\"attributes\":{\"name\":\"admin\"}}}]}}]}}\n```\n\nA、B、C分别只数到1、4、7个，均遗漏嵌套对象。"
+      }
+    }
+  ]
+}

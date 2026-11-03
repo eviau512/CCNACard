@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "PnP": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/3-2-x/user-guide/cisco-catalyst-center-user-guide-3-2-x/m_onboard-and-provision-devices-with-plug-and-play.html",
+    "API与事件": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/Catalyst-Center-Platform-Documentation/3_1_x/user_guide/b-cisco-catalyst-center-platform-ug-3-1-x/b-dnac-platform-ug-3-1-x-chapter-01.html",
+    "采集": "https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/226132-troubleshoot-wireless-issues-with.html",
+    "SDN": "https://opennetworking.org/sdn-definition/"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual documentation review; no live controller tests."
+}

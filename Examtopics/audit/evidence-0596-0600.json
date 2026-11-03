@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "NETCONF": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/cns/command/cns-cr-book/cns-cr-f1.html",
+    "SDN": "https://opennetworking.org/sdn-definition/",
+    "Catalyst Center": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/3-2-x/user-guide/cisco-catalyst-center-user-guide-3-2-x/m_onboard-and-provision-devices-with-plug-and-play.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q598_image.jpg"
+  ],
+  "limitations": "Manual documentation and image review; no live classic IOS NETCONF or SDN tests."
+}

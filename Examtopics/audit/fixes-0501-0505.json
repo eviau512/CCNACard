@@ -1,0 +1,67 @@
+{
+  "scope": "Manual Q501-Q505; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 501,
+      "before_sha256": "ecde92612e353f0882bd8d046171194d2d806e3b860584474e087b7a0cdcfbdf",
+      "reason": "核心B正确但所有上联都trusted及立即丢超额/err-disable的统一描述过度；补可配置DHCP PPS限制与平台行为，区分通用DDoS及绑定/IPSG。",
+      "updates": {
+        "explanation": "B，DHCP snooping可结合接口上的`ip dhcp snooping limit rate <pps>`配置限制DHCP报文接收速率，帮助控制异常DHCP请求泛洪。此限制针对DHCP，不是任意业务通用限速；是否启用、阈值及超限后丢弃/err-disable等处理应按平台配置核实，不能仅打开snooping就认定所有口已有同一速率限制。\n\nsnooping还按接口信任和协议规则检查报文，并建立客户端绑定信息。应信任合法服务器回复进入的授权路径，不应把所有上联无条件trusted；普通客户端入口通常不可信，防止其发送伪装服务器回复。绑定可供DAI/IPSG等已配置功能使用，数据库本身不替代这些功能。\n\nA描述组播监听/转发相关功能，而非DHCP监听；C是VLAN信息传播如VTP的作用；D若指通用全网DDoS清洗则超出范围。特定DHCP限速可减轻局部拒绝服务，但不应把“可减轻某类攻击”夸成能全面防御所有DDoS。"
+      }
+    },
+    {
+      "id": 502,
+      "before_sha256": "97e588b7fb558fc3f503a7c8871680460e1f5052bdaa0ca1697b2ab567a05ff5",
+      "reason": "原解析把SSH/Telnet称传输层协议、把ECDSA当非对称加密/密钥交换、所有HTTPS只有GUI均不准确；按安全远程shell功能解释，不泛化算法或基准。",
+      "updates": {
+        "prompt": "Which listed protocol is designed to provide an encrypted, authenticated interactive remote shell for network-device CLI management?",
+        "explanation": "D，SSH提供安全远程shell/命令行会话，通常使用TCP22，包含服务器身份认证、密钥交换、会话机密性及完整性保护。它运行于TCP之上，不应把SSH或Telnet直接归类为TCP/UDP那样的传输层协议。\n\n主机签名、密钥交换和数据加密分别有不同算法角色，例如ECDSA用于签名，不是把所有角色统称为非对称加密；最终选择及完整性保护形式取决于协商套件，不能说所有会话都固定使用同一套RSA/AES/HMAC组合。还需正确验证主机身份及配置用户认证。\n\nA普通Telnet虽支持远程终端但不提供本题加密通道；B HTTP不满足机密性要求；C HTTPS提供HTTP over TLS，用于Web/API等应用，可能承载Web终端，但不是题设直接提供远程shell的协议名称。不能把所有HTTPS用途都限定为图形界面，也不因有HTTPS就把它当SSH。"
+      }
+    },
+    {
+      "id": 503,
+      "before_sha256": "dde233a6e83d287c5dc80fd77bebc639a47e714424af712614380695237a3354",
+      "reason": "D符合WPA2/CCMP标准组合，但原解析AES坚不可摧、所有WPA2强制同一套件、厂商WPA+AES必缺安全框架均过度。限定标准RSN选择而非任意无线全局最强。",
+      "updates": {
+        "prompt": "Among the listed combinations, which selects the standardized WPA2/802.11i RSN protection using AES/CCMP rather than legacy WEP or WPA?",
+        "explanation": "D，WPA2结合AES/CCMP是所列项中明确对应标准WPA2/RSN数据保护的组合。CCMP使用AES实现数据机密性和完整性等保护；这不是宣称写上AES就让所有实现、口令或部署坚不可摧。\n\nA WEP和B WPA+TKIP属于旧方案，后者基于RC4相关机制；C标为WPA+AES，有些设备提供这种兼容配置，但标签不等于选择题设的WPA2/RSN。不能仅凭两项都写AES就说底层AES有不同强弱，也不应无依据断言所有厂商兼容实现都缺少同样的安全机制。\n\n题目限定这些组合与标准选择，不比较所有现存无线安全方案。实际协商套件、认证方式、共享口令强度、客户端兼容和设备实现都影响整体安全；混合模式也不保证每个客户端都按最强可选套件连接。"
+      }
+    },
+    {
+      "id": 504,
+      "before_sha256": "3b7d02135d2afdf9170baff2ddfa2955054fe6c724057b16811f30f2c68f1f85",
+      "reason": "B的access to servers也可指物理接触，原解析自行补成系统登录；B明确逻辑登录，A明确实体进入/接触，去物理接触必能完全劫持断言。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "physical entry to facilities and physical contact with networking equipment"
+          },
+          {
+            "label": "B",
+            "text": "logical login to server operating systems and applications"
+          },
+          {
+            "label": "C",
+            "text": "access to specific networks based on business function"
+          },
+          {
+            "label": "D",
+            "text": "access to computer networks and file systems"
+          }
+        ],
+        "explanation": "A，物理访问控制管理人员实际进入机房、数据中心等场所，以及接触网络设备、服务器硬件、线缆或机柜的权限。例如门锁、工牌门禁、安保和访问记录可参与这类控制。\n\nB明确指服务器操作系统/应用的逻辑登录；C按业务职能访问网络、D访问网络/文件系统，通常属于逻辑访问控制或分段权限。原B仅说access to servers，既可能物理接触也可能逻辑登录，不能靠解析自行补义判错，现已明确其逻辑含义。\n\n物理和逻辑措施相互补充。未经授权接触设备可造成断线、窃取或篡改等风险，但具体恢复/加密/防篡改机制不同，不能声称拿到物理接触就必然能执行口令恢复并完全劫持一切系统。"
+      }
+    },
+    {
+      "id": 505,
+      "before_sha256": "6a21c872e301f25757c8465c6fefa18c01ae28754f219e9a3c56988d9d7d54e7",
+      "reason": "题问any action时D access模式也是合理步骤；改问闲置端口VLAN归属。黑洞VLAN非绝对隔离保证，补shutdown、无路由/生产trunk，以及shutdown为接口模式非全局。",
+      "updates": {
+        "prompt": "After assigning active access ports to VLANs 2, 3 and 4, an engineer is deciding the VLAN membership for the remaining unused ports as part of a shutdown-and-isolation policy. Which listed choice provides an isolated parking VLAN rather than a production or trunk-native VLAN?",
+        "explanation": "C，将闲置端口归入专用隔离/parking（俗称black hole）VLAN，避免它们默认留在生产VLAN。该名称不是自动丢弃一切流量的特殊VLAN类型；应确认无生产成员、无通向生产网络的三层网关，且不在不必要的trunk中放行。\n\n还应在已确认闲置接口上采用固定access模式，并按支持情况关闭协商，使用接口配置模式下的`shutdown`行政关闭。`switchport mode access`与`switchport access vlan <parking-id>`分别控制模式及所属VLAN，不能把shutdown说成“全局关闭”，也不能只改VLAN号就保证绝对隔离；同VLAN若有多个启用端口仍可能互通。\n\nA/B只说native VLAN相关归属，不完成本题隔离parking策略。D固定access模式是合理的补充步骤，但没有指定VLAN归属，因此原来问“哪个行动”易有歧义，现改为明确问VLAN选择。不要在未核实用途时对实际生产接口执行这些示例命令。"
+      }
+    }
+  ]
+}

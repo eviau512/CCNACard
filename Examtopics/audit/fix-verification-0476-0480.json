@@ -1,0 +1,95 @@
+{
+  "scope": [
+    476,
+    480
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 72,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 2,
+  "q480_packet_model": [
+    {
+      "label": "A",
+      "cases": 126,
+      "mismatches": 0,
+      "example_failures": []
+    },
+    {
+      "label": "B",
+      "cases": 126,
+      "mismatches": 3,
+      "example_failures": [
+        {
+          "src": "172.16.1.33",
+          "dst": "192.168.4.1",
+          "proto": "tcp",
+          "port": 22,
+          "expected_permit": true
+        },
+        {
+          "src": "172.16.1.33",
+          "dst": "198.51.100.4",
+          "proto": "tcp",
+          "port": 22,
+          "expected_permit": true
+        }
+      ]
+    },
+    {
+      "label": "C",
+      "cases": 126,
+      "mismatches": 8,
+      "example_failures": [
+        {
+          "src": "172.16.1.33",
+          "dst": "172.16.1.62",
+          "proto": "tcp",
+          "port": 22,
+          "expected_permit": false
+        },
+        {
+          "src": "172.16.1.33",
+          "dst": "172.16.1.62",
+          "proto": "tcp",
+          "port": 23,
+          "expected_permit": true
+        }
+      ]
+    },
+    {
+      "label": "D",
+      "cases": 126,
+      "mismatches": 4,
+      "example_failures": [
+        {
+          "src": "172.16.1.33",
+          "dst": "172.16.1.62",
+          "proto": "tcp",
+          "port": 22,
+          "expected_permit": false
+        },
+        {
+          "src": "172.16.1.33",
+          "dst": "192.168.1.1",
+          "proto": "tcp",
+          "port": 22,
+          "expected_permit": false
+        }
+      ]
+    }
+  ],
+  "q480_answer_changed_to_A": true,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "a9167e75de420c64ce0df282aa4d8e3e3bebcb6913cedbff0097044931ccc08a",
+  "app_bundle_sha256": "39cfd85d933ac0fc16395b276668d26764e1d26f24acbda75f826a56934edd14",
+  "limitations": "Manual source/document/exhibit and formatter plus representative ACL packet-class model; not live WLC/MFA/SSH/WPA2/router testing."
+}

@@ -1,0 +1,86 @@
+{
+  "scope": "Manual Q496-Q500; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 496,
+      "before_sha256": "3d37d57cd68566e800df748f42fdda4429a268b55ae076c6b75659c9790debbd",
+      "reason": "原解析称5字段却列6项，且把数据库本身当自动防IP冒用；明确六个常见输出字段、RAM与持久化及DAI/IPSG需配置，答案D保持。",
+      "updates": {
+        "explanation": "D，交换机维护DHCP snooping绑定数据库，记录从DHCP交换学习到的客户端IP/MAC及接入信息，可用`show ip dhcp snooping binding`查看。常见输出列有MAC地址、IP地址、剩余租约、类型、VLAN和接口，共六项；不能写成五项却列出六个。\n\nA CAM表、B帧转发数据库和C MAC地址表在本题指二层转发所需MAC/VLAN/端口映射，不是维护DHCP租约绑定的专用数据库。CAM本身也是一种存储/查找实现术语，不必把所有平台内部硬件表结构说成完全相同。\n\n绑定数据可供DAI和IP Source Guard等功能使用，但还需相应配置及有效范围，存在数据库不等于已自动阻止所有ARP/IP欺骗。运行中绑定与持久化文件也要区分，重启后恢复取决于平台及数据库代理等持久化设置，不能从数据库名称推断永不丢失。"
+      }
+    },
+    {
+      "id": 497,
+      "before_sha256": "70a19982c084e1de885d49e233ea1bd9270c8bc281604352e14d64e8f2f36189",
+      "reason": "四组命令压平，题干误称RSA密钥直接加密管理流量；限定缺失RSA主机密钥生成任务，D2048、默认命名前提，去旧1024足够安全及ECC永不可用于SSH泛化。",
+      "updates": {
+        "prompt": "R1 uses the classic Cisco IOS hostname/domain-name workflow and supports the shown 2048-bit RSA generation syntax. The hostname is R1, no domain name or RSA key exists, and all other required SSH settings are already configured. Starting at R1# (privileged EXEC), which configuration generates the missing RSA host key pair for SSH?",
+        "options": [
+          {
+            "label": "A",
+            "text": "configure terminal\nip domain-name example.com\ncrypto key generate ec keysize 1024"
+          },
+          {
+            "label": "B",
+            "text": "configure terminal\nip domain-name example.com\ncrypto key generate ec keysize 2048"
+          },
+          {
+            "label": "C",
+            "text": "configure terminal\nip domain-name example.com\ncrypto key encrypt rsa name myKey"
+          },
+          {
+            "label": "D",
+            "text": "configure terminal\nip domain-name example.com\ncrypto key generate rsa modulus 2048"
+          }
+        ],
+        "explanation": "D，`configure terminal`进入全局配置，域名配合已有hostname完成题设默认命名条件，`crypto key generate rsa modulus 2048`生成2048位RSA主机密钥对。这里只考缺失的密钥步骤，不能把这三行说成完整SSH部署。\n\nSSH主机密钥用于服务器身份认证等协议功能；实际会话的数据通常用协商的对称加密算法保护，并非RSA公私钥直接加密每一条管理命令。算法角色与实际握手须区分。2048是题设明确支持的示例，旧1024不应再描述为普遍足够安全的部署建议。\n\nA/B显示的是EC命令且尺寸/语法不符合题问的RSA生成步骤，不代表所有SSH实现都不能用椭圆曲线。C不是所需RSA生成命令。域名前提限定默认未显式指定label的流程，其他命名/绑定方式可有不同要求；R1#已是特权EXEC，无需再放一条enable。"
+      }
+    },
+    {
+      "id": 498,
+      "before_sha256": "f7ca8c507d27be6c9a96b7878c18e7a85ca8da2ce5951df2f3ee349b16d5f227",
+      "reason": "原核心B正确，但GUI从未/协议一律禁Unicode和decimal数字不能作为密钥容易误导；限定AireOS8.7格式选择，区分编码选项和ASCII数字字符。",
+      "updates": {
+        "prompt": "In the Cisco AireOS 8.7 WLC GUI PSK Format selector for a WPA2-Personal WLAN, which listed format is supported?",
+        "explanation": "B，ASCII是该界面的PSK格式选项之一；另一个常见选项是HEX，但没有列在本题四项里。ASCII短语长度为8–63个字符，HEX原始密钥为64个十六进制字符，代表256位密钥；这里的字符数不是“64位二进制”。\n\nA decimal、C unicode和D base64不是此题指定格式下拉框的名称。全数字字符串仍可以作为ASCII字符输入，满足相应长度及规则即可，不能把“decimal不是格式项”误写成数字字符被禁止。实际口令强度也不能只看格式是否合法。\n\n题目限定AireOS版本和GUI，不把下拉框选择推广为所有WLC/客户端/未来版本永远相同，也不在此推导所有协议实现对Unicode处理都绝对一致。"
+      }
+    },
+    {
+      "id": 499,
+      "before_sha256": "66abfcb5ac392ecfa1a751134f92c4f10159833fc88ae335de869571124c871d",
+      "reason": "原图末尾deny ip any any log，直接追加许可无效；题干缺应用/顺序条件。明确在Telnet ACE原位替换，D用数值22，区分接口ACL与VTY服务自身配置。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SSH services and VTY authentication are already correctly configured on the routers in 172.16.1.0/24. The administrator must replace the existing ACL101 Telnet permit for source 10.1.1.0/24 at that same position, before the final explicit deny, with an entry permitting SSH instead. All other ACEs remain unchanged. Which replacement entry matches the required service?",
+        "options": [
+          {
+            "label": "A",
+            "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq 23"
+          },
+          {
+            "label": "B",
+            "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq scp"
+          },
+          {
+            "label": "C",
+            "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq 443"
+          },
+          {
+            "label": "D",
+            "text": "access-list 101 permit tcp 10.1.1.0 0.0.0.255 172.16.1.0 0.0.0.255 eq 22"
+          }
+        ],
+        "explanation": "D，TCP目的端口22用于SSH，源10.1.1.0/24和目的172.16.1.0/24符合题设。A的TCP23是Telnet，C的443是HTTPS，均非此次SSH替换目标；B的scp不是本题IOS ACL支持的独立TCP服务端口关键字，SCP通常借助SSH/TCP22，不能凭名字把它当作另一个端口。\n\n原图ACL末尾有`deny ip any any log`。许可必须在题设明确的原Telnet ACE位置替换，若仅追加到最终deny之后会先被拒绝；本题给的是替换条目，不声称单条旧式access-list输入就自动删掉Telnet或安全调整顺序。实际编辑应使用设备支持的序号方式并核实结果。\n\n图中ACL101通过E0/0的ip access-group101 in应用，是接口报文过滤，不是在VTY下应用扩展ACL。ACE许可也不会自己开启SSH、创建用户或强制VTY只接受SSH，相关条件已由题干给定；无需把特定VTY扩展ACL平台语义当成解题前提。"
+      }
+    },
+    {
+      "id": 500,
+      "before_sha256": "d68f36a72dd039bd81a61ee99a7b047f6c8cecf1b65c2e83e6d450a19c529366",
+      "reason": "原解析把RBAC限定软件系统不准确，门禁同样可以基于角色；明确问物理设施防护类别而非权限分配模型，解释两者能同时成立。",
+      "updates": {
+        "prompt": "A company installs badge readers on data-center doors to control who can physically enter. Permissions may be assigned by job role, but the question asks for the security-program area covering the door-entry safeguard itself, rather than its authorization model. Which area is it?",
+        "explanation": "A，physical access control针对人员进入机房等物理空间的控制，门禁工牌读卡器属于此类设施防护。\n\nC RBAC描述按角色分配权限的模型，也可以用于物理门禁；不能把RBAC限定为软件或逻辑资源。一个系统可以同时属于物理访问控制并使用RBAC策略，题目已明确问门禁措施所属领域，所以选A。\n\nB biometrics指指纹、人脸等生理/行为特征验证，工牌本身不是生物特征；D MFA需要不同类别因素，单刷工牌并不证明已使用多个因素。按角色决定权限也不自动增加一个认证因素。门禁实际还需处理授权撤销、尾随及审计，不能只安装读卡器就保证物理设施安全。"
+      }
+    }
+  ]
+}

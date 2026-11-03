@@ -1,0 +1,60 @@
+{
+  "scope": "Manual Q516-Q520; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 516,
+      "before_sha256": "ff4e1c3b53bb0c6fd4f9e94346eed30629b576431a676eaba68f20e142617e59",
+      "reason": "B正确但原尾句问认证必SAE泛化所有WPA3模式，192bit模式的384bit哈希称加密套件混淆；精简AES数据cipher与SAE/PSK角色，具体套件按模式。",
+      "updates": {
+        "prompt": "Which listed block-cipher algorithm is used by WPA3 data-protection suites, rather than being an authentication or key-establishment mechanism?",
+        "explanation": "B，AES是分组密码算法，WPA3的数据保护套件使用基于AES的CCMP/GCMP等机制，具体套件和密钥长度取决于安全模式及支持能力。算法、工作模式、密钥长度及认证方式不是同一个配置维度。\n\nC SAE用于WPA3-Personal的口令认证密钥交换，不直接为每个数据报文执行对称加密；不能把“WPA3认证”不加条件都答成SAE，因为Enterprise等模式的身份认证机制不同。D PSK是预共享密钥相关机制，也不是分组密码。A TKIP不是所问WPA3的数据cipher。\n\nWPA3-Enterprise的192位安全模式使用相应更高强度套件，但摘要长度、AES密钥长度与整体安全强度不能混称为同一种“哈希加密”。不需要背成所有WPA3都必用同一AES套件，也不保证配置只要写AES就抵御所有攻击。"
+      }
+    },
+    {
+      "id": 517,
+      "before_sha256": "276b6eb18a55afc9bd689510bd3fc57134ddf364d46fd594952b411357aa9c89",
+      "reason": "IPsec架构并非仅允许单播，原所有组播/动态路由必须GRE及封装顺序过度；限定常规单播选择器站点部署，区分三层载荷与二层控制帧。",
+      "updates": {
+        "prompt": "A conventional policy-based site-to-site IPsec deployment has unicast IPv4 traffic selectors and no GRE or Layer 2 tunnel encapsulation. Which listed traffic can it carry directly within those selectors?",
+        "explanation": "C，远端主机到总部服务器的单播IPv4报文可按题设选择器匹配并由IPsec保护。这里讨论给定的常规站点配置，不声称整个IPsec架构永远只能单播；RFC4301也讨论组播相关支持和约束。\n\nA组播流量不属于所给单播选择器；B描述二层广播，而题设三层IPsec不自动桥接以太网广播域；D STP BPDU也是二层控制帧，不能仅靠此三层站点隧道延伸交换拓扑。IP广播、以太网广播和IP组播要分别看，不能用一个“IPsec头无法封装”的说法概括全部协议能力。\n\n如部署需要承载特定组播或其他封装，可采用支持的平台及相应隧道设计。GRE over IPsec的典型顺序是先GRE封装再由IPsec保护，不应反过来说所有场景都必须在IPsec外再套GRE。动态路由也可能使用单播邻居配置，不能说所有路由协议更新都必然需要GRE。"
+      }
+    },
+    {
+      "id": 519,
+      "before_sha256": "50d8d4bebd1029ad8ec6016459d099cfadac0f5d296c5c17b321036b6bf2d5c3",
+      "reason": "原导入必须CA、pubkey-chain等同SSH无密码登录及固定768/1024标准错误；明确本地生成新主机密钥，无导入文件，区分生成/导入/擦除/其他设备公钥。",
+      "updates": {
+        "prompt": "A Cisco IOS router uses the default hostname/domain-name RSA key-naming workflow. The hostname, domain name and local login user are configured, no RSA host key exists, and no external key file is available. Which listed command begins generating a new local RSA key pair for SSH?",
+        "explanation": "B，`crypto key generate rsa`在全局配置模式生成本机RSA公私钥对；可按平台支持和当前策略选择合适模数等参数。题目明确本地新生成及默认命名前提，不把旧768/1024位当成统一安全建议。\n\nA `crypto key import rsa pem`导入预先存在的PEM密钥，不是这里没有外部文件时的本地生成；来源不一定是CA服务器，也可为设备支持的其他输入方式。C `crypto key zeroize rsa`擦除已有RSA密钥，方向相反；它会影响依赖所删密钥的服务，但不能一概说每种平台上所有SSH必立即停止。D `crypto key pubkey-chain rsa`用于手工配置其他设备的RSA公钥等公钥链内容，不生成本机私钥，也不应直接等同SSH用户免密登录配置。\n\n用户名是后续认证配置，不是RSA生成的数学前提；某些显式命名/绑定流程也不要求同样域名顺序。生成主机密钥本身未完成VTY、transport、用户授权及全套SSH访问配置。"
+      }
+    },
+    {
+      "id": 520,
+      "before_sha256": "0306879fa41ef7a37000e707f5897f030b569057adb7c945ba9b743b1b706d1b",
+      "reason": "题干type if笔误、B confirms非有效攻击选项，原SYN flood必伪造源/服务器每包必分配/永远不收ACK等绝对；改B MAC flooding并解释SYN cookies与超时边界。",
+      "updates": {
+        "prompt": "Which type of network attack sends many TCP connection-initiation requests without completing the handshakes, attempting to exhaust a server's half-open connection resources?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SYN flood"
+          },
+          {
+            "label": "B",
+            "text": "MAC flooding"
+          },
+          {
+            "label": "C",
+            "text": "teardrop"
+          },
+          {
+            "label": "D",
+            "text": "amplification"
+          }
+        ],
+        "explanation": "A，SYN flood利用TCP建立过程中的半开状态消耗处理或连接资源。正常连接中服务器收到SYN并回复SYN-ACK，随后期望客户端ACK完成握手；攻击以大量未完成的请求使合法连接受影响。\n\n源地址可能伪造，也可能使用真实来源而故意不完成握手，不是必须随机伪造。遇到不期望SYN-ACK的真实主机也可能回RST，而非一律静默丢弃。半开状态有超时，服务器也可能使用SYN cookies、延后分配资源或其他缓解，所以不能说每个SYN都必分配完整资源且永远等待。题问攻击尝试及目标，不保证所有实现必被耗尽。\n\nB MAC flooding主要针对交换机MAC学习/转发表资源；C teardrop涉及畸形重叠IP分片及重组漏洞；D amplification通常通过不对称请求/响应放大攻击流量，机制与本题直接耗半开TCP资源不同。不同DoS手法可组合，不能靠“耗资源”三个字把它们等同。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "scope": "Manual Q431-Q435; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 431,
+      "before_sha256": "d8dd5069f08309cb90799840c492168c41e6bb3e67bbd626cac7d21a2bd5d914",
+      "reason": "B master+server是fallback方向但命令server与IP粘连、三行压平；原英文把ntpserver误作本地来源且缺正常优先条件。补上游有效stratum2及本地软件时钟参考，恢复全部配置，不保证绝对精度/立即接管。",
+      "updates": {
+        "prompt": "On Cisco IOS, SW1 normally synchronizes to reachable NTP server 192.168.1.1 at stratum 2. It must also offer its local software clock as a fallback reference after that upstream source becomes unavailable and is no longer selected. Which configuration includes both the upstream association and the local reference?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1# config t\nSW1(config)#ntp peer 192.168.1.1\nSW1(config)#ntp access-group peer accesslist1"
+          },
+          {
+            "label": "B",
+            "text": "SW1# config t\nSW1(config)#ntp master\nSW1(config)#ntp server 192.168.1.1"
+          },
+          {
+            "label": "C",
+            "text": "SW1# config t\nSW1(config)#ntp backup\nSW1(config)#ntp server 192.168.1.1"
+          },
+          {
+            "label": "D",
+            "text": "SW1# config t\nSW1(config)#ntp server 192.168.1.1\nSW1(config)#ntp access-group peer accesslist1"
+          }
+        ],
+        "explanation": "B。`ntp server 192.168.1.1`建立上游关联，`ntp master`允许本地软件时钟作为参考；经典IOS省略层级时本地参考为stratum8。题设正常上游为2，SW1从它同步时通常为3，本地8保持较低偏好；上游失去选择资格后可使用本地参考。\n\nA的peer和access-group管理对等/访问，不提供所需本地参考；C的ntp backup不是此IOS本地参考命令；D也只有上游与访问控制，没有master。master不删除上游关联，也不使ntp server命令本身变成本地来源。故障识别/选源可能需时间，本地参考的绝对精度取决于时钟，不能承诺上游断开后立即无漂移接管；ACL还应按实际需要允许合法NTP通信。"
+      }
+    },
+    {
+      "id": 432,
+      "before_sha256": "06d421bb350309aca0ec71d4b88cc37513af467d9355a189e7ddef72626cbc3d",
+      "reason": "B relay正确；原题两站不一定跨广播域，补明确路由子网。原解析giaddr混作唯一default网关、snooping固定防饥饿等泛化，按角色及客户端入口解释。",
+      "updates": {
+        "prompt": "DHCP clients and their server are on different routed IP subnets. What must be configured on the client-side router to relay DHCPDISCOVER requests to that server?",
+        "explanation": "B，DHCP relay agent。在接收客户端广播的三层接口上，Cisco IOS常用`ip helper-address <DHCP-Server-IP>`把初始DHCP请求中继到远端服务器。giaddr通常标识客户端侧中继接口所属子网，帮助服务器选择配置，并非要求它在所有拓扑都恰是客户端使用的唯一默认网关。\n\nA binding是服务器的客户端地址分配关系，C snooping是检查/约束DHCP消息的安全功能，D pool是服务器分配资源定义；它们本身不执行所问的跨子网中继。客户端DISCOVER在本地广播域内传送，服务器在另一路由子网时通常需要中继；仅仅地理上两个站点不同不必然意味着广播域不同。后续回复还需中继与服务器之间正常路由和策略。"
+      }
+    },
+    {
+      "id": 433,
+      "before_sha256": "be601e8bca0b93686ec1ec9d166c30e595d50644a8a5f19c7e9cfc3bd88c589d",
+      "reason": "所列D/debug7可包含Informational6，原解析算术正确但题干severity与outputthreshold混淆。明确问四个候选输出门限哪个包含6，保留D，不把debug写成Informational等级。",
+      "updates": {
+        "prompt": "Which of the listed Cisco IOS syslog output thresholds includes informational messages at severity 6, assuming logging is enabled and no additional filters apply?",
+        "explanation": "D，debug/debugging为数值7，其门限包含0–7，故包含Informational6。A alert为1，只含0–1；B critical为2，只含0–2；C notice为5，只含0–5，均不包含6。\n\nInformational消息本身的等级仍是6，不是7；若可选门限包括informational，设6也能接收它，debug是给定四个候选中唯一满足的门限。输出门限只筛选已产生的消息，不自动启用所有调试生成器，也不保证越过其他策略/传输限制。"
+      }
+    },
+    {
+      "id": 434,
+      "before_sha256": "782c6d8c00f5f613c2f46dd0845813edd0f8a21f483aa96b48afd6a8d3f24d25",
+      "reason": "B DHCP在IPv4自动配置中Option3正确；原题未限定IP族，IPv6默认路由来自RA，原文43/150泛称WLC/TFTP不准确。限定IPv4并去无关选项泛化，保留B。",
+      "updates": {
+        "prompt": "On a Microsoft Windows workstation configured to obtain IPv4 settings automatically, which listed protocol can supply its default gateway?",
+        "explanation": "B，DHCPv4可通过Router选项（Option3）下发一个或多个路由器地址，客户端据配置建立相应网关/路由。Option6用于DNS服务器，不要与网关混淆。是否下发并采用这些参数还取决于服务器和客户端配置，不是所有DHCP租约必含默认网关。\n\nA STP控制二层无环拓扑，C SNMP是设备管理协议，D DNS提供名称解析，均不是此处自动IPv4配置的对应机制。题目明确IPv4；IPv6默认路由通常通过Router Advertisement获知，不能把DHCPv4 Option3无条件推广成DHCPv6的网关选项。网关也可由管理员静态配置，本题问的是所列动态协议。"
+      }
+    },
+    {
+      "id": 435,
+      "before_sha256": "0ca79672c8e9610c0e2eefab0677a61b6d1dd3adcf5ce309898e28062cc9cdb1",
+      "reason": "已看VLAN100.1/27、VLAN200.33/27、WAN209.165.201.2/27。原选项仅配置VLAN200 inside，若100非inside，B/C也不翻译100；补100原已inside且无其他NAT/ACL99条件。C wildcard全1实际匹配任意源，不能说公网地址不匹配。四段恢复模式换行、D access- list拼写，A保留。",
+      "updates": {
+        "prompt": "Refer to the exhibit. VLAN100 subinterface GigabitEthernet2/0/1.100 is already configured as ip nat inside. ACL99 is unused and no other NAT rules apply; interface addresses and VLAN encapsulation are correct. Which added configuration uses PAT for VLAN200 source hosts while leaving VLAN100 source addresses untranslated?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Router1(config)# access-list 99 permit 192.168.100.32 0.0.0.31\nRouter1(config)# ip nat inside source list 99 interface GigabitEthernet1/0/0 overload\nRouter1(config)# interface GigabitEthernet2/0/1.200\nRouter1(config-if)# ip nat inside\nRouter1(config-if)# exit\nRouter1(config)# interface GigabitEthernet1/0/0\nRouter1(config-if)# ip nat outside"
+          },
+          {
+            "label": "B",
+            "text": "Router1(config)# access-list 99 permit 192.168.100.0 0.0.0.255\nRouter1(config)# ip nat inside source list 99 interface GigabitEthernet1/0/0 overload\nRouter1(config)# interface GigabitEthernet2/0/1.200\nRouter1(config-if)# ip nat inside\nRouter1(config-if)# exit\nRouter1(config)# interface GigabitEthernet1/0/0\nRouter1(config-if)# ip nat outside"
+          },
+          {
+            "label": "C",
+            "text": "Router1(config)# access-list 99 permit 209.165.201.2 255.255.255.255\nRouter1(config)# ip nat inside source list 99 interface GigabitEthernet1/0/0 overload\nRouter1(config)# interface GigabitEthernet2/0/1.200\nRouter1(config-if)# ip nat inside\nRouter1(config-if)# exit\nRouter1(config)# interface GigabitEthernet1/0/0\nRouter1(config-if)# ip nat outside"
+          },
+          {
+            "label": "D",
+            "text": "Router1(config)# access-list 99 permit 209.165.201.2 0.0.0.0\nRouter1(config)# ip nat inside source list 99 interface GigabitEthernet1/0/0 overload\nRouter1(config)# interface GigabitEthernet2/0/1.200\nRouter1(config-if)# ip nat inside\nRouter1(config-if)# exit\nRouter1(config)# interface GigabitEthernet1/0/0\nRouter1(config-if)# ip nat outside"
+          }
+        ],
+        "explanation": "A。VLAN200的192.168.100.33/27位于192.168.100.32/27，wildcard0.0.0.31匹配.32–.63；VLAN100位于.0/27，不在该范围。inside source规则引用ACL99并以WAN口地址overload，相关VLAN200/WAN接口分别标inside/outside。ACL在此选择需转换的流量，未匹配并不等于接口ACL丢弃。\n\n题设已明确VLAN100也是inside，否则仅给VLAN200标inside时，不能仅凭B的宽ACL就断言100一定被翻译。B的/24现在会选择两个VLAN，C的全1 wildcard则忽略所有源地址位、等于任意源，也会选择两个VLAN；不能因C写了公网地址就说它匹配不到私网。D全0 wildcard只匹配209.165.201.2，无法选择VLAN200内部源。保持私有VLAN100地址不转换只是NAT选择结果，不保证这些地址因此能在公共互联网被路由，外部可达性另需有效设计。"
+      }
+    }
+  ]
+}

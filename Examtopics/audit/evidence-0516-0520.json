@@ -1,0 +1,15 @@
+{
+  "sources": {
+    "WPA3": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_wpa3.html",
+    "IPsec": "https://www.rfc-editor.org/rfc/rfc4301.html",
+    "RSA_commands": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/a1/sec-a1-cr-book/sec-cr-c4.html",
+    "SSH": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/security-vpn/security-vpn/m_sec-secure-shell-v2-0.html",
+    "AAA": "https://docs.manage.security.cisco.com/cdfmc/t_configure-aaa-settings-for-ravpn.html",
+    "SYN_flood": "https://www.rfc-editor.org/rfc/rfc4987.html"
+  },
+  "original_images_directly_viewed": [],
+  "q518_unchanged": true,
+  "q517_scope": "Conventional unicast-selector policy-based deployment, not universal IPsec restriction",
+  "q520_replacement_B": "MAC flooding intentionally replaces meaningless confirms",
+  "limitations": "Manual document/source review; not live WPA3/IPsec/AAA/RSA or SYN flood tests."
+}

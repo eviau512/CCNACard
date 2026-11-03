@@ -1,0 +1,67 @@
+{
+  "scope": "Manual Q531-Q535; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 531,
+      "before_sha256": "4df149b8b80ac854aa604fe9263486afe862fe0b832c9912f9406c4be76e31d3",
+      "reason": "ASA默认高安全级别至低级别可通行，原解析错误宣称跨域默认全部阻断；不同设备和策略各异。",
+      "updates": {
+        "explanation": "B。防火墙通常部署在不同安全域之间，按配置的策略控制跨域流量，例如内部网、外部网和DMZ之间的访问；具体隔离效果取决于拓扑、策略和设备能力。\n\n默认策略并不在所有防火墙上一律阻断所有跨域连接。例如特定ASA配置中，高安全级别接口向低级别接口的流量默认允许，反方向默认拒绝；ACL及其他配置可以改变行为。区域策略防火墙与ASA的区域/接口机制也不应简单视为完全相同。\n\nA IPS侧重检测或阻断恶意流量；C无线控制器管理无线网络，D接入点提供无线接入。它们可能参与安全策略或分段，但本题中以防火墙作为受策略控制的安全域边界最合适。"
+      }
+    },
+    {
+      "id": 532,
+      "before_sha256": "53d0436bd8f18a4061372a13ffe8101b3b211f9b6e93526cdf3d5af568d85d53",
+      "reason": "原答案只涉及交换机欺骗，题干却泛问所有VLAN hopping；限定DTP攻击并补双标签区别。",
+      "updates": {
+        "prompt": "Which measure mitigates VLAN hopping by preventing an attacker from using DTP to negotiate an unintended trunk on a host-facing switch port?",
+        "explanation": "A。在支持DTP的平台上，将主机端口明确设为access模式，必要的交换机互联端口手动设为trunk，并按平台要求禁用trunk上的DTP协商，可降低攻击者伪装交换机协商出非预期trunk的风险。两端设置必须兼容；不能把所有端口配置为trunk。\n\n这主要针对交换机欺骗，不是所有VLAN hopping手法的完整防护。双标签攻击还涉及native VLAN处理：可将trunk的native VLAN设为不供普通接入端口使用的专用VLAN，并按平台能力考虑标记native VLAN。具体影响取决于拓扑和配置。\n\nB扩展VLAN编号本身不能防止协商攻击；C启用所有闲置端口不安全；D动态ARP检查主要处理ARP欺骗，不替代trunk和native VLAN加固。"
+      }
+    },
+    {
+      "id": 533,
+      "before_sha256": "a54aba311b3e307ab91ec4fedb9077769b29d0cdac424c5f082218fe19e6af2e",
+      "reason": "SAE相关前向保密和抗离线猜测被写成绝对保证；四次握手仍存在，修改解析。",
+      "updates": {
+        "explanation": "A。WPA3-Personal引入SAE作为口令认证密钥交换，提供抵抗被动捕获材料离线口令猜测的改进，并在正确实现及适当安全假设下提供针对后来口令泄露的前向保密。认证之后仍有四次握手；弱口令、主动尝试、实现缺陷或会话密钥/终端泄露仍需考虑，不能承诺所有攻击都不可能。\n\nB中的802.1X与AES-128并非WPA3才出现；C的AES-64不是标准AES密钥长度（AES使用128、192或256位密钥）；D的TKIP是早期WPA过渡技术，不是WPA3新增加密增强。WPA3还采用受保护管理帧等措施，具体模式和兼容部署应看实际配置。"
+      }
+    },
+    {
+      "id": 534,
+      "before_sha256": "e68b110455eb8d31e8130776e76ac8087951b452b1f130465922e5fc629ac357",
+      "reason": "ESP并非任何配置都启用加密，也不能隐藏所有元数据；限定启用保密并解释AH。",
+      "updates": {
+        "prompt": "For a site-to-site VPN, which IPsec mode and protocol can encapsulate and encrypt the entire original IP packet when confidentiality is enabled?",
+        "explanation": "D。ESP隧道模式把原始IP头和载荷作为内部包封装；选择并启用保密性时加密内部包，并添加外层IP头供转发。外层地址、ESP部分字段和流量元数据仍可能可见。ESP可有不同算法和配置，不能说选了ESP或隧道就必然加密。\n\nAH提供完整性和数据源认证等保护但不提供加密，所以A和B不满足保密要求。C的ESP传输模式保留原IP头在外，通常保护上层载荷，不满足加密整个原始IP包的条件。算法与反重放等保护是否生效还取决于安全关联及配置。"
+      }
+    },
+    {
+      "id": 535,
+      "before_sha256": "ac04d5dba5e4a15d03483767e54b42189d3f89c105f4cba6c861a86da695862a",
+      "reason": "原选项CLI压成一行，且将VTY access-class目的端口当作普通接口ACL过滤；改为明确SSH和标准源地址ACL。",
+      "updates": {
+        "prompt": "On a classic Cisco IOS router, SSH, local login authentication and routing are already working. Which configuration restricts all VTY lines 0–15 to inbound SSH from 10.139.58.0/28, with no other permitted VTY source?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip access-list standard 10\n permit 10.139.58.0 0.0.0.15\nexit\nline vty 0 15\n access-class 10 in\n transport input ssh\nexit"
+          },
+          {
+            "label": "B",
+            "text": "ip access-list standard 10\n permit 10.139.58.0 0.0.0.7\nexit\nline vty 0 15\n access-class 10 in\n transport input ssh\nexit"
+          },
+          {
+            "label": "C",
+            "text": "ip access-list standard 10\n permit 10.139.58.0 0.0.0.15\nexit\nline vty 0 15\n access-class 10 in\n transport input telnet\nexit"
+          },
+          {
+            "label": "D",
+            "text": "ip access-list standard 10\n permit 10.139.58.0 0.0.0.15\nexit\nline vty 0 15\n access-group 10 in\n transport input ssh\nexit"
+          }
+        ],
+        "explanation": "A。标准ACL 10的permit匹配源地址10.139.58.0，通配符0.0.0.15对应/28；隐式拒绝排除其他源。在线路上用`access-class 10 in`应用入站VTY源地址限制，并用`transport input ssh`将该线路允许的传输协议限制为SSH。题设已保证认证、密钥、SSH及路由可用；ACL本身不会创建用户或保证连接成功。\n\nB的0.0.0.7只覆盖/29，遗漏后一半地址；C只允许Telnet而非SSH；D在线路下误用接口命令access-group。接口ACL也能过滤到达路由器的流量，但其范围和对转发业务的影响不同。\n\n原题将扩展ACL的目的TCP端口当作VTY access-class的普通报文过滤条件；Cisco对相关IOS实现说明该场景按源IP匹配，不能据此宣称eq 22在线路访问控制中保证目的端口过滤。SSH限制由线路transport input明确完成。"
+      }
+    }
+  ]
+}

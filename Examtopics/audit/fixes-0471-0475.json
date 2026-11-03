@@ -1,0 +1,85 @@
+{
+  "scope": "Manual Q471-Q475; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 471,
+      "before_sha256": "a776b8ae1dc816c5dec1259be8672482ffda3a98a5148df09407352b66b16436",
+      "reason": "SNMPv3不自动authPriv，syslog也可TLS；原所有监控协议只有v3安全、彻底杜绝监听、旧算法全称强安全均泛化。限定带认证/隐私的MIB轮询需求。",
+      "updates": {
+        "prompt": "A management station must poll device MIB objects using user-based message authentication and encrypted message contents. Which listed technology supports these requirements when its authentication-and-privacy security level is configured?",
+        "explanation": "D，SNMPv3在USM的authPriv级别同时提供消息认证/完整性与隐私保护，可用于安全轮询MIB对象；还应按用户/视图控制可访问对象，并配置双方支持的合适算法和凭据。启用v3这个版本名本身不保证已启用这两项保护。\n\nnoAuthNoPriv不提供消息认证或加密，authNoPriv有认证但无隐私，authPriv同时提供两者。隐私保护针对加密的scoped PDU等规定内容，不是把所有网络头和全部可观察元数据都隐藏，也不能保证设备或凭据被攻破后绝不泄漏。算法支持随平台变化，不应把旧算法一律称为强安全。\n\nA IP SLA用于主动性能探测，C NetFlow用于流量记录，B syslog用于事件日志，都不是题设的用户认证及隐私保护MIB轮询。syslog可使用TLS安全传输，不能因此断言所有其他监控技术都无法加密，或SNMPv3在任何配置下都具有全行业最高安全性。"
+      }
+    },
+    {
+      "id": 472,
+      "before_sha256": "4f0203e74d0a3caf164050c95e6900f1ef5d535403713cfb2f0c28151c6292e4",
+      "reason": "B由Configured1/Sticky0支持，但原A不能用非shutdown典型特征判错；各平台日志差异不宜作唯一排除。A改明确违规仍保持端口运行，依据shutdown直接排除，保留B。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "A port-security violation drops the offending frames but leaves the interface operational."
+          },
+          {
+            "label": "B",
+            "text": "One secure MAC address is manually configured on the interface."
+          },
+          {
+            "label": "C",
+            "text": "One secure MAC address is dynamically learned on the interface."
+          },
+          {
+            "label": "D",
+            "text": "Five secure MAC addresses are dynamically learned on the interface."
+          }
+        ],
+        "explanation": "B，图中Total MAC Addresses为1、Configured MAC Addresses为1、Sticky MAC Addresses为0，说明当前这一个安全地址是手工配置的，不是一个或五个动态学习地址。Maximum MAC Addresses为5是上限，不是现有学习数量，所以C/D不成立。\n\nA错误：显示Violation Mode为Shutdown，发生相应端口安全违规时端口进入err-disabled，而非只丢违规帧并继续保持运行。图中当前Secure-up、Violation Count0，不能说它现在已经err-disabled或已产生过告警。\n\n原A仅说产生syslog，原解析用“不是典型判据”排除并不充分，且日志/通知细节随平台文档与配置不同，不适合作为此未指定型号题的唯一排除依据。已把A改成由明确shutdown模式就能判断的行为。restrict/protect等模式与shutdown处理不同，但都不改变图中手工地址计数所支持的B。"
+      }
+    },
+    {
+      "id": 473,
+      "before_sha256": "d5bdc343aee6d04250b4b00d0f78973c82eb012456007a1c47b060b400334ae0",
+      "reason": "原解析模板；端口默认untrusted不是启用DAI把既有trusted全部重置。补新交换机默认状态，C改remains，说明DHCP绑定/ARP ACL及非管理关闭。",
+      "updates": {
+        "prompt": "Refer to the exhibit. FastEthernet0/1 is on a new switch and retains its default Dynamic ARP Inspection trust setting; no other DAI interface configuration has been applied. What is the effect of the shown configuration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The switch port remains administratively down until the interface is connected to another switch."
+          },
+          {
+            "label": "B",
+            "text": "Dynamic ARP Inspection is disabled because the ARP ACL is missing."
+          },
+          {
+            "label": "C",
+            "text": "The switch port remains untrusted for Dynamic ARP Inspection."
+          },
+          {
+            "label": "D",
+            "text": "The switch port remains down until it is configured to trust or untrust incoming packets."
+          }
+        ],
+        "explanation": "C，`ip arp inspection vlan 2`在VLAN2启用DAI，Fa0/1设为access VLAN2。该端口保留默认DAI untrusted状态，因为没有`ip arp inspection trust`；不是启用DAI会自动撤销所有曾经配置的trust。\n\nDAI对不可信入口的ARP报文做绑定验证，常结合DHCP snooping绑定表，静态地址环境可按需要使用ARP ACL等支持方式。题图未展示完整绑定来源，不能保证所有ARP都会通过，但缺ARP ACL不会自动把DAI禁用，所以B错误。\n\n不可信表示需要检查，不等于接口administratively down，也不要求先连接另一台交换机才起来，A/D错误。ARP限速违规等其他情况可能触发err-disable，但不是仅因默认untrusted就关闭端口。DAI信任设置也与其他协议的信任/访问策略分别配置。"
+      }
+    },
+    {
+      "id": 474,
+      "before_sha256": "37c418950a27a5f8977562a02536eb5e86e71d1d0a831f325e84e2fae3b5d55d",
+      "reason": "解析错误编码amp;amp;amp和不相关模板，缺逐项解释；按认证/授权/记账分工重写，去用户名口令是唯一认证方式的暗示。",
+      "updates": {
+        "explanation": "A。Authentication（认证）验证访问者声称的身份，例如核对口令、证书或其他凭据；Authorization（授权）决定已识别主体可以执行哪些操作、使用哪些资源。知道“是谁”不等于已授予所有命令权限。\n\n例：认证确认本地用户operator的登录凭据有效；授权策略允许其查看部分状态但不修改配置；Accounting（记账）再记录登录、操作或会话用量以供审计。实际执行哪些授权/记账取决于所配策略，不是仅打开AAA就自动完成。\n\nB把认证说成访问权限控制、把授权说成日志记录，混淆三个A；C的口令验证可属于认证，但与用户数据库通信不是授权的定义，认证也不局限于口令；D把口令验证错误归给授权。记忆时区分身份验证、权限决策与活动记录。"
+      }
+    },
+    {
+      "id": 475,
+      "before_sha256": "966c51224613eba4af636391eca63aa953cde4ea07def5c108cac99d024be820",
+      "reason": "网页自称安全不足以证明培训，原题未清楚保证授权模拟且解析含长引文/模板。补已核实的组织授权无害模拟，区别模拟手法与安全意识项目。",
+      "updates": {
+        "prompt": "The company security team confirms that it sent an authorized, harmless simulated phishing email. An employee clicks its test link and receives a training page explaining how a real malicious link could have harmed them. Which type of security program does this exercise support?",
+        "explanation": "A，用户安全意识培训（user awareness）。已核实的授权无害钓鱼模拟用于让员工识别诱导链接、学习核验来源及按组织流程报告可疑消息，培训页面提供反馈；它属于教育和演练项目。\n\nD social engineering描述现实攻击者利用信任、好奇或恐惧诱导人的攻击方法。培训可以模拟这种手法，但题问已授权演练所属的安全项目，故A比D准确。B brute force指反复猜测等试探，本题不是口令穷举；C physical access control控制门禁等物理进入，不是此邮件演练。\n\n不能仅凭网页自称safe就断定真实邮件没有恶意；也不能仅凭显示发件人像公司安全团队就信任。题干已明确由组织核实授权模拟，而不是要求员工用攻击页面的自我声明证明安全。"
+      }
+    }
+  ]
+}

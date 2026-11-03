@@ -1,0 +1,67 @@
+{
+  "scope": "Manual Q586-Q590; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 586,
+      "before_sha256": "45dbe94f4830d60547f46e24a6ebe3408bf141e2c340d518719913b22101e38d",
+      "reason": "原C和D都可能成立，JWT可签名或加密，签名JWT并不保密，也不是全部JWT均三段或证明持有人身份。",
+      "updates": {
+        "prompt": "An API uses a signed JWT as a bearer token after a user signs in. Which description best matches that specific use?",
+        "options": [
+          {
+            "label": "A",
+            "text": "an encrypted JSON token that is used for authentication"
+          },
+          {
+            "label": "B",
+            "text": "an encrypted JSON token that is used for authorization"
+          },
+          {
+            "label": "C",
+            "text": "an encoded token that always encrypts and hides all claims"
+          },
+          {
+            "label": "D",
+            "text": "an encoded JSON token that is used for authentication"
+          }
+        ],
+        "explanation": "D。题设中经过签名的JWT可携带声明，作为API认证流程中的bearer令牌；常见紧凑JWS形式为三段Base64url编码的头部、载荷和签名，编码不是加密，载荷可被读取。持有令牌者可出示它，因此必须通过TLS和安全存储保护；仅验证签名不等于证明持有人本人身份。\n\n验证还应依据应用要求检查允许算法、签发者、受众、有效期等声明及授权策略；状态、撤销和密钥管理依系统设计。A、B假设题设签名令牌必然加密，C错误地把编码等同保密。JWT也可使用JWE加密，且可用于授权及其他声明交换；原题C和D都可能正确，现限定具体用途并修改干扰项。"
+      }
+    },
+    {
+      "id": 587,
+      "before_sha256": "b793c614bc7787385b836c4781bd36b89f4a0a5fa18d85baaafea92e5694fa89",
+      "reason": "已查看原图，switch为键，但其余内容含未引用值及标点错误，不应称整图为有效JSON Schema。",
+      "updates": {
+        "prompt": "In the exhibit, what role is intended for the word `switch` in line 2?",
+        "explanation": "D。图中`switch`位于冒号左侧，意图作为对象成员名称（key）；右侧`3750`是对应字符串值。它不是整个数组、对象或该成员的值。\n\n原图还含未加引号的`e2`、`e20`、`e23`和不规范标点，不能直接作为严格JSON解析，也不应称为JSON Schema。规范化单个成员可写成`{\"switch\":\"3750\",\"port\":\"e2\"}`；本题根据原图的意图识别键。"
+      }
+    },
+    {
+      "id": 588,
+      "before_sha256": "20a72a2792d5a9543b9f50f5c49bd0ac3aa60e8213ca85e083ddecfc499e10d6",
+      "reason": "已查看原图为单个对象，排版引号需规范化；补说明并保留正确答案。",
+      "updates": {
+        "explanation": "D。原图用一对花括号表示一个对象，成员名称为`Employee’s name`，值为`Arthur`。对象内的名称是key，但整个结构不是单一key、数组或布尔值。\n\n图示使用排版引号；将定界引号规范化为ASCII双引号后可表示为`{\"Employee’s name\":\"Arthur\"}`。JSON对象成员名称必须使用双引号，名称中的撇号字符是字符串内容。"
+      }
+    },
+    {
+      "id": 589,
+      "before_sha256": "fe2f07c8ba337dde5061ba1a99677ce1f970ad75a2f3b526abc8c17ca6767372",
+      "reason": "南向方向正确，但主机可承载受管转发软件、应用也可有其他管理路径，原文绝对化。",
+      "updates": {
+        "explanation": "B。在常见SDN模型中，南向接口连接控制器与受管交换机、路由器等网络基础设施，用于交换状态或下发配置/转发规则；具体协议及能力取决于实现。\n\nC控制器与上层服务或应用的接口通常称为北向；D未描述控制器与设备之间的接口；A普通PC终端不是此题所指的受管交换机/路由器。实际主机也可运行受管虚拟交换机，应用也可能存在其他设备管理路径，不能对所有架构作绝对排除。"
+      }
+    },
+    {
+      "id": 590,
+      "before_sha256": "941db63520eab130c8dc807257893ae5386442079acc90e4ec94d2bfa0fce8da",
+      "reason": "已查看原图为一个对象、三个键和三个数组；图中末尾逗号和弯引号不符合严格JSON。",
+      "updates": {
+        "prompt": "In the exhibit, count the intended outer object, its keys, and the arrays used as their values. How many of each are shown?",
+        "explanation": "C。图示有一个外层对象、三个成员名称`Test_Questions`、`Test_Exam_Level`、`Test_Response`，各自对应一个数组，因此是1个对象、3个键和3个数组值。每个数组里有两个字符串元素，数组数量与元素总数不同。\n\n原图使用排版弯引号，数组末尾还保留了逗号，不能直接作为严格JSON解析。保持原意并规范化后：\n\n```json\n{\n  \"Test_Questions\": [\"Automation\", \"Configuration\"],\n  \"Test_Exam_Level\": [\"CCNA\", \"CCNP\"],\n  \"Test_Response\": [\"Correct\", \"Incorrect\"]\n}\n```\n\nA和B将数组误计为对象；D漏计一个数组。"
+      }
+    }
+  ]
+}

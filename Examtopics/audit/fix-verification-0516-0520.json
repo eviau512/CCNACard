@@ -1,0 +1,24 @@
+{
+  "scope": [
+    516,
+    520
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 4,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 109,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch3_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 4,
+  "q518_unchanged": true,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "pending Q600",
+  "source_sha256": "117a7c905ae1b983e8303408e4f5aaaa9cffea83ccd576ea7140c7bc8198b71e",
+  "app_bundle_sha256": "4240fe9acbc6fd2d15db9fc2bb1efe1d78cd105582c0eb017b23ec3ba8e3df98",
+  "limitations": "Manual document/source and actual formatter checks; not live WPA3/IPsec/AAA/RSA or SYN flood tests."
+}

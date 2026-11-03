@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "HTTP": "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "SDN": "https://opennetworking.org/sdn-definition/",
+    "Update Site": "https://developer.cisco.com/docs/catalyst-center/2-3-7-5/update-site/",
+    "JSON": "https://www.rfc-editor.org/rfc/rfc8259.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q585_image.jpg"
+  ],
+  "limitations": "Manual documentation and diagram review; not live API or network tests."
+}

@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    561,
+    562,
+    563,
+    564,
+    565
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 562,
+      "kind": "code",
+      "input": "```text\ncisco_ospf_vrf { \"R1 default\":\n  ensure => 'present',\n  auto_cost => '100',\n}\n\n```",
+      "expected": "cisco_ospf_vrf { \"R1 default\":\n  ensure => 'present',\n  auto_cost => '100',\n}",
+      "html": "<pre class=\"cli-block\"><code>cisco_ospf_vrf { \"R1 default\":\n  ensure =&gt; 'present',\n  auto_cost =&gt; '100',\n}</code></pre>"
+    },
+    {
+      "id": 562,
+      "kind": "code",
+      "input": "`cisco_ospf_vrf`",
+      "expected": "cisco_ospf_vrf",
+      "html": "<code class=\"inline-code\">cisco_ospf_vrf</code>"
+    },
+    {
+      "id": 562,
+      "kind": "code",
+      "input": "`R1 default`",
+      "expected": "R1 default",
+      "html": "<code class=\"inline-code\">R1 default</code>"
+    },
+    {
+      "id": 562,
+      "kind": "code",
+      "input": "`=>`",
+      "expected": "=>",
+      "html": "<code class=\"inline-code\">=&gt;</code>"
+    }
+  ]
+}

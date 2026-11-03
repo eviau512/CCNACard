@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "QoS": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html",
+    "LLQ": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Collaboration/hybrid/12x/hybcvd/bwm.html",
+    "TFTP": "https://www.rfc-editor.org/rfc/rfc1350.html",
+    "blocksize": "https://www.rfc-editor.org/rfc/rfc2348.html",
+    "windowsize": "https://www.rfc-editor.org/rfc/rfc7440.html",
+    "IP_SLA": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_sla_udp_jitter-xe.html"
+  },
+  "original_images_directly_viewed": [],
+  "answer_change": {
+    "419": {
+      "before": [
+        "B"
+      ],
+      "after": [
+        "D"
+      ]
+    }
+  },
+  "q420_authored_option_C": "Explicit false TCP-congestion-control claim replaces ambiguous congested-link function.",
+  "limitations": "Manual source/document review, not live QoS/TFTP tests."
+}

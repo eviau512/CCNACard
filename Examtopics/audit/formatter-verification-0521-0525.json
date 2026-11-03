@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    521,
+    522,
+    523,
+    524,
+    525
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 521,
+      "kind": "code",
+      "input": "`aaa authentication login CONSOLE_LOCAL local`",
+      "expected": "aaa authentication login CONSOLE_LOCAL local",
+      "html": "<code class=\"inline-code\">aaa authentication login CONSOLE_LOCAL local</code>"
+    },
+    {
+      "id": 521,
+      "kind": "code",
+      "input": "`login authentication CONSOLE_LOCAL`",
+      "expected": "login authentication CONSOLE_LOCAL",
+      "html": "<code class=\"inline-code\">login authentication CONSOLE_LOCAL</code>"
+    }
+  ]
+}

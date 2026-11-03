@@ -1,0 +1,95 @@
+{
+  "scope": "Manual Q446-Q450; next milestone Q600",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 446,
+      "before_sha256": "59644ab05e2168b6ab14909c2cd3778e799afd1df4092f39d23a5db629647398",
+      "reason": "TFTP不支持用户登录，原A及解析把无认证等同匿名登录；且把FTP数据端口一律20、TFTP会话都69泛化。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "has no protocol-level username/password authentication"
+          },
+          {
+            "label": "B",
+            "text": "uses two separate connections for control and data traffic"
+          },
+          {
+            "label": "C",
+            "text": "relies on the well-known TCP port 20 to transmit data"
+          },
+          {
+            "label": "D",
+            "text": "provides secure data transfer"
+          }
+        ],
+        "explanation": "A。基础TFTP没有用户名/密码认证流程，也没有用户登录命令；“无需协议级登录”不能写成提供anonymous用户登录。服务器仍可通过文件权限、允许目录、网络访问策略等限制访问，不代表所有人都能任意读写。\n\nTFTP使用UDP，初始RRQ/WRQ发往服务器69端口；服务器选择传输标识TID作为后续传输端口，因此不能把整个传输描述为始终以服务器69端口收发。基础协议用DATA/ACK及超时重传传文件，不采用FTP式独立TCP控制/数据连接，B错误；C的TCP20也不属于TFTP。FTP主动模式常用服务器数据端口20，被动模式协商其他数据端口，不能一概固定20。\n\nD错误：基础TFTP不提供加密或密码学身份/完整性保障。UDP校验与确认重传用于差错检测和可靠传输，不等同防篡改认证。需要安全文件传输时应选择相应安全协议及正确配置，而不是把无认证理解为安全。"
+      }
+    },
+    {
+      "id": 447,
+      "before_sha256": "d608939c639a7aa8cee95d15d8ac1d9b43c675dd0d72861083e83bbbfa6a9a5c",
+      "reason": "D概念正确，但题干和解析把classification/marking等统称四种PHB；改为QoS操作，区别DSCP标记与节点PHB，避免标记保证调度或policing必丢。",
+      "updates": {
+        "prompt": "Which QoS operation writes or changes a packet-header field, such as DSCP, to indicate the packet's traffic class?",
+        "explanation": "D，marking（标记）写入或修改报头字段，例如IP DS字段中的6位DSCP。后续节点按本地策略把标记映射到转发处理；写某值本身不保证端到端带宽或时延。二层802.1Q标签的3位PCP也可表达优先级，但不等于三层DSCP。\n\nB classification识别和归类流量，本身不改头；A shaping通过排队延后发送来控制输出速率，有限队列仍可能溢出；C policing衡量流量是否符合流量合同，可丢弃或重标记超额流量。policer可以包含marking动作，但题目问的直接改头操作名称是marking。\n\nDiffServ中的PHB是节点对某类报文施加的可观察逐跳转发行为，例如相应的调度/丢弃处理；不能把分类、标记、整形和监管简单说成四种PHB。分类及流量调节帮助选择、实施所需行为，DSCP与PHB也不是同一概念。"
+      }
+    },
+    {
+      "id": 448,
+      "before_sha256": "e42aae7633252a67351a2e19191c3313ea55aeaeccddf96aa10ff248983ceea8",
+      "reason": "原图完整，D方向正确，但either语义不清且解析绝对所有NAT都需物理inside/outside，忽略其他模式；限定经典NAT并补正常路由前提，解释编号ACL1的两条ACE。",
+      "updates": {
+        "prompt": "Refer to the exhibit. This router uses classic Cisco IOS inside/outside NAT. PC addressing and gateways, Internet routing, and upstream return reachability are otherwise correct. Which update completes the shown PAT configuration so both PCs can access the Internet?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Modify the configured number of the second access list"
+          },
+          {
+            "label": "B",
+            "text": "Change the ip nat inside source command to use interface GigabitEthernet0/0"
+          },
+          {
+            "label": "C",
+            "text": "Remove the overload keyword from the ip nat inside source command"
+          },
+          {
+            "label": "D",
+            "text": "Configure ip nat inside on GigabitEthernet0/0 and ip nat outside on GigabitEthernet0/1"
+          }
+        ],
+        "explanation": "D。图中PC1=172.16.0.1、PC2=172.16.0.2位于G0/0的172.16.0.0/24网段；G0/1为外网209.165.202.130/27。ACL1两条permit分别精确匹配这两个主机，省略wildcard时并非匹配整个/24。全局规则已选择G0/1地址并使用overload，缺少经典inside/outside NAT的接口角色：\n```text\ninterface GigabitEthernet0/0\n ip nat inside\nexit\ninterface GigabitEthernet0/1\n ip nat outside\n```\n\nA把第二条ACE改成其他ACL编号不会修复角色缺失，还会使它不属于规则引用的ACL1；图中是一个编号ACL中的两条条目。B将转换地址改成私网G0/0不是题设外网PAT要求；C移除overload不能满足两主机共享该公网接口地址的PAT要求，也不补接口角色。\n\n这些命令解决图中所缺的NAT角色，互联网可达仍需题设已满足的网关、路由及回程条件。结论限定经典inside/outside模式，不应泛化为所有NAT实现或所有接口都必须是物理接口；NAT Virtual Interface等使用不同配置模型。"
+      }
+    },
+    {
+      "id": 450,
+      "before_sha256": "b57784a29aebe04c8ab47d5521ee1f32b679285884e879d1e69a162bfd24e24d",
+      "reason": "原解析服务器到relay目的端口误写68，应67；原配置追加许可位于显式deny后无效，四组命令压平。补已知序号和在deny前插入，恢复选项换行。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R4 supports sequence-number editing of ACL 100 using ip access-list extended 100. Additional show ip access-lists output confirms the five permit entries have sequence numbers 10, 20, 30, 40, 50 and the final deny has sequence 60; sequence 55 is unused. The DHCP server 10.0.1.1 has a pool for 10.148.2.0/24, and routing and other settings are correct. Which added configuration enables initial DHCP allocation for hosts on FastEthernet0/1 while retaining the existing ACL entries?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface FastEthernet0/1\n ip helper-address 10.0.1.1\nexit\nip access-list extended 100\n 55 permit tcp host 10.0.1.1 eq 67 host 10.148.2.1 eq 67\nexit"
+          },
+          {
+            "label": "B",
+            "text": "interface FastEthernet0/0\n ip helper-address 10.0.1.1\nexit\nip access-list extended 100\n 55 permit udp host 10.0.1.1 eq bootps host 10.148.2.1 eq bootps\nexit"
+          },
+          {
+            "label": "C",
+            "text": "interface FastEthernet0/0\n ip helper-address 10.0.1.1\nexit\nip access-list extended 100\n 55 permit host 10.0.1.1 host 10.148.2.1 eq bootps\nexit"
+          },
+          {
+            "label": "D",
+            "text": "interface FastEthernet0/1\n ip helper-address 10.0.1.1\nexit\nip access-list extended 100\n 55 permit udp host 10.0.1.1 eq bootps host 10.148.2.1 eq bootps\nexit"
+          }
+        ],
+        "explanation": "D。原图显示Fa0/1为客户端LAN接口10.148.2.1/24，Fa0/0为WAN接口10.0.1.2/30并应用入站ACL100。helper应配置在收到客户端广播的Fa0/1，目的为服务器10.0.1.1。\n\n初始中继请求giaddr为10.148.2.1，服务器把回复送到该中继地址的DHCP服务器端口UDP67：源10.0.1.1:67，目的10.148.2.1:67。中继再向客户端传送时才使用客户端端口UDP68，不能混淆两段通信。D的ACE精确许可服务器到中继的67→67回包。\n\nACL按首条匹配处理。题干补充已核实的序号，55位于最终60 deny之前，且保留五条现有许可；若仍使用原先access-list100追加方式把许可放在显式deny之后，回包先被拒绝，不能解决故障。原图本身未显示序号，不能声称从图直接读出了55/60。\n\nA错误使用TCP；B将helper配在WAN而非客户端入口；C同样接口错误且ACE缺少ip/udp等协议字段，语法不完整。此配置解决题设中继初始分配路径，不意味着已涵盖所有后续直接续租、跨网段安全策略或其他平台语法。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "sources": {
+    "IPsec": "https://www.rfc-editor.org/rfc/rfc4301.html",
+    "IKEv2": "https://www.rfc-editor.org/rfc/rfc7296.html",
+    "WPA2": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/67134-wpa2-config.html",
+    "password_storage": "https://www.cisco.com/c/en/us/about/trust-center/resilient-infrastructure/protecting-secrets.html",
+    "RFC1918": "https://www.rfc-editor.org/rfc/rfc1918.html",
+    "ACL": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/security/acls/acls-configuration-guide/access-control-lists.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q489_image.jpg"
+  ],
+  "q489_original_SVI_labels": [
+    "10.10.0.0/24",
+    "10.20.0.0/24",
+    "10.30.0.0/24"
+  ],
+  "q489_replacement_gateways": [
+    "10.10.0.1/24",
+    "10.20.0.1/24",
+    "10.30.0.1/24"
+  ],
+  "q487_q488_explanation_option_alignment_corrected": true,
+  "limitations": "Manual source/document/exhibit review; not live VPN, WLAN, password, switch ACL or Internet routing tests."
+}
