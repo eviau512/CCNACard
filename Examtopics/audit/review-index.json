@@ -3,17 +3,17 @@
   "status": "active",
   "review_date": "2026-11-03",
   "source": "Examtopics\\output\\complete_q1_q1396.json",
-  "source_sha256": "70a26360452e0d3ec65943ad1c4b222eca761c6720925a3e3bea5141339f353e",
-  "app_bundle_sha256": "1a8c56d7e9e3f5fd4ad6877d2b5380e2c9b1d08bc6b310c0a72c968c5f9cfc51",
+  "source_sha256": "809c719dc31d0cc33473c49fc4f0a736c89e36015874ce94f79182e0c5d31155",
+  "app_bundle_sha256": "28277ee4adaabb7860071ec572558ac85f70e7c29a5edb6a166405e054609310",
   "total_questions": 1396,
-  "reviewed_count": 660,
+  "reviewed_count": 800,
   "status_counts": {
-    "问题": 435,
+    "问题": 575,
     "通过": 146,
     "歧义": 79
   },
-  "next_question_id": 661,
-  "unreviewed_count": 736,
+  "next_question_id": 801,
+  "unreviewed_count": 596,
   "production_data_modified": true,
   "method": "逐题语义、图片/代码完整性审查至Q660；全部已有图片含答案图直接查看。人工决定修订，执行App/分卷/完整HTML实际formatter并解析代码，独立地址/ACL模型核对；未按关键词自动通过，未宣称逐题真机UI或网络CLI实验。",
   "records": [
@@ -19356,6 +19356,4347 @@
           "B"
         ]
       }
+    },
+    {
+      "id": 661,
+      "original_qid": "Q869",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "SSID规范题；题干选项完整；C正确；原解析夸大ASCII和网络隔离，已修订。",
+      "question_sha256": "3ab12c911f3bcb2568da01567b9ae5a16ef723798782dd70412d299e024d9c92",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "50f8cf68f756c8f985c4013ea680808dd57826fc50d11d1aad207716773aa4da",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 662,
+      "original_qid": "Q870",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "WLC trunk题；四选项完整；B正确；原解析一SSID一VLAN的说法错误，已修订。",
+      "question_sha256": "eeb58b9eb2beef489abb0ea2b35f949648ab553de302fa2efb351ae44e107814",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "84c61cd7602ffadc759d5ca6922b49cc0249367bc1061aef47be1cbfff68f754",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 663,
+      "original_qid": "Q872",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "原图SSID broadcast已勾选、radio policy为All；原题误称安全和吞吐，限定指标后C正确。",
+      "question_sha256": "367c67aac4c7964c8c4a05ff89583fd9681afd888d9902e9d2ef8caa7c119d74",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "3694673d14a900add15484f23585aab0c3c37aabddd000e4df499e9740b0d4ac",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 664,
+      "original_qid": "Q873",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "MAC老化题；A正确；解析错误声称有效防MAC flooding，已删除。",
+      "question_sha256": "28d39f46ea95427f20148dcd16bd563b8245e60c54fb3e64a31d11ac188297de",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "b55037bf054f7f2535d63e4999b9b06a265a8b715bc7d76d8feb86536a4d966e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 665,
+      "original_qid": "Q875",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "图示PC VLAN及端口逐一核对；原C缺native VLAN，补齐前提及命令后C正确。",
+      "question_sha256": "3e14a042868556c8dc3b0f68e4a2c3549331e21372f6ed574dd989fc687f120b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "e776ce56ff36f01462e072ab3d0cb1687a546f74f6459d6c473fd3edcc075327",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 666,
+      "original_qid": "Q876",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "图示A的Gi0/0/0通B，Gi0/0/1通C；补全接口初始状态，B正确。",
+      "question_sha256": "b5f714f646ade63d8b3d96c770dbbbee84fac1c6d09b17e3021a3ef0eef0a7fc",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "1169fdd7d1204bdf58c193a0f30db1e392bf6ccd0af336b0290e24f1f434eba4",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 667,
+      "original_qid": "Q877",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "原图ISP Gi0/1为.254、R1 Gi0/0为.253；题干原子网错误，修正后A正确。",
+      "question_sha256": "3d9aa9170edbd74f2dea4c9afe3f309c27ef6a9060ae4b1924b529d7cf2c20e1",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "3a7208b1dcfe477d40f5eec093e8f0abc2b41d7ce0ff270f2f242b370ca85fa5",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 668,
+      "original_qid": "Q878",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "传统WLC接口功能题；D正确，删去所有数据必经WLC的绝对化表述。",
+      "question_sha256": "23bf170cc332efc8ec13fdc1cb08de47f756929d9292fb211570285c3ddb2531",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "bce4c4aadc136ab24af4c293d32485b5ddca378d4bbddfb8515273e8c72b270e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 669,
+      "original_qid": "Q879",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "8.5.164.0加密特性启用后控制和数据默认加密；B正确，限定版本并更正解析。",
+      "question_sha256": "271444c368867616562812dfbc6e991b423f2ad39068bfe8e37c5d35be2e7a5e",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "29a1ed044219fbf9ce5a5ce78cde978b27aaa54c8b15ec00a9850705474f2680",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 670,
+      "original_qid": "Q880",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原题阻止具备直连能力客户端关联，D仅隔离流量；限定Wi-Fi Direct并改答案A。",
+      "question_sha256": "fc9120194859c4be6d249223870ab972fb6bb1b55292e3f2fb38081c226268f4",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0661-0670.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0661-0670.md"
+      },
+      "current_question_sha256": "3eef628787e6d34950c3e57ec7841d4376aa311acf19732f12260497ec363a9a",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0661-0670.json",
+        "verification": "agent-verification-0661-0670.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 671,
+      "original_qid": "Q881",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "异步 console 与独立 IP service port；纠正绝对化断网可用结论。",
+      "question_sha256": "ebe3c6c1e7916381132c88feda205607edfbdef6cce5da9629030d3384de1b39",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "0a77a3050c20bb58e8ba209573acb5fd171ff361bc376744b1e101b81ceb4e86",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 672,
+      "original_qid": "Q882",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "限定单无标签管理 VLAN 的集中转发场景，避免 trunk 和聚合的绝对断言。",
+      "question_sha256": "cae1637af0d1fbb553bd654c0dafa09760ff1a559858db007a54a7923bb39661",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "46e065b780522438405acd17e0fd9286b0f4114834765adb56908ad6d400c69d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 673,
+      "original_qid": "Q883",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原题 B 与 D 同时合理，明确要求帧类型，纠正 TLS 恢复与 PMK 缓存混同。",
+      "question_sha256": "1ba22f839e4391f924d94d29ea2e70d0e0c78c732d619fa4ffcede3871ecd78b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "40a7f9876cf8c8233bd2b6192e80bc5ba4561e952006e085ac294de604678fa8",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 674,
+      "original_qid": "Q884",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原题要求展图但未附图；选项地址足够解题，补全条件并移除无图引用。",
+      "question_sha256": "d488c3cd7773982a09481422ebcdd3aed41c4cded99e5f199b2c3d25bdd0d7a6",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "76d9deb4a232c6a8030ce7960f3e97a4b42ebf0cfd7d2bfcec299163019a620f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 675,
+      "original_qid": "Q886",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "限制 LAG 吞吐表述为多流聚合，纠正单流和成员配置误解。",
+      "question_sha256": "457a50d15dfd60fba56f056a95f5987b9685c5b5899dbbcec9744cf5a84c52a2",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "9060a84bfdc7beaf4eee3a07c3d6697f24f0376943ba73f4fe13c0f022046b67",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 676,
+      "original_qid": "Q887",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "区分轻量架构、mesh 拓扑和云管理；说明零接触前提。",
+      "question_sha256": "9d9ea4f163a66cbb8bc2265143af11d4030b5d2bc2206c64f8842e484729fb89",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "a38c12891047128f28551141e8a48205b2050be992a82d9854ca436d5109c5ad",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 677,
+      "original_qid": "Q888",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "明确 Ethernet IP 带外，避免 console 也是带外导致问题不唯一。",
+      "question_sha256": "9dc261b7479549e35119313aa117f9a114f1bf7971ab92a5ec51b393310a4736",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "ca1d89cfe71075daebc84dc08ce22c29fcddebf550a16316706288b51ba9be7f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 678,
+      "original_qid": "Q889",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "检查展图确认 transparent；明确 VTP v2 和转发端口前提。",
+      "question_sha256": "d5104bfafa0094072530bfbf65351c422a729dd398b773e59e67fa3c0e3ec17d",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "305d874a557dfa160d7ba40baa0bedffc8ea1aef591bc2c5ca1dbffd0ac6b9aa",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 679,
+      "original_qid": "Q890",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "原题未指出流量方向与可区分前缀，补充入站专用目的前缀、运营商与备用带宽前提。",
+      "question_sha256": "ab12b7022ef0c97ae4b836ac90a1089febe621f9d8cb529c9e4e09d8a52c0cd9",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "d1b7d168a4f33644703c7bd14a0c0fd4dc474027f2c5535bdfb145ec4eb80a47",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 680,
+      "original_qid": "Q891",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "检查展图；恢复选项 CLI 换行，解释本地匹配和邻接前提。",
+      "question_sha256": "941c73e9351b7108902194fbb8631a9988085f38c4c759ae6f16ae1b2acc2c3e",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0671-0680.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0671-0680.md"
+      },
+      "current_question_sha256": "8681b9ed5125d47572777e4b2def0463b3c8a7f23acddefea7632b4c8f410818",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0671-0680.json",
+        "verification": "agent-verification-0671-0680.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 681,
+      "original_qid": "Q892",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看路由表；/32为单目的。",
+      "question_sha256": "f79afc98773610938e6325c05cbac016a017a9f51879236c18748cd839e875ef",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "afd689ce8f4dc1574ea4e4ecf9f57505de6c5433c05f8ae9a430aa5039f3e882",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 682,
+      "original_qid": "Q893",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看拓扑；主机路由与下一跳正确，补可达性条件。",
+      "question_sha256": "8c47a4cd7515aa89a62fe2a3400f749bae197a94b69df7806de749dcf7d04b6d",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "a99f2fbead266902992920d2958eb884ef929f2ae97fcb9f01cb59738b748284",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 683,
+      "original_qid": "Q894",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看路由表；OSPF与RIP度量不能跨协议比较，限定同协议比较。",
+      "question_sha256": "33ecb50688f28ca22a4287b3cc4459b9f05eac48e0c39dab62e72d0f9a195284",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "8c6658b05494bfee267cf82610d621d43641840317a6d273673e82851ad0bdc7",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 684,
+      "original_qid": "Q896",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看拓扑；浮动静态路由前提、收敛和命令换行。",
+      "question_sha256": "7e0d27bcc7b17cd5eea01c007931966465e79770dc7154a592b13e6511d56323",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "5732a03d6fab71799254efa3492c767a8dc8a27f8b59056d2f3abd45ea4f462d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 685,
+      "original_qid": "Q899",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看拓扑；2001:db8::/32为文档地址，不能实际公网使用。",
+      "question_sha256": "9cd2e6574430dca9fb3e7e62654369a63bebcdbd87ca59e1341e3654cfc4d25c",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "86d87e1c645b5d5c02b61a0bba6a1623ef3bc6b780e9e8765c9fc1fbc98316fd",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 686,
+      "original_qid": "Q901",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "已看拓扑；明确主机路由和回程条件。",
+      "question_sha256": "1f4d32ca5ef14fe0d306f5cb02c2d105bfedf1dfc1edf7b4a80e93e47848c504",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "51a76bec06f02666273e69dafa24efe7c8a7873e513abda105c9ea3eb49e26da",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 687,
+      "original_qid": "Q902",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看拓扑；原C EUI-64命令缺斜杠，明确要求EUI-64以排除静态地址同样支持SLAAC的歧义。",
+      "question_sha256": "99a261264666457a540bc532f1c1b0eb816cececb284b4b2e11f3f17715e236f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "5ec193e3afce6343ad6e497af0ed35f0d2a6fc378263f055be71bb80c1391e4c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 688,
+      "original_qid": "Q903",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看路由表；.202不在/29内，最长匹配/25。",
+      "question_sha256": "5b8ef96272cc5854f360c79f5dd55cbbf06b7e393a87a262af24b1755330341f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "d43f5302f651eb46592f3c0d9d7416e966fe7d143dc15454c85a01aa5222b8bc",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 689,
+      "original_qid": "Q904",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "已看拓扑；核算/29地址并恢复CLI换行。",
+      "question_sha256": "d5d6d21dfe9cc63c1fc12efe6d8bce20209deeb8cca8024fde59619c499c313b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "e318433b4b7f037d11093902fb6a3a3d476347eb8fece44eb5c1d30a590674b8",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 690,
+      "original_qid": "Q906",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "已看拓扑；核实目标掩码和对端下一跳。",
+      "question_sha256": "c889960102384299ac6bf913dac1af7415d10a5bf89c9ffa2517378b77f7b865",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0681-0690.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0681-0690.md"
+      },
+      "current_question_sha256": "0d225a2ddb9c516dbf12a1221d708f72c0afad7745ba8a424cfb23755fa766d3",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0681-0690.json",
+        "verification": "agent-verification-0681-0690.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 691,
+      "original_qid": "Q907",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "限定同前缀及默认AD，补下一跳可解析与共用链路限制。",
+      "question_sha256": "c142f881a917a14e42c9df207ef344865f1708c9be31fcd9c72ed1370f17069b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "897e49727d1685466f450e24c4d8fa79d7649bca94a0bf61cfedbdd3f94dd6bb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 692,
+      "original_qid": "Q908",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "保留图中EIGRP下一跳和逐项判断，避免将MAC表述为IP。",
+      "question_sha256": "9e52afe7f9459639155f44cdfe9669438a5afe7d2f9b02a4a56c28f3b7f07348",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "a10ac70a440f309fc3e622aba11d8fd6b91490e77f0addacb937699cf13e1f4b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 693,
+      "original_qid": "Q910",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "修正选项autoconfig拼写；自动分配也可DHCP，增加SLAAC及RA前提。",
+      "question_sha256": "d1586e787667141f39726f7a6efa3dddc45c68f0f6d78a5c3572f902b64d5bd2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "8295f34fdd8ba871d2ce65aca2df8119eb8e5b2fb3388e27178e74bfb02ea8b1",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 694,
+      "original_qid": "Q911",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "限定/24目标，补充回程前提，移除下一跳必为直连的绝对化。",
+      "question_sha256": "bba4264b789d5a07ed0b88f4e90de4f6fb56049ff9327be05b1506625e857eb6",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "d05d29e4464591feef61c40e04bbfdf1572588686ded943851456f00e8d9ed05",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 695,
+      "original_qid": "Q912",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "IPv4-mapped地址不应直接当普通IPv6接口地址；改为单地址前缀计算。",
+      "question_sha256": "b68f7c8da8b13cc1a1105983d258c04e1aae315d9b62c47946e6d1d6252acba8",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "3f05cd1efca4bcccb13cefc4c720c48cb6e2172d60bdaae6d99603a29b8f36f3",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 696,
+      "original_qid": "Q913",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "点对点取消DR选举，但不能保证固定时间。",
+      "question_sha256": "8e9b29712e73a32bd52c8881aea0ccee6f42085c389f91478261ffc1105bf47d",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "4592b3560dc7af505b7d9e48adad29ff7851cfec0864a8008e22f925537fb17e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 697,
+      "original_qid": "Q914",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "修正掩码分析，检查其他路由，说明末字节255不天然为广播。",
+      "question_sha256": "2eb608076328e5726d4af011e9546665cad88a5b8569b0269b9e7829a8d4a2b4",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "bfa173f87c64fd39fc288ca43d55ed3a7b2af5708d2e9842dbae9bc0b9c20f75",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 698,
+      "original_qid": "Q915",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "指明目的不匹配更具体路由，源地址不是/32掩码。",
+      "question_sha256": "66ed545aa359cbd00b565c20bbab5c795c65b853d1e1030f6da5583d0e8a7df3",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "eb0af9467dcd857d13081ebb545a45753c6371a22c8a133bf418852c41343fa5",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 699,
+      "original_qid": "Q916",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "指出首字节异或而非一律加2。",
+      "question_sha256": "ea07a8cca407a2cc204dcb05df6eebc41dc73f3b629e8b7a4cc75fc7c2ced151",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "c49c31120f2a6c282921e77b7f8c359d5254cef54c502f49885847bd9c0a410d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 700,
+      "original_qid": "Q917",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "纠正FHRP无缝切换、GLBP和管理开销绝对化。",
+      "question_sha256": "4a33b1ce6ecf441d66546afb8f12b6616a16505e875fe29a6c66bc79fee409d4",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0691-0700.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0691-0700.md"
+      },
+      "current_question_sha256": "5b4beb23939a575785eeb39ec77ea3f0230de0cab7644c9f9d578877094d0478",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0691-0700.json",
+        "verification": "agent-verification-0691-0700.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 701,
+      "original_qid": "Q918",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "修正保证无缝切换和排除负载分担的绝对说法。",
+      "question_sha256": "813240d64501eb570d70f7af9949141cd22c613f7883cf1312528209e89bafbd",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "542d67e8fb4f0cb8e13f67f6ba7aaa8fada083e2016b1a331413adbec8452089",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 702,
+      "original_qid": "Q919",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "内部 EIGRP 距离 90 优于 OSPF 110；更正错误答案并补足前提。",
+      "question_sha256": "2bd0b5a64ba7aae4b756e4ce429576b12a96da89efb833739676cb7e31b75e8a",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "66b843589e6695ecf1b40ec4c9ef1f0cb014790ad43a207a052b5e3e5b1053b8",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 703,
+      "original_qid": "Q920",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "GUA 前缀长度并非一定 /48，修正绝对化。",
+      "question_sha256": "063a134389b5515a5042c6079edbaad80f7833940a2dca3ee15844bcea937efe",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "496d5c0c04912a6a7d78465c1390f11255992bcee0a0859bab35971bd0f747d5",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 704,
+      "original_qid": "Q921",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "命令缺前缀长度，且双冒号并非必须出现。",
+      "question_sha256": "8091dcbf2a3d05adf1b9053ffa2433cb7c4df05ef262bd8186e5d2fdf89509ca",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "55421a0cb68a7c5884b521a3b2b4c811d97fd3d3397089bd22a8906ac732432c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 705,
+      "original_qid": "Q922",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "核对图示本地 /32，精简并纠正数据路径绝对化。",
+      "question_sha256": "96bc2fa7a157ece936bf37ca8bcfa78a2329db336afe3337f01f818ec8b4c38e",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "91f528492850ac7577414a70d14930214a9b97dc22c1c6bee90f56c67e9377cb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 706,
+      "original_qid": "Q923",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "修复缺前缀长度的错误 EUI-64 命令，改为计算完整地址。",
+      "question_sha256": "a41df7b52d1f23f58feedc07c4b9dccbaaf7cbf32181dd7de21de6849fe92457",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "fa29685cd3726a67d9ebce50469edecd1b717178dd669289c16451741dc3bd74",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 707,
+      "original_qid": "Q924",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D EX 不能推断外部来源不是 BGP，修正歧义选项。",
+      "question_sha256": "d123c9341b9e3e5e442f818662f7dc249f41e4e62174125dccfa272e2c7954dd",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "97cb8ec15c4338639c233de101803e71408c77af0da66fc2aab525eb70d1fcfb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 708,
+      "original_qid": "Q925",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "改进题干语法与私有地址复用解析。",
+      "question_sha256": "f5d17f86a55acdeb5d578b89411cdf11695aa97b5e9454f94abf0e049139219b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "8de162cb1058c908dada3919bce19f732c484918335af094da4173ab64f117ff",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 709,
+      "original_qid": "Q929",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "修正题干目标地址和选项 IP 拼写，限定浮动路由条件。",
+      "question_sha256": "039e56c6f6f8e5e135472fee0b3aafd71fe90b6c5cbd0e77ee24c932b2ae4d64",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "13a207c8ed6e002ba4625b5cbbe10c838efbc56195d92918ecde7048dbbc03ec",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 710,
+      "original_qid": "Q930",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "限定厂商协议支持，修正零中断和万能支持的绝对化。",
+      "question_sha256": "c1b718f95dd93b0c0b0a501a634d36159f6bfaae498a9d2c164ec770279f2ee0",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0701-0710.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0701-0710.md"
+      },
+      "current_question_sha256": "10bad407dab7b63f368dbacc9579436097710bea84d506038f2009799cac638f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0701-0710.json",
+        "verification": "agent-verification-0701-0710.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 711,
+      "original_qid": "Q932",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "原题声称立即恢复并保证接入电路故障均能检测，属于过度保证；限定第一跳冗余并区分上游故障跟踪。",
+      "question_sha256": "d87e0ad3ac0aef5693d3f465627f2e76047133b51d57df4724c0158d48d96a6b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "0738894964341069826f43e3a6d55613d28c0a61ad373720cff9a617d76d4a28",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 712,
+      "original_qid": "Q933",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "按图核对子网掩码；图中前缀未按网络边界规范显示，按掩码计算网络范围而非照抄。",
+      "question_sha256": "b5b94fd7f1a7b31b5a330801d1aaf1f2416902ca76aeeee950ed00dcc68897e1",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "beeeba41337f1f23145d62ccce8e409e742e2858acce5f70a4f8066a76f75177",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 713,
+      "original_qid": "Q934",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "按图核对两条EIGRP下一跳；移除等价路径一定安装及流量必然平均的绝对化描述。",
+      "question_sha256": "e9a0e4e7887ab2cccd5f9ddcd662ce819569d152697081d01be3f39a5880211b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "c0092e021ada15f1933700dc4a9f8fc68020d3c6763315a2bb3230fcdd7ba3a3",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 714,
+      "original_qid": "Q937",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原解释无条件承诺回ICMP，不符合抑制规则；核对原图全部路由。",
+      "question_sha256": "1c4b61b8c3c49861039ad0734f6d9357772d16a808105f7fb0abad0c52da00ef",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "8fa4f2de9b6a14a2465380261ab9534848b65beecfa07d3d88d76aa88560454c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 715,
+      "original_qid": "Q939",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "题目遗漏主默认路由的管理距离，10并非对任意动态协议都能浮动；补充主路由、下一跳条件并去掉毫秒级保证。",
+      "question_sha256": "6bb045c22ab0bbbcf490f590f33a5666cd1807004d5af6e11e2db749b10d0cb2",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "382b2f08ea8247ecc0c8631083df0fbe57d3e5f12b071a2750574697964552bc",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 716,
+      "original_qid": "Q940",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "按照图核对两个默认路由及下一跳可达性；限制竞争路由条件。",
+      "question_sha256": "7382c2f1fe35d73ab017ff26c1c2f026b130b53e8e1951defbae61ca1f9900bf",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "71958eac085ab766b2522ab4b25e69afea8f57d3e7080a2347ffb556af96f8c0",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 717,
+      "original_qid": "Q941",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "图中最长前缀与下一跳核对无误；修正将RIB路由选择与FIB查找混为一步的表述。",
+      "question_sha256": "b7972abbfbedf89bdbdcef680efc00fbd790bb8d8d4b1a264257a972497a7c8c",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "3e59aadd489c7225e399613cafc2938f2b2f522cba22b973583e92da05d36148",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 718,
+      "original_qid": "Q942",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "收到前缀不保证安装；限定三个OSPF前缀已被选中有效，同时恢复CLI选项换行。",
+      "question_sha256": "b0454f1ea91382c13a77a9e55723399f6d1af4a83cb5101ab6d88cd43c06de22",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "648ded7c142551a6d3d024e76611ea12173e2e31ee5e5cb42382e08280d3f245",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 719,
+      "original_qid": "Q943",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "缺默认路由不是唯一缺失路由的修复方式；题项改为无任何匹配路由，避免误导。",
+      "question_sha256": "f60de142f04d6268eb1a7d50de3e072a87f000b14d6afff3ba3d42eb12e327e1",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "6c5f854a3ff5ff299115ecbdae89335e3a10ec50a4d31c3d245fad66423e4aff",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 720,
+      "original_qid": "Q945",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "限定共同体字符串适用v1/v2c，避免把明文口令称为强认证，也不保证所有失败都发trap。",
+      "question_sha256": "6ce4b089688b74a156b2850416a93895e942ca7bb5042f6e4b8af259c521d015",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0711-0720.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0711-0720.md"
+      },
+      "current_question_sha256": "5fbfa39002ef50eaef94e68854173f67e82910365a3fb8bbe806444b512be40d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0711-0720.json",
+        "verification": "agent-verification-0711-0720.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 721,
+      "original_qid": "Q946",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "纠正严重性与设备实际状态的绝对化断言",
+      "question_sha256": "43cbcfd21eec8523950b1144f4df1f541853298a8c2e47fc4026dabfd2bdf6b5",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "3546ee53b6100a586b06dd2339dcccbcc0dcf14ab5beae7df3040871abd08dfb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 722,
+      "original_qid": "Q947",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "补接口前提并纠正中继头部过度概括",
+      "question_sha256": "8061c2548770e8e581efe1be52f08e735ef80d446ad373768ebccd3c66d87848",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "07d9e724dd6115712074142c53018d0ed27e8337611bb3d85f47bc4353a9fb2f",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 723,
+      "original_qid": "Q948",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原图接口子网冲突，限定拓扑并恢复选项命令格式",
+      "question_sha256": "6b5c80834308cafc7a33594b745187655e5aa699143423aeaaa7ed613f09d11f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "0d6124e5a78abb3c47c041092d6fa5aeafe5c0cb58c3af1e74906ff1ae995605",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 724,
+      "original_qid": "Q949",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "原题 DSCP 和 ToS 都是字段，明确旧名称及整字节",
+      "question_sha256": "a3c70c8bd2489649c5c665b7d454e38a0810f69f1bfc8187f455baf3150fcfed",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "368df0e8bd6ab119812356d21fd6e39488e171aa74a8b1c341b6dd3b4c5da468",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 725,
+      "original_qid": "Q951",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "修正 AF 保证带宽的错误描述",
+      "question_sha256": "089e4cceea6449809614bdb94d3ed796b321960d9aee566b6d1ec494cbcf86a3",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "f361e7b19cf7ab17d4113cd7ddf38b9fc6ff67d2bcce0c7c813db5e5cce8c6bf",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 726,
+      "original_qid": "Q953",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "明确地址池位于远端服务器，避免本地 DHCP 与中继冲突",
+      "question_sha256": "ee6b48c0af24839ad8cbacb9c591a0f7818f41bd167c92279efa4a08f700c3d1",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "34545718e72beb065a38f8cf19b0397e0384682ae395863620bc20c0aaa1b8d1",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 727,
+      "original_qid": "Q955",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "修正干扰项重复标签并解释分类",
+      "question_sha256": "3b08e4d5967540ad8c397e8e104ffff9a93badb6b23730b78efe15af6af9a942",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "3934558a63ee51a1621c495c74469a4bff822d16b952f60c0bebfc2a972623a7",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 728,
+      "original_qid": "Q957",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "原 B/D 等价导致多解，修正 B 并补 ACL 顺序",
+      "question_sha256": "fa328591635cafae324c2de00626d8a4d9bbf2d2eb552278c09fd9da62ba855a",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "b9f65412fda7a0ba57f2b3c17e020a302fe0f81a37deaf49591c4f62d135ca7c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 729,
+      "original_qid": "Q961",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "严重性阈值不更改单条消息固有级别，修正选项含义",
+      "question_sha256": "5d3958df1d9a9d39e4450511687637c8da1ae2adadff231f47401b08ff2e3465",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "908b0e0b3ffae1b8588bf64ac048846e4d083af4ce53f38105b93acfa3ccbeff",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 730,
+      "original_qid": "Q962",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "查看拓扑并指出 DHCP 池网关与 SVI 不一致",
+      "question_sha256": "3fc2876b1ea878e3e695ef82b93163d60d69485a6053659988075df1fb983e05",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0721-0730.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0721-0730.md"
+      },
+      "current_question_sha256": "f9498c466437a81623d7d9ca2e0155b78fa2d286212850208d8ddca9e9810e60",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0721-0730.json",
+        "verification": "agent-verification-0721-0730.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 731,
+      "original_qid": "Q964",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "ead8a9b742d29bc763c8d235acfebee699dfe0a7c0864ce65158df551d99fdbc",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "d493073649aca2164952e6365907c5ff357d7ba6e17ee7dba1043debaa65c568",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 732,
+      "original_qid": "Q968",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "35217d3b61f7fd9da8e13d4911a6969837e1a43f2ddb02351251801666b012a8",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "07dc8c01e13a22e997798b4b70690e9e2d132ad05684f14e2571da69f1ae960c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 733,
+      "original_qid": "Q969",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "bfb7d97268483b6925d260a38ad91bdd5a53049a82547d17c7f74be951c9fcde",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "f2022743d1ac2382de9611023b8bb4421010fa590a03a1bae8c9222e3db2977e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 734,
+      "original_qid": "Q971",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "17255e4b8299241d321ba00adcfc0acfaccb23d7e2e079418a0fa487f776df0c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "39d28d5b98fc73fa28b3bbf957e1454953f48213bb0952f57fcf0fe242ef4516",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 735,
+      "original_qid": "Q972",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "31fa91b847727c610eee463426ff26454d5b39fb06990d45e2a9e104bb06f105",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "c5f2164853c80dcd5ddb633be32569912785b4f79a3658f4b52e1866b5d9c504",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 736,
+      "original_qid": "Q973",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "b9d6ec2edf3059f92ca2f7b9b7d2327df679bd80a45cf9862d9f80675559f32a",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "cafe623226175c68292514e9f01efb24e196aae0d0db4defb658505014584a87",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 737,
+      "original_qid": "Q974",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "64ebab6d6f4a49b96c2ac4541fa92484717e1190603f07e751a2e8742992cb36",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "7c4c0461b65e0f19264e87f4b60b3438457ffba0ec4a20bb921905e87a04a4da",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 738,
+      "original_qid": "Q976",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "f5f877c7c73f010705a42e578ceb666edec3e8c4be1f1f8b02b4693d49085e03",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "79c870599641bf503768001e13b29b1adbf0f8a6825d6dcc459a23cfcac0b7f2",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 739,
+      "original_qid": "Q977",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "5babcc2fb19c8e9af72092de700c2e7f82153699d7a6924a4a432f78ce604e27",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "36d89cd6d11a5f35048c90e5ceee06c61db9155e3763f4b7ef579841a0667f91",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 740,
+      "original_qid": "Q978",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "逐题检查题干、选项、答案、解析及图片/CLI；修正错误或不完整前提。",
+      "question_sha256": "310339aaf4fa8fca8987ab4015cfbd340f312dd9fdc5081cdaab33a61a83698b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-review-0731-0740.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-review-0731-0740.md"
+      },
+      "current_question_sha256": "049db3c7f042eb644d5caa07f07f6f14022984604b9e64ce9613635c8c94bdf7",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0731-0740.json",
+        "verification": "agent-verification-0731-0740.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 741,
+      "original_qid": "Q979",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "限定 Type 7 的支持范围和可逆性。",
+      "question_sha256": "382ffbca818e5e8d5dc0992b2b854b6b478fa3205798c4de58254051571c8986",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "fac26927b6e025bf93440b7b494744c856773d7469041474193829fa7f008118",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 742,
+      "original_qid": "Q980",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "修正 secret 选项误录，明确要求 secret 哈希以消除 Type 7 选项歧义。",
+      "question_sha256": "e5e2d43cb91b0f4a816b62c702c40f86e9ef43e2ab72df7d1f5796dc874086ac",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "c75ca0f82090e821e7158b3694f0473b27d40e2c094d3d99ab679e23b4fb0c8d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 743,
+      "original_qid": "Q982",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "消除关于检测和人员授权的绝对化说法。",
+      "question_sha256": "0f9c5447db3cc15db21d76149eb351e95ba534a9f3fe9aeb2d17f0ac841b0d94",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "a0dd9d07430f80d764e98b1ea87c16604d99a4c5a95c869077cef733f0de5db0",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 744,
+      "original_qid": "Q984",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "补账号 privilege 15 使登录立即完整权限；还原 CLI 换行并标注 Telnet 风险。",
+      "question_sha256": "93aa28c5305a7e204506a36cd86dfea8bf0ccdb8bc7c6a0b5319367c432d23b3",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "159c604496b1ce3436081ba605c47e1abde1b8359935b24258221faa600ac334",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 745,
+      "original_qid": "Q985",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "更正 RSA 签名和密钥性质。",
+      "question_sha256": "a48b75ec1b4cd188a0074063ef3c8be843af4829dfac16092eca97fecc6b4613",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "ff9d666b4860877a8102175781d5570f02f93ddaa2b46fe1c5135b921863acfb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 746,
+      "original_qid": "Q987",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "限定 PMF 的防护范围，避免声称完全免疫。",
+      "question_sha256": "2f50eba652eb456edcfc68b0f4abb366eadc23d26256d5927dd4245baa339734",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "9a2485e3d4617ee1e53aaa26c10ec4a0a4ba4c84ed286e95da79ed6400a39187",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 747,
+      "original_qid": "Q988",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "修正强制特殊字符和必须最长的错误建议。",
+      "question_sha256": "4238a2f36aa7050ed2f075b9b119f35082c52d25190c60c70fdb26274f894276",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "fe36421e58b63a75032f764f0b64859c38f438c89b952116f4b2e31ad1b8d980",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 748,
+      "original_qid": "Q990",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "限定为所列算法比较；区分口令质量和哈希强度。",
+      "question_sha256": "2dec2e3d44092122d5d98babcc3b3b7ca7bab9415aa2e7bbfdcc6527c2e4409b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "4c6bafc4fc7a4d5011c5793a40473cca76cfbf460da6c11d43313e70472762a6",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 749,
+      "original_qid": "Q993",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "纠正公钥密码不能自动验证公钥身份。",
+      "question_sha256": "298e70cf0ef50a8c2a917a0b641b73301bb8e410492325a79eb8ef0e66e78a83",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "92ad151e4edfa93d9e84c361ccf5dca2b64780c6f74f48fe9374e9ecc7962b02",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 750,
+      "original_qid": "Q994",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "避免防病毒必然阻止零日及所有攻击的断言。",
+      "question_sha256": "0140b1fe7a093adb6ead985432b8888f6f28b92868c10d8debce6e9903c37bfb",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0741-0750.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0741-0750.md"
+      },
+      "current_question_sha256": "2b6b4f374dcc5c9fc7cb58c687bd174fee439575e36ebad0221a1c5956410afb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0741-0750.json",
+        "verification": "agent-verification-0741-0750.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 751,
+      "original_qid": "Q995",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "限制认证防护范围并纠正 PSK 不必使用证书。",
+      "question_sha256": "7147f01c709190bb313f8c13d16d29e25b40c4457ae944d01cc2ec6332985aa6",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "fa2f950650c7f1ba6196c58b48e79bffa1877c97ab60bc00118fbc26370df0e6",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 752,
+      "original_qid": "Q996",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "去除 AES 仅属 WPA2 与 AES/AES256 选项重叠，改问 CCMP。",
+      "question_sha256": "ce8773574ff1b6660ed2ff546f3e9cd68a6e8aced47de85c405bd354e3b7ef2b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "409ed2a478888b849fa957142c6f8de7959addcb45095fbef46dd38e2069a3e1",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 753,
+      "original_qid": "Q997",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "查看图示，纠正 ONS 拼写并恢复命令换行。",
+      "question_sha256": "b4414fd865a81850b9f6aebb837e7aaf0a682d877ea93ce35d46a49da13ebcd2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "85e752824f4936f4e52d01695b2da1c251964822ae1ee90bdf1483c7473005dd",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 754,
+      "original_qid": "Q998",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "修正拼写，区分 WPA2 PSK 与 WPA3 SAE。",
+      "question_sha256": "cc31495fcdb4684c5f735a87dad35d898091a97315a91317365520716d10a714",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "34780e7d59960454df982915cc01759a178cb654f57780c687d269a46a8c9ec5",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 755,
+      "original_qid": "Q999",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "恢复命令换行并补入接口、路由和 VTY 前提。",
+      "question_sha256": "e9bc275c6b93de68637fde7aafaa72511606e8c755e8b3112c64422997a7aec0",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "788d91148f6f3d1bdaa8198feb60433f9bdf9e7d336e0c379cfdaf109c0f8859",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 756,
+      "original_qid": "Q1000",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "精简物理门禁说明并纠正绝对化结论。",
+      "question_sha256": "62c1b3b37937c7a8b3366aca3c36b3de251f565d392d6b88ed7c22e1e43f3176",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "425231427e6325d8abdf83f331670e2db4dc9b4d4f4643bd5059e114ae418f5b",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 757,
+      "original_qid": "Q1002",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "限定人工管理基线，纠正传统网络不能使用 API 的错误。",
+      "question_sha256": "108c3d46144d64154b5416814d3c3ceea90403084471638f60d8394a67a83f6e",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "f097c33befb9edeba01adfdf37d2c4e65a412fc98c9d24bd1ddf3672ff437310",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 758,
+      "original_qid": "Q1003",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "描述常见 Chef 客户端拉取模型及运行边界。",
+      "question_sha256": "8adb90ca75a7a16016c5a9fad30dd33694728962f3ff9d8d11f6fdff24c188b4",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "84becc19fb0c0c4aeb63bffe275c7d5a3ee770ed294a9e94e08881f07cf6b5f3",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 759,
+      "original_qid": "Q1004",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "依据 RFC 9110 纠正 PUT 幂等不排除副作用的错误。",
+      "question_sha256": "55dd64a2d2e19204eb2fee070b349195e290a0546e37c9a1acc4fd3577da21cb",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "7f0f5c942815c4a22a92bd7bd5b448bec947a35855dd9b6b5c331e198c5a160c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 760,
+      "original_qid": "Q1005",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "限定人工分析基线，避免传统系统排除自动化及保证自动修复。",
+      "question_sha256": "5d19604742b19c97cd9048dada6d489da4bdc4f6287c2bfffc59c0d5cec89eb5",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0751-0760.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0751-0760.md"
+      },
+      "current_question_sha256": "e3940e48e0553cfac8c6729395ed3bb5b32e30e281e1dfa9f27649db2ebc4847",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0751-0760.json",
+        "verification": "agent-verification-0751-0760.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 761,
+      "original_qid": "Q1006",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A。原图中 `\"warning\"` 是 `myCar.wheels` 数组的第四个元素，其直接容器为方括号内的数组；它本身的数据类型是字符串。数组又作为值嵌套在 `myCar` 对象中，因此对象是更外层的容器；布尔值只包含 `true` 或",
+      "question_sha256": "b4bfe6de76ebff4c5cf9b62c31d445ccfce0604ab8ce6036f7ca07fb4f6352fe",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "0874b04b832e9f49126b6698ab3667b05945fecb8bae9912d7ac7902f8c88228",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 762,
+      "original_qid": "Q1007",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D。控制器通过南向接口与物理或虚拟网络设备通信，按所选协议管理配置、策略或采集状态；例如可使用 NETCONF 或 OpenFlow，具体功能依实现而定。A、B 中应用与开发者使用的是面向应用的北向接口；C 的编排系统通常通过北向接口集成。",
+      "question_sha256": "467ce20a3c48a1b718ed91348493c5dc9c9ab61fa6e2e0f5d9b0a1b4f32a8580",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "1ede8625cc303bfe1ee6cd6a4f69a6128bd6a4ddbb84ff01ae83ad2f0c98072a",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 763,
+      "original_qid": "Q1010",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A。在题设集中计算并编程转发表的 SDN 设计中，控制器承担路径选择及更新转发表的控制职能。B 的帧封装、C 的逐包 NAT 重写、D 的 VPN 加解密通常属于转发或服务数据路径，不能仅因引入控制器就认定移到了控制器。不同 SDN 产品的",
+      "question_sha256": "91f5688d06904a24f56ecc399bcd284e5d2b45fd4099c8e441793e38153c454c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "30866437a46503ddd74a8af1b4940d0fa3db01a52a40c41ac251df9d685758e0",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 764,
+      "original_qid": "Q1011",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C。北向接口面向控制器上方的应用；REST 风格的 HTTP API 可以提供 GET、POST、PUT、DELETE 等方法，具体资源和支持的方法要看 API 文档。A、D 面向网络设备，方向属于南向；B 的 SNMP GET 不是 HT",
+      "question_sha256": "72f20963853ac0ac43df86db8ab191b00cbf1bdb78b2f0d0feb330578f28300e",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "3ceae7492db3dc1dcfa5d68d0edf9f40bbc4845570572fc87771a65f49708a3c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 765,
+      "original_qid": "Q1012",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A。若该 API 将 DNS 服务器配置作为资源并支持 PUT，可向该资源 URI 发送表示以创建或替换其状态；具体操作和载荷以 API 文档为准。PUT 的幂等性是指重复相同请求的预期效果与一次请求相同，不排除逐次记录日志或其他客户端的并",
+      "question_sha256": "818c1a48fbc57e1d3e528296b5105770cac14dc894c4fbf0f921559c95e98617",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "0d92aede4575ec2d34c9719c2982a60bf912595eb26f8c9bfea85d2769c3dc97",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 766,
+      "original_qid": "Q1014",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C。在这些选项中，分离控制和数据平面可使控制器提供统一抽象及集中策略管理，从而降低部分网络配置和运维复杂度。它不保证每个部署的整体复杂度或费用都下降；控制器集群、可用性和现有协议也需要管理。B 可能是收益但并非必然；A 不是该架构的定义，D",
+      "question_sha256": "d107ff9e814727c2cf958003e83c6c7f82166c38260b877a411dde6b5004cc52",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "501754f57a0cb18e69e9e9826bbb047f6b96d744da3e8b82f841d4c7c795065e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 767,
+      "original_qid": "Q1015",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D。图中最外层 `{` 启动对象，而数组的 `]` 之后没有关闭该对象；补上末尾 `}` 才能配平结构。A 的 `\"Cisco Devices\"` 已有双引号，B 的 `!` 不是 JSON 注释，C 开头无需额外 `[`。图中内部对象还重",
+      "question_sha256": "060ada32af1b49523b0bd876a98f57454700bf0ce97bbdb5fb0dbd7e55942666",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "c95d344f455de3fef4028c8f28ce170ec5b8929bb5e2e05618f6ff145cf6d344",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 768,
+      "original_qid": "Q1016",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D。北向 API 把控制器能力暴露给应用或编排器，使应用可以读取网络状态、提交策略并实现网络自动化；API 本身不一定包含完整编排引擎。A 不是接口的一般功能定义；B 是某些管理应用可能提供的具体功能；C 的分布式处理与是否使用北向接口并不",
+      "question_sha256": "0619e62390a417fad273c44c46924e43397fd7a5da363906de515d541837411a",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "993524315484e66b70560a085e84b89df3e44942a2ca3f211d3d1d3994747106",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 769,
+      "original_qid": "Q1017",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B。静态 inventory 文件定义 Ansible 的目标主机/设备，通常还可分组并提供变量；常见格式有 INI 和 YAML。A 指模块等执行单元，C 是控制节点，D 是包含 plays 和 tasks 的 YAML playbook",
+      "question_sha256": "2fad5bccea345fad12d7ae88b7731ad1012e7eeb446e835f7dea097662682a1b",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "b39f1c563bfdfe0ccbb610a0f92fa768442fb84bee8721f54a5b4befd97c3389",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 770,
+      "original_qid": "Q1019",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D。北向 API 连接 SDN 控制器与网络应用，使应用读取状态或请求策略；南向接口则连接控制器与基础设施。A 不描述接口的核心作用，B 只是某些管理应用可能具备的功能，C 也无法定义接口方向。逻辑集中的 SDN 控制可以由多台控制器分布式",
+      "question_sha256": "d72caace406a5e897c5be9a35233c06ae515e2d084687a63aa73a64fcdf329e2",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0761-0770.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0761-0770.md"
+      },
+      "current_question_sha256": "2e7a820b5e39b0956c694c8b2262bf9190a3c751767b8ceb96683f65bfdc7faf",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0761-0770.json",
+        "verification": "agent-verification-0761-0770.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 771,
+      "original_qid": "Q1020",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D",
+      "question_sha256": "44e3ef59cda3455d815ebf93a4d911c75eb20d2a327357ead0ba2abf76e916cd",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "92d4e1faa2c3af89d06d293c641c4a44cd5e0ed924b15b92ac9ae50beea2b51c",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 772,
+      "original_qid": "Q1023",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A",
+      "question_sha256": "cf9ad10dd0d2bb690a324d8610aeccaa05e5147f8d78f075d0b991d5622494ab",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "d3200918f3572ecb43d82db8b96e158c2676ff3b6e1b70d39a9d86222bd62dea",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 773,
+      "original_qid": "Q1025",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "e657441dbb6fd6affc05a15299dae0bc23d6520b8ca0873d5500a9cb0ae8dabf",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "dfe04ca937075c311dcde84b6bde4f688a364216ff3d0d974e1f6e8354101eb0",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 774,
+      "original_qid": "Q1026",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D",
+      "question_sha256": "793886ab93b01b8756c89d902e7e8b3708dc797582b3d4934c19d1910f94545c",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "d91dc5f760a4967d0313aacc00703151c5bdd89c99a730038611ff768bb9cb26",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 775,
+      "original_qid": "Q1027",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "f8f2508269d36a8890c4bc059ff7c4f33e661755a6ffdd65cc94254018798c3b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "fa8c01f32835f79f95f9e5314460683ac700cc8e883602c33b0afd9b5095a29d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 776,
+      "original_qid": "Q1029",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "f9d1131030eb53cefd29b89fe87d917352801b949b7e7bc83dddbde0dcc1b691",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "85f637b837f9545bbb60b75cc19aa695c42de24be99de27b7e3696afcace66f6",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 777,
+      "original_qid": "Q1031",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A",
+      "question_sha256": "d9ac5f37aef895b721e78f62966978e4149684b6564439fa3b2dd9f2dafd612f",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "15e49f70b6aee37e8f7d63da660e4ef51146c801dfd7dd2f116bdbe41ab6ffeb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 778,
+      "original_qid": "Q1032",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A",
+      "question_sha256": "56df4c510c2331cb5bc0af5d4696148ec145cac59f59306e3dbcf43a4648db3d",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "26db29e962d1e4f7530ff2ea7e60fb3803cdcfc832aaaa227a6ce8a861eefb68",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 779,
+      "original_qid": "Q1033",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "58854c7dd6f9096ee85ec3f71feee5b72e93c0aac10fa6aa5d79b5ad3009e27b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "74befb42b19e5432bafaee886c23e59e7208d447f517106be12816819b7373e7",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 780,
+      "original_qid": "Q1035",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "153515cf53fa50689424701cf2e2c9766937c61b1496e3a99a6629316d8d41f7",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0771-0780.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0771-0780.md"
+      },
+      "current_question_sha256": "a6df442f01cbaac4897ec9a0bcb97dcbd2b456ad31f6abfb710c21c975e85a97",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0771-0780.json",
+        "verification": "agent-verification-0771-0780.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 781,
+      "original_qid": "Q1036",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C",
+      "question_sha256": "601fe981e46f3c52c2f811ad549ac78c5bed05b330ad8e5bf4f2db65253a3ac3",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "297b707814a941c86d8b93fef93285329391efc480d4815149d53b6b1e0e182d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 782,
+      "original_qid": "Q1037",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C",
+      "question_sha256": "d7ae5aae3a151b68fbab4c9eefc9989e9e131fd3fce8ede639508712b2c8ca6b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "3fe06dfc3dd2ec2a7d95fac557b72f4cd822c5ccbd8504e37c2a14311dafba70",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 783,
+      "original_qid": "Q1039",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A",
+      "question_sha256": "fcd127363546b213e9287aed10b17bfec6e0868526f0e1e8e0b323166c58384f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "6eed2837b5b214d95843d3fb7a9e5bc0f0ead57e8270438a0b2e015d83a1148e",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 784,
+      "original_qid": "Q1042",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "49604b471b15809aa5e3788fbedfee9919fb2417e9d3a551a8b8aab01d611461",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "0edddcc3bd499fa4380efecfb2c0e4aca9784aef4f030b5e533294aeffcd7efb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 785,
+      "original_qid": "Q1044",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "B"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "abd0b9d5b1795881c489da1672a7f11bc9acc46fa944178deebccddeb6c2cf29",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "c3740c3bcc8de5930ff446715fb4a403e8b6d8334a1f3ebaabb9feb54eab0e67",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 786,
+      "original_qid": "Q1045",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "C",
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "B",
+      "question_sha256": "6880b22fe5db7d5127f61ea168054b53e13b8dfb61c06306df682cd3770c0182",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "457da0d4ac0b8cc7b2e26712e06c08d2a8ffd37b32b1f02af733ebc4c0d7d028",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 787,
+      "original_qid": "Q1046",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "C",
+      "question_sha256": "043791244d45741112808f9e991c955ea8dac59843403a5e8dbc4c79d5e91e71",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "9d132b53e91aecf681781a7de7c957366d1bce146d4c43d38d88d2fb50b0557d",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 788,
+      "original_qid": "Q1048",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A",
+      "question_sha256": "205cb870b901a1868a91bd0fe13a477e93e39414080660aa6b6409edbc5ad5bf",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "316ba19ec6b7c480eae40febf7e1b6fed06b7f4ecb2f7644373319356bbaa8c7",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 789,
+      "original_qid": "Q1049",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "D",
+      "question_sha256": "1e02bc1d6ab73edb11158ff2cf56286c2b9a457cc5e22ee1d7b4eaed2d37a005",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "d6c443de4f2822355ba7aaa3d192c578259b41369c67607267bafb46bf0c91eb",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 790,
+      "original_qid": "Q1050",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "A",
+      "question_sha256": "c755f7bf65c76b13c71b07d6f03bb9fb1ae97cc6233f7ad10f963f68d37a9f0f",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0781-0790.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0781-0790.md"
+      },
+      "current_question_sha256": "b41750216bc35d77c230d1b15c9e7206e430dc93b144bead2016333e87a9a4f3",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0781-0790.json",
+        "verification": "agent-verification-0781-0790.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 791,
+      "original_qid": "Q1051",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "补足对端 VLAN20 与封装前提。",
+      "question_sha256": "3319bb2bf9d95ddea00aba40dbedf586cda52391141a44baed4c4abc67ff06a2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "fadbfd468ee1239b67e04635a4828409b2922f3c856f9c910e879b5fa278b797",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 792,
+      "original_qid": "Q1053",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "修复配置命令行并限定成员兼容性。",
+      "question_sha256": "02a83e89a19e59021e26575f08b2c0e8ac0d2939d6efb5ed3cd83b44893e5d7b",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "0e9de996179da233a94b9eff224f761443b2919a849becb562f7025f00e928f8",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 793,
+      "original_qid": "Q1055",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "纠正 16 次冲突与重传次数的含糊说法。",
+      "question_sha256": "5bdd2bfa30a0c93e6803d3afbfb04ec14e900158cf2d2753d37cdc0eef0fbfe4",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "5426e484df9fac08d28f4dc828ee2227324b69e38b3b3ad4ccff94430d4af3d3",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 794,
+      "original_qid": "Q1056",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "原图已限制允许列表，补 all 与跨厂商前提、恢复 CLI。",
+      "question_sha256": "b1ee6eb66ad43e92833e879ce4e8906b63277704ab7dae7f0d34d82fe637e4a2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "70c4290468b9eddd3560b627da88acabf7ac102d7e51c66ecf157a09746ddb50",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 795,
+      "original_qid": "Q1057",
+      "current_answer": [
+        "B"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "原答案 C 与 voice VLAN 静态绑定不符；更正 B 并限定平台，修复组播 MAC。",
+      "question_sha256": "8e41cfc7074282a73b7d3d68624755c675f04cd4b697bcb257d3169d355b15b1",
+      "has_exhibit": false,
+      "exhibit_viewed": false,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "861921109a905f94af894331d656eb49210026628c9ec6c427cbb91d29b635fc",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "B"
+        ]
+      }
+    },
+    {
+      "id": 796,
+      "original_qid": "Q1062",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "明确 JSON 数据而非 schema。",
+      "question_sha256": "687989a980ffebd6aa04605b08570018d0bd6179c5c4fefc0bb1cc85c077bd61",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "55d8fc85647f4d63626ceb7431f99c2a0439a30adddc55f1ef8b4a533503f273",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 797,
+      "original_qid": "Q1063",
+      "current_answer": [
+        "C"
+      ],
+      "reviewed_answer": [
+        "C"
+      ],
+      "status": "问题",
+      "assessment": "以原图核对数组中的 firewall、switch、IDS，限定最具体类型。",
+      "question_sha256": "f6c496376882b3fa658e82a021afa84815ac949e17c953756af2d98919859343",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "efd76e5bebbef872a3940e5ca327f6604b5930f89adf9bd589850ab51308a757",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "C"
+        ]
+      }
+    },
+    {
+      "id": 798,
+      "original_qid": "Q1064",
+      "current_answer": [
+        "D"
+      ],
+      "reviewed_answer": [
+        "D"
+      ],
+      "status": "问题",
+      "assessment": "修正误引用其他图中的 IPS_frankfurt，图中为 IPS31。",
+      "question_sha256": "e1fc6ecd869fe8d40d492058a252da7546c4b0791f0fe9ac040075b7b8e694d2",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "86e7096e7213fde0135dc9608eea29cfa240737748929f408ffdef5851570232",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "D"
+        ]
+      }
+    },
+    {
+      "id": 799,
+      "original_qid": "Q1065",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "修正误引用其他图中的 IDS，图中对象为 router 与 interface。",
+      "question_sha256": "ab62824e459b207ab47effdecb5206ea625d674e7e9fdd7267355032cec8a7a9",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "c938a996fb9422e0c55bc669be1013c649159a0b4013aa25785b08c7f7071550",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "A"
+        ]
+      }
+    },
+    {
+      "id": 800,
+      "original_qid": "Q1066",
+      "current_answer": [
+        "A"
+      ],
+      "reviewed_answer": [
+        "A"
+      ],
+      "status": "问题",
+      "assessment": "澄清行号和 JSON 数据与 schema。",
+      "question_sha256": "b599ab5ebf08b6a161fc59aa090d4d9f247aea0dd634b24a4f31d399baae2fed",
+      "has_exhibit": true,
+      "exhibit_viewed": true,
+      "report": "agent-0791-0800.md",
+      "presentation_reviewed": true,
+      "presentation_review": {
+        "status": "通过",
+        "assessment": "图像与代码显示按审查记录检查；详见逐题报告。",
+        "report": "agent-0791-0800.md"
+      },
+      "current_question_sha256": "a01e075baa8157376184f93a17b85083db492e79aa92a99b6be327e659759981",
+      "resolution": {
+        "status": "fixed",
+        "manifest": "agent-0791-0800.json",
+        "verification": "agent-verification-0791-0800.json",
+        "current_answer": [
+          "A"
+        ]
+      }
     }
   ],
   "batch_status_counts": {
@@ -19655,10 +23996,52 @@
     "review-0656-0660.md": {
       "歧义": 1,
       "问题": 4
+    },
+    "agent-review-0661-0670.md": {
+      "问题": 10
+    },
+    "agent-review-0671-0680.md": {
+      "问题": 10
+    },
+    "agent-0681-0690.md": {
+      "问题": 10
+    },
+    "agent-0691-0700.md": {
+      "问题": 10
+    },
+    "agent-review-0701-0710.md": {
+      "问题": 10
+    },
+    "agent-review-0711-0720.md": {
+      "问题": 10
+    },
+    "agent-0721-0730.md": {
+      "问题": 10
+    },
+    "agent-review-0731-0740.md": {
+      "问题": 10
+    },
+    "agent-0741-0750.md": {
+      "问题": 10
+    },
+    "agent-0751-0760.md": {
+      "问题": 10
+    },
+    "agent-0761-0770.md": {
+      "问题": 10
+    },
+    "agent-0771-0780.md": {
+      "问题": 10
+    },
+    "agent-0781-0790.md": {
+      "问题": 10
+    },
+    "agent-0791-0800.md": {
+      "问题": 10
     }
   },
-  "current_scope_fully_reviewed_count": 660,
-  "presentation_reviewed_count": 660,
+  "current_scope_fully_reviewed_count": 800,
+  "presentation_reviewed_count": 800,
   "presentation_reviewed_ids": [
     1,
     2,
@@ -20319,18 +24702,158 @@
     657,
     658,
     659,
-    660
+    660,
+    661,
+    662,
+    663,
+    664,
+    665,
+    666,
+    667,
+    668,
+    669,
+    670,
+    671,
+    672,
+    673,
+    674,
+    675,
+    676,
+    677,
+    678,
+    679,
+    680,
+    681,
+    682,
+    683,
+    684,
+    685,
+    686,
+    687,
+    688,
+    689,
+    690,
+    691,
+    692,
+    693,
+    694,
+    695,
+    696,
+    697,
+    698,
+    699,
+    700,
+    701,
+    702,
+    703,
+    704,
+    705,
+    706,
+    707,
+    708,
+    709,
+    710,
+    711,
+    712,
+    713,
+    714,
+    715,
+    716,
+    717,
+    718,
+    719,
+    720,
+    721,
+    722,
+    723,
+    724,
+    725,
+    726,
+    727,
+    728,
+    729,
+    730,
+    731,
+    732,
+    733,
+    734,
+    735,
+    736,
+    737,
+    738,
+    739,
+    740,
+    741,
+    742,
+    743,
+    744,
+    745,
+    746,
+    747,
+    748,
+    749,
+    750,
+    751,
+    752,
+    753,
+    754,
+    755,
+    756,
+    757,
+    758,
+    759,
+    760,
+    761,
+    762,
+    763,
+    764,
+    765,
+    766,
+    767,
+    768,
+    769,
+    770,
+    771,
+    772,
+    773,
+    774,
+    775,
+    776,
+    777,
+    778,
+    779,
+    780,
+    781,
+    782,
+    783,
+    784,
+    785,
+    786,
+    787,
+    788,
+    789,
+    790,
+    791,
+    792,
+    793,
+    794,
+    795,
+    796,
+    797,
+    798,
+    799,
+    800
   ],
   "presentation_review_pending_previously_reviewed_ids": [],
-  "next_action": "Q600已完成提交、推送、编译及user 0保留数据覆盖安装；从Q661逐题继续，Q800统一提交、推送、编译与安装，不发release。",
+  "next_action": "从Q801继续逐题审查；Q800统一提交、推送、编译和个人空间保留数据覆盖安装，不发布release。",
   "presentation_status_counts": {
-    "通过": 551,
+    "通过": 691,
     "问题": 103,
     "改进": 6
   },
   "initial_source_sha256": "7ac75984b0c84d413306b3dfd498947a1944ef07124a5b94a9e8c6cbb01a414e",
   "initial_app_bundle_sha256": "cc213f7da30ad41b9b7f6d9ddc3a0fadc822d38c7734c4749d1340c64dcb39fa",
-  "remediation_verified_through_id": 660,
+  "remediation_verified_through_id": 800,
   "resolved_question_ids": [
     1,
     5,
@@ -20845,7 +25368,147 @@
     657,
     658,
     659,
-    660
+    660,
+    661,
+    662,
+    663,
+    664,
+    665,
+    666,
+    667,
+    668,
+    669,
+    670,
+    671,
+    672,
+    673,
+    674,
+    675,
+    676,
+    677,
+    678,
+    679,
+    680,
+    681,
+    682,
+    683,
+    684,
+    685,
+    686,
+    687,
+    688,
+    689,
+    690,
+    691,
+    692,
+    693,
+    694,
+    695,
+    696,
+    697,
+    698,
+    699,
+    700,
+    701,
+    702,
+    703,
+    704,
+    705,
+    706,
+    707,
+    708,
+    709,
+    710,
+    711,
+    712,
+    713,
+    714,
+    715,
+    716,
+    717,
+    718,
+    719,
+    720,
+    721,
+    722,
+    723,
+    724,
+    725,
+    726,
+    727,
+    728,
+    729,
+    730,
+    731,
+    732,
+    733,
+    734,
+    735,
+    736,
+    737,
+    738,
+    739,
+    740,
+    741,
+    742,
+    743,
+    744,
+    745,
+    746,
+    747,
+    748,
+    749,
+    750,
+    751,
+    752,
+    753,
+    754,
+    755,
+    756,
+    757,
+    758,
+    759,
+    760,
+    761,
+    762,
+    763,
+    764,
+    765,
+    766,
+    767,
+    768,
+    769,
+    770,
+    771,
+    772,
+    773,
+    774,
+    775,
+    776,
+    777,
+    778,
+    779,
+    780,
+    781,
+    782,
+    783,
+    784,
+    785,
+    786,
+    787,
+    788,
+    789,
+    790,
+    791,
+    792,
+    793,
+    794,
+    795,
+    796,
+    797,
+    798,
+    799,
+    800
   ],
   "github_milestone": {
     "batch_size": 200,

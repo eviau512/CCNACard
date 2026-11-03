@@ -1,0 +1,380 @@
+{
+  "scope": "Q791–Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 791,
+      "original_qid": "Q1051",
+      "before_sha256": "3319bb2bf9d95ddea00aba40dbedf586cda52391141a44baed4c4abc67ff06a2",
+      "reason": "补足对端 VLAN20 与封装前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. OldSwitch and NewSwitch must carry VLANs 5, 10, and 20 using IEEE 802.1Q. The remote engineer has already changed OldSwitch to 802.1Q and added VLAN 20 to its allowed list; the native VLAN remains 15 on both ends. Assuming the shown NewSwitch commands are supported, which changes on its trunk preserve its existing allowed VLANs and add VLAN 20?",
+        "explanation": "D。图中 NewSwitch 以 ISL 封装并只允许 VLAN 5、10。将封装改为 802.1Q，再使用 `switchport trunk allowed vlan add 20`，保留现有列表并增加 20；对端也必须允许这些 VLAN 且封装和 native VLAN 配置匹配。图中旧配置尚未允许 VLAN 20，因此题设明确说明对端已先完成更改。A 的 channel-group 与要求无关且命令错误；B 使用 ISL 和 access；C 未切换为 dot1q。各型号命令支持与变更顺序应以实际版本为准。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit A new VLAN and switch are added to the network. A remote engineer configures OldSwitch and must ensure that the configuration meets these requirements: • accommodates current configured VLANs • expands the range to include VLAN 20 • allows for IEEE standard support for virtual LANs Which configuration on the NewSwitch side of the link meets these requirements?",
+        "explanation": "• 核心考点与原理分析：\n本题考查二层中继链路封装协议的标准化迁移（Cisco 私有 ISL 迁移至 IEEE 802.1Q）以及 Trunk 许可 VLAN 列表的无损增量添加。\n1. IEEE 开放虚拟局域网标准支持：\n   - Exhibit 显示 NewSwitch 的 FastEthernet 0/1 当前配置包含：\n     `switchport trunk encapsulation isl`\n     ISL 是 Cisco 早期私有的中继封装协议。\n   - 题干明确要求“allows for IEEE standard support for virtual LANs”，即必须采用国际通用开放标准 IEEE 802.1Q（`dot1q`）。\n   - 因此必须在 NewSwitch 上清除私有的 ISL 封装并启用 802.1Q：首先执行 `no switchport trunk encapsulation isl`，接着执行 `switchport trunk encapsulation dot1q`。\n2. 容纳现有 VLAN 并扩展包含 VLAN 20：\n   - NewSwitch 当前许可列表为：`switchport trunk allowed vlan 5,10`。\n   - 题干要求“accommodates current configured VLANs（保留现有已配置的 VLAN 5 和 10）”并“expands the range to include VLAN 20（扩展包含 VLAN 20）”。\n   - 在 Cisco IOS 中，如果直接执行 `switchport trunk allowed vlan 20`，会直接覆盖现有列表导致 VLAN 5 和 10 被移除而中断通信；\n   - 必须使用增量添加关键字 `add`，即执行 `switchport trunk allowed vlan add 20`，才能使最终允许通过的 VLAN 集合平滑变为 5, 10, 20。\n\n• 正确选项剖析：\n选项 D：\n- `no switchport trunk encapsulation isl`：移除 Cisco 私有 ISL 封装；\n- `switchport trunk encapsulation dot1q`：配置 IEEE 802.1Q 标准封装；\n- `switchport trunk allowed vlan add 20`：利用 `add` 参数将 VLAN 20 追加进现有允许列表中，无损保留 VLAN 5 和 10。\n该命令集精准达成题干提出的全部三项技术指标，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：加入了 `Channel group 1 mode active`（配置 LACP 链路聚合），拓扑中双方仅为单根物理网线互联且未配置 EtherChannel，凭空启用 channel-group 会导致物理链路被置为悬挂状态导致网络瘫痪；且命令存在 `switch port` 空格语法错误。\n- 选项 B：`no switchport mode trunk` 关闭了 Trunk 模式，保留了 ISL 封装并将端口配置为 Access 模式（`mode access vlan 20`），完全破坏了跨交换机多 VLAN 通信的基础架构。\n- 选项 C：没有清除 ISL 封装，未实现对 IEEE 标准的支持；且 `switchport nonegotiate` 仅是关闭 DTP，未满足题目要求。\n\n• 考试要点与速记技巧：\n- IEEE 标准认准 `dot1q`（彻底淘汰私有 `isl`）。\n- 增量扩充 VLAN 必带 `add`：`switchport trunk allowed vlan add <vlan-id>`，不带 add 会导致原有 VLAN 瞬间被覆盖清除！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "补足对端 VLAN20 与封装前提。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q791_agent.jpg",
+      "image_sha256": "cd9bd6fe0163ba5e8f36b48d0c512db52c7521b8334ee6542c7634757d758b8c"
+    },
+    {
+      "id": 792,
+      "original_qid": "Q1053",
+      "before_sha256": "02a83e89a19e59021e26575f08b2c0e8ac0d2939d6efb5ed3cd83b44893e5d7b",
+      "reason": "修复配置命令行并限定成员兼容性。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "no switchport\nchannel-group 1 mode active"
+          },
+          {
+            "label": "B",
+            "text": "no switchport\nchannel-group 1 mode on"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode trunk\nchannel-group 1 mode active"
+          },
+          {
+            "label": "D",
+            "text": "switchport\nswitchport mode trunk"
+          }
+        ],
+        "explanation": "A。图中 Po1(RU) 的 R 表示三层，U 表示使用中；协议为 LACP，Et0/0 和 Et0/1 的 P 表示已加入通道。在支持这些命令的交换机上，新成员可用 `no switchport` 配置为三层，再用 `channel-group 1 mode active` 加入 LACP 组；还需确保物理属性及对端 LACP 配置兼容。B 是静态 on 模式；C 是二层 trunk；D 没有加入通道。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "no switchport Channel group 1 mode active"
+          },
+          {
+            "label": "B",
+            "text": "no switchport Channel-group 1 mode on"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode trunk Channel-group 1 mode active"
+          },
+          {
+            "label": "D",
+            "text": "switchport Switchport mode trunk"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查三层以太网通道（Layer 3 EtherChannel）的属性要求与 LACP 协议配置规范。\n1. 观察 Exhibit 中 `SW1# show etherchannel summary` 输出：\n   `Group: 1, Port-channel: Po1(RU), Protocol: LACP, Ports: Et0/0(P), Et0/1(P)`\n   - 状态标志 `RU`：根据顶部 Flags 说明，`R` 代表 `Layer3`（三层路由端口），`U` 代表 `in use`（当前正在投入使用）。\n   - 协商协议 `Protocol`：明确标注为 `LACP`（IEEE 802.3ad 链路汇聚控制协议）。\n   这表明 Port-Channel 1 是一个运行 LACP 协议的**三层以太网通道**。\n2. 成员接口一致性检查（Interface Consistency Check）：\n   Cisco IOS 在将物理端口捆绑进 EtherChannel 时，强制执行严格的一致性检查。新加入的物理接口其二层/三层工作模式、协商协议必须与现有通道完全一致：\n   - 交换机物理端口默认工作在二层模式（`switchport`）。若要将其加入三层通道，首先必须执行 `no switchport` 命令，将物理接口转换为无标签的三层路由接口（Routed Port）。\n   - 通道协议采用 LACP，因此加入组时必须配置 LACP 的动态协商模式（`mode active` 或 `mode passive`），命令为 `channel-group 1 mode active`。\n\n• 正确选项剖析：\n选项 A（no switchport; Channel group 1 mode active）：\n第一步通过 `no switchport` 将新物理接口转换为三层路由模式，满足与 Po1(RU) 的 Layer 3 属性一致性；第二步通过 `channel-group 1 mode active` 使用 LACP 主动模式将其加入通道组 1。配置完全符合技术规范，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（no switchport; Channel-group 1 mode on）：`mode on` 是不使用任何协议的静态强制捆绑。与运行 LACP 动态协商协议的通道组模式冲突，会导致端口被处于挂起（suspended）状态而无法正常捆绑转发。\n- 选项 C（switchport mode trunk; Channel-group 1 mode active）：将物理接口配置为二层 Trunk 模式，与三层 Port-Channel 1 发生致命的二层/三层模式冲突，IOS 将直接拒绝捆绑。\n- 选项 D（switchport; Switchport mode trunk）：仅在物理端口上配置了二层 Trunk，完全未执行 `channel-group` 命令，根本没有将端口加入通道组。\n\n• 考试要点与速记技巧：\n- 查看 `show etherchannel summary` 状态速记：\n  - `(SU)`：S 代表 Layer 2，U 代表 In Use（二层通道）。\n  - `(RU)`：R 代表 Layer 3，U 代表 In Use（三层通道）。\n- 看到 `(RU)` + `LACP`：新接口必配 `no switchport` + `channel-group X mode active`！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "修复配置命令行并限定成员兼容性。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q792_agent.jpg",
+      "image_sha256": "3c18af337b02f043c1537553c808fd4fad2a71986f86dee145af9edef8e8a5e8"
+    },
+    {
+      "id": 793,
+      "original_qid": "Q1055",
+      "before_sha256": "5bdd2bfa30a0c93e6803d3afbfb04ec14e900158cf2d2753d37cdc0eef0fbfe4",
+      "reason": "纠正 16 次冲突与重传次数的含糊说法。",
+      "updates": {
+        "explanation": "A。图中的日志显示 excessive collisions 和 retry limit exceeded，表示半双工发送遭遇过多冲突，达到重试限制后放弃该帧。排查双工不匹配或半双工介质上的争用；全双工正常运行不使用 CSMA/CD 冲突退避。B 是发送队列问题，C 是过短帧，D 是过长帧，均不是该日志的直接含义。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.3 以太网 CSMA/CD 冲突检测机制、退避算法与过度冲突（Excessive Collisions）错误日志判定。\n1. 以太网冲突与退避算法（Backoff Algorithm）：\n   在以太网半双工网络环境或因配置错误导致双工不匹配（Duplex Mismatch，一端 Half 一端 Full）的链路上，数据收发会产生物理碰撞（Collision）。当发生冲突时，发送方发送 Jam 阻塞信号以确保冲突被全网感知，随后启动截断二进制指数退避算法（Truncated Binary Exponential Backoff），随机等待一个时间槽（Slot Time）后重发。\n2. 最大重传次数限制（Attempt Limit）：\n   - IEEE 802.3 标准第 4 条明确规定，以太网帧在丢弃前的最大重传尝试上限（`attemptLimit`）严格为 **16 次**。\n   - 如果一个数据帧连续经历了 16 次冲突重传仍未成功发送出去，以太网 MAC 控制器将彻底放弃重试，**直接丢弃该数据帧（Drop the frame）**，并向系统上报过度冲突（Excessive Collisions / Retry limit exceeded）事件。\n3. Exhibit 日志输出解读：\n   展示图中的系统告警日志明确显示：\n   `%AMDP2_FE-5-COLL: ... Excessive collisions`\n   `%PQUICC-5-COLL: ... Excessive collisions. Retry limit exceeded`\n   该日志是交换机以太网物理层控制器（如 AMD PCnet 或 QUICC 芯片）在数据帧达到 16 次重传失败上限并执行丢包时产生的典型告警。\n\n• 正确选项剖析：\n选项 A（Frames are dropped after 16 failed transmission attempts）：\n准确指出了以太网标准中对“Excessive collisions / Retry limit exceeded”的根本定义——在遭遇 16 次连续重传失败后，数据帧被系统主动丢弃，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（The internal transmit buffer is overloaded）：内部发送缓冲区溢出属于缓冲器满（Queue Overflow），在接口计数器中表现为 Output drops 或 Buffer overruns，不会触发 Excessive collisions 告警。\n- 选项 C（A high number of frames smaller than 64 bytes are received）：小于 64 字节的受损帧被称为残帧（Runts），通常由正常碰撞后被截断导致，但在接口统计中对应的是 Runts 计数器增长，而非超出重传上限的丢帧告警。\n- 选项 D（An excessive number of frames greater than 1518 bytes are received）：大于 1518 字节的非巨型帧称为超长帧（Giants）或 Jabber 帧，表现为 Giants 计数器增长，与冲突重传上限无关。\n\n• 考试要点与速记技巧：\n- 看到日志关键词 `Excessive collisions` 或 `Retry limit exceeded`，直接秒定答案：**重发 16 次失败后丢弃数据帧（16 failed transmission attempts）**。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "纠正 16 次冲突与重传次数的含糊说法。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q793_agent.jpg",
+      "image_sha256": "aef3e7fe75934f0fde14788204f016955bc076463ea83b09b003e8643b618d92"
+    },
+    {
+      "id": 794,
+      "original_qid": "Q1056",
+      "before_sha256": "b1ee6eb66ad43e92833e879ce4e8906b63277704ab7dae7f0d34d82fe637e4a2",
+      "reason": "原图已限制允许列表，补 all 与跨厂商前提、恢复 CLI。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW_1 is a Cisco switch that must connect its VLANs across a link to another vendor’s switch. The other side is already configured as a compatible static 802.1Q trunk that permits all required VLANs. On SW_1, which command sequence sets a static 802.1Q trunk and allows all VLANs, replacing the restricted list shown?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport trunk encapsulation dot1q\nswitchport mode trunk\nswitchport trunk allowed vlan all"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode trunk\nswitchport trunk allowed vlan all\nswitchport dot1q ethertype 0800"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode dynamic desirable\nswitchport trunk allowed vlan all\nswitchport trunk native vlan 7"
+          },
+          {
+            "label": "D",
+            "text": "switchport mode dynamic auto\nswitchport nonegotiate"
+          }
+        ],
+        "explanation": "A。图中的端口当前为 access，管理封装为 ISL，且 trunk VLAN 列表限制为 5、6；选项 A 将封装设为 IEEE 802.1Q、设置静态 trunk 并显式允许所有 VLAN。对端需使用其厂商等效配置，且 native VLAN、允许列表和实际 VLAN 均需一致；允许全部 VLAN 并不保证其它协议或链路条件已正确。B 的 0800 不是普通 802.1Q 标签的标准 TPID；C 依赖 DTP 且未明确设定 dot1q；D 既未静态设 trunk，也未允许全部 VLAN。具体封装命令依硬件型号而定。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit SW_1 and SW_12 represent two companies that are merging. They use separate network vendors. The VLANs on both sides have been migrated to share IP subnets. Which command sequence must be issued on both sides to join the two companies and pass all VLANs between the companies?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode trunk Switchport trunk encapsulation dot1q"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode trunk Switchport trunk allowed vlan all Switchport dot1q ethertype 0800"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode dynamic desirable Switchport trunk allowed vlan all Switchport trunk native vlan 7"
+          },
+          {
+            "label": "D",
+            "text": "switchport dynamic auto Switchport nonegotiate"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查多厂商（Multi-Vendor）异构交换网络环境下的二层中继（Trunk）对接规范与最佳实践。\n1. 异构厂商设备互联背景：\n   题干指出：“SW_1 and SW_12 represent two companies that are merging. They use separate network vendors（两家合并公司使用不同网络厂商的交换机）”。\n   - 在多厂商互联场景下，任何 Cisco 私有二层协议均无法正常工作：\n     • DTP（Dynamic Trunking Protocol，动态中继协议）：Cisco 私有协议，非 Cisco 厂商交换机无法识别或处理 DTP 协商报文。\n     • ISL（Inter-Switch Link）：Cisco 私有 Trunk 封装协议，第三方厂商完全不支持。\n   - 必须采用国际开放工业标准 IEEE 802.1Q（`dot1q`）。\n   - 必须在互联端口上显式静态配置为 Trunk 模式（`switchport mode trunk`），彻底禁用对端协议协商，确保跨厂商交换机可靠建立 Trunk。\n2. Exhibit 状态分析：\n   查看 SW_1 / SW_12 端口状态输出：\n   `Administrative Mode: static access`\n   `Operational Mode: static access`\n   `Administrative Trunking Encapsulation: isl`\n   接口当前处于静态 Access 模式，且默认封装为淘汰的 ISL。\n   两端必须统一修改为静态 Trunk 并启用 802.1Q 封装：\n   `switchport mode trunk`\n   `switchport trunk encapsulation dot1q`\n3. 传递所有共享 VLAN：\n   在 Cisco IOS 中，Trunk 接口一旦建立，默认即放行全部 VLAN（1-4094）。因此配置静态 Trunk + dot1q 封装后，两端迁移后共享的 VLAN 将自动全通。\n\n• 正确选项剖析：\n选项 A（switchport mode trunk; Switchport trunk encapsulation dot1q）：\n静态将接口模式置为 Trunk（避免依赖私有 DTP 协商），并采用全球通用的 IEEE 802.1Q 封装标准，跨厂商交换机能够立即稳定协商打通二层中继并透传所有 VLAN，完全满足企业合并对接需求，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B：包含了 `switchport dot1q ethertype 0800`，0800 是 IPv4 协议号而非 802.1Q 标签 TPID 字段（标准应为 0x8100），属于无中生有的错误语法或特殊 QinQ 属性，不适用于常规两厂商 Trunk 对接。\n- 选项 C（switchport mode dynamic desirable）：`dynamic desirable` 属于 Cisco 私有 DTP 动态协商模式。异构第三方厂商无法响应 DTP，接口将协商失败并退回到 Access 模式，导致 Trunk 无法建立；且更改 Native VLAN 7 与放行所有 VLAN 需求无关。\n- 选项 D（switchport dynamic auto; switchport nonegotiate）：`dynamic auto` 同样依赖 DTP，且 `nonegotiate`（关闭 DTP 发送）与 `dynamic` 命令互斥，配置会报错拒绝。\n\n• 考试要点与速记技巧：\n- 异构跨厂商对接（Separate vendors）黄金法则：**弃绝私有 DTP 与 ISL，必选静态 802.1Q Trunk**（`switchport mode trunk` + `switchport trunk encapsulation dot1q`）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "原图已限制允许列表，补 all 与跨厂商前提、恢复 CLI。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q794_agent.jpg",
+      "image_sha256": "804809386342ec11b0ce6b6d68ef7c2cf3d86ea912f7f77e1c9df01af96b0283"
+    },
+    {
+      "id": 795,
+      "original_qid": "Q1057",
+      "before_sha256": "8e41cfc7074282a73b7d3d68624755c675f04cd4b697bcb257d3169d355b15b1",
+      "reason": "原答案 C 与 voice VLAN 静态绑定不符；更正 B 并限定平台，修复组播 MAC。",
+      "updates": {
+        "prompt": "On a Cisco Catalyst 3750-X running IOS 12.2(53)SE2, an access interface already has port security enabled and voice VLAN 4 configured. Which command manually configures the unicast MAC address aacc.aacc.aacc as a static secure address on the voice VLAN?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport port-security mac-address aacc.aacc.aacc vlan 4"
+          },
+          {
+            "label": "B",
+            "text": "switchport port-security mac-address aacc.aacc.aacc vlan voice"
+          },
+          {
+            "label": "C",
+            "text": "switchport port-security mac-address aacc.aacc.aacc"
+          },
+          {
+            "label": "D",
+            "text": "switchport port-security mac-address sticky aacc.aacc.aacc vlan 4"
+          }
+        ],
+        "answer": [
+          "B"
+        ],
+        "explanation": "B。所限定平台的 Cisco 配置示例使用 `switchport port-security mac-address <MAC> vlan voice` 手工配置语音 VLAN 的静态安全 MAC；接口须已设置 voice VLAN 和端口安全，并根据话机及连接设备数量设置可用的安全地址上限。C 不明确指定 voice VLAN；D 使用 sticky 而非普通静态条目；A 的数字 VLAN 语法与该题所要求的 voice 关键字及端口情境不同。不同 Catalyst 平台和版本对 voice VLAN 静态安全地址的支持存在差异，不能推广为通用语法。原题 abcd.abcd.abcd 首字节的组播位为 1，已改成单播地址。"
+      },
+      "original_fields": {
+        "prompt": "An engineer is configuring a switch port that is connected to a VoIP handset. Which command must the engineer configure to enable port security with a manually assigned MAC address of abcd.abcd.abcd on voice VLAN 4?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport port-security mac-address abcd.abcd.abcd vlan 4"
+          },
+          {
+            "label": "B",
+            "text": "switchport port-security mac-address abcd.abcd.abcd vlan voice"
+          },
+          {
+            "label": "C",
+            "text": "switchport port-security mac-address abcd.abcd.abcd"
+          },
+          {
+            "label": "D",
+            "text": "switchport port-security mac-address sticky abcd.abcd.abcd vlan 4"
+          }
+        ],
+        "answer": [
+          "C"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 交换机端口安全（Port Security）特性在部署 VoIP 话机环境下的标准 CLI 配置语法。\n1. 语音 VLAN 与端口安全基本概念：\n   企业交换机接入端口通常同时连接一台 IP 话机和一台级联的 PC。话机流量归属于 Voice VLAN，PC 流量归属于 Access VLAN。\n   为防止未授权终端接入，管理员可在接口上启用端口安全（`switchport port-security`）。\n2. 端口安全 MAC 地址绑定类型：\n   - 动态学习（Dynamic）：端口动态学习 MAC 地址并保存在内存中，重启后丢失。\n   - 粘性学习（Sticky）：将动态学习到的 MAC 地址固化写入 running-config。\n   - 静态手工指定（Static）：管理员在 CLI 命令行中直接手工绑定特定的合法 MAC 地址。\n3. 静态安全 MAC 地址的标准语法：\n   在 Cisco IOS 命令行规范中，手动指定静态安全 MAC 地址的标准命令语法为：\n   `Switch(config-if)# switchport port-security mac-address <mac-address>`\n   （MAC 地址格式为 Cisco 点分十六进制 `H.H.H`，例如 `abcd.abcd.abcd`）。\n   当在 Access / Voice 混合接口上配置时，交换机端口安全引擎会自动侦听并处理该端口上的所有帧，静态指定的 MAC 地址直接绑定至该物理接口的安全表项中，无须（也不支持）在静态 MAC 命令末尾附加具体的数字 VLAN ID。\n\n• 正确选项剖析：\n选项 C（switchport port-security mac-address abcd.abcd.abcd）：\n这是 Cisco IOS 标准接口配置模式下静态绑定安全 MAC 地址的权威、纯正语法，在接入模式交换机端口上配置后即可实现安全准入校验，故 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（... mac-address abcd.abcd.abcd vlan 4）：在标准的二层 Access 模式接口下，`mac-address` 静态指定命令后不支持跟 `vlan 4` 语法，该参数通常仅在多 VLAN Trunk 端口安全的特殊语法子集或 private-vlan 模式下存在，在常规端口安全下会引发语法错误。\n- 选项 B（... mac-address abcd.abcd.abcd vlan voice）：Cisco IOS 命令行中根本不存在 `vlan voice` 这个作为静态 MAC 地址后缀的关键字。\n- 选项 D（... mac-address sticky abcd.abcd.abcd vlan 4）：`sticky` 是让交换机“自动学习”当前在线 MAC 的模式，不能与手工指定的具体 MAC 地址及 vlan 后缀混写在一起，语法混乱。\n\n• 考试要点与速记技巧：\n- 静态配置端口安全 MAC 极简口诀：“静态手工绑 MAC，直接接地址（`mac-address <MAC>`），不带后缀不带 VLAN”。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "changed C to B",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "原答案 C 与 voice VLAN 静态绑定不符；更正 B 并限定平台，修复组播 MAC。"
+      }
+    },
+    {
+      "id": 796,
+      "original_qid": "Q1062",
+      "before_sha256": "687989a980ffebd6aa04605b08570018d0bd6179c5c4fefc0bb1cc85c077bd61",
+      "reason": "明确 JSON 数据而非 schema。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In the JSON data, what type of element is \"LB20\" in the first object?",
+        "explanation": "A。图中 `\"load balancer\": \"LB20\"` 中，LB20 是冒号右侧的字符串值；`load balancer` 是键。它不是对象或数组。JSON 数据与 JSON Schema 是不同概念，本题展示的是 JSON 数据。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"LB20\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON（JavaScript Object Notation，RFC 8259）数据表示规范的核心语法元素。\n1. JSON 是网络自动化、网络可编程性（Network Programmability）以及 RESTCONF / NETCONF API 与 SDN 控制器交互中使用最广泛的数据格式。\n2. JSON 的四种核心数据表示概念：\n   - **键（Key / Name）**：位于键值对的左侧，始终用双引号 `\"\"` 括起来，用于标识数据字段的名称。\n   - **值（Value）**：位于键值对的冒号 `:` 右侧，表示该字段存储的具体数据内容。值可以是字符串（双引号）、数值、布尔值（true/false）、null、对象（Object）或数组（Array）。\n   - **对象（Object）**：由花括号 `{ }` 包裹的一个或多个无序键值对集合。\n   - **数组（Array）**：由方括号 `[ ]` 包裹的一个或多个有序值的列表。\n3. Exhibit 分析：\n   观察展示图中的 JSON 文本第 2 行：\n   `{\"load balancer\": \"LB20\", \"interface\": \"te4/3\"}`\n   - 在键值对 `\"load balancer\": \"LB20\"` 中：\n     • `\"load balancer\"` 位于冒号左侧，是 **键（Key）**。\n     • `\"LB20\"` 位于冒号右侧，是分配给该键的字符串数据，因此它是 **值（Value）**。\n\n• 正确选项剖析：\n选项 A（value）：\n\"LB20\" 位于冒号之后，是键 \"load balancer\" 所对应的具体数据内容，属于标准的 JSON 字符串值（Value），故 A 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（array）：数组是由方括号 `[ ]` 包裹的序列，\"LB20\" 仅是单个标量字符串，不是数组。\n- 选项 C（object）：对象是由花括号 `{ }` 包裹的键值对容器，\"LB20\" 自身不是对象。\n- 选项 D（key）：键是冒号左边的名称属性，本行中的键是 `\"load balancer\"`，容易将键与值的位置关系颠倒。\n\n• 考试要点与速记技巧：\n- JSON 四大金刚口诀：\n  - 花大括号 `{ }` 是**对象（Object）**\n  - 中方括号 `[ ]` 是**数组（Array）**\n  - 冒号左边 `key:` 是**键（Key）**\n  - 冒号右边 `: value` 是**值（Value）**。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "明确 JSON 数据而非 schema。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q796_agent.jpg",
+      "image_sha256": "91457db537f9cd5f7a07e5b8a71dd3dc4ca5f6fd206662fb5c4ae966f58e6228"
+    },
+    {
+      "id": 797,
+      "original_qid": "Q1063",
+      "before_sha256": "f6c496376882b3fa658e82a021afa84815ac949e17c953756af2d98919859343",
+      "reason": "以原图核对数组中的 firewall、switch、IDS，限定最具体类型。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is the most specific JSON container type for the entire structure from line 1 through line 5?",
+        "explanation": "C。图中第 1 行 `[` 和第 5 行 `]` 围成一个数组，里面按顺序包含 firewall、switch 和 IDS 三个对象。数组本身也是 JSON value，但在给定选项中 array 更具体；各 `{...}` 是内部对象，key 是对象中的成员名称。"
+      },
+      "original_fields": {
+        "prompt": "What is represented beginning with line 1 and ending with line 5 within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON（RFC 8259）数据结构中“数组（Array）”的语法定义与识别。\n1. JSON 数组（Array）标准定义：\n   - 数组是值的有序集合（An ordered collection of values）。\n   - 数组必须以左中括号 `[` 开始，并以右中括号 `]` 结束。\n   - 数组内部的元素可以是字符串、数值、布尔值、对象（Object）甚至嵌套的数组，各个元素之间通过逗号 `,` 分隔。\n2. Exhibit 结构分析：\n   - 第 1 行：单独一个左中括号 `[`。\n   - 第 2、3、4 行：分别包含三个由花括号 `{ }` 包裹的 JSON 对象（分别代表 load balancer、firewall、IDS 的配置对象）。\n   - 第 5 行：单独一个右中括号 `]`。\n   从第 1 行起始到第 5 行结束，整个顶层结构由一对中括号 `[ ]` 完整封装，其内部包含了 3 个对象的有序列表。因此，从第 1 行到第 5 行构成的整体数据结构即为一个标准的 **数组（Array）**。\n\n• 正确选项剖析：\n选项 C（array）：\n根据 JSON 规范，中括号 `[ ... ]` 严格标识一个数组容器。题干所询问的第 1 行开始到第 5 行结束的顶层结构正是该中括号数组，故 C 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（key）：键必须位于冒号 `:` 左侧且用双引号包裹，如第 2 行中的 `\"load balancer\"`，不是包裹 1 至 5 行的容器。\n- 选项 B（object）：对象必须由花括号 `{ ... }` 包裹，第 2、3、4 行内部单行是对象，但整个 1 到 5 行的外部容器是方括号，属于数组。\n- 选项 D（value）：虽然数组本身在广义上也是一种值类型，但在 JSON 专门术语考查中，最严谨、最精确描述中括号结构的名词是数组（Array）。\n\n• 考试要点与速记技巧：\n- JSON 容器类型一眼辨识：\n  - 方括号 `[ ... ]` = **数组（Array）**\n  - 花括号 `{ ... }` = **对象（Object）**。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "以原图核对数组中的 firewall、switch、IDS，限定最具体类型。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q797_agent.jpg",
+      "image_sha256": "3d94438632c662bf8a75851c75f6963c51d028a8275eb84331815a85a913c0ac"
+    },
+    {
+      "id": 798,
+      "original_qid": "Q1064",
+      "before_sha256": "e1fc6ecd869fe8d40d492058a252da7546c4b0791f0fe9ac040075b7b8e694d2",
+      "reason": "修正误引用其他图中的 IPS_frankfurt，图中为 IPS31。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In the second JSON object, what role does \"IDS\" have?",
+        "explanation": "D。图中第二个对象含 `\"IDS\": \"IPS31\"`：IDS 在冒号左侧，是成员名（key），IPS31 是字符串值。对象由花括号表示，数组由方括号表示。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"IDS\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON 键值对（Key-Value Pair）结构中“键（Key）”的语法特征与判定。\n1. JSON 键值对基本语法：\n   - 在 JSON 对象 `{ ... }` 内部，所有数据都以键值对的形式存储，标准格式为 `\"key\": value`。\n   - 冒号 `:` 是键与值的法定分隔符。\n   - 位于冒号左侧的文本被称为“键（Key）”或“名称（Name）”，它必须始终使用双引号 `\"\"` 包含，用于指示后续数据的属性或字段名称。\n   - 位于冒号右侧的内容为“值（Value）”，表示该属性所赋的具体数据。\n2. Exhibit 第 4 行分析：\n   第 4 行内容为：\n   `{\"IDS\": \"IPS_frankfurt\", \"interface\": \"e9/7\"}`\n   - 在第一个键值对中，`\"IDS\"` 位于冒号 `:` 的正左侧，双引号修饰；\n   - 冒号右侧是具体设备名称字符串 `\"IPS_frankfurt\"`。\n   - 因此，`\"IDS\"` 在该结构中代表字段属性的名称，即 **键（Key）**。\n\n• 正确选项剖析：\n选项 D（key）：\n\"IDS\" 严格位于键值对的冒号左侧，作为对象属性的标识符，符合 JSON 键（Key）的严格定义，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（object）：对象是整个第 4 行用花括号 `{ }` 包裹的完整数据结构，\"IDS\" 只是该对象中的一个属性键名。\n- 选项 B（value）：值位于冒号右侧，本例中与 \"IDS\" 对应的值是 `\"IPS_frankfurt\"`，不可将键与值颠倒。\n- 选项 C（array）：数组是由方括号 `[ ]` 包裹的集合，\"IDS\" 不是数组。\n\n• 考试要点与速记技巧：\n- JSON 键值对位置铁律：**左键右值（Left is Key, Right is Value）**。冒号左边固定是 Key！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "修正误引用其他图中的 IPS_frankfurt，图中为 IPS31。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q798_agent.jpg",
+      "image_sha256": "5d5eb0487c92b6069326df4a4428d8086ed66cc21d1a5aec32d56f15217d7dbe"
+    },
+    {
+      "id": 799,
+      "original_qid": "Q1065",
+      "before_sha256": "ab62824e459b207ab47effdecb5206ea625d674e7e9fdd7267355032cec8a7a9",
+      "reason": "修正误引用其他图中的 IDS，图中对象为 router 与 interface。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is the most specific JSON container type represented by the complete structure on line 4?",
+        "explanation": "A。图中第 4 行为 `{\"router\": \"R_frankfurt\", \"interface\": \"te8/30\"}`，花括号包含两个键值对，整体是对象。对象也可以作为数组元素或 JSON value，但 object 是这行容器类型的最具体选项；单独的 router 和 interface 才是键。"
+      },
+      "original_fields": {
+        "prompt": "What is represented in line 4 within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON 数据格式中“对象（Object）”的语法定义与层级识别。\n1. JSON 对象（Object）标准规范：\n   - 对象是一个无序的键值对集合（An unordered collection of key/value pairs）。\n   - 一个对象始终以左花括号 `{` 开始，并以右花括号 `}` 结束。\n   - 在花括号内部包含零个、一个或多个由逗号 `,` 分隔的键值对。\n2. Exhibit 第 4 行分析：\n   第 4 行代码为：\n   `4 {\"IDS\": \"IPS_frankfurt\", \"interface\": \"e9/7\"}`\n   - 整行代码以左大括号 `{` 开头，以右大括号 `}` 结尾；\n   - 括号内包含了两个键值对：`\"IDS\": \"IPS_frankfurt\"` 和 `\"interface\": \"e9/7\"`，中间由逗号分隔；\n   - 这一完整的结构直接体现了由花括号封装键值对的标准形态，因此第 4 行所代表的数据类型为一个 **对象（Object）**。\n\n• 正确选项剖析：\n选项 A（object）：\n第 4 行被花括号 `{ }` 完整包围，内部包含具体的键值对集合，完全符合 JSON 规范中对对象（Object）的定义，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（array）：数组必须由中括号 `[ ]` 包裹（如第 1 行至第 5 行的大结构），第 4 行外部是花括号，绝非数组。\n- 选项 C（key）：键是对象内部的特定字段名（如 `\"IDS\"` 或 `\"interface\"`），不能代表整行包含多个键值对的完整花括号结构。\n- 选项 D（value）：虽然对象可以作为数组的一个元素（值），但针对花括号本身结构类型的精准提问，专业技术名词首选对象（Object）。\n\n• 考试要点与速记技巧：\n- JSON 结构秒杀口诀：“大花括对象，中方括数组，冒号左边键，冒号右边值”。行 4 外层为花括号，必为 Object！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "修正误引用其他图中的 IDS，图中对象为 router 与 interface。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q799_agent.jpg",
+      "image_sha256": "f881c4fe49863f394ef4c773b9b401c0e6d2ae7df7a82c554ba310e8e3476104"
+    },
+    {
+      "id": 800,
+      "original_qid": "Q1066",
+      "before_sha256": "b599ab5ebf08b6a161fc59aa090d4d9f247aea0dd634b24a4f31d399baae2fed",
+      "reason": "澄清行号和 JSON 数据与 schema。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What role does \"port\" have within the JSON data?",
+        "explanation": "A。图中每个对象的 `\"port\": ...` 中，port 在冒号左侧，是成员名称（key）；右侧如 `\"te6/21\"` 是字符串值。对象为花括号结构，数组为外层方括号结构。图中行号用于说明，不属于 JSON 文本本身；此图是数据而非 JSON Schema。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"port\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON 语法结构中属性字段名称（Key）的判断。\n1. Exhibit 文本结构解析：\n   观察展示图中的 JSON 内容：\n   ```json\n   1 [\n   2 {\"router\": \"R_pittsburgh\", \"port\": \"te6/21\"},\n   3 {\"VPN concentrator\": \"VPN47\", \"port\": \"e6/37\"},\n   4 {\"firewall\": \"FW28\", \"port\": \"ge7/42\"}\n   5 ]\n   ```\n2. 键（Key）的判定法则：\n   - 在第 2、3、4 行的每一个对象中，均出现结构 `\"port\": \"<interface_name>\"`。\n   - 单词 `\"port\"` 用双引号引注，且严格放置在冒号 `:` 的左侧。\n   - 冒号右侧跟随着具体物理接口名称的字符串（如 `\"te6/21\"`, `\"e6/37\"`, `\"ge7/42\"`）。\n   - 根据 JSON（RFC 8259）技术标准，在键值对中处于冒号左侧的双引号字符串代表该属性的标识符，即 **键（Key / Attribute Name）**。\n\n• 正确选项剖析：\n选项 A（key）：\n单词 \"port\" 位于键值对的左侧，充当指示端口参数的属性键名称，技术归类为 Key，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（value）：值位于冒号右侧，在此 schema 中对应的值是接口编号（例如 `\"te6/21\"`），而非 \"port\" 本身。\n- 选项 C（array）：数组是由第 1 行与第 5 行方括号 `[ ]` 包裹的序列集合，\"port\" 只是对象内的一个键。\n- 选项 D（object）：对象是由第 2、3、4 行的花括号 `{ }` 包裹的集合，\"port\" 自身不是对象。\n\n• 考试要点与速记技巧：\n- 看到引注字符串紧挨在冒号左侧（`\"port\":`），100% 判定为 **Key（键）**。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where relevant",
+        "finding": "澄清行号和 JSON 数据与 schema。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q800_agent.jpg",
+      "image_sha256": "28592544d889d4bb6fe0625ea96fe7a7652a698da77c1e9e67f2e3f91a175b2c"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/12-2_53_se/configuration/guide/3750xscg/swtrafc.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/12-2ZY/configuration/guide/swcg/port_sec.pdf",
+    "https://www.rfc-editor.org/rfc/rfc8259",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+  ],
+  "limitations": "图片、文档与人工分析；未进行设备实测。"
+}

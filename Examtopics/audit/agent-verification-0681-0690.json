@@ -1,0 +1,12 @@
+{
+  "scope": [
+    681,
+    690
+  ],
+  "count": 10,
+  "ids_qids_preserved": true,
+  "original_fingerprints_match_head": true,
+  "corrections_match_manifest": true,
+  "master_app_equal": true,
+  "limitations": "人工逐题审查；未对网络设备执行实机实验。"
+}

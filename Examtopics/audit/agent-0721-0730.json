@@ -1,0 +1,321 @@
+{
+  "scope": "Q721–Q730",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 721,
+      "original_qid": "Q946",
+      "before_sha256": "43cbcfd21eec8523950b1144f4df1f541853298a8c2e47fc4026dabfd2bdf6b5",
+      "reason": "纠正严重性与设备实际状态的绝对化断言",
+      "updates": {
+        "explanation": "B。Syslog 严重级别 0 为 Emergency，标准描述为系统不可用；1 Alert 表示必须立即采取行动，2 Critical 为严重状况，3 Error 为错误状况。数字越小严重性越高。事件实际影响仍需结合设备日志判断，不能由举例推断每条日志的级别。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      }
+    },
+    {
+      "id": 722,
+      "original_qid": "Q947",
+      "before_sha256": "8061c2548770e8e581efe1be52f08e735ef80d446ad373768ebccd3c66d87848",
+      "reason": "补接口前提并纠正中继头部过度概括",
+      "updates": {
+        "prompt": "A Cisco IOS router receives DHCP broadcasts on its 10.10.0.1/24 client-facing interface. The DHCP server is 192.168.10.1 on another subnet. Which interface command configures relay to that server?",
+        "explanation": "D。在接收客户端广播的三层接口配置 `ip helper-address 192.168.10.1`，中继可将 DHCP 请求转发给指定服务器，并使用 giaddr 识别客户端子网；服务器返回中继后再交付客户端。还需要双向路由、服务器地址池和必要的 ACL 放行。A 是不完整的静态路由命令，不能代替中继；B 非此用途；C 不处理中继。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      }
+    },
+    {
+      "id": 723,
+      "original_qid": "Q948",
+      "before_sha256": "6b5c80834308cafc7a33594b745187655e5aa699143423aeaaa7ed613f09d11f",
+      "reason": "原图接口子网冲突，限定拓扑并恢复选项命令格式",
+      "updates": {
+        "prompt": "Refer to the exhibit. Ignore the duplicate subnet labels in the drawing: assume ROUTER-1 has one inside interface serving 192.168.1.0/24 and a separate outside interface on 209.165.202.128/27. The NAT inside/outside interface roles, routing, and return reachability are already configured. Which command set performs PAT using the single outside address 209.165.202.129?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip nat pool CCNA 192.168.0.1 192.168.0.1 netmask 255.255.255.224\naccess-list 10 permit 192.168.0.0 0.0.0.255\nip nat inside source list 10 pool CCNA overload"
+          },
+          {
+            "label": "B",
+            "text": "ip nat pool CCNA 209.165.202.129 209.165.202.129 netmask 255.255.255.224\naccess-list 10 permit 192.168.1.0 255.255.255.0\nip nat inside source list 10 pool CCNA overload"
+          },
+          {
+            "label": "C",
+            "text": "ip nat pool CCNA 192.168.0.1 192.168.0.1 netmask 255.255.255.224\naccess-list 10 permit 192.168.0.0 255.255.255.0\nip nat inside source list 10 pool CCNA overload"
+          },
+          {
+            "label": "D",
+            "text": "ip nat pool CCNA 209.165.202.129 209.165.202.129 netmask 255.255.255.224\naccess-list 10 permit 192.168.1.0 0.0.0.255\nip nat inside source list 10 pool CCNA overload"
+          }
+        ],
+        "explanation": "D。单地址池使用 209.165.202.129，ACL 10 以通配符 0.0.0.255 匹配 192.168.1.0/24，`overload` 启用 PAT。池的 /27 掩码与题设外网一致；还依赖已配置的 inside/outside、路由及外部回程。A/C 的地址池与要求不符，B 使用错误的 ACL 通配符。原图两条路由接口重复标为同一子网，故以题干明确的单一内网假设解题。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      },
+      "exhibit_path": "Examtopics/audit/exhibits/q723_image_agent.png",
+      "image_sha256": "85b04c8d1f058f41cbb5e22c52036eebffd75d607f01ba8ea982ff9a9daa863e"
+    },
+    {
+      "id": 724,
+      "original_qid": "Q949",
+      "before_sha256": "a3c70c8bd2489649c5c665b7d454e38a0810f69f1bfc8187f455baf3150fcfed",
+      "reason": "原题 DSCP 和 ToS 都是字段，明确旧名称及整字节",
+      "updates": {
+        "prompt": "In the original RFC 791 IPv4 header terminology, what is the name of the entire eight-bit octet whose six high-order bits can carry a DSCP QoS marking?",
+        "explanation": "C。RFC 791 将该八位组称为 Type of Service；现代 DiffServ 将其重新定义为 DS 字段，高 6 位为 DSCP，低 2 位为 ECN。D 是其中的六位 DSCP 字段，同样是有效的现代字段名称，故题干特意询问旧名称和完整八位组；修改 IPv4 头部时还要更新校验和。不能笼统说 QoS 标记总会修改全部 8 位或 ECN。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      }
+    },
+    {
+      "id": 725,
+      "original_qid": "Q951",
+      "before_sha256": "089e4cceea6449809614bdb94d3ed796b321960d9aee566b6d1ec494cbcf86a3",
+      "reason": "修正 AF 保证带宽的错误描述",
+      "updates": {
+        "explanation": "C。Assured Forwarding（AF）定义 4 个独立转发类别，每类有 3 个 drop precedence 等级，记为 AFxy；相同类内较高丢弃优先级在拥塞时更易被丢弃。实际调度、缓冲和丢包依配置及负载，AF 标记本身不保证固定带宽或无丢包。EF 是另一 PHB，默认行为是 best effort，class selector 用于与 IP precedence 兼容。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      }
+    },
+    {
+      "id": 726,
+      "original_qid": "Q953",
+      "before_sha256": "ee6b48c0af24839ad8cbacb9c591a0f7818f41bd167c92279efa4a08f700c3d1",
+      "reason": "明确地址池位于远端服务器，避免本地 DHCP 与中继冲突",
+      "updates": {
+        "prompt": "A separate DHCP server at 172.16.32.15 already has a correctly configured pool named CONTROL for 192.168.52.0/24, including the gateway address 192.168.52.253. Which command on the client-facing gateway interface relays client DHCP broadcasts to that server?",
+        "explanation": "A。在连接 192.168.52.0/24 的三层网关接口配置 `ip helper-address 172.16.32.15`；该服务器的地址池和双向连通性必须可用。/24 的可用地址为 .1 至 .254，因此倒数第二个为 .253。B 设置设备默认网关而不是 DHCP 中继；C 指定其他 UDP 协议，不提供此服务器地址；D 拼写错误且不配置中继。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      }
+    },
+    {
+      "id": 727,
+      "original_qid": "Q955",
+      "before_sha256": "3b08e4d5967540ad8c397e8e104ffff9a93badb6b23730b78efe15af6af9a942",
+      "reason": "修正干扰项重复标签并解释分类",
+      "updates": {
+        "explanation": "C。分类根据 IP 地址、端口、协议、已有标记等特征识别属于某个类别的流量，以便应用对应策略。A 是定义匹配规则的配置手段；B 是分类后的队列或其他处理；D 是把标识写入报头的标记动作。分类和标记可结合使用，但分类本身不必修改报头。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      }
+    },
+    {
+      "id": 728,
+      "original_qid": "Q957",
+      "before_sha256": "fa328591635cafae324c2de00626d8a4d9bbf2d2eb552278c09fd9da62ba855a",
+      "reason": "原 B/D 等价导致多解，修正 B 并补 ACL 顺序",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume 10.0.1.1 is the DHCP server, and the shown inbound ACL 100 is recreated with the new permit statement before its deny-all entry. Which configuration enables DHCP relay for FastEthernet0/1 clients and permits server replies through the WAN ACL?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface FastEthernet0/1\n ip helper-address 10.0.1.1\n!\naccess-list 100 permit tcp host 10.0.1.1 eq 67 host 10.148.2.1"
+          },
+          {
+            "label": "B",
+            "text": "interface FastEthernet0/1\n ip helper-address 10.0.1.1\n!\naccess-list 100 permit udp host 10.0.1.1 eq 68 host 10.148.2.1"
+          },
+          {
+            "label": "C",
+            "text": "interface FastEthernet0/0\n ip helper-address 10.0.1.1\n!\naccess-list 100 permit udp host 10.0.1.1 eq 67 host 10.148.2.1"
+          },
+          {
+            "label": "D",
+            "text": "interface FastEthernet0/1\n ip helper-address 10.0.1.1\n!\naccess-list 100 permit udp host 10.0.1.1 eq bootps host 10.148.2.1"
+          }
+        ],
+        "explanation": "D。在接收客户端广播的 Fa0/1 设置 helper，并在 Fa0/0 入站 ACL 的 deny-all 之前允许来自 DHCP 服务器 UDP 源端口 bootps（67）的回复。A 是 TCP；B 的源端口 68 不符；C 将 helper 放到 WAN 接口。原题 B 的数字 67 与 D 的 bootps 等价，造成两个正确答案；本题将 B 改为 68。ACL 自上而下匹配，直接把 permit 追加在已存在的 deny-all 后面无效，因此题设明确重建顺序。仍须保证路由与 DHCP 地址池配置正确。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      },
+      "exhibit_path": "Examtopics/audit/exhibits/q728_image_agent.png",
+      "image_sha256": "257a2b9b554298af98a56885af6df54a9af517a5eb6e99c8c3cd62905435b753"
+    },
+    {
+      "id": 729,
+      "original_qid": "Q961",
+      "before_sha256": "5d3958df1d9a9d39e4450511687637c8da1ae2adadff231f47401b08ff2e3465",
+      "reason": "严重性阈值不更改单条消息固有级别，修正选项含义",
+      "updates": {
+        "prompt": "What is the purpose of configuring different syslog severity thresholds for messages sent to a remote logging server by different devices?",
+        "options": [
+          {
+            "label": "A",
+            "text": "to select the minimum severity of messages sent by each device"
+          },
+          {
+            "label": "B",
+            "text": "to set the exact number of messages stored in each local buffer"
+          },
+          {
+            "label": "C",
+            "text": "to identify the originating device for each message"
+          },
+          {
+            "label": "D",
+            "text": "to impose a per-second rate limit on messages"
+          }
+        ],
+        "explanation": "A。设置发送远程服务器的严重性阈值后，设备发送该等级及更严重（数值更小）的消息。例如阈值 warning（4）包括 0–4，不包括 5–7。阈值筛选消息，并不重新定义单条事件的严重性；可能影响消息数量但不能设定固定条数，来源识别和速率限制也属于不同配置。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      }
+    },
+    {
+      "id": 730,
+      "original_qid": "Q962",
+      "before_sha256": "3fc2876b1ea878e3e695ef82b93163d60d69485a6053659988075df1fb983e05",
+      "reason": "查看拓扑并指出 DHCP 池网关与 SVI 不一致",
+      "updates": {
+        "prompt": "Refer to the exhibit. The DHCP server has a pool for each subnet and is reachable from SW1. Which command, applied under SW1 interface VLAN 10, relays DHCP requests from VLAN 10 clients to the server?",
+        "explanation": "C。图中 DHCP 服务器是 192.168.20.2，客户端位于 VLAN 10，SW1 的 VLAN 10 三层接口为 192.168.10.1；因此在该 SVI 配置 `ip helper-address 192.168.20.2`。服务器需有正确地址池、可达的回程和适当的访问控制。图中 Net10 的 default-router 为 192.168.10.2，与所示 SW1 SVI .1 不一致：如 SW1 是唯一网关应修正地址池为 .1，否则客户端拿到地址也不一定能跨网段通信。A/D 指向 VLAN 10 地址，B 指向 VLAN 20 的交换机接口，均非题设服务器。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "sources": [
+          "https://www.rfc-editor.org/rfc/rfc5424.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+          "https://www.rfc-editor.org/info/rfc2474/",
+          "https://www.rfc-editor.org/rfc/rfc2597.html"
+        ]
+      },
+      "exhibit_path": "Examtopics/audit/exhibits/q730_image_agent.png",
+      "image_sha256": "58e3b6989883cbb109aec26e3a29cbee801ff456a5792aec0b320c8cbb4e8f26"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc5424.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/26704-nat-faq-00.html",
+    "https://www.rfc-editor.org/info/rfc2474/",
+    "https://www.rfc-editor.org/rfc/rfc2597.html"
+  ],
+  "limitations": "审查基于原题、原图和公开文档，未进行真实设备实验；改写题意之处见逐题记录。"
+}

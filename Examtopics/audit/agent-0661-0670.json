@@ -1,0 +1,304 @@
+{
+  "scope": "Q661-Q670 manual review and proposed direct corrections",
+  "corrections": [
+    {
+      "id": 661,
+      "original_qid": "Q869",
+      "before_sha256": "3ab12c911f3bcb2568da01567b9ae5a16ef723798782dd70412d299e024d9c92",
+      "reason": "修正SSID字符集、长度和安全性过度概括。",
+      "updates": {
+        "explanation": "C。SSID区分大小写；例如 `Company` 与 `company` 是不同的SSID值。SSID元素最多包含32个八位字节，长度以字节而非显示字符计算；可用字符及编码受设备实现限制。SSID是网络名称，本身不提供认证或加密。\n\nA没有必须同时包含数字和字母的通用要求；B不是Cisco专有安全特性；D无线网络可映射到VLAN，但SSID本身不定义交换机VLAN。"
+      }
+    },
+    {
+      "id": 662,
+      "original_qid": "Q870",
+      "before_sha256": "eeb58b9eb2beef489abb0ea2b35f949648ab553de302fa2efb351ae44e107814",
+      "reason": "取消SSID必须一一对应独立VLAN及服务端口适用所有型号的绝对描述。",
+      "updates": {
+        "explanation": "B。交换机与WLC分配系统端口之间的802.1Q trunk可在同一链路的数据路径上承载多个允许的VLAN；具体SSID、接口和VLAN映射取决于无线架构与配置，不要求每个SSID都映射到不同VLAN。\n\nA链路冗余需要其他设计而非trunk本身；C带外管理不是配置数据trunk的目的；D配置trunk不提供或消除物理冗余。"
+      }
+    },
+    {
+      "id": 663,
+      "original_qid": "Q872",
+      "before_sha256": "367c67aac4c7964c8c4a05ff89583fd9681afd888d9902e9d2ef8caa7c119d74",
+      "reason": "图中SSID广播已选；隐藏SSID并非认证或加密，54 Mbps是物理速率而非保证吞吐量。",
+      "updates": {
+        "prompt": "Refer to the exhibit. An administrator wants to disable the SSID name in beacon broadcasts and select a 2.4 GHz 802.11g radio policy with a maximum nominal PHY rate of 54 Mbps. Assume the WLC supports the listed policies. Which tasks meet these settings?",
+        "explanation": "C。图中Broadcast SSID已启用、Radio Policy为All；取消该勾选并选择802.11g only满足题设。802.11g工作于2.4 GHz，最高标称物理速率54 Mbps，并非应用吞吐量的保证。\n\nA包含5 GHz的802.11a；B仍广播SSID；D选择802.11a且仍广播SSID。隐藏SSID不构成有效认证或加密，不能代替WPA2/WPA3等安全机制；图中显示的WPA2/802.1X配置才与接入保护有关。"
+      }
+    },
+    {
+      "id": 664,
+      "original_qid": "Q873",
+      "before_sha256": "28d39f46ea95427f20148dcd16bd563b8245e60c54fb3e64a31d11ac188297de",
+      "reason": "修正老化不能保证抗MAC flooding或保证永远有表项空间，默认值依平台而异。",
+      "updates": {
+        "explanation": "A。交换机对动态学习的源MAC地址表项设置老化机制，长期没有被刷新时可删除相应条目，为其他动态条目腾出空间。老化时间依平台和配置而异，静态表项通常不按动态表项老化。老化本身不能保证表永不满，也不能阻止持续生成活跃源地址的MAC flooding攻击。\n\nB MAC move是地址所学习端口改变；C不是这里所问的机制；D dynamic learning负责学习源MAC，而非删除超时记录。"
+      }
+    },
+    {
+      "id": 665,
+      "original_qid": "Q875",
+      "before_sha256": "3e14a042868556c8dc3b0f68e4a2c3549331e21372f6ed574dd989fc687f120b",
+      "reason": "恢复选项CLI逐行格式，C补路由器侧trunk native VLAN 5，明确路由和主机前提，缩窄VLAN 1要求。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW1 and SW2 Gi0/0 access ports, the VLANs, host addressing and gateways, and R1 subinterfaces for VLANs 7, 9, 108 and native VLAN 5 are already configured correctly. Choose the switch configuration that permits inter-VLAN routing, uses VLAN 5 for untagged traffic on the shown trunk links, and excludes VLAN 1 from user data on those trunks.",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)# interface Gi0/1\n switchport mode trunk\n switchport trunk allowed vlan 5,7,9,108\n switchport trunk native vlan 5\nSW1(config)# interface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 5,7,9,108\nSW2(config)# interface Gi0/1\n switchport mode access\n switchport access vlan 7\nSW2(config)# interface Gi0/7\n switchport mode trunk\n switchport trunk allowed vlan 7,9,108"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)# interface Gi0/1\n switchport mode trunk\n switchport trunk allowed vlan 5,7,9,108\n switchport trunk native vlan 5\nSW1(config)# interface Gi0/2\n switchport mode access\n switchport trunk allowed vlan 7,9,108\nSW2(config)# interface Gi0/1\n switchport mode access\n no switchport access vlan 1\n switchport access vlan 7\nSW2(config)# interface Gi0/7\n switchport mode trunk\n switchport trunk allowed vlan 7,9,108\n switchport trunk native vlan 5"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)# interface Gi0/1\n switchport mode trunk\n switchport trunk allowed vlan 5,7,9,108\n switchport trunk native vlan 5\nSW1(config)# interface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 5,7,9,108\n switchport trunk native vlan 5\nSW2(config)# interface Gi0/1\n switchport mode access\n switchport access vlan 7\nSW2(config)# interface Gi0/7\n switchport mode trunk\n switchport trunk allowed vlan 5,7,9,108\n switchport trunk native vlan 5"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)# interface Gi0/1\n switchport mode trunk\n switchport trunk allowed vian 5,7,9,108\nSW1(config)# interface Gi0/2\n switchport mode trunk\n switchport trunk allowed vlan 7,9,108\nSW2(config)# interface Gi0/1\n switchport mode trunk\n switchport trunk allowed vlan 7\nSW2(config)# interface Gi0/7\n switchport mode trunk\n switchport trunk allowed vlan 5,7,9,108"
+          }
+        ],
+        "explanation": "C。图中SW1 Gi0/1与SW2 Gi0/7互联，SW1 Gi0/2连接R1；这三个端口均为trunk，允许VLAN 5、7、9、108，native VLAN设为5。SW2 Gi0/1为VLAN 7的access口。已假定路由器子接口、主机与其余接入口配置正确。\n\nA未在SW2互联口配置native VLAN 5或允许VLAN 5；B把路由器链路设为access且SW2 trunk未允许VLAN 5；D把PC口设为trunk并漏配必要VLAN，且含`vian`拼写错误。原C漏了SW1 Gi0/2的native VLAN设置，已补齐。将VLAN 1排除出用户数据的trunk允许列表不意味着所有控制协议帧都被禁用。"
+      }
+    },
+    {
+      "id": 666,
+      "original_qid": "Q876",
+      "before_sha256": "b5f714f646ade63d8b3d96c770dbbbee84fac1c6d09b17e3021a3ef0eef0a7fc",
+      "reason": "还原CLI换行，补充到C接口已启用和其他接口不发送的前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Router A has CDP enabled on Gi0/0/0 and Gi0/0/1, and no other CDP-enabled interfaces. How should Router A be configured so that it sends CDP information only toward Router C?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Router A# configure terminal\nRouter A(config)# no cdp run\nRouter A(config)# interface gi0/0/1\nRouter A(config-if)# cdp enable"
+          },
+          {
+            "label": "B",
+            "text": "Router A# configure terminal\nRouter A(config)# cdp run\nRouter A(config)# interface gi0/0/0\nRouter A(config-if)# no cdp enable"
+          },
+          {
+            "label": "C",
+            "text": "Router A# configure terminal\nRouter A(config)# cdp run\nRouter A(config)# interface gi0/0/1\nRouter A(config-if)# cdp enable"
+          },
+          {
+            "label": "D",
+            "text": "Router A# configure terminal\nRouter A(config)# cdp run\nRouter A(config)# interface gi0/0/0\nRouter A(config-if)# cdp enable"
+          }
+        ],
+        "explanation": "B。图中Router A的Gi0/0/0通向B，Gi0/0/1通向C。全局启用CDP并在Gi0/0/0接口执行 `no cdp enable`，题设已经启用的Gi0/0/1仍可向C发送。\n\nA关闭全局CDP，接口启用无法代替全局启用；C未关闭通往B的接口；D使通往B的接口保持启用。CDP为直连发现协议，配置禁用该接口上的收发。"
+      }
+    },
+    {
+      "id": 667,
+      "original_qid": "Q877",
+      "before_sha256": "3d9aa9170edbd74f2dea4c9afe3f309c27ef6a9060ae4b1924b529d7cf2c20e1",
+      "reason": "展图为10.0.0.252/30而非10.0.0.0/30；恢复代码格式并指出目标在ISP而非R1。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On the device shown, an administrator must turn off Cisco Discovery Protocol on the interface configured with the last usable address in the 10.0.0.252/30 subnet. Which command set meets the requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface gi0/1\n no cdp enable"
+          },
+          {
+            "label": "B",
+            "text": "interface gi0/0\n no cdp run"
+          },
+          {
+            "label": "C",
+            "text": "interface gi0/0\n no cdp advertise-v2"
+          },
+          {
+            "label": "D",
+            "text": "interface gi0/1\n clear cdp table"
+          }
+        ],
+        "explanation": "A。图中10.0.0.252/30的网络地址为.252，可用主机为.253和.254，广播地址为.255；最后可用地址.254位于ISP设备Gi0/1，因此在该设备的接口配置模式输入 `no cdp enable`。图中R1 Gi0/0为.253。\n\nB和C指向另一接口，且全局CDP命令不能替代接口禁用；D清除邻居表并不持续关闭CDP。原题写10.0.0.0/30，与图不符，已更正。"
+      }
+    },
+    {
+      "id": 668,
+      "original_qid": "Q878",
+      "before_sha256": "23bf170cc332efc8ec13fdc1cb08de47f756929d9292fb211570285c3ddb2531",
+      "reason": "避免对所有WLC机型及本地交换流量作绝对化断言。",
+      "updates": {
+        "explanation": "D。在题设传统WLC端口分类中，distribution system端口连接有线交换网络，承载正常AP与控制器之间的控制及集中转发数据。具体端口功能与平台架构有关；例如FlexConnect本地交换业务并不都穿过控制器。\n\nA redundancy端口用于高可用同步；B service端口用于带外管理；C console端口用于本地管理，均非此题所需的普通AP业务连接。"
+      }
+    },
+    {
+      "id": 669,
+      "original_qid": "Q879",
+      "before_sha256": "271444c368867616562812dfbc6e991b423f2ad39068bfe8e37c5d35be2e7a5e",
+      "reason": "限定AireOS 8.5.164.0，区分启用特性与启用后数据加密默认值可再调整，修正IPsec拼写和不可靠端口断言。",
+      "updates": {
+        "prompt": "On a supported Cisco AireOS 8.5.164.0 WLC, after the encrypted mobility tunnel feature is enabled, which encryption setting is enabled by default?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The tunnel uses the IPsec protocol for encapsulation."
+          },
+          {
+            "label": "B",
+            "text": "Control and data traffic encryption are enabled."
+          },
+          {
+            "label": "C",
+            "text": "The tunnel uses the EoIP protocol to transmit data traffic."
+          },
+          {
+            "label": "D",
+            "text": "TCP port 443 and UDP 21 are used."
+          }
+        ],
+        "explanation": "B。Cisco AireOS 8.5.164.0文档说明：启用控制器加密后控制与数据流量默认均加密，但数据加密可依网络需要另行禁用。特性本身并非所有设备默认启用，且有平台、对端及版本限制。\n\nA此功能使用CAPWAP DTLS而非题设所述IPsec；C加密模式的数据使用UDP 16667替代旧的EoIP；D不是此功能所列端口。具体控制与数据端口行为应按设备及版本文档和配置核验。"
+      }
+    },
+    {
+      "id": 670,
+      "original_qid": "Q880",
+      "before_sha256": "fc9120194859c4be6d249223870ab972fb6bb1b55292e3f2fb38081c226268f4",
+      "reason": "原题要求阻止具备P2P能力的客户端接入，原答案D误将流量隔离当作阻止关联。根据Cisco Wi-Fi Direct策略修正答案并限定适用对象。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For this WLAN, an administrator wants to prevent Wi-Fi Direct clients from associating, using the controller policy shown. Which setting should be applied?",
+        "answer": [
+          "A"
+        ],
+        "explanation": "A。将Wi-Fi Direct Client Policy设为Not-Allow可拒绝Wi-Fi Direct客户端关联该WLAN；图中该策略当前为Disabled。Cisco说明该策略的能力和适用条件取决于控制器版本及AP模式。\n\nD的P2P Blocking Action=Drop是限制受支持路径中的客户端间数据转发，不等于拒绝Wi-Fi Direct客户端关联，也不保证阻止所有直接无线链路；B的ACL取决于具体规则，不能由题目推断实现该功能；C的MFP针对管理帧保护，与Wi-Fi Direct客户端的关联策略不同。原答案D混淆设备关联控制与流量隔离，已改为A。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 661,
+      "content_answer_explanation": "SSID规范题；题干选项完整；C正确；原解析夸大ASCII和网络隔离，已修订。",
+      "image_code": "无图与CLI。",
+      "source_urls": [
+        "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/98138-ssid-bss.html"
+      ],
+      "original_sha256": "3ab12c911f3bcb2568da01567b9ae5a16ef723798782dd70412d299e024d9c92",
+      "corrected_answer": [
+        "C"
+      ]
+    },
+    {
+      "id": 662,
+      "content_answer_explanation": "WLC trunk题；四选项完整；B正确；原解析一SSID一VLAN的说法错误，已修订。",
+      "image_code": "无图与CLI。",
+      "source_urls": [
+        "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+      ],
+      "original_sha256": "eeb58b9eb2beef489abb0ea2b35f949648ab553de302fa2efb351ae44e107814",
+      "corrected_answer": [
+        "B"
+      ]
+    },
+    {
+      "id": 663,
+      "content_answer_explanation": "原图SSID broadcast已勾选、radio policy为All；原题误称安全和吞吐，限定指标后C正确。",
+      "image_code": "原图已查看，图示完整；无CLI。",
+      "source_urls": [
+        "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/98138-ssid-bss.html"
+      ],
+      "original_sha256": "367c67aac4c7964c8c4a05ff89583fd9681afd888d9902e9d2ef8caa7c119d74",
+      "corrected_answer": [
+        "C"
+      ]
+    },
+    {
+      "id": 664,
+      "content_answer_explanation": "MAC老化题；A正确；解析错误声称有效防MAC flooding，已删除。",
+      "image_code": "无图与CLI。",
+      "source_urls": [],
+      "original_sha256": "28d39f46ea95427f20148dcd16bd563b8245e60c54fb3e64a31d11ac188297de",
+      "corrected_answer": [
+        "A"
+      ]
+    },
+    {
+      "id": 665,
+      "content_answer_explanation": "图示PC VLAN及端口逐一核对；原C缺native VLAN，补齐前提及命令后C正确。",
+      "image_code": "原图已查看；四选项CLI已还原换行，原D拼写错误作为干扰项保留。",
+      "source_urls": [
+        "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+      ],
+      "original_sha256": "3e14a042868556c8dc3b0f68e4a2c3549331e21372f6ed574dd989fc687f120b",
+      "corrected_answer": [
+        "C"
+      ]
+    },
+    {
+      "id": 666,
+      "content_answer_explanation": "图示A的Gi0/0/0通B，Gi0/0/1通C；补全接口初始状态，B正确。",
+      "image_code": "原图已查看；各选项CLI恢复换行。",
+      "source_urls": [],
+      "original_sha256": "b5f714f646ade63d8b3d96c770dbbbee84fac1c6d09b17e3021a3ef0eef0a7fc",
+      "corrected_answer": [
+        "B"
+      ]
+    },
+    {
+      "id": 667,
+      "content_answer_explanation": "原图ISP Gi0/1为.254、R1 Gi0/0为.253；题干原子网错误，修正后A正确。",
+      "image_code": "原图已查看；选项CLI恢复换行。",
+      "source_urls": [],
+      "original_sha256": "3d9aa9170edbd74f2dea4c9afe3f309c27ef6a9060ae4b1924b529d7cf2c20e1",
+      "corrected_answer": [
+        "A"
+      ]
+    },
+    {
+      "id": 668,
+      "content_answer_explanation": "传统WLC接口功能题；D正确，删去所有数据必经WLC的绝对化表述。",
+      "image_code": "无图与CLI。",
+      "source_urls": [],
+      "original_sha256": "23bf170cc332efc8ec13fdc1cb08de47f756929d9292fb211570285c3ddb2531",
+      "corrected_answer": [
+        "D"
+      ]
+    },
+    {
+      "id": 669,
+      "content_answer_explanation": "8.5.164.0加密特性启用后控制和数据默认加密；B正确，限定版本并更正解析。",
+      "image_code": "无图与CLI。",
+      "source_urls": [
+        "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/encrypted_mobility_tunnel.html"
+      ],
+      "original_sha256": "271444c368867616562812dfbc6e991b423f2ad39068bfe8e37c5d35be2e7a5e",
+      "corrected_answer": [
+        "B"
+      ]
+    },
+    {
+      "id": 670,
+      "content_answer_explanation": "原题阻止具备直连能力客户端关联，D仅隔离流量；限定Wi-Fi Direct并改答案A。",
+      "image_code": "原图已查看，显示Wi-Fi Direct Clients Policy Disabled；无CLI。",
+      "source_urls": [
+        "https://www.cisco.com/c/en/us/td/docs/wireless/controller/7-6/configuration-guide/b_cg76/b_cg76_chapter_01000001.pdf"
+      ],
+      "original_sha256": "fc9120194859c4be6d249223870ab972fb6bb1b55292e3f2fb38081c226268f4",
+      "corrected_answer": [
+        "A"
+      ]
+    }
+  ],
+  "sources": {
+    "ssid": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/98138-ssid-bss.html",
+    "trunk": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html",
+    "mobility": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/encrypted_mobility_tunnel.html",
+    "direct": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/7-6/configuration-guide/b_cg76/b_cg76_chapter_01000001.pdf"
+  },
+  "images_directly_viewed": [
+    "exhibits/q663_agent.jpg",
+    "exhibits/q665_agent.jpg",
+    "exhibits/q666_agent.jpg",
+    "exhibits/q667_agent.jpg",
+    "exhibits/q670_agent.jpg"
+  ],
+  "limitations": "No live WLC or IOS tests; corrections require integration into shared source and generated files."
+}

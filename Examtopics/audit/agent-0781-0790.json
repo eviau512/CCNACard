@@ -1,0 +1,509 @@
+{
+  "scope": "Q781–Q790",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 781,
+      "original_qid": "Q1036",
+      "before_sha256": "601fe981e46f3c52c2f811ad549ac78c5bed05b330ad8e5bf4f2db65253a3ac3",
+      "reason": "C",
+      "updates": {
+        "prompt": "On switches that support both ISL and 802.1Q encapsulation and default to trunk encapsulation negotiation, configure both interconnecting ports as static trunks carrying only user VLANs 1–10. Which command set explicitly selects the industry-standard encapsulation?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode dynamic desirable\nchannel-protocol lacp\nswitchport trunk allowed vlan 1-10"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode trunk\nswitchport trunk allowed vlan 1-10\nswitchport trunk native vlan 11"
+          },
+          {
+            "label": "C",
+            "text": "switchport trunk encapsulation dot1q\nswitchport mode trunk\nswitchport trunk allowed vlan 1-10"
+          },
+          {
+            "label": "D",
+            "text": "switchport trunk encapsulation isl\nswitchport mode dynamic desirable\nchannel-group 1 mode desirable\nswitchport trunk allowed vlan except 11-4094"
+          }
+        ],
+        "explanation": "C。先在支持封装选择且默认 negotiate 的平台指定 dot1q，再设 trunk 与 allowed vlan 1-10；两端配置须兼容。B 未明确选择封装且 native 11 不在允许列表；A 没有显式选择标准封装且聚合无关；D 使用 Cisco ISL。只限制题设用户 VLAN，部分控制协议可能仍在 VLAN 1 交换；仅支持 dot1q 的平台可能没有 encapsulation 命令。"
+      },
+      "original_fields": {
+        "prompt": "Two switches have been implemented and all interfaces are at the default configuration level. A trunk link must be implemented between two switches with these requirements: • using an industry-standard trunking protocol • permitting VLANs 1-10 and denying other VLANs How must the interconnecting ports be configured?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode dynamic Channel-protocol lacp Switchport trunk allowed vlans 1-10"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode trunk Switchport trunk allowed vlans 1-10 Switchport trunk native vlan 11"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode trunk Switchport trunk encapsulation dot1q Switchport trunk allowed vlans 1-10"
+          },
+          {
+            "label": "D",
+            "text": "switchport mode dynamic desirable Channel-group 1 mode desirable Switchport trunk encapsulation isl Switchport trunk allowed vlan except 11-4094"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco Catalyst 交换机中继链路（Trunk Link）的标准封装协议（IEEE 802.1Q）与 VLAN 允许列表剪枝控制。\n1. 行业标准中继协议：\n   - IEEE 802.1Q（dot1q）是开放的国际工业标准中继协议，采用向标准以太网帧插入 4 字节 802.1Q 标签（Tag，包含 12 位 VLAN ID 与 3 位 802.1p 优先级）的机制。\n   - 相比之下，ISL（Inter-Switch Link）是 Cisco 早期的专有私有封装协议，非行业标准。\n2. 交换机默认配置与配置语法规则：\n   - 在支持双中继协议（dot1q 和 ISL）的经典 Cisco Catalyst 交换机（如 3560/3750 等）上，接口默认中继封装模式为 `negotiate`。如果未显式配置封装协议，直接输入 `switchport mode trunk` 会触发系统报错拒绝（`Command rejected: An interface whose trunk encapsulation is \"Auto\" can not be configured to \"trunk\" mode`）。\n   - 因此，标准配置流程必须先显式指定中继封装协议为标准 802.1Q：`switchport trunk encapsulation dot1q`；\n   - 随后将接口静态强制设置为中继模式：`switchport mode trunk`；\n3. VLAN 流量修剪（VLAN Allowed List）：\n   - 题目要求“仅放行 VLAN 1-10，阻断其他 VLAN”。\n   - 标准语法命令为：`switchport trunk allowed vlan 1-10`。这会精确将 Trunk 链路上允许穿越的 VLAN 集合限定为 1 至 10。\n\n• 正确选项剖析：\n选项 C（switchport mode trunk; Switchport trunk encapsulation dot1q; Switchport trunk allowed vlans 1-10）语法和逻辑完全严密：\n1. `switchport trunk encapsulation dot1q` 满足“使用行业标准中继协议（IEEE 802.1Q）”；\n2. `switchport mode trunk` 静态确立 Trunk 模式；\n3. `switchport trunk allowed vlans 1-10` 精准满足“放行 VLAN 1-10 并拒绝其他所有 VLAN”。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：使用了 `switchport mode dynamic`（动态协商模式，非稳定中继）和 `channel-protocol lacp`（链路聚合命令），题干并未要求配置以太通道。\n- 选项 B：缺少关键的前置命令 `switchport trunk encapsulation dot1q`，且无端添加了修改本征 VLAN 的命令 `switchport trunk native vlan 11`，不符合题目要求。\n- 选项 D：封装协议错误配置为 Cisco 专有私有协议 `isl`，且包含 DTP 协商与 Port-channel 无关命令，语法完全错误。\n\n• 考试要点与速记技巧：\n经典 Trunk 配置三步曲：\n1. 行业标准先封 Q（`switchport trunk encapsulation dot1q`）；\n2. 静态起中继（`switchport mode trunk`）；\n3. 放行指定 VLAN（`switchport trunk allowed vlan 1-10`）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "C",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      }
+    },
+    {
+      "id": 782,
+      "original_qid": "Q1037",
+      "before_sha256": "d7ae5aae3a151b68fbab4c9eefc9989e9e131fd3fce8ede639508712b2c8ca6b",
+      "reason": "C",
+      "updates": {
+        "prompt": "Refer to the exhibit. The full-duplex 10-Gbps interface reports an unexpectedly large collision counter and slow transfers. Which conclusion is justified from this snapshot?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A speed mismatch is conclusively established"
+          },
+          {
+            "label": "B",
+            "text": "Current output queue drops prove congestion"
+          },
+          {
+            "label": "C",
+            "text": "The abnormal counter warrants verification; the root cause is not established"
+          },
+          {
+            "label": "D",
+            "text": "The opposite port is definitely operating in half duplex"
+          }
+        ],
+        "explanation": "C。图中 Full Duplex、10000 Mbps，累计 collisions 为 8662416065，计数器从未清零；单张快照无法证明数值何时增加或确定原因。检查平台/驱动计数器含义、软件版本与对端链路，并在记录基线后观察增量，结合 CRC、丢包、接口及流量排查。全双工万兆链路不应直接假设对端回退半双工；5 分钟平均速率与零累计 output drops 也不能排除短暂拥塞。原题把巨大计数直接归因双工不匹配，证据不足。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. traffic that is flowing over interface TenGigabitEthemet0/0/0 experiences slow transfer speeds. What is the cause of this issue?",
+        "options": [
+          {
+            "label": "A",
+            "text": "speed conflict"
+          },
+          {
+            "label": "B",
+            "text": "queuing drops"
+          },
+          {
+            "label": "C",
+            "text": "duplex incompatibility"
+          },
+          {
+            "label": "D",
+            "text": "heavy traffic congestion"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查万兆以太网（10GBASE）运行状态排错与全双工链路冲突（Collisions）的深层诊断机理。\n题目 Exhibit 输出的关键参数研判：\n1. 接口运行状态：`TenGigabitEthernet0/0/0 is up, line protocol is up`，物理层与数据链路层双 UP。\n2. 速率与双工：`Full Duplex, 10000Mbps, link type is force-up`，接口强制工作在全双工（Full Duplex）、10 Gbps 速率下。\n3. 队列与丢包统计：\n   - `Input queue: 0/375/0/0 (drops: 0); Total output drops: 0` —— 没有任何队列尾丢弃（No Queue Drops），彻底排除拥塞丢包。\n   - `5 minute input rate 6.16 Mbps, output rate 11.21 Mbps` —— 实际传输速率仅约 11 Mbps，在 10,000 Mbps 的万兆带宽下负载极轻（利用率不足 0.2%），彻底排除网络拥塞。\n4. 致命故障指标：\n   `0 output errors, 8662416065 collisions, 1 interface resets`\n   在输出行中记录了高达 86 亿余次的严重冲突（8662416065 collisions）！\n5. 网络底层原理裁决：\n   - 根据 IEEE 802.3 规范，在标准的全双工（Full Duplex）以太网通信中，数据发送（Tx）与数据接收（Rx）拥有完全独立的专用物理通道/光纤，**全双工模式下 CSMA/CD 冲突检测机制是完全关闭的，理论上冲突计数器必须永远恒为 0**！\n   - 一旦在显示为 Full Duplex 的接口上监测到海量的冲突统计（Collisions），唯一的根本原因就是链路两端发生了**双工不匹配（Duplex Incompatibility / Duplex Mismatch）**！例如本端强制为 Full Duplex，而直连对端因自动协商失效或其他误配置回退成了 Half Duplex（半双工）。半双工端在收发冲突时触发退避并产生碰撞碎影片段，导致万兆接口性能极速恶化、传输速率异常缓慢。\n\n• 正确选项剖析：\n选项 C（duplex incompatibility，双工不匹配 / 双工不兼容）完全正确。全双工接口上出现天文数字级的冲突（Collisions），是网络故障排查中最典型、无可辩驳的双工不匹配金标准现象。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（speed conflict，速率冲突）：万兆以太网若发生速率协商不匹配（如一端 10G 另一端 1G），物理层根本无法同步时钟建立载波，接口状态必然是 down / down，绝不可能保持在 up / up 状态。\n- 选项 B（queuing drops，队列丢弃）：输出中明确显示 `drops: 0` 和 `Total output drops: 0`，根本没有任何排队丢包。\n- 选项 D（heavy traffic congestion，严重流量拥塞）：输出中 5 分钟平均流量仅为 6-11 Mbps，相比万兆（10,000 Mbps）物理链路容量微乎其微，毫无拥塞可言。\n\n• 考试要点与速记技巧：\n双工排错铁律：“全双工下撞出火花（Collisions > 0），百分之百是双工不兼容（Duplex Incompatibility / Mismatch）！”"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "C",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q782_agent.jpg",
+      "image_sha256": "785fbebec7c364dfa9021edf647b7e3d9fd67ae5bc0ab51806e05f3cbba2ef59"
+    },
+    {
+      "id": 783,
+      "original_qid": "Q1039",
+      "before_sha256": "fcd127363546b213e9287aed10b17bfec6e0868526f0e1e8e0b323166c58384f",
+      "reason": "A",
+      "updates": {
+        "prompt": "Refer to the exhibit. Using the MAC address shown for R2, which IPv6 address results from applying modified EUI-64 to the workstation LAN /64 prefix? Treat the options as computed addresses, not IOS configuration commands.",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:DB8:D8D2:1009:10A0:ABFF:FECC:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:DB8:D8D2:1009:1230:ABFF:FECC:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:DB8:D8D2:1009:4347:31FF:FF47:0"
+          },
+          {
+            "label": "D",
+            "text": "2001:DB8:D8D2:1009:12A0:AB34:FFCC:1"
+          }
+        ],
+        "explanation": "A。图示 R2 MAC 为 12-a0-ab-cc-00-01；首字节异或 02 得 10，中间插入 ff:fe，接口 ID 得 10a0:abff:fecc:0001，与 2001:db8:d8d2:1009::/64 拼接为 A。B 未正确翻转首字节及第二字节，C、D 的接口 ID 也不符合。若在 IOS 生成地址，应按平台支持使用 `ipv6 address 2001:DB8:D8D2:1009::/64 eui-64`；图中标示的 MAC 需确为所配置 LAN 接口使用的地址。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The iPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. Which address must be used?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:10A0:ABFF:FECC:1 eui-64"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:1230:ABFF:FECC:1 eui-64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:4347:31FF:FF47:0 eui-64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:12A0:AB34:FFCC:1 eui-64"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查根据 MAC 地址计算 Modified EUI-64 格式 IPv6 接口标识符（Interface ID）的标准数学算法（RFC 4291）。\n拓扑图参数提取：\n- 路由器 R2 上的局域网（Workstations LAN segment）分配的前缀为：`2001:DB8:D8D2:1009::/64`。\n- 拓扑中明确标注 R2 的 MAC 地址为：`12-a0-ab-cc-00-01`。\nRFC 4291 Modified EUI-64 计算全流程详解：\n1. 步骤一：MAC 地址二分拆解\n   将 48 位（6 字节）MAC 地址均分为前后两半：\n   - 前 24 位（OUI）：`12-a0-ab`\n   - 后 24 位（NIC 扩展标识）：`cc-00-01`\n2. 步骤二：反转首字节第 7 位（U/L 全局/本地唯一性位）\n   - 提取 MAC 地址的第 1 个字节：十六进制 `0x12`；\n   - 转换为 8 位二进制：`0001 0010`；\n   - 在 IEEE 802 MAC 规范中，从高位到低位（从左往右）：\n     - 第 0-5 位为厂商分配位（`000100`）；\n     - 第 6 位（即从左数第 7 位）为 Universal/Local (U/L) 位，当前值为 `1`；\n     - 第 7 位为单播/组播（I/G）位，当前值为 `0`；\n   - 根据 RFC 4291 规则，必须对 U/L 位进行按位取反（XOR 0x02）：\n     原二进制 `0001 0010` 取反第 7 位后变为 `0001 0000`；\n   - 二进制 `0001 0000` 转换回十六进制即为 `0x10`！\n   - 因此，首字节 `12` 转换为 `10`。\n3. 步骤三：在中间插入固定的 16 位填充字节 `FF:FE`\n   拼接前后两部分：`10-a0-ab` + `ff-fe` + `cc-00-01`\n   形成 64 位接口 ID：`10:a0:ab:ff:fe:cc:00:01`。\n4. 步骤四：按 16 位一组（Hextet）组合并压缩前导零\n   - 第 1 组：`10a0`\n   - 第 2 组：`abff`\n   - 第 3 组：`fecc`\n   - 第 4 组：`0001` -> 省略前导零压缩为 `1`\n   - 接口 ID 最终形式为：`10A0:ABFF:FECC:1`。\n5. 步骤五：拼接 /64 网络前缀并生成配置命令\n   - 将网络前缀 `2001:DB8:D8D2:1009::` 与接口 ID 拼接；\n   - 得到完整地址：`2001:DB8:D8D2:1009:10A0:ABFF:FECC:1`。\n   - 对应的 Cisco IOS 接口配置命令为：`ipv6 address 2001:DB8:D8D2:1009:10A0:ABFF:FECC:1 eui-64`。\n\n• 正确选项剖析：\n选项 A（ipv6 address 2001:DB8:D8D2:1009:10A0:ABFF:FECC:1 eui-64）计算过程每一个十六进制字符均完全吻合上述 RFC 4291 推导结果（首字节 12 变 10，中间插入 FFFE，尾部 0001 压缩为 1），是标准答案。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（ipv6 address 2001:DB8:D8D2:1009:1230:ABFF:FECC:1 eui-64）：前缀首组错误写成了 `1230`，未对首字节 0x12 执行 U/L 位的正确取反。\n- 选项 C（ipv6 address 2001:DB8:D8D2:1009:4347:31FF:FF47:0 eui-64）：使用的是完全不相干的 MAC 地址计算结果，属于随机混淆干扰项。\n- 选项 D（ipv6 address 2001:DB8:D8D2:1009:12A0:AB34:FFCC:1 eui-64）：插入的填充字段出现了数值错误（变成了 AB34），且首字节未取反。\n\n• 考试要点与速记技巧：\nEUI-64 三步算号法：\n1. 首字节异或 0x02（`12` XOR `02` = `10`）；\n2. 中间硬塞 `FFFE`（`abff:fecc`）；\n3. 尾巴去前导零（`0001` 变 `1`）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "A",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q783_agent.jpg",
+      "image_sha256": "178e0e7c1e7487d8300d15e4d39007717136d1d0128aae21eecf53e13d095839"
+    },
+    {
+      "id": 784,
+      "original_qid": "Q1042",
+      "before_sha256": "49604b471b15809aa5e3788fbedfee9919fb2417e9d3a551a8b8aab01d611461",
+      "reason": "B",
+      "updates": {
+        "explanation": "B。Syslog severity/level 表示事件严重程度，0 为 Emergency、7 为 Debug；服务器可依级别规则将消息写入不同文件。facility 表示消息类别或来源，message body 是文本，process ID 标识进程，均非题目所求级别。Cisco 消息中的 FACILITY 标签与 RFC syslog priority 中的 facility 术语相关但不是简单一一对应；服务器过滤与文件去向取决于具体配置。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查系统日志架构（Syslog Protocol, RFC 5424）的消息格式与严重性级别（Severity Level）过滤准则。\n1. Cisco 设备 Syslog 标准报文结构：\n   `%FACILITY-SEVERITY-MNEMONIC: message-text`\n   - Facility（设施/源模块）：标识产生该日志事件的系统软硬件模块（如 SYS 代表系统内核、OSPF 代表动态路由协议、LINK 代表以太网链路、SEC 代表安全审计）。\n   - Severity Level（严重级别）：用 0 到 7 的单调递增数字，专门且量化地定义了**该事件在网络运维中的严重性与重要程度（Importance）**：\n     - Level 0（Emergency）：紧急，系统不可用；\n     - Level 1（Alert）：警报，需要立即采取纠正措施；\n     - Level 2（Critical）：严重，关键部件出现故障；\n     - Level 3（Error）：错误，运行发生错误；\n     - Level 4（Warning）：警告，可能存在潜在异常；\n     - Level 5（Notification）：通知，正常但重要的状态迁移（如接口 UP/DOWN）；\n     - Level 6（Informational）：信息，常规管理消息；\n     - Level 7（Debugging）：调试，最详细的排错输出。\n2. 业务需求研判：\n   管理员希望 Syslog 服务器能够“根据消息的重要程度（importance）将传入的消息过滤并归档到不同的文件中”，在日志协议字段中，直接决定并衡量重要程度的唯一标准指标就是“级别”（Level / Severity）。\n\n• 正确选项剖析：\n选项 B（level，级别）完全正确。在 syslog 守护进程（如 rsyslog、syslog-ng）配置规则中，正是通过匹配 Severity Level（如 `*.crit /var/log/critical.log`，`*.err /var/log/errors.log`）来依据事件的重要性执行分流存储。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（message body，消息正文）：消息体包含详细的动态文本描述（message-text），内容杂乱多变，无法作为量化重要程度的标准化过滤基准。\n- 选项 C（facility，设施）：设施标识的是产生日志的“功能组件来源”（如邮件、内核、认证、本地设备），只说明“是谁发出的”，不能衡量“该事件是否重要”（例如 OSPF 既可以发出普通的邻居建立通知 Level 5，也可以发出邻居超时的错误 Level 3）。\n- 选项 D（process ID，进程标识符）：操作系统内部为运行实例分配的 PID 数字，与事件的重要程度毫无关系。\n\n• 考试要点与速记技巧：\nSyslog 字段分工明晰：\n- 按“来源模块”分流查 Facility；\n- 按“重要程度（Importance）”分流必看 Level（0-7 级）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "B",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      }
+    },
+    {
+      "id": 785,
+      "original_qid": "Q1044",
+      "before_sha256": "abd0b9d5b1795881c489da1672a7f11bc9acc46fa944178deebccddeb6c2cf29",
+      "reason": "B",
+      "updates": {
+        "prompt": "On a Cisco AireOS WLC using the usual default interface roles, which interface is used for in-band administration and communication with lightweight access points?",
+        "explanation": "B。AireOS 管理接口用于控制器带内管理，并通常承担轻量 AP 的发现与控制通信。console 是本地串行管理，service port 用于带外维护，virtual interface 用于部分客户端相关功能。具体 AP-manager 接口、端口与软件型号可影响部署，不能把默认设计说成所有 WLC 的唯一实现。"
+      },
+      "original_fields": {
+        "prompt": "Which interface or port on the WLC is the default for in-band device administration and communications between the controller and access points?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）各逻辑/物理接口的功能定位与 AP 交互机制。\nCisco WLC 接口体系核心分类：\n1. 管理接口（Management Interface）：\n   - 性质：必须配置的静态、带内（In-band）三层逻辑接口。\n   - 核心功能：\n     1. 控制器带内管理：管理员通过 Web GUI（HTTPS）或 CLI（SSH）访问控制器；\n     2. 控制器与轻量化 AP（Lightweight AP）之间的核心通信信道：所有 AP 的 CAPWAP 发现、加入控制隧道（CAPWAP Control Port UDP 5246）、Keepalive 心跳维持以及 AP 镜像固件下载，默认全部以此管理接口为终结点；\n     3. 与企业外部认证服务器（RADIUS/TACACS+）、NTP、Syslog 进行交互。\n2. 服务端口（Service Port）：\n   - 属于独立的物理 10/100/1000 以太网电口，专用于带外管理（Out-of-band, OOB）与灾难恢复，该端口所连网络在三层上不可与 AP 通信。\n3. 虚拟接口（Virtual Interface）：\n   - 逻辑伪接口（默认 IP 通常为 1.1.1.1），专门用于无线客户端 Web 认证重定向（Web Auth / Captive Portal）和 DHCP 中继支持，不与 AP 建立通信隧道。\n4. 控制台端口（Console Port）：\n   - 物理串口，仅用于本地终端字符界面调试。\n\n• 正确选项剖析：\n选项 B（management interface，管理接口）完全吻合定义。管理接口是 WLC 系统中承担带内设备管理以及与所有轻量化 AP 进行 CAPWAP 控制通信的默认核心接口。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（console port，控制台端口）：物理异步串行接口，用于管理员使用 Console 线直连进行灾难配置，不支持任何 IP 网络协议包，更无法与 AP 通信。\n- 选项 C（virtual interface，虚拟接口）：用于处理客户端 Web Auth 登录页面的本地 DNS/HTTP 劫持重定向，不承载与 AP 的控制或管理协议。\n- 选项 D（service port，服务端口）：属于带外（OOB）物理维护接口，位于隔离的非路由网络中，控制器绝对不会使用服务端口与下属 AP 进行批量隧道通信。\n\n• 考试要点与速记技巧：\nWLC 接口口诀：“AP 建隧带内管，全靠管理接口（Management）；网页认证重定向，虚拟接口（Virtual 1.1.1.1）帮；带外救援服务口（Service Port）”。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "B",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      }
+    },
+    {
+      "id": 786,
+      "original_qid": "Q1045",
+      "before_sha256": "6880b22fe5db7d5127f61ea168054b53e13b8dfb61c06306df682cd3770c0182",
+      "reason": "B",
+      "updates": {
+        "type": "Single Choice",
+        "prompt": "Refer to the exhibit. The CPE must normally split IPv4 destinations by their highest bit between ISP1 and ISP2 and retain a less-specific default via each ISP for backup. Assume each next hop resolves only through its own connected ISP link and is withdrawn on link failure; both ISPs support the return path. Which single command set provides this behavior?",
+        "answer": [
+          "B"
+        ],
+        "explanation": "B。0.0.0.0/1 和 128.0.0.0/1 分别匹配目的地址的两半，优先于 /0；两条 /0 作为更不具体的备用。链路失效时在题设明确的下一跳撤销条件下，受影响的 /1 与对应 /0 撤销，另一条 /0 可承载流量。实际分流量不保证 50/50；单靠静态路由未必发现上游故障，递归解析及 IP SLA/track 等需按设计处理。C 为等价默认路由但不按最高位拆分；D 没有备份 /0；E 仅主备；A 的 AD 255 不可安装且缺对另一半的有效主路由。原题同时把 C、D 当成两个必须共同配置的答案，与冗余条件不符。"
+      },
+      "original_fields": {
+        "type": "Multiple Choice",
+        "prompt": "Refer to the exhibit. A network administrator configures the CPE to provide internet access to the company headquarters. traffic must be loadbalanced via ISP1 and ISP2 to ensure redundancy. Which two command sets must be configured on the CPE router? (Choose two.)",
+        "answer": [
+          "C",
+          "D"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查广域网出口路由器（CPE）双上行链路的静态路由负载均衡（Load Balancing）与冗余备份设计。\n拓扑与需求分析：\n- 公司总部 CPE 路由器通过双链路分别直连 ISP1（下一跳 IP 为 198.51.100.1）和 ISP2（下一跳 IP 为 203.0.113.1）。\n- 核心需求：“Traffic must be loadbalanced via ISP1 and ISP2 to ensure redundancy”（流量必须在 ISP1 和 ISP2 之间实现负载均衡以确保冗余）。\n实现方案深度剖析：\n1. 方案一：等价多路径（ECMP）默认路由（选项 C）\n   - 配置两条完全相同的默认路由，指向两个不同的运营商下一跳，且管理距离（AD）保持默认值 1：\n     `ip route 0.0.0.0 0.0.0.0 198.51.100.1`\n     `ip route 0.0.0.0 0.0.0.0 203.0.113.1`\n   - 工作机制：Cisco IOS CEF（Cisco 特快转发）检测到两条开销和 AD 完全相等的默认路由，会将两条路由同时装入 FIB 转发表，自动基于源目 IP 五元组哈希算法执行逐流（Per-flow）ECMP 负载均衡；一旦某条上行链路物理中断，对应的默认路由自动失效，全部流量无缝切换至另一条 ISP，满足高可用冗余。\n2. 方案二：全地址空间对半拆分汇总路由（选项 D）\n   - 将整个 IPv4 公网地址空间（0.0.0.0 - 255.255.255.255）利用掩码 128.0.0.0（/1）精确对半划分为两个等大的超网段：\n     - 前半部（0.0.0.0/1，覆盖 0.0.0.0 至 127.255.255.255）：`ip route 0.0.0.0 128.0.0.0 198.51.100.1`（出 ISP1）；\n     - 后半部（128.0.0.0/1，覆盖 128.0.0.0 至 255.255.255.255）：`ip route 128.0.0.0 128.0.0.0 203.0.113.1`（出 ISP2）。\n   - 工作机制：根据目的 IP 的最高位（0 还是 1），系统将访问全球不同网站的流量自然对半疏导至不同的 ISP，在工程中亦是极为经典的粗粒度静态负载分流技巧。\n\n• 正确选项剖析：\n选项 C（ip route 0.0.0.0 0.0.0.0 198.51.100.1; ip route 0.0.0.0 0.0.0.0 203.0.113.1）是 Cisco 题库中最为核心的标准得分项（标准双默认路由 ECMP 负载均衡）。同时，选项 D（拆分 /1 汇总路由）同样代表了另一种有效的互补性负载均衡配置。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：在两条默认路由末尾显式指定了管理距离 255（`ip route ... 255`）。在 Cisco IOS 中，管理距离为 255 的路由被系统视为不可信路由，永远不会被装入路由表执行转发（Dead route），导致完全断网。\n- 选项 B：同时混配了 4 条重叠的路由，逻辑冗余冲突。\n- 选项 E：在第二条路由末尾指定了管理距离 2（`ip route ... 203.0.113.1 2`）。这构成了典型的“浮动静态路由”（Floating Static Route），此时 ISP2 仅充当主备冷备份（Backup Only），在主链路存活时根本不承担任何分流转发，违背了题目“负载均衡（Loadbalanced）”的核心前提。\n\n• 考试要点与速记技巧：\n双出口选路速查：\n- 负载均衡（ECMP）——两条默认路由同 AD（选项 C）；\n- 主备冷冗余（Backup）——后一条必须加大 AD 搞浮动（选项 E）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and corrected",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "B",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q786_agent.jpg",
+      "image_sha256": "1f3c9c77ebc81227f4fcdaa58119818489cc0efdfcd75264e11c323c3eecd2c2"
+    },
+    {
+      "id": 787,
+      "original_qid": "Q1046",
+      "before_sha256": "043791244d45741112808f9e991c955ea8dac59843403a5e8dbc4c79d5e91e71",
+      "reason": "C",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW1 currently has a PAgP group 2. The engineer removes the incompatible existing group configuration before rebuilding it. Which SW1 physical-interface command set enables negotiated LACP with a different-vendor switch configured compatibly, using local group number 2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface port-channel 2\nchannel-group 2 mode desirable"
+          },
+          {
+            "label": "B",
+            "text": "interface fastethernet 1/1\nchannel-group 2 mode on"
+          },
+          {
+            "label": "C",
+            "text": "interface fastethernet 1/1\nchannel-group 2 mode active"
+          },
+          {
+            "label": "D",
+            "text": "interface port-channel 2\nchannel-group 2 mode auto"
+          }
+        ],
+        "explanation": "C。图示原 group 2 为 PAgP；清除不兼容旧配置后，物理成员接口 `channel-group 2 mode active` 使用 LACP，另端需支持并兼容 active 或 passive，成员配置须匹配。A/D 在逻辑接口上配置成员且是 PAgP 模式；B 是静态 on，可与兼容静态聚合互通但不进行 LACP 协商，故不满足题设。组号为本地标识，不必与对端相同。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A network engineer updates the existing configuration on interface fastethernet1/1 switch SW1. It must establish an EtherChannel by using the same group designation with another vendor switch. Which configuration must be performed to complete the process?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface port-channel 2 Channel-group 2 mode desirable"
+          },
+          {
+            "label": "B",
+            "text": "interface fastethernet 1/1 Channel-group 2 mode on"
+          },
+          {
+            "label": "C",
+            "text": "interface fastethernet 1/1 Channel-group 2 mode active"
+          },
+          {
+            "label": "D",
+            "text": "interface port-channel 2 Channel-group 2 mode auto"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查跨厂商多供应商环境下以太通道（EtherChannel）的协议选型与 Cisco IOS 命令行规范。\n题目 Exhibit 关键诊断信息研判：\n1. `SW1#show etherchannel` 当前输出显示：\n   - 通道组编号为：`Group: 2`\n   - 当前使用的协议为：`Protocol: PAGP`\n2. 业务约束与跨厂商需求：\n   - 工程师需要更新 SW1 接口 FastEthernet 1/1 的配置；\n   - 约束一：使用相同的组号（Group 2）；\n   - 约束二：“with another vendor switch”（与另一家第三方非 Cisco 厂商交换机对接）。\n3. 协议选型标准判定：\n   - PAgP（Port Aggregation Protocol，端口聚合协议）：是 Cisco 公司的私有专有协议，其模式包含 `auto` 和 `desirable`。非 Cisco 设备（如 Juniper、华为、Arista、H3C 等）原生不支持 PAgP 协议，二者之间绝对无法通过 PAgP 协商成功！\n   - LACP（Link Aggregation Control Protocol，链路聚合控制协议）：由 IEEE 802.3ad（现融入 IEEE 802.1AX）定义的国际开放行业标准，支持所有网络厂商设备之间的互通聚合。其模式包含 `active`（主动）和 `passive`（被动）。\n   - 因此，要与第三方厂商交换机建立 EtherChannel，SW1 必须放弃 PAgP，转而使用 LACP 协议（模式设为 active 或 passive）。\n4. Cisco IOS CLI 配置视图军规：\n   - 将物理端口绑定到通道组的命令是：`channel-group <number> mode <mode>`；\n   - 该命令**必须且只能在物理接口视图（Physical Interface，如 `interface FastEthernet 1/1`）下键入**，万万不能进入逻辑接口 `interface port-channel 2` 下配置！进入物理接口配置后，系统会自动创建并关联逻辑的 Port-channel 2。\n\n• 正确选项剖析：\n选项 C（interface fastethernet 1/1; channel-group 2 mode active）完全正确：\n1. 配置视图完全正确，进入物理接口 `interface FastEthernet 1/1`；\n2. 组号沿用 Group 2；\n3. 模式设置为 `active`，主动启用行业标准的 IEEE 802.3ad LACP 协议，实现与第三方异构厂商交换机的无缝跨品牌链路聚合。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：存在双重错误。其一，错误地在逻辑端口 `interface port-channel 2` 视图下配置 `channel-group`，CLI 会直接报语法错误拒绝；其二，使用了 `mode desirable`，属于 Cisco 专有 PAgP 协议，第三方设备无法识别。\n- 选项 B（interface fastethernet 1/1; channel-group 2 mode on）：`mode on` 是不协商任何协议的硬捆绑，且题目要求“establish an EtherChannel by using the same group designation with another vendor switch”，使用标准协议主动建链应首选 LACP `active`。\n- 选项 D：同样错误地在逻辑接口 `interface port-channel 2` 下配置，且 `mode auto` 属于 Cisco 专有 PAgP 协议。\n\n• 考试要点与速记技巧：\nEtherChannel 跨厂商必背军规：\n- 对接他厂（Other Vendor）必选 LACP（`active / passive`），Cisco 专有 PAgP（`desirable / auto`）见者秒杀；\n- 绑组命令下物理口（`interface Fa1/1`），切勿误入 Port-channel 逻辑口！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "C",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q787_agent.jpg",
+      "image_sha256": "aed213123398ad04b6522b27470fb5058755fa57830b1ab473f8365c0cc6760e"
+    },
+    {
+      "id": 788,
+      "original_qid": "Q1048",
+      "before_sha256": "205cb870b901a1868a91bd0fe13a477e93e39414080660aa6b6409edbc5ad5bf",
+      "reason": "A",
+      "updates": {
+        "prompt": "For a Cisco AireOS WLC deployment using LAG, which switch-side load-balancing mode is typically recommended by Cisco?",
+        "explanation": "A。Cisco 的 AireOS 部署指南通常推荐交换机对发往 WLC 的流量使用 source-destination IP 哈希。多个不同源/目的 IP 组合有助分散流，但成员选择取决于设备、流量和哈希实现；单流一般仍落在一条链路上，均匀分配并无保证。仅使用目的 IP 在大量流都指向同一 WLC IP 时可能集中；MAC 哈希效果也取决于二层路径和 MAC 分布。"
+      },
+      "original_fields": {
+        "prompt": "What is the recommended switch load-balancing mode for Cisco WLCs?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）与上联交换机互联时，以太网通道（EtherChannel / LAG）的负载均衡（Load Balancing）模式选择原理。\n1. 在 Cisco 集中式无线网络架构中，AP 与 WLC 之间通过 CAPWAP/LWAPP 协议建立控制与数据隧道（Control and Data Tunnels），客户端的所有上行与下行流量均被封装在 UDP 报文内进行传输。\n2. 当 WLC 采用链路聚合（LAG）与上层二层/三层交换机互联时，交换机侧的 EtherChannel 负载均衡哈希算法直接决定了流量如何在多条成员物理链路间分配：\n   - 如果采用基于 MAC 地址的哈希（如 `src-dst-mac` 或 `dst-mac`）：由于同一 AP 发出的所有 CAPWAP 报文源 MAC 相同，所有到达 WLC 的报文目的 MAC 均相同（WLC 虚拟/物理端口 MAC）。这将导致哈希计算结果完全恒定，所有流量被强制分流到同一条物理链路，造成严重的“单链路拥塞、其他链路空闲”的负载失衡。\n   - 如果采用基于源-目的 IP 地址的哈希（`source-destination IP address`，即 `src-dst-ip`）：不同 AP 拥有独立的 IP 地址，且外部客户端/服务器的 IP 地址高度分散，源 IP 与目的 IP 组合呈现良好的伪随机散列特性。交换机哈希引擎能均匀将数据流打散到各个物理成员端口。\n3. 因此，Cisco 官方部署指南（Cisco Wireless Controller Configuration Guide）明确推荐：在连接 Cisco WLC 的交换机端口通道上，负载均衡模式应配置为基于源和目的 IP 地址（`src-dst-ip`）。\n\n• 正确选项剖析：\n选项 A（source-destination IP address）：\n通过配置 `port-channel load-balance src-dst-ip`，交换机基于数据包的源 IP 和目的 IP 执行异或哈希运算，能够有效穿透 CAPWAP 的二层单一 MAC 限制，在各 AP 与 WLC 通信之间实现均衡的物理链路分摊，是 Cisco 官方强烈推荐的最佳实践配置，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（destination IP address）：若仅基于目的 IP 进行哈希，所有从 AP 发往 WLC 的下行流量（目的 IP 均为 WLC 的管理或动态接口 IP）将具有完全相同的哈希值，全部挤在一条链路上，无法实现下行负载均衡。\n- 选项 C（destination MAC address）：仅基于目的 MAC 地址，发往 WLC 的所有帧目的 MAC 相同，将全部落入单个物理端口，毫无负载均衡效果。\n- 选项 D（source-destination MAC address）：虽然这是传统以太网交换机的常见默认模式，但在无线集中式架构下，源 MAC 往往仅来自几台汇聚交换机或 AP，目的 MAC 恒为 WLC，MAC 组合数量极度匮乏，必然导致严重的极化与单边拥塞。\n\n• 考试要点与速记技巧：\n- WLC 聚合交换机负载均衡口诀：“无线 WLC 连交换，负载均衡 IP 算（src-dst-ip），避免 MAC 撞单线”。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "A",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      }
+    },
+    {
+      "id": 789,
+      "original_qid": "Q1049",
+      "before_sha256": "1e02bc1d6ab73edb11158ff2cf56286c2b9a457cc5e22ee1d7b4eaed2d37a005",
+      "reason": "D",
+      "updates": {
+        "explanation": "D。802.11a 工作在 5 GHz，通常比 2.4 GHz 的 802.11b/g 有更多可用不重叠的 20 MHz 信道，适合需要更多信道的规划；实际数量受地区法规、设备及 DFS 限制。A 成本受设备和部署影响；B 所述 2.4 GHz 干扰源并非 802.11a 的同频干扰；C 单一 802.11a 无线电不直接兼容 2.4 GHz 的 b/g，但双频设备可以分别支持。更多信道不保证消除干扰。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 射频工作频段、调制技术与信道容量规划（802.11a 与 802.11b/g 的对比）。\n1. 802.11b 与 802.11g 特性：\n   - 工作在 2.4 GHz ISM 频段。\n   - 频谱资源极度有限：在北美及大多数国家，2.4 GHz 仅提供 3 个互不重叠（Non-overlapping）的 20 MHz 信道（信道 1、6、11）。\n   - 频段拥挤且受到大量非 Wi-Fi 设备（如微波炉、蓝牙、无绳电话等）的严重电磁干扰。在多 AP 高密度部署时，极易产生严重的同频干扰（CCI）和邻频干扰（ACI）。\n2. 802.11a 特性：\n   - 工作在 5 GHz UNII 频段，采用正交频分复用（OFDM）技术，最大物理层速率达 54 Mbps。\n   - 频谱资源极度丰富：5 GHz 频段拥有多达 23~25 个互不重叠的 20 MHz 信道（涵盖 UNII-1、UNII-2、UNII-2 Extended 及 UNII-3）。\n   - 当无线局域网需要在同一物理区域内规划大量互不重叠信道以消除同频干扰、提升整体网络容量（Throughput / Capacity）时，802.11a（以及后续的 802.11n/ac/ax 5GHz）是替代 802.11b/g 的首要技术手段。\n3. 频段兼容性：\n   - 802.11a 处于 5 GHz，而 802.11b/g 处于 2.4 GHz，两者物理层工作频率完全不同，彼此不具备向后兼容性。\n\n• 正确选项剖析：\n选项 D（It is used in place of 802.11b/g when many nonoverlapping channels are required）：\n802.11a 工作在 5 GHz 频段，提供多达 20+ 个不重叠的 20 MHz 信道，彻底突破了 2.4 GHz（802.11b/g）仅有 3 个非重叠信道的物理瓶颈，完全满足大型企业及高密场景下对大量独立互不干扰信道的规划需求，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It is chosen over 802.11b when a lower-cost solution is necessary）：历史早期 802.11a 的 5 GHz 射频芯片成本明显高于 2.4 GHz 芯片，且 5 GHz 信号衰减快、覆盖范围小，需要部署更多数量的 AP，整体投资建设成本更高，绝非低成本方案。\n- 选项 B（It is susceptible to interference from 2.4 GHz devices such as microwave ovens）：802.11a 运行在 5 GHz 频段，根本不会受到 2.4 GHz 频段微波炉、蓝牙等电磁波的干扰。\n- 选项 C（It is compatible with 802.11b- and 802 11g-compliant wireless devices）：802.11a（5 GHz）与 802.11b/g（2.4 GHz）频段不互通，不能向下兼容 2.4 GHz 终端。\n\n• 考试要点与速记技巧：\n- 2.4 GHz（11b/11g）：仅 3 个非重叠信道（1、6、11），频段挤、干扰大。\n- 5 GHz（11a）：20+ 个非重叠信道，信道多、抗干扰强，频段不兼容 2.4G。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "D",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      }
+    },
+    {
+      "id": 790,
+      "original_qid": "Q1050",
+      "before_sha256": "c755f7bf65c76b13c71b07d6f03bb9fb1ae97cc6233f7ad10f963f68d37a9f0f",
+      "reason": "A",
+      "updates": {
+        "prompt": "Refer to the exhibit. On both fa0/1 interfaces, two VLANs (100 and 105) must cross an 802.1Q trunk, and policy requires native VLAN 3 instead of the default VLAN 1. Assume switches support configurable trunk encapsulation, both data VLANs exist, and no native-VLAN user traffic is required. Which configuration meets the requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport trunk encapsulation dot1q\nswitchport mode trunk\nswitchport trunk allowed vlan 100,105\nswitchport trunk native vlan 3"
+          },
+          {
+            "label": "B",
+            "text": "switchport trunk encapsulation isl\nswitchport mode trunk\nswitchport trunk allowed vlan 100,105\nswitchport trunk native vlan 1"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode dynamic\nswitchport access vlan 100,105\nswitchport trunk native vlan 1"
+          },
+          {
+            "label": "D",
+            "text": "switchport trunk encapsulation dot1q\nswitchport mode access\nswitchport access vlan 100,105\nswitchport trunk native vlan 3"
+          }
+        ],
+        "explanation": "A。两端采用 dot1q trunk，允许业务 VLAN 100 和 105，并将两端 native VLAN 设置为 3。VLAN 3 未列入 allowed 列表，因此不能据此宣称普通 native VLAN 数据可在该链路通过；题设明确无需此类流量。B 使用 ISL 且 native 仍为 1；C/D 的 access vlan 不能一次指定多个 VLAN，D 也不是 trunk。更换 native VLAN 是安全加固的一部分，不能单独保证阻止所有 VLAN 攻击；部分控制流量有平台特定行为。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. An engineer configures interface fa0/1 on SW1 and SW2 to pass traffic from two different VLANs. For security reasons, company policy requires the native VLAN to be set to a nondefault value. Which configuration meets this requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch(config-if)#switchport mode trunk Switch(config-if)#switchport trunk encapsulation dot1q Switch(config-if)#switchport trunk allowed vlan 100,105 Switch(config- if)#switchport trunk native vlan 3"
+          },
+          {
+            "label": "B",
+            "text": "Switch(config-if)#switchport mode trunk Switch(config-if)#switchport trunk encapsulation isl Switch(config-if)#switchport trunk allowed vlan 100,105 Switch(config- if)#switchport trunk native vlan 1"
+          },
+          {
+            "label": "C",
+            "text": "Switch(config-if)#switchport mode dynamic Switch(config-if)#switchport access vlan 100,105 Switch(config-if)#switchport trunk native vlan 1"
+          },
+          {
+            "label": "D",
+            "text": "Switch(config-if)#switchport mode access Switch(config-if)#switchport trunk encapsulation dot1q Switch(config-if)#switchport access vlan 100,105 Switch(config- if)#switchport trunk native vlan 3"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 交换机之间中继链路（Trunk Link）的配置规范及本征 VLAN（Native VLAN）的安全加固。\n1. 拓扑与 VLAN 转发需求：\n   拓扑中 SW1 与 SW2 互联在 fa0/1 接口上，需要同时透传 VLAN 100（PC1 与 PC2）和 VLAN 105（PC3 与 PC4）的数据流量。根据以太网二层交换原理，跨交换机承载多个 VLAN 流量的互联端口必须显式配置为 Trunk 模式（`switchport mode trunk`），在支持多封装协议的 Catalyst 交换机上还需指定封装类型为 `switchport trunk encapsulation dot1q`。\n2. Native VLAN 安全加固规范：\n   - IEEE 802.1Q 标准中，Native VLAN 承载未标记（Untagged）的数据帧。\n   - Cisco 交换机出厂默认将 Native VLAN 设为 VLAN 1。如果保留默认 Native VLAN 1，交换机会面临严重的安全威胁，例如 VLAN 双重标记跳跃攻击（Double-Tagging VLAN Hopping Attack）以及未授权控制流量监听。\n   - 最佳安全实践明确规定：必须将 Trunk 两端的 Native VLAN 统一更改为一个未被用户分配使用的非默认 VLAN ID（例如本题选项中的 VLAN 3），命令为 `switchport trunk native vlan <vlan-id>`。\n3. 许可 VLAN 控制：\n   使用 `switchport trunk allowed vlan 100,105` 明确只放行实际需要的业务 VLAN，遵循最小特权原则。\n\n• 正确选项剖析：\n选项 A：\n- `switchport mode trunk`：将接口强制配置为静态 Trunk 模式；\n- `switchport trunk encapsulation dot1q`：显式指定采用行业标准的 IEEE 802.1Q 封装；\n- `switchport trunk allowed vlan 100,105`：精确放行 VLAN 100 和 VLAN 105；\n- `switchport trunk native vlan 3`：将本征 VLAN 修改为非默认的 VLAN 3，完全满足公司的安全合规策略要求。\n四条命令无懈可击，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B：封装采用了 Cisco 私有淘汰的 ISL（`encapsulation isl`），ISL 会对所有帧封装 26 字节头和 4 字节 CRC，不具备 802.1Q Native VLAN 机制；且 `native vlan 1` 仍然保留了默认值，直接违背了题干“nondefault value”的安全要求。\n- 选项 C：`switchport mode dynamic` 是不完整的 DTP 协商命令（缺少 desirable/auto），且 `switchport access vlan 100,105` 是非法语法（Access 端口只能属于单个 VLAN）；且 Native VLAN 仍为 1。\n- 选项 D：配置了 `switchport mode access`，访问模式接口只能承载单个 VLAN 的非标记帧，根本无法在交换机之间透传多个 VLAN。\n\n• 考试要点与速记技巧：\n- Trunk 接口安全四步法：\n  1. 开启中继：`switchport mode trunk`\n  2. 封装规范：`switchport trunk encapsulation dot1q`\n  3. 收紧放行：`switchport trunk allowed vlan 100,105`\n  4. 修改本征：`switchport trunk native vlan 3`（必须非默认，防双标记跳跃攻击）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "A",
+        "source_urls": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+          "https://www.rfc-editor.org/rfc/rfc4291",
+          "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q790_agent.jpg",
+      "image_sha256": "f87cd8fd77779bedeebbb250c1715146a4261da76c5f3cd56ddce4724283c557"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/consolidated_guide/configuration_guide/b_consolidated_3850_3se_cg/b_consolidated_3850_3se_cg_chapter_01110001.html",
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+  ],
+  "limitations": "人工核对题目与原图，未执行真实网络设备实验。"
+}

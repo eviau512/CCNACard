@@ -1,0 +1,418 @@
+{
+  "scope": "Q751–Q760",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 751,
+      "original_qid": "Q995",
+      "before_sha256": "7147f01c709190bb313f8c13d16d29e25b40c4457ae944d01cc2ec6332985aa6",
+      "reason": "限制认证防护范围并纠正 PSK 不必使用证书。",
+      "updates": {
+        "explanation": "A。正确验证通信对端身份（例如验证 TLS 服务器证书及主机名）可降低攻击者冒充对端实施中间人攻击的风险；还需要保护会话完整性、保管密钥并处理证书错误。认证并非保证所有中间人攻击不可能发生，预共享密钥认证也不要求 CA 证书。B 抗重放限制重复使用旧报文；C 授权决定允许的操作；D 记账/审计记录活动，都不能替代对端认证。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查中间人攻击（Man-in-the-Middle Attack, MitM）的攻击向量及根本密码学防御机制。\n1. 中间人攻击（MitM）的运作机理：\n   - 在 MitM 攻击中，攻击者置身于通信双方（例如客户端与服务器、或两台路由器）的通信信道之间，拦截双方的所有往来流量。\n   - 攻击者向客户端伪装成合法服务器，同时向服务器伪装成合法客户端。由于双方以为自己在与真正的对方直接通信，攻击者可以窃听会话、盗取凭据（如会话劫持）、篡改数据包甚至植入恶意指令。\n   - 典型网络层手段包括：ARP 欺骗（ARP Spoofing）、DNS 劫持、恶意 Wi-Fi 伪 AP（Evil Twin）、SSL/TLS 剥离。\n2. 身份认证（Authentication）的免疫机制：\n   - MitM 攻击之所以能够成功，其核心根源在于通信实体在建立会话时“无法确认对方的真实物理/逻辑身份”。\n   - 采用强身份认证（Authentication，尤其是基于数字证书的 PKI 双向认证、802.1X EAP-TLS、IPsec 预共享密钥或 RSA 数字签名认证），通信双方在传输数据前必须利用各自持有的私钥和由受信权威 CA 签发的数字证书互相证明自己的身份。\n   - 攻击者由于无法伪造合法实体的私钥或有效签名，其中间人假冒企图会在握手第一步因“身份认证失败”（Authentication Failed）而立即被识破并中断连接，从而从根本上阻断了 MitM 攻击。\n\n• 正确选项剖析：\n选项 A（authentication，身份认证）完全正确。双向强身份认证是网络协议抵御欺骗与中间人攻击最基础、最关键的密码学安全服务。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（anti-replay，抗重放）：抗重放（如 IPsec ESP 序列号机制）主要用于防止攻击者截获有效的数据包后再次重复发送（重放攻击），无法在最初建立会话阶段防止中间人伪装与劫持。\n- 选项 C（authorization，授权）：授权是确定已通过认证的实体拥有哪些资源访问权限（例如能否执行特权命令、访问哪些敏感数据库），前提是认证已经完成，无法阻止外部未授权主体的中间人截获。\n- 选项 D（accounting，计费/审计）：计费记录用户在网络上消耗的时长、流量与活动日志，属于事后审计机制，无法实时防御中间人攻击。\n\n• 考试要点与速记技巧：\n网络安全防御对应口诀：“防中间人假冒凭认证（Authentication），防报文重复播放用抗重放（Anti-replay），管权限找授权（Authorization）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "限制认证防护范围并纠正 PSK 不必使用证书。"
+      }
+    },
+    {
+      "id": 752,
+      "original_qid": "Q996",
+      "before_sha256": "ce8773574ff1b6660ed2ff546f3e9cd68a6e8aced47de85c405bd354e3b7ef2b",
+      "reason": "去除 AES 仅属 WPA2 与 AES/AES256 选项重叠，改问 CCMP。",
+      "updates": {
+        "prompt": "Which cipher underlies the CCMP-128 data protection commonly used by WPA2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "RC4"
+          },
+          {
+            "label": "B",
+            "text": "AES"
+          },
+          {
+            "label": "C",
+            "text": "SHA"
+          },
+          {
+            "label": "D",
+            "text": "MD5"
+          }
+        ],
+        "explanation": "B。WPA2 常用的 CCMP-128 使用 AES-128；CCMP 是保护协议，AES 是其底层分组密码。AES 并非 WPA2 独有，其他安全标准也可使用 AES；旧设备的 WPA2 迁移配置也可能提供 TKIP，不能说所有 WPA2 会话都使用 CCMP。A RC4 用于 WEP 和 TKIP；C SHA 与 D MD5 是散列算法，不是本题要求的数据加密密码。"
+      },
+      "original_fields": {
+        "prompt": "Which cipher is supported for wireless encryption only with the WPA2 standard?",
+        "options": [
+          {
+            "label": "A",
+            "text": "RC4"
+          },
+          {
+            "label": "B",
+            "text": "AES"
+          },
+          {
+            "label": "C",
+            "text": "SHA"
+          },
+          {
+            "label": "D",
+            "text": "AES256"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查无线网络加密标准（WEP、WPA、WPA2、WPA3）与对应底层加密算法（Cipher）的演进体系。\n1. 历代无线加密标准与加密算法演进：\n   - WEP（有线等效保密）：采用 RC4 流密码，使用 24 位短初始化向量（IV），极易产生密钥重用，已被彻底攻破淘汰。\n   - WPA（Wi-Fi Protected Access，802.11i 草案阶段）：为紧急取代 WEP 并兼容老旧硬件而设计，采用 TKIP（临时密钥完整性协议），其底层核心仍然是基于 RC4 流密码，仅增加了动态单包密钥混合与 48 位 IV。\n   - WPA2（IEEE 802.11i 最终正式版）：强制抛弃脆弱的 RC4 流密码，全面引入国家级安全标准的对称块加密算法——AES（Advanced Encryption Standard，高级加密标准），配合基于计数器模式和密码分组链接的消息完整性协议（CCMP-128）。AES 提供了前所未有的强加密保证。\n   - WPA3：升级采用 AES-GCM（伽罗瓦/计数器模式），并在企业级支持 Suite B / CNSA 192 位加密。\n2. 题干关键限定：\n   题干询问在给出的选项中，哪一种密码算法是作为 WPA2 标准专有的无线加密算法而获得支持的（Which cipher is supported for wireless encryption only with the WPA2 standard?）。从旧版 WPA 仅支持 RC4 升级到 WPA2，其核心区别正是从 RC4 跃迁到了 AES！\n\n• 正确选项剖析：\n选项 B（AES，高级加密标准）完全正确。AES 是 WPA2（IEEE 802.11i / CCMP）核心且强制要求的对称加密密码算法，相较于初代 WPA 所支持的 RC4 实现了质的技术飞跃。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（RC4）：是初代 WPA（通过 TKIP）以及原始 WEP 使用的旧式流密码，WPA2 已经明确废弃了纯 RC4。\n- 选项 C（SHA）：安全散列算法（Secure Hash Algorithm），属于单向密码学哈希函数（用于数据完整性校验与 HMAC 认证），根本不是用于无线数据载荷加密的“对称加密算法”（Cipher）。\n- 选项 D（AES256）：标准 WPA2-Personal / Enterprise 普遍规范使用的是 128 位密钥的 AES（CCMP-128）；AES-256 主要出现在某些专有扩展或 WPA3-Enterprise 192 位套件中，标准 WPA2 认证规范定义的标准加密算法名称即为 AES。\n\n• 考试要点与速记技巧：\n无线加密代际演进必背表：\n- WPA -> TKIP (底层还是 RC4 流密码)；\n- WPA2 -> CCMP (底层强制采用 AES 块加密)；\n- 看到 WPA 选 RC4/TKIP，看到 WPA2 必选 AES！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "去除 AES 仅属 WPA2 与 AES/AES256 选项重叠，改问 CCMP。"
+      }
+    },
+    {
+      "id": 753,
+      "original_qid": "Q997",
+      "before_sha256": "b4414fd865a81850b9f6aebb837e7aaf0a682d877ea93ce35d46a49da13ebcd2",
+      "reason": "查看图示，纠正 ONS 拼写并恢复命令换行。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The ACL permits HTTP and HTTPS over TCP and DNS over UDP. An administrator wants to permit TCP access to the same DNS server. Which configuration efficiently updates the ACL?",
+        "options": [
+          {
+            "label": "A",
+            "text": "no ip access-list extended Services\nip access-list extended Services\n30 permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+          },
+          {
+            "label": "B",
+            "text": "ip access-list extended Services\n35 permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+          },
+          {
+            "label": "C",
+            "text": "ip access-list extended Services\npermit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+          },
+          {
+            "label": "D",
+            "text": "no ip access-list extended Services\nip access-list extended Services\npermit udp 10.0.0.0 0.255.255.255 any eq 53\npermit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain\ndeny ip any any log"
+          }
+        ],
+        "explanation": "B。原图中序号 30 允许 UDP DNS，序号 40 明确拒绝其他 IP 流量；在已有 ACL 下插入序号 35 的 TCP 53 许可，位于拒绝项之前且保留既有 HTTP/HTTPS 规则。C 不指定序号会追加到 40 之后，无法命中；A、D 删除并重建 ACL，遗漏既有规则且不是高效的就地编辑。TCP DNS 不仅用于区域传送，也用于其他需要 TCP 的 DNS 查询；配置生效仍取决于 ACL 应用方向及路由等条件。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. This ACL is configured to allow client access only to HTTP, HTTPS, and DNS services via UDP. The new administrator wants to add TCP access to the ONS service. Which configuration updates the ACL efficiently?",
+        "options": [
+          {
+            "label": "A",
+            "text": "no ip access-list extended Services Ip access-list extended Services 30 permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+          },
+          {
+            "label": "B",
+            "text": "ip access-list extended Services 35 permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+          },
+          {
+            "label": "C",
+            "text": "ip access-list extended Services Permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain"
+          },
+          {
+            "label": "D",
+            "text": "no ip access-list extended Services Ip access-list extended Services Permit udp 10.0.0.0 0.255.255.255 any eq 53 Permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain deny ip any any log"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 命名扩展访问控制列表（Named Extended ACL）的高级条目编辑、序列号插入机制（Sequence Numbering）与首命中原则。\n1. 现存 ACL 配置拓扑图示（Exhibit）深度解读：\n   查看题目图示输出：\n   ```\n   CPE# show ip access-list Services\n   Extended IP access list Services\n       10 permit tcp 10.0.0.0 0.255.255.255 any eq www\n       20 permit tcp 10.0.0.0 0.255.255.255 any eq 443\n       30 permit udp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain\n       40 deny ip any any log\n   ```\n   - 当前规则 10 允许发往任何地址的 HTTP（TCP 80）；\n   - 当前规则 20 允许发往任何地址的 HTTPS（TCP 443）；\n   - 当前规则 30 允许向 198.51.100.11 发送基于 UDP 的 DNS 请求（eq domain = 53）；\n   - 当前规则 40 显式拒绝并记录所有其他任何 IP 数据流。\n2. 业务变更需求：\n   新管理员需要为该 DNS 服务增加 TCP 协议支持（针对大于 512 字节的大报文解析或 DNS 区域传送，需要 TCP 53 端口）。且要求高效更新 ACL（updates the ACL efficiently）。\n3. Cisco IOS ACL 序列号机制与效率考量：\n   - 命名扩展 ACL 原生支持序列号（Sequence Numbering）。在条目前直接指定序列号，可以精准将新规则插入到现有 ACL 的任意空隙位置。\n   - 序列号 40 是 deny ip any any log。任何放行新业务的 permit 语句必须位于序列号 40 之前才能被流量匹配；\n   - 如果使用传统的全局重写（如先执行 no ip access-list 然后重新输入），会导致在重写期间接口安全策略完全失效或暂时阻断业务网络，极其危险且效率低下；\n   - 如果直接在 ACL 模式下输入一条不带序列号的 permit 语句，系统默认会以现有最大序列号 + 10（即 50）将其追加到列表最末尾，这将位于规则 40（deny ip any any log）之后，导致新规则永远无法被执行！\n   - 因此，最高效、无缝且零业务中断的做法是在命名 ACL 模式下，直接使用 31 至 39 之间的空闲序列号（如 35）插入明细条目！\n\n• 正确选项剖析：\n选项 B 完全符合高效插入原则：\n- 直接进入已有的命名 ACL 配置模式：`ip access-list extended Services`；\n- 显式指定序列号 35：`35 permit tcp 10.0.0.0 0.255.255.255 host 198.51.100.11 eq domain`；\n- 规则成功精准无误地嵌入在规则 30（UDP DNS）和规则 40（Deny all）之间，既无需删除 ACL，又确保了策略即时生效，操作最为高效。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：先删除了整个 ACL（no ip access-list extended Services），然后仅输入了一条规则 30，导致此前的规则 10、20、40 全部丢失，造成灾难性网络故障。\n- 选项 C：在命令中未指定序列号，系统将自动赋予该语句序列号 50，位于规则 40（deny ip any any log）之后，所有 TCP DNS 流量在到达该规则前均会被规则 40 提前阻断并丢弃，策略彻底失效。\n- 选项 D：同样执行了删除 ACL 重写操作，耗费大量管理开销，绝非高效（efficient）的做法，且多余地重敲了已有规则。\n\n• 考试要点与速记技巧：\nACL 运维必背军规：“末尾已有 deny any 时，绝不能盲目末尾追加；善用空余序列号（35 插在 30 与 40 之间），精准插队不中断业务”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "查看图示，纠正 ONS 拼写并恢复命令换行。"
+      },
+      "exhibit_path": "exhibits/q753_agent.jpg",
+      "image_sha256": "78d733999dd2f9297f6d7ae909f02446559fbc3742a8fc02241f2c15d3abd520"
+    },
+    {
+      "id": 754,
+      "original_qid": "Q998",
+      "before_sha256": "cc31495fcdb4684c5f735a87dad35d898091a97315a91317365520716d10a714",
+      "reason": "修正拼写，区分 WPA2 PSK 与 WPA3 SAE。",
+      "updates": {
+        "prompt": "Which WPA/WPA2 mode uses pre-shared key (PSK) authentication?",
+        "explanation": "B。WPA-Personal 与 WPA2-Personal 可使用预共享密钥，不需要每位用户单独通过 802.1X 服务器认证。WPA3-Personal 使用 SAE，不能把它简单等同于 WPA2-PSK 四次握手。A Local 与 D Client 不是此处的 WPA 安全模式；C Enterprise 通常使用 802.1X/EAP 与 AAA 服务器。"
+      },
+      "original_fields": {
+        "prompt": "Which WPA mode uses PSK authenticaton?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Wi-Fi 联盟所定义的 WPA/WPA2/WPA3 无线安全工作模式与身份认证体系架构。\nWi-Fi 安全认证分为两大核心工作模式：\n1. 个人模式（Personal Mode / WPA-Personal / WPA2-Personal / WPA3-Personal）：\n   - 面向家庭及小型办公环境（SOHO）。\n   - 采用预共享密钥（Pre-Shared Key, PSK）或密码短语（Passphrase，8 至 63 个 ASCII 字符）进行双向身份认证与会话密钥派生。\n   - 所有客户端均使用相同的静态密码与 AP 进行四次握手（WPA/WPA2）或 SAE 握手（WPA3）。无需搭建任何后端的集中身份认证服务器。\n2. 企业模式（Enterprise Mode / WPA-Enterprise / WPA2-Enterprise）：\n   - 面向中大型企业及园区网络。\n   - 采用 IEEE 802.1X / EAP 框架与集中的 AAA 服务器（如 RADIUS / Cisco ISE）进行联动。\n   - 每个用户使用专属的企业用户名/口令或客户端数字证书（如 EAP-TLS / PEAP）进行个体鉴权与权限划分，提供完善的计费和审计跟踪。\n\n• 正确选项剖析：\n选项 B（Personal，个人模式）完全正确。在无线标准定义中，凡是利用预共享密钥（PSK）进行认证与密钥协商的无线网络模式均被称为 Personal 模式（WPA-Personal / WPA2-PSK）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（Local，本地）：Local 是轻量化 AP（Lightweight AP）在 Cisco WLC 体系中的一种集中转发工作模式（与之对应的是 FlexConnect / Monitor 模式），不是 WPA 认证安全模式。\n- 选项 C（Enterprise，企业模式）：企业模式强制要求使用 802.1X / RADIUS / EAP 架构，严格禁止使用单一共享的 PSK。\n- 选项 D（Client，客户端）：Client 指网络中的终端角色，并非安全协议模式名称。\n\n• 考试要点与速记技巧：\n无线认证模式两分法速记：\n- 用共享密码（PSK）-> 选 Personal（个人版）；\n- 用 802.1X / RADIUS 证书账户 -> 选 Enterprise（企业版）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "修正拼写，区分 WPA2 PSK 与 WPA3 SAE。"
+      }
+    },
+    {
+      "id": 755,
+      "original_qid": "Q999",
+      "before_sha256": "e9bc275c6b93de68637fde7aafaa72511606e8c755e8b3112c64422997a7aec0",
+      "reason": "恢复命令换行并补入接口、路由和 VTY 前提。",
+      "updates": {
+        "prompt": "An engineer needs to permit SSH from subnet 10.139.58.0/28 to router interface FastEthernet0/0 (10.122.49.1/30). Traffic arrives on that interface; routing, return traffic, VTY authentication, and SSH are already configured. Which configuration permits this traffic?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface FastEthernet0/0\n ip address 10.122.49.1 255.255.255.252\n ip access-group 110 in\nip access-list extended 110\n permit tcp 10.139.58.0 0.0.0.15 host 10.122.49.1 eq 22"
+          },
+          {
+            "label": "B",
+            "text": "interface FastEthernet0/0\n ip address 10.122.49.1 255.255.255.240\n access-group 120 in\nip access-list extended 120\n permit tcp 10.139.58.0 255.255.255.248 any eq 22"
+          },
+          {
+            "label": "C",
+            "text": "interface FastEthernet0/0\n ip address 10.122.49.1 255.255.255.252\n ip access-group 105 in\nip access-list standard 105\n permit tcp 10.139.58.0 0.0.0.7 eq 22 host 10.122.49.1"
+          },
+          {
+            "label": "D",
+            "text": "interface FastEthernet0/0\n ip address 10.122.49.1 255.255.255.248\n ip access-group 10 in\nip access-list standard 10\n permit udp 10.139.58.0 0.0.0.7 host 10.122.49.1 eq 22"
+          }
+        ],
+        "explanation": "A。/28 源地址对应反掩码 0.0.0.15；扩展 ACL 110 在入接口匹配到本机 10.122.49.1 的 TCP 22。SSH 登录还依赖路由、返回路径、VTY 认证和其他策略，题设已满足。B 的接口调用缺少 ip 且反掩码不匹配目标源网段；C 与 D 把传输层和目的条件写进标准 ACL，且其掩码或协议也不符合要求。显式 permit 之外的流量会受 ACL 隐式拒绝影响，应评估完整策略。"
+      },
+      "original_fields": {
+        "prompt": "An engineer is configuring remote access to a router from IP subnet 10.139.58.0/28. The domain name, crypto keys, and SSH have been configured. Which configuration enables the traffic on the destination router?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.252 Ip access-group 110 in Ip access-list extended 110 Permit tcp 10.139.58.0 0.0.0.15 host 10.122.49.1 eq 22"
+          },
+          {
+            "label": "B",
+            "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.240 Access-group 120 in Ip access-list extended 120 Permit tcp 10.139.58.0 255.255.255.248 any eq 22"
+          },
+          {
+            "label": "C",
+            "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.252 Ip access-group 105 in Ip access-list standard 105 Permit tcp 10.139.58.0 0.0.0.7 eq 22 host 10.122.49.1"
+          },
+          {
+            "label": "D",
+            "text": "interface FastEthernet0/0 Ip address 10.122.49.1 255.255.255.248 Ip access-group 10 in Ip access-list standard 10 Permit udp 10.139.58.0 0.0.0.7 host 10.122.49.1 eq 22"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 设备接口扩展 ACL 配置、反掩码计算、以及对管理流量（SSH）进行基于接口方向的精准过滤控制。\n1. 题目关键参数与技术需求：\n   - 源管理客户端所在子网：10.139.58.0/28\n   - 目标路由器入站接口：FastEthernet0/0，直连 IP 地址为 10.122.49.1\n   - 访问管理协议：SSH（Secure Shell），传输层必须基于 TCP 协议，知名目的端口为 22（eq 22）。\n2. 子网与反掩码（Wildcard Mask）精确推导：\n   - 源网段为 /28 前缀，子网掩码为 255.255.255.240。\n   - 反掩码计算公式：255.255.255.255 - 255.255.255.240 = 0.0.0.15。\n3. ACL 类型与规则设计：\n   - 标准 ACL（Standard ACL，编号 1-99）：仅能根据数据包的三层源 IP 地址进行过滤，完全无法检查传输层协议（TCP/UDP）或目的端口号（22），无法满足“仅开放 SSH 流量”的控制要求。\n   - 扩展 ACL（Extended ACL，编号 100-199）：能够同时基于协议（TCP）、源 IP 及反掩码、目的 IP 及反掩码（或 host 关键字）、以及目的端口号进行深度匹配。\n   - 规则语法：permit tcp 10.139.58.0 0.0.0.15 host 10.122.49.1 eq 22\n4. 接口方向调用语法：\n   在三层接口模式下，将 ACL 策略应用于进入设备的数据流，标准命令为：\n   R1(config-if)# ip access-group <acl-number> in\n\n• 正确选项剖析：\n选项 A 每一处配置均无可挑剔：\n- 接口配置了正确的 IP 与 /30 掩码；\n- `ip access-group 110 in` 语法精确调用在入方向；\n- 编号 110 属于合法的扩展 ACL 范围（100-199）；\n- `permit tcp 10.139.58.0 0.0.0.15 host 10.122.49.1 eq 22` 精确使用了 /28 的反掩码 0.0.0.15，匹配了目标路由器接口自身 IP（host 10.122.49.1）及 SSH 端口 TCP 22。\n\n• 干扰项排除与错误陷阱：\n- 选项 B：反掩码填写错误，写成了子网掩码形式的 255.255.255.248，IOS 会报错；且调用命令缺少了 ip 关键字（直接敲了 `Access-group 120 in`，属于语法残缺）；且目的写成了 any 而非直连 IP。\n- 选项 C：严重概念错误。定义为标准 ACL（ip access-list standard 105），却试图在标准 ACL 中填写 permit tcp 以及目的端口 eq 22，Cisco IOS CLI 会直接返回 % Invalid input 错误；且反掩码 0.0.0.7 代表的是 /29 网段，与题目的 /28 不符。\n- 选项 D：严重语法错误。使用了标准编号 10 却写了 permit udp，协议误写为 UDP（SSH 是 TCP），且反掩码 0.0.0.7 错误。\n\n• 考试要点与速记技巧：\nSSH 访问过滤必检四件套：\n1. /28 反掩码必是 `0.0.0.15`；\n2. SSH 必定是 `tcp ... eq 22`（扩展 ACL 才能卡端口）；\n3. 接口调用必带 ip：`ip access-group <num> in`。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "恢复命令换行并补入接口、路由和 VTY 前提。"
+      }
+    },
+    {
+      "id": 756,
+      "original_qid": "Q1000",
+      "before_sha256": "62c1b3b37937c7a8b3366aca3c36b3de251f565d392d6b88ed7c22e1e43f3176",
+      "reason": "精简物理门禁说明并纠正绝对化结论。",
+      "updates": {
+        "explanation": "C。通过工牌限制人员进入数据中心，控制的是对物理空间的进入，因此属于物理访问控制。A 安全意识和 B 培训帮助人员识别并遵守安全要求；D 漏洞验证用于发现或确认弱点；这些都不是题设门禁的主要类别。门禁设计仍需考虑凭证遗失与尾随等情况。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查企业信息安全治理模型中针对核心资产物理环境的“物理访问控制”（Physical Access Control）体系。\n1. 数据中心（Data Center）核心基础设施防护：\n   数据中心是企业存放核心服务器机柜、SAN 存储阵列、骨干核心交换机及关键数据库资产的神经中枢。即使部署了世界上最顶级的防火墙与加密算法，一旦未经授权的人员能够物理接触到设备，攻击者便可通过重启设备进入 ROMMON 恢复密码、直连 Console 线抓取内存、拔除硬盘或剪断光纤，使一切逻辑安全措施归零。\n2. 工牌认证（Badge Authentication）的机制与归类：\n   - 使用 RFID 电子门禁工牌卡（Badge Authentication）、智能卡、生物指纹扫描器、双门防尾随隔离舱（Mantrap）对进入数据中心的人员进行门禁识别与授权登记。\n   - 这一安全措施直接管控的是人员实体在物理空间（Physical Space）中的移动与进入权限，属于安全规范（如 NIST SP 800-115、ISO 27001 Annex A.11）中明确定义的物理安全域——“物理访问控制”（Physical Access Control, PAC）。\n\n• 正确选项剖析：\n选项 C（physical access control，物理访问控制）完全正确。限制实体人员进入机房大门的刷卡门禁系统是物理访问控制最典型的落地部署方案。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（user awareness，用户安全意识）：指针对员工开展的防钓鱼、防社工等认知安全培训，属于软性教育手段，并非控制机房出入的硬件与系统机制。\n- 选项 B（user training，用户培训）：与选项 A 类似，属于管理层面的技能培训，无法代替物理门禁系统对大门进行自动锁定与身份鉴权。\n- 选项 D（vulnerability verification，脆弱性/漏洞验证）：指使用扫描器或渗透测试工具探测操作系统或网络设备的代码漏洞与配置缺陷，与机房门禁管理风马牛不相及。\n\n• 考试要点与速记技巧：\n物理出入管理速记：“凡见刷卡进大门、工牌验机房（Badge to enter data center）、加锁控旋转门，一律判定为物理访问控制（Physical Access Control）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "精简物理门禁说明并纠正绝对化结论。"
+      }
+    },
+    {
+      "id": 757,
+      "original_qid": "Q1002",
+      "before_sha256": "108c3d46144d64154b5416814d3c3ceea90403084471638f60d8394a67a83f6e",
+      "reason": "限定人工管理基线，纠正传统网络不能使用 API 的错误。",
+      "updates": {
+        "prompt": "Compared with a campus baseline where an operator manually collects each device’s information, which benefit can Cisco DNA Center provide?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It uniquely provides HTTPS; traditional devices support only HTTP."
+          },
+          {
+            "label": "B",
+            "text": "It uniquely provides SNMPv3; traditional devices support only SNMPv2."
+          },
+          {
+            "label": "C",
+            "text": "It provides APIs for centrally collected network information, reducing per-device manual collection."
+          },
+          {
+            "label": "D",
+            "text": "It uniquely provides SSH; traditional devices do not support SSH."
+          }
+        ],
+        "explanation": "C。Cisco DNA Center（现称 Cisco Catalyst Center）可集中收集设备信息并通过 API 向应用提供数据，减少逐台登录和人工汇总的工作。传统网络也可以使用 API、脚本和集中管理工具，因此不能说所有传统管理都必须手工收集。A、B、D 的 HTTPS、SNMPv3 与 SSH 均不是该平台独有的协议。"
+      },
+      "original_fields": {
+        "prompt": "Which benefit does Cisco DNA Center provide over traditional campus management?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Cisco DNA Center automates HTTPS for secure web access, and traditional campus management uses HTTP."
+          },
+          {
+            "label": "B",
+            "text": "Cisco DNA Center leverages SNMPv3 for encrypted management, and traditional campus management uses SNMPv2."
+          },
+          {
+            "label": "C",
+            "text": "Cisco DNA Center leverages APIs, and traditional campus management requires manual data gathering."
+          },
+          {
+            "label": "D",
+            "text": "Cisco DNA Center automates SSH access for encrypted entry, and SSH is absent from traditional campus management."
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco DNA Center（现 Cisco Catalyst Center）基于意图的网络（Intent-Based Networking, IBN）架构与传统园区网络运维管理模式的代际技术对比。\n1. 传统园区网络管理的局限性（Traditional Campus Management）：\n   - 碎片化与高度人工依赖：管理员需要通过 Telnet/SSH 登录数以百计的网络设备，手动执行 show running-config、show interfaces、show ip route 等 CLI 命令来获取设备状态与网络拓扑。\n   - 数据收集效率极其低下：跨设备故障排查时，必须由人工逐台提取日志并手动拼凑上下文，耗时耗力且极易因人为失误遗漏关键线索。\n2. Cisco DNA Center 的现代化网络可编程优势：\n   - 集中化控制器与全栈 API 支持：Cisco DNA Center 作为中央控制器，通过南向协议（NETCONF/RESTCONF、SNMP、Streaming Telemetry）自动从全网数千台网络基础设施中近实时采集海量遥测与资产数据。\n   - 北向意图 RESTful API（Northbound Intent APIs）：DNA Center 对外暴露丰富的标准化开放 REST API。上层应用、IT 服务管理系统（如 ServiceNow）或自动化 Python 脚本可直接通过调用 REST API 发送 JSON 报文，秒级获取全网设备清单、健康评分、拓扑链路及客户端连接体验，彻底终结了人工登录设备采集数据的时代。\n\n• 正确选项剖析：\n选项 C（Cisco DNA Center leverages APIs, and traditional campus management requires manual data gathering.，Cisco DNA Center 利用 API 进行编排管理，而传统园区管理需要人工收集数据）精准指出了新旧两代管理模式最根本的效率与架构鸿沟。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：传统园区网络设备（如 Catalyst 交换机与无线控制器）同样广泛支持并配置 HTTPS 进行安全 Web 访问，并非传统只用 HTTP。\n- 选项 B：传统网络设备原生全面支持 SNMPv3 加密监控，并非仅能使用不安全的 SNMPv2。\n- 选项 D：SSH 是传统网络设备自二十多年前起就标配的最基础远程安全接入方式，选项称传统管理完全缺失 SSH（“SSH is absent”）与事实完全违背。\n\n• 考试要点与速记技巧：\n新旧网络管理核心对比口诀：“传统网络靠人工（敲 CLI 慢抓数据），DNA Center 靠 API（全自动遥测秒出数据）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "限定人工管理基线，纠正传统网络不能使用 API 的错误。"
+      }
+    },
+    {
+      "id": 758,
+      "original_qid": "Q1003",
+      "before_sha256": "8adb90ca75a7a16016c5a9fad30dd33694728962f3ff9d8d11f6fdff24c188b4",
+      "reason": "描述常见 Chef 客户端拉取模型及运行边界。",
+      "updates": {
+        "explanation": "B。在常见的 Chef Infra Client/Server 模型中，节点上的 Chef Infra Client 主动联系服务器，取得节点的 run-list、所需 cookbook 等策略内容并在节点本地执行资源收敛。服务器响应客户端请求并不意味着它主动向节点推送配置。A、C、D 描述服务器主动推送或通知，不能准确说明此常见拉取模型；具体运行也可由调度器或其他机制触发，Chef 并非所有使用方式都要求常驻客户端。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查网络与系统自动化配置管理工具（Configuration Management Tools）的设计架构，特别是 Chef 的“拉取模型”（Pull Model）运作机制。\n主流配置管理工具核心架构深度对比：\n1. Ansible：\n   - 无代理架构（Agentless）：被管理目标设备上无须安装任何第三方后台软件。\n   - 推送模型（Push Model）：Ansible 控制节点直接通过 SSH 或 NETCONF 主动连接至目标设备，将 Playbook 编译为指令后主动推送（Push）执行。\n2. Puppet：\n   - 有代理架构（Agent-based）：被管节点安装 Puppet Agent。\n   - 拉取模型（Pull Model）：Agent 默认每 30 分钟向 Puppet Master 发起轮询，拉取（Pull）最新的 Catalog 清单并执行收敛。\n3. Chef：\n   - 有代理架构（Agent-based）：每个被纳管的节点上必须预先安装轻量级常驻客户端程序——Chef Client（Chef Infra Client）。\n   - 拉取模型（Pull Model）：Chef 采用严格的基于客户端驱动的拉取工作流：\n     1. 节点上的 Chef Client 按照设定的周期或由系统守护进程触发，主动向中央 Chef Infra Server 发起 HTTPS 通信；\n     2. 认证通过后，Chef Client 从服务器拉取该节点所属 Run-list 中定义的配置清单与食谱（Cookbooks & Recipes）；\n     3. 本地客户端解析食谱中的资源声明（Resources），比对节点本地当前配置状态，自动执行修正收敛（Convergence），确保设备严格符合期望目标配置；\n     4. 节点最后向 Chef Infra Server 上报执行结果报告。\n\n• 正确选项剖析：\n选项 B（The installed agent on the device connects to the Chef Infra Server and pulls its required configuration from the cookbook.）完全精确描述了 Chef 的核心工作机制：由设备上预装的 Agent 主动连接 Chef Infra Server，并从 Cookbook 中“拉取”（Pulls）期望配置。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：错误描述为由 Chef Infra Server 主动“推”（Push）配置到设备，混淆了 Chef 与 Ansible 的工作模式。\n- 选项 C：声称由服务器发送告警提醒节点去拉取（“alert each remote device”），违背了 Chef 纯粹由本地客户端定时调度主动轮询的去中心化触发机制。\n- 选项 D：声称在节点查询后由服务器执行推操作（“the server responds by pushing”），本质上依然是推，违背了客户端拉取并就地解析执行的机制。\n\n• 考试要点与速记技巧：\n四大自动化工具核心特征表：\n- Ansible：无 Agent，主动推（Push via SSH）；\n- Puppet：有 Agent，主动拉（Pull from Master）；\n- Chef：有 Agent，主动拉（Pull from Server Cookbook）；\n- SaltStack：既支持有 Agent（Minion 快速拉），也支持无 Agent 推。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "描述常见 Chef 客户端拉取模型及运行边界。"
+      }
+    },
+    {
+      "id": 759,
+      "original_qid": "Q1004",
+      "before_sha256": "55dd64a2d2e19204eb2fee070b349195e290a0546e37c9a1acc4fd3577da21cb",
+      "reason": "依据 RFC 9110 纠正 PUT 幂等不排除副作用的错误。",
+      "updates": {
+        "explanation": "A。HTTP PUT 请求以所提交的表示创建或替换目标资源的状态；服务器是否接受以及实际处理取决于资源约束。PUT 的预期效果具有幂等性：相同请求重复执行与一次执行的预期效果相同，但日志、版本记录等附带效果仍可能每次发生。B 非幂等不符合 PUT 语义；C 只读不符合写操作；D 展示网页不是 PUT 的定义。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查基于 HTTP 协议的 RESTful API 操作方法（HTTP Methods / Verbs）规范（RFC 7231 与 RFC 5789）。\n在 RESTful 架构中，客户端通过不同的 HTTP 动作动词对服务端特定统一资源标识符（URI）的资源执行标准 CRUD 操作：\n1. GET（Retrieve）：\n   - 获取目标资源在当前时刻的状态表示。\n   - 核心特征：只读（Read-Only）、安全（Safe）、具有幂等性（Idempotent）。\n2. POST（Create）：\n   - 在指定的集合资源下创建新的子资源，或提交数据由服务端处理。\n   - 核心特征：非幂等（Non-idempotent），多次重复执行相同的 POST 会在服务端重复创建多个不同的新资源。\n3. PUT（Replace / Overwrite）：\n   - 使用请求消息体（Request Body）中的新数据内容，完整替换（Replace）目标 URI 处的现有数据资源；若目标资源尚不存在，则以该 URI 创建它。\n   - 核心特征：写操作、具有幂等性（Idempotent）。无论调用 1 次还是 100 次相同的 PUT 请求，目标资源最终被替换后的状态与数据完全一致，不会产生附带累加副作用。\n4. PATCH（Modify）：对现有目标资源执行局部的增量修改，非幂等或幂等。\n5. DELETE（Remove）：删除目标 URI 处的资源，具备幂等性。\n\n• 正确选项剖析：\n选项 A（It replaces data at the destination.，它替换目标位置的数据）完全符合 RFC 7231 标准与 REST API 对 HTTP PUT 方法的权威定义。PUT 的核心使命就是将请求载荷作为完整实体，完全覆盖替换目标端点上的已有数据。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（It is a nonidempotent operation.）：严重概念错误。PUT 是绝对的幂等操作（Idempotent Operation）；POST 才是典型的非幂等（Non-idempotent）操作。\n- 选项 C（It is a read-only operation.）：PUT 负责向服务器写入并替换实体数据，是典型的写操作；只读操作是 GET。\n- 选项 D（It displays a web site.）：在浏览器中渲染并展示网页使用的是 GET 请求拉取 HTML/CSS 资源，PUT 并不用于网页展示。\n\n• 考试要点与速记技巧：\nREST API 四大动作与 CRUD 极速对照：\n- POST = Create (新建，非幂等)；\n- GET = Read (查询只读，安全且幂等)；\n- PUT = Replace/Update (整体替换，幂等！)；\n- DELETE = Delete (删除，幂等)。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "依据 RFC 9110 纠正 PUT 幂等不排除副作用的错误。"
+      }
+    },
+    {
+      "id": 760,
+      "original_qid": "Q1005",
+      "before_sha256": "5d19604742b19c97cd9048dada6d489da4bdc4f6287c2bfffc59c0d5cec89eb5",
+      "reason": "限定人工分析基线，避免传统系统排除自动化及保证自动修复。",
+      "updates": {
+        "prompt": "Compared with a campus baseline that requires operators to correlate monitoring data manually, which advantage does Cisco DNA Center network assurance provide?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It uniquely uses YANG and NETCONF; traditional systems can use only CLI."
+          },
+          {
+            "label": "B",
+            "text": "It moves every management task off infrastructure devices and eliminates their management load."
+          },
+          {
+            "label": "C",
+            "text": "It guarantees all security posture differences are found and fixed automatically."
+          },
+          {
+            "label": "D",
+            "text": "It correlates information from multiple sources to help operators identify network issues."
+          }
+        ],
+        "explanation": "D。Assurance 可汇聚并关联网络遥测及其他数据，呈现健康状况和问题线索，减少人工关联工作的负担。数据可用性、设备支持和配置会影响分析；系统不能保证发现所有故障，也不意味着不再需要工程师判断。A 传统系统也可使用数据模型及 API；B 管理和遥测仍会消耗设备资源；C 对自动识别及修复的保证过于绝对。"
+      },
+      "original_fields": {
+        "prompt": "Which advantage does the network assurance capability of Cisco DNA Center provide over traditional campus management?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Cisco DNA Center leverages YANG and NETCONF to assess the status of fabric and nonfabric devices, and traditional campus management uses CLI exclusively."
+          },
+          {
+            "label": "B",
+            "text": "Cisco DNA Center handles management tasks at the controller to reduce the load on infrastructure devices, and traditional campus management uses the data backbone."
+          },
+          {
+            "label": "C",
+            "text": "Cisco DNA Center automatically compares security postures among network devices, and traditional campus management needs manual comparisons."
+          },
+          {
+            "label": "D",
+            "text": "Cisco DNA Center correlates information from different management protocols to obtain insights, and traditional campus management requires manual analysis."
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco DNA Center 网络保障模块（Network Assurance）与传统园区运维分析能力的质的飞跃。\n1. 传统网络运维的数据孤岛与人工瓶颈（Traditional Management Silos）：\n   在传统园区网络中，网络监控数据分散在不同的专有协议与孤立系统中：SNMP 用于监控接口利用率，Syslog 记录离散日志，NetFlow 监控流量会话，RADIUS 记录鉴权认证日志。当发生诸如“用户接入无线网络卡顿”或“偶发性掉线”问题时，网络工程师必须在多个运维终端之间反复横跳，人肉比对海量文本日志的时间戳，耗费数小时甚至数天进行人工归因分析（Manual analysis）。\n2. Cisco DNA Center 网络保障（Network Assurance）的颠覆性架构：\n   - 多源数据无缝整合与智能关联（Cross-Protocol Correlation Engine）：\n     DNA Center 内置基于机器学习（ML）与人工智能（AI）的大数据分析引擎。它自动化地同时收集来自无线 AP、接入交换机、核心路由器乃至终端无线驱动程序的各类遥测数据流（Streaming Telemetry、NetFlow、SNMP、Syslog、802.1X/RADIUS、DHCP 响应延迟、DNS 查询时延）。\n   - 自动化关联推导洞见（Obtain Actionable Insights）：\n     系统能够将毫秒级跨越多个管理协议的相关事件自动关联在一起（Correlate information from different protocols），直接在全景仪表盘上指出故障根因（如：“由于外部 DHCP 服务器响应超时导致客户端获取 IP 失败，而非无线射频质量问题”），并提供指导性修复建议（Guided Remediation）。这彻底取代了传统排障中痛苦的人工数据拼接过程。\n\n• 正确选项剖析：\n选项 D（Cisco DNA Center correlates information from different management protocols to obtain insights, and traditional campus management requires manual analysis.）精准描述了 DNA Center Assurance 的核心技术价值与竞争优势所在：自动跨协议关联多源遥测数据以提取深层洞察，消除传统人工拼图式的低效分析。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：传统园区网络同样可以支持 NETCONF 与 YANG 数据模型，并非“传统管理只能完全依靠 CLI”；且 Assurance 的核心价值不仅在于采集协议，而在于后台对多源数据的关联与分析算法。\n- 选项 B：管理任务的处理位置并不是降低网络设备负荷的主要手段，网络设备的数据平面转发依然独立运行在 ASIC 上，且传统管理并不占用数据骨干大量带宽。\n- 选项 C：虽然网络控制器能协助比对安全策略，但网络保障（Network Assurance）组件的核心职责是保障网络运行健康度与服务体验（QoE / SLA），题干强调的是 Assurance 模块的能力，选项 D 的跨协议事件关联与传统人工分析对比更为切中命题要害。\n\n• 考试要点与速记技巧：\nDNA Center Assurance 核心精髓：“跨协议多源数据自动关联（Correlates from multiple protocols），告别传统人工抓瞎分析（Replaces manual analysis）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where applicable",
+        "finding": "限定人工分析基线，避免传统系统排除自动化及保证自动修复。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/213945-wireless-security.html",
+    "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html",
+    "https://docs.chef.io/client/18/",
+    "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center-assurance/2-3-7/b_cisco_catalyst_assurance_2_3_7_ug.pdf"
+  ],
+  "limitations": "人工核查；未进行网络设备或服务实测。"
+}

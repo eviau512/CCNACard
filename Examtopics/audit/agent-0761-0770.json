@@ -1,0 +1,331 @@
+{
+  "scope": "Q761–Q770",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 761,
+      "original_qid": "Q1006",
+      "before_sha256": "b4bfe6de76ebff4c5cf9b62c31d445ccfce0604ab8ce6036f7ca07fb4f6352fe",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "explanation": "A。原图中 `\"warning\"` 是 `myCar.wheels` 数组的第四个元素，其直接容器为方括号内的数组；它本身的数据类型是字符串。数组又作为值嵌套在 `myCar` 对象中，因此对象是更外层的容器；布尔值只包含 `true` 或 `false`。题目问直接容器，故不是字符串类型或外层对象。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查数据序列化格式 JSON（JavaScript Object Notation，IETF RFC 8259）的语法结构与核心数据类型判定。\n1. 题目图示（Exhibit）代码深入解剖：\n   展示的 JSON 文档结构如下：\n   ```json\n   {\n     \"myCar\": {\n       \"name\": \"thunder\",\n       \"wheels\": [\"good\", \"good\", \"pressureLow\", \"warning\"],\n       \"gasLight\": false\n     },\n     \"oldCar\": {\n       ...\n     },\n     \"newCar\": {\n       ...\n     }\n   }\n   ```\n2. JSON 标准四大核心结构与容器类型判定法则：\n   - 对象（Object）：由花括号 `{ }` 包裹，表示一组无序的键值对（Key-Value Pairs）集合。例如整个文档的最外层是一个对象，\"myCar\" 的值也是一个包含 \"name\"、\"wheels\"、\"gasLight\" 的对象。\n   - 数组（Array）：由方括号 `[ ]` 包裹，表示一个有序的值（Values）列表，各元素之间使用逗号分隔。在本题中：\n     `\"wheels\": [\"good\", \"good\", \"pressureLow\", \"warning\"]`\n     键 \"wheels\" 对应的值就是一个数组结构，其包含四个字符串元素。\n   - 布尔值（Boolean）：取值为严格的 true 或 false（例如 `\"gasLight\": false`）。\n   - 字符串（String）：由双引号包裹的文本序列（例如 `\"warning\"`、`\"thunder\"`）。\n3. 题干关键限定词“directly reside”（直接驻留）：\n   题目问的是“In which structure does the word 'warning' directly reside?”（单词“warning”直接驻留在哪种结构中？）。\n   单词 \"warning\" 是紧邻被包裹在中括号 `[ ... ]` 之内的有序元素，因此它直接驻留的容器结构正是“数组”（Array）！\n\n• 正确选项剖析：\n选项 A（array，数组）完全正确。在 JSON 语法层级中，方括号 `[ ... ]` 定义了数组（Array），单词 \"warning\" 是该数组的第 4 个直接元素，因此其直接归属于数组结构。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（object，对象）：单词 \"warning\" 位于 wheels 对应的数组中，数组再作为值嵌套在 myCar 对象内部，它并不是对象键值对的直接对应值，并未“直接驻留”（directly reside）在对象层级。\n- 选项 C（Boolean，布尔值）：布尔值是数据类型（仅包含 true 和 false），并非包含其他文字的数据结构容器。\n- 选项 D（string，字符串）：字符串是 \"warning\" 这个字面量自身的原始数据类型（Data Type），但题干询问的是它所驻留的“结构”（structure）。结构（Structure）专指 JSON 中用于组织数据的容器（JSON 规范中容器结构仅有 Object 和 Array 两种），因此不能选 string。\n\n• 考试要点与速记技巧：\nJSON 容器结构秒杀法则：\n- 花括号 `{ }` 包裹的是对象（Object / 键值对）；\n- 方括号 `[ ]` 包裹的是数组（Array / 列表项）；\n- 看到内容被 `[ ... ]` 框住，其直接驻留结构必是 Array！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "A。原图中 `\"warning\"` 是 `myCar.wheels` 数组的第四个元素，其直接容器为方括号内的数组；它本身的数据类型是字符串。数组又作为值嵌套在 `myCar` 对象中，因此对象是更外层的容器；布尔值只包含 `true` 或",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q761_agent.jpg",
+      "image_sha256": "cc730a7fdb6cebde590c9c184c7e4a08cfbbf794e708a1530c7cfa48893bf8db"
+    },
+    {
+      "id": 762,
+      "original_qid": "Q1007",
+      "before_sha256": "467ce20a3c48a1b718ed91348493c5dc9c9ab61fa6e2e0f5d9b0a1b4f32a8580",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "explanation": "D。控制器通过南向接口与物理或虚拟网络设备通信，按所选协议管理配置、策略或采集状态；例如可使用 NETCONF 或 OpenFlow，具体功能依实现而定。A、B 中应用与开发者使用的是面向应用的北向接口；C 的编排系统通常通过北向接口集成。控制器架构并不意味着所有设备的控制平面都被完全移除，也不保证所有策略都直接写入硬件。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查软件定义网络（Software-Defined Networking, SDN）及基于控制器的网络体系中南向接口（Southbound API, SBI）的核心使命与职能划分。\n1. 控制器体系分层架构与两大核心接口：\n   在以控制器为中心的网络架构（如 Cisco DNA Center、Cisco APIC、OpenFlow 控制器）中，控制平面从底层设备集中剥离到控制器上，形成了上下两大接口层级：\n   - 北向接口（Northbound API, NBI）：\n     面向控制器上方（Northbound）。主要供网络管理员、上层业务应用、云管理编排平台以及自动化脚本调用，用于将上层网络意图（Intent）传递给控制器。通常采用通用的 RESTful API（以 HTTP + JSON 为标准）。\n   - 南向接口（Southbound API, SBI）：\n     面向控制器下方（Southbound）。负责在中央控制器与底层物理或虚拟的网络转发硬件（交换机、路由器、AP、防火墙）之间建立控制与遥测通信通道。\n2. 南向 API（SBI）的具体运作职责：\n   - 硬件与拓扑发现：发现底层物理交换机、路由器节点与链路连接关系；\n   - 下发转发表项与策略：将控制器计算完成的转发表（FIB / 流表）、安全 ACL、QoS 策略下发到网络硬件的 ASIC/TCAM 芯片中执行硬件线速转发；\n   - 状态与遥测采集：实时监听并拉取网络硬件的接口状态、数据包统计、链路抖动及丢包等遥测数据。\n   - 代表协议：OpenFlow、NETCONF/RESTCONF、BGP-LS、SNMP、OVSDB、PCEP、Cisco OpFlex、CLI。\n\n• 正确选项剖析：\n选项 D（facilitates communication between the controller and the networking hardware，促进控制器与网络硬件之间的通信）精准概括了南向接口（SBI）的权威标准技术定义。南向 API 正是连接控制器与底层网络物理/虚拟硬件的基础纽带。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（facilitates communication between the controller and the applications）：促进控制器与上层应用程序之间的通信是北向接口（Northbound API, NBI）的专属职能。\n- 选项 B（allows application developers to interact with the network）：允许应用开发人员与网络交互依赖的是控制器提供的北向 REST API（NBI），开发人员无需直接对接南向协议。\n- 选项 C（integrates a controller with other automation and orchestration tools）：将控制器与外部第三方编排工具（如 Ansible、Terraform、ServiceNow）集成同样依赖北向 REST API 或东向/西向接口（East/Westbound API）。\n\n• 考试要点与速记技巧：\nSDN 控制器接口方向速记：\n- “南向（Southbound）朝下连硬件（Networking Hardware / Switches / Routers）”；\n- “北向（Northbound）朝上连应用（Applications / Developers / Orchestration）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "D。控制器通过南向接口与物理或虚拟网络设备通信，按所选协议管理配置、策略或采集状态；例如可使用 NETCONF 或 OpenFlow，具体功能依实现而定。A、B 中应用与开发者使用的是面向应用的北向接口；C 的编排系统通常通过北向接口集成。",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 763,
+      "original_qid": "Q1010",
+      "before_sha256": "91f5688d06904a24f56ecc399bcd284e5d2b45fd4099c8e441793e38153c454c",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "prompt": "In an SDN design where a controller computes network paths and programs forwarding entries, which traditional device control-plane function is moved to the controller?",
+        "explanation": "A。在题设集中计算并编程转发表的 SDN 设计中，控制器承担路径选择及更新转发表的控制职能。B 的帧封装、C 的逐包 NAT 重写、D 的 VPN 加解密通常属于转发或服务数据路径，不能仅因引入控制器就认定移到了控制器。不同 SDN 产品的分工不同，许多设备仍可运行本地控制协议或保留本地控制逻辑。"
+      },
+      "original_fields": {
+        "prompt": "Which function generally performed by a traditional network device is replaced by a software-defined controller?",
+        "explanation": "• 核心考点与原理分析：\n本题考查软件定义网络（Software-Defined Networking, SDN）的基础架构模型与控制平面/数据平面解耦机制。\n在传统分布式网络架构中：\n1. 每一台独立的物理路由器和交换机都同时承载数据平面（Data Plane）、控制平面（Control Plane）和管理平面（Management Plane）。\n2. 在控制平面上，每台设备各自运行分布式动态路由协议（如 OSPF、IS-IS、BGP），通过与邻居交互协议报文，在本地 CPU 中计算拓扑与最短路径，生成路由信息库（Routing Information Base, RIB / 路由表）。\n3. 随后，设备将 RIB 中的最佳路由下发下载到数据平面的硬件 ASIC/TCAM 芯片中，生成转发信息库（Forwarding Information Base, FIB / 转发表）以指导高速报文转发。\n在 SDN 架构中：\nSDN 控制器（如 Cisco DNA Center、Cisco APIC、OpenFlow 控制器）将所有底层网络设备的控制平面进行集中化剥离与接管。SDN 控制器掌握全网全局拓扑，在控制器集中运行路径计算算法，集中构建路由表（Route Table），并通过南向接口（Southbound API，如 OpenFlow、NETCONF）直接向下对底层交换机和路由器的转发表（Forwarding Table / FIB / 流表）进行编程和动态更新。\n\n• 正确选项剖析：\n选项 A（building route tables and updating the forwarding table，构建路由表并更新转发表）完全符合技术规范。\n计算最佳路径、构建全局路由表并将转发表项注入底层转发硬件，正是传统设备控制平面被 SDN 控制器集中化取代的核心功能。底层网络设备退化为纯粹的“白盒”或转发实体，仅执行控制器下发的数据平面转发表项。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（encapsulation and decapsulation of packets in a data-link frame，在数据链路帧中封装与解封装数据包）：属于典型的数据平面（Data Plane）动作。每个数据包进出物理接口时，二层 MAC 头的重新封装依然由物理交换芯片线速完成，绝不可能交由远程控制器处理。\n- 选项 C（changing the source or destination address during NAT operations，在 NAT 操作期间更改源或目的地址）：属于数据平面硬件在报文穿越时执行的线速地址转换（由 NAT 转换表驱动），控制器仅可能统一下发 NAT 策略，而非逐包执行报头重写。\n- 选项 D（encryption and decryption for VPN link processing，VPN 链路处理中的加密与解密）：属于数据平面的硬件加密协处理器（如 IPsec Crypto ASIC）线速执行的载荷加解密功能，控制器不参与数据包的具体加解密计算。\n\n• 考试要点与速记技巧：\nSDN 控制器核心取代的是控制平面（Control Plane）：“算路建路由表、下发刷转发表（Building route tables and updating forwarding tables）”；而封装、NAT、加密均留在底层数据平面。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A。在题设集中计算并编程转发表的 SDN 设计中，控制器承担路径选择及更新转发表的控制职能。B 的帧封装、C 的逐包 NAT 重写、D 的 VPN 加解密通常属于转发或服务数据路径，不能仅因引入控制器就认定移到了控制器。不同 SDN 产品的",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 764,
+      "original_qid": "Q1011",
+      "before_sha256": "72f20963853ac0ac43df86db8ab191b00cbf1bdb78b2f0d0feb330578f28300e",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "explanation": "C。北向接口面向控制器上方的应用；REST 风格的 HTTP API 可以提供 GET、POST、PUT、DELETE 等方法，具体资源和支持的方法要看 API 文档。A、D 面向网络设备，方向属于南向；B 的 SNMP GET 不是 HTTP GET，不能据此称为 REST API。REST 是架构风格，JSON/XML 和 HTTPS 是常见选择，并非 REST 唯一可能的表示或传输方式。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查软件定义网络（SDN）中的北向 API（Northbound API）与 RESTful Web 服务规范。\n1. SDN 接口架构分层：\n   - 南向 API（Southbound API, SBI）：位于 SDN 控制器与底层网络基础设施（路由器、交换机、AP）之间，负责设备配置下发与网络状态收集（如 NETCONF、RESTCONF、OpenFlow、SNMP、CLI）。面向的是网络元素（Network-element-facing）。\n   - 北向 API（Northbound API, NBI）：位于 SDN 控制器与上层业务应用、云管理平台（CMP）或自动化编排系统之间，用于将网络能力以抽象化服务形式暴露给上层软件系统。面向的是应用程序与开发人员（Application-facing）。\n2. RESTful 架构特征：\n   REST（Representational State Transfer）基于标准 HTTP/HTTPS 协议通信，使用无状态请求与结构化载荷（JSON/XML）。其核心在于通过标准 HTTP 谓词执行 CRUD 操作：\n   - GET：读取/检索网络资源或拓扑状态（Read）；\n   - POST：新建网络资源或下发配置策略（Create）；\n   - PUT：完全替换或更新现有资源（Update/Replace）；\n   - DELETE：删除指定资源（Delete）。\n\n• 正确选项剖析：\n选项 C（application-facing interface for GET, POST, PUT, and DELETE methods，面向应用程序且支持 GET、POST、PUT 和 DELETE 方法的接口）精确阐述了 SDN 北向 REST API 的两大核心属性：\n1. 拓扑朝向：面向北向的业务与管理应用程序（Application-facing）；\n2. 协议语义：基于 HTTP REST 标准，使用标准的 CRUD 动作谓词（GET、POST、PUT、DELETE）与控制器进行交互通信。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（network-element-facing interface for GET, POST, PUT, and DELETE methods）：方向描述错误。“network-element-facing”（面向网络网元）是南向 API（SBI）的定位，而非北向 API（NBI）。\n- 选项 B（application-facing interface for SNMP GET requests）：协议描述错误。REST API 运行于 HTTP/HTTPS 之上，传输 JSON/XML；而 SNMP 属于基于 UDP 161/162 的传统网络管理协议，二者在协议栈与数据模型上截然不同。\n- 选项 D（network-element-facing interface for the control and data planes）：方向及概念混淆。控制平面与数据平面之间的接口是面向网络设备的南向接口，与面向应用的北向 REST API 毫无关联。\n\n• 考试要点与速记技巧：\nSDN 接口口诀：“上北下南——北向面应用（Application-facing），REST 调 CRUD（GET/POST/PUT/DELETE）；南向面设备（Network-element-facing），配置下转发表”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C。北向接口面向控制器上方的应用；REST 风格的 HTTP API 可以提供 GET、POST、PUT、DELETE 等方法，具体资源和支持的方法要看 API 文档。A、D 面向网络设备，方向属于南向；B 的 SNMP GET 不是 HT",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 765,
+      "original_qid": "Q1012",
+      "before_sha256": "818c1a48fbc57e1d3e528296b5105770cac14dc894c4fbf0f921559c95e98617",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "prompt": "A network controller exposes a DNS-server configuration resource through an HTTP API that supports PUT. When would PUT be an appropriate choice?",
+        "explanation": "A。若该 API 将 DNS 服务器配置作为资源并支持 PUT，可向该资源 URI 发送表示以创建或替换其状态；具体操作和载荷以 API 文档为准。PUT 的幂等性是指重复相同请求的预期效果与一次请求相同，不排除逐次记录日志或其他客户端的并发修改。B 要求非幂等语义，与 PUT 不符；C 显示网页和 D 只读检索通常使用 GET。POST 的具体行为也由资源定义，不能断言每次调用必定新建资源。"
+      },
+      "original_fields": {
+        "prompt": "When is the PUT method used within HTTP?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 REST API / HTTP 协议方法（Methods）的语义规范与幂等性（Idempotence）原理（RFC 7231 与 RESTful 设计最佳实践）。\n在基于 HTTP 的 RESTful API 架构中，核心操作方法划分如下：\n1. GET（检索）：只读（Read-only）、安全（Safe）且幂等（Idempotent）。向服务器请求指定的资源实体，不改变服务器资源状态。\n2. POST（创建）：不安全且非幂等（Non-idempotent）。通常向目标 URI 发起资源创建请求，多次发送 POST 会创建多个不同的新资源实例。\n3. PUT（更新/替换）：不安全但严格具备幂等性（Idempotent）。向指定的已知 URI 发送完整的资源表示，用请求载荷完全替换或更新目标资源（若资源不存在且允许则创建）。无论客户端连续执行 1 次还是 10 次完全相同的 PUT 请求，服务器端该资源的最终状态完全恒定一致。\n4. PATCH（部分更新）：通常用于对已知资源的局部属性进行增量修改。\n5. DELETE（删除）：幂等操作，用于移除指定 URI 处的资源。\n在网络可编程性实践中，当管理员或脚本调用 REST API 更新网络服务配置（例如修改控制器的 DNS 服务器列表、NTP 服务器或接口 IP 配置）时，标准的 HTTP 方法就是向指定资源端点发起 PUT 请求。\n\n• 正确选项剖析：\n选项 A（to update a DNS server，更新 DNS 服务器配置）完全符合技术规范。\n在 Cisco DNA Center、SD-WAN vManage 或标准 RESTful 系统中，对已有系统网络参数（如全局 DNS 服务器地址）进行配置覆盖或更新，属于标准的 PUT 资源更新操作。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（when a nonidempotent operation is needed，当需要非幂等操作时）：技术概念颠倒。PUT 在 HTTP 标准中被强制定义为幂等（Idempotent）方法。需要非幂等操作时应当使用 POST。\n- 选项 C（to display a web site，显示网页）：显示或获取网页内容属于只读的资源拉取操作，必须使用 HTTP GET 方法。\n- 选项 D（when a read-only operation is required，当需要只读操作时）：PUT 是具有写权限的状态修改方法（Write/Update），只读操作必须使用 GET。\n\n• 考试要点与速记技巧：\nREST API 动词速记：\n- 查资源、读网页用 GET（只读幂等）；\n- 增资源、下新单用 POST（非幂等）；\n- 改设置、更 DNS 用 PUT（更新幂等）；\n- 删条目用 DELETE。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A。若该 API 将 DNS 服务器配置作为资源并支持 PUT，可向该资源 URI 发送表示以创建或替换其状态；具体操作和载荷以 API 文档为准。PUT 的幂等性是指重复相同请求的预期效果与一次请求相同，不排除逐次记录日志或其他客户端的并",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 766,
+      "original_qid": "Q1014",
+      "before_sha256": "d107ff9e814727c2cf958003e83c6c7f82166c38260b877a411dde6b5004cc52",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "explanation": "C。在这些选项中，分离控制和数据平面可使控制器提供统一抽象及集中策略管理，从而降低部分网络配置和运维复杂度。它不保证每个部署的整体复杂度或费用都下降；控制器集群、可用性和现有协议也需要管理。B 可能是收益但并非必然；A 不是该架构的定义，D 的虚拟机创建通常由计算/云管理系统负责。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查软件定义网络（SDN）的核心架构理念及其相较于传统网络架构的工程优势。\n1. 传统网络架构的技术痛点：\n   传统网络采用完全去中心化的分布式架构，每台交换机和路由器都独立运行整套控制平面协议（如 OSPF 邻居状态机、LSA 泛洪与 SPF 计算、BGP 路由选路、STP 根桥选举与端口阻塞）。在大型园区或数据中心中，数千台设备同时维护复杂的分布式状态，极易出现协议震荡、配置漂移（Configuration Drift）、次优路径或难以排查的黑洞与环路，运维网络极其复杂。\n2. SDN 控制面与数据面解耦的优势：\n   SDN 将控制智能从底层转发硬件中剥离，集中部署在 SDN 控制器上：\n   - 全网具备统一集中的拓扑抽象视图（Global Network View）；\n   - 底层硬件转变为统一可编程的数据平面，不再需要逐台独立配置和维护错综复杂的分布式路由协议；\n   - 策略与业务逻辑通过控制器集中下发，实现了端到端自动化编排与全网一致性策略管控。\n   - 这种解耦极大消除了单机协议堆叠，降低了全网的整体复杂度（Decreases overall network complexity）。\n\n• 正确选项剖析：\n选项 C（decreases overall network complexity，降低整体网络复杂度）准确反映了控制面与数据面分离的核心设计红利。通过集中化的逻辑大脑替代全网成千上万个离散运行的控制平面，大幅精简了网络管理拓扑与协议交互，降低了网络架构和日常运维的整体复杂度。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（limits data queries to the control plane）：描述模糊且技术失实。业务过境数据流在数据平面高速转发，本身就无需查询控制平面；解耦的目的是让数据转发更加线速直接，而非限制所谓的数据查询。\n- 选项 B（reduces cost）：虽然集中化自动化可能在长期降低一定的运营成本（OPEX），但“降低成本”过于泛化，且 SDN 建设初期需要采购高性能控制器与授权，成本甚至可能上升，它不是解耦本身的直接架构优势。\n- 选项 D（offloads the creation of virtual machines to the data plane）：属于荒谬的概念混淆。虚拟机的创建与调度属于云计算计算虚拟化（Hypervisor/KVM/ESXi）的职责，与网络数据平面转发报文毫无关联。\n\n• 考试要点与速记技巧：\nSDN 控制面与数据面解耦核心目的：消除分布式协议黑盒，统一全局视图，降低网络整体复杂度（Decreases overall network complexity）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C。在这些选项中，分离控制和数据平面可使控制器提供统一抽象及集中策略管理，从而降低部分网络配置和运维复杂度。它不保证每个部署的整体复杂度或费用都下降；控制器集群、可用性和现有协议也需要管理。B 可能是收益但并非必然；A 不是该架构的定义，D",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 767,
+      "original_qid": "Q1015",
+      "before_sha256": "060ada32af1b49523b0bd876a98f57454700bf0ce97bbdb5fb0dbd7e55942666",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which closing character is missing for the displayed text to be parsed as a complete JSON document?",
+        "options": [
+          {
+            "label": "A",
+            "text": "double quotes (\" \") around the \"Cisco Devices\" string"
+          },
+          {
+            "label": "B",
+            "text": "exclamation point (!) at the beginning of each line"
+          },
+          {
+            "label": "C",
+            "text": "square bracket ( [ ) at the beginning"
+          },
+          {
+            "label": "D",
+            "text": "closing curly bracket ( } ) at the end"
+          }
+        ],
+        "explanation": "D。图中最外层 `{` 启动对象，而数组的 `]` 之后没有关闭该对象；补上末尾 `}` 才能配平结构。A 的 `\"Cisco Devices\"` 已有双引号，B 的 `!` 不是 JSON 注释，C 开头无需额外 `[`。图中内部对象还重复使用三个 `name` 键：RFC 8259 要求同一对象成员名应当唯一，重复键在不同解析器中的处理可能不同；若想可靠保留三个设备，应改成包含三个对象的数组。JSON 是数据文本，解析不等于执行代码。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. What is missing from this output for it to be executed?",
+        "options": [
+          {
+            "label": "A",
+            "text": "double quotes (\" \") around the \"Cisco Devices\" string"
+          },
+          {
+            "label": "B",
+            "text": "exclamation point (!) at the beginning of each line"
+          },
+          {
+            "label": "C",
+            "text": "square bracket ( [ ) at the beginning"
+          },
+          {
+            "label": "D",
+            "text": "curly braket ( } ) at the end"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON（JavaScript Object Notation, RFC 8259）数据表示格式的标准语法结构与括号匹配规则。\n1. JSON 数据结构规范：\n   - JSON 文本必须由单一根元素（Root Element）开始和结束，该根元素通常是一个对象（Object）或一个数组（Array）。\n   - 对象（Object）：以左花括号 `{` 开始，以右花括号 `}` 结束，内部包含零个或多个由逗号分隔的键值对（Key-Value Pairs）。\n   - 数组（Array）：以左方括号 `[` 开始，以右方括号 `]` 结束，内部包含零个或多个由逗号分隔的值列表。\n2. 题目 Exhibit 逐行语法分析：\n   - 第 1 行：`{` —— 开启顶层根对象（Root Object）；\n   - 第 2 行：`\"Cisco Devices\": [` —— 根对象中的键 `\"Cisco Devices\"`，其值是一个数组，以 `[` 开头；\n   - 第 3 行：`{` —— 开启数组内部的第一个子对象；\n   - 第 4-6 行：包含三个 `\"name\": \"...\"` 键值对；\n   - 第 7 行：`}` —— 正确闭合了第 3 行开启的内部子对象；\n   - 第 8 行：`]` —— 正确闭合了第 2 行开启的数组；\n   - 结尾分析：整个 JSON 片段在此戛然而止！第一行开启的根对象 `{` 缺少对应的右花括号 `}` 来闭合。由于结构不完整，任何合规的 JSON 解析器（如 Python 的 `json.loads()`）在读取到文件结尾（EOF）时都会因“未预期的文档结尾”或缺少闭合符号而报语法错误，无法被执行解析。\n\n• 正确选项剖析：\n选项 D（curly braket ( } ) at the end，末尾缺少花括号 }）完全正确。在第 8 行 `]` 之后必须添加一个右花括号 `}`，以闭合在第 1 行开启的顶层对象，格式方才合法可被执行。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（double quotes (\" \") around the \"Cisco Devices\" string）：从图中清晰可见，`\"Cisco Devices\"` 已经完整包裹在合法英文双引号中，并不缺失。\n- 选项 B（exclamation point (!) at the beginning of each line）：感叹号 `!` 是 Cisco IOS CLI 命令行中的注释符号，而 JSON 标准语法根本不支持感叹号开头的注释语法，加入感叹号会导致 JSON 解析全面崩溃。\n- 选项 C（square bracket ( [ ) at the beginning）：开头第一行已经正确使用了代表对象的左花括号 `{`，无需在最开头添加方括号。\n\n• 考试要点与速记技巧：\nJSON 语法口诀：“花括号对对象（{ }），方括号对数组（[ ]）；成双成对必闭合，开闭不全报 EOF”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "D。图中最外层 `{` 启动对象，而数组的 `]` 之后没有关闭该对象；补上末尾 `}` 才能配平结构。A 的 `\"Cisco Devices\"` 已有双引号，B 的 `!` 不是 JSON 注释，C 开头无需额外 `[`。图中内部对象还重",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q767_agent.jpg",
+      "image_sha256": "897c79ed1beb469ca4fcdbfc1f6510a4dc8b4a5b43834b17ba421d6c15511aa4"
+    },
+    {
+      "id": 768,
+      "original_qid": "Q1016",
+      "before_sha256": "0619e62390a417fad273c44c46924e43397fd7a5da363906de515d541837411a",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "explanation": "D。北向 API 把控制器能力暴露给应用或编排器，使应用可以读取网络状态、提交策略并实现网络自动化；API 本身不一定包含完整编排引擎。A 不是接口的一般功能定义；B 是某些管理应用可能提供的具体功能；C 的分布式处理与是否使用北向接口并不等价，控制器也可以由分布式集群实现。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 SDN 控制器北向 API（Northbound API）在现代网络自动化与端到端编排体系中的核心功能。\n1. SDN 控制平面架构：\n   - SDN 控制器向下通过南向 API（如 NETCONF/RESTCONF/OpenFlow）直接管理网络物理/虚拟转发设备。\n   - SDN 控制器向上通过北向 API（通常为标准 RESTful API）与外部系统进行交互。\n2. 北向 API 的核心服务功能：\n   - 网络编排（Network Orchestration）：编排器（Orchestrator）可以将跨多个域（数据中心、广域网 SD-WAN、园区 SD-Access、公有云 VPC）的策略统一进行端到端串联和生命周期管理。\n   - 网络自动化（Network Automation）：外部 DevOps 工具（如 Ansible、Terraform、Python 脚本、CI/CD 流水线）无需逐台登录网络交换机，而是通过北向 API 向控制器发送结构化配置请求（如部署新租户网络、修改安全组策略），由控制器自动计算并将配置转化为南向指令批量推送到全网设备。\n\n• 正确选项剖析：\n选项 D（It provides orchestration and network automation services.，它提供编排和网络自动化服务）准确指出了北向 API 的技术定位。北向 API 是上层业务与底层网络控制之间的纽带，专为上层编排器和自动化流水线提供高效可编程的北向接口服务。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It relies on global provisioning and configuration.）：语义混淆。北向 API 本身就是用来实现全局自动下发配置的手段，而不是被动“依赖”全局配置。\n- 选项 B（It upgrades software and restores files.）：软件升级和文件备份/恢复通常由网络管理系统（NMS）的具体特定应用或操作模块完成，不是北向 API 抽象模型的一般性定义。\n- 选项 C（It supports distributed processing for configuration.）：SDN 的精髓是集中化控制与编排（Centralized processing），而非传统意义上的分布式离散配置。\n\n• 考试要点与速记技巧：\nSDN 北向 API 终极使命：连接上层业务，提供网络自动化与端到端业务编排（Orchestration and Network Automation）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "D。北向 API 把控制器能力暴露给应用或编排器，使应用可以读取网络状态、提交策略并实现网络自动化；API 本身不一定包含完整编排引擎。A 不是接口的一般功能定义；B 是某些管理应用可能提供的具体功能；C 的分布式处理与是否使用北向接口并不",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 769,
+      "original_qid": "Q1017",
+      "before_sha256": "2fad5bccea345fad12d7ae88b7731ad1012e7eeb446e835f7dea097662682a1b",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "prompt": "In a basic static-file Ansible setup, what does an inventory file contain?",
+        "explanation": "B。静态 inventory 文件定义 Ansible 的目标主机/设备，通常还可分组并提供变量；常见格式有 INI 和 YAML。A 指模块等执行单元，C 是控制节点，D 是包含 plays 和 tasks 的 YAML playbook。Inventory 并不限于单一静态文件，也可来自动态 inventory 插件或脚本；网络模块也不一定以 Python 代码推送到设备上运行。"
+      },
+      "original_fields": {
+        "prompt": "What is an Ansible inventory?",
+        "explanation": "• 核心考点与原理分析：\n本题考查无代理（Agentless）网络自动化配置管理工具 Ansible 的核心构件与架构术语。\nAnsible 作为基于 Python 和 SSH 的自动化框架，其核心组件包括：\n1. 控制节点（Control Node）：运行 Ansible 引擎并执行命令/剧本的 Linux 宿主机。\n2. 清单（Inventory）：定义和记录所有被管目标主机（Managed Hosts）与网络设备的列表文件（通常为 `hosts` 文件，支持 INI 或 YAML 格式）。在 Inventory 中，管理员可以：\n   - 列出目标设备的 IP 地址或主机名；\n   - 将设备逻辑分组（例如 `[routers]`、`[core_switches]`、`[access_switches]`）；\n   - 为特定主机或主机组关联变量（Host/Group Variables，如 SSH 端口、登录用户名密码、设备操作系统类型 `ansible_network_os=cisco.ios.ios`）。\n3. 剧本（Playbook）：以 YAML 格式编写的自动化脚本，定义要在 Inventory 指定的目标设备上按顺序执行的一组任务（Tasks）。\n4. 模块（Module）：执行实际操作的代码单元（如 `cisco.ios.ios_command`、`cisco.ios.ios_config`）。\n\n• 正确选项剖析：\n选项 B（file that Defines the target devices upon which commands and tasks are executed，定义将要对其执行命令和任务的目标设备的文件）完全吻合 Ansible 官方文档对 Inventory（清单）的标准定义。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（unit of Python code to be executed within Ansible）：描述的是 Ansible 的“模块”（Module），即真正被推送到远程节点执行具体任务的底层代码单元。\n- 选项 C（device with Ansible installed that manages target devices）：描述的是 Ansible 的“控制节点”（Control Node / Control Machine）。\n- 选项 D（collection of actions to perform on target devices, expressed in YAML format）：描述的是 Ansible 的“剧本”（Playbook），剧本是任务动作的集合，而 Inventory 是设备的列表。\n\n• 考试要点与速记技巧：\nAnsible 四大件速记：\n- 目标设备名单叫 Inventory（清单文件）；\n- 执行任务集合叫 Playbook（YAML 剧本）；\n- 底层执行代码叫 Module（模块）；\n- 发号施令机器叫 Control Node（控制节点）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "B。静态 inventory 文件定义 Ansible 的目标主机/设备，通常还可分组并提供变量；常见格式有 INI 和 YAML。A 指模块等执行单元，C 是控制节点，D 是包含 plays 和 tasks 的 YAML playbook",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 770,
+      "original_qid": "Q1019",
+      "before_sha256": "d72caace406a5e897c5be9a35233c06ae515e2d084687a63aa73a64fcdf329e2",
+      "reason": "审查并纠正解析中技术过度概括或题意不完整，保留答案。",
+      "updates": {
+        "explanation": "D。北向 API 连接 SDN 控制器与网络应用，使应用读取状态或请求策略；南向接口则连接控制器与基础设施。A 不描述接口的核心作用，B 只是某些管理应用可能具备的功能，C 也无法定义接口方向。逻辑集中的 SDN 控制可以由多台控制器分布式实现。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 SDN 体系架构三层模型（应用层、控制层、基础设施层）及层间 API 路径规划。\n标准 SDN 逻辑架构划分为三大部分：\n1. 基础设施层 / 数据平面（Infrastructure Layer / Data Plane）：底层物理或虚拟网络交换机、路由器，负责纯粹的高速数据包转发。\n2. 控制层（Control Layer）：由集中式 SDN 控制器构成，负责维护网络状态、集中运算路径决策并执行策略管控。\n3. 应用层（Application Layer）：由各类面向业务的网络应用组成，如自动化监控分析、QoS 策略引擎、安全防护、云管理平台。\n层间通信路径：\n- 南向 API（Southbound API）：建立在控制器与基础设施层之间，负责向下编程流表与收集设备遥测数据。\n- 北向 API（Northbound API）：建立在 SDN 控制器与上层网络应用程序之间，为网络应用程序调用控制器功能、获取网络拓扑视图和下发高级业务策略提供标准通信通道（Path）。\n\n• 正确选项剖析：\n选项 D（It provides a path between an SDN controller and network applications.，它在 SDN 控制器和网络应用程序之间提供通信路径）完美契合 SDN 架构图中的标准北向接口定位。北向 API 是连接 SDN 大脑（Controller）与上层业务软件（Network Applications）的高速桥梁。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It relies on global provisioning and configuration.）：说法颠倒，北向接口是实现全局配置的通路，而非依赖于它。\n- 选项 B（It upgrades software and restores files.）：这只是某类特定管理软件的功能表现，不能概括北向 API 自身的通用架构路径属性。\n- 选项 C（It supports distributed processing for configuration.）：概念错误，SDN 的本质是控制的集中化（Centralized Controller），北向 API 面对的是中心控制器，而非支持分布式离散处理。\n\n• 考试要点与速记技巧：\nSDN 连接关系一眼清：\n- 北向 API（Northbound）：连控制器与网络应用程序（Controller <-> Applications）；\n- 南向 API（Southbound）：连控制器与网络转发硬件（Controller <-> Network Devices）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "D。北向 API 连接 SDN 控制器与网络应用，使应用读取状态或请求策略；南向接口则连接控制器与基础设施。A 不描述接口的核心作用，B 只是某些管理应用可能具备的功能，C 也无法定义接口方向。逻辑集中的 SDN 控制可以由多台控制器分布式",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc8259.html",
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+          "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+    "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+  ],
+  "limitations": "查看原图并对照规范；没有实际控制器、网络设备或 API 实验。"
+}

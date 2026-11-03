@@ -1,0 +1,319 @@
+{
+  "scope": "Q711–Q720",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 711,
+      "original_qid": "Q932",
+      "before_sha256": "d87e0ad3ac0aef5693d3f465627f2e76047133b51d57df4724c0158d48d96a6b",
+      "reason": "原题声称立即恢复并保证接入电路故障均能检测，属于过度保证；限定第一跳冗余并区分上游故障跟踪。",
+      "updates": {
+        "prompt": "Which Cisco proprietary first-hop redundancy protocol provides a virtual default gateway that can move to a standby router if the active gateway fails?",
+        "explanation": "C。HSRP 是 Cisco 的第一跳冗余协议：同组设备提供虚拟网关 IP 和虚拟 MAC，活动网关失效后备份设备可接管，主机通常无需修改默认网关。故障检测和收敛需要时间，不能保证立即恢复或零丢包。对于活动路由器本身仍运行但上游链路失效的情况，需根据设计配置接口或对象跟踪、优先级变化和抢占；不能假定任何故障都自动触发切换。\n\nA 是第一跳冗余协议类别，B VRRP 是开放标准协议，D SLB 是服务器负载均衡。"
+      },
+      "original_fields": {
+        "prompt": "Which Cisco proprietary protocol ensures traffic recovers immediately, transparently, and automatically when edge devices or access circuits fail?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 私有第一跳冗余协议 HSRP（热备份路由器协议，Hot Standby Router Protocol）的核心定义与特性。\n1. HSRP 的协议属性：\n   - HSRP（Hot Standby Router Protocol）由 Cisco 自主开发（RFC 2281 定义为 Cisco 私有协议），是网络行业最早广泛应用的第一跳网关冗余协议。\n2. HSRP 运作机制：\n   - 在同一个局域网中，两台或多台 Cisco 路由器加入同一个 HSRP 备份组（Standby Group）。\n   - 组内根据优先级（Priority，默认 100）和 IP 大小选举产生一台活跃路由器（Active Router）和一台备份路由器（Standby Router）。\n   - Active 路由器承载虚拟 IP 地址与虚拟 MAC 地址（HSRP v1 为 `0000.0c07.acXX`），负责响应主机的 ARP 请求并实际转发所有出站数据包。\n   - Active 与 Standby 路由器之间通过组播 Hello 包（默认每 3 秒一次，保持时间 10 秒）维持心跳。\n3. 故障自愈与透明性：\n   当 Active 路由器发生硬件宕机或接入链路（access circuit）断开时，Standby 路由器在 10 秒 Hold 计时器超时后立即自动升级为 Active 路由器，并向交换机发送虚拟 MAC 的免费 ARP。局域网主机在完全无感知（Transparently）、无须更改任何默认网关配置的情况下，流量自动恢复正常转发。\n\n• 正确选项剖析：\n选项 C（HSRP）：\n题干包含两大决定性特征：“Cisco proprietary protocol”（Cisco 私有协议）和“traffic recovers immediately, transparently, and automatically when edge devices or access circuits fail”（边缘设备或访问链路失效时流量立即、透明、自动恢复）。HSRP 完全符合 Cisco 私有网关高可用协议的定义，故 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（FHRP）：第一跳冗余协议的统称术语，是一个协议分类，而非具体的某个协议实现，更不是“Cisco 私有协议”。\n- 选项 B（VRRP）：VRRP 是 IETF 发布的开放公有标准协议（RFC 3768/5798），非 Cisco 私有。\n- 选项 D（SLB）：服务器负载均衡（Server Load Balancing），属于四至七层应用交付与流量分发技术，不属于边缘设备和二/三层网关访问冗余协议。\n\n• 考试要点与速记技巧：\n- Cisco 网关高可用代表作：**HSRP（Cisco Proprietary）**。\n- 虚拟 MAC 特征速查：\n  • HSRP v1：`0000.0c07.acXX`（组播 224.0.0.2，UDP 1985）\n  • HSRP v2：`0000.0c9f.fXXX`（组播 224.0.0.102，UDP 1985）\n  • VRRP：`0000.5e00.01XX`（组播 224.0.0.18，IP 协议号 112）"
+      },
+      "has_exhibit": false,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 C",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "题目不依赖图片",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      }
+    },
+    {
+      "id": 712,
+      "original_qid": "Q933",
+      "before_sha256": "b5b94fd7f1a7b31b5a330801d1aaf1f2416902ca76aeeee950ed00dcc68897e1",
+      "reason": "按图核对子网掩码；图中前缀未按网络边界规范显示，按掩码计算网络范围而非照抄。",
+      "updates": {
+        "explanation": "B（条目 2）。对目的地址 192.168.10.5 做掩码匹配：条目 1 的 /23 为 192.168.10.0–192.168.11.255；条目 2 的 /26 为 192.168.10.0–192.168.10.63；条目 3 的 /16 为 192.168.0.0–192.168.255.255；条目 4 的 /19 为 192.168.0.0–192.168.31.255。四条均匹配，/26 最长，因此选 2。图中 192.168.10.0 与 /16、/19 组合的主机位非零，此处按地址与掩码相与得到各自网络前缀。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查三层网络中路由器的最长前缀匹配原则（Longest Prefix Match, LPM）与子网掩码计算。\n1. 最长前缀匹配原则（LPM）：\n   当路由器收到目的 IP 为特定主机的数据包时，会在 IP 路由表（FIB）中检索所有能够覆盖该目的地址的候选路由条目。如果有多条路由均匹配该目的地址，路由器将依据“网络掩码最长”（即前缀长度 /n 数值最大、包含主机数量最少、针对性最强）的原则决定最终转发条目。\n2. 题目各路由条目的子网掩码与前缀长度换算：\n   - 条目 1：掩码 255.255.254.0。第三字节为 254 = 11111110（7 个 1），对应前缀长度为 /23（8+8+7 = 23）。\n   - 条目 2：掩码 255.255.255.192。第四字节为 192 = 11000000（2 个 1），对应前缀长度为 /26（8+8+8+2 = 26）。\n   - 条目 3：掩码 255.255.0.0。对应标准 B 类掩码，前缀长度为 /16（8+8 = 16）。\n   - 条目 4：掩码 255.255.224.0。第三字节为 224 = 11100000（3 个 1），对应前缀长度为 /19（8+8+3 = 19）。\n\n• 正确选项剖析：\n选项 B（条目 2）完全符合技术规范：\n1. 目的主机 IP 为 192.168.10.5。\n2. 检验条目 2（192.168.10.0 255.255.255.192，即 192.168.10.0/26）：\n   - 子网块大小（Block Size）= 256 - 192 = 64。\n   - 子网网络地址为 192.168.10.0，广播地址为 192.168.10.63，有效主机范围为 192.168.10.1 至 192.168.10.62。\n   - 目标地址 192.168.10.5 完全落在该子网有效范围内，匹配成功。\n3. 比较所有匹配条目的前缀长度：\n   - 条目 2 的前缀长度为 /26；\n   - 条目 1 为 /23；\n   - 条目 4 为 /19；\n   - 条目 3 为 /16。\n   由于 26 > 23 > 19 > 16，条目 2 拥有最长的前缀掩码（Most Specific Route），因此是判定数据包转发的最长前缀匹配项。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（条目 1）：掩码 255.255.254.0 为 /23 前缀，覆盖范围为 192.168.10.0 至 192.168.11.255。虽然也包含目标 IP 192.168.10.5，但其前缀长度（/23）短于条目 2（/26），根据 LPM 原则落败。\n- 选项 C（条目 3）：掩码 255.255.0.0 为 /16 前缀，覆盖范围为 192.168.0.0 至 192.168.255.255。虽然包含目标 IP，但前缀仅为 16 位，是所有候选中最为宽泛的汇总路由。\n- 选项 D（条目 4）：掩码 255.255.224.0 为 /19 前缀，覆盖范围为 192.168.0.0 至 192.168.31.255。前缀长度 19 位小于条目 2 的 26 位，不满足最长匹配。\n\n• 考试要点与速记技巧：\n查表转发只认准一条黄金铁律：“最长前缀优先（Longest Prefix Match）”。将各点分十进制掩码快速转为前缀长度：255.192 即 /26，前缀位数最大必选！"
+      },
+      "has_exhibit": true,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 B",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "原图已直接查看",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      },
+      "exhibit_path": "exhibits/q712_agent.jpg",
+      "image_sha256": "77bd881c061d72526dc3172cb290fa2f53999f311f23795e4004dec6ca06410c"
+    },
+    {
+      "id": 713,
+      "original_qid": "Q934",
+      "before_sha256": "e9a0e4e7887ab2cccd5f9ddcd662ce819569d152697081d01be3f39a5880211b",
+      "reason": "按图核对两条EIGRP下一跳；移除等价路径一定安装及流量必然平均的绝对化描述。",
+      "updates": {
+        "explanation": "D。图中同一前缀 172.16.1.4/30 的两条已安装 EIGRP 路由均为 [90/7445]，下一跳分别为 172.16.9.5 和 172.16.4.4，因此路由器可在这两条等价路径之间分担流量。实际分配取决于平台和转发方式，按流哈希时单一流通常只走一条路径，不能保证每条链路流量完全相等。A/C 忽略了其中一条已安装路径；B 的 10.0.1.100 属于另一前缀的路由。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由表输出解读与等价多路径负载均衡（Equal-Cost Multi-Path, ECMP）机制。\n1. 路由代码与协议识别：\n   - 路由表中开头的字符标识协议来源：C 代表直连（Connected）、S 代表静态（Static）、O 代表 OSPF、D 代表 EIGRP（Enhanced Interior Gateway Routing Protocol）。\n2. ECMP 原理：\n   当路由器通过同一种动态路由协议学到通往同一目的前缀的多条路径，且各路径具有完全相同的管理距离（Administrative Distance, AD）和度量值（Metric）时，路由器不会只选一条，而是将所有等价路径同时安装至 RIB（路由表）和 FIB（转发信息库），通过 CEF（Cisco Express Forwarding）在不同链路之间进行基于哈希的逐流负载均衡。\n\n• 正确选项剖析：\n选项 D（It load-balances traffic over 172.16.9.5 and 172.16.4.4）完全正确：\n1. 查看 exhibit 中关于 172.16.1.4/30 的路由条目：\n   `D 172.16.1.4/30 [90/7445] via 172.16.9.5, 00:39:08, Gigabit Ethernet 0/0`\n   `                [90/7445] via 172.16.4.4, 00:39:08, Gigabit Ethernet 0/4`\n2. 逐项字段参数分析：\n   - 代码 D：表明此路由由 EIGRP 协议动态生成。\n   - 目的网络与掩码：172.16.1.4/30。\n   - [90/7445]：90 是 EIGRP 内部路由的管理距离（AD），7445 是经过复合度量公式（K 值）计算得出的 EIGRP 复合度量值。\n   - 下一跳 1：172.16.9.5，出接口为 GigabitEthernet0/0。\n   - 下一跳 2：172.16.4.4，出接口为 GigabitEthernet0/4。\n3. 由于两个下一跳的 AD 均为 90 且度量值均为 7445（属于标准 Equal-Cost），EIGRP 默认在最多 4 条（最高可配 16/32 条）等价路径间进行负载分担。因此 R1 会在这两条链路之间执行负载均衡转发。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It sends all traffic over the path via 172.16.9.5 using 172.16.4.4 as a backup）：混淆了活动/备用路径（Active/Backup）与负载均衡的概念。若为备份路径，则备用路由（如浮动静态或非等价可行后继）不会在路由表中同时以活动下一跳形式列出。\n- 选项 B（It sends all traffic over the path via 10.0.1.100）：下一跳 10.0.1.100 对应的是目标网段 `172.16.1.3/32` 的 OSPF 路由，而非题目询问的 `172.16.1.4/30`。\n- 选项 C（It sends all traffic over the path via 172.16.4.4）：忽视了等价路径的存在。路由器并不会武断地仅选择其中单一一跳，而是同时使用两条等价路径进行转发。\n\n• 考试要点与速记技巧：\n路由表中同一目的前缀下方紧接着出现度量值完全相同的并列 `via ...` 行，即为 ECMP 等价负载均衡（Equal-Cost Load Balancing）。"
+      },
+      "has_exhibit": true,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 D",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "原图已直接查看",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      },
+      "exhibit_path": "exhibits/q713_agent.jpg",
+      "image_sha256": "b2650aff0583d5b6400f9e999de5963a32985c2cdeda51bca2828276e71b757a"
+    },
+    {
+      "id": 714,
+      "original_qid": "Q937",
+      "before_sha256": "1c4b61b8c3c49861039ad0734f6d9357772d16a808105f7fb0abad0c52da00ef",
+      "reason": "原解释无条件承诺回ICMP，不符合抑制规则；核对原图全部路由。",
+      "updates": {
+        "explanation": "D。图中直连 10.10.10.0/28 的范围是 10.10.10.0–10.10.10.15，目的 10.10.10.16 不属于该前缀；图中其他前缀也不匹配，并显示 gateway of last resort is not set。因此路由器没有匹配路由，丢弃该包。路由器可按适用规则向源端发送目的不可达消息，但这会受 ICMP 抑制、策略和速率限制等影响，不保证每包都有响应。A 不是普通三层单播的未知目的处理，B 的相似地址不能代替掩码匹配，C 不会为等未来学到路由而一直排队。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查可变长子网掩码（VLSM）子网范围精算与默认路由缺失时的数据包丢弃行为。\n1. IP 子网划分与广播域边界：\n   - 子网掩码决定了网络位与主机位的边界，每个子网具有明确定义的网络地址、可用主机 IP 范围和定向广播地址。\n   - 路由器收到数据包时，仅根据报头中的目的 IP 地址在路由表中查找能够匹配的路由条目。\n2. 缺乏网关与默认丢包机制：\n   - 当路由器路由表中既没有匹配目标 IP 的明细路由，也没有匹配的汇总路由，且未配置或未学到默认路由（Gateway of last resort is not set）时，路由器无法将数据包交付给任何下一跳。\n   - 此时路由器将执行 RFC 791/1812 规定的行为：立即丢弃该数据包（Discard / Drop），并向源主机回送 ICMP“目的网络不可达（Destination Network Unreachable, Type 3 Code 0）”报文。\n\n• 正确选项剖析：\n选项 D（It discards the packets，丢弃数据包）完全正确：\n1. 目的 IP 地址分析：\n   - 题干明确指出数据包发往目的 IP `10.10.10.16`（destined for 10.10.10.16）。\n2. 查看路由表中与 10.10.10.x 相关的条目：\n   - 路由表中唯一的类似直连条目为：`C 10.10.10.0/28 is directly connected, GigabitEthernet0/0`。\n3. 精确计算 10.10.10.0/28 的子网范围：\n   - 掩码 /28 即 255.255.255.240。\n   - 块大小（Block Size）= 256 - 240 = 16。\n   - 子网 1：网络地址 10.10.10.0，有效主机范围 10.10.10.1 ~ 10.10.10.14，广播地址 10.10.10.15。\n   - 下一个相邻子网的网络地址即为 10.10.10.16/28。\n4. 显然，目标地址 10.10.10.16 已经超出了 10.10.10.0/28 的子网边界（它是下一个子网的网络号，即使作为主机也不属于当前 10.10.10.0/28）。\n5. 路由表首行明确标明：`Gateway of last resort is not set`（未设置最后选用网关/默认路由）。\n6. 由于无任何路由匹配该目的 IP，Router1 只能将数据包直接丢弃。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It floods packets to all learned next hops）：这是二层交换机对未知单播帧的泛洪（Flooding）行为。三层路由器绝不会泛洪单播 IP 包，查不到路由必丢弃。\n- 选项 B（It uses a route that is similar to the destination address）：路由器转发遵循严格的二进制掩码匹配规则，绝不存在所谓“相似地址匹配（Similar route）”这种模糊机制。\n- 选项 C（It queues the packets waiting for the route to be learned）：路由器只处理当前已有转发表，绝不会将无法转发的数据包在内存中长久排队等待未来路由学习，否则会导致严重的队列拥塞与缓冲区耗尽。\n\n• 考试要点与速记技巧：\n做子网题千万注意末尾数字陷阱：/28 块大小是 16，10.10.10.0/28 只到 10.10.10.15！.16 已出界，无默认路由直接丢弃（Discard）！"
+      },
+      "has_exhibit": true,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 D",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "原图已直接查看",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      },
+      "exhibit_path": "exhibits/q714_agent.jpg",
+      "image_sha256": "0e7d2e9b9e443f98ef028a83609c081ccce96d47cee64e73b4dcb1ea60f49f97"
+    },
+    {
+      "id": 715,
+      "original_qid": "Q939",
+      "before_sha256": "6bb045c22ab0bbbcf490f590f33a5666cd1807004d5af6e11e2db749b10d0cb2",
+      "reason": "题目遗漏主默认路由的管理距离，10并非对任意动态协议都能浮动；补充主路由、下一跳条件并去掉毫秒级保证。",
+      "updates": {
+        "prompt": "An engineer must configure a floating static default route to backup next hop 10.200.0.2. The existing primary default route is a static route with administrative distance 1, and the backup next hop is reachable. Which command meets the requirements?",
+        "explanation": "B。`ip route 0.0.0.0 0.0.0.0 10.200.0.2 10` 配置默认路由，管理距离 10 大于题设主默认静态路由的 1，因此主路由有效时作为备份；主路由撤销且备用下一跳仍可解析时才有资格安装。故障发现和收敛时间由接口状态、跟踪与协议等决定，不保证毫秒级。A 和 C 的静态管理距离都是 1，不高于题设主路由；D 的 `floating` 不是该位置的 IOS 距离参数。若主路由是 AD 20 的 eBGP，备份 AD 10 反而更优，必须另选更高距离。"
+      },
+      "original_fields": {
+        "prompt": "An engineer must configure a core router with a floating static default route to the backup router at 10.200.0.2. Which command meets the requirements?",
+        "explanation": "• 核心考点与原理分析：\n本题考查浮动静态路由（Floating Static Route）与默认路由（Default Route）的配置语法。\n1. 默认路由概念：\n   默认路由匹配所有未知目的地址（Quad-zero 表示法），IPv4 语法为 `0.0.0.0 0.0.0.0`，在拓扑中充当“最后选用网关（Gateway of last resort）”。\n2. 浮动静态路由核心机制：\n   - Cisco IOS 中普通静态路由的默认管理距离（Administrative Distance, AD）为 1。\n   - 常见动态路由协议的默认 AD：eBGP 为 20、EIGRP 内部为 90、OSPF 为 110、RIP 为 120。\n   - 浮动静态路由是一种特殊的静态路由，管理员在配置静态路由时人为将其 AD 设置为一个高于主路由（如主动态路由或主静态路由）的值。\n   - 只要主路径正常运作，浮动静态路由因 AD 较高而隐蔽在后台（不安装进路由表）；一旦主链路故障、主路由失效从 RIB 中撤销，浮动静态路由便“浮现”并安装到路由表中，实现毫秒级的链路冗余备份。\n3. 静态路由 CLI 完整命令语法：\n   `Router(config)# ip route <prefix> <mask> <next-hop-ip | exit-interface> [distance]`\n   其中末尾的可选参数 `[distance]` 取值范围为 1-255，用于定义该静态路由的管理距离。\n\n• 正确选项剖析：\n选项 B（ip route 0.0.0.0 0.0.0.0 10.200.0.2 10）完全符合技术标准：\n1. `0.0.0.0 0.0.0.0` 正确定义了全局默认路由（Default Route）。\n2. `10.200.0.2` 为指向备份路由器的合法下一跳 IP 地址。\n3. 结尾参数 `10` 显式将此静态路由的管理距离（AD）设置为 10。由于默认静态路由 AD 为 1，设置 AD=10 使其成为一条标准的浮动静态路由（Floating Static Route），当主路由（假设 AD < 10）失效时该备份路由立即接管转发。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（ip route 0.0.0.0 0.0.0.0 10.200.0.2 1）：末尾显式指定了 AD 为 1。AD=1 是静态路由的默认值，无法实现相对主静态路由的浮动备份功能。\n- 选项 C（ip route 0.0.0.0 0.0.0.0 10.200.0.2）：未指定 AD 参数，系统自动采用默认 AD=1，这是一条普通静态默认路由，并非浮动静态路由。\n- 选项 D（ip route 0.0.0.0 0.0.0.0 10.200.0.2 floating）：Cisco IOS `ip route` 命令末尾的距离参数必须是 1 到 255 的十进制整数，不存在 `floating` 这个关键字，此命令存在严重语法错误（CLI 会报 `% Invalid input detected at '^' marker`）。\n\n• 考试要点与速记技巧：\n浮动静态路由的精髓：“末尾跟数字改 AD”。关键字没有 floating，改大 AD 隐于世，主路挂掉它顶替！"
+      },
+      "has_exhibit": false,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 B",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "题目不依赖图片",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      }
+    },
+    {
+      "id": 716,
+      "original_qid": "Q940",
+      "before_sha256": "7382c2f1fe35d73ab017ff26c1c2f026b130b53e8e1951defbae61ca1f9900bf",
+      "reason": "按照图核对两个默认路由及下一跳可达性；限制竞争路由条件。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming the configured static next hop remains reachable and there is no other preferred default route, when is the static default route installed into the CPE routing table?",
+        "explanation": "C。图中静态默认路由 `ip route 0.0.0.0 0.0.0.0 203.0.113.1 21` 的管理距离为 21；当前 eBGP 默认路由显示 `[20/0]`，优先级更高。若 eBGP 默认路由失效，且静态下一跳 203.0.113.1 仍可解析、没有其他更优默认路由，浮动静态路由才可安装。图中下一跳所在 203.0.113.0/30 直连，且 ping 成功。A 单独学到一条通往下一跳的路由不能证明 eBGP 默认路由消失；B 下一跳不可达会使静态路由无法解析；D 只改变 eBGP 下一跳不必然使该路由失效。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. After configuring a new static route on the CPE, the engineer entered this series of commands to verify that the new configuration is operating normally. When is the static default route installed into the routing table?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 中浮动静态路由与外部 BGP（eBGP）之间的管理距离（Administrative Distance, AD）仲裁机制。\n1. 管理距离（AD）是路由器衡量不同路由来源可信度的标尺，取值范围 0-255，数值越小越优先：\n   - 直连网段（Connected）：0\n   - 静态路由（Static）：默认 1\n   - 外部 BGP（eBGP）：20\n   - EIGRP 内部路由：90\n   - OSPF：110\n   - IS-IS：115\n   - RIP：120\n   - 内部 BGP（iBGP）：200\n2. 路由表安装判定：\n   当路由器收到通往同一目的前缀（本题均为默认路由 0.0.0.0/0）的多条路由时，比较所有可用路由的 AD 值。AD 最小的路由将被选入路由表（RIB）。只有当当前活跃的低 AD 路由失效从路由表中撤销时，高 AD 的备份路由（浮动静态路由）才会被安装到路由表中。\n\n• 正确选项剖析：\n选项 C（when the default route learned over external BGP becomes invalid，当通过外部 BGP 学到的默认路由失效时）完全正确：\n1. 诊断命令与输出分析：\n   - 查看运行配置：`CPE# show run | include ip route` -> `ip route 0.0.0.0 0.0.0.0 203.0.113.1 21`。\n     工程师配置了一条指向下一跳 203.0.113.1 的静态默认路由，显式指定其管理距离为 21。\n   - 查看当前路由表：`CPE# show ip route` -> `B* 0.0.0.0/0 [20/0] via 198.51.100.1, 00:02:07`。\n     路由表中已经存在一条通过 eBGP 学到的默认路由（代码 B*），其管理距离为 20（[20/0]）。\n2. AD 对比：\n   - eBGP 默认路由的 AD = 20；\n   - 静态默认路由的 AD = 21。\n   - 因为 20 < 21，CPE 优先安装 eBGP 默认路由，静态默认路由作为浮动备份（Floating Static Route）暂时处于非激活状态。\n3. 状态转换逻辑：\n   根据浮动静态路由原理，只有当 eBGP 会话断开或通过 eBGP 学到的默认路由因对端撤销等原因变成无效（becomes invalid）时，这笔 AD=21 的静态默认路由才会被正式安装进路由表。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（when a route to 203.0.113.1 is learned via BGP）：从 exhibit 中 `show ip route 203.0.113.1` 可以看到，该地址属于直连网段（Known via \"connected\" on Ethernet0/1），根本不需要也不可能通过 BGP 学习。\n- 选项 B（when 203.0.113.1 is no longer reachable as a next hop）：如果下一跳 203.0.113.1 不可达，静态路由本身将无法通过递归解析，更不可能被安装进路由表。\n- 选项 D（when the default route learned over external BGP changes its next hop）：只要 eBGP 发布的默认路由仍然有效（无论其下一跳如何变更），其 AD 依然是 20，始终优于静态路由的 21，因此静态路由依然不会被安装。\n\n• 考试要点与速记技巧：\n记住关键协议 AD 表：eBGP 是 20，静态配了 21 属于备份；“低 AD（20）在线高 AD（21）靠边，主路由挂掉备份才装表”。"
+      },
+      "has_exhibit": true,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 C",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "原图已直接查看",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      },
+      "exhibit_path": "exhibits/q716_agent.jpg",
+      "image_sha256": "c562ee74237a01b3751e7944cc9f0212b6d6dea991a3bd2b295c5b54dc2b8e85"
+    },
+    {
+      "id": 717,
+      "original_qid": "Q941",
+      "before_sha256": "b7972abbfbedf89bdbdcef680efc00fbd790bb8d8d4b1a264257a972497a7c8c",
+      "reason": "图中最长前缀与下一跳核对无误；修正将RIB路由选择与FIB查找混为一步的表述。",
+      "updates": {
+        "explanation": "B。目的地址 192.168.20.75 不在图中的 192.168.20.0/26（.0–.63）或 /27（.0–.31）内；它匹配 192.168.20.0/25（.0–.127）、/24、192.168.0.0/19 以及默认路由。已安装匹配前缀中 /25 最长，图中其下一跳是 10.10.10.11。A 对应不匹配的 /26，C 对应不匹配的 /27，D 是较短的默认路由。管理距离和协议度量主要用于确定同一前缀的候选路由；数据包转发时在已安装路由中使用最长前缀匹配。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查路由器多层级子网掩码下的最长前缀匹配（Longest Prefix Match, LPM）决策逻辑。\n1. 路由选择三步法：\n   - 第一步：最长前缀匹配（Longest Prefix Match）。路由器首先比较所有候选路由中前缀掩码最长（/n 最大的明细路由）且包含目的 IP 的条目。\n   - 第二步：管理距离（AD）。仅当多条候选路由的前缀长度完全相同时，才比较 AD。\n   - 第三步：度量值（Metric）。仅当路由前缀与 AD 均相同时，才比较 Metric，若仍相同则执行 ECMP。\n2. 注意核心误区：\n   许多初学者常误以为“先比 AD 后比掩码”，这是严重的根本性错误。在路由查找过程中，**前缀掩码长度永远具有最高优先级**，/25 的路由哪怕是 RIP（AD=120），也绝对压倒 /24 的 EIGRP（AD=90）或直连网段！\n\n• 正确选项剖析：\n选项 B（10.10.10.11）完全正确：\n1. 报文目的 IP 地址为 `192.168.20.75`。\n2. 逐一比对 exhibit 中所有路由条目与目的 IP 192.168.20.75 的包含关系：\n   - 条目 1：`192.168.20.0/26` -> 范围为 .0 至 .63。75 不在范围内，不匹配。\n   - 条目 2：`192.168.20.0/27` -> 范围为 .0 至 .31。75 不在范围内，不匹配。\n   - 条目 3：`192.168.20.0/25 via 10.10.10.11` -> 块大小为 128，范围为 .0 至 .127。75 落在其中，匹配成功！前缀长度为 /25。\n   - 条目 4：`192.168.20.0/24 via 10.10.10.2` -> 范围为 .0 至 .255。75 落在其中，匹配成功！前缀长度为 /24。\n   - 条目 5：`192.168.0.0/19 via 10.10.10.13` -> 匹配，前缀长度 /19。\n   - 条目 6：`0.0.0.0/0 via 10.10.10.14` -> 默认路由匹配，前缀长度 /0。\n3. 应用最长匹配原则裁决：\n   在所有命中成功的条目中，前缀长度分别为 /25、/24、/19、/0。\n   /25 拥有最大的网络掩码长度（Most Specific），因此路由器坚定选择该条目。\n4. 条目 `192.168.20.0/25` 的下一跳地址正是 `10.10.10.11`。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（10.10.10.1）：对应的是 192.168.20.0/26。该网段广播地址为 192.168.20.63，根本不包含 .75。\n- 选项 C（10.10.10.12）：对应的是 192.168.20.0/27。该网段仅包含 .0 至 .31，目标 .75 不在其中。\n- 选项 D（10.10.10.14）：对应的是默认路由 `0.0.0.0/0`。默认路由前缀长度为 /0，仅在完全没有明细路由匹配时兜底使用，面对明细的 /25 匹配毫无胜算。\n\n• 考试要点与速记技巧：\n选路口诀牢记心间：“先看匹配不匹配，再看掩码谁最长”。.75 落入 /25（0-127），下一跳锁定 10.10.10.11！"
+      },
+      "has_exhibit": true,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 B",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "原图已直接查看",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      },
+      "exhibit_path": "exhibits/q717_agent.jpg",
+      "image_sha256": "3bbe08b51aef0264c574980177dbeea31b8207952bed0060547cd7560a471757"
+    },
+    {
+      "id": 718,
+      "original_qid": "Q942",
+      "before_sha256": "b0454f1ea91382c13a77a9e55723399f6d1af4a83cb5101ab6d88cd43c06de22",
+      "reason": "收到前缀不保证安装；限定三个OSPF前缀已被选中有效，同时恢复CLI选项换行。",
+      "updates": {
+        "prompt": "A router has selected and installed three valid OSPF external routes for 10.0.0.0/8, 10.0.0.0/16, and 10.0.0.0/24. Which output shows all three distinct prefixes in the routing table?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0\nO E2 10.0.0.0/8 [110/5] via 192.168.1.1, 0:01:00, Ethernet0\nO E2 10.0.0.0/16[110/5] via 192.168.2.1, 0:01:00, Ethernet1\nO E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+          },
+          {
+            "label": "B",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0\nO E2 10.0.0.0/8 [110/5] via 192.168.1.1, 0:01:00, Ethernet0"
+          },
+          {
+            "label": "C",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0\nO E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+          },
+          {
+            "label": "D",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0\nO E2 10.0.0.0/16[110/5] via 192.168.2.1, 0:01:00, Ethernet1\nO E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+          }
+        ],
+        "explanation": "A。/8、/16、/24 虽共享地址开头，却是三个不同的路由前缀；题设已明确它们均已安装，因此输出包含三条记录。B 只列 /8；C 只列 /24；D 只列 /16 和 /24。转发某个目的地址时才在匹配的已安装前缀中进行最长前缀匹配，不会因为 /24 存在就必然从路由表移除 /8 或 /16。实际收到路由通告并不自动保证其入表，还需满足有效性、下一跳解析及路由选择等条件。"
+      },
+      "original_fields": {
+        "prompt": "A router received three destination prefixes: 10.0.0.0/8, 10.0.0.0/16, and 10.0.0.0/24. When the show ip route command is executed, which output does it return?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/8 [110/5] via 192.168.1.1, 0:01:00, Ethernet0 O E2 10.0.0.0/16[110/5] via 192.168.2.1, 0:01:00, Ethernet1 O E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+          },
+          {
+            "label": "B",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/8 [110/5] via 192.168.1.1, 0:01:00, Ethernet0"
+          },
+          {
+            "label": "C",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+          },
+          {
+            "label": "D",
+            "text": "Gateway of last resort is 172.16.1.1 to network 0.0.0.0 O E2 10.0.0.0/16[110/5] via 192.168.2.1, 0:01:00, Ethernet1 O E2 10.0.0.0/24[110/5] via 192.168.3.1, 0:01:00, Ethernet2"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查无类域间路由（CIDR）及路由表中不同掩码前缀的独立存储机制。\n1. 前缀区分与路由表条目唯一性：\n   在现代 IP 路由体系（无类路由体系，Classless Routing）中，一条路由的完整网络标识（Network Identity）由“网络前缀 + 子网掩码”（Prefix/Length）共同唯一界定。\n   - 10.0.0.0/8（掩码 255.0.0.0）\n   - 10.0.0.0/16（掩码 255.255.0.0）\n   - 10.0.0.0/24（掩码 255.255.255.0）\n   这三个条目虽然网络 IP 地址部分均为 10.0.0.0，但由于它们具有不同的前缀掩码长度（/8、/16、/24），在路由表中被视为三个完全独立的目的网络（Distinct Prefixes）。\n2. 路由学习与共存机制：\n   当路由器收到通往这三个不同掩码前缀的路由通告时，只要下一跳或出接口有效，路由引擎就会将这三条路由同时安装进路由表（RIB）。路由器内部会建立树状结构（如 Radix Tree 或 CEF 256-way MTRIE 树），互不冲突，分别用于执行最长前缀匹配。\n\n• 正确选项剖析：\n选项 A 完全正确：\n1. 输出中同时显示了三条 OSPF 外部第二类（O E2）路由：\n   - `O E2 10.0.0.0/8 [110/5] via 192.168.1.1, ..., Ethernet0`\n   - `O E2 10.0.0.0/16 [110/5] via 192.168.2.1, ..., Ethernet1`\n   - `O E2 10.0.0.0/24 [110/5] via 192.168.3.1, ..., Ethernet2`\n2. 这三条路由前缀各不相同，各自指向不同的下一跳和物理出接口，完全符合 Cisco IOS 路由表的标准构建与显示逻辑。\n\n• 干扰项排除与错误陷阱：\n- 选项 B：错误地认为只保留了 /8 的自然网络条目，混淆了有类路由（Classful Routing）的自动汇总行为。在现代 CIDR/VLSM 路由器上，不同长度的前缀都会被完整独立展示。\n- 选项 C：错误地认为路由器在构建路由表时就执行了“最长前缀匹配”而只保留了 /24。这是极高频的经典概念陷阱——“最长前缀匹配（LPM）”发生在数据包转发查找阶段，而不是路由表条目安装阶段！路由表中必须保留所有学到的合法前缀。\n- 选项 D：错误地漏掉了 /8 路由。三个前缀都会被安装进路由表，没有任何理由剔除 /8。\n\n• 考试要点与速记技巧：\n避坑警示：LPM 是“查表转发时挑最长”，而不是“建表时把短掩码全删掉”！不同掩码即是不同网络，全员齐刷刷并存于路由表中（选包含全部 3 个前缀的选项 A）。"
+      },
+      "has_exhibit": false,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 A",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "题目不依赖图片",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      }
+    },
+    {
+      "id": 719,
+      "original_qid": "Q943",
+      "before_sha256": "f60de142f04d6268eb1a7d50de3e072a87f000b14d6afff3ba3d42eb12e327e1",
+      "reason": "缺默认路由不是唯一缺失路由的修复方式；题项改为无任何匹配路由，避免误导。",
+      "updates": {
+        "prompt": "Refer to the exhibit. User traffic originating at site B cannot reach an application at 192.168.0.10 in site A. What routing problem can be determined from Router2’s routing table?",
+        "options": [
+          {
+            "label": "A",
+            "text": "An implicit deny in an ACL on Router2 is blocking the traffic."
+          },
+          {
+            "label": "B",
+            "text": "Router2 has no route matching 192.168.0.10, including no default route."
+          },
+          {
+            "label": "C",
+            "text": "A static route to 192.168.0.10 must be configured on Router1."
+          },
+          {
+            "label": "D",
+            "text": "The site B host default gateway is configured incorrectly."
+          }
+        ],
+        "explanation": "B。Router2 的图示路由表没有覆盖 192.168.0.10 的已安装前缀，并注明 gateway of last resort is not set，因此到达 Router2 的该目的报文无匹配路由。可通过合适的更具体路由、汇总路由或默认路由提供下一跳；仅添加默认路由不保证下一跳可达、Router1 正确转发及回程正常。路由表不能单独证明 ACL 拒绝（A）、Router1 必须添加指定静态路由（C）或主机网关配置错误（D）。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. User traffic originating within site B is failing to reach an application hosted on IP address 192.168.0.10, which is located within site A What is determined by the routing table?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The traffic is blocked by an implicit deny in an ACL on router2."
+          },
+          {
+            "label": "B",
+            "text": "The lack of a default route prevents delivery of the traffic."
+          },
+          {
+            "label": "C",
+            "text": "The traffic to 192.168.0.10 requires a static route to be configured in router1."
+          },
+          {
+            "label": "D",
+            "text": "The default gateway for site B is configured incorrectly."
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查路由器根据路由表转发跨站点流量的机制与缺省默认路由（Default Route）的作用。\n1. 拓扑与路由故障诊断：\n   - 拓扑描述：Site B 的终端试图访问位于 Site A 的应用服务器，服务器 IP 为 `192.168.0.10`。\n   - 流量路径：Site B 终端 -> Router2 -> WAN 链路 -> Router1 -> Site A (192.168.0.10)。\n2. Router2 路由表分析：\n   Router2 作为 Site B 的出向网关路由器，其路由表决定了从 Site B 发往 Site A 的数据包命运。\n   查看 Router2 的 `show ip route` 输出：\n   - `Gateway of last resort is not set`（未配置最后选用网关/默认路由）\n   - 存在 10.0.0.0/8 相关的若干直连与 OSPF 路由；\n   - 存在一条静态路由 `S 172.16.0.0/12 via 10.10.10.1`；\n   - 路由表中**完全不存在任何包含 192.168.0.0/x 网络的路由条目**。\n3. 丢包原因裁决：\n   当 Site B 发送目的 IP 为 192.168.0.10 的数据包到达 Router2 时，Router2 在路由表中检索目标网段，既没有 192.168.0.0/x 的明细路由，又没有设置最后选用网关（0.0.0.0/0 默认路由）。根据 IP 路由规则，Router2 无法处理该流量，只能将其丢弃。\n\n• 正确选项剖析：\n选项 B（The lack of a default route prevents delivery of the traffic，缺乏默认路由阻止了流量的传递）完全符合路由表现实：\n1. 路由表明确声明 `Gateway of last resort is not set`。\n2. 如果 Router2 配置了指向 Router1 的默认路由（例如 `ip route 0.0.0.0 0.0.0.0 10.10.10.1`），那么目的为 192.168.0.10 的未知流量便可以通过默认路由转发至 Router1，从而成功到达 Site A。\n3. 正是由于当前既无明细路由也缺乏默认路由，导致流量被 Router2 静默丢弃。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（The traffic is blocked by an implicit deny in an ACL on router2）：路由表（show ip route）输出仅展示路由层面的条目信息，根本无法反映接口是否挂接了 ACL 以及是否有 implicit deny 统计。\n- 选项 C（The traffic to 192.168.0.10 requires a static route to be configured in router1）：流量是从 Site B 发向 Site A，首先阻断在 Router2，应该在 Router2 上配置指向 Router1 的路由，而不是在 Router1 上配置。\n- 选项 D（The default gateway for site B is configured incorrectly）：题干问的是“由路由表可以推断出什么（What is determined by the routing table?）”。终端的默认网关配置属于 PC/主机侧参数，无法从路由器的路由表中直接确定。\n\n• 考试要点与速记技巧：\n看路由表查不通故障两步法：一查有无目的明细路由，二看“Gateway of last resort is not set”。无明细又无默认，流量必定卡死在网关！"
+      },
+      "has_exhibit": true,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 B",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "原图已直接查看",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      },
+      "exhibit_path": "exhibits/q719_agent.jpg",
+      "image_sha256": "712087a057d16c6327b6ea768b232b298acb905f3873b17e5409c53b75229aea"
+    },
+    {
+      "id": 720,
+      "original_qid": "Q945",
+      "before_sha256": "6ce4b089688b74a156b2850416a93895e942ca7bb5042f6e4b8af259c521d015",
+      "reason": "限定共同体字符串适用v1/v2c，避免把明文口令称为强认证，也不保证所有失败都发trap。",
+      "updates": {
+        "prompt": "In SNMPv1 or SNMPv2c, what is the role of a community string?",
+        "explanation": "D。SNMPv1/v2c 使用 community string 作为共享口令式标识，设备依据配置将其关联到允许访问的管理对象及读写权限。它随报文以明文携带，不能提供加密或强身份认证，应限制管理网络访问；更安全的 SNMPv3 可使用基于用户的认证及隐私保护。A 是 MIB 名称/OID 的解析，B 不是传递 AD 账户凭据，C 则属于请求标识等报文字段的作用。错误字符串是否触发认证失败通知取决于设备配置，不能保证一定发送。"
+      },
+      "original_fields": {
+        "prompt": "What is the role of community strings in SNMP operations?",
+        "explanation": "• 核心考点与原理分析：\n本题考查简单网络管理协议（SNMP）的运行机制与共同体字符串（Community String）的安全角色。\n1. SNMP 架构组件：\n   SNMP 体系由网络管理系统（NMS / Manager）、被管设备中的代理进程（Agent）以及管理信息库（MIB）构成。MIB 是一个树状命名结构（OID 树），存储着设备的运行参数、接口流量、硬件温度等受管对象。\n2. SNMPv1 与 SNMPv2c 的认证机制：\n   - SNMPv1 和 SNMPv2c 属于弱安全模型协议，不支持基于用户的高级身份验证与加密。\n   - 它们使用“共同体字符串（Community String）”充当明文密码（Cleartext Shared Secret），用于在 NMS 发起 GET/SET 操作时验证其访问权限。\n   - 常见共同体类型：\n     * 只读共同体（Read-Only, RO）：允许 NMS 查询（GET）设备 MIB 变量。\n     * 读写共同体（Read-Write, RW）：赋予 NMS 更改（SET）设备 MIB 变量及系统配置的权限。\n3. SNMPv3 的演进：\n   针对共同体字符串明文传输易遭嗅探的漏洞，SNMPv3 引入了基于用户的安全模型（USM）和基于视角的访问控制模型（VACM），废弃了 Community String，全面支持 HMAC 认证（MD5/SHA）和对称加密（DES/AES）。\n\n• 正确选项剖析：\n选项 D（It serves as a password to protect access to MIB objects，它充当保护对 MIB 对象访问的密码）完全正确：\n1. 共同体字符串在本质上就是一种口令机制。当 NMS 发送 SNMP 报文时，报文头中必须携带该字符串；Agent 比对成功后才允许访问对应的 MIB 对象树分支。\n2. 缺乏正确共同体字符串的 SNMP 请求将被 Agent 拒绝并记录认证失败告警（Authentication Failure Trap）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It translates alphanumeric MIB output values to numeric values）：将可读的 MIB 变量名（如 ifInOctets）转换为数字点分格式对象标识符（如 1.3.6.1.2.1.2.2.1.10）是 MIB 编译器或 NMS 本地 MIB 文件的解析职能，与共同体字符串毫无关系。\n- 选项 B（It passes the Active Directory username and password that are required for device access）：SNMPv1/v2c 不支持活动目录（AD）或 LDAP 集中认证，管理密码独立在网络设备本地配置（如 `snmp-server community <string> RO`）。\n- 选项 C（It serves as a sequence tag on SNMP traffic messages）：用于标识请求和响应匹配顺序的是 SNMP PDU 头部的 Request ID（请求标识符），并非共同体字符串。\n\n• 考试要点与速记技巧：\nSNMPv1/v2c 核心考点：“Community String 就是访问 MIB 的明文密码（Password for MIB objects）”；v3 升级为用户名+加密（USM）。"
+      },
+      "has_exhibit": false,
+      "checks": {
+        "prompt": "逐项审查，修订见 updates",
+        "options": "全部选项检查并与答案比对",
+        "answer": "按题意和依据检查；本题保持原答案 D",
+        "explanation": "逐句检查并改正不严谨处",
+        "image": "题目不依赖图片",
+        "cli": "检查命令及代码换行；不适用则无需代码块"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html",
+    "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/20370-snmpsecurity-20370.html"
+  ],
+  "limitations": "人工检查题干、全部选项、答案和解析；直接查看6幅原图，并查阅Cisco资料；无实际设备运行实验。"
+}

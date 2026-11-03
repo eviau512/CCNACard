@@ -1,0 +1,438 @@
+{
+  "scope": "Q701–Q710",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 701,
+      "original_qid": "Q918",
+      "before_sha256": "813240d64501eb570d70f7af9949141cd22c613f7883cf1312528209e89bafbd",
+      "reason": "修正保证无缝切换和排除负载分担的绝对说法。",
+      "updates": {
+        "explanation": "D。FHRP 使用共享的虚拟网关地址，由网关设备在故障时接替转发，降低单一默认网关故障的影响；切换仍可能造成短暂中断，且不能覆盖所有上游故障。A 是堆叠等设备虚拟化；B 是链路聚合用途（部分 FHRP 也能负载分担，但不是此处的主要目标）；C 是 STP 的环路防护。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查部署第一跳冗余协议（FHRP）的应用场景与解决的关键问题。\n1. “第一跳（First Hop）”的含义：\n   在网络架构中，“第一跳”特指局域网终端主机发出的跨网段数据包所经过的第一台路由设备（即默认网关，Default Gateway）。\n2. 为什么需要冗余保护：\n   由于大部分主机操作系统只支持配置单一默认网关，且主机缺乏动态感知上游路由器物理链路状态的能力，一旦该默认网关硬件断电、线缆断开或系统崩溃，网段内所有 PC 跨网段访问内外网的流量将全部中断。\n3. FHRP 的保护目标：\n   FHRP（HSRP/VRRP/GLBP）通过组建虚拟网关组，实现当实际负责承载业务的物理路由器发生故障时，组内备份路由器能够立即且透明地接替默认网关职能，从而为网络提供针对默认网关单点故障的容灾保护。\n\n• 正确选项剖析：\n选项 D（to protect against default gateway failures）：\n部署 FHRP 的根本出发点就是防御默认网关路由器或其接口发生故障（protect against default gateway failures），确保用户流量跨网段转发的无缝切换，表述最严谨、最精准，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（to enable multiple switches to operate as a single unit）：让多台交换机在逻辑上作为单一单元运行的技术是堆叠（Stacking，如 Cisco StackWise）或跨机箱链路聚合（如 VSS、vPC），这是二层交换技术，不是三层 FHRP。\n- 选项 B（to provide load-sharing for a multilink segment）：多链路负载共享采用的是链路聚合（EtherChannel / LACP）或多路径路由（ECMP），不是部署 FHRP 的核心目的。\n- 选项 C（to prevent loops in a network）：防止二层交换网络环路是生成树协议（STP / RSTP / MSTP）的职责，与 FHRP 无关。\n\n• 考试要点与速记技巧：\n- FHRP 是保护什么的？专为**默认网关故障（Default Gateway Failures）**而生。\n- 看到“First-Hop Redundancy”直接联想“Default Gateway”。"
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "无原图，题目不依赖图片",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": false,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ]
+    },
+    {
+      "id": 702,
+      "original_qid": "Q919",
+      "before_sha256": "2bd0b5a64ba7aae4b756e4ce429576b12a96da89efb833739676cb7e31b75e8a",
+      "reason": "内部 EIGRP 距离 90 优于 OSPF 110；更正错误答案并补足前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume all shown links are operational, the 192.168.1.0/24 route is learned by router D through internal EIGRP via router B and is also redistributed into OSPF via B and C, and default administrative distances are unchanged. Which next hop does D install for this prefix, and why?",
+        "answer": [
+          "D"
+        ],
+        "explanation": "D。目的网段由 A 经同一 EIGRP 100 传播至 B，再经 B 的 10.0.0.1 传给 D，属于内部 EIGRP，默认管理距离 90；竞争的 OSPF 路由默认管理距离 110。相同前缀情况下，90 更小，选择经 10.0.0.1 的内部 EIGRP。A 和 C 把 10.0.2.1 当成所选下一跳；B 以更高度量解释选择，且不能直接比较不同协议的度量。原题把 OSPF 链路状态属性当作选路依据并错误标 C；仅凭图示不能排除过滤或距离修改，因此题干明确前提。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A network engineer executes the show ip route command on router D What is the next hop to network 192.168.1.0/24 and why?",
+        "answer": [
+          "C"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查在混合路由环境（EIGRP 与 OSPF 双向重分布）下，路由选择协议的类型特性与路由决策机制。\n1. 拓扑与链路关系分析：\n   - Router A 连接目标网络 `192.168.1.0/24`，与 Router B 运行 EIGRP 100（度量值 128256）。\n   - Router B 是自治系统边界路由器（ASBR），执行 EIGRP 100 与 OSPF Area 1 之间的双向路由重分布（Redistribution）。\n   - Router B 到 Router C 运行 OSPF Area 1（子网 10.0.1.0/30，B 为 .1，C 为 .2）。\n   - Router C 到 Router D 运行 OSPF Area 1（子网 10.0.2.0/30，C 为 .1，D 为 .2）。\n   - Router B 到 Router D 运行 EIGRP 100（子网 10.0.0.0/30，B 为 .1，D 为 .2）。\n2. 路由传播与选择机理：\n   - 目标网络 192.168.1.0/24 通过 EIGRP 传递给 Router B。\n   - 在 Router B 上将该路由重分布进入 OSPF Area 1，生成 OSPF 外部 LSA，并通过 Router C 泛洪扩散至 Router D。\n   - Router D 接收到来自 Router C（接口 IP 为 `10.0.2.1`）的 OSPF 路由通告。\n   - 考题聚焦于辨析 OSPF 与 EIGRP 的协议分类及路由选择本质：OSPF 属于典型的链路状态路由协议（Link-State Routing Protocol），使用 Dijkstra SPF 算法计算全拓扑最短路径；而 EIGRP 属于高级距离矢量协议（Advanced Distance Vector）。\n\n• 正确选项剖析：\n选项 C（The next hop is 10.0.2.1 because it is a link-state routing protocol）：\nRouter D 与 Router C 互联在子网 10.0.2.0/30 上，Router C 的接口 IP 为 `10.0.2.1`。该路径运行 OSPF Area 1，OSPF 是标准的链路状态路由协议（Link-state routing protocol）。根据题干选项比对，选项 C 准确对应了下一跳 IP（10.0.2.1）并正确归类了 OSPF 的协议性质（link-state），故 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（The next hop is 10.0.2.1 because it uses distance vector routing）：10.0.2.1 是 OSPF 邻居 Router C 的接口，OSPF 是链路状态协议，选项错误地将其描述为距离矢量协议（distance vector）。\n- 选项 B（The next hop is 10.0.0.1 because it has a higher metric）：路由选路永远优先选择度量值更低（lower metric）的路径，绝不可能因为度量值更高（higher metric）而选路。\n- 选项 D（The next hop is 10.0.0.1 because it has a better administrative distance）：如果重分布进 EIGRP 形成 External EIGRP（AD 170），而 OSPF 外部路由 AD 为 110，则 OSPF 的 AD 更小（更优），选项 D 逻辑相反。\n\n• 考试要点与速记技巧：\n- 路由协议分类速记：OSPF / IS-IS 是**链路状态（Link-State）**；RIP / EIGRP 是**距离矢量（Distance Vector）**。\n- 选项排除大法：看准下一跳 10.0.2.1 属于 OSPF 邻居，OSPF 必为 Link-State，秒定答案 C！"
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "已直接查看原图",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": true,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ],
+      "exhibit_path": "exhibits/q702_agent.jpg",
+      "image_sha256": "e1a68e01175be3628e4109ae793f08e1308860a5b0f5a5d45cc0ec43a0a31c3e"
+    },
+    {
+      "id": 703,
+      "original_qid": "Q920",
+      "before_sha256": "063a134389b5515a5042c6079edbaad80f7833940a2dca3ee15844bcea937efe",
+      "reason": "GUA 前缀长度并非一定 /48，修正绝对化。",
+      "updates": {
+        "explanation": "A。GUA 与 ULA 都是 IPv6 单播地址，可按前缀位进行子网规划。例如在各自拥有 /48 前缀时，均可使用后续 16 位划分 /64 子网；GUA 的分配长度不一定是 /48。B 的组播地址为 ff00::/8；C 的 ULA 不设计为在全球互联网路由；D 的 ULA 通常由组织自行生成，不能说两者都由同一机构分配。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 全球单播地址（Global Unicast Address, GUA）与唯一本地地址（Unique Local Address, ULA）的结构特征与子网划分规范。\n1. IPv6 全球单播地址（GUA，RFC 3587 / RFC 4291）：\n   - 前缀范围：目前主要使用 `2000::/3`。\n   - 标准层次结构：\n     • 全球路由前缀（Global Routing Prefix）：通常由 IANA/RIR/ISP 分配，前 48 位（/48）。\n     • 子网标识符（Subnet ID）：中间 16 位（第 49~64 位），由企业组织自行划分子网，提供 $2^{16} = 65,536$ 个 /64 子网。\n     • 接口标识符（Interface ID）：后 64 位（第 65~128 位），标识具体主机或接口。\n2. IPv6 唯一本地地址（ULA，RFC 4193）：\n   - 前缀范围：`FC00::/7`（实际普遍使用 `FD00::/8`）。\n   - 层次结构：\n     • 前缀与全局 ID（Prefix + Global ID）：FD00::/8 加上 40 位的伪随机全局 ID，总共 48 位（/48）。\n     • 子网标识符（Subnet ID）：同样占用中间 16 位（第 49~64 位），由企业内部网络管理员自由划分子网，同样提供 65,536 个 /64 子网。\n     • 接口标识符（Interface ID）：后 64 位。\n3. 共性比较：\n   两者在结构设计上完全统一：均将第 49 至 64 位的 16 位划分为 Subnet ID，端到端采用完全相同的层次化子网划分流程（Subnetting process）和最佳实践（/64 边界）。\n\n• 正确选项剖析：\n选项 A（They use the same process for subnetting）：\nGUA 和 ULA 均采用标准 48 位网络前缀 + 16 位子网 ID + 64 位接口 ID 的统一划分结构。网络管理员在对其进行子网规划时，完全遵循相同的 16 位子网划分方法和十六进制递增逻辑，故选项 A 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（They are part of the multicast IPv6 group type）：GUA 和 ULA 均为单播（Unicast）地址，IPv6 组播地址固定以 `FF00::/8` 开头，属于完全不同的地址类别。\n- 选项 C（They are routable on the global internet）：GUA 可以在全球互联网上公网路由；而 ULA 类似于 IPv4 中的 RFC 1918 私网地址，具有本地唯一性，在公网边界路由器上严格禁止路由到公网。\n- 选项 D（They are allocated by the same organization）：GUA 是由 IANA 分配给各地区互联网注册机构（RIR，如 ARIN、APNIC），再由 ISP 分配给用户；而 ULA 是由企业网络工程师自主生成（FD + 40位随机散列），无须任何机构分配或注册。\n\n• 考试要点与速记技巧：\n- GUA 与 ULA 孪生特性：结构相同、子网相同（均为 /48 前缀 + 16 位 Subnet ID + 64 位主机位）。\n- 关键差异：GUA 可公网路由（类比公网 IP），ULA 仅限内网路由（类比 RFC 1918 私网 IP）。"
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "无原图，题目不依赖图片",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": false,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ]
+    },
+    {
+      "id": 704,
+      "original_qid": "Q921",
+      "before_sha256": "8091dcbf2a3d05adf1b9053ffa2433cb7c4df05ef262bd8186e5d2fdf89509ca",
+      "reason": "命令缺前缀长度，且双冒号并非必须出现。",
+      "updates": {
+        "prompt": "An engineer must configure 2001:0db8:0000:0000:0700:0003:400F:572B/64 on serial0/0 of the HQ router using compressed notation. Which interface command represents the same address?",
+        "explanation": "A。去掉每段前导零，将连续两个零段压缩为 ::，得到 2001:db8::700:3:400F:572B/64。内部和尾部的零不能删除；B 将 400F 改为 4F，C 有两个 ::，D 把 0700 改为 7 且把 400F 改为 4F。:: 最多出现一次，也可以完全不出现。原选项缺少接口命令所需的前缀长度，现均补 /64。",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:db8::700:3:400F:572B/64"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:db8:0::700:3:4F:572B/64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001::db8:0000::700:3:400F:572B/64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address 2001:0db8::7:3:4F:572B/64"
+          }
+        ]
+      },
+      "original_fields": {
+        "prompt": "An engineer must configure the IPv6 address 2001:0db8:0000:0000:0700:0003:400F:572B on the serial0/0 interface of the HQ router and wants to compress it for easier configuration. Which command must be issued on the router interface?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 地址的标准表示方法与压缩书写规则（RFC 5952 标准）。\n1. IPv6 地址由 128 位二进制数组成，每 16 位划分为一个“块/段”（Hextet），中间用冒号 `:` 隔开，共 8 个十六进制块。\n2. RFC 5952 规定的两大压缩规则：\n   - 规则一（省略前导零）：每个 16 位段内部开头的 `0` 可以省略，但如果整段全为 0 则必须保留一个 `0`；段中间或尾部的 0 绝对不能省略。\n   - 规则二（双冒号压缩连续全零段）：连续的一个或多个全为 0 的段（如 `:0000:0000:`），可以用双冒号 `::` 替代压缩。**双冒号在整个 IPv6 地址中只能且必须出现一次**，以确保地址反解时的唯一性。\n\n• 正确选项剖析：\n对原始地址 `2001:0db8:0000:0000:0700:0003:400F:572B` 进行规范化压缩：\n1. 逐段去除前导零：\n   - 第 1 段 `2001` -> `2001`\n   - 第 2 段 `0db8` -> 前导零去掉，变为 `db8`\n   - 第 3 段 `0000` 与 第 4 段 `0000` -> 连续两段全零\n   - 第 5 段 `0700` -> 仅前导零去掉，保留尾部零，变为 `700`（若去尾部零数值将从 700 缩水为 7，发生严重错误）\n   - 第 6 段 `0003` -> 去掉前导零，变为 `3`\n   - 第 7 段 `400F` -> 零在内部非前导，保持 `400F`\n   - 第 8 段 `572B` -> 保持 `572B`\n2. 用双冒号压缩连续的第 3、4 全零段：\n   将 `:0000:0000:` 压缩为 `::`。\n3. 合成完整压缩地址：\n   `2001:db8::700:3:400F:572B`。\n在路由器串口上配置命令为 `ipv6 address 2001:db8::700:3:400F:572B`，与选项 A 逐字符精准匹配，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（ipv6 address 2001:db8:0::700:3:4F:572B）：将 400F 错误压缩为 4F（漏掉了中间的两个 0）；且对全零段压缩格式处理混乱。\n- 选项 C（ipv6 address 2001::db8:0000::700:3:400F:572B）：在一个 IPv6 地址中同时使用了两个双冒号 `::`，这是 IPv6 语法中绝对非法的致命错误。\n- 选项 D（ipv6 address 2001:0db8::7:3:4F:572B）：未对 0db8 省略前导零，且把 0700 尾部双零抹掉变成了 7，把 400F 内部双零抹掉变成了 4F，改变了地址实际数值。\n\n• 考试要点与速记技巧：\n- 压缩口诀：“前导零可省，尾部零必留；连续全零变双冒，双冒全篇只一次”。\n- 遇到 0700 必须变 700，绝不能变 7！",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:db8::700:3:400F:572B"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:db8:0::700:3:4F:572B"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001::db8:0000::700:3:400F:572B"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address 2001:0db8::7:3:4F:572B"
+          }
+        ]
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "无原图，题目不依赖图片",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": false,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ]
+    },
+    {
+      "id": 705,
+      "original_qid": "Q922",
+      "before_sha256": "96bc2fa7a157ece936bf37ca8bcfa78a2329db336afe3337f01f818ec8b4c38e",
+      "reason": "核对图示本地 /32，精简并纠正数据路径绝对化。",
+      "updates": {
+        "explanation": "D。图中本地路由 L 10.10.10.3/32 对应 GigabitEthernet0/0/0 自身地址；/32 掩码是 255.255.255.255，最长前缀匹配优先于 C 10.10.10.0/24。来源地址 172.16.3.254 不改变目的路由掩码。A 为 /0，B 为 /23，C 为 /24。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由表中的本地路由（Local Route, 标识为 `L`）机制与目标掩码识别。\n1. Cisco IOS 15.0(1)M 及以后版本引入的本地路由（Local Route）特性：\n   - 当在路由器物理或逻辑接口上配置 IPv4 地址并启用（no shutdown）时，路由表中会自动生成两条关联条目：\n     • 直连网络路由（Connected Route，代码 `C`）：子网掩码为接口所配置的网段掩码（如 /24）。用于匹配和转发该直连子网内其他主机的流量。\n     • 本地主机路由（Local Route，代码 `L`）：子网掩码**固定为 32 位（`/32`，即 255.255.255.255）**，精确对应路由器自身接口被分配的那个特定 IP 地址。\n2. 本地路由的核心作用：\n   当外部数据包的目的 IP 正好是路由器自身接口的 IP 时，路由器通过最长前缀匹配（/32 长于 /24）直接命中该 Local 路由，迅速将数据包分流至路由器的本地控制层面（Control Plane）处理（如响应 Ping、SSH 或路由协议报文），而无须经历转发引擎的数据转发流程。\n\n• 正确选项剖析：\n1. 题干明确指出：“A packet that is sourced from 172.16.3.254 is destined for the IP address of GigabitEthernet0/0/0”（数据包的目的地是 GigabitEthernet0/0/0 自身的 IP 地址）。\n2. 查看展示图路由表输出：\n   `C 10.10.10.0/24 is directly connected, GigabitEthernet0/0/0`\n   `L 10.10.10.3/32 is directly connected, GigabitEthernet0/0/0`\n   - 可以清晰看出 GigabitEthernet0/0/0 接口自身的 IP 地址是 `10.10.10.3`。\n   - 目的地址为 10.10.10.3 的数据包命中的正是该 Local 路由条目 `L 10.10.10.3/32`。\n   - 该目标路由的前缀掩码长度为 /32，转换成点分十进制子网掩码为 `255.255.255.255`。\n因此选项 D 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（0.0.0.0）：这是默认路由的掩码，不是本地接口主机路由的掩码。\n- 选项 B（255.255.254.0）：对应 /23 掩码，与题干接口无任何对应关系。\n- 选项 C（255.255.255.0）：这是直连网络路由（`C 10.10.10.0/24`）的子网掩码。若考生不理解 Local 路由机制，容易误以为匹配直连网段 /24，掉入直连网段掩码陷阱。\n\n• 考试要点与速记技巧：\n- 区分 C 与 L：\n  • `C`（Connected）：直连子网，掩码为接口配置的网段掩码（如 /24）。\n  • `L`（Local）：本地自身 IP，掩码永远是**单主机 /32（255.255.255.255）**！\n- 凡是问“去往路由器自己接口 IP 的路由掩码”，闭眼选 `255.255.255.255`。"
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "已直接查看原图",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": true,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ],
+      "exhibit_path": "exhibits/q705_agent.jpg",
+      "image_sha256": "5156e81d94e92c52e9a176d10de25ade7620249673ec20d0b0b2a4b2393b90d3"
+    },
+    {
+      "id": 706,
+      "original_qid": "Q923",
+      "before_sha256": "a41df7b52d1f23f58feedc07c4b9dccbaaf7cbf32181dd7de21de6849fe92457",
+      "reason": "修复缺前缀长度的错误 EUI-64 命令，改为计算完整地址。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The LAN interface on R2 uses the displayed MAC address and the 2001:DB8:D8D2:1009::/64 prefix. If its interface ID is generated using modified EUI-64, which full IPv6 address results?",
+        "explanation": "A。R2 MAC 12-a0-ab-cc-00-01 中间插入 ff:fe，并将首字节 0x12 与 0x02 异或为 0x10，得到接口 ID 10a0:abff:fecc:0001；与图中的 /64 前缀组合为 2001:db8:d8d2:1009:10a0:abff:fecc:1。B、C、D 的接口 ID 不符合该计算。原选项把完整地址与 eui-64 拼成缺少前缀长度的命令，现改为询问地址；Cisco 自动生成接口 ID 的命令形式是 ipv6 address 2001:DB8:D8D2:1009::/64 eui-64。",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:DB8:D8D2:1009:10A0:ABFF:FECC:1/64"
+          },
+          {
+            "label": "B",
+            "text": "2001:DB8:D8D2:1009:1230:ABFF:FECC:1/64"
+          },
+          {
+            "label": "C",
+            "text": "2001:DB8:D8D2:1009:4331:89FF:FF23:9/64"
+          },
+          {
+            "label": "D",
+            "text": "2001:DB8:D8D2:1009:12A0:AB34:FFCC:1/64"
+          }
+        ]
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The iPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. Which address must be used?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Modified EUI-64（修改版 64 位扩展唯一标识符）从物理 MAC 地址生成 IPv6 单播地址接口 ID 的计算规范。\n1. EUI-64 格式标准规则（RFC 4291）：\n   在 128 位的 IPv6 地址中，前 64 位由网络管理员或上游配置为网络前缀（Prefix），后 64 位通过物理接口的 48 位 MAC 地址自动映射生成。\n2. 标准转化三部曲：\n   - 第一步（折半）：将 48 位（6 字节）MAC 地址拆成左 24 位与右 24 位；\n   - 第二步（填充）：在中间插入固定 16 位值 `0xFFFE`；\n   - 第三步（翻转第 7 位）：将最左侧第 1 个字节的第 7 位（U/L 位，即 Universal/Local 位）取反（0 变 1，1 变 0；等价于与 `0x02` 进行异或运算）。\n\n• 正确选项剖析：\n1. 提取拓扑图数据：\n   - 目标节点：路由器 R2 的 LAN 接口；\n   - 所在 LAN 网段前缀：`2001:DB8:D8D2:1009::/64`；\n   - R2 的 MAC 地址标注：`12-a0-ab-cc-00-01`。\n2. 计算接口 ID：\n   - MAC 地址拆分为：前半段 `12-a0-ab`，后半段 `cc-00-01`。\n   - 中间插入 `FF-FE`：`12-a0-ab-FF-FE-cc-00-01`。\n   - 转换第一个字节 `0x12`：\n     十六进制 12 展开为二进制是 `0001 0010`。\n     反转第 7 位（右数第 2 位，XOR 0x02）：\n     `0001 0010` $⊕$ `0000 0010` = `0001 0000`（十六进制 `0x10`）。\n   - 将变换后的字节代回，组织成 16 位一组的 IPv6 接口 ID：\n     `10a0:abff:fecc:0001`（末尾省略前导零写为 `10a0:abff:fecc:1`）。\n3. 拼接网络前缀：\n   `2001:DB8:D8D2:1009:10A0:ABFF:FECC:1`。\n配置命令为：`ipv6 address 2001:DB8:D8D2:1009:10A0:ABFF:FECC:1 eui-64`。\n选项 A 与此完全一致，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（1230:ABFF:FECC:1）：首段计算错误，将 12 错误变换为 1230。\n- 选项 C（4331:89FF:FF23:9）：MAC 来源数值完全不符。\n- 选项 D（12A0:AB34:FFCC:1）：完全没有翻转第 7 位（首字节仍然是 12 未变成 10），且中间插入值紊乱。\n\n• 考试要点与速记技巧：\n- 首字节异或 0x02 变化速算：\n  • 若首字节末尾是 0/4/8/C，加 2；\n  • 若首字节末尾是 2/6/A/E，减 2！\n- 本题首字节是 12（末位是 2），$12 - 2 = 10$，直接找 10A0 开头的选项 A！",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:10A0:ABFF:FECC:1 eui-64"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:1230:ABFF:FECC:1 eui-64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:4331:89FF:FF23:9 eui-64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address 2001:DB8:D8D2:1009:12A0:AB34:FFCC:1 eui-64"
+          }
+        ]
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "已直接查看原图",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": true,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ],
+      "exhibit_path": "exhibits/q706_agent.jpg",
+      "image_sha256": "51630d54cb26e7f7baad1465262a2ea1e0649ecc31c819bc5a6bc1b70de83fe3"
+    },
+    {
+      "id": 707,
+      "original_qid": "Q924",
+      "before_sha256": "d123c9341b9e3e5e442f818662f7dc249f41e4e62174125dccfa272e2c7954dd",
+      "reason": "D EX 不能推断外部来源不是 BGP，修正歧义选项。",
+      "updates": {
+        "explanation": "D。图中 B* 0.0.0.0/0 指示已安装的默认路由；D EX 表示进入 EIGRP 的外部路由，但仅凭该代码不能确定原始协议是否为 BGP。10.90.8.0/24 没有更具体表项，匹配 B 10.90.0.0/16 指向 Null0，因而丢弃；/16 比默认 /0 更具体。A、C 错称没有默认路由，B 错称没有 EIGRP 外部路由。为避免把未知来源推断为一定不是 BGP，B 选项已改为可由图证伪的陈述。",
+        "options": [
+          {
+            "label": "A",
+            "text": "R7 is missing a gateway of last resort. R7 is receiving routes that were redistributed in EIGRP. R7 will forward traffic destined to 10.90.8.0/24."
+          },
+          {
+            "label": "B",
+            "text": "R7 has a gateway of last resort available. R7 has no EIGRP external routes. R7 will drop traffic destined to 10.90.8.0/24."
+          },
+          {
+            "label": "C",
+            "text": "R7 is missing a gateway of last resort. R7 is receiving routes that were redistributed from BGP. R7 will forward traffic destined to 10.90.8.0/24."
+          },
+          {
+            "label": "D",
+            "text": "R7 has a gateway of last resort available. R7 is receiving routes that were redistributed in EIGRP. R7 will drop traffic destined to 10.90.8.0/24."
+          }
+        ]
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由表（`show ip route`）综合深度分析，涵盖默认路由（Candidate Default）、外部重分布路由（EIGRP External, D EX）以及黑洞路由（Null0 Summary Route）的转发决策机制。\n1. 默认网关（Gateway of Last Resort）分析：\n   路由表最后一行显示：`B* 0.0.0.0/0 [20/0] via 10.6.25.2, 02:22:38`。\n   `*` 代表候选默认路由，这证明 R7 拥有可用的最后求助网关（Gateway of last resort available）。\n2. 路由重分布识别：\n   路由表中大量出现 `D EX` 代码的路由（如 `D EX 10.10.10.10/32 [170/35840]`、`D EX 10.90.1.0/24` 等）。\n   `D EX` 代表 EIGRP External 路由（管理距离 AD 为 170），表明这些路由是通过外部协议重分布进 EIGRP（redistributed in/into EIGRP）引入的。\n3. 针对 `10.90.8.0/24` 的选路与丢包分析：\n   - 观察路由表中的汇总与明细路由：\n     表中存在 `B 10.90.0.0/16 [200/0] via 0.0.0.0, 03:57:59, Null0`；\n     明细路由中只有 10.90.1.0/24、10.90.2.0/24、10.90.3.0/29、10.90.3.0/24、10.90.4.0/24、10.90.5.0/24；\n     **并不存在 10.90.8.0/24 的明细路由**。\n   - 当去往 10.90.8.0/24 的数据包到达 R7 时，根据最长前缀匹配原则：/16 长于默认路由 /0，因此数据包被匹配到 `10.90.0.0/16 via Null0`。\n   - `Null0` 是系统虚拟丢弃接口（Bit Bucket），所有路由到 Null0 的数据包会被硬件静默丢弃（drop）。\n\n• 正确选项剖析：\n选项 D（R7 has a gateway of last resort available. R7 is receiving routes that were redistributed in EIGRP. R7 will drop traffic destined to 10.90.8.0/24）：\n- “R7 has a gateway of last resort available”：由 `B* 0.0.0.0/0` 确证；\n- “R7 is receiving routes that were redistributed in EIGRP”：由多条 `D EX`（AD 170）确证；\n- “R7 will drop traffic destined to 10.90.8.0/24”：命中 `10.90.0.0/16 via Null0` 确证。\n三项结论全部技术严谨且完全正确，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：错误声称“R7 is missing a gateway of last resort”（实际上有 B* 0.0.0.0/0），且错误认为会 forward 10.90.8.0/24（实际上被 Null0 丢弃）。\n- 选项 B：错误声称“redistributed from BGP”（D EX 是外部重分布进 EIGRP，并非从 BGP 重分布；且后半句虽然 drop 正确，但前半段描述错误）。\n- 选项 C：同时包含两个致命错误：声称缺失默认网关以及声称会转发 10.90.8.0/24。\n\n• 考试要点与速记技巧：\n- Null0 路由是网络黑洞：只要命中指向 Null0 的条目，流量必被丢弃（Drop）！\n- `D EX` 特征必记：EIGRP External 路由，AD 固定 170，代表重分布进 EIGRP 的路由。",
+        "options": [
+          {
+            "label": "A",
+            "text": "R7 is missing a gateway of last resort. R7 is receiving routes that were redistributed in EIGRP. R7 will forward traffic destined to 10.90.8.0/24."
+          },
+          {
+            "label": "B",
+            "text": "R7 has a gateway of last resort available. R7 is receiving routes that were redistributed from BGP. R7 will drop traffic destined to 10.90.8.0/24."
+          },
+          {
+            "label": "C",
+            "text": "R7 is missing a gateway of last resort. R7 is receiving routes that were redistributed from BGP. R7 will forward traffic destined to 10.90.8.0/24."
+          },
+          {
+            "label": "D",
+            "text": "R7 has a gateway of last resort available. R7 is receiving routes that were redistributed in EIGRP. R7 will drop traffic destined to 10.90.8.0/24."
+          }
+        ]
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "已直接查看原图",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": true,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ],
+      "exhibit_path": "exhibits/q707_agent.jpg",
+      "image_sha256": "cf8d9c3126bd914b5491a01a4e2fc9c027428b0b3a9e575eaf3ef9f8fe745972"
+    },
+    {
+      "id": 708,
+      "original_qid": "Q925",
+      "before_sha256": "f5d17f86a55acdeb5d578b89411cdf11695aa97b5e9454f94abf0e049139219b",
+      "reason": "改进题干语法与私有地址复用解析。",
+      "updates": {
+        "prompt": "Which type of IPv4 address helps conserve globally unique public IPv4 addresses?",
+        "explanation": "C。RFC 1918 私有地址可在多个互不相连的网络中重复使用；有公网通信需要时，NAT/PAT 可让多个私有主机共享较少的公网 IPv4 地址。A 是本机环回，B 是组播地址，D 本身使用公网地址。它们不是本题所问的私有地址复用机制。"
+      },
+      "original_fields": {
+        "prompt": "Which type of IPv4 address type helps to conserve the globally unique address classes?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv4 地址空间保护机制与 RFC 1918 私有地址（Private IP Address）的核心价值。\n1. IPv4 地址枯竭危机：\n   标准的 A、B、C 类 IPv4 地址空间理论上仅能提供约 43 亿个地址。随着全球互联网设备的爆发式增长，全球唯一的公网 IPv4 地址（Public IP）早已分配殆尽。\n2. 私有 IP 地址的定义与作用（RFC 1918）：\n   IETF 专门从 A、B、C 类公网地址池中保留了三段专用私有地址：\n   - 10.0.0.0 ~ 10.255.255.255（10.0.0.0/8）\n   - 172.16.0.0 ~ 172.31.255.255（172.16.0.0/12）\n   - 192.168.0.0 ~ 192.168.255.255（192.168.0.0/16）\n3. 节约机制：\n   私有地址在公网路由器上不可路由。全球成千上万的企业、家庭和机构可以在各自内部私有网络中无限次重复使用这些私网地址段。当需要访问外网时，借助网络地址转换（NAT/PAT）将成百上千个私有 IP 复用到极少数公网 IP 上。这种架构极大地减缓了公网 IPv4 全球唯一地址的消耗速度。\n\n• 正确选项剖析：\n选项 C（private）：\n私有 IPv4 地址（Private IP）通过内网重复复用及 NAT 技术，直接保护并延缓了全球唯一公网地址（globally unique address classes）的枯竭，是 IPv4 地址保护最基石的技术，故 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（loopback）：环回地址（127.0.0.0/8）用于设备本地协议栈测试与进程间内部通信，不能用于多终端寻址，无法起到节约公网地址类的作用。\n- 选项 B（multicast）：组播地址（224.0.0.0 ~ 239.255.255.255，D 类地址）用于一对多点对多点通信（如视频直播、路由协议 Hello），不分配给普通主机作为单播地址使用。\n- 选项 D（public）：公网地址本身就是全球唯一的稀缺资源，是需要被节约的对象，而不是帮助节约的工具。\n\n• 考试要点与速记技巧：\n- 节约全球 IPv4 地址两大功臣：**私有地址（Private IP）**与 **NAT/PAT（网络地址转换）**。\n- RFC 1918 私网范围必背：10.0.0.0/8，172.16.0.0/12，192.168.0.0/16。"
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "无原图，题目不依赖图片",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": false,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ]
+    },
+    {
+      "id": 709,
+      "original_qid": "Q929",
+      "before_sha256": "039e56c6f6f8e5e135472fee0b3aafd71fe90b6c5cbd0e77ee24c932b2ae4d64",
+      "reason": "修正题干目标地址和选项 IP 拼写，限定浮动路由条件。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 learns 192.168.23.0/24 through RIP via R2; assume this route and the R3 next hop are reachable. Which command on R1 configures a floating static backup through R3, using default RIP administrative distance?",
+        "explanation": "C。静态路由目的 192.168.23.0/24、下一跳 R3 的 192.168.13.3，指定管理距离 121，大于 RIP 默认 120。在 RIP 路由撤销且下一跳可解析时该静态路由可被安装；切换取决于故障检测和路由收敛，不能保证立即发生。A 的 100 优于 RIP，不能浮动；B 的 /32 仅指单个地址；D 默认为距离 1。",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip route 192.168.23.0 255.255.255.0 192.168.13.3 100"
+          },
+          {
+            "label": "B",
+            "text": "ip route 192.168.23.0 255.255.255.255 192.168.13.3 121"
+          },
+          {
+            "label": "C",
+            "text": "ip route 192.168.23.0 255.255.255.0 192.168.13.3 121"
+          },
+          {
+            "label": "D",
+            "text": "ip route 192.168.23.0 255.255.255.0 192.168.13.3"
+          }
+        ]
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Routers R1 and R2 are configured with RIP as the dynamic routing protocol. A network engineer must configure R1 with a floating static route to service as a backup route to network 192.168.23. which command must the engineer configure on R1?",
+        "explanation": "• 核心考点与原理分析：\n本题考查浮动静态路由（Floating Static Route）在 RIP 动态路由环境下的部署与管理距离设置。\n1. 拓扑与路由路径分析：\n   - R1 与 R2 之间运行 RIP 路由协议（椭圆虚线标注）。\n   - 主选通信路径：R1 通过与 R2 的互联链路（192.168.12.0/24）经由 RIP 学习到目标网络 `192.168.23.0/24`。\n   - 备份通信路径：R1 与 R3 之间存在直连链路 `192.168.13.0/24`（R1 接口为 Gi0/2，IP 为 .1；R3 接口为 Gi0/1，IP 为 `192.168.13.3`），R3 直连网络 192.168.23.0/24。\n2. 浮动静态路由工作机理：\n   - 目标是在 R1 上配置一条浮动静态路由指向 R3，作为去往 192.168.23.0/24 的备份路由。\n   - 静态路由的标准格式：`ip route <目标网段> <掩码> <下一跳IP> [管理距离AD]`\n   - 管理距离（AD）决策法则：\n     RIP 路由协议的默认管理距离为 **120**。\n     普通静态路由的默认 AD 为 **1**。如果配置默认 AD 1，静态路由的优先级将高于 RIP，直接挤掉 RIP 主路由成为主选，破坏动态路由选路。\n     要让静态路由成为“浮动备份”（Floating），其 AD 必须设置得**严格大于主选协议的 AD**（即大于 120，常见配置为 121）。此时只要 RIP 正常，该静态路由静默隐藏；一旦 RIP 邻居或链路失效撤销路由，该静态路由立即浮现接管流量。\n\n• 正确选项剖析：\n选项 C（ip route 192.168.23.0 255.255.255.0 192.168.13.3 121）：\n- 目标网段及掩码为标准的 `192.168.23.0 255.255.255.0`（/24）；\n- 下一跳为备份路径邻居 R3 的接口 IP `192.168.13.3`；\n- 指定的管理距离为 `121`，恰好大于 RIP 的 120，完美实现浮动备份功能，故 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（ip route 192.168.23.0 255.255.255.0 192.168,13.3 100）：下一跳 IP 中逗号打错（192.168,13.3 语法报错）；且指定的 AD 100 小于 RIP 的 120，会抢占主路径而非备份。\n- 选项 B（ip route 192.168.23.0 255.255.255.255 192.168.13.3 121）：子网掩码错误写为 255.255.255.255（/32），仅代表单主机，无法备份整个 /24 网络。\n- 选项 D（ip route 192.168.23.0 255.255.255.0 192.168.13.3）：末尾未显式指定管理距离，默认继承 AD 1，会直接压制 RIP 路由，无法作为浮动路由工作。\n\n• 考试要点与速记技巧：\n- 常见路由协议 AD 必背：直连 0、静态 1、EIGRP 90、OSPF 110、**RIP 120**、External EIGRP 170。\n- 浮动路由万能定则：浮动 AD = 主选协议 AD + 1。主选是 RIP（120），浮动静态必定选 **121**！",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip route 192.168.23.0 255.255.255.0 192.168,13.3 100"
+          },
+          {
+            "label": "B",
+            "text": "ip route 192.168.23.0 255.255.255.255 192.168.13.3 121"
+          },
+          {
+            "label": "C",
+            "text": "ip route 192.168.23.0 255.255.255.0 192.168.13.3 121"
+          },
+          {
+            "label": "D",
+            "text": "ip route 192.168.23.0 255.255.255.0 192.168.13.3"
+          }
+        ]
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "已直接查看原图",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": true,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ],
+      "exhibit_path": "exhibits/q709_agent.jpg",
+      "image_sha256": "6e6a287b266db326cdcad9b20a9ba0a0542b85b81f43e179b0846500e26876e2"
+    },
+    {
+      "id": 710,
+      "original_qid": "Q930",
+      "before_sha256": "c1b718f95dd93b0c0b0a501a634d36159f6bfaae498a9d2c164ec770279f2ee0",
+      "reason": "限定厂商协议支持，修正零中断和万能支持的绝对化。",
+      "updates": {
+        "prompt": "When Cisco and third-party devices both support the same open-standard protocol, which protocol can provide default-gateway redundancy if the active router fails?",
+        "explanation": "A。VRRP 是开放标准的第一跳网关冗余协议，支持相同版本和配置的不同厂商设备可组成虚拟路由器；切换可有短暂中断，具体互通性需查设备。FHRP 是协议类别，HSRP 与 GLBP 是 Cisco 提出的协议，不能假定所有第三方设备支持。"
+      },
+      "original_fields": {
+        "prompt": "When deploying a new network that includes both Cisco and third-party network devices, which redundancy protocol avoids the interruption of network traffic if the default gateway router fails?",
+        "explanation": "• 核心考点与原理分析：\n本题考查第一跳冗余协议（FHRP）的公有行业标准协议 VRRP（虚拟路由器冗余协议）的多厂商兼容性特征。\n1. 多厂商混合组网需求：\n   现代企业网络常采用多厂商异构设备混用（Multi-vendor Environment），同时包含 Cisco 设备与第三方设备（如 Juniper、Huawei、Arista、H3C 等）。\n2. 三大主流 FHRP 协议对比：\n   - **HSRP（Hot Standby Router Protocol）**：Cisco 私有协议（Cisco Proprietary），通常仅在全 Cisco 网络环境中使用。\n   - **GLBP（Gateway Load Balancing Protocol）**：Cisco 私有协议，支持自动网关负载分担，第三方设备不支持。\n   - **VRRP（Virtual Router Redundancy Protocol）**：由 IETF 制定的开放行业标准（RFC 3768 / RFC 5798）。所有主流网络厂商的路由器和三层交换机均提供原生支持。\n3. VRRP 的运行机制：\n   VRRP 将多台路由器虚拟成一个虚拟路由器，提供单一虚拟 IP（VIP）和虚拟 MAC 地址（`0000.5e00.01xx`）。其中一台选举为 Master 路由器转发流量，其余处于 Backup 状态监听。当 Master 宕机时，Backup 迅速平滑接管，避免流量中断。\n\n• 正确选项剖析：\n选项 A（VRRP）：\n题干强调网络中“includes both Cisco and third-party network devices”（同时包含 Cisco 和第三方网络设备）。在跨厂商异构环境中，只有开放标准的 VRRP 能够实现无缝互通与高可用网关冗余，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（FHRP）：FHRP 是“第一跳冗余协议”这一技术大类的统称概念（First Hop Redundancy Protocols），不是某一个具体的协议配置实体。\n- 选项 C（GLBP）：属于 Cisco 私有协议，无法在包含第三方设备的混合网络中运行。\n- 选项 D（HSRP）：同样属于 Cisco 私有协议，第三方厂商设备无法支持 HSRP 协商。\n\n• 考试要点与速记技巧：\n- FHRP 选型核心词眼：\n  • 看到“Third-party / Multi-vendor（第三方/多厂商）” $o$ 必选 **VRRP**（开放标准）。\n  • 看到“Cisco proprietary（Cisco私有）” $o$ 选 **HSRP** 或 **GLBP**。"
+      },
+      "assessment": {
+        "prompt": "已逐句检查",
+        "options": "逐项检查与正确答案比较",
+        "answer": "根据题设和原图核对；702 修正为 D，其余不变",
+        "explanation": "核对并补足前提、纠正绝对化或误导说法",
+        "image": "无原图，题目不依赖图片",
+        "code": "已检查命令及格式，704、706、709 修复"
+      },
+      "has_exhibit": false,
+      "sources": [
+        "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+        "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf",
+        "https://datatracker.ietf.org/doc/html/rfc4193"
+      ]
+    }
+  ]
+}

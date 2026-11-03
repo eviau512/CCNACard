@@ -1,0 +1,20 @@
+{
+  "scope": [
+    601,
+    800
+  ],
+  "reviewed": 200,
+  "ids_qids_unchanged": true,
+  "source_app_batch_html_equal": true,
+  "formatter_prompt_explanation_checked": 400,
+  "formatter_outputs_equal": true,
+  "apk_data_matches_source": true,
+  "apk_sha256": "6847c6732746c94282d1089795a4b347fd2d062b7e85206e7e904e8374efd071",
+  "certificate_sha256": "841c1869811eb0d41992c8c61ad6eba6cd88ac96baf9cae33b6a33e73a1c6855",
+  "install_status": "pending: user 10 already has package; shared APK update may affect Island",
+  "device_package_installed_user_0": true,
+  "device_package_installed_user_10": true,
+  "practice_records_read_or_cleared": false,
+  "release_created": false,
+  "limitations": "Manual review and formatter checks; no network-device lab tests."
+}

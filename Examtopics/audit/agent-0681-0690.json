@@ -1,0 +1,277 @@
+{
+  "scope": "Q681–Q690",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 681,
+      "original_qid": "Q892",
+      "before_sha256": "f79afc98773610938e6325c05cbac016a017a9f51879236c18748cd839e875ef",
+      "reason": "已看路由表；/32为单目的。",
+      "updates": {
+        "explanation": "B。图中 O 10.0.1.3/32 [110/100] via 10.0.1.100 是 OSPF 学到的主机路由；/32 将全部 32 位固定，匹配唯一目的地址 10.0.1.3。10.0.1.100 是下一跳，不是此项的源地址。A 的整个子网需要较短前缀，D 的 10.0.0.0 网络也不是该 /32 目的。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv4 路由表结构表项解析以及 /32 主机路由（Host Route）的核心概念。\n在 IPv4 寻址与 CIDR 无类域间路由体系中：\n1. 网络掩码长度决定了路由所代表的地址空间范围：\n   - 主机位（Host Bits）数量计算公式：`32 - 前缀长度`。\n   - 常见的网段路由（如 `/24`）：掩码为 255.255.255.0，主机位有 8 位，涵盖 256 个 IP 地址（整个子网）。\n2. 主机路由（Host Route, /32）：\n   - 前缀长度为 `/32`（点分十进制掩码为 `255.255.255.255`）。\n   - 此时主机位为 `32 - 32 = 0` 比特，意味着所有 32 个比特位全部被网络位所固定，没有任何多余位可作为主机编号变动。\n   - 因此，`/32` 路由在三层路由表中仅且只能精确指代 **一个单独的具体目的 IP 地址（A single destination address）**，绝不包含任何其他主机。\n   - 在实际生产网络中，/32 路由通常源于：本地直连接口的 Local 路由（L 标记）、环回接口（Loopback 接口，OSPF 默认网络类型通告为 /32 主机路由）或管理员手动配置的静态主机路由。\n\n• 正确选项剖析：\n选项 B（a single destination address）准确界定了 /32 路由的技术定义：\n展图中路由条目为：\n`O 10.0.1.3/32 [110/100] via 10.0.1.100, 00:39:08, Serial0`\n该条目由 OSPF 协议学习而来，前缀为 `10.0.1.3/32`。由于掩码为 32 位全 1，它精确代表目的地址恰好为 `10.0.1.3` 这单一主机设备的路由，路由器在执行最长前缀匹配查表转发时，仅有目的 IP 完全等于 10.0.1.3 的数据包才会命中此条目，因此它代表“a single destination address”。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（all hosts in the 10.0.1.0 subnet）：代表 10.0.1.0 子网内所有主机的路由应当是掩码为 /24 的网段路由（即展表中随后的 `C 10.0.1.0/24 is directly connected`），而非 /32。\n- 选项 C（the source 10.0.1.100）：概念严重混淆。路由表是基于“目的 IP 地址（Destination IP）”进行查表选路的，`10.0.1.100` 是送达该目的地的**下一跳地址（Next-Hop）**，绝不是数据包的源地址（Source）。\n- 选项 D（the 10.0.0.0 network）：对应的是主类网络号（Class A），其汇总掩码为 /8，绝非 /32。\n\n• 考试要点与速记技巧：\n“掩码全 1 为 /32，主机位为 0 无子网；精准锁定单目的，主机路由（Host Route）最专一”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q681_agent.jpg",
+      "image_sha256": "a0ec79e482bbfc0aebd22d121346ca4284b33d77f9beb2315e9cabc92ee1c3b6"
+    },
+    {
+      "id": 682,
+      "original_qid": "Q893",
+      "before_sha256": "8c47a4cd7515aa89a62fe2a3400f749bae197a94b69df7806de749dcf7d04b6d",
+      "reason": "已看拓扑；主机路由与下一跳正确，补可达性条件。",
+      "updates": {
+        "explanation": "B。在 R14 上，目的主机 PC10 为 10.80.65.10，/32 掩码为 255.255.255.255；图中 R86 的互联接口为 10.73.65.66，因此 B 以其作为下一跳。需确保下一跳可达、R86 有目的网段路由且回程可用。A 的 /31 非主机路由；C 的掩码是通配符且目的与下一跳不符；D 的目标和掩码也不满足要求。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 静态主机路由（Static Host Route）的标准 CLI 命令语法及下一跳（Next-Hop）选路定位。\n1. 静态路由标准语法结构：\n   `ip route <目标网络/主机IP> <子网掩码> <下一跳IP地址或出接口>`\n2. 主机路由（Host Route）技术规范：\n   - 主机路由专用于指向网络中的某一台特定单机设备（如专用服务器、打印机或特定主机），其子网掩码必须固定为全 1，即 **`255.255.255.255`（/32）**。\n3. 展图拓扑参数解析：\n   - 本地待配置路由器：`R14`；\n   - 目标终端设备：`PC 10`，其接入网段为 `10.80.65.0/28`，终端 IP 标记为 `.10`，因此 PC 10 的完整目标 IP 为 **`10.80.65.10`**；\n   - R14 与相邻路由器 R86 之间的直连网段为 `10.73.65.64/30`：\n     * R14 的 Fa0/0 接口 IP 为 `.65`（10.73.65.65）；\n     * 对端邻居 R86 的 Fa0/0 接口 IP 为 `.66`（**`10.73.65.66`**）。\n   - 从 R14 视角转发报文前往 PC 10 时，数据包离开 R14 后的第一个直连三层中继点即为 R86 的入口，因此下一跳 IP 地址必须是 **`10.73.65.66`**。\n\n• 正确选项剖析：\n选项 B（`ip route 10.80.65.10 255.255.255.255 10.73.65.66`）完全符合配置规范：\n- 目标地址精确指定为 PC 10 的主机 IP：`10.80.65.10`；\n- 掩码采用 32 位全 1 的主机掩码：`255.255.255.255`；\n- 下一跳精准指定为对端直连路由器 R86 的接收接口 IP：`10.73.65.66`。\n该命令输入后，R14 路由表中将成功生成一条到达 PC 10 的静态主机路由，完全满足题干需求。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（`ip route 10.80.65.10 255.255.255.254 10.80.65.1`）：掩码 `255.255.255.254`（/31）非主机路由掩码；下一跳 `10.80.65.1` 是远端 R86 的 LAN 侧接口，与 R14 非直连，在没有既有路由情况下会引发递归路由失败。\n- 选项 C（`ip route 10.73.65.66 0.0.0.255 10.80.65.10`）：颠倒了目的地址与下一跳地址，且掩码位置错误地使用了反掩码 `0.0.0.255`，属于完全错误的语法。\n- 选项 D（`ip route 10.73.65.66 255.0.0.0 10.80.65.10`）：同样颠倒了目的与下一跳，将对端接口 IP 当成了目的网段，完全偏离了通往 PC 10 的路由目标。\n\n• 考试要点与速记技巧：\n静态路由书写口诀：\n“目标 IP 居最前，主机掩码四个 255；下一跳填直连对端口，方向千万莫颠倒”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q682_agent.jpg",
+      "image_sha256": "c1323205ed5d52dad2400f4674afe589ab096c6b464ccb8b5ffb597b264ae39b"
+    },
+    {
+      "id": 683,
+      "original_qid": "Q894",
+      "before_sha256": "33ecb50688f28ca22a4287b3cc4459b9f05eac48e0c39dab62e72d0f9a195284",
+      "reason": "已看路由表；OSPF与RIP度量不能跨协议比较，限定同协议比较。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Among the two displayed OSPF routes, which next-hop address has the larger OSPF metric?",
+        "explanation": "C。图中两条 OSPF 项的 [AD/metric] 分别是经 10.10.10.3 的 [110/100] 和经 10.10.10.2 的 [110/5]；100 大于 5。10.10.10.4 是 RIP 路由的下一跳，10.10.10.5 未显示。不同路由协议度量的单位和计算方法不同，不能把 RIP 的 10 与 OSPF 的 100 当成可直接比较的路径优劣；它们也指向不同目的前缀。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which next-hop IP address has the least desirable metric when sourced from R1?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由表表项解析，重点辨析“管理距离（Administrative Distance, AD）”与“度量值（Metric）”的本质区别，以及路由优选判定逻辑。\n1. 路由表表项标准格式：\n   在 Cisco `show ip route` 输出中，每条动态路由条目紧随目的网络后方包含一对方括号：\n   **`[Administrative Distance / Metric]`**（即 `[管理距离 / 度量值]`）。\n   - 管理距离（AD）：衡量不同路由协议或路由来源的“可信度/优先级”。例如 Connected=0, Static=1, EIGRP=90, OSPF=110, RIP=120。AD 越小，路由协议来源越优先；\n   - 度量值（Metric / Cost / Hop count）：在同一个路由协议内部衡量路径优劣的“开销/代价”。在任何动态路由协议中，**Metric 数值越小代表链路质量越高、越优选（Most desirable）；Metric 数值越大代表路径代价越高、越不可取（Least desirable）**。\n2. 展图路由表表项逐行解剖：\n   - `O 10.10.10.3/32 [110/100] via 10.10.10.3` -> AD 为 110（OSPF），Metric 为 **100**；\n   - `O 10.10.10.2/32 [110/5] via 10.10.10.2` -> AD 为 110（OSPF），Metric 为 **5**；\n   - `R 10.10.10.4/32 [120/10] via 10.10.10.4` -> AD 为 120（RIP），Metric 为 **10**。\n3. 题干精确设问辨析：“Which next-hop IP address has the least desirable metric when sourced from R1?”\n   - 题目直指**度量值（Metric）**这一单一技术维度（并未询问管理距离 AD）；\n   - 对比各条路由的 Metric 数值：5、10、100；\n   - 数值 100 是所有条目中开销最高、代价最大的数值，因而是“最不理想/最劣的度量值（Least desirable metric）”；\n   - 拥有该度量值 100 的对应下一跳 IP 地址正是 **`10.10.10.3`**！\n\n• 正确选项剖析：\n选项 C（10.10.10.3）完全符合题意：\n下一跳为 `10.10.10.3` 的 OSPF 路由，其括号内的度量值为 100（`[110/100]`）。在路由算法中，度量值代表传输开销，数值越大说明链路带宽越低或时延越高，属于最不受欢迎、最不理想的度量值（Least desirable metric）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（10.10.10.4）：最经典的审题陷阱！下一跳 10.10.10.4 是一条 RIP 路由，其管理距离 AD 为 120。很多粗心的考生将管理距离与度量值混为一谈，误以为 120 是度量值而错选 A。实际上该路由的度量值仅为 10（`[120/10]`），10 远小于 100，因此它的 Metric 优于 100。\n- 选项 B（10.10.10.5）：路由表中压根不存在下一跳为 10.10.10.5 的路由条目，纯属无关干扰项。\n- 选项 D（10.10.10.2）：该条目的 Metric 仅为 5，是全网开销最小、最优选的度量值（Most desirable metric），与题意相反。\n\n• 考试要点与速记技巧：\n路由表方括号结构速记：\n“前 AD、后 Metric，`[AD/Metric]` 莫混淆；\n问 Metric 找后项，数值越大越不优（Least Desirable 选 100 对应的 10.10.10.3）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q683_agent.jpg",
+      "image_sha256": "04ac47130679b0b89cae5ef403de61db91f33d7c38da6c3fb882dea2df5aa5c2"
+    },
+    {
+      "id": 684,
+      "original_qid": "Q896",
+      "before_sha256": "7e0d27bcc7b17cd5eea01c007931966465e79770dc7154a592b13e6511d56323",
+      "reason": "已看拓扑；浮动静态路由前提、收敛和命令换行。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.248 172.16.0.5 110\nR2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.6 110"
+          },
+          {
+            "label": "B",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.240 172.16.0.2 113\nR2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.1 114"
+          },
+          {
+            "label": "C",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.224 172.16.0.6 111\nR2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.5 112"
+          },
+          {
+            "label": "D",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.240 172.16.0.5 89\nR2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.6 89"
+          }
+        ],
+        "explanation": "C。图中 R2 工作站网络为 172.16.2.0/27（255.255.255.224），R1 的为 172.16.1.0/24。备用链路上 R1 是 172.16.0.5、R2 是 172.16.0.6，因此 R1 指向 .6、R2 指向 .5。假设图中 OSPF 路由采用默认管理距离 110，静态路由的 111 和 112 均较高，在相同目标前缀的 OSPF 主路由消失且备用下一跳可解析时可接替。故障检测、收敛和返回路径仍影响恢复时间。A 目标掩码及方向有误；B 使用主链路下一跳且掩码不符；D 的 89 低于默认 OSPF 距离且掩码不符。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.248 172.16.0.5 110 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.6 110"
+          },
+          {
+            "label": "B",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.240 172.16.0.2 113 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.1 114"
+          },
+          {
+            "label": "C",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.224 172.16.0.6 111 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.5 112"
+          },
+          {
+            "label": "D",
+            "text": "R1 - Ip route 172.16.2.0 255.255.255.240 172.16.0.5 89 R2 - Ip route 172.16.1.0 255.255.255.0 172.16.0.6 89"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查浮动静态路由（Floating Static Route）的设计机制、VLSM 子网掩码转换以及管理距离（AD）的层级关系。\n1. 浮动静态路由工作机制：\n   - 在主备冗余拓扑中，主链路通常运行动态路由协议（本题为主链路上运行 OSPF 200，其默认管理距离 AD 为 110）。\n   - 当配置一条静态路由作为次要备用链路（Secondary Route）时，必须为其显式指定一个**大于主路由协议管理距离的 AD 值（Administrative Distance > 110）**。\n   - 这样在主链路正常时，该静态路由因 AD 较大被隐藏在后台，不会出现在路由表中；一旦主链路故障、OSPF 邻居超时断开，该浮动静态路由立即自动激活浮入路由表接管转发。\n2. 拓扑参数与子网计算：\n   - 主链路：两台路由器通过 `Gi0/0` 互联（`172.16.0.0/30`，运行 OSPF 200）；\n   - 备用链路：两台路由器通过 `Gi0/1` 互联（`172.16.0.4/30`，R1 接口为 `.5`，R2 接口为 `.6`）；\n   - 工作站业务网段与掩码计算：\n     * R1 侧工作站网段为 `172.16.1.0/24` -> 子网掩码为 `255.255.255.0`；\n     * R2 侧工作站网段为 `172.16.2.0/27` -> `/27` 对应二进制前 27 位为 1，即 `128 + 64 + 32 = 224`，子网掩码严格为 **`255.255.255.224`**！\n3. 路由配置命令推导：\n   - 在 R1 上配置前往 R2 工作站（172.16.2.0/27）的次要路由：\n     下一跳为 R2 的 Gi0/1 地址（`172.16.0.6`），管理距离必须大于 OSPF 的 110（如 111）：\n     `ip route 172.16.2.0 255.255.255.224 172.16.0.6 111`\n   - 在 R2 上配置前往 R1 工作站（172.16.1.0/24）的次要路由：\n     下一跳为 R1 的 Gi0/1 地址（`172.16.0.5`），管理距离必须大于 110（如 112）：\n     `ip route 172.16.1.0 255.255.255.0 172.16.0.5 112`。\n\n• 正确选项剖析：\n选项 C 完全吻合技术要求：\n1. R2 侧工作站掩码 `/27` 精准换算为 `255.255.255.224`；\n2. 次要链路下一跳 IP 准确匹配（R1 的出向下一跳是 172.16.0.6，R2 的出向下一跳是 172.16.0.5）；\n3. 指定的管理距离为 111 和 112，均严格大于主链路 OSPF 的管理距离 110，完美构成了浮动备用静态路由，只有在主 OSPF 链路失效后才会接管通信。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：将 `/27` 错误计算为了 `255.255.255.248`（/29），掩码错误；且 R1 的下一跳错写成了自己的接口 IP 172.16.0.5；且 AD 配为 110 会与 OSPF 发生冲突。\n- 选项 B：将 `/27` 错误计算为了 `255.255.255.240`（/28），且下一跳写成了 Gi0/0 主链路的 IP（172.16.0.2 / 172.16.0.1），完全丧失了备用链路容灾功能。\n- 选项 D：将 `/27` 算错为 255.255.255.240；且其配置的管理距离为 89（小于 OSPF 的 110），这会导致静态路由强行覆盖主链路 OSPF 成为主路由，彻底颠倒了主备关系！\n\n• 考试要点与速记技巧：\n“掩码换算：/27 尾数为 224，/28 为 240，/29 为 248；\n浮动备用防覆盖，管理距离必大于主路由（> 110）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q684_agent.jpg",
+      "image_sha256": "2c0046bad2cbfb871833d5d21175eec911ba2b47ab21375a58422b2ebe93e177"
+    },
+    {
+      "id": 685,
+      "original_qid": "Q899",
+      "before_sha256": "9cd2e6574430dca9fb3e7e62654369a63bebcdbd87ca59e1341e3654cfc4d25c",
+      "reason": "已看拓扑；2001:db8::/32为文档地址，不能实际公网使用。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In this documentation-only example, which command configures a global-unicast-format IPv6 address on R2’s WAN interface? Assume the shown example prefix represents the service-provider allocation.",
+        "explanation": "C。命令配置普通 IPv6 单播地址；A、D 是链路本地形式，B 标注 anycast。图示采用 2001:db8::/32 文档前缀，C 只用于说明，不能作为实际公网分配地址使用；真实互联网连接应使用运营商分配的可全球路由前缀，还需要正确的上游路由及其他连接配置。任播有其合法用途，但题目要求普通接口单播地址。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A public IPv6 address must be configured for internet access. Which command must be configured on the R2 WAN interface to the service provider?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 地址分类结构、全球单播地址（Global Unicast Address, GUA）标准配置语法及 WAN 广域网因特网接入规范。\n在 IPv6 协议体系中，地址根据范围和用途分为三类主要单播地址：\n1. 全球单播地址（Global Unicast Address, GUA）：相当于 IPv4 的公网 IP 地址，全球唯一且公网可路由，用于访问公共互联网。其地址前缀定义在 `2000::/3` 范围内（即以二进制 `001` 开头，十六进制首位为 2 或 3，如 `2001::`、`2002::` 等）。\n2. 链路本地地址（Link-Local Address, LLA）：前缀固定为 `fe80::/10`，仅在同一个直连物理链路内有效，路由器绝对不会转发链路本地报文，因此无法用于访问 Internet。\n3. 唯一本地地址（Unique Local Address, ULA）：前缀为 `fc00::/7`（通常为 `fd00::/8`），相当于 IPv4 的私有私网地址（RFC 1918），无法在公共互联网中路由。\n4. 广域网接入配置需求：\n   题干明确指出：“A public IPv6 address must be configured for internet access”（必须配置公网 IPv6 地址以实现互联网访问）。因此在连接 ISP 互联网的 R2 广域网接口（Int G0/1）上，必须配置标准且合法的公网全球单播地址（GUA）。\n\n• 正确选项剖析：\n选项 C（`ipv6 address 2001:db8:123:45::4/64`）完全符合技术规范：\n该地址属于全球单播地址范围（`2001::/16` 属于 RFC 3849 定义的文档与范例公网前缀体系，在思科考试中广泛用作公网 IPv6 示例地址）。该命令语法完整、格式标准，将该单播地址配置在 R2 的 G0/1 WAN 接口上，使路由器获得连接外部 ISP 运营商并访问公共 IPv6 互联网的能力。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（`ipv6 address fe80::/10`）：`fe80::/10` 属于链路本地地址前缀，根本无法在公网路由；且该命令只是一个路由前缀，缺少具体接口标识符与关键字，属于无效语法。\n- 选项 B（`ipv6 address 2001:db8:433:37:7710:ffff:ffff:ffff/64 anycast`）：该命令带有了 `anycast`（任播）关键字。任播地址用于多个服务器共享同一 IP 提供就近负载冗余，绝不适用于常规广域网点对点物理互联接口的标准单播公网通信。\n- 选项 D（`ipv6 address fe80::260:3EFF:FE11:6770 link-local`）：明确配置为链路本地地址（link-local）。链路本地地址仅用于本地直连链路的邻居发现与下一跳选路，路由器坚决不予路由，根本无法用于互联网访问（internet access）。\n\n• 考试要点与速记技巧：\n“IPv6 公网互联用 GUA（2000::/3），直连通信用 LLA（fe80::/10）；看到 Internet 访问，坚决排除 fe80，认准 2001 单播”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q685_agent.jpg",
+      "image_sha256": "25c24142c0bb21e8337a953267ad4253abd47de6775d984b63165aa55726e355"
+    },
+    {
+      "id": 686,
+      "original_qid": "Q901",
+      "before_sha256": "1f4d32ca5ef14fe0d306f5cb02c2d105bfedf1dfc1edf7b4a80e93e47848c504",
+      "reason": "已看拓扑；明确主机路由和回程条件。",
+      "updates": {
+        "explanation": "A。图中服务器为 10.10.10.10，R2 面向 R1 的地址为 192.168.0.2；`ip route 10.10.10.10 255.255.255.255 192.168.0.2` 指定到单个 IPv4 地址的 /32 主机路由。B 是 /24 网段路由，C 是默认路由，D 将目标和下一跳颠倒。路由实际生效需要下一跳可达，并需有通往服务器及返回源网络的路径。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 静态主机路由（Host Route）的原理、子网掩码定义以及下一跳（Next-Hop）地址指向。\n1. 主机路由（Host Route）定义：\n   - 主机路由是路由表中前缀长度最长（/32）、精确度最高的专用路由，专门用于将流量直接引导至网络中的某一台特定单机设备。\n   - 在 IPv4 中，主机路由的子网掩码必须为 32 位全 1，即 **`255.255.255.255`**。\n2. 拓扑参数与路径分析：\n   - 待配置设备：`Router 1`（R1）；\n   - 目标目的地：`Server`，展图标明 Server 的 IP 地址为 **`10.10.10.10/24`**，因此目标主机 IP 为 `10.10.10.10`；\n   - 直连下一跳路由器：`Router 2`（R2）；\n   - R1 与 R2 之间通过串行链路（S0/0）直连，网段为 `192.168.0.0/30`：\n     * R1 的 S0/0 接口 IP 为 `192.168.0.1/30`；\n     * R2 的 S0/0 接口 IP 为 `192.168.0.2/30`。\n   - 从 R1 转发数据到 Server，报文必须首先发送给相邻直连路由器的对端入接口，因此下一跳 IP 必须为 **`192.168.0.2`**。\n3. CLI 配置语法：\n   `ip route <目标主机IP> <255.255.255.255> <下一跳IP>`\n   即：`ip route 10.10.10.10 255.255.255.255 192.168.0.2`。\n\n• 正确选项剖析：\n选项 A（`R1(config)#ip route 10.10.10.10 255.255.255.255 192.168.0.2`）完全正确：\n1. 目标地址精准指向服务器的单一 IP：`10.10.10.10`；\n2. 掩码为标准的 32 位主机掩码：`255.255.255.255`；\n3. 下一跳准确指向直连对端路由器 R2 的 S0/0 物理接口 IP：`192.168.0.2`。\n该配置在 R1 上生成一条针对该服务器的最优主机路由，完全符合题干要求。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（`ip route 10.10.10.0 255.255.255.0 192.168.0.2`）：配置的是指向整个 10.10.10.0/24 子网的网段路由（Network Route），并非题干要求的特定主机路由（host route to the server）。\n- 选项 C（`ip route 0.0.0.0 0.0.0.0 192.168.0.2`）：配置的是默认路由（Default Route），完全不符合主机路由的精度要求。\n- 选项 D（`ip route 192.168.0.2 255.255.255.255 10.10.10.10`）：不仅把下一跳颠倒成了目的地址，还把非直连的 Server IP 当作下一跳，属于逻辑完全颠倒的致命错误配置。\n\n• 考试要点与速记技巧：\n“主机路由四个 255，目标指向单主机；下一跳填对端接口 IP，网段默认莫混淆”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q686_agent.jpg",
+      "image_sha256": "8a154254010e42d76dde30d20b79a093cde68912dd091d0c6b52d07b00a3b13c"
+    },
+    {
+      "id": 687,
+      "original_qid": "Q902",
+      "before_sha256": "99a261264666457a540bc532f1c1b0eb816cececb284b4b2e11f3f17715e236f",
+      "reason": "已看拓扑；原C EUI-64命令缺斜杠，明确要求EUI-64以排除静态地址同样支持SLAAC的歧义。",
+      "updates": {
+        "prompt": "Refer to the exhibit. IPv6 unicast-routing is enabled. Which interface command configures R1 Gig0/0 using the assigned /64 prefix and automatically derives its interface identifier using EUI-64?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:DB8:FFFF:FCF3::64 link-local"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:DB8:FFFF:FCF3::1/64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001:DB8:FFFF:FCF3::/64 eui-64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address autoconfig 2001:DB8:FFFF:FCF2::/64"
+          }
+        ],
+        "explanation": "C。图中分配的前缀是 2001:DB8:FFFF:FCF3::/64；`ipv6 address 2001:DB8:FFFF:FCF3::/64 eui-64` 按 EUI-64 生成接口标识符并配置 R1 接口。原选项的 `::64` 缺少斜线，已修正。B 是同前缀的手工接口地址，并不自动生成接口标识符；但它在适当 RA 配置下也可支持主机 SLAAC，所以题目明确要求 EUI-64，而不把它误称为 SLAAC 的唯一方式。A 把 2001:db8 地址标为链路本地；D 的 autoconfig 语法和题设方向不符。2001:db8::/32 为文档示例。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. IPv6 is being implemented within the enterprise. The command ipv6 unicast-routing is configured. Interface Gig0/0 on R1 must be configured to provide a dynamic assignment using the assigned IPv6 block. Which command accomplishes this task?",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 address 2001:DB8:FFFF:FCF3::64 link-local"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 address 2001:DB8:FFFF:FCF3::1/64"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 address 2001:DB8:FFFF:FCF3::64 eui-64"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 address autoconfig 2001:DB8:FFFF:FCF2::/64"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 地址动态配置机制（SLAAC，无状态地址自动配置）与 EUI-64（扩展唯一标识符）在 Cisco 路由器接口上的部署。\n1. 在 Cisco IOS 中，当全局启用了 `ipv6 unicast-routing` 后，路由器接口配置了全球单播地址（GUA），接口会自动周期性发送 ICMPv6 路由器通告（Router Advertisement, RA）报文（目标为 ff02::1），同时响应局域网主机的路由器请求（Router Solicitation, RS）。\n2. 在接口上使用 `ipv6 address <ipv6-prefix>/<prefix-length> eui-64` 命令，路由器会提取该前缀，并根据接口的 MAC 地址（48位）在中间插入 0xFFFE 并翻转第7位（U/L位）自动生成 64 位的接口标识符（Interface ID），组合成完整的 128 位全球单播地址。更重要的是，配置该命令后，路由器将在该接口上向所属 LAN 网段通告该 /64 前缀，使得连接的主机能够通过 SLAAC 机制自动动态分配获取同一网段的 IPv6 地址与默认网关。\n\n• 正确选项剖析：\n选项 C（ipv6 address 2001:DB8:FFFF:FCF3::64 eui-64，题干/选项笔误实际为前缀后接 /64 eui-64）：\n通过指定分配的前缀块（2001:DB8:FFFF:FCF3::/64）并结合 `eui-64` 参数，路由器接口自身自动动态合成主机位地址，并在 Gig0/0 上启用 SLAAC 前缀通告，满足“使用分配的 IPv6 块提供动态分配（dynamic assignment using the assigned IPv6 block）”的技术需求，因此 C 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（ipv6 address 2001:DB8:FFFF:FCF3::64 link-local）：链路本地地址（Link-Local Address）必须使用 `fe80::/10` 范围内的地址，2001:DB8 开头属于全球单播地址范围，不能作为 link-local 地址配置，语法与技术原理均错误。\n- 选项 B（ipv6 address 2001:DB8:FFFF:FCF3::1/64）：这是完全静态手工配置单个 IPv6 单播地址，没有利用 EUI-64 动态生成自身接口 ID，不符合题干关于“dynamic assignment”的机制考查重点。\n- 选项 D（ipv6 address autoconfig 2001:DB8:FFFF:FCF2::/64）：`ipv6 address autoconfig` 命令是作为 IPv6 客户端（如主机或末节路由器下行口）用于通过上联路由器的 RA 自动获取地址，其后不能也不支持跟随具体的 IPv6 前缀参数；且此处的 IPv6 前缀 FCF2 与题干拓扑指定的 FCF3 不一致，语法和逻辑均错误。\n\n• 考试要点与速记技巧：\n- 路由器接口动态生成地址并通告 SLAAC 前缀：`ipv6 address <prefix>/64 eui-64`。\n- 客户端/接收端自动获取 SLAAC 地址：`ipv6 address autoconfig`（无后缀前缀）。\n- 链路本地地址范围必记：`FE80::/10`。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q687_agent.jpg",
+      "image_sha256": "caeeb8520b93161c562bdcdb3fc36d5708e2ef43b77342eb0388cb3470ec0c94"
+    },
+    {
+      "id": 688,
+      "original_qid": "Q903",
+      "before_sha256": "5b8ef96272cc5854f360c79f5dd55cbbf06b7e393a87a262af24b1755330341f",
+      "reason": "已看路由表；.202不在/29内，最长匹配/25。",
+      "updates": {
+        "explanation": "C。图中 172.16.0.192/29 覆盖 .192–.199，不包含目的 .202；172.16.0.128/25 覆盖 .128–.255，包含 .202；172.16.0.0/24 也包含 .202。按最长匹配选 /25 OSPF 路由，其 [110/32445] 中 110 是管理距离、32445 是度量；90 和 3184439 属于未匹配的 EIGRP /29 条目。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由表查看命令 `show ip route` 的解析与最长前缀匹配原则（Longest Prefix Match, LPM）。\n1. 最长前缀匹配是 IP 路由转发的核心法则：当数据包的目的 IP 地址同时与路由表中的多条路由匹配时，路由器始终优先选择子网掩码最长（即前缀长度数值最大）的路由条目进行转发。\n2. 路由表条目格式解析：\n   `协议代码 目标前缀/掩码长度 [管理距离 AD / 度量值 Metric] via 下一跳IP, 出接口`\n   在方括号 `[AD/Metric]` 中，第一个数值为管理距离（Administrative Distance），第二个数值为该协议计算出的度量值（Metric）。\n\n• 正确选项剖析：\n题干询问“路由器 R1 学习到通往主机 172.16.0.202 的路由条目所采用的度量值（Metric）”：\n1. 观察 R1 路由表中匹配 172.16.0.0 系列的前缀：\n   - 静态路由：`S 172.16.0.0/24 [1/0]`，覆盖范围为 172.16.0.0 ~ 172.16.0.255。\n   - OSPF 路由：`O 172.16.0.128/25 [110/32445]`，掩码 /25 块大小为 128，覆盖范围为 172.16.0.128 ~ 172.16.0.255。\n   - EIGRP 路由：`D 172.16.0.192/29 [90/3184439]`，掩码 /29 块大小为 8，覆盖范围为 172.16.0.192 ~ 172.16.0.199（网络号 .192，广播地址 .199）。\n2. 计算目的地址 172.16.0.202 的匹配情况：\n   - 202 大于 199，因此 **172.16.0.202 根本不在 172.16.0.192/29 网段内**！\n   - 202 落在 172.16.0.128 ~ 172.16.0.255 范围内，因此成功匹配 `172.16.0.128/25`！\n   - /25 的掩码（25位）长于 /24（24位），根据最长匹配原则，最终命中 `O 172.16.0.128/25`。\n3. 该 OSPF 路由的方括号内参数为 `[110/32445]`，其中 110 为 OSPF 的管理距离（AD），度量值（Metric）为 32445。因此选项 C 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（90）：90 是 EIGRP 的管理距离，不是 Metric，且该数据包并未匹配 EIGRP 路由。\n- 选项 B（110）：110 是 OSPF 的管理距离（Administrative Distance），题干问的是 Metric，混淆了 AD 与 Metric。\n- 选项 D（3184439）：这是 EIGRP 路由 `172.16.0.192/29` 的复合度量值。很多考生看到 /29 是最长掩码就不假思索选择 D，落入了“未验证目标 IP 是否真正落在该子网内”的经典算术陷阱（.192/29 最大地址仅为 .199）。\n\n• 考试要点与速记技巧：\n- 路由查找两步走：第一步“算范围”（排除不包含目标 IP 的子网），第二步“比掩码”（在包含该 IP 的路由中取掩码最长者）。\n- 方括号结构速记：`[AD/Metric]`，左边是信任度（AD），右边是开销值（Metric）。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q688_agent.jpg",
+      "image_sha256": "5692b477e7b421a38d04472c0952d4acca701771baa9a298b4891b339f9a7a1f"
+    },
+    {
+      "id": 689,
+      "original_qid": "Q904",
+      "before_sha256": "d5d6d21dfe9cc63c1fc12efe6d8bce20209deeb8cca8024fde59619c499c313b",
+      "reason": "已看拓扑；核算/29地址并恢复CLI换行。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.252\nR2(config-if)#ip address 10.10.10.2 255.255.255.252"
+          },
+          {
+            "label": "B",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.240\nR2(config-if)#ip address 10.10.10.12 255.255.255.240"
+          },
+          {
+            "label": "C",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.248\nR2(config-if)#ip address 10.10.10.4 255.255.255.248"
+          },
+          {
+            "label": "D",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.0\nR2(config-if)#ip address 10.10.10.5 255.255.255.0"
+          }
+        ],
+        "explanation": "C。两个接口已用 2 个地址，另需至少 2 个；常规 IPv4 多主机子网 /30 仅有 2 个可用地址，/29 有 6 个可用地址，是选项中满足要求的最小地址块。10.10.10.0/29 可用 .1–.6，所给 .1 与 .4 同属该子网且剩余 4 个。/28、/24 满足数量但分配空间更大。实际增加设备还需物理或二层连接；/31 点对点特例没有满足本题的额外地址。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.252 R2(config-if)#ip address 10.10.10.2 255.255.255.252"
+          },
+          {
+            "label": "B",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.240 R2(config-if)#ip address 10.10.10.12 255.255.255.240"
+          },
+          {
+            "label": "C",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.248 R2(config-if)#ip address 10.10.10.4 255.255.255.248"
+          },
+          {
+            "label": "D",
+            "text": "R1(config-if)#ip address 10.10.10.1 255.255.255.0 R2(config-if)#ip address 10.10.10.5 255.255.255.0"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv4 子网划分（VLSM）与网络规划需求分析。\n题干给出两个核心要求：\n1. “Consume as few IP addresses as possible”（尽可能少地消耗/浪费 IP 地址，即使用尽可能长的前缀掩码）；\n2. “Leave at least two additional useable IP addresses for future growth”（为未来增长预留至少 2 个额外的可用 IP 地址）。\n拓扑为 R1 与 R2 之间的点对点以太网链路，R1 和 R2 各自需要分配 1 个可用 IP 地址（共消耗 2 个地址）。\n加上预留的至少 2 个额外可用地址，该网段总共需要提供的可用主机地址数必须满足：可用地址数 ≥ 2 + 2 = 4。\n\n• 正确选项剖析：\n对于各子网掩码的可用主机数计算公式为：$2^{32 - prefix} - 2$：\n- /30（255.255.255.252）：总地址 4，可用主机数 = $4 - 2 = 2$。分配给 R1 和 R2 后剩余 0 个可用地址，无法满足“至少预留 2 个额外可用地址”的需求。\n- /29（255.255.255.248）：总地址 8，可用主机数 = $8 - 2 = 6$。分配给 R1（.1）和 R2（.4）后，消耗 2 个，剩余可用地址为 .2, .3, .5, .6 共 4 个，满足 $≥ 2$ 的要求，且是满足条件中消耗地址最少（最节省）的子网划分。\n选项 C 中：R1 配置 `10.10.10.1 255.255.255.248`，R2 配置 `10.10.10.4 255.255.255.248`。\n子网号为 10.10.10.0/29，可用主机范围为 10.10.10.1 ~ 10.10.10.6，广播地址为 10.10.10.7。R1 和 R2 处于同一子网内，通信正常且完全契合题意，故 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（255.255.255.252 /30）：/30 总共只有 2 个可用地址，给 R1 和 R2 用完后剩余 0 个，直接违背了“预留至少 2 个额外可用地址”的硬性要求。\n- 选项 B（255.255.255.240 /28）：/28 提供 14 个可用地址，虽然预留充足，但相比 /29（255.255.255.248）浪费了更多地址，不符合“尽可能少消耗地址”的限制条件。\n- 选项 D（255.255.255.0 /24）：/24 提供 254 个可用主机地址，极度浪费公网或私网地址空间，不符合最小化消耗原则。\n\n• 考试要点与速记技巧：\n- 子网需求速算：两台设备（2）+ 预留（2）= 至少 4 个可用 IP。\n- 掩码可用主机数速查：/30 为 2 个；/29 为 6 个；/28 为 14 个。4 落在 2 和 6 之间，必选 /29（255.255.255.248）。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q689_agent.jpg",
+      "image_sha256": "21d25f4965a73543b7e3f3b371ca895e89d39ff5ace3f2cf548acc8df6e50632"
+    },
+    {
+      "id": 690,
+      "original_qid": "Q906",
+      "before_sha256": "c889960102384299ac6bf913dac1af7415d10a5bf89c9ffa2517378b77f7b865",
+      "reason": "已看拓扑；核实目标掩码和对端下一跳。",
+      "updates": {
+        "explanation": "B。图中 R14 的互联地址是 10.73.65.65，R86 是 10.73.65.66；R86 到目标 172.16.34.0/29 的选项为 `ip route 172.16.34.0 255.255.255.248 10.73.65.65`。A 交换了目的与下一跳；C 使用了通配符而非子网掩码且以网络号作下一跳；D 的 /19 不符合 /29，且指向本端地址。静态路由还须下一跳可达并有可用回程。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS IPv4 静态路由（Static Route）的标准命令语法与拓扑下一跳地址判定。\n1. Cisco IOS 静态路由的标准语法为：\n   `Router(config)# ip route <prefix> <mask> {<ip-address> | <interface>} [distance]`\n   - 第一参数为目标网络的网络号（Destination Network Prefix）；\n   - 第二参数为目标网络对应的子网掩码（Subnet Mask，点分十进制格式，不能是通配符反掩码）；\n   - 第三参数为到达目标网络所经过的对端下一跳 IP 地址（Next-hop IP Address）或本地出接口。\n2. 拓扑与路由方向分析：\n   静态路由必须配置在路由器 R86 上，目标网络为挂接在 R14 后的 `172.16.34.0/29`。\n   R86 与 R14 互联于网段 `10.73.65.64/30`，其中 R14 的 Fa0/0 接口 IP 为 `10.73.65.65`，R86 本地接口 IP 为 `10.73.65.66`。\n   因此，R86 转发前往 172.16.34.0/29 网段的数据包时，下一跳 IP 必须指向对端 R14 的接口地址 `10.73.65.65`。\n\n• 正确选项剖析：\n选项 B（ip route 172.16.34.0 255.255.255.248 10.73.65.65）：\n- 目标网络为 `172.16.34.0`；\n- 前缀长度为 /29，转换成点分十进制子网掩码为 `255.255.255.248`（$256 - 2^{32-29} = 256 - 8 = 248$）；\n- 下一跳为对端 R14 的互联 IP `10.73.65.65`。\n语法完全标准，技术参数完全匹配拓扑，故 B 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（ip route 10.73.65.65 255.255.255.248 172.16.34.0）：将下一跳地址与目标网段位置颠倒，严重语法错误。\n- 选项 C（ip route 172.16.34.0 0.0.0.7 10.73.65.64）：子网掩码位置错误地使用了 ACL/OSPF 的通配符反掩码（Wildcard Mask 0.0.0.7），且下一跳写成了网段网络地址 10.73.65.64，IOS 拒绝执行该命令。\n- 选项 D（ip route 172.16.34.0 255.255.224.0 10.73.65.66）：掩码 255.255.224.0 对应 /19，完全不符合 /29；且下一跳 10.73.65.66 是 R86 自己的接口 IP，路由器不能将自身接口 IP 作为下一跳。\n\n• 考试要点与速记技巧：\n- 静态路由口诀：“先目网，再掩码，后下一跳对端塔”。\n- /29 掩码对应 255.255.255.248；/30 掩码对应 255.255.255.252。静态路由绝不用反掩码！"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q690_agent.jpg",
+      "image_sha256": "5d155e03f410f93d6642a3ce1105836607b6c267f5d1214cbe1384396d1db719"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/info/rfc3849/",
+    "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8606-redist.html",
+    "https://www.cisco.com/c/en/us/support/docs/dial-access/floating-static-route/118263-technote-nexthop-00.html",
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/command/ipv6-xe-3se-3850-cr-book.pdf"
+  ],
+  "limitations": "逐题人工查看原图及文档；未进行真实设备 CLI 或运行验证。"
+}
