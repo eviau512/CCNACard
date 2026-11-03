@@ -2266,7 +2266,7 @@
     "answer": [
       "Refer to Solution Diagram"
     ],
-    "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **categorizes packets based on the value of a traffic descriptor** | `classification` |\n| **guarantees minimum bandwidth to specific traffic classes when an interface is congested** | `policing` |\n| **prevents congestion by reducing the flow of outbound traffic** | `shaping` |\n| **outcome of overutilization** | `congestion` |\n| **uses defined criteria to limit the transmission of one or more classes of traffic** | `cloud-based weighted fair queueing` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【categorizes packets based on the value of a traffic descriptor】** → **正确匹配**：`classification`\n   - **【核心技术特征】**：RIP（路由信息协议）是基于跳数度量（最大 15 跳）的距离矢量协议，默认管理距离（AD）为 120。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `classification` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【guarantees minimum bandwidth to specific traffic classes when an interface is congested】** → **正确匹配**：`policing`\n   - **【概念匹配原理解析】**：`policing` 准确表达了 `guarantees minimum bandwidth to specific traffic classes when an interface is congested` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `policing` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【prevents congestion by reducing the flow of outbound traffic】** → **正确匹配**：`shaping`\n   - **【网络自动化与可编程性】**：在现代 SDN 自动化架构下，`shaping` 对应 `prevents congestion by reducing the flow of outbound traffic` 的数据编码与控制器通信标准。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `shaping` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【outcome of overutilization】** → **正确匹配**：`congestion`\n   - **【概念匹配原理解析】**：`congestion` 准确表达了 `outcome of overutilization` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `congestion` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n5. **目标定义 / 属性**：**【uses defined criteria to limit the transmission of one or more classes of traffic】** → **正确匹配**：`cloud-based weighted fair queueing`\n   - **【概念匹配原理解析】**：`cloud-based weighted fair queueing` 准确表达了 `uses defined criteria to limit the transmission of one or more classes of traffic` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `cloud-based weighted fair queueing` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **QoS terms** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。",
+    "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **categorizes packets based on the value of a traffic descriptor** | `classification` |\n| **guarantees minimum bandwidth to specific traffic classes when an interface is congested** | `cloud-based weighted fair queueing` |\n| **prevents congestion by reducing the flow of outbound traffic** | `shaping` |\n| **outcome of overutilization** | `congestion` |\n| **uses defined criteria to limit the transmission of one or more classes of traffic** | `policing` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **categorizes packets based on the value of a traffic descriptor** → **`classification`**：利用报文描述符字段区分流量归类。\n2. **guarantees minimum bandwidth to specific traffic classes when an interface is congested** → **`cloud-based weighted fair queueing` (CBWFQ)**：在拥塞发生时为特定业务类别提供基于权重的绝对最低带宽保障。\n3. **prevents congestion by reducing the flow of outbound traffic** → **`shaping`**：流量整形通过平滑出站突发流量速率，避免对端接口发生拥塞。\n4. **outcome of overutilization** → **`congestion`**：网络资源过度超卖利用的直接后果是拥塞。\n5. **uses defined criteria to limit the transmission of one or more classes of traffic** → **`policing`**：流量监管通过设定的度量标准对特定类别的发送速率进行硬性上限限制。",
     "drag_drop_data": {
       "sources": [
         "cloud-based weighted fair queueing",
@@ -2284,7 +2284,7 @@
         {
           "id": "t2",
           "label": "guarantees minimum bandwidth to specific traffic classes when an interface is congested",
-          "expected": "policing"
+          "expected": "cloud-based weighted fair queueing"
         },
         {
           "id": "t3",
@@ -2299,7 +2299,7 @@
         {
           "id": "t5",
           "label": "uses defined criteria to limit the transmission of one or more classes of traffic",
-          "expected": "cloud-based weighted fair queueing"
+          "expected": "policing"
         }
       ]
     }
@@ -4501,7 +4501,7 @@
     "answer": [
       "Refer to Solution Diagram"
     ],
-    "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **applies a specific action to packets whenever the maximum rate of packets is exceeded** | `queuing` |\n| **set the ToS value to associate a packet with a QoS group** | `marking` |\n| **reduces traffic congestion by holding packets and distributing them when the available bandwidth allows** | `classification` |\n| **the overall process of using specific criteria to differentiate traffic into categories** | `policing` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【applies a specific action to packets whenever the maximum rate of packets is exceeded】** → **正确匹配**：`queuing`\n   - **【概念匹配原理解析】**：`queuing` 准确表达了 `applies a specific action to packets whenever the maximum rate of packets is exceeded` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `queuing` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【set the ToS value to associate a packet with a QoS group】** → **正确匹配**：`marking`\n   - **【概念匹配原理解析】**：`marking` 准确表达了 `set the ToS value to associate a packet with a QoS group` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `marking` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【reduces traffic congestion by holding packets and distributing them when the available bandwidth allows】** → **正确匹配**：`classification`\n   - **【概念匹配原理解析】**：`classification` 准确表达了 `reduces traffic congestion by holding packets and distributing them when the available bandwidth allows` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `classification` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【the overall process of using specific criteria to differentiate traffic into categories】** → **正确匹配**：`policing`\n   - **【概念匹配原理解析】**：`policing` 准确表达了 `the overall process of using specific criteria to differentiate traffic into categories` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `policing` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **Qos features** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。",
+    "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **applies a specific action to packets whenever the maximum rate of packets is exceeded** | `policing` |\n| **set the ToS value to associate a packet with a QoS group** | `marking` |\n| **reduces traffic congestion by holding packets and distributing them when the available bandwidth allows** | `queuing` |\n| **the overall process of using specific criteria to differentiate traffic into categories** | `classification` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【applies a specific action to packets whenever the maximum rate of packets is exceeded】** → **正确匹配**：`policing`（流量监管）\n   - **【概念匹配原理解析】**：流量监管（Traffic Policing）对进入或离开路由器的流量速率进行硬性监控。当突发报文速率超过预先设定的最高限额（Maximum Rate / CIR）时，监管机制会立即对超额报文执行指定惩罚动作（通常为直接丢弃 Drop，或降级重标记 Remark DSCP/IP Precedence 后转发）。\n   - **混淆排除**：Queuing 并非在超速时执行丢弃/标记惩罚动作，而是在拥塞时利用缓冲队列进行报文暂存与调度排序。\n\n2. **目标定义 / 属性**：**【set the ToS value to associate a packet with a QoS group】** → **正确匹配**：`marking`（流量标记）\n   - **【概念匹配原理解析】**：流量标记（Marking）是在报文头部写入 QoS 优先级属性。在 IPv4 头部中通过设置服务类型（Type of Service, ToS / DSCP）字段，或在二层 802.1Q 帧头设置 CoS 字段，将数据包关联至指定的 QoS 优先级别服务组。\n\n3. **目标定义 / 属性**：**【reduces traffic congestion by holding packets and distributing them when the available bandwidth allows】** → **正确匹配**：`queuing`（排队调度）\n   - **【概念匹配原理解析】**：排队机制（Queuing / Buffer Management）是缓解网络拥塞的核心技术。当出接口瞬时过载时，路由器通过内部缓冲队列暂存待发送数据包（Holding packets），并在后续物理带宽允许空闲时按调度算法分发出队（Distributing them when bandwidth allows），避免报文被直接丢弃。\n\n4. **目标定义 / 属性**：**【the overall process of using specific criteria to differentiate traffic into categories】** → **正确匹配**：`classification`（流量分类）\n   - **【概念匹配原理解析】**：流量分类（Classification）是整个 QoS 流程的第一道工序（入口基础）。它根据管理员定义的特定标准（如源目 IP 地址、协议类型、端口号、ACL 或 NBAR 深度报文检测等），将流入网络的无序杂乱报文精确区分辨识为不同的业务类别（Categories / Classes），为后续的标记、排队和限速提供依据。\n\n• **考试要点与速记技巧**：\n“分类（Classification）抓特征，标记（Marking）打标签；监管（Policing）超速罚，排队（Queuing）缓拥塞”。",
     "drag_drop_data": {
       "sources": [
         "classification",
@@ -4513,7 +4513,7 @@
         {
           "id": "t1",
           "label": "applies a specific action to packets whenever the maximum rate of packets is exceeded",
-          "expected": "queuing"
+          "expected": "policing"
         },
         {
           "id": "t2",
@@ -4523,12 +4523,12 @@
         {
           "id": "t3",
           "label": "reduces traffic congestion by holding packets and distributing them when the available bandwidth allows",
-          "expected": "classification"
+          "expected": "queuing"
         },
         {
           "id": "t4",
           "label": "the overall process of using specific criteria to differentiate traffic into categories",
-          "expected": "policing"
+          "expected": "classification"
         }
       ]
     }
@@ -6443,7 +6443,7 @@
     "answer": [
       "Refer to Solution Diagram"
     ],
-    "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **best effort** | `standard Web browsing traffic` |\n| **policing** | `video traffic` |\n| **priority queue** | `database synchronization traffic` |\n| **shaping** | `VoIP traffic` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【best effort】** → **正确匹配**：`standard Web browsing traffic`\n   - **【概念匹配原理解析】**：`standard Web browsing traffic` 准确表达了 `best effort` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `standard Web browsing traffic` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【policing】** → **正确匹配**：`video traffic`\n   - **【概念匹配原理解析】**：`video traffic` 准确表达了 `policing` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `video traffic` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【priority queue】** → **正确匹配**：`database synchronization traffic`\n   - **【概念匹配原理解析】**：`database synchronization traffic` 准确表达了 `priority queue` 所定义的协议功能、操作时序或配置规范，在 CCNA 考点体系中属于标准配对。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `database synchronization traffic` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【shaping】** → **正确匹配**：`VoIP traffic`\n   - **【网络自动化与可编程性】**：在现代 SDN 自动化架构下，`VoIP traffic` 对应 `shaping` 的数据编码与控制器通信标准。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `VoIP traffic` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **traffic types** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。",
+    "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **best effort** | `standard Web browsing traffic` |\n| **policing** | `video traffic` |\n| **priority queue** | `VoIP traffic` |\n| **shaping** | `database synchronization traffic` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **best effort** → **`standard Web browsing traffic`**：普通网页浏览（HTTP/HTTPS）属于尽力而为（Best Effort）类型，无严苛的时延或抖动要求。\n2. **policing** → **`video traffic`**：视频流带宽占用大且可承受轻微丢包，通常配置流量监管（Policing）防止超量突发冲击全网。\n3. **priority queue** → **`VoIP traffic`**：语音流量对时延（< 150ms）和抖动（< 30ms）极其敏感，必须由优先队列（Priority Queue / LLQ）在所有其它流量之前得到绝对优先调度出队。\n4. **shaping** → **`database synchronization traffic`**：数据库同步数据量大且呈现突发性（Bursty），但具有较高的时延容忍度，适宜采用流量整形（Traffic Shaping）平滑出站速率。",
     "drag_drop_data": {
       "sources": [
         "database synchronization traffic",
@@ -6465,12 +6465,12 @@
         {
           "id": "t3",
           "label": "priority queue",
-          "expected": "database synchronization traffic"
+          "expected": "VoIP traffic"
         },
         {
           "id": "t4",
           "label": "shaping",
-          "expected": "VoIP traffic"
+          "expected": "database synchronization traffic"
         }
       ]
     }
