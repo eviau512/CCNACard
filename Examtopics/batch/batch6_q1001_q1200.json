@@ -1478,22 +1478,26 @@
         {
           "id": "t1",
           "label": "action (Slot 1)",
-          "expected": "BPDUs received are forwarded to the system module"
+          "expected": "BPDUs received are forwarded to the system module",
+          "unordered_group": "action"
         },
         {
           "id": "t2",
           "label": "action (Slot 2)",
-          "expected": "BPDUs received from the system module are processed and transmitted"
+          "expected": "BPDUs received from the system module are processed and transmitted",
+          "unordered_group": "action"
         },
         {
           "id": "t3",
           "label": "action (Slot 3)",
-          "expected": "Frames received from the attached segment are processed"
+          "expected": "Frames received from the attached segment are processed",
+          "unordered_group": "action"
         },
         {
           "id": "t4",
           "label": "action (Slot 4)",
-          "expected": "The port in the forwarding state responds to network management messages"
+          "expected": "The port in the forwarding state responds to network management messages",
+          "unordered_group": "action"
         }
       ]
     }
@@ -1523,22 +1527,26 @@
         {
           "id": "t1",
           "label": "Autonomous Access Point (Slot 1)",
-          "expected": "accessible for management via Telnet, SSH, or a web GUI"
+          "expected": "accessible for management via Telnet, SSH, or a web GUI",
+          "unordered_group": "Autonomous Access Point"
         },
         {
           "id": "t2",
           "label": "Autonomous Access Point (Slot 2)",
-          "expected": "requires a management IP address"
+          "expected": "requires a management IP address",
+          "unordered_group": "Autonomous Access Point"
         },
         {
           "id": "t3",
           "label": "Cloud-Based Access Point (Slot 1)",
-          "expected": "managed from a web-based dashboard"
+          "expected": "managed from a web-based dashboard",
+          "unordered_group": "Cloud-Based Access Point"
         },
         {
           "id": "t4",
           "label": "Cloud-Based Access Point (Slot 2)",
-          "expected": "supports automatic deployment"
+          "expected": "supports automatic deployment",
+          "unordered_group": "Cloud-Based Access Point"
         }
       ]
     }
@@ -1786,32 +1794,38 @@
         {
           "id": "t1",
           "label": "Monitor (Slot 1)",
-          "expected": "It enables enhanced RFID-tag location tracking."
+          "expected": "It enables enhanced RFID-tag location tracking.",
+          "unordered_group": "Monitor"
         },
         {
           "id": "t2",
           "label": "Monitor (Slot 2)",
-          "expected": "It provides air-quality data and interference detection across all enabled channels."
+          "expected": "It provides air-quality data and interference detection across all enabled channels.",
+          "unordered_group": "Monitor"
         },
         {
           "id": "t3",
           "label": "Sensor (Slot 1)",
-          "expected": "It supports real-time Wi-Fi client troubleshooting when network engineers are offsite."
+          "expected": "It supports real-time Wi-Fi client troubleshooting when network engineers are offsite.",
+          "unordered_group": "Sensor"
         },
         {
           "id": "t4",
           "label": "Sensor (Slot 2)",
-          "expected": "It supports analytics for wireless performance testing."
+          "expected": "It supports analytics for wireless performance testing.",
+          "unordered_group": "Sensor"
         },
         {
           "id": "t5",
           "label": "Sniffer (Slot 1)",
-          "expected": "It captures and forwards packets on a specific wireless channel."
+          "expected": "It captures and forwards packets on a specific wireless channel.",
+          "unordered_group": "Sniffer"
         },
         {
           "id": "t6",
           "label": "Sniffer (Slot 2)",
-          "expected": "It supports software that analyzes wireless frames on a remote device."
+          "expected": "It supports software that analyzes wireless frames on a remote device.",
+          "unordered_group": "Sniffer"
         }
       ]
     }
@@ -2919,32 +2933,38 @@
         {
           "label": "Controller-Based Networking (Slot 1)",
           "sub_label": "",
-          "expected": "focused on network"
+          "expected": "focused on network",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Controller-Based Networking (Slot 2)",
           "sub_label": "",
-          "expected": "user input is a policy"
+          "expected": "user input is a policy",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Controller-Based Networking (Slot 3)",
           "sub_label": "",
-          "expected": "uses allow list security model"
+          "expected": "uses allow list security model",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Traditional Networking (Slot 1)",
           "sub_label": "",
-          "expected": "focused on devices"
+          "expected": "focused on devices",
+          "unordered_group": "Traditional Networking"
         },
         {
           "label": "Traditional Networking (Slot 2)",
           "sub_label": "",
-          "expected": "user input is a configuration"
+          "expected": "user input is a configuration",
+          "unordered_group": "Traditional Networking"
         },
         {
           "label": "Traditional Networking (Slot 3)",
           "sub_label": "",
-          "expected": "uses block list security model"
+          "expected": "uses block list security model",
+          "unordered_group": "Traditional Networking"
         }
       ]
     }
@@ -3037,32 +3057,38 @@
         {
           "label": "Cisco DNA Center Device Management (Slot 1)",
           "sub_label": "",
-          "expected": "monitors the cloud for software updates"
+          "expected": "monitors the cloud for software updates",
+          "unordered_group": "Cisco DNA Center Device Management"
         },
         {
           "label": "Cisco DNA Center Device Management (Slot 2)",
           "sub_label": "",
-          "expected": "uses CLI templates to apply a consistent configuration to multiple devices at an individual location"
+          "expected": "uses CLI templates to apply a consistent configuration to multiple devices at an individual location",
+          "unordered_group": "Cisco DNA Center Device Management"
         },
         {
           "label": "Cisco DNA Center Device Management (Slot 3)",
           "sub_label": "",
-          "expected": "uses NetFlow to analyze potential security threats throughout the network and take appropriate action on that traffic"
+          "expected": "uses NetFlow to analyze potential security threats throughout the network and take appropriate action on that traffic",
+          "unordered_group": "Cisco DNA Center Device Management"
         },
         {
           "label": "Traditional Device Management (Slot 1)",
           "sub_label": "",
-          "expected": "implements changes via an SSH terminal"
+          "expected": "implements changes via an SSH terminal",
+          "unordered_group": "Traditional Device Management"
         },
         {
           "label": "Traditional Device Management (Slot 2)",
           "sub_label": "",
-          "expected": "manages device configurations on a per-device basis"
+          "expected": "manages device configurations on a per-device basis",
+          "unordered_group": "Traditional Device Management"
         },
         {
           "label": "Traditional Device Management (Slot 3)",
           "sub_label": "",
-          "expected": "security is managed near the perimeter of the network with firewalls, VPNs, and IPS"
+          "expected": "security is managed near the perimeter of the network with firewalls, VPNs, and IPS",
+          "unordered_group": "Traditional Device Management"
         }
       ]
     }
@@ -3186,27 +3212,32 @@
         {
           "label": "Controller-Based Networking (Slot 1)",
           "sub_label": "",
-          "expected": "This type allows better control over how networks work and how networks are configured."
+          "expected": "This type allows better control over how networks work and how networks are configured.",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Controller-Based Networking (Slot 2)",
           "sub_label": "",
-          "expected": "This type enables networks to integrate with applications through APIs."
+          "expected": "This type enables networks to integrate with applications through APIs.",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Controller-Based Networking (Slot 3)",
           "sub_label": "",
-          "expected": "This type provisions resources from a centralized location."
+          "expected": "This type provisions resources from a centralized location.",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Traditional Networking (Slot 1)",
           "sub_label": "",
-          "expected": "New devices are configured using the physical infrastructure."
+          "expected": "New devices are configured using the physical infrastructure.",
+          "unordered_group": "Traditional Networking"
         },
         {
           "label": "Traditional Networking (Slot 2)",
           "sub_label": "",
-          "expected": "This type requires a distributed control plane."
+          "expected": "This type requires a distributed control plane.",
+          "unordered_group": "Traditional Networking"
         }
       ]
     }
@@ -3236,22 +3267,26 @@
         {
           "label": "Controller-Based Networking (Slot 1)",
           "sub_label": "",
-          "expected": "This type deploys a consistent configuration across multiple devices."
+          "expected": "This type deploys a consistent configuration across multiple devices.",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Controller-Based Networking (Slot 2)",
           "sub_label": "",
-          "expected": "Southbound APIs are used to apply configurations."
+          "expected": "Southbound APIs are used to apply configurations.",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Traditional Networking (Slot 1)",
           "sub_label": "",
-          "expected": "A distributed control plane is needed."
+          "expected": "A distributed control plane is needed.",
+          "unordered_group": "Traditional Networking"
         },
         {
           "label": "Traditional Networking (Slot 2)",
           "sub_label": "",
-          "expected": "This type requires a distributed management plane."
+          "expected": "This type requires a distributed management plane.",
+          "unordered_group": "Traditional Networking"
         }
       ]
     }
@@ -3327,32 +3362,38 @@
         {
           "label": "Cisco DNA Center (Slot 1)",
           "sub_label": "",
-          "expected": "orchestrates background device configuration"
+          "expected": "orchestrates background device configuration",
+          "unordered_group": "Cisco DNA Center"
         },
         {
           "label": "Cisco DNA Center (Slot 2)",
           "sub_label": "",
-          "expected": "supports centralized software management"
+          "expected": "supports centralized software management",
+          "unordered_group": "Cisco DNA Center"
         },
         {
           "label": "Cisco DNA Center (Slot 3)",
           "sub_label": "",
-          "expected": "supports open APIs"
+          "expected": "supports open APIs",
+          "unordered_group": "Cisco DNA Center"
         },
         {
           "label": "Traditional (Slot 1)",
           "sub_label": "",
-          "expected": "provides greater flexibility for custom and non-standard configurations"
+          "expected": "provides greater flexibility for custom and non-standard configurations",
+          "unordered_group": "Traditional"
         },
         {
           "label": "Traditional (Slot 2)",
           "sub_label": "",
-          "expected": "relies on per-device management"
+          "expected": "relies on per-device management",
+          "unordered_group": "Traditional"
         },
         {
           "label": "Traditional (Slot 3)",
           "sub_label": "",
-          "expected": "uses individual software management"
+          "expected": "uses individual software management",
+          "unordered_group": "Traditional"
         }
       ]
     }
@@ -3381,22 +3422,26 @@
         {
           "label": "Configuration Management (Slot 1)",
           "sub_label": "",
-          "expected": "Puppet is used for this type of technology."
+          "expected": "Puppet is used for this type of technology.",
+          "unordered_group": "Configuration Management"
         },
         {
           "label": "Configuration Management (Slot 2)",
           "sub_label": "",
-          "expected": "This type of technology enables consistent configuration of infrastructure resources."
+          "expected": "This type of technology enables consistent configuration of infrastructure resources.",
+          "unordered_group": "Configuration Management"
         },
         {
           "label": "Orchestration (Slot 1)",
           "sub_label": "",
-          "expected": "This type of technology provides automation across multiple technologies and domains."
+          "expected": "This type of technology provides automation across multiple technologies and domains.",
+          "unordered_group": "Orchestration"
         },
         {
           "label": "Orchestration (Slot 2)",
           "sub_label": "",
-          "expected": "Ansible is used for this type of technology."
+          "expected": "Ansible is used for this type of technology.",
+          "unordered_group": "Orchestration"
         }
       ]
     }
@@ -3638,22 +3683,26 @@
         {
           "label": "Traditional Networking (Slot 1)",
           "sub_label": "",
-          "expected": "This type implements changes individually at each device."
+          "expected": "This type implements changes individually at each device.",
+          "unordered_group": "Traditional Networking"
         },
         {
           "label": "Traditional Networking (Slot 2)",
           "sub_label": "",
-          "expected": "Maintenance costs are higher than with other networking options."
+          "expected": "Maintenance costs are higher than with other networking options.",
+          "unordered_group": "Traditional Networking"
         },
         {
           "label": "Controller-Based Networking (Slot 1)",
           "sub_label": "",
-          "expected": "This type leverages controllers to handle network management."
+          "expected": "This type leverages controllers to handle network management.",
+          "unordered_group": "Controller-Based Networking"
         },
         {
           "label": "Controller-Based Networking (Slot 2)",
           "sub_label": "",
-          "expected": "This type provides a centralized view of the network."
+          "expected": "This type provides a centralized view of the network.",
+          "unordered_group": "Controller-Based Networking"
         }
       ]
     }
@@ -3952,27 +4001,32 @@
         {
           "label": "Split-MAC (Slot 1)",
           "sub_label": "",
-          "expected": "Work is divided between the access point and the controller."
+          "expected": "Work is divided between the access point and the controller.",
+          "unordered_group": "Split-MAC"
         },
         {
           "label": "Split-MAC (Slot 2)",
           "sub_label": "",
-          "expected": "Uses the CAPWAP tunneling protocol."
+          "expected": "Uses the CAPWAP tunneling protocol.",
+          "unordered_group": "Split-MAC"
         },
         {
           "label": "Split-MAC (Slot 3)",
           "sub_label": "",
-          "expected": "The access points transmit beacon frames."
+          "expected": "The access points transmit beacon frames.",
+          "unordered_group": "Split-MAC"
         },
         {
           "label": "Autonomous (Slot 1)",
           "sub_label": "",
-          "expected": "Appropriate for a small-business environment."
+          "expected": "Appropriate for a small-business environment.",
+          "unordered_group": "Autonomous"
         },
         {
           "label": "Autonomous (Slot 2)",
           "sub_label": "",
-          "expected": "Supports per device configuration and management."
+          "expected": "Supports per device configuration and management.",
+          "unordered_group": "Autonomous"
         }
       ]
     }
@@ -4901,32 +4955,38 @@
         {
           "label": "Traditional Campus Device Management (Slot 1)",
           "sub_label": "",
-          "expected": "leverages Cisco Prime Infrastructure"
+          "expected": "leverages Cisco Prime Infrastructure",
+          "unordered_group": "Traditional Campus Device Management"
         },
         {
           "label": "Traditional Campus Device Management (Slot 2)",
           "sub_label": "",
-          "expected": "requires manual configuration of complex protocols"
+          "expected": "requires manual configuration of complex protocols",
+          "unordered_group": "Traditional Campus Device Management"
         },
         {
           "label": "Traditional Campus Device Management (Slot 3)",
           "sub_label": "",
-          "expected": "lacks support for SDA"
+          "expected": "lacks support for SDA",
+          "unordered_group": "Traditional Campus Device Management"
         },
         {
           "label": "Cisco DNA Center (Slot 1)",
           "sub_label": "",
-          "expected": "reduces the workload for enterprise customers"
+          "expected": "reduces the workload for enterprise customers",
+          "unordered_group": "Cisco DNA Center"
         },
         {
           "label": "Cisco DNA Center (Slot 2)",
           "sub_label": "",
-          "expected": "uses algorithms to detect security threats"
+          "expected": "uses algorithms to detect security threats",
+          "unordered_group": "Cisco DNA Center"
         },
         {
           "label": "Cisco DNA Center (Slot 3)",
           "sub_label": "",
-          "expected": "uses northbound APIs"
+          "expected": "uses northbound APIs",
+          "unordered_group": "Cisco DNA Center"
         }
       ]
     }
@@ -4957,22 +5017,26 @@
         {
           "label": "feature (Slot 1)",
           "sub_label": "",
-          "expected": "executes modules via SSH by default"
+          "expected": "executes modules via SSH by default",
+          "unordered_group": "feature"
         },
         {
           "label": "feature (Slot 2)",
           "sub_label": "",
-          "expected": "uses the YAML language"
+          "expected": "uses the YAML language",
+          "unordered_group": "feature"
         },
         {
           "label": "feature (Slot 3)",
           "sub_label": "",
-          "expected": "pushes configurations to the client"
+          "expected": "pushes configurations to the client",
+          "unordered_group": "feature"
         },
         {
           "label": "feature (Slot 4)",
           "sub_label": "",
-          "expected": "operates without agents"
+          "expected": "operates without agents",
+          "unordered_group": "feature"
         }
       ]
     }
@@ -5003,32 +5067,38 @@
         {
           "label": "Cisco DNA Center Device Management (Slot 1)",
           "sub_label": "",
-          "expected": "It provides a single interface for network security and analytics."
+          "expected": "It provides a single interface for network security and analytics.",
+          "unordered_group": "Cisco DNA Center Device Management"
         },
         {
           "label": "Cisco DNA Center Device Management (Slot 2)",
           "sub_label": "",
-          "expected": "It supports CLI templates to apply a consistent configuration to multiple devices."
+          "expected": "It supports CLI templates to apply a consistent configuration to multiple devices.",
+          "unordered_group": "Cisco DNA Center Device Management"
         },
         {
           "label": "Cisco DNA Center Device Management (Slot 3)",
           "sub_label": "",
-          "expected": "It uses NetFlow to analyze potential security threats and take appropriate action on that traffic."
+          "expected": "It uses NetFlow to analyze potential security threats and take appropriate action on that traffic.",
+          "unordered_group": "Cisco DNA Center Device Management"
         },
         {
           "label": "Traditional Device Management (Slot 1)",
           "sub_label": "",
-          "expected": "It manages device configurations on a per-device basis."
+          "expected": "It manages device configurations on a per-device basis.",
+          "unordered_group": "Traditional Device Management"
         },
         {
           "label": "Traditional Device Management (Slot 2)",
           "sub_label": "",
-          "expected": "Security is managed near the perimeter of the network with firewalls, VPNs, and IPS."
+          "expected": "Security is managed near the perimeter of the network with firewalls, VPNs, and IPS.",
+          "unordered_group": "Traditional Device Management"
         },
         {
           "label": "Traditional Device Management (Slot 3)",
           "sub_label": "",
-          "expected": "It uses multiple tools and applications to analyze and troubleshoot different types of data."
+          "expected": "It uses multiple tools and applications to analyze and troubleshoot different types of data.",
+          "unordered_group": "Traditional Device Management"
         }
       ]
     }
@@ -5278,22 +5348,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "contains a single solid conductor"
+          "expected": "contains a single solid conductor",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "is affected by electrical and magnetic interference"
+          "expected": "is affected by electrical and magnetic interference",
+          "unordered_group": "copper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "is typically used for DWDM optical systems spanning long distances"
+          "expected": "is typically used for DWDM optical systems spanning long distances",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "eliminates distortion from overlapping light pulses"
+          "expected": "eliminates distortion from overlapping light pulses",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -5742,22 +5816,26 @@
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "may be used by multiple organizations at the same time"
+          "expected": "may be used by multiple organizations at the same time",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "allows sites to be combined without address conflicts"
+          "expected": "allows sites to be combined without address conflicts",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "sends packets to a group address rather than a single address"
+          "expected": "sends packets to a group address rather than a single address",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "provides one-to-many communications"
+          "expected": "provides one-to-many communications",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -5884,22 +5962,26 @@
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "is a counterpart of private IPv4 addresses"
+          "expected": "is a counterpart of private IPv4 addresses",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "allows sites to be combined without address conflicts"
+          "expected": "allows sites to be combined without address conflicts",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "sends packets to a group address rather than a single address"
+          "expected": "sends packets to a group address rather than a single address",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "has a unicast source sent to a group"
+          "expected": "has a unicast source sent to a group",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -5928,22 +6010,26 @@
         {
           "label": "multimode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "is typically used for internal datacenter connectivity"
+          "expected": "is typically used for internal datacenter connectivity",
+          "unordered_group": "multimode fiber"
         },
         {
           "label": "multimode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "becomes distorted at longer lengths"
+          "expected": "becomes distorted at longer lengths",
+          "unordered_group": "multimode fiber"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "uses a single wavelength on light"
+          "expected": "uses a single wavelength on light",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "has minimal light reflection as it travels down the core"
+          "expected": "has minimal light reflection as it travels down the core",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -6016,22 +6102,26 @@
         {
           "label": "multimode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "uses multiple wavelengths of light"
+          "expected": "uses multiple wavelengths of light",
+          "unordered_group": "multimode fiber"
         },
         {
           "label": "multimode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "has increased attenuation over long distances"
+          "expected": "has increased attenuation over long distances",
+          "unordered_group": "multimode fiber"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "has a core diameter of 9 microns"
+          "expected": "has a core diameter of 9 microns",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "uses a single wavelength of light"
+          "expected": "uses a single wavelength of light",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -6060,22 +6150,26 @@
         {
           "label": "Anycast (Slot 1)",
           "sub_label": "",
-          "expected": "is routed to the nearest interface that has the address"
+          "expected": "is routed to the nearest interface that has the address",
+          "unordered_group": "Anycast"
         },
         {
           "label": "Anycast (Slot 2)",
           "sub_label": "",
-          "expected": "cannot be used as a source address"
+          "expected": "cannot be used as a source address",
+          "unordered_group": "Anycast"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "is assigned to multiple devices on the same network simultaneously"
+          "expected": "is assigned to multiple devices on the same network simultaneously",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "provides one-to-many communications"
+          "expected": "provides one-to-many communications",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -6212,22 +6306,26 @@
         {
           "label": "Anycast (Slot 1)",
           "sub_label": "",
-          "expected": "is assigned to more than one interface"
+          "expected": "is assigned to more than one interface",
+          "unordered_group": "Anycast"
         },
         {
           "label": "Anycast (Slot 2)",
           "sub_label": "",
-          "expected": "is used exclusively by a non-host device"
+          "expected": "is used exclusively by a non-host device",
+          "unordered_group": "Anycast"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "provides one-to-many communications"
+          "expected": "provides one-to-many communications",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "cannot be used as a source address"
+          "expected": "cannot be used as a source address",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -6256,22 +6354,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "contains a conductor, bedding, and sheathing"
+          "expected": "contains a conductor, bedding, and sheathing",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "is typically used in small office applications"
+          "expected": "is typically used in small office applications",
+          "unordered_group": "copper"
         },
         {
           "label": "single mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "uses a single wavelength of light"
+          "expected": "uses a single wavelength of light",
+          "unordered_group": "single mode fiber"
         },
         {
           "label": "single mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "is ideal over longer distances with little loss of integrity"
+          "expected": "is ideal over longer distances with little loss of integrity",
+          "unordered_group": "single mode fiber"
         }
       ]
     }
@@ -6300,22 +6402,26 @@
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "is unable to route on the internet"
+          "expected": "is unable to route on the internet",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "allows sites to be combined without address conflicts"
+          "expected": "allows sites to be combined without address conflicts",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "has a unicast source sent to a group"
+          "expected": "has a unicast source sent to a group",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "sends packets to a group address rather than a single address"
+          "expected": "sends packets to a group address rather than a single address",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -6388,22 +6494,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "contains a conductor, bedding, and sheathing"
+          "expected": "contains a conductor, bedding, and sheathing",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "is typically used in small office applications"
+          "expected": "is typically used in small office applications",
+          "unordered_group": "copper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "is typically used for DWDM optical systems spanning long distances"
+          "expected": "is typically used for DWDM optical systems spanning long distances",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "eliminates distortion from overlapping light pulses"
+          "expected": "eliminates distortion from overlapping light pulses",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -6482,22 +6592,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "is easy to tap into and obtain secure information"
+          "expected": "is easy to tap into and obtain secure information",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "is affected by electrical and magnetic interference"
+          "expected": "is affected by electrical and magnetic interference",
+          "unordered_group": "copper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "transmits data of up to 40Gbit/s over long distances"
+          "expected": "transmits data of up to 40Gbit/s over long distances",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "has minimal light reflection as it travels down the core"
+          "expected": "has minimal light reflection as it travels down the core",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -6526,22 +6640,26 @@
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "is unable to route on the internet"
+          "expected": "is unable to route on the internet",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "allows sites to be combined without address conflicts"
+          "expected": "allows sites to be combined without address conflicts",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "provides one-to-many communications"
+          "expected": "provides one-to-many communications",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "sends packets to a group address rather than a single address"
+          "expected": "sends packets to a group address rather than a single address",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -6656,22 +6774,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "is typically used in small office applications"
+          "expected": "is typically used in small office applications",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "is not easily broken"
+          "expected": "is not easily broken",
+          "unordered_group": "copper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "transmits data of up to 40Gbit/s over long distances"
+          "expected": "transmits data of up to 40Gbit/s over long distances",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "eliminates distortion from overlapping light pulses"
+          "expected": "eliminates distortion from overlapping light pulses",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -6744,22 +6866,26 @@
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "may be used by multiple organizations at the same time"
+          "expected": "may be used by multiple organizations at the same time",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "allows sites to be combined without address conflicts"
+          "expected": "allows sites to be combined without address conflicts",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "cannot be used as a source address"
+          "expected": "cannot be used as a source address",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "has a unicast source sent to a group"
+          "expected": "has a unicast source sent to a group",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -6830,22 +6956,26 @@
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "may be used by multiple organizations at the same time"
+          "expected": "may be used by multiple organizations at the same time",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "counterpart of private IPv4 addresses"
+          "expected": "counterpart of private IPv4 addresses",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Global Unicast Address (Slot 1)",
           "sub_label": "",
-          "expected": "publicly routable in the same way as IPv4 addresses"
+          "expected": "publicly routable in the same way as IPv4 addresses",
+          "unordered_group": "Global Unicast Address"
         },
         {
           "label": "Global Unicast Address (Slot 2)",
           "sub_label": "",
-          "expected": "provides for one-to-one communication"
+          "expected": "provides for one-to-one communication",
+          "unordered_group": "Global Unicast Address"
         }
       ]
     }
@@ -6888,22 +7018,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "is easy to tap into and obtain secure information"
+          "expected": "is easy to tap into and obtain secure information",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "transmits data in the form of electronic signals"
+          "expected": "transmits data in the form of electronic signals",
+          "unordered_group": "copper"
         },
         {
           "label": "multi-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "transmits signals using pulses of light"
+          "expected": "transmits signals using pulses of light",
+          "unordered_group": "multi-mode fiber"
         },
         {
           "label": "multi-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "contains a core, cladding, and coating"
+          "expected": "contains a core, cladding, and coating",
+          "unordered_group": "multi-mode fiber"
         }
       ]
     }
@@ -6932,22 +7066,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "is easy to tap into and obtain secure information"
+          "expected": "is easy to tap into and obtain secure information",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "is comprised of shielded and unshielded twisted pairs"
+          "expected": "is comprised of shielded and unshielded twisted pairs",
+          "unordered_group": "copper"
         },
         {
           "label": "multi-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "attenuation increases over long distances"
+          "expected": "attenuation increases over long distances",
+          "unordered_group": "multi-mode fiber"
         },
         {
           "label": "multi-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "vulnerable to damage when handled"
+          "expected": "vulnerable to damage when handled",
+          "unordered_group": "multi-mode fiber"
         }
       ]
     }
@@ -6976,22 +7114,26 @@
         {
           "label": "Global Unicast Address (Slot 1)",
           "sub_label": "",
-          "expected": "publicly routable in the same way as IPv4 addresses"
+          "expected": "publicly routable in the same way as IPv4 addresses",
+          "unordered_group": "Global Unicast Address"
         },
         {
           "label": "Global Unicast Address (Slot 2)",
           "sub_label": "",
-          "expected": "routable and reachable via the Internet"
+          "expected": "routable and reachable via the Internet",
+          "unordered_group": "Global Unicast Address"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "sends packets to a group address rather than a single address"
+          "expected": "sends packets to a group address rather than a single address",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "never used as a source address"
+          "expected": "never used as a source address",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -7069,22 +7211,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "supplies conduit for PoE implementations"
+          "expected": "supplies conduit for PoE implementations",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "easy to tap into and obtain secure information"
+          "expected": "easy to tap into and obtain secure information",
+          "unordered_group": "copper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "used for DWDM optical systems spanning long distances"
+          "expected": "used for DWDM optical systems spanning long distances",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "has a core diameter of 9 microns"
+          "expected": "has a core diameter of 9 microns",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -7157,22 +7303,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "affected by electrical and magnetic interference"
+          "expected": "affected by electrical and magnetic interference",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "easy to tap into and obtain secure information"
+          "expected": "easy to tap into and obtain secure information",
+          "unordered_group": "copper"
         },
         {
           "label": "multi-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "increased refraction between cladding and core as it travels"
+          "expected": "increased refraction between cladding and core as it travels",
+          "unordered_group": "multi-mode fiber"
         },
         {
           "label": "multi-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "transmits signals using pulses of light"
+          "expected": "transmits signals using pulses of light",
+          "unordered_group": "multi-mode fiber"
         }
       ]
     }
@@ -7215,22 +7365,26 @@
         {
           "label": "Link-Local Address (Slot 1)",
           "sub_label": "",
-          "expected": "serves as the next-hop addresses in IGP"
+          "expected": "serves as the next-hop addresses in IGP",
+          "unordered_group": "Link-Local Address"
         },
         {
           "label": "Link-Local Address (Slot 2)",
           "sub_label": "",
-          "expected": "confined to a single link"
+          "expected": "confined to a single link",
+          "unordered_group": "Link-Local Address"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "has a unicast source sent to a group"
+          "expected": "has a unicast source sent to a group",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "never used as a source address"
+          "expected": "never used as a source address",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -7318,22 +7472,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "comprised of shielded or unshielded twisted pairs"
+          "expected": "comprised of shielded or unshielded twisted pairs",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "contains a conductor, bedding, and sheathing"
+          "expected": "contains a conductor, bedding, and sheathing",
+          "unordered_group": "copper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "transmits signals using pulses of light"
+          "expected": "transmits signals using pulses of light",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "has minimal light reflection as the signal travels down the core"
+          "expected": "has minimal light reflection as the signal travels down the core",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -7362,22 +7520,26 @@
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "sends packets to a group address rather than a single address"
+          "expected": "sends packets to a group address rather than a single address",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "provides one-to-many communications"
+          "expected": "provides one-to-many communications",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Link-Local Address (Slot 1)",
           "sub_label": "",
-          "expected": "confined to a single link"
+          "expected": "confined to a single link",
+          "unordered_group": "Link-Local Address"
         },
         {
           "label": "Link-Local Address (Slot 2)",
           "sub_label": "",
-          "expected": "serves as the next-hop addresses in IGP"
+          "expected": "serves as the next-hop addresses in IGP",
+          "unordered_group": "Link-Local Address"
         }
       ]
     }
@@ -7406,22 +7568,26 @@
         {
           "label": "cooper (Slot 1)",
           "sub_label": "",
-          "expected": "comprised of shielded and unshielded twisted pairs"
+          "expected": "comprised of shielded and unshielded twisted pairs",
+          "unordered_group": "cooper"
         },
         {
           "label": "cooper (Slot 2)",
           "sub_label": "",
-          "expected": "is affected by electrical and magnetic interference"
+          "expected": "is affected by electrical and magnetic interference",
+          "unordered_group": "cooper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "comprised of insulated glass strands"
+          "expected": "comprised of insulated glass strands",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "uses a single wavelength of light"
+          "expected": "uses a single wavelength of light",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -7464,22 +7630,26 @@
         {
           "label": "cooper (Slot 1)",
           "sub_label": "",
-          "expected": "contains a conductor, bedding, and sheathing"
+          "expected": "contains a conductor, bedding, and sheathing",
+          "unordered_group": "cooper"
         },
         {
           "label": "cooper (Slot 2)",
           "sub_label": "",
-          "expected": "affected by electrical and magnetic interference"
+          "expected": "affected by electrical and magnetic interference",
+          "unordered_group": "cooper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "contains a core, cladding, and coating"
+          "expected": "contains a core, cladding, and coating",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "comprised of insulated glass strands"
+          "expected": "comprised of insulated glass strands",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -7508,22 +7678,26 @@
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "counterpart of private IPv4 addresses"
+          "expected": "counterpart of private IPv4 addresses",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "may be used by multiple organizations at the same time"
+          "expected": "may be used by multiple organizations at the same time",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "never used as a source address"
+          "expected": "never used as a source address",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "provides one-to-many communications"
+          "expected": "provides one-to-many communications",
+          "unordered_group": "Multicast"
         }
       ]
     }
@@ -7601,22 +7775,26 @@
         {
           "label": "copper (Slot 1)",
           "sub_label": "",
-          "expected": "is affected by electrical and magnetic interference"
+          "expected": "is affected by electrical and magnetic interference",
+          "unordered_group": "copper"
         },
         {
           "label": "copper (Slot 2)",
           "sub_label": "",
-          "expected": "is comprised of shielded and unshielded twisted pairs"
+          "expected": "is comprised of shielded and unshielded twisted pairs",
+          "unordered_group": "copper"
         },
         {
           "label": "single-mode fiber (Slot 1)",
           "sub_label": "",
-          "expected": "transmits signals using pulses of light"
+          "expected": "transmits signals using pulses of light",
+          "unordered_group": "single-mode fiber"
         },
         {
           "label": "single-mode fiber (Slot 2)",
           "sub_label": "",
-          "expected": "is ideal over longer distances with little loss of integrity"
+          "expected": "is ideal over longer distances with little loss of integrity",
+          "unordered_group": "single-mode fiber"
         }
       ]
     }
@@ -7659,22 +7837,26 @@
         {
           "label": "Global Unicast Address (Slot 1)",
           "sub_label": "",
-          "expected": "publicly routable in the same way as IPv4 addresses"
+          "expected": "publicly routable in the same way as IPv4 addresses",
+          "unordered_group": "Global Unicast Address"
         },
         {
           "label": "Global Unicast Address (Slot 2)",
           "sub_label": "",
-          "expected": "routable and reachable via the Internet"
+          "expected": "routable and reachable via the Internet",
+          "unordered_group": "Global Unicast Address"
         },
         {
           "label": "Multicast (Slot 1)",
           "sub_label": "",
-          "expected": "provides one-to-many communications"
+          "expected": "provides one-to-many communications",
+          "unordered_group": "Multicast"
         },
         {
           "label": "Multicast (Slot 2)",
           "sub_label": "",
-          "expected": "has a unicast source sent to a group"
+          "expected": "has a unicast source sent to a group",
+          "unordered_group": "Multicast"
         }
       ]
     }

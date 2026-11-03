@@ -429,32 +429,38 @@
         {
           "label": "TCP (Slot 1)",
           "sub_label": "",
-          "expected": "HTTP"
+          "expected": "HTTP",
+          "unordered_group": "TCP"
         },
         {
           "label": "TCP (Slot 2)",
           "sub_label": "",
-          "expected": "SMTP"
+          "expected": "SMTP",
+          "unordered_group": "TCP"
         },
         {
           "label": "TCP (Slot 3)",
           "sub_label": "",
-          "expected": "Telnet"
+          "expected": "Telnet",
+          "unordered_group": "TCP"
         },
         {
           "label": "UDP (Slot 1)",
           "sub_label": "",
-          "expected": "DNS"
+          "expected": "DNS",
+          "unordered_group": "UDP"
         },
         {
           "label": "UDP (Slot 2)",
           "sub_label": "",
-          "expected": "RTP"
+          "expected": "RTP",
+          "unordered_group": "UDP"
         },
         {
           "label": "UDP (Slot 3)",
           "sub_label": "",
-          "expected": "SNMP"
+          "expected": "SNMP",
+          "unordered_group": "UDP"
         }
       ]
     }
@@ -586,22 +592,26 @@
         {
           "label": "Global Unicast (Slot 1)",
           "sub_label": "",
-          "expected": "2001:db8:600d:cafe::123"
+          "expected": "2001:db8:600d:cafe::123",
+          "unordered_group": "Global Unicast"
         },
         {
           "label": "Global Unicast (Slot 2)",
           "sub_label": "",
-          "expected": "3ffe:e54d:620:a87a::f00d"
+          "expected": "3ffe:e54d:620:a87a::f00d",
+          "unordered_group": "Global Unicast"
         },
         {
           "label": "Unique Local (Slot 1)",
           "sub_label": "",
-          "expected": "fcba:926a:e8e:7a25:b1:c6d2:1a76:8fdc"
+          "expected": "fcba:926a:e8e:7a25:b1:c6d2:1a76:8fdc",
+          "unordered_group": "Unique Local"
         },
         {
           "label": "Unique Local (Slot 2)",
           "sub_label": "",
-          "expected": "fd6d:c83b:5cef:b6b2::1"
+          "expected": "fd6d:c83b:5cef:b6b2::1",
+          "unordered_group": "Unique Local"
         }
       ]
     }
