@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    651,
+    652,
+    653,
+    654,
+    655
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 652,
+      "kind": "code",
+      "input": "`switchport trunk allowed vlan add 300`",
+      "expected": "switchport trunk allowed vlan add 300",
+      "html": "<code class=\"inline-code\">switchport trunk allowed vlan add 300</code>"
+    },
+    {
+      "id": 653,
+      "kind": "code",
+      "input": "`switchport trunk allowed vlan add 23`",
+      "expected": "switchport trunk allowed vlan add 23",
+      "html": "<code class=\"inline-code\">switchport trunk allowed vlan add 23</code>"
+    }
+  ]
+}

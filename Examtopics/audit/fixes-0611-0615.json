@@ -1,0 +1,83 @@
+{
+  "scope": "Manual Q611-Q615; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 611,
+      "before_sha256": "bf8c94dab134d1e1842e81c52782a992adadc3fa85b1cc0eb1f29862822a0ba3",
+      "reason": "应用也可能选择或请求无线网络，原A与D不够互斥；SSID不保证可见或唯一。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It uniquely authenticates every access point without any security protocol."
+          },
+          {
+            "label": "B",
+            "text": "It identifies the wired network to which a network device is connected."
+          },
+          {
+            "label": "C",
+            "text": "It identifies the wired network to which a user device is connected."
+          },
+          {
+            "label": "D",
+            "text": "It identifies a wireless network for a mobile device to connect."
+          }
+        ],
+        "explanation": "D。SSID标识无线服务集，客户端可依据该名称选择要连接的无线网络。多个AP可以使用相同SSID，SSID本身不是唯一设备身份，也不提供身份认证或加密。网络名称可被隐藏或伪造，连接仍需依据实际安全配置进行认证。\n\nA将SSID误当成无条件认证机制；B、C描述有线网络而非SSID所标识的无线服务。BSSID通常用于标识具体基本服务集，不能简单把它等同于整个SSID；实际无线接口和虚拟AP配置会影响其地址。"
+      }
+    },
+    {
+      "id": 612,
+      "before_sha256": "6bcc610378134ae53dd09838e50acda98814e2345a398343eb2fa52732330470",
+      "reason": "FTP分离控制和数据正确，但主动端口20及匿名登录细节不应当绝对化。",
+      "updates": {
+        "explanation": "C。FTP使用独立的TCP控制连接与按需建立的数据连接：控制连接通常使用服务器TCP 21，数据连接用于文件或目录数据。主动模式下服务器通常从TCP 20建立数据连接，被动模式下客户端连接服务器提供的数据端口；具体部署和端口可能有所不同。\n\nA FTP支持账号认证，也可配置匿名访问，因此不是始终无认证；B块编号和确认是TFTP等协议机制，FTP数据的可靠传输主要由TCP提供；D UDP 69是TFTP初始请求的常见端口。普通FTP的命令和数据默认不提供加密保护。"
+      }
+    },
+    {
+      "id": 613,
+      "before_sha256": "dc4d70d12b32e02ccd475f405bd3270aace6bc4b1eae34587e14cf609f426f90",
+      "reason": "屏蔽可减少干扰但效果依线缆、连接及接地，价格速率和性能不能一概而论。",
+      "updates": {
+        "explanation": "B。STP包含额外金属屏蔽，可在正确设计、端接和接地的系统中帮助降低外部电磁干扰；UTP没有该屏蔽层，但其双绞结构和差分传输也能抑制干扰。实际效果取决于线缆类别、连接、布线和环境。\n\nA速率并非由有无屏蔽单独决定；C屏蔽线常有额外安装要求，但成本和施工难度依产品而异；D笼统地把UTP说成一定更不易受干扰与屏蔽作用相反。屏蔽不是消除所有串扰或保证性能的万能措施。"
+      }
+    },
+    {
+      "id": 614,
+      "before_sha256": "c78ae9cce76fbacc531fb51d4f401e97382d1d395edf2e91bd9603b58432f4e6",
+      "reason": "VM可运行多个OS但隔离并非绝对，KVM与宿主内核关系及NPIV描述需谨慎。",
+      "updates": {
+        "prompt": "Which listed technology allows multiple guest operating systems to run concurrently on one physical host?",
+        "explanation": "D。服务器虚拟化通过hypervisor等组件抽象和分配计算、内存及I/O资源，使一台物理主机能够同时运行多个具有各自客户操作系统的虚拟机。隔离有助于减少相互影响，但硬件、管理面或实现漏洞仍可能成为共享故障点。\n\nA VRF隔离路由表，B VDC将支持的平台划分为逻辑设备上下文，C NPIV允许光纤通道物理端口使用多个虚拟N端口身份；这些并不是题目所问的通用多客户OS技术。不同hypervisor实现与宿主操作系统的关系不同，例如KVM依赖Linux内核，不宜把所有产品简单视为完全相同的裸机结构。"
+      }
+    },
+    {
+      "id": 615,
+      "before_sha256": "c7848b7f98bb473fbc5b278aa392382d8d5cba2d977438a044e5191120d28da5",
+      "reason": "降低运营成本和限制经常性管理成本都可能成立；原解析虚构70%统计且错误排除D。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "to reduce operational costs"
+          },
+          {
+            "label": "B",
+            "text": "to support simpler password policies"
+          },
+          {
+            "label": "C",
+            "text": "to enable “box by box” configuration and deployment"
+          },
+          {
+            "label": "D",
+            "text": "to guarantee that configuration errors can never occur"
+          }
+        ],
+        "explanation": "A。自动化可减少重复的人工操作并帮助提高配置一致性，从而有机会降低运营成本；实际结果取决于部署规模、开发维护、许可与培训成本，不能保证所有组织都节省费用。\n\nB降低密码复杂度不是自动化目标；C逐台手工处理不是此处的主要收益；D自动化中的错误配置也可能批量传播，不能保证零错误。原D“限制经常性管理成本”与A可能同时成立，现更换干扰项；原解析的70%故障比例缺少依据，已删除。"
+      }
+    }
+  ]
+}

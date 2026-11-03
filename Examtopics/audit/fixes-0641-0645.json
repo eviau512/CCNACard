@@ -1,0 +1,107 @@
+{
+  "scope": "Manual Q641-Q645; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 641,
+      "before_sha256": "72c63f69da39c96e3e6ab7a1bed66db345793324e20e5e3f6ff7955dd287e4c0",
+      "reason": "已查看原图含native VLAN tagging enabled，允许列表匹配是题设目标非所有trunk强制；恢复CLI。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The peer must be a static trunk with native VLAN 321 and allow exactly VLANs 100, 200, and 300. The peer supports 802.1Q and native VLAN tagging is already configured to match. Which interface configuration meets these requirements?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode trunk\nswitchport trunk native vlan 321\nswitchport trunk allowed vlan 100,200,300"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode dynamic desirable\nswitchport trunk native vlan 321\nswitchport trunk allowed vlan 100,200"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode trunk\nswitchport trunk native vlan 321\nswitchport trunk allowed vlan 100-300"
+          },
+          {
+            "label": "D",
+            "text": "switchport mode access\nswitchport access vlan 321"
+          }
+        ],
+        "explanation": "A。原图显示trunk、native VLAN 321、允许100、200、300，且native VLAN tagging enabled；题设明确对端也已匹配标记策略。A静态trunk并指定相同native与精确允许列表。\n\nB动态协商不满足静态要求且缺VLAN300；C的100-300是连续范围而非三个离散VLAN；D为access。两端允许列表不必在所有网络设计中完全相同，但本题明确要求精确匹配；native不一致可能导致告警或流量问题，不能保证必然触发STP阻断。"
+      }
+    },
+    {
+      "id": 642,
+      "before_sha256": "cb9f5eb6978eb3e1aebd84242d38bda8bbe51e724c46fbe2053ebd7b5444d73b",
+      "reason": "明确AireOS明文HTTP，默认状态和HTTPS证书有效性不能泛化。",
+      "updates": {
+        "prompt": "On a Cisco AireOS WLC, which command enables unencrypted HTTP web management?",
+        "explanation": "D。`config network webmode enable`启用AireOS的HTTP web管理；`secureweb`控制HTTPS，具体服务状态和默认值依版本与配置而异。明文HTTP可暴露凭据和管理流量，实际管理通常宜使用正确配置且可信证书的HTTPS及访问控制。\n\nA启用Telnet；B启用HTTPS；C涉及Web管理证书而非启用HTTP。Cisco不同控制器操作系统命令可能不同。"
+      }
+    },
+    {
+      "id": 643,
+      "before_sha256": "4da2bdb7f30800a43f74f8449ad89f53f2bfa68ee595cc2fd30444c4f0bda83b",
+      "reason": "RSTP discarding不学习不转发但可处理BPDU；原选项缺失且错误选learning，改A。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "discarding"
+          },
+          {
+            "label": "B",
+            "text": "learning"
+          },
+          {
+            "label": "C",
+            "text": "listening"
+          },
+          {
+            "label": "D",
+            "text": "disabled"
+          }
+        ],
+        "answer": [
+          "A"
+        ],
+        "explanation": "A。Rapid PVST+采用快速生成树的discarding、learning、forwarding状态。处于活动生成树实例中的discarding端口不转发用户数据帧、不学习源MAC，但可接收和处理BPDU以参与拓扑计算。\n\nB learning会学习源MAC并更新地址表，虽然尚不转发用户帧，因此不符合题设；C listening是传统802.1D状态，不是RSTP三种状态之一；D管理员关闭的接口不能正常处理BPDU。原题缺少discarding且错误选择learning，现补选项并将答案由B改为A。"
+      }
+    },
+    {
+      "id": 644,
+      "before_sha256": "c3487a879348554ea75fd403c15055a7addf892debf2b318855f700fa88fd6e1",
+      "reason": "泛洪限同VLAN合格端口且组播可能受snooping限制，非所有up端口。",
+      "updates": {
+        "prompt": "A switch floods an unknown unicast frame to all eligible forwarding ports in the same VLAN except the ingress port. What is this process called?",
+        "explanation": "C。未知单播目的MAC没有可用表项时，交换机通常在同VLAN内的合格转发端口泛洪，排除入端口；端口状态、隔离和安全策略可限制实际出口。广播也可能泛洪；组播是否泛洪可受IGMP snooping等机制影响。\n\nA ARP是地址解析协议，B CDP是邻居发现协议，D组播是寻址/分发方式，均不是题设复制转发行为的名称。"
+      }
+    },
+    {
+      "id": 645,
+      "before_sha256": "2cb1270acefc81d645f8332a39057fb08e1f497db5c760a1b8bdfb83c3199c0e",
+      "reason": "已查看图：SW4优先级8192、SW3 32768，SW1/SW2未给优先级；补条件并以较低数值说明。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Rapid PVST+ operates in the same VLAN on all switches. SW1 and SW2 use priority 32768; SW3 and SW4 have the priorities shown. Which switch is elected root, and why?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW4, because it has the lowest numerical bridge priority in this VLAN."
+          },
+          {
+            "label": "B",
+            "text": "SW1, because its priority is the lowest and its MAC address is higher"
+          },
+          {
+            "label": "C",
+            "text": "SW2, because its MAC address is the highest"
+          },
+          {
+            "label": "D",
+            "text": "SW3, because its priority is the highest"
+          }
+        ],
+        "explanation": "A。图中SW4优先级8192，SW3为32768；题设补充SW1和SW2也为32768。同VLAN内先比较桥ID的优先级部分，数值较小的SW4获胜，不需要使用MAC地址打破平局。\n\nB、C、D都未选择最小桥ID；只有优先级相同时才比较MAC，且选择数值较小者。图中未标明SW1/SW2优先级，原题无法仅凭图片保证SW4当选，现明确这一条件。"
+      }
+    }
+  ]
+}

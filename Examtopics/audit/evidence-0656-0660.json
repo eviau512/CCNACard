@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "FlexConnect": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html",
+    "serial": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/cmd-ref/b-cr85/config_commands_r_to_z.html",
+    "PoE": "https://www.cisco.com/c/en/us/td/docs/switches/connectedgrid/cg-switch-sw-master/software/configuration/guide/interfaces/int_cfg.html",
+    "users": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/olh/wlc-olh/secc.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q660_image.jpg"
+  ],
+  "limitations": "Manual documentation and image review; no live WLC, PoE or roaming tests."
+}

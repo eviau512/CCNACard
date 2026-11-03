@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "IPv6": "https://www.rfc-editor.org/rfc/rfc4291.html",
+    "private": "https://www.rfc-editor.org/rfc/rfc1918.html",
+    "campus": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+  },
+  "original_images_directly_viewed": [],
+  "unchanged": [
+    620
+  ],
+  "limitations": "Manual documentation and arithmetic review; no live network or VM tests."
+}

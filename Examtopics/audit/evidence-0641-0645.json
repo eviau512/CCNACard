@@ -1,0 +1,13 @@
+{
+  "sources": {
+    "RSTP": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24062-146.html",
+    "trunk": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html",
+    "WLC": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/configuring_management_users.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q641_image.jpg",
+    "exhibits/q645_image.jpg"
+  ],
+  "q643_answer_change": "B to A",
+  "limitations": "Manual documentation and image review; no live trunk, WLC or STP tests."
+}

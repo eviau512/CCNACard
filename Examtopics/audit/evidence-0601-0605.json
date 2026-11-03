@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "private": "https://www.rfc-editor.org/rfc/rfc1918.html",
+    "2.4GHz": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/71382-chan-selection.html",
+    "routing": "https://www.cisco.com/c/en/us/support/docs/lan-switching/inter-vlan-routing/41260-189.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q602_image.jpg"
+  ],
+  "unchanged": [
+    602
+  ],
+  "limitations": "Manual documentation and diagram review; not live RF, virtualization or routing tests."
+}

@@ -1,0 +1,174 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    601,
+    602,
+    603,
+    604,
+    605
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`ifconfig`",
+      "expected": "ifconfig",
+      "html": "<code class=\"inline-code\">ifconfig</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xffffe000`",
+      "expected": "0xffffe000",
+      "html": "<code class=\"inline-code\">0xffffe000</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xff`",
+      "expected": "0xff",
+      "html": "<code class=\"inline-code\">0xff</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xff`",
+      "expected": "0xff",
+      "html": "<code class=\"inline-code\">0xff</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xe0`",
+      "expected": "0xe0",
+      "html": "<code class=\"inline-code\">0xe0</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0x00`",
+      "expected": "0x00",
+      "html": "<code class=\"inline-code\">0x00</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`255.255.224.0`",
+      "expected": "255.255.224.0",
+      "html": "<code class=\"inline-code\">255.255.224.0</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`10.8.138.14`",
+      "expected": "10.8.138.14",
+      "html": "<code class=\"inline-code\">10.8.138.14</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`138`",
+      "expected": "138",
+      "html": "<code class=\"inline-code\">138</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`10.8.159.255`",
+      "expected": "10.8.159.255",
+      "html": "<code class=\"inline-code\">10.8.159.255</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`broadcast 10.8.159.255`",
+      "expected": "broadcast 10.8.159.255",
+      "html": "<code class=\"inline-code\">broadcast 10.8.159.255</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xffff0000`",
+      "expected": "0xffff0000",
+      "html": "<code class=\"inline-code\">0xffff0000</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xffffe000`",
+      "expected": "0xffffe000",
+      "html": "<code class=\"inline-code\">0xffffe000</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xffffc000`",
+      "expected": "0xffffc000",
+      "html": "<code class=\"inline-code\">0xffffc000</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xffffff00`",
+      "expected": "0xffffff00",
+      "html": "<code class=\"inline-code\">0xffffff00</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0x80`",
+      "expected": "0x80",
+      "html": "<code class=\"inline-code\">0x80</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xc0`",
+      "expected": "0xc0",
+      "html": "<code class=\"inline-code\">0xc0</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xe0`",
+      "expected": "0xe0",
+      "html": "<code class=\"inline-code\">0xe0</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xf0`",
+      "expected": "0xf0",
+      "html": "<code class=\"inline-code\">0xf0</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xf8`",
+      "expected": "0xf8",
+      "html": "<code class=\"inline-code\">0xf8</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`0xfc`",
+      "expected": "0xfc",
+      "html": "<code class=\"inline-code\">0xfc</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`e0`",
+      "expected": "e0",
+      "html": "<code class=\"inline-code\">e0</code>"
+    },
+    {
+      "id": 602,
+      "kind": "code",
+      "input": "`10.8.128.0/19`",
+      "expected": "10.8.128.0/19",
+      "html": "<code class=\"inline-code\">10.8.128.0/19</code>"
+    }
+  ]
+}

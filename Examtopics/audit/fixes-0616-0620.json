@@ -1,0 +1,77 @@
+{
+  "scope": "Manual Q616-Q620; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 616,
+      "before_sha256": "40e645421e6ddf2f58e937c9c9abb09671c81b1e4beeda59f51ff34bab385288",
+      "reason": "折叠核心合并功能而非必须路由器单机或特定链路，调整选项以明确核心特征。",
+      "updates": {
+        "prompt": "Which statement describes a collapsed-core campus architecture?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The router can support HSRP for Layer 2 redundancy in an IPv6 network."
+          },
+          {
+            "label": "B",
+            "text": "The core and distribution layers are deployed on two different devices to enable failover."
+          },
+          {
+            "label": "C",
+            "text": "Core and distribution functions are combined in the same layer or device set."
+          },
+          {
+            "label": "D",
+            "text": "The router must use IPv4 and IPv6 addresses at Layer 3."
+          }
+        ],
+        "explanation": "C。折叠核心将核心层和汇聚层功能合并到同一层或同一组设备，接入层仍负责终端接入；这一组可以是单设备或冗余设备，具体取决于规模及可用性要求。\n\nA HSRP用于默认网关冗余，不能定义折叠核心；B将核心和汇聚作为独立层级不符合本题所述合并；D不要求必须同时部署IPv4和IPv6。设备对、链路类型和具体协议均由设计决定。"
+      }
+    },
+    {
+      "id": 617,
+      "before_sha256": "a280dc5f67c59b072e579ba393807276f8df6b2fc8b73a1e25b383d1b0feaa21",
+      "reason": "容量是重要考量，物理位置与外设在某些部署同样重要，不可绝对排除。",
+      "updates": {
+        "prompt": "Which resource-capacity consideration is essential when planning virtual machine deployment?",
+        "explanation": "A。部署虚拟机前应核对宿主或集群可用CPU、内存以及工作负载需求，并结合存储、网络、余量与超配策略规划。资源争用可能影响性能，实际阈值依平台和负载而定。\n\nB外设支持和D部署位置在特定场景也可能重要，例如设备直通、延迟、数据驻留或故障域；它们不是本题所问的CPU/内存容量项。C所述VSM映射不是通用虚拟CPU分配前提。"
+      }
+    },
+    {
+      "id": 618,
+      "before_sha256": "a0da4c4cda1fa21c3fa5d58c8bfac11b28be01d94f26456f787e42696fec5911",
+      "reason": "fffe高8位确为ff组播前缀，只是不是ff02::1；修正地址范围解释。",
+      "updates": {
+        "explanation": "A。`ff02:0:0:0:0:0:0:1`压缩为`ff02::1`，是链路本地所有节点组播地址；`ff02::2`为链路本地所有路由器。IPv6没有广播地址，某些本地发现功能使用组播，但不能把所有组播与IPv4广播视为完全相同。\n\nB以2000::/3开头，属于全局单播范围；D以fe80::/10开头，属于链路本地单播范围；C以`ff`开头，属于组播地址格式，其后标志和作用域与`ff02::1`不同，不能因为开头为fffe就说没有组播前缀。"
+      }
+    },
+    {
+      "id": 619,
+      "before_sha256": "4ca2e47f08e5bc2abbb7f25bccf85e7fa66ec9d59d82e111426cbefcbdf783ac",
+      "reason": "私有地址不自动防攻击，原题以安全理由为唯一答案误导；改问独立网络复用地址。",
+      "updates": {
+        "prompt": "Why might independent organizations use RFC 1918 private IPv4 addresses on their isolated internal networks?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Comply with PCI regulations."
+          },
+          {
+            "label": "B",
+            "text": "Reduce the size of the forwarding table on network routers."
+          },
+          {
+            "label": "C",
+            "text": "Allow independent networks to reuse the same private address ranges."
+          },
+          {
+            "label": "D",
+            "text": "Comply with local law."
+          }
+        ],
+        "explanation": "C。相互隔离的网络可以重复使用RFC 1918私有地址，减少对全球唯一IPv4地址的需求；当网络互联时，重叠地址仍可能产生路由冲突，需要规划。私网地址通常不在公共互联网中全球路由，但本身不加密、不认证，也不能替代防火墙或访问控制。\n\nA支付行业合规、D地方规定都不能从题设推断；B内部路由表大小取决于拓扑与汇总，不会仅因为地址私有就必然缩小。原答案将私有编址本身等同于降低入侵风险，忽略暴露服务、配置和其他攻击路径，现改为其明确的地址复用用途。"
+      }
+    }
+  ]
+}

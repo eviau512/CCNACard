@@ -1,0 +1,76 @@
+{
+  "scope": "Manual Q601-Q605; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 601,
+      "before_sha256": "257b41404665a710e255eb4c25751a8bcb9e0808c29ce7810c8bb3a09317136d",
+      "reason": "私网地址重复使用以网络隔离为条件，联网后可冲突；NAT不是访问互联网唯一机制且地址本身不提供保密。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Independent networks can reuse the same private address space while they remain isolated."
+          },
+          {
+            "label": "B",
+            "text": "Direct connectivity is provided to internal hosts from outside an enterprise network."
+          },
+          {
+            "label": "C",
+            "text": "Communication to the internet is reachable without the use of NAT."
+          },
+          {
+            "label": "D",
+            "text": "All external hosts are provided with secure communication to the internet."
+          }
+        ],
+        "explanation": "A。RFC 1918地址可在相互隔离的机构网络中重复使用，减少对全局唯一IPv4地址的需求。若这些网络随后通过VPN、合并或其他方式互联，重叠地址可能产生路由或身份冲突，需要重新编址、转换或其他设计。\n\nB私有地址通常不能作为公网可路由地址直接访问，C也不能仅靠私有地址进行普通公网端到端路由；NAT是常见方案，代理、应用网关、VPN及双栈等场景也可能提供访问，不应说NAT是唯一途径。D私有地址不自动提供加密或安全。三个RFC 1918范围是10.0.0.0/8、172.16.0.0/12和192.168.0.0/16。"
+      }
+    },
+    {
+      "id": 603,
+      "before_sha256": "d5da36e806436f6635ca879d96e596bffb497fca3eac7d51eeb7a2f037871e58",
+      "reason": "software过于宽泛且不同功能可能分离；将选项明确为管理程序与虚拟交换机。",
+      "updates": {
+        "prompt": "Which software components can manage virtual machines and connect their virtual network interfaces to a physical network uplink in a conventional virtualized host?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A hypervisor and virtual-switch software"
+          },
+          {
+            "label": "B",
+            "text": "A network application with no management or switching component"
+          },
+          {
+            "label": "C",
+            "text": "virtual machine"
+          },
+          {
+            "label": "D",
+            "text": "hardware"
+          }
+        ],
+        "explanation": "A。Hypervisor提供虚拟机资源管理与隔离机制，虚拟交换软件可将虚拟网卡与宿主机的物理网络上联连接；具体实现可能由不同组件承担。\n\nB仅有网络应用不足以完成题设两项职责；C虚拟机是运行工作负载的实例，本身不是所问宿主管理及交换组件；D物理硬件提供基础资源，但题设的管理和虚拟连接通常由软件配合实现。原选项仅称software过于宽泛，现明确组件。"
+      }
+    },
+    {
+      "id": 604,
+      "before_sha256": "35a138a0e5795fdea72d0443d00384cf321d76228f3eea67820ff01e4390584f",
+      "reason": "802.11ac不工作于2.4GHz，题干混入ac且频宽与无干扰被过度泛化；限定22MHz 802.11b。",
+      "updates": {
+        "prompt": "For 802.11b using approximately 22 MHz-wide channels in the 2.4 GHz band, which listed group is the conventional set of three nonoverlapping channels?",
+        "explanation": "B。2.4 GHz信道1、6、11中心频率相隔25 MHz，是常用的三个非重叠信道选择；其他选项至少有一组仅间隔20 MHz，在题设约22 MHz的802.11b信道模型中重叠。实际频谱形状、信道宽度、地区许可和其他射频源均会影响干扰，非重叠不保证完全无干扰。\n\n题设限定802.11b以明确带宽比较。原题把802.11ac列入2.4 GHz不准确；802.11n/ax可有不同带宽配置，不能将所有部署一概视为相同宽度。"
+      }
+    },
+    {
+      "id": 605,
+      "before_sha256": "c4c4a2940e3b67345c8cf1165fbb99286ee9f2e6974fbcced48b199aa319105b",
+      "reason": "三层交换可路由VLAN，但广播中继、特殊二层功能和硬件性能不能一概绝对化。",
+      "updates": {
+        "explanation": "A。具备路由能力并正确配置的三层交换机可通过SVI或路由端口在不同VLAN/IP子网间转发；二层接口仍可在各自VLAN内交换帧。是否支持特定功能及硬件加速取决于平台、许可和配置。\n\nB不是三层交换机仅有的功能；C不能用IP地址概括所有二层帧转发；D仅按MAC地址转发不能描述通常的跨子网IP路由。路由通常不原样转发二层广播，但协议中继等配置可能转发相关请求，不能绝对断言广播相关流量永不跨越边界。"
+      }
+    }
+  ]
+}

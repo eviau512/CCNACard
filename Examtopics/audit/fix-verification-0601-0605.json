@@ -1,0 +1,26 @@
+{
+  "scope": [
+    601,
+    605
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 4,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 4,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch4_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 23,
+  "q602_image_directly_viewed": true,
+  "q602_network": "10.8.128.0/19",
+  "q602_unchanged": true,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "Q600 installation pending, Q800 milestone next",
+  "source_sha256": "22af4382cc4957d4046810c2c58430df5567318ac7d59b579870f15ebc9f764b",
+  "app_bundle_sha256": "45851d7462d29d5004b49b86f6341c6782882e47f38129bfefd69f6b0b221c65",
+  "limitations": "Manual documentation, diagram, subnet and formatter checks; not live RF, virtualization or routing tests."
+}

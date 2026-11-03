@@ -1,0 +1,20 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    656,
+    657,
+    658,
+    659,
+    660
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 657,
+      "kind": "code",
+      "input": "`config serial timeout 0`",
+      "expected": "config serial timeout 0",
+      "html": "<code class=\"inline-code\">config serial timeout 0</code>"
+    }
+  ]
+}

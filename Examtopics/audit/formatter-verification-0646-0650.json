@@ -1,0 +1,20 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    646,
+    647,
+    648,
+    649,
+    650
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 646,
+      "kind": "code",
+      "input": "`channel-group <id> mode on`",
+      "expected": "channel-group <id> mode on",
+      "html": "<code class=\"inline-code\">channel-group &lt;id&gt; mode on</code>"
+    }
+  ]
+}

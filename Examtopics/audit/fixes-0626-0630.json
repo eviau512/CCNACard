@@ -1,0 +1,65 @@
+{
+  "scope": "Manual Q626-Q630; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 626,
+      "before_sha256": "1e0fb9360c9322367e1049371783b9026f2938298b714dc755d7b4da152aee15",
+      "reason": "防火墙分区可实施策略，但跨区默认全部阻断不适用于所有产品配置。",
+      "updates": {
+        "explanation": "D。防火墙可作为不同安全区域之间的策略执行边界，根据配置控制跨区域流量。区域模型、状态检查和默认规则依产品及配置不同；不能泛称所有设备默认阻断所有跨区流量，例如某些ASA配置默认允许高安全级别向低安全级别发起的流量。\n\nA IPS主要检测或阻断威胁；B交换机可通过VLAN和ACL等参与分段；C接入点提供无线接入，也可配合无线策略。这里防火墙最直接承担题设的跨安全域策略控制，设备功能实际可组合。"
+      }
+    },
+    {
+      "id": 627,
+      "before_sha256": "ef4e02bc17dbdae63e5c8de5e60d7f0c306080825841562471ac79dc6f75a178",
+      "reason": "私有地址有助节约唯一地址，但NAT并非所有出口方式必需，复杂度也非必然上升。",
+      "updates": {
+        "explanation": "C。RFC 1918地址可以在彼此隔离的网络中复用，减少对全球唯一IPv4地址的需求。私网互联时地址重叠可能增加规划复杂度；公网访问可采用NAT、代理或其他架构，不能说每个出口都必须使用NAT。\n\nA限制直接公网可达性可能是部署效果，但不等同安全防护；B、D简化编址或复杂度取决于网络规模、重叠和设计，不是普遍保证。地址本身不提供加密或身份认证。"
+      }
+    },
+    {
+      "id": 628,
+      "before_sha256": "e26dcc27397ef95a75b663b7bfef61fcc483a0aeb3e49addb77b9d7513515860",
+      "reason": "折叠核心合并核心和汇聚层正确，规模阈值、成本及无线连接无绝对规则。",
+      "updates": {
+        "explanation": "D。折叠核心将核心层与汇聚层功能合并为一个组合层，接入层通常仍提供终端接入；组合层可以由单设备或多台冗余设备实现。选择该设计取决于规模、性能、成本及可靠性需求，没有题目给出的固定终端数量阈值。\n\nA单交换机SOHO描述不足以定义该结构；B并非合并核心与汇聚的表述；C无线接入路径和性能并非该拓扑定义，不能据此保证更快。"
+      }
+    },
+    {
+      "id": 629,
+      "before_sha256": "cb1b424be04bbfb680c2536484f9849c3e014c5d327cf94e3ece0a655a4203c7",
+      "reason": "重叠可增加干扰但性能影响依环境，SSID可因干扰无法解码，频谱机理不应绝对化。",
+      "updates": {
+        "explanation": "A。当覆盖区域内的无线信号使用重叠信道时，射频干扰可能增加，导致接收失败、重传和吞吐下降；实际影响取决于信号强度、距离、信道宽度、负载和环境，不是每次重叠都必然严重故障。\n\nB重叠不会从协议上消除SSID区别，但强干扰可能妨碍客户端接收信标；C未授权访问和D窃听风险主要取决于认证、加密与其他安全条件，不能仅由信道重叠推出。合理信道规划可降低干扰，但不保证无线环境完全无干扰。"
+      }
+    },
+    {
+      "id": 630,
+      "before_sha256": "aced922686f19731c37dad2c31050a72168d7c1eee6f1f91766b900f9c3a8dda",
+      "reason": "已查看原图，仅有累计冲突/CRC、late collision为0、无双工设置；不能断定错配，改为排查线索。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which issue is reasonable to investigate based on the interface counters, without treating the snapshot as conclusive proof?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The MTU is not set to the default value."
+          },
+          {
+            "label": "B",
+            "text": "Possible duplex mismatch or physical-layer errors warrant investigation."
+          },
+          {
+            "label": "C",
+            "text": "The QoS policy is dropping traffic."
+          },
+          {
+            "label": "D",
+            "text": "The link is over utilized."
+          }
+        ],
+        "explanation": "B。图示有累计15000次collisions、14278次CRC以及179次deferred，值得检查两端速率/双工协商、线缆和物理链路，并在业务时段观察计数器增量。图中late collision为0，且未显示两端实际双工状态；仅凭累计计数不能证明双工不匹配，也不能确定错误何时发生。\n\nA图示MTU 1500，但默认值因接口与平台而异；C输出队列丢包为0不证明不存在其他QoS丢弃；D五分钟平均速率较低，仅表示该观察窗口内平均负载较低，不能排除先前短时拥塞。确认原因需要两端配置、实时计数变化及进一步测试。"
+      }
+    }
+  ]
+}

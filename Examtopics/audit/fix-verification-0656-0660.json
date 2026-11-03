@@ -1,0 +1,26 @@
+{
+  "scope": [
+    656,
+    660
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 58,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch4_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 1,
+  "images_directly_viewed": [
+    660
+  ],
+  "q600_personal_install_completed": true,
+  "release_created": false,
+  "delivery": "Q800 milestone next",
+  "source_sha256": "70a26360452e0d3ec65943ad1c4b222eca761c6720925a3e3bea5141339f353e",
+  "app_bundle_sha256": "1a8c56d7e9e3f5fd4ad6877d2b5380e2c9b1d08bc6b310c0a72c968c5f9cfc51",
+  "limitations": "Manual documentation, image and formatter checks; no live WLC, PoE or roaming tests."
+}

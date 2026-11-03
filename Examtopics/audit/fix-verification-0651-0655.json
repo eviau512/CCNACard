@@ -1,0 +1,28 @@
+{
+  "scope": [
+    651,
+    655
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 53,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch4_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 2,
+  "images_directly_viewed": [
+    652,
+    653,
+    655
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "Q600 installation pending, Q800 milestone next",
+  "source_sha256": "ed0a5cab780dc72a81127e8fab35ee7b5955886805aa7f8da01003a06df93726",
+  "app_bundle_sha256": "192659dfb44693f10f6664137212fe8e2cf129ac8e5911f5db0aa550be1dc58f",
+  "limitations": "Manual documentation, images and formatter checks; no live LACP, trunk or WLC tests."
+}

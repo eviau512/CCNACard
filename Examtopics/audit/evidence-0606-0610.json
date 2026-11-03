@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "TCP": "https://www.rfc-editor.org/rfc/rfc9293.html",
+    "UDP": "https://www.rfc-editor.org/rfc/rfc768.html",
+    "HTTP3": "https://www.rfc-editor.org/rfc/rfc9114.html",
+    "SX": "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/gigabit-interface-converter-gbic/product_data_sheet09186a008014cb5e.html",
+    "无线": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/71382-chan-selection.html"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual documentation review; no live fiber, WAN, TCP or RF tests."
+}

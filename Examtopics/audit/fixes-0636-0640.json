@@ -1,0 +1,69 @@
+{
+  "scope": "Manual Q636-Q640; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 636,
+      "before_sha256": "9fa5c32edda6667ba08e289216c8d1c83468fe82cd25a2d6afa7062e670f7695",
+      "reason": "已查看WPA2/802.1X原图；Web Passthrough并非普遍必须None，WPA2-PSK可兼容，限定开放访客设计。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On this AireOS WLAN, the required design is an OPEN Layer 2 guest network with Layer 3 Web Passthrough and no WPA/802.1X authentication. Which action is required?",
+        "explanation": "D。原图显示Layer 2 Security为WPA+WPA2且启用802.1X；题设明确要求开放二层访客网络，因此将Layer 2 Security设为None，再按平台配置Web Passthrough。开放二层不提供链路层加密，门户也不能替代加密保护。\n\nA、B、C保留或增加二层认证/加密，不符合本题明确的开放设计。Web Passthrough并非普遍要求Layer 2 None：Cisco兼容矩阵列出WPA/WPA2-PSK与Web Passthrough可组合，其他802.1X/Web认证组合也受平台版本和策略限制；不能将全部情况一概视为互斥。"
+      }
+    },
+    {
+      "id": 637,
+      "before_sha256": "2af8fbdb55654ee171f0782da889833f24697ca9d2886af158c2726b826a5f7c",
+      "reason": "相同安全策略名称不保证权限一致，NAS-ID也可能影响RADIUS授权；限定完整有效策略。",
+      "updates": {
+        "prompt": "Each branch advertises SSID “office”. Which configuration category must be aligned so equivalent users can receive equivalent authorization, assuming consistent identity sources, reachable resources, and enforcement?",
+        "explanation": "D。应对齐认证、授权及访问控制等安全策略，使同等身份在各分支获得预期权限；还要检查AAA返回属性、VLAN/角色映射、路由与资源可达性。仅SSID或策略名称相同不能保证实际效果相同。\n\nA射频策略主要影响无线接入条件；B配置名称本身不决定权限；C NAS-ID可能被RADIUS策略用于区分站点并影响授权，但单独把它设为相同不能代替完整策略与验证。"
+      }
+    },
+    {
+      "id": 638,
+      "before_sha256": "86a5d084cd9e445c9a2016e764f76aa7582d4a7d7f72bc41a6b108636d27c3b4",
+      "reason": "已查看静态IP隧道未勾选原图；该功能适用于静态IPv4特定漫游，不能保证所有客户端不中断。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On a supported AireOS mobility design, clients use static IPv4 addresses and may associate with a controller that does not directly support their home subnet. P2P Blocking is disabled and the required mobility peers and home subnet are available. Which WLAN option supports tunneling such clients to a suitable controller?",
+        "explanation": "A。图中Static IP Tunneling未勾选；启用该功能可在支持的移动性组内为静态IPv4客户端选择支持其子网的控制器并隧道转发。需满足平台版本、移动性和网络条件，不保证所有DHCP客户端、所有漫游路径或业务零中断。\n\nB覆盖盲区检测属于射频管理；C P2P转发策略控制客户端间流量；D DHCP Addr. Assignment要求DHCP地址分配，与题设静态IPv4客户端不符。客户端排除或黑名单行为不能仅凭该选项一概断定。"
+      }
+    },
+    {
+      "id": 639,
+      "before_sha256": "62420713c2a6fa764c3ddbe8b9a27e10e1f47e0990390670160d2e22042e2fe2",
+      "reason": "已查看拓扑；原B缺少全局lldp run，接口设置不确保其余接口关闭；增加初始条件并修正CLI。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW1 supports LLDP; LLDP is currently globally disabled, and transmit and receive are already disabled on every other supported interface. Which configuration enables bidirectional LLDP on Gi1/0/1 while leaving the other interfaces disabled?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)# lldp run\nSW1(config)# interface GigabitEthernet1/0/1\nSW1(config-if)# no lldp transmit\nSW1(config-if)# no lldp receive"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)# lldp run\nSW1(config)# interface GigabitEthernet1/0/1\nSW1(config-if)# lldp transmit\nSW1(config-if)# lldp receive"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)# no lldp run\nSW1(config)# interface GigabitEthernet1/0/1\nSW1(config-if)# lldp transmit\nSW1(config-if)# lldp receive"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)# no cdp run\nSW1(config)# interface GigabitEthernet1/0/1\nSW1(config-if)# cdp enable"
+          }
+        ],
+        "explanation": "B。先用`lldp run`全局启用，再在Gi1/0/1启用`lldp transmit`和`lldp receive`；题设明确其他接口已单独禁用，故其设置保持。原B没有全局启用，不能保证LLDP运行；许多平台全局启用后支持接口默认收发，因此也不能凭仅配置目标接口就假设其他接口关闭。\n\nA关闭目标接口收发；C全局关闭LLDP；D配置的是CDP而非LLDP。具体默认值和接口范围应查所用平台，必要时逐接口显式关闭LLDP。"
+      }
+    },
+    {
+      "id": 640,
+      "before_sha256": "92dc1dfa658042f4b8bd3c9fb1d1dcedf215233a7b73d8b2656da3aa4cbdf777",
+      "reason": "已查看R2接口拓扑；仅凭发现IP和版本不能区分CDP/LLDP，限定CDP且其他发现协议已禁用。",
+      "updates": {
+        "prompt": "Refer to the exhibit. CDP is globally enabled on R2 and active on both shown interfaces; LLDP and other neighbor-discovery protocols are disabled. Which action stops CDP on the R3-facing link while retaining CDP with R1?",
+        "explanation": "C。图中R2 Gi0/2连接R3、Gi0/1连接R1；在Gi0/2执行`no cdp enable`可仅禁用该接口CDP，而全局CDP及Gi0/1保持。\n\nB全局关闭CDP会影响R1侧；A操作Gi0/1的LLDP接收，D全局关闭LLDP，均不能完成题设CDP目标。原题仅凭IP、平台和版本信息不足以唯一辨别CDP或LLDP；现明确协议及其他发现协议状态，不能声称禁用CDP就阻止所有其他信息共享。"
+      }
+    }
+  ]
+}

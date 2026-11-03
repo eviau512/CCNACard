@@ -1,0 +1,87 @@
+{
+  "scope": "Manual Q651-Q655; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 651,
+      "before_sha256": "cd14206f2811f74263aa9eb1f722173d68ff6be52b1d9aafba8345bf23ac7681",
+      "reason": "不同WLC系统对LAG重启要求不同；限定AireOS 5508启用状态变更。",
+      "updates": {
+        "prompt": "On a Cisco 5508 controller running AireOS, an administrator changes the global LAG mode and saves the configuration. What additional action is required for that LAG mode change to take effect?",
+        "explanation": "A。对题设AireOS 5508的全局LAG模式变更，保存配置并重启控制器以使新模式生效；应安排维护窗口并核对交换机侧配置。\n\nB清空MAC、C重启接口或D手动重新关联AP不能替代该平台要求的重启。不同WLC型号和操作系统的聚合配置机制不同，例如Catalyst 9800的port-channel不应一概套用此重启规则。"
+      }
+    },
+    {
+      "id": 652,
+      "before_sha256": "01b5333feee877002b903a4be8026b23a2f4e1db2f6229cd4cb1da03723e51d8",
+      "reason": "已查看两端口原图，SW1 Fa0/2缺300；不能假定对已有逻辑列表add必同步挂起成员，改为直接修复成员。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW1 Fa0/2 is not bundled because its allowed VLAN list is 100,200; SW1 Fa0/1 and both SW2 members allow 100,200,300. All other LACP and member settings are compatible. Which action corrects that member while retaining VLANs 100 and 200?",
+        "options": [
+          {
+            "label": "A",
+            "text": "configure the switchport trunk allowed vlan 300 command on SW1 port-channel 1."
+          },
+          {
+            "label": "B",
+            "text": "configure the switchport trunk allowed vlan add 300 command on interface Fa0/2 on SW2."
+          },
+          {
+            "label": "C",
+            "text": "On SW1 interface Fa0/2, add VLAN 300 to the existing allowed list."
+          },
+          {
+            "label": "D",
+            "text": "configure the switchport trunk allowed vlan 300 command on interface Fa0/2 on SW1."
+          }
+        ],
+        "explanation": "C。原图显示SW1 Fa0/2缺少VLAN300；在该成员接口使用`switchport trunk allowed vlan add 300`使其与题设兼容，再核查port-channel及成员状态。平台可能对成员配置或修改顺序有额外限制，需依实际设备操作并验证。\n\nA与D不带add会替换列表，可能移除原有VLAN；B操作的是已经包含300的SW2成员。原解析假定对逻辑接口重复添加已存在的VLAN必然同步修复挂起成员，图示不足以支持该保证。"
+      }
+    },
+    {
+      "id": 653,
+      "before_sha256": "c328506adb34798141aefe984327f5149d573f888296147865f1005aeea20c5c",
+      "reason": "已看原图列表1,22；D保留22也可能满足原需求，明确保留整个列表并纠正vlan拼写。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW1 Ethernet0/0 is a trunk currently allowing VLANs 1 and 22. VLAN 23 must be added while preserving every VLAN already allowed; SW2 and access ports are already configured correctly. Which command meets the requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport trunk allowed vlan 2-1001"
+          },
+          {
+            "label": "B",
+            "text": "switchport trunk allowed vlan 23"
+          },
+          {
+            "label": "C",
+            "text": "switchport trunk allowed vlan add 23"
+          },
+          {
+            "label": "D",
+            "text": "switchport trunk allowed vlan 22-23"
+          }
+        ],
+        "explanation": "C。原图显示允许列表为1,22；`switchport trunk allowed vlan add 23`将23追加而保留已有VLAN。跨交换机实际通信还依赖对端trunk、VLAN及端口状态，题设已给出这些条件。\n\nA替换为2–1001，移除VLAN1；B只允许23，移除1和22；D替换为22–23，虽然保留22但移除1。原题只要求不影响VLAN22，D也可能满足，故现明确保留整个原列表；原选项vian拼写已修正。"
+      }
+    },
+    {
+      "id": 654,
+      "before_sha256": "dcbc3ace6c2bf0dfdaf0b1425bd5b6aebb73b6fb3f793636b63f449e5ce899fe",
+      "reason": "限定AireOS动态接口工作流；配置顺序和DHCP/安全机制并非唯一。",
+      "updates": {
+        "prompt": "On an AireOS WLC, an engineer has configured an authentication server and a dynamic interface. For a centrally switched WLAN using that interface, which next task is needed among these choices?",
+        "explanation": "A。创建WLAN/SSID并将其映射到所需动态接口或接口组，使客户端流量能进入相应网络；还需根据设计配置安全、认证、VLAN、DHCP及启用状态。步骤顺序和具体要求依部署而异。\n\nB高可用可按需求设计但非此处创建WLAN的必要下一步；C不应为此要求启用明文Telnet；D管理接口通常在控制器初始部署中配置，并非题设所问的WLAN映射。"
+      }
+    },
+    {
+      "id": 655,
+      "before_sha256": "c1cccdcaa8c5c1d87c3c6a56972c12b6d98d01bd83579026794b3a4ffcf6889e",
+      "reason": "已查看FlexConnect Local Switching复选框未选；本地转发不代表所有控制与流量绝不经过WLC。",
+      "updates": {
+        "prompt": "Refer to the exhibit. A supported FlexConnect AP at a branch must locally switch client data for this WLAN instead of centrally tunneling that data to the WLC. Which WLAN option should be enabled?",
+        "explanation": "B。图中FlexConnect Local Switching选项未勾选；在受支持的FlexConnect部署中启用后，该WLAN的相关客户端数据可在AP所在分支本地转发。仍需AP模式、VLAN映射、上联和认证等配置；控制与管理流量及特定例外不因此保证完全不经过WLC。\n\nA HTTP profiling与C DHCP profiling用于客户端识别；D Disassociation Imminent用于无线客户端管理，均不是该本地数据交换选项。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "ASA": "https://www.cisco.com/c/en/us/td/docs/security/asa/asa919/configuration/firewall/asa-919-firewall-config/access-rules.html",
+    "private": "https://www.rfc-editor.org/rfc/rfc1918.html",
+    "duplex": "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/10561-3.html",
+    "channels": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/71382-chan-selection.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q630_image.jpg"
+  ],
+  "limitations": "Manual documentation and image review; no live duplex or RF tests."
+}

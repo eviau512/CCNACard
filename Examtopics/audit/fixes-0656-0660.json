@@ -1,0 +1,68 @@
+{
+  "scope": "Manual Q656-Q660; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 656,
+      "before_sha256": "ab464c0a03b4aa21d9f1f2bf82869e2d1dc942e588ce705f95b8a2b8081f5e8c",
+      "reason": "native VLAN与管理VLAN也可能需要匹配；明确询问承载多个VLAN的端口模式。",
+      "updates": {
+        "prompt": "A locally switched FlexConnect AP uses one uplink to carry its management VLAN and a different tagged client VLAN. Which switch-port mode supports these VLANs on that link?",
+        "explanation": "C。题设单链路需要承载不同VLAN，交换机端口应配置trunk并允许相应VLAN，AP与交换机的管理VLAN标记/native配置也应匹配。B在管理流量未打标的设计中可能是必要条件，但题目询问端口模式，不能把它当作所有部署都必须相同的普遍规则。\n\nA多链路LAG不是多VLAN的必要条件；D关闭trunk不满足题设。若所有本地流量和管理流量使用同一VLAN，支持的FlexConnect部署也可使用access端口。"
+      }
+    },
+    {
+      "id": 657,
+      "before_sha256": "86206a6c5e18b5de89dfb7b8f25a959ca4056b529e1fbdb5b285b160e0adb307",
+      "reason": "AireOS串口timeout 0正确，但文档默认值为0而非5分钟，会话也可能因其他原因断开。",
+      "updates": {
+        "prompt": "On an AireOS WLC, which command sets the serial console idle-session timeout to no timeout?",
+        "explanation": "C。`config serial timeout 0`将串口会话空闲超时设为0；Cisco AireOS 8.5文档给出范围0–160分钟，默认也是0。该设置只取消对应空闲超时，不能保证设备重启、连接故障或其他策略下会话永不中断。\n\nA会话数量限制不是串口超时；B的9600超出所列超时范围且容易与波特率混淆；D针对其他会话超时配置，不是题设串口命令。"
+      }
+    },
+    {
+      "id": 658,
+      "before_sha256": "d724c00adbcff3c8d9aceb166c01e6a441554c232e969284a5738099feb8d091",
+      "reason": "FlexConnect本地交换可支持离线生存，但新客户端认证、现有会话依配置和服务可用性。",
+      "updates": {
+        "explanation": "B。FlexConnect配合本地交换可使符合条件的客户端数据在分支转发，并在与控制器失联时提供一定独立工作能力。能否维持现有会话或允许新客户端接入取决于本地认证、RADIUS/DHCP可用性及WLAN配置，不能保证WAN故障时所有业务完全不受影响。\n\nA关闭本地交换不满足数据本地转发要求；C OfficeExtend用于不同远程场景，题设选项不满足所述方案；D仅启用fallback不能替代FlexConnect本地交换和离线认证设计。"
+      }
+    },
+    {
+      "id": 659,
+      "before_sha256": "4fd01b39b4cb3515c1e517df8954ed9a18b1e40f7d87f19dcf3803ac5135029a",
+      "reason": "auto按检测与预算分配，static预留，原B默认等级不构成准确优势；两者均检测PD。",
+      "updates": {
+        "prompt": "On a Cisco switch where auto allocates PoE power after detection and static pre-reserves a port budget, what is the resource-allocation advantage of auto for an empty port?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Power policing is enabled at the same time."
+          },
+          {
+            "label": "B",
+            "text": "Power is allocated after a powered device is detected and sufficient budget is available, rather than pre-reserved on the empty port."
+          },
+          {
+            "label": "C",
+            "text": "All four pairs of the cable are used."
+          },
+          {
+            "label": "D",
+            "text": "It detects the device is a powered device."
+          }
+        ],
+        "explanation": "B。题设平台的auto模式在检测受电设备且预算足够后分配功率，而static可在检测前为端口预留预算；auto因此不必为题设空端口预留同一静态额度。具体功率等级、协商、预算释放与限额依平台配置而异。\n\nA功率监管并非此模式切换必然启用；C线对数量由PoE标准和设备能力决定；D两种模式都可进行受电设备检测。原B“使用默认级别”不能准确区分两种模式，已改为明确的预算差异。"
+      }
+    },
+    {
+      "id": 660,
+      "before_sha256": "99f6b2cffe4854bb6242581407cf99f0d2b213d591db37908b9667a899e223e6",
+      "reason": "已查看原图Guest User勾选86400；取消可移除访客账户生命周期，不保证会话永不超时。",
+      "updates": {
+        "prompt": "Refer to the AireOS Local Net Users exhibit. The administrator wants this local account to be a regular user without the displayed guest-account lifetime. Which action addresses that account setting?",
+        "explanation": "B。原图中Guest User已勾选，Lifetime为86400秒；取消Guest User可将该账户配置为普通本地用户，从而不使用图示的访客账户寿命字段。还需按WLAN配置、认证策略及适用版本验证账户与接入。\n\nA Guest User Role不是移除访客寿命的操作；C与D依输入校验和版本行为而定，不能仅凭图片断言0或空值的结果。账户寿命与WLAN会话超时是不同设置，因此取消访客身份不能保证用户连接永远不中断或所有访问时间限制都消失。"
+      }
+    }
+  ]
+}

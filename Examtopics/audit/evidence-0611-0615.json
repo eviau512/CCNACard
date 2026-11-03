@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "FTP": "https://www.rfc-editor.org/rfc/rfc959.html",
+    "TFTP": "https://www.rfc-editor.org/rfc/rfc1350.html",
+    "SSID": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_wlan_ssid.html",
+    "KVM": "https://www.kernel.org/doc/html/latest/virt/kvm/index.html"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual documentation review; no live wireless, FTP or virtualization tests."
+}

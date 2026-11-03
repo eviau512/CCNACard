@@ -1,0 +1,15 @@
+{
+  "sources": {
+    "WLC兼容性": "https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/106082-wlc-compatibility-matrix.html",
+    "静态漫游": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/configuring_auto_anchor_mobility.html",
+    "LLDP": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750/software/release/12-2_52_se/configuration/guide/3750scg/swlldp.html",
+    "CDP": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/cdp/configuration/xe-16/cdp-xe-16-book/nm-cdp-discover.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q636_image.jpg",
+    "exhibits/q638_image.jpg",
+    "exhibits/q639_image.jpg",
+    "exhibits/q640_image.jpg"
+  ],
+  "limitations": "Manual documentation and image review; no live AireOS, LLDP or CDP tests."
+}

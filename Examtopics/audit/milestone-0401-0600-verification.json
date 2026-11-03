@@ -14,7 +14,11 @@
   "apk_data_matches_source": true,
   "apk_sha256": "606a5faea79178df332c7df700a7b523c9e52830e8c40fb7752a0f217f279c88",
   "certificate_sha256": "841c1869811eb0d41992c8c61ad6eba6cd88ac96baf9cae33b6a33e73a1c6855",
-  "install_status": "pending: no connected device",
+  "install_status": "success: same-signature adb install --user 0 -r",
+  "installed_apk_sha256_matches": true,
+  "personal_data_directory_identifiers_preserved": true,
+  "island_user_10_installed_before_and_after": false,
+  "practice_records_read_or_cleared": false,
   "release_created": false,
   "limitations": "Manual review plus source, formatter, APK asset and signing verification; no live network lab."
 }

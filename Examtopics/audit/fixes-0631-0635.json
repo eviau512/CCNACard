@@ -1,0 +1,85 @@
+{
+  "scope": "Manual Q631-Q635; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 631,
+      "before_sha256": "a8f9af3612f72021e2ba8771c7272ab4b85062e5058997f0f2d74745a756fad0",
+      "reason": "传统网管不只是被动监控，DNA Center能力依设备版本和配置。",
+      "updates": {
+        "explanation": "D。Cisco DNA Center（现称Catalyst Center）为支持的园区网络设备和服务提供集中管理、自动配置、策略及网络保障等能力；具体功能依设备、版本及许可而异。\n\nA地址池管理只是相关功能的一部分；B数据中心ACI策略控制通常由APIC承担；C串口控制台服务器提供不同的带外访问功能。传统网管也可能提供配置、自动化与监控，不能说传统工具只能被动监控。"
+      }
+    },
+    {
+      "id": 632,
+      "before_sha256": "ebaf7f82cd95a2fb87796fd605af23478956aed4562dab1065c70032a404b3c0",
+      "reason": "已查看拓扑；跨VLAN连通需路由与允许列表等前提，四组CLI被压平须恢复。",
+      "updates": {
+        "prompt": "Refer to the exhibit. VLANs, PC gateways, R1 inter-VLAN routing, and the SW1–R1 trunk are already correctly configured. Both switches support LACP, all shown VLANs exist and are allowed on the inter-switch trunk, and member links have compatible settings. Which configuration dynamically forms the inter-switch EtherChannel using an industry-standard protocol and carries those VLANs?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode access\n channel-group 1 mode active\nexit\nSW2 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode access\n channel-group 1 mode desirable\nexit"
+          },
+          {
+            "label": "B",
+            "text": "SW1 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode trunk\n channel-group 1 mode on\nexit\nSW2 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode trunk\n channel-group 1 mode on\nexit"
+          },
+          {
+            "label": "C",
+            "text": "SW1 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode trunk\n channel-group 1 mode active\nexit\nSW2 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode trunk\n channel-group 1 mode passive\nexit"
+          },
+          {
+            "label": "D",
+            "text": "SW1 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode trunk\n channel-group 1 mode auto\nexit\nSW2 (global configuration):\ninterface range Gi0/1 - 2\n switchport mode trunk\n channel-group 1 mode desirable\nexit"
+          }
+        ],
+        "explanation": "C。SW1的active与SW2的passive使用LACP动态协商，且成员链路设为trunk以承载题设允许的多个VLAN；题设已经保证R1路由、网关、VLAN与链路兼容等其他连通条件。实际平台对port-channel接口配置及成员一致性仍有要求。\n\nA混用LACP active和PAgP desirable，且access不能承载题设多VLAN；B `on`是静态汇聚而非动态协商；D auto/desirable使用Cisco PAgP，不符合题设行业标准LACP。原题未给出跨VLAN路由、允许列表等条件，不能仅凭trunk本身保证所有PC互通。"
+      }
+    },
+    {
+      "id": 633,
+      "before_sha256": "1837e18634cb0592ba09a057305659b6e29069dcd3371ebd9feb4f92b02d7a7d",
+      "reason": "console提供带外访问，但不保证所有崩溃状态均能恢复；管理端口是否带外看网络。",
+      "updates": {
+        "explanation": "C。WLC物理console连接提供独立于生产IP转发路径的带外管理入口，适合初始配置或部分网络故障排查。它仍依赖设备供电、console硬件和软件状态，不能保证所有崩溃场景均可恢复。\n\nA HTTP GUI需要相应网络服务；B和D明确描述带内连接，不符合串行console的题设。专用管理以太网接口若接入独立管理网络也可构成带外管理，不能只按“是否使用IP”判断。"
+      }
+    },
+    {
+      "id": 634,
+      "before_sha256": "cad55f6eb66568e5ba3c4d4fd49e0fe01b35d94902c527f5dcc803dfac48440c",
+      "reason": "已查看图，缺少源端VLAN、同网段和目的MAC条件；未知单播泛洪只限符合条件的同VLAN端口。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Hosts A and D are in VLAN 2 and the same IP subnet. D already knows A's destination MAC, but SW1 has no entry for that MAC in VLAN 2. No isolation, security, or flooding restrictions apply. What does SW1 do with D's unicast frame?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It floods the unknown unicast out eligible forwarding ports in VLAN 2 except the ingress port."
+          },
+          {
+            "label": "B",
+            "text": "It creates a broadcast storm."
+          },
+          {
+            "label": "C",
+            "text": "It shuts down the source port and places it in err-disable mode."
+          },
+          {
+            "label": "D",
+            "text": "It drops the frame from the MAC table of the switch."
+          }
+        ],
+        "explanation": "A。图中VLAN 2表项位于e0/1、e0/2和e0/3，未见A的目的MAC。题设明确D发送的是A的MAC且交换机无该项，因此交换机在VLAN 2的合格转发端口中除入口e0/3外泛洪未知单播；端口状态和过滤策略仍影响实际出口。\n\nB单次未知单播泛洪本身不是广播风暴；C正常未知单播不自动触发err-disable；D MAC表保存地址映射而非待删除的帧。原题仅给目的IP不足以推断二层目的MAC，跨网段时可能是网关MAC，因此补全同网段及目的MAC前提。"
+      }
+    },
+    {
+      "id": 635,
+      "before_sha256": "1640682f564ff54ac17f49f81af4df7b985a635d984384ea570c9b895a2a6840",
+      "reason": "每VLAN实例与快速收敛是不同机制，不能保证毫秒收敛或所有拓扑绝对行为。",
+      "updates": {
+        "prompt": "Which characteristic distinguishes Rapid PVST+ from an MST configuration that maps multiple VLANs to one instance?",
+        "explanation": "D。Rapid PVST+为各VLAN运行独立的快速生成树实例；不同VLAN可有不同根桥和转发拓扑。其快速收敛依赖RSTP机制及链路条件，而不是仅因为实例按VLAN划分，也不能保证固定的毫秒收敛时间。\n\nC描述MST将多个VLAN映射到同一实例；B多条核心链路不是运行前提；A同一生成树实例避免二层环路，不能把多条同时活动路径当作其定义。不同VLAN的树可使用不同链路，实际效果依配置与拓扑而异。"
+      }
+    }
+  ]
+}

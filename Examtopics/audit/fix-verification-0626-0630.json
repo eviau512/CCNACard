@@ -1,0 +1,24 @@
+{
+  "scope": [
+    626,
+    630
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 28,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch4_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 0,
+  "q630_image_directly_viewed": true,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "Q600 installation pending, Q800 milestone next",
+  "source_sha256": "f411c500d5d77b5264b603a02c17652a33de8ea2a7e385cf50cf9d6697762c6f",
+  "app_bundle_sha256": "f61261e415280a433afaaa0f66dee471711dff428729dfe97b8ee0841e7d3e23",
+  "limitations": "Manual documentation, diagram and formatter checks; no live duplex or RF tests."
+}

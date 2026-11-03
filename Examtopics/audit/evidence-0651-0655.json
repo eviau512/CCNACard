@@ -1,0 +1,13 @@
+{
+  "sources": {
+    "LAG": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/olh/wlc-olh/contc.html",
+    "EtherChannel": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-15/configuration_guide/lyr2/b_1715_lyr2_9300_cg/configuring_etherchannels.html",
+    "FlexConnect": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q652_image.jpg",
+    "exhibits/q653_image.jpg",
+    "exhibits/q655_image.jpg"
+  ],
+  "limitations": "Manual documentation and image review; no live LACP, trunk or WLC tests."
+}

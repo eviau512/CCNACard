@@ -1,0 +1,68 @@
+{
+  "scope": "Manual Q646-Q650; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 646,
+      "before_sha256": "dab70f3c665d7b1c35a5f538a2443475ef985fba50f71c0fe3eb76a76152030c",
+      "reason": "不同WLC支持能力不同，9800支持LACP；限定AireOS 5520静态LAG。",
+      "updates": {
+        "prompt": "A Cisco 5520 WLC running AireOS 8.1 uses its supported static LAG; the controller does not support LACP or PAgP. Which EtherChannel mode should the connected switch use?",
+        "explanation": "A。题设5520/AireOS静态LAG不协商LACP或PAgP，交换机侧应配置`channel-group <id> mode on`并保证成员配置兼容。B passive和C active属于LACP，D auto属于PAgP，均不满足该静态对端条件。\n\n不能将此限制推广到所有WLC：Catalyst 9800在支持的版本和部署中支持LACP等动态聚合。端口数量、跨交换机连接及失效行为还需依具体型号和设计确认。"
+      }
+    },
+    {
+      "id": 647,
+      "before_sha256": "703049836d2bee4e4ff605eb97b2c2225a9c7962895fe086148f907fb6d7f6c5",
+      "reason": "VLAN划分广播域，但VLAN与IP子网并非必然一一对应，隔离取决配置。",
+      "updates": {
+        "explanation": "C。VLAN在二层交换网络中划分逻辑广播域，广播帧通常限制在其所属VLAN的合格转发端口；跨VLAN IP通信一般需要路由或其他明确配置的连接。\n\nA STP主要防止二层环路；B VTP用于传播部分VLAN配置信息而不是广播域转发机制；D CSMA/CD用于半双工以太网介质访问。一个VLAN常规划为一个IP子网，但二者不是强制一一对应关系；广播中继等功能也可改变应用层行为。"
+      }
+    },
+    {
+      "id": 648,
+      "before_sha256": "ef9ee8c3e539180c856636e628933428fedf0814ba161655a34b9f6f28a0442d",
+      "reason": "FlexConnect可用access或trunk，限定本地交换多个打标VLAN。",
+      "updates": {
+        "prompt": "A FlexConnect AP locally switches multiple WLANs mapped to different tagged VLANs over one Ethernet uplink. Which switch-port mode carries those VLANs?",
+        "explanation": "D。题设要求在同一链路承载多个打标VLAN，交换机端口应配置trunk并允许相应VLAN；AP管理VLAN的标记或native设置还需与对端匹配。\n\nA access仅提供单个普通未标记接入VLAN，不满足题设多VLAN；B EtherChannel是链路聚合而非多VLAN模式；C PoE提供电力，可与trunk同时使用。FlexConnect并非一律要求trunk：Cisco文档允许符合单VLAN需求的access连接。"
+      }
+    },
+    {
+      "id": 649,
+      "before_sha256": "a9dc53a48cf1419903e5b2c1284c1c6b81b5880e3641dfe5af214745a39d43a5",
+      "reason": "根端口由最低根路径代价及平局规则选出，原题未明确非根桥，过度绝对。",
+      "updates": {
+        "prompt": "In a converged STP instance, what is the root port of a non-root switch?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is the port with the highest priority toward the root bridge."
+          },
+          {
+            "label": "B",
+            "text": "It is the port on the root switch that leads to the designated port on another switch."
+          },
+          {
+            "label": "C",
+            "text": "It is the port that is elected only when the root bridge has precisely one port on a single LAN segment."
+          },
+          {
+            "label": "D",
+            "text": "On a non-root switch, it is the selected port providing the best path toward the root bridge."
+          }
+        ],
+        "explanation": "D。非根交换机选出的根端口提供通向根桥的最佳路径；首先比较根路径开销，代价相同再按发送桥ID、发送端口ID和必要的本地端口ID等规则打破平局。根桥自身没有根端口。\n\nA仅说最高优先级而未说明路径代价及平局规则，不是完整定义；B根端口不在根桥上；C所述根桥端口数量不是选举前提。每个生成树实例独立计算，异常或隔离拓扑需按实际状态判断。"
+      }
+    },
+    {
+      "id": 650,
+      "before_sha256": "8579656732012455eec579e883f9af378a38f4ff0724c8dfb3dc0b9100782056",
+      "reason": "学习源地址需学习启用及合法状态，动态表项可老化，并非永久记录。",
+      "updates": {
+        "prompt": "A switch receives a valid frame on a VLAN with dynamic MAC learning enabled and no security restriction. The source MAC is not in its table. What learning action normally occurs?",
+        "explanation": "C。交换机通常将源MAC、所属VLAN和入端口关联为动态表项；该项可能老化、移动或受配置限制。之后是否单播转发、过滤或泛洪由目的地址及转发状态决定。\n\nA不存在向“未知源MAC端口”转发这一规则；B泛洪通常限同VLAN合格端口且排除入口；D学习不需要向源主机发送探测帧。端口安全、禁用学习或资源限制可改变行为，因此题干明确给出正常学习条件。"
+      }
+    }
+  ]
+}

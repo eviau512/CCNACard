@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "5520": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-1/5520-WLC-DG/b_Cisco-5520-WLC-deployment-guide.html",
+    "9800": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg/m_lacp_pagp.html",
+    "FlexConnect": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html",
+    "STP": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24062-146.html"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual Cisco documentation review; no live WLC, switch or STP tests."
+}

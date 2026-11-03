@@ -1,0 +1,48 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    616,
+    617,
+    618,
+    619,
+    620
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 618,
+      "kind": "code",
+      "input": "`ff02:0:0:0:0:0:0:1`",
+      "expected": "ff02:0:0:0:0:0:0:1",
+      "html": "<code class=\"inline-code\">ff02:0:0:0:0:0:0:1</code>"
+    },
+    {
+      "id": 618,
+      "kind": "code",
+      "input": "`ff02::1`",
+      "expected": "ff02::1",
+      "html": "<code class=\"inline-code\">ff02::1</code>"
+    },
+    {
+      "id": 618,
+      "kind": "code",
+      "input": "`ff02::2`",
+      "expected": "ff02::2",
+      "html": "<code class=\"inline-code\">ff02::2</code>"
+    },
+    {
+      "id": 618,
+      "kind": "code",
+      "input": "`ff`",
+      "expected": "ff",
+      "html": "<code class=\"inline-code\">ff</code>"
+    },
+    {
+      "id": 618,
+      "kind": "code",
+      "input": "`ff02::1`",
+      "expected": "ff02::1",
+      "html": "<code class=\"inline-code\">ff02::1</code>"
+    }
+  ]
+}

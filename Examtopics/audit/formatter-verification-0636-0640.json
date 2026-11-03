@@ -1,0 +1,41 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    636,
+    637,
+    638,
+    639,
+    640
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 639,
+      "kind": "code",
+      "input": "`lldp run`",
+      "expected": "lldp run",
+      "html": "<code class=\"inline-code\">lldp run</code>"
+    },
+    {
+      "id": 639,
+      "kind": "code",
+      "input": "`lldp transmit`",
+      "expected": "lldp transmit",
+      "html": "<code class=\"inline-code\">lldp transmit</code>"
+    },
+    {
+      "id": 639,
+      "kind": "code",
+      "input": "`lldp receive`",
+      "expected": "lldp receive",
+      "html": "<code class=\"inline-code\">lldp receive</code>"
+    },
+    {
+      "id": 640,
+      "kind": "code",
+      "input": "`no cdp enable`",
+      "expected": "no cdp enable",
+      "html": "<code class=\"inline-code\">no cdp enable</code>"
+    }
+  ]
+}

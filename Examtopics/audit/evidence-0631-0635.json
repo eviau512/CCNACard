@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "LACP": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-15/configuration_guide/lyr2/b_1715_lyr2_9300_cg/configuring_etherchannels.html",
+    "STP": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24062-146.html",
+    "WLC": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-17/config-guide/b_wl_17_17_cg.html"
+  },
+  "original_images_directly_viewed": [
+    "exhibits/q632_image.jpg",
+    "exhibits/q634_image.jpg"
+  ],
+  "limitations": "Manual documentation and diagram review; no live LACP, WLC or STP tests."
+}

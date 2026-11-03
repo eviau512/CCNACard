@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    641,
+    642,
+    643,
+    644,
+    645
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 642,
+      "kind": "code",
+      "input": "`config network webmode enable`",
+      "expected": "config network webmode enable",
+      "html": "<code class=\"inline-code\">config network webmode enable</code>"
+    },
+    {
+      "id": 642,
+      "kind": "code",
+      "input": "`secureweb`",
+      "expected": "secureweb",
+      "html": "<code class=\"inline-code\">secureweb</code>"
+    }
+  ]
+}

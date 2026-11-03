@@ -1,0 +1,29 @@
+{
+  "scope": [
+    636,
+    640
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 38,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch4_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 4,
+  "images_directly_viewed": [
+    636,
+    638,
+    639,
+    640
+  ],
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "Q600 installation pending, Q800 milestone next",
+  "source_sha256": "a5609c5ad9712ef6ec388122344b913a4e909f57996b26f09b48f5b8bf824f14",
+  "app_bundle_sha256": "e3a720c55636c60075a06eec4d3bff0752153b56479ec3f7dae8053e4b861beb",
+  "limitations": "Manual documentation, images and formatter checks; no live AireOS, LLDP or CDP tests."
+}

@@ -1,0 +1,23 @@
+{
+  "scope": [
+    606,
+    610
+  ],
+  "reviewed_count": 5,
+  "corrected_count": 5,
+  "total_questions": 1396,
+  "ids_qids_preserved": true,
+  "current_batch_changes": 9,
+  "all_changes_equal_manual_manifests": true,
+  "master_app_batch4_html_equal": true,
+  "app_logic_storage_native_unchanged": true,
+  "actual_formatter_outputs_agree": true,
+  "formatter_includes_prompts": true,
+  "literal_code_fragments_preserved": 0,
+  "phone_access": false,
+  "release_created": false,
+  "delivery": "Q600 installation pending, Q800 milestone next",
+  "source_sha256": "a0c5ff7e467132269e4e1fc5aff92fcf56ef7869e14558a8ecd35768362c5d17",
+  "app_bundle_sha256": "bb1aae74f3d94d38f8d2ab2968742059dd831d0756f3f40b0f4933748ab3d11a",
+  "limitations": "Manual documentation and formatter checks; no live fiber, WAN, TCP or RF tests."
+}

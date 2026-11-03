@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "IPv6": "https://www.rfc-editor.org/rfc/rfc4291.html",
+    "documentation": "https://www.rfc-editor.org/rfc/rfc3849.html",
+    "switch": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/12006-chapter22.html",
+    "fiber": "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/datasheet-c78-455693.html"
+  },
+  "original_images_directly_viewed": [],
+  "limitations": "Manual documentation and address review; no live fabric, switch or fiber tests."
+}

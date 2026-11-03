@@ -1,0 +1,67 @@
+{
+  "scope": "Manual Q606-Q610; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 606,
+      "before_sha256": "3f545f54d0951aac8273f18afdc93b8587c97c93ddca64aa3aab10563474ed64",
+      "reason": "模块形态不保证所有产品接头相同，指定SC及LC端口并说明光纤链路限制。",
+      "updates": {
+        "prompt": "Two compatible 1000BASE-SX optical modules must be connected directly with multimode fiber. The GBIC has an SC connector and the SFP has an LC connector. Which duplex patch cable connector pair fits?",
+        "explanation": "A。题设明确一端SC、一端LC，故需要SC-to-LC双工多模跳线，方向写作LC-to-SC相同。两端还需匹配光模块规格、光纤类型、长度和收发极性，接口形状本身不能保证链路正常。\n\nB、C各自两端相同，D含ST接头，均与题设直连端口不匹配。GBIC和SFP常见分别使用SC与LC，但具体接头应查模块型号，不能仅凭外形或1000BASE-SX名称保证。"
+      }
+    },
+    {
+      "id": 607,
+      "before_sha256": "d7b3921da1884fd683b7e37230848324fa77330798dbd6f5f16e51505b40baca",
+      "reason": "专线不必物理独占或保证无拥塞，成本和部署性能取决于服务合同。",
+      "updates": {
+        "explanation": "C。点到点租用电路连接两个固定端点，相比某些多点连接方案通常较容易理解和配置；具体仍需配置接口、寻址、封装和服务商参数。\n\nA成本因地区、速率、距离和合同而异，不能保证便宜或总是最贵；B可以由多条点到点线路组成全网状，但n个站点需n(n-1)/2条链路，扩展成本增加；D增减站点通常受电路交付约束。服务可能提供专用逻辑容量或SLA，但不必然物理独占、永不拥塞或保证特定时延。"
+      }
+    },
+    {
+      "id": 608,
+      "before_sha256": "e7ffae755f4e9e5df87ea0ea7fd792cadfaef7957a25faf4cee8a64b79614587",
+      "reason": "TCP不必逐包ACK，可累计或延迟确认；HTTPS HTTP/3也可使用QUIC/UDP。",
+      "updates": {
+        "prompt": "Why is TCP suitable for an application that needs reliable, ordered delivery of a byte stream, compared with UDP alone?",
+        "options": [
+          {
+            "label": "A",
+            "text": "UDP uses sequencing data for packets to arrive in order, and TCP offers the capability to receive packets in random order."
+          },
+          {
+            "label": "B",
+            "text": "UDP uses flow control mechanisms for the delivery of packets, and TCP uses congestion control for efficient packet delivery."
+          },
+          {
+            "label": "C",
+            "text": "UDP reliably guarantees delivery of all packets, and TCP drops packets under heavy load."
+          },
+          {
+            "label": "D",
+            "text": "UDP has no built-in delivery acknowledgments, while TCP uses acknowledgments and retransmission for reliable byte-stream delivery."
+          }
+        ],
+        "explanation": "D。TCP使用字节序列号、累计确认、重传和流量控制等机制提供可靠有序字节流；确认可以延迟或累计，不能说每个收到的数据包都必须单独发送ACK。异常断连仍可能导致交付失败，应用仍需处理错误。\n\nUDP本身不提供确认、排序或重传，但应用层可以自行实现这些功能；A颠倒排序职责，B错误地给UDP赋予内建流控，C错误宣称UDP保证交付。传统HTTP/1.1和HTTP/2常用TCP，而HTTP/3使用基于UDP的QUIC可靠传输，因此不能把HTTPS一律等同TCP。"
+      }
+    },
+    {
+      "id": 609,
+      "before_sha256": "00e523acf72e7477aed54db67bb4dc4963caee86e83f5aa3b6d8511880922ce2",
+      "reason": "hypervisor不一定裸机，host OS与直通设备可参与资源管理。",
+      "updates": {
+        "explanation": "A。Hypervisor或虚拟机监视器负责抽象、分配和调度虚拟机所需的计算、内存与其他资源。具体实现可能直接运行在硬件上，也可能与宿主操作系统协作；设备直通等配置会改变具体控制路径。\n\nB OS可能提供虚拟化支持，但题目所问的专门VM管理组件是hypervisor；C CPU是被管理资源之一，D机箱是物理承载结构，二者均不能单独完成VM资源分配。资源隔离和性能仍受配置及实现影响。"
+      }
+    },
+    {
+      "id": 610,
+      "before_sha256": "91191a47526424561c9ba8ba18526892edb7ce6e4d0d43f4f16168d5e361a020",
+      "reason": "非重叠信道减少干扰但不保证消除邻道泄漏或一律有固定数量信道。",
+      "updates": {
+        "prompt": "What is the main purpose of assigning nonoverlapping channels to nearby wireless access points?",
+        "explanation": "D。为相邻覆盖区域选择合适的非重叠信道，有助于减少信道间的频谱重叠和相互干扰，从而改善频谱复用；它不保证完全消除邻道泄漏、同频竞争或其他射频干扰。可用信道及宽度取决于地区、设备和配置。\n\nA信道宽度不会仅因选择非重叠而自动增加；B环境可能因此改善，但D更直接描述设计目的；C绑定信道是另一项配置，可能减少可用的独立信道。"
+      }
+    }
+  ]
+}

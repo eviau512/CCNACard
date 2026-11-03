@@ -1,0 +1,27 @@
+{
+  "outputs_agree": true,
+  "question_ids": [
+    621,
+    622,
+    623,
+    624,
+    625
+  ],
+  "includes_prompts": true,
+  "code_results": [
+    {
+      "id": 624,
+      "kind": "code",
+      "input": "`2001:db8:0234:ca3e::1/128`",
+      "expected": "2001:db8:0234:ca3e::1/128",
+      "html": "<code class=\"inline-code\">2001:db8:0234:ca3e::1/128</code>"
+    },
+    {
+      "id": 624,
+      "kind": "code",
+      "input": "`::`",
+      "expected": "::",
+      "html": "<code class=\"inline-code\">::</code>"
+    }
+  ]
+}

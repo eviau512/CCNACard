@@ -1,0 +1,67 @@
+{
+  "scope": "Manual Q621-Q625; next milestone Q800",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 621,
+      "before_sha256": "516b126bb0b13c9c5d56fa68506bc351cdcaf9bde242d1c693791ec025f05f25",
+      "reason": "规律跳数不保证实际延迟固定、无阻塞或所有链路拓扑绝对相同。",
+      "updates": {
+        "prompt": "In a regular two-tier spine-and-leaf fabric, what benefit can the consistent path length between hosts on different leaf switches provide?",
+        "explanation": "A。在规则的两层spine-leaf拓扑中，不同leaf下的主机通常经源leaf、spine、目的leaf通信，路径跳数规律，有助于规划和预测延迟。实际时延仍受距离、设备处理、拥塞、故障及路径选择影响，不能保证固定数值或完全无阻塞。\n\nB单纯增加leaf不必然降低超订；C流量不局限组播，终端连接方式也依设计；D负载和MTU由具体配置与封装决定，不是该架构的固有目的。"
+      }
+    },
+    {
+      "id": 622,
+      "before_sha256": "061552488e963cc6b1d2090b8c6a83150026755558615ca24de8a5ac4f077e43",
+      "reason": "用户设备是endpoint示例，但服务器/传感器也可为endpoint，基础设施也可发起连接。",
+      "updates": {
+        "prompt": "Which is an example of an endpoint using network services?",
+        "explanation": "D。用户直接使用的电脑或手机可作为endpoint访问网络服务。endpoint是通信的发起或终止一端，服务器、打印机和传感器也可能是endpoint，不要求一定由人直接操作。\n\nA和B更接近交换或路由设备中继流量，C更接近防火墙的区域访问控制职责。角色按具体通信和功能划分，一台设备也可能同时承担多个角色，基础设施设备自身亦可发起管理连接。"
+      }
+    },
+    {
+      "id": 623,
+      "before_sha256": "89aa8cd8ce93ab1852b4ec780753761f8b56496cef2027c592557b23e5a53b3d",
+      "reason": "原答案为默认状态而非功能且all泛化；改为学习源MAC/VLAN/入口接口。",
+      "updates": {
+        "explanation": "C。交换机动态学习收到帧的源MAC地址，并结合VLAN和入口接口建立或更新转发表项，供后续目的MAC查找使用；动态条目可按平台和配置老化。\n\nA trunk并非默认一律禁用学习；B学习本身不是管理VLAN认证机制；D攻击者可能利用动态学习填满表项，但那不是学习功能的目的。学习是否开启及老化时间依平台、接口和配置而定，不能说所有设备的全部端口都无例外启用。"
+      }
+    },
+    {
+      "id": 624,
+      "before_sha256": "05078cc4ece2424e2bcf15f3f985855973882e9e0619f8b76eafdc7861a2331c",
+      "reason": "文档前缀不是公网生产地址，任播不保证最低延迟或一律必须/128；原D地址语法不完整。",
+      "updates": {
+        "prompt": "For a documentation example of IPv6 anycast, which listed host address is drawn from the documentation-only unicast prefix 2001:db8::/32?",
+        "options": [
+          {
+            "label": "A",
+            "text": "FF00:1/12"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:0234:ca3e::1/128"
+          },
+          {
+            "label": "C",
+            "text": "FE80::1/10"
+          },
+          {
+            "label": "D",
+            "text": "2002:db84:3f30:ca84:be76:2::/64"
+          }
+        ],
+        "explanation": "B。`2001:db8:0234:ca3e::1/128`属于文档示例前缀，适合用来说明任播配置而不宣称它可在公网生产环境路由。IPv6任播从单播地址空间分配，语法本身通常无法区分任播与单播，取决于配置和路由。\n\nA以ff开头表示组播；C为链路本地单播，不在题设文档前缀；D为2002开头的6to4前缀，也不在题设文档范围。任播通常选择路由意义上的近端，不保证最低时延或服务器健康；/128常用于通告单个服务地址，但不是所有任播设计的普遍强制要求。原D缺少必要的`::`，现修正地址语法。"
+      }
+    },
+    {
+      "id": 625,
+      "before_sha256": "13ac02fad2b2e70db3d551f3bcbf76db5c2d2b6cc15911df12faf6da8e7a582b",
+      "reason": "OM3/OM4均50微米正确，传输距离依收发器和标准，原解析包含过度绝对化。",
+      "updates": {
+        "explanation": "C。OM3与OM4都是50/125微米多模光纤，即标称纤芯50微米、包层125微米；它们在有效模式带宽等指标上有所区别。实际可达距离依速率、光模块、链路损耗及标准而变，不能单凭OM类别保证某一距离。\n\nA的62.5微米常见于OM1；D的约9微米常见于单模光纤；B不是OM3/OM4的标称纤芯直径。外护套颜色也不能替代对线缆规格和链路预算的核对。"
+      }
+    }
+  ]
+}
