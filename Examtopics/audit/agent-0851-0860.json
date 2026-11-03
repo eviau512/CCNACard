@@ -1,0 +1,395 @@
+{
+  "scope": "Q851–Q860",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 851,
+      "original_qid": "Q1146",
+      "before_sha256": "16b39b62babca621229bbfe2f2cbf7fc5ac31945fb231e2bddf0546a76ce7354",
+      "reason": "修正原选项把私网地址当成天然安全，且 D 并非绝对错误；重写为 RFC1918 唯一定义并更正私网范围拼写。",
+      "updates": {
+        "prompt": "Which statement describes RFC 1918 private IPv4 address space?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It encrypts communications sent over the internet."
+          },
+          {
+            "label": "B",
+            "text": "Its use alone ensures PCI compliance."
+          },
+          {
+            "label": "C",
+            "text": "It is not globally unique and is not intended to be routed across the public internet."
+          },
+          {
+            "label": "D",
+            "text": "It can be assigned only to hosts that never access external services."
+          }
+        ],
+        "explanation": "C。RFC 1918 私有地址可在不同私网重复使用，不具备公网全局唯一性；其路由不应向公共互联网传播。私网范围为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16。A 私有地址本身不提供加密；B 使用私网地址本身不能证明合规；D 私网主机也可通过 NAT 或代理访问外部服务。私有地址本身并非防火墙，也不能保证免受互联网攻击。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of private IPv4 addressing?",
+        "options": [
+          {
+            "label": "A",
+            "text": "enables secure connectivity over the internet"
+          },
+          {
+            "label": "B",
+            "text": "complies with PCI regulations"
+          },
+          {
+            "label": "C",
+            "text": "provides an added level of protection against internet threats"
+          },
+          {
+            "label": "D",
+            "text": "is used on internal hosts that stream data solely to external resources"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址（Private IPv4 Addressing）的安全特性与网络边界隔离原理。\n根据 IETF RFC 1918 规范，保留用于私有网络的 IPv4 地址块包括：\n- A 类私网地址：10.0.0.0/8（10.0.0.0 - 10.255.255.255）\n- B 类私网地址：172.16.0.0/12（172.16.0.0 - 172.31.255.255）\n- C 类私网地址：192.168.0.0/16（192.168.0.0 - 192.258.255.255）\n私网地址的本质特征：\n1. 全球不可路由性（Non-routable over Internet）：互联网核心骨干网的所有路由器都严格配置路由过滤策略，直接丢弃以私网 IP 作为源或目的地址的数据包。\n2. NAT/PAT 边界隐蔽性：内部主机通过网络地址转换（NAT/PAT）共享少量公网 IP 访问外部网络。由于私网地址无法直接从互联网寻址，外部未经授权的互联网攻击者无法从外部主动发起直接针对内部主机私网 IP 的网络扫描、探测与渗透攻击，客观上为内部网络构筑了一层天然的保护屏障（Added level of protection）。\n\n• 正确选项剖析：\n选项 C（provides an added level of protection against internet threats）准确表述了私网地址的安全附加值：由于 RFC 1918 私网地址在公共互联网上不可路由且被 NAT 网关隐藏，外部互联网攻击者无法直接对其发起点对点的外部网络层攻击，从而提供了对抗互联网外部威胁的一层额外保护（Added level of protection）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（enables secure connectivity over the internet）：私网地址本身并不提供任何数据加密或安全传输机制，若要跨越互联网实现安全互联，必须依靠 VPN 技术（如 IPsec、SSL/TLS），私网地址单独使用在公网上直接被丢弃。\n- 选项 B（complies with PCI regulations）：PCI DSS（支付卡行业数据安全标准）涵盖访问控制、强加密传输、日志审计等大量严苛合规要求，仅在内网使用私网 IP 绝不足以满足 PCI 法规要求。\n- 选项 D（is used on internal hosts that stream data solely to external resources）：内部主机若要将数据流单向发送给外部资源，使用公网 IP 或经过 NAT 都可以实现；如果仅依赖私网 IP 而没有 NAT 转换，数据在到达公网后根本无法被外部服务器回包。\n\n• 考试要点与速记技巧：\n私网地址不可公网路由（RFC 1918），外网黑客无法直接 Ping/扫描内网私有 IP，天然提供额外防护层（Added level of protection）！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "修正原选项把私网地址当成天然安全，且 D 并非绝对错误；重写为 RFC1918 唯一定义并更正私网范围拼写。"
+      }
+    },
+    {
+      "id": 852,
+      "original_qid": "Q1148",
+      "before_sha256": "b48d33401e35b7b67619d943b3cf6081e2d33de9f527cd78d0c76106d4ec24ed",
+      "reason": "限定内部通信是用途而非仅有用途，移除天然安全和绝对化断言。",
+      "updates": {
+        "explanation": "D。只需内部互通的主机可使用 RFC 1918 私有地址；私网地址不要求全球唯一，不应作为公网路由通告。私网主机也可通过 NAT、代理等方式访问外部服务，因此“只与内部主机通信”是适用场景而非强制限制。A 公网发布需可公开路由的地址及适当转换或代理；B 地址范围有限；C 多个监听端点不是私网地址的定义。私网地址本身不保证安全。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址的应用场景与设计初衷。\n私网 IPv4 地址主要用于以下场景：\n1. 解决公网 IPv4 地址匮乏问题：允许企业内部成千上万台主机重复使用 RFC 1918 地址空间（10/8, 172.16/12, 192.168/16）。\n2. 纯内网隔离通信：在企业内部网络中，许多关键系统（如内部数据库服务器、域控服务器、存储节点、生产工控设备、财务系统主机等）设计上只需与企业内部的其他主机或应用系统进行内部通信，出于安全和架构考虑严禁暴露给外部互联网。此类主机分配私网 IPv4 地址，无需向 ISP 申请昂贵的公网 IP，即可安全高效地在本地网络内互联互通。\n\n• 正确选项剖析：\n选项 D（is used on hosts that communicate only with other internal hosts）精准切中了私网地址最纯粹的应用场景：对于那些仅仅需要与内部其他主机进行通信的主机（如内部文件服务器、局域网打印机、数据库等），使用私网 IPv4 地址是标准且最优的网络设计方案。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（is used when the ISP requires the new subnet to be advertised to the internet for web services）：公共 Web 服务需要面向互联网用户开放访问，ISP 严禁在互联网 BGP 路由表中通告 RFC 1918 私网地址；此类服务必须使用已注册的公网 IPv4 地址。\n- 选项 B（provides unlimited address ranges）：私网 IPv4 地址的地址数量也是严格有限的（例如 10.0.0.0/8 只有约 1677 万个地址，192.168.0.0/16 只有 65536 个地址），绝非无限制（Unlimited）。\n- 选项 C（is used when the network has multiple endpoint listeners）：多端点监听者通常涉及组播（Multicast，224.0.0.0/4）或任播（Anycast）技术，与单播私网地址的使用没有必然因果关系。\n\n• 考试要点与速记技巧：\n私网地址内网用（Internal only），对外发布用公网；有限空间非无限，内网互通最安全！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定内部通信是用途而非仅有用途，移除天然安全和绝对化断言。"
+      }
+    },
+    {
+      "id": 853,
+      "original_qid": "Q1149",
+      "before_sha256": "83c64d8b16c39940c25591f59f041bcabaa17a687ec51f47e03f70dfe2d0bc60",
+      "reason": "看原拓扑，补路由和默认 allowed list 条件；恢复各选项 CLI 换行，要求 VLAN 2/10/11/12 均通过。",
+      "updates": {
+        "prompt": "Refer to the exhibit. AccSw2 has VLANs 2, 10, 11 and 12 configured. Gi1/24 connects to AccSw1, whose corresponding port is already a trunk carrying these VLANs. The router-on-a-stick and hosts are already configured for inter-VLAN connectivity, and the AccSw2 trunk allowed list is at its default. Which configuration on AccSw2 connects Server1 in VLAN 10 and carries all four VLANs between the switches?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface GigabitEthernet1/1\n switchport access vlan 11\n!\ninterface GigabitEthernet1/24\n switchport mode trunk\n switchport trunk allowed vlan 10,11"
+          },
+          {
+            "label": "B",
+            "text": "interface GigabitEthernet1/3\n switchport mode access\n switchport access vlan 10\n!\ninterface GigabitEthernet1/24\n switchport mode trunk\n switchport trunk allowed vlan 2,10"
+          },
+          {
+            "label": "C",
+            "text": "interface GigabitEthernet1/3\n switchport mode access\n switchport access vlan 10\n!\ninterface GigabitEthernet1/24\n switchport mode trunk"
+          },
+          {
+            "label": "D",
+            "text": "interface GigabitEthernet1/1\n switchport mode access\n switchport access vlan 11\n!\ninterface GigabitEthernet1/24\n switchport mode trunk"
+          }
+        ],
+        "explanation": "C。图示 Server1 接 AccSw2 Gi1/3，服务器使用 VLAN 10；交换机间 Gi1/24 要以 trunk 承载多个 VLAN。题设允许列表为默认，C 因此允许所需 VLAN 2、10、11、12；现有非默认列表不能仅凭 mode trunk 推断已恢复。B 只允许 2、10，排除了 11、12；A/D 配置 Gi1/1 而不是 Server1 端口，A 还限制 VLAN。跨 VLAN 连通还依赖题设已配置的路由、网关、对端 trunk 和 VLAN。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The engineer configured the VLANs on the new AccSw2 switch. A router-on-a-stick is connected to both switches. How must The ports be configured on AccSw2 to establish full connectivity between the two switches and for Server1?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface GigabitEthernet1/1 Switchport access vlan 11 ! Interface GigabitEthernet1/24 Switchport mode trunk Switchport trunk allowed vlan 10,11"
+          },
+          {
+            "label": "B",
+            "text": "interface GigabitEthernet1/3 Switchport mode access Switchport access vlan 10 ! Interface GigabitEthernet1/24 Switchport mode trunk Switchport trunk allowed vlan 2,10"
+          },
+          {
+            "label": "C",
+            "text": "interface GigabitEthernet1/3 Switchport mode access Switchport access vlan 10 ! Interface GigabitEthernet1/24 Switchport mode trunk"
+          },
+          {
+            "label": "D",
+            "text": "interface GigabitEthernet1/1 Switchport mode access Switchport access vlan 11 ! Interface GigabitEthernet1/24 Switchport mode trunk"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网交换机 VLAN 配置、Trunk 链路封装以及单臂路由（Router-on-a-Stick）架构下的接入端口与中继端口配置规范。\n在多交换机互联的企业园区网络中：\n1. 接入链路（Access Link）：连接终端设备（如 PC、服务器）。交换机端口配置为 Access 模式并绑定指定的 VLAN ID。当终端发出的无标记以太网帧（Untagged Frame）进入 Access 端口时，交换机打上该端口的 PVID 标记并在该 VLAN 内部转发；当帧离开 Access 端口流向终端时，交换机剥离 802.1Q 标签以标准以太网帧交付终端。\n2. 中继链路（Trunk Link）：交换机与交换机之间（或交换机与单臂路由器之间）的互联链路。必须配置为 Trunk 模式（`switchport mode trunk`），在帧头插入 IEEE 802.1Q 4 字节标签，以便在单一物理链路上传输多个 VLAN 的数据流量。默认情况下，思科 Trunk 端口允许所有 VLAN（1-4094）通过。\n\n• 正确选项剖析：\n结合拓扑图与 `AccSw1# show vlan` 诊断输出深入剖析：\n1. `AccSw1` 的 VLAN 规划与分配：\n   - VLAN 10（Servers）：关联接口 Gig1/3, Gig1/4，业务为服务器网段。\n   - VLAN 11（Staff）：关联接口 Gig1/1，业务为员工 PC1（IP: 10.0.1.11/24）。\n   - VLAN 2（IT-Support）。\n2. 拓扑中新交换机 `AccSw2` 的连接情况：\n   - Server1（IP: 10.0.2.22/24，属于服务器网段）物理直连在 `AccSw2` 的 `GigabitEthernet1/3` 接口上。因此，为了让 Server1 归属到服务器 VLAN 10，必须将 `AccSw2` 的 Gi1/3 配置为 Access 端口并划入 VLAN 10：\n     ```cisco\n     interface GigabitEthernet1/3\n      switchport mode access\n      switchport access vlan 10\n     ```\n   - 两台交换机之间的互联链路为 `GigabitEthernet1/24`。为了实现 AccSw1 与 AccSw2 之间所有 VLAN（包括 Server1 所在的 VLAN 10，以及连往 AccSw1 上单臂路由器的 VLAN 11 等）的互联互通，必须将 Gi1/24 配置为 Trunk 模式：\n     ```cisco\n     interface GigabitEthernet1/24\n      switchport mode trunk\n     ```\n   选项 C 的配置完全准确无误地满足了全网连通性要求。\n\n• 干扰项排除与错误陷阱：\n- 选项 A 与 D：将配置写在 `GigabitEthernet1/1` 上并划入 VLAN 11。拓扑明确显示直连 Server1 的是 AccSw2 的 `Gi1/3` 接口，而 Gi1/1 是 AccSw1 上连接 PC1 的端口，端口号与 VLAN 完全错配！\n- 选项 B：在 Trunk 接口配置了 `switchport trunk allowed vlan 2,10`。这显式过滤并拒绝了 VLAN 11（Staff PC1 所在网段）通过该 Trunk 链路，导致 VLAN 11 的终端无法与 Server1 或跨交换机资源通信，破坏了全网连通性。\n\n• 考试要点与速记技巧：\n看清拓扑接哪个口：Server1 插在 AccSw2 的 Gi1/3，配 Access VLAN 10；交换机互联 Gi1/24，配 Mode Trunk 跑全网流量！"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q853_agent.jpg",
+      "image_sha256": "5c28b64ddef19bea9dc62a64e729514a29ef1972ee839611184dec8ec9010be4",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "看原拓扑，补路由和默认 allowed list 条件；恢复各选项 CLI 换行，要求 VLAN 2/10/11/12 均通过。"
+      }
+    },
+    {
+      "id": 854,
+      "original_qid": "Q1150",
+      "before_sha256": "d98f2f1b4ab5586b6baedefd4e81ca1e7de68629ffba158c2729360b22a903c3",
+      "reason": "明确同 VLAN 允许转发端口及未知单播条件，修正直通转发与 FCS 绝对化说法。",
+      "updates": {
+        "prompt": "How does an Ethernet switch normally handle an unknown unicast destination within a VLAN?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It floods the frame on eligible forwarding ports in that VLAN except the ingress port."
+          },
+          {
+            "label": "B",
+            "text": "It always modifies the source VLAN information."
+          },
+          {
+            "label": "C",
+            "text": "It rewrites both source and destination MAC addresses."
+          },
+          {
+            "label": "D",
+            "text": "It forwards frames only when they have fewer than five CRCs."
+          }
+        ],
+        "explanation": "A。交换机按 VLAN 查找目的 MAC；未知单播通常泛洪到该 VLAN 中符合条件的转发端口，排除入端口。STP 阻塞、端口隔离和未知单播抑制等可限制范围。B VLAN 标签可随接入或 trunk 处理，但并非因源 VLAN 已知而必须修改；C 普通二层桥接不以此方式改写 MAC；D 对 CRC 的说法没有意义。存储转发通常丢弃 FCS 错误帧；直通交换可能先行转发，不能绝对化。"
+      },
+      "original_fields": {
+        "prompt": "How does frame switching function on a switch?",
+        "options": [
+          {
+            "label": "A",
+            "text": "floods unknown destinations to all ports except the receiving port"
+          },
+          {
+            "label": "B",
+            "text": "modifies frames that contain a known source VLAN"
+          },
+          {
+            "label": "C",
+            "text": "rewrites the source and destination MAC address"
+          },
+          {
+            "label": "D",
+            "text": "buffers and forwards frames with less than 5 CRCs"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网二层交换机对未知单播帧的泛洪机制（Unknown Unicast Flooding）。\n以太网交换机接收到数据帧时的转发引擎逻辑如下：\n1. MAC 学习：提取帧的源 MAC 地址和入端口，记录到 MAC 地址表（CAM 表）中。\n2. 目的 MAC 查找：提取帧的目的 MAC 地址并在 CAM 表中查找该 VLAN 对应的出端口。\n   - 若目的 MAC 是已知单播（Known Unicast），则执行点对点过滤转发（Forwarding）。\n   - 若目的 MAC 是广播帧（全 F）、组播帧，或者在 CAM 表中找不到该单播目的 MAC（即未知单播帧，Unknown Unicast Frame）：\n     交换机无法得知目标终端连接在哪个具体端口上。为了保证数据能够送达目标主机，交换机必须执行**泛洪（Flooding）**操作，即复制该数据帧，并向该 VLAN 内除“接收该数据帧的入站端口”之外的所有活跃端口广播发送。\n\n• 正确选项剖析：\n选项 A（floods unknown destinations to all ports except the receiving port）严格且完整地陈述了 IEEE 802.1D 交换机标准处理未知目标帧的规范操作：当目的地址未知时，向除接收端口以外的所有端口进行泛洪。选项 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（modifies frames that contain a known source VLAN）：普通交换机在相同 VLAN 内转发数据帧时绝不修改数据帧内容；只有跨越 802.1Q Trunk 链路时才打上/剥除 4 字节的 VLAN Tag，但绝不更改已知 VLAN 源信息。\n- 选项 C（rewrites the source and destination MAC address）：重写二层源和目的 MAC 地址是三层路由器（Layer 3 Router）在跨网段路由时的标志性行为，二层交换机只基于 MAC 转发，绝对不重写 MAC。\n- 选项 D（buffers and forwards frames with less than 5 CRCs）：以太网交换机收到任何发生 CRC/FCS 校验错误的数据帧时，会立刻作为残损帧予以丢弃（Drop），绝不会缓存或允许带有任何 CRC 错误的数据帧继续转发。\n\n• 考试要点与速记技巧：\n交换机处理未知单播就一招：向入端口以外的所有同 VLAN 端口无脑泛洪（Floods unknown destinations to all ports except receiving port）！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "明确同 VLAN 允许转发端口及未知单播条件，修正直通转发与 FCS 绝对化说法。"
+      }
+    },
+    {
+      "id": 855,
+      "original_qid": "Q1151",
+      "before_sha256": "3245827e8e16a2ae32bd9dc7e55935f55e7d0344d29e58f8e13ab53c625d6da2",
+      "reason": "查看原 ipconfig；修正到期与租约仍有效时 T1 单播续订的混淆。",
+      "updates": {
+        "prompt": "Refer to the exhibit. At the T1 renewal time, while the lease is still valid, which DHCP server address does the client normally contact first by unicast?",
+        "explanation": "C。原图列出 DHCP Server 为 192.168.25.100，客户端在 T1 进入 RENEWING 时通常向授予租约的服务器单播 DHCPREQUEST。T1 默认约为租期 50%，服务器可指定定时器；若续租无响应，T2 进入 REBINDING 并广播寻找可用服务器。租约实际到期后不可把该过程简单描述为仍单播续租。A 为客户端自身地址，B 为默认网关，D 为 DNS 地址。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which address will the client contact to renew their IP address when the current lease expires?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 DHCP 协议（RFC 2131）的租约续订（Lease Renewal）状态机与报文交互原理。\n当 DHCP 客户端通过 DORA 流程成功获取 IP 地址后，会维护两个续订定时器：\n1. T1 定时器（续订定时器，Renewal Timer）：通常为租约总时长的 50%（0.5 * Lease Time）。当 T1 超时，客户端进入 RENEWING 状态，主动向**最初授予其租约的特定 DHCP 服务器**以**单播（Unicast）**方式发送 `DHCPREQUEST` 请求报文以延长租期。\n2. T2 定时器（重绑定定时器，Rebinding Timer）：通常为租约总时长的 87.5%（0.875 * Lease Time）。如果在 T1 阶段单播无响应，T2 超时后客户端进入 REBINDING 状态，改用广播（Broadcast）方式发送 `DHCPREQUEST` 请求任意可用的 DHCP 服务器。\n3. 核心机制：当租约到期或需要续订时，客户端直接联系的目标 IP 地址正是为其分配租约的 DHCP Server 的 IP 地址。\n\n• 正确选项剖析：\n观察客户端 `Wireless LAN adapter Wi-Fi` 的 `ipconfig /all` 详细输出：\n- IPv4 Address: 192.168.25.103（本机客户端 IP）\n- Subnet Mask: 255.255.255.0\n- Default Gateway: 192.168.25.1（网关路由器 IP）\n- DHCP Server: 192.168.25.100（为该客户端分配配置的 DHCP 服务器 IP）\n- DNS Servers: 192.168.25.254\n当租约需要续订（Renew）时，客户端发送单播 DHCPREQUEST 的目标 IP 地址必须是 DHCP Server 地址，即 `192.168.25.100`。选项 C 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（192.168.25.103）：这是客户端自身的本地 IPv4 地址，客户端不可能向自己发送续订请求。\n- 选项 B（192.168.25.1）：这是默认网关（Default Gateway）的 IP 地址，用于跨子网 IP 数据包路由，并非处理 DHCP 租约管理的服务器地址。\n- 选项 D（192.168.25.254）：这是 DNS 域名解析服务器的 IP 地址，只负责域名与 IP 的解析，与 DHCP 租约管理无关。\n\n• 考试要点与速记技巧：\n续订找谁？找发租约的房东！DHCP 续租直接单播联系 DHCP Server（.100），不找网关（.1），不找 DNS（.254）！"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q855_agent.jpg",
+      "image_sha256": "fd5794a1b19b749f00feac7f4f2c05767a60d942be5a2d9b6e51186f76007a42",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "查看原 ipconfig；修正到期与租约仍有效时 T1 单播续订的混淆。"
+      }
+    },
+    {
+      "id": 856,
+      "original_qid": "Q1152",
+      "before_sha256": "f3f286765b5342ea6e23d40bf7692e31900fcc2ba024cc442079b5cc95de3590",
+      "reason": "查看原图；更正 A 组播 MAC 与 D 重复交换机名，限定同一实例可互通。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume all four switches can exchange BPDUs in the same spanning-tree instance, and their bridge IDs are shown in the choices. Which becomes root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW4 - Bridge Priority - 8192 - MAC address 04:0f:e8:ed:b2:98"
+          },
+          {
+            "label": "B",
+            "text": "SW2 - Bridge Priority - 8192 - MAC address 00:ac:f0:9b:dc:72"
+          },
+          {
+            "label": "C",
+            "text": "SW3 - Bridge Priority - 16384 - MAC address 0e:6c:e4:b1:8a:57"
+          },
+          {
+            "label": "D",
+            "text": "SW1 - Bridge Priority - 16384 - MAC address 0a:45:22:26:29:77"
+          }
+        ],
+        "explanation": "B。同一生成树实例选最低 bridge ID；在相同系统 ID 扩展条件下先比较优先级，再比较 MAC。SW2 与 SW4 优先级均为 8192，低于其他两个的 16384；SW2 的首字节 00 小于 SW4 的 04，因此 SW2 胜出。原 A 的 05 为组播地址，已改为单播 04；原 D 重复标为 SW4，图中第四台为 SW1，已更正。其他 VLAN 的独立实例可能有不同根桥。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW4 - Bridge Priority - 8192 - Mac-address 05:0f:e8:ed:b2:98"
+          },
+          {
+            "label": "B",
+            "text": "SW2 - Bridge Priority - 8192 - Mac-address 00:ac:f0:9b:dc:72"
+          },
+          {
+            "label": "C",
+            "text": "SW3 - Bridge Priority - 16384 - Mac-address 0e:6c:e4:b1:8a:57"
+          },
+          {
+            "label": "D",
+            "text": "SW4 - Bridge Priority - 16384 - Mac-address 0a:45:22:26:29:77"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP / RSTP，IEEE 802.1D/802.1w）中根桥（Root Bridge）选举的二步裁决机制。\n在同一个广播域（或指定 VLAN 的生成树实例）中，所有交换机通过泛洪交换网桥协议数据单元（BPDU）参与根桥竞选。竞选判定依据唯一的网桥标识符（Bridge ID, BID）：\nBID 结构由两部分构成：\n1. 桥优先级（Bridge Priority）：占 2 字节。\n2. 交换机物理 MAC 地址（MAC Address）：占 6 字节。\n根桥选举法则遵循绝对的“最小即最优（Lowest BID wins）”原则：\n- 规则 1：优先比较 Bridge Priority，数值最小的交换机胜出。\n- 规则 2：若 Bridge Priority 出现平局（相同），则破除平局比较 MAC 地址。从最高有效位（第 1 字节）向低有效位逐字节以十六进制数值比较，数值最小者被选举为根桥。\n\n• 正确选项剖析：\n结合拓扑选项列出的候选网桥参数逐项比对：\n- 选项 A：SW4 - Priority: 8192 - MAC: `05:0f:e8:ed:b2:98`\n- 选项 B：SW2 - Priority: 8192 - MAC: `00:ac:f0:9b:dc:72`\n- 选项 C：SW3 - Priority: 16384 - MAC: `0e:6c:e4:b1:8a:57`\n- 选项 D：SW4 - Priority: 16384 - MAC: `0a:45:22:26:29:77`\n竞选裁决过程：\n1. 优先级比对：SW2 与 SW4 的优先级均为 8192，显著优于 16384（排除选项 C 和 D）。\n2. MAC 地址平局裁决：\n   - SW2 的 MAC 地址为 `00:ac:f0:9b:dc:72`\n   - SW4 的 MAC 地址为 `05:0f:e8:ed:b2:98`\n   - 比较首字节：SW2 的首字节为 `0x00`，而 SW4 的首字节为 `0x05`。\n   - 显然 `0x00 < 0x05`，SW2 的 MAC 地址整体更小！\n因此，SW2 拥有全网最小的 Bridge ID，成功加冕为根桥，选项 B 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：SW4 的优先级虽然同为 8192，但在比较 MAC 地址时，其首字节 `05` 大于 SW2 的 `00`，平局仲裁中被淘汰。\n- 选项 C 与 D：优先级高达 16384，高于 8192，直接在第一轮优先级比较中失去根桥资格。\n\n• 考试要点与速记技巧：\nSTP 选举口诀：先看优先级，小者得第一；若遇同分者，MAC 比高低！`00` 首字节全场最低，SW2 稳坐 Root Bridge！"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q856_agent.jpg",
+      "image_sha256": "414795923eb5b10bf31222ca0f3fd2933ace8910e55faff5ad94d79b038f60e0",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "查看原图；更正 A 组播 MAC 与 D 重复交换机名，限定同一实例可互通。"
+      }
+    },
+    {
+      "id": 857,
+      "original_qid": "Q1154",
+      "before_sha256": "f29f8f96b212a4d1888a741d6504b9a4fc4a900205a93b32c9ceb6ee224943d0",
+      "reason": "区分集中配置与 AP 本地有限配置，修正轻量 AP 无状态和职责划分的绝对化。",
+      "updates": {
+        "explanation": "B。集中管理的 lightweight AP 通常由管理员在 WLC 配置，控制器通过 CAPWAP 控制通道（旧架构可为 LWAPP）向已加入 AP 下发配置。A/D 不是该架构下集中修改 WLAN 配置的常规方式；部分平台仍支持 AP 本地诊断或有限配置，不应断言 AP 完全无状态或不可 SSH。C EoIP 可用于某些控制器间移动性，并非 AP 常规配置通道。不同产品和版本的数据平面、认证及本地交换职责有所差异。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查思科企业级集中式无线架构（Split-MAC Architecture）与轻量化接入点（Lightweight AP, LAP）的管理维护机制。\n在 Cisco 集中式无线架构中：\n1. 职责分离（Split-MAC）：AP 与无线局域网控制器（WLC）分工协作。AP 仅负责物理层和实时性要求极高的二层射频工作（如 Beacon 广播、握手探测应答、帧加解密等）；所有非实时的管理、认证、漫游、安全策略与全局配置均统一集中在 WLC 上。\n2. CAPWAP 隧道管理：轻量化 AP 开机后通过 DHCP Option 43 或 DNS 发现并加入（Join）其主控 WLC。WLC 与 AP 之间建立两条安全隧道：\n   - CAPWAP 数据隧道（UDP 端口 5247）\n   - CAPWAP 控制隧道（UDP 端口 5246，采用 DTLS 加密）\n3. 零配置免维护（Zero-Touch Deployment）：轻量化 AP 本身不保存任何独立的本地永久配置。管理员对 AP 的所有参数修改（如 SSID 绑定、信道调整、发射功率等）均在 WLC 的 GUI/CLI 上统一完成，WLC 自动通过 CAPWAP/LWAPP 控制隧道实时下发给 AP。\n\n• 正确选项剖析：\n选项 B（CAPWAP/LWAPP connection via the parent WLC）完全符合思科集中式无线架构规范：轻量化 AP 的一切配置变更必须通过其上联父控制器（Parent WLC）经由 CAPWAP/LWAPP 控制连接集中下发。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（SSH connection to the management IP of the AP）：轻量化 AP 在注册到 WLC 后，直接通过 SSH 登录到 AP 上仅能执行只读的排障诊断命令（如 `show controllers`、`show capwap client`），无法在 AP 本地修改 WLAN 配置。\n- 选项 C（EoIP connection via the parent WLC）：EoIP（Ethernet over IP）是早期思科控制器之间实现跨控制器二层漫游或锚点（Mobility Anchor）移动组通信的专有隧道技术，并非用于 AP 的配置管理。\n- 选项 D（HTTPS connection directly to the out-of-band address of the AP）：轻量化 AP 不具备独立的 Web GUI 管理界面，直接通过 HTTPS 访问 AP 会被拒绝或无法管理。\n\n• 考试要点与速记技巧：\n瘦 AP（Lightweight AP）是“无脑天线”，全身配置全靠 WLC；配置修改找控制器，CAPWAP 隧道下指令！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "区分集中配置与 AP 本地有限配置，修正轻量 AP 无状态和职责划分的绝对化。"
+      }
+    },
+    {
+      "id": 858,
+      "original_qid": "Q1156",
+      "before_sha256": "165c236172dbb035d512b3c2909346ec7dd81aa7569e48024afa0846048a3eff",
+      "reason": "区分逻辑集中和物理分布，移除全部控制功能下移和必须 ASIC 等绝对化。",
+      "updates": {
+        "explanation": "D。SDN 将网络控制功能与数据转发分离，并提供逻辑集中、可编程的控制视图；控制器可以采用多个物理节点实现，控制功能也不必全部从设备移除。数据平面仍由网络节点执行转发，未必均依赖专用 ASIC。应用平面通过接口使用控制器服务；“services”不是题目所指的核心平面。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查软件定义网络（SDN, Software-Defined Networking）的三层架构与核心设计哲学。\n传统网络设备（如传统交换机、路由器）将数据平面、控制平面和管理平面紧密耦合在每一台独立的硬件设备中（分布式控制）。\nSDN 的核心技术革命在于**控制平面与数据平面的彻底解耦**（Decoupling of Control and Data Planes）：\n1. 控制平面集中化（Centralized Control Plane）：将全网拓扑计算、路径规划、策略决策（如路由计算、安全策略、流表生成）从各个物理设备中抽离，上移并集中运行在逻辑统一的 SDN 控制器（SDN Controller，如 Cisco Catalyst Center / DNA Center, Cisco ACI APIC, OpenFlow Controller）上。控制器拥有全网全局视图，实现智能集中调度。\n2. 数据平面硬件转发（Distributed Data Plane）：物理或虚拟交换机/路由器仅保留快速转发引擎（ASIC），充当哑设备（Forwarding Nodes），依据控制器通过南向接口（SBI）下发的流表和指令以线速执行数据包转发。\n\n• 正确选项剖析：\n选项 D（control）准确切中 SDN 最本质的核心定义：在软件定义网络中，集中化的是控制平面（Control Plane），实现全网集中管理与智能化可编程。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（application）：应用平面位于 SDN 架构的最上层（业务层），包含业务管理、网络监控与编排应用，通过北向接口（NBI）与控制器通信，并非 SDN 解耦集中的核心网络平面。\n- 选项 B（services）：网络服务（如 NAT、防火墙、负载均衡）可以在网络中以物理设备或虚拟网络功能（VNF）存在，属于具体业务增值服务，并非 SDN 架构定义的解耦集中平面。\n- 选项 C（data）：数据平面（转发平面）如果集中化，会导致所有的海量业务数据包都涌向单一控制器，引发严重的网络瓶颈、巨大延迟和单点故障；数据平面必须保持高度分布式、依托硬件芯片在各网络节点就地高速线速转发。\n\n• 考试要点与速记技巧：\nSDN 灵魂考点：控制平面集中化（Centralized Control），数据平面分布式（Distributed Data）！大脑集中指挥，手脚就地干活！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "区分逻辑集中和物理分布，移除全部控制功能下移和必须 ASIC 等绝对化。"
+      }
+    },
+    {
+      "id": 859,
+      "original_qid": "Q1157",
+      "before_sha256": "4a531bcc2d92c3c028836d8598daa55dd65330deed2dfe5b4befe750a730bcc3",
+      "reason": "说明 RRM 可缓解但不保证消除干扰，避免对 WLC 平台功能作绝对断言。",
+      "updates": {
+        "explanation": "B。无线控制器可通过 RRM 结合测量调整信道和发射功率，帮助缓解高密度环境中的射频干扰；具体能力、CleanAir 和动态调整取决于设备及配置，也不能保证完全无干扰。A 边界防护不是本题最有代表性的无线服务；C 跨网段路由通常由路由器或三层交换机承担；D 为有线主机分配地址通常由 DHCP 服务承担，具体产品可能兼具其他功能。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查无线局域网控制器（WLC）的无线射频资源管理（RRM, Radio Resource Management）核心功能。\n在高密度无线部署环境（如大会议室、高层写字楼、体育馆等）中，大量 AP 密集部署会导致严重的同频干扰（Co-Channel Interference, CCI）以及信道竞争碰撞。\nCisco WLC 提供的 RRM 引擎通过集中管控所有轻量化 AP，实时采集空口射频环境数据，提供以下关键干扰管理服务：\n1. 动态信道分配（Dynamic Channel Assignment, DCA）：实时侦测同频与相邻信道干扰，自动为各 AP 计算并分配互不干扰的最佳非重叠信道。\n2. 发射功率控制（Transmit Power Control, TPC）：自动调节 AP 的射频发射功率，既避免信号覆盖盲区，又防止相邻 AP 功率过大造成射频相互串扰。\n3. 清洁信道技术（Cisco CleanAir）：主动识别和隔离非 Wi-Fi 干扰源（如微波炉、蓝牙、无线摄像头）。\n因此，“管理密集网络中的射频干扰（Manages interference in a dense network）”是无线控制器最具代表性的核心系统级服务。\n\n• 正确选项剖析：\n选项 B（It manages interference in a dense network）准确指出了 WLC 通过 RRM/CleanAir 机制进行自动信道规划和发射功率动态调节、有效抑制和管理密集无线网络干扰的核心服务能力。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It mitigates threats from the internet）：来自互联网的网络攻击威胁由边界下一代防火墙（如 Cisco Secure Firewall / Firepower）以及入侵防御系统（IPS）进行防御，WLC 主要负责局域网内部无线射频管理与准入。\n- 选项 C（It provides Layer 3 routing between wired and wireless devices）：有线与无线设备之间的三层互通路由通常由园区网的核心/汇聚层三层交换机或路由器完成，WLC 专注于集中式无线流量终结，而非充当通用骨干路由器。\n- 选项 D（It issues IP addresses to wired devices）：为有线设备分发 IP 地址是专用 DHCP 服务器或有线接入交换机的职责，WLC 绝不为纯有线终端提供 IP 分发。\n\n• 考试要点与速记技巧：\n控制器（WLC）管天不管地：密密麻麻无线网，射频干扰最头疼；自动调频调功率（RRM），全靠 WLC 管干扰（Manages interference）！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "说明 RRM 可缓解但不保证消除干扰，避免对 WLC 平台功能作绝对断言。"
+      }
+    },
+    {
+      "id": 860,
+      "original_qid": "Q1158",
+      "before_sha256": "d0e17ab0e2cc6e545f0aa441f0c44d76c13fcf58c8d59e564069b08c6f1f06e6",
+      "reason": "限定 AireOS 多接口及已选控制器阶段，补证书、可达性和平台边界。",
+      "updates": {
+        "prompt": "On a Cisco AireOS controller supporting multiple AP-manager interfaces, an AP has selected that controller and received multiple available AP-manager interfaces. Which interface does it normally choose for its join request?",
+        "explanation": "C。在支持多个 AP-manager 的 AireOS 场景，AP 通常在发现响应中选择负载最小、已连接 AP 数量最少的 AP-manager。控制器选择本身还可能考虑首选控制器及可用容量，加入也受可达性、证书和平台配置等影响，不能保证永远成功或负载完全均衡。A 不会因此禁用 WLAN；B 并非多接口必然失败；D 不是本题同一控制器上接口的主要选择规则。"
+      },
+      "original_fields": {
+        "prompt": "When more than one AP-Manager interface is provisioned on a wireless LAN controller, how is the request handled by the AP?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco AireOS 无线局域网控制器（WLC）上 AP-Manager 接口的多接口负载均衡（Load Balancing）机制。\n在思科集中式 WLC 体系中：\n1. AP-Manager 接口是专门用于终结来自轻量化 AP 的二层/三层 CAPWAP/LWAPP 管理控制流量的专用逻辑接口。\n2. 在中大型网络部署中，为了避免单个物理端口出现流量瓶颈并提供冗余，管理员可以在一个 WLC 上配置多个 AP-Manager 接口（通常绑定在不同的物理分布端口上）。\n3. AP 加入与均衡算法：\n   - 当 AP 向 WLC 发送 Discovery Request 时，WLC 会在 Discovery Response 中向 AP 返回该控制器上所有已启用的 AP-Manager 接口的 IP 地址列表及其当前已绑定的 AP 数量（负载情况）。\n   - AP 在决定向该 WLC 发起正式的 Join Request 时，会根据收到的负载数据执行算法评估，**主动选择当前连接 AP 数量最少（Fewest number of APs）的那个 AP-Manager 接口**建立 CAPWAP 会话。这确保了多个 AP-Manager 接口之间实现自动、动态的会话负载均衡。\n\n• 正确选项剖析：\n选项 C（The AP-Manager with the fewest number of APs is used by the AP to join）严格契合 Cisco 官方 AP 加入机制的技术规范：AP 会优先选用当前承载 AP 数量最少的 AP-Manager 接口进行关联，从而实现控制层面的平摊与负载均衡。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（The discovery response from the AP to the AP-Manager interface disables the WLAN port）：发现响应完全不会禁用任何 WLAN 端口，该选项为荒谬的虚假技术描述。\n- 选项 B（The AP join request fails and must be configured statically on the AP-Manager interface）：多 AP-Manager 是思科官方推荐的端口冗余与负载均衡方案，无需在 AP-Manager 上进行静态绑定，更不会导致加入失败。\n- 选项 D（The first AP-Manager interface to respond is chosen by the AP）：AP 并非简单粗暴地根据哪个接口最先响应来选择（那样会导致靠近的第一端口过载），而是基于响应报文中的 AP 承载数量权重，选择负荷最小的接口。\n\n• 考试要点与速记技巧：\n多 AP-Manager 挑哪个？选最闲的！AP 自动加入连接数最少（Fewest number of APs）的 AP-Manager，实现完美负载均衡！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定 AireOS 多接口及已选控制器阶段，补证书、可达性和平台边界。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc1918.html",
+    "https://www.rfc-editor.org/rfc/rfc2131.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless/5500-series-wireless-controllers/119286-lap-notjoin-wlc-tshoot.pdf",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html"
+  ],
+  "limitations": "直接查看题图及文档；未执行交换机、WLC、DHCP 实机测试。"
+}

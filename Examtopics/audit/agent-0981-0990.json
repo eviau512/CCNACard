@@ -1,0 +1,295 @@
+{
+  "scope": "Q981–Q990",
+  "corrections": [
+    {
+      "id": 981,
+      "before_sha256": "b52b9b490ed1429a233d377f5186741c94d72142c8c0f4f668746f329356601e",
+      "original_qid": "Q1314",
+      "reason": "私网并非安全边界；ISP 亦可能使用私网地址，移除歧义。",
+      "updates": {
+        "prompt": "Which statement describes RFC 1918 private IPv4 addresses?",
+        "options": [
+          {
+            "label": "A",
+            "text": "enables secure connectivity over the internet"
+          },
+          {
+            "label": "B",
+            "text": "allows communication across external internet boundaries"
+          },
+          {
+            "label": "C",
+            "text": "assigned by an enterprise organization to internal hosts"
+          },
+          {
+            "label": "D",
+            "text": "guarantee that all traffic is encrypted without additional protocols"
+          }
+        ],
+        "explanation": "C。组织可以自行在内部网络分配 RFC 1918 地址；三个范围是 10.0.0.0/8、172.16.0.0/12 和 192.168.0.0/16，可被不同组织重复使用。私网地址通常不会在公共 Internet 上被全球路由，但并不自动提供加密、认证或安全隔离。A、D 错在把地址类型当成安全机制；B 错在声称可直接跨公共 Internet 路由。ISP 也可能在接入网络使用私有地址或共享地址，不能一概断言用户必然获得公网地址。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "私网并非安全边界；ISP 亦可能使用私网地址，移除歧义。"
+      }
+    },
+    {
+      "id": 982,
+      "before_sha256": "fb07b0543aaa389b35e4a012a072a8bee99f68f4542a63ec6549bab5c423e8fc",
+      "original_qid": "Q1315",
+      "reason": "补网关实际接口及地址排除前提。",
+      "updates": {
+        "prompt": "On a Cisco IOS DHCP server, pool NOCC is being configured for 192.168.20.0/24. The actual gateway interface already uses the next-to-last usable address and this address is excluded from allocation. Which command in DHCP pool configuration mode supplies that gateway to clients?",
+        "explanation": "C。/24 的可用主机地址是 192.168.20.1–192.168.20.254，倒数第二个为 .253；在 DHCP 池模式下使用 `default-router 192.168.20.253` 向客户端提供路由器地址。应确保网关确实使用该地址并从动态分配中排除。A 的 next-server 用于引导服务器，不是默认路由器；B 不用于下发网关；D 既不是 DHCP 池命令，也不是有效的默认路由配置。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "补网关实际接口及地址排除前提。"
+      }
+    },
+    {
+      "id": 983,
+      "before_sha256": "f29fbaeb2ad127108e493a9bb40341fb6e3acc0b7501e7b94e71c4cd3fa0a8e7",
+      "original_qid": "Q1316",
+      "reason": "删除 Windows 查看路由只有两种命令的错误。",
+      "updates": {
+        "explanation": "B。Windows 的 `netstat -r` 显示 IP 路由表，也可使用 `route print`；不要将两命令的所有参数与功能视为完全等同。A 的 `ipconfig` 显示接口 IP 配置；C 的 `netstat -n` 以数字形式显示连接地址和端口；D 的 `ifconfig` 不是标准 Windows 内置命令。PowerShell 等还提供其他查看路由的方法，因此 B 是给定选项中的正确选择，不是唯一方法。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "删除 Windows 查看路由只有两种命令的错误。"
+      }
+    },
+    {
+      "id": 984,
+      "before_sha256": "d1543da23a8bf00c928312f01ca68f3e311639db2edd140c5602cf11916c22bc",
+      "original_qid": "Q1317",
+      "reason": "区分源学习和目的查表，避免未知单播绝对泛洪。",
+      "updates": {
+        "prompt": "In ordinary Ethernet switching with dynamic MAC learning, which action determines the egress interface for a known unicast frame?",
+        "options": [
+          {
+            "label": "A",
+            "text": "rewrites the source and destination MAC address"
+          },
+          {
+            "label": "B",
+            "text": "looks up the destination MAC address in the VLAN MAC table"
+          },
+          {
+            "label": "C",
+            "text": "sends a retransmission request when a new frame is received"
+          },
+          {
+            "label": "D",
+            "text": "inspects and drops frames from unknown destinations"
+          }
+        ],
+        "explanation": "B。交换机通常从入站帧的源 MAC、VLAN 和入端口学习动态表项，再查找同 VLAN 的目的 MAC 来决定已知单播的出端口。未知单播通常在相应 VLAN 的其他合格转发端口泛洪；端口状态、安全和其他配置可能限制或丢弃流量。A 的逐跳重写通常属于路由而不是普通透明二层转发；C 收帧不触发以太网交换机重传请求；D 将未知目的地一律丢弃并非默认行为。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "区分源学习和目的查表，避免未知单播绝对泛洪。"
+      }
+    },
+    {
+      "id": 985,
+      "before_sha256": "b59a1e23a75b6328dba1680a64c8fa18809fcebfd1df29b4c35e2d2c90595d98",
+      "original_qid": "Q1318",
+      "reason": "直接核对原图计时器并恢复 CLI 换行；说明修改后的死定时器需核验。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R2 is replacing a router, and R1 and R2 cannot form an OSPF neighbor relationship. Assume all other required parameters are compatible and the dead interval remains 40 seconds. Which R2 configuration corrects the timer mismatch shown?",
+        "options": [
+          {
+            "label": "A",
+            "text": "R2(config)# interface g0/0/0\nR2(config-if)# ip ospf hello-interval 10"
+          },
+          {
+            "label": "B",
+            "text": "R2(config)# router ospf 1\nR2(config-router)# router-id 192.168.1.1"
+          },
+          {
+            "label": "C",
+            "text": "R2(config)# router ospf 1\nR2(config-router)# network 192.168.1.0 255.255.255.0 area 2"
+          },
+          {
+            "label": "D",
+            "text": "R2(config)# interface g0/0/0\nR2(config-if)# ip ospf dead-interval 45"
+          }
+        ],
+        "explanation": "A。展图显示两端均在 area 0、point-to-point，R1 为 Hello 10 / Dead 40，R2 为 Hello 15 / Dead 40。接口下的 `ip ospf hello-interval 10` 修正 Hello 差异；操作后应再次查看 Dead 是否仍与 R1 的 40 秒一致。B 不处理 Hello 差异，Router ID 无需等于接口地址；C 不匹配图示 area，且 Cisco network 语法使用通配掩码；D 把 Dead 改为 45 会引入另一处不匹配。满足计时器条件后仍须确认链路、认证和其他邻接参数。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "直接核对原图计时器并恢复 CLI 换行；说明修改后的死定时器需核验。"
+      },
+      "exhibit_path": "exhibits/q985_agent.jpg",
+      "image_sha256": "4517cafbbea145a48aafc9c08a9b0d8db8b4a201387ce82654c46c09ab4996f9"
+    },
+    {
+      "id": 986,
+      "before_sha256": "4fa6836e77bd3ce511f60288bafcb3bef90ab40285df4d8bfe9dabd92b6e6d54",
+      "original_qid": "Q1319",
+      "reason": "SSID 非全球唯一或认证机制。",
+      "updates": {
+        "explanation": "B。SSID 是供客户端识别和选择 802.11 无线网络的服务集标识；不同 AP 可使用相同 SSID，也不能仅凭名称证明网络身份。A 文件共享属于应用服务；C 单靠 SSID 或隐藏广播不能消除未授权接入，应采用合适的认证、加密和访问控制；D PoE 是供电方式而非 SSID 的必要条件。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "SSID 非全球唯一或认证机制。"
+      }
+    },
+    {
+      "id": 987,
+      "before_sha256": "d6c304cb62cbc05f8131b97c52ba89aff5e3d63aa326a094a8c1b2740e7a8b7d",
+      "original_qid": "Q1320",
+      "reason": "直接核对原图 MAC 与前缀；复算 EUI-64。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 derives its LAN interface identifier from its shown 48-bit MAC address using modified EUI-64 and the displayed /64 prefix. Which IPv6 address results?",
+        "explanation": "B。图中 R1 的 E0/1 MAC 是 `ca:01:be:4a:00:01`，LAN 前缀是 `2001:db8:1a44:41a4::/64`。在前三字节和后三字节之间插入 `ff:fe`，并将首字节 `ca` 与 `02` 异或得到 `c8`，接口标识即 `c801:beff:fe4a:0001`；拼合得到 `2001:db8:1a44:41a4:c801:beff:fe4a:1`。A、C、D 的接口标识与该计算不符。文档前缀仅用于示例，不能据此推断实际公网地址。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "直接核对原图 MAC 与前缀；复算 EUI-64。"
+      },
+      "exhibit_path": "exhibits/q987_agent.jpg",
+      "image_sha256": "4c8b17b2732e37d05d02534f3c26d889273e4a9bac7e64ad830d72337ccb4511"
+    },
+    {
+      "id": 988,
+      "before_sha256": "6525bdc03a36a71c85d47507f5b90837bb979b5716cbca22c2760bca0e47051b",
+      "original_qid": "Q1321",
+      "reason": "限定 DNS 启用且已配置解析器，避免将任意 URL 当主机名。",
+      "updates": {
+        "prompt": "On a Cisco IOS device with DNS lookup enabled and a reachable DNS resolver configured, an unrecognized hostname is entered at the EXEC prompt. What name-resolution action can occur?",
+        "explanation": "D。IOS 可将无法识别的输入当作主机名并尝试名称解析，向已配置的 DNS 服务器发起查询；查询可能超时或被中断，不保证解析或后续连接成功。A 错在无限持续，B 不是自动 ping，C 不是必然提示输入 IP。这里讨论主机名，不保证任意包含协议和路径的完整 URL 都被当作 DNS 主机名处理；不同平台与配置行为可能不同。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "限定 DNS 启用且已配置解析器，避免将任意 URL 当主机名。"
+      }
+    },
+    {
+      "id": 989,
+      "before_sha256": "1aaa38c31197fb8a560074adeaada848d96ead335f46ed7bbe5c299bc79f894c",
+      "original_qid": "Q1322",
+      "reason": "改为可验证的源 MAC/VLAN/入端口学习，消除全 VLAN 接口默认的绝对化。",
+      "updates": {
+        "prompt": "In normal Ethernet switching with dynamic learning enabled, what information is learned from an incoming frame?",
+        "options": [
+          {
+            "label": "A",
+            "text": "a new destination IP route for every received frame"
+          },
+          {
+            "label": "B",
+            "text": "the source MAC address and ingress port in the frame VLAN"
+          },
+          {
+            "label": "C",
+            "text": "protects against denial of service attacks"
+          },
+          {
+            "label": "D",
+            "text": "forwards frames to a neighbor port using CDP"
+          }
+        ],
+        "explanation": "B。交换机依据入站帧的源 MAC 及其 VLAN，学习或刷新对应入端口；若源地址移动且策略允许，也可更新端口关联。A 是 IP 路由而非 MAC 学习；C 学习本身不保证抵御 DoS；D CDP 用于邻居发现，不决定普通帧的 MAC 学习。具体学习范围和老化时间受平台、端口状态与配置影响。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "改为可验证的源 MAC/VLAN/入端口学习，消除全 VLAN 接口默认的绝对化。"
+      }
+    },
+    {
+      "id": 990,
+      "before_sha256": "6312aff0aeda73610245812dfa70009e9f4011b320ae0d430333e441a1ce371f",
+      "original_qid": "Q1324",
+      "reason": "明确 MAC 表实际学习内容，避免所有接口默认和 ARP 绝对化。",
+      "updates": {
+        "prompt": "In ordinary Ethernet switching, what does dynamic MAC learning add to the switch MAC table?",
+        "options": [
+          {
+            "label": "A",
+            "text": "sends a retransmission request when a new frame is received"
+          },
+          {
+            "label": "B",
+            "text": "the frame source MAC and ingress port, associated with its VLAN"
+          },
+          {
+            "label": "C",
+            "text": "populates the ARP table with the egress port"
+          },
+          {
+            "label": "D",
+            "text": "protects against denial of service attacks"
+          }
+        ],
+        "explanation": "B。正常动态学习把入站帧的源 MAC 与入端口和 VLAN 关联；后续目的 MAC 查表可用该信息选择转发端口。A 收帧不产生以太网交换机重传请求；C ARP 用于 IPv4 地址与 MAC 的邻居解析，不是此 MAC 表映射；D 动态学习不自动防御 MAC 洪泛或其他 DoS，需结合适当的端口及安全策略。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked; multiline restored for Q985",
+        "finding": "明确 MAC 表实际学习内容，避免所有接口默认和 ARP 绝对化。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netstat",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-mac.html",
+    "https://www.rfc-editor.org/rfc/rfc4291"
+  ],
+  "limitations": "人工检查原图和官方资料；未进行真实设备实验。"
+}

@@ -1,0 +1,23 @@
+{
+  "scope_records": [
+    801,
+    1000
+  ],
+  "scope_question_ids": [
+    801,
+    1001
+  ],
+  "missing_question_id": 848,
+  "reviewed": 200,
+  "ids_qids_unchanged": true,
+  "source_app_batches_html_equal": true,
+  "formatter_prompt_explanation_checked": 400,
+  "formatter_outputs_equal": true,
+  "apk_data_matches_source": true,
+  "apk_sha256": "532a3d357d27e0171f604b891ed8417becffc624bdc40ac46f3fff25b411881a",
+  "build_status": "passed",
+  "install_status": "pending: user chose to wait for phone without package in Island",
+  "practice_records_read_or_cleared": false,
+  "release_created": false,
+  "limitations": "Manual review and formatter checks; no network-device lab tests."
+}

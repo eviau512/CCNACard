@@ -1,0 +1,323 @@
+{
+  "scope": "Q931–Q940",
+  "corrections": [
+    {
+      "id": 931,
+      "before_sha256": "2f91fd4775560d593c590552f6397fe03057673b1b42a104256762af6af29026",
+      "original": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 集中式无线网络架构（Split-MAC Architecture）中轻量化接入点（Lightweight AP, LAP）的安全管理模式。\n在 Cisco 分布式无线网络架构中：\n1. 集中控制平面（Split-MAC 原理）：轻量化 AP 不具备独立的控制平面与配置数据库。AP 启动后通过广播、DHCP Option 43、DNS 或静态发现机制寻找无线局域网控制器（WLC），与 WLC 建立基于加密的 CAPWAP（Control and Provisioning of Wireless Access Points）隧道。AP 的固件镜像、射频参数（信道、发射功率）、SSID 业务和加密密钥等全部由 WLC 集中统一下发。\n2. 轻量化 AP 的管理访问模型：\n   轻量化 AP 本地不运行独立的 Web 管理服务器（无本地 Web GUI），也不允许在本地永久保存独立的业务网络配置。因此，管理员对全网所有 AP 的配置变更、监控与固件升级，**必须统一通过管理无线控制器（WLC）来集中实现**。\n3. 安全访问 WLC 的工业标准方式：\n   管理员通过加密的传输层安全协议——**HTTPS（基于 TLS，TCP 端口 443）访问 WLC 的 Web 管理图形界面（WLC GUI via HTTPS）**。在 WLC 的图形界面中（如 `Wireless -> Access Points`），管理员可以集中查看已注册 AP 的实时状态、在线客户端分布，并安全、直观地批量调整各项无线参数。\n\n• 正确选项剖析：\n选项 D 完全正确。轻量化 AP 由 WLC 进行统一集中管控，网络管理员通过 HTTPS 加密协议登录 WLC 的 Web GUI 管理界面，是集中、安全管理所有轻量化 AP 的官方推荐标准途径。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：轻量化 AP 本身不运行独立的 Web 服务器，根本没有本地 AP GUI；且 SSH 是字符终端协议，并非用于呈现 Web GUI。\n- 选项 B：轻量化 AP 通常分散安装在建筑物天花板或高处，逐个去现场拉线通过带外串口 CLI 登录既不现实，也违背了集中化无线网络的设计初衷。\n- 选项 C：WLC 的虚拟接口（Virtual Interface，通常配置为 1.1.1.1）专门用于 Web 认证 Portal 重定向、DHCP 中继与移动性握手，不支持且不用于 SSH 远程设备管理。\n\n• 考试要点与速记技巧：\n“瘦 AP 本地无脑无 GUI，统筹配置归 WLC；安全集中管全网，HTTPS 上登 WLC GUI”。"
+      },
+      "updates": {
+        "explanation": "D。轻量 AP 由 WLC 集中配置，管理员可通过 HTTPS 登录 WLC GUI 管理已注册 AP；需启用 HTTPS 并验证控制器证书。A 将字符式 SSH 说成 GUI；B 即便部分型号支持本地串口，也不是选项中安全的集中式管理；C 的虚拟接口不作为常规 SSH 管理端点。不同平台也可能提供 WLC CLI 或其他受支持管理方式，不能说只有 GUI 才能管理。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "D",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 932,
+      "before_sha256": "eae3404405d50aaf58e98eda3a0419111db5997268f7d70b05d7503b95899270",
+      "original": {
+        "prompt": "Which type of protocol is VRRP?",
+        "explanation": "• 核心考点与原理分析：\n本题考查第一跳冗余协议（FHRP）中虚拟路由器冗余协议（VRRP，Virtual Router Redundancy Protocol）的协议属性与工作原理。\nVRRP 是由 IETF 制定并发布的开放行业标准协议（定义于 RFC 3768 / RFC 5798），其核心机制包括：\n1. 默认网关高可用冗余：\n   在局域网多路访问（Multi-Access）广播网络中，终端主机通常只能配置一个静态默认网关。如果该网关物理设备宕机，终端将彻底丧失跨网段通信能力。VRRP 允许将局域网内同一网段的两台或多台物理路由器（或三层交换机）组合成一个逻辑上的“虚拟路由器（Virtual Router）”。\n   - 该虚拟路由器对外呈现一个虚拟 IP 地址（Virtual IP）和一个标准虚拟 MAC 地址（`0000.5E00.01xx`，其中 xx 为 VRID 虚拟组号）。\n   - 局域网内所有终端统一将该虚拟 IP 配置为默认网关。\n2. 角色分工与故障倒换：\n   - 主路由器（Master）：组内优先级最高（默认 100，可配置 1-254，IP 拥有者固定为 255）的路由器负责实际转发发送至虚拟网关的数据流量，并以 1 秒为周期向组播地址发送 VRRP Advertisement 通告报文。\n   - 备份路由器（Backup）：监听 Master 发送的通告。一旦在主失效间隔（Master Down Interval，通常约为 3 倍通告间隔）内未收到通告，优先级最高的 Backup 立即无缝接管 Master 角色与虚拟 IP/MAC，局域网终端完全无感知。\n3. 协议特征辨析（VRRP vs. HSRP）：\n   - 标准属性：VRRP 是 IETF 开放标准（Open Standard）；HSRP（Hot Standby Router Protocol）是 Cisco 私有协议。\n   - 组播地址：VRRP IPv4 组播地址为 `224.0.0.18`（IP 协议号 112）；而 `224.0.0.102` 是 Cisco HSRPv2 使用的组播地址（HSRPv1 使用 `224.0.0.2`）。\n\n• 正确选项剖析：\n选项 A 完全正确。VRRP 的核心功能就是允许多台物理路由器协同工作，对外呈现统一的虚拟网关，充当终端局域网的高可用默认网关（allows two or more routers to act as a default gateway）。\n\n• 干扰项排除与错误陷阱：\n- 选项 B：VRRP 是 IETF 开放行业标准，Cisco 私有的第一跳冗余协议是 HSRP。\n- 选项 C：VRRP 路由器间通信使用的标准组播地址是 `224.0.0.18`（IPv6 为 `FF02::12`）；`224.0.0.102` 是 Cisco 私有 HSRPv2 的通信地址。\n- 选项 D：动态 IP 地址分配是 DHCP 协议的功能，VRRP 专门用于网关链路冗余，不负责地址动态分发。\n\n• 考试要点与速记技巧：\n“VRRP 开放 IETF，组播 224.0.0.18；多台路由化虚网关（Default Gateway），主机无感秒切换”。"
+      },
+      "updates": {
+        "prompt": "Which statement describes the primary purpose of VRRP?",
+        "explanation": "A。VRRP 是开放标准第一跳冗余协议，多个路由器通过虚拟 IP 为主机提供冗余默认网关；活动路由器失效时备份按协议接管，可能有短暂中断。B 为 Cisco 专有 HSRP；C 的 224.0.0.102 用于 HSRPv2，VRRP IPv4 通告使用 224.0.0.18；D 是 DHCP 的地址分配功能。具体时序与配置和版本有关。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 933,
+      "before_sha256": "786dac123125ada9b2a6b1c0a2a3c9df41089dc51b4791c4cdf2138737b4b823",
+      "original": {
+        "prompt": "Refer to the exhibit. The switch cat9k-acc-1 connects users to the campus LAN. Printing services are inaccessible through the network. Which interface issue is causing the connectivity problems?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A bad checksum is causing Ethernet frames to drop."
+          },
+          {
+            "label": "B",
+            "text": "Excessive collisions are causing dropped frames."
+          },
+          {
+            "label": "C",
+            "text": "A large number of broadcast packets are resulting in a port reset."
+          },
+          {
+            "label": "D",
+            "text": "The interface output queue cannot process the Ethernet frames."
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查通过 Cisco IOS 命令 `show interfaces <interface>` 分析交换机端口流量统计与故障排查。\n深入研读 exhibit 展示的 `cat9k-acc-1# show interfaces gigabitethernet 1/0/1` 输出信息（id_933_Q1245.jpg）：\n1. 端口关键计数器分析：\n   - 端口总输入流量：`2295197 packets input, 305539992 bytes`（累计输入约 229.5 万个数据包）。\n   - 广播报文统计：`Received 1925500 broadcasts`（累计接收了多达 192.5 万个广播包）！\n   - 计算广播包占比：$1,925,500 / 2,295,197 ≈ 83.9\\%$！\n     正常的局域网流量中，广播报文通常仅占总报文的 1% 到 5% 以下。此处高达 83.9% 的流量全为广播包，表明该端口连接的网络中爆发了严重的**广播风暴（Broadcast Storm）**或存在严重的二层环路/非正常泛洪。\n2. 接口状态与故障直接表现：\n   - 底部统计行：`0 output errors, 1 collisions, 1 interface resets, 0 restarts`\n   - 输出明确记录了 `1 interface resets`（发生了一次接口硬件重置）。\n   - 机理说明：当交换机端口遭遇短时间内海量突发广播风暴冲击时，内部接收 FIFO 缓冲区与 ASIC 处理队列被彻底淹没耗尽，触发硬件超时或保护机制导致接口发生重置（Interface Reset）。在重置过程中，端口物理层与数据链路层被强制重新初始化，导致打印机等终端的网络连接瞬间断开，加之巨量广播报文持续占用信道与打印机处理算力，最终造成网络打印服务彻底无法访问（inaccessible）。\n\n• 正确选项剖析：\n选项 C 完全正确。`show interfaces` 明确显示该端口收到了高达 1,925,500 个广播包（占全部入站报文的近 84%），并且直接导致了端口重置（1 interface resets），这正是造成打印服务网络中断的根本原因。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：输出显示 `0 input errors`，虽然统计中有 1790 CRC 计数，但相较于 230 万的总包量，CRC 错误率极低（不到 0.08%），并非导致业务全面瘫痪的主因。\n- 选项 B：输出显示 `1 collisions`（仅记录了 1 次单次冲突），对于全双工千兆以太网而言，完全不存在过量冲突（Excessive collisions）。\n- 选项 D：输出队列显示 `Output queue 1/1, 1 drops`，总计仅发生 1 次丢弃，输出队列运行完全通畅，并未出现队列阻塞无法处理帧的故障。\n\n• 考试要点与速记技巧：\n“看 show interfaces 先盯异常巨量值：230 万包入、192 万广播占八成；海量广播冲垮端口致 Reset，打印瘫痪选 C 定”。"
+      },
+      "updates": {
+        "prompt": "Refer to the exhibit. Which reported statistics are shown for GigabitEthernet1/0/1? The counters are cumulative and do not by themselves establish the cause of the printing issue.",
+        "options": [
+          {
+            "label": "A",
+            "text": "No CRC errors and no interface resets."
+          },
+          {
+            "label": "B",
+            "text": "Excessive collisions and zero broadcasts."
+          },
+          {
+            "label": "C",
+            "text": "1,925,500 received broadcasts and one interface reset."
+          },
+          {
+            "label": "D",
+            "text": "Zero broadcasts and zero output queue drops."
+          }
+        ],
+        "explanation": "C。原图显示 Received 1925500 broadcasts、1 interface resets，且 output queue 1/1、1 drops；因此 C 可直接从展示内容读取。图同时出现 0 input errors 与 1790 CRC、1790 frame 的不一致，不能据此断言这些计数真实、归因广播导致重置或解释打印故障。累计计数也不能直接推出当前广播速率；应核查采样时间、计数器和网络路径。A、B、D 与显示计数不符。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "C",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      },
+      "exhibit_path": "exhibits/q933_agent.jpg",
+      "image_sha256": "da2fbb1a672bcdab8e5b87b2bf8b73119387b136374a27add721a7492d11e3fc"
+    },
+    {
+      "id": 934,
+      "before_sha256": "55522ca0f996e3b3718cf3cc891bd4dc783b8b560db50d2578b95313971def3e",
+      "original": {
+        "prompt": "Which standard is required when more than one distribution system port and only one IP address are configured for a Cisco WLC?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）上的链路聚合（LAG）与 **IEEE 802.3ad** 行业标准。\n在 Cisco WLC 的物理网络互联设计中：\n1. 分布系统端口（Distribution System Ports）：是 WLC 上用于承载 AP CAPWAP 控制/数据隧道以及所有无线客户端业务 VLAN 的核心物理上行链路。\n2. 架构模式演进：\n   - 传统多端口无聚合模式：若配置多个分布系统端口，为了跨端口分摊 AP 流量，管理员必须在每个物理端口上分别绑定独立的 AP-Manager 接口，并为每个接口分配不同的独立 IP 地址。这种模式配置繁琐且无法提供动态端口级故障冗余。\n   - 链路聚合模式（LAG，Link Aggregation）：\n     当在 WLC 上启用 LAG 时，控制器将多个分布系统端口整体捆绑为一个单一的高带宽、高冗余的逻辑端口通道（Port-Channel / EtherChannel）。\n     启用 LAG 的最显著技术特征是：**无论绑定多少个物理分布系统端口，全控制器只需要且只能配置一个 IP 地址（如单个主 Management IP 地址）**！所有的辅助 AP-Manager 接口全部合并消除。\n3. 对应的 IEEE 国际标准：\n   链路聚合组（LAG）在国际电气与电子工程师协会标准中被定义为 **IEEE 802.3ad**（即 Link Aggregation 规范，后被归入 802.1AX）。上游连接的 Catalyst 交换机同样需要将直连端口配置为单一 EtherChannel（Channel-group）并采用相同的聚合模式。\n\n• 正确选项剖析：\n选项 A（802.3ad）完全正确。IEEE 802.3ad 是链路聚合（LAG）的标准规范。在 Cisco WLC 上，当配置多个物理分布端口且仅使用单一 IP 地址时，必须启用 LAG，其底层所依赖的核心工业标准正是 802.3ad。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（802.1q）：VLAN Trunking（虚拟局域网中继打标标准），用于在链路上划分和区分多 VLAN，不能将多个物理端口聚合为一个单一逻辑通道与单一 IP。\n- 选项 C（802.1d）：Spanning Tree Protocol（生成树协议 STP），用于阻塞二层冗余链路防止环路，不仅无法聚合端口，反而会把多余的备用端口置为 Blocking 状态。\n- 选项 D（802.1af）：Power over Ethernet（以太网供电 PoE 标准，最大供电 15.4W），用于交换机向受电设备（PD）供电，与控制器端口绑定及 IP 配置无关。\n\n• 考试要点与速记技巧：\n“WLC 多口合一用单 IP，必开 LAG 绑成束；IEEE 标准 802.3ad，链路聚合保冗余”。"
+      },
+      "updates": {
+        "prompt": "On a Cisco AireOS WLC supporting LAG, which IEEE link aggregation standard is associated with bundling multiple distribution system ports into one logical link?",
+        "explanation": "A。AireOS 的 LAG 是 802.3ad 链路聚合的部分实现，可将多个分布系统物理端口组成逻辑链路；具体型号与交换机需按对应文档配置聚合。管理接口可使用一个管理 IP，但控制器还可有多个带各自地址的动态接口，不能说整个控制器只能配置一个 IP。B 是 802.1Q VLAN 标签；C 是 802.1D 生成树；D 是 802.1AF PoE，不是链路聚合。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 935,
+      "before_sha256": "8dbcba9817ad15db5edd8e7f4fba2f9d1a66544aebad8ef577358a118e77cc79",
+      "original": {
+        "explanation": "• 核心考点与原理分析：\n本题考查简单文件传输协议（TFTP，Trivial File Transfer Protocol，RFC 1350）的技术特性与典型应用场景。\nTFTP 是一种运行在 UDP 端口 69 上的超轻量级应用层文件传输协议：\n1. 极简协议栈设计：\n   - TFTP 没有 TCP 复杂的三次握手与滑动窗口机制，采用基于 UDP 的停-等（Stop-and-Wait）确认机制。\n   - TFTP 完全不支持用户身份认证（No Authentication，无需用户名或密码即可匿名读写），也不支持目录列表浏览（No Directory Browsing），更不具备任何数据加密能力（全部为明文传输）。\n2. 无盘系统与引导启动（Bootstrap / PXE）：\n   由于 TFTP 协议极为简单，其客户端软件代码体积极小（只需数千字节的 ROM 代码），因此被广泛固化在计算机网络引导芯片（PXE Boot ROM）以及嵌入式网络硬件中。\n   最经典的应用场景是：在**没有本地永久存储介质（如无硬盘、无闪存系统的无盘工作站，systems without data storage devices）**开机加电时，通过网络利用 TFTP 从中央服务器快速拉取引导程序、操作系统镜像文件或初始化配置文件。在网络管理中，也常用于路由器/交换机在 ROMMON 模式下的紧急恢复以及配置/IOS 备份。\n\n• 正确选项剖析：\n选项 A 完全正确。TFTP 的轻量化极简特性使其成为在没有任何本地数据存储设备的系统（如无盘工作站、嵌入式终端、网络引导设备）上通过网络自动加载配置文件和操作系统的理想协议。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（provides authentication）：TFTP 最大的特性之一就是完全不提供任何身份认证机制（任何人只要网络可达均可发起请求），该选项与技术事实完全相反。\n- 选项 C（provides encryption）：TFTP 使用 UDP 明文传输，完全不具备任何加密机制；跨 WAN 的安全加密文件传输应采用 SFTP 或 SCP。\n- 选项 D（provides secure file access）：TFTP 既无认证又无加密，根本无法提供安全（secure）的文件访问保障。\n\n• 考试要点与速记技巧：\n“TFTP 基于 UDP 69，轻量极简无认证；无盘无存拉配置，网络引导（PXE）最相宜”。"
+      },
+      "updates": {
+        "explanation": "A。TFTP 可用于网络引导，为无本地磁盘设备传送引导文件或配置；仍需有网络连接、运行环境和可访问的服务器。TFTP 初始请求发往 UDP 69，服务器随后以选定的传输端口通信，并非所有数据都固定使用端口 69。基础协议不提供用户身份认证或加密，服务器仍可通过网络和文件权限限制访问；B、C、D 因此均非其提供的安全功能。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 936,
+      "before_sha256": "ece22fa8dd234883af66dc23df2fe4dd129ab7ef0d489b806163c7f9328ff184",
+      "original": {
+        "prompt": "Which action protects a network from VLAN hopping attacks?",
+        "explanation": "• 核心考点与原理分析：\n本题考查局域网二层安全威胁——VLAN 跳跃攻击（VLAN Hopping Attack）的攻击原理与官方防御最佳实践。\nVLAN 跳跃攻击是指攻击者突破 VLAN 二层逻辑隔离边界，向其他未经授权的 VLAN 发送非法数据帧的攻击手段。主要有两种攻击向量：\n1. 交换机欺骗（Switch Spoofing）：\n   - 原理：攻击者利用 Cisco 交换机端口默认开启 DTP（Dynamic Trunking Protocol）的漏洞，伪造 DTP 协商报文将自身接入端口伪装协商为 Trunk 端口，从而随意访问所有 VLAN。防御方法为静态将端口配置为 Access 模式并彻底关闭协商（`switchport mode access`）。\n2. 双重标签攻击（Double Tagging / Double 802.1Q Tagging）：\n   - 原理：攻击者构造一个包含内外两层 802.1Q 标签的特殊数据帧。\n     - 外层标签：配置为与中继链路的 **Native VLAN ID 相同（默认均为 VLAN 1）**。\n     - 内层标签：配置为攻击目标受害者的 VLAN ID（如 VLAN 10）。\n   - 转发漏洞：当第一台交换机接收到该帧并准备通过 Trunk 链路转发时，由于外层标签等于本地 Trunk 的 Native VLAN，交换机按照 802.1Q 标准行为将外层标签剥离（Strip），直接将未打标（实际上还带有一层内层标签）的帧发送过 Trunk。\n   - 攻击生效：第二台交换机在 Trunk 链路上收到该帧时，仅看到了剩下的内层 VLAN 10 标签，错误地将其作为合法 VLAN 10 帧转发至目标网段，实现跨 VLAN 单向越权渗透！\n官方防御最佳实践（Cisco Security Best Practices）：\n- **将所有 Trunk 端口的 Native VLAN 修改为一个未使用的独立 VLAN ID（Change the native VLAN to an unused VLAN ID，如 VLAN 999）**，并且绝不把该 VLAN 分配给任何最终用户接入端口！\n- 对 Native VLAN 实施显式强制打标（`vlan dot1q tag native`）。\n- 禁用所有接入端口的 DTP 自动协商。\n\n• 正确选项剖析：\n选项 B 完全正确。将 Native VLAN 修改为一个专门未使用的独立 VLAN ID（如 VLAN 999），能够彻底瓦解攻击者利用默认 Native VLAN（VLAN 1）在接入链路与中继链路上发起双标签剥离跳转的前提条件，是抵御 Double-Tagging VLAN Hopping 攻击的标准权威措施。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：Port Security（端口安全）用于限制端口上学习的最大 MAC 地址数量并绑定 MAC，防御的是 CAM 表溢出泛洪攻击（MAC Flooding），无法防御 802.1Q 双标签 VLAN 跳跃。\n- 选项 C：DAI（Dynamic ARP Inspection，动态 ARP 检查）基于 DHCP Snooping 绑定表防御 ARP 欺骗与中间人攻击（ARP Poisoning），与 VLAN 跳跃防御无关。\n- 选项 D：ACL 是三层/四层数据包过滤机制，而双标签跳跃是在交换机二层硬件转发引擎剥离标签时发生的纯二层违规，三层 ACL 无法阻止 Trunk 链路内部的二层标签跳跃。\n\n• 考试要点与速记技巧：\n“防范 VLAN 双标跳跃击，Native VLAN 改闲置（Unused VLAN ID）；关 DTP 强打标，二层越权全拦截”。"
+      },
+      "updates": {
+        "prompt": "Which action helps mitigate a double-tagging VLAN hopping attack on switch trunks?",
+        "explanation": "B。把 trunk native VLAN 设为不分配给终端接入端口的专用 VLAN，可减少攻击者处于 native VLAN 时实施双标签跳跃的条件；两端的 native 配置必须一致。还应将终端端口固定为 access、在支持平台上关闭不必要的 DTP，并按平台需要对 native 流量打标。单一措施不是对所有 VLAN hopping 场景的保证。A 的端口安全不直接处理标签剥离；C 是 ARP 检查；D 的普通 ACL 并非针对双标签的主要措施。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "B",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 937,
+      "before_sha256": "0a8d1d0d673187d7e3b7496ab79a59182572bb9a38c6a0bcacd8ac9943039962",
+      "original": {
+        "explanation": "• 核心考点与原理分析：\n本题考查推动企业采纳网络自动化（Network Automation）的核心业务痛点与技术决策考量。\n根据 Cisco、Gartner 等权威机构的长期网络运维统计数据，企业生产网络中高达 75% 到 85% 的重大网络中断（Network Outages）并非源于硬件损坏或自然灾害，而是由**人为配置失误（Human Error / Configuration Drift）**引发的。\n1. 传统人工运维的客观局限性：\n   - 在依靠手动敲命令行（Manual Changes）的运维环境中，网络工程师面对纷繁复杂的设备参数，极易发生敲错 IP、写错掩码、ACL 规则顺序颠倒、QoS 策略漏配等偶发性失误。\n   - 跨多人、多部门、多时期的手动变更不可避免地导致全网设备配置存在严重的不一致性（Inconsistencies）与“配置漂移（Configuration Drift）”，不仅增加了排障难度，更成为网络可靠性的巨大隐患。\n2. 自动化落地的核心驱动力：\n   网络管理员在权衡是否引入网络自动化时，最关键的考量正是认识到“**手动变更频繁导致配置错误与网络不一致（Manual changes frequently lead to configuration errors and inconsistencies）**”。通过引入自动化配置管理工具（如 Ansible、Python、Catalyst Center），以统一的代码模板和版本控制（Git）替代高风险的人工输入，能够从根源上保障配置的一致性与正确性。\n\n• 正确选项剖析：\n选项 D 完全正确。深刻揭示了传统人工网络变更的核心弊端——手动操作频繁引发人为错误和网络配置的不一致，这是网络管理员决策全面引入网络自动化的最主要依据。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：网络自动化系统（如 Ansible、Python 编排）具备天然的**高扩展性（Scale at scale）**，可轻松实现跨千台设备的快速并发批量配置，绝非“难以扩展”。\n- 选项 B：现代网络自动化广泛应用于物理交换机、路由器、无线控制器、防火墙以及云原生/虚拟网络设备（NFV），绝不局限于虚拟设备。\n- 选项 C：网络自动化通过消除机械繁重的手动工时、缩短故障恢复时间（MTTR），显著**降低**企业的日常运营支出（OpEx / Operating Costs），而不是增加成本。\n\n• 考试要点与速记技巧：\n“人脑手敲必出错，配置漂移网瘫痪；自动化改模板推，消灭错误保平安”。"
+      },
+      "updates": {
+        "explanation": "D。人工逐台变更可能引入拼写错误及配置漂移，标准模板、版本控制和验证有助于提高一致性。自动化也可能把错误快速传播，需要测试、审批和回滚策略。A 的扩展性取决于设计，不能认为自动化天然难以扩展；B 错在只限虚拟设备；C 不能一概断言总成本增加或减少，应考虑建设与维护成本。原解析的 75%–85% 故障比例缺乏题目所需依据，已移除。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "D",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 938,
+      "before_sha256": "0157a5834b06c48f17c3e622c23af5543d1cb71d5c723fe6397ff846b0fd38e0",
+      "original": {
+        "prompt": "Company has decided to require multifactor authentication for all systems. Which set of parameters meets the requirement?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络安全与身份访问管理中**多因素身份认证（MFA，Multi-Factor Authentication）**的严格定义与要素判定原则。\n多因素认证要求用户在登录认证时，必须同时提供**属于至少两种不同类别（Different Authentication Factors）**的独立凭证。国际公认的身份认证三大基本要素为：\n1. **知识要素（Something you know）**：\n   - 定义：用户大脑所掌握的私密信息。\n   - 典型示例：登录密码（Password）、个人数字身份码（PIN 码）、口令短语、密保问题。\n2. **所有要素（Something you have）**：\n   - 定义：用户物理拥有或受控持有的实体介质/数字凭证。\n   - 典型示例：数字证书（RSA Certificate / X.509）、智能卡（Smart Card）、硬件安全密钥（YubiKey）、RSA SecurID 动态硬件令牌、手机 Authenticator App 接收的一次性动态密码（OTP）。\n3. **固有/生物要素（Something you are）**：\n   - 定义：用户不可分割的物理生理或行为特征。\n   - 典型示例：指纹扫描（Fingerprint）、面部识别（Facial Recognition）、虹膜扫描（Iris）、视网膜扫描、声音识别。\n关键判定准则（严禁同类要素重复叠加）：\n- 只有跨越两个或两个以上不同分类的凭据组合，才构成真正的多因素认证（MFA）！\n- 若组合中的所有凭证均落在同一类别中，即便数量再多，也仅仅是“多重单因素认证（Multi-step Single-factor）”，绝非 MFA！\n本题选项分析：\n- 选项 A 中，“个人 10 位 PIN 码”属于 **Something you know**；“RSA 数字证书”属于 **Something you have**。两者跨越了“知识要素”与“所有要素”两个截然不同的认证维度，完全符合多因素认证（MFA）的严格标准！\n\n• 正确选项剖析：\n选项 A 完全正确。10 位 PIN 码属于用户知晓的凭据（Something you know），RSA 数字证书属于用户拥有的实体凭据（Something you have），两组参数横跨两个完全独立的身份认证要素类别，满足多因素身份认证（MFA）要求。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（复杂密码 + 10 位 PIN 码）：两者全部属于“Something you know（你知道什么）”，属于知识要素的简单叠加，仍然是单因素认证。\n- 选项 C（8-15 位密码 + 12 位 PIN 码）：同样两者全部属于“Something you know”，不构成 MFA。\n- 选项 D（指纹扫描 + 面部识别）：指纹和人脸识别全部属于“Something you are（你是什么/生物识别）”，属于生物特征内部的双重采集，未跨越到其他要素类别，不是多因素认证。\n\n• 考试要点与速记技巧：\n“MFA 必跨两要素：可知（Know：密码/PIN）、可有（Have：证书/令牌）、可鉴（Are：指纹/人脸）；同类叠加非多因，跨界组合才是真”。"
+      },
+      "updates": {
+        "prompt": "Which combination provides two different authentication factors? Assume the RSA private key is held on a possession-controlled authenticator and the PIN is independently verified.",
+        "explanation": "A。个人 PIN 是知识要素；通过持有的认证器证明 RSA 私钥控制权是持有要素。仅凭公开证书本身并不证明私钥持有，实际部署还须验证私钥控制与 PIN 验证流程。B、C 中密码和 PIN 均为知识要素；D 的指纹和人脸都是生物特征类别，通常属于同一因素类别。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 939,
+      "before_sha256": "b0a257ea4631ad39b9d2974eb397908622ad3bbcbb7ffabe096dc787e23dabf2",
+      "original": {
+        "explanation": "• 核心考点与原理分析：\n本题考查网络层 IPsec（Internet Protocol Security，RFC 4301）安全体系架构及其核心构件安全关联（Security Association, SA）。\n1. IPsec 协议族工作在 OSI 参考模型的三层（网络层），能够为 IP 报文及其上层所有应用程序（Web、FTP、VoIP、数据库等）提供端到端或网关到网关的机密性（Confidentiality）、完整性（Integrity）、原发源鉴别（Authentication）以及抗重放（Anti-replay）保护。\n2. 安全关联（Security Association, SA）：SA 是 IPsec 通信的基石，代表两个 IPsec 对等体（Peers）之间就特定的加密算法、哈希算法、身份认证机制、秘钥材料、协议封装模式（传输模式/隧道模式）和生存周期达成的一组单向安全参数契约。\n3. 在完整的 IPsec VPN 建立过程中，通过 IKE（Internet Key Exchange）协商两类 SA：\n   - IKE SA（Phase 1 SA）：建立双向安全管理隧道，用于保护后续的控制面协商信令；\n   - IPsec SA（Phase 2 SA）：真正用于保护业务数据流的单向数据通道，入向与出向各需一个 SA（成对建立，Sets of Security Associations），每个 SA 由 SPI（安全参数索引）、目的 IP 地址和安全协议标识（ESP/AH）唯一确定。\n\n• 正确选项剖析：\n选项 C（It enables sets of security associations between peers.，它在对等体之间启用成套的安全关联）完全符合 IPsec 技术标准规范。\nIPsec 正是通过在通信对等体之间动态协商和维护成套的单向安全关联（IKE SA 与成对的 IPsec ESP/AH SA），才得以在不可信的底层网络中为上层组织机构内的各类业务应用构建出安全可靠的传输隧道。\n\n• 干扰项排除与错误陷阱：\n选项 A（利用 FTP 保护网络节点间的文件传输）与选项 D（利用 TFTP 保护文件传输）：严重的概念混淆。FTP（TCP 20/21）和 TFTP（UDP 69）是应用层文件传输协议，且原生以纯明文传输数据，毫无加密机制，更非 IPsec 依赖的底层技术。\n选项 B（提供 GRE 隧道以安全传输网络节点间的流量）：技术概念颠倒。通用路由封装（GRE，RFC 2784）属于二层/三层通用隧道封装协议，GRE 原生不具备任何加密、完整性校验或认证能力（明文传输）。虽然业界常使用“GRE over IPsec”结合两者的优点，但提供安全保护的是 IPsec 本身，而不是 GRE 提供了安全。\n\n• 考试要点与速记技巧：\nIPsec 架构核心密码：\n“三层加密保全流，安全通道靠 SA（Security Association）；一阶段建管理隧道，二阶段成对建数据 SA”。"
+      },
+      "updates": {
+        "explanation": "C。IPsec 通过安全关联（SA）描述如何使用 ESP 或 AH 保护流量；IPsec SA 是单向的，双向流量通常需要两个方向的 SA。IKE 可用于协商密钥和 SA，也存在手动配置，保护范围与所选协议、算法和模式有关：例如 AH 不提供加密，ESP 的机密性取决于配置。A、D 的 FTP/TFTP 不是 IPsec 的安全机制；B 的 GRE 本身不提供加密或认证，但可与 IPsec 配合。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    },
+    {
+      "id": 940,
+      "before_sha256": "c87b8158ad2b9629a1c74efd9c75b59bfd6fef74de7e589f01c0b46db710107f",
+      "original": {
+        "prompt": "Network security team noticed that an increasing number of employees are becoming victims of phishing attacks. Which security program should Be implemented to mitigate the problem?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络安全防御体系中针对社会工程学攻击（Social Engineering）与网络钓鱼（Phishing）的人员防线建设。\n1. 网络钓鱼（Phishing）攻击机理：\n   网络钓鱼属于典型的社会工程学攻击手段。攻击者冒充合法机构（如公司 IT 管理员、银行客服、高管或合作供应商），发送伪造的发票、账户冻结警告、密码重置请求等极具诱骗性或紧迫性的欺诈邮件，诱导受害者点击恶意钓鱼网址输入账号密码，或下载运行携带木马勒索病毒的恶意附件。\n2. 钓鱼攻击的防御难点与根本对策：\n   - 技术层面的安全控制措施（如邮件网关的反垃圾反钓鱼规则、端点防病毒软件、操作系统安全补丁、防火墙）能够拦截大部分已知特征的恶意邮件与流量；\n   - 然而，钓鱼攻击的核心漏洞在于“人性的弱点”（信任、恐惧、贪婪、好奇或疏忽），再先进的物理或网络技术防护也无法阻止一名员工自愿将密码填入钓鱼网站；\n   - 因此，ISO 27001 和 NIST 网络安全框架强制要求企业必须建立长期的“安全意识培训与教育计划”（User Awareness Training），定期开展模拟钓鱼演练，使员工能够辨识可疑发件人域名、异常拼写、诱导性链接，并在第一时间主动上报安全团队，从源头封堵人为安全漏洞。\n\n• 正确选项剖析：\n选项 D（user awareness training，用户安全意识培训）是应对员工沦为钓鱼攻击受害者的最关键且最针对性的安全计划。\n通过安全意识培训，员工可以学会识别钓鱼邮件特征（如虚假链接、伪造发件人、要求立即提供敏感凭据等），极大降低被社工欺骗的概率，被公认为防御钓鱼攻击最核心的防线。\n\n• 干扰项排除与错误陷阱：\n选项 A（email system patches，邮件系统补丁）：补丁用于修复邮件服务器软件（如 Exchange、Sendmail）本身的代码级软件漏洞，但钓鱼攻击利用的是邮件内容诱骗用户，与服务器是否存在软件缺陷无关。\n选项 B（physical access control，物理访问控制）：涉及门禁系统、安保监控、机房上锁等物理安全防线，无法防范跨 Internet 发起的跨洋电子钓鱼邮件。\n选项 C（software firewall enabled on all PCs，所有 PC 启用软件防火墙）：主机防火墙用于控制三层/四层 IP 地址与 TCP/UDP 端口的访问控制，员工访问钓鱼网站使用的是完全合法的标准 HTTP/HTTPS 出向流量，防火墙无法识别用户自愿填写的登录凭据。\n\n• 考试要点与速记技巧：\n社会工程与钓鱼对症下药：\n“钓鱼专攻人心智，技术防火难根治；员工培训常演练，安全意识第一关（Phishing -> User Awareness Training）”。"
+      },
+      "updates": {
+        "prompt": "A network security team notices that an increasing number of employees are becoming victims of phishing attacks. Which security program should be implemented to mitigate the problem?",
+        "explanation": "D。用户安全意识培训可帮助员工识别可疑消息、通过可信渠道核实请求并报告钓鱼，降低受骗风险，但不能保证所有攻击被阻止。邮件过滤、及时补丁、抗钓鱼 MFA 和事件响应可作为互补措施。A 修复邮件系统漏洞；B 主要控制物理进入；C 管理终端网络访问，均不如 D 直接针对员工辨识和报告钓鱼的训练需求。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "D",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+          "https://www.rfc-editor.org/info/rfc1350/",
+          "https://www.rfc-editor.org/rfc/rfc5798",
+          "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+          "https://www.rfc-editor.org/rfc/rfc4301"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.html",
+    "https://www.rfc-editor.org/info/rfc1350/",
+    "https://www.rfc-editor.org/rfc/rfc5798",
+    "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+    "https://www.rfc-editor.org/rfc/rfc4301"
+  ],
+  "limitations": "人工文档审查，未对真实设备进行测试。"
+}

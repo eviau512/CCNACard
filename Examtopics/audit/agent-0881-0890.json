@@ -1,0 +1,391 @@
+{
+  "scope": "Q881–Q890",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 881,
+      "original_qid": "Q1185",
+      "before_sha256": "6cbdbf8ada52f86ae1a03e30bdd9843eca1de601287da59cf9a5efa7563335c3",
+      "reason": "SSID 命名与认证分离。",
+      "updates": {
+        "explanation": "D。SSID 是用于标识无线局域网的名称，通常最多 32 个八位组并区分大小写。它不要求同时包含字母和数字，也不自身提供认证、访问控制或登录提示；这些取决于所使用的安全和认证方案。隐藏广播也不是可靠的访问控制。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线局域网（WLAN）中服务集标识符（Service Set Identifier, SSID）的基本定义与功能。\n在 802.11 协议体系中：\n1. SSID 是一个长度最多为 32 个八位位组（Octets/Bytes）区分大小写的字符串。\n2. SSID 的核心作用是为无线网络（WLAN/ESS）赋予一个具有逻辑识别意义的名称（Name），以便人类用户或无线客户端设备能够识别、区分并选择连接特定的无线服务。\n3. AP 在其周期性（默认每 102.4ms）向空中广播的 Beacon（信标帧）或对客户端探测的 Probe Response 帧中包含 SSID 信息；客户端据此在操作系统中列出“可用 Wi-Fi 列表”。\n\n• 正确选项剖析：\n选项 D（associates a name to a WLAN）准确表述了 SSID 的本质作用——将一个人类可读的网络名称与特定的无线局域网（WLAN）进行逻辑关联绑定。\n\n• 干扰项排除与错误陷阱：\n选项 A（must include a combination of letters and numbers）：SSID 可以包含任意可打印的 ASCII 字符，完全可以纯字母、纯数字甚至包含特殊符号，并不强制要求“必须字母与数字组合”。\n选项 B（uses policies to prevent unauthorized users）：阻止未授权用户接入依靠的是安全认证与加密机制（如 WPA3/WPA2-Enterprise、802.1X/RADIUS、MAC 过滤等），SSID 本身只负责网络命名标识，不具备访问控制策略能力。\n选项 C（prompts a user for a login ID）：提示输入用户登录凭据是 Web 认证门户（Captive Portal）或 802.1X 客户端认证的行为，与 SSID 命名本身无关。\n\n• 考试要点与速记技巧：\n无线标识速记：\n- SSID：无线网络的名字（人类可读，如 \"Guest-WiFi\"）；\n- BSSID：AP 无线射频网卡的二层 MAC 地址（机器识别，如 00:1A:2B:3C:4D:5E）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "SSID 命名与认证分离。"
+      }
+    },
+    {
+      "id": 882,
+      "original_qid": "Q1187",
+      "before_sha256": "8324d6cdc6830673aed371adce844effb433cc046a35e3e9d8056288cc322eb8",
+      "reason": "修复组播 MAC 并明确同一实例条件。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume all switches participate in the same VLAN, can exchange BPDUs, and use the bridge priorities and unicast bridge MAC addresses in the options. Which switch becomes root?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 4 - Bridge Priority - 49152 - MAC address 06:8e:bc:7e:5b:85"
+          },
+          {
+            "label": "B",
+            "text": "SW 3 - Bridge Priority - 49152 - MAC address 0e:e4:96:da:ee:95"
+          },
+          {
+            "label": "C",
+            "text": "SW 1 - Bridge Priority - 36864 - MAC address 08:a7:23:5b:52:25"
+          },
+          {
+            "label": "D",
+            "text": "SW 2 - Bridge Priority - 36864 - MAC address 04:1e:c4:bf:02:55"
+          }
+        ],
+        "explanation": "D。同一生成树实例先比较桥 ID 的优先级字段；SW1 和 SW2 均为 36864，低于 SW3、SW4 的 49152。同优先级下再比较 MAC，04:1e... 小于 08:a7...，故 SW2 胜出。题设地址将原选项中的组播地址替换为单播地址；图示仅提供拓扑，优先级和地址来自选项。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 4 - Bridge Priority - 49152 - Mac-address 06:8e:bc:7e:5b:85"
+          },
+          {
+            "label": "B",
+            "text": "SW 3 - Bridge Priority - 49152 - Mac-address 0d:e4:96:da:ee:95"
+          },
+          {
+            "label": "C",
+            "text": "SW 1 - Bridge Priority - 36864 - Mac-address 05:a7:23:5b:52:25"
+          },
+          {
+            "label": "D",
+            "text": "SW 2 - Bridge Priority - 36864 - Mac-address 04:1e:c4:bf:02:55"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.1D / 802.1w 生成树协议（STP/RSTP）的根桥（Root Bridge）选举计算流程。\n在生成树拓扑中，交换机之间通过交换 BPDU 来竞选唯一的根桥。根桥选举遵循“最小网桥标识符（Bridge ID, BID）胜出”原则。\nBID 由 8 字节组成：\n- 网桥优先级（Bridge Priority）：2 字节（取值范围 0~61440，步长 4096，包含 12 位 Sys-ID-Ext 即 VLAN ID）。\n- MAC 地址：6 字节（交换机基准 MAC 地址）。\n选举优先级步骤：\n1. 优先级绝对优先：首先比对所有交换机的 Priority 数值，数值最低者当选。\n2. MAC 地址决胜（Tie-breaker）：当出现两台或多台交换机的 Priority 相同时，比对它们的 MAC 地址。十六进制数值从左往右逐字节对比，最小的 MAC 地址胜出。\n\n• 正确选项剖析：\n选项 D（SW 2 - Bridge Priority - 36864 - Mac-address 04:1e:c4:bf:02:55）完全正确。\n对比展图中四台交换机的 BID：\n- SW 1: Priority = 36864, MAC = 05:a7:23:5b:52:25\n- SW 2: Priority = 36864, MAC = 04:1e:c4:bf:02:55\n- SW 3: Priority = 49152, MAC = 0d:e4:96:da:ee:95\n- SW 4: Priority = 49152, MAC = 06:8e:bc:7e:5b:85\n第一轮（比 Priority）：\nSW1 与 SW2 优先级均为 36864，低于 SW3/SW4 的 49152。因此 SW3、SW4 被淘汰。\n第二轮（比 MAC 地址）：\n对比 SW1（`05:a7...`）与 SW2（`04:1e...`）。首字节对比中，`04` < `05`，SW2 的 MAC 地址更小。\n因此，SW2 拥有全网数值最小的 BID，成功当选为根桥。\n\n• 干扰项排除与错误陷阱：\n选项 A（SW 4）与选项 B（SW 3）：优先级高达 49152，在第一轮优先级比较中即被淘汰。\n选项 C（SW 1）：优先级虽然并列最低（36864），但在破局比对 MAC 时，其首字节 05 大于 SW2 的 04，竞选失败。\n\n• 考试要点与速记技巧：\nSTP 选根口诀：\n小者为尊（Lowest Wins）；先比优先级，数值越小越优先；平手看 MAC，顺位比对挑最小。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "修复组播 MAC 并明确同一实例条件。"
+      },
+      "exhibit_path": "exhibits/q882_agent.jpg",
+      "image_sha256": "414795923eb5b10bf31222ca0f3fd2933ace8910e55faff5ad94d79b038f60e0"
+    },
+    {
+      "id": 883,
+      "original_qid": "Q1189",
+      "before_sha256": "21cbe8f9be086c43bf2d0d54ab642580f6d614c0d4ff3979d2fbd308f93e5356",
+      "reason": "原图速率超过接口带宽且包速为零，改问可直接观察的负载。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which reported interface load is shown in the output?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Both transmit and receive loads are reported as 1/255"
+          },
+          {
+            "label": "B",
+            "text": "Both transmit and receive loads are reported as 255/255"
+          },
+          {
+            "label": "C",
+            "text": "Only transmit load is reported as 255/255"
+          },
+          {
+            "label": "D",
+            "text": "Only receive load is reported as 255/255"
+          }
+        ],
+        "explanation": "B。展图明示 txload 255/255、rxload 255/255，因此报告的双向负载均为 255/255。该样例又标示 100 Mb/s，却显示超过 200 Mb/s 且 0 packets/sec 的速率，数值彼此矛盾；不能凭此认定真实接口吞吐量或排除硬件和双工故障。速率是输出所列时间窗口的平均值，错误计数通常为累计值。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "options": [
+          {
+            "label": "A",
+            "text": "duplex mismatch"
+          },
+          {
+            "label": "B",
+            "text": "high throughput"
+          },
+          {
+            "label": "C",
+            "text": "bad NIC"
+          },
+          {
+            "label": "D",
+            "text": "broadcast storm"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS `show interface` 状态输出中关于吞吐量负载（Load & Throughput）参数的高级诊断分析。\n在接口状态统计中：\n1. 负载指标（txload / rxload）：衡量接口在 5 分钟（或特定间隔）内的带宽利用率。满载指标以 255 为分母表示：\n   - 负载为 `1/255` 表示利用率极低（轻载，< 1%）；\n   - 负载达到 `255/255` 表示接口发射（tx）或接收（rx）利用率达到了 100% 极限制（全线速饱和）。\n2. 速率统计（input / output rate）：表示当前的瞬时吞吐量（bits/sec）。\n3. 差错排查：若伴随高丢包、CRC 错误、碰撞或过载丢弃，可判断硬件故障或双工问题；若计数无物理差错而纯粹负载满溢，则属于高吞吐量（High Throughput / Traffic Saturation）。\n\n• 正确选项剖析：\n选项 B（high throughput）完全符合展图数据。\n观察展图 `q_883.jpg` 的核心诊断行：\n- `FastEthernet0/0 is up, line protocol is up`\n- `reliability 255/255, txload 255/255, rxload 255/255`\n- `30 second input rate 217244011 bits/sec, 0 packets/sec`\n- `30 second output rate 236536306 bits/sec, 0 packets/sec`\n- `0 input errors, 0 CRC, 0 frame, 0 collisions`\n数据证明：`txload 255/255` 与 `rxload 255/255` 均处于 255 满负荷极限值，且 30 秒平均输入输出速率均超过 2 亿比特/秒（> 200 Mbps），在 FastEthernet 链路上接口处于极端饱和的超高吞吐量（high throughput）状态，且无物理错误。\n\n• 干扰项排除与错误陷阱：\n选项 A（duplex mismatch）：接口工作在 `Full-duplex`，且 `0 collisions, 0 late collision, 0 CRC`，绝无双工不匹配故障。\n选项 C（bad NIC）：物理层 `0 input errors, 0 CRC, 0 runts, 0 giants`，网卡工作正常。\n选项 D（broadcast storm）：输出显示 `Received 267 broadcasts`，在 7331 个包中仅占 3.6%，属于正常网络广播水平，绝非广播风暴。\n\n• 考试要点与速记技巧：\n`show interface` 负载速记：\ntxload / rxload 满额是 255/255；看到 255/255 伴随几亿比特速率且无错，接口正是“高吞吐饱和（High Throughput）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原图速率超过接口带宽且包速为零，改问可直接观察的负载。"
+      },
+      "exhibit_path": "exhibits/q883_agent.jpg",
+      "image_sha256": "4a51eea1f78399d81c8b8b8539fa3593534f174bfb4154504cd75ca54b0f5f9c"
+    },
+    {
+      "id": 884,
+      "original_qid": "Q1191",
+      "before_sha256": "02be0962794f0c10d6e8ca62a6f9bc83b9752b577bfc008d9fa73aff562a748b",
+      "reason": "修正地址复用、VPN 及 NAT 的绝对表述。",
+      "updates": {
+        "explanation": "C。RFC 1918 私有地址可以在相互独立的网络中重复使用，结合 NAT/PAT 等方案可减少对公网 IPv4 地址的需求；跨组织互通时仍须处理重复地址。A 的站点 VPN 不强制使用私有地址；B 冗余需要其他设计；D 不是私有地址本身保证的效果。私有地址本身也不提供访问控制。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私有 IPv4 地址分配标准在企业网络中的设计角色与根本效益。\n随着全球互联网爆炸式增长，32 位 IPv4 地址空间（约 43 亿个地址）迅速面临枯竭危机。为此，IETF 制定了 RFC 1918 规范，划分出三个专用的私有网络地址块：\n- A 类：10.0.0.0/8\n- B 类：172.16.0.0/12\n- C 类：192.168.0.0/16\n私有 IPv4 地址的核心特征是：\n1. 局域网内任意重用：全球数以百万计的独立私有网络可以同时使用相同的地址段（如 192.168.1.0/24）而互不冲突。\n2. 配合 NAT/PAT 技术：私网主机需要访问公共互联网时，由出口边界网关将内部私网地址动态转换为公网合法 IP 地址。\n这一机制使得庞大的内网终端无需消耗宝贵的公网 IP，极大缓解了全球 IPv4 地址资源的短缺（alleviates the shortage of IPv4 addresses）。\n\n• 正确选项剖析：\n选项 C（alleviates the shortage of IPv4 addresses）精准阐述了 RFC 1918 私网地址的核心历史使命与现实作用。\n\n• 干扰项排除与错误陷阱：\n选项 A（used when traffic on a subnet must traverse a site-to-site VPN to an outside organization）：在与外部组织建立站点到站点 VPN 时，私网地址往往容易与对方内网产生 IP 地址冲突（IP Overlap），通常需要使用公网 IP 或双向 NAT 转换，使用私网地址绝不是此场景的必要特征。\n选项 B（supplies redundancy in the case of failure）：网络冗余性由高可用协议（如 HSRP/VRRP、动态路由多路径）提供，与地址是否为私网地址毫无因果关系。\n选项 D（reduces the forwarding table on network routers）：减少路由器转发表规模依靠的是路由汇总（Route Summarization/CIDR），私网地址在企业内部仍然会生成各自的详细路由表项。\n\n• 考试要点与速记技巧：\n私有 IPv4 地址（RFC 1918）核心作用两句话：\n内网任意重复用，出网借助 NAT 转；缓解 IPv4 短缺，延长网络生命周期。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "修正地址复用、VPN 及 NAT 的绝对表述。"
+      }
+    },
+    {
+      "id": 885,
+      "original_qid": "Q1193",
+      "before_sha256": "2370a26d4c719878b0334e4ecfef90284b0c87a4c52044f7e653af5df9c5db49",
+      "reason": "说明稳定状态与 backup 角色。",
+      "updates": {
+        "explanation": "B。稳定拓扑中，Rapid PVST+ 的 backup 端口处于 discarding（有时称 blocking），作为同一交换机通向同一共享网段的指定端口备用，正常情况下不转发用户帧或学习 MAC。alternate 端口则为根端口提供替代路径。learning、forwarding 和传统 STP 的 listening 均不是稳定 backup 端口的状态；拓扑变化后端口角色和状态可能改变。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.1w / Rapid PVST+ 中备份端口（Backup Port）的操作模式与拓扑角色。\n在快速生成树（RSTP）标准中，定义了 5 种端口角色（Port Roles）与 3 种端口操作状态（Port States）：\n1. 端口角色定义：\n   - 根端口（Root Port）：非根交换机上通往根桥路径开销最低的端口。\n   - 指定端口（Designated Port）：负责向所在链路转发配置 BPDU 和数据帧的端口。\n   - 替代端口（Alternate Port）：收到来自“其他交换机”的更优 BPDU，为根端口提供冗余备用路径。\n   - 备份端口（Backup Port）：收到来自“同一台交换机自身”更优 BPDU 的端口。这通常发生在交换机通过集线器（Hub）或共享介质（Shared segment）在同一个二层网段上连接了两个接口的情况。备份端口为该共享网段上的指定端口（Designated Port/Bridge）提供备用冗余路径。\n2. 端口操作状态（States）：\n   - Discarding（阻塞/丢弃状态）：不转发用户数据，不学习 MAC，仅监听 BPDU。RSTP 将传统的 802.1D Disabled、Blocking、Listening 合并为 Discarding。在 Cisco CLI 及题目表述中，Alternate 和 Backup 端口均处于 Blocking（Discarding）模式。\n\n• 正确选项剖析：\n选项 B（blocking mode and provides an alternate path toward the designated bridge）完全符合 RSTP 规范与 Cisco 官方教材定义：\n- 操作模式（Operating Mode）：Backup 端口处于阻塞（Blocking/Discarding）模式，防止二层自环；\n- 端口角色（Role）：它为所连共享 LAN 网段的指定网桥（Designated Bridge/Port）提供备用冗余路径（备胎）。\n\n• 干扰项排除与错误陷阱：\n选项 A 与选项 C：Backup 端口绝不会处于 Learning 或 Forwarding 状态，否则共享介质上两端口立即形成环路。\n选项 D：RSTP 中已经彻底废除了独立的 Listening 状态，且通往根桥（Root Bridge）的备用路径是替代端口（Alternate Port），而非备份端口（Backup Port）。\n\n• 考试要点与速记技巧：\nRSTP 备用端口快速辨析：\n- Alternate Port：根端口（RP）的备胎，备份通往根桥（Root Bridge）的路径；\n- Backup Port：指定端口（DP）的备胎，备份通往指定桥（Designated Bridge）的路径；两者平时均处于 Blocking/Discarding 状态。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "说明稳定状态与 backup 角色。"
+      }
+    },
+    {
+      "id": 886,
+      "original_qid": "Q1194",
+      "before_sha256": "6c19e3ece6cc62d65de3210b49abb6b9b54dd498832fd0c2a61561acbe4f2e30",
+      "reason": "限定传统本地 WLC，去除型号和升级时序绝对断言。",
+      "updates": {
+        "prompt": "In a traditional on-premises Cisco WLC-managed lightweight AP deployment, how do firmware updates differ from those of an autonomous AP?",
+        "explanation": "B。在题设传统本地 WLC 架构中，轻量 AP 的镜像可由控制器集中管理和分发；自主 AP 则可独立管理，不要求 WLC。具体升级策略、预下载、备份分区和故障恢复能力依型号与版本而异，不能断言每次都立即重启或所有型号均具备相同备份能力。A 错将自主 AP 绑定控制器；C、D 所称通用差异缺乏依据。"
+      },
+      "original_fields": {
+        "prompt": "A network architect is deciding whether to implement Cisco autonomous access points or lightweight access points. Which fact about firmware Updates must the architect consider?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 自主型接入点（Autonomous AP, 胖 AP）与轻量级接入点（Lightweight AP, 瘦 AP）在固件/镜像管理（Firmware/Image Updates）上的架构差异。\n1. 自主型 AP（Autonomous AP）：\n   采用完全独立的单机架构。每个 AP 拥有独立的 Cisco IOS 操作系统镜像。升级固件时，网络管理员必须逐台登录 AP，通过 CLI 命令（如 `archive download-sw /overwrite tftp://...`）或者依赖第三方管理平台（如 Cisco Prime Infrastructure / TFTP）手动推送远程固件升级。自主 AP 完全脱离 WLC 工作，绝不通过 WLC 下载镜像。\n2. 轻量级 AP（Lightweight AP）：\n   采用集中管控的 Split-MAC 架构。轻量级 AP 启动并发现无线控制器（WLC）后，第一步就是在 CAPWAP 控制隧道中比对自身的固件版本与 WLC 当前运行的固件版本。若版本不一致，轻量级 AP 会无条件自动从 WLC 下载匹配的固件并重启。因此，轻量级 AP 强制依赖 WLC 来实施其固件版本更新。\n\n• 正确选项剖析：\n选项 B（Unlike autonomous access points, lightweight access points require a WLC to implement remote firmware updates.）准确阐明了两者的固件机制区别。轻量级 AP 的远程固件下发与更新完全由 WLC 集中驱动和分发，无法脱离 WLC 独立实施升级。\n\n• 干扰项排除与错误陷阱：\n选项 A：自主 AP 完全不依赖任何 WLC，所谓的“需要一台 WLC”纯属技术荒谬。\n选项 C：不论自主 AP 还是轻量级 AP，在固件升级损坏时通常进入 bootloader (ap:) 提示符，轻量级 AP 甚至更容易通过自动 TFTP/CAPWAP 恢复，并非“只有自主 AP 才能自动恢复”。\n选项 D：现代 Cisco AP 均具备多分区备份功能，并非瘦 AP 独有的特异功能。\n\n• 考试要点与速记技巧：\n瘦 AP（LAP）镜像管理精髓：\n“版本认爹（WLC）”——瘦 AP 固件必须与控制器完全一致，接入 WLC 自动从控制器拉取更新；胖 AP 自力更生 TFTP 单独升。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定传统本地 WLC，去除型号和升级时序绝对断言。"
+      }
+    },
+    {
+      "id": 887,
+      "original_qid": "Q1195",
+      "before_sha256": "7fefe467c36ce99cf5cec1be9585c8ccf6a77c1d0779d406381d58808398a5d2",
+      "reason": "修正原选项 SNMP/UDP 分层歧义。",
+      "updates": {
+        "prompt": "Which statement describes typical SNMP management over UDP?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SNMP is an application-layer protocol used to monitor and manage devices, typically over UDP"
+          },
+          {
+            "label": "B",
+            "text": "SNMP is a transport-layer protocol that requires SSL to read device data"
+          },
+          {
+            "label": "C",
+            "text": "SNMP is a presentation-layer protocol that requires TCP to monitor devices"
+          },
+          {
+            "label": "D",
+            "text": "SNMP is a network-layer protocol carried exclusively inside SSH"
+          }
+        ],
+        "explanation": "A。SNMP 是应用层管理协议，可查询和设置被管设备的数据；通常请求发往代理 UDP 161，通知发往管理站 UDP 162。管理请求和通知能否执行取决于设备配置及权限。B、C、D 混淆 SNMP 的层次或传输，且将其他机制说成必需。"
+      },
+      "original_fields": {
+        "prompt": "What is the role of SNMP in the network?",
+        "options": [
+          {
+            "label": "A",
+            "text": "to monitor and manage network devices using a UDP underlay that operates on the application layer"
+          },
+          {
+            "label": "B",
+            "text": "to collect data directly from network devices using an SSL underlay that operates on the transport layer"
+          },
+          {
+            "label": "C",
+            "text": "to monitor network devices and functions using a TCP underlay that operates on the presentation layer"
+          },
+          {
+            "label": "D",
+            "text": "to collect telemetry and critical information from network devices using an SSH underlay that operates on the network layer"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查简单网络管理协议（Simple Network Management Protocol, SNMP）的协议栈分层与传输层底层（Underlay）协议特性。\n在 TCP/IP 协议栈架构中：\n1. 协议分层（Layer）：SNMP 是工作在 TCP/IP 应用层（Application Layer, OSI Layer 7）的管理协议。\n2. 传输层底层协议（Transport Underlay）：SNMP 传统上构建于 UDP（User Datagram Protocol）传输层协议之上：\n   - UDP 端口 161：用于 NMS（网管站）向 Agent（代理设备）发送查询（Get/GetNext/GetBulk）及设置（Set）请求；\n   - UDP 端口 162：用于 Agent 主动向 NMS 发送告警通知（Trap / InformRequest）。\n3. 业务目标：SNMP 允许网管员监控网络设备的健康指标（CPU、内存、接口流量等）并集中配置和管理被管设备。\n\n• 正确选项剖析：\n选项 A（to monitor and manage network devices using a UDP underlay that operates on the application layer）完全符合标准定义：\n- 目标：监控和管理网络设备（monitor and manage network devices）；\n- 底层机制：基于 UDP 传输（UDP underlay）；\n- 工作层次：应用层（operates on the application layer）。\n\n• 干扰项排除与错误陷阱：\n选项 B：声称 SNMP 使用“SSL underlay operating on the transport layer”，混淆了传输机制。\n选项 C：声称 SNMP 使用“TCP underlay operating on the presentation layer”，SNMP 主要基于 UDP 而非 TCP，且属于应用层而非表示层。\n选项 D：声称 SNMP 使用“SSH underlay operating on the network layer”，SSH 是应用层协议而非网络层，SNMP 亦非基于 SSH 承载（虽然 SNMPv3 支持 USM 加密）。\n\n• 考试要点与速记技巧：\nSNMP 分层速记：\n- 应用层协议（Layer 7），传输层靠 UDP（无连接轻量级）；\n- 轮询查表用 UDP 161，主动告警发 UDP 162。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "修正原选项 SNMP/UDP 分层歧义。"
+      }
+    },
+    {
+      "id": 888,
+      "original_qid": "Q1196",
+      "before_sha256": "b76780bf94c194873039c1ef564752375824f0acd67688a86fb683a00c2a7f41",
+      "reason": "确认 SW1 passive；补端口兼容前提与本地组号说明。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming matching speed, duplex and Layer 2 settings, which SW2 configuration negotiates LACP with the shown SW1 passive ports?",
+        "explanation": "A。图中 SW1 两端口均为 LACP passive；SW2 两个对应端口配置 active，可主动发起 LACP。一个交换机本地成员应加入同一 channel-group；两端本地组号不必相同。B desirable 与 D auto 使用 PAgP，C on 为静态聚合，不与题示 passive 建立 LACP。实际聚合还取决于端口兼容、允许 VLAN 及链路状态。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which configuration enables SW2 to establish an LACP EtherChannel?",
+        "explanation": "• **核心考点与原理分析：LACP（802.3ad）动态链路聚合配置与端口对应关系**\n在 Cisco IOS 交换机上配置 LACP EtherChannel 时：\n1. **协商模式配对**：\n   - 对端交换机 SW1 如果配置为 `active` 或 `passive`，本地 SW2 需配置为 `active` 模式，以主动发送 LACP 报文并保证双向动态协商成功。\n   - 题干拓扑中两台交换机之间互联两个千兆接口（GigabitEthernet0/1 和 GigabitEthernet0/2）。\n2. **接口配置一致性**：\n   - 聚合组中的所有物理成员接口（Gi0/1 和 Gi0/2）必须加入相同的 channel-group 编号（此处为 group 1）。\n   - 成员接口的双工、速率、VLAN 属性等参数必须保持严格一致。\n\n• **正确选项分析：A**\n```text\nSW2(config)#interface gigabitEthernet0/1\nSW2(config-if)#channel-group 1 mode active\nSW2(config-if)#interface gigabitEthernet0/2\nSW2(config-if)#channel-group 1 mode active\n```\n将 Gi0/1 和 Gi0/2 均配置加入 `channel-group 1` 并设置模式为 `active`，成功启用标准的 LACP 动态链路聚合。\n\n• **干扰项深度剖析**：\n- **B & D 选项**：使用了 `mode desirable` 和 `mode auto`，这是 Cisco 私有的 PAgP（端口聚合协议）协商模式，并非 IEEE 802.3ad LACP 标准。\n- **C 选项**：使用 `mode on`，这是无协议协商的静态强制聚合。当对端处于 LACP 动态协商状态时，静态 on 会导致 EtherChannel 出现单通或由于协议不匹配而导致端口处于 err-disable 状态。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "确认 SW1 passive；补端口兼容前提与本地组号说明。"
+      },
+      "exhibit_path": "exhibits/q888_agent.jpg",
+      "image_sha256": "6f84a6e61b64d0c16f981a9ec8729e00452a181d83e55f7b1db5cf2d9f17887a"
+    },
+    {
+      "id": 889,
+      "original_qid": "Q1197",
+      "before_sha256": "0d5e86691af54fd3fabb3d4a3abe55215931043f00a258ba0dbedb7b67c898e1",
+      "reason": "原图不能唯一证明断线或双工不匹配，改问可直接观察的状态。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which interface state is explicitly displayed for GigabitEthernet0/0/1?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Physical state down and line protocol up"
+          },
+          {
+            "label": "B",
+            "text": "Physical state up and line protocol down"
+          },
+          {
+            "label": "C",
+            "text": "Physical state administratively down and line protocol down"
+          },
+          {
+            "label": "D",
+            "text": "Physical state up and line protocol up"
+          }
+        ],
+        "explanation": "B。输出首行明确显示 `is up, line protocol is down`。这表示物理状态报告为 up，而线路协议报告为 down；仅凭这份输出不能唯一确定线缆断开或双工不匹配。图中 half duplex、累计碰撞及接口类型还需结合两端配置、介质和新鲜计数器排查；不能将累计碰撞直接当成双工不匹配的证明。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. What is the issue with the interface GigabitEthernet0/0/1?",
+        "options": [
+          {
+            "label": "A",
+            "text": "port security"
+          },
+          {
+            "label": "B",
+            "text": "cable disconnect"
+          },
+          {
+            "label": "C",
+            "text": "high throughput"
+          },
+          {
+            "label": "D",
+            "text": "duplex mismatch"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网物理层与数据链路层状态诊断（`show interface` 输出分析）、双工模式协商及线缆故障特征。\n1. 接口双状态机解析：\n   - 第一状态（Physical Layer / Layer 1）：“GigabitEthernet0/0/1 is up”，表明本地物理层收发器（SFP/PHY）检测到了合法的载波信号或光信号脉冲（Rx 端接收到光功率），物理层硬件链路处于正常连通状态。\n   - 第二状态（Data Link Layer / Layer 2）：“line protocol is down”，表明二层数据链路层无法正常建立或维持成帧/心跳握手（Keepalive 失败、帧同步丢失或时钟失步）。\n2. 输出关键参数异常诊断：\n   - 协商与工作模式：输出显示“Half Duplex, 1000Mbps, link type is auto, media type is LX”。千兆光纤（1000BASE-LX）在标准规范下强制工作在全双工（Full Duplex），半双工千兆以太网在实际组网中极其罕见且违背设计规范。\n   - 错误计数器：“50 collisions, 6 interface resets”。以太网冲突（Collisions）仅可能在运行 CSMA/CD 机制的半双工（Half Duplex）网络中发生。千兆接口如果出现半双工且存在大量冲突，表明链路两端存在严重的双工不匹配（Duplex Mismatch）。\n3. 题库参考答案（B）与现网技术事实（D）深度辨析：\n   - 题库官方标注答案为 B（cable disconnect）：在光纤（LX）通信中，如果是单向光纤故障（如 Tx 光纤断开或单芯拔出），本端接收到光信号显示 `is up`，但因无法完成双向握手或丢失二层帧，会导致 `line protocol is down`。题库据此将断纤或线缆断开归为引发原因。\n   - 现网工程技术判断为 D（duplex mismatch）：若完全断线（Cable Disconnect），以太网物理层会直接显示 `GigabitEthernet0/0/1 is down, line protocol is down`。输出中最为刺眼的异常指标是“Half Duplex”与“50 collisions”，这明确证明设备正工作在错误的半双工模式下并遭遇了双工不匹配与冲突碰撞。在各大认证社区与现网排障中，本题普遍公认双工不匹配（Duplex Mismatch）为最核心的技术故障特征。\n\n• 正确选项剖析：\n- 依据题库官方参考键（Option B: cable disconnect）：出题人意图考查“链路物理 Up 但协议 Down”的特殊线缆故障场景。在双绞线或双芯光纤中，发送端或接收端单侧断开（Unidirectional Link / Cable Disconnect）会导致物理层检测到假性信号但无法交互二层数据帧，从而使 line protocol 处于 down 状态。因此考试系统中 Option B 为标准判定得分项。\n- 依据技术原理剖析（Option D: duplex mismatch）：输出明确显示接口运行在 `Half Duplex` 并且累计了 `50 collisions`。全双工与半双工对接会导致大量晚期冲突和帧丢失，严重破坏二层通信导致协议 Down。无论在考试中遇到题库原题还是工程实际排障，考生都必须深刻理解这一关键特征。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（port security）：若触发端口安全违规（Port Security Violation）且动作模式为 `shutdown`，接口将进入 `down/down (err-disabled)` 状态，而不是 `up, line protocol is down`；且端口安全通常应用于二层接入交换机端口，本例为 SPA 路由器广域/骨干以太网接口。\n- 选项 C（high throughput，高吞吐量）：输出显示 `BW 1000000 Kbit/sec`（1 Gbps），但当前负载 `txload 1/255, rxload 1/255`，包计数器几乎没有流量，根本不存在高吞吐量拥塞。\n- 选项 D（duplex mismatch）：从输出中的 `Half Duplex` 与 `50 collisions` 来看，技术上存在强烈的双工不匹配特征。但需注意题库官方标准答案设定为 B，考生在应试时需牢记题库将该 up/down 状态与 cable disconnect 关联的考法，同时掌握双工冲突的技术原理。\n\n• 考试要点与速记技巧：\n双工与线缆排障口诀：\n- 物理 Down 必是全断线（Down/Down），单纤断开可致协议 Down（Up/Down）；\n- 出现 Half Duplex 与 Collisions 必是双工不匹配（Duplex Mismatch）；若题库死扣 Up/Down 考点，注意官方标准答案 B（cable disconnect）的特殊性。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原图不能唯一证明断线或双工不匹配，改问可直接观察的状态。"
+      },
+      "exhibit_path": "exhibits/q889_agent.jpg",
+      "image_sha256": "1cc3337238498fef0a90b88e2e206cb95d34c3f04b55edf3492c4907809f2d36"
+    },
+    {
+      "id": 890,
+      "original_qid": "Q1198",
+      "before_sha256": "b22952579e0de4dbc6a75c2091561c13b3b2bb986565f521dfc2efa50941ea5e",
+      "reason": "静态路由不作为动态更新接收；汇总 /23。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 has static routes to the four networks shown and redistributes them into OSPF. Which most-specific single summary covers all four?",
+        "explanation": "D。四个网络横跨 10.1.40.x 与 10.1.41.x，第三字节 40 与 41 的前 7 位相同，故最具体的共同前缀为 10.1.40.0/23，覆盖 10.1.40.0–10.1.41.255。A、B、C 都不能覆盖全部四个网络。静态路由由管理员配置，而非从邻居接收的静态路由更新；重分发与外部汇总还需正确配置，并注意汇总包含未列出的地址。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Router R1 receives static routing updates from routersA,B,C,and D The network engineer wants R1 to advertise static Routes in OSPF area 1. Which summary address must be advertised in OSPF?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv4 无类域间路由（CIDR）超网聚合（Route Summarization / Supernetting）及 OSPF 外部路由汇总机制。\n1. 拓扑与待汇总网络清单：\n   路由器 R1 从四台相连路由器分别接收到 4 条静态路由网段：\n   - 路由 A（连接 Router A）：10.1.40.0/25\n   - 路由 B（连接 Router B）：10.1.40.128/29\n   - 路由 C（连接 Router C）：10.1.40.176/28\n   - 路由 D（连接 Router D）：10.1.41.224/29\n2. 各子网覆盖的 IP 地址范围精确计算：\n   - 10.1.40.0/25：主机地址范围为 10.1.40.0 至 10.1.40.127。\n   - 10.1.40.128/29：主机地址范围为 10.1.40.128 至 10.1.40.135。\n   - 10.1.40.176/28：主机地址范围为 10.1.40.176 至 10.1.40.191。\n   - 10.1.41.224/29：主机地址范围为 10.1.41.224 至 10.1.41.231。\n3. 超网汇总计算过程：\n   - 前两段 10.1 保持一致（16 位完全相同）。\n   - 分析第三字节（Third Octet）：\n     * 40 的二进制为：0 0 1 0 1 0 0 0\n     * 41 的二进制为：0 0 1 0 1 0 0 1\n   - 比较发现：第三字节的前 7 位完全相同（0010100），仅在最后 1 位发生变化（0 与 1）。\n   - 因此，最长公共匹配前缀位数为：8 + 8 + 7 = 23 位（即 /23，掩码 255.255.254.0）。\n   - 汇总网络地址：10.1.00101000.0 = 10.1.40.0/23。\n   - 该 /23 汇总网段覆盖的完整范围是：10.1.40.0 至 10.1.41.255，完美包容上述全部 4 条静态明细路由！\n\n• 正确选项剖析：\n选项 D（10.1.40.0/23）完全正确：\n通过上述严格的二进制公共前缀计算，只有 /23 掩码才能将第 3 字节跨越 40 和 41 的所有子网全部聚合。在 R1 上将静态路由重分发进 OSPF 时，使用 `summary-address 10.1.40.0 255.255.254.0` 即可将上述四条明细外部路由（Type-5 LSA）聚合成单一路由向 Area 1 通告。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（10.1.41.0/25）：地址范围仅为 10.1.41.0 至 10.1.41.127，不仅连 Router D 的 10.1.41.224/29 都未覆盖，更是彻底遗漏了 10.1.40.x 上的前三条路由。\n- 选项 B（10.1.40.0/24）：地址范围仅为 10.1.40.0 至 10.1.40.255。虽然可以汇总 Router A、B、C 的网段，但无法覆盖 Router D 的 10.1.41.224/29，导致外部网络无法访问 Router D。\n- 选项 C（10.1.40.0/25）：范围仅为 10.1.40.0 至 10.1.40.127，仅能代表 Router A，属于严重欠汇总。\n\n• 考试要点与速记技巧：\n子网汇总速算法：\n第三字节 40 与 41 互为相邻偶数与奇数（40=00101000, 41=00101001），合并必借 1 位变 /23（10.1.40.0/23）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "静态路由不作为动态更新接收；汇总 /23。"
+      },
+      "exhibit_path": "exhibits/q890_agent.jpg",
+      "image_sha256": "44728ca7fd238c53f27a27992c8bee993e97297482ec0b5700c0af69963ca3eb"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/etherchannels.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/92x/Layer-2_switching/configuration/guide/b-cisco-nexus-9000-nx-os-layer-2-switching-configuration-guide-92x/b-cisco-nexus-9000-nx-os-layer-2-switching-configuration-guide-92x_chapter_01001.html",
+    "https://www.cisco.com/en/US/docs/internetworking/troubleshooting/guide/tr1904.html",
+    "https://www.rfc-editor.org/rfc/rfc1918"
+  ],
+  "limitations": "人工核对题干、选项、答案、解析、原图及 CLI；未做设备实测。"
+}

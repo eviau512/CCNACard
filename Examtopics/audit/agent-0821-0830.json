@@ -1,0 +1,512 @@
+{
+  "scope": "Q821–Q830",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 821,
+      "original_qid": "Q1100",
+      "before_sha256": "cbaab727b3263a925bcc49aa19db6142807c94c17a9d8a21ada5668d2e7ba893",
+      "reason": "限定独立网络地址复用，澄清互联重叠、NAT 和防火墙上游。",
+      "updates": {
+        "prompt": "What is a characteristic of RFC 1918 private IPv4 addressing in independently administered, disconnected networks?",
+        "explanation": "B。RFC 1918 私有地址可以在彼此独立的网络中重复使用，不必申请全球唯一的地址。例如两家未互联的企业均可使用 192.168.1.0/24。若网络后来通过 VPN 或合并互联而地址重叠，则需重新编址、转换或其他消歧方案。\n\nA 私网前缀不应在公共互联网全局路由中发布；C 防火墙外接口也可能连接私有上游，因此不是私网地址的定义；D 私网地址不能作为普通公网全局可路由地址，NAT 或隧道等可提供间接通信。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of private IPv4 addressing?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址空间的非全局路由特性与组织间地址重用能力。\n1. 隔离与非全局性（Non-Globally Routable）：RFC 1918 严格规定，私网地址（10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）仅在独立的私有管理域（Private Administrative Domain）内部具有本地有效性。互联网核心路由器（BGP/IGP）决不通告、也不路由任何目的或源为私网地址的数据包。\n2. 多企业无冲突复用：正是由于私网地址被天然限制在各自企业的局域网内部，因此成千上万家完全互不相关的公司（如企业 A、企业 B、企业 C）可以在各自的内部网络中同时独立规划和使用完全相同的 IP 地址（例如每家公司都使用 192.168.1.1 作为内部核心网关，使用 10.0.0.0/24 作为服务器网段），在彼此之间绝对不会引发任何 IP 地址冲突（allows multiple companies to use the same addresses without conflict）。当它们各自向外访问 Internet 时，经由各自边界 NAT 设备转换为全球唯一的公网 IP 即可完成透明通信。\n\n• 正确选项剖析：\n选项 B（allows multiple companies to use the same addresses without conflict，允许多家公司使用相同地址而互不冲突）完全正确。这是私网地址实现高复用率、破解 IPv4 地址短缺的核心技术机制之一。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（is used when the ISP requires the new subnet to be advertised to the internet for web services）：面向公共互联网提供 Web 服务必须使用全球唯一的公网 IPv4 地址，ISP 会强制拒绝向 Internet 宣告私有 IP。\n- 选项 C（is used on the external interface of a firewall）：防火墙的外部公网接口必须配置合法的公网 IP，以便 Internet 上的路由器能够将回包正确路由转发回该防火墙。\n- 选项 D（allows endpoints to communicate across public network boundaries）：私网地址无法直接跨越公共网络边界路由（public network boundaries），私网报文若未经 NAT 转换或 VPN 隧道封装直接注入公网会被运营商路由器直接丢弃。\n\n• 考试要点与速记技巧：\n私网 IP 核心特性：“各家用各家，重用不打架（multiple companies use same addresses without conflict）；出界必经 NAT，公网不认私网号”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定独立网络地址复用，澄清互联重叠、NAT 和防火墙上游。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 822,
+      "original_qid": "Q1104",
+      "before_sha256": "37859014deeac1604ae2f589ca3ebd835de4e6e94d03b5392553aeb10ac1a89b",
+      "reason": "SSID 区分大小写；将错误答案 C 改 D，移除把安全策略当作 SSID 固有功能的断言。",
+      "updates": {
+        "answer": [
+          "D"
+        ],
+        "explanation": "D。SSID 是用于标识无线服务集的字符串，区分大小写，例如 `Office` 与 `office` 不同。SSID 本身不执行身份验证或加密。\n\nA 单个基本服务集通常用 BSSID 标识；B 密码是某些安全模式的凭据而非 SSID 的定义；C 认证、授权和加密策略可关联 WLAN，但并非 SSID 本身必然阻止未授权用户。原答案 C 忽略了 D 正确且把可选策略误当成 SSID 自带能力。"
+      },
+      "original_fields": {
+        "answer": [
+          "C"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查企业级无线局域网（WLAN）中服务集标识符（SSID）的准入控制与安全策略（Security Policies）绑定机理。\n1. SSID 的功能定位：根据 IEEE 802.11 标准，SSID 是无线局域网的逻辑识别名称。但在企业级无线网络架构（如 Cisco WLC 无线局域网控制器）中，SSID 绝不仅是一个单纯的字符标识，它还是一个完整的“策略控制容器（Policy Container）”。\n2. 策略准入防御机制（Prevent Unauthorized Users）：在控制器上配置 WLAN 时，管理员必须为每个 SSID 绑定一套独立的安全策略（Security Policies），涵盖：\n   - 二层安全策略：如 802.1X/EAP-TLS（企业级动态认证）、WPA2/WPA3-Enterprise、WPA2-PSK、WebAuth 强制认证门户等；\n   - 本地策略（Local Policies）与访问控制列表（ACL）：基于 RADIUS 服务器下发的用户属性或设备角色（Profiling），施加精细化的入网权限、安全过滤和 VLAN 划分。\n   通过将这些严密的安全策略施加在特定的 SSID 入口上，网络能够自动阻断未授权客户端的接入，精准防止非法用户渗透（uses policies to prevent unauthorized users）。\n\n• 正确选项剖析：\n选项 C（uses policies to prevent unauthorized users，使用策略来防止未授权用户）完全正确。在 Cisco 官方认证考试题库及考纲考核意图中，该题旨在强调企业级 SSID 必须结合认证授权策略来实施无线准入控制防御。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（identifies an access point on a WLAN）：在无线网络中，用于唯一标识单个物理接入点（AP 射频天线）的是 BSSID（基本服务集标识符，通常是 AP 射频芯片的 48 位硬件 MAC 地址），而 SSID 标识的是整个逻辑网络。\n- 选项 B（uses the password to connect to an access point）：在企业级 802.1X（如 EAP-TLS）网络中，用户通常使用客户端数字证书或智能卡进行强身份认证，根本不需要密码，因此“使用密码”并不是 SSID 的通用本质特征。\n- 选项 D（uses a case-sensitive text string）：虽然 802.11 协议规定 SSID 区分大小写（case-sensitive），但该选项属于对 SSID 格式属性的局部技术描述，而在官方评分标准与核心教学意图中，选项 C（基于策略防止未授权接入）是官方锁定的唯一标准采分项。\n\n• 考试要点与速记技巧：\n企业级无线准入精髓：“SSID 挂帅当入口，背后策略严防守；未授权者休想进，安全策略定准入（uses policies to prevent unauthorized users）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "SSID 区分大小写；将错误答案 C 改 D，移除把安全策略当作 SSID 固有功能的断言。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 823,
+      "original_qid": "Q1105",
+      "before_sha256": "565f0a536eb49597cc2f5e4eeba74a997f76c33b49d4bbd302d3b734ee966d4c",
+      "reason": "内网主机可使用私网但并非唯一用途；删除绝对化成本、安全及强制论述。",
+      "updates": {
+        "prompt": "Which use of RFC 1918 private IPv4 addresses is appropriate?",
+        "explanation": "B。仅需与内部主机通信的设备可以使用 RFC 1918 私有地址；常见网段是 10.0.0.0/8、172.16.0.0/12 和 192.168.0.0/16。私有地址也可在 NAT、代理或隧道等方案下支持外部通信，并非只限于内部通信，也不自动提供安全保护。\n\nA、C、D 所说复杂度、编址便利性与维护成本取决于整体设计，并非使用私有地址必然带来的性质。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of private IPv4 addressing?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址的设计用途与适用网络宿主（Host）范围。\n1. 计算机网络中端系统主机的通信模型划分：\n   根据 RFC 1918 第 3 节关于内部与外部互联的论述，企业网络中的终端根据其业务边界可清晰划分为两类：\n   - 需要外部公网可达性的全局主机：如企业对外官方门户、外网邮件服务器、权威 DNS 服务器等，必须拥有全局公网 IP。\n   - 仅在内部网络交互的本地主机（Internal Hosts）：如内部生产数据库服务器、域控服务器（Active Directory）、内网打印机、员工办公机以及网管交换机/路由器管理接口。这些设备的所有业务数据流均在企业内部局域网流通，根本不需要也坚决不能被外部公共互联网直接寻址。\n2. 私网编址规范：对于所有仅在内部进行通信的主机（hosts that communicate only with other internal hosts），RFC 1918 推荐强制使用 10/8、172.16/12 或 192.168/16 私网网段编址，这既实现了公网 IP 资源的彻底节约，又从网络层天然规避了外部黑客的直接恶意扫描。\n\n• 正确选项剖析：\n选项 B（is used on hosts that communicate only with other internal hosts，用于仅与其他内部主机通信的主机）完全符合技术定义。这是私有 IPv4 地址最典型、最原生的宿主应用场景。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（reduces network complexity，降低网络复杂度）：使用私有地址需要部署 NAT、PAT、端口映射和复杂的内网路由协议，不仅打破了 IP 协议端到端无缝连接原则，还使多媒体协议（如 H.323/SIP）穿越受阻，显著增加了网络架构与排错的复杂度。\n- 选项 C（simplifies the addressing in the network，简化网络编址）：私网与公网并存导致需要管理重叠地址、NAT 转换表项以及内部与外部两套 DNS 命名体系（Split DNS），使得编址规划更为复杂繁琐。\n- 选项 D（reduces network maintenance costs，降低网络维护成本）：需要额外采购并维护支持大容量 NAT 会话的高性能防火墙与边界网关，运维成本通常上升而非降低。\n\n• 考试要点与速记技巧：\n私网终端定位口诀：“内部通信关照好，对外绝不乱暴露；内网互访首选私（internal hosts only），公网直访免打扰”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "内网主机可使用私网但并非唯一用途；删除绝对化成本、安全及强制论述。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 824,
+      "original_qid": "Q1106",
+      "before_sha256": "7bb1870b258f741ef148752f159d2ef463790cf36ee2bb5f6ea31c5d34febb05",
+      "reason": "原选项将认证误认为加密；改 C 表达无线数据机密性，答案 D 改 C。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "identifies an access point on a WLAN"
+          },
+          {
+            "label": "B",
+            "text": "uses the password to connect to an access point"
+          },
+          {
+            "label": "C",
+            "text": "uses a cipher to protect the confidentiality of wireless data"
+          },
+          {
+            "label": "D",
+            "text": "uses authentication protocols to secure a network"
+          }
+        ],
+        "answer": [
+          "C"
+        ],
+        "explanation": "C。无线加密使用密码算法保护无线链路上传输数据的机密性，使无密钥的监听者难以读取明文。认证负责验证身份；某些模式如 CCMP 还提供完整性保护，但加密与身份认证概念不同。\n\nA 是网络标识而非加密；B 密码仅是部分安全模式使用的凭据；D 身份认证是相关但独立的功能。原 D 将认证当成加密的本质，且原 C 描述的是完整性，故修订 C 明确考查机密性并调整答案。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "identifies an access point on a WLAN"
+          },
+          {
+            "label": "B",
+            "text": "uses the password to connect to an access point"
+          },
+          {
+            "label": "C",
+            "text": "uses integrity checks to identify forgery attacks in the frame"
+          },
+          {
+            "label": "D",
+            "text": "uses authentication protocols to secure a network"
+          }
+        ],
+        "answer": [
+          "D"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查无线网络安全架构（IEEE 802.11i / WPA2 / WPA3）中数据加密（Encryption）与网络认证协议（Authentication Protocols）的协同与依赖关系。\n1. 密码学对称加密的痛点——密钥协商：\n   在 IEEE 802.11 无线局域网中，为了保护空口数据传输的机密性，采用高级加密标准（AES-CCMP 或 GCMP）对数据载荷进行加密。然而，对称加密的核心前提是通信双方（无线客户端与 AP）必须共享一组高度安全的动态临时会话密钥（如单播的 PTK 对等临时密钥与组播的 GTK 组临时密钥）。\n2. 认证协议的安全基石作用：\n   - 无线网络绝不能使用固定的静态密钥进行加密，否则会被迅速破解。\n   - 动态加密密钥必须依托强大的网络认证协议（Authentication Protocols）来派生与协商！例如在 802.1X/EAP（EAP-TLS、PEAP）企业级安全架构中，RADIUS 服务器与客户端通过非对称加密完成身份认证，并安全协商出主密钥（MSK）；随后 AP 与客户端通过 WPA 四次握手（4-Way Handshake）派生出用于 AES 加密的会话密钥。\n   因此，无线数据加密不是孤立存在的算法，它在系统层面上必须使用认证协议来保证会话建立的合法性与安全性（uses authentication protocols to secure a network）。\n\n• 正确选项剖析：\n选项 D（uses authentication protocols to secure a network，使用认证协议来确保网络安全）完全正确。无线加密机制紧密结合 802.1X、EAP、SAE（WPA3 对等实体同时认证）等身份认证协议，构成了现代安全无线网络的核心纵深防御体系。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（identifies an access point on a WLAN）：标识 AP 的是 BSSID（48 位硬件 MAC 地址），加密属于数据安全服务，与 AP 的拓扑身份标识无关。\n- 选项 B（uses the password to connect to an access point）：使用预共享密码（PSK）仅存在于家庭级 WPA-Personal 模式中，而在企业级 802.1X 网络中采用数字证书或动态令牌认证，密码并不是加密机制的普遍属性。\n- 选项 C（uses integrity checks to identify forgery attacks in the frame）：消息完整性校验（MIC）属于数据完整性（Integrity）与抗伪造防护，虽然 CCMP 中集成了完整性校验，但在本题的考点分类中，官方标准着重考查加密体系在网络安全协议层面的依存关系（即选项 D）。\n\n• 考试要点与速记技巧：\n无线加密联动原则：“加密不能凭空造，必绑认证协议跑（uses authentication protocols）；先握手来后生密，动态派钥安全保”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "原选项将认证误认为加密；改 C 表达无线数据机密性，答案 D 改 C。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 825,
+      "original_qid": "Q1107",
+      "before_sha256": "69070e6474dc57dc3b1d3d9de31633dace4b17251263e98302872f06c8e706da",
+      "reason": "私网可用于内部主机，但并不限于内部通信或自动满足安全标准。",
+      "updates": {
+        "prompt": "Which use of RFC 1918 private IPv4 addresses is appropriate?",
+        "explanation": "D。仅需内部通信的主机可以使用私有 IPv4 地址；使用 NAT、代理或隧道也可支持外部通信。私网前缀为 10/8、172.16/12、192.168/16；使用私网地址本身既不保证安全，也不意味着自动合规。\n\nA 网络规划是否更简便取决于场景；B 合规需要满足完整控制要求，不能仅凭地址判断；C 路由表规模取决于地址规划与汇总等因素，并非必然缩减。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of private IPv4 addressing?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址的应用边界及其在现代网络设计中的职责划分（官方核心题库变体）。\n1. RFC 1918 地址段空间规范：\n   - Class A 专用段：10.0.0.0 到 10.255.255.255（/8 前缀，支持 1600 万+ 主机）\n   - Class B 专用段：172.16.0.0 到 172.31.255.255（/12 前缀，16 个连续的 /16）\n   - Class C 专用段：192.168.0.0 到 192.168.255.255（/16 前缀，256 个连续的 /24）\n2. 适用宿主主机的界定：RFC 1918 明确强调，私网地址的设计不是为了直接提供外部互联网可见性，而是专为那些“仅在组织内部局域网进行通信的内部主机（hosts that communicate only with other internal hosts）”而设。这些主机通过私网编址，在逻辑上形成与公共互联网的地址隔离，极大提升了内网主机的隐蔽性与防御深度。\n\n• 正确选项剖析：\n选项 D（is used on hosts that communicate only with other internal hosts）完全正确。对于无需对外暴露 IP、只进行内网业务交互的主机，配置 RFC 1918 私有地址是行业最通用且规范的技术方案。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（simplifies the addressing in the network）：私网地址需要协同 NAT、PAT 以及多层内部子网划分，使得网络规划和故障排查更加复杂，并不简化编址。\n- 选项 B（complies with PCI regulations）：PCI-DSS（支付卡行业数据安全标准）规范涵盖物理安全、防病毒、强认证、加密传输和日志审计等数十项严苛要求，单纯在内网使用私网 IP 绝不能代表直接“符合 PCI 法规”。\n- 选项 C（reduces the forwarding table on network routers）：内部路由器仍需为所有私网子网维护完整的路由转发表；而公网路由器的路由表缩减取决于 CIDR（RFC 1519）路由汇总，与私有地址本身无因果关系。\n\n• 考试要点与速记技巧：\n私网核心考点高频词：“私网地址用何处，只在内部通信忙（communicate only with other internal hosts）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "私网可用于内部主机，但并不限于内部通信或自动满足安全标准。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 826,
+      "original_qid": "Q1108",
+      "before_sha256": "0364bab04f09f8bb6bb3b11718cfa95ffcdbc1a0f5dbb559e9289bcb8598d310",
+      "reason": "AP 发送 Beacon；调整选项表述并说明隐藏 SSID 与默认值的边界。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "eliminates network piggybacking"
+          },
+          {
+            "label": "B",
+            "text": "prompts a user for a login ID"
+          },
+          {
+            "label": "C",
+            "text": "an access point commonly includes it in beacon frames by default"
+          },
+          {
+            "label": "D",
+            "text": "must include a combination of letters and numbers"
+          }
+        ],
+        "explanation": "C。SSID 用来标识无线服务集；常见 AP 默认在周期发送的 Beacon 管理帧中包含 SSID，以便客户端发现网络。发射 Beacon 的是 AP，不是 SSID；具体默认值依产品配置而异，隐藏 SSID 可使 Beacon 不包含明文网络名称，但并非认证或加密。\n\nA SSID 不会阻止蹭网；B 登录提示由认证机制决定；D 不要求同时包含字母和数字。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "eliminates network piggybacking"
+          },
+          {
+            "label": "B",
+            "text": "prompts a user for a login ID"
+          },
+          {
+            "label": "C",
+            "text": "broadcasts a beacon signal to announce its presence by default"
+          },
+          {
+            "label": "D",
+            "text": "must include a combination of letters and numbers"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线局域网服务集标识符（SSID）的广播通告机制与信标帧（Beacon Frame）原理。\n1. 802.11 管理帧与 Beacon 机制：\n   - 在 802.11 无线通信规范中，接入点（AP）必须向空间射频信道周期性地发射管理帧（Management Frame），其中最关键的就是“信标帧（Beacon Frame）”。\n   - 默认广播行为：在默认出厂与标准配置下，AP 每隔一个信标间隔（Beacon Interval，默认通常为 100 毫秒 / 100 TU）向空间全向广播发射一次 Beacon 帧。\n   - Beacon 内容：Beacon 帧的载荷中携带了网络的服务集标识符（SSID）、支持的传输速率（Supported Rates）、当前工作信道、时间戳、加密认证能力信息元素（RSN IE / WPA 信息）等。\n2. 宣告自身存在（Announce Presence）：通过这种默认的 Beacon 广播机制，AP 主动向其信号覆盖范围内的所有终端公告该 WLAN 的存在（broadcasts a beacon signal to announce its presence by default）。无线客户端的无线网卡被动扫描（Passive Scanning）监听到该信标后，才能在系统的可用 Wi-Fi 网络列表中展示出该网络名称供用户点击连接。\n\n• 正确选项剖析：\n选项 C（broadcasts a beacon signal to announce its presence by default，默认通过广播信标信号来宣告其存在）完全符合 IEEE 802.11 标准技术规范。这是无线 AP 发现网络的基础协议机制。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（eliminates network piggybacking）：未经许可的邻居或路人蹭网（piggybacking）必须依赖高强度的加密算法与严格的准入认证来防范；SSID 的默认广播甚至会暴露网络存在，绝不能消除蹭网。\n- 选项 B（prompts a user for a login ID）：提示输入用户名登录是由 802.1X 认证或 Captive Portal（网页重定向认证）触发的，属于身份认证层面的交互，不是 SSID 本身的固有机制。\n- 选项 D（must include a combination of letters and numbers）：802.11 规定 SSID 是最长 32 字节的文本字符串，可以纯字母、纯数字、甚至包含特殊字符与空格，没有任何“必须包含字母和数字组合”的限制。\n\n• 考试要点与速记技巧：\n无线信标口诀：“百毫秒发一信标（Beacon），默认广播现身形（announce presence by default）；无线搜网全靠它，被动扫描列表呈”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "AP 发送 Beacon；调整选项表述并说明隐藏 SSID 与默认值的边界。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 827,
+      "original_qid": "Q1109",
+      "before_sha256": "bccd46a84791f854a0e0fb84cdcc386341927a0850ef7335af23e3d90afa3094",
+      "reason": "加密保护机密性但不会阻止截获信号；调整 D 措辞。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "provides increased protection against spyware"
+          },
+          {
+            "label": "B",
+            "text": "prompts a user for a login ID"
+          },
+          {
+            "label": "C",
+            "text": "uses ciphers to detect and prevent zero-day network attacks"
+          },
+          {
+            "label": "D",
+            "text": "helps prevent unauthorized reading of data transmitted over the wireless link"
+          }
+        ],
+        "explanation": "D。无线链路加密提供数据机密性，使没有适当密钥的监听者难以读取受保护的数据。无线信号及密文帧仍可能被接收或捕获；链路加密也不自动保证无线链路以外的端到端保密。\n\nA 间谍软件需终端和其他安全措施防护；B 登录提示属于认证过程；C 密码算法不会自动检测或阻止所有零日攻击。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "provides increased protection against spyware"
+          },
+          {
+            "label": "B",
+            "text": "prompts a user for a login ID"
+          },
+          {
+            "label": "C",
+            "text": "uses ciphers to detect and prevent zero-day network attacks"
+          },
+          {
+            "label": "D",
+            "text": "prevents the interception of data as it transits a network"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查无线网络数据加密（Wireless Encryption）的核心安全属性与数据在传输中（in transit）的机密性防护机制。\n1. 信息安全 CIA 三要素与机密性（Confidentiality）：\n   信息安全的三大基石为机密性（Confidentiality）、完整性（Integrity）与可用性（Availability）。机密性的核心定义是确保信息不被未授权的人或系统所获知或读取。\n2. 开放无线信道防窃听原理：\n   - 无线局域网利用自由空间无线电磁波进行广播式传播，物理上完全没有传统有线双绞线的绝缘层和物理边界保护。任何携带无线网卡的人均可在信号覆盖区域内捕获空中的所有 802.11 数据包。\n   - 加密（Encryption）通过现代密码学算法（如 WPA2/WPA3 中的 AES-CCMP / AES-GCMP），利用通信双方协商的高强度动态临时密钥，将传输的用户明文数据转换为无法解密的密文（Ciphertext）。\n   - 纵深防御：即使攻击者使用无线监听软件（如 Wireshark、OmniPeek、Aircrack-ng）拦截捕获了空中传输的数据帧，由于其缺乏解密密钥，截获的数据全部呈现为无意义的伪随机比特流，从而在根本上防止了数据在跨越网络传输过程中的被窃听、窃取与拦截（prevents the interception of data as it transits a network）。\n\n• 正确选项剖析：\n选项 D（prevents the interception of data as it transits a network，防止数据在网络传输过程中被拦截窃取）完全正确。这精准阐述了网络加密用于保障机密性（Confidentiality）的本质安全价值。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（provides increased protection against spyware）：间谍软件（Spyware）通常是通过钓鱼邮件、恶意网址或非法软件下载植入终端的应用层恶意代码，防范间谍软件依赖主机杀毒软件（EDR）或应用层安全网关，链路层数据加密无法阻断用户主动下载间谍软件。\n- 选项 B（prompts a user for a login ID）：提示输入用户名属于身份认证（Authentication），加密负责将已认证会话的数据进行保密处理，不负责弹出登录框。\n- 选项 C（uses ciphers to detect and prevent zero-day network attacks）：零日攻击（Zero-day attacks）是针对未知漏洞的攻击，防范零日攻击需要 IPS/IDS、沙箱与动态行为威胁检测；密码加密算法（Ciphers）只负责数学变换加密，完全不具备检测未知攻击漏洞的功能。\n\n• 考试要点与速记技巧：\n加密根本目的：“加密护送数据走，密文过空无须忧；杜绝半路遭截听（prevents interception in transit），保密属性（Confidentiality）立功首”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "加密保护机密性但不会阻止截获信号；调整 D 措辞。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 828,
+      "original_qid": "Q1110",
+      "before_sha256": "5fe16c4aa55b77cc95819949783ef9f47af180a89b5ecfddba9d63d71f746f38",
+      "reason": "修正 Beacon 发送主体并区分 SSID、BSSID。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "intercepts data threats before they attack a network"
+          },
+          {
+            "label": "B",
+            "text": "encodes connections at the sending and receiving ends"
+          },
+          {
+            "label": "C",
+            "text": "an access point commonly includes it in beacon frames by default"
+          },
+          {
+            "label": "D",
+            "text": "identifies an access point on a WLAN"
+          }
+        ],
+        "explanation": "C。SSID 是无线服务集的名称，AP 通常在 Beacon 帧中通告该名称以便客户端发现；隐藏 SSID 时可不在 Beacon 中明文通告。发 Beacon 的是 AP，SSID 本身不广播。\n\nA 威胁拦截属于安全控制；B 编码或加密属于其他机制；D 单个基本服务集由 BSSID 标识，多个 AP 可以使用同一 SSID。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "intercepts data threats before they attack a network"
+          },
+          {
+            "label": "B",
+            "text": "encodes connections at the sending and receiving ends"
+          },
+          {
+            "label": "C",
+            "text": "broadcasts a beacon signal to announce its presence by default"
+          },
+          {
+            "label": "D",
+            "text": "identifies an access point on a WLAN"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 协议中无线接入点（AP）通告 SSID（服务集标识符）的底层信标机制（高频核心真题变体）。\n1. 802.11 服务集与 SSID 机制：\n   SSID（Service Set Identifier）是无线客户端用于识别并加入某个特定 WLAN 网络的逻辑名称，最大长度为 32 个八位字节（Octets）。\n   在基础架构模式（Infrastructure Mode）下，AP 作为中央协调者，必须让潜在的无线客户端能够快速感知到该 AP 的存在及其无线网络服务能力。\n2. 信标（Beacon）信号的作用机理：\n   - IEEE 802.11 协议规定，AP 在默认情况下必须周期性地（默认信标间隔通常为 100 TU，即 102.4 毫秒）向所在信道广播发送信标帧（Beacon Signal/Frame）。\n   - 信标帧属于 802.11 管理帧，其帧体内包含 SSID 字段。\n   - 客户端在开机或开启 Wi-Fi 时，通过被动扫描监听信道中的信标帧，从而获取周围环境中存在的 SSID 列表并显示给用户（broadcasts a beacon signal to announce its presence by default）。\n\n• 正确选项剖析：\n选项 C（broadcasts a beacon signal to announce its presence by default，默认通过广播信标信号宣告自身存在）完全符合 802.11 协议规定与 Cisco 官方考试采分标准。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（intercepts data threats before they attack a network）：拦截网络攻击是安全防火墙和入侵防御系统（IPS）的功能，SSID 是网络标识，不具备任何威胁拦截能力。\n- 选项 B（encodes connections at the sending and receiving ends）：在收发两端进行编码与加密处理属于加密协议（如 AES/TKIP）的职责，SSID 不执行数据编码。\n- 选项 D（identifies an access point on a WLAN）：该选项具有极高迷惑性。在 802.11 体系中，用于标识具体某一台接入点（AP）的是 BSSID（基本服务集标识符，即 AP 射频接口的 48 位 MAC 地址）；SSID 标识的是整个无线逻辑局域网（可能由成百上千台 AP 共同宣告同一个 SSID，构成扩展服务集 ESS）。因此 SSID 标识的是网络而非单个 AP。\n\n• 考试要点与速记技巧：\n概念辨析避坑指南：“单台 AP 看 BSSID（MAC 地址），整个网络认 SSID；默认广播通告在，信标信号（Beacon signal）立头功”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "修正 Beacon 发送主体并区分 SSID、BSSID。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    },
+    {
+      "id": 829,
+      "original_qid": "Q1111",
+      "before_sha256": "33e58dcbf6e4bfd54e7dcf674ebc09e530ff08c1fff87ec6c9860b31104879eb",
+      "reason": "亲看拓扑及 CLI；补 SW1 DTP、端口、地址条件，修正 D 命令缺少 vlan，纠正 auto 模式和 nonegotiate 错误解释。",
+      "updates": {
+        "prompt": "Refer to the exhibit. SW2 was replaced and its Fa0/1 configuration copied from SW1, so both ends use dynamic auto. Assume DTP is enabled on both ends, matching trunk encapsulation is supported, VLANs 5 and 10 exist and are allowed, and the PC access ports, addresses and physical links are correctly configured. Which listed command on SW2 Fa0/1 enables PC1 and PC2 to communicate across VLAN 5?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode trunk"
+          },
+          {
+            "label": "B",
+            "text": "switchport trunk native vlan 10"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode access"
+          },
+          {
+            "label": "D",
+            "text": "switchport trunk allowed vlan remove 10"
+          }
+        ],
+        "explanation": "A。图中 SW2 Fa0/1 为 dynamic auto，允许 VLAN 5、10；题设说明 SW1 复制源端口同为 dynamic auto。两端 auto 不主动发起 trunk 协商，无法形成 trunk；在 SW2 配置 `switchport mode trunk` 后，该端固定为 trunk 并通过 DTP 与 SW1 的 auto 协商形成 trunk。VLAN 5 通过链路后，同 VLAN 的 PC1/PC2 可在其他题设条件满足时通信。\n\nB 只修改 native VLAN，不能使 auto/auto 建立 trunk；C 将 SW2 设为 access，不满足题设；D 仅从 trunk 允许列表移除 VLAN 10，不建立 trunk。若使用 `switchport nonegotiate`，动态 auto 对端不能依赖 DTP 协商，需分别配置两端模式。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. SW2 is replaced because of a hardware failure. A network engineer starts to configure SW2 by copying the fa0/1 interface configuration from SW1. Which command must be configured on the fa0/1 interface of SW2 to enable PC1 to connect to PC2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode trunk"
+          },
+          {
+            "label": "B",
+            "text": "switchport trunk native vlan 10"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode access"
+          },
+          {
+            "label": "D",
+            "text": "switchport trunk allowed remove 10"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco Catalyst 交换机动态中继协议（DTP, Dynamic Trunking Protocol）协商机制与跨交换机 VLAN 通信的中继链路（Trunk）配置。\n拓扑与配置深入剖析：\n1. 业务互通需求：\n   - SW1 与 SW2 通过各自的 FastEthernet 0/1 接口互联。\n   - PC1（接 SW1 Fa0/2）与 PC2（接 SW2 Fa0/2）均属于 VLAN 5。\n   - PC3（接 SW1 Fa0/3）与 PC4（接 SW2 Fa0/3）均属于 VLAN 10。\n   - 目标：使处于相同 VLAN 5 的 PC1 与 PC2 能够跨交换机正常进行二层互联通信。\n2. 故障根因分析（DTP 状态机冲突）：\n   题干明确指出，SW2 出现硬件故障被替换，网络工程师“通过从 SW1 复制 fa0/1 接口配置来开始配置 SW2”。\n   观察展出的配置片段：\n   ```text\n   Switch2(config)#interface fa0/1\n   Switch2(config-if)#switchport mode dynamic auto\n   Switch2(config-if)#switchport trunk allowed vlan 5,10\n   ```\n   既然配置直接复制自 SW1，则意味着两端接口（SW1 fa0/1 与 SW2 fa0/1）的管理模式全部为 `dynamic auto`！\n   根据 Cisco 官方 DTP 协议协商矩阵规则：\n   - `Dynamic Auto` 模式的运行行为是被动等待对端发起协商，自身决不主动向外发送 DTP 中继协商报文。\n   - 当链路两端同时为 `Dynamic Auto + Dynamic Auto` 时，由于双方都在被动等待，最终 DTP 协商中继失败，端口自动回退并工作在默认的 `Access` 接入模式（所属 VLAN 1）！\n   - 在 Access 模式下，链路无法承载 802.1Q 标签，导致 VLAN 5（PC1/PC2）和 VLAN 10（PC3/PC4）的数据帧在跨交换机时被完全阻断。\n3. 解决策略：\n   要打破这种僵局，必须在 SW2 的 fa0/1 上主动发起中继协商或硬编码指定为中继模式。在 SW2 fa0/1 执行 `switchport mode trunk`，该接口立即成为静态 Trunk，并向对端发送 DTP 报文促使 SW1（处于 Dynamic Auto）成功协商为 Trunk；即使关闭 DTP，Trunk 链路也能正常打通并放行 VLAN 5 与 VLAN 10 的标记帧。\n\n• 正确选项剖析：\n选项 A（switchport mode trunk）完全正确。将 SW2 的 fa0/1 接口模式从被动的 `dynamic auto` 更改为静态的 `trunk`（即执行 `switchport mode trunk`），能够彻底打通 SW1 与 SW2 之间的 802.1Q 中继链路，使承载 VLAN 5 标记的数据帧在两台交换机之间顺畅转发，从而实现 PC1 与 PC2 的连通。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（switchport trunk native vlan 10）：仅修改中继链路的本征 VLAN 为 10，完全无法改变当前链路处于 Access 模式的根本故障，甚至还会因为两端 Native VLAN 不一致而引发 CDP 告警与 STP 阻断。\n- 选项 C（switchport mode access）：直接将端口锁定为接入模式（默认 VLAN 1），彻底杜绝了作为中继承载多 VLAN 的可能，PC1 与 PC2 依然彻底断连。\n- 选项 D（switchport trunk allowed remove 10）：该命令不仅未能解决中继未建立的问题，反而破坏了 VLAN 允许列表，与解决 PC1/PC2 通信毫无技术关联。\n\n• 考试要点与速记技巧：\nDTP 协商口诀：\n“Auto 遇 Auto 变 Access，Trunk 通道建不成；两端要想连通畅，至少一侧硬配 Trunk（switchport mode trunk）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "亲看拓扑及 CLI；补 SW1 DTP、端口、地址条件，修正 D 命令缺少 vlan，纠正 auto 模式和 nonegotiate 错误解释。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q829_agent.jpg",
+      "image_sha256": "22151f33d7fb68c92b3057eda343093ac46d2aff34bda52120e913120732927e"
+    },
+    {
+      "id": 830,
+      "original_qid": "Q1113",
+      "before_sha256": "526a1a982f554b23eecc091813118bb43728bd156050f89d6a38d085b82f77a3",
+      "reason": "无需向外部机构登记不等于组织无需自行跟踪；重写 C 并限定范围。",
+      "updates": {
+        "prompt": "What is a characteristic of using RFC 1918 private IPv4 addresses within an organization?",
+        "options": [
+          {
+            "label": "A",
+            "text": "composed of up to 65,536 available addresses"
+          },
+          {
+            "label": "B",
+            "text": "issued by IANA in conjunction with an autonomous system number"
+          },
+          {
+            "label": "C",
+            "text": "they can be used internally without registering each address with an Internet registry"
+          },
+          {
+            "label": "D",
+            "text": "traverse the Internet when an outbound ACL is applied"
+          }
+        ],
+        "explanation": "C。组织可以在内部使用 RFC 1918 私有地址，无需向互联网注册机构逐个申请或登记；仍应按本组织需要维护 IP 地址分配记录，以避免内部冲突。不同组织可复用相同私网地址，互联时需处理重叠。\n\nA 三个私有地址块合计远多于 65,536 个地址；B 无需与自治系统号一同分配；D ACL 不会使私有地址变为全球可路由地址。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of private IPv4 addressing?",
+        "options": [
+          {
+            "label": "A",
+            "text": "composed of up to 65,536 available addresses"
+          },
+          {
+            "label": "B",
+            "text": "issued by IANA in conjunction with an autonomous system number"
+          },
+          {
+            "label": "C",
+            "text": "used without tracking or registration"
+          },
+          {
+            "label": "D",
+            "text": "traverse the Internet when an outbound ACL is applied"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址的管理机制与免注册特性。\n1. 公网与私网的治理差异：\n   - 公网 IPv4 地址：属于全球稀缺公共资源，由互联网号码分配机构（IANA）统筹管理并逐级下发至各区域互联网注册管理机构（RIR，如 APNIC、ARIN 等）。公网 IP 的使用受到严格的注册登记、权威数据库（WHOIS）记录和生命周期跟踪，且具有排他性与计费属性。\n   - 私网 IPv4 地址（RFC 1918）：根据 RFC 1918 标准，IANA 永久保留了 10.0.0.0/8、172.16.0.0/12 和 192.168.0.0/16 三段私有网段。任何组织、企业或个人均可在自己的专用内部网络中无偿、自主、任意地规划使用这些地址。\n2. 免跟踪与免注册（Without Tracking or Registration）：\n   私网 IPv4 地址的使用完全不需要向 IANA、RIR、国家互联网信息中心或任何 ISP 进行事前申请或事后备案，互联网权威机构也绝不会对私网地址的分配去向进行任何集中登记、审核或持续跟踪（used without tracking or registration）。\n\n• 正确选项剖析：\n选项 C（used without tracking or registration，使用时无需跟踪或注册）完全正确。这精确描述了私有 IPv4 地址的设计自主性与管理透明性特征。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（composed of up to 65,536 available addresses）：私网地址总数包括 A 类（约 1677 万个）、B 类（约 104 万个）与 C 类（65536 个），私网地址总容量接近 1800 万个，选项 A 仅混淆了单个 C 类私网块（192.168.0.0/16）的大小。\n- 选项 B（issued by IANA in conjunction with an autonomous system number）：自治系统号（ASN）是 BGP 跨域路由标识，由 IANA/RIR 严格颁发；私网 IP 绝不由 IANA 伴随 ASN 统一颁发。\n- 选项 D（traverse the Internet when an outbound ACL is applied）：出站 ACL 无法使私网地址在 Internet 上路由，运营商边界路由器无条件阻断私有 IP 的公网传播。\n\n• 考试要点与速记技巧：\n私网地址核心特征：“自由规划无需批，免除跟踪与登记（without tracking or registration）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "无需向外部机构登记不等于组织无需自行跟踪；重写 C 并限定范围。",
+        "references": [
+          "https://www.rfc-editor.org/info/rfc1918/",
+          "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/info/rfc1918/",
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/68583-FAQ-Wireless-Security.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+  ],
+  "limitations": "人工审查，无无线或交换机实机实验。"
+}

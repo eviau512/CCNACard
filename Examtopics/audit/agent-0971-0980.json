@@ -1,0 +1,321 @@
+{
+  "scope": "Q971–Q980",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 971,
+      "original_qid": "Q1302",
+      "before_sha256": "52fcb0554134a88cb35b70b1147d8bb645eb49f8b28077220b0d700ba1dd9aa6",
+      "reason": "B。",
+      "updates": {
+        "prompt": "A Cisco switch port has port security configured with the shutdown violation action. What can place the port in the err-disabled state?",
+        "explanation": "B。端口安全发生违规且动作设为 `shutdown` 时，端口可进入 err-disabled；`protect` 和 `restrict` 通常丢弃违规流量但不关闭端口。A 是管理员关闭，C 通常是未连接，D 的普通延迟不是这里的端口安全违规。平台、功能和恢复策略会影响具体行为。"
+      },
+      "original_fields": {
+        "prompt": "What causes a port to be placed in the err-disabled state?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco Catalyst 交换机端口安全（Port Security）违规保护机制与 `err-disabled`（错误禁用）状态转换。\n1. `err-disabled` 保护状态机制：\n   - `err-disable` 是 Cisco IOS 交换机用于防范严重二层异常、环路风暴或安全威胁的一种硬件端口自我保护机制。\n   - 当某个监控特性在端口上检测到异常事件时，系统会自动切断该端口的二层数据收发逻辑，将其状态置为 `down (err-disabled)`，并在控制台输出 Syslog 报警信息，防止故障扩散至整个广播域。\n2. 端口安全（Port Security）违规响应行为：\n   在 Cisco 交换机接口上启用 `switchport port-security` 后，管理员可配置三种安全违规响应模式（Violation Modes）：\n   - `Protect`（保护）：丢弃来自未授权未知 MAC 地址的数据帧，不产生报警，计数器不增加，端口保持开启；\n   - `Restrict`（限制）：丢弃未授权帧，增加违规计数器，并向管理控制台发送 Syslog 和 SNMP Trap 告警，端口保持开启；\n   - `Shutdown`（关闭，**系统默认动作**）：当接入端口的 MAC 地址数量超过允许的上限（`maximum`）或接入未绑定的非法 MAC 时，交换机**立即触发将端口置为 `err-disabled` 状态**，并在控制台生成错误日志（如 `%PM-4-ERR_DISABLE: psecure-violation error detected on Fa0/1, putting Fa0/1 in err-disable state`）。\n\n• 正确选项剖析：\n选项 B（port security violation，端口安全违规）是导致交换机端口进入 `err-disabled` 状态的经典原因。\n在默认的 `shutdown` 违规处理动作下，任何端口安全规则违规都会瞬间触发操作系统将该端口挂起并转入 `err-disabled` 状态。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（shutdown command issued on the port，在端口上执行 shutdown 命令）：管理员在接口下执行 `shutdown` 命令后，接口的正常状态应为管理员人工关闭（`FastEthernet0/1 is administratively down, line protocol is down`），绝非由系统异常保护触发的 `err-disabled` 状态。\n- 选项 C（nothing plugged into the port，端口未插入任何网线）：当端口没有插入线缆或对端设备未上电时，物理层检测不到载波信号，接口状态显示为 `down, line protocol is down`（在 `show interfaces status` 中显示为 `notconnect`），不会进入 `err-disabled`。\n- 选项 D（latency，网络延迟）：网络延迟属于高层网络传输性能度量指标，交换机物理硬件接口根本不监控链路端到端延迟，更不可能因为延迟波动而挂起端口。\n\n• 考试要点与速记技巧：\nCisco 交换机端口状态三部曲辨析：\n- 人工手动关 -> `administratively down`；\n- 没插网线/对端关机 -> `down (notconnect)`；\n- 安全违规（Port-security）/ BPDU Guard 触发 -> `err-disabled`！"
+      },
+      "review": {
+        "prompt": "checked and clarified",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "B。"
+      }
+    },
+    {
+      "id": 972,
+      "original_qid": "Q1303",
+      "before_sha256": "96b4eabc15ad82ffbc7cd1cd69f0b35f65d527763dbc66ccf3bdd5e395ef1a3d",
+      "reason": "B。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For this EUI-64 calculation, use R2 E0/1 MAC 12-b0-ab-cc-00-01 (replace the multicast MAC shown in the diagram) and the displayed LAN /64 prefix. Which IPv6 address results?",
+        "explanation": "B。使用题干给定的单播 MAC 12-b0-ab-cc-00-01，中间插入 ff:fe 得 12-b0-ab-ff-fe-cc-00-01，首字节异或 02 得 10，接口标识符为 10b0:abff:fecc:0001；结合图中 LAN 前缀为 2001:db8:d945:91:10b0:abff:fecc:1。A、C、D 的接口标识符不符合该计算。原图首字节 13 的最低位为 1，表示组播地址，不适合作为以太网接口单播 MAC；本题明确使用修正值。文档前缀仅用于示例；EUI-64 不保证绝对唯一。",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:d945:91:12A0:AB34:FFCC:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:d945:91:10B0:ABFF:FECC:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:d945:91:4661:59FF:FF53:5"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:d945:91:1130:ABFF:FECC:1"
+          }
+        ]
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 无状态地址自动配置（SLAAC）中的 IEEE EUI-64（64位扩展唯一标识符，RFC 4291）算法规范与地址派生过程。\n1. EUI-64 设计目的与原理：\n   在 IPv6 单播地址体系中，全球单播地址通常由两部分组成：前 64 位为网络前缀（Network Prefix），后 64 位为接口标识符（Interface ID）。\n   当在路由器接口配置 `ipv6 address <prefix>/64 eui-64` 或终端利用 SLAAC 自动生成接口 ID 时，设备可利用其已有的 48 位以太网 MAC 地址自动填充生成 64 位接口 ID，确保全局唯一性并消除手动指定主机地址的工作量。\n2. EUI-64 算法核心四步法：\n   - 提取物理接口的 48-bit MAC 地址：根据题图，路由器 R2 的局域网接口 E0/1 标注的 MAC 地址为 `13-b0-ab-cc-00-01`；\n   - 居中拆分为两部分：前半部分 24 位为组织唯一标识符（OUI）`13-b0-ab`，后半部分 24 位为厂商分配扩展标识符 `cc-00-01`；\n   - 中间无缝插入固定 16 位保留常数 `FF:FE`（十六进制）：拼接形成 64 位序列 `13-b0-ab-FF-FE-cc-00-01`；\n   - 翻转第 1 个字节中的第 7 位（U/L 位，Universal/Local 标志位）：\n     - 第 1 个字节十六进制为 `13`，转换为二进制为 `0001 0011`；\n     - 其第 7 位（从高位第 1 位算起的第 7 位，对应数值权重 2）原为 1（代表局部管理地址）；\n     - 将该位翻转（Invert）变为 0，得到二进制 `0001 0001`，转换为十六进制即为 `11`；\n   - 最终组合成标准 64 位 IPv6 接口 ID：`11b0:abff:fecc:0001`（依据 RFC 5952 规范，省略前导零写作 `11B0:ABFF:FECC:1`）。\n\n• 正确选项剖析：\n选项 B（2001:db8:d945:91:11B0:ABFF:FECC:1）是经过严谨 EUI-64 算法派生出的唯一正确结果：\n1. 题图中 R2 所属 LAN 网段标注的前缀为：`2001:db8:d945:91::/64`；\n2. 结合 R2 的 E0/1 接口通过 EUI-64 生成的 64 位接口标识符 `11b0:abff:fecc:1`；\n3. 将两者拼接，得到的完整 IPv6 全球单播地址即为：`2001:db8:d945:91:11B0:ABFF:FECC:1`。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（2001:db8:d945:91:12A0:AB34:FFCC:1）：完全打乱了原始 MAC 地址的数值结构，未插入标准的 `FF:FE` 常数，属于随意捏造的干扰项。\n- 选项 C（2001:db8:d945:91:4661:59FF:FF53:5）：混淆了完全无关的随机接口 ID，中间插入了错误的 `FF:FF`，完全违背 EUI-64 标准。\n- 选项 D（2001:db8:d945:91:1130:ABFF:FECC:1）：第一字节虽然正确翻转计算为 11，但将第二字节原始的 `b0` 错误写成了 `30`，存在粗心计算陷阱。\n\n• 考试要点与速记技巧：\nEUI-64 换算秒杀口诀：\n- “48 变 64，正中插 FFFE；首字节看末位，逢奇减 2 逢偶加 2（翻转 U/L 位）”。\n- 本题原始 MAC 首字节为 13（末位 3 为奇数），减 2 变为 11，且中间必有 `ABFF:FECC`，直接秒杀选项 B！",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:d945:91:12A0:AB34:FFCC:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:d945:91:11B0:ABFF:FECC:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:d945:91:4661:59FF:FF53:5"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:d945:91:1130:ABFF:FECC:1"
+          }
+        ]
+      },
+      "review": {
+        "prompt": "checked and clarified",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "B。"
+      },
+      "exhibit_path": "exhibits/q972_agent.jpg",
+      "image_sha256": "ca839f139d7c993cd6afc3a6d49a40b88ec9cbf936be0493b4477b1fbd52e2cf"
+    },
+    {
+      "id": 973,
+      "original_qid": "Q1304",
+      "before_sha256": "07aaae1f47ca7dbc079d4b470de18f67fb9875a11b9afebf8cb44714aa75fad2",
+      "reason": "C。",
+      "updates": {
+        "explanation": "C。企业可以自主规划并将 RFC 1918 私有地址分配给内部主机；常用范围为 10.0.0.0/8、172.16.0.0/12 和 192.168.0.0/16。A 私网地址本身不保证路由表更小；B 私网地址不在公网上直接全局路由，但可经 NAT、代理或隧道等方式通信；D 使用私网地址本身不证明符合 PCI 安全要求。其他组织也可使用私网地址。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址（Private IPv4 Address Space）的治理架构、规划分配机制及与公网可路由地址的区别。\n1. 私网 IPv4 地址设计背景与规范：\n   为了缓解 IPv4 地址枯竭问题，互联网工程任务组（IETF）在 RFC 1918 中保留了三组未向全球互联网分配的专用私有地址块：\n   - A 类：`10.0.0.0/8`\n   - B 类：`172.16.0.0/12`\n   - C 类：`192.168.0.0/16`\n2. 地址分配与管理权属：\n   - 公网 IPv4 地址：由互联网数字分配机构（IANA）统一协调，再通过各大区域互联网注册管理机构（RIR，如 APNIC、ARIN、RIPE NCC）层层审批、租用和分配，具有全球唯一性。\n   - 私网 IPv4 地址：无需任何公共机构审批或备案，其使用权和分配权完全归属于各个企业机构（Enterprise Organization）。企业网络架构师和管理员可以根据自身网络规模、分支机构规划、VLAN 划分等需求，自由自主地将私网地址规划并分配给内部主机、服务器、路由器互联接口以及打印机等终端设备。\n\n• 正确选项剖析：\n选项 C（assigned by an enterprise organization to internal hosts，由企业组织分配给内部主机）准确表述了私网 IPv4 地址的核心分配属性。\n私有 IP 地址是企业内部网络自主规划、自主分配的专用资源，无需经过外部公网注册机构，由企业自行分配给内部终端主机使用。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（reduces the forwarding table on network routers，缩减网络路由器的转发表）：手段混淆。缩减全网路由器转发表的核心技术是路由汇总（Route Summarization）和 CIDR 超网划分，企业内部无论使用公网 IP 还是私网 IP，若缺乏合理汇总，都会在内部路由器上产生大量明细路由条目，私网地址本身并不具备缩减转发表的功能。\n- 选项 B（allows communication across external internet boundaries，允许跨越外部互联网边界进行通信）：技术事实颠倒。公网核心路由器默认过滤丢弃私网地址数据包，私网地址天生无法直接跨越互联网边界路由，若要跨公网通信必须依靠 NAT（网络地址转换）重写报头。\n- 选项 D（complies with Payment Card industry regulations，符合支付卡行业监管标准）：概念泛化。PCI-DSS（支付卡行业数据安全标准）关注的是网络微分段、端到端加密、防火墙访问控制和日志审计，使用私网地址只是最基本的网络组网常识，与直接满足支付卡合规监管没有必然等价关系。\n\n• 考试要点与速记技巧：\n公网与私网对比口诀：\n- 公网 IP 找机构审批租赁（全球唯一且可路由）；\n- 私网 IP 企业自己说了算（内部自主分配，assigned by enterprise to internal hosts）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C。"
+      }
+    },
+    {
+      "id": 974,
+      "original_qid": "Q974",
+      "before_sha256": "b3d07fa4fbbbd3f5a2e03cd2fb5dd5aeca0f139a187b29b5ade37d6856bfdbd5",
+      "reason": "A。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For one shared STP instance, assume the four switches can exchange BPDUs, have the same system-ID extension, and advertise the bridge priorities and MAC addresses in the options. Which switch becomes root bridge?",
+        "explanation": "A。针对同一 STP 实例，先比较桥 ID 的优先级部分；SW1 与 SW2 的 8192 小于 SW3 和 SW4 的 24576。SW1 与 SW2 再比较 MAC，00:10:a1:30:eb:38 小于 00:10:a1:80:fb:29，因此 SW1 的桥 ID 最小。需同一实例且 BPDU 可达；图本身没有标出这些优先级，数据来自选项。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP / IEEE 802.1D、802.1w RSTP）网络中根桥（Root Bridge）选举的比较法则与平局仲裁逻辑。\n1. 桥 ID（Bridge ID, BID）构成：\n   在 STP 拓扑中，每台交换机均具有由 8 字节构成的桥 ID（BID）：\n   - 桥优先级（Bridge Priority）：2 字节（取值范围 0~61440，默认为 32768，结合系统扩展 ID 以 4096 为倍数调整）；\n   - MAC 地址（MAC Address）：6 字节，交换机唯一的背板物理地址。\n2. 根桥选举标准规则：\n   - 比较原则：**全网 Bridge ID 最小的交换机胜出当选为 Root Bridge**。\n   - 判定顺序：\n     1. 首先比较“桥优先级”：数值越小越优；\n     2. 若桥优先级相同（打平），则触发 Tie-breaker，进入第二级判定，比较“MAC 地址”：数值越小越优。\n\n• 正确选项剖析：\n选项 A（SW 1 - Bridge Priority - 8192 - Mac-address 00:10:a1:30:eb:38）通过两级严格比较胜出：\n1. 第一级：桥优先级判定：\n   - SW 1: Priority = 8192\n   - SW 2: Priority = 8192\n   - SW 3: Priority = 24576\n   - SW 4: Priority = 24576\n   比较可见，8192 < 24576，SW 3 和 SW 4 由于优先级数值过大，在第一轮直接被淘汰。\n2. 第二级：平局 MAC 地址判定（SW 1 vs SW 2）：\n   - 两台交换机的桥优先级同为 8192，必须依靠 MAC 地址打破僵局：\n     - SW 1 MAC: `00:10:a1:30:eb:38`\n     - SW 2 MAC: `00:10:a1:80:fb:29`\n   - 逐字节自左向右比较：前三字节 `00:10:a1` 完全相同；比较第四字节，SW 1 为十六进制 `30`（十进制 48），SW 2 为十六进制 `80`（十进制 128）。\n   - 因为 `30` < `80`，SW 1 拥有全局更小的 MAC 地址。\n因此，SW 1 拥有全网最优的 Bridge ID，最终成为根桥（Root Bridge）。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（SW 2）：虽然优先级同为 8192，但在平局判定中，其 MAC 第四字节 `80` 大于 SW 1 的 `30`，因此在 MAC 比较中遗憾落败。\n- 选项 C（SW 3）与选项 D（SW 4）：两者的桥优先级均被配置为 24576，在第一轮优先级比较中就因劣势被直接淘汰，根本无需再比较 MAC 地址。\n\n• 考试要点与速记技巧：\nSTP 根桥选举两步杀：\n1. “先比优先级，越小越牛（8192 优于 24576）”；\n2. “若遇优先级相同，比 MAC 较小者（30 优于 80，SW1 胜出）”。"
+      },
+      "review": {
+        "prompt": "checked and clarified",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "A。"
+      },
+      "exhibit_path": "exhibits/q974_agent.jpg",
+      "image_sha256": "6059865a6a1dfe7b15a2831ae326fcc3e2e68197ebde37ed8b1df78c80598f21"
+    },
+    {
+      "id": 975,
+      "original_qid": "Q1306",
+      "before_sha256": "f784d57beff2f0aa8a22df2b78ce0e2c04fc77a675202e80ad4a933eb2a25831",
+      "reason": "C。",
+      "updates": {
+        "explanation": "C。二层交换机按 VLAN 中的目的 MAC 地址查询转发表，已知单播可转发到对应端口；未知单播通常在该 VLAN 的合适端口泛洪，受 STP、端口隔离等限制。广播和多播的具体复制也受 VLAN、组播侦听等配置影响。A 端到端可靠排序不是其基本职责；B 有状态事务跟踪不是二层转发定义；D 传输层过滤并非普通二层转发的定义，某些交换机仍支持 ACL 等更高层功能。MAC 表本身也是状态，不能称交换机完全无状态。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查数据链路层（OSI Layer 2）以太网交换机的核心转发原理与 MAC 地址表（CAM 表）工作机制。\n1. 二层交换机转发平面机制：\n   - 标准二层交换机（Layer 2 Switch）严格工作在 OSI 参考模型的第二层（数据链路层），其核心设计目标是在同一个广播域（VLAN）内部以硬件线速实现以太网数据帧（Frames）的过滤与转发。\n   - 查表转发决策（Forwarding Decision）：当交换芯片接收到以太网帧时，它仅解封装二层头部，提取其中的目的 MAC 地址（Destination MAC Address），并在交换机的硬件内容寻址内存（Content Addressable Memory, CAM 表 / MAC 地址表）中执行哈希查找：\n     - 若目的 MAC 在 CAM 表中存在匹配条目，交换机执行单播精准转发，仅将该数据帧送往绑定的物理出接口；\n     - 若目的 MAC 为全 F 广播地址、多播地址或表中未记录的未知单播地址，交换机在所属 VLAN 范围内执行泛洪（Flooding）。\n   - 二层交换机不解析 IP 报头，不维护路由表，更不修改帧内的源/目的 MAC 地址。\n\n• 正确选项剖析：\n选项 C（makes forwarding decisions based on MAC addresses，基于 MAC 地址做出转发决策）完美契合二层交换机的核心定义。\n二层交换机的本质特征就是根据以太网帧头中的 MAC 地址信息来决定数据帧的转发路径。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（responsible for sending data in a particular sequence，负责按特定顺序发送数据）：属于传输层（Layer 4）可靠传输协议（如 TCP 序列号与确认号机制）的职责。二层交换机只负责逐帧透明无序转发，不负责数据的重组或顺序维护。\n- 选项 B（maintains stateful transaction information，维护有状态事务信息）：属于有状态防火墙（Stateful Firewall）、深度数据包检测（DPI）或应用层网关的职责。标准二层交换机是完全无状态的（Stateless）。\n- 选项 D（filters based on a transport layer protocol，基于传输层协议进行过滤）：属于三/四层访问控制列表（ACL）或网络防火墙的功能（基于 TCP/UDP 端口号过滤）。纯二层交换机不感知四层协议头。\n\n• 考试要点与速记技巧：\n网络设备选路标志速记：\n- 二层交换机认 MAC（CAM 表）；\n- 三层路由器认 IP（路由表/FIB）；\n- 四层防火墙认端口（TCP/UDP Port）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C。"
+      }
+    },
+    {
+      "id": 976,
+      "original_qid": "Q1307",
+      "before_sha256": "fb4b3e11b1d86e5fba77f1eee48030cc9baa70ca61c9760b2bd289f6eb502897",
+      "reason": "A。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In the displayed JSON-like snippet, what role does the quoted word \"switch\" have within its object?",
+        "explanation": "A。图中 `\"switch\": \"SW18\"` 的 `\"switch\"` 位于冒号左侧，是对象成员名（key）；`\"SW18\"` 是字符串值，整个花括号内容是对象，最外层方括号表示数组。图中最后一个数组元素后仍有逗号，严格 JSON 不允许尾随逗号；删除它后才可解析，图示的行号也不是 JSON 内容。该片段是 JSON 数据示例而不是 JSON Schema 定义。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"switch\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络自动化与可编程性（Network Programmability）中 JSON（JavaScript Object Notation, RFC 8259）数据表示格式的键值对（Key-Value Pair）语法结构。\n1. JSON 数据结构规范：\n   - JSON 是一种轻量级文本数据交换格式，其核心复合结构分为“对象（Object）”和“数组（Array）”。\n   - 对象（Object）：由一对花括号 `{ ... }` 包裹，内部包含零个或多个由逗号分隔的键值对。\n   - 键值对（Key-Value Pair）：构成 JSON 对象的最小数据单元，其标准语法结构为：\n     `\"Key\": Value`\n     - 冒号 `:` 左侧被双引号括起的字符串被定义为“键”（Key / Name / 属性名）；\n     - 冒号 `:` 右侧的内容为与该键绑定的“值”（Value），值可以是字符串、数值、布尔值、空值、数组或嵌套对象。\n2. 题目 Exhibit 逐行语法剖析：\n   ```json\n   1 [\n   2 {\"IDS\": \"IPS22\", \"port\": \"te3/46\"},\n   3 {\"load balancer\": \"LB12\", \"port\": \"te6/38\"},\n   4 {\"switch\": \"SW18\", \"port\": \"ge2/41\"},\n   5 ]\n   ```\n   - 第 1 行与第 5 行：方括号 `[ ... ]` 表明这是一个顶层数组；\n   - 第 4 行：`{\"switch\": \"SW18\", \"port\": \"ge2/41\"}` 是数组中的第 3 个对象元素；\n   - 在该对象中，`\"switch\"` 紧随左花括号出现且位于冒号 `:` 的左侧，它是该键值对的属性名，即“键”（Key）。与它对应的值是字符串 `\"SW18\"`。\n\n• 正确选项剖析：\n选项 A（key，键）完全正确。在 JSON 语法规则中，位于键值对冒号左侧的双引号字符串代表键（Key）。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（object，对象）：对象是由大括号 `{}` 包裹的整个无序键值对集合（如第 4 行的 `{\"switch\": \"SW18\", ...}` 整体是一个对象），`\"switch\"` 仅是该对象内部的一个键，其本身不是对象。\n- 选项 C（array，数组）：数组是由中括号 `[]` 包裹的有序值列表（如第 1 行到第 5 行由 `[` 和 `]` 包裹的整体是一个数组），`\"switch\"` 不是数组。\n- 选项 D（value，值）：值是位于冒号右侧的数据实体（如 `\"SW18\"` 是值），`\"switch\"` 是键而非值。\n\n• 考试要点与速记技巧：\nJSON 键值对秒杀口诀：\n- “冒号左边是 Key（键），冒号右边是 Value（值）；大括号成 Object，中括号聚 Array”。"
+      },
+      "review": {
+        "prompt": "checked and clarified",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "A。"
+      },
+      "exhibit_path": "exhibits/q976_agent.jpg",
+      "image_sha256": "cb1acd6739ff7bd74ca699c849ceb374714674ac3b4b64efb08f467d87e981f1"
+    },
+    {
+      "id": 977,
+      "original_qid": "Q1308",
+      "before_sha256": "a6cee602a2a19514c3ef9f299839d61deab7b29dcecd400dcdb92548468a5ebe",
+      "reason": "B。",
+      "updates": {
+        "explanation": "B。加密将受保护的明文转换为密文，使没有相应密钥的旁观者难以理解内容；无线电帧仍可能被捕获，公开管理字段、密钥泄露或协议缺陷也会影响实际保密性。A 是完整性验证，C 不能把加密等同于检测所有零日攻击，D 属于接入认证和授权；实际无线安全套件可将加密、认证及完整性保护结合。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查无线网络安全架构中数据加密（Encryption）技术的核心机制与机密性（Confidentiality）保障原理。\n1. 无线传输的天然脆弱性与加密的必要性：\n   - 在 IEEE 802.11 无线局域网中，射频无线电波在开放空间中向四周无差别辐射。处于信号覆盖范围内的任何恶意攻击者，只要拥有一块支持监听模式（Monitor Mode）的无线网卡，都可以无缝捕获空中飞驰的所有 802.11 数据帧。\n   - 如果不对传输的数据载荷进行加密，用户的敏感信息（账号口令、机密文件、个人隐私）将以明文形式暴露无遗，遭受空中窃听（Eavesdropping）。\n2. 加密技术的工作机制：\n   - 现代企业无线网络采用强大的对称密钥密码算法（如 WPA2-Enterprise 使用的 AES-CCMP，或 WPA3 使用的 AES-GCMP / CNSA 密码套件）。\n   - 在无线客户端与接入点（AP）完成四次握手（4-Way Handshake）后，双方动态协商生成成对传输密钥（Pairwise Transient Key, PTK）。\n   - 发送方使用加密算法与协商好的会话密钥对明文数据（Plaintext）进行数学运算，转换成完全随机化的密文（Ciphertext）并在无线介质中广播发送；接收方（仅限于持有对应解密密钥的 AP 或客户端）使用相同的密钥逆向解密还原出原始明文。\n   - 这一机制确保了即使第三方攻击者窃听捕获了无线数据帧，在没有解密密钥的情况下也绝不可能读懂或解析数据内容，从而实现了强健的机密性保护。\n\n• 正确选项剖析：\n选项 B（via an algorithm to change wireless data so that only the access point and client understand it，通过算法转换无线数据，使只有接入点和客户端能够理解它）精确诠释了无线加密的核心技术定义：\n利用密码学算法将明文数据转变为密文，保证只有持有正确密钥的通信双方（AP 和已认证客户端）能够解密和理解数据，彻底阻断第三方未授权监听。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（via integrity checks to identify wireless forgery attacks in the frame，通过完整性校验识别帧中的无线伪造攻击）：描述的是消息完整性校验码（Message Integrity Code, MIC，如 HMAC、BIP）的作用，用于保障数据完整性（Integrity）与防篡改，而非机密性加密（Encryption）。\n- 选项 C（via specific ciphers to detect and prevent zero-day network attacks，通过特定密码检测并防御零日网络攻击）：技术事实荒谬。密码算法（Cipher）的作用仅是对数据进行数学加解密，没有任何安全密码具备检测未知漏洞或防御零日网络攻击（Zero-day attacks）的功能（防零日攻击需要 IPS、NGFW 及沙箱技术）。\n- 选项 D（via a policy to prevent unauthorized users from communicating on the wireless network，通过策略阻止未授权用户在无线网络上通信）：描述的是网络访问控制与身份认证策略（Authentication & NAC，如 802.1X/EAP 或 MAC 过滤），属于认证准入范畴，并非加密算法本身的定义。\n\n• 考试要点与速记技巧：\n信息安全三要素（CIA）对号入座：\n- 加密（Encryption）-> 保密防偷窥，仅通信双方能看懂（Confidentiality）；\n- 校验（MIC/Hash）-> 防篡改伪造（Integrity）；\n- 认证（802.1X/WPA）-> 防冒名准入（Authentication）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "B。"
+      }
+    },
+    {
+      "id": 978,
+      "original_qid": "Q1311",
+      "before_sha256": "1da9bd11d184e57ed58565bd093de99e7b94fff60eea14c93b5d360a07fad571",
+      "reason": "C。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For this EUI-64 calculation, use R2 E0/1 MAC 12-d8-bf-69-00-01 (replace the multicast MAC shown in the diagram) and the displayed LAN /64 prefix. Which IPv6 address results?",
+        "explanation": "C。对题设单播 MAC 12-d8-bf-69-00-01，在中间插入 ff:fe 并以首字节异或 02 得 10-d8-bf-ff-fe-69-00-01，接口标识符为 10d8:bfff:fe69:0001；加上 LAN 前缀得到 2001:db8:d955:1697:10d8:bfff:fe69:1。A、B、D 的接口标识符不符合所给 MAC 的计算。图中首字节 13 的最低位为 1，是组播地址，题干因此指定有效单播替代值。",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:d955:1697:1130:ABFF:FECC:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:d955:1697:4657:149F:FE65:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:d955:1697:10D8:BFFF:FE69:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:d955:1697:12D8:BAFE:FF01:1"
+          }
+        ]
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 地址生成规范中基于物理 MAC 地址派生 EUI-64（RFC 4291）接口标识符的精确计算步骤。\n1. EUI-64 规范核心计算流程：\n   IPv6 全球单播地址的后 64 位为接口标识符（Interface ID）。当启用 EUI-64 自动生成时，系统执行以下标准换算：\n   - 第 1 步：提取接口的 48-bit 物理 MAC 地址；\n   - 第 2 步：将 MAC 地址均分为前 24 位和后 24 位；\n   - 第 3 步：在正中间插入 16 位固定常数十六进制 `FF:FE`；\n   - 第 4 步：翻转第 1 字节中的第 7 位（U/L 位，Universal/Local 位，最高有效位为第 1 位）：原为 0 则变为 1，原为 1 则变为 0（即首字节异或 `0x02`）。\n2. 结合题图详细计算 R2 局域网地址：\n   - 题图中 R2（San Jose 路由器）右侧局域网接口 E0/1 标注信息：\n     - LAN IPv6 网络前缀：`2001:db8:d955:1697::/64`\n     - E0/1 物理 MAC 地址：`13-d8-bf-69-00-01`\n   - 执行 EUI-64 变换：\n     1. 将 MAC 居中拆开：`13-d8-bf` 与 `69-00-01`；\n     2. 插入 `FF:FE`：得到 `13-d8-bf-FF-FE-69-00-01`；\n     3. 转换首字节并翻转 U/L 位：\n        - 首字节为十六进制 `13` = 二进制 `0001 0011`；\n        - 对第 7 位执行异或运算：`0001 0011` XOR `0000 0010` = `0001 0001` = 十六进制 `11`；\n        - 变换后首字节为 `11`；\n     4. 生成 64 位接口 ID：`11d8:bfff:fe69:0001`（简写前导零为 `11D8:BFFF:FE69:1`）；\n     5. 拼接网络前缀：将前缀 `2001:db8:d955:1697::/64` 与接口 ID 组合，最终生成完整的 IPv6 地址：\n        `2001:db8:d955:1697:11D8:BFFF:FE69:1`。\n\n• 正确选项剖析：\n选项 C（2001:db8:d955:1697:11D8:BFFF:FE69:1）计算结果完全正确。\n网络前缀严格匹配 R2 局域网标注的 `2001:db8:d955:1697`，接口标识符完全符合从 MAC `13-d8-bf-69-00-01` 进行 EUI-64 转换的标准结果。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（2001:db8:d955:1697:1130:ABFF:FECC:1）：接口 ID 属于另一道题目的干扰项参数，与题图中 R2 的 MAC 地址完全不符。\n- 选项 B（2001:db8:d955:1697:4657:149F:FE65:1）：伪造的散乱接口 ID，未遵循 EUI-64 插入规范。\n- 选项 D（2001:db8:d955:1697:12D8:BAFE:FF01:1）：首字节错误计算为 `12D8`（未正确执行第 7 位翻转），中间插入了荒谬的 `BAFE`，计算全面错误。\n\n• 考试要点与速记技巧：\nEUI-64 地址秒杀技巧：\n- 认准题图 R2 MAC 地址：`13-d8-bf-69-00-01`；\n- 首字节 13 翻转后必为 11（13 - 2 = 11）；\n- 中间必包含 `BFFF:FE69`；\n- 瞬间锁定选项 C！",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:d955:1697:1130:ABFF:FECC:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:d955:1697:4657:149F:FE65:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:d955:1697:11D8:BFFF:FE69:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:d955:1697:12D8:BAFE:FF01:1"
+          }
+        ]
+      },
+      "review": {
+        "prompt": "checked and clarified",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "C。"
+      },
+      "exhibit_path": "exhibits/q978_agent.jpg",
+      "image_sha256": "8d5e32bc21b15932b41ba6d548e9330f25f886c5269125bd424e468d2a913a31"
+    },
+    {
+      "id": 979,
+      "original_qid": "Q1312",
+      "before_sha256": "1463d6b400e84ddf2dc29903d7b272667f3862c4ff19edea486c1d95ca0266d0",
+      "reason": "B。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In the displayed JSON-like snippet, what role does \"LB13\" have in the load balancer member?",
+        "explanation": "B。图中 `\"load balancer\": \"LB13\"` 的冒号左侧是成员名，右侧 `\"LB13\"` 是字符串值；它不是数组、对象或该成员的键。最末数组元素后有尾随逗号，严格 JSON 应删除该逗号，图中行号也不是 JSON 本身。该示例是 JSON 数据片段，并非 JSON Schema。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"LB13\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络可编程性中 JSON（JavaScript Object Notation, RFC 8259）数据结构的基本组成要素与语法解析。\n1. JSON 键值对（Key-Value Pair）核心定义：\n   JSON 数据在对象（Object）内部通过键值对来存储数据：\n   `\"Key\": Value`\n   - 键（Key）：位于冒号 `:` 左侧，由双引号包裹的字符串，代表数据的属性名称；\n   - 值（Value）：位于冒号 `:` 右侧，代表属性的具体数据内容。\n2. 题目 Exhibit 语法结构精析：\n   ```json\n   1 [\n   2 {\"load balancer\": \"LB13\", \"port\": \"fe9/2\"},\n   3 {\"firewall\": \"FW20\", \"port\": \"e2/28\"},\n   4 {\"router\": \"R41\", \"port\": \"te7/27\"},\n   5 ]\n   ```\n   - 题干询问：“What is represented by the word \"LB13\" within this JSON schema?”；\n   - 定位第 2 行：`{\"load balancer\": \"LB13\", \"port\": \"fe9/2\"}`；\n   - 冒号左侧是 `\"load balancer\"`，它是属性名（Key）；\n   - 冒号右侧是 `\"LB13\"`，它是赋给该属性的具体文本内容，在 JSON 语法术语中被定义为“值”（Value）。\n\n• 正确选项剖析：\n选项 B（value，值）完全正确。`\"LB13\"` 位于冒号右侧，是属性 `\"load balancer\"` 对应的具体数据值。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（array，数组）：数组由方括号 `[ ... ]` 标识，`\"LB13\"` 是字符串标量，绝不是数组。\n- 选项 C（object，对象）：对象是由大括号 `{ ... }` 包含的完整键值对集合，`\"LB13\"` 只是对象内的一个原子数据值。\n- 选项 D（key，键）：键是位于冒号左侧的属性名称（如 `\"load balancer\"` 是键），`\"LB13\"` 位于冒号右侧，因此是值而非键。\n\n• 考试要点与速记技巧：\nJSON 构成一眼辨：\n- 左边叫 Key（属性名），右边叫 Value（具体值）；\n- 题中 `\"LB13\"` 在右边，妥妥是个 Value。"
+      },
+      "review": {
+        "prompt": "checked and clarified",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "B。"
+      },
+      "exhibit_path": "exhibits/q979_agent.jpg",
+      "image_sha256": "09a7071b5150ee86e9650056217850a0ba91cf63f1b311271de74742f68763b4"
+    },
+    {
+      "id": 980,
+      "original_qid": "Q1313",
+      "before_sha256": "75e60ac68a06875af18d61e55cee494fbcc795d7db17a5668a80f0216a845833",
+      "reason": "C。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is the top-level JSON type of the complete value shown?",
+        "explanation": "C。最外层 `{ ... }` 是对象，`\"Interfaces\"` 是对象成员名，其值是字符串数组；因此整个顶层值是 object。A 布尔值是 true 或 false，B 虽然数组内元素是字符串，但整体不是字符串；D sequence 不是 JSON 标准类型名。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which type of JSON data is shown?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络可编程性中 JSON（JavaScript Object Notation, RFC 8259）数据类型的标准界定与顶层根结构识别。\n1. JSON 数据类型规范：\n   JSON 标准严格定义了以下基本与复合数据类型：\n   - 对象（Object）：由一对花括号 `{ ... }` 包裹的无序键值对集合；\n   - 数组（Array）：由一对中括号 `[ ... ]` 包裹的有序值列表；\n   - 字符串（String）：由双引号包裹的 Unicode 文本；\n   - 数值（Number）：十进制整数或浮点数；\n   - 布尔值（Boolean）：字面量 `true` 或 `false`；\n   - 空值（Null）：字面量 `null`。\n2. 题目 Exhibit 结构深度解析：\n   ```json\n   {\n   \"Interfaces\":[\"ethernet0/3\", \"ethernet0/4\", \"ethernet0/5\"]\n   }\n   ```\n   - 最外层由一对左花括号 `{` 和右花括号 `}` 完整封装，定义了该 JSON 数据的顶层根结构；\n   - 在花括号内部，包含一个键 `\"Interfaces\"`，其对应的值是一个由方括号 `[ ... ]` 包裹的字符串数组；\n   - 题干询问：“Which type of JSON data is shown?”（展示了哪种类型的 JSON 数据？）。在数据表示与类型判定中，整个 Exhibit 所呈现的顶层整体数据类型是由大括号所界定的“对象”（Object）。\n\n• 正确选项剖析：\n选项 C（object，对象）完全正确。根据 JSON 语法规范，由大括号 `{}` 包裹且包含键值对的数据结构在类型上权威判定为“对象”（Object）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（Boolean，布尔值）：布尔值只能是小写的 `true` 或 `false`，图中完全没有布尔变量。\n- 选项 B（string，字符串）：虽然内部元素 `\"ethernet0/3\"` 等是字符串，但 Exhibit 呈现的是包含嵌套结构的完整顶层数据实体，而非孤立的单字符串。\n- 选项 D（sequence，序列）：sequence 是通用计算机编程术语（如 Python 中的 sequence），并非标准 JSON 语法所定义的六大合法数据类型之一。\n\n• 考试要点与速记技巧：\nJSON 根类型一秒判定：\n- `{}` 框住的是对象（Object）；\n- `[]` 框住的是数组（Array）。"
+      },
+      "review": {
+        "prompt": "checked and clarified",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "C。"
+      },
+      "exhibit_path": "exhibits/q980_agent.jpg",
+      "image_sha256": "2e71f3d87e5378422465c89073dac42d9178a5ae629f884a46cf3ca4cae8d3d4"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc8259",
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/port-security/41454-port-security-00.html"
+  ],
+  "limitations": "直接查看原图并人工核对，无交换机或无线设备实测。"
+}

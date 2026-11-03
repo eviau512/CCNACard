@@ -13,6 +13,12 @@ MASTER = ROOT / 'Examtopics/output/complete_q1_q1396.json'
 BUNDLE = ROOT / 'CCNA-App/app/src/main/assets/data/ccna_cards_data.js'
 
 
+def write_atomic(path, text):
+    temporary = path.with_name(path.name + '.review-tmp')
+    temporary.write_text(text, encoding='utf-8')
+    temporary.replace(path)
+
+
 def fingerprint(question):
     raw = json.dumps(question, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
     return hashlib.sha256(raw.encode('utf-8')).hexdigest()
@@ -43,8 +49,8 @@ def apply(manifest_path):
         assert question['explanation'].strip()
         changed.append(question['id'])
     MASTER.parent.mkdir(exist_ok=True)
-    MASTER.write_text(json.dumps(questions, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    BUNDLE.write_text(prefix + json.dumps(questions, ensure_ascii=False) + ';\n', encoding='utf-8')
+    write_atomic(MASTER, json.dumps(questions, ensure_ascii=False, indent=2) + '\n')
+    write_atomic(BUNDLE, prefix + json.dumps(questions, ensure_ascii=False) + ';\n')
     fixed_ids = {item['id'] for item in manifest['corrections']}
     for batch in sorted((ROOT / 'Examtopics/batch').glob('batch*_q*.json')):
         data = json.loads(batch.read_text(encoding='utf-8'))

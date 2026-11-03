@@ -1,0 +1,324 @@
+{
+  "scope": "Q861–Q870",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 861,
+      "original_qid": "Q1159",
+      "before_sha256": "54e9af544863fe345361e6bb3b6e0bc35a8ccc5c511b73df48a32cfc38ce1377",
+      "reason": "对象也是 JSON 值，限定具体结构并指出末尾逗号。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which specific JSON structural type describes the brace-delimited element on line 2?",
+        "explanation": "A。第 2 行花括号括住两个名称/值成员，结构类型为对象（object）；外层 `[...]` 是数组，键如 `port`，字符串如 `e0/27` 是其成员值。对象本身也属于 JSON value，题目询问更具体的结构类型。原图最后一个数组元素后多了逗号，移除它才能构成严格合法的 JSON。"
+      },
+      "original_fields": {
+        "prompt": "What is represented in line 2 within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络自动化与数据建模标准中的 JSON（RFC 8259）数据类型辨析。\nJSON 规范定义了以下核心数据容器与语法符号：\n1. 对象（Object）：以左花括号 `{` 开始，以右花括号 `}` 结束。对象是由零个或多个逗号分隔的键值对（Key-Value Pairs）构成的无序集合。\n2. 数组（Array）：以左方括号 `[` 开始，以右方括号 `]` 结束。数组是由零个或多个逗号分隔的值（Values）构成的有序列表。\n3. 键（Key）：对象内每组数据的属性标识符，必须是用双引号括起来的字符串。\n4. 值（Value）：属性所对应的具体数据，可以是字符串、数值、布尔值、对象或数组。\n\n• 正确选项剖析：\n观察题目提供的 JSON 架构：\n```json\n1 [\n2 {\"load balancer\": \"LB48\", \"port\": \"e0/27\"},\n3 {\"firewall\": \"FW49\", \"port\": \"ge2/37\"},\n4 {\"router\": \"R_paris\", \"port\": \"te6/6\"},\n5 ]\n```\n第 2 行内容为：\n`{\"load balancer\": \"LB48\", \"port\": \"e0/27\"},`\n分析该行：\n整行以 `{` 开头，以 `}` 结尾，内部包含 `\"load balancer\": \"LB48\"` 和 `\"port\": \"e0/27\"` 两个键值对。根据 JSON 语法规范，由 `{}` 包裹的键值对集合正是一个标准的 JSON **对象（Object）**。该对象作为最外层数组的一个元素存在。因此第 2 行代表的是 object，选项 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（value）：`\"LB48\"` 或 `\"e0/27\"` 属于单一属性的值，第 2 行整体是由大括号包围的完整数据结构，定义为对象（object）。\n- 选项 C（key）：`\"load balancer\"` 和 `\"port\"` 是对象内部的键（key），不能代表整行数据结构。\n- 选项 D（array）：整个数组是由第 1 行的 `[` 和第 5 行的 `]` 所界定的，第 2 行仅是该数组内部包含的一个对象成员。\n\n• 考试要点与速记技巧：\n看到花括号 `{ }` 必是对象（Object），看到方括号 `[ ]` 必是数组（Array）！第 2 行花括号包到底，妥妥的 Object！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "对象也是 JSON 值，限定具体结构并指出末尾逗号。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q861_agent.jpg",
+      "image_sha256": "d0c373be63ec4ad57d41f55dedb1a1535693b2e6099a888f93cab6dd9f70c6ce"
+    },
+    {
+      "id": 862,
+      "original_qid": "Q1160",
+      "before_sha256": "9bccae21531683dd39e033a586b1c6907f081b87d7e4ad2b89ff9c66750401f5",
+      "reason": "限定动态学习、VLAN、过滤和老化条件。",
+      "updates": {
+        "explanation": "C。交换机通常依据收到帧的源 MAC 地址、入端口和所属 VLAN 动态学习或刷新表项，随后按目的 MAC 查表转发。未知单播一般在同 VLAN 的允许转发端口泛洪，但端口安全、STP 等可限制学习或泛洪。A：一般 MAC 学习本身不能防止 DoS；B：未知单播并非发往指定组播组；D：学习不会请求重传。老化时间随平台和配置而异，MAC 泛洪的影响也取决于设备和保护配置。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网交换机二层 MAC 地址学习（MAC Address Learning）的基础原理。\n以太网交换机内部维护一张 MAC 地址表（也称 CAM 表，内容寻址寄存器），其工作原理严格区分“源地址”与“目的地址”：\n1. 学习看源（Source MAC）：当交换机从某个端口收到一个以太网帧时，交换机立刻提取帧头中的**源 MAC 地址（Source MAC Address）**。如果 MAC 地址表中尚未存在该源 MAC 地址，交换机就会将该“源 MAC 地址 - 接收物理端口 - 所属 VLAN”作为一条新的动态表项写入 MAC 地址表中，并开启老化定时器（默认 300 秒）。如果该表项已存在，则刷新老化定时器。\n2. 转发看目的（Destination MAC）：交换机提取帧头中的目的 MAC 地址，在 CAM 表中查找出端口以执行单播转发；找不到则执行未知单播泛洪。\n\n• 正确选项剖析：\n选项 C（adds unknown source MAC addresses to the address table）准确无误地阐明了 MAC 学习的本质：当交换机检测到未知（未记录）的源 MAC 地址时，将其添加到 MAC 地址表中。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（protects against denial of service attacks）：MAC 学习本身不具备防御拒绝服务攻击（DoS）的能力；相反，恶意黑客利用 MAC 泛洪攻击（MAC Flooding）向交换机发送大量伪造源 MAC 的数据帧，会迅速填满 CAM 表导致交换机退化为集线器（Hub），需要配置端口安全（Port Security）才能防御此类攻击。\n- 选项 B（sends frames with unknown destinations to a multicast group）：对于未知目的 MAC 地址的帧，交换机会在所属 VLAN 内进行未知单播泛洪（Flooding），绝不会将其发送到组播组（Multicast group）。\n- 选项 D（sends a retransmission request when a new frame is received）：交换机工作在二层，只负责透明交换，没有端到端的重传请求机制；数据包丢失的重传是由传输层 TCP 协议（通过 ACK/超时重传）实现的。\n\n• 考试要点与速记技巧：\n交换机金科玉律：学习基于源 MAC（Learning based on Source MAC），转发基于目的 MAC（Forwarding based on Destination MAC）！未知的源入表，未知的目的泛洪！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定动态学习、VLAN、过滤和老化条件。"
+      }
+    },
+    {
+      "id": 863,
+      "original_qid": "Q1161",
+      "before_sha256": "8e61429aab9cf57c0b7262d4a076a4e6b51ce5e9179a24196b697e121f11d35d",
+      "reason": "核对原图并指出尾随逗号无效。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is represented by the string \"ge3/36\" in the displayed JSON-like data?",
+        "explanation": "A。在图中的 `\"interface\": \"ge3/36\"` 中，`interface` 是键，`ge3/36` 是字符串值；B 数组由方括号包围，C 对象由花括号包围，D 指属性名。图中最后一个元素后有多余逗号，删除该逗号后才符合严格 JSON 语法；这不改变该字符串的角色。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"ge3/36\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络可编程性中 JSON（RFC 8259）数据表示法的语法元素识别。\n在 JSON 的键值对（Key-Value Pair）结构中：\n- 语法规则：`\"key\" : value`\n- 冒号 `:` 充当分隔符。\n- 冒号左侧是键名（Key），必须用英文双引号包裹，类型必须是字符串。\n- 冒号右侧是键所对应的数据值（Value），类型可以是字符串、数字、布尔值（true/false）、null、数组或内嵌对象。\n\n• 正确选项剖析：\n题目展示的 JSON 数据如下：\n```json\n1 [\n2 {\"VPN concentrator\": \"VPN36\", \"interface\": \"ge3/36\"},\n3 {\"load balancer\": \"LB33\", \"interface\": \"te7/10\"},\n4 {\"switch\": \"SW31\", \"interface\": \"fe2/25\"},\n5 ]\n```\n在第 2 行的键值对 `\"interface\": \"ge3/36\"` 中：\n- `\"interface\"` 位于冒号左侧，代表键（Key）。\n- `\"ge3/36\"` 位于冒号右侧，代表分配给该键的具体字符串数据，即**值（Value）**。\n因此 `\"ge3/36\"` 代表的是 value，选项 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（array）：数组必须由方括号 `[ ... ]` 标识，`\"ge3/36\"` 是单个接口名称字符串，不是数组。\n- 选项 C（object）：对象由花括号 `{ ... }` 包含，如整行 `{\"VPN concentrator\": ...}`，`\"ge3/36\"` 只是对象内部的一个字段值。\n- 选项 D（key）：`\"interface\"` 才是该属性的键（key），`\"ge3/36\"` 位于冒号右侧，是对应的数值（value）。\n\n• 考试要点与速记技巧：\n冒号为界分左右：冒号左边是属性名（Key），冒号右边是属性值（Value）！`\"ge3/36\"` 在冒号右边，必定是 Value！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对原图并指出尾随逗号无效。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q863_agent.jpg",
+      "image_sha256": "dbf2ebeea883cccc4f8d2aaba83f78f302e5c3ba149b2ef5e2116bea02543544"
+    },
+    {
+      "id": 864,
+      "original_qid": "Q1162",
+      "before_sha256": "547a0a56a370bf1179ab4238ed544eae03e4da4ff338198d06256aef364a2738",
+      "reason": "Inform 是有确认通知但有限重试不保证到达。",
+      "updates": {
+        "prompt": "Which SNMP notification type asks the receiver for an acknowledgment and may be retransmitted when none arrives?",
+        "explanation": "B。InformRequest 要求接收方发送 Response；发送方可以按配置在超时后重试，因而比未确认的 Trap 更可靠，但有限次重试不能保证最终送达。C Trap 通常不请求通知确认；A Get 与 D Set 是管理操作请求，不是此题中的主动通知。"
+      },
+      "original_fields": {
+        "prompt": "Which SNMP message type is reliable and precedes an acknowledgment response from the SNMP manager?",
+        "explanation": "• 核心考点与原理分析：\n本题考查简单网络管理协议（SNMP, RFC 3416）的消息类型及可靠性传输机制。在 SNMP 架构中，被管理设备（SNMP Agent）向网络管理系统（NMS/Manager）主动发送的非请求通知事件主要有两种：Trap 和 Inform。\n1. Trap：使用 UDP 端口 162，是单向发送（Fire-and-forget）。Agent 发出后无需 NMS 进行确认，属于不可靠传输（Unreliable）。若网络拥塞或丢包，NMS 无法收到告警，Agent 也不会感知。\n2. InformRequest（简称 Inform）：最初在 SNMPv2c 引入，同样使用 UDP 162，但增加了应用层确认机制（Reliable）。Agent 发送 Inform 后，NMS 必须回复一个包含相同 Request-ID 的 SNMP Response（即确认报文）。若 Agent 在指定超时时间内未收到该确认，则会自动重传，直至达到最大重试次数。\n\n• 正确选项剖析：\n选项 B（Inform）完全符合题干描述。题目明确要求“哪种 SNMP 消息类型是可靠的，且在 SNMP Manager 回复确认响应之前发出”（is reliable and precedes an acknowledgment response from the SNMP manager）。Agent 主动发送 InformRequest，随后接收来自 SNMP Manager 的 Response（确认），完全符合可靠通知的状态流程。\n\n• 干扰项排除与错误陷阱：\n选项 A（Get）：GetRequest 是由 NMS 主动发往 Agent 以查询特定 MIB 对象变量的拉取请求，而非 Agent 发往 NMS 的通知消息，方向与题意不符。\n选项 C（Traps）：Trap 采用无确认的 UDP 单向通知机制，NMS 收到 Trap 后绝不会回复任何 ACK/Response 响应，不具备可靠性。\n选项 D（Set）：SetRequest 是由 NMS 发往 Agent 用于修改被管设备 MIB 变量配置的请求，并非由 Agent 发出等待 NMS 确认的机制。\n\n• 考试要点与速记技巧：\nTrap 无回复不可靠，Inform 必确认才可靠；两者皆由 Agent 发，目标 UDP 端口百六十二（162）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "Inform 是有确认通知但有限重试不保证到达。"
+      }
+    },
+    {
+      "id": 865,
+      "original_qid": "Q1163",
+      "before_sha256": "a6e1c43e2314ede6175cc9ab16a6eb43509664856a8e2507be4fd32d972f256a",
+      "reason": "私网复用与 NAT 的作用及路由过滤并非绝对。",
+      "updates": {
+        "explanation": "D。RFC 1918 的 10/8、172.16/12 和 192.168/16 可在彼此独立的网络内复用，常与 NAT/PAT 配合以减少公网 IPv4 地址需求，但不会产生新的公网地址。A 私网范围有限；B 多接收者属于组播而非私网定义；C 网络复杂度取决于设计，地址重叠和 NAT 也可能增加复杂度。私有前缀不应在公共互联网中全局路由，但不能据此保证每台路由器都正确过滤。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私有 IPv4 地址空间（Private IPv4 Addressing）的定义、作用及网络设计原则。在 IPv4 体系中，为了缓解全球公网 IPv4 地址快速耗尽的危机，IETF 在 RFC 1918 中划定了三个专用于组织内部网络的私有地址段：\n1. Class A：10.0.0.0/8（10.0.0.0 - 10.255.255.255）\n2. Class B：172.16.0.0/12（172.16.0.0 - 172.31.255.255）\n3. Class C：192.168.0.0/16（192.168.0.0 - 192.168.255.255）\n私网地址不向 Internet 路由器通告，任何公网路由器都会丢弃目的地址为私网地址的数据包。企业内部可以通过私网地址自由规划拓扑，并在访问 Internet 时借助 NAT/PAT 技术共用少量公网 IP，从而极大延缓了全球公网 IPv4 地址短缺。\n\n• 正确选项剖析：\n选项 D（alleviates the shortage of IPv4 addresses）精准概括了私网地址的核心技术价值。通过允许全球数以亿计的企业和家庭网络在其内部重叠复用相同的 RFC 1918 地址段，公网仅需按需分配公网 IP 并结合 NAT 转换，显著缓解了 IPv4 枯竭的严峻问题。\n\n• 干扰项排除与错误陷阱：\n选项 A（provides unlimited address ranges）：私有 IPv4 地址总量是严格受限的（如 10.0.0.0/8 仅约 1677 万个地址），其范围是由 RFC 1918 严格限定的固定 32 位地址集，绝非“无限地址范围”。\n选项 B（is used when the network has multiple endpoint listeners）：多端点监听是组播技术（Multicast, 224.0.0.0/4）的应用场景，与单播私网地址无关。\n选项 C（reduces network complexity）：私有地址需要与 NAT/PAT、DNS 甚至复杂的策略路由配合才能与外部通信，往往增加了网络拓扑与故障排查的复杂度，而非降低复杂度。\n\n• 考试要点与速记技巧：\nRFC 1918 划三段：10/8、172.16/12、192.168/16；内网随意复用，公网绝不路由，巧搭 NAT 延缓地址枯竭。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "私网复用与 NAT 的作用及路由过滤并非绝对。"
+      }
+    },
+    {
+      "id": 866,
+      "original_qid": "Q1164",
+      "before_sha256": "612063191495c824153176d4952db8fd05ec5f1c890fd5ab74f2618713219191",
+      "reason": "累计广播数和零当前速率不能证明风暴，改为直接判读计数。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What does the value 3553 in the interface output count?",
+        "options": [
+          {
+            "label": "A",
+            "text": "collisions"
+          },
+          {
+            "label": "B",
+            "text": "CRC errors"
+          },
+          {
+            "label": "C",
+            "text": "output packets"
+          },
+          {
+            "label": "D",
+            "text": "received broadcast packets"
+          }
+        ],
+        "explanation": "D。`Received 3553 broadcasts` 是接口统计中的累计接收广播数；图中 collisions 和 CRC 均为 0，output packets 为 3927。计数器注明从未清除，而 30 秒输入速率为 0；单次累计比例不能证明当前广播风暴，也不能单凭零错误排除其他故障。需连续采样广播速率、流量基线及其他端口状态再判断。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "options": [
+          {
+            "label": "A",
+            "text": "collisions"
+          },
+          {
+            "label": "B",
+            "text": "bad NIC"
+          },
+          {
+            "label": "C",
+            "text": "duplex mismatch"
+          },
+          {
+            "label": "D",
+            "text": "broadcast storm"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS `show interface` 命令输出中的流量计数器与网络异常状态排查。\n在以太网接口的健康监测中：\n1. 广播风暴（Broadcast Storm）：交换机网络中由于缺少生成树防护产生二层环路，或者某主机网卡故障/广播软件异常，导致网络中广播帧持续成倍泛洪复制。接口表现为：极短时间内接收到极其巨大的广播包数量，且广播包在总输入报文中的比例畸高（正常网络中广播包通常低于总流量的 5%）。\n2. 双工不匹配（Duplex Mismatch）：一端 Full-duplex 一端 Half-duplex 时，Half 端会出现大量 Collisions 和 Late Collisions，Full 端会出现大量的 CRC/FCS 错误或 Frame 错误。\n\n• 正确选项剖析：\n选项 D（broadcast storm）完全符合展图数据指标。\n观察 exhibit 中的 FastEthernet0/0 统计数据：\n- 接口状态：`FastEthernet0/0 is up, line protocol is up`，工作在 `Full-duplex, 100 Mb/s`。\n- 报文统计：`7331 packets input, 7101162 bytes`，紧接着 `Received 3553 broadcasts (0 IP multicasts)`。\n在接收的 7331 个报文中，广播报文竟然高达 3553 个，占比接近 50%！这在正常的点到点或路由接口中是极其不正常的极端异常比例，典型表明相连子网正在发生广播风暴。\n\n• 干扰项排除与错误陷阱：\n选项 A（collisions）：展图明确显示 `0 output errors, 0 collisions, 0 late collision`，碰撞计数完全为 0，因此不是碰撞问题。\n选项 B（bad NIC）：损坏的网卡通常会导致物理层出现大量畸变，产生大量 Runts（超短帧）、Giants（超长帧）、CRC 校验错误或 Frame 帧对齐错误，而输出中这些错误计数全为 0。\n选项 C（duplex mismatch）：本接口工作在 Full-duplex 且 Late collisions 和 CRC 计数均为 0，无任何双工不匹配的经典特征。\n\n• 考试要点与速记技巧：\n看 `show interface` 排错技巧：\n- 广播占比高（如几千包里半数是广播）且无物理错 -> 广播风暴（Broadcast Storm）。\n- 出现 Late Collisions 且伴随 CRC 递增 -> 双工不匹配（Duplex Mismatch）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "累计广播数和零当前速率不能证明风暴，改为直接判读计数。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q866_agent.jpg",
+      "image_sha256": "c40d79bde5da7b539c4b1a604ecc10347ed7292e29f348a36826b25074d0a482"
+    },
+    {
+      "id": 867,
+      "original_qid": "Q1166",
+      "before_sha256": "418cc85be37806f118235694df04e4706d6110931013165ceb1c23de29aa5c63",
+      "reason": "限定未知单播和同 VLAN 合格转发端口。",
+      "updates": {
+        "prompt": "For normal Ethernet switching, how is an unknown unicast frame handled?",
+        "options": [
+          {
+            "label": "A",
+            "text": "flooded to eligible forwarding ports in the same VLAN except the receiving port"
+          },
+          {
+            "label": "B",
+            "text": "buffered and forwarded when it has fewer than 5 CRCs"
+          },
+          {
+            "label": "C",
+            "text": "forwarded to a neighbor port using CDP"
+          },
+          {
+            "label": "D",
+            "text": "sent to a multicast group"
+          }
+        ],
+        "explanation": "A。交换机对未知目的单播通常在同一 VLAN 内向除入端口外的合格转发端口泛洪；STP 状态、VLAN 成员关系、端口隔离或未知单播抑制等策略可限制范围。B CRC 是校验而非允许少于五个错误；存储转发交换机会校验 FCS。C CDP 用于邻居发现，不负责普通帧选路；D 不会因此将目的地址改为组播组。"
+      },
+      "original_fields": {
+        "prompt": "How does frame switching function on a switch?",
+        "options": [
+          {
+            "label": "A",
+            "text": "floods unknown destinations to all ports except the receiving port"
+          },
+          {
+            "label": "B",
+            "text": "buffers and forwards frames with less than 5 CRCs"
+          },
+          {
+            "label": "C",
+            "text": "forwards frames to a neighbor port using CDP"
+          },
+          {
+            "label": "D",
+            "text": "sends frames with unknown destinations to a multicast group"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网二层交换机（Layer 2 Switch）的数据帧转发与交换机制。交换机工作在 OSI 模型的数据链路层，其核心交换逻辑基于 MAC 地址表（CAM 表），基本行为包括三大动作：\n1. 学习（Learning）：交换机检查入站数据帧的源 MAC 地址（Source MAC），将该 MAC 与接收端口及所属 VLAN 进行关联绑定并记录到 MAC 地址表（默认老化时间 300 秒）。\n2. 转发/过滤（Forwarding/Filtering）：交换机检查入站帧的目的 MAC 地址（Destination MAC）。若目的 MAC 在 MAC 表中且关联端口不是接收端口，则单播转发至对应目标端口；若关联端口就是接收端口，则直接丢弃（过滤）。\n3. 泛洪（Flooding）：若目的 MAC 地址不在 MAC 表中（称为未知单播帧 Unknown Unicast），或者目的 MAC 为广播地址（FF:FF:FF:FF:FF:FF），交换机将把该帧从同 VLAN 内除接收端口外的所有其他活动端口复制泛洪发送出去。\n\n• 正确选项剖析：\n选项 A（floods unknown destinations to all ports except the receiving port）准确描述了交换机的泛洪机制。当数据帧的目的 MAC 地址未知时，为了确保通信不中断并寄希望于目标主机回包以便学习其位置，交换机必须向除接收端口外的所有端口泛洪该帧。\n\n• 干扰项排除与错误陷阱：\n选项 B（buffers and forwards frames with less than 5 CRCs）：任何存在 CRC/FCS 校验错误的数据帧都被视为物理传输中受损的无效帧，交换机在 Store-and-Forward 模式下会直接丢弃，绝不会容忍“少于 5 个 CRC”并转发。\n选项 C（forwards frames to a neighbor port using CDP）：思科发现协议（CDP）是二层设备发现协议，仅用于交换机和路由器之间通告自身身份信息，根本不参与实际以太网数据帧的转发流程。\n选项 D（sends frames with unknown destinations to a multicast group）：未知单播在二层直接泛洪，绝不会被转换为特定多播组地址。\n\n• 考试要点与速记技巧：\n交换机三字诀：“学源发目”——源 MAC 进表用于学习，目的 MAC 查表用于转发；查无记录（未知单播）则除己泛洪。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定未知单播和同 VLAN 合格转发端口。"
+      }
+    },
+    {
+      "id": 868,
+      "original_qid": "Q1167",
+      "before_sha256": "e9c4090f476dba761aff17d74ca207844863ce8e626f06105da270bc26c26bea",
+      "reason": "图中前缀格式非法且候选不等于已安装项；补全条件。",
+      "updates": {
+        "prompt": "Refer to the exhibit as a list of candidate routes (not an installed routing table). Assume all four entries mean the same destination prefix 10.232.106.0/27, the next hops are reachable, and only one best path is installed. Which interface is selected?",
+        "explanation": "A。图中写作 `10.232.106.30.27`，并非标准的 CIDR 写法；题设将四项统一理解为覆盖 .30 的 10.232.106.0/27。EIGRP 路径均为 AD 90，优先于 OSPF 的 110；在两条 EIGRP 候选中，F0/9 的度量 6580 小于 F0/16 的 46095，因此单路径下选 F0/9。F0/7 和 F0/24 为 OSPF；不同协议的 metric 不直接比较。实际设备路由安装取决于可达性、协议配置和平台支持，不能把这张示意表当作已安装的路由表。"
+      },
+      "original_fields": {
+        "prompt": "Which interface is used to send traffic to the destination network?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 路由表选路决策算法（Routing Table Selection Process）。\n当路由器有多个通往相同目标网络的路由时，其选路流程遵循严格的三层优先级判断：\n1. 最长前缀匹配（Longest Prefix Match）：首先比较子网掩码长度，前缀最长者绝对优先（最具体）。\n2. 管理距离（Administrative Distance, AD）：当前缀长度相同时，比较路由协议的可靠性度量。AD 越小，路由来源越可信。常见协议默认 AD：\n   - 直连（Connected）：0\n   - 静态路由（Static）：1\n   - EIGRP 内部路由（Internal）：90\n   - OSPF：110\n   - RIP：120\n   - 外部 EIGRP（External）：170\n3. 度量值（Metric）：当协议类型及 AD 也相同时，比较协议内部计算的度量值，Metric 越低越优先。\n\n• 正确选项剖析：\n选项 A（F0/9）完全正确。分析展图中的四条候选路由：\n- 目标网段均为：`10.232.106.30/27`（前缀长度完全相同，均为 /27）。\n- 比较 AD：\n  - 路由 1: `D 10.232.106.30/27 [90/6580] via F0/9`（EIGRP，AD=90）\n  - 路由 2: `D 10.232.106.30/27 [90/46095] via F0/16`（EIGRP，AD=90）\n  - 路由 3: `O 10.232.106.30/27 [110/3158] via F0/7`（OSPF，AD=110）\n  - 路由 4: `O 10.232.106.30/27 [110/7367] via F0/24`（OSPF，AD=110）\n  EIGRP 的 AD (90) 优于 OSPF 的 AD (110)，因此排除两条 OSPF 路由。\n- 比较 EIGRP 内部 Metric：\n  路由 1 Metric 为 6580，路由 2 Metric 为 46095。\n  6580 < 46095，因此度量值最小的路由 1（下一跳对应接口 F0/9）最终被优选并安装进路由表负责发送流量。\n\n• 干扰项排除与错误陷阱：\n选项 B（F0/16）：同属 EIGRP 路由，但 Metric（46095）远大于 F0/9 的 6580，沦为次优路径。\n选项 C（F0/7）：虽 Metric（3158）看似很小，但其协议为 OSPF，AD 为 110，在 AD 比较阶段已被 EIGRP（AD=90）直接淘汰。\n选项 D（F0/24）：OSPF 路由，AD=110 且 Metric 更大，优先级最低。\n\n• 考试要点与速记技巧：\n路由优选口诀：先看掩码长不长，再比 AD 小不小（直 0 静 1 EIGRP 90，OSPF 110 RIP 120），同等协议比度量（Metric 越低越称王）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "图中前缀格式非法且候选不等于已安装项；补全条件。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q868_agent.jpg",
+      "image_sha256": "4d72c79ff8eaed0686f14b6c6e6007829c03510bab6545db0d7e718d9a54c71e"
+    },
+    {
+      "id": 869,
+      "original_qid": "Q1168",
+      "before_sha256": "376c0f80dd51314d150484724274d63265752d45251d11e009347d75de26a988",
+      "reason": "纠正 WPA3-SAE 类型与加密保证的过度断言。",
+      "updates": {
+        "explanation": "D。无线加密使用密钥将明文转换为密文，并由持有适当密钥的接收方解密，从而保护数据机密性；现代方案还通常提供完整性保护。加密不能阻止无线信号被接收，也不能保证密钥泄露或协议被攻破时内容安全。A 描述威胁检测/防护，B 描述身份认证与访问控制；C 是可能存在的口令策略，而非所有加密机制都要求的字符组合。WPA3-SAE 是认证和密钥建立方式，不能简单当作加密算法。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查无线网络安全中的加密技术原理（Wireless Encryption Mechanisms）。\n在 802.11 无线局域网（WLAN）中，射频（RF）信号在自由开放的空气介质中全向传播，任何处于信号覆盖范围内的无线接收设备都可以被动捕获空中传输的无线电磁帧。为确保通信安全，无线体系设计了加密机制（如早期的 WEP/TKIP，以及现代标准的 WPA2-AES/CCMP、WPA3-SAE）：\n1. 机密性（Confidentiality）：在发射端，加密算法使用协商生成的成对临时密钥（PTK）将原始明文有效载荷编码（加密）为乱码密文。\n2. 完整性与可读性：只有拥有有效解密密钥的授权客户端和 AP 才能通过逆向算法成功解码（解密）数据。未经授权的第三方即使截获了帧，也无法读取其实际内容。\n\n• 正确选项剖析：\n选项 D（encodes and decodes data for authorized users）准确概括了无线加密的本质定义。加密的数学与技术核心就是“为授权用户对数据进行编码（加密）和解码（解密）”，以保障开放无线介质中的数据机密性。\n\n• 干扰项排除与错误陷阱：\n选项 A（intercepts data threats before they attack a network）：在威胁攻击网络之前进行拦截属于入侵防御系统（IPS/IDS）或下一代防火墙（NGFW）的职能，加密不具备流量分析或威胁拦截能力。\n选项 B（uses policies to prevent unauthorized users）：使用策略阻止未授权用户接入属于身份认证与访问控制（如 802.1X/EAP、NAC 策略），而非加密算法本身。\n选项 C（must include a combination of letters and numbers）：这是对密码口令复杂度（Password/Pre-shared Key Complexity）的常见管理要求，并非无线加密机制本身的通用技术特征。\n\n• 考试要点与速记技巧：\n加密（Encryption）保密性：发射端编码（加密），接收端解码（解密）；认证（Authentication）防非法，权限（Authorization）管访问。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "纠正 WPA3-SAE 类型与加密保证的过度断言。"
+      }
+    },
+    {
+      "id": 870,
+      "original_qid": "Q1169",
+      "before_sha256": "fcd8370dd2d912a294720e66890040c2f4dc1443ebcaab0e9aec4f99199303b4",
+      "reason": "核对原图并指出尾随逗号无效。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is represented by the word \"firewall\" in the displayed JSON-like data?",
+        "explanation": "B。图中 `\"firewall\": \"FW37\"` 的 `firewall` 是对象成员的键，`FW37` 是字符串值；整个花括号结构是对象，外层方括号结构是数组。图中最后一个元素后有多余逗号，移除才能形成严格合法的 JSON；不影响对该键的识别。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"firewall\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络自动化与可编程性中的 JSON（JavaScript Object Notation, RFC 8259）语法规范。\nJSON 是一种轻量级的数据交换格式，基于两种核心结构：\n1. 数组（Array）：用方括号 `[...]` 包裹，由逗号分隔的有序值集合。\n2. 对象（Object）：用花括号 `{...}` 包裹，由键值对（Key-Value Pairs）组成的无序集合。\n键值对由冒号 `:` 分隔，其标准语法结构为 `\"key\": value`：\n- 冒号左侧的双引号字符串必须是字符串类型，称为键（Key）或属性名（Property Name）。\n- 冒号右侧的内容为对应的值（Value），值可以是字符串、数值、布尔值、null、对象或数组。\n\n• 正确选项剖析：\n选项 B（key）完全正确。\n展图代码片段为：\n```json\n[\n  {\"router\": \"R_pittsburgh\", \"port\":\"e0/36\"},\n  {\"firewall\": \"FW37\", \"port\":\"te23\"},\n  {\"switch\": \"SW_toronto\", \"port\":\"ge5/28\"}\n]\n```\n在第 3 行 `{\"firewall\": \"FW37\", \"port\":\"te23\"}` 中，`\"firewall\"` 位于冒号 `:` 的左侧，代表该属性的名称，即键（Key）；而 `\"FW37\"` 是冒号右侧对应的具体内容，代表值（Value）。\n\n• 干扰项排除与错误陷阱：\n选项 A（value）：`\"FW37\"` 才是对应键 `\"firewall\"` 的值（Value）。\n选项 C（object）：包含 `\"firewall\": \"FW37\", \"port\":\"te23\"` 的整个花括号结构 `{...}` 才是对象（Object）。\n选项 D（array）：包裹所有对象的最外层中括号 `[...]` 才是数组（Array）。\n\n• 考试要点与速记技巧：\nJSON 语法铁律：大括号 `{}` 包对象，中括号 `[]` 装数组；冒号左边是 Key，冒号右边是 Value。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对原图并指出尾随逗号无效。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q870_agent.jpg",
+      "image_sha256": "cb81cdf4a26003189f31b7edf06e343aa7828faf2263e6386bfeda6ffed88568"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "https://www.rfc-editor.org/rfc/rfc1918.html",
+    "https://www.rfc-editor.org/rfc/rfc3416.html"
+  ],
+  "limitations": "已直接查看所有5张原图；未进行实际网络设备实验。"
+}

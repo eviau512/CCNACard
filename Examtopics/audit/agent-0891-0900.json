@@ -1,0 +1,327 @@
+{
+  "scope": "Q891–Q900",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 891,
+      "original_qid": "Q1199",
+      "before_sha256": "105718f431318e7e38e6dfc2d3adf60c9be98788bdaf03fc2df84f44688edc7e",
+      "reason": "明确选项内比较，修正 Windows 输出绝对化。",
+      "updates": {
+        "prompt": "An on-site service desk technician must verify the IP address and configured DNS server addresses on a user’s Windows computer. Which command among these choices should be entered at the command prompt?",
+        "explanation": "B。Windows 的 `ipconfig /all` 显示各适配器的完整 TCP/IP 配置，包含 IP 地址和 DNS 服务器地址；不带参数的 `ipconfig` 只显示基本 IP、子网掩码和默认网关。A 是网络设备 CLI，C 显示路由表而非 DNS 配置，D 不是标准 Windows 命令。其他 Windows 工具也可能获取这些信息，本题是在给定选项中选择。"
+      },
+      "original_fields": {
+        "prompt": "An on-site service desk technician must verify the IP address and DNS server information on a user’s Windows computer. Which command must The technician enter at the command prompt on the user’s computer?",
+        "explanation": "• 核心考点与原理分析：\n本题考查操作系统客户端网络参数验证 CLI 工具的使用规范。\n在 Windows 操作系统中，服务台技术人员排查终端网络连通性时，最核心的诊断命令是 `ipconfig`（Internet Protocol Configuration）：\n1. `ipconfig`（无参数）：仅显示每个绑定了 TCP/IP 的网络适配器的 IPv4 地址、子网掩码（Subnet Mask）以及默认网关（Default Gateway）。\n2. `ipconfig /all`（完整参数）：输出最详尽的二层与三层网络堆栈参数，包括：\n   - 计算机主机名（Host Name）与节点类型；\n   - 物理 MAC 地址（Physical Address）；\n   - DHCP 是否启用以及获取到的 DHCP 服务器 IP 地址；\n   - DNS 服务器列表（`DNS Servers . . . . . : x.x.x.x`）；\n   - IPv4 与 IPv6 租约获得与到期时间等。\n题干明确要求核实两项关键信息：“IP address”与“DNS server information”，因此必须加上 `/all` 开关。\n\n• 正确选项剖析：\n选项 B（ipconfig /all）完全正确。在 Windows 命令提示符（cmd.exe 或 PowerShell）下执行 `ipconfig /all`，可以完整列出当前网卡的 IPv4 地址及所配置的主备 DNS 服务器地址，满足题干的全部验证需求。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（show interface）：这是 Cisco IOS / NX-OS 网络设备操作系统上的特权模式查看命令，在 Windows 命令提示符下执行会提示“不是内部或外部命令”。\n- 选项 C（netstat -r）：用于在 Windows / Linux 上显示本机的 IP 路由表（IPv4 / IPv6 Route Table）以及持久路由，无法直接查看已配置的 DNS 服务器地址。\n- 选项 D（ifconfig -a）：这是传统的 Unix / Linux / macOS 操作系统中的网络配置查看工具，Windows 原生命令行中不存在该命令；且 Unix 下的 `ifconfig` 仅显示 IP、MAC、掩码等接口信息，DNS 服务器信息通常存放在 `/etc/resolv.conf` 文件中。\n\n• 考试要点与速记技巧：\nWindows 看网络参数速记：\n- 单看 IP 和网关：`ipconfig`；\n- 要看 DNS 和 MAC 地址：必加 `/all`（`ipconfig /all`）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "明确选项内比较，修正 Windows 输出绝对化。"
+      }
+    },
+    {
+      "id": 892,
+      "original_qid": "Q1200",
+      "before_sha256": "f24f1e06ac6ab02179eeb78443f0e45e3417f60b1d0ea75f67f820173f3c1685",
+      "reason": "私网地址不是访问控制；IPv4 global unicast 亦存在。",
+      "updates": {
+        "prompt": "Which IPv4 address type from these options is intended for addressing hosts in a private internal network rather than being globally routed as an Internet destination?",
+        "explanation": "A。RFC 1918 定义私有地址块 10.0.0.0/8、172.16.0.0/12 和 192.168.0.0/16，供内部寻址，不应作为全球 Internet 路由目的。私网地址本身不是防火墙：VPN、代理或 NAT/端口映射仍可能建立外部访问，限制入站和出站必须使用路由及访问控制策略。B 为公网地址；D 是组播而非单台服务器的单播地址。C 的 global unicast 并非 IPv6 独有，IPv4 也有全球可路由的单播地址。"
+      },
+      "original_fields": {
+        "prompt": "Which type of IPv4 address must be assigned to a server to protect it from external access and allow only internal users access while restricting Internet access?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址（Private IPv4 Address）的设计规范与网络安全隔离边界。\n1. RFC 1918 私有地址空间：\n   - Class A: 10.0.0.0/8（10.0.0.0 - 10.255.255.255）\n   - Class B: 172.16.0.0/12（172.16.0.0 - 172.31.255.255）\n   - Class C: 192.168.0.0/16（192.168.0.0 - 192.168.255.255）\n2. 路由与隔离特性：\n   - 不可在公网路由（Non-routable over Internet）：互联网骨干 ISP 路由器严禁传递任何以私网 IP 为源或目的的路由条目。\n   - 内部可达性：在组织内部网络中，内部路由器能够自由交换私有网段的路由信息（通过 OSPF、EIGRP 等），允许所有内网终端正常访问该服务器。\n   - 天然的安全边界：外部互联网黑客无法直接通过 IP 路由寻址私网地址；若网关未为该服务器配置 NAT/PAT 映射或代理出口，该服务器也无法直接发起或接收 Internet 流量，从而完美达成“防范外部直接访问、允许内部访问并限制互联网访问”的安全目标。\n\n• 正确选项剖析：\n选项 A（private，私网地址）完全正确。私网 IPv4 地址仅在企业内部有效，天然阻断了来自互联网的直接访问，且在没有出口 NAT 的情况下无法连接互联网，完全满足题干的所有防护与访问限制要求。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（public，公网地址）：公网 IPv4 地址在全球互联网上是唯一且可被全球路由的。将公网 IP 直接配置在服务器上会使其直接暴露于全网黑客的扫描与攻击之下，无法达成“protect it from external access”的目标。\n- 选项 C（global unicast，全球单播地址）：这是 IPv6 协议体系中的专业术语（前缀为 2000::/3），题干明确限定为“type of IPv4 address”。\n- 选项 D（multicast，组播地址）：IPv4 组播地址范围为 224.0.0.0/4（D 类地址），用于一对多数据分发（如视频会议、OSPF 邻居发现），绝对不能作为单台主机的单播 IP 地址进行分配。\n\n• 考试要点与速记技巧：\nRFC 1918 私网 IP（Private IP）双重价值：节约公网地址资源，天然阻断外网路由访问。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "私网地址不是访问控制；IPv4 global unicast 亦存在。"
+      }
+    },
+    {
+      "id": 893,
+      "original_qid": "Q1201",
+      "before_sha256": "e044d9f58c7cbfc447c6e8352774ef35679cdbfcb710e06279e8e27c1ce0f28a",
+      "reason": "限定 AireOS 版本及硬件例外，澄清 OEAP 与 FlexConnect。",
+      "updates": {
+        "prompt": "In the Cisco AireOS 8.5 OfficeExtend documentation, which statement best describes supported AP hardware for the OfficeExtend use case compared with FlexConnect?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A personal SSID is supported by FlexConnect, but OfficeExtend never supports one."
+          },
+          {
+            "label": "B",
+            "text": "OfficeExtend cannot use DTLS to the WLC, while FlexConnect always encrypts all data traffic by default."
+          },
+          {
+            "label": "C",
+            "text": "FlexConnect always requires client NAT, while OfficeExtend requires publicly addressed clients."
+          },
+          {
+            "label": "D",
+            "text": "Supported indoor AP models with integrated antennas can be used for OfficeExtend, subject to documented model exceptions; FlexConnect is also available on supported indoor and outdoor models."
+          }
+        ],
+        "explanation": "D。Cisco AireOS 8.5 文档针对 OfficeExtend 列出支持的室内内置天线型号并明确有型号例外；具体 FlexConnect 支持须查 AP 和控制器的兼容性，不能断言所有室内外型号均支持。OfficeExtend 面向远程办公，控制器与 AP 之间使用 DTLS，并可支持个人 SSID；FlexConnect 主要支持远端站点按配置本地或集中交换。A、B、C 的绝对断言不成立；OEAP 常部署在 NAT 后，OfficeExtend 与 FlexConnect 也并非互斥的工作方式。"
+      },
+      "original_fields": {
+        "prompt": "What differentiates the Cisco OfficeExtend AP mode from the Cisco FlexConnect AP mode?",
+        "options": [
+          {
+            "label": "A",
+            "text": "FlexConnect allows a personal SSID to be configured on the AP, and personal SSIDs are not supported with OfficeExtend."
+          },
+          {
+            "label": "B",
+            "text": "OfficeExtend does not support DTLS tunneling of traffic to the WLC, and FlexConnect tunnels traffic to the WLC with DTLS."
+          },
+          {
+            "label": "C",
+            "text": "FlexConnect must be deployed behind a router that NATs the client traffic, and OfficeExtend uses public IP sources."
+          },
+          {
+            "label": "D",
+            "text": "OfficeExtend mode requires indoor APs with internal antennas, and indoor and outdoor APs use FlexConnect mode."
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 企业无线接入点（AP）工作模式的架构差异，重点对比 OfficeExtend AP（OEAP）模式与 FlexConnect 模式。\n1. Cisco OfficeExtend AP（OEAP）模式：\n   - 设计场景：专为远程在家办公（Teleworker / Home Office）设计，将企业安全内网无缝延伸至员工家庭。\n   - 硬件要求与规范：Cisco 官方规范严格规定，OfficeExtend 模式**必须且只能使用带有内置集成天线的室内 AP（indoor APs with internal antennas）**（例如 Aironet 1810 OEAP、1815T、Catalyst 9105AXW 等壁挂式/桌面式型号）。其设计初衷是避免在家居环境中安装高增益外置天线造成射频超标或部署混乱。\n   - 通信机制：OEAP 部署在家庭宽带路由器（NAT/DHCP）之后，通过公网建立安全的加密 CAPWAP/DTLS 隧道连接至企业 DMZ 区的无线控制器（WLC）。同时，OEAP 允许配置本地“个人 SSID”（Personal SSID），以便员工家庭打印机或私人设备进行本地互联网访问。\n2. Cisco FlexConnect 模式（前身为 H-REAP）：\n   - 设计场景：面向企业分支机构（Branch Office / Remote Site）的无线部署。\n   - 硬件支持度：FlexConnect 支持极其广泛的硬件形态，既支持各类室内 AP（内置或外置天线），也全力支持户外高防护级 AP（outdoor APs，如 Catalyst 9124、Aironet 1560 系列）。\n   - 流量分流：支持本地认证与本地流量交换（Local Switching），在 WAN 链路中断时依然保持本地分支无线通信。\n\n• 正确选项剖析：\n选项 D（OfficeExtend mode requires indoor APs with internal antennas, and indoor and outdoor APs use FlexConnect mode.）完全正确。这是 Cisco 官方无线部署文档与认证大纲中明确标定的核心区别：OEAP 仅限于配备内置天线的室内 AP，而 FlexConnect 能够灵活应用于室内和户外各类 AP 硬件。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：说法完全颠倒。OfficeExtend AP 明确支持在 AP 本地配置“Personal SSID”（本地家庭 SSID），使员工家庭设备能够直连本地宽带而不消耗企业 VPN 隧道带宽；反而是标准的集中式 AP 不支持本地个人 SSID。\n- 选项 B：错误。OfficeExtend 穿越公网 Internet 通信，必须强制开启 CAPWAP 控制与数据隧道的完整 DTLS（数据报传输层安全）加密，绝非不支持 DTLS。\n- 选项 C：错误。OfficeExtend AP 正是部署在普通家庭宽带路由器（NAT 环境）之后的代表性方案，两者均可在 NAT 路由器后稳定工作。\n\n• 考试要点与速记技巧：\n无线模式硬件口诀：\n在家远程办公 OEAP（OfficeExtend），小巧美观“室内内嵌天线”（Indoor with Internal Antennas）；\n分支机构部署 FlexConnect，上天下地“室内户外全能”（Indoor & Outdoor）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定 AireOS 版本及硬件例外，澄清 OEAP 与 FlexConnect。"
+      }
+    },
+    {
+      "id": 894,
+      "original_qid": "Q1202",
+      "before_sha256": "05a94230b434d563cf317a37c3e43c38d2df918198e49f5b408587205401f312",
+      "reason": "检查拓扑图；更正 WLAN 配置范围和客户端数量说明。",
+      "updates": {
+        "explanation": "B。图示 USERWL 使用 VLAN 20 和 172.16.10.0/24；在该 WLAN 的配置中将 Maximum Allowed Clients 设置为 125，可限制该 WLAN 允许关联的客户端总数，具体界面和范围依控制器版本而定。子网划分或 VLAN 本身并不等于关联数量限制。A 的 IPv6 throttle 与此无关；C 不是本题所需的 WLAN 限额；D 的 DTIM 是节能广播/组播交付间隔，不是客户端计数。容量、DHCP 池及 AP/WLC 的其他限制仍需单独规划。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）的 WLAN 高级参数调优与客户端容量控制机制。\n在企业无线部署中，网络工程师经常需要基于 IP 子网规划或射频信道容量来限制某个特定 WLAN/SSID 上允许关联的最大无线客户端数量，以防止单个 AP 或子网因终端过多而耗尽 DHCP 地址池或导致空口带宽崩溃：\n1. WLC GUI 配置路径：\n   - 登录 Cisco WLC Web 管理界面；\n   - 点击顶部主菜单 `WLANs`；\n   - 点击需要限制的特定 WLAN 标识（如 WLAN ID 或 SSID `USERWL`）；\n   - 切换到 `Advanced`（高级）选项卡；\n   - 在高级设置页面中，定位到 **“Maximum Allowed Clients”**（最大允许客户端数）配置项；\n   - 输入限制数值（如 125），点击 Apply 确认生效。\n2. 对应 CLI 配置命令：\n   `config wlan max-associated-clients <wlan_id> 125`\n\n• 正确选项剖析：\n选项 B（In the WLAN configuration, set the Maximum Allowed Clients value to 125.）完全正确。在 WLC 的 WLAN 专属配置项中配置“Maximum Allowed Clients”，正是 Cisco 无线控制器限制连接到该 SSID 的终端设备总数的标准标准功能。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（In the Controller IPv6 configuration, set the Throttle value to 125）：IPv6 节流（Throttle）功能用于防御 IPv6 邻居发现（ND）或多播洪泛攻击，与限制 WLAN 关联终端数毫无关联。\n- 选项 C（In the Management Software activation configuration, set the Clients value to 125）：这是纯粹编造的无效配置路径。\n- 选项 D（In the Advanced configuration, set the DTIM value to 125）：DTIM（Delivery Traffic Indication Message，传输流量指示消息）周期用于控制无线终端在节能休眠模式下唤醒接收组播/广播报文的信标（Beacon）间隔频率，常规设置为 1 到 3，将其设置为 125 会导致严重的组播延迟或节能故障，完全无法限制客户端数量。\n\n• 考试要点与速记技巧：\n限终端数量认准：WLAN 高级配置里的 **“Maximum Allowed Clients”**；DTIM 管休眠唤醒，千万不能混！"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q894_agent.jpg",
+      "image_sha256": "ac4776f89d64105a3fa3cbb948b710ff35f3216b24c9bf46f2f81fe8d217e5c5",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "检查拓扑图；更正 WLAN 配置范围和客户端数量说明。"
+      }
+    },
+    {
+      "id": 895,
+      "original_qid": "Q1203",
+      "before_sha256": "8955b5944a113837abfaa506c72e2ed1c92be8324349c267b3d13d9369d7bd0d",
+      "reason": "检查配置图；补成员兼容前提并纠正不匹配结果绝对化。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Both switches support LACP and their corresponding member-port settings are compatible. Which command on SW2 interfaces Gi0/1-2 forms an LACP EtherChannel with SW1?",
+        "explanation": "C。图中 SW1 两个成员接口采用 `channel-group 1 mode active`；SW2 的 `mode active` 同样使用 LACP，active/active 可协商聚合。若 SW2 是 passive，active/passive 也可以，但 passive 未列为选项。A 的 on 是不协商的静态聚合；B desirable 与 D auto 是 PAgP 模式，均不与 LACP 协商。实际形成还取决于端口参数和平台支持，协议不匹配不能一概断言固定进入 err-disabled 状态。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. An LACP EtherChannel between two directly connected switches is in the configuration process. Which command must be Configured on switch SW2s Gi0/1-2 interfaces to establish the channel to SW1?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.3ad 链路汇聚控制协议（LACP）的状态机协商机制与 Cisco IOS 命令语法。\n1. 以太网链路聚合协议分类：\n   - LACP（IEEE 802.3ad / 802.1AX 国际行业开放标准）：\n     * 模式参数：`active`（主动发送 LACP 协商报文）和 `passive`（被动等待接收 LACP 报文，不主动发起）。\n   - PAgP（Port Aggregation Protocol，Cisco 私有协议）：\n     * 模式参数：`desirable`（主动发起 PAgP 协商）和 `auto`（被动等待 PAgP 协商）。\n   - 静态无协商模式：`mode on`（强制捆绑，完全关闭协商协议）。\n2. LACP 协商建立条件矩阵：\n   - SW1 的 Gi0/1-2 接口配置为：`channel-group 1 mode active`。\n   - 对端 SW2 若要成功协商建立 LACP EtherChannel，SW2 对应的物理接口必须配置为 `active`（主动对主动）或 `passive`（被动对主动）。若两端均为 `passive` 则无法建立。\n   - 查看本题提供的备选命令选项：\n     * 选项 A: `mode on`（无协议静态捆绑，与 active 对接会导致端口被挂起/err-disabled）\n     * 选项 B: `mode desirable`（PAgP 协议，与 LACP 协议冲突，协议不匹配无法建链）\n     * 选项 C: `mode active`（LACP 主动模式，active + active 完美协商建立 LACP）\n     * 选项 D: `mode auto`（PAgP 协议，协议不匹配）\n\n• 正确选项剖析：\n选项 C（channel-group 1 mode active）完全正确。在 SW2 的接口上配置 `channel-group 1 mode active`，两侧均作为 LACP 主动端互相发送 LACPDU（LACP 数据单元）进行系统优先级与端口状态协商，能够迅速且稳定地建立符合 IEEE 802.3ad 规范的 LACP EtherChannel。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（channel-group 1 mode on）：`mode on` 属于强制静态汇聚，关闭了所有控制报文；而 SW1 开启了 LACP active。LACP 发现对端不回复 LACPDU 会将端口置为独立状态（Suspended / Down），导致聚合失败。\n- 选项 B（channel-group 1 mode desirable）：属于 Cisco 私有协议 PAgP，LACP 与 PAgP 是两种完全互不兼容的链路聚合协议，无法建立信道。\n- 选项 D（channel-group 1 mode auto）：同样属于 PAgP 协议的被动模式，无法与 LACP 进行协商。\n\n• 考试要点与速记技巧：\nEtherChannel 协议配对速记表：\n- LACP（IEEE 公有）：`active` ↔ `active` / `active` ↔ `passive`；\n- PAgP（思科私有）：`desirable` ↔ `desirable` / `desirable` ↔ `auto`；\n- 绝不能把 `active`（LACP）与 `desirable`（PAgP）跨协议混配！"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q895_agent.jpg",
+      "image_sha256": "a51ab12aae391a5230f8f4a8935917cf36df1a8ffd6489dd81ad19577722cbe4",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "检查配置图；补成员兼容前提并纠正不匹配结果绝对化。"
+      }
+    },
+    {
+      "id": 896,
+      "original_qid": "Q1204",
+      "before_sha256": "8fb0fa8be173bb3c8256ae3f9435e5cbd23232a4de9294a70fea3091770b6417",
+      "reason": "原题缺图，补自包含 DTP、允许列表和端口条件，恢复 CLI 换行。",
+      "updates": {
+        "prompt": "On SW1, the link toward SW2 must negotiate an 802.1Q trunk using DTP; SW2 is in dynamic auto mode. A printer on SW1 is already in access VLAN 5. The SW1 trunk allowed list currently excludes VLAN 5, SW2 permits VLAN 5, and all other required VLAN and endpoint settings are configured. Which commands on the SW1 link to SW2 establish the trunk and add VLAN 5?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode dynamic auto\nswitchport private-vlan association host 5"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode trunk\nswitchport trunk pruning vlan add 5"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode dynamic desirable\nswitchport trunk allowed vlan add 5"
+          },
+          {
+            "label": "D",
+            "text": "switchport mode dynamic auto\nswitchport trunk encapsulation negotiate"
+          }
+        ],
+        "explanation": "C。与 SW2 的 dynamic auto 配对时，SW1 的 dynamic desirable 主动通过 DTP 协商 trunk；`switchport trunk allowed vlan add 5` 将 VLAN 5 添加到当前允许列表。A、D 两端都是 auto，不能主动形成 trunk；B 的 pruning eligible 列表不等同 trunk allowed 列表，因此不能解决题设 VLAN 5 被排除的问题。命令需在支持 DTP/相应封装的平台接口下执行。原题引用展图但未提供，此处已列出解题所需条件。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. An administrator must connect SW_1 and the printer to the network. SW_2 requires DTP to be used for the connection to SW_1. The printer is configured as an access port with VLAN 5. Which set of commands completes the connectivity?",
+        "options": [
+          {
+            "label": "A",
+            "text": "switchport mode dynamic auto Switchport private-vlan association host 5"
+          },
+          {
+            "label": "B",
+            "text": "switchport mode trunk Switchport trunk pruning vlan add 5"
+          },
+          {
+            "label": "C",
+            "text": "switchport mode dynamic desirable Switchport trunk allowed vlan add 5"
+          },
+          {
+            "label": "D",
+            "text": "switchport mode dynamic auto Switchport trunk encapsulation negotiate"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查动态中继协议（DTP, Dynamic Trunking Protocol）的工作模式与 Trunk 允许 VLAN 列表配置。\n1. DTP（Dynamic Trunking Protocol）状态机原理：\n   - `switchport mode dynamic desirable`：主动模式。接口主动对外发送 DTP 协商帧，试图将相连链路协商为 Trunk。\n   - `switchport mode dynamic auto`：被动模式。接口被动等待接收对端的 DTP 协商帧；若对端为 desirable 或 trunk，则形成 Trunk；若两端均为 auto，则保持为 Access 模式。\n   - `switchport mode trunk`：强制中继模式，持续对外发送 DTP 协商帧通知对端。\n   - 协商规则：题目明确要求“SW_2 requires DTP to be used for the connection to SW_1”（SW_2 要求使用 DTP 来与 SW_1 协商中继），且 SW_1 必须主动促成 Trunk 的建立，因此配置 `dynamic desirable` 是最标准、最主动的 DTP 中继协商配置。\n2. 跨交换机数据传输与 Trunk 允许列表：\n   - 拓扑中网络打印机接入 SW_1，并配置在 VLAN 5（“The printer is configured as an access port with VLAN 5”）。\n   - 为使网络其他区域的终端能够通过 SW_2 访问该打印机，SW_1 与 SW_2 之间的 Trunk 链路必须放行 VLAN 5 的流量。\n   - Cisco IOS 添加指定 VLAN 至中继允许列表的标准语法为：`switchport trunk allowed vlan add <vlan-id>`。若使用 `add` 参数，可以安全地将 VLAN 5 追加进 Trunk，而不会覆盖原有的允许 VLAN 列表。\n\n• 正确选项剖析：\n选项 C（switchport mode dynamic desirable / Switchport trunk allowed vlan add 5）完全符合技术规范与题目需求：\n- 第一条命令 `switchport mode dynamic desirable` 满足了对端“requires DTP to be used”的硬性条件，主动向对端发送 DTP 协商中继；\n- 第二条命令 `switchport trunk allowed vlan add 5` 精准地将打印机所在的 VLAN 5 加入 Trunk 允许通信列表中，确保打印机网络业务打通。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：包含 `Switchport private-vlan association host 5`，题目根本未提及私有 VLAN（PVLAN），且 dynamic auto 属于被动等待，两者配合无法满足题意。\n- 选项 B：`Switchport trunk pruning vlan add 5` 配置的是 VTP VLAN 修剪（Pruning），修剪功能是将 VLAN 5 置于修剪合格列表中以备 VTP 动态剪枝，而不是放行中继流量；且命令未配置 DTP 协商模式。\n- 选项 D：`Switchport trunk encapsulation negotiate` 仅协商封装类型（802.1Q 或 ISL），未能配置允许打印机 VLAN 5 通过 Trunk。\n\n• 考试要点与速记技巧：\nDTP 中继协商与 VLAN 放行两步走：\n主动建 Trunk 选 `dynamic desirable`；放行特定 VLAN 牢记加 `add`（`switchport trunk allowed vlan add 5`）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "missing; self-contained replacement",
+        "code_cli": "checked; line breaks restored",
+        "finding": "原题缺图，补自包含 DTP、允许列表和端口条件，恢复 CLI 换行。"
+      }
+    },
+    {
+      "id": 897,
+      "original_qid": "Q1205",
+      "before_sha256": "a5d6a95236939ecd1a4fd105688c43aa2fb156e69b5e5ca519e483b3520060be",
+      "reason": "检查报文图；加入争用与分类调度前提，移除 AF 数字决定严格优先的错误。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume R1 classifies packets by their AF markings and schedules the shown classes for transmission during output contention. Which per-hop QoS mechanism does this class-based scheduling illustrate?",
+        "explanation": "C。图示 AF31、AF21、AF11 三类报文从 R1 输出，题设补充输出争用及按类别调度，所描述的是排队与调度。AF 类别编号本身并不规定 AF31 必须严格优先于 AF21 或 AF11，服务顺序取决于设备策略；单张箭头示意图也不能证明具体队列算法。A marking 修改标记；B shaping 限制平均发送速率；D policing 按速率配置对超额流量采取动作，这些不是题干所述的调度机制。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which per-hop QoS behavior is R1 applying to incoming packets?",
+        "explanation": "• 核心考点与原理分析：\n本题考查差分服务模型（DiffServ）下的逐跳行为（Per-Hop Behavior, PHB）与 QoS 排队调度（Queuing & Scheduling）机制。\n1. 拓扑与报文时序解析：\n   - 拓扑中显示三个不同优先级标记的 IP 报文同时到达路由器 R1 的入口接口 Gi0/0：\n     * 报文 1：标记为 AF31（Assured Forwarding 类 3，低丢弃概率，DSCP = 26）\n     * 报文 2：标记为 AF21（Assured Forwarding 类 2，低丢弃概率，DSCP = 18）\n     * 报文 3：标记为 AF11（Assured Forwarding 类 1，低丢弃概率，DSCP = 10）\n   - 在出口接口 Gi0/1 处，报文发送的先后次序呈现为：AF31 首发，随后是 AF21，最后是 AF11。\n2. QoS 逐跳行为（PHB）机制裁决：\n   - 排队与调度（Queuing & Scheduling）：当多个流量流在输出接口产生竞争或拥塞时，路由器根据数据包头部的 DSCP/IP Precedence 优先级标记，将报文置入不同的硬件/软件输出队列（如 CBWFQ / LLQ / Priority Queuing）。高优先级的队列（AF31 > AF21 > AF11）优先获得调度器分配的带宽和出队权重，从而先于低优先级报文发送出去。\n   - 题图中数据包的优先级标记（AF31/AF21/AF11）在穿越 R1 之后并未发生改变，而是离港发送次序严格按照优先级高低依次排队转发，这正是典型的排队调度行为（Queuing）。\n\n• 正确选项剖析：\n选项 C（queuing，排队）完全正确。图示清晰展现了 R1 将不同服务类别（Class of Service）的报文依据 AF 级别分类并放入不同优先级的出方向队列，执行优先调度转发。这种根据优先级决定报文出队顺序的操作即为 QoS 的排队（Queuing）与调度。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（marking，标记/重标记）：标记机制是在报文进入网络边缘时修改其 IP 报头 ToS/DSCP 字段或 802.1Q CoS 字段。图中进出 R1 的数据包 DSCP 标记保持原样（进是 AF31/21/11，出依然是 AF31/21/11），并未发生任何重标记（Remarking）。\n- 选项 B（shaping，流量整形）：整形机制是通过将超出约定速率的报文缓存在内存队列中，平滑突发流量至目标速率，通常体现为流量速率波形图被削平为平滑波形，而非展示基于 DiffServ 优先级的出队顺序。\n- 选项 D（policing，流量监管）：监管机制通常采用令牌桶算法，对超出限制速率的突发流量直接执行丢弃（Drop）或重标记（Remark），图中没有任何报文被丢弃或降级。\n\n• 考试要点与速记技巧：\nQoS 核心组件行为速辨：\n- 改头换面标 DSCP：标记（Marking）；\n- 论资排辈出接口：排队（Queuing）；\n- 削峰填谷进缓存：整形（Shaping）；\n- 超速就砍立丢弃：监管（Policing）。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q897_agent.jpg",
+      "image_sha256": "d06b0e161337761ac27e5ef4479ce83c888a94fd73b1baeb2d66dae4aab79841",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "检查报文图；加入争用与分类调度前提，移除 AF 数字决定严格优先的错误。"
+      }
+    },
+    {
+      "id": 898,
+      "original_qid": "Q1206",
+      "before_sha256": "5274bd6da2d19ec9ef4029b988410374446ceb8688e7f497cf5b5bc4bc3ad6df",
+      "reason": "限定生成树实例和到根路径；说明故障/收敛条件。",
+      "updates": {
+        "explanation": "C。对于具有到根桥路径的非根交换机，根端口是当前生成树实例中通往根桥最佳路径的端口；路径开销相同时再按 BPDU 中的桥 ID、端口 ID 等规则比较。正常收敛后根端口参与转发；根桥自身没有根端口。A/B 将根端口与其他端口角色的故障接替混淆，D 描述管理关闭而非根端口角色。实例隔离、断链与收敛期间不能机械地假定设备始终有一个正在转发的根端口。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP / RSTP / MSTP）的拓扑计算角色与根端口（Root Port, RP）职能。\n在 IEEE 802.1D / 802.1w 生成树算法（STA）中，为了在存在冗余物理链路的二层交换网络中消除环路，网络会选举一台根桥（Root Bridge），所有非根交换机（Non-Root Switch）必须确定自身到达根桥的无环最佳路径：\n1. 根端口（Root Port）的选举：\n   每台非根交换机上有且仅有一个根端口。交换机通过比较所有活动端口接收到的 BPDU，依据以下判定次序选出唯一根端口：\n   - 拥有到达根桥的最低根路径开销（Lowest Root Path Cost, RPC）；\n   - 若开销相同，则选择对端邻居桥 ID 最小（Lowest Neighbor Bridge ID）；\n   - 若仍相同，选择对端邻居端口 ID 最小（Lowest Neighbor Port ID）；\n   - 若仍相同，选择本地内部端口 ID 最小（Lowest Internal Port ID）。\n2. 根端口的核心使命：\n   根端口是非根交换机转发数据前往根桥的最佳路径端口（The best path to the root from a nonroot switch），在 STP 稳定收敛后始终处于 Forwarding（转发）状态。\n\n• 正确选项剖析：\n选项 C（It is the best path to the root from a nonroot switch.）完全正确。它精准表述了 IEEE 802.1D 与 802.1w 协议规范对根端口（Root Port）的根本定义：非根交换机朝向根桥的最低开销最佳转发路径。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It replaces the designated port when the designated port fails.）：指定端口（Designated Port）失效时，若本网段存在替代端口，通常由备用端口（Backup Port）接替，根端口负责本地交换机朝向根桥的上行流量，不扮演指定端口的替补。\n- 选项 B（It replaces the designated port when the root port fails.）：逻辑混乱的语病选项。当根端口失效时，在 RSTP 中是由替代端口（Alternate Port）迅速转变为新的根端口。\n- 选项 D（It is administratively disabled until a failover occurs.）：根端口正常处于数据转发状态（Forwarding），绝非处于管理性关闭（administratively disabled）状态。处于阻塞或丢弃状态的是阻塞端口（Blocking Port）或替代端口（Alternate Port）。\n\n• 考试要点与速记技巧：\nSTP 端口角色极简速记：\n- 根桥自己全都是指定端口（DP）；\n- 非根交换机朝向上游去根桥的唯一最优口就是根端口（RP，Best path to root）；\n- 挡在路上的防环口是堵塞/替代口（AP/Blocking）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定生成树实例和到根路径；说明故障/收敛条件。"
+      }
+    },
+    {
+      "id": 899,
+      "original_qid": "Q1207",
+      "before_sha256": "6977bc7a8504ac1f254d0903d742f77b5dc6efa17c74f0ebf2cbf29f3457a5f8",
+      "reason": "去掉启动 always 的断言；改考 RSTP discarding 的定义。",
+      "updates": {
+        "prompt": "In Rapid PVST+, which state describes a port that neither learns source MAC addresses nor forwards user frames while the spanning-tree topology is being established?",
+        "explanation": "D。Rapid PVST+ 使用 discarding、learning、forwarding 三种状态：discarding 不学习源 MAC 或转发用户数据，learning 学习 MAC 但不转发用户数据，forwarding 可以执行两者。Listening 是传统 802.1D 的状态，不是 RSTP 单独的状态。端口角色、链路状态和 PortFast 等特性会影响状态转变，不应将题目理解为所有端口开机都必须经历相同、可观察的定时序列。"
+      },
+      "original_fields": {
+        "prompt": "What is the temporary state that switch ports always enter immediately after the boot process when Rapid PVST+ is used?",
+        "explanation": "• 核心考点与原理分析：\n本题考查快速生成树协议（RSTP, IEEE 802.1w / Rapid PVST+）的端口状态机模型与链路初始化瞬态。\n1. 经典 STP（802.1D）与 RSTP（802.1w）端口状态对比：\n   - 经典 802.1D 拥有 5 种状态：Disabled（禁用）、Blocking（阻塞）、Listening（侦听）、Learning（学习）、Forwarding（转发）。\n   - Rapid PVST+ / 802.1w 为了极大加速收敛并简化状态机，将 Disabled、Blocking 与 Listening 三种非转发状态合并为单一状态——**Discarding（丢弃状态）**。\n   - 802.1w 仅保留三种运行状态：\n     * **Discarding（丢弃）**：不转发任何用户数据帧，不学习 MAC 地址，但能够持续接收并处理 BPDU。\n     * **Learning（学习）**：不转发用户数据帧，开始根据接收帧的源 MAC 填充 CAM 表。\n     * **Forwarding（转发）**：完全正常转发数据帧并持续学习 MAC 地址。\n2. 交换机引导或端口链路建立（Link-Up）后的初始状态：\n   当交换机刚完成引导启动（immediately after the boot process）或物理接口刚由 Down 变 Up 时，为了绝对避免在拓扑未收敛时造成瞬间二层广播风暴，交换机端口必须无条件、默认地首先进入 **Discarding（丢弃）** 状态，随后通过 P/A（Proposal/Agreement）握手机制或转发延迟定时器平滑过渡到 Forwarding 状态。\n\n• 正确选项剖析：\n选项 D（discarding，丢弃状态）完全正确。在 Rapid PVST+ 网络中，所有活动端口在设备启动或端口初始化阶段无一例外首先进入 Discarding 临时状态以防范环路。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（forwarding，转发状态）：如果端口启动立即进入 Forwarding 状态，将在未计算出无环拓扑前引发毁灭性的广播风暴和 MAC 表震荡（除非显式开启了针对终端主机的 PortFast 特性）。\n- 选项 B（listening，侦听状态）：这是经典 802.1D STP 的特有状态，在 802.1w / Rapid PVST+ 中已经被完全废除，802.1w 根本不存在 Listening 状态。\n- 选项 C（learning，学习状态）：Learning 是端口离开 Discarding 状态、进入 Forwarding 状态之前的过渡状态，并非启动瞬间进入的初始状态。\n\n• 考试要点与速记技巧：\nRSTP / Rapid PVST+ 三态合一必背口诀：\n废黜 Listening 与 Blocking，开机默认必是 Discarding；先丢弃（Discarding）、再学习（Learning）、终转发（Forwarding）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "去掉启动 always 的断言；改考 RSTP discarding 的定义。"
+      }
+    },
+    {
+      "id": 900,
+      "original_qid": "Q1208",
+      "before_sha256": "6df24291cf2b00283dd0c382361aa246f38a0dd9c7db3b301fbe9637bba134e5",
+      "reason": "区分主动 DISCOVER 探测与 OFFER 响应，纠正无条件 err-disabled。",
+      "updates": {
+        "prompt": "An administrator actively probes a LAN for unknown DHCP servers. Which DHCP message can the probe broadcast to solicit server responses for subsequent investigation?",
+        "explanation": "D。主动探测可发送客户端的 DHCPDISCOVER，促使可达 DHCP 服务器返回 DHCPOFFER；管理员再核对响应及服务器身份是否获授权。收到回复本身不能证明服务器恶意。C 是服务器的响应，A DHCPACK 是后续确认，B DHCPREQUEST 是客户端请求。DHCP snooping 在不可信端口过滤服务器 Offer/ACK；不是每次收到 Offer 都会自动使端口 err-disabled，限速违规等条件应另行考虑。原题未区分主动探测和识别响应，此处已限定询问主动发送的报文。"
+      },
+      "original_fields": {
+        "prompt": "What is used to identify spurious DHCP servers?",
+        "explanation": "• 核心考点与原理分析：\n本题考查局域网安全中的仿冒/流氓 DHCP 服务器（Rogue / Spurious DHCP Server）识别与 DHCP Snooping（DHCP 监听）防御机制。\n1. 流氓 DHCP 服务器（Spurious DHCP Server）的危害：\n   未经授权接入企业内网的家用路由器或攻击者主机若运行 DHCP 服务，会向网络中广播错误的 IP 地址、网关（引向黑客主机实施中间人 MITM 攻击）或恶意 DNS 服务器，导致内网大规模网络瘫痪或凭据失窃。\n2. DHCP 交互四步流程（DORA）与识别机制：\n   - 步骤 1：客户端广播发送 `DHCPDISCOVER`（发现报文）；\n   - 步骤 2：网络中所有收到请求的 DHCP 服务器（包括合法服务器和仿冒服务器）均会回复 `DHCPOFFER`（提供报文），内含所提供的 IP 地址、掩码、租约以及 DHCP 服务器标识符（Server Identifier，即服务器自身 IP）；\n   - 步骤 3：客户端发送 `DHCPREQUEST`（请求报文）；\n   - 步骤 4：服务器回复 `DHCPACK`（确认报文）。\n3. 仿冒服务器的侦测与防护技术事实剖析：\n   - 工业界事实与 DHCP Snooping 机制：在二层交换机上启用 DHCP Snooping 后，所有交换机端口默认被标记为“非受信任”（Untrusted）。当任何非受信任端口上出现 **`DHCPOFFER`** 或 `DHCPACK` 报文时，交换机立即将其判定为非法/仿冒 DHCP 服务器（Spurious DHCP Server），直接静默丢弃该报文并将端口置为 err-disabled。因此在现实网络工程中，识别流氓 DHCP 服务器的关键报文正是 **DHCPOFFER**。\n   - 题库官方参考键（Option D: DHCPDISCOVER）的出题思路辨析：在主动式流氓 DHCP 探测工具（如 `dhcp-probe`、Nmap 嗅探脚本或某些网络管理套件）中，网络管理员为了主动“引蛇出洞”探测内网是否存在未知流氓服务器，由侦测探针向局域网广播发送 `DHCPDISCOVER` 报文，借此诱使全网隐藏的仿冒服务器现身回复。题库将这一主动诱捕行为的核心触发报文标定为答案 D。\n\n• 正确选项剖析：\n- 题库标准得分项（Option D: DHCPDISCOVER）：题库出题侧重于“如何主动探测/识别未知流氓服务器”的工作流——管理员或扫描探针主动广播发送 `DHCPDISCOVER` 探针报文，以此诱导仿冒服务器暴露。考生在认证机考中应优先遵循题库标准键选择 D。\n- 现网技术防御解析（Option C: DHCPOFFER）：从被动防御与 Cisco 官方安全规范（DHCP Snooping / DAI）视角来看，交换机正是通过在不可信端口上截获非法的 `DHCPOFFER` 报文来确认存在流氓服务器的。深入理解两者关系，无论在应试还是实战中都能游刃有余。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（DHCPACK）：DHCPACK 是客户端接受 Offer 并发送 Request 后的最终确认报文，发生在 Offer 之后，不是流氓服务器主动宣誓提供 IP 的第一标志报文。\n- 选项 B（DHCPREQUEST）：这是客户端发出的请求报文，由客户端单播或广播发送，无法表征流氓服务器自身的身份。\n- 选项 C（DHCPOFFER）：技术层面是识别流氓服务器最核心的下行报文。但需格外警惕本题在 ExamTopics 题库中的标准记录答案为 D，应试时切勿忽视官方历史记录键。\n\n• 考试要点与速记技巧：\nDHCP 嗅探与流氓检测：\n- 诱蛇出洞主动找：发 `DHCPDISCOVER` 探针（题库答案 D）；\n- 交换机抓流氓：不可信端口敢发 `DHCPOFFER` 立斩（现网技术 C）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "区分主动 DISCOVER 探测与 OFFER 响应，纠正无条件 err-disabled。"
+      }
+    }
+  ],
+  "sources": [
+    "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig",
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect_groups.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-host-configuration-protocol-dhcp-dhcpv6/217055-operate-and-troubleshoot-dhcp-snooping.html"
+  ],
+  "limitations": "人工审查并查看展图；未进行真实 WLC、交换机或 DHCP 网络实测。"
+}

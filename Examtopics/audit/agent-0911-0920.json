@@ -1,0 +1,281 @@
+{
+  "scope": "Q911–Q920",
+  "corrections": [
+    {
+      "id": 911,
+      "original_qid": "Q1222",
+      "before_sha256": "e6a15c19d0af64b097d7cf9bc2542fd86847fd3f44160d980d2cafb486fc95b0",
+      "reason": "原B也配置voice VLAN 73，可能与D同时满足要求；重写干扰项并恢复CLI。",
+      "updates": {
+        "prompt": "Refer to the exhibit. VLAN 72 is already the data access VLAN on Ethernet0/0, which connects a Cisco IP phone and PC. CDP is enabled globally and on the port. Which command sequence creates voice VLAN 73 named VoIP and assigns it to the phone port?",
+        "options": [
+          {
+            "label": "A",
+            "text": "vlan 73\n name VoIP\ninterface Ethernet0/0\n switchport voice vlan dot1p"
+          },
+          {
+            "label": "B",
+            "text": "vlan 73\n name VoIP\ninterface Ethernet0/0\n switchport voice vlan 72"
+          },
+          {
+            "label": "C",
+            "text": "vlan 73\n name VoIP\ninterface Ethernet0/0\n switchport mode trunk\n channel-group 73 mode active"
+          },
+          {
+            "label": "D",
+            "text": "vlan 73\n name VoIP\ninterface Ethernet0/0\n switchport voice vlan 73"
+          }
+        ],
+        "explanation": "D。图中 Et0/0 已属数据 VLAN 72；创建 VLAN 73 并在接口配置 `switchport voice vlan 73`，支持的 Cisco 电话通过 CDP 获取语音 VLAN。A 使用优先级标记而非 VLAN 73；B 指定 VLAN 72；C 将终端端口改为 trunk 并尝试聚合，未完成要求。语音 CoS 信任、QoS 和电话型号需按部署单独验证。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. VoIP is being implemented in the network using VLAN ID 73 and named \"VoIP\". Each user needs a Cisco IP phone at their Desk. Switchport e0/0 has been configured as an access port in the data VLAN. Cisco Discovery Protocol is enabled globally. Which command Sequence completed the configuration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "vlan73 Name VoIP E0/0 Switchport voice vlan dot1p"
+          },
+          {
+            "label": "B",
+            "text": "vlan 73 Name VoIP E0/0 Switchport trunk allowed vlan 72,73 Switchport voice vlan 73"
+          },
+          {
+            "label": "C",
+            "text": "vlan 73 Name VoIP E0/0 Switchport mode trunk Channel-group 73 mode active"
+          },
+          {
+            "label": "D",
+            "text": "vlan 73 Name VoIP E0/0 Switchport voice vlan 73"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查企业级 IP 语音电话（Cisco IP Phone）与 PC 级联场景下的语音 VLAN（Voice VLAN）配置与 CDP 协商。\n1. 拓扑与业务架构：\n   - 拓扑中交换机 Sw1 的 e0/0 接口连接了一台 Cisco IP 电话，电话后方的 PC 端口级联了一台电脑终端。\n   - 现有配置输出（`SW_1#show vlan`）：\n     * `72 Data vlan active Et0/0`\n     * 接口 Et0/0 已经成功作为 Access 端口划入数据 VLAN 72（供 PC 使用）。\n2. Cisco IP 电话双 VLAN 工作机制：\n   - 桌面双网口集成：为了节约交换机物理端口和综合布线成本，Cisco IP 电话内置了一个三端口 10/100/1000 以太网交换芯片（Port 1 连交换机，Port 2 连内部电话 CPU，Port 3 连外接 PC）。\n   - 数据与语音隔离：\n     * PC 发出的数据帧保持无标签（Untagged），由交换机在本地划入数据接入 VLAN（Data VLAN 72）。\n     * 语音流量必须保证高优先级和隔离，交换机通过 CDP（思科发现协议）向 IP 电话通告指定的 Voice VLAN ID（本题为 VLAN 73）。IP 电话随即将自身的语音数据打上 IEEE 802.1Q 标签（带有 VLAN 73 及 CoS 5 高优先级）向交换机发送。\n3. 补全配置的规范 CLI 步骤：\n   - 第一步：全局创建语音 VLAN 并命名：\n     `SW_1(config)# vlan 73`\n     `SW_1(config-vlan)# name VoIP`\n   - 第二步：在物理接口下启用语音 VLAN 特性：\n     `SW_1(config-vlan)# interface Ethernet0/0`\n     `SW_1(config-if)# switchport voice vlan 73`\n\n• 正确选项剖析：\n选项 D（vlan 73 / Name VoIP / E0/0 / Switchport voice vlan 73）完全正确。命令序列完整创建了名为 VoIP 的 VLAN 73，并在已有数据 VLAN 72 的 e0/0 接口上精准配置了 `switchport voice vlan 73`，这是 Cisco IOS 部署企业 IP 电话的最标准配置。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（Switchport voice vlan dot1p）：配置为 `dot1p` 模式会使电话发送带有 802.1p 优先级标记但属于 VLAN 0（优先级标记帧）而非 VLAN 73，违背了题目“using VLAN ID 73”的要求。\n- 选项 B（Switchport trunk allowed vlan 72,73 / Switchport voice vlan 73）：在已有 access 端口上盲目增加 trunk allowed 语法，且未将端口改成 trunk 模式，属于混乱的多余配置；标准 IP 电话接入直接使用 `switchport voice vlan` 即可，端口本身保持 access 模式。\n- 选项 C（Switchport mode trunk / Channel-group 73 mode active）：错误地将单条终端电话端口配置为 Trunk 和 EtherChannel 聚合链路，完全破坏了正常的主机接入。\n\n• 考试要点与速记技巧：\n思科 IP 电话接口极简配置两行诗：\n数据走 `switchport access vlan X`；语音跟 `switchport voice vlan Y`；底层 CDP 自动推，PC 语音两不误！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原B也配置voice VLAN 73，可能与D同时满足要求；重写干扰项并恢复CLI。"
+      },
+      "exhibit_path": "exhibits\\q911_agent.jpg",
+      "image_sha256": "12ccb635330b9a0593dff83cddba8ecb7647f3b5d53575ca5e61e92f27d14ded"
+    },
+    {
+      "id": 912,
+      "original_qid": "Q1223",
+      "before_sha256": "3fa727c2740aaac9d404b2a13756cf3418fe16172cc590114c5f10830dc86ac3",
+      "reason": "核对路由图，限定路由有效并说明仅出接口解析条件。",
+      "updates": {
+        "explanation": "B。图中 `10.10.10.0/28` 的范围为 10.10.10.0–10.10.10.15，包含 .3；掩码为 255.255.255.240，且比同样匹配的 10.0.0.0/8 更长。A 的 10.10.0.0/22 仅覆盖第三字节 0–3；D 的 /32 只匹配 .1。假定图示路由有效，最长前缀选 B；以太网仅指定出接口的静态路由在实际网络中还需考虑下一跳解析。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查静态路由（`ip route`）命令配置语法、掩码点分十进制换算与路由表最长前缀匹配（LPM）。\n1. 报文目的寻址分析：\n   - 待匹配的数据包目的 IP 地址为：`10.10.10.3`。\n2. 路由表中各静态路由条目反向推导与匹配度对比：\n   - 路由表项：`S 10.10.10.0/28 is directly connected, GigabitEthernet0/0`\n     * 分析网络前缀与掩码：网络号为 `10.10.10.0`，前缀长度为 `/28`。\n     * 点分十进制掩码换算：前 24 位为 255.255.255；第 4 字节占 4 位，即 128 + 64 + 32 + 16 = 240。对应掩码为 `255.255.255.240`。\n     * 主机块大小（Block Size）= 256 - 240 = 16。\n     * 地址范围：`10.10.10.0` 至 `10.10.10.15`。\n     * 目的 IP `10.10.10.3` 完全处于该子网范围内，命中匹配！前缀长度高达 **/28**！\n   - 路由表项：`S 10.10.10.1/32`\n     * 仅包含单 IP `10.10.10.1`，无法匹配目的 IP `10.10.10.3`。\n   - 路由表项：`S 10.10.0.0/22`\n     * 对应掩码 `255.255.252.0`。块大小为 4，第三字节范围为 0 至 3（10.10.0.0 - 10.10.3.255），无法匹配第三字节为 10 的目的地址。\n   - 路由表项：`S 10.0.0.0/8`\n     * 前缀仅为 `/8`，明细度远低于 `/28`。\n3. 最佳路径与 CLI 对应关系：\n   能够为目的 IP 10.10.10.3 提供最长匹配（/28）并胜出的最佳路由条目是 `10.10.10.0/28`。在 Cisco IOS 中创建该静态路由的出接口命令为：\n   `ip route 10.10.10.0 255.255.255.240 g0/0`。\n\n• 正确选项剖析：\n选项 B（ip route 10.10.10.0 255.255.255.240 g0/0）完全正确。该命令生成了路由表中前缀长度最长（/28）、精准覆盖 10.10.10.3 的静态路由，严格符合最长前缀匹配原则。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（ip route 10.10.0.0 255.255.252.0 g0/0）：生成的路由网段仅包含 10.10.0.0 到 10.10.3.255，根本不能到达 10.10.10.3。\n- 选项 C（ip route 10.0.0.0 255.0.0.0 g0/0）：仅产生 /8 的粗粒度主类网络路由，在存在 /28 明细路由时绝不可能作为“best path”。\n- 选项 D（ip route 10.10.10.1 255.255.255.255 g0/0）：这是 /32 的单机路由，只能引导发往 10.10.10.1 的流量，对于发往 10.10.10.3 的数据包而言属于不匹配条目。\n\n• 考试要点与速记技巧：\n子网掩码 /28 速算：\n24 位后借 4 位：128 + 64 + 32 + 16 = 240（掩码 255.255.255.240），覆盖 10.10.10.0 ~ 10.10.10.15，包含 10.10.10.3 且前缀最长！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对路由图，限定路由有效并说明仅出接口解析条件。"
+      },
+      "exhibit_path": "exhibits\\q912_agent.jpg",
+      "image_sha256": "698cfc869fbd7cf63610d89583b4265cf4e1ba1b4a5082fb346b08d344d49aaa"
+    },
+    {
+      "id": 913,
+      "original_qid": "Q1224",
+      "before_sha256": "fa626fd75ca812db781b2278e6a34deeb15958f33a55793d5394c39f6ab298a7",
+      "reason": "明确两端引脚及传统10/100约束，避免以设备类别绝对化。",
+      "updates": {
+        "prompt": "A 10BASE-T/100BASE-TX router port uses MDI (pins 1/2 transmit; 3/6 receive), and the switch port uses MDI-X (pins 1/2 receive; 3/6 transmit). Auto-MDIX is unavailable. Which cable connects them?",
+        "explanation": "D。两端的收发引脚互补，直通线使路由器 1/2 接交换机 1/2、交换机 3/6 接路由器 3/6。A 交叉线适用于相同收发引脚布局；B 和 C 为控制台用途。不要仅凭设备名称推断所有端口引脚：题设明确限定传统 10/100 接口和无 Auto-MDIX。"
+      },
+      "original_fields": {
+        "prompt": "Which cable type must be used when connecting a router and switch together using these criteria? • Pins 1 and 2 are receivers and pins 3 and 6 are transmitters. • Auto detection MDI-X is unavailable.",
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网双绞线物理层引脚线序标准（MDI 与 MDI-X）及双绞线类型选型原则。\n1. 以太网接口收发引脚线序定义（10BASE-T / 100BASE-TX）：\n   - **MDI（Medium Dependent Interface，介质相关接口）**：\n     * 典型采用设备：终端 PC、服务器、网络打印机、路由器物理端口。\n     * 规范引脚定义：**引脚 1 和 2 为发送端（Transmit, Tx）；引脚 3 和 6 为接收端（Receive, Rx）**。\n   - **MDI-X（Medium Dependent Interface with Crossover，交叉介质相关接口）**：\n     * 典型采用设备：二层交换机（Switch）、以太网集线器（Hub）。\n     * 规范引脚定义：**引脚 1 和 2 为接收端（Receive, Rx）；引脚 3 和 6 为发送端（Transmit, Tx）**。\n2. 题目约束条件推导：\n   - 题目给定条件：“Pins 1 and 2 are receivers and pins 3 and 6 are transmitters”（引脚 1/2 为接收端，引脚 3/6 为发送端），这正是交换机侧标准的 MDI-X 接口属性！\n   - 与之对接的对端设备是路由器（Router），路由器的端口天然为 MDI（引脚 1/2 为 Tx 发送端，引脚 3/6 为 Rx 接收端）。\n   - 在“Auto detection MDI-X is unavailable”（Auto-MDIX 自动翻转未开启/不可用）的硬性前提下：\n     * 路由器的发送端（Tx: 1, 2）正好需要直线连接交换机的接收端（Rx: 1, 2）；\n     * 交换机的发送端（Tx: 3, 6）正好需要直线连接路由器的接收端（Rx: 3, 6）；\n     * 物理引脚两端一一对应直连即可完成收发对接（1-1, 2-2, 3-3, 6-6），必须使用**直通双绞线（Straight-Through Cable）**。\n\n• 正确选项剖析：\n选项 D（straight-through，直通线）完全正确。异种设备互联（如路由器连交换机，PC 连交换机）时，一端为 MDI，另一端为 MDI-X，收发引脚天然对称互补，必须使用直通线进行电气连通。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（crossover，交叉双绞线）：交叉线内部将 1/2 与 3/6 进行了引脚调换，专用于同种设备互联（如交换机连交换机，路由器连路由器，PC 连 PC）；若在路由器连交换机时使用交叉线，会导致两端 Tx 对 Tx、Rx 对 Rx，链路物理层无法协商建立。\n- 选项 B（rollover，反转线）：线序 1-8 与 8-1 完全反转，用于 Cisco 专有 Console 翻转电缆，不能用于以太网数据传输。\n- 选项 C（console，控制台线）：用于连接计算机串口与网络设备 Console 端口进行本地带外配置管理，非数据网络以太网跳线。\n\n• 考试要点与速记技巧：\n双绞线缆选型不败法则：\n- 异种设备（路由连交换、PC 连交换）：引脚互补用**直通线（Straight-Through）**；\n- 同种设备（路由连路由、交换连交换、PC 连路由）：引脚撞车用**交叉线（Crossover）**！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "明确两端引脚及传统10/100约束，避免以设备类别绝对化。"
+      }
+    },
+    {
+      "id": 914,
+      "original_qid": "Q1225",
+      "before_sha256": "7e0f04121ad0b4aeb7b7e1798df2f6bee39e256e1e193bf94ab9f8ffc668efd2",
+      "reason": "限定Web REST并纠正必须依赖HTTP的绝对说法。",
+      "updates": {
+        "prompt": "Which listed application protocol is commonly used by web-based REST APIs?",
+        "explanation": "D。Web REST API 通常使用 HTTP 或通过 TLS 保护的 HTTPS，并通过 URI、方法与状态码进行交互。REST 是架构风格，并非规定所有 REST 系统只能使用 HTTP 的独立协议。SSH 通常承载远程终端等；STP 用于二层防环；SNMP 是另一种网络管理协议。GET、PUT、DELETE 定义为幂等方法，但服务端仍可能记录日志等副作用。"
+      },
+      "original_fields": {
+        "prompt": "Which protocol does a REST API use to communicate?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络可编程性与自动化中的 REST API（Representational State Transfer，表述性状态转移）通信协议规范。\nREST 是一种基于分布式超媒体系统的软件架构风格，由 Roy Fielding 博士在 2000 年提出。RESTful API 并非独立创造全新的传输协议，而是直接构建在现有的万维网通信标准——HTTP/HTTPS 协议之上，以实现客户端与服务器之间的无状态（Stateless）通信：\n1. 资源与 URI 标识：在 REST 架构中，网络设备上的所有配置、状态与资源均通过统一定位符（URI，Uniform Resource Identifier）进行唯一标识。\n2. HTTP 动词操作（CRUD 映射）：客户端使用标准 HTTP 请求方法（HTTP Verbs）对资源发起操作，核心映射关系为：\n   - GET：读取/检索资源（Read），具备安全与幂等性；\n   - POST：创建新资源（Create），非幂等；\n   - PUT：完全替换或更新现有资源（Replace/Update），具备幂等性；\n   - PATCH：局部修改资源（Partial Update）；\n   - DELETE：删除资源（Delete），具备幂等性。\n3. 报文交互与状态码：客户端通过 HTTP Request Header（如 `Accept: application/json`、`Content-Type: application/json`）指明数据格式，服务器端通过 HTTP 状态码（如 200 OK、201 Created、400 Bad Request、401 Unauthorized、404 Not Found、500 Internal Error）反馈操作执行结果。\n\n• 正确选项剖析：\n选项 D（HTTP）完全正确。RESTful API 严格依赖 HTTP/HTTPS 协议进行所有通信，通过 HTTP 动词、HTTP 请求头和 HTTP 响应状态码完成资源的增删改查交互。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（SSH）：Secure Shell，运行在 TCP 端口 22，主要用于远程字符终端（CLI）加密会话管理，或在 NETCONF 协议（RFC 6242）中作为底层安全传输通道，REST API 并不基于 SSH 通信。\n- 选项 B（STP）：Spanning Tree Protocol（生成树协议，IEEE 802.1D），属于以太网二层防环控制协议，与三层/七层软件 API 通信完全无关。\n- 选项 C（SNMP）：Simple Network Management Protocol，基于 UDP 端口 161/162 运行，使用 OID 和 MIB 进行设备监控与轮询，属于传统网络管理协议，不同于现代基于 HTTP 的 RESTful API。\n\n• 考试要点与速记技巧：\n“REST API 依 HTTP，增删改查 Verb 清晰（GET/POST/PUT/DELETE），数据常用 JSON 递”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定Web REST并纠正必须依赖HTTP的绝对说法。"
+      }
+    },
+    {
+      "id": 915,
+      "original_qid": "Q1226",
+      "before_sha256": "64e2c3c887917ca3b5fe8ed28159aae2064f55d43d99a042196d468103b53be1",
+      "reason": "限定AireOS平台，说明管理接口可承担AP-manager。",
+      "updates": {
+        "prompt": "On a Cisco AireOS WLC model supporting AP-manager interfaces and LAG, which interface type is limited to one when LAG is enabled?",
+        "explanation": "D。Cisco AireOS 文档指出启用 LAG 时仅支持一个 AP-manager；关闭 LAG 时可在支持的平台按端口配置多个。管理接口默认可承担 AP-manager 功能，不意味着启用 LAG 后必须创建独立接口，也不能把此规则直接推广到所有控制器型号。service 和 virtual 是其他用途的接口；trunk 是链路模式。"
+      },
+      "original_fields": {
+        "prompt": "Which interface on the WLC is limited to one when LAG is in use?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）架构中链路聚合（LAG，Link Aggregation）对内部逻辑接口的约束机制。\n在 Cisco 传统集中式 WLC（如 AireOS 5508、5520、8540 等）中，系统定义了多种逻辑接口用于承载不同特性的控制与数据平面流量：\n1. Management Interface：主管理接口，用于 WLC 自身网络管理、与 AP 建立 CAPWAP 控制隧道通信以及与 AAA、Syslog、TFTP 服务器交互。\n2. AP-Manager Interface：在未启用 LAG 的多端口分布式部署场景中，AP-Manager 接口负责终结发往控制器的数据/控制流量。管理员可以在不同的物理分布系统端口（Distribution System Ports）上分别配置一个 AP-Manager 接口，使得接入的众多 AP 可以动态跨不同物理端口进行负载分担与哈希分发。\n3. Virtual Interface：分配保留 IP 地址（如 1.1.1.1），用于 Web 认证重定向、DHCP 中继与移动性握手，一台 WLC 系统内部始终只能有一个虚拟接口。\n4. Service Port Interface：物理独立的带外（Out-of-band）管理端口，仅用于带外 CLI/Web 管理，物理上始终只有一个。\n关键技术转变（LAG 与 AP-Manager 接口）：\n当在 WLC 上启用 LAG（链路聚合，IEEE 802.3ad）时，所有物理分布端口绑定为一个单一的 EtherChannel 逻辑端口通道。此时，跨物理端口分担 AP 流量的底层机制由硬件 Hash 自动接管，多 AP-Manager 接口的动态负载分担机制被系统废除。因此，WLC 强制要求只能有一个 AP-Manager 接口（Limited to one），或者系统直接将 AP-Manager 的功能自动与主 Management 接口无缝整合为单一点位，多余的 AP-Manager 接口会被自动清除。\n\n• 正确选项剖析：\n选项 D（AP-manager）完全正确。在未启用 LAG 时，WLC 可以在各个物理端口上配置多个 AP-manager 接口实现负载均衡；一旦启用 LAG，所有端口捆绑为单一通道，WLC 不再允许存在多个 AP-Manager 接口，该接口被严格限制为只能有一个（Limited to one）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（service）：Service Port 是物理上完全独立的带外管理接口，不管 WLC 是否启用 LAG，它在硬件上始终只有一个，其数量限制并非“启用 LAG 的结果”。\n- 选项 B（virtual）：虚拟接口在系统内始终有且仅有一个（通常分配 1.1.1.1 用于 Web Auth），无论是否配置 LAG，其数量都不会发生改变。\n- 选项 C（trunk）：Trunk 是交换机端口连接模式（802.1Q 打标模式），并非 WLC 内部接口类型（WLC 接口为 Management、AP-manager、Virtual、Dynamic 等）。\n\n• 考试要点与速记技巧：\n“WLC 开启 LAG，端口全绑定；动态分担交给 EtherChannel，AP-Manager 仅留一（Limited to One）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定AireOS平台，说明管理接口可承担AP-manager。"
+      }
+    },
+    {
+      "id": 916,
+      "original_qid": "Q1227",
+      "before_sha256": "e36728fc6da19091b652c5ad9f2b2d774ad73948e55168b21e32cf2e0ed25cbf",
+      "reason": "原题将掩码不一致误认为必然导致上网失败；改为匹配计划的可证实问题。",
+      "updates": {
+        "prompt": "Refer to the exhibit. A network plan requires the PC mask to match the router LAN interface mask. Which displayed PC setting differs from that plan?",
+        "explanation": "A。路由器接口为 10.2.2.1/27，计划掩码是 255.255.255.224；图中 PC 为 10.2.2.2/26（255.255.255.192），故应把子网掩码改成 /27 以符合计划。默认网关 .1 与路由器地址一致。重要的是 .1 和 .2 在 /26 与 /27 下均被视为本地地址，单凭掩码不一致不能证明图中访问互联网失败的根因；DNS、路由与服务连通性仍需检查。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A newly configured PC fails to connect to the internet by using TCP port 80 to www.cisco.com. Which setting must be Modified for the connection to work?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv4 子网划分（Subnetting）与同网段终端网关参数匹配原则。\n深入分析拓扑图与终端配置输出：\n1. 拓扑中路由器的网关接口参数：\n   - 路由器 LAN 接口直连二层交换机，配置为 `10.2.2.1/27`。\n   - 前缀 `/27` 对应的标准子网掩码为 `255.255.255.224`（二进制前 27 位为 1）。\n   - 计算子网范围：块大小（Block size）= 256 - 224 = 32。\n   - 该子网的网络号为 `10.2.2.0`，合法可用主机地址范围为 `10.2.2.1` 至 `10.2.2.30`，子网定向广播地址为 `10.2.2.31`。\n2. PC 端执行 `ipconfig /all` 实际输出：\n   - IPv4 Address: `10.2.2.2(Preferred)`\n   - Subnet Mask: `255.255.255.192`（前缀 `/26`）\n   - Default Gateway: `10.2.2.1`\n   - DNS Servers: `8.8.8.8`\n3. 故障机理剖析：\n   PC 错误地配置了 `/26` 掩码（`255.255.255.192`），其认知的本地广播域为 `10.2.2.0 - 10.2.2.63`（广播地址为 .63）。而在路由器侧，由于掩码是 `/27`（`255.255.255.224`），其子网广播地址为 `.31`。在以太网局域网二层直连环境中，主机与网关接口的子网掩码必须完全保持一致。掩码不匹配会导致子网边界认知错乱、ARP 请求与广播定向处理异常，影响 TCP 握手回包。PC 必须将其 Subnet Mask 修改为与路由器一致的 `255.255.255.224`。\n\n• 正确选项剖析：\n选项 A（Subnet Mask）完全正确。拓扑中路由器接口明确配置为 `/27`（`255.255.255.224`），而 PC 上通过 `ipconfig` 查看到的子网掩码是 `255.255.255.192`（/26）。同网段的主机必须与默认网关配置相同长度的子网掩码，因此必须修改 Subnet Mask 为 `255.255.255.224` 才能保证网络正常通信。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（DNS Servers）：PC 配置了公共 DNS 服务器 `8.8.8.8`，地址完全合法，一旦网关三层连通即可正常解析 www.cisco.com，无需修改。\n- 选项 C（Default Gateway）：PC 配置的网关为 `10.2.2.1`，与拓扑中路由器直连接口 IP 完全一致，配置正确。\n- 选项 D（DHCP Servers）：题干明确说明该 PC 是 newly configured（手动静态配置），且 DHCP 服务器地址仅供参考，不影响已生效的静态网络参数转发。\n\n• 考试要点与速记技巧：\n“拓扑前缀标 /27（.224），PC 错填 /26（.192）；直联网段掩码必一致，改 Subnet Mask 破阻碍”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原题将掩码不一致误认为必然导致上网失败；改为匹配计划的可证实问题。"
+      },
+      "exhibit_path": "exhibits\\q916_agent.jpg",
+      "image_sha256": "cdd72ae31c6e7cdca285f2536d9c8dd35c5675d5950c60e2695f6f4a83d6cee4"
+    },
+    {
+      "id": 917,
+      "original_qid": "Q1228",
+      "before_sha256": "8d54b21cadff6e59ed6780fe2b7c2324d270c9762644305aa49d0ca220e11b07",
+      "reason": "修正默认日志阈值与传输方式的绝对说法。",
+      "updates": {
+        "explanation": "C。Syslog severity 标识消息严重度，0–7 共八级，数值越小越严重。Cisco 日志中 facility 描述生成消息的功能组件；B 错在声称有 16 个严重度级别。D 的默认转发与阈值依设备、版本及是否配置日志服务器而异，不能假定全部级别均发送。UDP 514 常见，但 Syslog 也有其他传输方式。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Syslog（系统日志协议，RFC 5424 / RFC 3164）在网络运维中的架构规范与消息级别定义。\nSyslog 是网络设备集中化日志审计与故障排查的核心协议（默认使用 UDP 端口 514）。Cisco 设备生成的标准 Syslog 格式如下：\n`seq no: timestamp: %facility-severity-MNEMONIC: description`\n例如：`*Mar 1 00:00:15.123: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down`\n1. Logging Level（日志级别/严重性）：定义了特定事件对系统稳定性的紧急程度与严重性，从 0 到 7 共 8 个级别（数值越小越严重）：\n   - Level 0: Emergencies（系统不可用，panic）\n   - Level 1: Alerts（需立即采取纠正措施）\n   - Level 2: Critical（关键严重状态）\n   - Level 3: Errors（普通错误条件）\n   - Level 4: Warnings（警告信息）\n   - Level 5: Notifications（正常但重要的状态改变，如接口 up/down）\n   - Level 6: Informational（纯信息通知）\n   - Level 7: Debugging（最高粒度的调试输出）\n2. 过滤控制机制：日志级别在配置日志输出目的地（如 Console、VTY、Buffer 或 Syslog Server）时充当过滤阈值。例如执行 `logging trap 4` 时，系统会将级别 0 到 4（Emergencies 至 Warnings）的所有日志发送到 Syslog 服务器，而忽略级别 5、6、7。\n\n• 正确选项剖析：\n选项 C 完全正确。Syslog 中的日志级别（Logging Level，0-7）直接定义了特定消息的严重程度（severity of a particular message）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：Syslog 中用于标识生成消息的软硬件功能模块的字段是 **Facility**（如 LINK、SYS、OSPF、SEC 等），而不是由 Syslog 协议或 Logging level 来定义的。\n- 选项 B：Syslog 仅定义了 8 个日志级别（0 到 7），而不是 16 个；16 个级别混淆了 Cisco IOS 的命令特权级别（Privilege Levels 0-15）。\n- 选项 D：Cisco 设备默认的 syslog trap 级别是 `informational`（Level 6），Level 7（Debugging）默认不会发送至 Syslog 服务器；且必须显式配置 `logging host <IP>` 启用日志转发，绝非“默认所有级别自动发送”。\n\n• 考试要点与速记技巧：\n“Syslog 级别 0 到 7，数值越小越紧急；Facility 定模块，Level 只定 Severity”。\n口诀：“0急1警2严重，3错4告5通知，6信7调牢记心”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "修正默认日志阈值与传输方式的绝对说法。"
+      }
+    },
+    {
+      "id": 918,
+      "original_qid": "Q1229",
+      "before_sha256": "ba8cf9960d3a3c3d79468c09e892a2807cdf7428dfb701f314186b8a6d4b3cf6",
+      "reason": "限定批量变更场景，避免监控也合理，并纠正自动化保证无错的说法。",
+      "updates": {
+        "prompt": "A traditionally managed network has many devices requiring repeated, standardized configuration changes. Which approach most directly centralizes those repetitive management tasks and can reduce maintenance effort while improving consistency?",
+        "explanation": "C。集中执行经过测试的模板、自动化配置及核验，可减少逐台重复操作并提高配置一致性；节省程度取决于规模和实施成本，自动化本身不能保证无故障。A 的自动监控可帮助提前发现问题，但题目侧重批量配置管理；B 增加人员不直接减少维护工作；D 的变更验证有价值但仅覆盖验证环节。"
+      },
+      "original_fields": {
+        "prompt": "In what way does a network supervisor reduce maintenance costs while maintaining network integrity on a traditionally managed network?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络管理模式的演进——传统手动运维与网络自动化集中管理的成本及可靠性对比。\n在传统的网络管理模式（Traditional Box-by-Box Management）下，网络维护存在两大核心痛点：\n1. 运维成本居高不下（High Operational Costs / OpEx）：网络管理员必须通过 Console 或 SSH 逐台登录交换机、路由器和防火墙，手动敲入 CLI 命令行进行配置更新、固件升级、状态核对与基线备份。随着企业网络节点成百上千地扩张，机械性的人工操作耗费大量工时与人力成本。\n2. 人为操作失误导致网络完整性受损（Risk to Network Integrity）：手工输入极易引发拼写错误、漏配配置或未按合规标准配置，导致不同设备间存在严重的“配置漂移（Configuration Drift）”与配置不一致，引发广播风暴、路由黑洞或安全策略失效。\n解决之道（网络自动化集中管理）：\n在传统管理的网络中引入自动化工具（如利用 Python 脚本、Ansible Playbooks、Netmiko 等工具集中化执行任务），能够将配置模板化与批量化下发。一方面通过集中自动化执行将重复繁重的手动工时压缩到最低，直接降低维护成本；另一方面杜绝了人工敲错的偶然性，从根本上保障了全网配置与策略的一致性和网络完整性（Maintaining Network Integrity）。\n\n• 正确选项剖析：\n选项 C 完全正确。利用自动化技术将网络管理任务集中化（use automation to centralize network-management tasks），既能以批量自动化替代高昂的手工维护工作量（降低成本），又能避免人为配置差错带来的网络不一致，切实维护了网络的完整性。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：部署自动化监控系统仅能提供问题发生时的早期告警（Early Warning），监控属于被动的只读操作，无法直接减少网络变更与日常运维的庞大工时，更不能保证配置本身的正确完整性。\n- 选项 B：雇佣更多网络管理员会直接大幅增加企业的人力与经常性管理成本（Increase maintenance costs），且参与手动操作的人越多，配置混乱与人为出错的概率越高。\n- 选项 D：选项 D 仅局限于自动化变更管理中“验证问题是否解决”这一个孤立环节，而选项 C 涵盖了配置下发、合规审计、日常维护任务的全生命周期集中化管理，是实现降本与保障完整性的根本手段。\n\n• 考试要点与速记技巧：\n“传统运维人海战，逐台手敲易混乱；自动化做集中管（Centralize Tasks），降本保真两全安”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定批量变更场景，避免监控也合理，并纠正自动化保证无错的说法。"
+      }
+    },
+    {
+      "id": 919,
+      "original_qid": "Q1230",
+      "before_sha256": "788a9b7b07692431c813a1df35f9e41351e3522d8d29f29a6d4dee90b9421959",
+      "reason": "原题缺少多VLAN前提，补充具体VLAN并解释单VLAN可用access。",
+      "updates": {
+        "prompt": "An autonomous AP uses one SSID mapped to client VLAN 20; its management traffic uses VLAN 10. Both VLANs must traverse the same wired uplink, and VLAN 20 is 802.1Q tagged. Which switch-port mode supports this design?",
+        "explanation": "A。题设明确要求一条链路承载管理 VLAN 10 与不同的客户端 VLAN 20，且 VLAN 20 打标签，故使用 802.1Q trunk 并匹配两端 native/允许 VLAN 配置。C 的普通 access 口只承载一个数据 VLAN；B 不是端口模式；D 是链路聚合，不是承载多个 VLAN 的必要条件。只有一个 SSID 或自主模式本身不必然要求 trunk：管理和客户端共用一个 VLAN 时，适用设备也可使用 access。"
+      },
+      "original_fields": {
+        "prompt": "Which type of wired port is required when an AP offers one unique SSID, passes client data and management traffic, and is in autonomous mode?",
+        "explanation": "• 核心考点与原理分析：\n本题考查自主式 AP（Autonomous AP / Standalone AP）的有线交换机端口工作模式（Access vs. Trunk）的选择规范。\n在无线网络部署中，AP 主要有两种工作模式：\n1. 轻量化模式（Lightweight AP）：AP 与 WLC 之间建立 CAPWAP 隧道，AP 的管理流量和不同 SSID 的客户端业务数据流量全部封装在同一条 UDP/CAPWAP 隧道内传输。因此轻量化 AP 连接有线交换机通常只需要配置为 Access 端口。\n2. 自主模式（Autonomous AP）：AP 独立运行 Cisco IOS 软件，本地直接处理所有的 802.11 与 802.3 帧桥接，没有 WLC，也不存在 CAPWAP 隧道。\n自主 AP 的多流量属性与 VLAN 映射机制：\n- **管理流量（Management Traffic）**：用于管理员通过 SSH/HTTPS/SNMP 管理 AP 本身，属于 AP 所在的基础设施管理 VLAN（通常使用 Native VLAN 或专用管理 VLAN）。\n- **客户端数据流量（Client Data Traffic）**：无线终端关联到该唯一 SSID 后产生的数据流量，必须被桥接映射到特定的业务 VLAN（Client Data VLAN）。\n即使该自主 AP 只对外广播提供一个唯一的 SSID（one unique SSID），由于网络安全架构要求必须将“网络设备管理平面”与“最终用户数据平面”进行二层逻辑隔离（归属于两个不同的 VLAN）。因此，连接自主 AP 的交换机物理有线端口必须配置为 **Trunk 端口**（802.1Q 中继），以便在单条物理链路上传输并打标隔离这两种不同 VLAN 的流量。\n\n• 正确选项剖析：\n选项 A（trunk）完全正确。自主 AP 必须在单条有线链路上同时传输 AP 本身的管理流量（Management VLAN）以及该 SSID 对应的客户端数据流量（Data VLAN）。管理平面与数据平面属于两个不同 VLAN，因此交换机有线端口必须配置为 Trunk 端口。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（default）：并非合法的 Cisco 交换机端口工作模式（Switchport Mode），仅代表未配置时的出厂状态。\n- 选项 C（access）：Access 端口仅能承载单一未标记的 VLAN 流量。如果配置为 Access 口，管理流量与客户端流量将被迫混在同一广播域，或者 AP 与客户端二者之一无法获得网络连接。\n- 选项 D（LAG）：Link Aggregation（链路聚合组），用于将多个物理链路捆绑增加带宽与容错，不是端口的基础二层模式，单网线连接自主 AP 无需配置 LAG。\n\n• 考试要点与速记技巧：\n“瘦 AP 钻 CAPWAP 接 Access，胖 AP（Autonomous）管业分离多 VLAN，有线端口必配 Trunk”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "原题缺少多VLAN前提，补充具体VLAN并解释单VLAN可用access。"
+      }
+    },
+    {
+      "id": 920,
+      "original_qid": "Q1231",
+      "before_sha256": "516549641217355e966a5dbd47516c8e7d86ec72865c7f8ca9a6bb00a9b3639a",
+      "reason": "明确认证前阶段和ACL例外，说明HTTP重定向及认证后策略。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On an AireOS WLC, User1 and User2 must be directed to a web login before normal network access. Before authentication, ordinary client IP traffic is blocked except DHCP and DNS, with no pre-auth ACL exceptions. Which WLAN configuration enables this behavior?",
+        "explanation": "C。在 WLAN Security > Layer 3 启用 Web Policy 并选择 Authentication。A 将 Web 认证误放在二层；B 的 MAC 过滤不等同 Web 登录；D 的 AAA 服务器配置不是启用该策略的位置。Cisco 文档说明认证前普通 IP 流量默认仅放 DHCP/DNS，HTTP 请求可被拦截并重定向至门户；预认证 ACL 可以另行放行流量。认证后仍受网络策略约束，不代表所有流量无条件放行。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A network engineer must configure the WLC to allow only DHCP and DNS packets for User1 and User2. Which configuration Must be used?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线控制器（WLC）的三层安全机制（Layer 3 Security）与 Web 认证策略（Web Policy / Web Auth）。\n结合拓扑图与题干需求：网络工程师需要对关联到 AP 21 的无线用户（User1、User2）进行配置，限制其在认证通过前**仅允许发送和接收 DHCP 与 DNS 数据包**。\n1. Cisco WLC 安全层级模型：\n   - Layer 2 Security：包含 WPA/WPA2/WPA3、802.1X、MAC 过滤等。802.1X 在认证前仅允许 EAPOL 帧通过，二层握手未通过前任何 IP 层报文（包括 DHCP、DNS）均无法通行。\n   - Layer 3 Security：包含 Web Policy（Web 认证）。\n2. Web 认证（Web Authentication）的工作机制与状态转换：\n   - 客户端连接到启用 Web Policy 的 WLAN 并完成基础二层关联后，客户端进入控制器的 `WEBAUTH_REQD`（要求 Web 认证）状态。\n   - 在此未认证的初始状态下，客户端必须能够获取 IP 地址并解析外部主机名。因此 WLC 的内置防火墙策略**严格仅放行 DHCP（UDP 67/68）和 DNS（UDP 53）报文**！\n   - 当客户端尝试在浏览器中发起任何 HTTP（TCP 80）请求时，WLC 拦截该报文并向客户端返回 HTTP 302 重定向响应，引导客户端打开 Web 认证登录门户。\n   - 用户在 Portal 页面成功输入凭据完成认证后，WLC 将客户端状态切换至 `RUN`，放行其所有常规业务流量。\n3. WLC 配置路径：\n   在 Cisco WLC GUI 界面中，进入 `WLANs -> Edit -> Security -> Layer 3` 选项卡，勾选 **Web Policy**，并在下拉单选框中选择 **Authentication**。\n\n• 正确选项剖析：\n选项 C 完全正确。在 WLC 的 Layer 3 Security 配置中启用 Web policy 并选择 Authentication，系统会自动在认证前仅放行客户端的 DHCP 和 DNS 数据包，以支持初始网络配置与 Web Portal 重定向。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：802.1X 属于 Layer 2 Security，其在完成 EAP 认证前完全阻断所有的 IP 报文，DHCP 和 DNS 根本无法通行；且 Web 认证属于三层安全，非二层。\n- 选项 B：MAC 过滤属于二层安全机制，Layer 3 Security 下没有所谓的“Fallback Policy with MAC filtering”配置。\n- 选项 D：AAA Server 选项卡仅用于配置 RADIUS/TACACS+ 服务器的连接 IP、共享密钥及超时参数，并不用于开启 WLAN 的 Web 过滤策略。\n\n• 考试要点与速记技巧：\n“Web 认证属 Layer 3，未登录前控极严；仅通 DHCP 与 DNS，Web Policy 选 Auth 现”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "明确认证前阶段和ACL例外，说明HTTP重定向及认证后策略。"
+      },
+      "exhibit_path": "exhibits\\q920_agent.jpg",
+      "image_sha256": "6e9c4822a590090e3baa0f5481bb92691becdbca563c4dcfca56d4517f038e6d"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-4500-series-switches/69632-configuring-cat-ip-phone.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/ports_and_interfaces.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless/5500-series-wireless-controllers/108501-webauth-tshoot.html"
+  ],
+  "limitations": "未进行设备或网络实验"
+}

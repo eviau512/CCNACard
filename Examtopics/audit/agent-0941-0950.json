@@ -1,0 +1,331 @@
+{
+  "scope": "Q941–Q950",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 941,
+      "original_qid": "Q1253",
+      "before_sha256": "0cfe56da333df340f03f68019be9cb441b6fe01d29103cb972656d1b3ba01d98",
+      "reason": "帧交换不一定是存储转发；限定方法并纠正校验和泛洪绝对化。",
+      "updates": {
+        "prompt": "Which characteristic describes store-and-forward Ethernet switching?",
+        "explanation": "C。存储转发交换机先接收完整帧并检查 FCS，再转发有效帧；CRC 可检测许多差错但不保证检测所有差错。也有 cut-through 等转发方式，不能将此过程归为所有帧交换的必然特征。A 混淆 ARP 与从入站帧源 MAC 学习的地址表；B 未知目的单播通常在同 VLAN 的合格端口泛洪，但安全策略等可能限制；D 普通二层转发不以重写源、目的 MAC 为职责。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of frame switching?",
+        "explanation": "• 核心考点与原理分析：\n本题考查二层以太网交换机（Layer 2 Switch）的帧交换（Frame Switching）机制及其转发转发方式（Switching Methods）。\n1. 帧交换的转发架构：\n   以太网交换机在数据链路层（OSI Layer 2）工作，根据以太网帧的目的 MAC 地址（DMAC）查表转发数据帧。现代交换机主流采用“存储转发”（Store-and-Forward）模式。\n2. 存储转发（Store-and-Forward）核心特性：\n   - 完整接收并缓冲（Buffer）：交换机入站端口接收整个以太网数据帧（包含前导码、源/目的 MAC、以太网类型、载荷以及 4 字节的 FCS 帧校验序列），将其暂存入内部内存缓冲区（Buffer）；\n   - 硬件错误校验（Error Checking）：交换机运行循环冗余校验（CRC）算法，重新计算帧的校验和并与接收到的 FCS 字段进行比对。如果校验和匹配且帧长度合规（64 至 1518 字节之间），则说明帧无差错，交换机查询 MAC 地址表将其从目标出站端口转发出去；若发现 CRC 校验失败（如碰撞产生的碎片残帧 Runt 或超长帧 Giant），则直接在本地硬件中丢弃该错误帧，绝不向网络下游转发，从而防止错误在广播域内扩散。\n\n• 正确选项剖析：\n选项 C（stores and forwards frames in a buffer and uses error checking，在缓冲区中暂存并转发帧，并使用错误校验）精准提炼了现代以太网帧交换中存储转发（Store-and-Forward）的黄金法则，既提供了流量缓冲吸收能力，又通过 FCS 严格确保了传输数据的完整性无差错。\n\n• 干扰项排除与错误陷阱：\n选项 A（用出站端口填充 ARP 表）：严重混淆概念。交换机维护的是基于 MAC 地址与入站物理接口映射关系的“MAC 地址表”（CAM 表），不是三层用于将 IP 解析为 MAC 的“ARP 表”；且交换机学习 MAC 地址依据的是入站数据帧的源 MAC 和入站端口（Ingress Port），而非出站端口。\n选项 B（丢弃地址表中未列出的接收到的 MAC 地址）：逻辑错误。当交换机在 MAC 地址表中查不到数据帧的目的 MAC 地址时，会执行“未知单播泛洪”（Unknown Unicast Flooding），即将该帧复制并从除入站端口外的同一 VLAN 内所有其它活跃端口发送出去，绝对不会丢弃。\n选项 D（重写源和目的 MAC 地址）：二层与三层设备行为混淆。二层以太网交换机在同广播域（VLAN）内部转发帧时，原封不动地保留原始以太网报头中的源 MAC 和目的 MAC；只有三层路由器（Router）跨网段路由时，才会在每个网络跳点（Hop）解封装并重写源/目的 MAC 地址。\n\n• 考试要点与速记技巧：\n二层交换核心属性速记：\n“整帧缓存存转走，CRC 验错除残破（Store-and-Forward with Error Checking）；源 MAC 入口学进 CAM 表，未知单播泛洪发”。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "帧交换不一定是存储转发；限定方法并纠正校验和泛洪绝对化。"
+      }
+    },
+    {
+      "id": 942,
+      "original_qid": "Q1254",
+      "before_sha256": "1afd01b38dee8a4508a812d463f12f11944bd62c40317bda7faffab7877074c5",
+      "reason": "原图第四行的句点导致整段无效 JSON，但可识别目标字符串值。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In the intended JSON structure, what role does \"R20\" have? Note that the period after the last object must be removed for valid JSON.",
+        "explanation": "A。第 3 行 `\"router\": \"R20\"` 中，`router` 是键，`R20` 是对应字符串值；外层方括号表示数组，花括号包围对象。原图第 4 行对象后面的句点不是合法 JSON，应删除该句点才能解析整个数组。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"R20\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查数据交换格式 JSON（JavaScript Object Notation，RFC 8259）的语法构成要素及其键值对（Key-Value Pair）定义。\n1. JSON 基本语法架构：\n   - JSON 是一种轻量级基于文本的数据交换标准，被广泛应用于网络自动化控制（RESTCONF、NETCONF、Cisco DNA Center、SD-WAN API）。\n   - 对象（Object）：由一对花括号 `{ ... }` 包裹，内部包含无序的“键值对”集合；\n   - 数组（Array）：由一对中括号 `[ ... ]` 包裹，内部包含有序的值列表，元素间以逗号分隔；\n   - 键值对（Key-Value Pair）：标准格式为 `\"key\": value`，冒号左侧为必须由双引号包裹的属性名（Key），冒号右侧为该属性所关联的具体数据内容（Value）。\n2. 题目 Exhibit 结构逐行解析：\n   - 第 1 行：`[` —— 开启顶层数组；\n   - 第 2 行：`{\"firewall\": \"FW12\", \"port\": \"e0/23\"},` —— 数组的第 1 个对象元素；\n   - 第 3 行：`{\"router\": \"R20\", \"port\": \"te5/5\"},` —— 数组的第 2 个对象元素；\n     - 键（Key 1）：`\"router\"`；对应的值（Value 1）：`\"R20\"`；\n     - 键（Key 2）：`\"port\"`；对应的值（Value 2）：`\"te5/5\"`；\n   - 第 4 行：`{\"switch\": \"SW25\", \"port\": \"ge1/36\"}.` —— 数组的第 3 个对象元素；\n   - 第 5 行：`]` —— 闭合顶层数组。\n   题干明确询问：“'R20' 在该 JSON 模式中代表什么？”，由于 `\"R20\"` 位于冒号 `:` 的右侧，属于键 `\"router\"` 所映射的具体属性内容，因此它代表的是一个**值（Value）**。\n\n• 正确选项剖析：\n选项 A（value，值）完全正确。在 JSON 语法规范中，`\"router\": \"R20\"` 是标准的键值对绑定，左侧为键，右侧 `\"R20\"` 为具体的字符串值（Value）。\n\n• 干扰项排除与错误陷阱：\n选项 B（array，数组）：由第 1 行的 `[` 和第 5 行的 `]` 括起来的整体才是数组，`\"R20\"` 是对象内部的一个标量字符串，绝非数组。\n选项 C（object，对象）：由第 3 行的花括号 `{ ... }` 包裹的整套属性集合才是一个对象实体，`\"R20\"` 只是该对象中的一个属性值。\n选项 D（key，键）：冒号左侧的 `\"router\"` 才是键，`\"R20\"` 是对应的值，二者方向不可混淆。\n\n• 考试要点与速记技巧：\nJSON 键值对语法法则：\n“冒号为界分两半，左边是键（Key）定属性，右边是值（Value）存数据”。"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原图第四行的句点导致整段无效 JSON，但可识别目标字符串值。"
+      },
+      "exhibit_path": "exhibits/q942_agent.jpg",
+      "image_sha256": "508c2653d8f291bfea40c8a4a2578661dbe5b87d1fb54c2d712e8f5e7faa8bb2"
+    },
+    {
+      "id": 943,
+      "original_qid": "Q1255",
+      "before_sha256": "e53de13d734015e32a35bc8e584436a38902227681d0eded50a1867852420f25",
+      "reason": "补充同一 STP 实例及 BPDU 连通前提，按优先级和 MAC 比较。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming all four switches participate in the same STP instance and exchange BPDUs, which switch becomes root bridge?",
+        "explanation": "D。相同实例中比较桥 ID，首先比较优先级：SW1 和 SW4 的 12288 小于 SW2/SW3 的 28672；二者优先级相同时比较 MAC，SW4 的 `00:10:a1:03:42:e8` 小于 SW1 的 `00:10:a1:95:2b:77`，因此 SW4 胜出。该结论依赖各交换机同属选举域且能交换 BPDU。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP，IEEE 802.1D / PVST+ / 802.1w RSTP）的根桥（Root Bridge）选举仲裁机制与 Bridge ID（BID）比较规则。\n1. 桥标识符（Bridge ID, BID）结构：\n   STP 根桥选举依据全网唯一的 Bridge ID。在扩展系统 ID（Extended System ID）架构下，BID 长度为 8 字节（64 位），由以下两部分构成：\n   - 桥优先级（Bridge Priority）：2 字节（16 位），由 4 位优先级（必须是 4096 的倍数）和 12 位系统扩展 ID（VLAN ID）组成；\n   - 基础 MAC 地址（MAC Address）：6 字节（48 位），取自交换机背板的主 MAC 地址。\n2. 根桥选举优先级仲裁判定法：\n   全网所有交换机启动时均认为自己是根桥，向外发送配置 BPDU 宣告自身 BID。当收到更优的 BPDU 时，按以下顺序比较：\n   步骤 1：比较桥优先级（Bridge Priority）——**数值越小越优（Lowest Priority wins）**；\n   步骤 2：若优先级相等，则比较交换机 MAC 地址——**数值越小越优（Lowest MAC Address wins）**，按 MAC 地址十六进制字节从左至右逐字节进行数值比对。\n\n• 正确选项剖析：\n紧扣题干与拓扑中各交换机的参数逐一计算比对：\n1. 优先级比对：\n   - SW1: Priority = 12288\n   - SW2: Priority = 28672\n   - SW3: Priority = 28672\n   - SW4: Priority = 12288\n   SW1 与 SW4 优先级均为 12288，明显低于 SW2 和 SW3 的 28672，因此 SW2 和 SW3 首先在第一轮被淘汰，根桥必在 SW1 与 SW4 之间产生。\n2. 优先级并列时的 MAC 地址比对（SW1 vs SW4）：\n   - SW1 MAC: `00:10:a1:95:2b:77`\n   - SW4 MAC: `00:10:a1:03:42:e8`\n   从左向右逐字节比对：\n   - 前三字节相同：`00:10:a1` == `00:10:a1`\n   - 第四字节：SW4 为 `03`（十六进制），SW1 为 `95`（十六进制），`0x03 < 0x95`！\n   因此，SW4 的 MAC 地址小于 SW1，SW4 拥有全网最小的完整 Bridge ID！\n结论：SW4 赢得根桥选举，成为该生成树拓扑中的 Root Bridge（选项 D 正确）。\n\n• 干扰项排除与错误陷阱：\n选项 A（SW3）与选项 B（SW2）：桥优先级高达 28672，在比较第一项优先级时就因数值过大直接被刷掉，绝不可能成为根桥。\n选项 C（SW1）：虽然优先级为 12288 与 SW4 并列第一，但在第二步比较 MAC 地址时，`95:2b:77` 大于 SW4 的 `03:42:e8`，因而惜败于 SW4。\n\n• 考试要点与速记技巧：\nSTP 根桥选举绝杀口诀：\n“根桥选举先比级，数值越小越无敌（Lowest Priority）；若遇平手比 MAC，首字节起寻最小（Lowest MAC wins）”。"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "补充同一 STP 实例及 BPDU 连通前提，按优先级和 MAC 比较。"
+      },
+      "exhibit_path": "exhibits/q943_agent.jpg",
+      "image_sha256": "414795923eb5b10bf31222ca0f3fd2933ace8910e55faff5ad94d79b038f60e0"
+    },
+    {
+      "id": 944,
+      "original_qid": "Q1257",
+      "before_sha256": "7a5c7ddd4b83c79c8efc39e04243dd9960a9611d689c234a409d127e16c70de8",
+      "reason": "修正端口冲突域、交换顺序及泛洪的过度概括。",
+      "updates": {
+        "explanation": "D。二层交换机在数据链路层处理并转发帧，通常根据 VLAN 和目的 MAC 查转发表。A 的端到端可靠有序交付由 TCP 等机制提供；B 的“使用路由器创建冲突域”不是交换机的基本定义；C 错，交换机会学习并保存源 MAC 与端口的对应关系。以太网全双工链路不发生 CSMA/CD 碰撞；不同 VLAN 可以形成独立广播域。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查二层交换机（Layer 2 Switch）在 OSI 参考模型中的层级定位与数据链路层基本工作机制。\n1. OSI 分层模型与二层交换机：\n   - 传统的二层交换机严格工作在 OSI 参考模型的第二层——数据链路层（Data Link Layer）；\n   - 其主要职责是：在单一广播域（如同一 VLAN）内部，通过物理接口接收并处理以太网帧（Ethernet Frames），解析数据链路层报头中的 48 位以太网 MAC 地址，执行硬件线速转发。\n2. 二层交换机与广播域/冲突域机制：\n   - 冲突域（Collision Domain）：二层以太网交换机的**每一个物理端口本身就是一个独立的冲突域**（采用微段化 Microsegmentation 技术，消除物理碰撞）；\n   - 广播域（Broadcast Domain）：默认情况下，二层交换机的所有端口同属于一个统一的广播域（除非通过划分不同的 VLAN 进行隔离）；创建跨网段隔离广播域依赖的是三层路由器或三层交换机，而非冲突域。\n\n• 正确选项剖析：\n选项 D（uses the data link layer for communications，使用数据链路层进行通信）精准道出了二层交换机（Layer 2 Switch）的核心技术本质。\n二层交换机就是专门设计用于在数据链路层（Layer 2）进行以太网数据帧寻址、交换与转发的典型网络设备。\n\n• 干扰项排除与错误陷阱：\n选项 A（responsible for sending data in a particular sequence，负责按特定顺序发送数据）：属于传输层（OSI Layer 4）协议（特别是 TCP 协议）的核心职责。TCP 通过序列号（Sequence Number）负责数据的按序组装与重传；二层交换机仅按接收顺序逐帧处理，绝无报文重排序逻辑。\n选项 B（uses routers to create collision domains，利用路由器创建冲突域）：概念严重错乱。交换机物理端口自身即天然隔离冲突域（全双工下甚至无碰撞），路由器分割的是“广播域”（Broadcast Domains），而非冲突域。\n选项 C（avoids MAC address storage for faster transmission，避免存储 MAC 地址以加快传输）：技术描述完全颠倒。二层交换机之所以能够实现高速智能转发，正是依赖于在专用硬件（CAM 表项）中动态学习并存储 MAC 地址与端口的映射关系；如果“不存储 MAC 地址”，交换机就会退化成无脑泛洪的集线器（Hub），造成大量带宽浪费与网络风暴。\n\n• 考试要点与速记技巧：\n交换机层级定位口诀：\n“二层交换走数据链路（Data Link Layer），逐端口隔绝冲突域；MAC 地址存 CAM 表，帧头源学目的转”。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "修正端口冲突域、交换顺序及泛洪的过度概括。"
+      }
+    },
+    {
+      "id": 945,
+      "original_qid": "Q1259",
+      "before_sha256": "13928c5772139527f584a8d0caee64019ab064cbee680e7bb66bbc7901351654",
+      "reason": "直接查看接口输出；区分瞬时队列与历史丢包，不能仅凭计数判定根因。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which condition is directly shown by the nonzero input and output queue sizes?",
+        "explanation": "B。图中 `Input queue: 175/300/0/0`、`Output queue: 50/300` 显示采样时队列中分别有 175、50 个包，`Queueing strategy: fifo` 表示采用 FIFO 策略；`Total output drops: 100` 是自计数器清零以来累计丢包，不能独立确定当前根因或持续拥塞。267 个广播是累计值，并不足以证明或排除风暴；图中错误计数为零也不能证明网卡或双工一定无故障。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 设备接口状态诊断命令 `show interface <interface-id>` 的输出解析与 QoS 拥塞排队（Queueing）机制。\n1. `show interface` 队列字段深度剖析：\n   - `Input queue: 175/300/0/0 (size/max/drops/flushes)`：\n     - `size`（当前队列长度）：175。表示当前瞬间有 175 个入站数据包正在入向软件队列中排队等待 CPU 调度处理；\n     - `max`（最大队列深度）：300；\n   - `Queueing strategy: fifo`：\n     - 明确指出当前接口启用了先进先出（First-In, First-Out, FIFO）排队调度策略；\n   - `Output queue: 50/300 (size/max)`：\n     - 表示当前有 50 个准备发送的数据包正在出向队列中缓冲排队；\n   - `Total output drops: 100`：\n     - 意味着此前由于出向硬件或软件队列被突发流量填满，发生了 100 次尾丢弃（Tail Drops）。\n2. 故障现象综合判定：\n   由于入向队列（175/300）与出向队列（50/300）同时存在显著积压，且明确标明了 FIFO 排队策略和丢包记录，这表明接口正在经受明显的流量拥塞与排队处理（Queueing）。\n\n• 正确选项剖析：\n选项 B（queueing，排队缓冲/拥塞排队）完美契合输出中的核心特征事实。\n输出中不仅显式标明了 `Queueing strategy: fifo`，更量化展示了 `Input queue` 和 `Output queue` 中正在排队的大量数据包（175 和 50），直接证明当前接口正处于高负载排队状态。\n\n• 干扰项排除与错误陷阱：\n选项 A（broadcast storm，广播风暴）：输出中 `Received 267 broadcasts`，在总共 7331 个接收包中仅占极小比例，绝非每秒数万包的广播风暴。\n选项 C（bad NIC，物理网卡故障）：若网卡物理硬件或线缆受损，输出中必将伴随大量的 `CRC errors`、`frame errors`、`input errors` 或 `runts/giants`，而图中所有错误计数器（errors、CRC、frame、overrun）全部为清一色的 0，硬件状态极度健康。\n选项 D（duplex mismatch，双工不匹配）：双工不匹配的经典黄金指征是“大量晚期碰撞（Late collisions）与 CRC 错误”，而图中 `0 collisions, 0 late collision, 0 CRC`，且接口明确运行在稳定的 `Full-duplex, 100 Mb/s`，绝无双工不匹配。\n\n• 考试要点与速记技巧：\nIOS 接口诊断黄金排除法：\n- 见 Input/Output queue 积压且带 drop -> 锁定 Queueing；\n- 见 Late Collision / Runts -> 锁定 Duplex Mismatch；\n- 见 CRC / Input errors -> 锁定 物理线路/Bad NIC。"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "直接查看接口输出；区分瞬时队列与历史丢包，不能仅凭计数判定根因。"
+      },
+      "exhibit_path": "exhibits/q945_agent.jpg",
+      "image_sha256": "de2d5d2b89053464067b7a532534b2e85c063350b0c06b75e132cd1237ff5824"
+    },
+    {
+      "id": 946,
+      "original_qid": "Q1261",
+      "before_sha256": "6d3e8f2855d3c38bc31c8ccfa24122391a50c35aacd705b19f9b6288554743e0",
+      "reason": "对象也是 JSON value，限定更具体结构类型；原图存在句点与缺冒号。",
+      "updates": {
+        "prompt": "Refer to the exhibit. After correcting the punctuation errors, which specific JSON structural type is the curly-braced item on line 3?",
+        "explanation": "A。第 3 行最具体的结构类型是 object，位于顶层 array 中；object 同时也是一种 JSON value，因此题目限定为具体结构类型以消除 A/C 的歧义。原图第 2 行对象后为句点，应改成逗号；第 3 行 `\"port\"` 与 `\"te0/26\"` 之间缺少冒号。修正后示例：`{\"load balancer\": \"LB_munich\", \"port\": \"te0/26\"}`。"
+      },
+      "original_fields": {
+        "prompt": "What is represented in line 3 within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查结构化数据表示格式 JSON（JavaScript Object Notation，RFC 8259）的顶层数据结构与嵌套对象（Object）语法规范。\n1. JSON 核心数据结构界定：\n   - 对象（Object）：由花括号 `{` 开始，至 `}` 结束。内部包含由逗号分隔的零个或多个键值对（Key-Value pairs），表示一个结构化的实体记录；\n   - 数组（Array）：由方括号 `[` 开始，至 `]` 结束。内部包含由逗号分隔的值或对象列表，具有固定的索引顺序；\n   - 键（Key）：对象内冒号左侧由英文双引号括起来的字符串；\n   - 值（Value）：对象内冒号右侧的数据（可为字符串、数字、布尔值、空值、数组或嵌套对象）。\n2. 题目 Exhibit 结构剖析：\n   - 第 1 行：`[` —— 表示最外层是一个数组结构；\n   - 第 2 行：`{\"switch\": \"SW_dallas\", \"port\": \"ge16\"}.` —— 数组中的第 1 个元素（以 `{}` 包裹的对象）；\n   - 第 3 行：`{\"load balancer\": \"LB_munich\", \"port\" \"te0/26\"},` —— 数组中的第 2 个元素；\n   - 第 4 行：`{\"VPN concentrator\": \"VPN_toronto\", \"port\": \"ge8/15\"}` —— 数组中的第 3 个元素；\n   - 第 5 行：`]` —— 闭合最外层数组。\n   题干明确询问：“在第 3 行中代表的是什么？”，第 3 行整体由左花括号 `{` 开启，右花括号 `}` 闭合，内部包裹了一组网络负载均衡器的属性键值对，因此第 3 行在语法上代表的是一个标准的 JSON **对象（Object）**。\n\n• 正确选项剖析：\n选项 A（object，对象）完全正确。在 JSON 规范中，花括号 `{ ... }` 专门用于定义无序键值对集合——即对象（Object）。第 3 行整体就是该 JSON 数组中承载负载均衡器信息的一个独立对象元素。\n\n• 干扰项排除与错误陷阱：\n选项 B（key，键）：`\"load balancer\"` 是一个键，但第 3 行整行代码是由 `{}` 包裹的完整实体，不能将整个对象等同于单一的键。\n选项 C（value，值）：`\"LB_munich\"` 是一个值，但第 3 行整体是包含键与值的完整对象容器。\n选项 D（array，数组）：只有第 1 行与第 5 行由方括号 `[ ... ]` 构成的最外层集合才是数组，第 3 行处于花括号内，绝非数组。\n\n• 考试要点与速记技巧：\nJSON 符号一眼辨识法：\n“花开为物（{ } 为 Object），方框成列（[ ] 为 Array）；左键右值冒号隔，第 3 行花括必对象”。"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "对象也是 JSON value，限定更具体结构类型；原图存在句点与缺冒号。"
+      },
+      "exhibit_path": "exhibits/q946_agent.jpg",
+      "image_sha256": "01037f2cf10889b76964f5d4efb8aac6ad57497dc2cb1b0b26e862d2739a0dd7"
+    },
+    {
+      "id": 947,
+      "original_qid": "Q1262",
+      "before_sha256": "d0961d69006e2304a43738d75ae7952668e263b8091414c048866fc17d05c3aa",
+      "reason": "说明学习的是源 MAC 与 VLAN、入口端口；未知单播泛洪存在安全例外。",
+      "updates": {
+        "explanation": "D。交换机从进入帧的源 MAC 学习或更新对应的 VLAN 和入口端口；后续转发通常依据目的 MAC 和 VLAN 查表。MAC 移动时条目可更新，动态条目可老化。A 是可能配置的端口安全限制，而非 MAC 学习固有的 10 地址上限；B 并非学习机制的目标；C 混淆源地址学习和未知目的单播，后者通常向同 VLAN 合格端口泛洪，但可能受安全策略等限制。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查二层以太网交换机（Layer 2 Switch）基础转发引擎的 MAC 地址学习机制（MAC Learning）与 CAM 表维护机制。\n1. MAC 地址学习的三大黄金步骤：\n   - 步骤 1（监听入站帧）：当一个以太网帧到达交换机的某一物理接口（Ingress Port）时，交换芯片硬件 ASIC 立即提取该数据帧报头中的**源 MAC 地址（Source MAC Address）**；\n   - 步骤 2（检查并绑定）：交换机查询其内容可寻址内存（CAM 表，即 MAC 地址表）：\n     - 若 CAM 表中尚未包含该源 MAC 地址，交换机立即创建新条目，将该源 MAC 地址与接收它的入站物理端口、所属 VLAN 进行映射绑定；\n     - 若已存在该条目，则刷新该条目的老化定时器（Aging Timer，Cisco 默认 300 秒）；\n   - 步骤 3（指导精准转发）：此后，当有其他主机发送目的 MAC（DMAC）为该 MAC 地址的数据帧到达时，交换机无需泛洪，直接查表将帧单播精确转发至绑定的目标端口。\n\n• 正确选项剖析：\n选项 D（associates the MAC address with the port on which it is received，将 MAC 地址与接收到它的端口进行关联）精确无误地阐明了 MAC 地址学习机制的核心工作机理。\n交换机正是通过持续捕捉入站帧的源 MAC 并将其与入站物理端口进行绑定记录，才动态构建出指导数据转发的 MAC 地址表。\n\n• 干扰项排除与错误陷阱：\n选项 A（restricts ports to a maximum of 10 dynamically-learned addresses，将端口限制为最多学习 10 个动态地址）：属于二层安全特性中的“端口安全”（Port Security，命令如 `switchport port-security maximum 10`）功能，而非底层原生的 MAC 学习行为（原生交换机每个端口可动态学习成百上千个 MAC 地址，受限于 CAM 芯片总容量）。\n选项 B（increases security on the management VLAN，提高管理 VLAN 的安全性）：MAC 学习是纯粹的数据平面报文转发支撑机制，完全不涉及任何加密、鉴权或安全加固能力。\n选项 C（drops received MAC addresses not listed in the address table，丢弃地址表中未列出的接收到的 MAC 地址）：完全错误。当数据帧的目的 MAC 在地址表中未找到时，交换机执行的是“未知单播泛洪”（Unknown Unicast Flooding）以寻找目标主机，绝不会直接丢弃帧。\n\n• 考试要点与速记技巧：\n交换机三部曲口诀：\n“进站看源学 MAC（绑定接收端口成 CAM 表），出站看目的查表转；已知单播直接送，未知广播全泛洪”。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "说明学习的是源 MAC 与 VLAN、入口端口；未知单播泛洪存在安全例外。"
+      }
+    },
+    {
+      "id": 948,
+      "original_qid": "Q1264",
+      "before_sha256": "ffe98d25625559272bc203638c49551796c31c3875113fb43824615cb25beb02",
+      "reason": "A 原称所有 VLAN 与接口始终启用过于绝对，明确正常二层接口及功能默认状态。",
+      "updates": {
+        "prompt": "On a typical Cisco Ethernet switch with default MAC-learning settings, how does dynamic MAC learning operate on eligible active Layer 2 ports?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It learns source MAC addresses on eligible VLANs and ingress ports by default."
+          },
+          {
+            "label": "B",
+            "text": "It increases security on the management VLAN by authenticating all senders."
+          },
+          {
+            "label": "C",
+            "text": "It sends all frames with unknown destinations to a multicast group."
+          },
+          {
+            "label": "D",
+            "text": "It automatically drops every frame whose destination is unknown."
+          }
+        ],
+        "explanation": "A。通常默认在支持学习的活跃二层端口和 VLAN 中，从进入帧的源 MAC 学习地址与端口的关联；学习可能受配置、端口状态和平台能力影响，不能断言任意接口与 VLAN 都一定学习。B 不是身份认证；C 将未知单播误认为组播；D 错，未知单播一般在同 VLAN 合格端口泛洪，但安全策略可能改变行为。"
+      },
+      "original_fields": {
+        "prompt": "How does MAC learning function?",
+        "options": [
+          {
+            "label": "A",
+            "text": "enabled by default on all VLANs and interfaces"
+          },
+          {
+            "label": "B",
+            "text": "increases security on the management VLAN"
+          },
+          {
+            "label": "C",
+            "text": "sends frames with unknown destinations to a multicast group"
+          },
+          {
+            "label": "D",
+            "text": "inspects and drops frames from unknown destinations"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查二层交换机（Layer 2 Switch）MAC 地址学习（MAC Learning）机制的运行环境与默认配置策略。\n1. MAC 地址学习默认状态：\n   在以太网交换网络中，MAC 地址学习是交换机能够实现精准点对点帧转发的最基础引擎。因此，在 Cisco Catalyst 交换机出厂默认配置下，**MAC 地址动态学习功能在所有活跃 VLAN 和所有二层接口上均是全局开启且默认启用的（Enabled by default on all VLANs and interfaces）**。\n2. 可控性与动态管理：\n   - 虽然管理员在特定安全场景（如防止 MAC 泛洪攻击或在静态配置专用转发条目时）可以使用特权命令（例如 `no mac address-table learning vlan <vlan-id>`）针对特定 VLAN 临时禁用 MAC 学习，但其默认状态始终为自适应开启；\n   - 只要有数据帧从任何物理 Access 或 Trunk 端口进入交换机，硬件芯片即刻提取帧头的源 MAC 并更新 CAM 表项，无需任何前置手工配置。\n\n• 正确选项剖析：\n选项 A（enabled by default on all VLANs and interfaces，默认在所有 VLAN 和接口上启用）完全契合 Cisco 官方标准规范。\n交换机的即插即用（Plug-and-Play）二层转发特性完全建立在“MAC 地址学习默认全面开启”的基础之上，任何新建的 VLAN 或接入的端口都会立即投入源 MAC 监听与学习工作。\n\n• 干扰项排除与错误陷阱：\n选项 B（increases security on the management VLAN，提高管理 VLAN 的安全性）：MAC 学习是底层无差别的二层转发支撑功能，并不包含身份认证、加密或访问控制机制，无法提升管理 VLAN 的安全性。\n选项 C（sends frames with unknown destinations to a multicast group，将目的未知帧发送到组播组）：技术机制错误。当交换机遇到目的 MAC 不在 CAM 表中的数据帧时，执行的是“未知单播泛洪”（Unknown Unicast Flooding）——将原始广播帧原封不动复制推向同 VLAN 所有其它端口，绝对不会转换成组播报文发给组播组。\n选项 D（inspects and drops frames from unknown destinations，检查并丢弃来自未知目的地的帧）：严重错误。二层交换机的核心原则是尽量保证连通性，对于未知目的地的帧采用泛洪寻址策略，只有显式配置了端口安全或 ACL 丢弃规则时才会丢包，原生 MAC 学习机制绝不丢弃未知目的帧。\n\n• 考试要点与速记技巧：\n交换机 MAC 学习天性：\n“交换开箱即插用，MAC 学习全默认（Enabled by default on all VLANs）；未知单播全域泛洪，切莫错选丢弃与组播”。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A 原称所有 VLAN 与接口始终启用过于绝对，明确正常二层接口及功能默认状态。"
+      }
+    },
+    {
+      "id": 949,
+      "original_qid": "Q1265",
+      "before_sha256": "dbd18414b4a86d34aae9588ed4c4dbf861b2a51b1867dca4fd45dd1f16265d41",
+      "reason": "区分 VLAN 广播域以及未知单播、组播的不同转发处理。",
+      "updates": {
+        "prompt": "Which characteristic describes how a Layer 2 Ethernet switch normally makes forwarding decisions, regardless of how many VLANs are configured?",
+        "explanation": "D。二层交换机通常按 VLAN 与目的 MAC 地址查转发表；源 MAC 则用于学习。A 只有所有端口处于同一广播域时才成立，VLAN 可划分多个广播域；B 的 TCP 连接状态跟踪不是普通二层转发的必要功能；C 将交换机与共享碰撞域的集线器混淆。未知单播可按 VLAN 泛洪；组播还可能受组播侦听或过滤配置影响。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of a Layer 2 switch?",
+        "explanation": "• 核心考点与原理分析：\n本题考查二层交换机（Layer 2 Switch）的核心转发依据与硬件交换机理。\n1. 二层交换机的转发决策模型：\n   - 工作层级：严格在数据链路层（OSI Layer 2）操作；\n   - 核心数据结构：内容可寻址内存（Content Addressable Memory, CAM 表，通常称为 MAC 地址表）；\n   - 决策依据：当一个完整的以太网数据帧到达交换机接口并通过 CRC 校验后，交换机的硬件 ASIC/转发引擎会提取数据链路层帧头中的**目的 MAC 地址（Destination MAC Address, DMAC）**，在 CAM 表中以硬件线速并发匹配目标物理端口；\n   - 动作输出：\n     1. 若 CAM 表中命中该目的 MAC，则将帧精确单播转发至绑定的目标端口（Forwarding）；\n     2. 若目的 MAC 对应的出站端口恰好是接收该帧的端口，则直接丢弃（Filtering / 过滤）；\n     3. 若为未知单播（Unknown Unicast）或广播/组播帧，则向 VLAN 内泛洪（Flooding）。\n\n• 正确选项剖析：\n选项 D（makes forwarding decisions based on MAC addresses，基于 MAC 地址做出转发决策）精准概括了二层交换机最根本的架构特征。\n二层交换区别于一层物理集线器（无脑全端口复制）和三层路由器（基于 IP 路由表转发）的本质分水岭，就在于其硬件转发引擎完全基于二层以太网 MAC 地址表做出转发与过滤决策。\n\n• 干扰项排除与错误陷阱：\n选项 A（provides a single broadcast domain for all connected devices，为所有连接的设备提供单一广播域）：说法片面。虽然未划分 VLAN 的原生交换机是一个大广播域，但现代二层交换机的核心价值正是通过 802.1Q 划分 VLAN 来切分隔离广播域，因此“提供单一广播域”不能作为其本质特征。\n选项 B（tracks the number of active TCP connections，跟踪活动 TCP 连接的数量）：属于传输层（Layer 4）以及有状态防火墙（Stateful Firewall）的功能，普通的二层交换机对 TCP 握手和状态完全透明，不具备连接跟踪能力。\n选项 C（offers one collision domain for all connected devices，为所有连接的设备提供一个冲突域）：严重概念混淆。这是物理层集线器（Hub）的缺陷特性。二层以太网交换机的核心革命正是“每个端口都是一个独立的冲突域”（Microsegmentation 微段化），在全双工模式下彻底消除了冲突。\n\n• 考试要点与速记技巧：\n网络设备核心决策表速记：\n“一层 Hub 拼电信号，二层 Switch 查 MAC 表，三层 Router 算 IP 路由，四层防火墙盯 TCP 连接”。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "区分 VLAN 广播域以及未知单播、组播的不同转发处理。"
+      }
+    },
+    {
+      "id": 950,
+      "original_qid": "Q1269",
+      "before_sha256": "3a5ef095360009594c468669bbd5877b5363341ffc437fa4810be4d518727f6c",
+      "reason": "原图接口 MAC 首字节13为组播地址，改为有效单播12并重算；指出图中两 LAN 前缀重复。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For this calculation, use R2 E0/1 unicast MAC address 12-be-bf-b9-00-01 (instead of the invalid group address shown). With prefix 2001:db8:bd69:1469::/64, which IPv6 address results from modified EUI-64?",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:bd69:1469:12D8:BAFE:FF01:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:bd69:1469:1130:ABFF:FECC:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:bd69:1469:4628:255F:FE32:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:bd69:1469:10BE:BFFF:FEB9:1"
+          }
+        ],
+        "explanation": "D。将 `12:be:bf:b9:00:01` 中间插入 `ff:fe`，得 `12:be:bf:ff:fe:b9:00:01`；反转首字节的 U/L 位（`0x12 XOR 0x02 = 0x10`）得到接口 ID `10be:bfff:feb9:0001`，与 /64 前缀拼接为 `2001:db8:bd69:1469:10be:bfff:feb9:1`。原图的 `13:be:...` 首字节最低位为 1，表示组播，不能作为普通以太网接口单播 MAC；原图两个分离 LAN 又标有相同 /64，不应据此推断可路由的实际拓扑。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:bd69:1469:12D8:BAFE:FF01:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:bd69:1469:1130:ABFF:FECC:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:bd69:1469:4628:255F:FE32:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:bd69:1469:11BE:BFFF:FEB9:1"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 无状态自动配置中基于 IEEE EUI-64（Extended Unique Identifier 64-bit）标准生成接口标识符（Interface ID）的算法与子网拼接规范。\n1. EUI-64 算法核心原理（RFC 4291）：\n   将 48 位（6 字节）的 IEEE 802 MAC 地址转换为 64 位（8 字节）的 IPv6 接口标识符（Interface ID），必须严格遵循以下两步计算法：\n   - 步骤 1（插入填充）：将 48 位 MAC 地址平均分成前后两半（各 24 位），在中间插入固定的 16 位十六进制常数 `FF-FE`（二进制 `11111111 11111110`）；\n   - 步骤 2（反转 U/L 位）：取转换后 64 位地址的第 1 个字节（从左往右第 1 至 8 位），将其中的**第 7 位（通用/本地 Universal/Local 管理位）强制进行逻辑取反**（若原为 0 则改为 1，若原为 1 则改为 0）。\n\n2. 题目拓扑参数代入与分步详细演算：\n   - 拓扑中 R2 连接 LAN 的接口为 E0/1，给定的 MAC 地址为：`13-be-bf-b9-00-01`；\n   - R2 所在 LAN 网段的 IPv6 前缀为：`2001:db8:bd69:1469::/64`。\n   【第 1 步：拆分并插入 FFFE】\n   前半部分：`13-be-bf`\n   插入常量：`ff-fe`\n   后半部分：`b9-00-01`\n   组合后初步得到：`13be:bfff:feb9:0001`\n   【第 2 步：提取第 1 字节并反转第 7 位（U/L 位）】\n   第 1 字节为十六进制 `0x13`：\n   展开为 8 位二进制：`0 0 0 1 0 0 1 1`\n   bit 位置（从左向右）：`1 2 3 4 5 6 7 8`\n   第 7 位当前为 `1`。执行取反操作后变为 `0`：\n   取反后的二进制为：`0 0 0 1 0 0 0 1`\n   将其转回十六进制：`0x11`！因此首字节从 `13` 变为 `11`。\n   【第 3 步：生成完整 64 位 Interface ID】\n   修改后的 Interface ID 为：`11be:bfff:feb9:0001`（压缩前导 0 后为 `11be:bfff:feb9:1`）。\n   【第 4 步：拼接 64 位网络前缀】\n   前缀 `2001:db8:bd69:1469::/64` + 接口 ID `11be:bfff:feb9:1`：\n   最终由路由器自动生成的完整 IPv6 地址为：`2001:db8:bd69:1469:11BE:BFFF:FEB9:1`。\n\n• 正确选项剖析：\n选项 D（2001:db8:bd69:1469:11BE:BFFF:FEB9:1）完全正确，前缀完全匹配 R2 的 LAN 网段，中间精确嵌入了 `BFFF:FEB9`，且首字节 `0x13` 准确反转为 `0x11`，前导零 `0001` 合法压缩为 `1`。\n\n• 干扰项排除与错误陷阱：\n选项 A（首段 12D8）与选项 C（4628...）：使用了完全错误的 MAC 地址计算，甚至混淆了 R1 的 MAC。\n选项 B（1130:ABFF:FECC:1）：使用了无关的 MAC 地址。\n此外，必须警惕未反转 U/L 位或在十进制/十六进制转换中将 `13` 误算为 `12` 的低级数学陷阱。\n\n• 考试要点与速记技巧：\nEUI-64 极速口诀：\n“MAC 居中插 FFFE，首字节第七位必取反；十六进制快速算：末位加二或减二（0x13 末位 3 为奇数，反转必减 2 变成 0x11）”。"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原图接口 MAC 首字节13为组播地址，改为有效单播12并重算；指出图中两 LAN 前缀重复。"
+      },
+      "exhibit_path": "exhibits/q950_agent.jpg",
+      "image_sha256": "b41c2ce56c9d5dfc2d9d20ac0946d8f4fed50ec03b60570938eeca06bc4347ba"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/info/rfc8259/",
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/ethernet/12006-chapter22.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/configure-mac.html"
+  ],
+  "limitations": "未进行设备实验。"
+}

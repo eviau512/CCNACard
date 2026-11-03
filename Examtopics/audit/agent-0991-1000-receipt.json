@@ -1,0 +1,29 @@
+{
+  "manifest": "agent-0991-1000.json",
+  "applied_ids": [
+    991,
+    992,
+    993,
+    994,
+    995,
+    996,
+    997,
+    998,
+    999,
+    1000
+  ],
+  "corrected_question_sha256": {
+    "991": "9d81132bb3aecb573d5d0781c9cf3835d020cfd711edabc52f8270368255c57e",
+    "992": "19b6096db02a7378431c6d2fc0b4d06df22f0601a3dce7d9c8b9a1950b845f7d",
+    "993": "4ee36ed7d548b07daf71d11f02fe03252e2972a7cee3d45913d509d8ebc857b3",
+    "994": "cc7625026ad93ff419b89d6c83620ad846edfc61bbcdded58442f5fed02bbb30",
+    "995": "3678d6c717e2f7c093a3cebde4539135b8a45e7a025877ed3d6f6b5dbb9a7773",
+    "996": "8dd86e9547c2b0856e70197b6cf730771659f214e37dd3104de5690abd5e3db3",
+    "997": "97a9a0ca3cceffe6235ed9d0c45ed4e969e0872bc33d43a9b06973229363df38",
+    "998": "46c9ebdef16f493da87e3c2768fe72d2ba3d5162a395d2fc6cff897389c3cb2e",
+    "999": "fee196cf56b2251322fcb22b0c6a37e61feecfa166c14e2354a299750aab3522",
+    "1000": "c12de495b4a5c885fda736f7a50a10f66346cd915525f78dae433175e98e764c"
+  },
+  "source_sha256": "a773f7a47f7c8be4d838db2fb8e3310dd1e6084da5da23eb3d4ecc88fa529f19",
+  "app_bundle_sha256": "9a4e98dd0bec10e6c8fb216011d37f13fcfbf8eafb855e47ebd4c6d2f3a7dddf"
+}
