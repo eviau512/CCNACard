@@ -633,18 +633,18 @@
       title.innerHTML = `<span>💻</span> Cisco IOS Virtual Terminal`;
 
       const actions = document.createElement('div');
-      actions.className = 'ios-sim-actions';
+      actions.className = 'ios-sim-actions ios-header-controls';
 
       const resetBtn = document.createElement('button');
       resetBtn.type = 'button';
-      resetBtn.className = 'ios-btn-reset';
+      resetBtn.className = 'ios-btn-reset ios-ctrl-btn';
       resetBtn.textContent = '↺ Reload NVRAM';
       resetBtn.title = 'Reset active device state';
       resetBtn.onclick = () => this.resetActiveDevice();
 
       const clearBtn = document.createElement('button');
       clearBtn.type = 'button';
-      clearBtn.className = 'ios-btn-clear';
+      clearBtn.className = 'ios-btn-clear ios-ctrl-btn';
       clearBtn.textContent = 'Clear Screen';
       clearBtn.onclick = () => this.clearScreen();
 
@@ -656,14 +656,14 @@
 
       // Device Tabs Bar
       const tabsWrap = document.createElement('div');
-      tabsWrap.className = 'ios-sim-tabs';
+      tabsWrap.className = 'ios-sim-tabs ios-device-tabs';
       this.tabsWrapEl = tabsWrap;
       this.renderTabs();
       wrap.appendChild(tabsWrap);
 
       // Terminal Screen
       const screen = document.createElement('div');
-      screen.className = 'ios-terminal-screen';
+      screen.className = 'ios-sim-screen ios-terminal-screen';
       this.screenEl = screen;
       wrap.appendChild(screen);
 
