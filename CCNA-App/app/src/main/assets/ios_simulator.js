@@ -625,22 +625,18 @@
     const pattern = parts.slice(1).join(' ').trim();
     if (!pattern && filterType !== 'section') return rawOutput;
 
-    const lines = rawOutput.split('
-');
+    const lines = rawOutput.split('\n');
     const regex = new RegExp(pattern, 'i');
 
     if (matchesPrefix(filterType, 'include', 3) || filterType === 'inc') {
-      return lines.filter(l => regex.test(l)).join('
-');
+      return lines.filter(l => regex.test(l)).join('\n');
     }
     if (matchesPrefix(filterType, 'exclude', 3) || filterType === 'exc') {
-      return lines.filter(l => !regex.test(l)).join('
-');
+      return lines.filter(l => !regex.test(l)).join('\n');
     }
     if (matchesPrefix(filterType, 'begin', 3) || filterType === 'beg') {
       const idx = lines.findIndex(l => regex.test(l));
-      return idx !== -1 ? lines.slice(idx).join('
-') : '';
+      return idx !== -1 ? lines.slice(idx).join('\n') : '';
     }
     if (matchesPrefix(filterType, 'section', 3) || filterType === 'sec') {
       const result = [];
@@ -653,8 +649,7 @@
           result.push(line);
         }
       }
-      return result.join('
-');
+      return result.join('\n');
     }
     return rawOutput;
   }
@@ -873,6 +868,24 @@
 
     getActiveSession() {
       return this.devices[this.activeDeviceName];
+    }
+
+    normalizeInterface(raw) {
+      if (!raw) return 'Ethernet0/0';
+      const clean = String(raw).trim().replace(/\s+/g, '');
+      const m = clean.match(/^([a-zA-Z\-]+)(.*)$/);
+      if (!m) return clean;
+      const prefix = m[1].toLowerCase();
+      const num = m[2];
+
+      if (prefix.startsWith('gi') || prefix.startsWith('g')) return `GigabitEthernet${num}`;
+      if (prefix.startsWith('fa') || prefix.startsWith('f')) return `FastEthernet${num}`;
+      if (prefix.startsWith('et') || prefix.startsWith('e')) return `Ethernet${num}`;
+      if (prefix.startsWith('vl') || prefix.startsWith('v')) return `Vlan${num}`;
+      if (prefix.startsWith('lo') || prefix.startsWith('l')) return `Loopback${num}`;
+      if (prefix.startsWith('po') || prefix.startsWith('p')) return `Port-channel${num}`;
+      if (prefix.startsWith('se') || prefix.startsWith('s')) return `Serial${num}`;
+      return clean;
     }
 
     render() {
