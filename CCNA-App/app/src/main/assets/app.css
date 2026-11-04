@@ -335,7 +335,7 @@ main {
 
 /* EXHIBIT IMAGE */
 .exhibit-wrap {
-  background: #000;
+  background: #1f2937;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 8px;
@@ -344,12 +344,28 @@ main {
   cursor: zoom-in;
 }
 
+[data-theme="light"] .exhibit-wrap {
+  background: #fff;
+}
+
 .exhibit-img {
   max-width: 100%;
   max-height: 380px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
+}
+
+.exhibit-img,
+.solution-img,
+.lightbox-img {
+  /* Do not invert diagrams: colors and topology markings carry meaning. */
+  background-color: #fff;
+}
+
+/* Only neutral, light-background diagrams are eligible for dark rendering. */
+[data-theme="dark"] img.monochrome-exhibit {
+  filter: invert(0.88);
 }
 
 .zoom-hint {
@@ -1370,4 +1386,57 @@ main {
 .btn-confirm-reset:active {
   background: #dc2626;
   transform: scale(0.97);
+}
+
+/* CALLOUTS & BLOCKQUOTES */
+.md-callout {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-blue, #38BDF8);
+  background: rgba(56, 189, 248, 0.08);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+[data-theme="light"] .md-callout {
+  background: rgba(2, 132, 199, 0.08);
+  border-left-color: #0284c7;
+}
+.md-callout-note {
+  border-left-color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+}
+.md-callout-tip {
+  border-left-color: #10B981;
+  background: rgba(16, 185, 129, 0.08);
+}
+.md-callout-warning {
+  border-left-color: #F59E0B;
+  background: rgba(245, 158, 11, 0.08);
+}
+.md-callout .callout-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.md-callout .callout-content {
+  flex: 1;
+  min-width: 0;
+}
+.md-blockquote {
+  border-left: 3px solid var(--border, #334155);
+  margin: 10px 0;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0 6px 6px 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+[data-theme="light"] .md-blockquote {
+  background: rgba(0, 0, 0, 0.03);
+  border-left-color: #cbd5e1;
 }

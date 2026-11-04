@@ -53,7 +53,15 @@ def main():
 
     # Clean & recreate build directories
     if os.path.exists(BUILD_DIR):
-        shutil.rmtree(BUILD_DIR)
+        for item in os.listdir(BUILD_DIR):
+            item_path = os.path.join(BUILD_DIR, item)
+            try:
+                if os.path.isdir(item_path):
+                    shutil.rmtree(item_path, ignore_errors=True)
+                else:
+                    os.remove(item_path)
+            except Exception:
+                pass
     os.makedirs(BUILD_DIR, exist_ok=True)
     os.makedirs(GEN_DIR, exist_ok=True)
     os.makedirs(CLASSES_DIR, exist_ok=True)

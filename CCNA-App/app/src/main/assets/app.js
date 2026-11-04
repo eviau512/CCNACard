@@ -233,9 +233,46 @@ function formatMarkdown(text) {
   }
   out = newLines.join('\n');
 
-  // 6. Markdown Headings (#, ##, ###)
-  out = out.replace(/^###\s+(.+)$/gm, '<h4 class="md-h4">$1</h4>');
-  out = out.replace(/^##\s+(.+)$/gm, '<h3 class="md-h3">$1</h3>');
+  // 5.5 Blockquotes & Callouts (> [!NOTE], > [!TIP], > ...)
+  const qLines = out.split('\n');
+  const quoteProcessed = [];
+  let qi = 0;
+  while (qi < qLines.length) {
+    const qLine = qLines[qi].trim();
+    if (qLine.startsWith('&gt;')) {
+      const bqGroup = [];
+      while (qi < qLines.length && qLines[qi].trim().startsWith('&gt;')) {
+        bqGroup.push(qLines[qi].trim().replace(/^&gt;\s?/, ''));
+        qi++;
+      }
+      const firstLine = bqGroup[0] || '';
+      const calloutMatch = firstLine.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+      if (calloutMatch) {
+        const type = calloutMatch[1].toLowerCase();
+        const iconMap = {
+          'note': 'ℹ️',
+          'tip': '💡',
+          'important': '❗',
+          'warning': '⚠️',
+          'caution': '🛑'
+        };
+        const icon = iconMap[type] || 'ℹ️';
+        const innerLines = bqGroup.slice(1);
+        quoteProcessed.push(`<div class="md-callout md-callout-${type}"><div class="callout-icon">${icon}</div><div class="callout-content">${innerLines.join('\n')}</div></div>`);
+      } else {
+        quoteProcessed.push(`<blockquote class="md-blockquote">${bqGroup.join('\n')}</blockquote>`);
+      }
+      continue;
+    }
+    quoteProcessed.push(qLines[qi]);
+    qi++;
+  }
+  out = quoteProcessed.join('\n');
+
+  // 6. Markdown Headings (#, ##, ###, ####)
+  out = out.replace(/^####\s+(.+)$/gm, '<h5 class="md-h4">$1</h5>');
+  out = out.replace(/^###\s+(.+)$/gm, '<h4 class="md-h3">$1</h4>');
+  out = out.replace(/^##\s+(.+)$/gm, '<h3 class="md-h2">$1</h3>');
   out = out.replace(/^#\s+(.+)$/gm, '<h2 class="md-h2">$1</h2>');
 
   // 7. Section Bullets (• **...**: or • ...)
@@ -319,7 +356,7 @@ function renderCurrentCard() {
 
   // Handle image exhibit
   if (currentQuestion.image) {
-    exhibitImg.src = currentQuestion.image;
+    setDiagramImage(exhibitImg, currentQuestion.image);
     exhibitWrap.style.display = 'block';
   } else {
     exhibitWrap.style.display = 'none';
@@ -959,7 +996,7 @@ function showExplanation(isCorrect, misconceptionMsg) {
     if (!existingImg) {
       const solImg = document.createElement('img');
       solImg.className = 'solution-img';
-      solImg.src = currentQuestion.answer_image;
+      setDiagramImage(solImg, currentQuestion.answer_image);
       solImg.style.width = '100%';
       solImg.style.borderRadius = '8px';
       solImg.style.marginTop = '12px';
@@ -1387,9 +1424,40 @@ function zoomExhibit() {
   }
 }
 
+// Only invert near-neutral diagrams with a predominantly light background.
+// Color is significant in many exhibits, so colored images remain unchanged.
+function setDiagramImage(img, src) {
+  img.classList.remove('monochrome-exhibit');
+  img.onload = () => {
+    try {
+      const canvas = document.createElement('canvas');
+      const width = img.naturalWidth, height = img.naturalHeight;
+      // Preserve very large images when a full-resolution check would be costly.
+      if (!width || !height || width * height > 4000000) return;
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(img, 0, 0);
+      const pixels = ctx.getImageData(0, 0, width, height).data;
+      let light = 0, visible = 0;
+      for (let i = 0; i < pixels.length; i += 4) {
+        if (pixels[i + 3] < 250) return;
+        const r = pixels[i], g = pixels[i + 1], b = pixels[i + 2];
+        if (Math.max(r, g, b) - Math.min(r, g, b) > 8) return;
+        visible++;
+        if (Math.min(r, g, b) >= 220) light++;
+      }
+      img.classList.toggle('monochrome-exhibit', visible > 0 && light / visible > 0.55);
+    } catch (_) {
+      // Keep the original image if pixel inspection is unavailable.
+    }
+  };
+  img.src = src;
+}
+
 function openLightbox(src) {
   const img = document.getElementById('lightboxImg');
-  img.src = src;
+  setDiagramImage(img, src);
   resetLightboxState();
   document.getElementById('lightbox').classList.add('active');
 }
