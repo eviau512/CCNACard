@@ -1,0 +1,26 @@
+{
+  "scope": "Q1201–Q1201",
+  "corrections": [
+    {
+      "id": 1201,
+      "before_sha256": "b9ce4a2a05342aa56942e8dc8b1be69f95b69ed6d95e62ed69897d44f1b78b90",
+      "reason": "缺拓扑且答案图错题；补三项任务，普通权限、VLAN 5 和精确 RFC1918 /12。",
+      "updates": {
+        "prompt": "SIMULATION-Guidelines-This is a lab item in which tasks will be performed on virtual devices• Refer to the Tasks tab to view the tasks for this lab item.• Refer to the Topology tab to access the device console(s) and perform the tasks.• Console access is available for all required devices by clicking the device icon or using the tab(s) above the console window.• All necessary pre-configurations have been applied.• Do not change the enable password or hostname for any device.• Save your configurations to NVRAM before moving to the next item.• Click Next at the bottom of the screen to submit this lab and move to the next question.• When Next is clicked, the lab closes and cannot be reopened.Topology- Tasks-Refer to the topology. All physical cabling is in place. Configure local user account, configure a Named ACL (NACL), and Dynamic ArpInspection.1.. Configure a local account on Sw3 with telnet access only on virtual ports 0-4. Use the following information:O Username: tech12O Password: load1keyO Algorithm type: md5O Privilege level: Exec mode2.. Configure and apply a NACL on R1 to control network traffic towards ISP:O Name: ISP_ACLO Restrict RFC 1918 class A and B addressesO Allow all other addresses3.. A DHCP IP Pool is preconfigured on R1 for VLAN 5, and DHCP Snooping is configured on Sw2. Configure on Sw2:O Dynamic Arp Inspection for VLAN 5O Enable validation of the ARP packet destination MAC addressO Enable validation of the ARP packet source MAC addressO Enable validation of the ARP Packet IP address\n\nThe topology is unavailable: determine the R1 ISP-facing interface from the live device before applying the ACL.",
+        "answer_image": null,
+        "explanation": "题图缺少拓扑；原答案图是另一道静态路由题，已隐藏并保留审查证据。题设的 Sw3 用户是普通 EXEC（默认 privilege 1），不是 privilege 15；Sw2 是 VLAN 5，不是 VLAN 10。以下以 IOS 支持 MD5 `secret` 的实验平台为例；实际平台及现有 AAA/VTY 配置应先核对。\n\n```text\n! Sw3\nusername tech12 privilege 1 secret load1key\nline vty 0 4\n login local\n transport input telnet\nexit\n! R1: 过滤前往 ISP 的源地址\nip access-list extended ISP_ACL\n deny ip 10.0.0.0 0.255.255.255 any\n deny ip 172.16.0.0 0.15.255.255 any\n permit ip any any\nexit\ninterface <ISP-facing-interface>\n ip access-group ISP_ACL out\nexit\n! Sw2\nip arp inspection vlan 5\nip arp inspection validate src-mac dst-mac ip\nend\n```\n\n172.16.0.0/12 的通配符是 0.15.255.255；题目只要求 RFC 1918 的 A/B 范围。按拓扑和 DHCP snooping 绑定核实信任口，不能凭空指定端口；检查 `show access-lists ISP_ACL`、`show ip interface <ISP-facing-interface>`、`show ip arp inspection` 和绑定表，在各设备保存配置。`ip arp inspection validate` 后续单独执行会覆盖前一次设置，因此三项同一行指定。Telnet 为明文，本题仅按实验要求配置。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1201_answer_image_review1201.jpg"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr/command/ipaddr-cr-book/ipaddr-i1.html",
+    "https://www.rfc-editor.org/rfc/rfc1350",
+    "https://www.rfc-editor.org/rfc/rfc959",
+    "https://www.rfc-editor.org/rfc/rfc2328",
+    "https://www.rfc-editor.org/rfc/rfc768",
+    "https://www.rfc-editor.org/rfc/rfc9293"
+  ],
+  "limitations": "逐题审查、图片直看及地址计算；未进行实机实验。"
+}

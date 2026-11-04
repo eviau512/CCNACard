@@ -1,0 +1,228 @@
+{
+  "scope": [
+    1083,
+    1092
+  ],
+  "corrections": [
+    {
+      "id": 1083,
+      "before_sha256": "3c5be6a19ba86eaa2d7abe220e5d5a90d2d0865f71e22f86243c9455a4a78ad8",
+      "reason": "传统和控制器均可定制；按明确场景区分逐台配置。",
+      "updates": {
+        "prompt": "Compare a centralized Cisco DNA Center deployment with the stated traditional per-device management scenario. Place each adapted characteristic in the appropriate category; entries within each category may be placed in any order.",
+        "drag_drop_data": {
+          "sources": [
+            "orchestrates background device configuration",
+            "custom device configuration is performed directly on each device in this scenario",
+            "relies on per-device management",
+            "supports centralized software management",
+            "supports open APIs",
+            "uses individual software management"
+          ],
+          "targets": [
+            {
+              "label": "Cisco DNA Center (Slot 1)",
+              "sub_label": "",
+              "expected": "orchestrates background device configuration",
+              "unordered_group": "Cisco DNA Center",
+              "id": "t1"
+            },
+            {
+              "label": "Cisco DNA Center (Slot 2)",
+              "sub_label": "",
+              "expected": "supports centralized software management",
+              "unordered_group": "Cisco DNA Center",
+              "id": "t2"
+            },
+            {
+              "label": "Cisco DNA Center (Slot 3)",
+              "sub_label": "",
+              "expected": "supports open APIs",
+              "unordered_group": "Cisco DNA Center",
+              "id": "t3"
+            },
+            {
+              "label": "Traditional (Slot 1)",
+              "sub_label": "",
+              "expected": "custom device configuration is performed directly on each device in this scenario",
+              "unordered_group": "Traditional",
+              "id": "t4"
+            },
+            {
+              "label": "Traditional (Slot 2)",
+              "sub_label": "",
+              "expected": "relies on per-device management",
+              "unordered_group": "Traditional",
+              "id": "t5"
+            },
+            {
+              "label": "Traditional (Slot 3)",
+              "sub_label": "",
+              "expected": "uses individual software management",
+              "unordered_group": "Traditional",
+              "id": "t6"
+            }
+          ]
+        },
+        "explanation": "控制器支持集中软件管理、开放接口和配置编排；传统逐台配置可处理控制器未覆盖的定制，但传统网络也能使用自动化，控制器也能支持自定义。答案图将编排和定制交换，已移除。 原描述将定制灵活性视作传统管理独有，控制器也支持定制；现以题设明确的逐台管理方式替代，不能据此推论其他部署缺乏自动化。"
+      }
+    },
+    {
+      "id": 1087,
+      "before_sha256": "8b97d1f9e9bad388e9aaa741531922d7ffa41c9614bbe3424a49f71d1d445734",
+      "reason": "澄清 REST 无状态与响应缓存规则。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "cacheable",
+            "client-server",
+            "layered system",
+            "stateless",
+            "uniform interface"
+          ],
+          "targets": [
+            {
+              "label": "separates concerns between consumers and producers of a service",
+              "sub_label": "",
+              "expected": "client-server",
+              "id": "t1"
+            },
+            {
+              "label": "organizes a system into a hierarchy of levels",
+              "sub_label": "",
+              "expected": "layered system",
+              "id": "t2"
+            },
+            {
+              "label": "responses identify whether they may be reused by a cache under applicable rules",
+              "sub_label": "",
+              "expected": "cacheable",
+              "id": "t3"
+            },
+            {
+              "label": "each request contains the context needed by the server; the server need not retain client session state between requests",
+              "sub_label": "",
+              "expected": "stateless",
+              "id": "t4"
+            },
+            {
+              "label": "simplifies communication through standard interfaces and formats",
+              "sub_label": "",
+              "expected": "uniform interface",
+              "id": "t5"
+            }
+          ]
+        },
+        "explanation": "client-server 分离关注点；layered system 按层组织；cacheable 允许按缓存规则复用响应；stateless 不依赖服务器保存客户端会话上下文，但服务端可以保存资源状态；uniform interface 统一资源交互约束，不规定只能用 JSON。原答案图错配，已移除。 无状态约束针对服务端保存的客户端会话上下文，并不禁止资源状态或认证。缓存复用受响应指令及其他规则约束。"
+      }
+    },
+    {
+      "id": 1088,
+      "before_sha256": "6269ca8227c9700266cc3955bcd45392a06e68b765b3b8a1a623f354fc4542c0",
+      "reason": "受管节点无须安装 Ansible，但并非不能安装。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "control node",
+            "inventory",
+            "managed node",
+            "module",
+            "playbook",
+            "task"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "collection of actions to perform on target devices, expressed in YAML format",
+              "expected": "playbook"
+            },
+            {
+              "id": "t2",
+              "label": "device with Ansible installed that manages target devices",
+              "expected": "control node"
+            },
+            {
+              "id": "t3",
+              "label": "network device that is a target of Ansible automation",
+              "expected": "managed node"
+            },
+            {
+              "id": "t4",
+              "label": "specific action to be performed on one or more target devices",
+              "expected": "task"
+            },
+            {
+              "id": "t5",
+              "label": "a reusable unit that performs a specific operation",
+              "expected": "module"
+            },
+            {
+              "id": "t6",
+              "label": "a static or dynamic source defining target devices and groups",
+              "expected": "inventory"
+            }
+          ]
+        },
+        "explanation": "playbook 是 YAML 中组织 play 的任务集；control node 运行 Ansible，managed node 是被管理目标；task 调用模块，module 是执行具体工作的可重用单元，常用 Python 但不限定语言；inventory 可来自文件或动态来源。网络模块常在控制节点运行，托管主机也可安装 Ansible。原答案图对调控制与受管节点，已移除。 受管节点无须安装 Ansible，但是否安装并不决定其是否为受管节点。"
+      }
+    },
+    {
+      "id": 1089,
+      "before_sha256": "882b47e8154722710c3e4e4864be37e34656e1ef3b070120041fdf052b0bfcf4",
+      "reason": "限定传统设备逐台管理情境而非绝对规则。",
+      "updates": {
+        "prompt": "In the stated scenarios, classify the characteristics of individually managed traditional networking and controller-based networking. Items within each category may be placed in any order.",
+        "explanation": "传统逐台管理常需对每个设备分别执行变更；控制器可提供集中视图和管理。成本取决于规模、许可与运维，原题把成本较高视为必然不成立，已改为逐台软件操作的明确描述。原答案图所示原文字已失效，移除以免误导。 这里比较的是题设的逐台管理与集中控制方案；传统设备也可以利用自动化工具。"
+      }
+    },
+    {
+      "id": 1090,
+      "before_sha256": "f0a2443301e2c7fb6b2214774a329c418ecb39ed3c7d6cc43db7236cb0f54732",
+      "reason": "SNR 使用噪声功率作为分母，区别 SINR。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "absorption",
+            "noise floor",
+            "reflection",
+            "receiver sensitivity",
+            "signal-to-noise ratio"
+          ],
+          "targets": [
+            {
+              "label": "measure of the minimum power required to decode a radio signal without excessive errors",
+              "sub_label": "",
+              "expected": "receiver sensitivity",
+              "id": "t1"
+            },
+            {
+              "label": "measured background noise power within the receiver bandwidth",
+              "sub_label": "",
+              "expected": "noise floor",
+              "id": "t2"
+            },
+            {
+              "label": "a wave bounces off a surface or boundary",
+              "sub_label": "",
+              "expected": "reflection",
+              "id": "t3"
+            },
+            {
+              "label": "a material converts part of the RF energy passing through it into heat or other forms",
+              "sub_label": "",
+              "expected": "absorption",
+              "id": "t4"
+            },
+            {
+              "label": "ratio of desired signal power to noise power within the relevant receiver bandwidth",
+              "sub_label": "",
+              "expected": "signal-to-noise ratio",
+              "id": "t5"
+            }
+          ]
+        },
+        "explanation": "接收灵敏度是规定误码条件下可解码所需的最低信号功率；噪声底是接收频带噪声功率；反射是波遇界面回弹；吸收是材料将部分射频能量转为热等形式；SNR 是信号与噪声的功率比。自由空间随距离的路径损耗并不是材料吸收。SNR 高低影响可用调制编码，但不保证固定吞吐。原答案图配对错误，已移除。 SNR 的分母是噪声功率；如果同时计入干扰，通常称为信号与干扰加噪声比（SINR）。"
+      }
+    }
+  ]
+}

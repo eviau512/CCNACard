@@ -1,0 +1,300 @@
+{
+  "scope": "Q1031–Q1040",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 1031,
+      "original_qid": "Q1031",
+      "before_sha256": "541f54f21e2cf8250bf3bef8f9f22ac2bacbb0e1f7462599d709e97bd6dd0261",
+      "updates": {
+        "prompt": "Which credential can an enterprise-managed device use for automated 802.1X EAP-TLS network authentication without entering a user password?",
+        "explanation": "D。设备可持有由受信任 CA 签发的证书及相应私钥，通过 EAP-TLS 证明身份；服务器也需正确验证，准入仍受授权策略控制。A 是口令轮换策略；B 的邮件链接主要用于交互式登录；C 仍是一次性密码，并非题设的证书设备认证。证书需妥善保护、更新及吊销，不能保证杜绝所有攻击。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定 EAP-TLS 设备证书，避免泛称无密码无风险",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    },
+    {
+      "id": 1032,
+      "original_qid": "Q1032",
+      "before_sha256": "0767daa75d2399db4080f87379827977281abc1d0ff3eb8a84b880717367477e",
+      "updates": {
+        "prompt": "Which authentication method directly verifies a user’s physical biometric trait, such as a fingerprint?",
+        "explanation": "A。生物识别比对指纹、人脸或虹膜等生理特征。B 是知识因子；D 通常使用设备持有的证书和私钥；C 是组合多种不同因子的方法，可以包含生物识别，但并非一定要求它。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定物理生物特征，MFA 不一定包含生物识别",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    },
+    {
+      "id": 1033,
+      "original_qid": "Q1033",
+      "before_sha256": "a1d458c25091bc5dc8273eb12a21ff340826039c240388835699372fe94077f3",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming the switches exchange BPDUs within the same STP instance and the displayed priorities include the same system ID extension, which switch becomes root?",
+        "explanation": "B。图示 SW1、SW2、SW3、SW4 的优先级分别为 32768、4096、8192、12288。SW2 最低，因此其 Bridge ID 最小；优先级不并列时不必比较 MAC。若无法接收 BPDU 或属于不同 STP 实例，不能据此推断整个拓扑的根桥。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对拓扑优先级及 STP 实例前提",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      },
+      "exhibit_path": "Examtopics\\audit\\exhibits\\q1033_agent.jpg",
+      "image_sha256": "1776d7af49de92d6edcda913af75af3ebefefe5a97730eb131425daea09806ac"
+    },
+    {
+      "id": 1034,
+      "original_qid": "Q1034",
+      "before_sha256": "46ac2c392f126fbf97f0f2fb6f81477fadca4f0795c61c07c00902e21f1b1405",
+      "updates": {
+        "prompt": "Refer to the exhibit. The switches exchange BPDUs in one STP instance with the same system ID extension. Their bridge MAC addresses are SW1 0C:B4:86:22:42:37, SW2 0C:0B:15:22:05:97, SW3 0C:0B:15:1A:3C:9D, and SW4 0C:B0:18:A1:B3:19. Which becomes root?",
+        "explanation": "C。图中 SW3 和 SW4 的优先级均为 4096，低于 SW1/SW2 的 8192；比较并列者的 MAC，SW3 的第二字节 0B 小于 SW4 的 B0，因此 SW3 Bridge ID 最低。假设所有设备均在同一可交换 BPDU 的 STP 实例。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对拓扑优先级与 MAC，修复非 ASCII 字符",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      },
+      "exhibit_path": "Examtopics\\audit\\exhibits\\q1034_agent.jpg",
+      "image_sha256": "57efa6d16743fbae73b94cd017ad0465e1afb6869d0053fa02e998e7cc27de96"
+    },
+    {
+      "id": 1035,
+      "original_qid": "Q1035",
+      "before_sha256": "0b5a3847731e703ab288db853268089b1860567c06055d1f799347a32953a1d7",
+      "updates": {
+        "prompt": "Which mechanism improves password-based authentication in WPA3-Personal compared with WPA2-Personal?",
+        "explanation": "B。WPA3-Personal 使用 SAE 密码认证密钥交换，旨在抵抗被动抓包后的离线密码猜测，并提供前向保密；实际安全仍取决于实现、密码强度及部署。SAE 协商所得密钥随后仍用于四次握手，不能说取消了四次握手。A 是配置或配对机制；C 也可用于企业模式；D 对前代并非新增。兼容过渡模式可能保留 WPA2-PSK。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "修正 SAE 并未废弃四次握手及过渡模式",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    },
+    {
+      "id": 1036,
+      "original_qid": "Q1036",
+      "before_sha256": "46432434f94ab42966382df79f73c5c946f598c29168f430d5034eb3d4582477",
+      "updates": {
+        "prompt": "For Ansible’s standard SSH connection to a supported Unix managed host, which protocol transports tasks and modules?",
+        "explanation": "D。Ansible 常用 SSH 连接 Unix 主机以传输和运行模块；A Telnet 明文，B Kerberos 是认证机制，C SNMP 通常用于管理和监控。不同连接插件也可使用 HTTPS、WinRM 等；网络设备模块通常在控制节点运行，再通过 network_cli、NETCONF 或 API 与设备通信，不能泛称所有模块均推送到网络设备。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定 Unix SSH 模块传输，网络模块可在控制端运行",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    },
+    {
+      "id": 1037,
+      "original_qid": "Q1037",
+      "before_sha256": "88656a75d67486c8ea16e96fde6fd330ff47263452b8a6c3a003e98b20321771",
+      "updates": {
+        "explanation": "C。迭代解析中，发起查询的解析器可能根据响应中的委派信息继续询问其他服务器，直至取得答案、否定响应或失败；缓存命中时未必需要逐级访问。A 不需联系所有根服务器；B DNS 迭代本身不提供加密；D 属于更新而非查询。递归服务器一般代表终端执行这些迭代查询，委派响应也未必直接包含地址。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "修正迭代引荐、缓存和失败分支",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    },
+    {
+      "id": 1038,
+      "original_qid": "Q1038",
+      "before_sha256": "87b82ea1a8b3cfdfe70de80baeda47070768c124ca09d95e278e1f6081eb8438",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Controller-based networks centralize forwarding of all user traffic; traditional networks distribute it."
+          },
+          {
+            "label": "B",
+            "text": "Traditional networks centralize control decisions while controller-based networks distribute every control decision."
+          },
+          {
+            "label": "C",
+            "text": "Traditional networks centralize all user traffic forwarding while controller-based networks distribute it."
+          },
+          {
+            "label": "D",
+            "text": "Controller-based networks can centralize network-wide control decisions, while traditional networks commonly distribute them among devices."
+          }
+        ],
+        "explanation": "D。在典型 SDN 模型中，控制器可提供集中视图并负责部分网络级控制和策略，传统网络通常由各设备通过分布式协议决定控制状态。数据转发通常仍在设备上进行，实际控制器架构也可能采用分布式控制器或保留设备本地控制平面，不能断言所有控制功能都集中。A、C 将用户转发集中化；B 颠倒题意。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "消除所有控制功能集中与设备无控制面断言",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    },
+    {
+      "id": 1039,
+      "original_qid": "Q1039",
+      "before_sha256": "f782b29d0d592449b96b83d49b40efc1c42f6d78826d9ef8aa27d67aba590e21",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "to allow SSH access to all nodes in the network"
+          },
+          {
+            "label": "B",
+            "text": "to provide software redundancy in the network"
+          },
+          {
+            "label": "C",
+            "text": "to perform upgrades without service interruption"
+          },
+          {
+            "label": "D",
+            "text": "to provide fast and accurate deployment of patches and updates"
+          }
+        ],
+        "explanation": "D。Cisco DNA Center（现称 Catalyst Center）的软件镜像管理可集中规划和执行适用设备的镜像更新、合规检查与升级流程，减少人工操作并提高一致性。A 的 SSH 访问不是生命周期管理本身；B 并非其主要目的；C 不保证所有升级均无业务中断，具体取决于设备和方案。自动化不能保证完全杜绝错误。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "修正选项拼写及自动化无差错断言",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    },
+    {
+      "id": 1040,
+      "original_qid": "Q1040",
+      "before_sha256": "e3dd5ff81d2eae64ac83f3af294bf9801e6ab80756fd08826920cb6bf130442a",
+      "updates": {
+        "prompt": "On a Cisco Catalyst 9800 wireless controller, which interface is the default for in-band management and is used for AP CAPWAP communication?",
+        "explanation": "D。Catalyst 9800 的 wireless management interface 是用于 AP/CAPWAP 通信的三层接口，也是带内管理的默认接口；它需在具体部署中配置。A 是管理方式而非接口名；B 冗余端口用于高可用连接；C service port 用于带外管理。不同 WLC 产品和版本的接口名称及细节可能不同。"
+      },
+      "reason": "逐项核对并修正原解析或题目边界。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定 Catalyst 9800 并区分 WMI 与带外管理",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+          "https://www.rfc-editor.org/rfc/rfc1034"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wpa3-dg.html",
+    "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-5/config-guide/b_wl_17_5_cg/m_config-wmi.html",
+    "https://www.rfc-editor.org/rfc/rfc1034"
+  ],
+  "limitations": "查看原图并核对文档；未进行真实设备实验。"
+}

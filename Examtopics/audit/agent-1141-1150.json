@@ -1,0 +1,779 @@
+{
+  "scope": "Q1141–Q1150",
+  "corrections": [
+    {
+      "id": 1141,
+      "before_sha256": "6494a34c66f5c3f312207eb9a68a70b555025050ff10761e84cba8c158cdd692",
+      "reason": "修复绑定表定义及 trusted 接口措辞。",
+      "updates": {
+        "prompt": "Match DHCP snooping terms to the corrected descriptions. The original exhibit contains inaccurate wording; use the interactive text.",
+        "drag_drop_data": {
+          "sources": [
+            "DHCP server",
+            "snooping binding database",
+            "spurious DHCP server",
+            "trusted",
+            "untrusted"
+          ],
+          "targets": [
+            {
+              "label": "table of learned DHCP client IP, MAC, lease, VLAN and port bindings",
+              "sub_label": "",
+              "expected": "snooping binding database"
+            },
+            {
+              "label": "network component that propagates IP addresses to hosts on the network",
+              "sub_label": "",
+              "expected": "DHCP server"
+            },
+            {
+              "label": "interface administratively trusted to receive DHCP server responses",
+              "sub_label": "",
+              "expected": "trusted"
+            },
+            {
+              "label": "unknown DHCP server within an administrative domain",
+              "sub_label": "",
+              "expected": "spurious DHCP server"
+            },
+            {
+              "label": "default state of all interfaces",
+              "sub_label": "",
+              "expected": "untrusted"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "绑定数据库记录 DHCP snooping 学到的客户端 IP、MAC、租期、VLAN 和接口，而不是未知主机列表。管理员将通往合法 DHCP 服务器或上游的端口设为 trusted；未配置时交换机接口通常为 untrusted。DHCP server 分配地址；spurious DHCP server 指未授权服务器。非信任端口收到的服务器响应会被丢弃，其他 DHCP 客户端流量不能一概称为服务器报文。原答案图以错误描述作答，保留题图供追溯。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "修复绑定表定义及 trusted 接口措辞。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the DHCP snooping terms from the left onto the descriptions on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "DHCP server",
+            "snooping binding database",
+            "spurious DHCP server",
+            "trusted",
+            "untrusted"
+          ],
+          "targets": [
+            {
+              "label": "list of hosts on the network that are unknown to the administrative domain",
+              "sub_label": "",
+              "expected": "snooping binding database"
+            },
+            {
+              "label": "network component that propagates IP addresses to hosts on the network",
+              "sub_label": "",
+              "expected": "DHCP server"
+            },
+            {
+              "label": "internal device under the control of the network administrator",
+              "sub_label": "",
+              "expected": "trusted"
+            },
+            {
+              "label": "unknown DHCP server within an administrative domain",
+              "sub_label": "",
+              "expected": "spurious DHCP server"
+            },
+            {
+              "label": "default state of all interfaces",
+              "sub_label": "",
+              "expected": "untrusted"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| DHCP 安全特性与角色定义 | 正确对应的术语 |\n| :--- | :--- |\n| **list of hosts on the network that are unknown to the administrative domain** | `snooping binding database` (Snooping 绑定数据库) |\n| **network component that propagates IP addresses to hosts on the network** | `DHCP server` (DHCP 服务器) |\n| **internal device under the control of the network administrator** | `trusted` (信任设备/接口) |\n| **unknown DHCP server within an administrative domain** | `spurious DHCP server` (私设/伪造的恶意 DHCP 服务器) |\n| **default state of all interfaces** | `untrusted` (默认非信任状态) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **`snooping binding database`**：交换机监听 Untrusted 端口上的 DHCP 交互过程，动态记录客户端 MAC、租得的 IP、租约期限、VLAN 与物理接口的映射绑定关系。\n2. **`DHCP server`**：负责在网络中响应终端请求并分发 IP 掩码、网关和 DNS 的合法服务节点。\n3. **`trusted`**：管理员手工指定的信任端口（如连接合法 DHCP 服务器或上行交换机端口），允许放行 DHCP Offer/ACK 回应报文。\n4. **`spurious DHCP server`**：内网未经授权私自接入的 Rogue DHCP 服务器。\n5. **`untrusted`**：交换机启用 DHCP Snooping 后，所有端口默认均为非信任端口，禁止传入任何 DHCP 服务器报文。"
+      },
+      "exhibit_path": "exhibits/q1141_image_agent1141.jpg"
+    },
+    {
+      "id": 1142,
+      "before_sha256": "9adf210541ea8740afc46d8f3c8be4915d6fefb218ab420abad6f2138324c848",
+      "reason": "ULA 冲突概率和 IPv6 源地址例外。",
+      "updates": {
+        "prompt": "Classify the corrected IPv6 characteristics. Place both items in each category in either order; the exhibit shows the original wording.",
+        "drag_drop_data": {
+          "sources": [
+            "is a counterpart of private IPv4 addresses",
+            "sends packets to a group address rather than a single address",
+            "typically uses a unicast source and a multicast group destination",
+            "uses a pseudo-random global ID that reduces inter-site prefix collision risk"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "is a counterpart of private IPv4 addresses",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "uses a pseudo-random global ID that reduces inter-site prefix collision risk",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "typically uses a unicast source and a multicast group destination",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "ULA 是类似 IPv4 私网的本地用途单播地址，RFC 4193 使用伪随机全局 ID 降低合并时前缀冲突概率，并不保证零冲突。组播把数据发送到组地址，通常使用单播源；IPv6 未指定源地址在特定场景亦可出现，因此不能说源地址永远必须为单播。组内两个槽可交换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "ULA 冲突概率和 IPv6 源地址例外。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the IPv6 address type on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "is a counterpart of private IPv4 addresses",
+            "sends packets to a group address rather than a single address",
+            "has a unicast source sent to a group",
+            "allows sites to be combined without address conflicts"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "is a counterpart of private IPv4 addresses",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "allows sites to be combined without address conflicts",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "has a unicast source sent to a group",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| IPv6 地址类型 | 正确对应的特性描述 |\n| :--- | :--- |\n| **Unique Local** | `is a counterpart of private IPv4 addresses` (相当于 IPv4 私网地址)<br>`allows sites to be combined without address conflicts` (随机全局 ID 允许站点无冲突合并) |\n| **Multicast** | `sends packets to a group address rather than a single address` (发往组播组地址)<br>`has a unicast source sent to a group` (报文源地址为单播地址，目的为组播组) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Unique Local (ULA)**：对应 RFC 1918 私网概念，前缀 `FC00::/7`。\n2. **Multicast 报文特征**：组播报文的**源 IP 永远是单播地址（Unicast Source）**，绝不能是组播地址；而**目的 IP 是组播组地址（Multicast Group Destination）**。"
+      },
+      "exhibit_path": "exhibits/q1142_image_agent1141.jpg"
+    },
+    {
+      "id": 1143,
+      "before_sha256": "262250cb3cd6c89680cde8b5d280957d3c361356196b832b80f6f45a3dc08d9f",
+      "reason": "纠正模式与波长混同。",
+      "updates": {
+        "prompt": "Match the corrected characteristics to the fiber type; items within each category are unordered. The original exhibit uses misleading wavelength wording.",
+        "drag_drop_data": {
+          "sources": [
+            "supports one spatial propagation mode at its specified wavelength",
+            "suffers intermodal dispersion that can limit link distance",
+            "is typically used for internal datacenter connectivity",
+            "is commonly used for longer-reach optical links"
+          ],
+          "targets": [
+            {
+              "label": "multimode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "is typically used for internal datacenter connectivity",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "multimode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "suffers intermodal dispersion that can limit link distance",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "supports one spatial propagation mode at its specified wavelength",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "is commonly used for longer-reach optical links",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "多模光纤支持多个空间传播模式，模间色散限制链路距离，常用于数据中心互联。单模光纤在设计波长支持单个空间模式，常用于较长距离；单模并不意味着只能使用一个波长，WDM 可在同一光纤承载多个波长。实际距离取决于光模块和链路预算。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "纠正模式与波长混同。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the cable type on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "uses a single wavelength on light",
+            "becomes distorted at longer lengths",
+            "is typically used for internal datacenter connectivity",
+            "has minimal light reflection as it travels down the core"
+          ],
+          "targets": [
+            {
+              "label": "multimode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "is typically used for internal datacenter connectivity",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "multimode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "becomes distorted at longer lengths",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "uses a single wavelength on light",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "has minimal light reflection as it travels down the core",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| 光纤类型 | 正确对应的光学与布线特性 |\n| :--- | :--- |\n| **multimode fiber** (多模光纤, MMF) | `is typically used for internal datacenter connectivity` (常用于数据中心机房内短距互联)<br>`becomes distorted at longer lengths` (距离变长时光脉冲产生模间色散畸变) |\n| **single-mode fiber** (单模光纤, SMF) | `uses a single wavelength on light` (使用单一波长的窄带激光)<br>`has minimal light reflection as it travels down the core` (光线沿 9 微米纤芯直线传播，几乎无反射) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Multimode Fiber（50/62.5 微米大纤芯）**：成本低，搭配 LED 或 VCSEL 光模块，通常适用于 500 米以内数据中心机架间或楼宇垂直主干互联。长距离时由于光沿不同路径反射，产生严重的模间色散（Modal Distortion）。\n2. **Single-Mode Fiber（9 微米极细纤芯）**：搭配半导体激光器（Laser），光波几乎平行于光纤轴线直线传播，内部反射损耗极小，支持上百公里的无中继长途骨干传输。"
+      },
+      "exhibit_path": "exhibits/q1143_image_agent1141.jpg"
+    },
+    {
+      "id": 1144,
+      "before_sha256": "57f4de2c9c01798866a39ba8bd0f1148853c3813cea5b36dc78933384d4c1fad",
+      "reason": "规范化链路本地、组播和 ULA 示例。",
+      "updates": {
+        "prompt": "Classify the corrected sample IPv6 addresses by type. Use the interactive addresses; the original exhibit includes invalid or reserved example fields.",
+        "drag_drop_data": {
+          "sources": [
+            "2000:87aa:84ab:fdd9:5ac3:41a5:ef72:1",
+            "fd00:c51f:922d:0c12:9c54:7644:28f5:3",
+            "fe80::7",
+            "ff02::12"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2000:87aa:84ab:fdd9:5ac3:41a5:ef72:1"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80::7"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff02::12"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fd00:c51f:922d:0c12:9c54:7644:28f5:3"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "2000::/3 为分配用于全球单播的范围，不保证任意示例均在公网可达；fe80::/10 中的链路本地地址此处采用 fe80:: 格式；ff02:: 为链路本地范围组播；fd00::/8 为本地生成的 ULA。原图 fc00 使用保留 L 位、ff00 使用保留 scope，且原 fe80 地址的保留位非零，示例已规范化。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "规范化链路本地、组播和 ULA 示例。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the IPv6 address from the left onto the type on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "2000:87aa:84ab:fdd9:5ac3:41a5:ef72:1",
+            "fc00:c51f:922d:0c12:9c54:7644:28f5:3",
+            "fe80:ccc7:17f1:5d15:f611:5cea:ef92:7",
+            "ff00:520a:3e47:de13:fe6f:476e:5325:12"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2000:87aa:84ab:fdd9:5ac3:41a5:ef72:1"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80:ccc7:17f1:5d15:f611:5cea:ef92:7"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff00:520a:3e47:de13:fe6f:476e:5325:12"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fc00:c51f:922d:0c12:9c54:7644:28f5:3"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| IPv6 地址类型 | 标准前缀 | 对应的地址条目 |\n| :--- | :--- | :--- |\n| **Global Unicast** | `2000::/3` | `2000:87aa:84ab:fdd9:5ac3:41a5:ef72:1` |\n| **Link-Local Unicast** | `FE80::/10` | `fe80:ccc7:17f1:5d15:f611:5cea:ef92:7` |\n| **Multicast** | `FF00::/8` | `ff00:520a:3e47:de13:fe6f:476e:5325:12` |\n| **Unique Local** | `FC00::/7` | `fc00:c51f:922d:0c12:9c54:7644:28f5:3` |\n\n• **逐项核心考点与原理深度解析**：\n\n- `2000::/3` 开头为互联网全局单播地址。\n- `FE80::/10` 开头为本地链路地址（单跳广播域）。\n- `FF00::/8` 开头为组播地址。\n- `FC00::/7` 开头为企业内网唯一本地地址。"
+      },
+      "exhibit_path": "exhibits/q1144_image_agent1141.jpg"
+    },
+    {
+      "id": 1145,
+      "before_sha256": "d311730ae5a56551332e733b7a4bd7eb33d74f4f6aa9c5636dda9062802ebca4",
+      "reason": "纠正单模/多模与波长混同。",
+      "updates": {
+        "prompt": "Match the corrected fiber characteristics to the fiber type; the two items in each category may be placed in either order.",
+        "drag_drop_data": {
+          "sources": [
+            "supports multiple spatial propagation modes",
+            "has a core diameter of 9 microns",
+            "intermodal dispersion can limit its link distance",
+            "supports a single spatial propagation mode at its specified wavelength"
+          ],
+          "targets": [
+            {
+              "label": "multimode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "supports multiple spatial propagation modes",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "multimode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "intermodal dispersion can limit its link distance",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "has a core diameter of 9 microns",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "supports a single spatial propagation mode at its specified wavelength",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "多模支持多个空间模式，模间色散限制距离；单模在设计波长只传输单一空间模式，典型纤芯直径约 9 μm。模式数和波长数不是同一概念，单模系统也可通过 WDM 使用多个波长；传输距离还取决于模块与链路预算。原答案图的单/多波长说法不准确。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "纠正单模/多模与波长混同。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the cable type on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "uses multiple wavelengths of light",
+            "has a core diameter of 9 microns",
+            "has increased attenuation over long distances",
+            "uses a single wavelength of light"
+          ],
+          "targets": [
+            {
+              "label": "multimode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "uses multiple wavelengths of light",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "multimode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "has increased attenuation over long distances",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "has a core diameter of 9 microns",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "uses a single wavelength of light",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| 光纤类型 | 物理特性与参数 |\n| :--- | :--- |\n| **multimode fiber** (多模光纤) | `uses multiple wavelengths of light` (支持/使用多种波长/多传播模式)<br>`has increased attenuation over long distances` (随传输距离增加衰减和色散急剧增大) |\n| **single-mode fiber** (单模光纤) | `has a core diameter of 9 microns` (纤芯直径仅约 9 微米)<br>`uses a single wavelength of light` (使用单一波长激光直射) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **单模光纤（SMF）**：典型纤芯直径为 8~10 微米（标准 9 微米），包层 125 微米。仅允许单一基模光波通过，无模间色散。\n2. **多模光纤（MMF）**：纤芯通常为 50 或 62.5 微米，允许光波以多种角度和模式向前反射传播，距离较长时衰减和脉冲展宽极为明显。"
+      },
+      "exhibit_path": "exhibits/q1145_image_agent1141.jpg"
+    },
+    {
+      "id": 1146,
+      "before_sha256": "af1d3a9f2f08de244158216221128be70622452914450ce72ca33dc13765190f",
+      "reason": "RFC4291 已取消 anycast 源地址限制。",
+      "updates": {
+        "prompt": "Classify the corrected IPv6 anycast and multicast characteristics; each group is unordered.",
+        "drag_drop_data": {
+          "sources": [
+            "allows multiple receivers to join the same multicast group",
+            "delivers a packet to one of multiple interfaces sharing an address",
+            "is routed to the nearest interface that has the address",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "label": "Anycast (Slot 1)",
+              "sub_label": "",
+              "expected": "is routed to the nearest interface that has the address",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Anycast (Slot 2)",
+              "sub_label": "",
+              "expected": "delivers a packet to one of multiple interfaces sharing an address",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "allows multiple receivers to join the same multicast group",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "Anycast 将同一地址分配给多个接口，路由把每个包送到路由度量较近的一个接口；multicast 让多个接收者加入同一组并支持一对多。原图声称 anycast 不能作为源地址是已过时的限制；RFC 4291 取消该限制，RFC 7094 说明服务端可使用 anycast 源地址。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "RFC4291 已取消 anycast 源地址限制。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the IPv6 address type on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "is assigned to multiple devices on the same network simultaneously",
+            "cannot be used as a source address",
+            "is routed to the nearest interface that has the address",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "label": "Anycast (Slot 1)",
+              "sub_label": "",
+              "expected": "is routed to the nearest interface that has the address",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Anycast (Slot 2)",
+              "sub_label": "",
+              "expected": "cannot be used as a source address",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "is assigned to multiple devices on the same network simultaneously",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| IPv6 通信类型 | 路由转发与配置特征 |\n| :--- | :--- |\n| **Anycast** (任播通信, One-to-Nearest) | `is routed to the nearest interface that has the address` (路由至拓扑度量最近的单台接口)<br>`cannot be used as a source address` (RFC 规范禁止作为报文源地址) |\n| **Multicast** (组播通信, One-to-Many) | `is assigned to multiple devices on the same network simultaneously` (可同时由网段内多个主机侦听)<br>`provides one-to-many communications` (提供一对多数据流分发) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Anycast（任播）**：\n   - 多个分布在不同地理位置的服务器配置相同的任播 IP（常用于根 DNS、CDN 网关），通过 BGP/OSPF 发布路由。客户端发往该 IP 的数据包由路由协议自动转发到**网络距离最近（Nearest）的一台服务器**。RFC 4291 严禁将任播地址用作 IPv6 报文的 Source Address。\n2. **Multicast（组播）**：\n   - 数据发送到特定的多播组，所有加入该组的成员主机均会收到拷贝（一对多通信）。"
+      },
+      "exhibit_path": "exhibits/q1146_image_agent1141.jpg"
+    },
+    {
+      "id": 1147,
+      "before_sha256": "1b3cc6575520d26c71a8298cd1301b133304b736bfe4f2da6c299791128e036c",
+      "reason": "核对 AAA 两组映射和组内乱序。",
+      "updates": {
+        "explanation": "Accounting 记录连接时长并支持用户访问报告；Authorization 决定是否允许访问 FTP 等资源并限制可执行的 CLI 命令。使用 TACACS+ 验证用户和确认身份属于 Authentication，是未使用的干扰项。两个 Accounting 槽和两个 Authorization 槽各自组内可互换，组间不可混放。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对 AAA 两组映射和组内乱序。"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **Accounting** | `It records the duration of each connection.` |\n| **Accounting** | `It supports User Access Reporting.` |\n| **Authorization** | `It grants access to network assets, such as FTP servers.` |\n| **Authorization** | `It restricts the CLI commands that a user is able to perform.` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【Accounting】** → **正确匹配**：`It records the duration of each connection.`\n   - **【核心技术特征】**：计费/审计（Accounting）回答“你做了什么？”的问题，收集并记录用户会话的开始/结束时间、已执行命令、传输字节数等日志，用于合规审计。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It records the duration of each connection.` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【Accounting】** → **正确匹配**：`It supports User Access Reporting.`\n   - **【核心技术特征】**：计费/审计（Accounting）回答“你做了什么？”的问题，收集并记录用户会话的开始/结束时间、已执行命令、传输字节数等日志，用于合规审计。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It supports User Access Reporting.` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【Authorization】** → **正确匹配**：`It grants access to network assets, such as FTP servers.`\n   - **【核心技术特征】**：授权（Authorization）回答“你能做什么？”的问题，在用户通过认证后，确定其被允许执行的操作级别、命令集或可访问的网络资源。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It grants access to network assets, such as FTP servers.` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【Authorization】** → **正确匹配**：`It restricts the CLI commands that a user is able to perform.`\n   - **【核心技术特征】**：授权（Authorization）回答“你能做什么？”的问题，在用户通过认证后，确定其被允许执行的操作级别、命令集或可访问的网络资源。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It restricts the CLI commands that a user is able to perform.` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **statements about AAA services** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。"
+      },
+      "exhibit_path": "exhibits/q1147_image_agent1141.jpg"
+    },
+    {
+      "id": 1148,
+      "before_sha256": "a1264a9af27e269ade3529559285d82c49e538b448a8182623221b8343852108",
+      "reason": "规范化链路本地、组播和 ULA 示例。",
+      "updates": {
+        "prompt": "Classify the corrected sample IPv6 addresses by type. Use the interactive addresses; the original exhibit includes invalid or reserved example fields.",
+        "drag_drop_data": {
+          "sources": [
+            "fe80::7",
+            "2000:1092:a1e8:827d:527c:3ce7:9816:1",
+            "ff02::12",
+            "fd00:9860:653f:5146:8cb2:a27c:cb6f:3"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2000:1092:a1e8:827d:527c:3ce7:9816:1"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80::7"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff02::12"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fd00:9860:653f:5146:8cb2:a27c:cb6f:3"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "2000::/3 为分配用于全球单播的范围，不保证任意示例均在公网可达；fe80::/10 中的链路本地地址此处采用 fe80:: 格式；ff02:: 为链路本地范围组播；fd00::/8 为本地生成的 ULA。原图 fc00 使用保留 L 位、ff00 使用保留 scope，且原 fe80 地址的保留位非零，示例已规范化。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "规范化链路本地、组播和 ULA 示例。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the IPv6 address from the left onto the type on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "fe80:cc72:4b9e:445c:8179:0420:5988:7",
+            "2000:1092:a1e8:827d:527c:3ce7:9816:1",
+            "ff00:ec6c:dbb1:3e8b:6d46:bd27:a236:12",
+            "fc00:9860:653f:5146:8cb2:a27c:cb6f:3"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2000:1092:a1e8:827d:527c:3ce7:9816:1"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80:cc72:4b9e:445c:8179:0420:5988:7"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff00:ec6c:dbb1:3e8b:6d46:bd27:a236:12"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fc00:9860:653f:5146:8cb2:a27c:cb6f:3"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| IPv6 类型 | 标准前缀范围 | 匹配地址 |\n| :--- | :--- | :--- |\n| **Global Unicast** | `2000::/3` | `2000:1092:a1e8:827d:527c:3ce7:9816:1` |\n| **Link-Local Unicast** | `FE80::/10` | `fe80:cc72:4b9e:445c:8179:0420:5988:7` |\n| **Multicast** | `FF00::/8` | `ff00:ec6c:dbb1:3e8b:6d46:bd27:a236:12` |\n| **Unique Local** | `FC00::/7` | `fc00:9860:653f:5146:8cb2:a27c:cb6f:3` |\n\n• **逐项核心考点与原理深度解析**：\n\n- `2000::/3`：全球单播可路由地址。\n- `FE80::/10`：直连链路本地单播地址。\n- `FF00::/8`：组播地址。\n- `FC00::/7`：企业私有唯一本地单播地址。"
+      },
+      "exhibit_path": "exhibits/q1148_image_agent1141.jpg"
+    },
+    {
+      "id": 1149,
+      "before_sha256": "4a3ee8466013126526c080bc4b70fb3a78c3f76a8be6815d4007e9d24da8f5b9",
+      "reason": "核对原拓扑，纠正选举、配置上下文和环回前缀限制。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "题图显示 OSPF 进程 1、Area 0，R1/R2 共链路为 10.10.12.0/24，接口分别是 .1/.2；R1/R3 的 E0/1 相连，R2 到 R1 和 R3 分别是 E0/0 与 E0/2。示例（执行前核对配置，重启 OSPF 会中断邻接）：\n\n```text\nR1(config)# router ospf 1\nR1(config-router)# router-id 10.10.12.1\nR1(config-router)# network 192.168.1.1 0.0.0.0 area 0\nR1(config-router)# passive-interface Ethernet0/1\n\nR2(config)# interface Ethernet0/0\nR2(config-if)# ip ospf priority 255\nR2(config)# interface Ethernet0/2\nR2(config-if)# ip ospf priority 255\nR2(config)# router ospf 1\nR2(config-router)# router-id 10.10.12.2\nR2(config-router)# network 192.168.2.2 0.0.0.0 area 0\n\nR3(config)# router ospf 1\nR3(config-router)# network 192.168.3.3 0.0.0.0 area 0\nR3(config-router)# passive-interface Ethernet0/1\n```\n\n确认 R2 两个接口均启用 OSPF area 0，R1/R3 对应接口优先级为默认 1。DR 选举非抢占：需要在合适维护窗口重建相关网段上的 OSPF 邻接后检查 `show ip ospf neighbor` 和 `show ip ospf interface`；单独清除 R2 进程未必取代仍在工作的现有 DR。host wildcard 只精确选择 Loopback1 接口，OSPF 默认环回网络类型通常通告 /32，与接口上的 /24 配置不同。原答案图片未覆盖所有任务，故隐藏，保留原图证据。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对原拓扑，纠正选举、配置上下文和环回前缀限制。"
+      },
+      "original_fields": {
+        "explanation": "• Lab Task 1 (Router IDs):\nR1 shared link IP is 10.10.12.1; R2 shared link IP is 10.10.12.2.\nR1:\n  router ospf 1\n   router-id 10.10.12.1\nR2:\n  router ospf 1\n   router-id 10.10.12.2\n\n• Lab Task 2 (DR Election):\nSet OSPF priority to max (255) on R2 interfaces facing R1 (E0/0) and R3 (E0/2):\nR2:\n  interface Ethernet0/0\n   ip ospf priority 255\n  interface Ethernet0/2\n   ip ospf priority 255\n  exit\n  clear ip ospf process\n\n• Lab Task 3 (Advertise Loopback1 with Host Wildcard 0.0.0.0):\nR1:\n  router ospf 1\n   network 192.168.1.1 0.0.0.0 area 0\nR2:\n  router ospf 1\n   network 192.168.2.2 0.0.0.0 area 0\nR3:\n  router ospf 1\n   network 192.168.3.3 0.0.0.0 area 0\n\n• Lab Task 4 (Passive Interface between R1 and R3):\nPrevent OSPF hellos/adjacencies across the R1-R3 link (E0/1 on both):\nR1:\n  router ospf 1\n   passive-interface Ethernet0/1\nR3:\n  router ospf 1\n   passive-interface Ethernet0/1\n\n• Save Configuration:\ncopy running-config startup-config"
+      },
+      "exhibit_path": "exhibits/q1149_image_agent1141.jpg"
+    },
+    {
+      "id": 1150,
+      "before_sha256": "a82c63113014dd6e08b305548ccc564e2849694ab2709fa8d7d3496439751b43",
+      "reason": "移除已过时的 anycast 非主机限制。",
+      "updates": {
+        "prompt": "Classify the corrected IPv6 anycast and multicast characteristics; each category has two unordered slots.",
+        "drag_drop_data": {
+          "sources": [
+            "is assigned to more than one interface",
+            "cannot be used as a source address",
+            "delivers a packet to one of the interfaces sharing that address",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "label": "Anycast (Slot 1)",
+              "sub_label": "",
+              "expected": "is assigned to more than one interface",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Anycast (Slot 2)",
+              "sub_label": "",
+              "expected": "delivers a packet to one of the interfaces sharing that address",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "cannot be used as a source address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "Anycast 同一地址可分配给多个接口，路由将包送往其中一个接口；Multicast 用目的组地址实现一对多，组播地址不可作为 IPv6 源地址。原图声称 anycast 只可用于非主机设备已过时，RFC 4291 已取消旧有主机限制。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "移除已过时的 anycast 非主机限制。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the IPv6 address type on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "is assigned to more than one interface",
+            "cannot be used as a source address",
+            "is used exclusively by a non-host device",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "label": "Anycast (Slot 1)",
+              "sub_label": "",
+              "expected": "is assigned to more than one interface",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Anycast (Slot 2)",
+              "sub_label": "",
+              "expected": "is used exclusively by a non-host device",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "cannot be used as a source address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "• **拖拽配对结果速览**：\n\n| 机制类型 | 规范特征 |\n| :--- | :--- |\n| **Anycast** | `is assigned to more than one interface` (配置在多个不同接口上)<br>`is used exclusively by a non-host device` (通常只配置在路由器/网关/服务器服务接口上，终端主机不分配) |\n| **Multicast** | `provides one-to-many communications` (实现一对多分发)<br>`cannot be used as a source address` (绝不能作为数据帧源 IP 地址) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Anycast**：将相同地址分配给多个接口，提供冗余和负载分担。通常部署在网络路由器和权威服务器上，普通终端 host 不配置任播地址。\n2. **Multicast**：接收方主机加入多播组，源端以单播身份向组播目的地址发送报文。组播地址仅能作为 Destination，严禁作为 Source。"
+      },
+      "exhibit_path": "exhibits/q1150_image_agent1141.jpg"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.rfc-editor.org/rfc/rfc4193",
+    "https://www.rfc-editor.org/rfc/rfc7094",
+    "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html"
+  ],
+  "limitations": "人工查看题图及答案图，无真实设备实验。"
+}

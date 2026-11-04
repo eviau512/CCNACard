@@ -1,0 +1,508 @@
+{
+  "scope": "Q1171–Q1180",
+  "corrections": [
+    {
+      "id": 1171,
+      "before_sha256": "533d929147cdd30080ddb7fe038ba1a748f145cce8ff38a864ee27b61a4c6124",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare twisted-pair copper with typical multimode glass fiber.",
+        "drag_drop_data": {
+          "sources": [
+            "twisted-pair copper is susceptible to electromagnetic interference",
+            "multimode fiber commonly uses a 50 or 62.5 micrometer core",
+            "twisted-pair copper is available in shielded and unshielded forms",
+            "glass fiber can be damaged by excessive bending"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "twisted-pair copper is susceptible to electromagnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "twisted-pair copper is available in shielded and unshielded forms",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "multi-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "multimode fiber commonly uses a 50 or 62.5 micrometer core",
+              "unordered_group": "multi-mode fiber"
+            },
+            {
+              "label": "multi-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "glass fiber can be damaged by excessive bending",
+              "unordered_group": "multi-mode fiber"
+            }
+          ]
+        },
+        "explanation": "铜双绞线可分为屏蔽和非屏蔽类型，且会受电磁干扰；多模光纤常见 50 或 62.5 微米芯径，过度弯曲可能损伤光纤。原图的“距离越长衰减越大”和“不当操作可能损坏”对多种介质均成立，已改为限定性描述。光纤及铜线都需要正确施工；光纤也可能被窃听。每类内顺序不限。",
+        "answer_image": null
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1171 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1171。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1172,
+      "before_sha256": "196c36543e10ca11dd1d36e227d9c79e34485027f39382bf4fc15b068d25cfc6",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare IPv6 global unicast with multicast.",
+        "drag_drop_data": {
+          "sources": [
+            "a globally scoped unicast prefix can be advertised on the public Internet",
+            "identifies a group of interfaces as the packet destination",
+            "must not be used as an IPv6 packet source",
+            "identifies a single interface with global scope"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast Address (Slot 1)",
+              "sub_label": "",
+              "expected": "a globally scoped unicast prefix can be advertised on the public Internet",
+              "unordered_group": "Global Unicast Address"
+            },
+            {
+              "label": "Global Unicast Address (Slot 2)",
+              "sub_label": "",
+              "expected": "identifies a single interface with global scope",
+              "unordered_group": "Global Unicast Address"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "identifies a group of interfaces as the packet destination",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "must not be used as an IPv6 packet source",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "全局单播地址标识一个接口，具全球作用域；全球作用域本身不保证公网连通，仍需路由与策略，文档前缀等也不能作为公网可达例证。组播地址标识接收组，只能作目的地址，不能作源地址。原图关于“必定互联网可达”的描述过于绝对，已限定；每类内顺序不限。",
+        "answer_image": null
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1172 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1172。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1173,
+      "before_sha256": "dcb6a9bc5294e29f46a470dd13af562f855691cf57165b0e36d898780fd61500",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Assign two characteristics to an AP and two to a wireless LAN controller; one option is unused.",
+        "drag_drop_data": {
+          "sources": [
+            "provides centralized management and security",
+            "every wireless AP always requires a hardware WLC",
+            "provides the wireless radio interface for client devices",
+            "a controller can be deployed on premises or as a supported virtual instance",
+            "supports both IEEE 802.11 and Ethernet standards"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Access Point (Slot 1)",
+              "expected": "provides the wireless radio interface for client devices",
+              "unordered_group": "Access Point"
+            },
+            {
+              "id": "t2",
+              "label": "Access Point (Slot 2)",
+              "expected": "supports both IEEE 802.11 and Ethernet standards",
+              "unordered_group": "Access Point"
+            },
+            {
+              "id": "t3",
+              "label": "Wireless LAN Controller (Slot 1)",
+              "expected": "provides centralized management and security",
+              "unordered_group": "Wireless LAN Controller"
+            },
+            {
+              "id": "t4",
+              "label": "Wireless LAN Controller (Slot 2)",
+              "expected": "a controller can be deployed on premises or as a supported virtual instance",
+              "unordered_group": "Wireless LAN Controller"
+            }
+          ]
+        },
+        "explanation": "AP 提供无线射频接入，并可桥接 IEEE 802.11 与以太网；WLC 可集中管理 AP 并下发安全策略，控制器可按产品支持情况采用本地或虚拟部署。原图将轻量 AP 一概描述为独立决定转发容易误导：集中交换 WLAN 的数据经控制器，FlexConnect 本地交换由 AP 本地转发。独立 AP 不一定需要硬件 WLC。各类别内顺序不限。",
+        "answer_image": null
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1173 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1173。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1174,
+      "before_sha256": "01e45acb5c52abfdd999848a381918b55240e44cf3a6997dd69bab58f8ed3d0e",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare twisted-pair copper with typical single-mode glass fiber.",
+        "drag_drop_data": {
+          "sources": [
+            "twisted-pair copper can carry Ethernet Power over Ethernet",
+            "single-mode fiber is commonly used for long-distance DWDM",
+            "copper twisted-pair is susceptible to electromagnetic interference",
+            "typical single-mode fiber has a core diameter near 9 micrometers"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "twisted-pair copper can carry Ethernet Power over Ethernet",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "copper twisted-pair is susceptible to electromagnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "single-mode fiber is commonly used for long-distance DWDM",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "typical single-mode fiber has a core diameter near 9 micrometers",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "PoE 可通过符合标准的铜双绞线传输电力，铜缆受电磁干扰；单模光纤常见约 9 微米芯径，可用于长距离 DWDM，具体容量和距离取决于光模块及链路设计。原图将铜缆一概称为容易获取安全信息过于绝对，窃听风险取决于物理与加密防护。每类内可交换顺序。",
+        "answer_image": null
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1174 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1174。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1175,
+      "before_sha256": "7f1755e33b5f8bca569cb7114e0a8456292560fd7393d8aece956ee626fc28c3",
+      "updates": {
+        "prompt": "Classify each adapted IPv6 address by type.",
+        "drag_drop_data": {
+          "sources": [
+            "fe80::4a87:147f:dc21:7",
+            "ff02::1",
+            "fd00:733d:b542:a948:d7fa:eeea:989a:3",
+            "2001:4860:4860::8888"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2001:4860:4860::8888"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80::4a87:147f:dc21:7"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fd00:733d:b542:a948:d7fa:eeea:989a:3"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff02::1"
+            }
+          ]
+        },
+        "explanation": "`2001:4860:4860::8888` 为全局单播格式；`fe80::4a87:147f:dc21:7` 为链路本地单播；`fd00:733d:b542:a948:d7fa:eeea:989a:3` 为本地生成 ULA；`ff02::1` 为链路本地范围组播。原图的 FE80 地址前 64 位保留段非零，FF00 的组播范围为保留值，FC00 的 L 位为 0 而非本地生成 ULA；已改为有效示例。地址格式不保证公网可达。",
+        "answer_image": null
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1175 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1175。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1176,
+      "before_sha256": "03dffdc93d70113fa0020a4f3d62a992e52fa8fe10af4d0b7b5a53382f6223a9",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare twisted-pair copper with multimode fiber.",
+        "drag_drop_data": {
+          "sources": [
+            "twisted-pair copper is affected by electromagnetic interference",
+            "multimode fiber supports multiple optical propagation modes",
+            "twisted-pair copper can carry electrical power using PoE",
+            "multimode fiber transmits information using light pulses"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "twisted-pair copper is affected by electromagnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "twisted-pair copper can carry electrical power using PoE",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "multi-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "multimode fiber supports multiple optical propagation modes",
+              "unordered_group": "multi-mode fiber"
+            },
+            {
+              "label": "multi-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "multimode fiber transmits information using light pulses",
+              "unordered_group": "multi-mode fiber"
+            }
+          ]
+        },
+        "explanation": "铜双绞线可受到电磁干扰，也可按 PoE 标准承载电力；多模光纤以光脉冲传输，允许多种传播模式。原图所谓“折射增加”不是可靠分类描述，窃听难度也不构成绝对安全保证；光纤同样需要物理和加密防护。每组内部可以互换。",
+        "answer_image": null
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1176 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1176。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1177,
+      "before_sha256": "6c04ed978b2ae10214716451eaca51b5bd3d6fd6459aba82fa71def1e8e880f0",
+      "updates": {
+        "prompt": "Configure SW-2 and SW-3 Ethernet0/0 as 802.1Q trunks allowing VLANs 10 and 11, with VLAN 11 native and VLAN 10 tagged. Configure Ethernet0/2 and Ethernet0/3 as a trunk EtherChannel allowing all VLANs, using LACP passive on SW-2 and active on SW-3. The designated channel-group number and topology are not provided; use the actual lab assignment.",
+        "answer_image": null,
+        "explanation": "原答案图属于前一题的光纤分类，且当前材料缺少本题拓扑及指定聚合组号；不能凭空确定组号。以下示例中的 `<N>` 必须替换为题目实际指定的本地组号，并确保 VLAN 10/11 存在。根据设备型号，仅在支持且需要时配置 `switchport trunk encapsulation dot1q`。\n\n```text\n! 在两台交换机分别配置\ninterface ethernet 0/0\n switchport mode trunk\n switchport trunk native vlan 11\n switchport trunk allowed vlan 10,11\n no shutdown\n! SW-2 的成员端口使用 passive；SW-3 将 passive 替换为 active\ninterface range ethernet 0/2 - 3\n channel-group <N> mode passive\n no shutdown\ninterface port-channel <N>\n switchport mode trunk\n switchport trunk allowed vlan all\n```\n`<N>` 是占位符而不是可直接执行的命令；核对两端链路、VLAN/native 和通道兼容性。用 `show etherchannel summary`、`show interfaces trunk` 验证；如要求保存，执行 `copy running-config startup-config`。未进行真实设备实验。"
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1177 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1177。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1178,
+      "before_sha256": "477df71454dacfc3a99f84381d8cab6b0e491241862b52fb02566481795101a7",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare IPv6 link-local unicast and multicast destinations.",
+        "drag_drop_data": {
+          "sources": [
+            "used as the next hop by some IPv6 IGPs on a link",
+            "identifies a group of receiving interfaces in the destination field",
+            "must not appear as the IPv6 source address",
+            "link-local addresses are not routed to another link"
+          ],
+          "targets": [
+            {
+              "label": "Link-Local Address (Slot 1)",
+              "sub_label": "",
+              "expected": "used as the next hop by some IPv6 IGPs on a link",
+              "unordered_group": "Link-Local Address"
+            },
+            {
+              "label": "Link-Local Address (Slot 2)",
+              "sub_label": "",
+              "expected": "link-local addresses are not routed to another link",
+              "unordered_group": "Link-Local Address"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "identifies a group of receiving interfaces in the destination field",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "must not appear as the IPv6 source address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "链路本地地址用于同一链路，不跨路由器转发；OSPFv3 等 IPv6 路由协议可用邻居链路本地地址作为下一跳，但并非所有 IGP 或所有实现均使用。组播目的地址标识接收组，组播地址不能作源地址；某些报文如重复地址检测可使用未指定源地址，不能声称所有组播报文源必为单播。每类内可互换。",
+        "answer_image": null
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1178 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1178。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1179,
+      "before_sha256": "b654714dfee2d6b927c797d5d6c1dceb9ea078158784e79cd0936495d7f64dc3",
+      "updates": {
+        "prompt": "Refer to the displayed routing entries. Assuming the Cisco default administrative distances shown have not been changed, associate each displayed prefix with its route source; one prefix is unused.",
+        "explanation": "图中路由条目的来源代码不可见，但括号内显示管理距离：`207.165.200.244/30 [1/1]` 对应默认静态；`192.168.2.0/24 [90/3184437]` 对应默认内部 EIGRP；`192.168.1.0/24 [110/84437]` 对应默认 OSPF；`172.16.2.0/24 [120/2]` 对应默认 RIP。`207.165.200.248/30` 显示为直连，并非四个所选方法。AD 可被管理员修改，因此仅在题设默认值下可由这些数字推断协议；静态路由也可结合跟踪机制撤销，不应一概说不能自动响应变化。"
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1179 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1179。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    },
+    {
+      "id": 1180,
+      "before_sha256": "94bf68b0b0a466cd51c42698668507d04a38a7c047fbea83daa2ba3ef5bc09bd",
+      "updates": {
+        "prompt": "For 16 sites, divide 10.20.0.0/16 into 16 equal subnets and use the second subnet: assign the first and last usable IPv4 addresses to Sw101 and Sw102 e0/0 respectively. Divide 2001:db8::/52 into 16 equal /56 site prefixes and assign unique 64-bit interface identifiers from a /64 within the second site prefix to each e0/0. The example uses documentation-only IPv6 space; assume routed interfaces and IPv6 support.",
+        "image": "data:image/jpeg;base64,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",
+        "answer_image": null,
+        "explanation": "**IPv4：** 借 4 位得 /20；按从零开始编号，第二个为 `10.20.16.0/20`，范围到 `10.20.31.255`，两端可用地址分别为 `10.20.16.1` 和 `10.20.31.254`，掩码 `255.255.240.0`。\n\n**IPv6：** `/52` 划为 16 个 `/56`，第二个为 **`2001:db8:0:100::/56`**（不是 `2001:db8:100::/56`，后者在不同 /52 中）。选该站点内 `2001:db8:0:100::/64` 作为此链路。`2001:db8::/32` 为文档前缀，不可当作公网部署地址。示例使用两个显式且不同的 64 位接口标识；如平台及任务要求 EUI-64，可在确认接口支持和 MAC 唯一后使用。\n\n```text\n! Sw101，前提：e0/0 为可配置 IP 的三层端口\ninterface ethernet 0/0\n ip address 10.20.16.1 255.255.240.0\n ipv6 address 2001:db8:0:100::1/64\n no shutdown\n! Sw102，同样前提\ninterface ethernet 0/0\n ip address 10.20.31.254 255.255.240.0\n ipv6 address 2001:db8:0:100::2/64\n no shutdown\n```\n若是可转换的交换机端口，按平台要求先配置 `no switchport`；纯二层端口需采用受支持的三层接口/SVI 方案。图中的 e0/0 直接互连；用 `show ip interface brief`、`show ipv6 interface brief` 和双向 ping 验证，必要时保存配置。题目拓扑原来误放在答案图位置，已移回题目区。"
+      },
+      "reason": "逐题对照题图、答案图、分组和技术事实，修复 Q1180 发现的问题。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "逐项核对图像、判分和解析；详见报告 Q1180。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291.html",
+          "https://www.rfc-editor.org/rfc/rfc4193.html",
+          "https://www.rfc-editor.org/rfc/rfc3849.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291.html",
+    "https://www.rfc-editor.org/rfc/rfc4193.html",
+    "https://www.rfc-editor.org/rfc/rfc3849.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_flexconnect_overview.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+  ],
+  "limitations": "审查图像、标准和配置示例；未在真实交换机、WLC 或光纤链路测试。"
+}

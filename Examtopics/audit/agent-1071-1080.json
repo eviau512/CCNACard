@@ -1,0 +1,334 @@
+{
+  "scope": "Q1071–Q1080",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 1071,
+      "original_qid": "Q1071",
+      "before_sha256": "e456752c5563de7b49d194efa6791b889a20ca1dba38dd3330c845dc56b84e55",
+      "reason": "Accounting：记录会话统计和用户执行的命令；Authentication：验证用户凭据、核实尝试访问路由器的身份；Authorization：决定用户权限，包括是否允许进入 enable 模式。",
+      "updates": {
+        "prompt": "DRAG DROP - Match each description to the AAA function it most directly describes. Interpret securing router access here as verifying the identity of a user seeking access.",
+        "explanation": "Accounting：记录会话统计和用户执行的命令；Authentication：验证用户凭据、核实尝试访问路由器的身份；Authorization：决定用户权限，包括是否允许进入 enable 模式。\n\n题中“secures access to routers”宽泛，认证、授权和审计都能帮助保护访问；此处按题设限定的身份核验匹配认证。进入 enable 时也可能需要再次认证，本题将允许其获得权限归于授权。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the descriptions of AAA services from the left onto the corresponding services on the right.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **Accounting** | `log session statistics` |\n| **Accounting** | `records user commands` |\n| **Authentication** | `validates user credentials` |\n| **Authentication** | `secures access to routers` |\n| **Authorization** | `limits the user's access permissions` |\n| **Authorization** | `allows the user to change to enable mode` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【Accounting】** → **正确匹配**：`log session statistics`\n   - **【核心技术特征】**：计费/审计（Accounting）回答“你做了什么？”的问题，收集并记录用户会话的开始/结束时间、已执行命令、传输字节数等日志，用于合规审计。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `log session statistics` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【Accounting】** → **正确匹配**：`records user commands`\n   - **【核心技术特征】**：计费/审计（Accounting）回答“你做了什么？”的问题，收集并记录用户会话的开始/结束时间、已执行命令、传输字节数等日志，用于合规审计。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `records user commands` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【Authentication】** → **正确匹配**：`validates user credentials`\n   - **【核心技术特征】**：身份认证（Authentication）回答“你是谁？”的问题，通过验证用户提供的凭据（如用户名/密码、数字证书或令牌）来确认登录主体合法性。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `validates user credentials` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【Authentication】** → **正确匹配**：`secures access to routers`\n   - **【核心技术特征】**：身份认证（Authentication）回答“你是谁？”的问题，通过验证用户提供的凭据（如用户名/密码、数字证书或令牌）来确认登录主体合法性。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `secures access to routers` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n5. **目标定义 / 属性**：**【Authorization】** → **正确匹配**：`limits the user's access permissions`\n   - **【核心技术特征】**：授权（Authorization）回答“你能做什么？”的问题，在用户通过认证后，确定其被允许执行的操作级别、命令集或可访问的网络资源。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `limits the user's access permissions` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n6. **目标定义 / 属性**：**【Authorization】** → **正确匹配**：`allows the user to change to enable mode`\n   - **【核心技术特征】**：授权（Authorization）回答“你能做什么？”的问题，在用户通过认证后，确定其被允许执行的操作级别、命令集或可访问的网络资源。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `allows the user to change to enable mode` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **descriptions of AAA services** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1071_image_agent.jpg"
+    },
+    {
+      "id": 1072,
+      "original_qid": "Q1072",
+      "before_sha256": "8bb9c3218e99844a5d9bfeaaa38c5972e286ddd5d6ac6d437ad6f07535204cf6",
+      "reason": "Accounting：记录用户消耗的网络资源、跟踪所用服务。Authentication：核验凭据并接受或拒绝登录尝试，可使用本地数据库、RADIUS 或 TACACS+；PPP 可使用相关认证协议，但 PPP 本身不是 AAA 服务器。",
+      "updates": {
+        "explanation": "Accounting：记录用户消耗的网络资源、跟踪所用服务。Authentication：核验凭据并接受或拒绝登录尝试，可使用本地数据库、RADIUS 或 TACACS+；PPP 可使用相关认证协议，但 PPP 本身不是 AAA 服务器。\n\n未使用的“assigns per-user attributes”更直接对应授权。原解析中的无线 AP local 模式与本题无关。"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **Accounting** | `It records the amount of network resources consumed by the user.` |\n| **Accounting** | `It tracks the services that a user is using.` |\n| **Authentication** | `It permits and denies login attempts.` |\n| **Authentication** | `It supports local, PPP, RADIUS, and TACACS+ options` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【Accounting】** → **正确匹配**：`It records the amount of network resources consumed by the user.`\n   - **【核心技术特征】**：计费/审计（Accounting）回答“你做了什么？”的问题，收集并记录用户会话的开始/结束时间、已执行命令、传输字节数等日志，用于合规审计。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It records the amount of network resources consumed by the user.` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【Accounting】** → **正确匹配**：`It tracks the services that a user is using.`\n   - **【核心技术特征】**：计费/审计（Accounting）回答“你做了什么？”的问题，收集并记录用户会话的开始/结束时间、已执行命令、传输字节数等日志，用于合规审计。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It tracks the services that a user is using.` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【Authentication】** → **正确匹配**：`It permits and denies login attempts.`\n   - **【核心技术特征】**：身份认证（Authentication）回答“你是谁？”的问题，通过验证用户提供的凭据（如用户名/密码、数字证书或令牌）来确认登录主体合法性。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It permits and denies login attempts.` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【Authentication】** → **正确匹配**：`It supports local, PPP, RADIUS, and TACACS+ options`\n   - **【核心技术特征】**：Local 模式是轻量级 AP 的默认工作模式，为连接的客户端提供正常的 BSS 数据传输，并在空闲时段进行后台射频信道扫描。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `It supports local, PPP, RADIUS, and TACACS+ options` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **statements about AAA** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1072_image_agent.jpg"
+    },
+    {
+      "id": 1073,
+      "original_qid": "Q1073",
+      "before_sha256": "25c9cdbc6dca902e318dabb88b6a27f2b305dc1701ab956f7a50a3c82509ee44",
+      "reason": "Security policy 是规定组织安全目标、职责和基本要求的政策；security standard 具体规定必须遵守的统一要求。Awareness 让全员关注并理解基本安全事项；training 培养岗位所需操作技能；education 深入学习跨领域概念和原则。",
+      "updates": {
+        "explanation": "Security policy 是规定组织安全目标、职责和基本要求的政策；security standard 具体规定必须遵守的统一要求。Awareness 让全员关注并理解基本安全事项；training 培养岗位所需操作技能；education 深入学习跨领域概念和原则。\n\n原答案图把 awareness 与 education 对调，已移除；此处修正互动答案。原图的“specific tasks and methods”也可指 procedure（流程），由于题目没有该选项，本题将对应描述明确为强制性技术标准。",
+        "prompt": "DRAG DROP - Match the elements of a security program to the descriptions. For the standard, use the clarified requirement shown on the interactive target rather than the ambiguous original wording in the exhibit.",
+        "drag_drop_data": {
+          "sources": [
+            "awareness",
+            "education",
+            "security policy",
+            "security standard",
+            "training"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "document that outlines an organization's security goals and practices and the roles and responsibilities of the organization's personnel",
+              "expected": "security policy"
+            },
+            {
+              "id": "t2",
+              "label": "document that defines mandatory specific security requirements and controls",
+              "expected": "security standard"
+            },
+            {
+              "id": "t3",
+              "label": "user-awareness learning level that focuses on learning about topics and practices beyond what is typically required by the user's job",
+              "expected": "education"
+            },
+            {
+              "id": "t4",
+              "label": "user-awareness learning level that focuses on security practices that all employees must understand and enforce",
+              "expected": "awareness"
+            },
+            {
+              "id": "t5",
+              "label": "user-awareness learning level that focuses on teaching employees how to perform tasks specifically required by their jobs",
+              "expected": "training"
+            }
+          ]
+        },
+        "answer_image": null
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the elements of a security program from the left onto the corresponding descriptions on the right.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **document that outlines an organization's security goals and practices and the roles and responsibilities of the organization's personnel** | `security policy` |\n| **tactical document that sets out specific tasks and methods to maintain security** | `security standard` |\n| **user-awareness learning level that focuses on learning about topics and practices beyond what is typically required by the user's job** | `awareness` |\n| **user-awareness learning level that focuses on security practices that all employees must understand and enforce** | `education` |\n| **user-awareness learning level that focuses on teaching employees how to perform tasks specifically required by their jobs** | `training` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【document that outlines an organization's security goals and practices and the roles and responsibilities of the organization's personnel】** → **正确匹配**：`security policy`\n   - **【网络安全防御体系】**：在终端接入与网络边界安全中，`security policy` 作为安全缓解措施，精准针对并化解 `document that outlines an organization's security goals and practices and the roles and responsibilities of the organization's personnel` 所描述的安全威胁。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `security policy` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【tactical document that sets out specific tasks and methods to maintain security】** → **正确匹配**：`security standard`\n   - **【网络安全防御体系】**：在终端接入与网络边界安全中，`security standard` 作为安全缓解措施，精准针对并化解 `tactical document that sets out specific tasks and methods to maintain security` 所描述的安全威胁。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `security standard` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【user-awareness learning level that focuses on learning about topics and practices beyond what is typically required by the user's job】** → **正确匹配**：`awareness`\n   - **【核心技术特征】**：Learning 状态下端口准备参与数据帧转发，开始根据接收到的数据帧学习源 MAC 地址构建 MAC 地址表，但仍然不转发业务数据帧。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `awareness` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【user-awareness learning level that focuses on security practices that all employees must understand and enforce】** → **正确匹配**：`education`\n   - **【核心技术特征】**：Learning 状态下端口准备参与数据帧转发，开始根据接收到的数据帧学习源 MAC 地址构建 MAC 地址表，但仍然不转发业务数据帧。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `education` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n5. **目标定义 / 属性**：**【user-awareness learning level that focuses on teaching employees how to perform tasks specifically required by their jobs】** → **正确匹配**：`training`\n   - **【核心技术特征】**：Learning 状态下端口准备参与数据帧转发，开始根据接收到的数据帧学习源 MAC 地址构建 MAC 地址表，但仍然不转发业务数据帧。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `training` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **elements of a security program** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。",
+        "drag_drop_data": {
+          "sources": [
+            "awareness",
+            "education",
+            "security policy",
+            "security standard",
+            "training"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "document that outlines an organization's security goals and practices and the roles and responsibilities of the organization's personnel",
+              "expected": "security policy"
+            },
+            {
+              "id": "t2",
+              "label": "tactical document that sets out specific tasks and methods to maintain security",
+              "expected": "security standard"
+            },
+            {
+              "id": "t3",
+              "label": "user-awareness learning level that focuses on learning about topics and practices beyond what is typically required by the user's job",
+              "expected": "awareness"
+            },
+            {
+              "id": "t4",
+              "label": "user-awareness learning level that focuses on security practices that all employees must understand and enforce",
+              "expected": "education"
+            },
+            {
+              "id": "t5",
+              "label": "user-awareness learning level that focuses on teaching employees how to perform tasks specifically required by their jobs",
+              "expected": "training"
+            }
+          ]
+        }
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1073_image_agent.jpg"
+    },
+    {
+      "id": 1074,
+      "original_qid": "Q1074",
+      "before_sha256": "126d7cebb6415129c68e892fc6ca1d8a05edaa89598a22a2aba6e365f5aad6ad",
+      "reason": "DHCP snooping：拦截不可信端口上的非法 DHCP 服务器响应；DAI：按 DHCP snooping 绑定或配置的 ARP ACL 验证不可信端口 ARP；storm control：按配置阈值限制对应广播、组播或未知单播流量；IP Source Guard：依据绑定",
+      "updates": {
+        "prompt": "DRAG DROP - Match the features to these specific threats: an unauthorized DHCP server on an untrusted port, ARP cache poisoning, excessive broadcast/multicast/unknown-unicast traffic, and IPv4 source-address spoofing by a client.",
+        "explanation": "DHCP snooping：拦截不可信端口上的非法 DHCP 服务器响应；DAI：按 DHCP snooping 绑定或配置的 ARP ACL 验证不可信端口 ARP；storm control：按配置阈值限制对应广播、组播或未知单播流量；IP Source Guard：依据绑定过滤来源 IPv4 地址，可按平台与配置另外检查源 MAC。\n\n效果取决于信任边界、绑定、启用的 VLAN 和端口；这些功能并不能阻断所有恶意客户端。原答案图错配，已移除。",
+        "answer_image": null
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the Cisco IOS attack mitigation features from the left onto the types of network attack they mitigate on the right.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 攻击威胁 / 网络异常类型 | 对应的 Cisco IOS 缓解特性 |\n| :--- | :--- |\n| **rogue server that spoofs IP configuration** (伪造 IP 配置的恶意服务器) | `DHCP snooping` |\n| **cache poisoning** (ARP 缓存中毒攻击) | `Dynamic ARP Inspection` |\n| **flood attacks** (广播/多播/未知单播泛洪攻击) | `storm control` |\n| **rogue clients on the network** (网络中的仿冒恶意客户端) | `IP Source Guard` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **【rogue server that spoofs IP configuration】 → `DHCP snooping`**：\n   - **原理解析**：恶意主机可私设 Rogue DHCP Server，下发错误的网关和 DNS（实施中间人窃听）或耗尽地址池（DHCP Starvation）。**DHCP Snooping** 将交换机端口划分为 Trusted（连接合法 DHCP 服务器）与 Untrusted（连接普通用户），并在非信任端口上丢弃所有传入的 DHCP Server 回复报文（如 DHCPOFFER、DHCPACK），彻底扼制伪造服务器。\n\n2. **【cache poisoning】 → `Dynamic ARP Inspection` (DAI)**：\n   - **原理解析**：ARP 协议没有内建认证，攻击者可发送伪造的 Gratuitous ARP 毒化网关或终端的 ARP 缓存。**DAI** 基于 DHCP Snooping Binding Table（或静态 ARP ACL）拦截并检查所有未信任端口上的 ARP 请求与应答，丢弃 IP-MAC 绑定不一致的非法报文，防止 ARP 缓存中毒。\n\n3. **【flood attacks】 → `storm control`**：\n   - **原理解析**：广播风暴或恶意泛洪会导致交换网络带宽耗尽。**Storm Control**（风暴控制）监控进入交换机端口的广播、组播或未知单播流量比例，一旦超出设定阈值（如带宽百分比或 pps），自动丢弃超额流量或将端口置于 err-disabled 状态。\n\n4. **【rogue clients on the network】 → `IP Source Guard` (IPSG)**：\n   - **原理解析**：恶意客户端伪造/仿冒他人的源 IP 地址或使用未经 DHCP 授权的 IP 进行通信。**IPSG** 结合 DHCP Snooping 绑定表动态构建端口 ACL，严格只放行源 IP 和源 MAC 与租约绑定记录完全吻合的数据帧，阻断非法伪造客户端接入。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1074_image_agent.jpg"
+    },
+    {
+      "id": 1075,
+      "original_qid": "Q1075",
+      "before_sha256": "4c8c5f0a445361539a422072d60bb7b77ddfe7761125c9f934988c1bc9d11ca0",
+      "reason": "此题设示例中控制器方案以网络与策略为中心并使用允许列表；传统方案以设备配置为中心并使用阻止列表。同组空位可互换。",
+      "updates": {
+        "prompt": "DRAG DROP - In the following simplified comparison, the controller-based design uses an allow-list policy and the traditional design uses a block-list policy. Match these example characteristics to the two designs.",
+        "explanation": "此题设示例中控制器方案以网络与策略为中心并使用允许列表；传统方案以设备配置为中心并使用阻止列表。同组空位可互换。\n\n这是题设设计取舍，不是架构必然属性：传统设备也能实施允许列表或自动化，控制器方案也能采用阻止列表；分布式和集中式功能可并存。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the characteristics of networking from the left onto the correct networking types on the right.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 网络架构范式 | 特征描述与操作模式 |\n| :--- | :--- |\n| **Controller-Based Networking** (控制器驱动网络) | `focused on network` (全局全网视角)<br>`user input is a policy` (基于业务意图/策略输入)<br>`uses allow list security model` (白名单/零信任安全模型) |\n| **Traditional Networking** (传统网络) | `focused on devices` (逐台设备逐端口聚焦)<br>`user input is a configuration` (管理员手工输入具体 CLI 配置)<br>`uses block list security model` (基于黑名单/默认放行安全模型) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **管理视角（Network vs Device）**：\n   - **Controller-Based**：网络管理员从控制器（如 Cisco DNA Center）的单一控制台出发，立足于整个 Fabric 全局拓扑，统揽全网状态（**focused on network**）。\n   - **Traditional**：管理员必须逐一登录 Console/SSH 终端，对各个交换机、路由器进行逐台调试与排错（**focused on devices**）。\n\n2. **输入模式（Policy vs Configuration）**：\n   - **Controller-Based**：采用基于意图的网络（IBN），管理员定义上层业务策略（如“HR 部门只允许访问 HR 服务器”，即 **user input is a policy**），由控制器自动编译翻译并下发底层配置。\n   - **Traditional**：管理员必须直接编写底层的 CLI 命令行或配置脚本（如编写精确的 ACL 规则、VLAN 声明，即 **user input is a configuration**）。\n\n3. **安全模型（Allow List vs Block List）**：\n   - **Controller-Based (Cisco TrustSec / SDA)**：采用基于角色的微隔离（SGT），默认实施 **Allow List**（白名单）模型，即“默认全部拒绝，仅明确授权的组间通信才允许通过”。\n   - **Traditional**：传统路由交换通常默认连通，仅靠配置否定性 ACL 规则来阻断已知风险（**Block List** / 黑名单模型）。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1075_image_agent.jpg"
+    },
+    {
+      "id": 1076,
+      "original_qid": "Q1076",
+      "before_sha256": "97822f27d99cb04438989fd52cdf2c18777b06cda87e2927b5c2ba3b9fd47402",
+      "reason": "Ansible：通常通过 SSH 无代理管理网络设备，playbook 使用 YAML。Chef：常见 recipes 和 cookbooks 使用 Ruby DSL；题目所述旧版 Chef Push Jobs 服务可使用 TCP 10002，该端口不是所有 Chef 配置管理部",
+      "updates": {
+        "prompt": "DRAG DROP - Match these descriptions to Ansible, Chef, and Puppet in the illustrated configuration-management deployment.",
+        "explanation": "Ansible：通常通过 SSH 无代理管理网络设备，playbook 使用 YAML。Chef：常见 recipes 和 cookbooks 使用 Ruby DSL；题目所述旧版 Chef Push Jobs 服务可使用 TCP 10002，该端口不是所有 Chef 配置管理部署的通用端口。Puppet：使用 manifest 描述配置，agent 与 Puppet Server 默认通过 TCP 8140 通信；端口可更改。\n\n同一产品的两个空位顺序可以互换；实际连接插件、运行方式和部署端口依配置而定。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Refer to the exhibit. Drag and drop the network elements, parameters, or characteristics from the left onto the corresponding target categories on the right.",
+        "explanation": "• Technical Analysis (Cisco CCNA Core Concept):\nThis item evaluates the operational mechanics and syntax of major network automation tools (Ansible, Chef, and Puppet):\n- Ansible (Agentless):\n  1. Uses SSH for remote device communication (no proprietary agent required on managed network elements).\n  2. Uses YAML for fundamental configuration elements (Playbooks).\n- Chef (Agent-based):\n  1. Uses TCP port 10002 for configuration push jobs (Chef push-jobs service).\n  2. Uses Ruby (Domain Specific Language) for fundamental configuration elements (Cookbooks and Recipes).\n- Puppet (Agent-based):\n  1. Fundamental configuration elements are stored in a manifest (.pp files).\n  2. Uses TCP port 8140 for encrypted communication between Puppet Master and Agent nodes."
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1076_image_agent.jpg"
+    },
+    {
+      "id": 1077,
+      "original_qid": "Q1077",
+      "before_sha256": "f70fce5fd02a8c3543147770ec32dbc3de5aacd6de52fcec27b6b7cf3ec7c66d",
+      "reason": "题设中的 DNA Center 示例包括检查云端软件更新、使用 CLI 模板批量部署及结合 NetFlow 遥测与相关安全分析平台。传统示例是逐设备 SSH、逐设备维护配置和以边界设备为主的安全管理。",
+      "updates": {
+        "prompt": "DRAG DROP - In the illustrated comparison, classify the example practices as Cisco DNA Center management or a traditional per-device, perimeter-focused operating model.",
+        "explanation": "题设中的 DNA Center 示例包括检查云端软件更新、使用 CLI 模板批量部署及结合 NetFlow 遥测与相关安全分析平台。传统示例是逐设备 SSH、逐设备维护配置和以边界设备为主的安全管理。\n\n这些是题目设定的两种示例，不是互斥能力：传统网络也可收集 NetFlow、自动化配置并实施内部安全；DNA Center 部署中的威胁检测和响应可能依赖额外产品或集成。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the descriptions of device management from the left onto the types of device management on the right.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 管理模式 | 对应的特性与运维实践 |\n| :--- | :--- |\n| **Cisco DNA Center Device Management** | `monitors the cloud for software updates`<br>`uses CLI templates to apply a consistent configuration to multiple devices at an individual location`<br>`uses NetFlow to analyze potential security threats throughout the network and take appropriate action on that traffic` |\n| **Traditional Device Management** | `implements changes via an SSH terminal`<br>`manages device configurations on a per-device basis`<br>`security is managed near the perimeter of the network with firewalls, VPNs, and IPS` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Cisco DNA Center 特性**：\n   - **Cloud Monitoring for Updates**：DNA Center 直接连接 Cisco 云端知识库，自动检查最新合规固件并提供完整生命周期软件镜像管理（SWIM）。\n   - **CLI Templates for Consistency**：通过模板引擎（Velocity/Jinja）批量渲染参数，对特定站点（Site）内的多台设备统一下发统一标准的配置。\n   - **Network-wide NetFlow Threat Analysis (Cisco Encrypted Traffic Analytics / Stealthwatch)**：收集全网交换机与路由器的 NetFlow 遥测数据，利用机器学习识别异常行为与安全威胁并联动下发隔离策略。\n\n2. **Traditional Device Management 特性**：\n   - **SSH Terminal**：管理员日常主要通过终端模拟器（Putty/SecureCRT）打开单个 SSH 会话进行手工输入。\n   - **Per-Device Basis**：设备配置分散在各自的 NVRAM/startup-config 中，难以保证全网配置的一致性。\n   - **Perimeter-based Security**：主要依赖边界防火墙、边缘 IPS 和 VPN 网关构建“城堡护城河”式边界防御，缺乏内网横向东西向流量的可视性。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1077_image_agent.jpg"
+    },
+    {
+      "id": 1078,
+      "original_qid": "Q1078",
+      "before_sha256": "30d8ba5c2bd6d950282255b55c9dc80347f11f265422fa50e584f9f379d8bbc9",
+      "reason": "Accounting 记录用户或会话活动；authentication 验证身份；authorization 验证和决定访问权限；CoA（Change of Authorization）可在已建立的会话中请求更新授权属性。",
+      "updates": {
+        "explanation": "Accounting 记录用户或会话活动；authentication 验证身份；authorization 验证和决定访问权限；CoA（Change of Authorization）可在已建立的会话中请求更新授权属性。\n\nRADIUS 的 Disconnect 与 CoA 是不同请求；具体属性、设备支持及是否需要重新认证依部署而异。原答案图把身份验证和访问权限对调，已移除。",
+        "answer_image": null
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 安全描述 / 职能 | 正确对应的 AAA 术语 |\n| :--- | :--- |\n| **tracks activity** (记录并审计用户会话活动) | `accounting` |\n| **updates session attributes** (动态更新已建立会话的安全属性) | `CoA` (Change of Authorization) |\n| **verifies access rights** (校验并限定用户的访问特权/执行权限) | `authorization` |\n| **verifies identity** (核验用户的真实身份凭据) | `authentication` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **【tracks activity】 → `accounting` (审计/计费)**：\n   - 记录用户“在网络上做了什么”（如会话起止时间、数据流量消耗、执行的特权命令记录等），用于安全审计和事后追溯。\n\n2. **【updates session attributes】 → `CoA` (Change of Authorization, RFC 5176)**：\n   - RADIUS 协议的标准扩展能力。允许 AAA 服务器（如 Cisco ISE）在用户的网络会话已经建立后，主动向网络接入设备（NAD，如交换机/WLC）发送 CoA 报文，动态更改已连接用户的 VLAN、ACL 策略或强制下线重新认证。\n\n3. **【verifies access rights】 → `authorization` (授权)**：\n   - 解决“用户可以做什么”。核实通过认证的用户拥有哪些权限、能够进入哪些特权级别（如 enable 权限）或执行哪些命令集。\n\n4. **【verifies identity】 → `authentication` (认证)**：\n   - 解决“用户是谁”。通过用户名/密码、802.1X 数字证书、MFA 令牌等凭证检验接入实体的真实身份。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1078_image_agent.jpg"
+    },
+    {
+      "id": 1079,
+      "original_qid": "Q1079",
+      "before_sha256": "e9ea6a2a954cb8a87065350facb481e5c123640ba118870e9a1672f4ae15da57",
+      "reason": "多租户是多个租户共享基础设施并实施隔离；scalability 指资源随负载扩缩；workload movement 指将工作负载迁移到其他位置；on-demand 指按需申请资源；resiliency 指故障后维持或恢复服务的能力。",
+      "updates": {
+        "explanation": "多租户是多个租户共享基础设施并实施隔离；scalability 指资源随负载扩缩；workload movement 指将工作负载迁移到其他位置；on-demand 指按需申请资源；resiliency 指故障后维持或恢复服务的能力。\n\n故障恢复可能涉及重启、恢复或切换，是否无缝、是否能在线迁移及是否按用量计费取决于实现和服务合同，不由这些词本身保证。原图中 physical 拼写错误及“on a permanent”句尾缺字不改变配对。"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 云计算环境核心特征描述 | 正确对应的云架构术语 |\n| :--- | :--- |\n| **One or more clients can be hosted with the same physical or virtual infrastructure** | `multitenancy` (多租户架构) |\n| **Resources can be added and removed as needed to support current workload and tasks** | `scalability` (弹性可扩展性) |\n| **Tasks can be migrated to different physical locations to increase efficiency or reduce cost.** | `workload movement` (工作负载迁移) |\n| **Resources are dedicated only when necessary instead of on a permanent** | `on-demand` (按需分配) |\n| **Tasks and data residing on a failed server can be seamlessly migrated to other physical resources.** | `resiliency` (韧性与故障自愈) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Multitenancy（多租户）**：在同一套物理或虚拟化计算、存储与网络基础设施上安全隔离地托管多个不同客户（租户）的数据与应用。\n2. **Scalability（可扩展性）**：系统具备根据实时负载波动灵活扩充或缩容（Scale Out/In, Scale Up/Down）计算与存储资源的能力。\n3. **Workload Movement（负载迁移）**：支持将正在运行的容器或虚拟机跨数据中心、跨物理机在线迁移（如 vSphere vMotion），以优化电费、散热成本或靠近终端用户。\n4. **On-Demand（按需服务）**：资源无需提前重资采购与长期闲置，按需申请与即时释放，按实际使用量付费。\n5. **Resiliency（高韧性/容灾）**：底层节点故障时，高可用管理平台自动监测并在健康的备用物理机上重启或迁移工作负载，确保业务连续性。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1079_image_agent.jpg"
+    },
+    {
+      "id": 1080,
+      "original_qid": "Q1080",
+      "before_sha256": "75f719e85c700f164930a81110140bdef3407380c52db860269c6d6783b971ea",
+      "reason": "按题设，控制器方案集中配置资源、提供 API 及集中可视化；传统方案逐设备配置，且本示例使用分布式控制平面。",
+      "updates": {
+        "prompt": "DRAG DROP - Compare the depicted controller-managed deployment with a traditional per-device deployment that uses a distributed control plane. Match each example to its corresponding model.",
+        "explanation": "按题设，控制器方案集中配置资源、提供 API 及集中可视化；传统方案逐设备配置，且本示例使用分布式控制平面。\n\n“better control”是相对题设的管理效果，并非保证；传统网络也可通过 API 或自动化部署，控制器网络仍可能保留分布式控制功能。设备初始化也不一定需要现场连接 console。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the statements about networking from the left onto the corresponding networking types on the right.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 网络架构范式 | 正确对应的特征描述 |\n| :--- | :--- |\n| **Controller-Based Networking** (控制器驱动网络) | `This type allows better control over how networks work and how networks are configured.`<br>`This type enables networks to integrate with applications through APIs.`<br>`This type provisions resources from a centralized location.` |\n| **Traditional Networking** (传统分布式网络) | `New devices are configured using the physical infrastructure.`<br>`This type requires a distributed control plane.` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Controller-Based 架构优势**：\n   - **Centralized Provisioning**：从统一控制器一处集中下发配置，消除逐台配置产生的配置漂移。\n   - **Application Integration via APIs**：通过北向 RESTful API 让业务软件直接与网络控制器交互，按需自动开通网络管道。\n   - **Better Control & Visibility**：拥有全网全局拓扑视角，实时掌握端到端性能指标。\n\n2. **Traditional 架构特征**：\n   - **Distributed Control Plane**：每台路由器/交换机独立运行 OSPF、EIGRP、STP 计算拓扑，控制平面完全去中心化分布式运算。\n   - **Physical Infrastructure Configuration**：设备初始化通常必须物理连接 Console 线或按物理端口连接拓扑依次进行初始化配置。"
+      },
+      "review": {
+        "prompt": "checked and clarified as needed",
+        "options": "all drag sources and target slots checked",
+        "answer": "interaction mapping compared to question and solution images; corrected when necessary",
+        "explanation": "checked and revised",
+        "image": "viewed",
+        "answer_image": "viewed; incorrect images removed where necessary and retained as audit evidence",
+        "code_cli": "checked; none required"
+      },
+      "exhibit_path": "exhibits/q1080_image_agent.jpg"
+    }
+  ],
+  "sources": [
+    "https://csrc.nist.gov/Projects/awareness-training-education",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-15/configuration_guide/sec/b_1715_sec_9300_cg/configuring_ip_source_guard.html",
+    "https://help.puppet.com/core/current/Content/PuppetCore/Markdown/configuration.htm",
+    "https://www.rfc-editor.org/rfc/rfc5176"
+  ],
+  "images_directly_viewed": [
+    1071,
+    1072,
+    1073,
+    1074,
+    1075,
+    1076,
+    1077,
+    1078,
+    1079,
+    1080
+  ],
+  "limitations": "人工检查原图、答案图和引用文档；未进行设备或交互运行实测。"
+}

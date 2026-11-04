@@ -1,0 +1,199 @@
+{
+  "scope": "Q1093–Q1102 独立复核",
+  "corrections": [
+    {
+      "id": 1093,
+      "before_sha256": "52291d6a8d7c7cf1facf340dcc83b2da978c9b7f2309d18f6e275da3b95545b0",
+      "reason": "修正题干前缀和 GHz 拼写；两频段分类及组内无序保持。",
+      "updates": {
+        "prompt": "Drag and drop the wireless standards from the left onto the number of nonoverlapping channels they support on the right. Assume the exhibit’s simplified 20 MHz channel plan, with three 2.4 GHz and 23 5 GHz channels; actual availability varies by regulatory domain.",
+        "drag_drop_data": {
+          "sources": [
+            "802.11a",
+            "802.11b",
+            "802.11g",
+            "802.11n 2.4 GHz",
+            "802.11n 5 GHz"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "3 Non-Overlapping Channels (Slot 1)",
+              "expected": "802.11b",
+              "unordered_group": "3 Non-Overlapping Channels"
+            },
+            {
+              "id": "t2",
+              "label": "3 Non-Overlapping Channels (Slot 2)",
+              "expected": "802.11g",
+              "unordered_group": "3 Non-Overlapping Channels"
+            },
+            {
+              "id": "t3",
+              "label": "3 Non-Overlapping Channels (Slot 3)",
+              "expected": "802.11n 2.4 GHz",
+              "unordered_group": "3 Non-Overlapping Channels"
+            },
+            {
+              "id": "t4",
+              "label": "23 Non-Overlapping Channels (Slot 1)",
+              "expected": "802.11a",
+              "unordered_group": "23 Non-Overlapping Channels"
+            },
+            {
+              "id": "t5",
+              "label": "23 Non-Overlapping Channels (Slot 2)",
+              "expected": "802.11n 5 GHz",
+              "unordered_group": "23 Non-Overlapping Channels"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 1095,
+      "before_sha256": "7841fb491a58c03097fd3539109974d57bb1c4686a75db36964260db5494bdea",
+      "reason": "802.1Q 隧道可用一个外层服务商 VLAN 承载多个客户 VLAN；改写易误读的描述。",
+      "updates": {
+        "prompt": "Drag and drop the VLAN port modes from the left onto the adapted descriptions on the right.",
+        "drag_drop_data": {
+          "sources": [
+            "dynamic access",
+            "private",
+            "static access",
+            "trunk",
+            "tunnel"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "allows the port to belong to one VLAN when manually configured",
+              "expected": "static access"
+            },
+            {
+              "id": "t2",
+              "label": "allows the port to be assigned automatically to one VLAN",
+              "expected": "dynamic access"
+            },
+            {
+              "id": "t3",
+              "label": "allows the port to belong to one or more VLANs",
+              "expected": "trunk"
+            },
+            {
+              "id": "t4",
+              "label": "encapsulates customer VLAN traffic within a service-provider VLAN tag",
+              "expected": "tunnel"
+            },
+            {
+              "id": "t5",
+              "label": "allows the port to communicate with others within the same community VLAN",
+              "expected": "private"
+            }
+          ]
+        },
+        "explanation": "手工指定单个接入 VLAN 为 static access；在支持相应动态分配机制的设备上自动指定接入 VLAN 为 dynamic access；trunk 可承载多个 VLAN；802.1Q tunnel 将客户流量封装进服务商 VLAN，客户侧可有多个 VLAN；private VLAN community 端口可与同一 community 成员通信，也可按配置与 promiscuous 端口通信。支持与具体行为依交换机平台和配置而定。静态 access VLAN 与静态路由是不同概念。 原题图所称 single VLAN 指服务商外层 VLAN，不意味着客户只能使用一个 VLAN；交互描述已明确标记封装。"
+      }
+    },
+    {
+      "id": 1096,
+      "before_sha256": "d6d92ae7dd35f83c6b699ae55786b1eecf5b1a3a83d8a62547ff75cc8ee64761",
+      "reason": "原小企业和 AP beacon 两项并非架构独有，改为明确架构特征并保留两组乱序。",
+      "updates": {
+        "prompt": "Classify the adapted wireless architecture characteristics. Each architecture group accepts its items in any order.",
+        "drag_drop_data": {
+          "sources": [
+            "Operates as a standalone AP without a WLAN controller.",
+            "Work is divided between the access point and the controller.",
+            "The AP handles time-sensitive 802.11 MAC functions while a controller handles centralized functions.",
+            "Supports per device configuration and management.",
+            "Uses the CAPWAP tunneling protocol."
+          ],
+          "targets": [
+            {
+              "label": "Split-MAC (Slot 1)",
+              "sub_label": "",
+              "expected": "Work is divided between the access point and the controller.",
+              "unordered_group": "Split-MAC"
+            },
+            {
+              "label": "Split-MAC (Slot 2)",
+              "sub_label": "",
+              "expected": "Uses the CAPWAP tunneling protocol.",
+              "unordered_group": "Split-MAC"
+            },
+            {
+              "label": "Split-MAC (Slot 3)",
+              "sub_label": "",
+              "expected": "The AP handles time-sensitive 802.11 MAC functions while a controller handles centralized functions.",
+              "unordered_group": "Split-MAC"
+            },
+            {
+              "label": "Autonomous (Slot 1)",
+              "sub_label": "",
+              "expected": "Operates as a standalone AP without a WLAN controller.",
+              "unordered_group": "Autonomous"
+            },
+            {
+              "label": "Autonomous (Slot 2)",
+              "sub_label": "",
+              "expected": "Supports per device configuration and management.",
+              "unordered_group": "Autonomous"
+            }
+          ]
+        },
+        "explanation": "Split-MAC：AP 与控制器分工、使用 CAPWAP，AP 处理诸如 beacon 发射等对时间敏感的 802.11 MAC 功能；Autonomous：作为不依赖 WLAN 控制器的独立 AP 运行，并可逐台配置。原图的“小企业适用”与“AP 发送 beacon”并非架构独有特征，已改为明确的部署条件；两组内部顺序不限。"
+      }
+    },
+    {
+      "id": 1100,
+      "before_sha256": "be216c50e3b221474a80679bd60a339c4fcae2438ef8a8b700c795e49282d220",
+      "reason": "原 Listen、Speak、Learn 仅凭收发 hello 不能互相区分；按 Cisco 状态定义改写选项。",
+      "updates": {
+        "prompt": "Match each adapted HSRP state description to its state.",
+        "drag_drop_data": {
+          "sources": [
+            "knows the virtual IP, is neither active nor standby, and listens for hello messages",
+            "forwards packets addressed to the group virtual MAC",
+            "is the candidate to become the next active router",
+            "sends periodic hellos and participates in the active or standby election",
+            "has not learned the virtual IP and awaits an authenticated hello from the active router"
+          ],
+          "targets": [
+            {
+              "label": "Active",
+              "sub_label": "",
+              "expected": "forwards packets addressed to the group virtual MAC"
+            },
+            {
+              "label": "Learn",
+              "sub_label": "",
+              "expected": "has not learned the virtual IP and awaits an authenticated hello from the active router"
+            },
+            {
+              "label": "Listen",
+              "sub_label": "",
+              "expected": "knows the virtual IP, is neither active nor standby, and listens for hello messages"
+            },
+            {
+              "label": "Speak",
+              "sub_label": "",
+              "expected": "sends periodic hellos and participates in the active or standby election"
+            },
+            {
+              "label": "Standby",
+              "sub_label": "",
+              "expected": "is the candidate to become the next active router"
+            }
+          ]
+        },
+        "explanation": "根据 Cisco HSRP 状态定义：Learn 尚未确定虚拟 IP 且等待活动路由器的认证 hello；Listen 已知虚拟 IP、既非活动也非备用并监听 hello；Speak 定期发送 hello 并参与活动或备用路由器选举；Standby 是下一活动路由器的候选者；Active 转发发往虚拟 MAC 的流量。原选项仅描述收发 hello，不能唯一确定状态，已补充状态特征。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.html",
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/lanswitch/configuration/xe-3se/3850/lnsw-ieee-8021q-tunneling.html"
+  ],
+  "limitations": "直接核对原图及答案图；未进行实体设备实验。"
+}

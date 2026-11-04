@@ -1,0 +1,428 @@
+{
+  "scope": "Q1061–Q1070",
+  "corrections": [
+    {
+      "id": 1061,
+      "original_qid": "Q1061",
+      "before_sha256": "505984603c1347e763a31836076eb5f26216242fd79a0e40dec64e75c5f73291",
+      "reason": "命令匹配：`show snmp host` 显示配置的通知接收者；`show snmp engineID` 显示本地以及已配置远端 SNMP 引擎标识，部分平台同时显示远端 IP；`show snmp group` 显示组及安全模型；`show snmp community` 显示 community；`show snmp chassis` 显示已配置的 chassis ID（题图称序列号）。具体输出与平台、配置有关，engineID 不是自动发现所有远端设备的地址；chassis ID 不保证总是硬件序列号。",
+      "updates": {
+        "explanation": "命令匹配：`show snmp host` 显示配置的通知接收者；`show snmp engineID` 显示本地以及已配置远端 SNMP 引擎标识，部分平台同时显示远端 IP；`show snmp group` 显示组及安全模型；`show snmp community` 显示 community；`show snmp chassis` 显示已配置的 chassis ID（题图称序列号）。具体输出与平台、配置有关，engineID 不是自动发现所有远端设备的地址；chassis ID 不保证总是硬件序列号。",
+        "prompt": "DRAG DROP - Match each SNMP command to the described output. Assume the relevant remote engine and chassis identifier are configured on a platform that supports these commands."
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "命令匹配：`show snmp host` 显示配置的通知接收者；`show snmp engineID` 显示本地以及已配置远端 SNMP 引擎标识，部分平台同时显示远端 IP；`show snmp group` 显示组及安全模型；`show snmp community` 显示 community；`show snmp chassis` 显示已配置的 chassis ID（题图称序列号）。具体输出与平台、配置有关，engineID 不是自动发现所有远端设备的地址；chassis ID 不保证总是硬件序列号。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1061_image_agent.png",
+            "sha256": "e7c94d5910beaae3522ddc2f1e0d151eb3a371248c53d05664b6fe457a7e3890"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1061_answer_image_agent.png",
+            "sha256": "e95e39b03dfaef208c9abfd0659966dfbb96991599db1c348415209d1cdbff6a"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1062,
+      "original_qid": "Q1062",
+      "before_sha256": "bfc96e848477b5b549cc3d6ea91e819fcbe1c41f75df5d55eba91e308f1529ed",
+      "reason": "分类依据描述符字段划分类；CBWFQ 是 **class-based weighted fair queueing**，在配置且平台支持时为指定类在拥塞时提供带宽保障；整形通过缓冲平滑输出，不能保证杜绝下游拥塞；监管依限速规则丢弃、重新标记或传送超额流量；资源竞争可能引起拥塞。原图误写 cloud-based，答案图中 policing 与 CBWFQ 的目标也对调；请以修正后的交互标签及配对为准。",
+      "updates": {
+        "explanation": "分类依据描述符字段划分类；CBWFQ 是 **class-based weighted fair queueing**，在配置且平台支持时为指定类在拥塞时提供带宽保障；整形通过缓冲平滑输出，不能保证杜绝下游拥塞；监管依限速规则丢弃、重新标记或传送超额流量；资源竞争可能引起拥塞。原图误写 cloud-based，答案图中 policing 与 CBWFQ 的目标也对调；请以修正后的交互标签及配对为准。",
+        "prompt": "DRAG DROP - Match the corrected QoS terms to their descriptions. The original exhibit misspells class-based as cloud-based and its answer diagram has two mappings swapped; use the interactive labels.",
+        "drag_drop_data": {
+          "sources": [
+            "class-based weighted fair queueing",
+            "classification",
+            "congestion",
+            "policing",
+            "shaping"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "categorizes packets based on the value of a traffic descriptor",
+              "expected": "classification"
+            },
+            {
+              "id": "t2",
+              "label": "guarantees minimum bandwidth to specific traffic classes when an interface is congested",
+              "expected": "class-based weighted fair queueing"
+            },
+            {
+              "id": "t3",
+              "label": "prevents congestion by reducing the flow of outbound traffic",
+              "expected": "shaping"
+            },
+            {
+              "id": "t4",
+              "label": "outcome of overutilization",
+              "expected": "congestion"
+            },
+            {
+              "id": "t5",
+              "label": "uses defined criteria to limit the transmission of one or more classes of traffic",
+              "expected": "policing"
+            }
+          ]
+        }
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "分类依据描述符字段划分类；CBWFQ 是 **class-based weighted fair queueing**，在配置且平台支持时为指定类在拥塞时提供带宽保障；整形通过缓冲平滑输出，不能保证杜绝下游拥塞；监管依限速规则丢弃、重新标记或传送超额流量；资源竞争可能引起拥塞。原图误写 cloud-based，答案图中 policing 与 CBWFQ 的目标也对调；请以修正后的交互标签及配对为准。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1062_image_agent.png",
+            "sha256": "1078acbfbf6f795175597ba9b8a8ac2d879c682edcf3030614ae3ca639601b85"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1062_answer_image_agent.png",
+            "sha256": "7020d8f66f17076758de29d9483b8805eb35c4d81721d23a904db7eb0977f60e"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1063,
+      "original_qid": "Q1063",
+      "before_sha256": "136ef5c58e1b691909223229cfb3a672203d05502c4d15689859a7cc881062d6",
+      "reason": "检测（fault detection）发现性能下降或中断；关联聚合把相关告警归组；诊断隔离定位可能的原因；解决（problem resolution）可由管理员消除故障源；恢复服务可以执行预置脚本恢复功能。自动关联不保证找到根因，恢复也未必代表根因已被永久消除。原题是通用故障管理流程，系统可利用 SNMP，但不是所有步骤均由 SNMP 本身实现。",
+      "updates": {
+        "explanation": "检测（fault detection）发现性能下降或中断；关联聚合把相关告警归组；诊断隔离定位可能的原因；解决（problem resolution）可由管理员消除故障源；恢复服务可以执行预置脚本恢复功能。自动关联不保证找到根因，恢复也未必代表根因已被永久消除。原题是通用故障管理流程，系统可利用 SNMP，但不是所有步骤均由 SNMP 本身实现。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "检测（fault detection）发现性能下降或中断；关联聚合把相关告警归组；诊断隔离定位可能的原因；解决（problem resolution）可由管理员消除故障源；恢复服务可以执行预置脚本恢复功能。自动关联不保证找到根因，恢复也未必代表根因已被永久消除。原题是通用故障管理流程，系统可利用 SNMP，但不是所有步骤均由 SNMP 本身实现。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1063_image_agent.png",
+            "sha256": "7a9b6fabe0c876e0b735fdcb840c025dc1535232aab9dca9a128ce91e602333b"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1063_answer_image_agent.png",
+            "sha256": "2fec85139989f9027b63376562e2590172cdc31e02bd021118af1892c9de1953"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1064,
+      "original_qid": "Q1064",
+      "before_sha256": "71ad625cec1c4aaa7a98a0d5e7f3e2e44190393109814c27ff7a44b61d3bbdaf",
+      "reason": "四个正确项是维护地址池、基于客户端/服务器的网段控制、减少终端上线的手工配置、按可配置租约分配地址。DHCP 也可以通过 option 6 向客户端提供 DNS 服务器地址，因此原图中的 “offers domain name server configuration” 也是有效功能；为使四空唯一，交互项改为运行权威 DNS 名称解析。域名与地址的记录解析及权威 DNS 区域服务属于 DNS；DHCP 能分发 DNS 配置但不等于自身提供权威解析。租约和 relay 的行为取决于服务配置。",
+      "updates": {
+        "explanation": "四个正确项是维护地址池、基于客户端/服务器的网段控制、减少终端上线的手工配置、按可配置租约分配地址。DHCP 也可以通过 option 6 向客户端提供 DNS 服务器地址，因此原图中的 “offers domain name server configuration” 也是有效功能；为使四空唯一，交互项改为运行权威 DNS 名称解析。域名与地址的记录解析及权威 DNS 区域服务属于 DNS；DHCP 能分发 DNS 配置但不等于自身提供权威解析。租约和 relay 的行为取决于服务配置。",
+        "prompt": "DRAG DROP - Select four DHCP functions. The interactive choices correct a DNS-related ambiguity in the original image.",
+        "drag_drop_data": {
+          "sources": [
+            "provides local control for network segments using a client-server scheme",
+            "uses authoritative servers for record keeping",
+            "maintains an address pool",
+            "associates hostnames to IP address",
+            "operates an authoritative DNS server for name resolution",
+            "reduces the administrative burden for onboarding end users",
+            "assigns IP addresses to local hosts for a configurable lease time"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "function (Slot 1)",
+              "expected": "maintains an address pool",
+              "unordered_group": "function"
+            },
+            {
+              "id": "t2",
+              "label": "function (Slot 2)",
+              "expected": "provides local control for network segments using a client-server scheme",
+              "unordered_group": "function"
+            },
+            {
+              "id": "t3",
+              "label": "function (Slot 3)",
+              "expected": "reduces the administrative burden for onboarding end users",
+              "unordered_group": "function"
+            },
+            {
+              "id": "t4",
+              "label": "function (Slot 4)",
+              "expected": "assigns IP addresses to local hosts for a configurable lease time",
+              "unordered_group": "function"
+            }
+          ]
+        }
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "四个正确项是维护地址池、基于客户端/服务器的网段控制、减少终端上线的手工配置、按可配置租约分配地址。DHCP 也可以通过 option 6 向客户端提供 DNS 服务器地址，因此原图中的 “offers domain name server configuration” 也是有效功能；为使四空唯一，交互项改为运行权威 DNS 名称解析。域名与地址的记录解析及权威 DNS 区域服务属于 DNS；DHCP 能分发 DNS 配置但不等于自身提供权威解析。租约和 relay 的行为取决于服务配置。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1064_image_agent.png",
+            "sha256": "f5ec3b6ded4804f14bc7cb2223cf69dfd698a4a8fa48d8b76e5957c24a19f03e"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1064_answer_image_agent.png",
+            "sha256": "873ef5ae7291e4c7bf68ae960af8999433010fc3eb73d47fb9b49ad3d3e45f6c"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1065,
+      "original_qid": "Q1065",
+      "before_sha256": "c5e0d510c869724f887320d73bcf4ca42f2fd2a75fdbc5a97befe3cadcafa739",
+      "reason": "认证验证身份：标识用户并校验凭据；授权决定允许执行的操作及可用服务；记账记录会话及操作以供管理员分析。每组内两个空可互换；实际是否记录命令或其他字段取决于配置，不能假定所有活动都会自动留痕。",
+      "updates": {
+        "explanation": "认证验证身份：标识用户并校验凭据；授权决定允许执行的操作及可用服务；记账记录会话及操作以供管理员分析。每组内两个空可互换；实际是否记录命令或其他字段取决于配置，不能假定所有活动都会自动留痕。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "认证验证身份：标识用户并校验凭据；授权决定允许执行的操作及可用服务；记账记录会话及操作以供管理员分析。每组内两个空可互换；实际是否记录命令或其他字段取决于配置，不能假定所有活动都会自动留痕。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1065_image_agent.png",
+            "sha256": "5d042e7da861b988550221bb5d86b3ac5eeafd320fa27fc3ca5ba4317211745e"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1065_answer_image_agent.png",
+            "sha256": "791c911bb7ed41f0351dafa48c4971ee713207463b67ded92c85154a1ac09652"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1066,
+      "original_qid": "Q1066",
+      "before_sha256": "d43deeb5d78ca44ea6defe9928f22fee219eca1e5205d595f3e584c28eb94285",
+      "reason": "按 Cisco WLC 的配置分类，WPA/WPA2 和 802.1X 属于 Layer 2 配置；web policy 与 passthrough 在该题的 Layer 3 Web 策略类别中。同组答案可交换。802.1X 是端口访问控制框架，WPA/WPA2 为无线安全机制；Web passthrough 可能只要求接受条款，不能等同于验证用户身份，也不能保证空口加密。具体组合取决于控制器软件。",
+      "updates": {
+        "explanation": "按 Cisco WLC 的配置分类，WPA/WPA2 和 802.1X 属于 Layer 2 配置；web policy 与 passthrough 在该题的 Layer 3 Web 策略类别中。同组答案可交换。802.1X 是端口访问控制框架，WPA/WPA2 为无线安全机制；Web passthrough 可能只要求接受条款，不能等同于验证用户身份，也不能保证空口加密。具体组合取决于控制器软件。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "按 Cisco WLC 的配置分类，WPA/WPA2 和 802.1X 属于 Layer 2 配置；web policy 与 passthrough 在该题的 Layer 3 Web 策略类别中。同组答案可交换。802.1X 是端口访问控制框架，WPA/WPA2 为无线安全机制；Web passthrough 可能只要求接受条款，不能等同于验证用户身份，也不能保证空口加密。具体组合取决于控制器软件。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1066_image_agent.png",
+            "sha256": "a6327917a03f741e72069f55ddfbfb89da3d7a35759716b6275879b190778d7c"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1066_answer_image_agent.png",
+            "sha256": "3103193917c86c0016b011c8c9b4502161290ef3ece30d07c2cfa8af5eb95827"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1067,
+      "original_qid": "Q1067",
+      "before_sha256": "3b813a083c2860715b65b59f690f60c4ad704d9093816d5cf8f1ca1170505957",
+      "reason": "双标签攻击：避免将用户接入口放进 trunk 所用 native VLAN，并采用专用未用 native VLAN；仅更改默认 VLAN 编号不自动防御。MAC flooding：802.1X 限制未授权设备接入，仍需结合端口安全和限制，不能保证已认证设备不会发送大量伪源 MAC。DHCP snooping 可阻挡非信任端口伪 DHCP 响应，从而缓解该类中间人；不能单独阻止所有 ARP 欺骗，可结合 DAI。禁用 DTP、将接入口显式配置为 access 可降低交换机伪装协商 trunk 风险。原答案图将中间两项对调，以交互配对为准。",
+      "updates": {
+        "explanation": "双标签攻击：避免将用户接入口放进 trunk 所用 native VLAN，并采用专用未用 native VLAN；仅更改默认 VLAN 编号不自动防御。MAC flooding：802.1X 限制未授权设备接入，仍需结合端口安全和限制，不能保证已认证设备不会发送大量伪源 MAC。DHCP snooping 可阻挡非信任端口伪 DHCP 响应，从而缓解该类中间人；不能单独阻止所有 ARP 欺骗，可结合 DAI。禁用 DTP、将接入口显式配置为 access 可降低交换机伪装协商 trunk 风险。原答案图将中间两项对调，以交互配对为准。",
+        "prompt": "DRAG DROP - Match the listed techniques to the specific attack scenarios they can help mitigate. Assume native VLAN isolation, authenticated access and the relevant DHCP trust boundaries are configured; the original answer diagram swaps the two middle answers."
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "双标签攻击：避免将用户接入口放进 trunk 所用 native VLAN，并采用专用未用 native VLAN；仅更改默认 VLAN 编号不自动防御。MAC flooding：802.1X 限制未授权设备接入，仍需结合端口安全和限制，不能保证已认证设备不会发送大量伪源 MAC。DHCP snooping 可阻挡非信任端口伪 DHCP 响应，从而缓解该类中间人；不能单独阻止所有 ARP 欺骗，可结合 DAI。禁用 DTP、将接入口显式配置为 access 可降低交换机伪装协商 trunk 风险。原答案图将中间两项对调，以交互配对为准。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1067_image_agent.png",
+            "sha256": "967a292ee38b913a06537be9b3394afb48152e0e5df169f634d4918d817fc61a"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1067_answer_image_agent.png",
+            "sha256": "46bdabf00ef7259614346c3be600646b9d9861d682485d109c5d7e561ea78795"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1068,
+      "original_qid": "Q1068",
+      "before_sha256": "ba222ec2a2c951d1d9bc3abaf67c47dbc686366dd05edab0fd21e7d4becbe665",
+      "reason": "从 User EXEC 依次 `enable` → `configure terminal` → `enable secret $hf!@4fs` → `exit`。题目假定已具备进入特权模式的权限；`enable secret` 配置的是特权口令散列而非可逆加密，具体类型由平台和配置决定，旧类型可能不安全。`service password-encryption` 是可逆的 Type 7 混淆，不能替代 secret；`line vty 0 4` 是线路配置。",
+      "updates": {
+        "explanation": "从 User EXEC 依次 `enable` → `configure terminal` → `enable secret $hf!@4fs` → `exit`。题目假定已具备进入特权模式的权限；`enable secret` 配置的是特权口令散列而非可逆加密，具体类型由平台和配置决定，旧类型可能不安全。`service password-encryption` 是可逆的 Type 7 混淆，不能替代 secret；`line vty 0 4` 是线路配置。",
+        "prompt": "DRAG DROP - Starting in user EXEC, assuming permission to enter privileged EXEC and an existing local user database, put the commands in order to configure an enable secret. Not all commands are used."
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "从 User EXEC 依次 `enable` → `configure terminal` → `enable secret $hf!@4fs` → `exit`。题目假定已具备进入特权模式的权限；`enable secret` 配置的是特权口令散列而非可逆加密，具体类型由平台和配置决定，旧类型可能不安全。`service password-encryption` 是可逆的 Type 7 混淆，不能替代 secret；`line vty 0 4` 是线路配置。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1068_image_agent.png",
+            "sha256": "c1f6a41b20b83807165db145a1289a46f38874d6d224df9eaf7e9eaf853a793c"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1068_answer_image_agent.png",
+            "sha256": "56bc205a938dd4c65e00c390e9fcf31cd5b03849498750be1146a3c8da9ba90a"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1069,
+      "original_qid": "Q1069",
+      "before_sha256": "f1b4f8266f50ad3c41eae00987a48760d058a048d194387d1b506bb1bcc08a45",
+      "reason": "假定接口已经处于 access 模式：启用 port-security、启用 sticky 学习、设置最多两个安全源 MAC、将违规动作设置为 shutdown。Sticky 将动态学习到的地址加入运行配置；持久化需保存配置，变化的设备可能触发违规。shutdown 在违反安全源 MAC 规则时使端口进入 err-disabled；它限制不同源 MAC 数量，不是对广播、多播或未知单播的流量速率限制。阻止高流量风暴还需依平台配置 storm control。",
+      "updates": {
+        "explanation": "假定接口已经处于 access 模式：启用 port-security、启用 sticky 学习、设置最多两个安全源 MAC、将违规动作设置为 shutdown。Sticky 将动态学习到的地址加入运行配置；持久化需保存配置，变化的设备可能触发违规。shutdown 在违反安全源 MAC 规则时使端口进入 err-disabled；它限制不同源 MAC 数量，不是对广播、多播或未知单播的流量速率限制。阻止高流量风暴还需依平台配置 storm control。",
+        "prompt": "DRAG DROP - An interface is already configured as a static access port. Arrange the shown commands to enable port security, learn up to two secure MAC addresses with sticky learning, and shut the port down on a security violation. This controls source MAC addresses, not traffic rate. Not all commands are used."
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "假定接口已经处于 access 模式：启用 port-security、启用 sticky 学习、设置最多两个安全源 MAC、将违规动作设置为 shutdown。Sticky 将动态学习到的地址加入运行配置；持久化需保存配置，变化的设备可能触发违规。shutdown 在违反安全源 MAC 规则时使端口进入 err-disabled；它限制不同源 MAC 数量，不是对广播、多播或未知单播的流量速率限制。阻止高流量风暴还需依平台配置 storm control。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1069_image_agent.png",
+            "sha256": "2f8515c5393858104a6bb5983e792d895f8c3911dbb37e7314ac44784f1684eb"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1069_answer_image_agent.png",
+            "sha256": "82b328bdbb6126806b9ca56654150ec473f1bf5cb899bab763b77ac2aacbff8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1070,
+      "original_qid": "Q1070",
+      "before_sha256": "87d2a2c945e64231d785ab9e267e7da7125a453b07080116a9e10af2138d8384",
+      "reason": "记账可记录远程会话时长并经 TACACS+ 记录管理命令；授权可对所支持的 RADIUS 用户网络服务授权，也可限制 CLI 命令。每组两项顺序可交换。原题干扰项 “user- or group-based access” 也可描述授权，导致授权项不止两个；交互选项改为验证凭据，使题目唯一。实际协议支持及命令授权能力依设备而异，验证凭据属于认证。",
+      "updates": {
+        "explanation": "记账可记录远程会话时长并经 TACACS+ 记录管理命令；授权可对所支持的 RADIUS 用户网络服务授权，也可限制 CLI 命令。每组两项顺序可交换。原题干扰项 “user- or group-based access” 也可描述授权，导致授权项不止两个；交互选项改为验证凭据，使题目唯一。实际协议支持及命令授权能力依设备而异，验证凭据属于认证。",
+        "prompt": "DRAG DROP - Match the displayed features to accounting and authorization. The interactive choices correct an ambiguous distractor in the original image; not all choices are used.",
+        "drag_drop_data": {
+          "sources": [
+            "It verifies user or group identity using credentials.",
+            "It leverages a RADIUS server to grant user access to a reverse Telnet session.",
+            "It records the amount of time for which a user accesses the network on a remote server.",
+            "It restricts the CLI commands that a user can perform.",
+            "It uses TACACS+ to log the configuration commands entered by a network administrator.",
+            "It verifies the user and password before granting access to the device."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Accounting (Slot 1)",
+              "expected": "It records the amount of time for which a user accesses the network on a remote server.",
+              "unordered_group": "Accounting"
+            },
+            {
+              "id": "t2",
+              "label": "Accounting (Slot 2)",
+              "expected": "It uses TACACS+ to log the configuration commands entered by a network administrator.",
+              "unordered_group": "Accounting"
+            },
+            {
+              "id": "t3",
+              "label": "Authorization (Slot 1)",
+              "expected": "It leverages a RADIUS server to grant user access to a reverse Telnet session.",
+              "unordered_group": "Authorization"
+            },
+            {
+              "id": "t4",
+              "label": "Authorization (Slot 2)",
+              "expected": "It restricts the CLI commands that a user can perform.",
+              "unordered_group": "Authorization"
+            }
+          ]
+        }
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "drag-and-drop choices and targets checked",
+        "answer": "interactive mappings checked against both images and technical facts",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "记账可记录远程会话时长并经 TACACS+ 记录管理命令；授权可对所支持的 RADIUS 用户网络服务授权，也可限制 CLI 命令。每组两项顺序可交换。原题干扰项 “user- or group-based access” 也可描述授权，导致授权项不止两个；交互选项改为验证凭据，使题目唯一。实际协议支持及命令授权能力依设备而异，验证凭据属于认证。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits/q1070_image_agent.png",
+            "sha256": "a95d84e7f6350adb8dd1f642a71849c9e1f1f6fcff63684579cd72ede724539d"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits/q1070_answer_image_agent.png",
+            "sha256": "d8068f617337644ce03f4c0b7d176385262d8a24dc893452cca1386d1bbd5fd0"
+          }
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/command/nm-snmp-cr-book.pdf",
+    "https://www.cisco.com/en/US/docs/ios/12_0t/12_0t5/feature/guide/cbwfq.html",
+    "https://www.rfc-editor.org/rfc/rfc2132#section-3.8",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/configure-mac.html"
+  ],
+  "limitations": "人工核对原题图和答案图及公开资料，未作设备实测。"
+}

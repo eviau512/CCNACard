@@ -6,6 +6,8 @@ rewrite questions from audit keywords, and never touches saved practice records.
 import argparse
 import hashlib
 import json
+import time
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -16,7 +18,14 @@ BUNDLE = ROOT / 'CCNA-App/app/src/main/assets/data/ccna_cards_data.js'
 def write_atomic(path, text):
     temporary = path.with_name(path.name + '.review-tmp')
     temporary.write_text(text, encoding='utf-8')
-    temporary.replace(path)
+    for attempt in range(20):
+        try:
+            temporary.replace(path)
+            break
+        except PermissionError:
+            if attempt == 19:
+                raise
+            time.sleep(0.25)
 
 
 def fingerprint(question):
@@ -37,7 +46,7 @@ def apply(manifest_path):
     for correction in manifest['corrections']:
         question = by_id[correction['id']]
         updates = correction['updates']
-        assert set(updates) <= {'prompt', 'options', 'answer', 'explanation', 'image', 'answer_image', 'type'}
+        assert set(updates) <= {'prompt', 'options', 'answer', 'explanation', 'image', 'answer_image', 'type', 'drag_drop_data'}
         if all(question.get(key) == value for key, value in updates.items()):
             continue
         accepted = [correction['before_sha256']] + correction.get('accepted_intermediate_sha256', [])
@@ -45,7 +54,18 @@ def apply(manifest_path):
         question.update(updates)
         labels = [option['label'] for option in question['options']]
         assert len(labels) == len(set(labels))
-        assert set(question['answer']) <= set(labels)
+        if question['type'] == 'Drag and Drop':
+            data = question['drag_drop_data']
+            sources, targets = data['sources'], data['targets']
+            target_ids = [t.get('id') or f't{i + 1}' for i, t in enumerate(targets)]
+            assert sources and targets and len(set(target_ids)) == len(targets)
+            assert all(isinstance(s, str) and s.strip() for s in sources)
+            assert all(t.get('label') and t.get('expected') for t in targets)
+            assert not (Counter(t['expected'] for t in targets) - Counter(sources))
+        elif question['options']:
+            assert set(question['answer']) <= set(labels)
+        else:
+            assert question['type'] == 'Simulation / Lab' and question['answer']
         assert question['explanation'].strip()
         changed.append(question['id'])
     MASTER.parent.mkdir(exist_ok=True)

@@ -1,0 +1,696 @@
+{
+  "scope": "Q1081–Q1090",
+  "corrections": [
+    {
+      "id": 1081,
+      "original_qid": "Q1081",
+      "before_sha256": "d619511878720beb6b2bb5286ea4e5ee7499bcdb4939ea655909143d7a090ee8",
+      "reason": "控制器可批量一致配置，南向接口与设备交互；传统设备通常有分布式控制与逐台管理，但并非必然。北向接口面向应用。原答案图误配，已移除；原题图保留。",
+      "updates": {
+        "explanation": "控制器可批量一致配置，南向接口与设备交互；传统设备通常有分布式控制与逐台管理，但并非必然。北向接口面向应用。原答案图误配，已移除；原题图保留。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "This type deploys a consistent configuration across multiple devices.",
+            "In this comparison, devices typically run distributed control protocols.",
+            "In this comparison, devices are typically managed individually.",
+            "Southbound APIs are used to apply configurations.",
+            "Northbound APIs interact with end devices."
+          ],
+          "targets": [
+            {
+              "label": "Controller-Based Networking (Slot 1)",
+              "sub_label": "",
+              "expected": "This type deploys a consistent configuration across multiple devices.",
+              "unordered_group": "Controller-Based Networking",
+              "id": "t1"
+            },
+            {
+              "label": "Controller-Based Networking (Slot 2)",
+              "sub_label": "",
+              "expected": "Southbound APIs are used to apply configurations.",
+              "unordered_group": "Controller-Based Networking",
+              "id": "t2"
+            },
+            {
+              "label": "Traditional Networking (Slot 1)",
+              "sub_label": "",
+              "expected": "In this comparison, devices typically run distributed control protocols.",
+              "unordered_group": "Traditional Networking",
+              "id": "t3"
+            },
+            {
+              "label": "Traditional Networking (Slot 2)",
+              "sub_label": "",
+              "expected": "In this comparison, devices are typically managed individually.",
+              "unordered_group": "Traditional Networking",
+              "id": "t4"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1081_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "控制器可批量一致配置，南向接口与设备交互；传统设备通常有分布式控制与逐台管理，但并非必然。北向接口面向应用。原答案图误配，已移除；原题图保留。",
+        "references": [
+          "https://www.cisco.com/c/en/us/solutions/enterprise-networks/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 1082,
+      "original_qid": "Q1082",
+      "before_sha256": "b8ddb196f6bdbe26272b11fe83acfceb421a04cc336cf15824650ffde2792a12",
+      "reason": "原图显示五个匹配目标，现恢复 DELETE 槽并修正 PUT/POST/GET/PATCH 配对；原答案图的 PUT/PATCH 显示错误，已移除。HTTP PUT 通常请求创建或替换目标资源，POST 由目标资源按自身语义处理；GET 检索；DELETE 移除关联；PATCH 应用修改指令。具体接口行为与响应受实现决定，幂等不排除日志等副作用。",
+      "updates": {
+        "explanation": "原图显示五个匹配目标，现恢复 DELETE 槽并修正 PUT/POST/GET/PATCH 配对；原答案图的 PUT/PATCH 显示错误，已移除。HTTP PUT 通常请求创建或替换目标资源，POST 由目标资源按自身语义处理；GET 检索；DELETE 移除关联；PATCH 应用修改指令。具体接口行为与响应受实现决定，幂等不排除日志等副作用。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "DELETE",
+            "GET",
+            "POST",
+            "PATCH",
+            "PUT"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "processes a request to create a resource, often returning its URI",
+              "expected": "POST"
+            },
+            {
+              "id": "t2",
+              "label": "creates or replaces the state of the target resource",
+              "expected": "PUT"
+            },
+            {
+              "id": "t3",
+              "label": "requests removal of a resource association",
+              "expected": "DELETE"
+            },
+            {
+              "id": "t4",
+              "label": "retrieves a representation of a resource",
+              "expected": "GET"
+            },
+            {
+              "id": "t5",
+              "label": "applies instructions to modify a resource",
+              "expected": "PATCH"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1082_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "原图显示五个匹配目标，现恢复 DELETE 槽并修正 PUT/POST/GET/PATCH 配对；原答案图的 PUT/PATCH 显示错误，已移除。HTTP PUT 通常请求创建或替换目标资源，POST 由目标资源按自身语义处理；GET 检索；DELETE 移除关联；PATCH 应用修改指令。具体接口行为与响应受实现决定，幂等不排除日志等副作用。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://www.rfc-editor.org/rfc/rfc5789"
+        ]
+      }
+    },
+    {
+      "id": 1083,
+      "original_qid": "Q1083",
+      "before_sha256": "ce1defc9cce4b0d710af43f92004de3cce1fce40375fcd1a1e512d2d54848680",
+      "reason": "控制器支持集中软件管理、开放接口和配置编排；传统逐台配置可处理控制器未覆盖的定制，但传统网络也能使用自动化，控制器也能支持自定义。答案图将编排和定制交换，已移除。",
+      "updates": {
+        "explanation": "控制器支持集中软件管理、开放接口和配置编排；传统逐台配置可处理控制器未覆盖的定制，但传统网络也能使用自动化，控制器也能支持自定义。答案图将编排和定制交换，已移除。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "orchestrates background device configuration",
+            "provides greater flexibility for custom and non-standard configurations",
+            "relies on per-device management",
+            "supports centralized software management",
+            "supports open APIs",
+            "uses individual software management"
+          ],
+          "targets": [
+            {
+              "label": "Cisco DNA Center (Slot 1)",
+              "sub_label": "",
+              "expected": "orchestrates background device configuration",
+              "unordered_group": "Cisco DNA Center",
+              "id": "t1"
+            },
+            {
+              "label": "Cisco DNA Center (Slot 2)",
+              "sub_label": "",
+              "expected": "supports centralized software management",
+              "unordered_group": "Cisco DNA Center",
+              "id": "t2"
+            },
+            {
+              "label": "Cisco DNA Center (Slot 3)",
+              "sub_label": "",
+              "expected": "supports open APIs",
+              "unordered_group": "Cisco DNA Center",
+              "id": "t3"
+            },
+            {
+              "label": "Traditional (Slot 1)",
+              "sub_label": "",
+              "expected": "provides greater flexibility for custom and non-standard configurations",
+              "unordered_group": "Traditional",
+              "id": "t4"
+            },
+            {
+              "label": "Traditional (Slot 2)",
+              "sub_label": "",
+              "expected": "relies on per-device management",
+              "unordered_group": "Traditional",
+              "id": "t5"
+            },
+            {
+              "label": "Traditional (Slot 3)",
+              "sub_label": "",
+              "expected": "uses individual software management",
+              "unordered_group": "Traditional",
+              "id": "t6"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1083_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "控制器支持集中软件管理、开放接口和配置编排；传统逐台配置可处理控制器未覆盖的定制，但传统网络也能使用自动化，控制器也能支持自定义。答案图将编排和定制交换，已移除。",
+        "references": [
+          "https://developer.cisco.com/docs/catalyst-center/"
+        ]
+      }
+    },
+    {
+      "id": 1084,
+      "original_qid": "Q1084",
+      "before_sha256": "8d44d88409cd764e949ef5babff8554d18008d8c7a5a1d5d863065756af28e66",
+      "reason": "配置管理维护期望配置状态，编排协调跨系统任务。Puppet 可用于配置管理；Ansible 可用于编排也可用于配置管理，因此此题描述限定工具使用场景，避免声称二者互斥。",
+      "updates": {
+        "explanation": "配置管理维护期望配置状态，编排协调跨系统任务。Puppet 可用于配置管理；Ansible 可用于编排也可用于配置管理，因此此题描述限定工具使用场景，避免声称二者互斥。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "This type of technology provides automation across multiple technologies and domains.",
+            "This type of technology enables consistent configuration of infrastructure resources.",
+            "Puppet is used here to maintain host configuration state.",
+            "Ansible is used here to coordinate a multi-system workflow."
+          ],
+          "targets": [
+            {
+              "label": "Configuration Management (Slot 1)",
+              "sub_label": "",
+              "expected": "Puppet is used here to maintain host configuration state.",
+              "unordered_group": "Configuration Management",
+              "id": "t1"
+            },
+            {
+              "label": "Configuration Management (Slot 2)",
+              "sub_label": "",
+              "expected": "This type of technology enables consistent configuration of infrastructure resources.",
+              "unordered_group": "Configuration Management",
+              "id": "t2"
+            },
+            {
+              "label": "Orchestration (Slot 1)",
+              "sub_label": "",
+              "expected": "This type of technology provides automation across multiple technologies and domains.",
+              "unordered_group": "Orchestration",
+              "id": "t3"
+            },
+            {
+              "label": "Orchestration (Slot 2)",
+              "sub_label": "",
+              "expected": "Ansible is used here to coordinate a multi-system workflow.",
+              "unordered_group": "Orchestration",
+              "id": "t4"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1084_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "配置管理维护期望配置状态，编排协调跨系统任务。Puppet 可用于配置管理；Ansible 可用于编排也可用于配置管理，因此此题描述限定工具使用场景，避免声称二者互斥。",
+        "references": [
+          "https://docs.ansible.com/projects/ansible/latest/getting_started/index.html"
+        ]
+      }
+    },
+    {
+      "id": 1085,
+      "original_qid": "Q1085",
+      "before_sha256": "175f9996997a769d6dddb443d6f4a0db57713089266aa46b9f4ac36cb46aff20",
+      "reason": "常见 Ansible 场景使用 YAML playbook 和 SSH，但也支持其他连接；Chef 配方采用 Ruby DSL，Push Jobs 的 10002 属特定组件端口，不能代表所有 Chef 通信；Puppet manifest 描述期望状态，8140 是典型 Puppet Server 端口。版本和部署可以不同。",
+      "updates": {
+        "explanation": "常见 Ansible 场景使用 YAML playbook 和 SSH，但也支持其他连接；Chef 配方采用 Ruby DSL，Push Jobs 的 10002 属特定组件端口，不能代表所有 Chef 通信；Puppet manifest 描述期望状态，8140 是典型 Puppet Server 端口。版本和部署可以不同。",
+        "drag_drop_data": {
+          "sources": [
+            "fundamental configuration elements are stored in a manifest",
+            "uses TCP port 10002 for configuration push jobs",
+            "uses Ruby for fundamental configuration elements",
+            "uses SSH for remote device communication",
+            "uses TCP 8140 for communication",
+            "uses YAML for fundamental configuration elements"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Ansible (Slot 1)",
+              "expected": "uses SSH for remote device communication",
+              "unordered_group": "Ansible"
+            },
+            {
+              "id": "t2",
+              "label": "Ansible (Slot 2)",
+              "expected": "uses YAML for fundamental configuration elements",
+              "unordered_group": "Ansible"
+            },
+            {
+              "id": "t3",
+              "label": "Chef (Slot 1)",
+              "expected": "uses TCP port 10002 for configuration push jobs",
+              "unordered_group": "Chef"
+            },
+            {
+              "id": "t4",
+              "label": "Chef (Slot 2)",
+              "expected": "uses Ruby for fundamental configuration elements",
+              "unordered_group": "Chef"
+            },
+            {
+              "id": "t5",
+              "label": "Puppet (Slot 1)",
+              "expected": "fundamental configuration elements are stored in a manifest",
+              "unordered_group": "Puppet"
+            },
+            {
+              "id": "t6",
+              "label": "Puppet (Slot 2)",
+              "expected": "uses TCP 8140 for communication",
+              "unordered_group": "Puppet"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1085_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "常见 Ansible 场景使用 YAML playbook 和 SSH，但也支持其他连接；Chef 配方采用 Ruby DSL，Push Jobs 的 10002 属特定组件端口，不能代表所有 Chef 通信；Puppet manifest 描述期望状态，8140 是典型 Puppet Server 端口。版本和部署可以不同。",
+        "references": [
+          "https://docs.chef.io/push_jobs/",
+          "https://help.puppet.com/core/current/Content/PuppetCore/Markdown/server.htm"
+        ]
+      }
+    },
+    {
+      "id": 1086,
+      "original_qid": "Q1086",
+      "before_sha256": "ed156af8940eeb02541ded8e4b1c299ff8e4e835d5a06bbfa0978e2801e4f0d4",
+      "reason": "POST 常用于由服务端处理创建；GET 检索；DELETE 请求移除 URI 的关联；PUT 请求用表示创建或替换目标资源。题干明确目标是完整替换，使 PUT 与 PATCH 的局部更改可区分；操作成功、持久存储和副作用依服务实现。",
+      "updates": {
+        "explanation": "POST 常用于由服务端处理创建；GET 检索；DELETE 请求移除 URI 的关联；PUT 请求用表示创建或替换目标资源。题干明确目标是完整替换，使 PUT 与 PATCH 的局部更改可区分；操作成功、持久存储和副作用依服务实现。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "DELETE",
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH"
+          ],
+          "targets": [
+            {
+              "label": "creates a resource on the server",
+              "sub_label": "",
+              "expected": "POST",
+              "id": "t1"
+            },
+            {
+              "label": "reads data from the server",
+              "sub_label": "",
+              "expected": "GET",
+              "id": "t2"
+            },
+            {
+              "label": "removes a resource from the server",
+              "sub_label": "",
+              "expected": "DELETE",
+              "id": "t3"
+            },
+            {
+              "label": "replaces the current representation of the identified resource in an API that supports PUT",
+              "sub_label": "",
+              "expected": "PUT",
+              "id": "t4"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1086_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "POST 常用于由服务端处理创建；GET 检索；DELETE 请求移除 URI 的关联；PUT 请求用表示创建或替换目标资源。题干明确目标是完整替换，使 PUT 与 PATCH 的局部更改可区分；操作成功、持久存储和副作用依服务实现。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc9110.html",
+          "https://www.rfc-editor.org/rfc/rfc5789"
+        ]
+      }
+    },
+    {
+      "id": 1087,
+      "original_qid": "Q1087",
+      "before_sha256": "9eb4cfa58fcd741945e155432f3e99c606f30b2860134bb3a0dfa20098a313c2",
+      "reason": "client-server 分离关注点；layered system 按层组织；cacheable 允许按缓存规则复用响应；stateless 不依赖服务器保存客户端会话上下文，但服务端可以保存资源状态；uniform interface 统一资源交互约束，不规定只能用 JSON。原答案图错配，已移除。",
+      "updates": {
+        "explanation": "client-server 分离关注点；layered system 按层组织；cacheable 允许按缓存规则复用响应；stateless 不依赖服务器保存客户端会话上下文，但服务端可以保存资源状态；uniform interface 统一资源交互约束，不规定只能用 JSON。原答案图错配，已移除。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "cacheable",
+            "client-server",
+            "layered system",
+            "stateless",
+            "uniform interface"
+          ],
+          "targets": [
+            {
+              "label": "separates concerns between consumers and producers of a service",
+              "sub_label": "",
+              "expected": "client-server",
+              "id": "t1"
+            },
+            {
+              "label": "organizes a system into a hierarchy of levels",
+              "sub_label": "",
+              "expected": "layered system",
+              "id": "t2"
+            },
+            {
+              "label": "enables clients to reuse a previous response",
+              "sub_label": "",
+              "expected": "cacheable",
+              "id": "t3"
+            },
+            {
+              "label": "processes requests without using stored session information",
+              "sub_label": "",
+              "expected": "stateless",
+              "id": "t4"
+            },
+            {
+              "label": "simplifies communication through standard interfaces and formats",
+              "sub_label": "",
+              "expected": "uniform interface",
+              "id": "t5"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1087_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "client-server 分离关注点；layered system 按层组织；cacheable 允许按缓存规则复用响应；stateless 不依赖服务器保存客户端会话上下文，但服务端可以保存资源状态；uniform interface 统一资源交互约束，不规定只能用 JSON。原答案图错配，已移除。",
+        "references": [
+          "https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm"
+        ]
+      }
+    },
+    {
+      "id": 1088,
+      "original_qid": "Q1088",
+      "before_sha256": "9764c54879f86cbeec71e6cc157150f9e9c92bd824724c75c045fe309c0c862b",
+      "reason": "playbook 是 YAML 中组织 play 的任务集；control node 运行 Ansible，managed node 是被管理目标；task 调用模块，module 是执行具体工作的可重用单元，常用 Python 但不限定语言；inventory 可来自文件或动态来源。网络模块常在控制节点运行，托管主机也可安装 Ansible。原答案图对调控制与受管节点，已移除。",
+      "updates": {
+        "explanation": "playbook 是 YAML 中组织 play 的任务集；control node 运行 Ansible，managed node 是被管理目标；task 调用模块，module 是执行具体工作的可重用单元，常用 Python 但不限定语言；inventory 可来自文件或动态来源。网络模块常在控制节点运行，托管主机也可安装 Ansible。原答案图对调控制与受管节点，已移除。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "control node",
+            "inventory",
+            "managed node",
+            "module",
+            "playbook",
+            "task"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "collection of actions to perform on target devices, expressed in YAML format",
+              "expected": "playbook"
+            },
+            {
+              "id": "t2",
+              "label": "device with Ansible installed that manages target devices",
+              "expected": "control node"
+            },
+            {
+              "id": "t3",
+              "label": "network device, without Ansible installed, upon which commands can be executed",
+              "expected": "managed node"
+            },
+            {
+              "id": "t4",
+              "label": "specific action to be performed on one or more target devices",
+              "expected": "task"
+            },
+            {
+              "id": "t5",
+              "label": "a reusable unit that performs a specific operation",
+              "expected": "module"
+            },
+            {
+              "id": "t6",
+              "label": "a static or dynamic source defining target devices and groups",
+              "expected": "inventory"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1088_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "playbook 是 YAML 中组织 play 的任务集；control node 运行 Ansible，managed node 是被管理目标；task 调用模块，module 是执行具体工作的可重用单元，常用 Python 但不限定语言；inventory 可来自文件或动态来源。网络模块常在控制节点运行，托管主机也可安装 Ansible。原答案图对调控制与受管节点，已移除。",
+        "references": [
+          "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+          "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html"
+        ]
+      }
+    },
+    {
+      "id": 1089,
+      "original_qid": "Q1089",
+      "before_sha256": "82d8afb9356c21485dadaaf24471293b193e9421dd59ae511df891a5cffea7ae",
+      "reason": "传统逐台管理常需对每个设备分别执行变更；控制器可提供集中视图和管理。成本取决于规模、许可与运维，原题把成本较高视为必然不成立，已改为逐台软件操作的明确描述。原答案图所示原文字已失效，移除以免误导。",
+      "updates": {
+        "explanation": "传统逐台管理常需对每个设备分别执行变更；控制器可提供集中视图和管理。成本取决于规模、许可与运维，原题把成本较高视为必然不成立，已改为逐台软件操作的明确描述。原答案图所示原文字已失效，移除以免误导。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "Software updates are coordinated individually on each device in this scenario.",
+            "This type provides a centralized view of the network.",
+            "This type implements changes individually at each device.",
+            "This type leverages controllers to handle network management."
+          ],
+          "targets": [
+            {
+              "label": "Traditional Networking (Slot 1)",
+              "sub_label": "",
+              "expected": "This type implements changes individually at each device.",
+              "unordered_group": "Traditional Networking",
+              "id": "t1"
+            },
+            {
+              "label": "Traditional Networking (Slot 2)",
+              "sub_label": "",
+              "expected": "Software updates are coordinated individually on each device in this scenario.",
+              "unordered_group": "Traditional Networking",
+              "id": "t2"
+            },
+            {
+              "label": "Controller-Based Networking (Slot 1)",
+              "sub_label": "",
+              "expected": "This type leverages controllers to handle network management.",
+              "unordered_group": "Controller-Based Networking",
+              "id": "t3"
+            },
+            {
+              "label": "Controller-Based Networking (Slot 2)",
+              "sub_label": "",
+              "expected": "This type provides a centralized view of the network.",
+              "unordered_group": "Controller-Based Networking",
+              "id": "t4"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1089_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "传统逐台管理常需对每个设备分别执行变更；控制器可提供集中视图和管理。成本取决于规模、许可与运维，原题把成本较高视为必然不成立，已改为逐台软件操作的明确描述。原答案图所示原文字已失效，移除以免误导。",
+        "references": [
+          "https://www.cisco.com/c/en/us/solutions/enterprise-networks/software-defined-networking/overview.html"
+        ]
+      }
+    },
+    {
+      "id": 1090,
+      "original_qid": "Q1090",
+      "before_sha256": "6a73d8e5d0ba810510515aee8b56668849b3a38cc10fa38a6a00740ede7e98a8",
+      "reason": "接收灵敏度是规定误码条件下可解码所需的最低信号功率；噪声底是接收频带噪声功率；反射是波遇界面回弹；吸收是材料将部分射频能量转为热等形式；SNR 是信号与噪声的功率比。自由空间随距离的路径损耗并不是材料吸收。SNR 高低影响可用调制编码，但不保证固定吞吐。原答案图配对错误，已移除。",
+      "updates": {
+        "explanation": "接收灵敏度是规定误码条件下可解码所需的最低信号功率；噪声底是接收频带噪声功率；反射是波遇界面回弹；吸收是材料将部分射频能量转为热等形式；SNR 是信号与噪声的功率比。自由空间随距离的路径损耗并不是材料吸收。SNR 高低影响可用调制编码，但不保证固定吞吐。原答案图配对错误，已移除。",
+        "answer_image": null,
+        "drag_drop_data": {
+          "sources": [
+            "absorption",
+            "noise floor",
+            "reflection",
+            "receiver sensitivity",
+            "signal-to-noise ratio"
+          ],
+          "targets": [
+            {
+              "label": "measure of the minimum power required to decode a radio signal without excessive errors",
+              "sub_label": "",
+              "expected": "receiver sensitivity",
+              "id": "t1"
+            },
+            {
+              "label": "measured background noise power within the receiver bandwidth",
+              "sub_label": "",
+              "expected": "noise floor",
+              "id": "t2"
+            },
+            {
+              "label": "a wave bounces off a surface or boundary",
+              "sub_label": "",
+              "expected": "reflection",
+              "id": "t3"
+            },
+            {
+              "label": "a material converts part of the RF energy passing through it into heat or other forms",
+              "sub_label": "",
+              "expected": "absorption",
+              "id": "t4"
+            },
+            {
+              "label": "relative power of the desired radio signal to unwanted signals at the receiver",
+              "sub_label": "",
+              "expected": "signal-to-noise ratio",
+              "id": "t5"
+            }
+          ]
+        }
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1090_image_agent.png",
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources checked",
+        "answer": "all target mappings checked",
+        "explanation": "corrected",
+        "image": "question and answer viewed",
+        "code_cli": "not applicable",
+        "finding": "接收灵敏度是规定误码条件下可解码所需的最低信号功率；噪声底是接收频带噪声功率；反射是波遇界面回弹；吸收是材料将部分射频能量转为热等形式；SNR 是信号与噪声的功率比。自由空间随距离的路径损耗并不是材料吸收。SNR 高低影响可用调制编码，但不保证固定吞吐。原答案图配对错误，已移除。",
+        "references": [
+          "https://www.cisco.com/c/en/us/support/docs/wireless/5500-series-wireless-controllers/116057-site-survey-guidelines-wlan-00.html"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://developer.cisco.com/docs/catalyst-center/",
+    "https://docs.ansible.com/projects/ansible/latest/getting_started/index.html",
+    "https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html",
+    "https://docs.ansible.com/projects/ansible/latest/network/getting_started/network_differences.html",
+    "https://docs.chef.io/push_jobs/",
+    "https://help.puppet.com/core/current/Content/PuppetCore/Markdown/server.htm",
+    "https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm",
+    "https://www.cisco.com/c/en/us/solutions/enterprise-networks/software-defined-networking/overview.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless/5500-series-wireless-controllers/116057-site-survey-guidelines-wlan-00.html",
+    "https://www.rfc-editor.org/rfc/rfc5789",
+    "https://www.rfc-editor.org/rfc/rfc9110.html"
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1081_image_agent.png",
+    "exhibits/q1081_answer_image_agent.png",
+    "exhibits/q1082_image_agent.png",
+    "exhibits/q1082_answer_image_agent.png",
+    "exhibits/q1083_image_agent.png",
+    "exhibits/q1083_answer_image_agent.png",
+    "exhibits/q1084_image_agent.png",
+    "exhibits/q1084_answer_image_agent.png",
+    "exhibits/q1085_image_agent.png",
+    "exhibits/q1085_answer_image_agent.png",
+    "exhibits/q1086_image_agent.png",
+    "exhibits/q1086_answer_image_agent.png",
+    "exhibits/q1087_image_agent.png",
+    "exhibits/q1087_answer_image_agent.png",
+    "exhibits/q1088_image_agent.png",
+    "exhibits/q1088_answer_image_agent.png",
+    "exhibits/q1089_image_agent.png",
+    "exhibits/q1089_answer_image_agent.png",
+    "exhibits/q1090_image_agent.png",
+    "exhibits/q1090_answer_image_agent.png"
+  ],
+  "limitations": "Manual question and answer image review; no live device tests."
+}

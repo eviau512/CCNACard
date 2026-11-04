@@ -1,0 +1,466 @@
+{
+  "scope": "Q1002–Q1010",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 1002,
+      "original_qid": "Q1345",
+      "before_sha256": "5e74a5b94455eb09b3228d860af6e68cb1cb1a1d3c662e707e3132a16814a74f",
+      "reason": "原题将所有非 Wi-Fi 干扰等同随机噪声，且排除其他干扰来源；改为背景噪声的具体定义。",
+      "updates": {
+        "prompt": "In a Wi-Fi receiver, which description best defines background noise?",
+        "options": [
+          {
+            "label": "A",
+            "text": "measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal"
+          },
+          {
+            "label": "B",
+            "text": "unwanted background energy, including receiver thermal noise, that can degrade reception"
+          },
+          {
+            "label": "C",
+            "text": "signals from other Wi-Fi networks that interfere with the local signal"
+          },
+          {
+            "label": "D",
+            "text": "ratio of signal-to-noise rating supplied by the wireless device"
+          }
+        ],
+        "explanation": "B。背景噪声是接收机中的不需要的随机能量，例如热噪声；它与期望信号共同影响接收质量。非 Wi-Fi 发射源也可能产生干扰，但不应把所有非 Wi-Fi 信号都定义成随机噪声，也不能说干扰只来自 Wi-Fi。A 是两个信号的功率差，不是噪声定义；C 是其他 Wi-Fi 信号造成的干扰；D 是信噪比（SNR）指标而非噪声本身。信号与噪声均以 dBm 表示时，其差值以 dB 表示。"
+      },
+      "original_fields": {
+        "prompt": "How is noise defined in Wi-Fi?",
+        "options": [
+          {
+            "label": "A",
+            "text": "measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal"
+          },
+          {
+            "label": "B",
+            "text": "any interference that is not Wi-Fi traffic that degrades the desired signal"
+          },
+          {
+            "label": "C",
+            "text": "signals from other Wi-Fi networks that interfere with the local signal"
+          },
+          {
+            "label": "D",
+            "text": "ratio of signal-to-noise rating supplied by the wireless device"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线局域网（WLAN）射频通信中“噪声”（Noise）的技术定义及与“干扰”（Interference）的本质区别。\n在无线射频（RF）与物理层调制解调中，空间电磁环境由多种信号源构成：\n1. 信号（Desired Signal）：合法 AP 与无线客户端之间按照 802.11 协议标准进行调制与发射的期望电磁波。其强度通常用接收信号强度指示（RSSI）度量（单位为 dBm，如 -50 dBm）。\n2. 噪声（Noise / Noise Floor，底噪）：指在给定的工作频段内，所有来自非 802.11 来源的随机杂散电磁辐射和热噪声（Thermal Noise）的总和。这些非 Wi-Fi 源包括微波炉、蓝牙设备、婴儿监视器、无绳电话、雷达、荧光灯电磁泄漏以及自然背景辐射。噪声直接抬高了射频环境的底噪电平（如 -90 dBm），直接压制有用信号，恶化信噪比（SNR）。\n3. 干扰（Interference）：专指同频或邻频的其它合法 802.11 Wi-Fi 信号（如同信道干扰 CCI 和邻信道干扰 ACI）。这些信号是符合 802.11 规范的有效无线帧，终端能够解调其报头，由于 CSMA/CA 机制，它们会导致信道忙等待与争用避退，这在技术上属于 Wi-Fi 流量干扰（Wi-Fi Interference），而非物理层背景“噪声”（Noise）。\n\n• 正确选项剖析：\n选项 B（any interference that is not Wi-Fi traffic that degrades the desired signal）完全正确且表述严谨。\n在 Wi-Fi 术语中，噪声正是指所有“非 Wi-Fi 流量的、会使期望信号发生劣化的杂散电磁干扰与背景噪声”。\n\n• 干扰项排除与错误陷阱：\n选项 A（measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal）：混淆概念。期望信号与干扰 Wi-Fi 信号之间的强度差值在射频工程中称为信干比（SIR，Signal-to-Interference Ratio），而非噪声。\n选项 C（signals from other Wi-Fi networks that interfere with the local signal）：这是同信道干扰（CCI / Co-Channel Interference）或重叠基本服务集（OBSS）干扰的定义，属于合法的 Wi-Fi 数据流竞争，不属于噪声。\n选项 D（ratio of signal-to-noise rating supplied by the wireless device）：这是信噪比（SNR，Signal-to-Noise Ratio）的定义（计算公式为 Signal dBm - Noise dBm），是信号与噪声的相对比值，而非噪声本身。\n\n• 考试要点与速记技巧：\n无线射频三剑客辨析表：\n- 噪声（Noise）：非 Wi-Fi 的杂波与底噪（微波炉、蓝牙、热噪声）；\n- 干扰（Interference）：其它 Wi-Fi 网络的信号踩踏争用（CCI/ACI）；\n- 信噪比（SNR）：有用信号减去背景噪声，差值越大网速越飞快（建议 > 20 dB）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where present",
+        "finding": "原题将所有非 Wi-Fi 干扰等同随机噪声，且排除其他干扰来源；改为背景噪声的具体定义。",
+        "references": []
+      }
+    },
+    {
+      "id": 1003,
+      "original_qid": "Q1346",
+      "before_sha256": "72762a938e28c3f38130a86e93d5a4c21cf84c6ba42523c941507af24c2d01b8",
+      "reason": "已查看拓扑；补图中 .1 标签与实际 EUI-64 地址的冲突说明，修正题干拼写。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For router R2 E0/1, use the LAN /64 prefix and displayed MAC address to calculate its modified EUI-64 IPv6 address. Treat the diagram’s .1 interface label as a placeholder to be replaced by the calculated address. Which address results?",
+        "explanation": "D。图中 R2 E0/1 的 MAC 为 `ca:01:b8:b8:00:01`，LAN 前缀为 `2001:db8:8bb8:8bb1::/64`。在 MAC 前后三字节中间插入 `ff:fe`，再将首字节 `ca` 与 `02` 异或得到 `c8`，接口标识符为 `c801:b8ff:feb8:0001`；与 /64 前缀拼接即为 D。其余选项的前缀或接口标识符不符合该计算。图中的 `.1` 标签仅作占位，不能同时认定为生成的 EUI-64 接口地址；文档前缀 2001:db8::/32 供示例使用。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured which ipv6 Address is produced by the router?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 4291 IPv6 接口标识符（Interface ID）采用 EUI-64 格式生成的标准计算流程与拓扑解析。\n在 Cisco IOS 路由器接口上配置 `ipv6 address <prefix>/64 eui-64` 命令后，系统会自动读取该物理以太网接口的 48 位硬件 MAC 地址，并严格执行 IEEE 规定的 EUI-64 算法转换为 64 位接口 ID：\n1. 拆分 MAC 地址：将 48 位（6 字节）MAC 地址从中间平均截开为左侧 24 位（高 3 字节）和右侧 24 位（低 3 字节）。\n2. 中间填充固定字段：在两部分之间插入 16 位固定保留值 `FF:FE`（即二进制 `11111111 11111110`）。\n3. 反转第 7 个比特位（U/L 位，Universal/Local bit）：定位第 1 字节（最高字节），将其从左至右第 7 位二进制比特（表示 MAC 地址为全球唯一还是本地管理）取反（0 变 1，1 变 0）。在十六进制下等效于与 `0x02` 进行异或操作（XOR 0x02）。\n4. 拼接前缀与格式化简写：将 64 位子网前缀与 64 位接口 ID 拼接成完整的 128 位 IPv6 单播地址，并依据 RFC 5952 规范省略段内前导零。\n\n• 正确选项剖析：\n选项 D（2001:db8:8bb8:8bb1:C801:B8FF:FEB8:1）完全正确。\n结合拓扑进行精准推导：\n- 目标设备与接口：Boston 站点的路由器 R2 连接 LAN 的接口 E0/1。\n- 展图信息：R2 连接的 LAN 网段前缀为 `2001:db8:8bb8:8bb1::/64`；接口 E0/1 标注的 MAC 地址为 `ca-01-b8-b8-00-01`。\n- 逐步推导计算：\n  1. 拆分并插入 `FF:FE`：\n     `ca:01:b8` 与 `b8:00:01` 中间插入 `ff:fe` -> `ca:01:b8:ff:fe:b8:00:01`。\n  2. 反转首字节第 7 位（U/L 位）：\n     首字节为十六进制 `0xca`，转换为二进制：`1 1 0 0 1 0 1 0`。\n     从左往右第 7 个比特是 `1`，反转后变为 `0`，得到二进制：`1 1 0 0 1 0 0 0`。\n     转换为十六进制为：`0xc8`（即 `0xCA ^ 0x02 = 0xC8`）。\n  3. 生成 64 位接口标识符（Interface ID）：\n     `c801:b8ff:feb8:0001`。\n  4. 拼接前缀并省略前导零：\n     `2001:db8:8bb8:8bb1:c801:b8ff:feb8:0001`，末尾 `:0001` 省略前导零简写为 `:1`。\n     最终生成的 IPv6 地址为：`2001:db8:8bb8:8bb1:C801:B8FF:FEB8:1`，与选项 D 丝毫不差！\n\n• 干扰项排除与错误陷阱：\n选项 A（...:C081:B8FF:FF4B:1）：首字节反转错误算成 C0，且把 Atlanta 侧 R1 的 MAC 后缀 FF4B 杂糅进来。\n选项 B（...:C001:8BFE:FF01:1）：首字节算错，且插入字段与 MAC 地址位置彻底错乱。\n选项 C（...:6792:43FF:EF87:1）：子网前缀错误（前缀算成了 8bb4），且接口 ID 全为臆造数据。\n\n• 考试要点与速记技巧：\nEUI-64 地址生成三步法：\n1. 劈两半：MAC 地址中间切开塞 `FFFE`；\n2. 反第七：首字节十六进制第二位加减 2（`CA` 变 `C8`）；\n3. 拼前缀：前缀抄展图，末位 `:0001` 缩写写为 `:1`！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where present",
+        "finding": "已查看拓扑；补图中 .1 标签与实际 EUI-64 地址的冲突说明，修正题干拼写。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291#appendix-A"
+        ]
+      },
+      "exhibit_path": "exhibits/q1003_agent.jpg",
+      "image_sha256": "ba8a41886dca35df269f14d9fa6cb200ad881f19b89ca9b6d5d773430474728d"
+    },
+    {
+      "id": 1004,
+      "original_qid": "Q1347",
+      "before_sha256": "8114d67a16b3612efdcf6ba32368c3c5bd5defee80cd1ae3ae47ee556d3fa643",
+      "reason": "限定未知单播、VLAN 与合格转发端口，避免声称所有端口与所有 BUM 一律泛洪。",
+      "updates": {
+        "prompt": "By default, how does a Layer 2 switch handle a unicast frame whose destination MAC address is absent from the forwarding table for the incoming VLAN?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It floods the frame through eligible forwarding ports in the same VLAN, except the ingress port."
+          },
+          {
+            "label": "B",
+            "text": "inspects and drops frames from unknown destinations"
+          },
+          {
+            "label": "C",
+            "text": "forwards frames to a neighbor port using CDP"
+          },
+          {
+            "label": "D",
+            "text": "protects against denial of service attacks"
+          }
+        ],
+        "explanation": "A。默认情况下，交换机按入站 VLAN 和目的 MAC 查询转发表；未知单播会从同 VLAN 中符合条件的转发端口泛洪，排除入端口。STP 端口状态、VLAN 允许列表及未知单播抑制等配置会影响实际转发。B 不是默认未知单播行为；C 的 CDP 用于邻居发现而非数据帧转发；D 的 DoS 防护不是一般帧交换的保证。组播处理还可能受 IGMP snooping 等配置影响。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristics of frame switching?",
+        "options": [
+          {
+            "label": "A",
+            "text": "floods unknown destinations to all ports except the receiving port"
+          },
+          {
+            "label": "B",
+            "text": "inspects and drops frames from unknown destinations"
+          },
+          {
+            "label": "C",
+            "text": "forwards frames to a neighbor port using CDP"
+          },
+          {
+            "label": "D",
+            "text": "protects against denial of service attacks"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查二层以太网帧交换（Frame Switching）对未知单播帧（Unknown Unicast Frame）的泛洪处理机制。\n交换机在接收到无差错的以太网数据帧时，执行两个维度的操作：\n1. 入站学习（MAC Learning）：读取帧头的源 MAC 地址，将其与入站物理接口和对应 VLAN 记录到 CAM 表中。\n2. 出站转发判断（Forwarding Decision）：读取帧头的目的 MAC 地址并在 CAM 表中检索：\n   - 已知单播（Known Unicast）：若目的 MAC 存在于 CAM 表中，且出接口与入接口不同，交换机执行点对点精准硬件转发；\n   - 过滤（Filtering）：若目的 MAC 映射的接口正是入站接口，交换机直接丢弃该帧以避免环路与无用传输；\n   - 未知单播泛洪（Unknown Unicast Flooding）：若 CAM 表中不存在该目的 MAC 地址（即交换机尚不知晓目标设备连接在何处），为了防止通信中断并寄希望于目标主机接收后产生回包以便交换机动态学习其端口位置，交换机将原封不动地将该帧向同一 VLAN 内除接收该帧的端口之外的所有其余活动端口进行泛洪复制发送。\n\n• 正确选项剖析：\n选项 A（floods unknown destinations to all ports except the receiving port）完全正确。\n向除接收端口外的所有端口泛洪未知目的地的帧，是以太网透明桥接与交换转发算法（IEEE 802.1D）的核心定义与基本行为。\n\n• 干扰项排除与错误陷阱：\n选项 B（inspects and drops frames from unknown destinations）：严重违背交换机转发原理。交换机绝不会盲目丢弃未知单播帧，否则网络中任何两个新接入节点在建立首次通信时都将因丢包而彻底断网。\n选项 C（forwards frames to a neighbor port using CDP）：混淆二层协议。思科发现协议（CDP）是设备属性通告协议，仅用于邻居间交换系统名称、IOS 版本及对端接口等管理信息，根本不参与实际以太网数据帧的转发决策。\n选项 D（protects against denial of service attacks）：混淆安全特性。基础的帧交换转发不具备防范 DoS 攻击的功能；相反，过多的未知单播泛洪还会导致二层网络带宽浪费，需要依赖 Storm Control（风暴控制）来约束泛洪速率。\n\n• 考试要点与速记技巧：\n交换机处理 BUM 流量铁律：\nBUM（Broadcast 广播、Unknown Unicast 未知单播、Multicast 组播）三兄弟，见之通通“除己泛洪（Floods to all ports except the receiving port）”，不丢帧不瞎改，全网广播找目标。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where present",
+        "finding": "限定未知单播、VLAN 与合格转发端口，避免声称所有端口与所有 BUM 一律泛洪。",
+        "references": [
+          "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/23563-143.html"
+        ]
+      }
+    },
+    {
+      "id": 1005,
+      "original_qid": "Q1005",
+      "before_sha256": "20ada14369a13550dbeb16ec8a4bd8ac818df6f9b7cf50c586fc9d0289ce8e3f",
+      "reason": "原题把半双工及碰撞断言为双工不匹配，单张计数器快照不能唯一确认原因；改为直接观察。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which observation is directly supported by the displayed interface counters?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The interface is half-duplex and has recorded 480 collisions and 35 runts."
+          },
+          {
+            "label": "B",
+            "text": "The 30-second input rate is 200 Mb/s."
+          },
+          {
+            "label": "C",
+            "text": "The output proves that the attached NIC is faulty."
+          },
+          {
+            "label": "D",
+            "text": "The output queue is currently full and has recorded output drops."
+          }
+        ],
+        "explanation": "A。图示 Half-duplex、480 collisions、35 runts；计数器在 18 秒前清零。输出显示 30 秒入/出速率均为 0、output queue 为 0/300 且 output drops 为 0，因此 B 和 D 不符。C 无法仅凭此快照确定。碰撞和 runt 可提示进一步调查双工或物理链路，但也可能有其他原因；需检查对端双工、协商、线缆及计数变化后才能判断，不应直接断言双工不匹配。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Duplex mismatch"
+          },
+          {
+            "label": "B",
+            "text": "High throughput"
+          },
+          {
+            "label": "C",
+            "text": "Bad NIC"
+          },
+          {
+            "label": "D",
+            "text": "Queueing"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 设备接口状态（`show interface`）故障诊断及以太网双工不匹配（Duplex Mismatch）的识别特征。\n在以太网物理层通信中：\n1. 双工模式：\n   - 全双工（Full-duplex）：接口具有独立的收发信道，收发并发，不使用 CSMA/CD 碰撞检测，理论碰撞（Collisions）计数永远为 0。\n   - 半双工（Half-duplex）：收发共享单一介质，强制启用 CSMA/CD。在发送数据前必须监听信道空闲；若同时检测到对端发送，则立即认定为碰撞，停止发送并等待随机退避时间重发。\n2. 双工不匹配故障表现：\n   当链路一端手动配置为 Full-duplex，而对端配置为 Half-duplex（或者自协商协议失败降级为半双工）：\n   - 全双工端不管三七二十一随时发包，这会导致半双工端频繁在其传输窗口内检测到冲突，引发大量的以太网碰撞（Collisions）；\n   - 半双工端在检测到冲突后会立即中止发送，导致已发出的数据帧被切断，在网络中产生小于 64 字节的超短残帧（Runts）；\n   - 同时，全双工端因接收到这些残缺碎片帧而产生大量的 FCS/CRC 校验差错。\n\n• 正确选项剖析：\n选项 A（Duplex mismatch）完全正确。\n深度分析展图中 `R30# show interface fa0/0` 的关键输出：\n- `Half-duplex, 100 Mb/s, 100BaseTX/FX`：在现代 FastEthernet 百兆交换网络中，该端口工作在异常的半双工模式；\n- `35 runts, 0 giants, 0 throttles`：产生了 35 个超短残帧（Runts）；\n- `3927 packets output... 480 collisions`：在仅仅输出 3927 个数据包的情况下，发生了高达 480 次碰撞（碰撞率超过 12%）；\n- `0 input errors, 0 CRC, 0 frame, 0 overrun`：底层物理线路与网卡芯片完全无 CRC 差错。\nHalf-duplex + 持续增加的 Collisions 与 Runts，是网络中存在双工不匹配（Duplex Mismatch）的绝对黄金诊断特征！\n\n• 干扰项排除与错误陷阱：\n选项 B（High throughput）：输出明确显示 `30 second input rate 0 bits/sec, 30 second output rate 0 bits/sec`，且接口负载 `txload 1/255, rxload 1/255` 接近于零，毫无高吞吐量特征。\n选项 C（Bad NIC）：物理层网卡损坏通常会导致严重的电气信号失真，产生大量的 CRC 错误、Frame 帧对齐错误或 Jabber 错误；而展图中这些硬件错误计数全为 0。\n选项 D（Queueing）：排队拥塞由流量突发引起，典型表现为 output queue 填满并在 `Total output drops` 中记录丢包；展图中丢包数为 0，队列为空。\n\n• 考试要点与速记技巧：\n双工不匹配（Duplex Mismatch）速断指南：\n- 半双工端（Half-duplex）：产生大量 Collisions（碰撞）+ Runts（超短残帧）；\n- 全双工端（Full-duplex）：产生大量 CRC / FCS 错误 + Late Collisions（后期碰撞）；\n- 解决之道：两端统一配置 `speed auto` 和 `duplex auto`。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where present",
+        "finding": "原题把半双工及碰撞断言为双工不匹配，单张计数器快照不能唯一确认原因；改为直接观察。",
+        "references": []
+      },
+      "exhibit_path": "exhibits/q1005_agent.jpg",
+      "image_sha256": "8c485084a6f024794ab88fb931c97426c0c1ae5c4d13bb5e5d568e62dfe04b73"
+    },
+    {
+      "id": 1006,
+      "original_qid": "Q1006",
+      "before_sha256": "901abc33d06b2bf58d6a060ea176aa09e46d0c3a3e189f4d35797219020c000f",
+      "reason": "恢复多设备 CLI 换行、修正提示符并补二层接口与兼容配置前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The displayed interfaces are Layer 2 ports, have compatible speed, duplex and VLAN settings, and have no conflicting channel configuration. Which command set configures an LACP EtherChannel?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode auto\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode desirable\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode on\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode active\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          }
+        ],
+        "explanation": "D。图中两条链路分别连接 SW1 和 SW2 的 Fa0/13、Fa0/14。SW1 的 `active` 主动发送 LACP 报文，SW2 的 `passive` 响应，可协商同一 LACP 聚合；还需题设中的二层接口、速率、双工和 VLAN 等条件兼容。A 的 auto、B 的 desirable 属于 PAgP，不能与 passive LACP 协商；C 的 on 为静态聚合，不发起 LACP。双方均 passive 也不会主动发起协商。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which set of commands must be applied to the two switches to configure an LACP Layer 2 EtherChannel?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)#interface range f0/13 -14SW1(config-if-range)#channel-group 1 mode autoSW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode desirable SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode on SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode active SW2(config)#interface range f0/13 -14 SW2(config--range)#channel-group 1 mode passive"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.3ad / 802.1AX 链路汇聚控制协议（LACP）模式匹配规则与以太通道（EtherChannel）配置。\n在 Cisco IOS/IOS-XE 交换机上通过 `channel-group <number> mode <mode>` 配置端口捆绑时，涉及两种协商协议与五种工作模式：\n1. LACP 模式（行业开放标准）：\n   - `active`（主动模式）：接口主动发送 LACPDU 报文，向对端提议建立 LACP 捆绑。\n   - `passive`（被动模式）：接口只监听不主动发包，仅在收到对端 LACPDU 时做出响应并同意捆绑。\n2. PAgP 模式（思科私有标准）：\n   - `desirable`（主动模式）：主动发送 PAgP 报文。\n   - `auto`（被动模式）：被动监听 PAgP 报文。\n3. 静态模式：\n   - `on`（强制模式）：无协商报文，强制开启 EtherChannel。\n4. 汇聚成功原则：\n   要成功协商 LACP 以太通道，两端必须都属于 LACP 协议族，且至少有一侧处于主动状态以发起协商握手。因此只有两种有效组合：\n   - Active <-> Active（双方主动发起，成功）\n   - Active <-> Passive（一方主动发起，一方被动应答，成功）\n\n• 正确选项剖析：\n选项 D（SW1 mode active / SW2 mode passive）完全符合技术规范。\nSW1 上配置 `channel-group 1 mode active`，SW2 上配置 `channel-group 1 mode passive`。SW1 周期性向 SW2 发送 LACPDU 报文，SW2 处于 Passive 模式监听到该报文后回复确认，两端成功协商建立符合 IEEE 802.3ad 标准的 Layer 2 EtherChannel。\n\n• 干扰项排除与错误陷阱：\n选项 A（SW1 mode auto / SW2 mode passive）：协议混乱。`auto` 是 PAgP 协议的被动模式，`passive` 是 LACP 协议的被动模式。不同协议之间无法识别对端的控制报文，永远无法建立聚合。\n选项 B（SW1 mode desirable / SW2 mode passive）：协议混乱。`desirable` 属于思科私有 PAgP，`passive` 属于行业标准 LACP，协议不匹配。\n选项 C（SW1 mode on / SW2 mode passive）：模式冲突。`on` 模式不发送任何控制报文，而 SW2 的 `passive` 模式由于永远收不到来自 SW1 的 LACPDU，接口将始终处于独立等待状态，通道无法协商。\n\n• 考试要点与速记技巧：\n以太通道口令口诀：\n“主动被动配对成，协议切莫两头混；LACP 认 Active/Passive，PAgP 认 Desirable/Auto；见 Active 配 Passive，LACP 稳稳立大功”。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where present",
+        "finding": "恢复多设备 CLI 换行、修正提示符并补二层接口与兼容配置前提。",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1006_agent.jpg",
+      "image_sha256": "f8bf7bbc3bab112a6c455d7e54bfb6bc4a5cb5828b604af9c2d73ceadbedbc5c"
+    },
+    {
+      "id": 1007,
+      "original_qid": "Q1007",
+      "before_sha256": "701497d69140b46d808d3eb33df8041611b5ee263cdb37567c0aa90a83bbf5ec",
+      "reason": "原题将所有非 Wi-Fi 干扰等同随机噪声，且排除其他干扰来源；改为背景噪声的具体定义。",
+      "updates": {
+        "prompt": "In a Wi-Fi receiver, which description best defines background noise?",
+        "options": [
+          {
+            "label": "A",
+            "text": "measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal"
+          },
+          {
+            "label": "B",
+            "text": "unwanted background energy, including receiver thermal noise, that can degrade reception"
+          },
+          {
+            "label": "C",
+            "text": "signals from other Wi-Fi networks that interfere with the local signal"
+          },
+          {
+            "label": "D",
+            "text": "ratio of signal-to-noise rating supplied by the wireless device"
+          }
+        ],
+        "explanation": "B。背景噪声是接收机中的不需要的随机能量，例如热噪声；它与期望信号共同影响接收质量。非 Wi-Fi 发射源也可能产生干扰，但不应把所有非 Wi-Fi 信号都定义成随机噪声，也不能说干扰只来自 Wi-Fi。A 是两个信号的功率差，不是噪声定义；C 是其他 Wi-Fi 信号造成的干扰；D 是信噪比（SNR）指标而非噪声本身。信号与噪声均以 dBm 表示时，其差值以 dB 表示。"
+      },
+      "original_fields": {
+        "prompt": "How is noise defined in Wi-Fi?",
+        "options": [
+          {
+            "label": "A",
+            "text": "measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal"
+          },
+          {
+            "label": "B",
+            "text": "any interference that is not Wi-Fi traffic that degrades the desired signal"
+          },
+          {
+            "label": "C",
+            "text": "signals from other Wi-Fi networks that interfere with the local signal"
+          },
+          {
+            "label": "D",
+            "text": "ratio of signal-to-noise rating supplied by the wireless device"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线局域网（WLAN）射频工程中“噪声”（Noise）的技术定义及频谱干扰类型。\n在无线网络环境中，客户端与接入点（AP）之间的空中接口依赖射频（RF）电磁波传输：\n1. 信号（Signal）：合法的 802.11 发射机按照标准物理层协议规范调制生成的无线射频电波。\n2. 噪声（Noise / Noise Floor，背景底噪）：指工作频段内所有无法被解调为 802.11 帧的杂散电磁能量。它来自于非 Wi-Fi 的辐射源（如微波炉辐射泄漏、蓝牙设备跳频、无线视频监视器、2.4GHz 无绳电话、工业设备热噪声及宇宙背景辐射等）。这些非 Wi-Fi 杂散辐射在频谱上表现为无规律的随机背景底噪，会严重恶化信噪比（SNR），掩盖有用信号，导致无线调制阶数下降、重传率上升甚至终端掉线。\n3. 干扰（Interference）的细分：在无线工程中，来自其它 Wi-Fi 网络的信号属于同频干扰（CCI）或邻频干扰（ACI），它们是格式完好的 802.11 协议帧，会触发客户端的 CCA（信道空闲评估）避退机制，在专业术语中区分于背景“噪声”。\n\n• 正确选项剖析：\n选项 B（any interference that is not Wi-Fi traffic that degrades the desired signal）精准定义了噪声。\n在 Wi-Fi 射频分析中，噪声明确被定义为“任何非 Wi-Fi 流量的、会使期望信号发生劣化的杂散电磁干扰与背景能量”。\n\n• 干扰项排除与错误陷阱：\n选项 A（measured difference between the desired Wi-Fi signal and an interfering Wi-Fi signal）：混淆概念。期望信号与干扰 Wi-Fi 信号的功率差值是信干比（SIR，Signal-to-Interference Ratio），并非噪声的定义。\n选项 C（signals from other Wi-Fi networks that interfere with the local signal）：这是同频干扰（CCI）或邻频干扰（ACI）的定义，属于 Wi-Fi 间的信道争用，不是物理背景噪声。\n选项 D（ratio of signal-to-noise rating supplied by the wireless device）：这是信噪比（SNR，Signal-to-Noise Ratio）的度量指标，是信号强度与噪声强度的差值（dB），而非噪声本身。\n\n• 考试要点与速记技巧：\n无线射频术语三区分：\n- 噪声（Noise）：非 Wi-Fi 杂散电磁能量（微波炉、蓝牙、底噪）；\n- 干扰（Interference）：其它 Wi-Fi 网络信号踩踏争用（CCI/ACI）；\n- 信噪比（SNR）：Signal - Noise，数值越大信号质量越优秀。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where present",
+        "finding": "原题将所有非 Wi-Fi 干扰等同随机噪声，且排除其他干扰来源；改为背景噪声的具体定义。",
+        "references": []
+      }
+    },
+    {
+      "id": 1008,
+      "original_qid": "Q1008",
+      "before_sha256": "1e7b113498f7875c2b02c76a9e6c978b1e4eab98b6380e1cdc33421d4906dd30",
+      "reason": "已查看拓扑；补图中 .1 标签与实际 EUI-64 地址的冲突说明，修正题干拼写。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For router R2 E0/1, use the LAN /64 prefix and displayed MAC address to calculate its modified EUI-64 IPv6 address. Treat the diagram’s .1 interface label as a placeholder to be replaced by the calculated address. Which address results?",
+        "explanation": "D。图中 R2 E0/1 的 MAC 为 `ca:01:b8:b8:00:01`，LAN 前缀为 `2001:db8:8bb8:8bb1::/64`。在 MAC 前后三字节中间插入 `ff:fe`，再将首字节 `ca` 与 `02` 异或得到 `c8`，接口标识符为 `c801:b8ff:feb8:0001`；与 /64 前缀拼接即为 D。其余选项的前缀或接口标识符不符合该计算。图中的 `.1` 标签仅作占位，不能同时认定为生成的 EUI-64 接口地址；文档前缀 2001:db8::/32 供示例使用。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured whichIpv6 address is produced by the router?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 4291 IPv6 接口标识符生成算法——EUI-64 格式的数学推导与拓扑验证。\n当使用 EUI-64 机制根据以太网接口的 48 位物理 MAC 地址生成 64 位 IPv6 Interface ID 时，标准执行以下四步转换流程：\n1. 均分 MAC 地址：将 48 位 MAC 地址分为高 24 位（前 3 字节）与低 24 位（后 3 字节）。\n2. 中间插入固定填充：在两部分之间插入 16 位固定十六进制数 `FF:FE`（二进制 `11111111 11111110`）。\n3. 反转通用/本地控制位（U/L 位）：提取第 1 字节（最高字节），将其从左往右数的第 7 个比特位取反（0 变为 1，1 变为 0）。在十六进制算术中，等价于对首字节与 `0x02` 进行异或操作（XOR 0x02）。\n4. 拼接网络前缀：将 /64 网络前缀与生成的 64 位 Interface ID 拼接，依据 IPv6 缩写规则省略各段的前导零。\n\n• 正确选项剖析：\n选项 D（2001:db8:8bb8:8bb1:C801:B8FF:FEB8:1）完全正确。\n结合展图信息进行严谨数学推导：\n- 目标设备与接口：Boston 站点的路由器 R2，其连接 LAN 的接口为 E0/1。\n- 展图参数：R2 的 LAN 侧 IPv6 前缀为 `2001:db8:8bb8:8bb1::/64`；接口 E0/1 标注的 MAC 地址为 `ca-01-b8-b8-00-01`。\n- 算法推导过程：\n  1. 拆分与填充：`ca-01-b8` 与 `b8-00-01` 中间插入 `ff-fe`，得到：`ca:01:b8:ff:fe:b8:00:01`。\n  2. 反转首字节第 7 位（U/L 位）：\n     首字节为十六进制 `0xca`，转换为二进制为 `1 1 0 0 1 0 1 0`。\n     从左往右第 7 个比特位是 `1`，反转后变为 `0`，二进制变为 `1 1 0 0 1 0 0 0`。\n     转换回十六进制为 `0xc8`（即十六进制直接做 `0xCA ^ 0x02 = 0xC8`）。\n  3. 组合接口 ID：`c801:b8ff:feb8:0001`。\n  4. 拼接子网前缀并简写：\n     `2001:db8:8bb8:8bb1:c801:b8ff:feb8:0001`，末尾 `:0001` 省略前导零简写为 `:1`。\n     最终生成的 IPv6 单播地址为：`2001:db8:8bb8:8bb1:C801:B8FF:FEB8:1`，与选项 D 完全匹配！\n\n• 干扰项排除与错误陷阱：\n选项 A（...:C081:B8FF:FF4B:1）：首字节反转错误算成 C0，且把 Atlanta 侧 R1 的后缀杂糅。\n选项 B（...:C001:8BFE:FF01:1）：首字节反转错误，且插入位置与 MAC 字节顺序完全混乱。\n选项 C（...:6792:43FF:EF87:1）：子网前缀错成 8bb4，接口 ID 为随机数字。\n\n• 考试要点与速记技巧：\nEUI-64 秒杀三部曲：\n1. 中间塞进 `FFFE`；\n2. 首字节加减 2（`CA` 变 `C8`）；\n3. 拼上前缀末尾省前导零（`:0001` 变 `:1`）。看到 `C801:B8FF:FEB8:1` 立即秒选！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where present",
+        "finding": "已查看拓扑；补图中 .1 标签与实际 EUI-64 地址的冲突说明，修正题干拼写。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291#appendix-A"
+        ]
+      },
+      "exhibit_path": "exhibits/q1008_agent.jpg",
+      "image_sha256": "9f051f6a3258045b4f2a9c7166575e902943adbc560b055f96ca44f3afff3338"
+    },
+    {
+      "id": 1009,
+      "original_qid": "Q1009",
+      "before_sha256": "45bed60bff48fb6ef674c49721dc41806235092d018ca83d274d73deebc24739",
+      "reason": "限定未知单播、VLAN 与合格转发端口，避免声称所有端口与所有 BUM 一律泛洪。",
+      "updates": {
+        "prompt": "By default, how does a Layer 2 switch handle a unicast frame whose destination MAC address is absent from the forwarding table for the incoming VLAN?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It floods the frame through eligible forwarding ports in the same VLAN, except the ingress port."
+          },
+          {
+            "label": "B",
+            "text": "inspects and drops frames from unknown destinations"
+          },
+          {
+            "label": "C",
+            "text": "forwards frames to a neighbor port using CDP"
+          },
+          {
+            "label": "D",
+            "text": "protects against denial of service attacks"
+          }
+        ],
+        "explanation": "A。默认情况下，交换机按入站 VLAN 和目的 MAC 查询转发表；未知单播会从同 VLAN 中符合条件的转发端口泛洪，排除入端口。STP 端口状态、VLAN 允许列表及未知单播抑制等配置会影响实际转发。B 不是默认未知单播行为；C 的 CDP 用于邻居发现而非数据帧转发；D 的 DoS 防护不是一般帧交换的保证。组播处理还可能受 IGMP snooping 等配置影响。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristics of frame switching?",
+        "options": [
+          {
+            "label": "A",
+            "text": "floods unknown destinations to all ports except the receiving port"
+          },
+          {
+            "label": "B",
+            "text": "inspects and drops frames from unknown destinations"
+          },
+          {
+            "label": "C",
+            "text": "forwards frames to a neighbor port using CDP"
+          },
+          {
+            "label": "D",
+            "text": "protects against denial of service attacks"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网二层交换机对未知单播帧（Unknown Unicast Frame）的处理流程——泛洪（Flooding）机制。\n以太网交换机通过动态学习建立 CAM 表（MAC 地址表）来实现硬件转发：\n1. 已知单播：当入站帧的目的 MAC 地址能够在 CAM 表中找到匹配项时，交换机精准将数据帧从对应的单个物理端口转发出去；\n2. 未知单播（Unknown Unicast）：当入站帧的目的 MAC 地址尚未记录在 CAM 表中时，交换机无法确定目标主机究竟连接在网络的哪一个端口上。为了保证数据通信不中断，并期待目标设备在接收到帧后回复响应，从而让交换机在回包时学习到该主机的真实端口位置，交换机必须执行泛洪（Flooding）动作——即将该数据帧从所属 VLAN 内除接收该帧的接口之外的所有其余活动接口复制发送出去。\n\n• 正确选项剖析：\n选项 A（floods unknown destinations to all ports except the receiving port）完全正确。\n向除接收端口外的所有端口泛洪未知目的地的帧，是以太网透明网桥（IEEE 802.1D）的基本处理准则。\n\n• 干扰项排除与错误陷阱：\n选项 B（inspects and drops frames from unknown destinations）：严重违背网络通信基本逻辑。交换机绝对不会因为目的 MAC 未知而丢弃数据帧，否则网络中任何两个主机在建立首次通信时都将因丢包而无法通信。\n选项 C（forwards frames to a neighbor port using CDP）：混淆协议职能。思科发现协议（CDP）是设备互联发现协议，仅在直连设备间交互系统名称、硬件型号和端口信息，绝不参与数据帧的转发处理。\n选项 D（protects against denial of service attacks）：混淆安全特性。单纯的二层帧交换转发行为本身无法防御 DoS 攻击。\n\n• 考试要点与速记技巧：\n交换机处理三大泛洪流量（BUM）：\n- 广播帧（Broadcast，全 F）；\n- 未知单播帧（Unknown Unicast，CAM 无表项）；\n- 未知组播帧（Unknown Multicast，未开启 IGMP Snooping）。\n统一处理规则：同 VLAN 内“除入端口外全泛洪（Floods to all ports except the receiving port）”。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked and formatted where present",
+        "finding": "限定未知单播、VLAN 与合格转发端口，避免声称所有端口与所有 BUM 一律泛洪。",
+        "references": [
+          "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/23563-143.html"
+        ]
+      }
+    },
+    {
+      "id": 1010,
+      "original_qid": "Q1010",
+      "before_sha256": "86777fa549c7a302005af5ba37904057075f98277b65a1363f67d3470430b5ff",
+      "reason": "已查看拓扑；补图中 .1 标签与实际 EUI-64 地址的冲突说明，修正题干拼写。",
+      "updates": {
+        "prompt": "Refer to the exhibit. For router R2 E0/1, use the LAN /64 prefix and displayed MAC address to calculate its modified EUI-64 IPv6 address. Treat the diagram’s .1 interface label as a placeholder to be replaced by the calculated address. Which address results?",
+        "explanation": "A。图中 R2 E0/1 的 MAC 为 `ca:01:b6:b4:00:01`，LAN 前缀为 `2001:db8:9bb6:6bb9::/64`。在 MAC 前后三字节中间插入 `ff:fe`，再将首字节 `ca` 与 `02` 异或得到 `c8`，接口标识符为 `c801:b6ff:feb4:0001`；与 /64 前缀拼接即为 A。其余选项的前缀或接口标识符不符合该计算。图中的 `.1` 标签仅作占位，不能同时认定为生成的 EUI-64 接口地址；文档前缀 2001:db8::/32 供示例使用。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R2 must be configured using the EUI-64 format. When configured whichIpv6 address is produced by the router?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 4291 IPv6 接口标识符生成算法——EUI-64 格式在不同 MAC 地址变体下的精确计算与拓扑识别。\n在 Cisco 路由器上使用 EUI-64 自动生成接口地址时，核心算法为：\n1. 取 48 位以太网 MAC 地址，在中间（前 24 位与后 24 位之间）插入 16 位固定填充值 `FF:FE`；\n2. 反转最高字节的第 7 位（U/L 位，Universal/Local bit，从 0 变 1 或从 1 变 0，等价于与 `0x02` 进行异或）；\n3. 将生成的 64 位 Interface ID 追加到 64 位子网前缀之后，并执行 IPv6 文本压缩简写。\n\n• 正确选项剖析：\n选项 A（2001:db8:9bb6:6bb9:C801:B6FF:FEB4:1）完全正确。\n细致核对展图拓扑与推导过程：\n- 设备与接口：Boston 站点的路由器 R2，其连接局域网的接口为 E0/1。\n- 展图信息：R2 的 LAN 侧 IPv6 前缀为 `2001:db8:9bb6:6bb9::/64`；接口 E0/1 标注的 MAC 地址清晰显示为 `ca-01-b6-b4-00-01`。\n- 逐步推导：\n  1. 拆分并在中间插入 `FF:FE`：`ca:01:b6` 与 `b4:00:01` 中间插入 `ff:fe` -> `ca:01:b6:ff:fe:b4:00:01`。\n  2. 反转首字节第 7 位（U/L 位）：\n     首字节为十六进制 `0xca`，二进制为 `1 1 0 0 1 0 1 0`。\n     反转从左往右第 7 位，得到二进制 `1 1 0 0 1 0 0 0`，即十六进制 `0xc8`（即 `0xCA ^ 0x02 = 0xC8`）。\n  3. 组合 64 位接口标识符（Interface ID）：\n     `c801:b6ff:feb4:0001`。\n  4. 拼接网络前缀并省略前导零：\n     `2001:db8:9bb6:6bb9:c801:b6ff:feb4:0001`，末尾 `:0001` 省略前导零缩写为 `:1`。\n     最终生成的 IPv6 地址为：`2001:db8:9bb6:6bb9:C801:B6FF:FEB4:1`，与选项 A 严密契合！\n\n• 干扰项排除与错误陷阱：\n选项 B（...:C001:6BFE:FF01:1）：首字节反转错误算成 C0，且把 MAC 地址内部字符错位重组。\n选项 C（...:C081:B6FF:FF4B:1）：混淆了 Atlanta 侧 R1 的 MAC 地址后缀，且首字节错误。\n选项 D（...:4736:931F:FE37:1）：纯粹虚构的随机字符串，毫无 EUI-64 转换依据。\n\n• 考试要点与速记技巧：\nEUI-64 题型秒杀速决：\n核对拓扑 MAC 地址 `ca-01-b6-b4-00-01`，首字节 `ca` 异或 `02` 必为 `c8`，中间必含 `B6FF:FEB4`，前缀紧跟 `6bb9`，一眼锁定正确选项！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where present",
+        "finding": "已查看拓扑；补图中 .1 标签与实际 EUI-64 地址的冲突说明，修正题干拼写。",
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4291#appendix-A"
+        ]
+      },
+      "exhibit_path": "exhibits/q1010_agent.jpg",
+      "image_sha256": "f95cdaeba3561c268be769df9df4fc29143cf29dde3802b9f6986c9d90b81d35"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/23563-143.html",
+    "https://www.rfc-editor.org/rfc/rfc4291#appendix-A"
+  ],
+  "limitations": "人工审查图像与题目，未进行真实网络设备实验。"
+}

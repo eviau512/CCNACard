@@ -1,0 +1,229 @@
+{
+  "scope": "Q1103–Q1112 independently reviewed",
+  "corrections": [
+    {
+      "id": 1104,
+      "before_sha256": "b206c07a71643336553d23d218924cc2c0ecf9de38da0745d2b039112b9cfeb1",
+      "reason": "静态路由不是协议；明确静态下一跳仅在静态路由可用时可达，避免题设矛盾；原图留存。",
+      "updates": {
+        "prompt": "For the same destination prefix, assume each route not explicitly described as unavailable is eligible, the EIGRP route is internal, default administrative distances apply, and the static route has a reachable next hop whenever it is available. Match each adapted condition to the selected routing source. Within each source category, slots may be filled in either order.",
+        "drag_drop_data": {
+          "sources": [
+            "All listed routing sources are available.",
+            "OSPF and eBGP are down.",
+            "The static route and eBGP are down.",
+            "The static route and EIGRP are down.",
+            "The static route and OSPF are down."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "eBGP (Slot 1)",
+              "expected": "The static route and EIGRP are down.",
+              "unordered_group": "eBGP"
+            },
+            {
+              "id": "t2",
+              "label": "eBGP (Slot 2)",
+              "expected": "The static route and OSPF are down.",
+              "unordered_group": "eBGP"
+            },
+            {
+              "id": "t3",
+              "label": "EIGRP",
+              "expected": "The static route and eBGP are down."
+            },
+            {
+              "id": "t4",
+              "label": "Static (Slot 1)",
+              "expected": "All listed routing sources are available.",
+              "unordered_group": "Static"
+            },
+            {
+              "id": "t5",
+              "label": "Static (Slot 2)",
+              "expected": "OSPF and eBGP are down.",
+              "unordered_group": "Static"
+            }
+          ]
+        },
+        "answer_image": null
+      }
+    },
+    {
+      "id": 1106,
+      "before_sha256": "eb6b9bdc1770ed3e6ddf33fc7325f0dde4978c3d5964903e722b8a80033c957b",
+      "reason": "原 ToS 值与内部 QoS group 混同；明确 DSCP 是 IP 首部标记。",
+      "updates": {
+        "prompt": "Match each QoS feature to the corrected description shown in the interactive board.",
+        "drag_drop_data": {
+          "sources": [
+            "classification",
+            "marking",
+            "policing",
+            "queuing"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "applies a specific action to packets whenever the maximum rate of packets is exceeded",
+              "expected": "policing"
+            },
+            {
+              "id": "t2",
+              "label": "sets a DSCP value in the IP header to mark the packet",
+              "expected": "marking"
+            },
+            {
+              "id": "t3",
+              "label": "reduces traffic congestion by holding packets and distributing them when the available bandwidth allows",
+              "expected": "queuing"
+            },
+            {
+              "id": "t4",
+              "label": "the overall process of using specific criteria to differentiate traffic into categories",
+              "expected": "classification"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 1108,
+      "before_sha256": "68fd6655c6f89d6bb1ee52814ad3938b418676397ded9e65e2fdf69e43b9bd0e",
+      "reason": "ip domain-lookup 控制 DNS 查询，不代表禁用本地主机表映射。",
+      "updates": {
+        "prompt": "Match each IOS DNS command to the corrected effect on the interactive board.",
+        "drag_drop_data": {
+          "sources": [
+            "ip domain-lookup",
+            "ip domain-name",
+            "ip host switch_1 192.168.0.1",
+            "ip name-server",
+            "show hosts"
+          ],
+          "targets": [
+            {
+              "label": "adds an entry to the host table",
+              "sub_label": "",
+              "expected": "ip host switch_1 192.168.0.1"
+            },
+            {
+              "label": "sets the default domain suffix used for unqualified host names",
+              "sub_label": "",
+              "expected": "ip domain-name"
+            },
+            {
+              "label": "displays address-mapping information",
+              "sub_label": "",
+              "expected": "show hosts"
+            },
+            {
+              "label": "enables DNS-based hostname lookup",
+              "sub_label": "",
+              "expected": "ip domain-lookup"
+            },
+            {
+              "label": "specifies the IP address of the DNS server",
+              "sub_label": "",
+              "expected": "ip name-server"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 1111,
+      "before_sha256": "9a25a316c5291b47e3efa40929864b4cb6f172a91a251eef668c380e950b72f3",
+      "reason": "用户访问报告可以包含认证授权日志，改为明确的计账记录；保留原图证据。",
+      "updates": {
+        "prompt": "Match the adapted AAA statements to their service categories. Two slots belong to each category and order within each category does not matter; not all options are used.",
+        "drag_drop_data": {
+          "sources": [
+            "It grants access to network assets, such as FTP servers.",
+            "It restricts the CLI commands that a user is able to perform.",
+            "It performs user validation via TACACS+.",
+            "It records the duration of each connection.",
+            "It records user access activity for accounting.",
+            "It verifies \"who you are\"."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Authentication (Slot 1)",
+              "expected": "It performs user validation via TACACS+.",
+              "unordered_group": "Authentication"
+            },
+            {
+              "id": "t2",
+              "label": "Authentication (Slot 2)",
+              "expected": "It verifies \"who you are\".",
+              "unordered_group": "Authentication"
+            },
+            {
+              "id": "t3",
+              "label": "Authorization (Slot 1)",
+              "expected": "It grants access to network assets, such as FTP servers.",
+              "unordered_group": "Authorization"
+            },
+            {
+              "id": "t4",
+              "label": "Authorization (Slot 2)",
+              "expected": "It restricts the CLI commands that a user is able to perform.",
+              "unordered_group": "Authorization"
+            }
+          ]
+        },
+        "answer_image": null
+      }
+    },
+    {
+      "id": 1112,
+      "before_sha256": "fb6a59840c41a6e445ea04f5eae3064d945f5c6ce42ea642622cc6eba2196e68",
+      "reason": "PPP 是链路协议而非与 RADIUS/TACACS+ 平级的认证方法；题图作为历史证据。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "It assigns per-user attributes.",
+            "It restricts the CLI commands that a user is able to perform.",
+            "It permits or denies a login attempt after checking credentials.",
+            "It records the amount of network resources consumed by the user.",
+            "It supports local, RADIUS, and TACACS+ authentication methods.",
+            "It tracks the services that a user is using."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Authentication (Slot 1)",
+              "expected": "It permits or denies a login attempt after checking credentials.",
+              "unordered_group": "Authentication"
+            },
+            {
+              "id": "t2",
+              "label": "Authentication (Slot 2)",
+              "expected": "It supports local, RADIUS, and TACACS+ authentication methods.",
+              "unordered_group": "Authentication"
+            },
+            {
+              "id": "t3",
+              "label": "Authorization (Slot 1)",
+              "expected": "It assigns per-user attributes.",
+              "unordered_group": "Authorization"
+            },
+            {
+              "id": "t4",
+              "label": "Authorization (Slot 2)",
+              "expected": "It restricts the CLI commands that a user is able to perform.",
+              "unordered_group": "Authorization"
+            }
+          ]
+        },
+        "explanation": "Authentication 验证用户身份，可采用本地数据库或 RADIUS、TACACS+ 等方法；PPP 是链路协议，其 PAP/CHAP 可执行身份验证，不应将 PPP 本身与认证数据库并列。Authorization 决定授予的用户属性与允许执行的 CLI 命令。记录资源消耗和服务使用属于 Accounting。每个类别的两个槽位可以互换，不可跨类别混放。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/routers/sdwan/26x-later/user-mgmt/user-mgmt-guide/authenticate/aaa-auth.html",
+    "https://www.cisco.com/c/en/us/td/docs/routers/ncs4000/software/qos/command_ref/b-ncs4000-qos-cr/m-marking.html"
+  ]
+}

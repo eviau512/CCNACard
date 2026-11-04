@@ -1,0 +1,92 @@
+{
+  "corrections": [
+    {
+      "id": 1047,
+      "before_sha256": "1444ada269b28a30e342874b99943babf539f2ac7d091f775e3efffbac1645f4",
+      "reason": "原管理IP和自动部署描述跨架构重叠，改为明确的管理特征，保留组内无序。",
+      "updates": {
+        "prompt": "For the AP management architectures, classify each adapted characteristic under the appropriate architecture. Items within each architecture can be placed in either order; not all items are used.",
+        "drag_drop_data": {
+          "sources": [
+            "configured and managed by a WLC",
+            "managed from a web-based dashboard",
+            "accessible for management via Telnet, SSH, or a web GUI",
+            "configured individually through the AP local management interface",
+            "receives centralized configuration from a cloud management service"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Autonomous Access Point (Slot 1)",
+              "expected": "accessible for management via Telnet, SSH, or a web GUI",
+              "unordered_group": "Autonomous Access Point"
+            },
+            {
+              "id": "t2",
+              "label": "Autonomous Access Point (Slot 2)",
+              "expected": "configured individually through the AP local management interface",
+              "unordered_group": "Autonomous Access Point"
+            },
+            {
+              "id": "t3",
+              "label": "Cloud-Based Access Point (Slot 1)",
+              "expected": "managed from a web-based dashboard",
+              "unordered_group": "Cloud-Based Access Point"
+            },
+            {
+              "id": "t4",
+              "label": "Cloud-Based Access Point (Slot 2)",
+              "expected": "receives centralized configuration from a cloud management service",
+              "unordered_group": "Cloud-Based Access Point"
+            }
+          ]
+        },
+        "explanation": "自治 AP 逐台使用本机管理界面配置；云管理 AP 使用云端仪表盘并从云服务接收集中配置。WLC 管理适用于控制器管理的轻量 AP。原图中“需要管理 IP”和“支持自动部署”可同时适用于多种架构，已将这两项改写为可以区分的管理特征；同一类内顺序不限。"
+      }
+    },
+    {
+      "id": 1048,
+      "before_sha256": "9aed3c098e533c2ac66d307824d60c169e950a1318e48ef8d59e40809e03e100",
+      "reason": "原管理IP和自动部署描述跨架构重叠，改为明确的管理特征，保留组内无序。",
+      "updates": {
+        "prompt": "For the AP management architectures, classify each adapted characteristic under the appropriate architecture. Items within each architecture can be placed in either order; not all items are used.",
+        "drag_drop_data": {
+          "sources": [
+            "configured and managed by a WLC",
+            "accessible for management via Telnet, SSH, or a Web GUI",
+            "supports different operational modes",
+            "configured individually through the AP local management interface",
+            "joins a controller over a CAPWAP tunnel"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Autonomous Access Point (Slot 1)",
+              "expected": "configured individually through the AP local management interface",
+              "unordered_group": "Autonomous Access Point"
+            },
+            {
+              "id": "t2",
+              "label": "Autonomous Access Point (Slot 2)",
+              "expected": "accessible for management via Telnet, SSH, or a Web GUI",
+              "unordered_group": "Autonomous Access Point"
+            },
+            {
+              "id": "t3",
+              "label": "Lightweight Access Point (Slot 1)",
+              "expected": "configured and managed by a WLC",
+              "unordered_group": "Lightweight Access Point"
+            },
+            {
+              "id": "t4",
+              "label": "Lightweight Access Point (Slot 2)",
+              "expected": "joins a controller over a CAPWAP tunnel",
+              "unordered_group": "Lightweight Access Point"
+            }
+          ]
+        },
+        "explanation": "自治 AP 逐台使用本机管理界面配置；轻量 AP 由 WLC 配置管理，并通过 CAPWAP 加入控制器。原图中“需要管理 IP”和“支持自动部署”可适用于多种架构，已改写为区分性描述；同一类内顺序不限。"
+      }
+    }
+  ]
+}

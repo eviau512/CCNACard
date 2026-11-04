@@ -1,0 +1,159 @@
+{
+  "scope": "Independent review Q1053–Q1062",
+  "corrections": [
+    {
+      "id": 1058,
+      "before_sha256": "ece4f3c0e97faf9acef8cd94457e81d9c922083f2408e524ad8d15efe32ac398",
+      "reason": "DNS解析URL中的主机名而非完整URL；同步交互文本、预期值。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "resolves a URL hostname to IP addresses",
+            "assigns a default gateway to a client",
+            "holds the TCP/IP settings to be distributed to the clients",
+            "stores a list of IP addresses mapped to names",
+            "assigns IP addresses to enabled clients"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "DHCP Server (Slot 1)",
+              "expected": "assigns a default gateway to a client",
+              "unordered_group": "DHCP Server"
+            },
+            {
+              "id": "t2",
+              "label": "DHCP Server (Slot 2)",
+              "expected": "holds the TCP/IP settings to be distributed to the clients",
+              "unordered_group": "DHCP Server"
+            },
+            {
+              "id": "t3",
+              "label": "DHCP Server (Slot 3)",
+              "expected": "assigns IP addresses to enabled clients",
+              "unordered_group": "DHCP Server"
+            },
+            {
+              "id": "t4",
+              "label": "DNS Server (Slot 1)",
+              "expected": "resolves a URL hostname to IP addresses",
+              "unordered_group": "DNS Server"
+            },
+            {
+              "id": "t5",
+              "label": "DNS Server (Slot 2)",
+              "expected": "stores a list of IP addresses mapped to names",
+              "unordered_group": "DNS Server"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 1060,
+      "before_sha256": "21e3076d5835c9582da415642aac020a643b178ef99161b2bba8d757ec08a972",
+      "reason": "Ethernet0内A/B、Serial0内C/D、全局E/F各两条独立配置命令可互换顺序；此前固定顺序误判。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "ip address 172.16.1.1 255.255.255.0",
+            "ip address 45.83.2.214 255.255.255.240",
+            "ip nat inside",
+            "ip nat inside source list 1 interface s0 overload",
+            "ip nat inside source static tcp 172.16.1.2 80 45.83.2.214 80 extendable",
+            "ip nat outside"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "position A",
+              "expected": "ip address 172.16.1.1 255.255.255.0",
+              "unordered_group": "ethernet0"
+            },
+            {
+              "id": "t2",
+              "label": "position B",
+              "expected": "ip nat inside",
+              "unordered_group": "ethernet0"
+            },
+            {
+              "id": "t3",
+              "label": "position C",
+              "expected": "ip address 45.83.2.214 255.255.255.240",
+              "unordered_group": "serial0"
+            },
+            {
+              "id": "t4",
+              "label": "position D",
+              "expected": "ip nat outside",
+              "unordered_group": "serial0"
+            },
+            {
+              "id": "t5",
+              "label": "position E",
+              "expected": "ip nat inside source static tcp 172.16.1.2 80 45.83.2.214 80 extendable",
+              "unordered_group": "global"
+            },
+            {
+              "id": "t6",
+              "label": "position F",
+              "expected": "ip nat inside source list 1 interface s0 overload",
+              "unordered_group": "global"
+            }
+          ]
+        },
+        "prompt": "Refer to the exhibit. Configure Ethernet0 as the inside interface and Serial0 as the outside interface, publish the web server at TCP port 80, and enable PAT for the inside subnet using the existing ACL. Place each command in its configuration position. Assume reachability, addressing and the gateway are correctly configured. Within each interface configuration section, and within the global configuration section, the two commands may be entered in either order.",
+        "explanation": "A：`ip address 172.16.1.1 255.255.255.0`；B：`ip nat inside`；C：`ip address 45.83.2.214 255.255.255.240`；D：`ip nat outside`；E：`ip nat inside source static tcp 172.16.1.2 80 45.83.2.214 80 extendable`；F：`ip nat inside source list 1 interface s0 overload`。E 是 Web 服务的静态 TCP 端口映射；F 将 ACL 1 选中的内部源地址做接口地址复用。仅发布 Web 服务不必然需要 PAT；题设额外要求它。仍需路由、服务器默认网关及安全策略允许对应流量。\n\n同一配置模式中的两条独立命令不要求固定先后：A/B 可互换、C/D 可互换、E/F 可互换，但不能跨接口或配置模式互换。"
+      }
+    },
+    {
+      "id": 1062,
+      "before_sha256": "9815d2aa4712ddd6710b4d1e6e76bf94cf574ee6c3929eea9b017798de48a50b",
+      "reason": "整形能够缓冲和平滑发送速率，但无法保证防止拥塞；原答案图曾错配，应避免展示。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "class-based weighted fair queueing",
+            "classification",
+            "congestion",
+            "policing",
+            "shaping"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "categorizes packets based on the value of a traffic descriptor",
+              "expected": "classification"
+            },
+            {
+              "id": "t2",
+              "label": "guarantees minimum bandwidth to specific traffic classes when an interface is congested",
+              "expected": "class-based weighted fair queueing"
+            },
+            {
+              "id": "t3",
+              "label": "buffers outbound traffic to smooth the sending rate",
+              "expected": "shaping"
+            },
+            {
+              "id": "t4",
+              "label": "outcome of overutilization",
+              "expected": "congestion"
+            },
+            {
+              "id": "t5",
+              "label": "uses defined criteria to limit the transmission of one or more classes of traffic",
+              "expected": "policing"
+            }
+          ]
+        },
+        "answer_image": null
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m-packet-capture.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13772-12.html"
+  ],
+  "limitations": "Static source and exhibit review; no live router or AP experiment."
+}

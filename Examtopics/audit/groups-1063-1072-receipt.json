@@ -1,0 +1,15 @@
+{
+  "manifest": "groups-1063-1072.json",
+  "applied_ids": [
+    1067,
+    1069,
+    1072
+  ],
+  "corrected_question_sha256": {
+    "1067": "ea061e8135bf79a1a3c2ed081a6339f093d35c7b5f396275e8ce954671865737",
+    "1069": "bdd25d9bba998b68c5146b32021605affce8412a491cf00610d00746ca9c86db",
+    "1072": "8840c6866355f83ded3df3d17545d49b4b4a29806fc8da48e0d2420da7c18348"
+  },
+  "source_sha256": "8bf5adcdd6ceece92930652ee39ac6b01c29a5a2e8816769596d3a626a0d4721",
+  "app_bundle_sha256": "8c5fa4bf329221a03adc46c166af0d20deb15f009471e8ab4e56f11ce108075d"
+}
