@@ -579,9 +579,11 @@
   }
 
   class IosSimulator {
-    constructor(container, promptText) {
-      this.container = container;
-      this.promptText = promptText;
+    constructor(container, options = {}) {
+      this.container = typeof container === 'string' ? document.getElementById(container) : container;
+      if (!this.container) return;
+
+      this.options = (typeof options === 'string') ? { promptText: options } : (options || {});
       this.devices = {};
       this.activeDeviceName = '';
       this.screenEl = null;
@@ -589,14 +591,25 @@
       this.promptEl = null;
       this.tabsWrapEl = null;
 
-      this.initDevices(promptText);
+      this.initDevices(this.options);
+      this.render();
     }
 
-    initDevices(promptText) {
-      const names = IosSimulator.extractDevices(promptText);
+    initDevices(options) {
+      let names = [];
+      if (options && Array.isArray(options.devices) && options.devices.length > 0) {
+        names = options.devices;
+      } else if (options && typeof options.promptText === 'string') {
+        names = IosSimulator.extractDevices(options.promptText);
+      } else if (typeof options === 'string') {
+        names = IosSimulator.extractDevices(options);
+      } else {
+        names = ['SW-1', 'SW-2'];
+      }
+
       names.forEach(name => {
-        const isSwitch = /^sw/i.test(name);
-        this.devices[name] = new IosDeviceSession(name, isSwitch ? 'switch' : 'router');
+        const isRouter = /^(r\d+|router)/i.test(name);
+        this.devices[name] = new IosDeviceSession(name, isRouter ? 'router' : 'switch');
       });
       this.activeDeviceName = names[0] || 'SW-1';
     }
