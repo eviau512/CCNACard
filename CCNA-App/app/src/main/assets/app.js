@@ -2205,9 +2205,5 @@ window.handleAndroidBack = function() {
     closeModals();
     return true;
   }
-  if (appState.drillTopic) {
-    exitDrillMode();
-    return true;
-  }
   return false;
 };

@@ -307,10 +307,10 @@ public class MainActivity extends Activity {
                 if (!handled) {
                     long currentTime = System.currentTimeMillis();
                     if (currentTime - lastBackPressTime < 2000) {
-                        finish();
+                        finishAffinity();
                     } else {
                         lastBackPressTime = currentTime;
-                        Toast.makeText(MainActivity.this, "Press back again to exit CCNA", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "再按一次返回退出 CCNA", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
