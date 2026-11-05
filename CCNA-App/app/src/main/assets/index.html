@@ -67,6 +67,7 @@
           <span class="badge badge-domain" id="cardDomain">IP Connectivity</span>
           <span class="badge badge-topic" id="cardTopic">OSPFv2</span>
           <span class="badge badge-retry" id="cardRetryBadge" style="display:none;">Review</span>
+          <span class="badge badge-srs" id="cardSrsBadge" style="display:none;"></span>
         </div>
         <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()">★</button>
       </div>
@@ -104,8 +105,13 @@
       </div>
 
       <!-- Action Button -->
-      <div class="action-bar">
+      <div class="action-bar" id="actionBar">
+        <button class="btn btn-prev" id="prevBtn" onclick="goToPreviousCard()" title="Previous Question" style="display:none;">← Prev</button>
         <button class="btn btn-primary" id="actionBtn" onclick="submitAnswer()">Check Answer</button>
+        <div class="lab-eval-group" id="labEvalGroup" style="display:none;">
+          <button class="btn btn-lab-retry" id="labRetryBtn" onclick="submitLabSelfEval(false)">🔁 需重练 (Retry)</button>
+          <button class="btn btn-next" id="labMasteredBtn" onclick="submitLabSelfEval(true)">✅ 已掌握 (Mastered →)</button>
+        </div>
       </div>
     </div>
   </main>
@@ -166,14 +172,33 @@
             <button class="btn btn-primary" style="padding:6px 14px; width:auto; font-size:0.85rem;" onclick="jumpToQuestion()">Go</button>
           </div>
         </div>
-        <div style="display:flex; gap:8px; margin-bottom: 12px;">
-          <button class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; background:var(--bg-secondary); color:var(--primary); border:1px solid var(--primary);" onclick="jumpToType('drag')">🧩 Practice Drag & Drop</button>
-          <button class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="jumpToType('sim')">🛠️ Practice Lab Sims</button>
+        <div style="display:flex; gap:8px; margin-bottom: 10px; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="modeBtnSmart" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%;" onclick="switchDeckMode('smart')">🧠 Smart Adaptive</button>
+          <button class="btn btn-primary" id="modeBtnWeak" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--warning); border:1px solid var(--warning);" onclick="switchDeckMode('weak')">📕 Wrong & Weak Pool</button>
+          <button class="btn btn-primary" id="modeBtnBookmarks" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="switchDeckMode('bookmarks')">⭐ Bookmarked (0)</button>
+          <button class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--primary); border:1px solid var(--primary);" onclick="jumpToType('drag')">🧩 Drag & Drop</button>
+          <button class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; flex:1 1 100%; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="jumpToType('sim')">🛠️ Practice Lab Sims (37)</button>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; gap: 8px;">
+          <span style="font-size:0.85rem; font-weight:600;">CCNA Domain:</span>
+          <select id="domainFilterSelect" onchange="filterByDomain(this.value)" style="flex:1; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:0.82rem;">
+            <option value="">All 6 Domains (1,396 Qs)</option>
+            <option value="Network Fundamentals">1. Network Fundamentals</option>
+            <option value="Network Access">2. Network Access</option>
+            <option value="IP Connectivity">3. IP Connectivity</option>
+            <option value="IP Services">4. IP Services</option>
+            <option value="Security Fundamentals">5. Security Fundamentals</option>
+            <option value="Automation and Programmability">6. Automation & Programmability</option>
+          </select>
         </div>
         <hr style="border:0; border-top:1px solid var(--border-color); margin-bottom: 12px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
           <span>Shuffle Options (乱序选项):</span>
           <input type="checkbox" id="shuffleOptionsToggle" checked onchange="updateShuffleOptions(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+          <span>Hide Mastered Qs (仅刷未掌握):</span>
+          <input type="checkbox" id="hideMasteredToggle" onchange="updateHideMastered(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; justify-content:space-between; align-items:center;">

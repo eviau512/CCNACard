@@ -1562,3 +1562,63 @@ main {
     margin-top: 10px !important;
   }
 }
+
+
+/* ==========================================================================
+   SRS Badges, Previous Button, and Lab Self-Evaluation Controls
+   ========================================================================== */
+.badge-srs {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  text-transform: none;
+}
+
+.badge-srs.srs-learning {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.badge-srs.srs-mastered {
+  background: var(--success-light);
+  color: var(--success);
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.badge-srs.srs-leech {
+  background: var(--danger-light);
+  color: var(--danger);
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
+.btn-prev {
+  flex: 0 0 auto;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.92rem;
+}
+
+.btn-prev:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.lab-eval-group {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+}
+
+.btn-lab-retry {
+  background: var(--warning-light);
+  color: var(--warning);
+  border: 1.5px solid var(--warning);
+}
+
+.btn-lab-retry:active {
+  filter: brightness(0.92);
+  transform: scale(0.98);
+}

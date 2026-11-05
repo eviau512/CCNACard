@@ -13,16 +13,323 @@ let dndShuffledSources = []; // array of { idx, text }
 
 // Persistence State
 let appState = {
-  masteredIds: {},          // qid -> boolean
+  masteredIds: {},          // qid -> boolean (true once Box >= 2)
   bookmarkedIds: {},        // qid -> boolean
+  cardStats: {},            // qid -> { box: 0..3, streak, lapses, attempts, everWrong, lastSeenStep, nextDueStep, lastReviewedAt }
+  totalSteps: 0,            // monotonic global question step counter
   history: [],              // array of { qid, domain, topic, misconception, correct, isIdk, time }
-  retryInterval: 7,         // default 7 questions later
+  retryInterval: 7,         // default 7 questions later for Stage 1 review
   retryDefaultMigratedV2: true,
   shuffleOptions: true,     // default true: randomize option order (需要乱序选项)
-  drillTopic: null          // active topic drill if any
+  hideMastered: false,      // optional: completely exclude mastered cards
+  deckMode: 'smart',        // 'smart' | 'weak' | 'bookmarks' | 'domain' | 'topic' | 'type'
+  domainFilter: '',         // active CCNA domain filter if any
+  drillTopic: null          // active topic/mode drill label if any
 };
 
 let currentWindow = 50; // 50 / 200 / 500
+let questionById = {};  // fast O(1) lookup map: qid -> question object
+
+// =========================================================================
+// 1. SRS & Leitner Memory Engine (SrsEngine)
+// =========================================================================
+const SrsEngine = {
+  ensureStat(qid) {
+    if (!appState.cardStats) appState.cardStats = {};
+    if (!appState.cardStats[qid]) {
+      const wasMastered = appState.masteredIds[qid] === true;
+      const wasFailed = appState.masteredIds[qid] === false;
+      appState.cardStats[qid] = {
+        box: wasMastered ? 2 : 0,
+        streak: wasMastered ? 2 : 0,
+        lapses: wasFailed ? 1 : 0,
+        attempts: (wasMastered || wasFailed) ? 1 : 0,
+        everWrong: wasFailed,
+        lastSeenStep: 0,
+        nextDueStep: 0,
+        lastReviewedAt: 0
+      };
+    }
+    return appState.cardStats[qid];
+  },
+
+  migrateFromLegacyState() {
+    if (!appState.cardStats) appState.cardStats = {};
+    if (typeof appState.totalSteps !== 'number') {
+      appState.totalSteps = (appState.history && appState.history.length) || 0;
+    }
+    // Replay history if cardStats was empty
+    if (Object.keys(appState.cardStats).length === 0 && Array.isArray(appState.history) && appState.history.length > 0) {
+      appState.history.forEach((h, idx) => {
+        if (!h || !h.qid) return;
+        const st = this.ensureStat(h.qid);
+        st.attempts++;
+        st.lastSeenStep = idx + 1;
+        st.lastReviewedAt = h.time || Date.now();
+        if (!h.correct || h.isIdk) {
+          st.everWrong = true;
+          st.lapses++;
+          st.streak = 0;
+          st.box = 0;
+        } else {
+          st.streak++;
+          st.box = st.everWrong ? (st.streak >= 2 ? 2 : 1) : 3;
+        }
+      });
+    }
+    // Sync masteredIds keys
+    Object.keys(appState.masteredIds || {}).forEach(qid => {
+      const st = this.ensureStat(qid);
+      if (appState.masteredIds[qid] === true && st.box < 2) {
+        st.box = 2;
+        st.streak = Math.max(st.streak, 2);
+      } else if (appState.masteredIds[qid] === false && st.box >= 2) {
+        st.box = 0;
+        st.streak = 0;
+        st.everWrong = true;
+        st.lapses = Math.max(st.lapses, 1);
+      }
+    });
+  },
+
+  recordOutcome(question, isCorrect, isIdk) {
+    const qid = question.id;
+    appState.totalSteps = (appState.totalSteps || 0) + 1;
+    const st = this.ensureStat(qid);
+    st.attempts++;
+    st.lastSeenStep = appState.totalSteps;
+    st.lastReviewedAt = Date.now();
+
+    const baseInterval = parseInt(appState.retryInterval, 10) || 7;
+
+    if (!isCorrect || isIdk) {
+      st.everWrong = true;
+      st.lapses++;
+      st.streak = 0;
+      st.box = 0;
+      appState.masteredIds[qid] = false;
+
+      // Leech cards (3+ lapses) get a tighter initial reinforcement interval
+      const stepInterval = st.lapses >= 3 ? Math.max(3, Math.floor(baseInterval * 0.6)) : baseInterval;
+      st.nextDueStep = appState.totalSteps + stepInterval;
+      this.scheduleInActiveQueue(question, stepInterval, 1);
+      return {
+        status: 'reinforce',
+        box: 0,
+        interval: stepInterval,
+        lapses: st.lapses
+      };
+    }
+
+    // Correct answer!
+    st.streak++;
+    if (!st.everWrong) {
+      // First-sight correct -> Box 3 (Mastered immediately)
+      st.box = 3;
+      appState.masteredIds[qid] = true;
+      st.nextDueStep = appState.totalSteps + 200;
+      return { status: 'mastered_first', box: 3, interval: 200 };
+    }
+
+    if (st.streak === 1) {
+      // Missed previously, passed Stage 1 -> Box 1 (Consolidating 1/2)
+      st.box = 1;
+      appState.masteredIds[qid] = false;
+      const consolidationInterval = baseInterval * 3 + 4; // e.g., 25 Qs for default 7
+      st.nextDueStep = appState.totalSteps + consolidationInterval;
+      this.scheduleInActiveQueue(question, consolidationInterval, 2);
+      return {
+        status: 'consolidating',
+        box: 1,
+        interval: consolidationInterval,
+        streak: 1
+      };
+    }
+
+    // Passed Stage 2+ consecutive review -> Graduated to Mastered (Box 2 / 3)!
+    st.box = st.streak >= 3 ? 3 : 2;
+    appState.masteredIds[qid] = true;
+    const longInterval = st.streak >= 3 ? 300 : 120;
+    st.nextDueStep = appState.totalSteps + longInterval;
+    return {
+      status: 'graduated',
+      box: st.box,
+      interval: longInterval,
+      streak: st.streak
+    };
+  },
+
+  scheduleInActiveQueue(question, interval, stage) {
+    // Remove any existing future retry copy of the same question beyond currentIndex to avoid duplicates
+    for (let i = activeQueue.length - 1; i > currentIndex; i--) {
+      if (activeQueue[i].id === question.id && activeQueue[i].isRetry) {
+        activeQueue.splice(i, 1);
+      }
+    }
+    const insertIndex = Math.min(activeQueue.length, currentIndex + interval);
+    const retryCard = { ...question, isRetry: true, retryStage: stage };
+    activeQueue.splice(insertIndex, 0, retryCard);
+
+    const banner = document.getElementById('queueBanner');
+    if (banner) {
+      banner.classList.add('active');
+      const stageLabel = stage === 2 ? 'Stage 2/2 Consolidation' : 'Stage 1/2 Reinforce';
+      document.getElementById('queueBannerText').textContent =
+        `🔁 #${question.id} (${stageLabel}) scheduled in ${interval} questions.`;
+    }
+  }
+};
+
+// =========================================================================
+// 2. Smart Weighted Deck Scheduler & Session Persistence (DeckScheduler)
+// =========================================================================
+const DeckScheduler = {
+  getWeakTopicsSet() {
+    const recent = (appState.history || []).slice(-100);
+    const topics = new Set();
+    recent.forEach(h => {
+      if (h && (!h.correct || h.isIdk) && h.topic) {
+        topics.add(h.topic);
+      }
+    });
+    return topics;
+  },
+
+  buildSmartQueue(pool) {
+    const weakTopics = this.getWeakTopicsSet();
+    const stepNow = appState.totalSteps || 0;
+
+    const dueCards = [];
+    const weakUnseen = [];
+    const normalUnseen = [];
+    const masteredPool = [];
+
+    pool.forEach(q => {
+      const st = appState.cardStats && appState.cardStats[q.id];
+      const isMastered = appState.masteredIds[q.id] === true;
+      const isFailedOrConsolidating = (appState.masteredIds[q.id] === false) || (st && (st.box === 0 || st.box === 1));
+
+      if (isFailedOrConsolidating) {
+        dueCards.push({
+          q,
+          priority: (st ? st.box : 0) * 1000 + ((st && st.nextDueStep) ? (st.nextDueStep - stepNow) : 0) - ((st ? st.lapses : 1) * 15)
+        });
+      } else if (isMastered) {
+        if (!appState.hideMastered) {
+          masteredPool.push(q);
+        }
+      } else {
+        // Unseen card
+        if (weakTopics.has(q.topic)) {
+          weakUnseen.push(q);
+        } else {
+          normalUnseen.push(q);
+        }
+      }
+    });
+
+    // Sort due cards by urgency
+    dueCards.sort((a, b) => a.priority - b.priority);
+    const orderedDue = dueCards.map(item => ({ ...item.q, isRetry: true, retryStage: (appState.cardStats[item.q.id] && appState.cardStats[item.q.id].box === 1) ? 2 : 1 }));
+    const shufWeakUnseen = shuffle(weakUnseen).map(q => ({ ...q, isRetry: false }));
+    const shufNormalUnseen = shuffle(normalUnseen).map(q => ({ ...q, isRetry: false }));
+    const shufMastered = shuffle(masteredPool).map(q => ({ ...q, isRetry: false }));
+
+    // Combine unseen with weak-topic boost (1 weak-topic card every 3 unseen cards)
+    const unseenCombined = [];
+    let wi = 0, ni = 0;
+    while (wi < shufWeakUnseen.length || ni < shufNormalUnseen.length) {
+      if (wi < shufWeakUnseen.length) unseenCombined.push(shufWeakUnseen[wi++]);
+      for (let k = 0; k < 2 && ni < shufNormalUnseen.length; k++) {
+        unseenCombined.push(shufNormalUnseen[ni++]);
+      }
+    }
+
+    // Interleave due reviews near the front (1 due card every 2 unseen cards) and 5% mastered review
+    const result = [];
+    let di = 0, ui = 0, mi = 0;
+    const maxSprinkledMastered = Math.max(5, Math.floor(unseenCombined.length * 0.05));
+
+    while (di < orderedDue.length || ui < unseenCombined.length) {
+      if (di < orderedDue.length) {
+        result.push(orderedDue[di++]);
+      }
+      for (let k = 0; k < 2 && ui < unseenCombined.length; k++) {
+        result.push(unseenCombined[ui++]);
+      }
+      if (result.length > 0 && result.length % 19 === 0 && mi < Math.min(shufMastered.length, maxSprinkledMastered)) {
+        result.push(shufMastered[mi++]);
+      }
+    }
+
+    // Append remaining mastered cards at the end if unseen/due are exhausted (or if user mastered everything)
+    while (mi < shufMastered.length) {
+      result.push(shufMastered[mi++]);
+    }
+
+    // Fallback if hideMastered hid everything and no unseen/due left
+    if (result.length === 0 && pool.length > 0) {
+      return shuffle(pool).map(q => ({ ...q, isRetry: false }));
+    }
+    return result;
+  },
+
+  saveSessionSnapshot() {
+    try {
+      if (!activeQueue || activeQueue.length === 0) return;
+      const windowSlice = activeQueue.slice(Math.max(0, currentIndex - 20), currentIndex + 120);
+      const baseOffset = Math.max(0, currentIndex - 20);
+      const snap = {
+        deckMode: appState.deckMode || 'smart',
+        drillTopic: appState.drillTopic || null,
+        domainFilter: appState.domainFilter || '',
+        savedIndex: currentIndex - baseOffset,
+        entries: windowSlice.map(q => ({
+          id: q.id,
+          r: q.isRetry ? 1 : 0,
+          s: q.retryStage || 0
+        }))
+      };
+      localStorage.setItem('ccna_session_snapshot_v1', JSON.stringify(snap));
+    } catch (e) {
+      console.error('Failed to save session snapshot', e);
+    }
+  },
+
+  restoreSessionSnapshot() {
+    try {
+      const raw = localStorage.getItem('ccna_session_snapshot_v1');
+      if (!raw) return false;
+      const snap = JSON.parse(raw);
+      if (!snap || !Array.isArray(snap.entries) || snap.entries.length === 0) return false;
+      const restored = [];
+      snap.entries.forEach(e => {
+        const baseQ = questionById[e.id];
+        if (baseQ) {
+          restored.push({
+            ...baseQ,
+            isRetry: Boolean(e.r),
+            retryStage: e.s || (e.r ? 1 : 0)
+          });
+        }
+      });
+      if (restored.length === 0) return false;
+      // Append remaining smart cards after the snapshot window so the queue never runs dry prematurely
+      const inSnap = new Set(restored.map(q => q.id));
+      const tailPool = allQuestions.filter(q => !inSnap.has(q.id));
+      const tailQueue = this.buildSmartQueue(tailPool);
+      activeQueue = restored.concat(tailQueue);
+      currentIndex = Math.min(Math.max(0, snap.savedIndex || 0), restored.length - 1);
+      appState.deckMode = snap.deckMode || 'smart';
+      appState.drillTopic = snap.drillTopic || null;
+      appState.domainFilter = snap.domainFilter || '';
+      syncDrillBannerUI();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+};
 
 // Initialize
 window.addEventListener('DOMContentLoaded', async () => {
@@ -30,7 +337,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   initTheme();
   initLightboxGestures();
   await loadQuestionData();
-  setupPracticeQueue();
+  SrsEngine.migrateFromLegacyState();
+  if (!DeckScheduler.restoreSessionSnapshot()) {
+    setupPracticeQueue(appState.drillTopic);
+  }
   renderCurrentCard();
   updateHeaderStats();
 });
@@ -55,11 +365,12 @@ function loadStoredState() {
 
 function saveState() {
   try {
-    // Keep max 500 history items to bound storage
-    if (appState.history.length > 500) {
-      appState.history = appState.history.slice(-500);
+    // Keep max 1000 history items to bound storage while supporting 500-window diagnostics
+    if (appState.history.length > 1000) {
+      appState.history = appState.history.slice(-1000);
     }
     localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
+    DeckScheduler.saveSessionSnapshot();
   } catch (e) {
     console.error('Failed to save state to localStorage', e);
   }
@@ -69,12 +380,22 @@ async function loadQuestionData() {
   const bundle = window.CCNA_CARDS_DATA || window.CCNA_QUESTIONS_DATA || window.ccnaCardsData || (typeof ccnaCardsData !== 'undefined' ? ccnaCardsData : null);
   if (bundle && Array.isArray(bundle) && bundle.length > 0) {
     allQuestions = bundle;
+    questionById = {};
+    allQuestions.forEach(q => {
+      enrichQuestionTaxonomy(q);
+      questionById[q.id] = q;
+    });
     console.log(`Loaded ${allQuestions.length} CCNA questions from script bundle.`);
     return true;
   }
   try {
     const res = await fetch('data/ccna_cards_tagged.json');
     allQuestions = await res.json();
+    questionById = {};
+    allQuestions.forEach(q => {
+      enrichQuestionTaxonomy(q);
+      questionById[q.id] = q;
+    });
     console.log(`Loaded ${allQuestions.length} CCNA questions from fetch.`);
     return true;
   } catch (err) {
@@ -82,6 +403,50 @@ async function loadQuestionData() {
     document.getElementById('cardPrompt').textContent = 'Error loading question bank. Please reinstall or restart app.';
     return false;
   }
+}
+
+function enrichQuestionTaxonomy(q) {
+  if (q.domain && q.topic && q.topic !== 'General') return;
+  const optText = Array.isArray(q.options) ? q.options.map(o => o.text || '').join(' ') : '';
+  const hay = `${q.prompt || ''} ${optText} ${(q.explanation || '').slice(0, 400)}`.toLowerCase();
+
+  const rules = [
+    // 6. Automation and Programmability
+    { re: /\b(ansible|puppet|chef|restconf|netconf|json|yaml|xml|rest api|crud|dna center|sd-access|controller-based|southbound|northbound|postman|python)\b/, domain: 'Automation and Programmability', topic: 'Automation, SDN & REST APIs' },
+    // 5. Security Fundamentals
+    { re: /\b(dhcp snooping|dynamic arp inspection|\bdai\b|port-security|port security|bpdu guard|root guard|802\.1x)\b/, domain: 'Security Fundamentals', topic: 'Layer 2 Security (Port Security / DAI / Snooping)' },
+    { re: /\b(access-list|ip access-group|standard acl|extended acl|wildcard mask)\b/, domain: 'Security Fundamentals', topic: 'Access Control Lists (ACLs)' },
+    { re: /\b(wpa2|wpa3|\baaa\b|tacacs\+|radius|ipsec|vpn|cryptography|phishing|malware|ddos|firewall|ngfw|ips|ids)\b/, domain: 'Security Fundamentals', topic: 'Security, VPNs, AAA & Wireless Security' },
+    // 4. IP Services
+    { re: /\b(ip nat|nat inside|nat outside|overload|\bpat\b|inside global|inside local)\b/, domain: 'IP Services', topic: 'NAT & PAT' },
+    { re: /\b(hsrp|standby ip|standby \d|vrrp|glbp|first hop redundancy|fhrp)\b/, domain: 'IP Services', topic: 'First Hop Redundancy (HSRP / FHRP)' },
+    { re: /\b(ip dhcp|dhcp pool|ip helper-address|dora|\bdns\b|fqdn)\b/, domain: 'IP Services', topic: 'DHCP & DNS Services' },
+    { re: /\b(\bntp\b|syslog|snmp|mib|logging trap|stratum|\btftp\b|\bftp\b)\b/, domain: 'IP Services', topic: 'NTP, Syslog & SNMP' },
+    { re: /\b(\bqos\b|dscp|cos|queuing|llq|cbwfq|policing|shaping|per-hop behavior|phb)\b/, domain: 'IP Services', topic: 'QoS & Traffic Management' },
+    // 3. IP Connectivity
+    { re: /\b(ospf|router-id|dr\/bdr|designated router|area 0|wildcard|lsa|spf|passive-interface)\b/, domain: 'IP Connectivity', topic: 'OSPFv2 Dynamic Routing' },
+    { re: /\b(ip route|ipv6 route|floating static|default-information originate|gateway of last resort|administrative distance|longest match|longest prefix|routing table|show ip route)\b/, domain: 'IP Connectivity', topic: 'IP Routing & Static Routes' },
+    // 2. Network Access
+    { re: /\b(spanning-tree|stp|rstp|pvst|root bridge|root port|designated port|portfast)\b/, domain: 'Network Access', topic: 'Spanning Tree Protocol (STP / RSTP)' },
+    { re: /\b(etherchannel|lacp|pagp|channel-group|port-channel)\b/, domain: 'Network Access', topic: 'EtherChannel (LACP / PAgP)' },
+    { re: /\b(vlan|802\.1q|dot1q|trunk|native vlan|switchport|router-on-a-stick|svi|voice vlan|vtp)\b/, domain: 'Network Access', topic: 'VLANs & 802.1Q Trunking' },
+    { re: /\b(\bcdp\b|\blldp\b)\b/, domain: 'Network Access', topic: 'Layer 2 Discovery (CDP & LLDP)' },
+    { re: /\b(wlc|capwap|lwapp|ssid|802\.11|wireless|ap mode|flexconnect|autonomous ap)\b/, domain: 'Network Access', topic: 'Wireless LANs (WLC & 802.11)' },
+    // 1. Network Fundamentals
+    { re: /\b(ipv6|fe80|2001:|slaac|eui-64|solicited-node|link-local|unique local|global unicast)\b/, domain: 'Network Fundamentals', topic: 'IPv6 Addressing & Neighbor Discovery' },
+    { re: /\b(\/\d{2}\b|subnet|255\.255\.|vlsm|cidr|broadcast address|private ip|rfc 1918)\b/, domain: 'Network Fundamentals', topic: 'IPv4 Addressing & Subnetting' },
+    { re: /\b(tcp|udp|three-way handshake|syn|ack|port \d+|osi|encapsulation|pdu|mac address-table|csma\/cd|duplex|poe|fiber|utp|sfp|spine-leaf|three-tier|two-tier)\b/, domain: 'Network Fundamentals', topic: 'TCP/IP, Ethernet & Network Architecture' }
+  ];
+
+  for (const r of rules) {
+    if (r.re.test(hay)) {
+      if (!q.domain) q.domain = r.domain;
+      if (!q.topic || q.topic === 'General') q.topic = r.topic;
+      return;
+    }
+  }
+  if (!q.domain) q.domain = 'Network Fundamentals';
+  if (!q.topic) q.topic = 'TCP/IP, Ethernet & Network Architecture';
 }
 
 function shuffle(array) {
@@ -93,29 +458,129 @@ function shuffle(array) {
   return arr;
 }
 
+function syncDrillBannerUI() {
+  const banner = document.getElementById('drillBanner');
+  const txt = document.getElementById('drillBannerText');
+  if (!banner || !txt) return;
+  if (appState.drillTopic) {
+    banner.classList.add('active');
+    txt.textContent = appState.drillTopic;
+  } else {
+    banner.classList.remove('active');
+  }
+}
+
 function setupPracticeQueue(filterTopic = null) {
   let pool = allQuestions;
   if (filterTopic) {
-    pool = allQuestions.filter(q => q.topic === filterTopic || q.domain === filterTopic);
-    if (pool.length === 0) pool = allQuestions;
-    appState.drillTopic = filterTopic;
-    document.getElementById('drillBanner').classList.add('active');
-    document.getElementById('drillBannerText').textContent = `🎯 Focused Drill: ${filterTopic} (${pool.length} Qs)`;
+    const matched = allQuestions.filter(q => q.topic === filterTopic || q.domain === filterTopic);
+    if (matched.length > 0) {
+      pool = matched;
+      appState.deckMode = 'topic';
+      appState.drillTopic = `🎯 Focused Drill: ${filterTopic} (${pool.length} Qs)`;
+    } else {
+      appState.drillTopic = null;
+      appState.deckMode = 'smart';
+    }
   } else {
     appState.drillTopic = null;
-    document.getElementById('drillBanner').classList.remove('active');
+    appState.deckMode = 'smart';
+    appState.domainFilter = '';
   }
 
-  // Shuffle pool pseudo-randomly
-  activeQueue = shuffle(pool).map(q => ({ ...q, isRetry: false }));
+  syncDrillBannerUI();
+  activeQueue = DeckScheduler.buildSmartQueue(pool);
   currentIndex = 0;
+  DeckScheduler.saveSessionSnapshot();
 }
+
+function switchDeckMode(mode) {
+  if (mode === 'bookmarks') {
+    const bIds = Object.keys(appState.bookmarkedIds || {}).filter(k => appState.bookmarkedIds[k]);
+    const pool = allQuestions.filter(q => appState.bookmarkedIds[q.id]);
+    if (pool.length === 0) {
+      showToast('⭐ No bookmarked questions yet! Tap ★ on any card to bookmark it.');
+      return;
+    }
+    appState.deckMode = 'bookmarks';
+    appState.drillTopic = `⭐ Bookmarked Pool (${pool.length} Qs)`;
+    syncDrillBannerUI();
+    activeQueue = DeckScheduler.buildSmartQueue(pool);
+    currentIndex = 0;
+    closeModals();
+    renderCurrentCard();
+    updateHeaderStats();
+    saveState();
+    showToast(`⭐ Loaded ${pool.length} bookmarked questions`);
+    return;
+  }
+
+  if (mode === 'weak') {
+    const pool = allQuestions.filter(q => {
+      const st = appState.cardStats && appState.cardStats[q.id];
+      return appState.masteredIds[q.id] === false || (st && (st.box === 0 || st.box === 1 || (st.everWrong && !appState.masteredIds[q.id])));
+    });
+    if (pool.length === 0) {
+      showToast('🎉 Zero unresolved weak/wrong questions! Keep practicing in Smart Mode.');
+      return;
+    }
+    appState.deckMode = 'weak';
+    appState.drillTopic = `📕 Wrong & Weak Pool (${pool.length} Qs)`;
+    syncDrillBannerUI();
+    activeQueue = DeckScheduler.buildSmartQueue(pool);
+    currentIndex = 0;
+    closeModals();
+    renderCurrentCard();
+    updateHeaderStats();
+    saveState();
+    showToast(`📕 Loaded ${pool.length} wrong/weak questions for targeted review`);
+    return;
+  }
+
+  // Default: 'smart'
+  setupPracticeQueue(null);
+  closeModals();
+  renderCurrentCard();
+  updateHeaderStats();
+  saveState();
+  showToast('🧠 Switched to Smart Adaptive Mode (Due + Unseen prioritized)');
+}
+window.switchDeckMode = switchDeckMode;
+
+function filterByDomain(domainName) {
+  appState.domainFilter = domainName || '';
+  if (!domainName) {
+    setupPracticeQueue(null);
+    closeModals();
+    renderCurrentCard();
+    updateHeaderStats();
+    saveState();
+    showToast('📚 Showing all 6 CCNA Domains');
+    return;
+  }
+  const pool = allQuestions.filter(q => q.domain === domainName);
+  if (pool.length === 0) {
+    showToast(`No questions found for domain ${domainName}`);
+    return;
+  }
+  appState.deckMode = 'domain';
+  appState.drillTopic = `📚 Domain: ${domainName} (${pool.length} Qs)`;
+  syncDrillBannerUI();
+  activeQueue = DeckScheduler.buildSmartQueue(pool);
+  currentIndex = 0;
+  closeModals();
+  renderCurrentCard();
+  updateHeaderStats();
+  saveState();
+  showToast(`📚 Filtered to ${domainName} (${pool.length} Qs)`);
+}
+window.filterByDomain = filterByDomain;
 
 function exitDrillMode() {
   setupPracticeQueue(null);
   renderCurrentCard();
   updateHeaderStats();
-  showToast('Exited drill mode. Resumed full random bank.');
+  showToast('Exited drill mode. Resumed Smart Adaptive Queue.');
 }
 
 function formatMarkdown(text) {
@@ -349,11 +814,33 @@ function renderCurrentCard() {
   domainEl.textContent = currentQuestion.domain || 'Network Fundamentals';
   topicEl.textContent = currentQuestion.topic || 'General';
   
+  const srsBadge = document.getElementById('cardSrsBadge');
+  const cardStat = (appState.cardStats && appState.cardStats[currentQuestion.id]) || null;
+
   if (currentQuestion.isRetry) {
     retryBadge.style.display = 'inline-block';
-    retryBadge.textContent = '🔁 Reinforce';
+    retryBadge.textContent = currentQuestion.retryStage === 2 ? '🌱 Consolidate (2/2)' : '🔁 Reinforce (1/2)';
   } else {
     retryBadge.style.display = 'none';
+  }
+
+  if (srsBadge) {
+    srsBadge.className = 'badge badge-srs';
+    if (cardStat && cardStat.lapses >= 3 && !appState.masteredIds[currentQuestion.id]) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-leech');
+      srsBadge.textContent = `🔥 Leech (${cardStat.lapses}x missed)`;
+    } else if (cardStat && cardStat.box === 1) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-learning');
+      srsBadge.textContent = '🌱 Step 1/2 Passed';
+    } else if (appState.masteredIds[currentQuestion.id] === true) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-mastered');
+      srsBadge.textContent = '✓ Mastered';
+    } else {
+      srsBadge.style.display = 'none';
+    }
   }
 
   // Bookmark state
@@ -380,8 +867,17 @@ function renderCurrentCard() {
   if (oldSolImg) oldSolImg.remove();
   document.getElementById('expMisconception').style.display = 'none';
   idkWrap.style.display = 'block';
+  actionBtn.style.display = 'flex';
   actionBtn.textContent = 'Check Answer';
   actionBtn.className = 'btn btn-primary';
+  const prevBtn = document.getElementById('prevBtn');
+  if (prevBtn) {
+    prevBtn.style.display = currentIndex > 0 ? 'flex' : 'none';
+  }
+  const labEvalGroup = document.getElementById('labEvalGroup');
+  if (labEvalGroup) {
+    labEvalGroup.style.display = 'none';
+  }
 
   // Render options or Interactive Drag & Drop
   optionsList.innerHTML = '';
@@ -890,18 +1386,39 @@ function submitAnswer() {
     });
   }
 
-  // Handle outcome
+  // Special handling for Simulation / Lab: reveal reference config first and let user self-evaluate
+  if (currentQuestion.type === 'Simulation / Lab') {
+    showExplanation(true, null);
+    const actionBtn = document.getElementById('actionBtn');
+    const labEvalGroup = document.getElementById('labEvalGroup');
+    if (labEvalGroup) {
+      actionBtn.style.display = 'none';
+      labEvalGroup.style.display = 'flex';
+    } else {
+      actionBtn.textContent = 'Next Question →';
+      actionBtn.className = 'btn btn-next';
+    }
+    showToast('🛠️ Compare your CLI config with the reference solution below.');
+    return;
+  }
+
+  // Handle outcome via SrsEngine (2-stage consolidation for missed questions)
   if (isCorrect) {
     triggerHaptic(true);
-    appState.masteredIds[currentQuestion.id] = true;
     logAttempt(true, false, null);
-    showToast('✨ Correct! Well done.');
+    const srsRes = SrsEngine.recordOutcome(currentQuestion, true, false);
+    if (srsRes.status === 'consolidating') {
+      showToast(`🌱 Step 1/2 Correct! Will consolidate in ${srsRes.interval} Qs.`);
+    } else if (srsRes.status === 'graduated') {
+      showToast('✨ Mastered! (2/2 consecutive reviews passed)');
+    } else {
+      showToast('✨ Correct! Well done.');
+    }
   } else {
     triggerHaptic(false);
-    appState.masteredIds[currentQuestion.id] = false;
     logAttempt(false, false, misconceptionMsg);
-    scheduleErrorReappearance();
-    showToast('⚠️ Incorrect. Question queued for review.');
+    const srsRes = SrsEngine.recordOutcome(currentQuestion, false, false);
+    showToast(`⚠️ Incorrect. Queued for reinforcement in ${srsRes.interval} Qs.`);
   }
 
   // Show explanation
@@ -915,6 +1432,25 @@ function submitAnswer() {
   updateHeaderStats();
   saveState();
 }
+
+function submitLabSelfEval(isMastered) {
+  if (!currentQuestion) return;
+  triggerHaptic(Boolean(isMastered));
+  if (isMastered) {
+    logAttempt(true, false, null);
+    SrsEngine.recordOutcome(currentQuestion, true, false);
+    showToast('✨ Lab marked as Mastered!');
+  } else {
+    const msg = `${currentQuestion.topic || 'Simulation / Lab'} (Needs CLI Practice)`;
+    logAttempt(false, false, msg);
+    const srsRes = SrsEngine.recordOutcome(currentQuestion, false, false);
+    showToast(`🔁 Lab queued for retry in ${srsRes.interval} Qs.`);
+  }
+  updateHeaderStats();
+  saveState();
+  advanceToNextCard();
+}
+window.submitLabSelfEval = submitLabSelfEval;
 
 function handleIdk() {
   if (isAnswerSubmitted) return;
@@ -940,14 +1476,11 @@ function handleIdk() {
     });
   }
 
-  // Log as IDK attempt
+  // Log as IDK attempt & schedule via SrsEngine
   const idkMsg = currentQuestion.idk_tag || `${currentQuestion.topic} (Unmastered Knowledge Point)`;
-  appState.masteredIds[currentQuestion.id] = false;
   logAttempt(false, true, idkMsg);
-
-  // Schedule reappearance
-  scheduleErrorReappearance();
-  showToast('Recorded as weak point. Explanation revealed.');
+  const srsRes = SrsEngine.recordOutcome(currentQuestion, false, true);
+  showToast(`Recorded as weak point. Will reappear in ${srsRes.interval} Qs.`);
 
   // Show explanation
   showExplanation(false, `Marked as unknown: ${idkMsg}`);
@@ -1033,9 +1566,20 @@ function showExplanation(isCorrect, misconceptionMsg) {
 
 function advanceToNextCard() {
   currentIndex++;
+  DeckScheduler.saveSessionSnapshot();
   renderCurrentCard();
   updateHeaderStats();
 }
+
+function goToPreviousCard() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    DeckScheduler.saveSessionSnapshot();
+    renderCurrentCard();
+    updateHeaderStats();
+  }
+}
+window.goToPreviousCard = goToPreviousCard;
 
 function logAttempt(correct, isIdk, misconception) {
   appState.history.push({
@@ -1217,6 +1761,27 @@ function openSettingsModal() {
   if (shufToggle) {
     shufToggle.checked = (appState.shuffleOptions !== false);
   }
+  const hideMastToggle = document.getElementById('hideMasteredToggle');
+  if (hideMastToggle) {
+    hideMastToggle.checked = Boolean(appState.hideMastered);
+  }
+  const domSelect = document.getElementById('domainFilterSelect');
+  if (domSelect) {
+    domSelect.value = appState.domainFilter || '';
+  }
+  const bmBtn = document.getElementById('modeBtnBookmarks');
+  if (bmBtn) {
+    const bmCount = Object.values(appState.bookmarkedIds || {}).filter(Boolean).length;
+    bmBtn.textContent = `⭐ Bookmarked (${bmCount})`;
+  }
+  const wkBtn = document.getElementById('modeBtnWeak');
+  if (wkBtn) {
+    const wkCount = allQuestions.filter(q => {
+      const st = appState.cardStats && appState.cardStats[q.id];
+      return appState.masteredIds[q.id] === false || (st && (st.box === 0 || st.box === 1));
+    }).length;
+    wkBtn.textContent = `📕 Wrong & Weak (${wkCount})`;
+  }
   document.getElementById('settingsModal').classList.add('active');
 }
 
@@ -1227,6 +1792,16 @@ function updateShuffleOptions(enabled) {
   showToast(appState.shuffleOptions ? 'Option shuffling enabled (已开启乱序选项)' : 'Option shuffling disabled (已恢复固定顺序)');
 }
 window.updateShuffleOptions = updateShuffleOptions;
+
+function updateHideMastered(enabled) {
+  appState.hideMastered = Boolean(enabled);
+  saveState();
+  setupPracticeQueue(null);
+  renderCurrentCard();
+  updateHeaderStats();
+  showToast(appState.hideMastered ? '🎯 Hiding mastered cards (仅抽取未掌握题)' : '🧠 Including 5% mastered review (智能抗遗忘抽检)');
+}
+window.updateHideMastered = updateHideMastered;
 
 function updateRetryInterval(val) {
   appState.retryInterval = parseInt(val) || 7;
@@ -1388,8 +1963,11 @@ function closeResetModal(e) {
 function confirmResetAllProgress() {
   appState.masteredIds = {};
   appState.bookmarkedIds = {};
+  appState.cardStats = {};
+  appState.totalSteps = 0;
   appState.history = [];
   appState.weakDiagnosed = {};
+  localStorage.removeItem('ccna_session_snapshot_v1');
   saveState();
   setupPracticeQueue(null);
   renderCurrentCard();
