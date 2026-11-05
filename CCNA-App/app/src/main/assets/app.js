@@ -331,6 +331,18 @@ function renderCurrentCard() {
   const idkWrap = document.getElementById('idkWrap');
   const expCard = document.getElementById('explanationCard');
   const actionBtn = document.getElementById('actionBtn');
+  const card = document.getElementById('activeCard');
+  const cardContainer = document.getElementById('cardContainer') || document.querySelector('main');
+
+  // Toggle responsive lab split-view layout
+  const isLab = currentQuestion.type === 'Simulation / Lab';
+  if (isLab) {
+    if (card) card.classList.add('is-lab-card');
+    if (cardContainer) cardContainer.classList.add('is-lab-main');
+  } else {
+    if (card) card.classList.remove('is-lab-card');
+    if (cardContainer) cardContainer.classList.remove('is-lab-main');
+  }
 
   // Set top tags
   qidEl.textContent = `#${currentQuestion.id}`;

@@ -34,38 +34,17 @@ desktop_css = """
   :root {
     --safe-top: 60px;
   }
-  main {
-    max-width: 1080px !important;
+  main:not(.is-lab-main) {
+    max-width: 760px !important;
     padding: 24px !important;
   }
-  .card {
+  .card:not(.is-lab-card) {
     padding: 28px !important;
     border-radius: var(--radius-lg) !important;
   }
-  .card-prompt {
-    font-size: 1.15rem !important;
-    line-height: 1.7 !important;
-  }
-  /* Simulator Terminal Enlarged for Desktop Monitor */
-  .ios-sim-container {
-    margin: 18px 0 !important;
-    border-radius: 12px !important;
-  }
-  .ios-sim-screen {
-    min-height: 420px !important;
-    max-height: 600px !important;
-    font-size: 15px !important;
-    line-height: 1.55 !important;
-  }
-  .ios-prompt-line {
-    font-size: 15px !important;
-  }
-  .ios-input {
-    font-size: 15px !important;
-  }
-  /* Exhibit images desktop scaling */
-  .exhibit-img {
-    max-height: 520px !important;
+  .prompt {
+    font-size: 1.05rem !important;
+    line-height: 1.65 !important;
   }
 }
 

@@ -1440,3 +1440,125 @@ main {
   background: rgba(0, 0, 0, 0.03);
   border-left-color: #cbd5e1;
 }
+
+
+/* ==========================================================================
+   Responsive Split-Screen Adaptation for Large Screens & Tablets (Landscape)
+   Spec: When screen is large enough (8"+ / >= 900px) and in landscape mode,
+   Simulation/Lab questions split into:
+   - Left Column: Question Prompt, Checklist, and Topology Exhibit
+   - Right Column: Virtual Cisco IOS Terminal CLI (Sticky)
+   ========================================================================== */
+
+@media screen and (min-width: 900px) and (min-height: 480px) and (orientation: landscape),
+       screen and (min-width: 1024px) and (min-height: 480px) {
+
+  /* Allow main container to expand for lab split view */
+  main.is-lab-main {
+    max-width: min(1680px, 96vw) !important;
+    width: 96% !important;
+    padding: 16px 24px 32px 24px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Two-column responsive grid layout */
+  .card.is-lab-card {
+    display: grid !important;
+    grid-template-columns: minmax(380px, 1fr) minmax(500px, 1.25fr) !important;
+    column-gap: 28px !important;
+    row-gap: 16px !important;
+    align-items: start !important;
+    padding: 24px 28px !important;
+  }
+
+  /* Prevent Firefox Gecko & WebKit grid child blowout */
+  .card.is-lab-card > * {
+    min-width: 0 !important;
+  }
+
+  /* Left column: Card top, Prompt, Exhibit, IDK button, Explanation, Action button */
+  .card.is-lab-card > *:not(.options-list) {
+    grid-column: 1 !important;
+  }
+
+  /* Right column: Cisco IOS Virtual Terminal CLI */
+  .card.is-lab-card > .options-list {
+    grid-column: 2 !important;
+    grid-row: 1 / 30 !important;
+    position: sticky !important;
+    top: 76px !important;
+    align-self: start !important;
+    height: calc(100vh - 100px) !important;
+    max-height: 860px !important;
+    min-height: 520px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+  }
+
+  .card.is-lab-card #inlineSimWrapper {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .card.is-lab-card .ios-sim-container {
+    height: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45) !important;
+  }
+
+  .card.is-lab-card .ios-sim-screen,
+  .card.is-lab-card .ios-terminal-screen {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 340px !important;
+    max-height: none !important;
+    scrollbar-width: thin;
+    scrollbar-color: #30363d #0d1117;
+  }
+
+  .card.is-lab-card .ios-sim-screen::-webkit-scrollbar,
+  .card.is-lab-card .ios-terminal-screen::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .card.is-lab-card .ios-sim-screen::-webkit-scrollbar-thumb,
+  .card.is-lab-card .ios-terminal-screen::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+  }
+
+  /* Exhibit image scaling in split left column */
+  .card.is-lab-card .exhibit-wrap {
+    margin: 6px 0 !important;
+    background: #161b22;
+  }
+
+  .card.is-lab-card .exhibit-img {
+    max-height: 460px !important;
+    object-fit: contain;
+  }
+
+  .card.is-lab-card .prompt {
+    font-size: 1.02rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .card.is-lab-card .explanation-card {
+    margin-top: 12px !important;
+  }
+
+  .card.is-lab-card .action-bar {
+    margin-top: 10px !important;
+  }
+}
