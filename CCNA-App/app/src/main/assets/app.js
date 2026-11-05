@@ -434,7 +434,7 @@ function renderCurrentCard() {
 
       if (window.IosSimulator) {
         const devs = IosSimulator.extractDevices(currentQuestion.prompt);
-        const sim = new IosSimulator(simWrap, { devices: devs, promptText: currentQuestion.prompt });
+        const sim = new IosSimulator(simWrap, { questionId: currentQuestion.id, devices: devs, promptText: currentQuestion.prompt });
         if (typeof sim.render === 'function' && (!simWrap.children || simWrap.children.length === 0)) {
           sim.render();
         }

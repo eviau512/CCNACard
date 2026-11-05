@@ -68,7 +68,6 @@
     'ro': 'route',
     'enc': 'encapsulation', 'encap': 'encapsulation',
     'def': 'default-router', 'dns': 'dns-server',
-    'ex': 'excluded-address',
     'inc': 'include', 'exc': 'exclude', 'beg': 'begin', 'sec': 'section'
   };
 
@@ -76,6 +75,8 @@
     if (!token) return '';
     const t = token.toLowerCase();
     if (t === 'ro' && mode === 'config') return 'router';
+    if ((t === 'ex' || t === 'exi') && mode.startsWith('config')) return 'exit';
+    if (t === 'ex' && mode === 'config-dhcp') return 'excluded-address';
     return ALIAS[t] || t;
   }
 
@@ -124,19 +125,35 @@
       { cmd: 'username', desc: 'Establish User Name Authentication' },
       { cmd: 'vlan', desc: 'VLAN configuration commands' }
     ],
-    'config-if': [
-      { cmd: 'channel-group', desc: 'Etherchannel interface configuration' },
+        'config-if': [
+      { cmd: 'arp', desc: 'Set arp type (arpa, probe, snap) or timeout' },
+      { cmd: 'bandwidth', desc: 'Set bandwidth informational parameter' },
+      { cmd: 'cdp', desc: 'Global CDP configuration subcommands' },
+      { cmd: 'channel-group', desc: 'Etherchannel/port bundling configuration' },
+      { cmd: 'channel-protocol', desc: 'Select the channel protocol (LACP, PAgP)' },
+      { cmd: 'delay', desc: 'Specify interface throughput delay' },
       { cmd: 'description', desc: 'Interface specific description' },
       { cmd: 'do', desc: 'To run exec commands in config mode' },
+      { cmd: 'duplex', desc: 'Configure duplex operation.' },
       { cmd: 'end', desc: 'Exit from configure mode' },
-      { cmd: 'exit', desc: 'Exit from configure mode' },
-      { cmd: 'ip', desc: 'Interface Internet Protocol config subcommands' },
-      { cmd: 'ipv6', desc: 'Interface IPv6 config subcommands' },
+      { cmd: 'exit', desc: 'Exit from interface configuration mode' },
+      { cmd: 'hold-queue', desc: 'Set hold queue depth' },
+      { cmd: 'ip', desc: 'Interface Internet Protocol config commands' },
+      { cmd: 'ipv6', desc: 'IPv6 interface subcommands' },
+      { cmd: 'lldp', desc: 'LLDP interface subcommands' },
+      { cmd: 'mdix', desc: 'Set Media Dependent Interface with Crossover' },
+      { cmd: 'mls', desc: 'mls interface commands' },
       { cmd: 'no', desc: 'Negate a command or set its defaults' },
-      { cmd: 'shutdown', desc: 'Shut down the selected interface' },
+      { cmd: 'power', desc: 'Power configuration' },
+      { cmd: 'rep', desc: 'Resilient Ethernet Protocol characteristics' },
+      { cmd: 'service-policy', desc: 'Configure QoS Service Policy' },
+      { cmd: 'shutdown', desc: 'Shutdown the selected interface' },
       { cmd: 'spanning-tree', desc: 'Spanning Tree Subsystem' },
+      { cmd: 'speed', desc: 'Configure speed operation.' },
       { cmd: 'standby', desc: 'HSRP interface configuration commands' },
-      { cmd: 'switchport', desc: 'Set switching characteristics of the interface' }
+      { cmd: 'storm-control', desc: 'storm configuration' },
+      { cmd: 'switchport', desc: 'Set switching mode characteristics' },
+      { cmd: 'tx-ring-limit', desc: 'Configure PA level transmit ring limit' }
     ],
     'config-subif': [
       { cmd: 'description', desc: 'Interface specific description' },
@@ -144,23 +161,40 @@
       { cmd: 'encapsulation', desc: 'Set encapsulation type for an interface' },
       { cmd: 'end', desc: 'Exit from configure mode' },
       { cmd: 'exit', desc: 'Exit from configure mode' },
-      { cmd: 'ip', desc: 'Interface Internet Protocol config subcommands' },
-      { cmd: 'ipv6', desc: 'Interface IPv6 config subcommands' },
+      { cmd: 'ip', desc: 'Interface Internet Protocol config commands' },
+      { cmd: 'ipv6', desc: 'IPv6 interface subcommands' },
       { cmd: 'no', desc: 'Negate a command or set its defaults' },
-      { cmd: 'shutdown', desc: 'Shut down the selected interface' }
+      { cmd: 'shutdown', desc: 'Shutdown the selected interface' }
     ],
     'config-if-range': [
-      { cmd: 'channel-group', desc: 'Etherchannel interface configuration' },
+      { cmd: 'arp', desc: 'Set arp type (arpa, probe, snap) or timeout' },
+      { cmd: 'bandwidth', desc: 'Set bandwidth informational parameter' },
+      { cmd: 'cdp', desc: 'Global CDP configuration subcommands' },
+      { cmd: 'channel-group', desc: 'Etherchannel/port bundling configuration' },
+      { cmd: 'channel-protocol', desc: 'Select the channel protocol (LACP, PAgP)' },
+      { cmd: 'delay', desc: 'Specify interface throughput delay' },
       { cmd: 'description', desc: 'Interface specific description' },
       { cmd: 'do', desc: 'To run exec commands in config mode' },
+      { cmd: 'duplex', desc: 'Configure duplex operation.' },
       { cmd: 'end', desc: 'Exit from configure mode' },
-      { cmd: 'exit', desc: 'Exit from configure mode' },
-      { cmd: 'ip', desc: 'Interface Internet Protocol config subcommands' },
-      { cmd: 'ipv6', desc: 'Interface IPv6 config subcommands' },
+      { cmd: 'exit', desc: 'Exit from interface configuration mode' },
+      { cmd: 'hold-queue', desc: 'Set hold queue depth' },
+      { cmd: 'ip', desc: 'Interface Internet Protocol config commands' },
+      { cmd: 'ipv6', desc: 'IPv6 interface subcommands' },
+      { cmd: 'lldp', desc: 'LLDP interface subcommands' },
+      { cmd: 'mdix', desc: 'Set Media Dependent Interface with Crossover' },
+      { cmd: 'mls', desc: 'mls interface commands' },
       { cmd: 'no', desc: 'Negate a command or set its defaults' },
-      { cmd: 'shutdown', desc: 'Shut down the selected interface' },
+      { cmd: 'power', desc: 'Power configuration' },
+      { cmd: 'rep', desc: 'Resilient Ethernet Protocol characteristics' },
+      { cmd: 'service-policy', desc: 'Configure QoS Service Policy' },
+      { cmd: 'shutdown', desc: 'Shutdown the selected interface' },
       { cmd: 'spanning-tree', desc: 'Spanning Tree Subsystem' },
-      { cmd: 'switchport', desc: 'Set switching characteristics of the interface' }
+      { cmd: 'speed', desc: 'Configure speed operation.' },
+      { cmd: 'standby', desc: 'HSRP interface configuration commands' },
+      { cmd: 'storm-control', desc: 'storm configuration' },
+      { cmd: 'switchport', desc: 'Set switching mode characteristics' },
+      { cmd: 'tx-ring-limit', desc: 'Configure PA level transmit ring limit' }
     ],
     'config-router': [
       { cmd: 'default-information', desc: 'Control distribution of default information' },
@@ -221,6 +255,41 @@
 
   // Comprehensive Hierarchical Subcommand Trees for Contextual Help & Tab Completion
   const SUB_TREES = {
+    // configure command in privileged exec
+    'configure': [
+      { cmd: 'memory', desc: 'Configure from NV memory' },
+      { cmd: 'network', desc: 'Configure from a TFTP/FTP/RCP network host' },
+      { cmd: 'terminal', desc: 'Configure from the terminal' },
+      { cmd: '<cr>', desc: '' }
+    ],
+    // channel-protocol
+    'channel-protocol': [
+      { cmd: 'lacp', desc: 'Prepare interface for LACP protocol' },
+      { cmd: 'pagp', desc: 'Prepare interface for PAgP protocol' }
+    ],
+    // duplex
+    'duplex': [
+      { cmd: 'auto', desc: 'Enable AUTO duplex configuration' },
+      { cmd: 'full', desc: 'Force full duplex operation' },
+      { cmd: 'half', desc: 'Force half duplex operation' }
+    ],
+    // speed
+    'speed': [
+      { cmd: '10', desc: 'Force 10 Mbps operation' },
+      { cmd: '100', desc: 'Force 100 Mbps operation' },
+      { cmd: '1000', desc: 'Force 1000 Mbps operation' },
+      { cmd: 'auto', desc: 'Enable AUTO speed configuration' }
+    ],
+    // mdix
+    'mdix': [
+      { cmd: 'auto', desc: 'Enable Media Dependent Interface with Crossover' }
+    ],
+    // storm-control
+    'storm-control': [
+      { cmd: 'broadcast', desc: 'Broadcast address storm control' },
+      { cmd: 'multicast', desc: 'Multicast address storm control' },
+      { cmd: 'unicast', desc: 'Unicast address storm control' }
+    ],
     // switchport
     'switchport': [
       { cmd: 'access', desc: 'Set access mode characteristics of the interface' },
@@ -654,6 +723,1106 @@
     return rawOutput;
   }
 
+  const TOPOLOGY_REGISTRY = {
+  "1092": {
+    "devices": [
+      "SW-1",
+      "SW-2",
+      "SW-3",
+      "SW-4"
+    ],
+    "deviceTypes": {
+      "SW-1": "l3switch",
+      "SW-2": "l3switch",
+      "SW-3": "l3switch",
+      "SW-4": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-2",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-3",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-4",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "SW-3",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-4",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-3",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-4",
+        "toPort": "Ethernet0/1"
+      }
+    ],
+    "initialConfigs": {
+      "all": {
+        "trunkPorts": [
+          "Ethernet0/1",
+          "Ethernet0/2"
+        ],
+        "encapsulation": "dot1q"
+      }
+    }
+  },
+  "1119": {
+    "devices": [
+      "SW1",
+      "SW2"
+    ],
+    "deviceTypes": {
+      "SW1": "l3switch",
+      "SW2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW2",
+        "toPort": "Ethernet0/1"
+      }
+    ],
+    "initialConfigs": {
+      "all": {
+        "vlans": {
+          "50": "MONITORING"
+        }
+      }
+    }
+  },
+  "1120": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router",
+      "R4": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "GigabitEthernet0/0",
+        "to": "R3",
+        "toPort": "GigabitEthernet0/0"
+      },
+      {
+        "from": "R2",
+        "fromPort": "GigabitEthernet0/1",
+        "to": "R4",
+        "toPort": "GigabitEthernet0/1"
+      }
+    ]
+  },
+  "1121": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/2",
+        "to": "R2",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "R2",
+        "fromPort": "Ethernet0/0",
+        "to": "R3",
+        "toPort": "Ethernet0/0"
+      }
+    ]
+  },
+  "1122": {
+    "devices": [
+      "SW1",
+      "SW2"
+    ],
+    "deviceTypes": {
+      "SW1": "l3switch",
+      "SW2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW2",
+        "toPort": "Ethernet0/1"
+      }
+    ],
+    "initialConfigs": {
+      "SW2": {
+        "vlans": {
+          "20": "Available"
+        }
+      }
+    }
+  },
+  "1123": {
+    "devices": [
+      "R1",
+      "R2"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/1",
+        "to": "R2",
+        "toPort": "Ethernet0/1"
+      }
+    ]
+  },
+  "1124": {
+    "devices": [
+      "SW1",
+      "SW2",
+      "SW3"
+    ],
+    "deviceTypes": {
+      "SW1": "l3switch",
+      "SW2": "l3switch",
+      "SW3": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/2",
+        "to": "SW2",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "SW2",
+        "fromPort": "Ethernet0/3",
+        "to": "SW3",
+        "toPort": "Ethernet0/3"
+      }
+    ]
+  },
+  "1125": {
+    "devices": [
+      "SW101",
+      "SW102"
+    ],
+    "deviceTypes": {
+      "SW101": "l3switch",
+      "SW102": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/0",
+        "to": "SW102",
+        "toPort": "Ethernet0/0"
+      }
+    ]
+  },
+  "1126": {
+    "devices": [
+      "SW1"
+    ],
+    "deviceTypes": {
+      "SW1": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW1",
+        "fromPort": "GigabitEthernet0/1",
+        "to": "Server",
+        "toPort": "eth0"
+      },
+      {
+        "from": "SW1",
+        "fromPort": "GigabitEthernet0/2",
+        "to": "Host",
+        "toPort": "eth0"
+      }
+    ]
+  },
+  "1128": {
+    "devices": [
+      "R1",
+      "R2",
+      "SW1"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "SW1": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/1",
+        "to": "R2",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/2",
+        "to": "R2",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "R1",
+        "fromPort": "GigabitEthernet0/0",
+        "to": "SW1",
+        "toPort": "GigabitEthernet0/0"
+      }
+    ]
+  },
+  "1149": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "R2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "R2",
+        "fromPort": "Ethernet0/1",
+        "to": "R3",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/2",
+        "to": "R3",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1159": {
+    "devices": [
+      "R1",
+      "SW-1"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "SW-1": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "GigabitEthernet0/0/1",
+        "to": "SW-1",
+        "toPort": "GigabitEthernet0/1"
+      }
+    ]
+  },
+  "1160": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router",
+      "R4": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "GigabitEthernet0/1",
+        "to": "R2",
+        "toPort": "GigabitEthernet0/1"
+      },
+      {
+        "from": "R2",
+        "fromPort": "GigabitEthernet0/2",
+        "to": "R3",
+        "toPort": "GigabitEthernet0/2"
+      },
+      {
+        "from": "R3",
+        "fromPort": "GigabitEthernet0/3",
+        "to": "R4",
+        "toPort": "GigabitEthernet0/3"
+      }
+    ]
+  },
+  "1161": {
+    "devices": [
+      "SW101",
+      "SW102"
+    ],
+    "deviceTypes": {
+      "SW101": "l3switch",
+      "SW102": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/0",
+        "to": "SW102",
+        "toPort": "Ethernet0/0"
+      }
+    ]
+  },
+  "1165": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router",
+      "R4": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "GigabitEthernet0/0",
+        "to": "R2",
+        "toPort": "GigabitEthernet0/0"
+      },
+      {
+        "from": "R2",
+        "fromPort": "GigabitEthernet0/1",
+        "to": "R3",
+        "toPort": "GigabitEthernet0/1"
+      },
+      {
+        "from": "R3",
+        "fromPort": "GigabitEthernet0/2",
+        "to": "R4",
+        "toPort": "GigabitEthernet0/2"
+      }
+    ]
+  },
+  "1166": {
+    "devices": [
+      "R1",
+      "R2",
+      "SW-1",
+      "SW-2"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "SW-1": "l3switch",
+      "SW-2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-1",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "R2",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-2",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1167": {
+    "devices": [
+      "R1",
+      "SW-1",
+      "SW-2"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "SW-1": "l3switch",
+      "SW-2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-1",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-2",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1169": {
+    "devices": [
+      "SW-1",
+      "SW-2",
+      "SW-3"
+    ],
+    "deviceTypes": {
+      "SW-1": "l3switch",
+      "SW-2": "l3switch",
+      "SW-3": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-2",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-3",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1177": {
+    "devices": [
+      "SW-2",
+      "SW-3"
+    ],
+    "deviceTypes": {
+      "SW-2": "l3switch",
+      "SW-3": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-3",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/2",
+        "to": "PC1",
+        "toPort": "eth0"
+      },
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/3",
+        "to": "PC2",
+        "toPort": "eth0"
+      }
+    ]
+  },
+  "1180": {
+    "devices": [
+      "SW101",
+      "SW102"
+    ],
+    "deviceTypes": {
+      "SW101": "l3switch",
+      "SW102": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/0",
+        "to": "SW102",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/1",
+        "to": "PC1",
+        "toPort": "eth0"
+      },
+      {
+        "from": "SW102",
+        "fromPort": "Ethernet0/1",
+        "to": "Server",
+        "toPort": "eth0"
+      }
+    ]
+  },
+  "1184": {
+    "devices": [
+      "R1",
+      "SW-1",
+      "SW-2",
+      "SW-3",
+      "SW-4"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "SW-1": "l3switch",
+      "SW-2": "l3switch",
+      "SW-3": "l3switch",
+      "SW-4": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-1",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-2",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-3",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-4",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "SW-3",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-4",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-3",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-4",
+        "toPort": "Ethernet0/1"
+      }
+    ]
+  },
+  "1189": {
+    "devices": [
+      "R1",
+      "SW101",
+      "SW103"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "SW101": "l3switch",
+      "SW103": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW101",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/2",
+        "to": "SW103",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1191": {
+    "devices": [
+      "SW101",
+      "SW102"
+    ],
+    "deviceTypes": {
+      "SW101": "l3switch",
+      "SW102": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/0",
+        "to": "SW102",
+        "toPort": "Ethernet0/0"
+      }
+    ]
+  },
+  "1192": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router",
+      "R4": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "GigabitEthernet0/0",
+        "to": "R2",
+        "toPort": "GigabitEthernet0/0"
+      },
+      {
+        "from": "R2",
+        "fromPort": "GigabitEthernet0/1",
+        "to": "R3",
+        "toPort": "GigabitEthernet0/1"
+      },
+      {
+        "from": "R3",
+        "fromPort": "GigabitEthernet0/2",
+        "to": "R4",
+        "toPort": "GigabitEthernet0/2"
+      }
+    ]
+  },
+  "1193": {
+    "devices": [
+      "R1",
+      "SW-1",
+      "SW-2"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "SW-1": "l3switch",
+      "SW-2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-1",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-2",
+        "toPort": "Ethernet0/1"
+      }
+    ]
+  },
+  "1194": {
+    "devices": [
+      "SW1",
+      "SW2"
+    ],
+    "deviceTypes": {
+      "SW1": "l3switch",
+      "SW2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW2",
+        "toPort": "Ethernet0/1"
+      }
+    ]
+  },
+  "1195": {
+    "devices": [
+      "SW-1",
+      "SW-2",
+      "SW-3",
+      "SW-4"
+    ],
+    "deviceTypes": {
+      "SW-1": "l3switch",
+      "SW-2": "l3switch",
+      "SW-3": "l3switch",
+      "SW-4": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-2",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-3",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-4",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1196": {
+    "devices": [
+      "R1",
+      "SW101",
+      "SW102",
+      "SW103"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "SW101": "l3switch",
+      "SW102": "l3switch",
+      "SW103": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW101",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/1",
+        "to": "SW102",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW101",
+        "fromPort": "Ethernet0/2",
+        "to": "SW103",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1197": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/1",
+        "to": "R2",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "R2",
+        "fromPort": "Ethernet0/2",
+        "to": "R3",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1198": {
+    "devices": [
+      "SW-1",
+      "SW-2",
+      "SW-3"
+    ],
+    "deviceTypes": {
+      "SW-1": "l3switch",
+      "SW-2": "l3switch",
+      "SW-3": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW-2",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "SW-2",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-3",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  },
+  "1199": {
+    "devices": [
+      "R1",
+      "R2"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "R2",
+        "toPort": "Ethernet0/0"
+      }
+    ]
+  },
+  "1200": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router",
+      "R4": "router",
+      "R5": "router",
+      "R6": "router"
+    },
+    "links": [
+      {
+        "from": "R5",
+        "fromPort": "Ethernet0/0",
+        "to": "R1",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/1",
+        "to": "R3",
+        "toPort": "Ethernet0/1"
+      },
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/2",
+        "to": "R2",
+        "toPort": "Ethernet0/2"
+      },
+      {
+        "from": "R3",
+        "fromPort": "Ethernet0/3",
+        "to": "R6",
+        "toPort": "Ethernet0/3"
+      },
+      {
+        "from": "R2",
+        "fromPort": "Ethernet0/3",
+        "to": "R6",
+        "toPort": "Ethernet0/4"
+      }
+    ]
+  },
+  "1201": {
+    "devices": [
+      "R1",
+      "SW2",
+      "SW3"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "SW2": "l3switch",
+      "SW3": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "GigabitEthernet0/0",
+        "to": "SW2",
+        "toPort": "GigabitEthernet0/0"
+      },
+      {
+        "from": "SW2",
+        "fromPort": "GigabitEthernet0/1",
+        "to": "SW3",
+        "toPort": "GigabitEthernet0/1"
+      }
+    ]
+  },
+  "1202": {
+    "devices": [
+      "SW1",
+      "SW2"
+    ],
+    "deviceTypes": {
+      "SW1": "l3switch",
+      "SW2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/1",
+        "to": "SW2",
+        "toPort": "Ethernet0/1"
+      }
+    ]
+  },
+  "1203": {
+    "devices": [
+      "SW1",
+      "SW2"
+    ],
+    "deviceTypes": {
+      "SW1": "l3switch",
+      "SW2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/1",
+        "to": "PC1",
+        "toPort": "eth0"
+      },
+      {
+        "from": "SW1",
+        "fromPort": "Ethernet0/2",
+        "to": "Phone1",
+        "toPort": "eth0"
+      },
+      {
+        "from": "SW2",
+        "fromPort": "Ethernet0/1",
+        "to": "PC2",
+        "toPort": "eth0"
+      },
+      {
+        "from": "SW2",
+        "fromPort": "Ethernet0/2",
+        "to": "Phone2",
+        "toPort": "eth0"
+      }
+    ]
+  },
+  "1204": {
+    "devices": [
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "R3": "router"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "R2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/1",
+        "to": "R3",
+        "toPort": "Ethernet0/1"
+      }
+    ]
+  },
+  "1227": {
+    "devices": [
+      "R1",
+      "R2",
+      "SW-1",
+      "SW-2"
+    ],
+    "deviceTypes": {
+      "R1": "router",
+      "R2": "router",
+      "SW-1": "l3switch",
+      "SW-2": "l3switch"
+    },
+    "links": [
+      {
+        "from": "R1",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-1",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "R2",
+        "fromPort": "Ethernet0/0",
+        "to": "SW-2",
+        "toPort": "Ethernet0/0"
+      },
+      {
+        "from": "SW-1",
+        "fromPort": "Ethernet0/2",
+        "to": "SW-2",
+        "toPort": "Ethernet0/2"
+      }
+    ]
+  }
+};
+
   // Device Session representing a real Cisco switch or router in the topology
   class IosDeviceSession {
     constructor(hostname, type = 'switch') {
@@ -716,67 +1885,56 @@
         savedStartupConfig: null
       };
 
-      // Populate default interfaces based on device type
-      const isSw = this.type === 'switch' || this.hostname.toLowerCase().startsWith('sw');
+            // Populate default interfaces based on device type
+      const isSw = (this.type === 'switch' || this.type === 'l3switch') || this.type === 'l3switch' || /^(sw|switch|dls|als)/i.test(this.hostname);
       if (isSw) {
         ['Ethernet0/0', 'Ethernet0/1', 'Ethernet0/2', 'Ethernet0/3', 'GigabitEthernet0/1', 'GigabitEthernet0/2', 'Vlan1'].forEach(name => {
+          const isVlan = name.toLowerCase().startsWith('vlan');
           this.config.interfaces[name] = {
             name: name,
-            isRouted: false,
+            isRouted: isVlan, // SVI VLAN interfaces are Layer 3 by definition
             ip: null,
             mask: null,
             ipv6: null,
             ipv6LinkLocal: null,
-            status: 'up',
-            protocol: 'up',
+            status: isVlan ? 'up' : 'down',
+            protocol: isVlan ? 'up' : 'down',
+            connected: false,
+            peerDevice: null,
+            peerPort: null,
             description: null,
-            mode: 'access', // 'access', 'trunk', 'routed'
+            mode: isVlan ? 'routed' : 'access', // 'access', 'trunk', 'routed'
             encapsulation: 'dot1q',
-            accessVlan: '1',
+            accessVlan: isVlan ? null : '1',
             trunkAllowed: '1-4094',
             nativeVlan: '1',
             voiceVlan: null,
             channelGroup: null,
             channelMode: null,
-            portSecurity: {
-              enabled: false,
-              max: 1,
-              violation: 'shutdown',
-              macs: [],
-              sticky: false
-            },
-            spanningTree: {
-              portfast: false,
-              bpduguard: false,
-              cost: null
-            },
-            ospf: {
-              area: null,
-              priority: null,
-              cost: null,
-              hello: 10,
-              dead: 40
-            },
-            nat: null, // 'inside', 'outside'
+            portSecurity: { enabled: false, max: 1, violation: 'shutdown', macs: [], sticky: false },
+            spanningTree: { portfast: false, bpduguard: false, cost: null },
+            ospf: { area: null, priority: null, cost: null, hello: 10, dead: 40 },
+            nat: null,
             accessGroup: { in: null, out: null },
             cdp: true,
             lldp: { tx: true, rx: true }
           };
         });
       } else {
-        ['Ethernet0/0', 'Ethernet0/1', 'GigabitEthernet0/0', 'GigabitEthernet0/1', 'GigabitEthernet0/2', 'Serial0/1/0', 'Loopback0'].forEach(name => {
+        ['Ethernet0/0', 'Ethernet0/1', 'Ethernet0/2', 'GigabitEthernet0/0', 'GigabitEthernet0/1', 'GigabitEthernet0/2', 'Serial0/0/0', 'Serial0/0/1', 'Loopback0'].forEach(name => {
           this.config.interfaces[name] = {
             name: name,
             isRouted: true,
-            isSubif: false,
-            dot1qVlan: null,
-            dot1qNative: false,
             ip: null,
             mask: null,
             ipv6: null,
             ipv6LinkLocal: null,
-            status: 'administratively down',
-            protocol: 'down',
+            status: name.startsWith('Loopback') ? 'up' : 'down',
+            protocol: name.startsWith('Loopback') ? 'up' : 'down',
+            connected: false,
+            peerDevice: null,
+            peerPort: null,
+            shutdown: false,
             description: null,
             ospf: {
               area: null,
@@ -785,17 +1943,17 @@
               hello: 10,
               dead: 40
             },
-            nat: null, // 'inside', 'outside'
+            nat: null,
             accessGroup: { in: null, out: null },
             helperAddress: null,
-            standby: {}, // group -> { ip, priority, preempt }
+            standby: {},
             cdp: true,
             lldp: { tx: true, rx: true }
           };
         });
       }
 
-      this.addLog('system', `Cisco IOS Software (${this.type.toUpperCase()}-UNIVERSALK9-M), Version 15.4(3)M2\nTechnical Support: http://www.cisco.com/techsupport\nPress RETURN to get started.`);
+this.addLog('system', `Cisco IOS Software (${this.type.toUpperCase()}-UNIVERSALK9-M), Version 15.4(3)M2\nTechnical Support: http://www.cisco.com/techsupport\nPress RETURN to get started.`);
     }
 
     addLog(type, text) {
@@ -847,23 +2005,153 @@
       this.render();
     }
 
+    createDefaultInterface(name, devType) {
+      const isVlan = name.toLowerCase().startsWith('vlan');
+      const isRouter = devType === 'router';
+      return {
+        name: name,
+        isRouted: isRouter || isVlan,
+        ip: null,
+        mask: null,
+        ipv6: null,
+        ipv6LinkLocal: null,
+        status: isVlan ? 'up' : 'down',
+        protocol: isVlan ? 'up' : 'down',
+        connected: false,
+        peerDevice: null,
+        peerPort: null,
+        shutdown: false,
+        description: null,
+        mode: (isRouter || isVlan) ? 'routed' : 'access',
+        encapsulation: 'dot1q',
+        accessVlan: isVlan ? null : '1',
+        trunkAllowed: '1-4094',
+        nativeVlan: '1',
+        voiceVlan: null,
+        channelGroup: null,
+        channelMode: null,
+        portSecurity: { enabled: false, max: 1, violation: 'shutdown', macs: [], sticky: false },
+        spanningTree: { portfast: false, bpduguard: false, cost: null },
+        ospf: { area: null, priority: null, cost: null, hello: 10, dead: 40 },
+        nat: null,
+        accessGroup: { in: null, out: null },
+        cdp: true,
+        lldp: { tx: true, rx: true }
+      };
+    }
+
+    applyTopology(topo) {
+      if (!topo) return;
+
+      // 1. Mark links on connected interfaces
+      (topo.links || []).forEach(l => {
+        const fromDev = this.devices[l.from];
+        const toDev = this.devices[l.to];
+        const fromP = this.normalizeInterface(l.fromPort);
+        const toP = this.normalizeInterface(l.toPort);
+
+        if (fromDev) {
+          if (!fromDev.config.interfaces[fromP]) {
+            fromDev.config.interfaces[fromP] = this.createDefaultInterface(fromP, fromDev.type);
+          }
+          const it = fromDev.config.interfaces[fromP];
+          it.connected = true;
+          it.status = 'up';
+          it.protocol = 'up';
+          it.peerDevice = l.to;
+          it.peerPort = toP;
+        }
+
+        if (toDev) {
+          if (!toDev.config.interfaces[toP]) {
+            toDev.config.interfaces[toP] = this.createDefaultInterface(toP, toDev.type);
+          }
+          const it = toDev.config.interfaces[toP];
+          it.connected = true;
+          it.status = 'up';
+          it.protocol = 'up';
+          it.peerDevice = l.from;
+          it.peerPort = fromP;
+        }
+      });
+
+      // 2. Apply initial configs if specified (e.g. initial trunks, VLANs)
+      if (topo.initialConfigs) {
+        Object.keys(topo.initialConfigs).forEach(target => {
+          const cfg = topo.initialConfigs[target];
+          const targetDevs = target === 'all' ? Object.keys(this.devices) : [target];
+          targetDevs.forEach(devName => {
+            const dev = this.devices[devName];
+            if (!dev) return;
+
+            if (cfg.trunkPorts && Array.isArray(cfg.trunkPorts)) {
+              cfg.trunkPorts.forEach(rawP => {
+                const p = this.normalizeInterface(rawP);
+                if (dev.config.interfaces[p]) {
+                  dev.config.interfaces[p].mode = 'trunk';
+                  dev.config.interfaces[p].isRouted = false;
+                  dev.config.interfaces[p].trunkEncap = cfg.encapsulation || 'dot1q';
+                }
+              });
+            }
+
+            if (cfg.vlans && typeof cfg.vlans === 'object') {
+              Object.keys(cfg.vlans).forEach(vid => {
+                dev.config.vlans[vid] = cfg.vlans[vid];
+              });
+            }
+          });
+        });
+      }
+    }
+
+    static detectQuestionId(text) {
+      if (!text) return null;
+      const str = String(text);
+      const m = str.match(/(?:question|card|id|#)\s*[:#]?\s*(\d{4})/i) || str.match(/\b(1092|1119|1120|1121|1122|1123|1124|1125|1126|1128|1149|1159|1160|1161|1165|1166|1167|1169|1177|1180|1184|1189|1191|1192|1193|1194|1195|1196|1197|1198|1199|1200|1201|1202|1203|1204|1227)\b/);
+      if (m) {
+        const id = parseInt(m[1], 10);
+        if (TOPOLOGY_REGISTRY[id]) return id;
+      }
+      return null;
+    }
+
     initDevices(options) {
-      let names = [];
-      if (options && Array.isArray(options.devices) && options.devices.length > 0) {
-        names = options.devices;
-      } else if (options && typeof options.promptText === 'string') {
-        names = IosSimulator.extractDevices(options.promptText);
-      } else if (typeof options === 'string') {
-        names = IosSimulator.extractDevices(options);
-      } else {
-        names = ['SW101', 'SW102'];
+      let qId = options.questionId;
+      if (!qId && options.promptText) {
+        qId = IosSimulator.detectQuestionId(options.promptText);
       }
 
-      names.forEach(name => {
-        const isRouter = /^(r\d+|router)/i.test(name);
-        this.devices[name] = new IosDeviceSession(name, isRouter ? 'router' : 'switch');
+      const topo = qId && TOPOLOGY_REGISTRY[qId] ? TOPOLOGY_REGISTRY[qId] : null;
+
+      let devNames = [];
+      if (topo && topo.devices && topo.devices.length > 0) {
+        devNames = topo.devices;
+      } else if (options && Array.isArray(options.devices) && options.devices.length > 0) {
+        devNames = options.devices;
+      } else if (options && typeof options.promptText === 'string') {
+        devNames = IosSimulator.extractDevices(options.promptText);
+      } else {
+        devNames = ['SW101', 'SW102'];
+      }
+
+      devNames.forEach(name => {
+        let devType = 'switch';
+        if (topo && topo.deviceTypes && topo.deviceTypes[name]) {
+          devType = topo.deviceTypes[name];
+        } else if (/^(r\d+|router)/i.test(name)) {
+          devType = 'router';
+        } else if (/^(sw\d+|switch|dls|als)/i.test(name)) {
+          devType = 'l3switch';
+        }
+        this.devices[name] = new IosDeviceSession(name, devType);
       });
-      this.activeDeviceName = names[0] || 'SW101';
+
+      if (topo) {
+        this.applyTopology(topo);
+      }
+
+      this.activeDeviceName = devNames[0] || 'SW101';
     }
 
     getActiveSession() {
@@ -1056,20 +2344,7 @@
         this.tabsWrapEl.appendChild(btn);
       });
 
-      const addBtn = document.createElement('button');
-      addBtn.type = 'button';
-      addBtn.className = 'ios-tab-add-btn';
-      addBtn.textContent = '+ Add';
-      addBtn.title = 'Add new device';
-      addBtn.onclick = () => {
-        const newName = prompt('Enter device name (e.g. SW103, R3):');
-        if (newName && !this.devices[newName.trim()]) {
-          const clean = newName.trim();
-          this.devices[clean] = new IosDeviceSession(clean, clean.toLowerCase().startsWith('sw') ? 'switch' : 'router');
-          this.switchDevice(clean);
-        }
-      };
-      this.tabsWrapEl.appendChild(addBtn);
+// Authentic lab topology: tabs strictly match question topology devices
     }
 
     switchDevice(name) {
@@ -1321,18 +2596,30 @@
         return;
       }
 
-      // Configure terminal
+      // Configure command (terminal, memory, network)
       if (matchesPrefix(p0, 'configure', 4) || p0 === 'conf') {
-        if (p1 === 'terminal' || p1 === 't' || p1 === '') {
+        if (!p1 || p1 === 'terminal' || p1 === 't' || p1 === 'term') {
           s.mode = 'config';
-          s.addLog('system', 'Enter configuration commands, one per line.  End with CNTL/Z.');
+          if (!p1) {
+            s.addLog('system', 'Configuring from terminal, memory, or network [terminal]?\nEnter configuration commands, one per line.  End with CNTL/Z.');
+          } else {
+            s.addLog('system', 'Enter configuration commands, one per line.  End with CNTL/Z.');
+          }
+          this.refreshScreen();
+          return;
+        } else if (p1 === 'memory' || p1 === 'mem') {
+          s.addLog('system', 'Non-Volatile memory configuration loaded into running configuration.\n[OK]');
+          this.refreshScreen();
+          return;
+        } else if (p1 === 'network' || p1 === 'net') {
+          s.addLog('system', 'Host or network configuration file [host]? \nAddress of remote host [255.255.255.255]? \nName of configuration file [network-confg]? \nConfigure using network-confg... [timed out]');
           this.refreshScreen();
           return;
         }
       }
 
-      // Exit / End
-      if (p0 === 'exit') {
+      // Exit / End (supports 'exit', 'exi', 'ex')
+      if (p0 === 'exit' || p0 === 'exi' || p0 === 'ex') {
         if (s.mode.startsWith('config-if') || s.mode === 'config-subif' || s.mode === 'config-router' ||
             s.mode === 'config-vlan' || s.mode === 'config-line' || s.mode === 'config-dhcp' ||
             s.mode === 'config-std-nacl' || s.mode === 'config-ext-nacl') {
@@ -1340,8 +2627,10 @@
           s.context = null;
         } else if (s.mode === 'config') {
           s.mode = 'priv';
+          s.context = null;
         } else if (s.mode === 'priv') {
           s.mode = 'user';
+          s.context = null;
         }
         this.refreshScreen();
         return;
@@ -1507,6 +2796,41 @@
         }
         const intf = targetInterfaces[0] || null;
 
+        // channel-protocol (lacp / pagp)
+        if (p0 === 'channel-protocol') {
+          targetInterfaces.forEach(it => {
+            it.channelProtocol = p1;
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // duplex (auto / full / half)
+        if (p0 === 'duplex') {
+          targetInterfaces.forEach(it => { it.duplex = p1; });
+          this.refreshScreen();
+          return;
+        }
+
+        // speed (10 / 100 / 1000 / auto)
+        if (p0 === 'speed') {
+          targetInterfaces.forEach(it => { it.speed = p1; });
+          this.refreshScreen();
+          return;
+        }
+
+        // mdix auto
+        if (p0 === 'mdix') {
+          this.refreshScreen();
+          return;
+        }
+
+        // storm-control
+        if (p0 === 'storm-control') {
+          this.refreshScreen();
+          return;
+        }
+
         // NO SWITCHPORT (Converts L2 switchport to L3 routed interface)
         if (p0 === 'no' && (p1 === 'switchport' || p1 === 'sw')) {
           targetInterfaces.forEach(it => {
@@ -1549,7 +2873,7 @@
 
           // CRITICAL CHECK: In Cisco IOS, L2 switchports CANNOT have an IP address unless 'no switchport' was configured or it's an SVI (VLAN interface)
           const isSvi = intf && intf.name.toLowerCase().startsWith('vlan');
-          if (intf && !intf.isRouted && !isSvi && s.type === 'switch') {
+          if (intf && !intf.isRouted && !isSvi && (s.type === 'switch' || s.type === 'l3switch')) {
             s.addLog('error', '% IP addresses may not be configured on L2 links.');
             this.refreshScreen();
             return;
@@ -1570,7 +2894,7 @@
         if (p0 === 'ipv6' && matchesPrefix(p1, 'address', 2)) {
           const addr = parts[2];
           const isSvi = intf && intf.name.toLowerCase().startsWith('vlan');
-          if (intf && !intf.isRouted && !isSvi && s.type === 'switch') {
+          if (intf && !intf.isRouted && !isSvi && (s.type === 'switch' || s.type === 'l3switch')) {
             s.addLog('error', '% IPv6 addresses may not be configured on L2 links.');
             this.refreshScreen();
             return;
@@ -1951,7 +3275,7 @@
           s.context = { type: isSub ? 'subif' : 'if', name: ifName };
 
           if (!s.config.interfaces[ifName]) {
-            const isSw = s.type === 'switch' && !isSub;
+            const isSw = (s.type === 'switch' || s.type === 'l3switch') && !isSub;
             s.config.interfaces[ifName] = {
               name: ifName,
               isRouted: !isSw,
@@ -2300,12 +3624,12 @@
 
         if (s.config.hostname) lines.push(`hostname ${s.config.hostname}`, '!');
         if (s.config.domainName) lines.push(`ip domain name ${s.config.domainName}`);
-        if (s.config.ipRouting && s.type === 'switch') lines.push('ip routing');
+        if (s.config.ipRouting && (s.type === 'switch' || s.type === 'l3switch')) lines.push('ip routing');
         if (s.config.ipv6UnicastRouting) lines.push('ipv6 unicast-routing');
         if (s.config.dhcpSnooping) lines.push('ip dhcp snooping');
 
         // Spanning Tree
-        if (s.type === 'switch') {
+        if ((s.type === 'switch' || s.type === 'l3switch')) {
           lines.push(`spanning-tree mode ${s.config.spanningTree.mode || 'pvst'}`);
           lines.push('spanning-tree extend system-id');
           lines.push('!');
@@ -2327,7 +3651,9 @@
           lines.push(`interface ${intf.name}`);
           if (intf.description) lines.push(` description ${intf.description}`);
 
-          if (s.type === 'switch') {
+          const isVlan = intf.name.toLowerCase().startsWith('vlan');
+          const isSwitchDev = s.type === 'switch' || s.type === 'l3switch';
+          if (isSwitchDev && !isVlan) {
             if (intf.isRouted) {
               lines.push(' no switchport');
             } else {
@@ -2340,7 +3666,7 @@
                 lines.push(' switchport mode access');
                 if (intf.accessVlan && intf.accessVlan !== '1') lines.push(` switchport access vlan ${intf.accessVlan}`);
               }
-              if (intf.portSecurity) {
+              if (intf.portSecurity && intf.portSecurity.enabled) {
                 lines.push(' switchport port-security');
                 if (intf.portSecurity.max) lines.push(` switchport port-security maximum ${intf.portSecurity.max}`);
                 if (intf.portSecurity.violation) lines.push(` switchport port-security violation ${intf.portSecurity.violation}`);
@@ -2451,7 +3777,7 @@
         }
       }
 
-      // SHOW IP INTERFACE BRIEF
+      // SHOW IP INTERFACE BRIEF (Authentic Cisco IOS / Packet Tracer output format)
       else if (p1 === 'ip' && (matchesPrefix(p2, 'interface', 3) || p2 === 'int') && (matchesPrefix(p3, 'brief', 2) || p3 === 'br')) {
         const rows = [
           'Interface                  IP-Address      OK? Method Status                Protocol'
@@ -2460,9 +3786,35 @@
           const intf = s.config.interfaces[name];
           const cName = intf.name.padEnd(26, ' ');
           const cIp = (intf.ip || 'unassigned').padEnd(15, ' ');
-          const cMethod = 'YES manual ';
-          const cStatus = intf.shutdown ? 'administratively down down' : (intf.status === 'up' ? 'up                    up' : 'down                  down');
+          const cMethod = intf.ip ? 'YES manual ' : 'YES unset  ';
+          let cStatus = 'down                  down';
+          if (intf.shutdown) {
+            cStatus = 'administratively down down';
+          } else if (intf.status === 'up' && intf.protocol === 'up') {
+            cStatus = 'up                    up';
+          }
           rows.push(`${cName} ${cIp} ${cMethod} ${cStatus}`);
+        });
+        output = rows.join('\n');
+      }
+
+      // SHOW INTERFACES STATUS (Packet Tracer switchport status table)
+      else if ((matchesPrefix(p1, 'interfaces', 4) || p1 === 'int') && (p2 === 'status' || matchesPrefix(p2, 'status', 4))) {
+        const rows = [
+          'Port      Name               Status       Vlan       Duplex  Speed Type'
+        ];
+        Object.keys(s.config.interfaces).forEach(name => {
+          const intf = s.config.interfaces[name];
+          if (intf.name.toLowerCase().startsWith('vlan') || intf.name.toLowerCase().startsWith('loopback')) return;
+          const shortP = intf.name.replace(/^GigabitEthernet/, 'Gi').replace(/^FastEthernet/, 'Fa').replace(/^Ethernet/, 'Et').replace(/^Port-channel/, 'Po');
+          const pCol = shortP.padEnd(9, ' ');
+          const nameCol = (intf.description || '').substring(0, 18).padEnd(18, ' ');
+          const statCol = (intf.shutdown ? 'disabled' : (intf.connected ? 'connected' : 'notconnect')).padEnd(12, ' ');
+          const vlanCol = (intf.isRouted ? 'routed' : (intf.mode === 'trunk' ? 'trunk' : (intf.accessVlan || '1'))).padEnd(10, ' ');
+          const dupCol = 'auto  ';
+          const spdCol = 'auto ';
+          const typeCol = intf.name.startsWith('Gi') ? '1000BaseTX' : '10/100BaseTX';
+          rows.push(`${pCol} ${nameCol} ${statCol} ${vlanCol} ${dupCol} ${spdCol} ${typeCol}`);
         });
         output = rows.join('\n');
       }
@@ -2510,7 +3862,7 @@
           const assignedPorts = [];
           Object.keys(s.config.interfaces).forEach(intfName => {
             const intf = s.config.interfaces[intfName];
-            if (intf.mode === 'access' && String(intf.accessVlan) === String(vid)) {
+            if (intf.mode === 'access' && intf.accessVlan === vid && !intf.isRouted && !intf.name.toLowerCase().startsWith('vlan')) {
               assignedPorts.push(intf.name);
             }
           });
@@ -2523,63 +3875,53 @@
         output = rows.join('\n');
       }
 
-      // SHOW IP ROUTE
-      else if (p1 === 'ip' && (matchesPrefix(p2, 'route', 2) || p2 === 'ro')) {
-        const rows = [
-          'Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP',
-          '       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area',
-          '       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2',
-          '       E1 - OSPF external type 1, E2 - OSPF external type 2',
-          '       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2',
-          '       ia - IS-IS inter area, * - candidate default, U - per-user static route',
-          '       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP',
-          '       a - application route',
-          '       + - replicated route, % - next hop override',
-          '',
-          'Gateway of last resort is not set',
-          ''
-        ];
-
-        // Connected and Local routes
+      // SHOW ETHERCHANNEL SUMMARY (Dynamic based on configured channel-groups)
+      else if (matchesPrefix(p1, 'etherchannel', 5) || (p1 === 'ip' && p2 === 'etherchannel')) {
+        const groups = {};
         Object.keys(s.config.interfaces).forEach(name => {
           const intf = s.config.interfaces[name];
-          if (intf.ip && intf.mask && intf.status === 'up' && !intf.shutdown) {
-            rows.push(`C     ${intf.ip}/24 is directly connected, ${intf.name}`);
-            rows.push(`L     ${intf.ip}/32 is directly connected, ${intf.name}`);
+          if (intf.channelGroup && intf.channelGroup.id) {
+            const gid = intf.channelGroup.id;
+            if (!groups[gid]) {
+              groups[gid] = {
+                id: gid,
+                mode: intf.channelGroup.mode || 'active',
+                ports: [],
+                isRouted: intf.isRouted
+              };
+            }
+            const shortP = intf.name.replace(/^Ethernet/, 'Et').replace(/^GigabitEthernet/, 'Gi').replace(/^FastEthernet/, 'Fa');
+            groups[gid].ports.push(`${shortP}(P)`);
           }
         });
 
-        // Static routes
-        (s.config.staticRoutes || []).forEach(r => {
-          rows.push(`S     ${r.net}/24 [${r.ad || 1}/0] via ${r.nh}`);
-        });
-
-        output = rows.join('\n');
-      }
-
-      // SHOW IP OSPF NEIGHBOR
-      else if (p1 === 'ip' && p2 === 'ospf' && (matchesPrefix(p3, 'neighbor', 4) || p3 === 'nei')) {
-        output = `Neighbor ID     Pri   State           Dead Time   Address         Interface\n10.20.31.254      1   FULL/BDR        00:00:34    10.20.31.254    Ethernet0/0`;
-      }
-
-      // SHOW IP ARP
-      else if (p1 === 'arp' || (p1 === 'ip' && p2 === 'arp')) {
-        const rows = [
-          'Protocol  Address          Age (min)  Hardware Addr   Type   Interface'
+        const gKeys = Object.keys(groups);
+        const header = [
+          'Flags:  D - down        P - bundled in port-channel',
+          '        I - stand-alone s - suspended',
+          '        H - Hot-standby (LACP only)',
+          '        R - Layer3      S - Layer2',
+          '        U - in use      f - failed to allocate aggregator',
+          '',
+          `Number of channel-groups in use: ${gKeys.length}`,
+          `Number of aggregators:           ${gKeys.length}`,
+          '',
+          'Group  Port-channel  Protocol    Ports',
+          '------+-------------+-----------+-----------------------------------------------'
         ];
-        Object.keys(s.arpCache).forEach(ip => {
-          const entry = s.arpCache[ip];
-          rows.push(`Internet  ${ip.padEnd(16, ' ')} ${String(entry.age).padEnd(10, ' ')} ${entry.mac.padEnd(15, ' ')} ARPA   ${entry.interface}`);
-        });
-        if (rows.length === 1) {
-          rows.push('Internet  10.20.31.1              -   aabb.cc00.0100  ARPA   Ethernet0/0');
-        }
-        output = rows.join('\n');
-      }
 
-      // SHOW ETHERCHANNEL SUMMARY
-      else if (matchesPrefix(p1, 'etherchannel', 5) || (p1 === 'ip' && p2 === 'etherchannel')) {
-        output = `Flags:  D - down        P - bundled in port-channel\n        I - stand-alone s - suspended\n        H - Hot-standby (LACP only)\n        R - Layer3      S - Layer2\n        U - in use      f - failed to allocate aggregator\n\nNumber of channel-groups in use: 1\nNumber of aggregators:           1\n\nGroup  Port-channel  Protocol    Ports\n------+-------------+-----------+-----------------------------------------------\n1      Po1(SU)         LACP      Et0/1(P)    Et0/2(P)`;
+        gKeys.forEach(gid => {
+          const g = groups[gid];
+          const proto = (g.mode === 'active' || g.mode === 'passive') ? 'LACP' : ((g.mode === 'auto' || g.mode === 'desirable') ? 'PAgP' : '-');
+          const poType = g.isRouted ? 'RU' : 'SU';
+          const poName = `Po${gid}(${poType})`.padEnd(13, ' ');
+          const gCol = String(gid).padEnd(6, ' ');
+          const protoCol = proto.padEnd(11, ' ');
+          const portsCol = g.ports.join('    ');
+          header.push(`${gCol} ${poName} ${protoCol} ${portsCol}`);
+        });
+
+        output = header.join('\n');
       }
 
       // SHOW SPANNING-TREE
@@ -2592,9 +3934,34 @@
         output = `          Mac Address Table\n-------------------------------------------\nVlan    Mac Address       Type        Ports\n----    -----------       --------    -----\n   1    aabb.cc00.0100    DYNAMIC     Et0/1\n   1    aabb.cc00.0200    DYNAMIC     Et0/2\nTotal Mac Addresses for this criterion: 2`;
       }
 
-      // SHOW CDP / LLDP NEIGHBORS
+      // SHOW CDP / LLDP NEIGHBORS (Dynamic Cisco device neighbor table)
       else if (p1 === 'cdp' || p1 === 'lldp') {
-        output = `Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge\n                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone\n\nDevice ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\nSW102            Eth 0/1           158             S I    Linux     Eth 0/1\nSW102            Eth 0/2           158             S I    Linux     Eth 0/2`;
+        const rows = [
+          'Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge',
+          '                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone',
+          '',
+          'Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID'
+        ];
+
+        let count = 0;
+        Object.keys(s.config.interfaces).forEach(name => {
+          const intf = s.config.interfaces[name];
+          if (intf.connected && intf.peerDevice && !intf.shutdown && intf.status === 'up') {
+            const isCisco = /^(sw|r|switch|router|dls|als|dist|core)/i.test(intf.peerDevice);
+            if (isCisco) {
+              count++;
+              const devCol = intf.peerDevice.padEnd(16, ' ');
+              const locCol = intf.name.replace(/^GigabitEthernet/, 'Gig ').replace(/^Ethernet/, 'Eth ').padEnd(17, ' ');
+              const holdCol = (150 + Math.floor(Math.random() * 30)).toString().padEnd(10, ' ');
+              const capCol = intf.peerDevice.toUpperCase().startsWith('R') ? 'R        ' : 'S I      ';
+              const platCol = intf.peerDevice.toUpperCase().startsWith('R') ? 'ISR4321   ' : 'WS-C2960 ';
+              const portCol = (intf.peerPort || intf.name).replace(/^GigabitEthernet/, 'Gig ').replace(/^Ethernet/, 'Eth ');
+              rows.push(`${devCol} ${locCol} ${holdCol} ${capCol} ${platCol} ${portCol}`);
+            }
+          }
+        });
+
+        output = count > 0 ? rows.join('\n') : '% CDP neighbor table is empty or no CDP neighbors discovered.';
       }
 
       // SHOW ACCESS-LISTS
@@ -2617,7 +3984,7 @@
 
       // SHOW VERSION
       else if (matchesPrefix(p1, 'version', 3) || p1 === 'ver') {
-        output = `Cisco IOS Software, ${s.type.toUpperCase()} Software (${s.type.toUpperCase()}-UNIVERSALK9-M), Version 15.4(3)M2, RELEASE SOFTWARE (fc2)\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2026 by Cisco Systems, Inc.\nCompiled Wed 15-Oct-26 12:00 by prod_rel_team\n\nROM: ROMMON Emulation Microcode\n\n${s.config.hostname} uptime is 3 hours, 28 minutes\nSystem returned to ROM by power-on\nSystem image file is "flash3:/vios-adventerprisek9-m"\nLast reload reason: Normal reload\n\nCisco ${s.type.toUpperCase()} (revision 1.0) with 1048576K/262144K bytes of memory.\nProcessor board ID 99482910\n4 Ethernet interfaces\n2 GigabitEthernet interfaces\nConfiguration register is 0x2102`;
+        output = `Cisco IOS Software, ${s.type === 'router' ? 'ROUTER' : 'SWITCH'} Software (${s.type === 'router' ? 'ROUTER' : 'SWITCH'}-UNIVERSALK9-M), Version 15.4(3)M2, RELEASE SOFTWARE (fc2)\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2026 by Cisco Systems, Inc.\nCompiled Wed 15-Oct-26 12:00 by prod_rel_team\n\nROM: ROMMON Emulation Microcode\n\n${s.config.hostname} uptime is 3 hours, 28 minutes\nSystem returned to ROM by power-on\nSystem image file is "flash3:/vios-adventerprisek9-m"\nLast reload reason: Normal reload\n\nCisco ${s.type === 'router' ? 'ROUTER' : 'SWITCH'} (revision 1.0) with 1048576K/262144K bytes of memory.\nProcessor board ID 99482910\n4 Ethernet interfaces\n2 GigabitEthernet interfaces\nConfiguration register is 0x2102`;
       }
 
       // DEFAULT SHOW OUTPUT
