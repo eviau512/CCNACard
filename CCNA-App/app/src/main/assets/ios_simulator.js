@@ -1290,25 +1290,27 @@
       }
 
       const lower = cmd.toLowerCase();
-      const parts = cmd.split(/\s+/);
-      const p0 = (parts[0] || '').toLowerCase();
-      const p1 = (parts[1] || '').toLowerCase();
-      const p2 = (parts[2] || '').toLowerCase();
-
-      // Help '?' or commands containing '?'
-      if (lower === '?' || lower === 'help' || rawCmd.includes('?')) {
-        const query = rawCmd.replace(/\?.*$/, '');
-        this.outputHelp(s, query);
+      const parts = cmd.split(/\s+/).filter(Boolean);
+      if (parts.length === 0) {
         this.refreshScreen();
-        if (this.inputEl) {
-          this.inputEl.value = query;
-          this.inputEl.focus();
-        }
         return;
       }
 
-      // Mode Navigation - enable, disable
-      if (matchesPrefix(p0, 'enable', 2)) {
+      const p0 = parts[0].toLowerCase();
+      const p1 = (parts[1] || '').toLowerCase();
+      const p2 = (parts[2] || '').toLowerCase();
+      const p3 = (parts[3] || '').toLowerCase();
+
+      // Help command if typed with trailing ?
+      if (trimmed.endsWith('?')) {
+        const query = trimmed.substring(0, trimmed.length - 1);
+        this.outputHelp(s, query);
+        this.refreshScreen();
+        return;
+      }
+
+      // Enable / Disable
+      if ((matchesPrefix(p0, 'enable', 2) || p0 === 'en') && s.mode === 'user') {
         s.mode = 'priv';
         this.refreshScreen();
         return;
@@ -1319,16 +1321,14 @@
         return;
       }
 
-      // configure terminal
-      if (matchesPrefix(p0, 'configure', 4)) {
-        if (s.mode === 'user') {
-          s.addLog('error', '% Type "enable" first to enter privileged mode.');
-        } else {
+      // Configure terminal
+      if (matchesPrefix(p0, 'configure', 4) || p0 === 'conf') {
+        if (p1 === 'terminal' || p1 === 't' || p1 === '') {
           s.mode = 'config';
           s.addLog('system', 'Enter configuration commands, one per line.  End with CNTL/Z.');
+          this.refreshScreen();
+          return;
         }
-        this.refreshScreen();
-        return;
       }
 
       // Exit / End
@@ -1356,10 +1356,409 @@
         return;
       }
 
-      // ==========================================
-      // GLOBAL CONFIG COMMANDS (mode: 'config')
-      // ==========================================
-      if (s.mode === 'config') {
+      // =========================================================================
+      // 1. SUBMODE-SPECIFIC COMMANDS (Evaluated first when in specific submode)
+      // =========================================================================
+
+      // (A) VLAN CONFIG (mode: 'config-vlan')
+      if (s.mode === 'config-vlan') {
+        if (p0 === 'name') {
+          const vid = s.context ? s.context.vid : '1';
+          s.config.vlans[vid] = parts[1] || 'VLAN';
+          this.refreshScreen();
+          return;
+        }
+      }
+
+      // (B) ROUTER OSPF CONFIG (mode: 'config-router')
+      if (s.mode === 'config-router') {
+        if (lower.startsWith('router-id')) {
+          s.config.ospf.routerId = parts[1];
+          this.refreshScreen();
+          return;
+        }
+        if (lower.startsWith('network')) {
+          const net = parts[1];
+          const wildcard = parts[2];
+          const aIdx = parts.indexOf('area');
+          const area = aIdx !== -1 ? parts[aIdx + 1] : '0';
+          s.config.ospf.networks.push({ net, wildcard, area });
+          this.refreshScreen();
+          return;
+        }
+        if (lower.startsWith('passive-interface')) {
+          const pIf = this.normalizeInterface(parts[1]);
+          s.config.ospf.passiveInterfaces.push(pIf);
+          this.refreshScreen();
+          return;
+        }
+        if (lower.startsWith('default-information originate')) {
+          s.config.ospf.defaultInformationOriginate = true;
+          this.refreshScreen();
+          return;
+        }
+      }
+
+      // (C) DHCP POOL CONFIG (mode: 'config-dhcp')
+      if (s.mode === 'config-dhcp') {
+        const pool = s.context ? s.config.dhcpPools[s.context.name] : null;
+        if (pool) {
+          if (lower.startsWith('network')) {
+            pool.network = parts[1];
+            pool.mask = parts[2];
+            this.refreshScreen();
+            return;
+          }
+          if (lower.startsWith('default-router')) {
+            pool.defaultRouter = parts[1];
+            this.refreshScreen();
+            return;
+          }
+          if (lower.startsWith('dns-server')) {
+            pool.dnsServer = parts[1];
+            this.refreshScreen();
+            return;
+          }
+          if (lower.startsWith('domain-name')) {
+            pool.domainName = parts[1];
+            this.refreshScreen();
+            return;
+          }
+          if (lower.startsWith('lease')) {
+            pool.lease = parts.slice(1).join(' ');
+            this.refreshScreen();
+            return;
+          }
+        }
+      }
+
+      // (D) ACL CONFIG (mode: 'config-std-nacl', 'config-ext-nacl')
+      if (s.mode === 'config-std-nacl') {
+        const acl = s.context ? s.config.accessLists.standard[s.context.name] : null;
+        if (acl && (p0 === 'permit' || p0 === 'deny' || p0 === 'remark')) {
+          acl.push(parts.join(' '));
+          this.refreshScreen();
+          return;
+        }
+      }
+      if (s.mode === 'config-ext-nacl') {
+        const acl = s.context ? s.config.accessLists.extended[s.context.name] : null;
+        if (acl && (p0 === 'permit' || p0 === 'deny' || p0 === 'remark')) {
+          acl.push(parts.join(' '));
+          this.refreshScreen();
+          return;
+        }
+      }
+
+      // (E) LINE CONFIG (mode: 'config-line')
+      if (s.mode === 'config-line') {
+        const lineKey = s.context ? s.context.target : 'vty 0 4';
+        if (!s.config.lines[lineKey]) s.config.lines[lineKey] = { password: null, login: false, loginLocal: true, transport: 'ssh' };
+        if (p0 === 'password') {
+          s.config.lines[lineKey].password = parts[1];
+          this.refreshScreen();
+          return;
+        }
+        if (p0 === 'login') {
+          if (p1 === 'local') s.config.lines[lineKey].loginLocal = true;
+          else s.config.lines[lineKey].login = true;
+          this.refreshScreen();
+          return;
+        }
+        if (p0 === 'transport' && p1 === 'input') {
+          s.config.lines[lineKey].transport = parts.slice(2).join(' ');
+          this.refreshScreen();
+          return;
+        }
+      }
+
+      // (F) INTERFACE CONFIG (mode: 'config-if', 'config-subif', 'config-if-range')
+      if (s.mode === 'config-if' || s.mode === 'config-subif' || s.mode === 'config-if-range') {
+        const targetInterfaces = [];
+        if (s.mode === 'config-if-range' && s.context && s.context.range) {
+          const rStr = s.context.range;
+          const m = rStr.match(/([a-zA-Z]+)(\d+)\/(\d+)\s*-\s*(\d+)/);
+          if (m) {
+            const pfx = m[1];
+            const mod = m[2];
+            const start = parseInt(m[3], 10);
+            const end = parseInt(m[4], 10);
+            for (let i = start; i <= end; i++) {
+              const name = this.normalizeInterface(`${pfx}${mod}/${i}`);
+              if (!s.config.interfaces[name]) {
+                s.config.interfaces[name] = {
+                  name,
+                  isRouted: false,
+                  status: 'up',
+                  mode: 'access',
+                  accessVlan: '1',
+                  dot1qVlan: null,
+                  ip: null,
+                  mask: null,
+                  ipv6: null,
+                  channelGroup: null
+                };
+              }
+              targetInterfaces.push(s.config.interfaces[name]);
+            }
+          }
+        } else if (s.context && s.context.name && s.config.interfaces[s.context.name]) {
+          targetInterfaces.push(s.config.interfaces[s.context.name]);
+        }
+        const intf = targetInterfaces[0] || null;
+
+        // NO SWITCHPORT (Converts L2 switchport to L3 routed interface)
+        if (p0 === 'no' && (p1 === 'switchport' || p1 === 'sw')) {
+          targetInterfaces.forEach(it => {
+            it.isRouted = true;
+            it.mode = 'routed';
+            it.accessVlan = null;
+            it.trunkAllowed = null;
+            it.nativeVlan = null;
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // SWITCHPORT (Converts back to L2 switchport)
+        if (matchesPrefix(p0, 'switchport', 2) && parts.length === 1) {
+          targetInterfaces.forEach(it => {
+            it.isRouted = false;
+            it.mode = 'access';
+            it.ip = null;
+            it.mask = null;
+            it.ipv6 = null;
+            it.accessVlan = '1';
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // description <text>
+        if (matchesPrefix(p0, 'description', 4)) {
+          const desc = parts.slice(1).join(' ');
+          targetInterfaces.forEach(it => { it.description = desc; });
+          this.refreshScreen();
+          return;
+        }
+
+        // ip address <ip> <mask>
+        if (p0 === 'ip' && matchesPrefix(p1, 'address', 3)) {
+          const ip = parts[2];
+          const mask = parts[3];
+
+          // CRITICAL CHECK: In Cisco IOS, L2 switchports CANNOT have an IP address unless 'no switchport' was configured or it's an SVI (VLAN interface)
+          const isSvi = intf && intf.name.toLowerCase().startsWith('vlan');
+          if (intf && !intf.isRouted && !isSvi && s.type === 'switch') {
+            s.addLog('error', '% IP addresses may not be configured on L2 links.');
+            this.refreshScreen();
+            return;
+          }
+
+          if (intf && ip && mask) {
+            targetInterfaces.forEach(it => {
+              it.ip = ip;
+              it.mask = mask;
+              it.isRouted = true;
+            });
+          }
+          this.refreshScreen();
+          return;
+        }
+
+        // ipv6 address <addr>
+        if (p0 === 'ipv6' && matchesPrefix(p1, 'address', 2)) {
+          const addr = parts[2];
+          const isSvi = intf && intf.name.toLowerCase().startsWith('vlan');
+          if (intf && !intf.isRouted && !isSvi && s.type === 'switch') {
+            s.addLog('error', '% IPv6 addresses may not be configured on L2 links.');
+            this.refreshScreen();
+            return;
+          }
+
+          if (intf && addr) {
+            targetInterfaces.forEach(it => {
+              if (lower.includes('link-local')) it.ipv6LinkLocal = addr;
+              else it.ipv6 = addr;
+              it.isRouted = true;
+            });
+          }
+          this.refreshScreen();
+          return;
+        }
+
+        // encapsulation dot1Q <vlan> [native]
+        if (matchesPrefix(p0, 'encapsulation', 3) && (p1 === 'dot1q' || p1 === 'dot11q')) {
+          const vid = parts[2];
+          const isNat = lower.includes('native');
+          targetInterfaces.forEach(it => {
+            it.dot1qVlan = vid;
+            it.dot1qNative = isNat;
+            it.isSubif = true;
+            it.isRouted = true;
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // shutdown / no shutdown
+        if (p0 === 'shutdown' || (p0 === 'shut' && parts.length === 1)) {
+          targetInterfaces.forEach(it => {
+            it.shutdown = true;
+            it.status = 'administratively down';
+            it.protocol = 'down';
+          });
+          s.addLog('system', `%LINK-5-CHANGED: Interface ${intf ? intf.name : 'Ethernet0/0'}, changed state to administratively down\n%LINEPROTO-5-UPDOWN: Line protocol on Interface ${intf ? intf.name : 'Ethernet0/0'}, changed state to down`);
+          this.refreshScreen();
+          return;
+        }
+        if (p0 === 'no' && (p1 === 'shutdown' || p1 === 'shut')) {
+          targetInterfaces.forEach(it => {
+            it.shutdown = false;
+            it.status = 'up';
+            it.protocol = 'up';
+          });
+          s.addLog('system', `%LINK-3-UPDOWN: Interface ${intf ? intf.name : 'Ethernet0/0'}, changed state to up\n%LINEPROTO-5-UPDOWN: Line protocol on Interface ${intf ? intf.name : 'Ethernet0/0'}, changed state to up`);
+          this.refreshScreen();
+          return;
+        }
+
+        // switchport mode access | trunk
+        if (lower.includes('mode access')) {
+          targetInterfaces.forEach(it => { it.mode = 'access'; it.isRouted = false; });
+          this.refreshScreen();
+          return;
+        }
+        if (lower.includes('mode trunk')) {
+          targetInterfaces.forEach(it => { it.mode = 'trunk'; it.isRouted = false; });
+          this.refreshScreen();
+          return;
+        }
+
+        // switchport access vlan <id>
+        if (lower.includes('access vlan')) {
+          const aVid = parts[parts.length - 1];
+          targetInterfaces.forEach(it => { it.accessVlan = aVid; });
+          this.refreshScreen();
+          return;
+        }
+
+        // switchport trunk encapsulation dot1q
+        if (lower.includes('trunk encapsulation')) {
+          targetInterfaces.forEach(it => { it.trunkEncap = 'dot1q'; });
+          this.refreshScreen();
+          return;
+        }
+
+        // switchport trunk native vlan <id>
+        if (lower.includes('trunk native vlan')) {
+          const nVid = parts[parts.length - 1];
+          targetInterfaces.forEach(it => { it.nativeVlan = nVid; });
+          this.refreshScreen();
+          return;
+        }
+
+        // switchport trunk allowed vlan [add|remove|except|all] <list>
+        if (lower.includes('trunk allowed vlan')) {
+          const allowedStr = parts.slice(parts.indexOf('vlan') + 1).join(' ');
+          targetInterfaces.forEach(it => { it.trunkAllowed = allowedStr; });
+          this.refreshScreen();
+          return;
+        }
+
+        // switchport port-security ...
+        if (lower.startsWith('switchport port-security')) {
+          targetInterfaces.forEach(it => {
+            if (!it.portSecurity) it.portSecurity = { enabled: true, max: 1, violation: 'shutdown', mac: null };
+            it.portSecurity.enabled = true;
+            if (lower.includes('maximum')) {
+              const maxIdx = parts.indexOf('maximum');
+              it.portSecurity.max = parseInt(parts[maxIdx + 1], 10) || 1;
+            }
+            if (lower.includes('violation')) {
+              const vIdx = parts.indexOf('violation');
+              it.portSecurity.violation = parts[vIdx + 1] || 'shutdown';
+            }
+            if (lower.includes('mac-address')) {
+              const mIdx = parts.indexOf('mac-address');
+              it.portSecurity.mac = parts.slice(mIdx + 1).join(' ');
+            }
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // channel-group <id> mode <mode>
+        if (matchesPrefix(p0, 'channel-group', 4)) {
+          const gid = parts[1];
+          const modeIdx = parts.indexOf('mode');
+          const cmode = modeIdx !== -1 ? parts[modeIdx + 1] : 'active';
+          targetInterfaces.forEach(it => {
+            it.channelGroup = { id: gid, mode: cmode };
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // spanning-tree portfast / bpduguard
+        if (matchesPrefix(p0, 'spanning-tree', 4) && (lower.includes('portfast') || lower.includes('bpduguard') || lower.includes('cost'))) {
+          targetInterfaces.forEach(it => {
+            if (lower.includes('portfast')) it.portfast = true;
+            if (lower.includes('bpduguard')) it.bpduguard = true;
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // ip nat inside | outside
+        if (lower === 'ip nat inside') {
+          targetInterfaces.forEach(it => { it.nat = 'inside'; });
+          this.refreshScreen();
+          return;
+        }
+        if (lower === 'ip nat outside') {
+          targetInterfaces.forEach(it => { it.nat = 'outside'; });
+          this.refreshScreen();
+          return;
+        }
+
+        // ip access-group <name> in|out
+        if (p0 === 'ip' && p1 === 'access-group') {
+          const grp = parts[2];
+          const dir = parts[3] || 'in';
+          targetInterfaces.forEach(it => {
+            if (!it.accessGroup) it.accessGroup = { in: null, out: null };
+            if (dir === 'in') it.accessGroup.in = grp;
+            else it.accessGroup.out = grp;
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // ip ospf <id> area <area>
+        if (p0 === 'ip' && p1 === 'ospf' && parts.includes('area')) {
+          const aIdx = parts.indexOf('area');
+          const area = parts[aIdx + 1] || '0';
+          targetInterfaces.forEach(it => {
+            if (!it.ospf) it.ospf = { area: null };
+            it.ospf.area = area;
+          });
+          this.refreshScreen();
+          return;
+        }
+
+        // ip helper-address <addr>
+        if (p0 === 'ip' && matchesPrefix(p1, 'helper-address', 6)) {
+          targetInterfaces.forEach(it => { it.helperAddress = parts[2]; });
+          this.refreshScreen();
+          return;
+        }
+      }
+
+      // =========================================================================
+      // 2. GLOBAL & MODE-TRANSITION CONFIG COMMANDS (Accessible from any config mode)
+      // =========================================================================
+      if (s.mode.startsWith('config')) {
         // hostname <name>
         if (matchesPrefix(p0, 'hostname', 4)) {
           const newName = parts[1] || 'Device';
@@ -1379,7 +1778,7 @@
 
         // crypto key generate rsa [modulus <bits>]
         if (p0 === 'crypto' && p1 === 'key' && p2 === 'generate') {
-          const bits = parts.includes('modulus') ? (parts[parts.indexOf('modulus') + 1] || '1024') : '1024';
+          const bits = parts.includes('modulus') ? (parts[parts.indexOf('modulus') + 1] || '1024') : (parts[4] || '1024');
           s.config.cryptoKeys = { type: 'rsa', bits: parseInt(bits, 10) || 1024 };
           const hostStr = s.config.domainName ? `${s.config.hostname}.${s.config.domainName}` : s.config.hostname;
           s.addLog('output', `The name for the keys will be: ${hostStr}\n% Generating ${bits} bit RSA keys, keys will be non-exportable...\n[OK] (elapsed 0.2 seconds)`);
@@ -1395,83 +1794,46 @@
         }
 
         // service password-encryption
-        if (p0 === 'service' && lower.includes('password-encryption')) {
+        if (lower.startsWith('service password-encryption')) {
           s.config.servicePasswordEncryption = true;
           this.refreshScreen();
           return;
         }
 
-        // username <name> [privilege <num>] secret|password <pw>
-        if (p0 === 'username') {
-          const uname = parts[1];
-          let priv = 1;
-          if (parts.includes('privilege')) priv = parseInt(parts[parts.indexOf('privilege') + 1], 10) || 1;
-          const pw = parts[parts.length - 1];
-          s.config.users[uname] = { privilege: priv, secret: pw };
-          this.refreshScreen();
-          return;
-        }
-
-        // spanning-tree mode pvst / rapid-pvst
-        if (p0 === 'spanning-tree' && p1 === 'mode') {
-          s.config.spanningTree.mode = parts[2] || 'rapid-pvst';
-          this.refreshScreen();
-          return;
-        }
-        if (p0 === 'spanning-tree' && p1 === 'vlan') {
-          const vid = parts[2] || '1';
-          if (!s.config.spanningTree.vlans[vid]) s.config.spanningTree.vlans[vid] = {};
-          if (parts.includes('root')) {
-            s.config.spanningTree.vlans[vid].root = parts[parts.indexOf('root') + 1] || 'primary';
-          }
-          if (parts.includes('priority')) {
-            s.config.spanningTree.vlans[vid].priority = parts[parts.indexOf('priority') + 1] || '4096';
-          }
+        // username <user> [privilege <lvl>] secret|password <secret>
+        if (matchesPrefix(p0, 'username', 4)) {
+          const user = parts[1];
+          const privIdx = parts.indexOf('privilege');
+          const priv = privIdx !== -1 ? parseInt(parts[privIdx + 1], 10) : 1;
+          const secIdx = parts.includes('secret') ? parts.indexOf('secret') : parts.indexOf('password');
+          const sec = secIdx !== -1 ? parts[secIdx + 1] : 'cisco';
+          s.config.users[user] = { secret: sec, privilege: priv };
           this.refreshScreen();
           return;
         }
 
         // ip routing / ipv6 unicast-routing
-        if (p0 === 'ip' && p1 === 'routing') {
+        if (lower === 'ip routing') {
           s.config.ipRouting = true;
           this.refreshScreen();
           return;
         }
-        if (p0 === 'ipv6' && matchesPrefix(p1, 'unicast-routing', 7)) {
+        if (lower === 'ipv6 unicast-routing') {
           s.config.ipv6UnicastRouting = true;
           this.refreshScreen();
           return;
         }
 
-        // cdp run / lldp run
-        if (p0 === 'cdp' && p1 === 'run') {
-          s.config.cdpRun = true;
-          this.refreshScreen();
-          return;
-        }
-        if (p0 === 'lldp' && p1 === 'run') {
-          s.config.lldpRun = true;
-          this.refreshScreen();
-          return;
-        }
-
-        // ntp server <ip>
-        if (p0 === 'ntp' && p1 === 'server') {
-          s.config.ntpServers.push(parts[2]);
-          this.refreshScreen();
-          return;
-        }
-
         // ip dhcp excluded-address <low> [high]
-        if (p0 === 'ip' && p1 === 'dhcp' && matchesPrefix(p2, 'excluded-address', 3)) {
+        if (lower.startsWith('ip dhcp excluded-address')) {
           const low = parts[3];
-          const high = parts[4] || low;
-          if (low) s.config.dhcpExcluded.push({ low, high });
+          const high = parts[4] || null;
+          s.config.dhcpExcluded.push({ low, high });
           this.refreshScreen();
           return;
         }
 
-        // ip dhcp pool <name> -> config-dhcp
+        // ip dhcp pool <name> -> transitions to config-dhcp
         if (p0 === 'ip' && p1 === 'dhcp' && p2 === 'pool') {
           const poolName = parts[3] || 'POOL1';
           s.mode = 'config-dhcp';
@@ -1493,7 +1855,7 @@
           const intf = intfIdx !== -1 ? this.normalizeInterface(parts[intfIdx + 1]) : null;
           const pool = poolIdx !== -1 ? parts[poolIdx + 1] : null;
           const overload = lower.includes('overload');
-          s.config.nat.insideSourceList = { acl, interface: intf, pool, overload };
+          s.config.nat.insideSourceList = { acl, intf, pool, overload };
           this.refreshScreen();
           return;
         }
@@ -1505,7 +1867,38 @@
           const endIp = parts[5];
           const maskIdx = parts.indexOf('netmask');
           const mask = maskIdx !== -1 ? parts[maskIdx + 1] : '255.255.255.0';
-          s.config.nat.pools[poolName] = { start: startIp, end: endIp, mask };
+          s.config.nat.pools[poolName] = { start: startIp, end: endIp, netmask: mask };
+          this.refreshScreen();
+          return;
+        }
+
+        // ip route <net> <mask> <nh> [ad]
+        if (p0 === 'ip' && matchesPrefix(p1, 'route', 2)) {
+          const net = parts[2];
+          const mask = parts[3];
+          const nh = parts[4];
+          const ad = parts[5] ? parseInt(parts[5], 10) : 1;
+          s.config.staticRoutes.push({ net, mask, nh, ad });
+          this.refreshScreen();
+          return;
+        }
+
+        // ipv6 route <prefix> <nh> [ad]
+        if (p0 === 'ipv6' && matchesPrefix(p1, 'route', 2)) {
+          const prefix = parts[2];
+          const nh = parts[3];
+          const ad = parts[4] ? parseInt(parts[4], 10) : 1;
+          s.config.ipv6Routes.push({ prefix, nh, ad });
+          this.refreshScreen();
+          return;
+        }
+
+        // access-list <num> permit|deny ...
+        if (p0 === 'access-list') {
+          const num = parts[1];
+          const rule = parts.slice(2).join(' ');
+          if (!s.config.accessLists.numbered[num]) s.config.accessLists.numbered[num] = [];
+          s.config.accessLists.numbered[num].push(rule);
           this.refreshScreen();
           return;
         }
@@ -1528,16 +1921,20 @@
           return;
         }
 
-        // access-list <num> permit|deny ...
-        if (matchesPrefix(p0, 'access-list', 3) && /^\d+$/.test(p1)) {
-          const num = p1;
-          if (!s.config.accessLists.numbered[num]) s.config.accessLists.numbered[num] = [];
-          s.config.accessLists.numbered[num].push(parts.slice(2).join(' '));
+        // spanning-tree mode ... / priority ...
+        if (matchesPrefix(p0, 'spanning-tree', 4)) {
+          if (lower.includes('mode rapid-pvst')) s.config.spanningTree.mode = 'rapid-pvst';
+          else if (lower.includes('mode pvst')) s.config.spanningTree.mode = 'pvst';
+          else if (lower.includes('mode mst')) s.config.spanningTree.mode = 'mst';
+          if (lower.includes('priority')) {
+            const pIdx = parts.indexOf('priority');
+            s.config.spanningTree.priority = parseInt(parts[pIdx + 1], 10) || 32768;
+          }
           this.refreshScreen();
           return;
         }
 
-        // interface / int ...
+        // interface / int ... -> transitions to config-if, config-subif, or config-if-range
         if (matchesPrefix(p0, 'interface', 3)) {
           if (p1 === 'range' || matchesPrefix(p1, 'range', 1)) {
             const rangeStr = parts.slice(2).join(' ');
@@ -1565,30 +1962,28 @@
               mask: null,
               ipv6: null,
               ipv6LinkLocal: null,
-              status: isSw ? 'up' : 'administratively down',
-              protocol: isSw ? 'up' : 'down',
+              status: 'up',
+              protocol: 'up',
+              shutdown: false,
               description: null,
               mode: isSw ? 'access' : 'routed',
-              accessVlan: isSw ? '1' : null,
-              trunkAllowed: isSw ? '1-4094' : null,
-              nativeVlan: isSw ? '1' : null,
-              voiceVlan: null,
+              accessVlan: '1',
+              trunkAllowed: null,
+              nativeVlan: null,
+              trunkEncap: null,
+              portSecurity: null,
               channelGroup: null,
-              channelMode: null,
-              portSecurity: { enabled: false, max: 1, violation: 'shutdown', macs: [], sticky: false },
-              spanningTree: { portfast: false, bpduguard: false, cost: null },
-              ospf: { area: null, priority: null, cost: null, hello: 10, dead: 40 },
+              ospf: { area: null },
               nat: null,
               accessGroup: { in: null, out: null },
-              cdp: true,
-              lldp: { tx: true, rx: true }
+              helperAddress: null
             };
           }
           this.refreshScreen();
           return;
         }
 
-        // router ospf <id>
+        // router ospf <id> -> transitions to config-router
         if (matchesPrefix(p0, 'router', 4)) {
           const proto = p1;
           const pid = parts[2] || '1';
@@ -1599,7 +1994,7 @@
           return;
         }
 
-        // vlan <id>
+        // vlan <id> -> transitions to config-vlan
         if (matchesPrefix(p0, 'vlan', 2)) {
           const vid = parts[1] || '10';
           s.mode = 'config-vlan';
@@ -1609,474 +2004,62 @@
           return;
         }
 
-        // line ...
+        // line ... -> transitions to config-line
         if (matchesPrefix(p0, 'line', 3)) {
           const target = parts.slice(1).join(' ');
           s.mode = 'config-line';
           s.context = { type: 'line', target };
+          if (!s.config.lines[target]) s.config.lines[target] = { password: null, login: false, loginLocal: true, transport: 'ssh' };
           this.refreshScreen();
           return;
         }
 
-        // ip route <net> <mask> <nh> [ad]
-        if (p0 === 'ip' && matchesPrefix(p1, 'route', 2)) {
-          const [net, mask, nh, ad] = [parts[2], parts[3], parts[4], parts[5]];
-          if (net && mask && nh) {
-            s.config.staticRoutes.push({ net, mask, nh, ad: ad || '1' });
-          }
+        // ntp server <addr>
+        if (p0 === 'ntp' && matchesPrefix(p1, 'server', 3)) {
+          s.config.ntpServers.push(parts[2]);
           this.refreshScreen();
           return;
         }
 
-        // ipv6 route <prefix> <nh> [ad]
-        if (p0 === 'ipv6' && matchesPrefix(p1, 'route', 2)) {
-          const [prefix, nh, ad] = [parts[2], parts[3], parts[4]];
-          if (prefix && nh) {
-            s.config.ipv6Routes.push({ prefix, nh, ad: ad || '1' });
-          }
+        // cdp run / no cdp run
+        if (lower === 'cdp run') {
+          s.config.cdpRun = true;
+          this.refreshScreen();
+          return;
+        }
+        if (lower === 'no cdp run') {
+          s.config.cdpRun = false;
           this.refreshScreen();
           return;
         }
 
-        // ip dhcp snooping
-        if (lower.includes('dhcp snooping')) {
-          s.config.dhcpSnooping = true;
+        // lldp run / no lldp run
+        if (lower === 'lldp run') {
+          s.config.lldpRun = true;
           this.refreshScreen();
           return;
         }
-
-        // Global Negations (no ...)
-        if (p0 === 'no') {
-          if (p1 === 'ip' && matchesPrefix(p2, 'route', 2)) {
-            const net = parts[3];
-            s.config.staticRoutes = s.config.staticRoutes.filter(r => r.net !== net);
-            this.refreshScreen();
-            return;
-          }
-          if (p1 === 'ipv6' && matchesPrefix(p2, 'route', 2)) {
-            const pref = parts[3];
-            s.config.ipv6Routes = s.config.ipv6Routes.filter(r => r.prefix !== pref);
-            this.refreshScreen();
-            return;
-          }
-          if (p1 === 'router' && p2 === 'ospf') {
-            s.config.ospf.id = null;
-            s.config.ospf.networks = [];
-            this.refreshScreen();
-            return;
-          }
-          if (p1 === 'vlan' && /^\d+$/.test(p2)) {
-            delete s.config.vlans[p2];
-            this.refreshScreen();
-            return;
-          }
-          if (p1 === 'ip' && p2 === 'dhcp' && parts[3] === 'pool') {
-            delete s.config.dhcpPools[parts[4]];
-            this.refreshScreen();
-            return;
-          }
-          if (p1 === 'ip' && matchesPrefix(p2, 'domain-lookup', 6)) {
-            this.refreshScreen();
-            return;
-          }
-          if (p1 === 'cdp' && p2 === 'run') {
-            s.config.cdpRun = false;
-            this.refreshScreen();
-            return;
-          }
-          if (p1 === 'lldp' && p2 === 'run') {
-            s.config.lldpRun = false;
-            this.refreshScreen();
-            return;
-          }
-        }
-      }
-
-      // ==========================================
-      // INTERFACE CONFIG (mode: 'config-if', 'config-subif', 'config-if-range')
-      // ==========================================
-      if (s.mode === 'config-if' || s.mode === 'config-subif' || s.mode === 'config-if-range') {
-        const intf = (s.context && s.context.name) ? s.config.interfaces[s.context.name] : null;
-
-        // NO SWITCHPORT (Converts L2 switchport to L3 routed interface)
-        if (p0 === 'no' && (p1 === 'switchport' || p1 === 'sw')) {
-          if (intf) {
-            intf.isRouted = true;
-            intf.mode = 'routed';
-            intf.accessVlan = null;
-            intf.trunkAllowed = null;
-            intf.nativeVlan = null;
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // SWITCHPORT (Converts back to L2 switchport)
-        if (matchesPrefix(p0, 'switchport', 2) && parts.length === 1) {
-          if (intf) {
-            intf.isRouted = false;
-            intf.mode = 'access';
-            intf.ip = null;
-            intf.mask = null;
-            intf.ipv6 = null;
-            intf.accessVlan = '1';
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // description <text>
-        if (matchesPrefix(p0, 'description', 4)) {
-          if (intf) intf.description = parts.slice(1).join(' ');
-          this.refreshScreen();
-          return;
-        }
-
-        // encapsulation dot1q <vlan> [native] (Sub-interfaces)
-        if (matchesPrefix(p0, 'encapsulation', 3) && matchesPrefix(p1, 'dot1q', 4)) {
-          const vid = parts[2];
-          if (intf && vid) {
-            intf.dot1qVlan = vid;
-            intf.dot1qNative = lower.includes('native');
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // IP ADDRESS CONFIGURATION (Check L2 switchport constraint!)
-        if (p0 === 'ip' && matchesPrefix(p1, 'address', 2)) {
-          const ip = parts[2];
-          const mask = parts[3];
-
-          // CRITICAL CHECK: In Cisco IOS, L2 switchports CANNOT have an IP address unless 'no switchport' was configured or it's an SVI (VLAN interface)
-          const isSvi = intf && intf.name.toLowerCase().startsWith('vlan');
-          if (intf && !intf.isRouted && !isSvi && s.type === 'switch') {
-            s.addLog('error', '% IP addresses may not be configured on L2 links.');
-            this.refreshScreen();
-            return;
-          }
-
-          if (intf && ip && mask) {
-            intf.ip = ip;
-            intf.mask = mask;
-            intf.status = 'up';
-            intf.protocol = 'up';
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // IPV6 ADDRESS CONFIGURATION (Check L2 switchport constraint!)
-        if (p0 === 'ipv6' && matchesPrefix(p1, 'address', 2)) {
-          const addr = parts[2];
-
-          const isSvi = intf && intf.name.toLowerCase().startsWith('vlan');
-          if (intf && !intf.isRouted && !isSvi && s.type === 'switch') {
-            s.addLog('error', '% IPv6 addresses may not be configured on L2 links.');
-            this.refreshScreen();
-            return;
-          }
-
-          if (intf && addr) {
-            if (parts.includes('link-local')) {
-              intf.ipv6LinkLocal = addr;
-            } else {
-              intf.ipv6 = addr;
-            }
-            intf.status = 'up';
-            intf.protocol = 'up';
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // no ip address / no ipv6 address
-        if (p0 === 'no' && p1 === 'ip' && matchesPrefix(p2, 'address', 2)) {
-          if (intf) { intf.ip = null; intf.mask = null; }
-          this.refreshScreen();
-          return;
-        }
-        if (p0 === 'no' && p1 === 'ipv6' && matchesPrefix(p2, 'address', 2)) {
-          if (intf) { intf.ipv6 = null; intf.ipv6LinkLocal = null; }
-          this.refreshScreen();
-          return;
-        }
-
-        // no shutdown / shutdown
-        if (p0 === 'no' && matchesPrefix(p1, 'shutdown', 4)) {
-          if (intf) { intf.status = 'up'; intf.protocol = 'up'; }
-          s.addLog('system', `%LINK-3-UPDOWN: Interface ${intf ? intf.name : 'port'}, changed state to up\n%LINEPROTO-5-UPDOWN: Line protocol on Interface ${intf ? intf.name : 'port'}, changed state to up`);
-          this.refreshScreen();
-          return;
-        }
-        if (matchesPrefix(p0, 'shutdown', 4)) {
-          if (intf) { intf.status = 'administratively down'; intf.protocol = 'down'; }
-          s.addLog('system', `%LINK-5-CHANGED: Interface ${intf ? intf.name : 'port'}, changed state to administratively down`);
-          this.refreshScreen();
-          return;
-        }
-
-        // switchport mode access / trunk
-        if (matchesPrefix(p0, 'switchport', 2) && lower.includes('mode')) {
-          const smode = lower.includes('trunk') ? 'trunk' : 'access';
-          if (intf) {
-            intf.isRouted = false;
-            intf.mode = smode;
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // switchport trunk allowed vlan ...
-        if (lower.includes('trunk allowed vlan')) {
-          const vlans = parts.slice(parts.indexOf('vlan') + 1).join(' ');
-          if (intf) intf.trunkAllowed = vlans;
-          this.refreshScreen();
-          return;
-        }
-
-        // switchport trunk native vlan <id>
-        if (lower.includes('trunk native vlan')) {
-          const nVid = parts[parts.length - 1];
-          if (intf) intf.nativeVlan = nVid;
-          this.refreshScreen();
-          return;
-        }
-
-        // switchport access vlan <id>
-        if (lower.includes('access vlan')) {
-          const aVid = parts[parts.length - 1];
-          if (intf) intf.accessVlan = aVid;
-          this.refreshScreen();
-          return;
-        }
-
-        // switchport voice vlan <id>
-        if (lower.includes('voice vlan')) {
-          const vVid = parts[parts.length - 1];
-          if (intf) intf.voiceVlan = vVid;
-          this.refreshScreen();
-          return;
-        }
-
-        // switchport port-security ...
-        if (lower.startsWith('switchport port-security') || lower.startsWith('sw port-security')) {
-          if (intf) intf.portSecurity.enabled = true;
-          if (lower.includes('maximum')) {
-            const maxVal = parts[parts.indexOf('maximum') + 1] || '1';
-            if (intf) intf.portSecurity.max = parseInt(maxVal, 10) || 1;
-          }
-          if (lower.includes('violation')) {
-            const viol = parts[parts.indexOf('violation') + 1] || 'shutdown';
-            if (intf) intf.portSecurity.violation = viol;
-          }
-          if (lower.includes('mac-address')) {
-            if (lower.includes('sticky')) {
-              if (intf) intf.portSecurity.sticky = true;
-            } else {
-              const mac = parts[parts.indexOf('mac-address') + 1];
-              if (intf && mac) intf.portSecurity.macs.push(mac);
-            }
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // channel-group <id> mode <mode>
-        if (matchesPrefix(p0, 'channel-group', 4)) {
-          const gid = parts[1];
-          const modeIdx = parts.indexOf('mode');
-          const cmode = modeIdx !== -1 ? parts[modeIdx + 1] : 'active';
-          if (intf) {
-            intf.channelGroup = gid;
-            intf.channelMode = cmode;
-          }
-          const poName = `Port-channel${gid}`;
-          if (!s.config.interfaces[poName]) {
-            s.config.interfaces[poName] = { name: poName, isRouted: false, mode: 'trunk', status: 'up', protocol: 'up' };
-          }
-          s.addLog('system', `Creating a port-channel interface Port-channel ${gid}`);
-          this.refreshScreen();
-          return;
-        }
-
-        // spanning-tree portfast / bpduguard
-        if (lower.includes('portfast')) {
-          if (intf) intf.spanningTree.portfast = true;
-          s.addLog('system', `%Warning: portfast should only be enabled on ports connected to a single host.`);
-          this.refreshScreen();
-          return;
-        }
-        if (lower.includes('bpduguard')) {
-          if (intf) intf.spanningTree.bpduguard = true;
-          this.refreshScreen();
-          return;
-        }
-
-        // ip nat inside / outside
-        if (p0 === 'ip' && p1 === 'nat') {
-          if (p2 === 'inside' || p2 === 'outside') {
-            if (intf) intf.nat = p2;
-          }
-          this.refreshScreen();
-          return;
-        }
-
-        // ip access-group <name> in|out
-        if (p0 === 'ip' && matchesPrefix(p1, 'access-group', 7)) {
-          const aclName = parts[2];
-          const dir = parts[3] === 'out' ? 'out' : 'in';
-          if (intf) intf.accessGroup[dir] = aclName;
-          this.refreshScreen();
-          return;
-        }
-
-        // ip helper-address <ip>
-        if (p0 === 'ip' && matchesPrefix(p1, 'helper-address', 7)) {
-          if (intf) intf.helperAddress = parts[2];
-          this.refreshScreen();
-          return;
-        }
-
-        // standby <group> ip <vip> / priority / preempt
-        if (p0 === 'standby') {
-          const grp = /^\d+$/.test(p1) ? p1 : '1';
-          if (intf) {
-            if (!intf.standby[grp]) intf.standby[grp] = { ip: null, priority: 100, preempt: false };
-            if (parts.includes('ip')) intf.standby[grp].ip = parts[parts.indexOf('ip') + 1];
-            if (parts.includes('priority')) intf.standby[grp].priority = parseInt(parts[parts.indexOf('priority') + 1], 10) || 100;
-            if (parts.includes('preempt')) intf.standby[grp].preempt = true;
-          }
+        if (lower === 'no lldp run') {
+          s.config.lldpRun = false;
           this.refreshScreen();
           return;
         }
       }
 
-      // ==========================================
-      // ROUTER CONFIG (mode: 'config-router')
-      // ==========================================
-      if (s.mode === 'config-router') {
-        if (lower.startsWith('router-id')) {
-          s.config.ospf.routerId = parts[1];
-          this.refreshScreen();
-          return;
-        }
-        if (lower.startsWith('network')) {
-          s.config.ospf.networks.push(parts.slice(1).join(' '));
-          this.refreshScreen();
-          return;
-        }
-        if (lower.startsWith('passive-interface')) {
-          s.config.ospf.passiveInterfaces.push(parts[1]);
-          this.refreshScreen();
-          return;
-        }
-        if (lower.includes('default-information originate')) {
-          s.config.ospf.defaultInformationOriginate = true;
-          this.refreshScreen();
-          return;
-        }
-      }
+      // =========================================================================
+      // 3. EXEC & MONITORING COMMANDS (show, ping, traceroute, clear, write)
+      // =========================================================================
 
-      // ==========================================
-      // DHCP CONFIG (mode: 'config-dhcp')
-      // ==========================================
-      if (s.mode === 'config-dhcp') {
-        const pool = s.context ? s.config.dhcpPools[s.context.name] : null;
-        if (pool) {
-          if (lower.startsWith('network')) {
-            pool.network = parts[1];
-            pool.mask = parts[2];
-            this.refreshScreen();
-            return;
-          }
-          if (lower.startsWith('default-router') || lower.startsWith('def')) {
-            pool.defaultRouter = parts.slice(1).join(' ');
-            this.refreshScreen();
-            return;
-          }
-          if (lower.startsWith('dns-server') || lower.startsWith('dns')) {
-            pool.dnsServer = parts.slice(1).join(' ');
-            this.refreshScreen();
-            return;
-          }
-          if (lower.startsWith('domain-name')) {
-            pool.domainName = parts[1];
-            this.refreshScreen();
-            return;
-          }
-        }
-      }
-
-      // ==========================================
-      // ACL CONFIG (mode: 'config-std-nacl', 'config-ext-nacl')
-      // ==========================================
-      if (s.mode === 'config-std-nacl') {
-        const acl = s.context ? s.config.accessLists.standard[s.context.name] : null;
-        if (acl && (p0 === 'permit' || p0 === 'deny' || p0 === 'remark')) {
-          acl.push(parts.join(' '));
-          this.refreshScreen();
-          return;
-        }
-      }
-      if (s.mode === 'config-ext-nacl') {
-        const acl = s.context ? s.config.accessLists.extended[s.context.name] : null;
-        if (acl && (p0 === 'permit' || p0 === 'deny' || p0 === 'remark')) {
-          acl.push(parts.join(' '));
-          this.refreshScreen();
-          return;
-        }
-      }
-
-      // ==========================================
-      // VLAN CONFIG (mode: 'config-vlan')
-      // ==========================================
-      if (s.mode === 'config-vlan') {
-        if (p0 === 'name') {
-          const vid = s.context ? s.context.vid : '1';
-          s.config.vlans[vid] = parts[1] || 'VLAN';
-          this.refreshScreen();
-          return;
-        }
-      }
-
-      // ==========================================
-      // LINE CONFIG (mode: 'config-line')
-      // ==========================================
-      if (s.mode === 'config-line') {
-        const lineKey = (s.context && s.context.target) ? s.context.target : 'vty 0 4';
-        const line = s.config.lines[lineKey] || s.config.lines['vty 0 4'];
-        if (line) {
-          if (p0 === 'password') { line.password = parts[1]; this.refreshScreen(); return; }
-          if (p0 === 'login') {
-            line.login = true;
-            if (p1 === 'local') line.loginLocal = true;
-            this.refreshScreen();
-            return;
-          }
-          if (lower.startsWith('transport input')) {
-            line.transport = parts.slice(2).join(' ') || 'ssh';
-            this.refreshScreen();
-            return;
-          }
-        }
-      }
-
-      // ==========================================
-      // EXEC & SHOW COMMANDS (any mode if 'do', or priv/user)
-      // ==========================================
       // SHOW commands
-      if (matchesPrefix(p0, 'show', 2)) {
+      if (matchesPrefix(p0, 'show', 2) || p0 === 'sh') {
         this.handleShowCommand(s, parts.slice(1), pipeClause);
-        this.refreshScreen();
         return;
       }
 
       // REAL PING SIMULATOR
       if (p0 === 'ping') {
-        const dest = parts[1];
+        const dest = parts[1] || '';
         this.simulatePing(s, dest);
-        this.refreshScreen();
         return;
       }
 
@@ -2091,7 +2074,7 @@
       // CLEAR commands
       if (p0 === 'clear') {
         if (p1 === 'ip' && p2 === 'ospf') {
-          s.addLog('output', 'Reset OSPF process? [no]: yes\n% OSPF process 33 restarted, adjacencies recalculated.');
+          s.addLog('output', 'Reset OSPF process? [no]: yes\n% OSPF process restarted, adjacencies recalculated.');
           this.refreshScreen();
           return;
         }
