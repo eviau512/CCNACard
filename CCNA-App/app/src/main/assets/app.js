@@ -15,10 +15,13 @@ let dndShuffledSources = []; // array of { idx, text }
 let appState = {
   masteredIds: {},          // qid -> boolean (true once Box >= 2)
   bookmarkedIds: {},        // qid -> boolean
+  bookmarkUpdatedAt: {},    // qid -> epoch ms tombstone (prevents zombie bookmark resurrection)
   cardStats: {},            // qid -> { box: 0..3, streak, lapses, attempts, everWrong, lastSeenStep, nextDueStep, lastReviewedAt }
   totalSteps: 0,            // monotonic global question step counter
+  resetEpoch: 0,            // epoch ms of last full reset (prevents zombie progress resurrection)
+  updatedAt: 0,             // epoch ms of last local state modification
   history: [],              // array of { qid, domain, topic, misconception, correct, isIdk, time }
-  retryInterval: 25,        // default ~25 questions cooldown (with ±35% random fuzz) to prevent déjà vu
+  retryInterval: 25,        // default ~25 questions cooldown scale tau to prevent déjà vu
   retryDefaultMigratedV2: true,
   antiDejaVuMigratedV3: true,
   shuffleOptions: true,     // default true: randomize option order (需要乱序选项)
@@ -32,9 +35,14 @@ let currentWindow = 50; // 50 / 200 / 500
 let questionById = {};  // fast O(1) lookup map: qid -> question object
 
 // =========================================================================
-// 1. SRS & Leitner Memory Engine (SrsEngine)
+// 1. SRS & Rational Algebraic Stochastic Engine (SrsEngine)
+//    Zero transcendental functions (no exp/tanh/log/pow) — pure + - * /
+//    with O(M) activeMistakeIds Set indexing (< 5 microseconds per step)
 // =========================================================================
 const SrsEngine = {
+  activeMistakeIds: new Set(),
+  consecutiveUnseenStreak: 0,
+
   ensureStat(qid) {
     if (!appState.cardStats) appState.cardStats = {};
     if (!appState.cardStats[qid]) {
@@ -54,12 +62,31 @@ const SrsEngine = {
     return appState.cardStats[qid];
   },
 
+  syncActiveMistakeSet() {
+    this.activeMistakeIds.clear();
+    if (!appState.cardStats) appState.cardStats = {};
+    const allIds = new Set([
+      ...Object.keys(appState.masteredIds || {}),
+      ...Object.keys(appState.cardStats || {})
+    ]);
+    allIds.forEach(rawId => {
+      const qid = parseInt(rawId, 10);
+      if (!qid) return;
+      const st = appState.cardStats[qid];
+      const isMistake = (appState.masteredIds[qid] === false) ||
+        (st && (st.box === 0 || st.box === 1) && (st.everWrong || st.lapses > 0));
+      if (isMistake && appState.masteredIds[qid] !== true) {
+        this.activeMistakeIds.add(qid);
+      }
+    });
+  },
+
   migrateFromLegacyState() {
     if (!appState.cardStats) appState.cardStats = {};
+    if (!appState.bookmarkUpdatedAt) appState.bookmarkUpdatedAt = {};
     if (typeof appState.totalSteps !== 'number') {
       appState.totalSteps = (appState.history && appState.history.length) || 0;
     }
-    // Replay history if cardStats was empty
     if (Object.keys(appState.cardStats).length === 0 && Array.isArray(appState.history) && appState.history.length > 0) {
       appState.history.forEach((h, idx) => {
         if (!h || !h.qid) return;
@@ -78,7 +105,6 @@ const SrsEngine = {
         }
       });
     }
-    // Sync masteredIds keys
     Object.keys(appState.masteredIds || {}).forEach(qid => {
       const st = this.ensureStat(qid);
       if (appState.masteredIds[qid] === true && st.box < 2) {
@@ -91,6 +117,7 @@ const SrsEngine = {
         st.lapses = Math.max(st.lapses, 1);
       }
     });
+    this.syncActiveMistakeSet();
   },
 
   randomInt(min, max) {
@@ -102,43 +129,129 @@ const SrsEngine = {
     return Math.max(6, baseInterval + this.randomInt(-spread, spread));
   },
 
-  getCooldownSteps() {
-    const base = parseInt(appState.retryInterval, 10) || 25;
-    return Math.max(12, Math.floor(base * 0.75));
+  getTau() {
+    return Math.max(12, parseInt(appState.retryInterval, 10) || 25);
+  },
+
+  // Pure rational quadratic Hill readiness c_q = ds^2 / (ds^2 + tau^2) in [0, 1)
+  computeStepReadiness(qid, stepNow = null, tau = null) {
+    const st = appState.cardStats && appState.cardStats[qid];
+    if (!st || !st.lastSeenStep) return 1.0; // Never seen in current step epoch -> fully ready
+    const sNow = stepNow !== null ? stepNow : (appState.totalSteps || 0);
+    const tScale = tau !== null ? tau : this.getTau();
+    const ds = Math.max(0, sNow - st.lastSeenStep);
+    const ds2 = ds * ds;
+    return ds2 / (ds2 + tScale * tScale);
+  },
+
+  // Pure rational anti-deja-vu roulette weight W(q) using only + - * /
+  computeMistakeWeight(qid, stepNow = null, nowMs = null, tau = null) {
+    const st = appState.cardStats && appState.cardStats[qid];
+    const sNow = stepNow !== null ? stepNow : (appState.totalSteps || 0);
+    const nMs = nowMs !== null ? nowMs : Date.now();
+    const tScale = tau !== null ? tau : this.getTau();
+
+    const ds = (st && st.lastSeenStep) ? Math.max(0, sNow - st.lastSeenStep) : (tScale * 2);
+    const ds2 = ds * ds;
+    const cq = ds2 / (ds2 + tScale * tScale); // Step cooldown factor in [0, 1)
+
+    const dtMin = (st && st.lastReviewedAt) ? Math.max(0, (nMs - st.lastReviewedAt) / 60000) : 30;
+    const tq = (1.2 + dtMin) / (8.0 + dtMin);  // Time cooldown factor in [0.15, 1)
+
+    const ageBoost = 1.0 + (3.0 * ds) / (ds + 2.0 * tScale); // Bounded in [1, 4)
+    const lapses = (st && st.lapses) ? st.lapses : 1;
+    const box = (st && typeof st.box === 'number') ? st.box : 0;
+    const urgencyBoost = (1.0 + 0.35 * lapses) * (1.3 - 0.3 * box);
+
+    return cq * tq * ageBoost * urgencyBoost;
   },
 
   isRecentlySeen(qid, customMinSteps = null, minMinutes = 8) {
-    const st = appState.cardStats && appState.cardStats[qid];
-    if (!st || !st.lastSeenStep) return false;
-    const stepNow = appState.totalSteps || 0;
-    const minSteps = customMinSteps !== null ? customMinSteps : this.getCooldownSteps();
-    const stepsAgo = stepNow - st.lastSeenStep;
-    const minsAgo = st.lastReviewedAt ? ((Date.now() - st.lastReviewedAt) / 60000) : 999;
-    return (stepsAgo >= 0 && stepsAgo < minSteps) || (minsAgo >= 0 && minsAgo < minMinutes);
+    return this.computeStepReadiness(qid) < 0.36; // Equivalent to ds < 0.75 * tau
   },
 
-  pickHistoricalMistakeForReview(excludeQid) {
-    if (!Array.isArray(allQuestions) || allQuestions.length === 0) return null;
-    const upcomingIds = new Set(
-      (activeQueue || []).slice(currentIndex, currentIndex + 22).map(item => item && item.id)
-    );
-    upcomingIds.add(excludeQid);
+  // Continuous rational hazard P_review(s) = s^2 / (s^2 + mu^2) in O(M) time
+  computeReviewProbability(s = null, candidateIds = null, seenCountOverride = null, unseenCountOverride = null) {
+    const streak = s !== null ? s : this.consecutiveUnseenStreak;
+    if (streak <= 0) return 0.0;
 
-    const candidates = [];
-    for (let i = 0; i < allQuestions.length; i++) {
-      const q = allQuestions[i];
-      if (!q || upcomingIds.has(q.id)) continue;
-      if (appState.domainFilter && q.domain !== appState.domainFilter) continue;
-      const st = appState.cardStats && appState.cardStats[q.id];
-      const isMistake = (appState.masteredIds[q.id] === false) || (st && (st.box === 0 || st.box === 1));
-      if (!isMistake) continue;
-      if (!this.isRecentlySeen(q.id)) {
-        candidates.push(q);
+    const stepNow = appState.totalSteps || 0;
+    const tau = this.getTau();
+    const iterSet = candidateIds || this.activeMistakeIds;
+
+    let mEff = 0.0;
+    iterSet.forEach(qid => {
+      if (appState.domainFilter && questionById[qid] && questionById[qid].domain !== appState.domainFilter) return;
+      mEff += this.computeStepReadiness(qid, stepNow, tau);
+    });
+
+    if (mEff <= 0.01) return 0.0;
+
+    const totalQ = (allQuestions && allQuestions.length) ? allQuestions.length : 1396;
+    const nSeen = seenCountOverride !== null
+      ? seenCountOverride
+      : Math.max(1, Object.keys(appState.masteredIds || {}).length);
+    const nUnseen = unseenCountOverride !== null
+      ? unseenCountOverride
+      : Math.max(0, totalQ - nSeen);
+
+    const rSeen = mEff / Math.max(25, nSeen);
+    const rRem = mEff / (mEff + Math.max(1, nUnseen));
+    const x = 3.0 * rSeen + 2.2 * rRem + 0.03 * mEff;
+
+    // Rational saturation S(x) = x / (1 + x) and Pool factor M_eff^2 / (M_eff^2 + 36)
+    const sx = x / (1.0 + x);
+    const mEff2 = mEff * mEff;
+    const poolFactor = mEff2 / (mEff2 + 36.0);
+
+    const pBase = (0.06 + 0.42 * sx) * poolFactor;
+    if (pBase <= 0.001) return 0.0;
+
+    const mu = (1.0 - pBase) / pBase;
+    const s2 = streak * streak;
+    return s2 / (s2 + mu * mu);
+  },
+
+  // O(M) Weighted Roulette Selection
+  weightedDrawMistake(excludeIdsSet = null, candidateList = null, stepNow = null, nowMs = null, tau = null) {
+    const sNow = stepNow !== null ? stepNow : (appState.totalSteps || 0);
+    const nMs = nowMs !== null ? nowMs : Date.now();
+    const tScale = tau !== null ? tau : this.getTau();
+
+    const pool = [];
+    let totalWeight = 0.0;
+
+    if (Array.isArray(candidateList)) {
+      for (let i = 0; i < candidateList.length; i++) {
+        const q = candidateList[i];
+        if (!q || (excludeIdsSet && excludeIdsSet.has(q.id))) continue;
+        const w = this.computeMistakeWeight(q.id, sNow, nMs, tScale);
+        if (w > 0) {
+          pool.push({ q, w });
+          totalWeight += w;
+        }
       }
+    } else {
+      this.activeMistakeIds.forEach(qid => {
+        if (excludeIdsSet && excludeIdsSet.has(qid)) return;
+        const q = questionById[qid];
+        if (!q) return;
+        if (appState.domainFilter && q.domain !== appState.domainFilter) return;
+        const w = this.computeMistakeWeight(qid, sNow, nMs, tScale);
+        if (w > 0) {
+          pool.push({ q, w });
+          totalWeight += w;
+        }
+      });
     }
-    if (candidates.length === 0) return null;
-    const shuffled = shuffle(candidates);
-    return shuffled[0];
+
+    if (pool.length === 0) return null;
+    let r = Math.random() * totalWeight;
+    for (let i = 0; i < pool.length; i++) {
+      r -= pool[i].w;
+      if (r <= 0) return pool[i].q;
+    }
+    return pool[pool.length - 1].q;
   },
 
   recordOutcome(question, isCorrect, isIdk) {
@@ -149,7 +262,13 @@ const SrsEngine = {
     st.lastSeenStep = appState.totalSteps;
     st.lastReviewedAt = Date.now();
 
-    const baseInterval = Math.max(12, parseInt(appState.retryInterval, 10) || 25);
+    if (question.isRetry) {
+      this.consecutiveUnseenStreak = 0;
+    } else {
+      this.consecutiveUnseenStreak++;
+    }
+
+    const baseInterval = this.getTau();
 
     if (!isCorrect || isIdk) {
       st.everWrong = true;
@@ -157,21 +276,14 @@ const SrsEngine = {
       st.streak = 0;
       st.box = 0;
       appState.masteredIds[qid] = false;
+      this.activeMistakeIds.add(qid);
 
-      // Push the just-missed card far enough ahead (with ±35% random fuzz) to prevent short-term déjà vu
       const rawCooldown = st.lapses >= 3 ? Math.max(14, Math.floor(baseInterval * 0.8)) : baseInterval;
       const stepInterval = this.applyFuzz(rawCooldown, 0.35);
       st.nextDueStep = appState.totalSteps + stepInterval;
       this.scheduleInActiveQueue(question, stepInterval, 1);
 
-      // Also pull a random OLDER mistake (not seen recently) into a medium randomized slot if available
-      const olderMistake = this.pickHistoricalMistakeForReview(qid);
-      if (olderMistake) {
-        const olderSt = this.ensureStat(olderMistake.id);
-        const olderStage = olderSt.box === 1 ? 2 : 1;
-        const olderGap = this.randomInt(7, 15);
-        this.scheduleInActiveQueue(olderMistake, olderGap, olderStage, true);
-      }
+      this.maybeInjectProbabilisticReview(qid);
 
       return {
         status: 'reinforce',
@@ -184,20 +296,22 @@ const SrsEngine = {
     // Correct answer!
     st.streak++;
     if (!st.everWrong) {
-      // First-sight correct -> Box 3 (Mastered immediately)
       st.box = 3;
       appState.masteredIds[qid] = true;
+      this.activeMistakeIds.delete(qid);
       st.nextDueStep = appState.totalSteps + this.applyFuzz(240, 0.25);
+      this.maybeInjectProbabilisticReview(qid);
       return { status: 'mastered_first', box: 3, interval: 240 };
     }
 
     if (st.streak === 1) {
-      // Missed previously, passed Stage 1 -> Box 1 (Consolidating 1/2) with stretched fuzzed spacing
       st.box = 1;
       appState.masteredIds[qid] = false;
+      this.activeMistakeIds.add(qid);
       const consolidationInterval = this.applyFuzz(Math.round(baseInterval * 2.4) + 10, 0.35);
       st.nextDueStep = appState.totalSteps + consolidationInterval;
       this.scheduleInActiveQueue(question, consolidationInterval, 2);
+      this.maybeInjectProbabilisticReview(qid);
       return {
         status: 'consolidating',
         box: 1,
@@ -209,8 +323,10 @@ const SrsEngine = {
     // Passed Stage 2+ consecutive review -> Graduated to Mastered (Box 2 / 3)!
     st.box = st.streak >= 3 ? 3 : 2;
     appState.masteredIds[qid] = true;
+    this.activeMistakeIds.delete(qid);
     const longInterval = this.applyFuzz(st.streak >= 3 ? 320 : 140, 0.25);
     st.nextDueStep = appState.totalSteps + longInterval;
+    this.maybeInjectProbabilisticReview(qid);
     return {
       status: 'graduated',
       box: st.box,
@@ -219,8 +335,35 @@ const SrsEngine = {
     };
   },
 
-  scheduleInActiveQueue(question, interval, stage, isOlderRotation = false) {
-    // Remove any existing future retry copy of the same question beyond currentIndex to avoid duplicates
+  maybeInjectProbabilisticReview(justAnsweredQid) {
+    if (!activeQueue || activeQueue.length === 0) return;
+    const nextCard = activeQueue[currentIndex + 1];
+    if (nextCard && nextCard.isRetry) return; // Next card is already a review card
+
+    const pRev = this.computeReviewProbability(this.consecutiveUnseenStreak);
+    if (pRev <= 0 || Math.random() >= pRev) return;
+
+    const excludeSet = new Set([justAnsweredQid]);
+    for (let i = Math.max(0, currentIndex - 3); i <= Math.min(activeQueue.length - 1, currentIndex + 5); i++) {
+      if (activeQueue[i]) excludeSet.add(activeQueue[i].id);
+    }
+
+    const picked = this.weightedDrawMistake(excludeSet);
+    if (!picked) return;
+
+    const st = this.ensureStat(picked.id);
+    const stage = st.box === 1 ? 2 : 1;
+    // Remove any duplicate retry copy further ahead before inserting at currentIndex + 1
+    for (let i = activeQueue.length - 1; i > currentIndex + 1; i--) {
+      if (activeQueue[i].id === picked.id && activeQueue[i].isRetry) {
+        activeQueue.splice(i, 1);
+      }
+    }
+    activeQueue.splice(currentIndex + 1, 0, { ...picked, isRetry: true, retryStage: stage });
+    this.consecutiveUnseenStreak = 0;
+  },
+
+  scheduleInActiveQueue(question, interval, stage, isSilent = false) {
     for (let i = activeQueue.length - 1; i > currentIndex; i--) {
       if (activeQueue[i].id === question.id && activeQueue[i].isRetry) {
         activeQueue.splice(i, 1);
@@ -230,7 +373,7 @@ const SrsEngine = {
     const retryCard = { ...question, isRetry: true, retryStage: stage };
     activeQueue.splice(insertIndex, 0, retryCard);
 
-    if (!isOlderRotation) {
+    if (!isSilent) {
       const banner = document.getElementById('queueBanner');
       if (banner) {
         banner.classList.add('active');
@@ -243,7 +386,7 @@ const SrsEngine = {
 };
 
 // =========================================================================
-// 2. Smart Weighted Deck Scheduler & Session Persistence (DeckScheduler)
+// 2. Continuous Probabilistic Deck Scheduler (DeckScheduler)
 // =========================================================================
 const DeckScheduler = {
   getWeakTopicsSet() {
@@ -258,11 +401,13 @@ const DeckScheduler = {
   },
 
   buildSmartQueue(pool) {
+    SrsEngine.syncActiveMistakeSet();
     const weakTopics = this.getWeakTopicsSet();
     const stepNow = appState.totalSteps || 0;
+    const nowMs = Date.now();
+    const tau = SrsEngine.getTau();
 
-    const olderDue = [];
-    const recentDue = [];
+    const mistakePool = [];
     const weakUnseen = [];
     const normalUnseen = [];
     const masteredPool = [];
@@ -273,24 +418,17 @@ const DeckScheduler = {
       const isFailedOrConsolidating = (appState.masteredIds[q.id] === false) || (st && (st.box === 0 || st.box === 1));
 
       if (isFailedOrConsolidating) {
-        const retryCard = {
+        mistakePool.push({
           ...q,
           isRetry: true,
           retryStage: (st && st.box === 1) ? 2 : 1,
-          _lastSeenStep: (st && st.lastSeenStep) ? st.lastSeenStep : 0,
-          _lastReviewedAt: (st && st.lastReviewedAt) ? st.lastReviewedAt : 0
-        };
-        if (SrsEngine.isRecentlySeen(q.id)) {
-          recentDue.push(retryCard);
-        } else {
-          olderDue.push(retryCard);
-        }
+          _weight: SrsEngine.computeMistakeWeight(q.id, stepNow, nowMs, tau)
+        });
       } else if (isMastered) {
         if (!appState.hideMastered) {
           masteredPool.push(q);
         }
       } else {
-        // Unseen card
         if (weakTopics.has(q.topic)) {
           weakUnseen.push(q);
         } else {
@@ -299,17 +437,35 @@ const DeckScheduler = {
       }
     });
 
-    // 1. Randomly shuffle older historical mistakes so review order is never rigid or predictable
-    const shufOlderDue = shuffle(olderDue);
-    // 2. Sort recently seen mistakes from least-recently-seen to most-recently-seen
-    //    so a card missed 1 minute ago is always pushed to the very end
-    recentDue.sort((a, b) => (a._lastSeenStep - b._lastSeenStep) || (a._lastReviewedAt - b._lastReviewedAt));
+    // Order mistakePool by weighted roulette without replacement (highest anti-deja-vu weight favored stochastically)
+    const orderedMistakes = [];
+    const remainingMistakes = mistakePool.slice();
+    while (remainingMistakes.length > 0) {
+      let totalW = 0.0;
+      for (let i = 0; i < remainingMistakes.length; i++) {
+        totalW += remainingMistakes[i]._weight;
+      }
+      let pickedIdx = 0;
+      if (totalW > 0) {
+        let r = Math.random() * totalW;
+        for (let i = 0; i < remainingMistakes.length; i++) {
+          r -= remainingMistakes[i]._weight;
+          if (r <= 0) {
+            pickedIdx = i;
+            break;
+          }
+        }
+      } else {
+        pickedIdx = Math.floor(Math.random() * remainingMistakes.length);
+      }
+      orderedMistakes.push(remainingMistakes[pickedIdx]);
+      remainingMistakes.splice(pickedIdx, 1);
+    }
 
     const shufWeakUnseen = shuffle(weakUnseen).map(q => ({ ...q, isRetry: false }));
     const shufNormalUnseen = shuffle(normalUnseen).map(q => ({ ...q, isRetry: false }));
     const shufMastered = shuffle(masteredPool).map(q => ({ ...q, isRetry: false }));
 
-    // Combine unseen with randomized weak-topic boost (1 weak-topic card every 2~4 normal unseen cards)
     const unseenCombined = [];
     let wi = 0, ni = 0;
     while (wi < shufWeakUnseen.length || ni < shufNormalUnseen.length) {
@@ -320,57 +476,69 @@ const DeckScheduler = {
       }
     }
 
-    // Pure Mistake Review Mode (e.g. Wrong & Weak Pool where unseenCombined is empty):
-    // Return randomized older mistakes first, and keep recently missed cards at the very back!
-    if (unseenCombined.length === 0 && (shufOlderDue.length > 0 || recentDue.length > 0)) {
-      return shufOlderDue.concat(recentDue);
+    // Pure Mistake Review Mode (e.g. Wrong & Weak Pool): return roulette-ordered mistakes directly
+    if (unseenCombined.length === 0 && orderedMistakes.length > 0) {
+      return orderedMistakes;
     }
 
-    // Smart Adaptive Mode: Dynamic randomized spacing between mistake reviews (no fixed frequency!)
+    // Continuous Probabilistic Interleaving using P_review(s) = s^2 / (s^2 + mu^2)
     const result = [];
-    let di = 0, ri = 0, ui = 0, mi = 0;
+    let di = 0, ui = 0, mi = 0;
+    let s = 0; // consecutive unseen streak
+    const totalSeenCount = Math.max(1, masteredPool.length + mistakePool.length);
     const maxSprinkledMastered = Math.max(5, Math.floor(unseenCombined.length * 0.05));
+    let nextMasteredAt = SrsEngine.randomInt(16, 28);
 
-    // Warm-up with 3~7 unseen cards at the start of the queue before the first historical mistake
-    const initialWarmup = SrsEngine.randomInt(3, 7);
-    for (let k = 0; k < initialWarmup && ui < unseenCombined.length; k++) {
-      result.push(unseenCombined[ui++]);
+    // Precompute initial effective cooled-down mistake mass M_eff
+    let mEff = 0.0;
+    for (let i = 0; i < orderedMistakes.length; i++) {
+      mEff += SrsEngine.computeStepReadiness(orderedMistakes[i].id, stepNow, tau);
     }
 
-    let nextMasteredAt = result.length + SrsEngine.randomInt(16, 28);
+    while (ui < unseenCombined.length || di < orderedMistakes.length) {
+      const remainingUnseen = unseenCombined.length - ui;
+      const remainingDue = orderedMistakes.length - di;
 
-    while (di < shufOlderDue.length || ui < unseenCombined.length) {
-      if (di < shufOlderDue.length) {
-        result.push(shufOlderDue[di++]);
+      if (remainingUnseen === 0) {
+        while (di < orderedMistakes.length) {
+          result.push(orderedMistakes[di++]);
+        }
+        break;
       }
-      // Dynamic stretched gap: 5 to 12 unseen cards between historical mistake reviews
-      const unseenGap = SrsEngine.randomInt(5, 12);
-      for (let k = 0; k < unseenGap && ui < unseenCombined.length; k++) {
+
+      let drawReview = false;
+      if (remainingDue > 0 && s > 0) {
+        const effMass = Math.max(0.2, mEff * (remainingDue / Math.max(1, orderedMistakes.length)));
+        const rSeen = effMass / Math.max(25, totalSeenCount + ui);
+        const rRem = effMass / (effMass + remainingUnseen);
+        const x = 3.0 * rSeen + 2.2 * rRem + 0.03 * effMass;
+        const sx = x / (1.0 + x);
+        const eff2 = effMass * effMass;
+        const poolFactor = eff2 / (eff2 + 36.0);
+        const pBase = Math.max(0.03, (0.06 + 0.42 * sx) * poolFactor);
+        const mu = (1.0 - pBase) / pBase;
+        const s2 = s * s;
+        const pRev = s2 / (s2 + mu * mu);
+        drawReview = (Math.random() < pRev);
+      }
+
+      if (drawReview) {
+        result.push(orderedMistakes[di++]);
+        s = 0;
+      } else {
         result.push(unseenCombined[ui++]);
+        s++;
         if (result.length >= nextMasteredAt && mi < Math.min(shufMastered.length, maxSprinkledMastered)) {
           result.push(shufMastered[mi++]);
           nextMasteredAt = result.length + SrsEngine.randomInt(16, 28);
         }
       }
-      if (ui >= unseenCombined.length && di < shufOlderDue.length) {
-        // Unseen cards exhausted; append remaining older due cards
-        while (di < shufOlderDue.length) {
-          result.push(shufOlderDue[di++]);
-        }
-      }
     }
 
-    // Place recently-missed cooldown cards far down the queue (at the tail)
-    while (ri < recentDue.length) {
-      result.push(recentDue[ri++]);
-    }
-
-    // Append remaining mastered cards at the end if unseen/due are exhausted
     while (mi < shufMastered.length) {
       result.push(shufMastered[mi++]);
     }
 
-    // Fallback if hideMastered hid everything and no unseen/due left
     if (result.length === 0 && pool.length > 0) {
       return shuffle(pool).map(q => ({ ...q, isRetry: false }));
     }
@@ -417,7 +585,6 @@ const DeckScheduler = {
         }
       });
       if (restored.length === 0) return false;
-      // Append remaining smart cards after the snapshot window so the queue never runs dry prematurely
       const inSnap = new Set(restored.map(q => q.id));
       const tailPool = allQuestions.filter(q => !inSnap.has(q.id));
       const tailQueue = this.buildSmartQueue(tailPool);
@@ -434,6 +601,374 @@ const DeckScheduler = {
   }
 };
 
+// =========================================================================
+// 3. FBReader-Style Google Account & Google Drive Cloud Sync (CloudSyncEngine)
+// =========================================================================
+const CloudSyncEngine = {
+  autoPushTimer: null,
+  webFileHandle: null,
+  isSyncInFlight: false,
+  pendingPushAfterFlight: false,
+
+  getSyncState() {
+    if (window.AndroidBridge && typeof window.AndroidBridge.getGoogleSyncState === 'function') {
+      try {
+        return JSON.parse(window.AndroidBridge.getGoogleSyncState());
+      } catch (e) {
+        return { signedIn: false };
+      }
+    }
+    try {
+      const raw = localStorage.getItem('ccna_web_cloud_sync_meta');
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return { signedIn: false };
+  },
+
+  formatSyncTime(epochMs) {
+    if (!epochMs) return 'Never';
+    const diffSec = Math.max(0, Math.floor((Date.now() - epochMs) / 1000));
+    if (diffSec < 15) return 'Just now';
+    if (diffSec < 60) return `${diffSec}s ago`;
+    if (diffSec < 3600) return `${Math.floor(diffSec / 60)}m ago`;
+    return new Date(epochMs).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  },
+
+  syncSettingsCardUI(statusOverride = null) {
+    const state = this.getSyncState();
+    const badge = document.getElementById('cloudSyncBadge');
+    const signedOutBox = document.getElementById('cloudSignedOutActions');
+    const signedInBox = document.getElementById('cloudSignedInActions');
+    const emailEl = document.getElementById('cloudAccountEmail');
+    const timeEl = document.getElementById('cloudLastSyncTime');
+
+    if (!badge || !signedOutBox || !signedInBox) return;
+
+    if (state && state.signedIn) {
+      signedOutBox.style.display = 'none';
+      signedInBox.style.display = 'flex';
+      const provider = state.providerType || 'Google Drive';
+      badge.textContent = statusOverride || `✓ ${provider}`;
+      badge.style.background = 'rgba(16, 185, 129, 0.15)';
+      badge.style.color = 'var(--success)';
+      if (emailEl) emailEl.textContent = `👤 ${state.email || 'Google Drive Account'}`;
+      if (timeEl) timeEl.textContent = `Synced: ${this.formatSyncTime(state.lastSyncTime)}`;
+    } else {
+      signedOutBox.style.display = 'flex';
+      signedInBox.style.display = 'none';
+      badge.textContent = 'Optional • Offline';
+      badge.style.background = 'rgba(148, 163, 184, 0.15)';
+      badge.style.color = 'var(--text-muted)';
+    }
+  },
+
+  // CRDT Monotonic Two-Way Merge (prevents stale overwrites and zombie bookmarks/resets)
+  mergeProgressStates(local, remote) {
+    if (!remote || typeof remote !== 'object') return local;
+    const localReset = local.resetEpoch || 0;
+    const remoteReset = remote.resetEpoch || 0;
+    const effectiveResetEpoch = Math.max(localReset, remoteReset);
+
+    const filterByReset = (stateObj, stateReset) => {
+      if (stateReset >= effectiveResetEpoch) return stateObj;
+      // This side was superseded by a newer full reset on the other device
+      const cleanedStats = {};
+      Object.keys(stateObj.cardStats || {}).forEach(qid => {
+        const st = stateObj.cardStats[qid];
+        if (st && (st.lastReviewedAt || 0) > effectiveResetEpoch) {
+          cleanedStats[qid] = st;
+        }
+      });
+      const cleanedBm = {};
+      const cleanedBmTs = {};
+      Object.keys(stateObj.bookmarkUpdatedAt || {}).forEach(qid => {
+        const ts = stateObj.bookmarkUpdatedAt[qid] || 0;
+        if (ts > effectiveResetEpoch) {
+          cleanedBmTs[qid] = ts;
+          if (stateObj.bookmarkedIds && stateObj.bookmarkedIds[qid]) {
+            cleanedBm[qid] = true;
+          }
+        }
+      });
+      const cleanedHist = (stateObj.history || []).filter(h => h && (h.time || 0) > effectiveResetEpoch);
+      return {
+        ...stateObj,
+        cardStats: cleanedStats,
+        masteredIds: {},
+        bookmarkedIds: cleanedBm,
+        bookmarkUpdatedAt: cleanedBmTs,
+        history: cleanedHist,
+        totalSteps: cleanedHist.length
+      };
+    };
+
+    const L = filterByReset(local, localReset);
+    const R = filterByReset(remote, remoteReset);
+
+    const mergedStats = {};
+    const mergedMastered = {};
+    const allStatIds = new Set([
+      ...Object.keys(L.cardStats || {}),
+      ...Object.keys(R.cardStats || {}),
+      ...Object.keys(L.masteredIds || {}),
+      ...Object.keys(R.masteredIds || {})
+    ]);
+
+    allStatIds.forEach(qid => {
+      const ls = (L.cardStats && L.cardStats[qid]) || null;
+      const rs = (R.cardStats && R.cardStats[qid]) || null;
+      if (ls && !rs) {
+        mergedStats[qid] = { ...ls };
+      } else if (!ls && rs) {
+        mergedStats[qid] = { ...rs };
+      } else if (ls && rs) {
+        const lTime = ls.lastReviewedAt || 0;
+        const rTime = rs.lastReviewedAt || 0;
+        const newer = lTime >= rTime ? ls : rs;
+        mergedStats[qid] = {
+          ...newer,
+          attempts: Math.max(ls.attempts || 0, rs.attempts || 0),
+          lapses: Math.max(ls.lapses || 0, rs.lapses || 0),
+          everWrong: Boolean(ls.everWrong || rs.everWrong),
+          lastReviewedAt: Math.max(lTime, rTime)
+        };
+      }
+      const ms = mergedStats[qid];
+      if (ms) {
+        if (ms.box >= 2) {
+          mergedMastered[qid] = true;
+        } else if (ms.attempts > 0 || ms.everWrong || L.masteredIds?.[qid] === false || R.masteredIds?.[qid] === false) {
+          mergedMastered[qid] = false;
+        }
+      } else if (L.masteredIds?.[qid] !== undefined) {
+        mergedMastered[qid] = L.masteredIds[qid];
+      } else if (R.masteredIds?.[qid] !== undefined) {
+        mergedMastered[qid] = R.masteredIds[qid];
+      }
+    });
+
+    // Merge bookmarks using tombstone timestamps (bookmarkUpdatedAt)
+    const mergedBookmarks = {};
+    const mergedBookmarkTs = {};
+    const allBmIds = new Set([
+      ...Object.keys(L.bookmarkedIds || {}),
+      ...Object.keys(R.bookmarkedIds || {}),
+      ...Object.keys(L.bookmarkUpdatedAt || {}),
+      ...Object.keys(R.bookmarkUpdatedAt || {})
+    ]);
+    allBmIds.forEach(qid => {
+      const lTs = (L.bookmarkUpdatedAt && L.bookmarkUpdatedAt[qid]) || (L.bookmarkedIds && L.bookmarkedIds[qid] ? 1 : 0);
+      const rTs = (R.bookmarkUpdatedAt && R.bookmarkUpdatedAt[qid]) || (R.bookmarkedIds && R.bookmarkedIds[qid] ? 1 : 0);
+      if (lTs >= rTs) {
+        mergedBookmarkTs[qid] = lTs;
+        if (L.bookmarkedIds && L.bookmarkedIds[qid]) mergedBookmarks[qid] = true;
+      } else {
+        mergedBookmarkTs[qid] = rTs;
+        if (R.bookmarkedIds && R.bookmarkedIds[qid]) mergedBookmarks[qid] = true;
+      }
+    });
+
+    // Merge history chronologically without duplicates
+    const histMap = new Map();
+    (L.history || []).concat(R.history || []).forEach(h => {
+      if (!h || !h.qid) return;
+      const key = `${h.qid}_${h.time || 0}`;
+      if (!histMap.has(key)) histMap.set(key, h);
+    });
+    const mergedHistory = Array.from(histMap.values())
+      .sort((a, b) => (a.time || 0) - (b.time || 0))
+      .slice(-1000);
+
+    return {
+      ...local,
+      masteredIds: mergedMastered,
+      bookmarkedIds: mergedBookmarks,
+      bookmarkUpdatedAt: mergedBookmarkTs,
+      cardStats: mergedStats,
+      history: mergedHistory,
+      totalSteps: Math.max(L.totalSteps || 0, R.totalSteps || 0, mergedHistory.length),
+      resetEpoch: effectiveResetEpoch,
+      updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0, Date.now())
+    };
+  },
+
+  async signIn(linkExisting = false) {
+    if (window.AndroidBridge && typeof window.AndroidBridge.signInWithGoogle === 'function') {
+      window.AndroidBridge.signInWithGoogle(Boolean(linkExisting));
+      return;
+    }
+    // Desktop Web File System Access API fallback (Google Drive for Desktop / Cloud folder)
+    try {
+      if (linkExisting && window.showOpenFilePicker) {
+        const [handle] = await window.showOpenFilePicker({
+          types: [{ description: 'CCNA Sync JSON', accept: { 'application/json': ['.json'] } }]
+        });
+        this.webFileHandle = handle;
+      } else if (window.showSaveFilePicker) {
+        this.webFileHandle = await window.showSaveFilePicker({
+          suggestedName: 'ccna_study_progress.json',
+          types: [{ description: 'CCNA Sync JSON', accept: { 'application/json': ['.json'] } }]
+        });
+      } else {
+        showToast('💡 请在 Android 客户端或支持 File System API 的浏览器中使用 Google Drive 自动同步');
+        return;
+      }
+      const meta = {
+        signedIn: true,
+        email: this.webFileHandle.name || 'Google Drive Sync File',
+        providerType: 'Google Drive File',
+        lastSyncTime: Date.now()
+      };
+      localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+      this.syncSettingsCardUI();
+      await this.syncNow();
+    } catch (e) {
+      if (e && e.name !== 'AbortError') {
+        showToast('取消或无法绑定同步文件: ' + e.message);
+      }
+    }
+  },
+
+  rebindFile() {
+    if (window.AndroidBridge && typeof window.AndroidBridge.rebindDriveSyncFile === 'function') {
+      window.AndroidBridge.rebindDriveSyncFile(true);
+      return;
+    }
+    this.signIn(true);
+  },
+
+  signOut() {
+    if (window.AndroidBridge && typeof window.AndroidBridge.signOutGoogle === 'function') {
+      window.AndroidBridge.signOutGoogle();
+    }
+    this.webFileHandle = null;
+    localStorage.removeItem('ccna_web_cloud_sync_meta');
+    this.syncSettingsCardUI();
+  },
+
+  scheduleAutoPush() {
+    const state = this.getSyncState();
+    if (!state || !state.signedIn) return;
+    if (this.autoPushTimer) clearTimeout(this.autoPushTimer);
+    this.autoPushTimer = setTimeout(() => {
+      this.pushToCloud();
+    }, 2200);
+  },
+
+  pushToCloud() {
+    const state = this.getSyncState();
+    if (!state || !state.signedIn) return;
+    const payload = JSON.stringify(appState);
+    if (window.AndroidBridge && typeof window.AndroidBridge.cloudPushProgress === 'function') {
+      this.syncSettingsCardUI('⟳ Syncing...');
+      window.AndroidBridge.cloudPushProgress(payload);
+      return;
+    }
+    if (this.webFileHandle) {
+      this.webPush(payload);
+    }
+  },
+
+  async webPush(payload) {
+    try {
+      const writable = await this.webFileHandle.createWritable();
+      await writable.write(payload);
+      await writable.close();
+      const meta = this.getSyncState();
+      meta.lastSyncTime = Date.now();
+      localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+      this.syncSettingsCardUI();
+    } catch (e) {
+      console.warn('Web cloud push failed', e);
+    }
+  },
+
+  async syncNow() {
+    const state = this.getSyncState();
+    if (!state || !state.signedIn) return;
+    this.syncSettingsCardUI('⟳ Syncing...');
+    if (window.AndroidBridge && typeof window.AndroidBridge.cloudPullProgress === 'function') {
+      window.AndroidBridge.cloudPullProgress();
+      return;
+    }
+    if (this.webFileHandle) {
+      try {
+        const file = await this.webFileHandle.getFile();
+        const text = await file.text();
+        if (text && text.trim().startsWith('{')) {
+          const remote = JSON.parse(text);
+          appState = this.mergeProgressStates(appState, remote);
+          SrsEngine.syncActiveMistakeSet();
+          localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
+          updateHeaderStats();
+        }
+        await this.webPush(JSON.stringify(appState));
+        showToast('☁️ 已与 Google Drive 完成双向增量同步');
+      } catch (e) {
+        showToast('⚠️ 同步失败: ' + e.message);
+      }
+    }
+  },
+
+  onAppResume() {
+    const state = this.getSyncState();
+    if (state && state.signedIn && window.AndroidBridge && typeof window.AndroidBridge.cloudPullProgress === 'function') {
+      window.AndroidBridge.cloudPullProgress();
+    }
+  }
+};
+window.CloudSyncEngine = CloudSyncEngine;
+
+window.onGoogleDriveBound = function (jsonStr) {
+  try {
+    const info = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
+    CloudSyncEngine.syncSettingsCardUI('⟳ Syncing...');
+    if (info && info.isNewlyCreated) {
+      CloudSyncEngine.pushToCloud();
+      showToast(`☁️ 已绑定 ${info.email || 'Google Drive'} 并上传初始刷题进度`);
+    } else {
+      CloudSyncEngine.syncNow();
+    }
+  } catch (e) {
+    console.error('onGoogleDriveBound error', e);
+  }
+};
+
+window.onCloudPullCallback = function (jsonStr) {
+  try {
+    const res = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
+    if (res && res.ok) {
+      if (res.data && res.data.trim().startsWith('{')) {
+        const remote = JSON.parse(res.data);
+        appState = CloudSyncEngine.mergeProgressStates(appState, remote);
+        SrsEngine.syncActiveMistakeSet();
+        localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
+        updateHeaderStats();
+      }
+      // Push merged state back so cloud file also reflects any newer local progress
+      CloudSyncEngine.pushToCloud();
+    } else {
+      CloudSyncEngine.syncSettingsCardUI('⚠️ Offline');
+    }
+  } catch (e) {
+    console.error('onCloudPullCallback error', e);
+    CloudSyncEngine.syncSettingsCardUI('⚠️ Sync Error');
+  }
+};
+
+window.onCloudPushCallback = function (jsonStr) {
+  try {
+    const res = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
+    if (res && res.ok) {
+      CloudSyncEngine.syncSettingsCardUI();
+    } else {
+      CloudSyncEngine.syncSettingsCardUI('⚠️ Offline');
+    }
+  } catch (e) {
+    CloudSyncEngine.syncSettingsCardUI();
+  }
+};
+
 // Initialize
 window.addEventListener('DOMContentLoaded', async () => {
   loadStoredState();
@@ -446,6 +981,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
   renderCurrentCard();
   updateHeaderStats();
+  CloudSyncEngine.syncSettingsCardUI();
+  CloudSyncEngine.onAppResume();
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && CloudSyncEngine.autoPushTimer) {
+    clearTimeout(CloudSyncEngine.autoPushTimer);
+    CloudSyncEngine.autoPushTimer = null;
+    CloudSyncEngine.pushToCloud();
+  }
 });
 
 function loadStoredState() {
@@ -474,12 +1019,14 @@ function loadStoredState() {
 
 function saveState() {
   try {
+    appState.updatedAt = Date.now();
     // Keep max 1000 history items to bound storage while supporting 500-window diagnostics
     if (appState.history.length > 1000) {
       appState.history = appState.history.slice(-1000);
     }
     localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
     DeckScheduler.saveSessionSnapshot();
+    CloudSyncEngine.scheduleAutoPush();
   } catch (e) {
     console.error('Failed to save state to localStorage', e);
   }
@@ -1839,6 +2386,8 @@ function startTargetedDrill(topic) {
 function toggleBookmark() {
   if (!currentQuestion) return;
   const qid = currentQuestion.id;
+  if (!appState.bookmarkUpdatedAt) appState.bookmarkUpdatedAt = {};
+  appState.bookmarkUpdatedAt[qid] = Date.now();
   if (appState.bookmarkedIds[qid]) {
     delete appState.bookmarkedIds[qid];
     document.getElementById('bookmarkBtn').classList.remove('active');
@@ -1866,6 +2415,7 @@ function syncRetryPillsUI() {
 
 function openSettingsModal() {
   syncRetryPillsUI();
+  CloudSyncEngine.syncSettingsCardUI();
   const shufToggle = document.getElementById('shuffleOptionsToggle');
   if (shufToggle) {
     shufToggle.checked = (appState.shuffleOptions !== false);
@@ -2072,10 +2622,14 @@ function closeResetModal(e) {
 function confirmResetAllProgress() {
   appState.masteredIds = {};
   appState.bookmarkedIds = {};
+  appState.bookmarkUpdatedAt = {};
   appState.cardStats = {};
   appState.totalSteps = 0;
+  appState.resetEpoch = Date.now();
   appState.history = [];
   appState.weakDiagnosed = {};
+  SrsEngine.activeMistakeIds.clear();
+  SrsEngine.consecutiveUnseenStreak = 0;
   localStorage.removeItem('ccna_session_snapshot_v1');
   saveState();
   setupPracticeQueue(null);

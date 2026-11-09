@@ -212,12 +212,39 @@
             <button type="button" class="retry-pill" data-val="60" onclick="updateRetryInterval(60)">~60 Qs</button>
           </div>
         </div>
-        <hr style="border:0; border-top:1px solid var(--border-color);">
+        <hr style="border:0; border-top:1px solid var(--border-color); margin: 12px 0;">
+        <!-- FBReader-Style Optional Google Account & Google Drive Cloud Sync Card -->
+        <div id="cloudSyncCard" style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:10px; padding:12px; margin-bottom:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-weight:700; font-size:0.88rem; display:flex; align-items:center; gap:6px;">
+              <span>☁️ Google Drive Cloud Sync</span>
+            </span>
+            <span id="cloudSyncBadge" style="font-size:0.72rem; padding:2px 8px; border-radius:999px; background:rgba(148,163,184,0.15); color:var(--text-muted); font-weight:600;">Optional • Offline</span>
+          </div>
+          <div id="cloudSyncDesc" style="font-size:0.76rem; color:var(--text-muted); line-height:1.4; margin-bottom:10px;">
+            登录 Google 账号并绑定 Google Drive 云端硬盘同步文件后，刷题进度、错题与书签将自动双向增量合并备份。
+          </div>
+          <div id="cloudSignedOutActions" style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; flex:1 1 48%;" onclick="CloudSyncEngine.signIn(false)">☁️ 登录并新建云同步</button>
+            <button type="button" class="btn btn-primary" style="padding:8px 10px; font-size:0.8rem; flex:1 1 48%; background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border-color);" onclick="CloudSyncEngine.signIn(true)">📂 关联已有云端文件</button>
+          </div>
+          <div id="cloudSignedInActions" style="display:none; flex-direction:column; gap:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-color);">
+              <span id="cloudAccountEmail" style="font-weight:600; color:var(--text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">👤 Google Account</span>
+              <span id="cloudLastSyncTime" style="color:var(--text-muted); font-size:0.72rem;">Just now</span>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-primary" style="padding:7px 10px; font-size:0.78rem; flex:1 1 38%;" onclick="CloudSyncEngine.syncNow()">🔄 立即同步</button>
+              <button type="button" class="btn btn-primary" style="padding:7px 10px; font-size:0.78rem; flex:1 1 34%; background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border-color);" onclick="CloudSyncEngine.rebindFile()">📂 切换文件</button>
+              <button type="button" class="btn btn-primary" style="padding:7px 10px; font-size:0.78rem; flex:1 1 22%; background:var(--danger-light); color:var(--danger); border:1px solid var(--danger);" onclick="CloudSyncEngine.signOut()">退出</button>
+            </div>
+          </div>
+        </div>
         <button class="btn btn-primary" style="background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="exportProgress()">📁 Export to Downloads (JSON)</button>
         <button class="btn btn-primary" style="background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="triggerImportProgress()">📥 Import Records (JSON)</button>
         <input type="file" id="importFile" accept=".json,application/json,text/plain" style="display:none;" onchange="importProgress(event)">
         <button class="btn btn-primary" style="background:var(--danger-light); color:var(--danger); border:1px solid var(--danger);" onclick="openResetModal()">⚠️ Reset All Progress</button>
-        <div style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 12px;">CCNA Practice Cards v1.2.0 • IOS Lab Ready</div>
+        <div style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 12px;">CCNA Practice Cards v1.3.0 • IOS Lab &amp; Cloud Sync Ready</div>
       </div>
     </div>
   </div>
