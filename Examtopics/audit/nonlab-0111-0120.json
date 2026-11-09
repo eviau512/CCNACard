@@ -1,0 +1,175 @@
+{
+  "scope": "Q111–Q120",
+  "corrections": [
+    {
+      "id": 114,
+      "before_sha256": "3ce9ba1d2315022041e4c3d1558a8cd800a0eccc08abc6a5d1f02fde5a277f37",
+      "reason": "移除折叠核心仅适用于增长极低及大型网必须三层等绝对化说法。",
+      "updates": {
+        "prompt": "When is a collapsed-core campus architecture an appropriate design choice among these options?",
+        "explanation": "B 是所列选项中最合适的场景：在接入规模和扩展需求允许时，可把核心层与汇聚层功能合并，以减少独立层级和设备复杂度。折叠核心也可用于符合容量及可用性需求的中型园区，增长需求不必为零。\n\nA：VSS 不是必要条件，可使用独立设备或其他支持的冗余方案。C：大型、多个分布块互联的园区更可能受益于独立核心层，但是否必须三层取决于实际规模、容量和冗余要求。D：折叠核心合并的是核心与汇聚功能，并不要求接入层与汇聚层在同一设备。核心通常优先保证高速可靠转发，但不能据此断言任何核心设备绝不执行策略。"
+      }
+    },
+    {
+      "id": 115,
+      "before_sha256": "d5b431956537d3c4dec65258040de02fadf983a610cdbe49837437c01ba4f6e3",
+      "reason": "按原图计算包含额外路由器接口的容量并补充前提。",
+      "updates": {
+        "explanation": "B。图中 192.168.0.0/24 被拆为 /29：借用 5 位得到 32 个子网，每段 8 个地址，其中通常 6 个可分配主机地址。当前 1 个 VLAN 加 30 个新增 VLAN 共需 31 段，容量足够；当前段的三台 PC 与 SVI 共需 4 个地址，即使路由器也占用一个该段地址，仍在 6 个可用地址之内。192.168.0.1 是首个 /29 段的可用地址。\n\nA /30 每段仅 2 个可用地址，不足；C /24 不作切分；D /25 仅得到 2 段。题目默认每个新增 VLAN 的主机需求不超过每段可用容量，且交换机支持所需的三层接口；实际还须配置 VLAN、链路和路由。"
+      }
+    },
+    {
+      "id": 117,
+      "before_sha256": "85c2d42a37837d556424631c40282edaec651b5288ea3c6f9ab8a46088b1ae3a",
+      "reason": "按 Cisco 产品数据限定接口和光纤条件，纠正 ZX 与 IEEE 标准的绝对化。",
+      "updates": {
+        "prompt": "For the Cisco Gigabit Ethernet SFP modules described by these options, which distance comparison best distinguishes 1000BASE-LX/LH from 1000BASE-ZX on supported single-mode fiber?",
+        "explanation": "D。在 Cisco 所列模块和适用光纤条件下，LX/LH 常见支持单模光纤 10 km；ZX 常见标称约 70 km，某些型号/光纤条件可更远。实际可达距离取决于具体模块、光纤、连接器及光功率预算，短距离链路也可能需衰减器，不能仅凭距离断言链路一定可用。\n\nA 将 ZX 与多模调节跳线关联错误：Cisco 表中 ZX 面向所列单模光纤；LX/LH 对部分传统多模光纤则需要模式调节跳线。B 将 ZX 误称为多模双速模块；C 将距离大幅夸大或颠倒。ZX 的 Cisco 产品命名不应一概归为 IEEE 802.3z 标准接口。"
+      }
+    },
+    {
+      "id": 120,
+      "before_sha256": "a0074ca05337855afe4f066a5e52b24692f5d171faedf5cfe419986d34908e5a",
+      "reason": "RFC 4291 任播接口通常但不一定属于不同节点，修正选项A。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "An individual IPv6 unicast address identifies one interface, whereas an IPv6 anycast address is assigned to multiple interfaces (typically on different nodes)."
+          },
+          {
+            "label": "B",
+            "text": "IPv6 anycast never requires a node to recognize an address as anycast, but every unicast address must be specially declared as anycast."
+          },
+          {
+            "label": "C",
+            "text": "IPv6 unicast nodes must be explicitly configured to recognize the unicast address, but IPv6 anycast nodes require no special configuration."
+          },
+          {
+            "label": "D",
+            "text": "Unlike an IPv6 anycast address, an IPv6 unicast address is assigned to a group of interfaces on multiple nodes."
+          }
+        ],
+        "explanation": "A。IPv6 unicast 地址标识一个接口；anycast 将同一地址分配给多个接口（通常分属不同节点），由路由选择向其中一个接口转发。RFC 4291 中的“最近”是路由协议使用的距离度量，并非必然物理距离最近。\n\nAnycast 地址使用单播地址空间，无法只凭地址格式区分；标准要求被分配 anycast 地址的节点知晓其用途，平台和路由宣告仍需按部署配置。B 和 C 否认或颠倒该要求，D 颠倒了单播与任播的接口基数。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 111,
+      "question_sha256": "809ed01699b7acdf91f06a93bb671a2a7da38857b664e75e66db60afd5e9fd82",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "题干、各项和现有解析匹配；本轮保留。"
+    },
+    {
+      "id": 112,
+      "question_sha256": "cfb62c8417b28e5b53b97a34272151713e1a57fcc6439b8cbbe99593567d071e",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "题干、各项和现有解析匹配；本轮保留。"
+    },
+    {
+      "id": 113,
+      "question_sha256": "87e239f2622f55280917d61b38d3fd63d793323fa702bc8131842f512a5ab313",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "题干、各项和现有解析匹配；本轮保留。"
+    },
+    {
+      "id": 114,
+      "question_sha256": "3ce9ba1d2315022041e4c3d1558a8cd800a0eccc08abc6a5d1f02fde5a277f37",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "移除折叠核心仅适用于增长极低及大型网必须三层等绝对化说法。"
+    },
+    {
+      "id": 115,
+      "question_sha256": "d5b431956537d3c4dec65258040de02fadf983a610cdbe49837437c01ba4f6e3",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "Q115 directly viewed; blue device symbols require original colors",
+      "code_cli": "checked and line breaks retained",
+      "finding": "按原图计算包含额外路由器接口的容量并补充前提。"
+    },
+    {
+      "id": 116,
+      "question_sha256": "c9d3c682e71532703db3c1e435a9122b6c74a0ef9fcc5826140cd30a7129b85d",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "题干、各项和现有解析匹配；本轮保留。"
+    },
+    {
+      "id": 117,
+      "question_sha256": "85c2d42a37837d556424631c40282edaec651b5288ea3c6f9ab8a46088b1ae3a",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "按 Cisco 产品数据限定接口和光纤条件，纠正 ZX 与 IEEE 标准的绝对化。"
+    },
+    {
+      "id": 118,
+      "question_sha256": "309a64badc4232bdd98251ed68889d92f6c4c648c7c6eea8c4452fb85aa03584",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "题干、各项和现有解析匹配；本轮保留。"
+    },
+    {
+      "id": 119,
+      "question_sha256": "f89e403ca2449f00758416f1b36118b5ba7ba4e5dd16a36436861e7648048ff8",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "题干、各项和现有解析匹配；本轮保留。"
+    },
+    {
+      "id": 120,
+      "question_sha256": "a0074ca05337855afe4f066a5e52b24692f5d171faedf5cfe419986d34908e5a",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "none",
+      "finding": "RFC 4291 任播接口通常但不一定属于不同节点，修正选项A。"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/cloud-systems-management/catalyst-center/225714-understand-templates-on-catalyst-center.html",
+    "https://www.cisco.com/c/en/us/products/collateral/switches/nexus-7000-series-switches/data_sheet_c78-720322.html",
+    "https://www.rfc-editor.org/rfc/rfc4291.html"
+  ],
+  "limitations": "人工题图、命令和标准核对；无实际设备实验。"
+}

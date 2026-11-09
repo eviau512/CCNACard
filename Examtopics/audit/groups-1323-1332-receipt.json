@@ -1,0 +1,13 @@
+{
+  "manifest": "groups-1323-1332.json",
+  "applied_ids": [
+    1324,
+    1329
+  ],
+  "corrected_question_sha256": {
+    "1324": "696ca3f9850fdab1c9435219ae871cf55c809688540ff985772fd81634a481b9",
+    "1329": "6b075c4497a2390018bf8f04cdf0e0b71c36af41f9adfe6846ea66d51bb50589"
+  },
+  "source_sha256": "e636a29f8616b2a5ca1040f168e117cceae42d55f5f0a9b943929ab99f632eb7",
+  "app_bundle_sha256": "c4b5554a3e52917c583fccaf8ebadf90354247ee703164583a16f945543e8978"
+}

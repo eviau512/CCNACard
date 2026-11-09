@@ -1,0 +1,14 @@
+{
+  "scope": "Q1363–Q1372 independent review",
+  "corrections": [
+    {
+      "id": 1366,
+      "before_sha256": "c73534f5b3ab8c3dfc30c68d4f9641955259868fffdf8aa0a0844d5bd41ea30d",
+      "reason": "一般化路由场景中下一跳 IGP 代价亦可成为 BGP 选路准则；限定静态和 OSPF 候选，消除 A 选项歧义。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume R1 compares an eligible static route and the best eligible OSPF route for the same destination prefix 1.1.1.3/32. OSPF first selects among its own candidate paths. Which two values are used in these comparisons? (Choose two.)",
+        "explanation": "C、E。题设中，OSPF 比较同一前缀的候选路径时使用 OSPF metric；路由表在该前缀的合格静态路由与 OSPF 最佳路由之间比较管理距离。图中静态路由 `[1/0]` 的 1 为管理距离、0 为度量；图本身未显示所有 OSPF 候选，因此题干给出假设。不能直接用不同协议的 metric 比较优劣。B、D 的最高值不是该题设的优选规则；A 的递归下一跳代价可用于某些协议的选路（例如部分 BGP 场景），并非本题所限定的静态与 OSPF 比较项。"
+      }
+    }
+  ]
+}

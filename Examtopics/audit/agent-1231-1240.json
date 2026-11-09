@@ -1,0 +1,386 @@
+{
+  "scope": "Q1231–Q1240",
+  "corrections": [
+    {
+      "id": 1231,
+      "before_sha256": "e964503dbdcd11dbb4cd755cbabd09aed9ebaa1ef0693de62748a3557a5eab67",
+      "reason": "原图 ff05:1:3 非完整 IPv6 地址，FCBA 属未定义的 FC00::/8；改为有效组播与 FD 本地 ULA，注明文档地址。",
+      "updates": {
+        "prompt": "Classify the adapted IPv6 examples by address type. The legacy exhibit contains malformed or undefined examples; use the corrected choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "2001:db8:600d:cafe::123",
+            "fdba:926a:e8e:7a25:b1:c6d2:1a76:8fdc",
+            "fe80::a00:27ff:feeb:89aa",
+            "ff05::1:3"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Global Unicast",
+              "expected": "2001:db8:600d:cafe::123"
+            },
+            {
+              "id": "t2",
+              "label": "Link-Local Unicast",
+              "expected": "fe80::a00:27ff:feeb:89aa"
+            },
+            {
+              "id": "t3",
+              "label": "Multicast",
+              "expected": "ff05::1:3"
+            },
+            {
+              "id": "t4",
+              "label": "Unique Local",
+              "expected": "fdba:926a:e8e:7a25:b1:c6d2:1a76:8fdc"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "2001:db8:600d:cafe::123 属于 2000::/3 的文档示例，不可作为公网可用地址；fe80::a00:27ff:feeb:89aa 为链路本地；ff05::1:3 为组播；fdba:926a:e8e:7a25:b1:c6d2:1a76:8fdc 为 FD00::/8 本地分配 ULA。原图 ff05:1:3 缺少完整分组或 ::；FCBA 属 FC00::/8，未定义为本地分配 ULA，因此已修正。各目标是一对一分类。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原图 ff05:1:3 非完整 IPv6 地址，FCBA 属未定义的 FC00::/8；改为有效组播与 FD 本地 ULA，注明文档地址。"
+      },
+      "exhibit_path": "exhibits/q1231_image_audit1231.png"
+    },
+    {
+      "id": 1232,
+      "before_sha256": "cd88a0778934c774701c2626abe5623f8d347a2969d8a0ef1ae40515077b7cd4",
+      "reason": "TCP 不保证绝对交付；修正表述并保留 TCP/UDP 两组组内无序。",
+      "updates": {
+        "prompt": "Classify these adapted transport characteristics as TCP or UDP. Items within the same protocol group may be placed in any order.",
+        "drag_drop_data": {
+          "sources": [
+            "has less transport state and overhead than TCP in a typical implementation",
+            "offers minimal overhead within a packet",
+            "provides support for retransmission of lost packets",
+            "provides reliable, ordered byte-stream delivery or reports connection failure",
+            "uses a 32-bit sequence number",
+            "often used for real-time voice where late data may be less useful"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "TCP (Slot 1)",
+              "expected": "provides support for retransmission of lost packets",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t2",
+              "label": "TCP (Slot 2)",
+              "expected": "provides reliable, ordered byte-stream delivery or reports connection failure",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t3",
+              "label": "TCP (Slot 3)",
+              "expected": "uses a 32-bit sequence number",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t4",
+              "label": "UDP (Slot 1)",
+              "expected": "often used for real-time voice where late data may be less useful",
+              "unordered_group": "UDP"
+            },
+            {
+              "id": "t5",
+              "label": "UDP (Slot 2)",
+              "expected": "has less transport state and overhead than TCP in a typical implementation",
+              "unordered_group": "UDP"
+            },
+            {
+              "id": "t6",
+              "label": "UDP (Slot 3)",
+              "expected": "offers minimal overhead within a packet",
+              "unordered_group": "UDP"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "TCP 使用 32 位序列号，结合确认和重传提供可靠有序字节流；连接故障时仍可能无法交付，不能保证所有数据最终送达。UDP 首部固定 8 字节、通常维护更少传输状态，常用于对时延敏感的实时语音；应用仍可另行实现可靠性。每组内顺序可交换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "TCP 不保证绝对交付；修正表述并保留 TCP/UDP 两组组内无序。"
+      },
+      "exhibit_path": "exhibits/q1232_image_audit1231.png"
+    },
+    {
+      "id": 1233,
+      "before_sha256": "246ba6fa4ae809c2baf2b85d1d56fe6cc5452ff50acd47d8e9fac2ac18ced960",
+      "reason": "AAAA 专指 IPv6；修正 SOA 的区域信息描述。",
+      "updates": {
+        "prompt": "Match each DNS record type to its adapted description.",
+        "drag_drop_data": {
+          "sources": [
+            "AAAA",
+            "CNAME",
+            "NS",
+            "PTR",
+            "SOA"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "aliases one name to another",
+              "expected": "CNAME"
+            },
+            {
+              "id": "t2",
+              "label": "contains the zone serial number and responsible mailbox",
+              "expected": "SOA"
+            },
+            {
+              "id": "t3",
+              "label": "correlates a domain with its authoritative name servers",
+              "expected": "NS"
+            },
+            {
+              "id": "t4",
+              "label": "maps a host name to an IPv6 address",
+              "expected": "AAAA"
+            },
+            {
+              "id": "t5",
+              "label": "supports reverse name lookups",
+              "expected": "PTR"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "CNAME 将别名指向规范名称；SOA 含区域序列号、主服务器及负责人的邮箱字段；NS 指定权威名称服务器；AAAA 将名称映射到 IPv6 地址（A 记录对应 IPv4）；PTR 常用于反向查询。原图“IP address”未区分 A 与 AAAA，已明确为 IPv6。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "AAAA 专指 IPv6；修正 SOA 的区域信息描述。"
+      },
+      "exhibit_path": "exhibits/q1233_image_audit1231.png"
+    },
+    {
+      "id": 1234,
+      "before_sha256": "b6575fa21623b47614a1036d5d796ad136603a60b13ab71ff7664b586ed0d04e",
+      "reason": "3FFE 为已退役的 6bone 前缀；用文档前缀例子并明确不可在公网使用。",
+      "updates": {
+        "prompt": "Classify these adapted IPv6 address examples; the original exhibit used a retired 6bone prefix.",
+        "drag_drop_data": {
+          "sources": [
+            "2001:db8:620:a87a::f00d",
+            "fe80::a00:27ff:feeb:89aa",
+            "ff05::1:3",
+            "fd6d:c83b:5cef:b6b2::1"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Global Unicast",
+              "expected": "2001:db8:620:a87a::f00d"
+            },
+            {
+              "id": "t2",
+              "label": "Link-Local Unicast",
+              "expected": "fe80::a00:27ff:feeb:89aa"
+            },
+            {
+              "id": "t3",
+              "label": "Multicast",
+              "expected": "ff05::1:3"
+            },
+            {
+              "id": "t4",
+              "label": "Unique Local",
+              "expected": "fd6d:c83b:5cef:b6b2::1"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "2001:db8:620:a87a::f00d 为 2000::/3 中保留作示例的文档地址，不能作为公网可路由地址；fe80::a00:27ff:feeb:89aa 为链路本地；ff05::1:3 为组播；fd6d:c83b:5cef:b6b2::1 为本地分配 ULA。原图 3ffe::/16 用于已退役的 6bone，不能作为当前公网分配示例。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "3FFE 为已退役的 6bone 前缀；用文档前缀例子并明确不可在公网使用。"
+      },
+      "exhibit_path": "exhibits/q1234_image_audit1231.png"
+    },
+    {
+      "id": 1235,
+      "before_sha256": "d83ad2ee82fd6678f3950a43dbc2494c652b9324d1064b49231347c5091d84df",
+      "reason": "限定正常长度和对齐，避免计数器重叠及硬件差异绝对化。",
+      "updates": {
+        "prompt": "On a Cisco interface that counts normal-length, aligned Ethernet frames with a bad FCS as CRC input errors, which two counters increase? (Choose two.)",
+        "explanation": "A、D。题设计数方式下，CRC 记录 FCS 检验失败，input errors 为包含此错误的输入错误总数。frame 通常涉及对齐错误，runts/giants 分别涉及长度异常；题设排除了这些额外条件。错误可由物理介质、接口等原因导致，单凭计数器不能确定根因；不同平台统计实现可能不同。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定正常长度和对齐，避免计数器重叠及硬件差异绝对化。"
+      }
+    },
+    {
+      "id": 1236,
+      "before_sha256": "c698a8e9a232bd59c9b3444d80ce437582c224665a9457eddbacfae8115cb898",
+      "reason": "仅路由器加入 FF02::2；明确接口是开启 IPv6 转发的路由器接口。",
+      "updates": {
+        "prompt": "On a Cisco router interface with IPv6 enabled and IPv6 unicast routing active, which two listed link-local multicast groups does the interface join? (Choose two.)",
+        "explanation": "D、E。IPv6 节点加入链路范围 all-nodes FF02::1；IPv6 路由器接口还加入 all-routers FF02::2。接口还会加入对应的 solicited-node multicast 组，供邻居发现等使用，但该组不在选项中。普通主机不因启用 IPv6 就成为 all-routers 成员；FE80::/10 是链路本地单播，而不以 FF 开头。A、B、C 均非组播地址。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "仅路由器加入 FF02::2；明确接口是开启 IPv6 转发的路由器接口。"
+      }
+    },
+    {
+      "id": 1237,
+      "before_sha256": "6c67e1773f788b4b3cb87c0ce9204c8bcec024cc09fa6cca8ce29cd8dd01f7cf",
+      "reason": "半双工本身不等于双工不匹配，明确对端全双工与迟碰撞条件。",
+      "updates": {
+        "prompt": "In a half-duplex 10/100 Mb/s Ethernet collision domain, which two conditions can cause late collisions? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "when Carrier Sense Multiple Access/Collision Detection is used"
+          },
+          {
+            "label": "B",
+            "text": "when one side is half-duplex and the other is full-duplex"
+          },
+          {
+            "label": "C",
+            "text": "when the sending device waits 15 seconds before sending the frame again"
+          },
+          {
+            "label": "D",
+            "text": "when a collision occurs after the 32nd byte of a frame has been transmitted"
+          },
+          {
+            "label": "E",
+            "text": "when the cable length limits are exceeded"
+          }
+        ],
+        "explanation": "B、E。双工不匹配可使半双工端在发送窗口后遇到碰撞；超出相应介质和拓扑的长度/传播时延限制也可能产生迟发碰撞。10/100 Mb/s 的常见判定为超过 512 位时间（64 字节）后检测到碰撞。单纯使用 CSMA/CD 或两端都正确设为半双工不必然产生迟碰撞；15 秒及第 32 字节不是标准判据。具体距离依介质和标准而定。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "半双工本身不等于双工不匹配，明确对端全双工与迟碰撞条件。"
+      }
+    },
+    {
+      "id": 1238,
+      "before_sha256": "7e2890937957f9f877459a6dc77e6bd773d163cd9bf4839b859f4c1e45a1631e",
+      "reason": "区域和频宽决定 5GHz 可用信道，补全 E 并去除对中继及漫游绝对断言。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "In a regulatory domain allowing up to 23 usable nonoverlapping 20 MHz channels, 5 GHz can provide more channel capacity"
+          },
+          {
+            "label": "B",
+            "text": "5GHz channel selection requires an autonomous access point."
+          },
+          {
+            "label": "C",
+            "text": "Cells that overlap one another are configured to use nonoverlapping channels."
+          },
+          {
+            "label": "D",
+            "text": "Adjacent cells with overlapping channels use a repeater access point."
+          },
+          {
+            "label": "E",
+            "text": "For maximum throughput, always assign adjacent overlapping access points to the same channel"
+          }
+        ],
+        "explanation": "A、C。可用的非重叠 5 GHz 信道数量取决于国家/地区、频宽、设备及 DFS 规则；题设限定存在最多 23 个 20 MHz 信道的环境。覆盖重叠的 AP 应规划非重叠信道以减少竞争，但不保证漫游不中断。B：控制器管理的 AP 也可选 5 GHz；D：重叠覆盖不要求中继；E：相邻 AP 强制同信道会增加竞争。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "区域和频宽决定 5GHz 可用信道，补全 E 并去除对中继及漫游绝对断言。"
+      }
+    },
+    {
+      "id": 1239,
+      "before_sha256": "ceac91b7ade1b2349d8cd5bb71c1e34b6643aab5a36ace3e5d9aa6d695edc53a",
+      "reason": "说明纤芯和包层的真实光场，不宣称光场绝不会存在于包层。",
+      "updates": {
+        "explanation": "B、D。光纤的纤芯被折射率较低的包层包围，光沿纤芯导引；铜缆使用电信号。A 的 BNC 常用于同轴铜缆；E 的 RJ-45 常用于双绞线；光纤常用 LC、SC 等接口。C 将数据路径简单归于包层并不符合本题基础分类，但实际导模的电磁场可部分存在于包层中，不能说包层中绝无光场。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "说明纤芯和包层的真实光场，不宣称光场绝不会存在于包层。"
+      }
+    },
+    {
+      "id": 1240,
+      "before_sha256": "0ea18053846725f875e9842a66cc108e9d55ed2f480b507dc7bdfefd17ad8e4e",
+      "reason": "冗余设计提高可用性但不保证任意故障零中断；三层角色也有实现差异。",
+      "updates": {
+        "explanation": "A、B。典型三层园区设计中，汇聚层可承接二层和三层功能，核心层通过冗余设备与链路提高故障时可用性；能否保持业务取决于故障范围、冗余和收敛，不能保证任意故障零中断。C 通常跨 VLAN 策略与路由放在汇聚层，实际也可采用三层接入；D 终端主要接入接入层；E 在三层设计中核心与汇聚职责有所区分，折叠核心设计则可能合并。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "冗余设计提高可用性但不保证任意故障零中断；三层角色也有实现差异。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4193",
+    "https://www.rfc-editor.org/rfc/rfc3701",
+    "https://www.rfc-editor.org/rfc/rfc9293",
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/12006-chapter22.html"
+  ],
+  "limitations": "人工审核题图和答案图；未进行真实设备实验。"
+}

@@ -1,0 +1,364 @@
+{
+  "scope": "Q1241–Q1250",
+  "corrections": [
+    {
+      "id": 1241,
+      "original_qid": "Q1241",
+      "before_sha256": "9349fe0244456fdc3534b7e9288c737fe90dd570356fa1511c9d3d47a3d5c101",
+      "reason": "以太网地址标识本链路接口；原解析错误地保证全球唯一和每跳必改。",
+      "updates": {
+        "prompt": "For what two purposes are Ethernet MAC addresses used on a local Ethernet segment? (Choose two.)",
+        "explanation": "A、E。以太网帧使用源和目的 MAC 地址标识本链路接口并交付帧；同一二层域应避免活动单播地址冲突。MAC 地址可由软件配置、可随机化或重复，不能保证全球唯一。跨子网通常将帧发往本地网关，路由器在下一段重新封装；透明二层交换通常保留帧的源和目的 MAC。B 的跨网络选路需要网络层；C 的类型由 EtherType/Length 等字段指示；D 的访问仲裁或优先级并非由目的 MAC 本身决定；F 未知地址可通过 ARP/邻居发现等机制解析，非 MAC 字段自身功能。"
+      }
+    },
+    {
+      "id": 1242,
+      "original_qid": "Q1242",
+      "before_sha256": "8f59aa35ddcadac7214e1f6e3e287fac3ec6cc4d0f36be32e28002d82223211a",
+      "reason": "修正以运行故障混淆层间接口设计及对可靠性绝对化的说明。",
+      "updates": {
+        "explanation": "A、B。OSI 参考模型将网络功能组织为各层，帮助理解封装、传输和排错；它是抽象框架，不是自动实现互操作或可靠交付的协议。C 的“某层任何变化都不会影响其他层”过于绝对：稳定接口可减少耦合，但依赖、性能和故障仍可影响其他层。D 的可靠性取决于具体协议、配置及端到端条件，分层本身不能保证交付。"
+      }
+    },
+    {
+      "id": 1243,
+      "original_qid": "Q1243",
+      "before_sha256": "9936d08894ab6411164fc27e964ba3b790578ad028839d7b9f8211bcc9beea0c",
+      "reason": "将厂商前缀限定为 MA-L 分配的全球管理单播地址；示例首字节 0A 是本地管理地址，不能当 OUI 厂商证明。",
+      "updates": {
+        "prompt": "For ordinary 48-bit Ethernet unicast interface addresses, which three statements are correct? Assume option D refers to a universally administered MA-L assignment. (Choose three.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Interfaces sharing a Layer 2 segment need distinct active unicast MAC addresses for unambiguous delivery."
+          },
+          {
+            "label": "B",
+            "text": "A MAC address is another name for an IP address."
+          },
+          {
+            "label": "C",
+            "text": "An administrator must manually configure every MAC address in the Cisco IOS CLI."
+          },
+          {
+            "label": "D",
+            "text": "In a universally administered MA-L assignment, the IEEE-assigned 24-bit organizational identifier is followed by a 24-bit extension assigned by the organization."
+          },
+          {
+            "label": "E",
+            "text": "0A:26:B8:D6:65:90 is an example of a 48-bit unicast MAC address."
+          },
+          {
+            "label": "F",
+            "text": "The first portion of every MAC address identifies the IP subnet and the second portion identifies the host."
+          }
+        ],
+        "explanation": "A、D、E。为可靠区分同一二层域的活动接口，单播 MAC 地址应避免冲突。D 仅描述全球管理的 MA-L 地址：24 位 OUI 与组织分配的 24 位扩展，不适用于全部分配类型或本地管理地址。E 的首字节 0A 的组播位为 0、本地管理位为 1，所以是有效的本地管理单播地址示例，不能据此前缀推断厂商。B 混淆 MAC 与 IP；C 忽略出厂地址及软件地址；F 错把 MAC 的组织分配结构说成 IP 网络/主机划分。"
+      }
+    },
+    {
+      "id": 1244,
+      "original_qid": "Q1244",
+      "before_sha256": "ca6266455261b3a645bf7efd0f22a538d7ed69f7ad6bc9501fb7f04f05171431",
+      "reason": "补充下一跳可达及管理距离与最长前缀匹配的条件。",
+      "updates": {
+        "explanation": "A、E。`ip route 172.16.3.0 255.255.255.0 192.168.2.4` 指向 172.16.3.0/24，192.168.2.4 是下一跳；未显式写距离时普通静态路由默认 AD 为 1。下一跳需能解析且路由须被选中才会进入转发表。B 将下一跳误认目的；C、D 是默认路由的描述，本条不是 0.0.0.0/0；D 还把下一跳地址当作本路由器出接口地址。F 的“最后使用”不是默认静态路由行为；同一前缀的候选路由通常先比较 AD，转发时还须遵循最长前缀匹配，具体优选条件依平台而定。"
+      }
+    },
+    {
+      "id": 1245,
+      "original_qid": "Q1245",
+      "before_sha256": "ff6f3cbfdae6d90ff8252f2053dc23984bf355c6826a4b787a6857405a4c3516",
+      "reason": "原 C 并非私网独有，且私网并非任何场景必须 NAT；明确考查免费分配及跨组织复用。",
+      "updates": {
+        "prompt": "Which two benefits can RFC 1918 private IPv4 addresses provide? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "They are advertised unchanged across the public Internet."
+          },
+          {
+            "label": "B",
+            "text": "Organizations can use them internally without paying a public address registration fee for each host."
+          },
+          {
+            "label": "C",
+            "text": "Separate organizations can reuse the same private address space in their own networks."
+          },
+          {
+            "label": "D",
+            "text": "They eliminate the need for any address translation or proxy in every deployment."
+          },
+          {
+            "label": "E",
+            "text": "They prevent duplicate addresses inside a network."
+          }
+        ],
+        "explanation": "B、C。RFC 1918 地址供组织内部使用，不要求为每台内部设备申请全球唯一公网地址；彼此独立的网络可以复用相同私有前缀，从而节省公网地址。A：私有前缀不应在公共互联网传播，但在私网内仍按 IP 路由规则转发。D：公网通信可采用 NAT、应用代理等架构，是否需要取决于连接方式；隔离网络不一定需要 NAT。E：同一网络中的地址冲突仍需管理，互联私网也可能出现地址重叠。"
+      }
+    },
+    {
+      "id": 1246,
+      "original_qid": "Q1246",
+      "before_sha256": "36960a29fcbc725617ba11fd48775ad9a1b2b64eb96d2144277d64608aafbe4a",
+      "reason": "校验和并非密码学完整性，IPv4 可以禁用；UDP 不保证低延迟。",
+      "updates": {
+        "prompt": "Which two UDP characteristics can benefit application traffic? Assume the UDP checksum is enabled. (Choose two.)",
+        "explanation": "A、E。UDP 头部为 8 字节，且无需 TCP 式连接建立，因此可减少协议开销；启用时 UDP 校验和覆盖伪首部、UDP 头和数据，可检测许多传输错误。校验和并非密码学认证，也不能保证检测所有错误；IPv4 UDP 可以不发送校验和，IPv6 通常要求校验和（存在受限例外）。B：UDP 不内置确认和重传；C：UDP 没有 TCP 的控制标志或三次握手；D：UDP 本身无连接，但应用仍可自行维护会话状态。实际延迟取决于网络和应用，不能保证 UDP 一定更快。"
+      }
+    },
+    {
+      "id": 1247,
+      "original_qid": "Q1247",
+      "before_sha256": "f44c8f65baed9d7fe3f88ea44b0ea061f151ef03f8ae5c0eb6e148357bb7e50b",
+      "reason": "私有地址本身不是安全边界；将 D 明确为部署有状态过滤减少未请求入站暴露。",
+      "updates": {
+        "prompt": "A network uses RFC 1918 addresses internally and an Internet gateway configured to block unsolicited inbound connections. Which two design goals can this combination support? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Automatically satisfy every PCI requirement."
+          },
+          {
+            "label": "B",
+            "text": "Conserve globally unique IPv4 addresses through internal address reuse."
+          },
+          {
+            "label": "C",
+            "text": "Guarantee that all internal routing tables shrink."
+          },
+          {
+            "label": "D",
+            "text": "Reduce unsolicited inbound exposure through the gateway filtering policy."
+          },
+          {
+            "label": "E",
+            "text": "Automatically comply with every local law."
+          }
+        ],
+        "explanation": "B、D。在独立内部网络中复用 RFC 1918 地址可节省公网 IPv4 地址；题设明确配置的网关过滤策略可减少未经请求的入站连接暴露。私有地址或 NAT 本身不构成充分防护，不能阻止所有攻击，仍需根据风险配置防火墙、访问控制和监控。A、E 不能由地址方案自动满足法规或标准；C 内部路由规模取决于拓扑、汇总和策略，私有编址不保证路由表变小。"
+      }
+    },
+    {
+      "id": 1248,
+      "original_qid": "Q1248",
+      "before_sha256": "2fc7a4d72f27d546e661bacb544b629d437380b4a788724bcf66e33475a8567e",
+      "reason": "修正题干语法和错误地把 asynchronous 等同 asymmetric；移除保证毫秒倒换、双 ISP 等绝对结论。",
+      "updates": {
+        "prompt": "Which two WAN design choices can improve scalability and resilience when correctly configured? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Asymmetric routing by itself, without adding an alternate path"
+          },
+          {
+            "label": "B",
+            "text": "Single-homed branches with no backup connection"
+          },
+          {
+            "label": "C",
+            "text": "Dual-homed branches with independently provisioned paths"
+          },
+          {
+            "label": "D",
+            "text": "Only manually maintained static routes at every branch"
+          },
+          {
+            "label": "E",
+            "text": "A suitable dynamic routing protocol with a tested backup path"
+          }
+        ],
+        "explanation": "C、E。双宿且尽量避免共享故障点可提供替代路径；合适的动态路由可传播前缀并在满足条件时重新收敛。可靠性仍取决于实际故障域、路由策略、探测及收敛时间；双宿不必然代表两个 ISP 或毫秒级切换。A 去回程不对称本身不增加备份路径；B 缺少备用链路；D 适合小型或特定场景，但只靠人工维护在大规模变更时较难扩展。"
+      }
+    },
+    {
+      "id": 1249,
+      "original_qid": "Q1249",
+      "before_sha256": "0de0f220f0dcd9f0f00ddca52e17e821618ea5fd3fb77f57ee72f37c6cc33440",
+      "reason": "解释私网地址适合内部通信但并非唯一选择，NAT 不唯一，路由可汇总。",
+      "updates": {
+        "explanation": "A、D。组织可在内部自主规划 RFC 1918 地址，支持内部通信；不同组织复用相同地址空间可减少对全球唯一 IPv4 地址的需求。A 不意味着只有私网地址才能在企业内通信。B 的 NAT 是可能的互联工具而非使用私网地址的必然目的；C 公网或私网均可承载应用；E 路由开销取决于拓扑与汇总设计，私网编址本身不保证减少。不同私网互联时可能需要处理地址重叠。"
+      }
+    },
+    {
+      "id": 1250,
+      "original_qid": "Q1250",
+      "before_sha256": "d51722d7d50a939ff2333434ab6bd05a48758f23ce9361a8de411702f29b9da7",
+      "reason": "C 拼接了 B，恢复为单独干扰项；删除服务器必需专用硬件和支持海量客户端的绝对化结论。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It can handle requests from multiple workstations at the same time."
+          },
+          {
+            "label": "B",
+            "text": "It achieves redundancy exclusively by using virtual server clustering."
+          },
+          {
+            "label": "C",
+            "text": "It must be housed in a data center dedicated to a single client."
+          },
+          {
+            "label": "D",
+            "text": "It must run the same operating system as other servers to communicate with them."
+          },
+          {
+            "label": "E",
+            "text": "It runs applications that send and retrieve data for requesting workstations."
+          }
+        ],
+        "explanation": "A、E。服务器角色是向客户端提供服务；服务端应用可接收多个客户端请求、处理数据并响应。是否能并发、支持多少客户端取决于应用和资源，普通计算机或虚拟机也可以承担服务端角色。B 冗余实现有多种方案；C 服务器可以在云、边缘或本地运行，不必专属数据中心；D 遵循兼容网络协议的不同操作系统可以通信。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1241,
+      "content_answer_explanation": "以太网地址标识本链路接口；原解析错误地保证全球唯一和每跳必改。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": 1242,
+      "content_answer_explanation": "修正以运行故障混淆层间接口设计及对可靠性绝对化的说明。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": 1243,
+      "content_answer_explanation": "将厂商前缀限定为 MA-L 分配的全球管理单播地址；示例首字节 0A 是本地管理地址，不能当 OUI 厂商证明。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "A",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "id": 1244,
+      "content_answer_explanation": "补充下一跳可达及管理距离与最长前缀匹配的条件。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": 1245,
+      "content_answer_explanation": "原 C 并非私网独有，且私网并非任何场景必须 NAT；明确考查免费分配及跨组织复用。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": 1246,
+      "content_answer_explanation": "校验和并非密码学完整性，IPv4 可以禁用；UDP 不保证低延迟。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": 1247,
+      "content_answer_explanation": "私有地址本身不是安全边界；将 D 明确为部署有状态过滤减少未请求入站暴露。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "id": 1248,
+      "content_answer_explanation": "修正题干语法和错误地把 asynchronous 等同 asymmetric；移除保证毫秒倒换、双 ISP 等绝对结论。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "C",
+        "E"
+      ]
+    },
+    {
+      "id": 1249,
+      "content_answer_explanation": "解释私网地址适合内部通信但并非唯一选择，NAT 不唯一，路由可汇总。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 1250,
+      "content_answer_explanation": "C 拼接了 B，恢复为单独干扰项；删除服务器必需专用硬件和支持海量客户端的绝对化结论。",
+      "image_code": "无题图、答案图或必要多行 CLI；检查题干、全部选项、答案及解析。",
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc1918",
+        "https://www.rfc-editor.org/rfc/rfc8085",
+        "https://www.rfc-editor.org/rfc/rfc768"
+      ],
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.rfc-editor.org/rfc/rfc8085",
+    "https://www.rfc-editor.org/rfc/rfc768"
+  ],
+  "limitations": "逐题人工审查；未进行网络设备实机实验。"
+}

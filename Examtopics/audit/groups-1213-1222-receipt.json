@@ -1,0 +1,25 @@
+{
+  "manifest": "groups-1213-1222.json",
+  "applied_ids": [
+    1213,
+    1214,
+    1216,
+    1217,
+    1218,
+    1220,
+    1221,
+    1222
+  ],
+  "corrected_question_sha256": {
+    "1213": "a80963bd40d7c452add4688bb4693ae0bfc649a2cd9839b0bdb30bfa47b7bf4d",
+    "1214": "7b18e887e7fd54aa6d2a24f0e35f0ba1c9a6156275a9ee8a36b2262bb082c6bf",
+    "1216": "0251d8d6a2538a675cfd776e5e2f86955f2fb89a3cc6209fe45eb319eae85e3a",
+    "1217": "2d4ff57a2d6132d90ea350fde8fe3f73019c2d8e4f5b3b8c8a41da1359c7d91a",
+    "1218": "9d3692b11469c87bf19230e6ce3a69ba59bea5d14eaf9ceab2d37df17ace382c",
+    "1220": "b94392277c093b08e5f6e1a570972f8cade6f50bd2f1e3aa0c4dfb15c20b41df",
+    "1221": "e1ee716773525ae64ce903fb4b5d7c86de5f6bf4064de738e8f343bba66afa51",
+    "1222": "236bb1e1c1f390b05ae2da3adf2a9d38a4b3ea54b76f2dd1c84a2fefb2bc8a55"
+  },
+  "source_sha256": "4a6f7a472834329f504ab1cf0d7f7ad8fa07fc8fb6cb57915ea21b0270e37b64",
+  "app_bundle_sha256": "43a923f229b54922c1f175e1de039c697a0eed832aff419035794b58e4ae85dc"
+}

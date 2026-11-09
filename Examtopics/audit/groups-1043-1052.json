@@ -1,0 +1,21 @@
+{
+  "scope": "Q1043–1052 independent group review",
+  "corrections": [
+    {
+      "id": 1047,
+      "before_sha256": "1444ada269b28a30e342874b99943babf539f2ac7d091f775e3efffbac1645f4",
+      "reason": "Clarify this is classification by intended deployment example, since IP and automation capabilities overlap across architectures.",
+      "updates": {
+        "prompt": "For the intended Cisco autonomous and cloud-managed AP deployment examples, match the listed characteristic descriptions to each AP type. Select the two descriptions associated with each example; not all descriptions are used."
+      }
+    },
+    {
+      "id": 1048,
+      "before_sha256": "9aed3c098e533c2ac66d307824d60c169e950a1318e48ef8d59e40809e03e100",
+      "reason": "Clarify this is classification by intended deployment example, since IP and automation capabilities overlap across architectures.",
+      "updates": {
+        "prompt": "For the intended Cisco autonomous and lightweight controller-managed AP deployment examples, match the listed characteristic descriptions to each AP type. Select the two descriptions associated with each example; not all descriptions are used."
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "scope": "Independent review Q1173–Q1182",
+  "corrections": [
+    {
+      "id": 1173,
+      "before_sha256": "602c90626ff8eb57a267cc90c095f8b1f140a3a9198636b55b24a193268b61e4",
+      "reason": "题图保留原措辞而互动选项已修订，明确以互动选项为准；Q1181补充可区分的铜缆结构特征。",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Assign two characteristics to an AP and two to a wireless LAN controller; one option is unused. The exhibit shows the original wording; use the corrected interactive options below."
+      }
+    },
+    {
+      "id": 1174,
+      "before_sha256": "a154436d8e4d6eb1e65937b2873c72214d0f548ee19c01a329c8792c86e484eb",
+      "reason": "题图保留原措辞而互动选项已修订，明确以互动选项为准；Q1181补充可区分的铜缆结构特征。",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare twisted-pair copper with typical single-mode glass fiber. The exhibit shows the original wording; use the corrected interactive options below."
+      }
+    },
+    {
+      "id": 1175,
+      "before_sha256": "255ca93562f1c278b160bd5aba2361d9a5e2c51901856bd809fce7f61902c6d5",
+      "reason": "题图保留原措辞而互动选项已修订，明确以互动选项为准；Q1181补充可区分的铜缆结构特征。",
+      "updates": {
+        "prompt": "Classify each adapted IPv6 address by type. The exhibit shows the original wording; use the corrected interactive options below."
+      }
+    },
+    {
+      "id": 1176,
+      "before_sha256": "38c4e33f697113556f193a991e7fb5ea08068b27c463f42774f491ebcc91e71f",
+      "reason": "题图保留原措辞而互动选项已修订，明确以互动选项为准；Q1181补充可区分的铜缆结构特征。",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare twisted-pair copper with multimode fiber. The exhibit shows the original wording; use the corrected interactive options below."
+      }
+    },
+    {
+      "id": 1178,
+      "before_sha256": "14d4041772bbdae3609140a9340721dbb379261663c959989d9e0f1cd3bab8e9",
+      "reason": "题图保留原措辞而互动选项已修订，明确以互动选项为准；Q1181补充可区分的铜缆结构特征。",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare IPv6 link-local unicast and multicast destinations. The exhibit shows the original wording; use the corrected interactive options below."
+      }
+    },
+    {
+      "id": 1181,
+      "before_sha256": "cc781ddff3ca11949fbf69c0f8108502c07f36e217052fe975c3cba1c65fb180",
+      "reason": "题图保留原措辞而互动选项已修订，明确以互动选项为准；Q1181补充可区分的铜缆结构特征。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "transmits signals using pulses of light",
+            "supports one spatial propagation mode at the operating wavelength",
+            "contains metallic conductors covered by electrical insulation",
+            "comprised of shielded or unshielded twisted pairs"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "comprised of shielded or unshielded twisted pairs",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "contains metallic conductors covered by electrical insulation",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "transmits signals using pulses of light",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "supports one spatial propagation mode at the operating wavelength",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "prompt": "Match each adapted characteristic to copper twisted-pair cable or single-mode fiber. Within each category, either order is accepted. The original exhibit shows older descriptions; use the corrected interactive options below.",
+        "explanation": "铜双绞线由金属导体与绝缘及护套构成，可使用屏蔽或非屏蔽双绞线。单模光纤用光信号传输，在设计工作波长上支持单一空间传播模式；并非所有光纤都绝对不发生反射，也可通过 WDM 在同一光纤传输多个波长。每组内两项可互换。原答案图沿用过度简化的反射描述，已隐藏；原图留存审查证据。 原图的 conductor/bedding/sheathing 并不是双绞线独有的可靠定义；互动选项改为具金属导体及电气绝缘，以与光纤信号传输区分。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/diff-om4-om5-multimode-fiber-wp.html",
+    "https://www.cisco.com/E-Learning/bulk/guest/celc/fwl/ch1/1_2_3/content.html"
+  ],
+  "limitations": "人工复核原图、答案图、交互映射；未在网络设备实测。"
+}

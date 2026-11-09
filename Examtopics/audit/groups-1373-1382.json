@@ -1,0 +1,139 @@
+{
+  "scope": [
+    1373,
+    1382
+  ],
+  "corrections": [],
+  "reviews": [
+    {
+      "id": 1373,
+      "question_sha256": "8a4f61e3c9ab14c7a9278b3539baa4fc8f0ca7525e2183519f93b679f3568a86",
+      "answer": [
+        "A",
+        "E"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "直接查看原图",
+      "code_cli": "题内命令逐项检查",
+      "finding": "图示为 Gi0/1 access 且 port-security 已启用；sticky 学习写入运行配置，restrict 丢弃违规并记录，答案 A/E 成立。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960x/software/15-2_7_e/configuration_guide/b_1527e_consolidated_2960x_cg/configuring_port_based_traffic_control.html"
+    },
+    {
+      "id": 1374,
+      "question_sha256": "d4660975d719e67be30ccd4deced03ede8736994e56a23f60b6691cac7a4def9",
+      "answer": [
+        "C",
+        "E"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "ESP/AH 是 IPsec 保护协议；3DES/AES 是算法，TLS 不是 IPsec 保护协议，C/E 成立。",
+      "reference": null
+    },
+    {
+      "id": 1375,
+      "question_sha256": "b60cb3d306024db9f75c2b3767a49a01edef9ae05c4a6dcea67df2c84c9b96ff",
+      "answer": [
+        "C",
+        "D"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "WPA3-Enterprise 可选 192-bit 套件采用 GCMP-256；WPA3-Personal SAE、WPA2-Personal PSK，C/D 成立。",
+      "reference": "https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/220712-configure-and-verify-wi-fi-6e-wlan-layer.pdf"
+    },
+    {
+      "id": 1376,
+      "question_sha256": "12544b9c969e1f4eb6fab69d6c116acf5ccbfc48bfce1b07363107a7952275e1",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "题干分别限定动态 spoke 与私有 WAN 组加密，DMVPN/GETVPN A/B 成立；其他是泛称或远程接入。",
+      "reference": null
+    },
+    {
+      "id": 1377,
+      "question_sha256": "f2978df680fa5a02d15733ce7522cfa8e9ce5d4f07e2f3cceb917f2115755fe3",
+      "answer": [
+        "A",
+        "C"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "在接口实际由控制器提供的前提下，REST/SOAP 均可作北向 Web 接口，A/C 成立；接口方向取决于部署。",
+      "reference": null
+    },
+    {
+      "id": 1378,
+      "question_sha256": "bc7cf0c7ac6dd781a9fec45cda35bc13a76c61d3b603389b66edee6ae7581fd2",
+      "answer": [
+        "C",
+        "D"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "GET/POST 是标准 HTTP 方法，REMOVE/REDIRECT/POP 不是通常核心方法，C/D 成立。",
+      "reference": null
+    },
+    {
+      "id": 1379,
+      "question_sha256": "0997a3c76ed6e0dc0448038188fd4631cc9570c9c33687724f5803be83f9e811",
+      "answer": [
+        "A",
+        "E"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "PATCH 与 PUT 在常见映射中支持更新，具体 API 也可能用 POST；题目限定常见映射，A/E 成立。",
+      "reference": null
+    },
+    {
+      "id": 1380,
+      "question_sha256": "499f4cc881f010c7c38323c449840210994cb8343b52f791735453a25efa09b9",
+      "answer": [
+        "A",
+        "D"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "Cisco AireOS 8.7 文档明确 service-port 支持 SSH/Telnet，排除 TACACS+/RADIUS，列表未列 SCP，A/D 成立。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.pdf"
+    },
+    {
+      "id": 1381,
+      "question_sha256": "6cdd2e84fdc8a69277d65a1cc0370656e685b015c28b4f381cc9fd3e4c7fb867",
+      "answer": [
+        "A",
+        "D"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "10.172.76.200 属 10/8，172.31.255.100 属 172.16/12；其余不属于 RFC1918，A/D 成立。",
+      "reference": "https://www.rfc-editor.org/rfc/rfc1918"
+    },
+    {
+      "id": 1382,
+      "question_sha256": "31668abec59c5cdba12c25d70a9bf84bc559ba08a3a883c5de28e4afb670491a",
+      "answer": [
+        "B",
+        "D"
+      ],
+      "prompt_options_answer_explanation": "逐项核对，保留现状",
+      "image": "无需图片",
+      "code_cli": "无CLI",
+      "finding": "接入终端 PortFast 加速 forwarding，正常边缘端口上下线不产生相应 TCN；不禁用 STP 或限制 MAC，B/D 成立。",
+      "reference": "https://www.cisco.com/c/dam/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185-01.pdf"
+    }
+  ]
+}

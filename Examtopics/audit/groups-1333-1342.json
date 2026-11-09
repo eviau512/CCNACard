@@ -1,0 +1,114 @@
+{
+  "scope": "Independent Q1333–1342 verification",
+  "corrections": [
+    {
+      "id": 1336,
+      "before_sha256": "52050e686f58d8fe9b6a9f19ee9ef379de94a64103c04e59436c4af304b2dbd9",
+      "reason": "Cisco supports WPA1 with AES on some platforms; original option WPA made the question ambiguous. State concrete cipher configurations.",
+      "updates": {
+        "prompt": "Which two listed Wi-Fi security configurations use CCMP for data protection? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Wi-Fi 6"
+          },
+          {
+            "label": "B",
+            "text": "WPA3-Personal using CCMP-128"
+          },
+          {
+            "label": "C",
+            "text": "WEP"
+          },
+          {
+            "label": "D",
+            "text": "WPA2 using CCMP"
+          },
+          {
+            "label": "E",
+            "text": "WPA1 configured to use only TKIP"
+          }
+        ],
+        "explanation": "B、D。题设的 WPA3-Personal 配置使用 CCMP-128，WPA2 配置使用 CCMP；CCMP 使用 AES 提供数据保密与完整性。E 明确限定只使用 TKIP，因此该配置不使用 CCMP。部分 Cisco 平台也允许在 WPA1 下配置 AES，故不能把所有 WPA1 实现一概排除。WPA3 的其他模式和平台可能使用 GCMP 等套件。A Wi-Fi 6 是无线技术代际而非具体加密配置；C WEP 使用 RC4 而非 CCMP。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1333,
+      "before_sha256": "4de2add5a5f999229b71539d1d519371c9ba853bfc5fee71fc72c844e4c03dab",
+      "prompt_options_answer_explanation": "逐项核对：D/E 在给定目标下成立，所有选项及备份条件已核对，无图。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1334,
+      "before_sha256": "991fc12eb21a63705ecccec0766bd58c76d0730954d06d2adab6ca239e94f910",
+      "prompt_options_answer_explanation": "逐项核对：已直接查看 WLC 原图；C/D 与题设 WPA2、AES 及 RADIUS 条件一致。",
+      "image": "已直接查看原图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1335,
+      "before_sha256": "4be9fa8d1241bd3d4e6f6d8422fdcec5e07040d631cbe0144734f14604dfeed4",
+      "prompt_options_answer_explanation": "逐项核对：已直接查看交换机配置原图：RSA 已存在、VTY local login 但只开放 Telnet；在题设下 A/C 成立。",
+      "image": "已直接查看原图",
+      "code_cli": "已核对 CLI 换行及配置前提"
+    },
+    {
+      "id": 1336,
+      "before_sha256": "52050e686f58d8fe9b6a9f19ee9ef379de94a64103c04e59436c4af304b2dbd9",
+      "prompt_options_answer_explanation": "逐项核对：Cisco 文档允许 WPA1 配置 AES，原 E 亦可能支持 CCMP；将题干和选项限定具体配置。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1337,
+      "before_sha256": "c71688e80b79cb8d2ab07be25e8ffd5c40ebdd6e753ee35ca57d5ecb26ef842f",
+      "prompt_options_answer_explanation": "逐项核对：逻辑交换与多客体系统可在宿主机上运行，A/B 成立，选项及解析已核对。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1338,
+      "before_sha256": "27e1249ea9a16bf3517979c23289a4a419bb7ce85ac5651975e821476bfae078",
+      "prompt_options_answer_explanation": "逐项核对：在良好设计与重复变更场景中 B/C 是潜在收益，解析已声明无保证。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1339,
+      "before_sha256": "c63291932b0fe4e28f492b24740d85a772b0049508e9afc78ca97243c563a218",
+      "prompt_options_answer_explanation": "逐项核对：题干明确该 API 仅使用所列两种结构化表示，C/D 成立。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1340,
+      "before_sha256": "1849b6c312403ee2d991dbc0a0a618825e66c31c66d06fdc99d8910bd8f72968",
+      "prompt_options_answer_explanation": "逐项核对：该版本 REST API 与多厂商 SDK 符合题设；设备支持存在范围限制。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1341,
+      "before_sha256": "57748331957a4817521f0c0dc184514b5db39d7a853d40aabbe563d854620e4a",
+      "prompt_options_answer_explanation": "逐项核对：集中策略与降低配置复杂度为 B/D，解析说明传统网络也可集中管理。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    },
+    {
+      "id": 1342,
+      "before_sha256": "941d6282c467f10152f71004bf31b3c5e9c57a6956befd55c05740b109a2f272",
+      "prompt_options_answer_explanation": "逐项核对：Cisco Catalyst Center 文档确认成功添加的默认状态 Managed 与 Global，A/D 成立。",
+      "image": "无题图",
+      "code_cli": "无代码块"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/configuring-wlan-security/how-to-configure-wlan-security.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/c9800-best-practices.html",
+    "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/3-1-x/admin_guide/b_cisco_catalyst_center_admin_guide_3_1_x/b_cisco_catalyst_center_admin_guide_3_1_x_chapter_010.html"
+  ],
+  "limitations": "Independent manual review of existing records and exhibit images; no network-device experiment."
+}

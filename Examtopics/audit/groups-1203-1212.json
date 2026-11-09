@@ -1,0 +1,53 @@
+{
+  "scope": "Q1203–Q1212 independent image and group review",
+  "corrections": [
+    {
+      "id": 1203,
+      "before_sha256": "8b1476546fda0be80e40f4161fd1da80321f2672667c93150bfb5f5181b4422f",
+      "reason": "补全两台交换机的 VLAN 名称、每个接口和 LLDP 命令，纠正原解析省略绝大部分实际配置。",
+      "updates": {
+        "explanation": "图中 Sw1：E0/1 数据 VLAN 77 + 语音 VLAN 177；E0/2 数据 VLAN 77；E0/3 数据 VLAN 88 + 语音 VLAN 188。Sw2：E0/1 数据 VLAN 88 + 语音 VLAN 188；E0/2 为仅语音 VLAN 177 的端口；E0/3 数据 VLAN 77。两台交换机分别创建并命名所有 VLAN，以下是对应完整示例：\n\n```text\n! Sw1\nconfigure terminal\nvlan 77\n name IT_User_VLAN\nexit\nvlan 88\n name HR_User_VLAN\nexit\nvlan 177\n name IT_Voice_VLAN\nexit\nvlan 188\n name HR_Voice_VLAN\nexit\ninterface ethernet 0/1\n switchport mode access\n switchport access vlan 77\n switchport voice vlan 177\nexit\ninterface ethernet 0/2\n switchport mode access\n switchport access vlan 77\nexit\ninterface ethernet 0/3\n switchport mode access\n switchport access vlan 88\n switchport voice vlan 188\nexit\nlldp run\ninterface ethernet 0/0\n lldp transmit\n lldp receive\nend\ncopy running-config startup-config\n\n! Sw2\nconfigure terminal\nvlan 77\n name IT_User_VLAN\nexit\nvlan 88\n name HR_User_VLAN\nexit\nvlan 177\n name IT_Voice_VLAN\nexit\nvlan 188\n name HR_Voice_VLAN\nexit\ninterface ethernet 0/1\n switchport mode access\n switchport access vlan 88\n switchport voice vlan 188\nexit\ninterface ethernet 0/2\n switchport mode access\n switchport access vlan 177\nexit\ninterface ethernet 0/3\n switchport mode access\n switchport access vlan 77\nexit\nlldp run\ninterface ethernet 0/0\n lldp transmit\n lldp receive\nend\ncopy running-config startup-config\n```\n\n题干原称每口仅一个无标记 VLAN，同时表格给同一接口指定数据及语音 VLAN；采用语音 VLAN 标记的电话接入解释，需设备及电话支持，不能把两条 `switchport access vlan` 当成同时生效。Sw2 E0/2 以上例为仅语音终端的无标签接入口；如果实际电话要求带标签，应按电话与平台支持的部署调整。LLDP 提供邻居信息；native VLAN TLV 是否发送及支持取决于具体平台和 TLV 配置，不能仅凭 `lldp run` 保证。检查 `show vlan brief`、`show interfaces ... switchport` 和 `show lldp neighbors detail`。原题图是前题解答，正确拓扑已移至题干。"
+      }
+    },
+    {
+      "id": 1205,
+      "before_sha256": "705d6e3b35488ae7aa4dc254c3bcb026d757c5ab6cd821f695a510bb6cca59e2",
+      "reason": "原题图选项与已改写的互动选项不同，明确以互动选项为准，避免图中旧表述与判分冲突。",
+      "updates": {
+        "prompt": "Classify the adapted properties of FTP and TFTP. Slots within each protocol group are interchangeable. The historical exhibit may show earlier wording; use the interactive choices below."
+      }
+    },
+    {
+      "id": 1208,
+      "before_sha256": "bc97da0b1b3ee13197ec9113352d892c3add84bd546f8dcc809b8723f716dedb",
+      "reason": "原题图选项与已改写的互动选项不同，明确以互动选项为准，避免图中旧表述与判分冲突。",
+      "updates": {
+        "prompt": "Classify these adapted TCP and UDP characteristics; slots within each group are interchangeable. The historical exhibit may show earlier wording; use the interactive choices below."
+      }
+    },
+    {
+      "id": 1210,
+      "before_sha256": "993854f6daa0f840206ee7bf2643541e431763e4bcc99777f2494857e3edaad7",
+      "reason": "原题图选项与已改写的互动选项不同，明确以互动选项为准，避免图中旧表述与判分冲突。",
+      "updates": {
+        "prompt": "Classify the conventional transport for each specified service or media stream; slots within each group are interchangeable. The historical exhibit may show earlier wording; use the interactive choices below."
+      }
+    },
+    {
+      "id": 1211,
+      "before_sha256": "7ea43c1e46432a10f39d73df4881974b4b93156afa86860b8cb247aa2616f270",
+      "reason": "原题图选项与已改写的互动选项不同，明确以互动选项为准，避免图中旧表述与判分冲突。",
+      "updates": {
+        "prompt": "Classify each specified use by its indicated TCP or UDP transport. Treat the items as the stated common uses rather than exclusive protocol requirements; order within a group does not matter. The historical exhibit may show earlier wording; use the interactive choices below."
+      }
+    },
+    {
+      "id": 1212,
+      "before_sha256": "8b503f7fb7a24e06ec3c66f0abb3828d64a27a07ffc33cdc8f891fd29ea72bca",
+      "reason": "原题图选项与已改写的互动选项不同，明确以互动选项为准，避免图中旧表述与判分冲突。",
+      "updates": {
+        "prompt": "Classify these campus design characteristics under a typical collapsed-core or three-tier design. Within each category the order does not matter. The historical exhibit may show earlier wording; use the interactive choices below."
+      }
+    }
+  ]
+}

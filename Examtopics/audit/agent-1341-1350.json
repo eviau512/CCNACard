@@ -1,0 +1,246 @@
+{
+  "scope": "Q1341–1350",
+  "corrections": [
+    {
+      "id": 1341,
+      "original_qid": "Q1341",
+      "before_sha256": "58ce74db6763970882ebe80f81f466c06d8aa589dbb2726c484f4e0551d960cf",
+      "reason": "纠正原解析绝对化表述并解释各选项。",
+      "updates": {
+        "explanation": "B、D。控制器可集中定义策略和编排设备配置，从而降低大规模逐台操作的工作量和人为配置不一致风险。实际收益取决于平台、设备支持和设计；传统网络也可集中管理或通过脚本自动化，控制器并不保证消除故障或人为错误。A 和 E 描述成本或带宽变化而非必然收益；C 将减少故障当作保证。"
+      }
+    },
+    {
+      "id": 1342,
+      "original_qid": "Q1342",
+      "before_sha256": "04a0d77c2a377adc86fc55280552a2cbe980279f902984abf450ac5c2d584a41",
+      "reason": "限定成功添加的默认条件；核对 Cisco 官方文档。",
+      "updates": {
+        "explanation": "A、D。在 Cisco Catalyst Center 成功添加、导入或发现设备的默认情形下，Cisco 文档说明设备进入 Managed 状态，并归属 Global 站点。之后可将设备分配到具体站点并进行供应。凭据、可达性和设备支持等异常须另外诊断，不能把“已发现”当作已完成供应或保证所有功能均正常。B 与默认状态不符；C 不是文档所列默认站点；E 是不同的供应阶段。",
+        "prompt": "In Cisco Catalyst Center, after a device is successfully added, imported, or discovered, which two default states or assignments apply? (Choose two.)"
+      }
+    },
+    {
+      "id": 1343,
+      "original_qid": "Q1343",
+      "before_sha256": "577881346ae813720a5d6108e0c9e58903ece40eb44114c81ff00f7955c7f00a",
+      "reason": "纠正原解析绝对化表述并解释各选项。",
+      "updates": {
+        "explanation": "A、E。题设要求以 Ansible playbook 编写 VLAN 配置：playbook 提供一个或多个 play，task 表示具体动作，通常调用适配设备的模块。实际还需可访问的设备、清单、凭据、连接方式及相应集合。B、D 是 Chef 术语；C 不是此题所问 Ansible 剧本基本要素。Ansible 也支持即席命令和通过 roles 导入任务，不意味着所有自动化都必须直接在 play 中内联 task。",
+        "prompt": "An engineer writes an Ansible playbook to configure a VLAN on a switch. Which two components are involved in that playbook? (Choose two.)"
+      }
+    },
+    {
+      "id": 1344,
+      "original_qid": "Q1344",
+      "before_sha256": "e475558c50a918f297c1b9a85973efee50269b760299318d633549f18f55aeca",
+      "reason": "纠正原解析绝对化表述并解释各选项。",
+      "updates": {
+        "explanation": "D、E。NETCONF 可供控制器通过设备配置与状态模型管理网络设备；OpenFlow 可供控制器与支持该协议的交换设备交换流表规则，二者均是常见南向协议。Thrift、DSC 和 CORBA 属通用 RPC、配置管理或对象通信技术，并非此题所列的典型专用网络南向协议。南向是接口相对于控制器的方向，具体产品也可能采用其他协议或通用接口。",
+        "prompt": "Which two listed protocols are commonly used as network controller southbound interfaces? (Choose two.)"
+      }
+    },
+    {
+      "id": 1345,
+      "original_qid": "Q1345",
+      "before_sha256": "013f55be7cca07238e34738c1ba10df5c9b2c22232acc9756c6d4e135a4527bc",
+      "reason": "纠正原解析绝对化表述并解释各选项。",
+      "updates": {
+        "explanation": "D、E。HTTP 状态 4xx 为客户端错误类别，例如 400、401 或 404；5xx 为服务器错误类别，例如 500、502 或 503。状态类别描述服务器对请求的响应，并不总能单凭首位确定组织或人员的责任：网关和上游故障也可能产生 5xx。1xx 为信息响应、2xx 为成功类别、3xx 为重定向类别；各类别中具体码的语义仍须分别查看。"
+      }
+    },
+    {
+      "id": 1346,
+      "original_qid": "Q1346",
+      "before_sha256": "bbe9ae6922e3797347fb8d0df7c5b7355349ef8e726234bcf2389165a95404ac",
+      "reason": "纠正原解析绝对化表述并解释各选项。",
+      "updates": {
+        "explanation": "A、C。公有云由服务提供方为广泛客户提供资源，多组织可共享基础设施；服务通常可经互联网访问。实际也可经专线或其他私有连接访问，不要求所有用户都走公网，也不能仅因多租户便假设隔离绝对无风险。B 的“完全自定义”超出一般托管资源的控制范围；D 是单一组织使用的描述；E 混合公有与私有资源更接近混合云。",
+        "prompt": "Which two characteristics commonly describe a public cloud service? (Choose two.)"
+      }
+    },
+    {
+      "id": 1347,
+      "original_qid": "Q1347",
+      "before_sha256": "f7542a3b4ff981995abbc2e22194bd7f83c19325d3f40627f0448de4b4f2979d",
+      "reason": "原 E 集中供应入口也可能为自动化驱动，替换歧义选项。",
+      "updates": {
+        "explanation": "A、C。对自动诊断/按策略执行修复的需求，以及按策略快速一致地配置资源，是网络自动化的合理驱动。它们依赖数据、规则、权限与人工监督，不能保证零故障、毫秒级恢复或替代所有人工操作。B 消除培训并不现实；D 硬件占地并非自动化固有结果；E 仍需明确配置策略与权限。",
+        "prompt": "Which two listed requirements motivate network automation, rather than eliminating human skills or changing physical equipment? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Increasing reliance on self-diagnostic and self-healing"
+          },
+          {
+            "label": "B",
+            "text": "Eliminating training needs"
+          },
+          {
+            "label": "C",
+            "text": "Policy-driven provisioning of resources"
+          },
+          {
+            "label": "D",
+            "text": "Reducing hardware footprint"
+          },
+          {
+            "label": "E",
+            "text": "Eliminating the need to define resource provisioning policies"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1348,
+      "original_qid": "Q1348",
+      "before_sha256": "356e7532de01ed30c24beafdfaccc531ef541a452e93f49139daa28cbdc6e4c8",
+      "reason": "SOHO 人数不是统一上限且原 50 在 B/C 重叠；显式限定教学模型。",
+      "updates": {
+        "explanation": "B、D。按题设的教学规模模型，SOHO 覆盖 1–50 名用户，路由器可通过 WAN 接口连接宽带接入设备。1–50 是本题采用的分类边界，不是全球统一的技术上限；接入介质、路由器和运营商方案也可不同。A 要求所有上行均为 10Gb、E 要求独立三层架构都不是 SOHO 的必要条件；C 超出题设定义的范围。",
+        "prompt": "Using a classroom model that classifies a SOHO as a network for 1–50 users, which two characteristics describe a typical SOHO connection? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "It requires 10Gb ports on all uplinks."
+          },
+          {
+            "label": "B",
+            "text": "It supports between 1 and 50 users."
+          },
+          {
+            "label": "C",
+            "text": "It is defined by this model as supporting 51 to 100 users."
+          },
+          {
+            "label": "D",
+            "text": "A router port connects to a broadband connection."
+          },
+          {
+            "label": "E",
+            "text": "It requires a core, distribution, and access layer architecture."
+          }
+        ]
+      }
+    },
+    {
+      "id": 1349,
+      "original_qid": "Q1349",
+      "before_sha256": "3ff1d523717d772eae86da26453f3c4cf62882d261b27c9b5767f97de6053504",
+      "reason": "纠正原解析绝对化表述并解释各选项。",
+      "updates": {
+        "explanation": "D、E。控制器可通过模板或 API 自动执行配置任务，并提供集中策略、管理和规模化操作能力。容量和自动化效果受产品、网络与设计限制；传统网络同样可自动化，控制器不会天然防止 DoS，也不会保证所有虚拟机无缝连通。A、B、C 均不是区分两种架构的普遍保证。",
+        "prompt": "Which two typical management advantages can a controller-based architecture provide compared with manual device-by-device configuration? (Choose two.)"
+      }
+    },
+    {
+      "id": 1350,
+      "original_qid": "Q1350",
+      "before_sha256": "1206490f3fe876adc96b19c57a409c27fb9551e9a0b20e9b740d782e415f2386",
+      "reason": "纠正原解析绝对化表述并解释各选项。",
+      "updates": {
+        "explanation": "A、D。N 个节点若每对节点各建一条独立双向链路，需要 N(N−1)/2 条；例如 4 个节点需 6 条，10 个需 45 条。链路和邻接关系随节点数按平方量级增长，通常增加端口、隧道或线路成本及配置维护负担。成本依物理/逻辑实现而异；全互联不要求专用高 MTU，也不限于 BGP。E 的逐对连接是拓扑特征而非本题所问的成本和运维缺点。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1341,
+      "content_answer_explanation": "纠正原解析绝对化表述并解释各选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "id": 1342,
+      "content_answer_explanation": "限定成功添加的默认条件；核对 Cisco 官方文档。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 1343,
+      "content_answer_explanation": "纠正原解析绝对化表述并解释各选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": 1344,
+      "content_answer_explanation": "纠正原解析绝对化表述并解释各选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "D",
+        "E"
+      ]
+    },
+    {
+      "id": 1345,
+      "content_answer_explanation": "纠正原解析绝对化表述并解释各选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "D",
+        "E"
+      ]
+    },
+    {
+      "id": 1346,
+      "content_answer_explanation": "纠正原解析绝对化表述并解释各选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "id": 1347,
+      "content_answer_explanation": "原 E 集中供应入口也可能为自动化驱动，替换歧义选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "id": 1348,
+      "content_answer_explanation": "SOHO 人数不是统一上限且原 50 在 B/C 重叠；显式限定教学模型。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "id": 1349,
+      "content_answer_explanation": "纠正原解析绝对化表述并解释各选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "D",
+        "E"
+      ]
+    },
+    {
+      "id": 1350,
+      "content_answer_explanation": "纠正原解析绝对化表述并解释各选项。",
+      "image_code": "已检查无题图、答案图或 CLI；暗黑模式无图像适配需求。",
+      "corrected_answer": [
+        "A",
+        "D"
+      ]
+    }
+  ],
+  "images_directly_viewed": [],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/3-3-x/admin-guide/cisco-catalyst-center-admin-guide-3-3-x/configure-device-settings/c_device_controllability.html",
+    "https://www.rfc-editor.org/rfc/rfc9110",
+    "https://csrc.nist.gov/pubs/sp/800/145/final",
+    "https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html"
+  ],
+  "limitations": "人工审核；无控制器、云服务或网络设备实测。"
+}

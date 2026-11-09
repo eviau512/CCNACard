@@ -1,0 +1,173 @@
+{
+  "scope": "独立复核 Q1143–1152",
+  "corrections": [
+    {
+      "id": 1143,
+      "before_sha256": "c401d79e9c30beb0ab93e475aebbd38ef8c5900e999ebff362b646e9b1897129",
+      "reason": "消除多个类别均可成立或过度绝对化的描述，保持各组内乱序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "supports one spatial propagation mode at its specified wavelength",
+            "suffers intermodal dispersion that can limit link distance",
+            "typically has a 50 or 62.5 micrometer core",
+            "is commonly used for longer-reach optical links"
+          ],
+          "targets": [
+            {
+              "label": "multimode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "typically has a 50 or 62.5 micrometer core",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "multimode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "suffers intermodal dispersion that can limit link distance",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "supports one spatial propagation mode at its specified wavelength",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "is commonly used for longer-reach optical links",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "多模光纤通常使用 50 或 62.5 微米纤芯，支持多个空间传播模式，模间色散会限制距离。单模光纤在设计波长支持单一空间传播模式，常用于较长距离；单模不意味着只能使用一个波长，WDM 可在同一光纤承载多个波长。数据中心既使用多模也使用单模，故不用部署地点作为唯一分类条件。"
+      }
+    },
+    {
+      "id": 1150,
+      "before_sha256": "52d38f5797bc9b788dc699f361bccb881eabe8c7ce9a4f91845032a11ba53135",
+      "reason": "消除多个类别均可成立或过度绝对化的描述，保持各组内乱序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "uses a unicast-format address shared by multiple interfaces",
+            "cannot be used as a source address",
+            "delivers a packet to one of the interfaces sharing that address",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "label": "Anycast (Slot 1)",
+              "sub_label": "",
+              "expected": "uses a unicast-format address shared by multiple interfaces",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Anycast (Slot 2)",
+              "sub_label": "",
+              "expected": "delivers a packet to one of the interfaces sharing that address",
+              "unordered_group": "Anycast"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "cannot be used as a source address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "Anycast 使用同一单播格式地址标识多个接口，路由按度量将每个包送往其中一个；multicast 使用组地址实现一对多，IPv6 组播地址不能作为源地址。组播也关联多个接口，因此“分配给多个接口”不能单独区分两类。原图声称 anycast 只可用于非主机设备的限制已过时。"
+      }
+    },
+    {
+      "id": 1151,
+      "before_sha256": "39f53a33ff33c471e7e88ff1b4d818a9ed8fe69b461500926a83612cd205a74e",
+      "reason": "消除多个类别均可成立或过度绝对化的描述，保持各组内乱序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "uses metallic conductors to carry electrical signals",
+            "is commonly used for long-haul DWDM optical links",
+            "can be affected by electromagnetic interference",
+            "propagates one spatial optical mode"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "uses metallic conductors to carry electrical signals",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "can be affected by electromagnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "propagates one spatial optical mode",
+              "unordered_group": "single mode fiber"
+            },
+            {
+              "label": "single mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "is commonly used for long-haul DWDM optical links",
+              "unordered_group": "single mode fiber"
+            }
+          ]
+        },
+        "explanation": "铜缆通过金属导体传输电信号，也可能受到电磁干扰；单模光纤在设计波长支持单一空间传播模式，常用于长途 DWDM 光链路。单模指传播模式而不是只能使用一个波长，原答案图把两类颠倒，已隐藏。小型办公室也可能采用光纤，故不用场所作唯一分类条件。"
+      }
+    },
+    {
+      "id": 1152,
+      "before_sha256": "0e43c3da38777e93bdf7b076d80bc114cdaa0d8c7816964129ab46b6c72102d1",
+      "reason": "消除多个类别均可成立或过度绝对化的描述，保持各组内乱序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "may carry traffic from a unicast source to multiple group members",
+            "uses an fc00::/7 prefix intended for local unicast routing",
+            "reduces the likelihood of conflicts when independently numbered sites merge",
+            "sends packets to a group address rather than a single address"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "uses an fc00::/7 prefix intended for local unicast routing",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "reduces the likelihood of conflicts when independently numbered sites merge",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "may carry traffic from a unicast source to multiple group members",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "ULA fc00::/7 是供本地通信的单播地址范围，通常不在公共互联网上传播；随机全局 ID 降低站点合并冲突概率，但不保证零冲突。它不是技术上不能被路由，路由策略和隧道仍可转发。IPv6 组播以组地址为目的，可从单播源向多个成员发送；源地址也可能为未指定地址，取决于协议。"
+      }
+    }
+  ]
+}

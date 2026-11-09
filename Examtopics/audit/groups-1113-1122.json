@@ -1,0 +1,114 @@
+{
+  "scope": "Independent follow-up Q1113–1122",
+  "corrections": [
+    {
+      "id": 1115,
+      "before_sha256": "8ef27f625da913b2790dbd5c344fee44640dd89c3e1c83799d34a038a74d93a0",
+      "reason": "Prime Infrastructure 也提供北向 API，原分类描述不唯一，限定 SD-Access fabric 控制器功能。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "leverages Cisco Prime Infrastructure",
+            "reduces the workload for enterprise customers",
+            "requires manual configuration of complex protocols",
+            "lacks support for SDA",
+            "uses algorithms to detect security threats",
+            "exposes SD-Access fabric controller functions through northbound APIs"
+          ],
+          "targets": [
+            {
+              "label": "Traditional Campus Device Management (Slot 1)",
+              "sub_label": "",
+              "expected": "leverages Cisco Prime Infrastructure",
+              "unordered_group": "Traditional Campus Device Management"
+            },
+            {
+              "label": "Traditional Campus Device Management (Slot 2)",
+              "sub_label": "",
+              "expected": "requires manual configuration of complex protocols",
+              "unordered_group": "Traditional Campus Device Management"
+            },
+            {
+              "label": "Traditional Campus Device Management (Slot 3)",
+              "sub_label": "",
+              "expected": "lacks support for SDA",
+              "unordered_group": "Traditional Campus Device Management"
+            },
+            {
+              "label": "Cisco DNA Center (Slot 1)",
+              "sub_label": "",
+              "expected": "reduces the workload for enterprise customers",
+              "unordered_group": "Cisco DNA Center"
+            },
+            {
+              "label": "Cisco DNA Center (Slot 2)",
+              "sub_label": "",
+              "expected": "uses algorithms to detect security threats",
+              "unordered_group": "Cisco DNA Center"
+            },
+            {
+              "label": "Cisco DNA Center (Slot 3)",
+              "sub_label": "",
+              "expected": "exposes SD-Access fabric controller functions through northbound APIs",
+              "unordered_group": "Cisco DNA Center"
+            }
+          ]
+        },
+        "explanation": "传统独立设备管理可使用 Cisco Prime Infrastructure，通常需要较多手工配置，且不提供题设的控制器驱动 SD-Access fabric 工作流。Cisco DNA Center 可用自动化减少重复操作、提供北向 API，并可结合支持的安全分析组件检测威胁。集成、许可证和具体版本决定可用能力；传统网络也能自动化，无法从题意推断固定节省比例。原答案图把两项分错组，已移除并保留审查证据。 原图的“使用北向 API”并非控制器专属：Prime Infrastructure 也提供北向接口，因此交互选项改为明确指向 SD-Access fabric 控制器功能。"
+      }
+    },
+    {
+      "id": 1118,
+      "before_sha256": "1f1dfa266d47a4250edcbc5693d5647e4015e5d39337c17c740eae898db52099",
+      "reason": "agent 并不必然是主动轮询中心更新的守护进程，使用通用的受管节点管理软件定义。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "agent",
+            "agentless",
+            "provision",
+            "pull",
+            "push",
+            "post"
+          ],
+          "targets": [
+            {
+              "label": "software running on a managed node to carry out management tasks",
+              "sub_label": "",
+              "expected": "agent"
+            },
+            {
+              "label": "model in which the central server sends updates to nodes on an as-needed basis",
+              "sub_label": "",
+              "expected": "push"
+            },
+            {
+              "label": "easy-to-manage deployment option that may lack scalability",
+              "sub_label": "",
+              "expected": "agentless"
+            },
+            {
+              "label": "model in which managed nodes request configuration updates from a central server",
+              "sub_label": "",
+              "expected": "pull"
+            },
+            {
+              "label": "to automatically install or deploy a configuration or update",
+              "sub_label": "",
+              "expected": "provision"
+            }
+          ]
+        },
+        "explanation": "agent 是受管节点上检查和执行管理任务的驻留程序；push 是中央控制端主动发送更新；agentless 不需安装专用代理，通常容易部署但集中连接数可能限制扩展；pull 是受管节点主动向中央服务器请求更新；provision 指准备或部署配置与资源。原题第四个描述将 agentless 与设备硬件功能混为一谈，已改为明确的 pull 描述；原答案图配对错误，已保留作审查证据。 agent 的具体运行方式依产品而异，不应假定所有 agent 都轮询中心更新。"
+      }
+    },
+    {
+      "id": 1121,
+      "before_sha256": "c61ac1fcb4901d672b3bd7a3ef80370198d849831c6c8e5095fa2e10ff28535d",
+      "reason": "图中 R3 与 R1 存在直连链路；必须核对目的流量经 R2，否则接口 NAT 不会命中。",
+      "updates": {
+        "explanation": "图中 R2 e0/0 通往 R1（10.1.2.0），e0/1 通往 R3（10.2.3.0）；R1 e0/2 为 10.1.3.1，R3 e0/2 需要 DHCP 获得 10.1.3.11。原图现作为拓扑展示。\n\nR2 上配置标准 ACL 和接口 PAT（将访问目标限制为 R1 loopback 并非标准源 ACL 能表达的条件；以下 ACL 匹配图示 R3 三个源地址）：\n```text\nip access-list standard PUBNET\n permit host 10.2.3.3\n permit host 10.1.3.11\n permit host 192.168.3.1\nexit\ninterface ethernet 0/1\n ip nat inside\ninterface ethernet 0/0\n ip nat outside\nexit\nip nat inside source list PUBNET interface ethernet 0/0 overload\n```\n在 R1 的特权 EXEC 模式设置 `clock set 00:00:00 1 May 2018`，配置 `ntp master`；R2 配置 `ntp server 10.1.3.1`。R1 的 DHCP 配置：\n```text\nip dhcp excluded-address 10.1.3.1 10.1.3.10\nip dhcp pool NETPOOL\n network 10.1.3.0 255.255.255.0\n default-router 10.1.3.1\n```\n在 R3 e0/2 使用 `ip address dhcp` 和 `no shutdown`；需检查现有租约、冲突及 DHCP 可达性，不能只靠排除前十个地址保证一定分配 .11。R3 上配置 `username netadmin secret N3t4ccess`、域名、`crypto key generate rsa modulus 1024`、`ip ssh version 2`，VTY 0–4 用 `login local` 和 `transport input ssh`，不修改 console。R1 用 `ssh -l netadmin 10.1.3.11` 验证；R3 以指定源 ping 192.168.1.1 后在 R2 用 `show ip nat translations` 检查转换。最后各设备 `copy running-config startup-config`。\n\n拓扑中 R3 与 R1 还存在直连链路；在 R3 先用 `show ip route 192.168.1.1` 确认到 R1 loopback 的转发路径经 R2，必要时按题设和既有路由添加可撤销的主机路由，并核对 R2 出接口和回程。若数据包绕过 R2，R2 的 NAT 配置不会转换该流量。"
+      }
+    }
+  ]
+}

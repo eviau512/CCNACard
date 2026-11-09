@@ -1,0 +1,161 @@
+{
+  "scope": "Independent non-Lab Q21–Q30 review; dark-mode image review",
+  "corrections": [
+    {
+      "id": 21,
+      "before_sha256": "1b46d4bda05eebcd06e6d3e7d8185d4746f193f59d9f6ea716251154596cf184",
+      "reason": "FF00::/12 only a subset of the multicast block; clarify the question and restore FF00::/8.",
+      "updates": {
+        "prompt": "Which IPv6 prefix identifies multicast addresses?",
+        "options": [
+          {
+            "label": "A",
+            "text": "2000::/3"
+          },
+          {
+            "label": "B",
+            "text": "FC00::/7"
+          },
+          {
+            "label": "C",
+            "text": "FE80::/10"
+          },
+          {
+            "label": "D",
+            "text": "FF00::/8"
+          }
+        ],
+        "explanation": "D. IPv6 multicast addresses have the first eight bits set to one, giving prefix `FF00::/8`. The fields that follow include flags and scope. A is the currently allocated global unicast range; B is unique local unicast; C is link-local unicast. The original D used `FF00::/12`, only a subset of the multicast prefix, so it has been corrected to the general block."
+      }
+    },
+    {
+      "id": 22,
+      "before_sha256": "45313ec05a28a1633adfbd0b1c1d1f5f714b5af05684b4a24889ed6b15880aad",
+      "reason": "TCP is reliable but persistent failure can prevent delivery; distinguish UDP properties and application reliability.",
+      "updates": {
+        "explanation": "D. TCP is connection-oriented and provides a reliable, in-order byte stream using sequence numbers, acknowledgments and retransmissions. Persistent failure can still cause a connection to fail; reliability is not a guarantee that an application operation succeeds. UDP is connectionless and offers best-effort datagrams without TCP-style delivery, ordering or retransmission guarantees. An application can add its own reliability mechanisms. A, B and C reverse one or both properties."
+      }
+    },
+    {
+      "id": 23,
+      "before_sha256": "5cf247433a2499de5bc7f0fb848c26e7dd3397e971ccbc3ac768b8d2739e2b39",
+      "reason": "Not every address in 2000::/3 is publicly reachable; distinguish special-purpose ranges and policy.",
+      "updates": {
+        "explanation": "D. Global unicast is the IPv6 address type intended for globally scoped unicast communication, analogous to public IPv4 addressing. A multicast address identifies a group, B unique-local addresses are intended for local use, and C link-local addresses are scoped to a link. `2000::/3` is the currently allocated global-unicast space, but special-purpose prefixes (for example `2001:db8::/32` documentation space), filtering and routing policy mean that not every address in that range is reachable on the public Internet."
+      }
+    },
+    {
+      "id": 24,
+      "before_sha256": "fa0c051acfd312ec5fa49a4e08020142f82dd4c703e8eedf319e009f6a845a31",
+      "reason": "Limit to modified EUI-64 derived from a 48-bit Ethernet MAC; specify bit numbering.",
+      "updates": {
+        "prompt": "When deriving an IPv6 interface identifier from a 48-bit Ethernet MAC address using modified EUI-64, which operation is performed?",
+        "explanation": "C. To form a modified EUI-64 interface identifier from a 48-bit Ethernet MAC, insert `FFFE` between the first and last three octets, then invert the universal/local bit (bit 1 of the first octet when numbered from the least significant bit, or the seventh bit when counted left to right). For example, `00:11:22:33:44:55` yields `0211:22ff:fe33:4455`. A describes a different way of generating an identifier; B confuses the link-local prefix with the inserted bytes; D omits both modifications. Not every IPv6 interface identifier uses EUI-64."
+      }
+    },
+    {
+      "id": 25,
+      "before_sha256": "d6461baff7a359c8f68ce387f0e6c261367d3b7e007a5b477076ab46334777a8",
+      "reason": "Repair OCR, distinguish four actual /27 networks, and state interface and capacity assumptions.",
+      "updates": {
+        "prompt": "An office has four floors with 24, 29, 28 and 22 users respectively. Each floor needs its own equal-size subnet, including one address for the router interface, with no other addresses required. The listed prefix after “for each floor” specifies the subnet size; assign each floor a different contiguous subnet. Which choice uses the smallest suitable summary and subnet size?",
+        "explanation": "C. A /27 contains 32 addresses, 30 of which are conventionally usable for hosts. Even the largest floor needs 29 user addresses plus one router interface, so a /27 fits each floor. Four distinct contiguous /27s—192.168.0.0/27, .32/27, .64/27 and .96/27—aggregate to 192.168.0.0/25. The /28 and /29 options do not have enough usable addresses per floor; /25 per floor wastes more space. The allocation assumes no further reserved addresses or growth."
+      }
+    },
+    {
+      "id": 28,
+      "before_sha256": "7d964c87ae71e08230af9694b1aca3207bc59e66a5fca53785e8dc1fa465ae8b",
+      "reason": "Clarify a Layer 3 switch SVI and size for worst-case users plus gateway.",
+      "updates": {
+        "prompt": "An office has eight floors with up to 40 users per floor. All users share one IPv4 subnet, and one additional address is needed for the Layer 3 switch SVI. Which interface command uses the least address space among the choices while providing enough usable addresses?",
+        "explanation": "B. Eight floors × 40 users plus one SVI require at least 321 usable addresses. A /23 provides 510 usable addresses and is the smallest listed choice that fits; /16 is much larger, whereas /25 provides 126 and /27 provides 30. `192.168.0.1/23` is a usable host address in the 192.168.0.0/23 network. This sizing assumes no other address reservations."
+      }
+    },
+    {
+      "id": 30,
+      "before_sha256": "b9c5e7a4ba1c6ca0838dcfcde6eb4bf69fa9b5f5cc639bfef92afaca6406b8c9",
+      "reason": "Clarify unchanged MACs versus VLAN tag/FCS changes and explain distractors.",
+      "updates": {
+        "explanation": "C. Both PCs are shown in VLAN 200 and the path is switched at Layer 2. After address resolution, the switch forwards the unicast frame according to its destination MAC and does not replace either endpoint MAC with its own. A and D incorrectly describe rewriting the MAC addresses; B is a broadcast destination, not the normal known-unicast destination for PC_B. A switch may add or remove VLAN tags and recalculate FCS where appropriate, but that does not require changing the source or destination MAC."
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 21,
+      "question_sha256": "1b46d4bda05eebcd06e6d3e7d8185d4746f193f59d9f6ea716251154596cf184",
+      "status": "修订",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 22,
+      "question_sha256": "45313ec05a28a1633adfbd0b1c1d1f5f714b5af05684b4a24889ed6b15880aad",
+      "status": "修订",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 23,
+      "question_sha256": "5cf247433a2499de5bc7f0fb848c26e7dd3397e971ccbc3ac768b8d2739e2b39",
+      "status": "修订",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 24,
+      "question_sha256": "fa0c051acfd312ec5fa49a4e08020142f82dd4c703e8eedf319e009f6a845a31",
+      "status": "修订",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 25,
+      "question_sha256": "d6461baff7a359c8f68ce387f0e6c261367d3b7e007a5b477076ab46334777a8",
+      "status": "修订",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 26,
+      "question_sha256": "cf926f29d1a34bf1161576a1f301e242ee895821996d00f8775da06c170ed31e",
+      "status": "通过",
+      "has_exhibit": true,
+      "exhibit_viewed": true
+    },
+    {
+      "id": 27,
+      "question_sha256": "d2f2de849cec0753899664626d7807d08276521d726a87972a177e43eeb2db8a",
+      "status": "通过",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 28,
+      "question_sha256": "7d964c87ae71e08230af9694b1aca3207bc59e66a5fca53785e8dc1fa465ae8b",
+      "status": "修订",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 29,
+      "question_sha256": "57864d0984b6124934711909f84f2a3f7172c798faf743970ad4535001700091",
+      "status": "通过",
+      "has_exhibit": false,
+      "exhibit_viewed": false
+    },
+    {
+      "id": 30,
+      "question_sha256": "b9c5e7a4ba1c6ca0838dcfcde6eb4bf69fa9b5f5cc639bfef92afaca6406b8c9",
+      "status": "修订",
+      "has_exhibit": true,
+      "exhibit_viewed": true
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.rfc-editor.org/rfc/rfc9293",
+    "https://www.rfc-editor.org/rfc/rfc3849",
+    "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+  ]
+}

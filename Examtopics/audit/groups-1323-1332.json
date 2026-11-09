@@ -1,0 +1,179 @@
+{
+  "scope": "Q1323–Q1332 independent review",
+  "corrections": [
+    {
+      "id": 1324,
+      "before_sha256": "bf0472200e86b157bc98787f4b4823baca31ff46bf50d2852be37f819e699b4e",
+      "reason": "恢复空格与介词，明确ACL选项，不改变原意。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Add a \"permit ip any any\" statement at the end of ACL 101 for allowed traffic."
+          },
+          {
+            "label": "B",
+            "text": "Add a \"permit ip any any\" statement to the beginning of ACL 101 for allowed traffic."
+          },
+          {
+            "label": "C",
+            "text": "The ACL must be moved to the Gi0/1 interface outbound on R2."
+          },
+          {
+            "label": "D",
+            "text": "The source and destination IPs must be swapped in ACL 101."
+          },
+          {
+            "label": "E",
+            "text": "The ACL must be configured inbound on the Gi0/2 interface on R1."
+          }
+        ]
+      }
+    },
+    {
+      "id": 1329,
+      "before_sha256": "81d0c6ce63da668c01a3cc8180008d7daae66d8f411e25def2504757d04edd51",
+      "reason": "以标准小写格式显示IOS命令，不改变选项或答案。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "ip ssh pubkey-chain"
+          },
+          {
+            "label": "B",
+            "text": "Username cisco password 0 cisco"
+          },
+          {
+            "label": "C",
+            "text": "crypto key generate rsa"
+          },
+          {
+            "label": "D",
+            "text": "Transport input telnet"
+          },
+          {
+            "label": "E",
+            "text": "login console"
+          }
+        ]
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1323,
+      "question_sha256": "f1fa2c30b61c22d478f1725583101cb37f188f09d4a2cc251ed00fbd84ace5d9",
+      "review": "闲置端口 access/隔离 VLAN 与 shutdown，C/D；无需题图或CLI。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1324,
+      "question_sha256": "bf0472200e86b157bc98787f4b4823baca31ff46bf50d2852be37f819e699b4e",
+      "review": "直接查看拓扑和ACL；源、目的反向并需末尾permit，A/D；恢复选项排版。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": true,
+      "dark_theme": "原图含蓝色图形，保留彩色；当前逐像素检测颜色差值分别145和140，高于阈值，保留原色。",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1325,
+      "question_sha256": "ea8fc86407b3cfa74ca7ddc759e427951c02c2ebe76968b62ffb8310b771d6a4",
+      "review": "非空ACL首匹配；过宽permit及排序靠前可放行，B/E。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1326,
+      "question_sha256": "93748cad9728b5e3c500b9c9540bcc132867521ccce0e6b577a32547a392c8cd",
+      "review": "唯一密码与自动填充可降低指定风险，A/E；解析明确其局限。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1327,
+      "question_sha256": "76ea575992ea3abc2851b0646030731be868237a4ec6f4275960a0ec6c2c817a",
+      "review": "802.1X 与关闭未用口，D/E；PortFast非认证。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1328,
+      "question_sha256": "21c1f22b5f2db48010828b8ad1fe83e3865e7af1eb536be273071d418cca614d",
+      "review": "题设交互管理限定，HTTP/Telnet为明文，C/D；TFTP另作文件传输说明。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1329,
+      "question_sha256": "81d0c6ce63da668c01a3cc8180008d7daae66d8f411e25def2504757d04edd51",
+      "review": "直接查看原图；根据限定的公钥SSH场景核对A/C并统一IOS命令格式。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": true,
+      "dark_theme": "原图含蓝色图形，保留彩色；当前逐像素检测颜色差值分别145和140，高于阈值，保留原色。",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1330,
+      "question_sha256": "d7ffaa61685aa73bddaaa0f2e39f1c18c93c6984a08a2c07de46ba681bfc2881",
+      "review": "题设签发及撤销公布限定下，CA与CRL对应D/B；OCSP不排除。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1331,
+      "question_sha256": "d046725ded4a98e489b8df56fedf06c7fa7481a15f36f7274d24383055aaa2c5",
+      "review": "SSH VTY和2048位RSA对应A/C，解释已包含平台与其他配置前提。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    },
+    {
+      "id": 1332,
+      "question_sha256": "cf271c1c9f51d0ca3c00fa463a367fb045ff41eb3025c7020e4b33b2f58806fd",
+      "review": "受保护设备或密钥的持有因素与独立知识PIN，B/E，条件已说明。",
+      "options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "image_checked": false,
+      "dark_theme": "无图片",
+      "code_cli_checked": true
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-2/sec-data-acl-xe-2-book/sec-acl-seq-num.pdf"
+  ],
+  "limitations": "直接检查原图与当前问答；无网络设备实机实验。"
+}

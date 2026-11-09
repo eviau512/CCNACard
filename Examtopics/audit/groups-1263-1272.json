@@ -1,0 +1,28 @@
+{
+  "scope": "Independent Q1263–Q1272 review",
+  "corrections": [
+    {
+      "id": 1265,
+      "before_sha256": "510339da7956923531ba0d3fc24a231ccc485b251bee4d6018bc45fc66979e14",
+      "reason": "默认 VLAN 属于设备数据库，不应说由 VTP 动态定义。",
+      "updates": {
+        "prompt": "On a Cisco Catalyst 3750 switch running IOS 12.2(52)SE, which two listed VLAN IDs are among the default VLANs in the VLAN database? (Choose two.)",
+        "explanation": "B、C。此平台默认 VLAN 包括 Ethernet VLAN 1 和保留的 FDDI/Token Ring VLAN 1002–1005；1005 为传统 Token Ring 项。它们是交换机 VLAN 数据库中的默认项，而非由 VTP 动态创建。VLAN 0 是优先级标记的保留 VID；1006 为扩展范围的起始值；4096 超出 12 位 VID 数值范围。具体 VLAN 与管理功能应按平台和软件版本核实。"
+      }
+    },
+    {
+      "id": 1268,
+      "before_sha256": "e51e32f0414537f0f969b6aeb72707f0258a9bbe79a84b522a936d2a82cd3b8d",
+      "reason": "channel-group 命令在成员端口接口模式执行，应避免误称在逻辑聚合接口执行。",
+      "updates": {
+        "prompt": "On an EtherChannel-capable switch, which two member-interface commands place the port in an active negotiation mode? (Choose two.)",
+        "explanation": "D、E。在成员物理端口的接口配置模式中，`channel-group 10 mode desirable` 主动发起 PAgP，`channel-group 10 mode active` 主动发起 LACP。它们属于不同协议，同一聚合的两端不能一端用 PAgP、另一端用 LACP。`auto` 是 PAgP 被动模式，`passive` 是 LACP 被动模式；`on` 为静态聚合，不进行协议协商。两端成员参数还须兼容。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750/software/release/15-0_2_se/configuration/guide/scg3750/swvlan.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/etherchannels.html",
+    "https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/system-management/configuration-guide/system-management-configuration-guide-for-cisco-8000-series-routers-cisco-ios-xr-releases/cisco-discovery-protocol/cisco-discovery-protocol-version-2.html"
+  ]
+}

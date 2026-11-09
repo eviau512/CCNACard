@@ -1,0 +1,21 @@
+{
+  "manifest": "nonlab-0071-0080.json",
+  "applied_ids": [
+    72,
+    73,
+    74,
+    78,
+    79,
+    80
+  ],
+  "corrected_question_sha256": {
+    "72": "8e3674c119376cdeec71e2b441fa103bd2c96f6db8bc7803c75662413f0f762c",
+    "73": "7c56198aaf8fc3e2a2bfa17ce3dce30023be22f75237194bf7d90e3628cc79e3",
+    "74": "e6b09c3a5fbc642315fd754acc70b3e6b89ab368ac718d90fce11ab837e6f853",
+    "78": "310dc60262f5560aba07662d7a0d3927a62229b29dbfc67c1560353d2902830b",
+    "79": "d38317d8f19a0b7fdabcf3c0d315ed15dd37ec901b59a8c59fe9da26c4014316",
+    "80": "5e1446f8946ed9f53b453082ed91aea2253541bff0799ea2cc42af688fc68d62"
+  },
+  "source_sha256": "5ddd164f83f33a2286d51d701844628ed4d8fcf12350ddaead80dee3438e2bd2",
+  "app_bundle_sha256": "42b6238636e6048da3d8ac6c8133cae78ead1c7eb38851795ddcb9cd1e4ab872"
+}

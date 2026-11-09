@@ -1,0 +1,123 @@
+{
+  "scope": "Q1183–Q1192 independent regrouping review",
+  "corrections": [
+    {
+      "id": 1185,
+      "before_sha256": "2794746e951c8233ecf83d7a132c31fc9722f5461703ec1e13448f1860d96836",
+      "reason": "原图保留旧措辞，明确以修订后的选项为准；必要时消除分类歧义。",
+      "updates": {
+        "prompt": "Classify these adapted cable characteristics as copper cable or single-mode fiber. Within each category either order is accepted. The original exhibit uses earlier wording; classify the adapted interactive options."
+      }
+    },
+    {
+      "id": 1186,
+      "before_sha256": "4cc3f919539ba15d35731f7478a5e7687d5c14fdd7df10f6294cc7b2e41c2076",
+      "reason": "原图保留旧措辞，明确以修订后的选项为准；必要时消除分类歧义。",
+      "updates": {
+        "prompt": "Match the adapted characteristics to IPv6 unique-local unicast or multicast. Within each category either order is accepted. The original exhibit uses earlier wording; classify the adapted interactive options."
+      }
+    },
+    {
+      "id": 1188,
+      "before_sha256": "f6833430c03c479b6b1708c617664b12deefffabdbbea12f74160e9ebb1d443c",
+      "reason": "原图保留旧措辞，明确以修订后的选项为准；必要时消除分类歧义。",
+      "updates": {
+        "prompt": "Classify the adapted characteristics as copper twisted-pair cable or single-mode fiber. Within each category either order is accepted. The original exhibit uses earlier wording; classify the adapted interactive options.",
+        "drag_drop_data": {
+          "sources": [
+            "is affected by electrical and magnetic interference",
+            "supports a single spatial mode at its specified operating wavelength",
+            "is available in shielded or unshielded twisted-pair forms",
+            "transmits signals using pulses of light"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "is affected by electrical and magnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "is available in shielded or unshielded twisted-pair forms",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "transmits signals using pulses of light",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "supports a single spatial mode at its specified operating wavelength",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "铜双绞线可有屏蔽或非屏蔽形式，电气信号可能受 EMI 影响；Ethernet 长度由所用标准、速率和介质决定，不能断言所有铜缆均为 100 m。单模光纤以光信号传输，可根据模块、连接损耗及光功率预算支持长距离，并非无限距离或零误码。两组组内无序；已修正原图“同时有屏蔽和无屏蔽”及模糊的距离表述。 单模在规定工作波长支持单一空间传播模式；长距离也可能由其他介质或模式实现，不能单凭“较长距离”唯一分类。"
+      }
+    },
+    {
+      "id": 1190,
+      "before_sha256": "9d499ee61ee4f936e82db8adfc1e3cc02d878fe87e413b6d69c4e59ed93288ea",
+      "reason": "原图保留旧措辞，明确以修订后的选项为准；必要时消除分类歧义。",
+      "updates": {
+        "prompt": "Match adapted characteristics to IPv6 global unicast or multicast destination addresses. Within each category either order is accepted. The original exhibit uses earlier wording; classify the adapted interactive options.",
+        "drag_drop_data": {
+          "sources": [
+            "globally scoped unicast address can be routed on the public Internet",
+            "provides one-to-many communications",
+            "identifies a group of receiving interfaces as a destination",
+            "identifies one interface rather than a multicast group"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast Address (Slot 1)",
+              "sub_label": "",
+              "expected": "globally scoped unicast address can be routed on the public Internet",
+              "unordered_group": "Global Unicast Address"
+            },
+            {
+              "label": "Global Unicast Address (Slot 2)",
+              "sub_label": "",
+              "expected": "identifies one interface rather than a multicast group",
+              "unordered_group": "Global Unicast Address"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "identifies a group of receiving interfaces as a destination",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "全球单播地址用于单个接口，地址范围适合全球路由，但能否从互联网访问还取决于路由通告、防火墙及路径；地址类型本身不保证可达。多播目的地址标识一组接收者，可进行一对多发送；IPv6 多播地址不能用于源地址。各类别内顺序可互换。原图把全球单播写成必定互联网可达，已修正互动表述。 源地址为单播并不能单独区分单播或多播目的，因此使用目的地址标识接收组作为明确特征。"
+      }
+    },
+    {
+      "id": 1191,
+      "before_sha256": "26e86ff34e87faf469c7f637ca7782fad5e82ebaf16e3c2ce59d079009c0e307",
+      "reason": "恢复实验题题干的任务层级与可读性，保留配置目标和题号。",
+      "updates": {
+        "prompt": "Refer to the topology. A company plans to deploy 64 new sites. Subnet 10.30.64.0/19 into 64 equal-sized subnets while maximizing hosts per subnet. In the second subnet, assign the first usable IPv4 address to Sw101 e0/0 and the last usable address to Sw102 e0/0. Subnet 2001:db8::/56 into 64 equal-sized subnets while maximizing addresses per subnet. In the second subnet, assign each interface a unique 64-bit interface identifier. Save the configurations."
+      }
+    },
+    {
+      "id": 1192,
+      "before_sha256": "bc89058a135bb53ba8e6558ac5d30190049ccabed733236e29fabc760da55ecd",
+      "reason": "恢复实验题题干的任务层级与可读性，保留配置目标和题号。",
+      "updates": {
+        "prompt": "Refer to the topology. Configure R1 to prefer R2 to reach 2001:db8:41::/64, with a floating route through R3 if the R1–R2 connection fails. Ensure end-to-end ping and traceroute work. Save the configurations."
+      }
+    }
+  ]
+}

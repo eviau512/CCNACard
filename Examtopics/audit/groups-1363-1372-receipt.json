@@ -1,0 +1,11 @@
+{
+  "manifest": "groups-1363-1372.json",
+  "applied_ids": [
+    1366
+  ],
+  "corrected_question_sha256": {
+    "1366": "5097e4e5e2b30fd1db53a7cb0f795ae43823fe8cdbaad226cb8c10f2d82e7dae"
+  },
+  "source_sha256": "637e0f76dea9bc0f7147b394d42cdebe0ef209b590a8e2882394c24af244bdbb",
+  "app_bundle_sha256": "5b01af6eebfa895b44cbd3da0818237ca3e0b770216c2e69debe9d5a8b304c34"
+}

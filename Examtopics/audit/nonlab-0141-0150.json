@@ -1,0 +1,212 @@
+{
+  "scope": "Independent non-Lab review Q141–Q150",
+  "corrections": [
+    {
+      "id": 141,
+      "before_sha256": "18308bc64156a4521f7c9313ea9e47e4326330528bd228c187216dd39193fae4",
+      "reason": "移除相邻 AP 绝不能同频、全球只有三个信道和禁用 TCP 不可能等绝对说法。",
+      "updates": {
+        "explanation": "A。对覆盖区域重叠的 802.11b AP，规划互不重叠的 2.4 GHz 信道可减少相邻信道干扰；在常见的 1–11 信道规划中，1、6、11 是一组常用选择。信道可用性随监管区域而异，有限频谱下同频道重用无法完全避免，也不能保证吞吐量。\n\nB 的 TCP 是传输层协议，关闭 TCP 并非射频协商方法；C 的 5 Mbps 并非 802.11b 标称速率级；D 的 54 Mbps 对应 802.11a/g 的最高标称 PHY 速率，802.11b 最高为 11 Mbps。"
+      }
+    },
+    {
+      "id": 142,
+      "before_sha256": "5da57cfb064e1efee8ba1e6df411dcb66fd5652f7042ccf6e4b83182e2fc6b8c",
+      "reason": "补充链路 trunk、两端、允许列表及 native VLAN 未强制打标前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The link between Switch 1 and Switch 2 is an 802.1Q trunk. Assuming native VLAN tagging is disabled and VLAN 67 is allowed, which command should be configured on the trunk interfaces so that VLAN 67 traffic is untagged and other allowed VLAN traffic is tagged?",
+        "explanation": "D。在两端对应 trunk 接口配置 `switchport trunk native vlan 67`，在未启用 native VLAN 显式打标的常见配置下，VLAN 67 数据帧作为 native VLAN 无标签发送；两端 native VLAN 应一致，并确保 VLAN 已创建且在允许列表中。\n\nA 指定 access VLAN 而不设置 trunk native VLAN；B 修改允许列表并可能只允许 VLAN 67，不决定无标签发送；C 是 private VLAN 配置。部分 Cisco 平台可配置 `vlan dot1q tag native`，启用后 native VLAN 的打标行为与默认情形不同。"
+      }
+    },
+    {
+      "id": 143,
+      "before_sha256": "f9793e310f4b74e4e6349a5ab0296931bb1fdd25a48c549de407a9a16425cd47",
+      "reason": "明确端口、电话配置与PC无标签等前提，纠正端到端可达及固定CoS的保证。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume Gi3/1/4 is an access port with default data VLAN 1, VLANs 1 and 50 are active, and a compatible Cisco phone receives the voice VLAN configuration. The attached PC sends untagged frames. Which VLANs carry the phone voice traffic and PC data traffic?",
+        "explanation": "B。图中接口配置 `switchport voice vlan 50`；在电话成功获知语音 VLAN 并使用该配置时，其语音数据使用 VLAN 50。题设 PC 发送的无标签数据经电话转发后，由交换机划入接入数据 VLAN 1。\n\nA/C 错在断言默认数据侧没有 VLAN；D 错在把普通无标签 PC 流量也放入语音 VLAN。实际连通性仍取决于 VLAN 存在、端口状态、上联及电话配置；图中配置本身不能保证端到端通话，也不能推断所有语音帧都必定使用固定 CoS。"
+      }
+    },
+    {
+      "id": 144,
+      "before_sha256": "d1bc0b85cef8558019a429c302bfc72a10ab5cd7e222d644814738fc40188765",
+      "reason": "避免称所有无标签帧无条件接受及接入VLAN配置作废，区分归类与最终转发。",
+      "updates": {
+        "explanation": "C。图中 Gi0/1 显式配置为 trunk，native VLAN 5 位于 allowed VLAN 1–10 中。按通常的未标记帧处理，交换机将到达的无标签数据帧归入 native VLAN 5；配置中的 access VLAN 11 在该端口处于 trunk 模式时不是此无标签帧的分类依据。\n\nVLAN 1 是常见默认 native 值，但已被 5 覆盖；11 是保存的 access VLAN，不是当前 trunk 的 native VLAN。该题关注 VLAN 分类，实际转发还受 VLAN 状态、STP、接收策略与平台配置影响，不应将“归类为 VLAN 5”直接等同保证最终交付。"
+      }
+    },
+    {
+      "id": 145,
+      "before_sha256": "aab79ff681ee476d7cabce5a0b0e714e662d68fb255df066aee90c0df54b0725",
+      "reason": "替换模板化解析，说明全局/接口和LLDP/CDP的区别。",
+      "updates": {
+        "explanation": "A。Cisco IOS 的 `lldp run` 在全局配置模式启用 LLDP；可在支持的接口上根据需要启用或关闭发送与接收。\n\nB 的 `lldp enable` 不是题设 IOS 全局启用命令；C 的 `lldp transmit` 控制接口发送，不是全局启用；D 的 `cdp run` 与 E 的 `cdp enable` 分别是 CDP 相关全局/接口命令，不是 LLDP。具体功能和默认状态依平台与软件版本而异。"
+      }
+    },
+    {
+      "id": 146,
+      "before_sha256": "8c894b68fa39b6fa9f9839575dcd0c1ea27257aa11341f1eba47807fde989281",
+      "reason": "消除模糊的 delay time，替换模板解析，区分发送周期、保持与重新初始化。",
+      "updates": {
+        "prompt": "Which Cisco IOS global configuration command sets the LLDP interface reinitialization delay to 5 seconds?",
+        "explanation": "D。`lldp reinit 5` 将 LLDP 接口重新初始化延迟设置为 5 秒，参数单位为秒。\n\nA 的 `lldp timer` 设置 LLDP 通告发送间隔，而且 5000 不表示 5 秒；B 的 `lldp holdtime 5` 是邻居保留本设备信息所通告的保持时间，不是重新初始化延迟；C 的 5000 不是 5 秒，是否在命令范围内取决于平台。"
+      }
+    },
+    {
+      "id": 149,
+      "before_sha256": "5a75096ea0decd9f5c8cc68b72a302a779b2c318624c43e20bf2c89e7dc66c66",
+      "reason": "限定Cisco Catalyst默认VLAN，去掉所有控制协议无条件位于VLAN1等绝对化。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On the Cisco Catalyst switch shown, which VLAN is the default VLAN in the VLAN database?",
+        "explanation": "A。题设 Cisco Catalyst 的默认 VLAN 是 VLAN 1；图中端口的 access VLAN 5 和 trunk 的 native VLAN 10 是单独配置的角色，不能因此把默认 VLAN 改成 5 或 10。VLAN 20 也只是图中允许列表范围内的普通 VLAN。\n\n默认 VLAN、端口 access VLAN 与 trunk native VLAN 是不同概念：出厂常以 VLAN 1 作为默认 access/native 值，但管理员可以更改端口的 VLAN 分配或 native VLAN。协议控制流量的承载和 VLAN 1 的限制依设备平台、特性与配置而异，不应把所有控制协议行为写成无条件规则。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 141,
+      "before_sha256": "18308bc64156a4521f7c9313ea9e47e4326330528bd228c187216dd39193fae4",
+      "review": "A正确，检查802.11b速率和选项；无图CLI。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": false
+    },
+    {
+      "id": 142,
+      "before_sha256": "5da57cfb064e1efee8ba1e6df411dcb66fd5652f7042ccf6e4b83182e2fc6b8c",
+      "review": "查看原拓扑，D正确但需 trunk、允许和未强制打标前提。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": true
+    },
+    {
+      "id": 143,
+      "before_sha256": "f9793e310f4b74e4e6349a5ab0296931bb1fdd25a48c549de407a9a16425cd47",
+      "review": "查看原配置图，B在默认接入VLAN、电话获知配置和PC无标签条件下正确。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": true
+    },
+    {
+      "id": 144,
+      "before_sha256": "d1bc0b85cef8558019a429c302bfc72a10ab5cd7e222d644814738fc40188765",
+      "review": "查看原配置图，C为native VLAN分类；转发另有条件。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": true
+    },
+    {
+      "id": 145,
+      "before_sha256": "aab79ff681ee476d7cabce5a0b0e714e662d68fb255df066aee90c0df54b0725",
+      "review": "A全局lldp run，解释C接口发送及D/E的CDP。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": false
+    },
+    {
+      "id": 146,
+      "before_sha256": "8c894b68fa39b6fa9f9839575dcd0c1ea27257aa11341f1eba47807fde989281",
+      "review": "D为reinit 5秒；明确题目指重初始化并说明其他计时器。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": false
+    },
+    {
+      "id": 147,
+      "before_sha256": "e045377389757e7fd75e54913b8ad5a3f8ebed9f2fd3fac3944306505c3bd9b1",
+      "review": "B正确，已核对CDP另一可通告接口地址及无IP不妨碍二层发现；现有解析足够。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": false
+    },
+    {
+      "id": 148,
+      "before_sha256": "628b1d3a1cef69c0a3995faf23ae488ae9bb4d9e5b9686eeeffea1ce462d3e99",
+      "review": "A正确，passive响应LACP，active主动，PAgP及on不同；现有解析足够。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": false
+    },
+    {
+      "id": 149,
+      "before_sha256": "5a75096ea0decd9f5c8cc68b72a302a779b2c318624c43e20bf2c89e7dc66c66",
+      "review": "查看拓扑图，A为Cisco默认VLAN 1；区分access/native及平台限制。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": true
+    },
+    {
+      "id": 150,
+      "before_sha256": "619fd875a81d81c3a5a624cf0d115fceded794f98c2f1ac3d6f8f94ea31c30ac",
+      "review": "查看配置图，SW2 native 100，B仅指接收归类；已说明允许列表与STP限制。",
+      "checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image_or_absence",
+        "cli_or_absence"
+      ],
+      "image_viewed": true
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_55_se/configuration/guide/3560_scg/swlldp.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/csbms/CBS_250_350/CLI/cbs-250-cli/lldp-commands.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+  ]
+}

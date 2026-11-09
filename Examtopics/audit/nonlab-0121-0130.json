@@ -1,0 +1,40 @@
+{
+  "scope": "Q121–Q130 非 Lab 独立复核",
+  "corrections": [
+    {
+      "id": 123,
+      "before_sha256": "3988f53badb587368c84d6942e764a530ab1b910bdaee92966996000662f1715",
+      "reason": "选项只说 one of 可被理解为至少一个；明确仅连接一台 spine。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "Each leaf switch connects to only one spine switch."
+          },
+          {
+            "label": "B",
+            "text": "Each leaf switch is connected to each spine switch."
+          },
+          {
+            "label": "C",
+            "text": "Each leaf switch is connected to two spine switches, making a loop."
+          },
+          {
+            "label": "D",
+            "text": "Each leaf switch is connected to a central leaf switch, then uplinked to a core spine switch."
+          }
+        ],
+        "explanation": "B。标准两层 leaf–spine 架构中，每台 leaf 与每台 spine 建立链路，终端或服务器通常连接 leaf；任意两台不同 leaf 间的典型路径经一个 spine。A 将每台 leaf 限制为仅接一台 spine，不符合全互连；C 把 spine 数量限定为两台，冗余路径也不等于必然产生未受控二层环路；D 引入中心 leaf，并非题设的两层架构。冗余路径和带宽规划仍需结合设备数量、链路和超售比。"
+      }
+    },
+    {
+      "id": 126,
+      "before_sha256": "3f415db831753c66f082e359ff3c257faf32a879d3e46de58790d1a59d183b9a",
+      "reason": "原解释大量模板套话，没有说明各档位用途；限定 Cisco WLC 标准金属档位并逐项解释。",
+      "updates": {
+        "prompt": "On a Cisco wireless controller using the standard metal QoS profiles, which profile is intended for voice-over-WLAN traffic?",
+        "explanation": "A。Cisco WLC 的标准金属 QoS 分类将 Platinum 对应 Voice，适合作为语音 WLAN 的 QoS 配置。B Bronze 对应 Background 背景流量；C Gold 对应 Video 视频流量；D Silver 对应 Best Effort 尽力而为流量，通常是默认值。Platinum 是分类和优先处理策略的一部分，并不单独保证带宽、时延或端到端通话质量；还需结合终端、空口容量及有线网络 QoS 配置。"
+      }
+    }
+  ]
+}

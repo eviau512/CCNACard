@@ -1,0 +1,17 @@
+{
+  "manifest": "groups-1193-1202.json",
+  "applied_ids": [
+    1193,
+    1195,
+    1201,
+    1202
+  ],
+  "corrected_question_sha256": {
+    "1193": "ca4ca18675e17aa2c472f66ed95358acd20e06749b535fa62bf6f46d44204c94",
+    "1195": "90325fbdbc65a469072dc88b3679ab4f9a84a26df729cabc78dd250d9471e81c",
+    "1201": "a6ff15e0b90365760c492b0db1551b49e44af167d7c13dc40e747f764a0e9c55",
+    "1202": "db26dd447adf2a582690ecb5acb0e8743b1f4900646199b2f624adb6df4edca8"
+  },
+  "source_sha256": "e4f35f9f5949b00799973df328a30f19d08705523592f7e1e74d81f577379872",
+  "app_bundle_sha256": "2cf1f64040a29ec91c1158b911e04b1ab520f9fb6187c2b62aaae098018db508"
+}

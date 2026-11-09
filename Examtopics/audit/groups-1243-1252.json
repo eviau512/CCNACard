@@ -1,0 +1,67 @@
+{
+  "scope": "Independent Q1243–Q1252 content, answers, explanation, image and CLI audit",
+  "corrections": [
+    {
+      "id": 1249,
+      "before_sha256": "362a5e55f15fa6cb092840797fdd02d7f7f24ff2bee91bb7350f67b21072c093",
+      "reason": "原 C 连接应用同样可由私网实现，与 A 并列造成歧义；改为地址方案不能保证的应用互通。",
+      "updates": {
+        "prompt": "Which two are reasons to use RFC 1918 IPv4 private address space? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "to enable intra-enterprise communication"
+          },
+          {
+            "label": "B",
+            "text": "to implement NAT"
+          },
+          {
+            "label": "C",
+            "text": "to guarantee application interoperability regardless of protocol or implementation"
+          },
+          {
+            "label": "D",
+            "text": "to conserve global address space"
+          },
+          {
+            "label": "E",
+            "text": "to manage routing overhead"
+          }
+        ],
+        "explanation": "A、D。组织可以在内部规划 RFC 1918 地址以支持内部通信；独立网络复用相同前缀可减少全球唯一 IPv4 地址需求。企业内部也可使用公网地址；私网互联时须处理可能的地址重叠。B 的 NAT 可用于特定互联设计，但并非使用私网地址的必需目的；C 应用互通仍取决于协议与实现；E 编址本身不保证降低路由开销。"
+      }
+    },
+    {
+      "id": 1252,
+      "before_sha256": "6a8b0180af7660525f6818062cf854f234d9c7eedd54114bb26b13fa73f16c83",
+      "reason": "澄清交换以太帧及目的 MAC/VLAN，避免将 packet 与源 MAC 混为一谈。",
+      "updates": {
+        "prompt": "Which two functions are provided by ordinary Layer 2 Ethernet switching? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "acts as a central point for association and authentication servers"
+          },
+          {
+            "label": "B",
+            "text": "selects the best route between networks on a WAN"
+          },
+          {
+            "label": "C",
+            "text": "forwards Ethernet frames within a VLAN"
+          },
+          {
+            "label": "D",
+            "text": "moves packets between different VLANs"
+          },
+          {
+            "label": "E",
+            "text": "uses destination MAC addresses and VLAN membership to make forwarding decisions"
+          }
+        ],
+        "explanation": "C、E。二层交换在所属 VLAN 内依据目的 MAC 地址与 VLAN 成员关系转发以太帧：已知单播通常定向转发，未知单播通常泛洪到该 VLAN 中允许转发的其他端口。转发还受端口状态、过滤及其他策略约束。无线关联与认证集中功能、WAN 选路及跨 VLAN 路由不是纯二层转发的基本职能；多层交换机可另行提供三层功能。"
+      }
+    }
+  ]
+}

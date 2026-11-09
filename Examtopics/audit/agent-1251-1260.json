@@ -1,0 +1,282 @@
+{
+  "corrections": [
+    {
+      "id": 1251,
+      "before_sha256": "750c6cab94d60039355afd406341a113a7a57784ef9ede45440dcb3d959d4eef",
+      "updates": {
+        "prompt": "In the classic three-tier campus design, which two functions are primary goals of the core layer? (Choose two.)",
+        "explanation": "A、C。核心层连接多个汇聚模块，以高可用和高性能转发为目标；冗余和快速收敛可以降低中断，但不保证任何故障下零中断或端到端时延。B深度安全检查通常放在适当安全边界，D终端接入通常在接入层，E边缘流量监管并非核心层的主要职责。具体设备和设计仍可能在核心应用策略。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "A、C。核心层连接多个汇聚模块，以高可用和高性能转发为目标；冗余和快速收敛可以降低中断，但不保证任何故障下零中断或端到端时延。B深度安全检查通常放在适当安全边界，D终端接入通常在接"
+      }
+    },
+    {
+      "id": 1252,
+      "before_sha256": "204afc5b773ab3c3ae13cf3fc71033c9a410e634eb418df5a4820b738dc5684a",
+      "updates": {
+        "explanation": "C、E。纯二层交换在所属 VLAN 内依据目的 MAC 和 VLAN 作转发决策：已知单播可定向转发，未知单播通常在允许端口泛洪。A无线关联与认证集中功能、B广域路由、D跨 VLAN 路由均不是纯二层转发的基本职能；多层交换机可另行提供三层功能。题目中的 packet 此处对应以太帧。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "C、E。纯二层交换在所属 VLAN 内依据目的 MAC 和 VLAN 作转发决策：已知单播可定向转发，未知单播通常在允许端口泛洪。A无线关联与认证集中功能、B广域路由、D跨 VLA"
+      }
+    },
+    {
+      "id": 1253,
+      "before_sha256": "b4f75fa601c1689209dc60c67dbcf14a01636585b5255ce0e8567fd4ff5777e4",
+      "updates": {
+        "prompt": "For standard 1000BASE-T channels on compliant Cat 5e and Cat 6a cabling, which two statements are true? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Both categories specify 10GBASE-T over a full 100-meter channel."
+          },
+          {
+            "label": "B",
+            "text": "Both support 1 Gigabit Ethernet."
+          },
+          {
+            "label": "C",
+            "text": "Both have a maximum 1000BASE-T channel length of 55 meters."
+          },
+          {
+            "label": "D",
+            "text": "Both support a 100-meter 1000BASE-T channel."
+          },
+          {
+            "label": "E",
+            "text": "Both are specified to 500 MHz."
+          }
+        ],
+        "explanation": "B、D。符合布线要求的 Cat 5e 与 Cat 6a 都可支持 1000BASE-T 的 100 米信道。Cat 6a 额定至 500 MHz 并适合完整 100 米 10GBASE-T；不能因此把 Cat 5e 也归为该 10GBASE-T 规格。原 C 说两者能跑 55 米同样成立，现改为询问最大长度以消除歧义；55 米不是 1000BASE-T 频道上限。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "B、D。符合布线要求的 Cat 5e 与 Cat 6a 都可支持 1000BASE-T 的 100 米信道。Cat 6a 额定至 500 MHz 并适合完整 100 米 10GBA"
+      }
+    },
+    {
+      "id": 1254,
+      "before_sha256": "ddba2f09b352aa9da43abe4d8dd60069e6032ac537acee04515a0d98be61a8c9",
+      "updates": {
+        "prompt": "Which two forwarding-plane actions can occur while a switch forwards a transit Ethernet frame? (Choose two.)",
+        "explanation": "C、D。转发帧时可以按出口 VLAN 规则添加或移除 802.1Q 标签，也可以按目标 MAC 与 VLAN 查询转发表。运行路由协议属于控制平面；NETCONF 配置属于管理平面。发送给设备自身的 ICMP 请求由本地协议栈处理，其具体实现可以依平台而异；平面是功能划分，并不保证任何动作一定由专用 ASIC 完成。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "C、D。转发帧时可以按出口 VLAN 规则添加或移除 802.1Q 标签，也可以按目标 MAC 与 VLAN 查询转发表。运行路由协议属于控制平面；NETCONF 配置属于管理平面"
+      }
+    },
+    {
+      "id": 1255,
+      "before_sha256": "46ea3890944127ea599aa32ce12f1ddf395c5aae99d8ea7837edc85da36cd5a4",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It uniquely identifies a client in a WLAN."
+          },
+          {
+            "label": "B",
+            "text": "Its length is at most 32 octets."
+          },
+          {
+            "label": "C",
+            "text": "It uniquely identifies an access point in a WLAN."
+          },
+          {
+            "label": "D",
+            "text": "It provides secured access to a WLAN."
+          },
+          {
+            "label": "E",
+            "text": "Its announcement in beacons can be enabled or suppressed."
+          }
+        ],
+        "explanation": "B、E。SSID 长度上限为 32 个八位字节，不能把多字节字符与字节数等同；AP 可配置在信标中发布或隐藏网络名称。隐藏并非加密或认证，客户端仍可通过其他管理帧暴露名称。客户端通常用 MAC 地址标识；BSSID 标识基本服务集，同一 SSID 可用于多个 AP。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "B、E。SSID 长度上限为 32 个八位字节，不能把多字节字符与字节数等同；AP 可配置在信标中发布或隐藏网络名称。隐藏并非加密或认证，客户端仍可通过其他管理帧暴露名称。客户端通"
+      }
+    },
+    {
+      "id": 1256,
+      "before_sha256": "2b51ac0d42e540e034e7178a9af3a04bb50085186614ddc5b24d7b6d38f92aa8",
+      "updates": {
+        "prompt": "For a Cisco WLAN with Broadcast SSID enabled, which two statements about the SSID and its announcement are correct? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "The SSID is at most 32 octets long."
+          },
+          {
+            "label": "B",
+            "text": "The SSID by itself determines the Wi-Fi data rate."
+          },
+          {
+            "label": "C",
+            "text": "The SSID can only be used with a wireless controller."
+          },
+          {
+            "label": "D",
+            "text": "The SSID is restricted to exactly one access point."
+          },
+          {
+            "label": "E",
+            "text": "The AP includes the SSID in its beacon announcements."
+          }
+        ],
+        "explanation": "A、E。SSID 最长 32 字节；在题设启用 Broadcast SSID 时，AP 的信标通告该名称。SSID 不是速率控制机制，不局限控制器架构，也可以由多个 AP 使用。不同平台的默认设置可能不同，隐藏名称也不提供认证或加密。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "A、E。SSID 最长 32 字节；在题设启用 Broadcast SSID 时，AP 的信标通告该名称。SSID 不是速率控制机制，不局限控制器架构，也可以由多个 AP 使用。不"
+      }
+    },
+    {
+      "id": 1257,
+      "before_sha256": "a28e7fac4afecbaba612f26d6019146b6cc21ae6070c511890bc22195cb02c07",
+      "updates": {
+        "prompt": "In the classic three-tier campus model, which two are typical access-layer connection points? (Choose two.)",
+        "explanation": "B、D。接入层通常连接打印机等终端以及无线 AP 到有线网络；AP 需要时可使用 PoE 和 trunk，具体依部署。汇聚层通常承担接入层聚合与策略，核心强调骨干高可用；冗余也可应用于接入层，三层边界也可下移到接入层，具体取决于设计。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "B、D。接入层通常连接打印机等终端以及无线 AP 到有线网络；AP 需要时可使用 PoE 和 trunk，具体依部署。汇聚层通常承担接入层聚合与策略，核心强调骨干高可用；冗余也可应"
+      }
+    },
+    {
+      "id": 1258,
+      "before_sha256": "307d01502758342f75d466ed6dd075f0c9595f19a93f8ccdc88fc2f3bd883e1e",
+      "updates": {
+        "prompt": "Which two addressing approaches can reduce public IPv4 consumption while providing IPv6 Internet access or IPv4 Internet access respectively? (Choose two.)",
+        "explanation": "A、B。IPv6 连接使支持 IPv6 的目标可不消耗公网 IPv4；访问仅支持 IPv4 的目标仍需双栈或合适的转换机制。RFC 1918 私网配 PAT 可让多个内部会话共享一个或少量公网 IPv4，具体容量受地址、端口和实现限制。私网本身不是加密或防火墙，单独使用也不能直接在公网路由。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "A、B。IPv6 连接使支持 IPv6 的目标可不消耗公网 IPv4；访问仅支持 IPv4 的目标仍需双栈或合适的转换机制。RFC 1918 私网配 PAT 可让多个内部会话共享一"
+      }
+    },
+    {
+      "id": 1259,
+      "before_sha256": "b6ed183f83dcc4b035830427a21714afe6aa6c119316bed126cf9c298d0a248a",
+      "updates": {
+        "prompt": "Which two are benefits of RFC 1918 private IPv4 addressing in independently administered networks? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Only private addresses can be subnetted hierarchically."
+          },
+          {
+            "label": "B",
+            "text": "The same private address ranges can be reused in separate networks."
+          },
+          {
+            "label": "C",
+            "text": "Internal addresses need not be advertised in the global Internet routing table."
+          },
+          {
+            "label": "D",
+            "text": "Private addresses encrypt sensitive data inside the enterprise."
+          },
+          {
+            "label": "E",
+            "text": "Private addressing alone securely encrypts traffic through an ISP."
+          }
+        ],
+        "explanation": "B、C。RFC 1918 地址可以在彼此独立的网络重复使用，通常不在全球互联网中作为公网前缀路由；网络互联时地址重叠仍需规划或转换。私网本身不加密、不保证安全；公有地址也可以分层划分。原 B 将节省维护成本表述成必然效果，现改为可验证的复用优势。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "B、C。RFC 1918 地址可以在彼此独立的网络重复使用，通常不在全球互联网中作为公网前缀路由；网络互联时地址重叠仍需规划或转换。私网本身不加密、不保证安全；公有地址也可以分层划"
+      }
+    },
+    {
+      "id": 1260,
+      "before_sha256": "f9b378b1092b2acc9c6fd54a8c42365cad71f211a2043ffbc990fc9bd9a65c18",
+      "updates": {
+        "prompt": "An AP connects through an Ethernet access switch using a 2.5GBASE-T or 5GBASE-T link. Both ports explicitly support the required IEEE 802.3bz speed and the cable channel meets its specifications. Which two cabling categories among these can be used? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Category 6A twisted-pair cable"
+          },
+          {
+            "label": "B",
+            "text": "1000BASE-LX/LH optical transceiver"
+          },
+          {
+            "label": "C",
+            "text": "Category 5e twisted-pair cable"
+          },
+          {
+            "label": "D",
+            "text": "Category 3 twisted-pair cable"
+          },
+          {
+            "label": "E",
+            "text": "A telephone-only untwisted cable"
+          }
+        ],
+        "explanation": "A、C。符合信道条件的 Cat 5e 和 Cat 6A 可用于支持 802.3bz 的 2.5G/5G 铜缆端口；实际距离、线缆质量和端口支持须核实。1000BASE-LX/LH 是 1G 光接口而非适用于此铜缆链路的线缆类别；Cat 3 和未绞合电话线不满足题设。原题将 10GBASE-T 物理层标准当线缆类别，并假设所有 10G 端口都支持 2.5G/5G，现明确端口与线缆前提。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none present",
+        "code_cli": "none",
+        "finding": "A、C。符合信道条件的 Cat 5e 和 Cat 6A 可用于支持 802.3bz 的 2.5G/5G 铜缆端口；实际距离、线缆质量和端口支持须核实。1000BASE-LX/LH "
+      }
+    }
+  ]
+}

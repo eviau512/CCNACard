@@ -1,0 +1,255 @@
+{
+  "scope": "Q1361–Q1370",
+  "corrections": [
+    {
+      "id": 1361,
+      "before_sha256": "3c6a52bb5c2b67c9e29368e33afe455a16c6eff2b4ff936bae903d619568a015",
+      "updates": {
+        "prompt": "Refer to the exhibit. In this routing example, consider both selecting eligible same-protocol routes for the same prefix and forwarding packets to matching installed prefixes. Which two criteria are relevant? (Choose two.)",
+        "explanation": "C、E。对于目标地址，路由器对已安装的匹配路由执行最长前缀匹配（E）；图中静态 1.1.1.3/32 与 OSPF 1.1.1.0/24 重叠，目标为 1.1.1.3 时 /32 更长。构建同一前缀的路由时，同一路由协议可以用度量值比较候选路径（C）；跨来源选择还要考虑管理距离和各协议的选路规则，不能把不同协议的 metric 直接比较。图中显示的是不同前缀，并不证明它们仅依据 metric 相互竞争。B、D 选择最高值不符合题设；A 不代表本题通用规则。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "C、E。对于目标地址，路由器对已安装的匹配路由执行最长前缀匹配（E）；图中静态 1.1.1.3/32 与 OSPF 1.1.1.0/24 重叠，目标为 1.1.1.3 时 /32 更长。构建同一前缀的路由时，同一路由协议可以用度量值比较候选路径（C）；跨来源选择还要考虑管理距离和各协议的选路规则，不",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html"
+      },
+      "exhibit_path": "exhibits/q1361_image_agent.jpg",
+      "image_sha256": "675342e7e2d3b82689c5074468708210ff143c48b03ed5a625842c7e0425ca4c"
+    },
+    {
+      "id": 1362,
+      "before_sha256": "2c4e4b9cdce38aecef9b52b46f9e0863179b8628d7ede011e3f11f122ea860ac",
+      "updates": {
+        "explanation": "B、C。HSRP 将同一局域网的多台路由器抽象为共享虚拟 IP 和虚拟 MAC 的网关组；活动路由器转发，备用路由器在符合故障检测和选举条件时可接管，以减少网关单点故障。切换并非必然毫秒级或完全无中断，时间取决于定时器和网络环境。A 描述 BOOTP/DHCP 的地址配置；D 为 DHCP 等配置服务；E 错在声称不需要网关，主机仍使用虚拟网关或其他合适路由。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "B、C。HSRP 将同一局域网的多台路由器抽象为共享虚拟 IP 和虚拟 MAC 的网关组；活动路由器转发，备用路由器在符合故障检测和选举条件时可接管，以减少网关单点故障。切换并非必然毫秒级或完全无中断，时间取决于定时器和网络环境。A 描述 BOOTP/DHCP 的地址配置；D 为 DHCP 等配置服",
+        "reference": "https://datatracker.ietf.org/doc/html/rfc2281"
+      }
+    },
+    {
+      "id": 1363,
+      "before_sha256": "3c11854f5c7757148b2594775379c8d7d6068c818a3a936f21c041879a2d7c82",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "They independently provide Internet access for all IoT devices."
+          },
+          {
+            "label": "B",
+            "text": "They reduce demand for globally unique IPv4 addresses."
+          },
+          {
+            "label": "C",
+            "text": "They allow the same address space to be reused in separate private networks."
+          },
+          {
+            "label": "D",
+            "text": "They automatically provide redundant gateways."
+          },
+          {
+            "label": "E",
+            "text": "They guarantee Internet access without additional connectivity."
+          }
+        ],
+        "explanation": "B、C。RFC 1918 地址可用于不需要全球唯一地址的内部设备，从而节省公有 IPv4 地址；不同的隔离网络也可以复用相同地址。网络互联时地址重叠仍可能需要重新编址或转换。私网地址本身不提供网关冗余、互联网连接或安全防护；防火墙、访问策略和互联网出口等需要单独设计。原 C 选项把私有地址当成天然安全层，现改为明确的地址复用优势。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "B、C。RFC 1918 地址可用于不需要全球唯一地址的内部设备，从而节省公有 IPv4 地址；不同的隔离网络也可以复用相同地址。网络互联时地址重叠仍可能需要重新编址或转换。私网地址本身不提供网关冗余、互联网连接或安全防护；防火墙、访问策略和互联网出口等需要单独设计。原 C 选项把私有地址当成天然安",
+        "reference": "https://www.rfc-editor.org/rfc/rfc1918"
+      }
+    },
+    {
+      "id": 1364,
+      "before_sha256": "1c23997584742f58c40ee98bf096bddfce0d28feef17a9c0e0420e2971cc9d32",
+      "updates": {
+        "explanation": "C、D。RFC 1918 地址可在彼此独立的私有网络中复用，从而减少对全球唯一 IPv4 地址的需求。若这些网络后来直连，重叠地址可能造成路由歧义，需规划或转换。A 不成立：私有地址可以在企业 WAN 上传递路由，但不应在公共互联网作为全球可达前缀传播。B 私网地址范围有限；E 本身不提供互联网访问，还需要适当的出口及转换等机制。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C、D。RFC 1918 地址可在彼此独立的私有网络中复用，从而减少对全球唯一 IPv4 地址的需求。若这些网络后来直连，重叠地址可能造成路由歧义，需规划或转换。A 不成立：私有地址可以在企业 WAN 上传递路由，但不应在公共互联网作为全球可达前缀传播。B 私网地址范围有限；E 本身不提供互联网访问",
+        "reference": "https://www.rfc-editor.org/rfc/rfc1918"
+      }
+    },
+    {
+      "id": 1365,
+      "before_sha256": "c2abdd52ab3b406d35fe3df93c3bf69553a1fc00a7dc7a8b904651da90ede832",
+      "updates": {
+        "prompt": "Which two individual IPv6 unicast addresses are suitable for assignment to a router interface on a shared link? Select address types independently; link-local communication is confined to that link. (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "FF02::1:FF00:0/104"
+          },
+          {
+            "label": "B",
+            "text": "ff06:bb43:cc13:dd16:1bb:ff14:7545:234d"
+          },
+          {
+            "label": "C",
+            "text": "fe80::2/64"
+          },
+          {
+            "label": "D",
+            "text": "2001:701:104b:1111::1/64"
+          },
+          {
+            "label": "E",
+            "text": "::ffff:10.14.101.1/96"
+          }
+        ],
+        "answer": [
+          "C",
+          "D"
+        ],
+        "explanation": "C、D。`fe80::2/64` 是可用于链路本地通信的单播地址；`2001:701:104b:1111::1/64` 是全球单播形式。链路两端通信还需使用相应作用域、兼容前缀与正确接口；题目是分别判断地址类型，并非声称这两个不同作用域地址互为一对。A、B 是组播；E 是用于表示 IPv4 端点的 IPv4-mapped IPv6 形式，不应将它当作普通路由器 IPv6 链路接口地址。原 C 含两个 `::` 且一个字段超过四位，已改成有效链路本地地址；原将 E 作为普通接口答案有误。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "corrected",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C、D。`fe80::2/64` 是可用于链路本地通信的单播地址；`2001:701:104b:1111::1/64` 是全球单播形式。链路两端通信还需使用相应作用域、兼容前缀与正确接口；题目是分别判断地址类型，并非声称这两个不同作用域地址互为一对。A、B 是组播；E 是用于表示 IPv4 端点的 ",
+        "reference": "https://www.rfc-editor.org/rfc/rfc4291"
+      }
+    },
+    {
+      "id": 1366,
+      "before_sha256": "d8cf285ce902dd0fdb53c9a354b7b0386c6032469f674580a4e84faf3562f94b",
+      "updates": {
+        "prompt": "Refer to the exhibit. For the same destination prefix 1.1.1.3/32, suppose R1 has eligible routes from different sources and multiple candidates within one routing protocol. Which two values are commonly used to select a route for the routing table? (Choose two.)",
+        "explanation": "C、E。对相同前缀的合格候选路由，路由器通常比较路由来源的管理距离，并在同一协议的候选路径中使用该协议的 metric；各协议的具体选路规则仍然适用，不能直接比较不同协议的 metric。图中显示静态 1.1.1.3/32，`[1/0]` 分别为管理距离和度量；图没有展示同一 /32 的所有其他候选，因此题干将比较作为假设。最高 AD 或 metric 不是这里的优选规则。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "C、E。对相同前缀的合格候选路由，路由器通常比较路由来源的管理距离，并在同一协议的候选路径中使用该协议的 metric；各协议的具体选路规则仍然适用，不能直接比较不同协议的 metric。图中显示静态 1.1.1.3/32，`[1/0]` 分别为管理距离和度量；图没有展示同一 /32 的所有其他候选",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html"
+      },
+      "exhibit_path": "exhibits/q1366_image_agent.jpg",
+      "image_sha256": "b9541eb0cb0c95d68935bc011ff213e02e69c9125406f83318fcda48fe1427c1"
+    },
+    {
+      "id": 1367,
+      "before_sha256": "095d0c33fde8cff894ca9e0a7f741f67c6b34ba8ef3ddf39741d0a97f273337b",
+      "updates": {
+        "explanation": "B、D。在 Cisco IOS 常见部署中，DHCP relay 配在接收客户端广播的三层接口，可用 `ip helper-address` 将请求转送给远程服务器；这让一个集中服务器能够服务多个子网，但不意味着必须只使用一台服务器或 relay 必须是默认网关。relay 通常填写 `giaddr`，供服务器确定作用域；具体来源地址、转发目的及策略依部署而定。A 的 DNS 参数通常由 DHCP 服务器提供；C 错在限制为一个 helper，同一接口可配置多个；E 错在只依据 MAC 保留项确定子网。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "B、D。在 Cisco IOS 常见部署中，DHCP relay 配在接收客户端广播的三层接口，可用 `ip helper-address` 将请求转送给远程服务器；这让一个集中服务器能够服务多个子网，但不意味着必须只使用一台服务器或 relay 必须是默认网关。relay 通常填写 `giaddr",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html"
+      }
+    },
+    {
+      "id": 1368,
+      "before_sha256": "0d0319880d84d56d87a9b3c05b59b2dd241e71c538f132faf8205f34db16dd6b",
+      "updates": {
+        "explanation": "C、D。Syslog 可以通过 UDP 或 TCP 承载。传统 UDP syslog 常用 UDP 514；TLS 保护的 syslog 使用 TCP，标准端口为 6514，明文 TCP 的端口依实现和配置而定。TCP 的重传和顺序交付不能保证应用、服务器故障或连接中断时每条日志都被持久保存。IP 为网络层，ARP 用于地址解析；RTP 常用于实时媒体，不是此处的 syslog 传输协议。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "C、D。Syslog 可以通过 UDP 或 TCP 承载。传统 UDP syslog 常用 UDP 514；TLS 保护的 syslog 使用 TCP，标准端口为 6514，明文 TCP 的端口依实现和配置而定。TCP 的重传和顺序交付不能保证应用、服务器故障或连接中断时每条日志都被持久保存。IP ",
+        "reference": "https://www.rfc-editor.org/rfc/rfc5425"
+      }
+    },
+    {
+      "id": 1369,
+      "before_sha256": "37248de5c06143dc92493b2449591cfa37b0b3fb1a086b65c8ecb541a468d26c",
+      "updates": {
+        "prompt": "Which two SNMPv2 operations support bulk retrieval and an acknowledged notification, respectively? (Choose two.)",
+        "explanation": "D、E。GetBulk 可在一条请求中请求多项连续变量，降低遍历大表所需的往返次数；响应仍受消息大小、设备实现等限制。Inform 是需要接收方以 Response 确认的通知，与无需确认的 Trap 是不同 PDU；超时可按配置重试，但重试有限且无法保证 100% 送达。Get、GetNext、Set 已在 SNMPv1 使用，分别用于读取、按字典序读取下一项及写入；单次 Get 或 GetNext 也可包含多个变量绑定。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "D、E。GetBulk 可在一条请求中请求多项连续变量，降低遍历大表所需的往返次数；响应仍受消息大小、设备实现等限制。Inform 是需要接收方以 Response 确认的通知，与无需确认的 Trap 是不同 PDU；超时可按配置重试，但重试有限且无法保证 100% 送达。Get、GetNext、S",
+        "reference": "https://www.cisco.com/en/US/docs/ios-xml/ios/snmp/configuration/15-0s/nm-snmp-cfg-snmp-support.html"
+      }
+    },
+    {
+      "id": 1370,
+      "before_sha256": "baff8b50bdcb8b2f314c938eba23a9fc7edcde655d39eb07ccb8626029317dae",
+      "updates": {
+        "prompt": "In a lab configuration for initial SSH setup, assume local user authentication, RSA keys generated using the hostname and domain name shown, and access by IP address. Which two shown commands are not required to establish that SSH setup? (Choose two.)\n\n```cisco\nhostname CPE\nservice password-encryption\nip domain name ccna.cisco.com\nip name-server 198.51.100.210\ncrypto key generate rsa modulus 1024\nusername admin privilege 15 secret s0m3s3cr3t\nline vty 0 4\n transport input ssh\n login local\n```",
+        "explanation": "A、C。按题设通过 IP 访问、使用本地认证建立 SSH，外部 DNS name-server 与 `service password-encryption` 不是 SSH 建立所必需；本地用户、VTY 认证和 RSA 密钥等仍需按平台配置。该题只判断设置 SSH 的必要性，不建议在已有网络中盲目删除安全相关配置：`service password-encryption` 对某些明文口令提供可逆的 Type 7 混淆，关闭前必须评估其他配置。已生成密钥后，删除 domain/hostname 并不必然立即令现有密钥失效；题干明确比较初始密钥生成前提。密钥长度与算法应遵循设备版本及当前安全策略。"
+      },
+      "reason": "逐项复核题意、选项、答案、解析及图示，修正技术错误或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "A、C。按题设通过 IP 访问、使用本地认证建立 SSH，外部 DNS name-server 与 `service password-encryption` 不是 SSH 建立所必需；本地用户、VTY 认证和 RSA 密钥等仍需按平台配置。该题只判断设置 SSH 的必要性，不建议在已有网络中盲目删",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "https://datatracker.ietf.org/doc/html/rfc2281",
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/27470-100.html",
+    "https://www.rfc-editor.org/rfc/rfc5425",
+    "https://www.cisco.com/en/US/docs/ios-xml/ios/snmp/configuration/15-0s/nm-snmp-cfg-snmp-support.html",
+    "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+  ],
+  "limitations": "Manual source and image review; no router or SSH lab tests."
+}

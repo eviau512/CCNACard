@@ -1,0 +1,371 @@
+{
+  "scope": "Q1311–Q1320",
+  "corrections": [
+    {
+      "id": 1311,
+      "before_sha256": "c61a69e0813c41f77923210d4835017aadedcae2904df9c5a7617cb2a9c4b277",
+      "updates": {
+        "prompt": "A Cisco IOS router has a reachable, configured remote Syslog server and remote logging enabled. After `logging trap 3` is set, which three listed severity levels pass the remote logging threshold? (Choose three.)",
+        "explanation": "B、D、F。`logging trap 3` 对远程日志选择严重性数值 0–3：emergency 0、alert 1、critical 2、error 3。选项中的 B、D、F 均通过门限；A informational 6、C warning 4、E debugging 7 不通过。通过门限不代表该级别消息一定产生或网络一定成功送达；服务器、路由及日志功能需正常。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "限定日志发送条件与门限。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/esm/configuration/xe-16/esm-xe-16-book/esm-config-syslog.html"
+        ],
+        "dark_image": "无题图/答案图",
+        "exhibit_paths": []
+      }
+    },
+    {
+      "id": 1312,
+      "before_sha256": "06c6b56b2b8b0df07ac80c43ff3954f912adad8aa488afb35dd8faad1078d10e",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "The DHCP server always grants infinite leases and never requires renewal."
+          },
+          {
+            "label": "B",
+            "text": "The DHCP server leases client IP addresses dynamically."
+          },
+          {
+            "label": "C",
+            "text": "The DHCP client is able to request up to four DNS server addresses."
+          },
+          {
+            "label": "D",
+            "text": "The DHCP server offers the ability to exclude specific IP addresses from a pool of IP addresses."
+          },
+          {
+            "label": "E",
+            "text": "The DHCP client maintains a pool of IP addresses it is able to assign."
+          }
+        ],
+        "explanation": "B、D。DHCP 服务器可动态租出地址；服务器实现通常允许从动态池排除指定地址，例如 Cisco IOS 的 `ip dhcp excluded-address`。A 的 always 错：RFC 2131 允许有限或无限租约；有限租约通常续租。默认 T1/T2 分别为租期的 50%/87.5%，可由服务器配置。C 不能从 DHCP 规则推导为统一最多四个 DNS 地址；E 混淆服务器地址池与客户端角色。排除固定地址可降低冲突风险，但不保证其他误配置不会冲突。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "限定无限租期表述，纠正T1/T2默认值。",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc2131"
+        ],
+        "dark_image": "无题图/答案图",
+        "exhibit_paths": []
+      }
+    },
+    {
+      "id": 1313,
+      "before_sha256": "d1f084565f358221c1b99bec0f2f6dcdfa3f5e93e7af18f344e553c716c92697",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 must obtain its Fa0/0 address from the remote DHCP server. Assume the switch, DHCP server, address pool, return routing, and R2 interface addressing are already configured correctly. Which two configurations complete the DHCP client and relay setup? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "R1(config)# interface fa0/0\nR1(config-if)# ip helper-address 198.51.100.100"
+          },
+          {
+            "label": "B",
+            "text": "R2(config)# interface gi0/0\nR2(config-if)# ip helper-address 198.51.100.100"
+          },
+          {
+            "label": "C",
+            "text": "R1(config)# interface fa0/0\nR1(config-if)# ip address dhcp\nR1(config-if)# no shutdown"
+          },
+          {
+            "label": "D",
+            "text": "R2(config)# interface gi0/0\nR2(config-if)# ip address dhcp"
+          },
+          {
+            "label": "E",
+            "text": "R1(config)# interface fa0/0\nR1(config-if)# ip helper-address 192.0.2.2"
+          }
+        ],
+        "explanation": "B、C。图中 R1 Fa0/0 与 R2 Gi0/0 连接同一二层广播域；远端 DHCP 服务器为 198.51.100.100。R1 接口通过 `ip address dhcp` 作为客户端，并用 `no shutdown` 启用；R2 面向客户端的 Gi0/0 配置 `ip helper-address 198.51.100.100` 中继 DHCP 广播。A/E 在客户端接口设置 helper，D 将图中作为网关的 R2 接口改为 DHCP，均非题设所需。服务器必须有与中继 giaddr 对应的地址池，且双向路径可达。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "根据原图核对中继、接口并恢复CLI换行。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-host-configuration-protocol-dhcp-bootp/27470-100.html"
+        ],
+        "dark_image": "原图为不透明浅底，深色界面中仍可阅读；是否自动转暗取决于主代理统一实现和实际显示验证。",
+        "exhibit_paths": [
+          "exhibits\\q1313_image_agent1311.jpeg"
+        ]
+      }
+    },
+    {
+      "id": 1314,
+      "before_sha256": "41ffb2d90e93dce5f199ab8bc84000112e2da044bd3f12b4cb55030239b7e6e4",
+      "updates": {
+        "prompt": "With appropriately configured thresholds, which two descriptions of Weighted Random Early Detection (WRED) are correct? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "It supports protocol discovery."
+          },
+          {
+            "label": "B",
+            "text": "It guarantees the delivery of high-priority packets."
+          },
+          {
+            "label": "C",
+            "text": "It identifies individual flows with high granularity as its primary function."
+          },
+          {
+            "label": "D",
+            "text": "It can reduce congestion by dropping packets before a queue becomes full."
+          },
+          {
+            "label": "E",
+            "text": "With suitable thresholds, it can make lower-priority packets more likely to be dropped."
+          }
+        ],
+        "explanation": "D、E。WRED 根据平均队列长度、类别阈值和概率在队列满之前选择性丢包；合理的类别配置可令较低优先级报文更早或以更高概率被丢弃。它有助缓解拥塞和降低 TCP 全局同步概率，并不保证队列永不满、严格的每包丢弃先后或高优先级必达。A 协议发现、C 细粒度流识别不是基本 WRED 的主要职责；具体平台可能另有基于流的扩展。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "改正WRED概率性并修复flows拼写。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-conavd-oview-0.html"
+        ],
+        "dark_image": "无题图/答案图",
+        "exhibit_paths": []
+      }
+    },
+    {
+      "id": 1315,
+      "before_sha256": "c3ab772c4035bd70d2f5d243dd7f582b1382712ee87946dc127c932f70b71fbb",
+      "updates": {
+        "prompt": "On a Cisco IOS device, an administrator must configure a unicast NTP client to authenticate a server using a preconfigured shared key. Which two tasks are needed among the following? (Choose two.)",
+        "explanation": "A、C。题设要求使用已配置的共享密钥认证单播 NTP 服务：启用 `ntp authenticate`，并用 `ntp server <address> key <id>` 指定服务器和密钥。密钥本身还须在设备与服务器匹配，并在客户端配置受信 key ID；仅做 A/C 而没有密钥配置不足以完成认证。B 时区只影响本地显示；D 的非对称私钥不是题设对称认证配置；E 关闭广播不是配置单播认证的必要步骤。普通未认证 NTP 客户端无需仅因服务器可信而强制启用认证。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "明确认证NTP共享密钥的前提。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/configuration/15-mt/bsm-15-mt-book/bsm-time-calendar-set.html"
+        ],
+        "dark_image": "无题图/答案图",
+        "exhibit_paths": []
+      }
+    },
+    {
+      "id": 1316,
+      "before_sha256": "42615b9f548649ddcde90d20c0199663afca341e0696faa14c97804e266c6b9f",
+      "updates": {
+        "prompt": "In a Cisco IOS `show ntp status` output that reports `Clock is synchronized` and `reference is <peer IPv4 address>`, which two pieces of information can be determined? (Choose two.)",
+        "explanation": "B、D。输出中的 `Clock is synchronized` 给出同步状态，题设 `reference is` 字段给出当前同步参考对端 IPv4 地址。其他状态或平台上的 reference 可为非 IPv4 标识；未同步时不能假定存在有效的当前对端。A 静态配置、C 全部配置服务器、E 对端协议版本不能仅从所给状态字段确定；可结合 `show ntp associations detail` 和运行配置检查。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "限定同步且reference为IPv4的输出。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/19643-ntpm.html"
+        ],
+        "dark_image": "无题图/答案图",
+        "exhibit_paths": []
+      }
+    },
+    {
+      "id": 1317,
+      "before_sha256": "bd3ca0cb4909696a28a9e15759dd5aee47be07be3da5aeb6dc0fb762afc29855",
+      "updates": {
+        "explanation": "A、E。CBWFQ 通过类队列和带宽调度管理拥塞，PQ 通过优先级队列调度；严格优先队列可能使低优先级流量饥饿。FRTS 是 Frame Relay 流量整形，CAR 是监管/标记，PBR 是基于策略选路，故 B/C/D 不属于题设排队拥塞管理。实际调度、带宽保证及队列配置随平台和策略变化。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "说明拥塞排队和平台条件。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-congestion-management/19645-priority-queue.html"
+        ],
+        "dark_image": "无题图/答案图",
+        "exhibit_paths": []
+      }
+    },
+    {
+      "id": 1318,
+      "before_sha256": "069db4def23289cc8409ca85572d46dfba2ce450638672fd148f004ad7bdce4f",
+      "updates": {
+        "explanation": "A、B。NTP 时间报文通常通过 IP 上的 UDP 123 交换；支持 NTP 的 Cisco 路由器可作为上游服务器的客户端，也可向下游设备提供时间。`ntp master` 可在适用配置下以本地时钟作为源，但本地时钟的准确性取决于实际条件。C/D 错在“只能”一种角色，E 的 TCP 不是常规 NTP 时间同步传输。UDP 并不保证延迟确定或无丢包。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "纠正UDP延迟保证和master过度绝对化。",
+        "reference": [
+          "https://www.rfc-editor.org/rfc/rfc5905"
+        ],
+        "dark_image": "无题图/答案图",
+        "exhibit_paths": []
+      }
+    },
+    {
+      "id": 1319,
+      "before_sha256": "3f4f1b21243178b3d36ac453baa65925659af4b3fe0a43c0d36606f1b9ccb92a",
+      "updates": {
+        "prompt": "Refer to the Cisco IOS configuration exhibit. Assume no RSA host key exists, all remote administrative access uses the displayed VTY lines, and this IOS release supports the shown RSA command. Which two additions enable SSH access and restrict those VTY lines to SSH? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "transport input ssh"
+          },
+          {
+            "label": "B",
+            "text": "username CNAC secret R!41!3705926@"
+          },
+          {
+            "label": "C",
+            "text": "crypto key generate rsa modulus 1024"
+          },
+          {
+            "label": "D",
+            "text": "line vty 0 4"
+          },
+          {
+            "label": "E",
+            "text": "ip ssh version 2"
+          }
+        ],
+        "explanation": "A、C。图中已有主机名、域名、本地用户及 `line vty 0 15` 的 `login local`；题设明确没有 RSA 主机密钥。全局配置生成 RSA 密钥（C），在题设所有 VTY 线路下配置 `transport input ssh`（A）以只允许 SSH。图中 `show ssh` 没有活动连接本身不能证明 SSH 服务器关闭，须以密钥和服务器状态检查。E 可显式限定 SSHv2，是推荐的安全设置，但不能代替生成密钥；密钥长度与语法依 IOS 版本及组织安全要求调整，1024 位仅为题目示例。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "查看原图，修正RSA命令和无SSH会话不等于无服务器的推断。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        ],
+        "dark_image": "原图为不透明浅底，深色界面中仍可阅读；是否自动转暗取决于主代理统一实现和实际显示验证。",
+        "exhibit_paths": [
+          "exhibits\\q1319_image_agent1311.jpeg"
+        ]
+      }
+    },
+    {
+      "id": 1320,
+      "before_sha256": "54ab4623e494a162ba260c3a8d8a0e4a042783acdfa658cf6ec565f6e0312b8c",
+      "updates": {
+        "prompt": "Refer to the exhibit. After the configured secure MAC limit is reached, a frame arrives with a source MAC that is not a secure address. Which two results follow from the displayed violation mode? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "The security violation counter does not increment."
+          },
+          {
+            "label": "B",
+            "text": "The port LED turns off"
+          },
+          {
+            "label": "C",
+            "text": "The interface is error-disabled"
+          },
+          {
+            "label": "D",
+            "text": "A syslog message is generated"
+          },
+          {
+            "label": "E",
+            "text": "The interface drops frames from the unauthorized source MAC address."
+          }
+        ],
+        "explanation": "A、E。原图显示端口安全 violation mode 为 `Protect`；当安全 MAC 数达到上限后，来自未授权源 MAC 的帧被丢弃，端口安全违规计数器不递增。Protect 不因该违规将接口置于 err-disabled，也不按 restrict/shutdown 模式生成违规通知。图中当前是3/4，题干明确后续已达到4/4。LED 行为依平台与其他状态而异，不能用作此题判断依据；已授权流量仍依其他接口及网络条件转发。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; formatting restored where needed",
+        "finding": "查看protect图，纠正拼写和LED绝对断言。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/support/docs/lan-switching/port-security/10544-74.html"
+        ],
+        "dark_image": "原图为不透明浅底，深色界面中仍可阅读；是否自动转暗取决于主代理统一实现和实际显示验证。",
+        "exhibit_paths": [
+          "exhibits\\q1320_image_agent1311.jpeg"
+        ]
+      }
+    }
+  ],
+  "sources": {
+    "1311": [
+      "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/esm/configuration/xe-16/esm-xe-16-book/esm-config-syslog.html"
+    ],
+    "1312": [
+      "https://www.rfc-editor.org/rfc/rfc2131"
+    ],
+    "1313": [
+      "https://www.cisco.com/c/en/us/support/docs/ip/dynamic-host-configuration-protocol-dhcp-bootp/27470-100.html"
+    ],
+    "1314": [
+      "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-conavd-oview-0.html"
+    ],
+    "1315": [
+      "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/bsm/configuration/15-mt/bsm-15-mt-book/bsm-time-calendar-set.html"
+    ],
+    "1316": [
+      "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/19643-ntpm.html"
+    ],
+    "1317": [
+      "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-congestion-management/19645-priority-queue.html"
+    ],
+    "1318": [
+      "https://www.rfc-editor.org/rfc/rfc5905"
+    ],
+    "1319": [
+      "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+    ],
+    "1320": [
+      "https://www.cisco.com/c/en/us/support/docs/lan-switching/port-security/10544-74.html"
+    ]
+  },
+  "limitations": "人工审阅文档与原图；未执行路由器或交换机实机实验。"
+}

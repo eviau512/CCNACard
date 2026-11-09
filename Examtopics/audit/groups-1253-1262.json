@@ -1,0 +1,102 @@
+{
+  "scope": "Independent review Q1253–Q1262",
+  "corrections": [],
+  "reviews": [
+    {
+      "id": 1253,
+      "before_sha256": "50df8a023b6880f06273b1fccba1c5fad0c9658cd7125266d52d00865f4ee00f",
+      "result": "通过",
+      "assessment": "B/D：两种符合规范的 Cat 5e、Cat 6A 信道均支持 100 米 1000BASE-T；C 的 55 米上限与题设不符。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1254,
+      "before_sha256": "ceecf3eef1852619de00ad1e5b2aa9e3595958b0c7ac56102fd5b72f51d3b241",
+      "result": "通过",
+      "assessment": "C/D：交换转发可执行 VLAN 标签处理和目标 MAC/VLAN 查表；NETCONF、路由协议及设备本机 ICMP 均非题设转发帧操作。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1255,
+      "before_sha256": "9e56c2a184d337aff9f3c2ce9e9f503e0668dd0ff8fb3ecaa095d5d43ff3dbf6",
+      "result": "通过",
+      "assessment": "B/E：SSID 最多 32 字节，信标发布可配置；不单独构成安全机制。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1256,
+      "before_sha256": "2a14c31792499d62c91ce2ddbacc4193314ee4ebf43a42021d78e2a0c31762b9",
+      "result": "通过",
+      "assessment": "A/E：题设启用广播，信标通告 SSID，32 字节上限；不限定单 AP 或控制器。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1257,
+      "before_sha256": "c6c85e6614d877b295a764e490ce8e4b6022e50b19d0cf0e7da44d73c249d548",
+      "result": "通过",
+      "assessment": "B/D：打印机与 AP 属常见接入层连接；三层边界/冗余不是唯一分层证据。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1258,
+      "before_sha256": "9c82c526aa4c75ad9dd226befe3a71265b3ff3baf26f1aeac3d9b504a222a238",
+      "result": "通过",
+      "assessment": "A/B：IPv6 可访问 IPv6 目标、私网 PAT 可共享公网 IPv4；v6-only 访问 v4-only 需要其他机制。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1259,
+      "before_sha256": "990c06d2e3cdcae2915806af3459b3e1610b38d3605fe0f734bc3c0ad81ad94c",
+      "result": "通过",
+      "assessment": "B/C：独立网络复用 RFC1918 地址，私网前缀不需进入全球公网路由；互联重叠须规划，私网不加密。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1260,
+      "before_sha256": "8614d49e4f2592e13506144be8c7a35d2cf36e5b014e34abc27904ad6483854f",
+      "result": "通过",
+      "assessment": "A/C：限定支持 802.3bz 且信道合规，Cat 5e 和 Cat 6A 可用于对应 2.5/5G 铜缆链路，光模块及电话线不符合。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1261,
+      "before_sha256": "1dfa2536d125211760c8edcb885e2fee701fb361457f344e748325d37a43f698",
+      "result": "通过",
+      "assessment": "B/E：RFC1918 内部编号可独立 ISP 前缀，复用减少公网地址需求，合并重叠时有转换或重编号风险。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    },
+    {
+      "id": 1262,
+      "before_sha256": "dd101734c3e32bb39cd6c6de92289850ea0d5d9a344f8ae12908633c83c47c8b",
+      "result": "通过",
+      "assessment": "C/D：AireOS 创建页分别配置 Profile Name 与 SSID，WLAN ID 另选；Cisco 配置步骤与题干一致。",
+      "image": "题目未引用或包含题图及答案图",
+      "code_cli": "无代码或 CLI",
+      "checked": "题干、全部选项、答案、解析、图与代码"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/115951-web-auth-wlc-guide-00.html",
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-9000/nb-06-multigigabit-ethernet-wp-cte-en.html"
+  ],
+  "limitations": "人工阅读及公开资料核对；未做网络实机实验。"
+}

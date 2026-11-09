@@ -1,0 +1,11 @@
+{
+  "manifest": "groups-1233-1242.json",
+  "applied_ids": [
+    1241
+  ],
+  "corrected_question_sha256": {
+    "1241": "f4c5001df5e8f2f465905ab576b52f35553aec437cde2a796a436ebcc749873d"
+  },
+  "source_sha256": "ed377393b01306e8645548062313494dff3db77616f354187bb3d37406f7f25b",
+  "app_bundle_sha256": "59bc1820de35216fe5acba14a1d58476d2ad71ae0e799d7ff86c21f39f2004de"
+}

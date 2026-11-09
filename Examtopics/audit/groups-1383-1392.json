@@ -1,0 +1,161 @@
+{
+  "scope": "Q1383–Q1392 独立复核",
+  "corrections": [],
+  "reviews": [
+    {
+      "id": 1383,
+      "before_sha256": "9af54b9cb9de04ef75ccbfd4f4aec45f7923429e8f921d500b183d993ddac641",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "A",
+        "E"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "无命令块",
+      "assessment": "Hypervisor 允许同宿主多个 VM 和独立 guest OS；网络、资源不保证相同。"
+    },
+    {
+      "id": 1384,
+      "before_sha256": "ece9639f62adf294b26389d60831c9aefe1869cc55e74d22c5a8c12895eae4f0",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "D",
+        "E"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "无命令块",
+      "assessment": "pharming 重定向至仿冒站点，phishing 冒充可信方；其他选项为非攻击活动。"
+    },
+    {
+      "id": 1385,
+      "before_sha256": "8f85ad9893ff90252902217776be6c388ed01b78a2cac8cfc18bc7183870f0b5",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "无命令块",
+      "assessment": "按题设许可和功能，URL 过滤和站点 VPN 均成立；其他项不属于题设功能。"
+    },
+    {
+      "id": 1386,
+      "before_sha256": "7e23c8efcacda7014c78aaa974a81dfb6c5f0209bd13ff795b67c9d9bd6d1546",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "B",
+        "E"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "已检查",
+      "assessment": "核对全局 snooping、VLAN 开启与上联 trust；DAI 对 VLAN 启用并仅信任可信上游。"
+    },
+    {
+      "id": 1387,
+      "before_sha256": "942fb94ab50c1ea10908f752e28a53574cc30c6ea667c377d616348c4bc5ec20",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "C",
+        "D"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "无命令块",
+      "assessment": "服务器支持集中地址管理和动态配置；DISCOVER 客户端发出，OFFER 为服务端消息。"
+    },
+    {
+      "id": 1388,
+      "before_sha256": "cb452981e05726f7fb97cdfc54fd18d840aa3195ed2f5bfebe6789f6bba3e508",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "B",
+        "E"
+      ],
+      "explanation": "已检查",
+      "image": "已直接查看原图",
+      "code_cli": "已检查",
+      "assessment": "直接看拓扑原图，LAN 为 2001:db8:0:afff::/64，Gi0/0 EUI-64；WAN ACBD:FA0/127，Gi0/1 首地址 FA0。"
+    },
+    {
+      "id": 1389,
+      "before_sha256": "de990b725dcab3bbae8480ac0b22766fe74bd1c32c427c44a6ca55761df13ae1",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "A",
+        "C"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "无命令块",
+      "assessment": "VRRP 单组承担首跳冗余，多组与主机网关分配可以负载分担，不保证均衡。"
+    },
+    {
+      "id": 1390,
+      "before_sha256": "53633a4c3fd801aa246db54b526222ee16b27f15f1ec1caac672dc313bc76c6c",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "A",
+        "C"
+      ],
+      "explanation": "已检查",
+      "image": "已直接查看原图",
+      "code_cli": "无命令块",
+      "assessment": "直接看 AireOS WLAN Advanced 原图，Client Band Select 和 Allow AAA Override 均为图中独立设置；客户端选频不能保证。"
+    },
+    {
+      "id": 1391,
+      "before_sha256": "bed2309ffa2516d3635482960040a7aa1115ab107c73a27991bda4509c498f01",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "A",
+        "C"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "无命令块",
+      "assessment": "监控可检测或记录，工牌门禁控制物理入口；培训为行政措施。"
+    },
+    {
+      "id": 1392,
+      "before_sha256": "d6bcfc152a225a5031d8312a43c927aa8c69cf1d90bbce54d9b6ea00c9e5bec0",
+      "decision": "保留",
+      "prompt": "已检查",
+      "options": "逐项已检查",
+      "answer": [
+        "B",
+        "C"
+      ],
+      "explanation": "已检查",
+      "image": "无题图",
+      "code_cli": "已检查",
+      "assessment": "标准 ACL 源地址通配符和 VTY access-class 入方向符合题设，接口 ACL 会作用转发流量。"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/campus-lan-switches-access/Catalyst-1300x/CLI_Release_4_10_0_xx/c1300x-cli-guide/dhcp-snooping-commands.pdf",
+    "https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/104x/unicast-routing-configuration/cisco-nexus-9000-series-nx-os-unicast-routing-configuration-guide/m_configuring_vrrp.html"
+  ],
+  "limitations": "逐项技术核查与原图查看；未进行设备实测。"
+}

@@ -1,0 +1,165 @@
+{
+  "scope": [
+    1133,
+    1142
+  ],
+  "corrections": [
+    {
+      "id": 1133,
+      "before_sha256": "2ed5392b30c3466ef6dedc35fa3f0a7ab98313817f091a849402c56192080670",
+      "reason": "题目只有光纤或铜缆分类，移除不相关 IPv6 字样。",
+      "updates": {
+        "prompt": "Classify the corrected cable characteristics into the displayed cable types. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below."
+      }
+    },
+    {
+      "id": 1135,
+      "before_sha256": "dfc017672abe780cdfeaa478ed2784ba5d4f8a908cc4e269bdbe5a1b24e2b6c2",
+      "reason": "题目只有光纤或铜缆分类，移除不相关 IPv6 字样。",
+      "updates": {
+        "prompt": "Classify the corrected cable characteristics into the displayed cable types. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below."
+      }
+    },
+    {
+      "id": 1137,
+      "before_sha256": "ab178c7f566599ccd583e02fc293ca1b45b1d3c942aa8d09e57058b743e654c7",
+      "reason": "题目只有光纤或铜缆分类，移除不相关 IPv6 字样。",
+      "updates": {
+        "prompt": "Classify the corrected cable characteristics into the displayed cable types. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below."
+      }
+    },
+    {
+      "id": 1139,
+      "before_sha256": "c39317d5338960733066ea25dfcb3be5888bb9d8d8ee58d406b1101475a3a1bc",
+      "reason": "多个组织同时使用组播地址也可能成立，改为 ULA 单播且本地用途的明确描述，保留各类别组内无序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "is a unicast address intended for local communication within or between sites",
+            "sends packets to a group address rather than a single address",
+            "provides one-to-many communications",
+            "reduces the chance of prefix collisions when sites are combined"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "is a unicast address intended for local communication within or between sites",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "reduces the chance of prefix collisions when sites are combined",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "ULA 常按 RFC 4193 使用伪随机 Global ID；不同组织可部署，合并网络时冲突概率低但并非绝对为零。组播使用组地址向一个或多个成员递送数据，其转发范围取决于配置和组播作用域。 原图“多个组织可同时使用”也可能描述组播，已改为 ULA 的本地用途单播特征以避免歧义。"
+      }
+    },
+    {
+      "id": 1140,
+      "before_sha256": "0c72aaf25ea410389a9f8fd2e71597c07261a0ae8978b948017aa263501f7463",
+      "reason": "多个组织同时使用组播地址也可能成立，改为 ULA 单播且本地用途的明确描述，保留各类别组内无序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "is a unicast address intended for local communication within or between sites",
+            "is scoped to a single IPv6 link",
+            "is required on IPv6-enabled interfaces",
+            "is a counterpart of private IPv4 address"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Unique Local (Slot 1)",
+              "expected": "is a unicast address intended for local communication within or between sites",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "id": "t2",
+              "label": "Unique Local (Slot 2)",
+              "expected": "is a counterpart of private IPv4 address",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "id": "t3",
+              "label": "Link-Local Address (Slot 1)",
+              "expected": "is scoped to a single IPv6 link",
+              "unordered_group": "Link-Local Address"
+            },
+            {
+              "id": "t4",
+              "label": "Link-Local Address (Slot 2)",
+              "expected": "is required on IPv6-enabled interfaces",
+              "unordered_group": "Link-Local Address"
+            }
+          ]
+        },
+        "explanation": "ULA 与 IPv4 私有地址一样通常不在公共互联网上路由，但两者并不完全相同。链路本地地址用于单一 IPv6 链路，IPv6 启用接口需具备链路本地地址；路由器不会跨链路转发此类源或目的地址。 原图“多个组织可同时使用”也可能描述组播，已改为 ULA 的本地用途单播特征以避免歧义。"
+      }
+    },
+    {
+      "id": 1141,
+      "before_sha256": "2e385c7fca7701ebf59cd8e2871f22e51a528c1dc5ce90c330fc1d548a89b4c5",
+      "reason": "未知服务器未必未经授权；默认状态须限定平台而非断言所有设备。",
+      "updates": {
+        "prompt": "On a Cisco switch whose DHCP snooping ports default to untrusted, match each corrected term to its description. The original exhibit contains inaccurate wording; use the interactive text.",
+        "drag_drop_data": {
+          "sources": [
+            "DHCP server",
+            "snooping binding database",
+            "spurious DHCP server",
+            "trusted",
+            "untrusted"
+          ],
+          "targets": [
+            {
+              "label": "table of learned DHCP client IP, MAC, lease, VLAN and port bindings",
+              "sub_label": "",
+              "expected": "snooping binding database"
+            },
+            {
+              "label": "network component that propagates IP addresses to hosts on the network",
+              "sub_label": "",
+              "expected": "DHCP server"
+            },
+            {
+              "label": "interface administratively trusted to receive DHCP server responses",
+              "sub_label": "",
+              "expected": "trusted"
+            },
+            {
+              "label": "DHCP server not authorized by the network administrator",
+              "sub_label": "",
+              "expected": "spurious DHCP server"
+            },
+            {
+              "label": "default DHCP snooping trust state of switch interfaces on the specified Cisco platform",
+              "sub_label": "",
+              "expected": "untrusted"
+            }
+          ]
+        },
+        "explanation": "绑定数据库记录 DHCP snooping 学到的客户端 IP、MAC、租期、VLAN 和接口，而不是未知主机列表。管理员将通往合法 DHCP 服务器或上游的端口设为 trusted；未配置时交换机接口通常为 untrusted。DHCP server 分配地址；spurious DHCP server 指未授权服务器。非信任端口收到的服务器响应会被丢弃，其他 DHCP 客户端流量不能一概称为服务器报文。原答案图以错误描述作答，保留题图供追溯。 无授权才是 rogue/spurious 的关键，未知并不自动等于未授权；默认信任状态因平台而定。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4193.html",
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/dhcp/97882-dhcp-snooping.html"
+  ]
+}

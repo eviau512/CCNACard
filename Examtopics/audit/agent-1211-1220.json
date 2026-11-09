@@ -1,0 +1,509 @@
+{
+  "scope": "Q1211–Q1220",
+  "corrections": [
+    {
+      "id": 1211,
+      "before_sha256": "58fae0e6d95ab1510d49f3f7e544a295f71431122749973b2e75021ade2d9bac",
+      "updates": {
+        "prompt": "Classify each specified use by its indicated TCP or UDP transport. Treat the items as the stated common uses rather than exclusive protocol requirements; order within a group does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "a typical DNS query using UDP",
+            "HTTP/1.1 over TCP",
+            "RTP over UDP",
+            "SMTP",
+            "SNMP messages over UDP",
+            "Telnet"
+          ],
+          "targets": [
+            {
+              "label": "TCP (Slot 1)",
+              "sub_label": "",
+              "expected": "HTTP/1.1 over TCP",
+              "unordered_group": "TCP"
+            },
+            {
+              "label": "TCP (Slot 2)",
+              "sub_label": "",
+              "expected": "SMTP",
+              "unordered_group": "TCP"
+            },
+            {
+              "label": "TCP (Slot 3)",
+              "sub_label": "",
+              "expected": "Telnet",
+              "unordered_group": "TCP"
+            },
+            {
+              "label": "UDP (Slot 1)",
+              "sub_label": "",
+              "expected": "a typical DNS query using UDP",
+              "unordered_group": "UDP"
+            },
+            {
+              "label": "UDP (Slot 2)",
+              "sub_label": "",
+              "expected": "RTP over UDP",
+              "unordered_group": "UDP"
+            },
+            {
+              "label": "UDP (Slot 3)",
+              "sub_label": "",
+              "expected": "SNMP messages over UDP",
+              "unordered_group": "UDP"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "TCP 组：HTTP/1.1、SMTP、Telnet；UDP 组：题设 UDP DNS 查询、RTP 和 SNMP。DNS 同时支持 TCP，区域传送及其他查询可使用 TCP；HTTP/3 使用 QUIC/UDP，因此题设明确具体用法。原解答图将 SMTP 与 DNS 错置，已隐藏；原题图保留供核对。同组内顺序不限。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "TCP 组：HTTP/1.1、SMTP、Telnet；UDP 组：题设 UDP DNS 查询、RTP 和 SNMP。DNS 同时支持 TCP，区域传送及其他查询可使用 TCP；HTTP/3 使用 QUIC/UDP，因此题设明确具体用法。原解答图将 SMTP 与 DNS 错置，已隐藏；原题图保留供核对。同组内顺序不限。",
+        "reference": "https://www.rfc-editor.org/info/rfc7766/"
+      }
+    },
+    {
+      "id": 1212,
+      "before_sha256": "b54bc7e9d7b7be0809270da8d31943cafd8e5ced0b66fdd8c9376cd49617dd77",
+      "updates": {
+        "prompt": "Classify these campus design characteristics under a typical collapsed-core or three-tier design. Within each category the order does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "the core and distribution functions are combined in the same layer",
+            "uses a dedicated core layer to connect distribution blocks",
+            "often needs fewer devices than a comparable three-tier design",
+            "commonly used for smaller campus designs",
+            "uses separate core and distribution layers"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Collapsed Core (Slot 1)",
+              "expected": "the core and distribution functions are combined in the same layer",
+              "unordered_group": "Collapsed Core"
+            },
+            {
+              "id": "t2",
+              "label": "Collapsed Core (Slot 2)",
+              "expected": "often needs fewer devices than a comparable three-tier design",
+              "unordered_group": "Collapsed Core"
+            },
+            {
+              "id": "t3",
+              "label": "Collapsed Core (Slot 3)",
+              "expected": "commonly used for smaller campus designs",
+              "unordered_group": "Collapsed Core"
+            },
+            {
+              "id": "t4",
+              "label": "Three-Tier (Slot 1)",
+              "expected": "uses a dedicated core layer to connect distribution blocks",
+              "unordered_group": "Three-Tier"
+            },
+            {
+              "id": "t5",
+              "label": "Three-Tier (Slot 2)",
+              "expected": "uses separate core and distribution layers",
+              "unordered_group": "Three-Tier"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "折叠核心将核心与汇聚功能合并，常用于较小园区，可能减少设备；三层设计有独立核心层连接汇聚块。高可用与冗余取决于具体设计，折叠核心也可使用冗余设备，不能说三层必然更高可用或折叠核心只有一台交换机。已改写原图中含糊描述；同组内顺序不限。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "折叠核心将核心与汇聚功能合并，常用于较小园区，可能减少设备；三层设计有独立核心层连接汇聚块。高可用与冗余取决于具体设计，折叠核心也可使用冗余设备，不能说三层必然更高可用或折叠核心只有一台交换机。已改写原图中含糊描述；同组内顺序不限。",
+        "reference": null
+      }
+    },
+    {
+      "id": 1213,
+      "before_sha256": "5762f7d9495e0a9a4792c2bd62890414803c157248f5e4a9990be6f0c5de5dc0",
+      "updates": {
+        "prompt": "Match TCP and UDP with the indicated transport-layer properties. Order within each group does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "sends datagrams without establishing a transport-layer connection",
+            "establishes a connection before ordinary application data transfer",
+            "does not itself guarantee delivery or retransmit lost datagrams",
+            "supports reliable data transmission"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "TCP (Slot 1)",
+              "expected": "establishes a connection before ordinary application data transfer",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t2",
+              "label": "TCP (Slot 2)",
+              "expected": "supports reliable data transmission",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t3",
+              "label": "UDP (Slot 1)",
+              "expected": "sends datagrams without establishing a transport-layer connection",
+              "unordered_group": "UDP"
+            },
+            {
+              "id": "t4",
+              "label": "UDP (Slot 2)",
+              "expected": "does not itself guarantee delivery or retransmit lost datagrams",
+              "unordered_group": "UDP"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "TCP 面向连接，通过序号、确认与重传等机制提供可靠有序字节流；UDP 无连接，协议本身不保证交付或重传，应用仍可自行实现可靠性。原图“无需数据通道”含糊，现改为无需先建立传输层连接。每组内可交换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "TCP 面向连接，通过序号、确认与重传等机制提供可靠有序字节流；UDP 无连接，协议本身不保证交付或重传，应用仍可自行实现可靠性。原图“无需数据通道”含糊，现改为无需先建立传输层连接。每组内可交换。",
+        "reference": null
+      }
+    },
+    {
+      "id": 1214,
+      "before_sha256": "1a4a89678161ff4be170893331df5b1aea24b3fb26b10f7fe99a8c06dc34ae66",
+      "updates": {
+        "prompt": "Classify the adapted IPv6 examples by their address-prefix category. Order within each group does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "2001:db8:600d:cafe::123",
+            "fdba:926a:e8e:7a25:b1:c6d2:1a76:8fdc",
+            "fd6d:c83b:5cef:b6b2::1",
+            "3ffe:e54d:620:a87a::f00d"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast (Slot 1)",
+              "sub_label": "",
+              "expected": "2001:db8:600d:cafe::123",
+              "unordered_group": "Global Unicast"
+            },
+            {
+              "label": "Global Unicast (Slot 2)",
+              "sub_label": "",
+              "expected": "3ffe:e54d:620:a87a::f00d",
+              "unordered_group": "Global Unicast"
+            },
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "fdba:926a:e8e:7a25:b1:c6d2:1a76:8fdc",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "fd6d:c83b:5cef:b6b2::1",
+              "unordered_group": "Unique Local"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "2001:db8:600d:cafe::123 和 3ffe:e54d:620:a87a::f00d 在 2000::/3 全局单播格式范围内，但 2001:db8::/32 为文档前缀，3ffe::/16 为已退役 6bone 前缀，均不能据此认定实际可公网使用。fdba:... 和 fd6d:... 属 fd00::/8 本地分配 ULA；原图 fcba 的 L 位为 0，未定义为本地分配 ULA，故替换为 fdba。每组内可交换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "2001:db8:600d:cafe::123 和 3ffe:e54d:620:a87a::f00d 在 2000::/3 全局单播格式范围内，但 2001:db8::/32 为文档前缀，3ffe::/16 为已退役 6bone 前缀，均不能据此认定实际可公网使用。fdba:... 和 fd6d:... 属 fd00::/8 本地分配 ULA；原图 fcba",
+        "reference": "https://www.rfc-editor.org/info/rfc4291/"
+      }
+    },
+    {
+      "id": 1215,
+      "before_sha256": "75c3f435448e85ed34fd63783e9cecaf74b9d1a22c7f68bb9866103390bba33b",
+      "updates": {
+        "prompt": "Classify the IPv6 examples by address format. Order within the global-unicast-format group does not matter.",
+        "explanation": "2001:db8:600d:cafe::123 和 3ffe:e54d:620:a87a::f00d 落在 2000::/3 地址格式范围；前者是文档前缀，后者是已退役的 6bone 前缀，不能据此推断互联网可达。fe80::a00:27ff:feeb:89aa 是有效链路本地单播；ff05::1:3 为组播地址。两个全局单播格式槽位可互换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "2001:db8:600d:cafe::123 和 3ffe:e54d:620:a87a::f00d 落在 2000::/3 地址格式范围；前者是文档前缀，后者是已退役的 6bone 前缀，不能据此推断互联网可达。fe80::a00:27ff:feeb:89aa 是有效链路本地单播；ff05::1:3 为组播地址。两个全局单播格式槽位可互换。",
+        "reference": "https://www.rfc-editor.org/info/rfc4291/"
+      }
+    },
+    {
+      "id": 1216,
+      "before_sha256": "3a05f2bb59fd01f3d6dd993c32785cc24ae8516d76acc2f8202dbb544f98d718",
+      "updates": {
+        "prompt": "Match each adapted description to the IPv6 delivery type. Each type has two descriptions and group members may be placed in either order.",
+        "drag_drop_data": {
+          "sources": [
+            "includes link-local and loopback addresses",
+            "delivery is to one eligible interface selected by routing",
+            "identifies an interface on an IPv6 device",
+            "assigned to more than one interface",
+            "derived from the FF00::/8 address range",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Anycast (Slot 1)",
+              "expected": "assigned to more than one interface",
+              "unordered_group": "Anycast"
+            },
+            {
+              "id": "t2",
+              "label": "Anycast (Slot 2)",
+              "expected": "delivery is to one eligible interface selected by routing",
+              "unordered_group": "Anycast"
+            },
+            {
+              "id": "t3",
+              "label": "Multicast (Slot 1)",
+              "expected": "derived from the FF00::/8 address range",
+              "unordered_group": "Multicast"
+            },
+            {
+              "id": "t4",
+              "label": "Multicast (Slot 2)",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "id": "t5",
+              "label": "Unicast (Slot 1)",
+              "expected": "identifies an interface on an IPv6 device",
+              "unordered_group": "Unicast"
+            },
+            {
+              "id": "t6",
+              "label": "Unicast (Slot 2)",
+              "expected": "includes link-local and loopback addresses",
+              "unordered_group": "Unicast"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "任播地址可分配给多个接口，但报文通常送到路由意义上最近的一个接口；不能说任播只能用于路由器，RFC 4291 已移除旧限制。组播使用 ff00::/8 并可一对多；单播标识单个接口，链路本地及回环属于单播。同组内任意顺序。原题及答案图中的 non-host 专用断言错误，已改写并隐藏错误答案图。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "任播地址可分配给多个接口，但报文通常送到路由意义上最近的一个接口；不能说任播只能用于路由器，RFC 4291 已移除旧限制。组播使用 ff00::/8 并可一对多；单播标识单个接口，链路本地及回环属于单播。同组内任意顺序。原题及答案图中的 non-host 专用断言错误，已改写并隐藏错误答案图。",
+        "reference": "https://www.rfc-editor.org/info/rfc4291/"
+      }
+    },
+    {
+      "id": 1217,
+      "before_sha256": "6f9fea53638056245ce366849ae25946f7e74c48587d08ce2fa6650bc7ea8935",
+      "updates": {
+        "prompt": "Match each adapted characteristic to global unicast or link-local IPv6 addresses. Each group has two slots and order within a group does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "packets using the address are not forwarded beyond the originating link",
+            "equivalent to public IPv4 addresses",
+            "is scoped to the local link",
+            "can be globally routed when allocated and permitted by routing and policy"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Global Unicast Address (Slot 1)",
+              "expected": "equivalent to public IPv4 addresses",
+              "unordered_group": "Global Unicast Address"
+            },
+            {
+              "id": "t2",
+              "label": "Global Unicast Address (Slot 2)",
+              "expected": "can be globally routed when allocated and permitted by routing and policy",
+              "unordered_group": "Global Unicast Address"
+            },
+            {
+              "id": "t3",
+              "label": "Link-Local Address (Slot 1)",
+              "expected": "is scoped to the local link",
+              "unordered_group": "Link-Local Address"
+            },
+            {
+              "id": "t4",
+              "label": "Link-Local Address (Slot 2)",
+              "expected": "packets using the address are not forwarded beyond the originating link",
+              "unordered_group": "Link-Local Address"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "全局单播通常用于可全球路由的地址，类似公网 IPv4，但具体是否可达取决于分配、路由及策略。链路本地仅在链路内有效，路由器不应转发源或目的为链路本地的包。原答案图将公网可路由放入链路本地，且误称接口只可配置一个地址；已改写，修订后的两组各自可乱序。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "全局单播通常用于可全球路由的地址，类似公网 IPv4，但具体是否可达取决于分配、路由及策略。链路本地仅在链路内有效，路由器不应转发源或目的为链路本地的包。原答案图将公网可路由放入链路本地，且误称接口只可配置一个地址；已改写，修订后的两组各自可乱序。",
+        "reference": "https://www.rfc-editor.org/info/rfc4291/"
+      }
+    },
+    {
+      "id": 1218,
+      "before_sha256": "b7be85fa5fb82afd12c07122bb746234616f015377ad2177705cf26e82028b75",
+      "updates": {
+        "prompt": "Match the adapted IPv6 link-local and unique-local properties. Each group has two slots and group order does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "packets using the address are not forwarded beyond the originating link",
+            "intended for local communications and normally not routed on the public Internet",
+            "addresses with prefix FC00::/7",
+            "used for communication scoped to one link"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Link-Local Address (Slot 1)",
+              "expected": "used for communication scoped to one link",
+              "unordered_group": "Link-Local Address"
+            },
+            {
+              "id": "t2",
+              "label": "Link-Local Address (Slot 2)",
+              "expected": "packets using the address are not forwarded beyond the originating link",
+              "unordered_group": "Link-Local Address"
+            },
+            {
+              "id": "t3",
+              "label": "Unique Local Address (Slot 1)",
+              "expected": "addresses with prefix FC00::/7",
+              "unordered_group": "Unique Local Address"
+            },
+            {
+              "id": "t4",
+              "label": "Unique Local Address (Slot 2)",
+              "expected": "intended for local communications and normally not routed on the public Internet",
+              "unordered_group": "Unique Local Address"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "链路本地地址作用域是单条链路，源或目的为链路本地的包不跨路由器转发。ULA 属 fc00::/7，当前本地分配形式为 fd00::/8，通常不在公网路由；原题“每接口只配置一次”不是通用限制，接口可有多个 IPv6 地址。组内可乱序。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "链路本地地址作用域是单条链路，源或目的为链路本地的包不跨路由器转发。ULA 属 fc00::/7，当前本地分配形式为 fd00::/8，通常不在公网路由；原题“每接口只配置一次”不是通用限制，接口可有多个 IPv6 地址。组内可乱序。",
+        "reference": "https://www.rfc-editor.org/info/rfc4291/"
+      }
+    },
+    {
+      "id": 1219,
+      "before_sha256": "3a8fce921fa6f68ff77d1afb3ea719a896d30875ecde7fa07b76037800a0575f",
+      "updates": {
+        "prompt": "Refer to the active Wi-Fi adapter in the exhibit. Assume its 192.168.1.20 address uses mask 255.255.255.0 and gateway 192.168.1.1. Match its identifiers with the requested network parameters.",
+        "explanation": "活动 Wi-Fi 接口的 MAC 为 B8-76-3F-7C-57-DF，主机为 192.168.1.20、默认网关 192.168.1.1；/24 网络的广播为 192.168.1.255，最后可分配单播地址为 192.168.1.254。图中的 Wi-Fi Direct 虚拟适配器已断开，其 MAC 不用于此题。MAC 可能被本地配置或随机化，不能绝对保证全球唯一。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "活动 Wi-Fi 接口的 MAC 为 B8-76-3F-7C-57-DF，主机为 192.168.1.20、默认网关 192.168.1.1；/24 网络的广播为 192.168.1.255，最后可分配单播地址为 192.168.1.254。图中的 Wi-Fi Direct 虚拟适配器已断开，其 MAC 不用于此题。MAC 可能被本地配置或随机化，不能绝对保",
+        "reference": null
+      }
+    },
+    {
+      "id": 1220,
+      "before_sha256": "b8be62226ff35722dce7cd6174e30341e116b61c102d1b8be9b4267fd976fb69",
+      "updates": {
+        "prompt": "Match the DNS concepts and Cisco IOS client lookup command with the adapted descriptions.",
+        "drag_drop_data": {
+          "sources": [
+            "domain",
+            "cache",
+            "name resolver",
+            "DNS",
+            "no ip domain-lookup"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "service that maps hostname to IP addresses",
+              "expected": "DNS"
+            },
+            {
+              "id": "t2",
+              "label": "local database of address mappings that improves name resolution performance",
+              "expected": "cache"
+            },
+            {
+              "id": "t3",
+              "label": "in response to client requests, queries a name server for IP address information",
+              "expected": "name resolver"
+            },
+            {
+              "id": "t4",
+              "label": "hierarchical name used for an administrative namespace in a URL hostname",
+              "expected": "domain"
+            },
+            {
+              "id": "t5",
+              "label": "disables DNS hostname lookup by the Cisco device",
+              "expected": "no ip domain-lookup"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "DNS 提供主机名与地址等记录查询；缓存存储先前结果以减少重复查询；resolver 根据请求进行名称查询；域名是层次化命名空间而非可靠地表明组织类型或地理位置。Cisco IOS `no ip domain-lookup` 关闭设备的 DNS 主机名查询，并不等同关闭所有 DNS 服务器或其他 DNS 服务。原图描述过宽，已改写对应标签。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked all drag sources and targets",
+        "answer": "checked against original image and standards",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "DNS 提供主机名与地址等记录查询；缓存存储先前结果以减少重复查询；resolver 根据请求进行名称查询；域名是层次化命名空间而非可靠地表明组织类型或地理位置。Cisco IOS `no ip domain-lookup` 关闭设备的 DNS 主机名查询，并不等同关闭所有 DNS 服务器或其他 DNS 服务。原图描述过宽，已改写对应标签。",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/routers/10000-series-routers/46253-ipdomain-lookup.html"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/info/rfc4291/",
+    "https://www.rfc-editor.org/info/rfc4193/",
+    "https://www.rfc-editor.org/info/rfc7766/",
+    "https://www.cisco.com/c/en/us/support/docs/routers/10000-series-routers/46253-ipdomain-lookup.html"
+  ],
+  "limitations": "Manually checked source and answer images; no real device tests."
+}

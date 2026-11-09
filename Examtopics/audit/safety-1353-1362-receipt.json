@@ -1,0 +1,11 @@
+{
+  "manifest": "safety-1353-1362.json",
+  "applied_ids": [
+    1361
+  ],
+  "corrected_question_sha256": {
+    "1361": "5b8178672e2b62b97ffcd943195472f5e626244e0c89044d2662ea439b19a6ee"
+  },
+  "source_sha256": "35e2e6d3ede7b688420f10773fbf29c6b1747797434a17b8f415733f24952525",
+  "app_bundle_sha256": "b2ee52cada3c472deabb7917565f3d04fca0174dee489076e79dc23073c37a97"
+}

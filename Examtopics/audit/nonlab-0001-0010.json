@@ -1,0 +1,143 @@
+{
+  "scope": "Independent non-lab Q1–Q10 review",
+  "corrections": [
+    {
+      "id": 2,
+      "before_sha256": "b87e1820c5240cbc2b44dfacd0b1aaafc87bbe206076d68043874380f3eaca9f",
+      "reason": "直看路由表：.214 匹配 .208/29，D 正确，补完整范围及排除项；彩色扫描含细微色偏，应保留原色。",
+      "updates": {
+        "explanation": "D。图中 Host A 的目的地址是 10.10.13.214；10.10.13.208/29 覆盖 .208–.215，因此匹配该主机。10.10.13.0/25 只覆盖 .0–.127，10.10.13.144/28 覆盖 .144–.159，10.10.10.0/28 属于不同的网段，均不匹配。路由器在所有匹配项中采用最长前缀匹配；这里 /29 是图示中匹配该目的地址的路由。下一跳是否可达及返回路径仍由实际网络状态决定。"
+      }
+    },
+    {
+      "id": 4,
+      "before_sha256": "44a75838ed949f17d30f40115f587c23373f9c9eff717a370edd8e0d8394d0a0",
+      "reason": "Association Response 属管理帧，A 正确；补 Action、protected 和控制帧区分。",
+      "updates": {
+        "explanation": "A。Association Response 是 802.11 管理帧的一个子类型；AP 用它告知客户端关联请求被接受或拒绝。Action 也是管理帧中的另一类子类型，并不是 Association Response 的顶层帧类型；Control 指控制帧，而 Protected Frame 表示帧受保护的属性，并非本题所问的顶层帧类型。"
+      }
+    },
+    {
+      "id": 6,
+      "before_sha256": "3c62ef40c2e9c5007c07f8d5092e2abfecb33db8b354b798b50c0c4411bc5e91",
+      "reason": "hypervisor 虚拟化物理资源，C 正确；补其他选项原因。",
+      "updates": {
+        "explanation": "C。虚拟机管理程序（hypervisor）对 CPU、内存以及虚拟存储等资源提供抽象，使多个具有各自客户操作系统的虚拟机共享物理主机。A 把虚拟化误说成无需物理资源的三层通信；B 错在一个 hypervisor 只能运行一台虚拟机；D 的独立物理交换机并非虚拟机实现所必需，具体网络可使用虚拟交换或直通等方案。"
+      }
+    },
+    {
+      "id": 7,
+      "before_sha256": "cb85b2bf55ae68a5da6ba339e76fdd2cb99f71f2fd42560dfa84ca306abddbec",
+      "reason": "指定 /64 和 eui-64 唯一 B；补 DHCP/SLAAC/link-local 区别。",
+      "updates": {
+        "explanation": "B。`ipv6 address 2001:DB8:5:112::/64 eui-64` 将指定 /64 前缀与接口基于 MAC 地址生成的 modified EUI-64 接口标识组合：在 48 位 MAC 中间插入 FFFE 并翻转首字节的 U/L 位。A 使用 DHCPv6；C 使用路由器通告进行自动配置，其接口标识生成方式取决于实现，题目要求给定前缀并明确使用 EUI-64；D 使用 `link-local` 却指定了文档前缀全局单播地址，不符合命令所需的链路本地地址语义。"
+      }
+    },
+    {
+      "id": 8,
+      "before_sha256": "f74fc47028f155b3bcc70b05a116e6526fe7b1150899516be7b1f10d5f27d7e9",
+      "reason": "未知单播 VLAN 内可转发端口泛洪，C 正确；限定单播和 STP 状态。",
+      "updates": {
+        "prompt": "By default, what does a Layer 2 switch do when it receives an unknown unicast destination MAC address on a forwarding port?",
+        "explanation": "C。交换机按入站 VLAN 与目的 MAC 查表；目的单播 MAC 未命中时，默认向同 VLAN 中其他符合转发条件的端口泛洪，不从入端口发回；STP 阻塞端口或被策略限制的端口不会因此参与转发。源 MAC 可以在入端口学习，但不是凭空将未知目的 MAC 加入表中，所以 A、B 不对；默认行为不是直接丢弃 D。端口隔离、未知单播抑制等功能可能改变默认行为。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "before_sha256": "a4ed9448644fd3c87f7e53cfb0df3360675cc63d31ef91395535c1c8a2f85fcf",
+      "assessment": "直看路由表：.10 匹配 OSPF /25，B 正确；灰阶图。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": true,
+      "code_cli_checked": true,
+      "dark_mode_checked": true
+    },
+    {
+      "id": 2,
+      "before_sha256": "b87e1820c5240cbc2b44dfacd0b1aaafc87bbe206076d68043874380f3eaca9f",
+      "assessment": "直看路由表：.214 匹配 .208/29，D 正确，补完整范围及排除项；彩色扫描含细微色偏，应保留原色。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": true,
+      "code_cli_checked": true,
+      "dark_mode_checked": true
+    },
+    {
+      "id": 3,
+      "before_sha256": "7b4e431b46576a8c25ca03e62d7fb08e1e59950350fb56a3973bb4b1a7089bee",
+      "assessment": "TCP 三次握手而 UDP 无连接，A 正确；题干选项均完整。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    },
+    {
+      "id": 4,
+      "before_sha256": "44a75838ed949f17d30f40115f587c23373f9c9eff717a370edd8e0d8394d0a0",
+      "assessment": "Association Response 属管理帧，A 正确；补 Action、protected 和控制帧区分。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    },
+    {
+      "id": 5,
+      "before_sha256": "5ec44b87f1c2a693a3b9c06bb856b389c887fe01dc68709f50cec3cf2397aaa0",
+      "assessment": "增加 leaf 并连接每台 spine，C 正确；现有解释说明冗余与超售限制。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    },
+    {
+      "id": 6,
+      "before_sha256": "3c62ef40c2e9c5007c07f8d5092e2abfecb33db8b354b798b50c0c4411bc5e91",
+      "assessment": "hypervisor 虚拟化物理资源，C 正确；补其他选项原因。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    },
+    {
+      "id": 7,
+      "before_sha256": "cb85b2bf55ae68a5da6ba339e76fdd2cb99f71f2fd42560dfa84ca306abddbec",
+      "assessment": "指定 /64 和 eui-64 唯一 B；补 DHCP/SLAAC/link-local 区别。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    },
+    {
+      "id": 8,
+      "before_sha256": "f74fc47028f155b3bcc70b05a116e6526fe7b1150899516be7b1f10d5f27d7e9",
+      "assessment": "未知单播 VLAN 内可转发端口泛洪，C 正确；限定单播和 STP 状态。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    },
+    {
+      "id": 9,
+      "before_sha256": "84e633e3b1558416297c8b74d8bae41a18bd33dff99f846ab1d5eb640fd150be",
+      "assessment": "/30 的 D 为可用地址，A 为广播；B/C 为 /29；CLI 逐行完整。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    },
+    {
+      "id": 10,
+      "before_sha256": "b717a6b41744edd611413bb20240e083410d4acfff3ad8965129603960b0c566",
+      "assessment": "172.28/16 完整属于 RFC1918 172.16/12，B 正确；其余不属于。",
+      "prompt_options_answer_explanation_checked": true,
+      "image_checked": false,
+      "code_cli_checked": true,
+      "dark_mode_checked": false
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/23563-143.pdf",
+    "https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/ipaddresses-and-services/configuration-guide/ip-addresses-and-services-config-cisco8000/network-stack-ipv4-and-ipv6-addressing/ipv6-addresses.html"
+  ]
+}

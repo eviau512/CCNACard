@@ -1,0 +1,155 @@
+{
+  "scope": [
+    1303,
+    1312
+  ],
+  "corrections": [
+    {
+      "id": 1312,
+      "before_sha256": "004ff0d7620fe8c2a82f9446c6fded95f55909016dcf0d61a07d958fd640bd9e",
+      "reason": "原C叙述“可请求最多四个”可能成立，无法作为唯一错误选项；限定IOS并改为明确错误的固定四个。",
+      "updates": {
+        "prompt": "A Cisco IOS device is configured as a DHCPv4 server. Which two statements describe supported DHCP functions? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "The DHCP server always grants infinite leases and never requires renewal."
+          },
+          {
+            "label": "B",
+            "text": "The DHCP server leases client IP addresses dynamically."
+          },
+          {
+            "label": "C",
+            "text": "The DHCP client must always receive exactly four DNS server addresses."
+          },
+          {
+            "label": "D",
+            "text": "The DHCP server offers the ability to exclude specific IP addresses from a pool of IP addresses."
+          },
+          {
+            "label": "E",
+            "text": "The DHCP client maintains a pool of IP addresses it is able to assign."
+          }
+        ],
+        "explanation": "B、D。Cisco IOS DHCP 服务器可以动态租出 IPv4 地址，并可使用 `ip dhcp excluded-address` 将指定地址排除在动态分配之外。A 错在 always：有限租约需要续租，也可以配置无限租约。C 错在必须恰好四个：DHCP DNS 服务器选项是地址列表，数量取决于配置与实现，并无这样的统一要求。E 混淆客户端与服务端：客户端不维护服务器的可分配地址池。排除固定地址有助于避免冲突，但不能消除其他错误配置造成的冲突。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1303,
+      "before_sha256": "fbf8a41e88560e3176cd1001cc80829753d6318043b33d3b35b1913022631a2e",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "已核对图中两条/126和两端下一跳，B/D双向有效；其余选项下一跳或目标不符。"
+    },
+    {
+      "id": 1304,
+      "before_sha256": "3c8c63b177e19f1a52afd5f752311bef2796af9edcd11f23a2a545c2fee6482e",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "图示共享广播网，Hello/dead或区域不一致阻止邻居；DR/DROther及路由管理距离解释成立。"
+    },
+    {
+      "id": 1305,
+      "before_sha256": "b699e133c773a4c63cbfea5b3fa6f83a3785d675f46af5916e2c3d9a291cfccb",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "已按 /26 验证前缀范围 .0–.63，A/B位于范围内。"
+    },
+    {
+      "id": 1306,
+      "before_sha256": "fa3c82e986241a3f9427325f1374739db5af96248666fc00f31bfbaf969542e8",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "已核对图中接口、DR/BDR与新选举前提，优先级0使R3不参与、200使R1最高。"
+    },
+    {
+      "id": 1307,
+      "before_sha256": "5b02b30e8162ccb2af738a47df8e4e0d5e1b2a131301ac2a873fc2f98d01a3f0",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "已核图中两下一跳与主机地址，/24加/32分别指向R2/R3，纯出接口需解析并已排除proxy ARP。"
+    },
+    {
+      "id": 1308,
+      "before_sha256": "7fb25090e17767affc13f5956f7a9f0243bd9974185837a15a7e94621c6fb722",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "图示R2/R3下一跳分别为fd00:12::2和fd00:13::3；/128覆盖/64。"
+    },
+    {
+      "id": 1309,
+      "before_sha256": "4ed274a1d41d62257b4e98689ec519bcfc0d2e3717e292fdf54fafd007d8d4d5",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "D/E对应虚拟网关及失败切换，负载共享和跟踪限制已说明。"
+    },
+    {
+      "id": 1310,
+      "before_sha256": "24ca3b27396d4de1b7296e306542b1d0332813361eab4e10e486eaee909daf4b",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "DNS名称解析与多个A/AAAA记录对应D/E，名称分层且本身不加密。"
+    },
+    {
+      "id": 1311,
+      "before_sha256": "fb85bdf8e5343733164803eef1d356ac4598c94b1c7415a60b525d53d3e1befb",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "远程阈值3允许0–3，选项B/D/F正确；输出不保证生成和送达。"
+    },
+    {
+      "id": 1312,
+      "before_sha256": "004ff0d7620fe8c2a82f9446c6fded95f55909016dcf0d61a07d958fd640bd9e",
+      "prompt": "checked",
+      "all_options": "checked",
+      "answer": "checked",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "C的“可请求最多四个”并不必然错误，明确改为错误的恰好四个；题干限定IOS使排除地址功能可验证。"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc2132.html",
+    "https://www.rfc-editor.org/rfc/rfc2131.html"
+  ]
+}

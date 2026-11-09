@@ -1,0 +1,11 @@
+{
+  "manifest": "groups-1313-1322.json",
+  "applied_ids": [
+    1315
+  ],
+  "corrected_question_sha256": {
+    "1315": "f53b17b14f157e3bc8fa4ada74442a0a9e407a65cbf3d24b2fb6482278c5cb18"
+  },
+  "source_sha256": "62fd52fdbbdf05076119264ad15b6eedb602f4836d33b0653c67beaf4d450d7e",
+  "app_bundle_sha256": "b32b70b12d97ddbb3c39f3b482004dc748171cdd54d868844bbb8911d7288f05"
+}

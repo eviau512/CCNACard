@@ -1,0 +1,205 @@
+{
+  "scope": "non-Lab Q11–Q20",
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4193",
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.rfc-editor.org/rfc/rfc9293",
+    "https://www.rfc-editor.org/rfc/rfc768",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup2T/15_4_sy_swcg_2T/power_over_ethernet.pdf",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-5SY/config_guide/sup6T/15_5_sy_swcg_6T/unknown_ucast_mcast_flood_control.pdf"
+  ],
+  "corrections": [
+    {
+      "id": 12,
+      "before_sha256": "1f2c33031afcfd3b840b833bac2b7feec2ee9c23a06db0900dc53f835b90f2c9",
+      "reason": "ULA不在公共互联网按常规路由策略传播，非技术上绝不可能。",
+      "updates": {
+        "prompt": "Which IPv6 address type is intended for communication between internal subnets and is not normally routed on the public Internet?",
+        "explanation": "B。Unique Local Address（ULA，FC00::/7；本地分配通常使用 FD00::/8）适用于组织内部通信，并可通过内部路由器跨子网转发；它不预期在全球互联网中路由，仍需边界过滤策略防止泄漏。A 的 FE80::/10 链路本地地址只用于同一链路；C 是组播而不是题设内部单播地址类型；D 是可用于全球通信的全局单播。"
+      }
+    },
+    {
+      "id": 14,
+      "before_sha256": "b68107071b49d21104566dfa0f5a22d75d63844d0d9c16bc83131f4e8f02b0de",
+      "reason": "控制器集中管理可减少逐台配置，但仍有供电、发现及注册前提。",
+      "updates": {
+        "prompt": "What is a benefit of using a Cisco Wireless LAN Controller with compatible lightweight access points?",
+        "explanation": "A。兼容的轻量 AP 加入 WLC 后，管理员可集中配置 WLAN、安全策略和射频参数，而无需逐台手工维护这些共同设置。AP 仍需供电、IP 连通性、控制器发现、兼容性及注册等前提；控制器也不能保证完全没有设备级或部署配置。B 是缺点而非优势；C 没有这一普遍限制；D 将自治 AP 与受控制器管理的轻量 AP 混为一谈。"
+      }
+    },
+    {
+      "id": 15,
+      "before_sha256": "f087f63c78f6a670c40f94ea0cdc8cb9b985eab8538246e349b9cb93e1c655f5",
+      "reason": "明确Cisco特定平台上的功率测量、监管以及违例动作，不将所有PoE分类覆盖等同监管。",
+      "updates": {
+        "prompt": "On a Cisco platform that supports IEEE PoE classification override with power measurement and policing enabled, what occurs when a monitored port exceeds the administratively configured maximum power?",
+        "explanation": "A。在题设支持功率测量与 policing 的 Cisco 平台上，端口功率超过管理上限时可关闭并进入 err-disabled；其分类覆盖允许管理员结合实际功率需求安全调整分配。实际可用命令和违例动作依平台及配置而异，不能推断所有 PoE 端口只启用分类覆盖就必定执行相同行为。B 不是该越限动作；C 功率监控不要求暂停数据；D 并无题述“低于最小功率就断开”的规则。"
+      }
+    },
+    {
+      "id": 16,
+      "before_sha256": "46dc73648fbca30c6f4557a3f2f8707edb181c78f068d7c5b1223bdf53b6eec1",
+      "reason": "泛洪受VLAN、STP及过滤限制；已知组播可被侦听抑制。",
+      "updates": {
+        "prompt": "On a switch with no flood-blocking features enabled, where is an unknown unicast Ethernet frame flooded?",
+        "explanation": "C。目的 MAC 在该 VLAN 的转发表中未知时，交换机默认向同一 VLAN 的其他合格转发端口复制帧，不向入端口回送。trunk 必须允许该 VLAN，端口也须处于转发状态；STP、端口隔离或未知单播阻断可进一步缩小范围。A 跨 VLAN 错误；B 已知单播按表项转发而非泛洪；D 未排除入端口。不能将所有组播一概视为泛洪：IGMP snooping 等可限制其端口范围。"
+      }
+    },
+    {
+      "id": 17,
+      "before_sha256": "cdbf1f36bb98d32a9fa455237f197cb999ef3cc1d0b0e722386104a713207629",
+      "reason": "隔离网络重用，连接或合并网络存在重叠冲突。",
+      "updates": {
+        "prompt": "What is a benefit of RFC 1918 private IPv4 addressing for organizations whose networks are not interconnected?",
+        "explanation": "A。相互独立且未互联的组织可重复使用 10.0.0.0/8、172.16.0.0/12 或 192.168.0.0/16，不会因此在全球公网产生地址分配冲突。若这些私网后来互联，重叠地址仍可能造成路由冲突，需要规划或转换。私网地址通常不会在公网全局路由；B 的外部直达、C 的不需任何转换、D 的天然安全均非 RFC 1918 的保证。"
+      }
+    },
+    {
+      "id": 19,
+      "before_sha256": "6890ee82275410472eab893f89ba880b1f93d28724f1f17cbda7f725a5588e6d",
+      "reason": "UDP发送独立数据报，不是TCP式连续字节流。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "TCP provides no reliability or error checking, while UDP acknowledges and retransmits lost messages."
+          },
+          {
+            "label": "B",
+            "text": "TCP uses flow control to avoid overwhelming the receiver; UDP sends datagrams without built-in flow control."
+          },
+          {
+            "label": "C",
+            "text": "TCP is connectionless and unreliable; UDP is connection-oriented and uses sequencing."
+          },
+          {
+            "label": "D",
+            "text": "UDP provides reliable transfer by establishing a three-way handshake."
+          }
+        ],
+        "explanation": "B。TCP 是面向连接的字节流协议，使用序号、确认和需要时的重传提供可靠传输，并用接收窗口进行流量控制；UDP 面向无连接的数据报，协议本身不提供确认、重传、排序或流量控制。应用可自行在 UDP 上实现可靠性。TCP 连接建立及重传不保证应用永远成功交付；UDP 不是连续字节流。A/C/D 均颠倒或误述两种协议。"
+      }
+    },
+    {
+      "id": 20,
+      "before_sha256": "570f5519817a7e61f930af45722065855c0c9b14090cd743a152a2509c893339",
+      "reason": "加入平台兼容、路由、CAPWAP过滤和发现前提，避免任何交换机绝对化。",
+      "updates": {
+        "prompt": "A compatible local-mode lightweight AP must join a WLC over CAPWAP. Which connection arrangement can work?",
+        "explanation": "D。轻量 AP 可通过交换网络接入，只要 AP 能取得适当 IP 配置、发现并到达兼容 WLC，且沿途路由、ACL、防火墙和必要的 CAPWAP 控制/数据流量允许通过；不要求与 WLC 同一交换机或直接用铜缆相连。CAPWAP 通常使用 UDP 5246（控制）和 5247（数据）；控制器及网络策略可能限制允许的连接。A/B/C 将非必要条件说成必须。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 11,
+      "before_sha256": "7c8fed3e10777201807e85cbc33a6e71e0141a9e2a77a5cbe39deecc15611ee7",
+      "result": "已直接查看原图，.143/28 为广播地址；选项及答案 D 正确。图片黑字白底；暗色适配不应改变文字。",
+      "answer_reviewed": [
+        "D"
+      ],
+      "image_checked": true,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 12,
+      "before_sha256": "1f2c33031afcfd3b840b833bac2b7feec2ee9c23a06db0900dc53f835b90f2c9",
+      "result": "核对ULA内部路由与公网策略；题意和解析已消除绝对断言。",
+      "answer_reviewed": [
+        "B"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 13,
+      "before_sha256": "7a119d196d75a06bee4e9abe5922db027c508aa5a23f90ea628bfc9b109f3117",
+      "result": "FF00::/8为IPv6组播地址范围；其他选项为单播前缀，答案D正确。",
+      "answer_reviewed": [
+        "D"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 14,
+      "before_sha256": "b68107071b49d21104566dfa0f5a22d75d63844d0d9c16bc83131f4e8f02b0de",
+      "result": "集中管理是轻量AP WLC优点；补充分部署前提。",
+      "answer_reviewed": [
+        "A"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 15,
+      "before_sha256": "f087f63c78f6a670c40f94ea0cdc8cb9b985eab8538246e349b9cb93e1c655f5",
+      "result": "Cisco平台分类覆盖涉及功率测量与policing，按支持条件明确题意。",
+      "answer_reviewed": [
+        "A"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 16,
+      "before_sha256": "46dc73648fbca30c6f4557a3f2f8707edb181c78f068d7c5b1223bdf53b6eec1",
+      "result": "未知单播同VLAN向其他合格端口泛洪；限定默认条件并解释组播侦听例外。",
+      "answer_reviewed": [
+        "C"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 17,
+      "before_sha256": "cdbf1f36bb98d32a9fa455237f197cb999ef3cc1d0b0e722386104a713207629",
+      "result": "未互联组织可重用私网地址；合并或互联仍可能冲突。",
+      "answer_reviewed": [
+        "A"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 18,
+      "before_sha256": "33002c2a53328f9d787b08348c4b746027c03528988feac06872db25f56c2ff7",
+      "result": "在题设经典IOS modified EUI-64及SLAAC场景中C正确；现代IID可随机，现有解析已有边界。",
+      "answer_reviewed": [
+        "C"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 19,
+      "before_sha256": "6890ee82275410472eab893f89ba880b1f93d28724f1f17cbda7f725a5588e6d",
+      "result": "B原选项把UDP描述成连续流，已改为无连接数据报并说明流控区别。",
+      "answer_reviewed": [
+        "B"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    },
+    {
+      "id": 20,
+      "before_sha256": "570f5519817a7e61f930af45722065855c0c9b14090cd743a152a2509c893339",
+      "result": "限定兼容、发现、IP连通及CAPWAP允许条件，不应称任意交换机无条件可用。",
+      "answer_reviewed": [
+        "D"
+      ],
+      "image_checked": false,
+      "options_checked": true,
+      "code_cli_checked": true
+    }
+  ]
+}

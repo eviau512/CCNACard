@@ -1,0 +1,161 @@
+{
+  "scope": "Independent review Q1153–Q1162",
+  "corrections": [
+    {
+      "id": 1153,
+      "before_sha256": "83c4f0141445ea6051163645168bc6bed855f60e36657f4c77ee5d309a65f6b6",
+      "reason": "流量类型不能普遍唯一决定服务机制；补给定业务策略，避免其他QoS设计同样合理。",
+      "updates": {
+        "prompt": "Match each traffic type to the requested QoS treatment for this policy: ordinary web traffic has no special treatment; voice uses strict priority; database synchronization must have bursts buffered and smoothed; and video exceeding its configured rate is dropped or remarked.",
+        "explanation": "按明确的业务策略配对：普通 Web 使用 best effort；实时 VoIP 使用优先队列；数据库同步整形以缓存并平滑突发；视频超过策略速率时由 policing 丢弃或重标记。业务类型本身不决定唯一策略；其他网络可以采用不同设计。整形队列也有容量上限，优先队列须配置适当限制。"
+      }
+    },
+    {
+      "id": 1154,
+      "before_sha256": "70fe2574f6490d2dd3e03ffb033734fbd761d4fa5df505d6e4908b8de4ad7a69",
+      "reason": "小办公室既可使用铜缆也可使用光纤，改为可区分媒介的特征。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "contains a conductor, bedding, and sheathing",
+            "is typically used for DWDM optical systems spanning long distances",
+            "carries electrical signals through twisted metal pairs",
+            "eliminates intermodal dispersion"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "contains a conductor, bedding, and sheathing",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "carries electrical signals through twisted metal pairs",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "is typically used for DWDM optical systems spanning long distances",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "eliminates intermodal dispersion",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "铜缆使用导体、绝缘与护套，也可通过金属双绞线传送电信号；单模光纤适用于合适模块下的长距离 DWDM，并避免模间色散，但并不消除所有色散或衰减。办公室也可使用光纤，故原图“用于小办公室”已改为可区分的特征。同一类别的两项顺序不限。"
+      }
+    },
+    {
+      "id": 1157,
+      "before_sha256": "551ccf3ac81ac3158b716439c3bd63eaaf712e7773dc37ee34c89e295e65f339",
+      "reason": "ULA的转发限制是公网策略与地址作用域，原选项绝对禁止路由不准确。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "reduces the likelihood of conflicts when independently numbered sites merge",
+            "sends packets to a group address rather than a single address",
+            "uses locally assigned fd00::/8 unicast prefixes normally filtered at the public Internet boundary",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "uses locally assigned fd00::/8 unicast prefixes normally filtered at the public Internet boundary",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "reduces the likelihood of conflicts when independently numbered sites merge",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "本例的 fd00::/8 本地分配 ULA 属于单播，可在组织内部或站点间专网路由，通常应在公共互联网边界过滤；随机生成 Global ID 降低站点合并时冲突概率，不能保证绝无冲突。IPv6 组播向组地址分发，实现一对多通信。同组两个选项可交换。"
+      }
+    },
+    {
+      "id": 1159,
+      "before_sha256": "606bb0af20d980c8a0a469439d1284b6cd38b722561af8ca64fa650aa496c0fd",
+      "reason": "题目拓扑缺失但可给出明确占位示例；避免将错误答案图中的VLAN和接口当成证据。",
+      "updates": {
+        "explanation": "原题拓扑缺失，原附答案图属于其他题，无法确定 VLAN 编号、接口或 R1 所连端口。先根据现场拓扑确定 `<sales-vlan>`、`<server-vlan>`、`<pc3-port>`、`<server-port>`、`<r1-port>` 和其他端口；下列为示意模板，不能将占位符原样输入：\n```text\nconf t\nvlan <sales-vlan>\n name SALES\ninterface <pc3-port>\n switchport mode access\n switchport access vlan <sales-vlan>\n no shutdown\ninterface <server-port>\n switchport mode access\n switchport access vlan <server-vlan>\n no shutdown\ncdp run\ninterface <r1-port>\n cdp enable\ninterface <other-port>\n no cdp enable\nend\n```\n对所有不应被发现的接口逐一关闭 CDP，必要时也检查 LLDP；使用 `show vlan brief`、`show cdp interface` 与 `show cdp neighbors` 验证后保存配置。题意只明确 Cisco 邻居发现，是否关闭 LLDP 取决于实际约束。"
+      }
+    },
+    {
+      "id": 1160,
+      "before_sha256": "c5e809cb2e06554bbaa9c90ddcda27284430e137a74bd25725f35ad6d98b449a",
+      "reason": "补充路由命令模板与占位前提，避免缺乏CLI且不臆造邻居接口IP。",
+      "updates": {
+        "explanation": "题图中误放上一题交换机配置，原答案图实际上是本题拓扑，已移至题图。Server 为 10.0.41.10，R2 到 ISP 的下一跳为 209.165.200.225。R1 的邻居接口地址需按实际配置确定，以下 `<R2-next-hop>` 与 `<R3-next-hop>` 为占位符：\n```text\n! R1: host route via R2, preferred LAN route via R3\nip route 10.0.41.10 255.255.255.255 <R2-next-hop>\nip route 10.0.41.0 255.255.255.0 <R3-next-hop>\nip route 10.0.41.0 255.255.255.0 <R2-next-hop> 200\n! R2: default route toward the ISP\nip route 0.0.0.0 0.0.0.0 209.165.200.225\n```\n/32 对服务器优先于 /24。示例中备份路由的管理距离 200 应高于所用主路由；R1 的主路由必须在 R3–R4 远端链路故障时被撤销，例如结合适当的跟踪或动态路由，仅设置较高管理距离不能检测远端故障。确认 R2 至目的地及回程可达，使用 `show ip route` 等命令验证后保存。"
+      }
+    },
+    {
+      "id": 1162,
+      "before_sha256": "ad58c4e7a0fdc77767f4df32b178cda6e64274a01f446be08adb75f620361190",
+      "reason": "小办公室不能唯一表征铜缆，改为明确铜缆的电磁耦合特征。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "carries electrical signals and may be affected by electromagnetic interference",
+            "can support long-distance optical links with suitable transceivers",
+            "uses metal conductors to carry electrical signals",
+            "avoids intermodal dispersion in the fiber"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "carries electrical signals and may be affected by electromagnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "uses metal conductors to carry electrical signals",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "can support long-distance optical links with suitable transceivers",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "avoids intermodal dispersion in the fiber",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "铜缆使用金属导体承载电信号，可能受到电磁干扰；单模光纤在合适光模块与链路预算下可用于长距离，并避免模间色散。原图的小办公室用途不能唯一排除光纤，已改成电信号特征；同组内顺序不限。单模光纤仍受其他色散、损耗和硬件能力限制。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html",
+    "https://www.rfc-editor.org/rfc/rfc4193"
+  ],
+  "limitations": "Original image and answer image directly reviewed from saved exhibits; no network device tests."
+}

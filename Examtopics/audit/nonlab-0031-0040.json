@@ -1,0 +1,155 @@
+{
+  "scope": "Non-lab Q31–Q40 independent review",
+  "corrections": [
+    {
+      "id": 31,
+      "before_sha256": "82149a59e71f07a26adce2d31516e7eea0b77ba5ef3813eac1bcaed081bf4783",
+      "reason": "题干将不重叠信道与无碰撞等同；原解析混合 DSSS 与可选 40 MHz OFDM。",
+      "updates": {
+        "prompt": "For nearby 802.11b DSSS access points using approximately 22-MHz channels in a region where channels 1–11 are available, which three channels are conventionally selected to minimize channel overlap?",
+        "explanation": "C：在题设下，1、6、11 三个中心频率分别为 2412、2437、2462 MHz，相邻中心间隔 25 MHz，通常用作互不重叠的 2.4 GHz 信道。A、B、D 均包含间距不足的信道。信道不重叠可减少相邻信道干扰，不能保证无同信道竞争、无线碰撞或其他设备干扰；当地可用信道由监管域决定。"
+      }
+    },
+    {
+      "id": 32,
+      "before_sha256": "1376811fe0e997dac42bdf8cc7790cda2244dbfa981c49663e2f9e8f105fdbad",
+      "reason": "TCP 提供可靠有序字节流并非在故障时保证一定送达；UDP IPv4 校验和可能禁用。",
+      "updates": {
+        "prompt": "How do TCP and UDP differ in their transport-layer mechanisms for reliable delivery?",
+        "explanation": "C：TCP 使用校验和、序列号与确认，并在需要时重传以提供可靠有序的字节流；网络长期故障或连接超时仍可能使连接失败，并非绝对保证最终送达。UDP 本身没有确认和重传；其校验和用于差错检测，IPv4 中可省略，IPv6 通常必需且有特定例外。A、B、D 误把奇偶校验、CRC 或 UDP 确认/重传当作题设传输层机制。"
+      }
+    },
+    {
+      "id": 34,
+      "before_sha256": "7246d9c89aa62bcc888be6604a33a74ce5d7a941247678f9d6621800a82ae1d9",
+      "reason": "广播向 VLAN 内合格出口转发，不能无条件断言所有端口。",
+      "updates": {
+        "explanation": "B：以太网广播目标 MAC 的 48 位全部为 1，即 FF:FF:FF:FF:FF:FF。正常二层交换机在同一 VLAN 中向除入端口之外、处于转发状态且允许该 VLAN 的相关端口泛洪；安全策略、链路状态及其他功能可能限制转发，路由器也不会把二层广播帧原样转发到其他广播域。其他地址不是全 F 广播地址。"
+      }
+    },
+    {
+      "id": 36,
+      "before_sha256": "7c744a5dec42a53b7b8b84d73519d9dea571c4bfb0a5dfe1c371a3b4106e6fb3",
+      "reason": "DHCP 地址获取与默认路由获取不可无条件等同。",
+      "updates": {
+        "prompt": "A Cisco IOS edge router must obtain its IPv4 address dynamically from a DHCP service on FastEthernet0/0. Which interface command enables the DHCP client?",
+        "explanation": "D：在接口配置模式执行 `ip address dhcp`，接口作为 DHCP 客户端请求地址和相关参数。租约内容由服务器与平台配置决定；默认路由不能仅由这条命令保证。A 用于特定设备的管理默认网关，B 是静态路由，C 涉及候选默认网络，E 不是题设正确命令。运营商是否分配公网地址取决于其网络。"
+      }
+    },
+    {
+      "id": 37,
+      "before_sha256": "4033326c8e2f67d6f27fc5d0f293404b89a6d5590fd0d5afacf478928f95fabb",
+      "reason": "补充历史 6to4 限制，避免当作当前优选方案。",
+      "updates": {
+        "explanation": "B：6to4 将 IPv6 数据包封装在 IPv4 中，通过 IPv4 基础设施传送（IPv4 协议号 41），属于题设的 IPv6 过渡隧道。A 一般的 NAT 不等同于该封装；C 的 L2TPv3 是二层隧道；D 双栈使设备同时运行 IPv4 与 IPv6，但本身不是把 IPv6 封装穿越纯 IPv4 网络。6to4 是历史机制，RFC 7526 弃用其任播中继机制；实际采用须考虑部署支持和安全。"
+      }
+    },
+    {
+      "id": 38,
+      "before_sha256": "f31adf5e09956c53c111ccaa3e127233a440bb337cb6b3710633e7ed27808a12",
+      "reason": "题目需限定两接口为同 VRF 的普通三层接口，图中端口在相同/24。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Router1 uses two ordinary routed interfaces in the same VRF, with the displayed IPv4 addresses and masks; all hosts use the same VLAN. Which conclusion follows when configuring these interfaces on Cisco IOS?",
+        "explanation": "C：图中 Router1 两个普通三层接口分别为 192.168.1.1/24 与 192.168.1.2/24，同属于 192.168.1.0/24。对于题设同一 VRF 的普通三层接口，Cisco IOS 不接受直接配置相互重叠的连接子网，因此该寻址不能按图配置。不能从这张图单独得出交换机之间必须是 trunk 或需要 STP 环路阻断：路由器的三层接口不构成二层转发桥；单 VLAN 也不必要求 802.1Q 标记。子接口、桥接或不同 VRF 等特殊设计不在题设中。"
+      }
+    },
+    {
+      "id": 39,
+      "before_sha256": "6a3a476184a400d3305711a94d93693684e52163afd0e1f3b4daceffe86df516",
+      "reason": "SOHO WAN 选择取决于可用性，避免将 cable 断言为普遍最佳。",
+      "updates": {
+        "prompt": "For a small or home office seeking an available, shared broadband service at modest cost, which option is typically appropriate among those listed?",
+        "explanation": "A：在有覆盖且资费、性能符合需求时，宽带有线接入是 SOHO 的常见选择。帧中继和 ISDN 是较旧方案，专线通常用于有专属带宽或服务等级需求的场景；具体选择仍取决于当地覆盖、成本、性能及业务需求。宽带不自动等于安全，如需访问企业内网可根据需求配置 VPN。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 31,
+      "before_sha256": "82149a59e71f07a26adce2d31516e7eea0b77ba5ef3813eac1bcaed081bf4783",
+      "assessment": "逐项核对 DSSS 信道与题设；修正碰撞和频宽表述。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 32,
+      "before_sha256": "1376811fe0e997dac42bdf8cc7790cda2244dbfa981c49663e2f9e8f105fdbad",
+      "assessment": "核对 TCP/UDP、各干扰项；修正绝对保证及 UDP 校验和条件。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 33,
+      "before_sha256": "38db18539d6a317177bbfe9e401251663bb52cd1b9789374dd9125b8f893b5e2",
+      "assessment": "Band Select 与 DTIM、RX-SOP、AAA override 及语音条件已核对；无需改动。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 34,
+      "before_sha256": "7246d9c89aa62bcc888be6604a33a74ce5d7a941247678f9d6621800a82ae1d9",
+      "assessment": "全 F 广播地址正确；明确广播出口及 VLAN 边界。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 35,
+      "before_sha256": "188f7356232e5c196954ab5fda5d612435836c48bafa72cfccc9311ad7483b25",
+      "assessment": "前导码同步与 SFD、EtherType、数据字段的区别正确；无需改动。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 36,
+      "before_sha256": "7c744a5dec42a53b7b8b84d73519d9dea571c4bfb0a5dfe1c371a3b4106e6fb3",
+      "assessment": "DHCP 接口命令正确；去除服务器必给公网地址/默认路由的假设。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 37,
+      "before_sha256": "4033326c8e2f67d6f27fc5d0f293404b89a6d5590fd0d5afacf478928f95fabb",
+      "assessment": "6to4 封装协议及其他选项核对；补充历史适用限制。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 38,
+      "before_sha256": "f31adf5e09956c53c111ccaa3e127233a440bb337cb6b3710633e7ed27808a12",
+      "assessment": "直接查看拓扑；两普通三层接口同属 192.168.1.0/24，补 VRF 和路由接口前提。",
+      "image_review": "viewed q38 original",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "q38 has colored topology: preserve original colors"
+    },
+    {
+      "id": 39,
+      "before_sha256": "6a3a476184a400d3305711a94d93693684e52163afd0e1f3b4daceffe86df516",
+      "assessment": "题目问首选过于绝对，限定为可用且低成本的普通宽带场景。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    },
+    {
+      "id": 40,
+      "before_sha256": "0eb2ec0f01771851f43b4b6beb99742092ea1c675cc2488c2357d24b5e68788b",
+      "assessment": "FC00::/7、L 位和 FD 首字节及其余选项正确；无需改动。",
+      "image_review": "no image",
+      "options_and_answer": "checked; answer retained",
+      "dark_mode": "no image"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/smb/wireless/CB-Wireless-Mesh/2069-tz-Changing-RF-Channels.html",
+    "https://www.rfc-editor.org/rfc/rfc9293.html",
+    "https://www.rfc-editor.org/info/rfc8095/",
+    "https://www.rfc-editor.org/info/rfc7526/"
+  ],
+  "limitations": "Manual review and original-image inspection; no physical network lab."
+}

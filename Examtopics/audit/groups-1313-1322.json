@@ -1,0 +1,161 @@
+{
+  "scope": "Independent review Q1313–Q1322",
+  "corrections": [
+    {
+      "id": 1315,
+      "before_sha256": "db79596d8644fc8a4b6f004141650b11c844190c55be1b7b43f5ea4197e78bd2",
+      "reason": "认证所需 trusted-key 不能仅从已配置共享密钥推定；题干需明确它已预配置。",
+      "updates": {
+        "prompt": "On a Cisco IOS device, an administrator must configure a unicast NTP client to authenticate a server. Assume the matching shared authentication key is already configured on both devices, the key ID is trusted on the client, and IP reachability exists. Which two remaining tasks are needed among the following? (Choose two.)",
+        "explanation": "A、C。匹配的共享密钥和客户端 trusted-key 已按题设预配置；启用 `ntp authenticate`，并用 `ntp server <address> key <id>` 指定单播服务器和相应密钥。缺少匹配密钥、受信 key ID 或网络可达性时，仅做 A/C 仍不足以完成认证。B 时区只影响本地显示；D 非对称私钥不是题设对称认证配置；E 关闭广播不是配置单播认证的必要步骤。普通未认证 NTP 客户端无需仅因服务器可信而强制启用认证。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1313,
+      "question_sha256": "aed8658054ba3a452f3f3a2d5769d9e16dd3c2711f3224c293e0699e849814f2",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "已直接核对拓扑、客户端和中继接口，B/C 与题设一致。",
+      "image_viewed": true
+    },
+    {
+      "id": 1314,
+      "question_sha256": "ef68fdb6f54649748a355eb016c292dcb6f2ba051ff2514b8765077e1b797767",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "WRED 按阈值概率提前丢弃，D/E 在限定配置下成立，不保证传输。",
+      "image_viewed": false
+    },
+    {
+      "id": 1315,
+      "question_sha256": "db79596d8644fc8a4b6f004141650b11c844190c55be1b7b43f5ea4197e78bd2",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "认证所需 trusted-key 不能仅从已配置共享密钥推定；题干需明确它已预配置。",
+      "image_viewed": false
+    },
+    {
+      "id": 1316,
+      "question_sha256": "12a55bbd1fe80cfda9c72c16eae8557c9d0831c357f4fa863daa151905a95dd3",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "仅从给出的同步状态和IPv4 reference字段可判定 B/D。",
+      "image_viewed": false
+    },
+    {
+      "id": 1317,
+      "question_sha256": "a6e848d7b87873d4df03328fd448c2de45df14fa73a61de15cab1cd1a0e8b2e6",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "CBWFQ/PQ 是队列调度，其他选项非此类拥塞管理。",
+      "image_viewed": false
+    },
+    {
+      "id": 1318,
+      "question_sha256": "d6568907fa27fcddc9bc74a2f1c3dc7409a36eb40e577fa1b3abf3e579350537",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "NTP 使用 UDP；适用 Cisco 设备可同时作为客户端和下游时间服务器。",
+      "image_viewed": false
+    },
+    {
+      "id": 1319,
+      "question_sha256": "356fd4eaa783e8656a46fb09519c079c64d5a75f389cc84eed4d538565d1e3fb",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "已核对配置图，生成 RSA 和限制 VTY 传输为 SSH 对应 A/C。",
+      "image_viewed": true
+    },
+    {
+      "id": 1320,
+      "question_sha256": "7ad3875f26f97562f697cfc55cdc00cb6090f80b2195c27a346d4629df5a06f1",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "已核对 Protect 和题设达到上限；丢弃未授权帧且违规计数不增。",
+      "image_viewed": true
+    },
+    {
+      "id": 1321,
+      "question_sha256": "ce685a1496a23f561cd36732f27d6e080aa0175b324489ad03387e877e25b34e",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "已核对 Aging 5 mins/inactivity、Sticky 2、上限3、Protect；不推断sticky必老化。",
+      "image_viewed": true
+    },
+    {
+      "id": 1322,
+      "question_sha256": "8ed4926e75e22167972e74673bb54d670ba826967b1941ce21009d257bfe5e8b",
+      "fields_checked": [
+        "prompt",
+        "all_options",
+        "answer",
+        "explanation",
+        "image",
+        "code_cli"
+      ],
+      "finding": "AireOS PSK GUI 的输入格式为 ASCII、hex。",
+      "image_viewed": false
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/time-sync/ntp-configuration-guide/m-network-time-protocol.html",
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+  ],
+  "limitations": "Documentation and exhibit review; no live Cisco device tests."
+}

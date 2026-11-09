@@ -1,0 +1,304 @@
+{
+  "scope": "Q1271–Q1280",
+  "corrections": [
+    {
+      "id": 1271,
+      "before_sha256": "3b13a43684da4c3d7cafac906971e38cee94dd86655d69f8891d61807ec2cf92",
+      "updates": {
+        "explanation": "C、E。兼容且配置正确的 VTP 域中，VTP 可沿适当中继链路传播支持的 VLAN 数据库信息，减少重复配置并帮助保持一致。传播取决于域名、版本、认证、模式、链路及平台；transparent 设备不按通告同步本地数据库，VTP v3 修改还需相应主服务器，不能保证所有交换机自动一致。A 读取标签与 D 多 VLAN 承载是中继/802.1Q 功能；B 的端口分配不是 VTP 数据库同步。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1272,
+      "before_sha256": "0f60293ed799a52dab2d93bd26c9364d3dd119cdf1138b75a1b5d90efeb37256",
+      "updates": {
+        "prompt": "In a conventional VLAN design using separate IP subnets and independent VLAN learning, which three statements are typical? (Choose three.)",
+        "explanation": "B、D、E。题设常规设计中，各 VLAN 使用独立 IP 子网，跨 VLAN 的 IP 通信通常通过路由器或三层交换机路由；独立 VLAN 学习使交换机的 MAC 转发表项按 VLAN 区分，逻辑上可视作各 VLAN 桥接表。不同部署也可存在二层桥接或重叠地址等例外，VLAN 不强制一一对应唯一 IP 子网。A 新交换机常有默认 VLAN；C VLAN 改变广播域而非通常减少交换端口冲突域；F 中继可以跨交换机扩展 VLAN。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1273,
+      "before_sha256": "d74b1883e3bca573877a9b342f4f49a0a39927579187df895a025aca1f9fd036",
+      "updates": {
+        "prompt": "Refer to the Cisco IOS exhibit. Which two conclusions follow from the displayed per-VLAN spanning-tree output? (Choose two.)",
+        "explanation": "A、E。图中 VLAN 30 的 `protocol rstp` 在题设 Cisco IOS 每 VLAN 输出下表示 Rapid PVST+；Root ID 列出 Cost 19 和 Port 1 (FastEthernet 2/1)，所以 Fa2/1 是本交换机通向根桥的根端口，当前交换机不是根桥。B 根端口不是该实例中的指定端口；C 指传统 PVST+；D 与显示的根路径及根端口不符。Cost 19 是图中数值，具体速率不能仅凭它在所有路径成本配置下确定。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1274,
+      "before_sha256": "6fba648250bc6427711fbcafb21905ecf602e5cbff5fa3f36c87f4915a49093e",
+      "updates": {
+        "prompt": "For an IOS switch Ethernet interface observed down/down, which two listed situations can directly account for a failure to forward? Consider a duplex mismatch separately while its link remains up. (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "An encapsulation mismatch is reported on an otherwise up Ethernet link."
+          },
+          {
+            "label": "B",
+            "text": "A duplex mismatch exists while the Ethernet link remains up."
+          },
+          {
+            "label": "C",
+            "text": "The interface is administratively shut down and reported as administratively down."
+          },
+          {
+            "label": "D",
+            "text": "A switch protection feature has put the port into an error-disabled state."
+          },
+          {
+            "label": "E",
+            "text": "Incompatible speed settings prevent the physical link from coming up."
+          }
+        ],
+        "explanation": "D、E。触发 err-disabled 的保护机制会关闭端口；不兼容的速率或协商设置也可能使物理链路无法建立。应核查 `show interfaces status`、`show logging` 和两端设置，不能仅凭 down/down 唯一确定原因。题设 B 明确链路仍为 up，不是直接解释；但双工不匹配产生严重错误时，也可能间接触发 err-disabled，不能断言它永不导致端口关闭。C 通常显示 administratively down；A 在题设链路仍 up，不能直接说明物理 down。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1275,
+      "before_sha256": "8b0c194cd7a81b716ddeccaeb12e297102f93c21160fc320e207d70cf42a3ded",
+      "updates": {
+        "prompt": "On an older Cisco IOS switch with no existing RSA keys, an engineer follows the standard default key-generation workflow using the device hostname and domain name. Which two listed prerequisites are needed to prepare SSH? (Choose two.)",
+        "explanation": "D、E。在题设传统 IOS 默认 RSA 密钥生成流程中，需支持加密/SSH 的软件镜像，配置设备 hostname 与 IP domain name 后生成 RSA 密钥；还需可达的管理 IP、合适的 VTY transport 与认证配置。镜像名称与功能依平台版本而异，已存在密钥、显式命名密钥等流程不能简单推断始终必须重新配置域名。A 二层交换机无需启用 IP routing；B 控制台密码不是 VTY 认证的必需条件；C 可以同时允许 Telnet 与 SSH，限制为 SSH 是安全配置选择。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1276,
+      "before_sha256": "33669f66bc1da8d6bf8b2ac31d641dbf4b07b463e296aa92bdc75d26048e127c",
+      "updates": {
+        "prompt": "For a properly configured Cisco PortFast edge port attached to a host, which two behaviors apply during ordinary link activation? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "The port must wait in the listening state before forwarding."
+          },
+          {
+            "label": "B",
+            "text": "The port always waits 50 seconds before forwarding."
+          },
+          {
+            "label": "C",
+            "text": "The edge port does not generate an STP topology change notification solely from its ordinary edge link transition."
+          },
+          {
+            "label": "D",
+            "text": "The port transitions to forwarding immediately after it becomes operational."
+          },
+          {
+            "label": "E",
+            "text": "The edge port must create a topology change notification before it can forward."
+          }
+        ],
+        "explanation": "C、D。对于合适的主机边缘端口，PortFast 避免传统 STP listening/learning 转发延迟，使可用端口快速进入 forwarding；普通边缘端口的状态变化不应导致不必要的拓扑变更通知。实际链路协商、保护功能和平台状态仍会影响可用时间；收到 BPDU 或违规时可能失去边缘状态、受 BPDU Guard 限制，不能把“永不产生任何通知”当成无条件保证。A、B、E 都不是此正常边缘端口行为。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1277,
+      "before_sha256": "4557d896c48294cc2c2a4d5d22ae6e49c22624c0ad32b7111c3f67a089c8d0b2",
+      "updates": {
+        "prompt": "A network engineer allocates two non-overlapping IPv4 subnets from 10.70.128.0/19 for 24 and 472 usable host addresses respectively, using the longest possible masks. Which two valid SVI configurations use the first usable address of each subnet? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface vlan 1148 ip address 10.70.148.1 255.255.254.0"
+          },
+          {
+            "label": "B",
+            "text": "interface vlan 3002 ip address 10.70.147.17 255.255.255.224"
+          },
+          {
+            "label": "C",
+            "text": "interface vlan 472 ip address 10.70.133.17 255.255.255.192"
+          },
+          {
+            "label": "D",
+            "text": "interface vlan 1234 ip address 10.70.159.1 255.255.254.0"
+          },
+          {
+            "label": "E",
+            "text": "interface vlan 155 ip address 10.70.155.65 255.255.255.224"
+          }
+        ],
+        "explanation": "A、E。24 个可用地址需 /27（30 个可用地址），E 的网络是 10.70.155.64/27，首个可用地址 .65。472 个需 /23（510 个可用地址），A 的网络是 10.70.148.0/23，首个可用地址 10.70.148.1；两网均处于 /19 内且不重叠。B 的 /27 网络为 10.70.147.0，首址为 .1 而非 .17；C 的 /26 首址不是 .17，且不是容纳 24 个主机所需的最长掩码；D 在 10.70.158.0/23，首址是 10.70.158.1。各 SVI/对应 VLAN 还需在设备上有效创建。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1278,
+      "before_sha256": "756efabc0b5738edd48f25e8b09f1f2a8bd24b3f85db520b32c7bf6b6e9372ac",
+      "updates": {
+        "prompt": "Besides discarding, which two port states are defined by RSTP (802.1w)? (Choose two.)",
+        "explanation": "D、E。RSTP 的三个数据转发状态是 discarding、learning、forwarding。Learning 可学习源 MAC 但不转发用户数据；forwarding 可学习并转发。Discarding 不学习或转发用户数据，运行的 STP 端口仍可处理 BPDU。传统 STP 的 blocking/listening 对应不转发、不学习的行为；speaking 不是 STP 端口状态。快速收敛、边缘端口或同步机制可能使状态经历时间很短，不能认为每次切换都必须等待固定时长。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1279,
+      "before_sha256": "bb766364d3a05b617d72296aee698caae63aba3abca21c7f55515a6372e914be",
+      "updates": {
+        "prompt": "When a Cisco PortFast access port becomes operational under traditional 802.1D STP, which two transitional states are bypassed? (Choose two.)",
+        "explanation": "B、C。对于适宜连接终端的 PortFast 端口，传统 STP 的 listening 与 learning 等待被旁路，端口可快速转入 forwarding。disabled 表示管理关闭等非工作条件；blocking 不是这里所问两段过渡等待；forwarding 是目标状态。PortFast 不能保证端口永不被阻断，接收到 BPDU 或触发 BPDU Guard 等保护时应依实际状态处理，也不能将其当作物理环路的防护措施。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    },
+    {
+      "id": 1280,
+      "before_sha256": "cb78cd7261a74268c38fc95a82bb206844823bf15f4ca9eb86cf1eb42a85ab61",
+      "updates": {
+        "prompt": "Refer to the Cisco IOS exhibit. Which two conclusions follow from this per-VLAN spanning-tree output? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "The spanning-tree mode is Rapid PVST+"
+          },
+          {
+            "label": "B",
+            "text": "This is the root bridge"
+          },
+          {
+            "label": "C",
+            "text": "The spanning-tree mode is PVST+"
+          },
+          {
+            "label": "D",
+            "text": "The designated port is FastEthernet 2/1"
+          },
+          {
+            "label": "E",
+            "text": "The root port is FastEthernet 2/1"
+          }
+        ],
+        "explanation": "A、E。图中 VLAN 30 显示 `protocol rstp`，题设 Cisco IOS 每 VLAN 输出对应 Rapid PVST+；Root ID 中 Cost 19、Port 1 (FastEthernet 2/1) 标识 Fa2/1 是通向根桥的根端口。B 本交换机并非该 VLAN 根桥；C 传统 PVST+ 不对应此 rstp 输出；D Fa2/1 在该实例为 root 而非 designated。路径成本依成本方法与配置而定，不能仅凭 19 普遍断定接口速率。"
+      },
+      "reason": "逐项核对题干、选项、答案、解析及图片；纠正绝对化或缺失条件，保留答案标签。"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1271,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1272,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1273,
+      "finding": "已核对题干、全部选项、答案与解析；已直接查看原题图。无拖拽结构。",
+      "image": "viewed",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1274,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1275,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1276,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1277,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1278,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1279,
+      "finding": "已核对题干、全部选项、答案与解析；无题图或答案图。无拖拽结构。",
+      "image": "none",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    },
+    {
+      "id": 1280,
+      "finding": "已核对题干、全部选项、答案与解析；已直接查看原题图。无拖拽结构。",
+      "image": "viewed",
+      "code_cli": "checked",
+      "references": [
+        "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+        "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+        "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+      ]
+    }
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1273_review.png",
+    "exhibits/q1280_review.png"
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_u1.html",
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/69980-errdisable-recovery.html",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/24330-185.html"
+  ],
+  "limitations": "文档与原图审查，未进行设备实测。"
+}

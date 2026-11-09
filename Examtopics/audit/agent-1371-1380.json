@@ -1,0 +1,239 @@
+{
+  "scope": "Q1371–Q1380",
+  "corrections": [
+    {
+      "id": 1371,
+      "before_sha256": "712137127e7f181c91c386268b8906a7f699c0a86962e3e6a50388b543b28bfb",
+      "original_qid": "Q1371",
+      "reason": "修正整形可保证零丢包、监管固定丢弃的绝对说法。",
+      "updates": {
+        "explanation": "B、C。policer 根据令牌桶和配置动作可对超限流量丢弃或重标记，也可能允许符合条件的报文通过；具体动作依策略和平台。它不以排队等待令牌的方式整形。E 的缓存属于整形机制；整形队列也可能溢出并丢包，不能保证零丢失。A 是突发流量特性，D 不是 policing 的动作。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "修正整形可保证零丢包、监管固定丢弃的绝对说法。",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html"
+      }
+    },
+    {
+      "id": 1372,
+      "before_sha256": "089592e82caf5a245212412be02fb36b1e586d3c09f44315f610db9b3acb0493",
+      "original_qid": "Q1372",
+      "reason": "明确角色分类，纠正权威回答及递归链路的绝对化。",
+      "updates": {
+        "prompt": "Which two DNS server roles can help resolve a domain name to an IP address? (Choose two.)",
+        "explanation": "A、D。权威服务器回答其负责区域的 DNS 数据；递归解析器可使用缓存或根据委派向其他服务器查询并返回结果。记录可能是 A、AAAA、CNAME 或否定回答，权威服务器并不保证每个名字都直接对应 IP。B、C 是其他服务角色，E 是虚拟化主机角色，三者本身不是 DNS 服务器角色；同一设备另行部署 DNS 的情况不改变角色分类。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "明确角色分类，纠正权威回答及递归链路的绝对化。",
+        "reference": "https://www.rfc-editor.org/rfc/rfc1034"
+      }
+    },
+    {
+      "id": 1373,
+      "before_sha256": "d1370bfbba7f0767617bb7b362ba70730fe401b754aef52d1e9bd8fbea5613a7",
+      "original_qid": "Q1373",
+      "reason": "图示为已启用安全的 Gi0/1；补充 sticky 持久化目标以消除普通动态学习歧义。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On the shown access port, the administrator must dynamically learn secure MAC addresses into the running configuration (which can later be saved) and log security violations without disabling the port. Which two interface commands meet these requirements? (Choose two.)",
+        "explanation": "A、E。图中 Gi0/1 已配置 access 与 port-security。`switchport port-security mac-address sticky` 动态学习并将 sticky 条目加入 running-config；如需重启后保留，还须保存配置。`violation restrict` 对违反安全 MAC 规则的流量丢弃、计数并按设备配置记录日志，端口保持启用。B 是手工指定 MAC；C 只调整上限；D 会使端口 err-disabled。普通动态安全 MAC 无需 sticky 也可学习，因此题目特别要求写入运行配置。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "图示为已启用安全的 Gi0/1；补充 sticky 持久化目标以消除普通动态学习歧义。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-6/configuration_guide/sec/b_176_sec_9300_cg/configuring_port_security.html"
+      }
+    },
+    {
+      "id": 1374,
+      "before_sha256": "77db45426e035593384256c4e9be73ca10bf9d2435e647b73938d50a56def9a1",
+      "original_qid": "Q1374",
+      "reason": "纠正 ESP 默认加密/认证及 IPsec 仅两协议的绝对化。",
+      "updates": {
+        "prompt": "Which two listed IPsec protocols provide packet protection? (Choose two.)",
+        "explanation": "C、E。ESP（IP 协议号 50）可按安全关联配置提供机密性、完整性、数据源认证和防重放；并非每项均无条件启用。AH（IP 协议号 51）提供完整性及数据源认证等保护，但自身不提供加密；它验证 IP 头中不可变的部分，通常与改写地址的 NAT 不兼容。AES 和 3DES 是算法，TLS 是另一安全协议。IKE 也属于 IPsec 密钥管理，不应把整个 IPsec 架构简化为只有两个协议。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "纠正 ESP 默认加密/认证及 IPsec 仅两协议的绝对化。",
+        "reference": "https://www.rfc-editor.org/rfc/rfc4303"
+      }
+    },
+    {
+      "id": 1375,
+      "before_sha256": "af7c423c05c120aab101aba900cffbc7d603837a314a3c84746fc4b91f8f9ff1",
+      "original_qid": "Q1375",
+      "reason": "原 C 混淆192位安全级别与加密密钥，D 对比 SAE 与 AES 不同层概念；改为明确正确陈述。",
+      "updates": {
+        "prompt": "Which two statements correctly describe WPA2 and WPA3? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "WPA2 uses 192-bit key encryption, and WPA3 requires 256-bit key encryption."
+          },
+          {
+            "label": "B",
+            "text": "WPA3 uses AES for stronger protection than WPA2, which uses SAE."
+          },
+          {
+            "label": "C",
+            "text": "WPA3-Enterprise offers an optional 192-bit security suite that uses AES-256-GCMP."
+          },
+          {
+            "label": "D",
+            "text": "WPA3-Personal uses SAE, while WPA2-Personal commonly uses a pre-shared key (PSK)."
+          },
+          {
+            "label": "E",
+            "text": "WPA3 uses AES for stronger protection than WPA2, which uses TKIP."
+          }
+        ],
+        "explanation": "C、D。WPA3-Enterprise 192-bit 安全套件使用 AES-256-GCMP 等算法；192-bit 指套件的安全级别，不是 AES 的 192 位密钥。WPA3-Personal 使用 SAE，WPA2-Personal 使用 PSK；两者都可使用 AES 数据加密，认证方式不能直接与 AES 对比。SAE 可缓解被动抓包后的离线字典攻击，但不能保证弱密码或所有实现绝对安全；迁移模式可同时支持 WPA2。A/B/E 混淆密钥位数、认证与密码算法或将 TKIP 作为 WPA2 唯一方式。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "原 C 混淆192位安全级别与加密密钥，D 对比 SAE 与 AES 不同层概念；改为明确正确陈述。",
+        "reference": "https://www.cisco.com/c/en/us/products/collateral/wireless/catalyst-9100ax-access-points/wpa3-dep-guide-og.html"
+      }
+    },
+    {
+      "id": 1376,
+      "before_sha256": "dc4824c1576bcc33c520bb0058ac1367efc6efcfd83c60aebe09415cf4cd10c0",
+      "original_qid": "Q1376",
+      "reason": "限定具体技术，纠正 GET VPN 零开销/无限规模和所有站点隧道不可扩展。",
+      "updates": {
+        "prompt": "Which two named Cisco VPN technologies provide scalable branch-to-branch designs: dynamic spoke tunnels over an IP underlay or group encryption over a private routed WAN? (Choose two.)",
+        "explanation": "A、B。DMVPN 可结合 mGRE、NHRP 与 IPsec，为适当配置的分支提供动态 spoke-to-spoke 通信；GET VPN 适合私有可路由 WAN，以密钥服务器管理组加密并保留 IP 头用于底层路由。两者仍有封装、平台、密钥和路由开销及规模限制。C 是更宽泛的站点互联类别，题设要具体命名技术；D/E 通常面向远程用户。普通 site-to-site 的扩展性取决于架构，不能一概排除其用于分支。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定具体技术，纠正 GET VPN 零开销/无限规模和所有站点隧道不可扩展。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/sec-vpn/b-security-vpn/m_sec-get-vpn.html"
+      }
+    },
+    {
+      "id": 1377,
+      "before_sha256": "0f8b7d39d093b7e89a349a528c04cd7b1effa795bbaafc53f0d79972c7c926a0",
+      "original_qid": "Q1377",
+      "reason": "补充接口位置与产品前提，纠正 REST 为协议和方向固定的误导。",
+      "updates": {
+        "prompt": "Which two listed Web service interface styles or protocols can be used by applications as northbound interfaces to an SDN controller? (Choose two.)",
+        "explanation": "A、C。在控制器提供相应接口时，应用可通过 REST 风格的 HTTP API 或 SOAP Web 服务请求控制器。北向/南向描述的是系统中的接口位置，不是协议天生固定属性；NETCONF 常用于控制器对设备的配置，OpenFlow 常用于控制转发，OpFlex 用于策略控制。不同产品的可用接口和方向应以具体实现为准。REST 是架构风格，SOAP 是消息协议，并非每个控制器都同时支持二者。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "补充接口位置与产品前提，纠正 REST 为协议和方向固定的误导。",
+        "reference": "https://www.rfc-editor.org/rfc/rfc6241"
+      }
+    },
+    {
+      "id": 1378,
+      "before_sha256": "868914dc6991a3d300874c70371678d6f50f21ce31817ff593bd5e27650e7659",
+      "original_qid": "Q1378",
+      "reason": "明确 HTTP 场景及方法语义，避免 REST 只能使用 HTTP 的绝对化。",
+      "updates": {
+        "prompt": "Which two standard HTTP methods are commonly used by HTTP-based REST APIs? (Choose two.)",
+        "explanation": "C、D。GET 请求获取目标资源的表示；POST 向资源提交数据，由服务定义处理语义，可用于创建或触发操作。GET 的安全性指客户端未请求状态更改，服务器仍可能记录日志；POST 不保证幂等但特定 API 可实现幂等。A、B、E 不是通常使用的标准 HTTP 核心方法；HTTP 支持扩展方法。REST 是架构风格，不限于 HTTP。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "明确 HTTP 场景及方法语义，避免 REST 只能使用 HTTP 的绝对化。",
+        "reference": "https://www.rfc-editor.org/rfc/rfc9110"
+      }
+    },
+    {
+      "id": 1379,
+      "before_sha256": "7c91658f99185e1f21f93aa39305138f3d1279378d884133ad6919f1909ae42e",
+      "original_qid": "Q1379",
+      "reason": "明确常见映射和特定 API 语义，纠正 POST 绝不更新及 PATCH 总幂等误解。",
+      "updates": {
+        "prompt": "In the usual HTTP-to-CRUD mapping, which two methods are commonly used for updates when an API supports them? (Choose two.)",
+        "explanation": "A、E。PUT 通常替换目标资源的表示，语义上幂等；PATCH 应用补丁文档，通常用于部分更新，是否幂等取决于补丁及 API。GET 常用于读取，DELETE 常用于删除；POST 常用于创建或提交处理，也可被特定 API 设计用于更新，因此映射并非严格一一对应。具体支持的操作和字段应以服务契约为准。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "明确常见映射和特定 API 语义，纠正 POST 绝不更新及 PATCH 总幂等误解。",
+        "reference": "https://www.rfc-editor.org/rfc/rfc5789"
+      }
+    },
+    {
+      "id": 1380,
+      "before_sha256": "9f477769fa277af69f4ebeed902fd257041423a3fb802064e0cfa4c622e439ac",
+      "original_qid": "Q1380",
+      "reason": "限定 AireOS 8.7，纠正 service port 默认网关及所有型号不支持 AAA 的错误。",
+      "updates": {
+        "prompt": "According to Cisco AireOS WLC release 8.7 service-port documentation, which two listed protocols are supported through the service-port interface? (Choose two.)",
+        "explanation": "A、D。Cisco AireOS 8.7 的 service-port 支持列表包含 SSH 与 Telnet，也列出 HTTP(S)、SNMP、FTP/TFTP/SFTP、syslog、ICMP 和 NTP，并说明该版本不支持经 service-port 使用 TACACS+ 和 RADIUS。SCP 不在该版本所列协议中。该服务端口不能配置默认网关，访问远端网络可按文档配置静态路由。限制取决于平台与版本：Catalyst 9800 IOS XE 17.6 及以后列有 RADIUS/TACACS+ 支持，不能将 AireOS 的限制推广到全部 WLC。Telnet 为明文，实际管理优先使用 SSH。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定 AireOS 8.7，纠正 service port 默认网关及所有型号不支持 AAA 的错误。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.pdf"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/products/collateral/wireless/catalyst-9100ax-access-points/wpa3-dep-guide-og.html",
+    "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html",
+    "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/sec-vpn/b-security-vpn/m_sec-get-vpn.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-6/configuration_guide/sec/b_176_sec_9300_cg/configuring_port_security.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-7/config-guide/b_cg87/m_ports_and_interfaces.pdf",
+    "https://www.rfc-editor.org/rfc/rfc1034",
+    "https://www.rfc-editor.org/rfc/rfc4303",
+    "https://www.rfc-editor.org/rfc/rfc5789",
+    "https://www.rfc-editor.org/rfc/rfc6241",
+    "https://www.rfc-editor.org/rfc/rfc9110"
+  ],
+  "limitations": "文档与人工审查；未进行 WLC、VPN 或交换机实机测试。"
+}

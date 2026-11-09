@@ -1,0 +1,110 @@
+{
+  "scope": [
+    1273,
+    1282
+  ],
+  "corrections": [
+    {
+      "id": 1277,
+      "before_sha256": "6fdb0dec34a513cb9f7bdf5ec12243f4e2d84eb0618ebd9a6c068e2654e605be",
+      "reason": "原选项把接口配置和 IP 地址命令拼为一行，恢复有效 CLI 换行。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface vlan 1148\n ip address 10.70.148.1 255.255.254.0"
+          },
+          {
+            "label": "B",
+            "text": "interface vlan 3002\n ip address 10.70.147.17 255.255.255.224"
+          },
+          {
+            "label": "C",
+            "text": "interface vlan 472\n ip address 10.70.133.17 255.255.255.192"
+          },
+          {
+            "label": "D",
+            "text": "interface vlan 1234\n ip address 10.70.159.1 255.255.254.0"
+          },
+          {
+            "label": "E",
+            "text": "interface vlan 155\n ip address 10.70.155.65 255.255.255.224"
+          }
+        ]
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1273,
+      "before_sha256": "37bfb6db738507df7c5a008ecff9cdea15d3a1900a782cd8f10d0e51041f90a5",
+      "finding": "复核原图RSTP、根端口 Fa2/1、所有选项及现答案 A/E，解析与图一致。",
+      "image_viewed": true,
+      "code_checked": true
+    },
+    {
+      "id": 1274,
+      "before_sha256": "0ea8b7ee655f1c3ae7b3fc3ff9a184ac42ad6dfea622055075e4f31285786e08",
+      "finding": "核对 down/down、错误关闭、速率和管理关闭条件；D/E 与已限定题意一致。",
+      "image_viewed": false,
+      "code_checked": true
+    },
+    {
+      "id": 1275,
+      "before_sha256": "7f35879783684ee8b6341997e060da78bd635d0d7c9f3e88292e14a551670b8a",
+      "finding": "核对传统 IOS 默认 hostname/domain RSA 密钥前提与干扰项，D/E 可成立。",
+      "image_viewed": false,
+      "code_checked": true
+    },
+    {
+      "id": 1276,
+      "before_sha256": "a56389137b2e4976f7f5aaa97413e5dbd59cb234cad293deb93316d4d8059434",
+      "finding": "核对 PortFast 对常规边缘转换的作用及 BPDU/保护例外，C/D 成立。",
+      "image_viewed": false,
+      "code_checked": true
+    },
+    {
+      "id": 1277,
+      "before_sha256": "6fdb0dec34a513cb9f7bdf5ec12243f4e2d84eb0618ebd9a6c068e2654e605be",
+      "finding": "核对 /19 内 /27 和 /23 的网络地址、首地址及掩码，A/E 成立；选项 CLI 原为一行，恢复每条命令的换行。",
+      "image_viewed": false,
+      "code_checked": true
+    },
+    {
+      "id": 1278,
+      "before_sha256": "097f89f3595c6036ecc4c5e42d6d495be468d2e039fbaa7952f70960db4ac99e",
+      "finding": "核对 RSTP 丢弃/学习/转发状态及各选项，D/E 成立。",
+      "image_viewed": false,
+      "code_checked": true
+    },
+    {
+      "id": 1279,
+      "before_sha256": "134148e8734cdf2fa8df1f28220d5fe962b1583f4d10230f06fd16f21f1a24c4",
+      "finding": "核对传统 STP PortFast 旁路 listening、learning 的题设，B/C 成立。",
+      "image_viewed": false,
+      "code_checked": true
+    },
+    {
+      "id": 1280,
+      "before_sha256": "06cae76751e8e19068d337c5424cf3d02591942c7fa326a50f16ae61a9813095",
+      "finding": "直接查看 VLAN30 RSTP 图，确认根端口 Fa2/1 和 Rapid PVST+，A/E 成立。",
+      "image_viewed": true,
+      "code_checked": true
+    },
+    {
+      "id": 1281,
+      "before_sha256": "b07f21916348e55a2a2a47a005199b54801a70464a2f82f53e9897be3fd3e7c3",
+      "finding": "核对支持集中管理员 AAA 的题设与各协议，RADIUS/TACACS+ 为该题选项，B/D 成立。",
+      "image_viewed": false,
+      "code_checked": true
+    },
+    {
+      "id": 1282,
+      "before_sha256": "409925d6267e4e55c9f44d3d7e803aaa217c6601f42332c575880e423d987871",
+      "finding": "核对浮动静态路由主备管理距离、路由撤销与可达条件，A/C 成立。",
+      "image_viewed": false,
+      "code_checked": true
+    }
+  ],
+  "limitations": "仅手工题目及图像核验；未在实体 Cisco 设备上执行配置。"
+}

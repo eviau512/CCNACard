@@ -1,0 +1,157 @@
+{
+  "scope": "Q1223–Q1232 independent group review",
+  "corrections": [
+    {
+      "id": 1223,
+      "before_sha256": "b51ce7f93b6a5b6446f6c9d6d950bd936cf14e7eddc9c6e225db3561d0befffe",
+      "reason": "原题图仍显示修订前的文字，明确以互动选项为准，避免两处描述冲突。",
+      "updates": {
+        "prompt": "For legacy LWAPP deployment modes, classify the adapted characteristics; each mode has two unordered slots. CAPWAP is outside this question. The exhibit shows the original wording; use the corrected interactive choices below."
+      }
+    },
+    {
+      "id": 1224,
+      "before_sha256": "7dbda530fe7635687dd0874f2f7c025bede0d0e2cbec51ddcb51641be1a18c27",
+      "reason": "原题图仍显示修订前的文字，明确以互动选项为准，避免两处描述冲突。",
+      "updates": {
+        "prompt": "Classify the traditional RADIUS and TACACS+ AAA protocol characteristics. Slots within a group are unordered. The exhibit shows the original wording; use the corrected interactive choices below."
+      }
+    },
+    {
+      "id": 1225,
+      "before_sha256": "934a4a0ef114149a6d354f1fc7265e19478a46cbd0c4536100dde2e1442f9e35",
+      "reason": "原题图仍显示修订前的文字，明确以互动选项为准，避免两处描述冲突。",
+      "updates": {
+        "prompt": "Classify the adapted examples as controller-orchestrated SD-Access or device-by-device traditional configuration. Within each category, order does not matter. The exhibit shows the original wording; use the corrected interactive choices below."
+      }
+    },
+    {
+      "id": 1226,
+      "before_sha256": "c4186d9b9599ecc4e14b22aa5d2e86e1a44660bde7701c5f6401f2ba9e465729",
+      "reason": "原题图仍显示修订前的文字，明确以互动选项为准，避免两处描述冲突。",
+      "updates": {
+        "prompt": "Classify these IPv6 address properties. Within each category, order does not matter. The exhibit shows the original wording; use the corrected interactive choices below."
+      }
+    },
+    {
+      "id": 1228,
+      "before_sha256": "911df4080a082ff9fe583918be197c3f38c323071f68d55f934aa275b58f5750",
+      "reason": "原题图仍显示修订前的文字，明确以互动选项为准，避免两处描述冲突。",
+      "updates": {
+        "prompt": "Refer to the topology. Use these non-overlapping subnets: DC-1 Gi1/0 is the last usable address of 209.165.202.128/30, Gi1/1 the first usable of 192.168.4.8/29, Gi1/2 the last usable of 192.168.3.0/28, and HQ-1 Gi1/3 the last usable of 192.168.3.16/29. Match the commands. The exhibit shows the original wording; use the corrected interactive choices below."
+      }
+    },
+    {
+      "id": 1232,
+      "before_sha256": "f93250a158735770fe4a87c5ceec5580d7bc7e90e9af4f00b59c99aafda0a0c3",
+      "reason": "原题图仍显示修订前的文字，明确以互动选项为准，避免两处描述冲突。",
+      "updates": {
+        "prompt": "Classify these adapted transport characteristics as TCP or UDP. Items within the same protocol group may be placed in any order. The exhibit shows the original wording; use the corrected interactive choices below."
+      }
+    },
+    {
+      "id": 1229,
+      "before_sha256": "d4444520995bfc3823a0f9429c1689f65d8dcaa4766337dc91e4aaedbabd06b5",
+      "reason": "原标签“禁止路由到互联网”亦适用于链路本地及站点范围组播，改为唯一指定的ULA类型。",
+      "updates": {
+        "prompt": "Match the adapted valid IPv6 examples to their address descriptions. The exhibit shows the original wording; use the corrected interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "2001:db8:bced:1234::456d:aacc",
+            "FD00:0000:0000:1a2d:a153:3992:a19d:ccca",
+            "fe80::abcd:ffff:12de:3992",
+            "FF05::23:becf:22:1111"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "multicast address used only locally within the site",
+              "expected": "FF05::23:becf:22:1111"
+            },
+            {
+              "id": "t2",
+              "label": "address that is automatically created on a link when IPv6 is enabled on an interface",
+              "expected": "fe80::abcd:ffff:12de:3992"
+            },
+            {
+              "id": "t3",
+              "label": "locally assigned Unique Local Address from fd00::/8",
+              "expected": "FD00:0000:0000:1a2d:a153:3992:a19d:ccca"
+            },
+            {
+              "id": "t4",
+              "label": "address from the documentation prefix 2001:db8::/32",
+              "expected": "2001:db8:bced:1234::456d:aacc"
+            }
+          ]
+        },
+        "explanation": "FF05::23:becf:22:1111 为站点范围多播；fe80::abcd:ffff:12de:3992 为链路本地地址，可自动配置；fd00:0:0:1a2d:a153:3992:a19d:ccca 是 ULA；2001:db8:bced:1234::456d:aacc 属文档前缀。原题 FE80 组 abcdf 超过四个十六进制字符、文档地址组数不足，已补正；实际生产网络不应将文档前缀作为公网地址。 链路本地地址和站点范围多播也不应转发到全球互联网，因此不能仅用“禁止路由到互联网”唯一识别 ULA。"
+      }
+    },
+    {
+      "id": 1230,
+      "before_sha256": "d7400496810efd0703d7200ce940cf4dc4c75aea0905714896ee9046861eceb7",
+      "reason": "原链路本地标签可能涵盖FF02多播；ULA也能充当下一跳。明确单播FE80范围以消除交叉。",
+      "updates": {
+        "prompt": "Classify the adapted IPv6 address characteristics. Each category is unordered; not all examples are used. The exhibit shows the original wording; use the corrected interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "IPv6 addresses in the format FF02::5",
+            "IPv6 addresses that begin with FD",
+            "locally assigned ULA prefixes are intended for use within sites",
+            "private IPv6 addresses",
+            "unicast addresses from fe80::/10 scoped to one link",
+            "not forwarded by routers beyond the local link"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Unique Local Addresses (Slot 1)",
+              "expected": "private IPv6 addresses",
+              "unordered_group": "Unique Local Addresses"
+            },
+            {
+              "id": "t2",
+              "label": "Unique Local Addresses (Slot 2)",
+              "expected": "IPv6 addresses that begin with FD",
+              "unordered_group": "Unique Local Addresses"
+            },
+            {
+              "id": "t3",
+              "label": "Unique Local Addresses (Slot 3)",
+              "expected": "locally assigned ULA prefixes are intended for use within sites",
+              "unordered_group": "Unique Local Addresses"
+            },
+            {
+              "id": "t4",
+              "label": "Link-Local Unicast Addresses (Slot 1)",
+              "expected": "unicast addresses from fe80::/10 scoped to one link",
+              "unordered_group": "Link-Local Unicast Addresses"
+            },
+            {
+              "id": "t5",
+              "label": "Link-Local Unicast Addresses (Slot 2)",
+              "expected": "not forwarded by routers beyond the local link",
+              "unordered_group": "Link-Local Unicast Addresses"
+            }
+          ]
+        },
+        "explanation": "ULA 使用 FC00::/7，实际本地分配通常是 FD00::/8，适用于站点内部且不预期全球路由。链路本地单播可作为同一链路上的源或目的地址，也可作下一跳，但路由器不跨链路转发它。FF02::5 是链路范围多播，而非链路本地单播。原答案错误声称链路本地地址不能作目的地址，已修正。 原“可作为下一跳”也可能适用于其他单播地址；现限定为 fe80::/10 的链路本地单播。"
+      }
+    },
+    {
+      "id": 1227,
+      "before_sha256": "8a18700f8fb38e7fb837ea4a24cca5f29b2c0fa49a47f9c8a02cdff454c9d9dc",
+      "reason": "修复题干拼接和 OCR 错误；补充带占位符的配置代码与平台/邻居前提，不虚构缺失拓扑。",
+      "updates": {
+        "prompt": "Lab — The topology is not included in the available source, so PC interface numbers cannot be determined. R1 and R2 are preconfigured and all cabling is in place. Each PC-facing switch port must carry one VLAN and be operational.\n\n1. On SW-1 create VLAN 15 named OPS, and configure the PC1-facing port as an access port in VLAN 15.\n2. On SW-2 create VLAN 66 named ENGINEERING, and configure the PC2-facing port as an access port in VLAN 66.\n3. On both switches enable the vendor-neutral neighbor discovery protocol on Ethernet0/2 and Cisco CDP on Ethernet0/0.\n4. Save the running configuration to NVRAM. Identify PC-facing interfaces from the actual topology before applying the example.",
+        "explanation": "拓扑缺失，不能从现有材料确定 PC 接口。分别在两台交换机使用下列模板，替换 PC 接口及 VLAN 名称/编号：\n\n```text\nconfigure terminal\nvlan <15_or_66>\n name <OPS_or_ENGINEERING>\nexit\ninterface <PC_facing_interface_from_topology>\n switchport mode access\n switchport access vlan <15_or_66>\n no shutdown\nexit\nlldp run\ncdp run\ninterface Ethernet0/2\n lldp transmit\n lldp receive\nexit\ninterface Ethernet0/0\n cdp enable\nexit\nend\ncopy running-config startup-config\n```\n\nSW-1 使用 VLAN 15 / OPS，SW-2 使用 VLAN 66 / ENGINEERING。设备须支持对应接口和命令；`lldp run`、`cdp run` 为全局启用。题目要求这两个端口各启用指定协议，并未要求在同一端口禁用另一协议。用 `show vlan brief`、`show lldp neighbors`、`show cdp neighbors` 验证，并确认邻居侧已启用。原答案图属于另一道 IPv6 题，不能用来推断 PC 接口。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291.html",
+    "https://www.rfc-editor.org/rfc/rfc4193.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9000/lyr2-fwd/lldp/lldp-configuration-guide/configure-lldp.html"
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "scope": "Q1321–Q1330 manual review",
+  "corrections": [
+    {
+      "id": 1321,
+      "original_qid": "Q1321",
+      "before_sha256": "befb7dccc2822305c9763ea40e421c77b0792cebdeaa6aa4e7fc43242d8be941",
+      "reason": "原答案把 sticky 一律视作动态学习及五分钟必老化，改为可直接读取的图示事实。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which two configuration or status values are directly displayed for this interface? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "The secure-address aging type is inactivity with a five-minute timer."
+          },
+          {
+            "label": "B",
+            "text": "The violation mode is shutdown."
+          },
+          {
+            "label": "C",
+            "text": "The interface has two sticky secure MAC addresses."
+          },
+          {
+            "label": "D",
+            "text": "The interface has three sticky secure MAC addresses."
+          },
+          {
+            "label": "E",
+            "text": "The maximum number of secure MAC addresses is two."
+          }
+        ],
+        "explanation": "A、C。展图显示 Aging Time 5 mins、Aging Type Inactivity、Sticky MAC Addresses 2。Protect 是违规模式，最大地址数为 3，故 B、D、E 不符。输出无法证明每个 sticky 地址均为动态学习：sticky 也可以手工配置；具体平台对 sticky 地址老化的支持不同，不能仅凭此输出断定这两个地址会在五分钟后老化。"
+      }
+    },
+    {
+      "id": 1322,
+      "original_qid": "Q1322",
+      "before_sha256": "ec69343f6bab7e14e67fc377509a0b994f5a94736725c9f37c987d6fa1ee498d",
+      "reason": "限定 AireOS 版本范围并纠正十六进制密钥来源过度断言。",
+      "updates": {
+        "prompt": "In the Cisco AireOS WLC WLAN Layer 2 security GUI, which two input formats can be selected for a WPA2 preshared key? (Choose two.)",
+        "explanation": "B、C。AireOS 的 PSK Format 使用 ASCII 或 hexadecimal。ASCII 口令通常为 8–63 个可打印字符；十六进制形式为 64 个十六进制字符表示 256 位 PSK。十六进制是输入表示法，不能据此断言密钥一定由某次 PBKDF2 运算产生。decimal、binary 和 base64 不是此界面的格式选项。具体 UI 依平台版本而异。"
+      }
+    },
+    {
+      "id": 1323,
+      "original_qid": "Q1323",
+      "before_sha256": "ea76f66e4f33fb95c9b953732722954e5f94c250efa425e9a015f6f47959a5f1",
+      "reason": "说明 VLAN 99 为题设停车 VLAN，不能保证同 VLAN 内设备互相隔离。",
+      "updates": {
+        "prompt": "Unused switch access ports currently reside in the default VLAN. VLAN 99 is an unused parking VLAN with no production services. Which two steps help protect those ports? (Choose two.)",
+        "explanation": "C、D。将闲置接口设为 access 并划入题设的空置隔离 VLAN，再执行 shutdown，可降低意外启用时暴露生产网络的风险。VLAN 99 不是通用保留的隔离 VLAN，必须先确认它未承载业务且其路由和二层范围符合策略；同一 VLAN 内设备仍可能相互通信。trunk、CDP 和 EtherChannel 均不替代禁用闲置端口。"
+      }
+    },
+    {
+      "id": 1324,
+      "original_qid": "Q1324",
+      "before_sha256": "87538e7ece57d8bb90b56a2933958bdc966f888b8913cfac05b78b4d4e165199",
+      "reason": "已核对拓扑和 ACL 原图；明确入接口及地址方向，补放行范围。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R2 applies ACL 101 inbound on Gi0/2, receiving traffic from 10.0.10.0/26. Which two changes block TCP destination ports 25 and 80 from that subnet to 10.0.20.0/26 while permitting other traffic through this ACL? (Choose two.)",
+        "explanation": "A、D。图中两条 deny 的源、目的网段顺序反了；改为源 10.0.10.0 0.0.0.63、目的 10.0.20.0 0.0.0.63，并分别在目的端匹配 `eq smtp` 和 `eq www`。在两条 deny 之后添加 `permit ip any any`，允许此 ACL 中其余 IPv4 流量；放在开头则会遮蔽后面的 deny。此处现有 R2 Gi0/2 入方向已经位于来源路径；移动接口不是修正这两项错误的必要条件。其他 ACL、路由及服务器策略仍会影响端到端通信。"
+      }
+    },
+    {
+      "id": 1325,
+      "original_qid": "Q1325",
+      "before_sha256": "bfd9c63241b0dd5a09dc08f0bb7b3c9f99676692c4930e4b176a16cd90e39f10",
+      "reason": "非空 ACL 前提避免空 ACL 不过滤导致原题歧义。",
+      "updates": {
+        "prompt": "An existing, nonempty IPv4 ACL is applied inbound to an interface and contains intended deny entries. All observed packets match a permit ACE before any intended denial. Which two misconfigurations could explain this behavior? (Choose two.)",
+        "explanation": "B、E。过宽的 permit 可能匹配了不该放行的流量；permit 排在相关 deny 之前也会先命中并遮蔽后续规则。ACL 自上而下首条匹配生效。C 若未命中任何 ACE 则通常被非空 ACL 的隐式拒绝拦截；D 早匹配 deny 会丢弃而非放行。空或不存在的 ACL 的处理依设备和配置情境而异，题设明确 ACL 非空。"
+      }
+    },
+    {
+      "id": 1326,
+      "original_qid": "Q1326",
+      "before_sha256": "95b6ac64bf8d85972dd69160789018cac56448f0fd7e3f54aaca9ebb6acdf054",
+      "reason": "自动填充仅降低物理键盘记录暴露，原选项保证受损设备/网站安全错误。",
+      "updates": {
+        "prompt": "Which two password-manager features can reduce exposure to password theft or reuse? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "It can help users generate and use strong, unique passwords."
+          },
+          {
+            "label": "B",
+            "text": "It uses an internal firewall to protect the password repository."
+          },
+          {
+            "label": "C",
+            "text": "It includes antivirus functionality on every workstation."
+          },
+          {
+            "label": "D",
+            "text": "It automatically supplies a second factor unknown to the user."
+          },
+          {
+            "label": "E",
+            "text": "It can autofill a stored password instead of requiring each character to be typed."
+          }
+        ],
+        "explanation": "A、E。密码生成和独立保存降低弱密码及跨站复用风险；自动填充减少逐字符键入，可能降低仅记录物理击键的键盘记录器获取该站点密码的机会。它不保证在设备或网站受入侵时保护凭据：恶意扩展、屏幕/剪贴板采集、表单窃取、解锁后的密码库或被攻陷的网站仍可能泄露密码。防火墙和杀毒并非密码管理器必备功能，管理器也不会凭空产生用户未知的第二因素。"
+      }
+    },
+    {
+      "id": 1327,
+      "original_qid": "Q1327",
+      "before_sha256": "9ad881dab8c7240277c11022dcaabe9d2d760a858827aed962d827d5c8bbfe79",
+      "reason": "802.1X 常用 RADIUS，避免 TACACS+ 及绝对安全断言。",
+      "updates": {
+        "explanation": "D、E。对需要使用的办公区接入口实施 802.1X 等基于端口认证，并对未使用端口执行 shutdown，可降低未授权接入风险。802.1X 通常通过 RADIUS 与认证服务器交互；开放前允许哪些控制流量取决于设备和策略，认证也并非所有威胁的保证。PortFast 用于边缘端口快速转发，不提供身份认证；固定速率与静态 ARP 均不能替代接入控制。"
+      }
+    },
+    {
+      "id": 1328,
+      "original_qid": "Q1328",
+      "before_sha256": "67b579d81c94bc3a0cd058f238cda3e1124f3d1e7432b9cb7947c07fe0a0a0ad",
+      "reason": "区分交互式管理和不安全的 TFTP 文件传输。",
+      "updates": {
+        "prompt": "Which two cleartext interactive management protocols should be disabled on a Wireless LAN Controller when secure web and CLI alternatives are available? (Choose two.)",
+        "explanation": "C、D。HTTP 和 Telnet 的交互管理会话不提供传输加密，应使用配置正确的 HTTPS 与 SSH，并限制管理来源。TFTP 也缺少传输加密，但在此题中它用于文件传输而非交互式 Web/CLI 登录；应另外限制或替换不安全的文件传输。启用加密协议不自动保证认证、证书和访问控制配置安全。"
+      }
+    },
+    {
+      "id": 1329,
+      "original_qid": "Q1329",
+      "before_sha256": "ffdcf9febb92e9f3440b2695778fe543607b992d2842b90594f3a6f892f577e0",
+      "reason": "公钥认证非所有 SSH 必需；明确题设要求公钥和已有 VTY 配置。",
+      "updates": {
+        "prompt": "Refer to the exhibit. An IOS router is to use SSH with administrator public-key authentication. Hostname, domain name, network reachability, VTY SSH transport and authorization are already configured; the server RSA key has not been created and the administrator public key has not been provisioned. Which two commands begin those remaining configuration tasks? (Choose two.)",
+        "explanation": "A、C。`crypto key generate rsa` 生成本题 IOS SSH 服务使用的服务器 RSA 密钥；`ip ssh pubkey-chain` 进入客户端公钥链配置模式，随后仍须为正确用户导入公钥。题设已给出 VTY、域名等其他必要条件。公钥认证并非所有 SSH 登录必须：本地密码或 AAA 等也可用于 SSH；`username ... password 0 ...` 会以明文形式存在于配置中，不满足本题要求的公钥认证。Telnet 不加密，console 登录非远程 VTY 访问。"
+      }
+    },
+    {
+      "id": 1330,
+      "original_qid": "Q1330",
+      "before_sha256": "4de563cf8a1d974825742e3d5f83553e7cacb27c69ab1aa296c51533aa552b52",
+      "reason": "CRL 为题设 PKI 组件，状态核验和 PKI 组件不应绝对化。",
+      "updates": {
+        "prompt": "Which two components may be part of a public key infrastructure that issues X.509 certificates and publishes certificate revocation lists? (Choose two.)",
+        "explanation": "B、D。CA 签发证书，CRL 发布已撤销证书的信息，供依其策略使用 CRL 的验证方检查；证书状态也可通过 OCSP 等机制提供，是否检查及失败处理取决于实现和策略。预共享密钥和明文密码不构成本题要求的 CA/CRL 架构；一次性口令令牌也不是 CA 或 CRL，虽然硬件安全设备可以参与其他 PKI 部署。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1321,
+      "content_answer_explanation": "原答案把 sticky 一律视作动态学习及五分钟必老化，改为可直接读取的图示事实。",
+      "image_code": "原图直接查看；白底图在暗色背景保留原色，宜使用浅色画布/缩放避免深色文字不可见。",
+      "original_sha256": "befb7dccc2822305c9763ea40e421c77b0792cebdeaa6aa4e7fc43242d8be941",
+      "corrected_answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "id": 1322,
+      "content_answer_explanation": "限定 AireOS 版本范围并纠正十六进制密钥来源过度断言。",
+      "image_code": "无原题图或代码图；检查全部选项与解析。",
+      "original_sha256": "ec69343f6bab7e14e67fc377509a0b994f5a94736725c9f37c987d6fa1ee498d",
+      "corrected_answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": 1323,
+      "content_answer_explanation": "说明 VLAN 99 为题设停车 VLAN，不能保证同 VLAN 内设备互相隔离。",
+      "image_code": "无原题图或代码图；检查全部选项与解析。",
+      "original_sha256": "ea76f66e4f33fb95c9b953732722954e5f94c250efa425e9a015f6f47959a5f1",
+      "corrected_answer": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": 1324,
+      "content_answer_explanation": "已核对拓扑和 ACL 原图；明确入接口及地址方向，补放行范围。",
+      "image_code": "原图直接查看；白底图在暗色背景保留原色，宜使用浅色画布/缩放避免深色文字不可见。",
+      "original_sha256": "87538e7ece57d8bb90b56a2933958bdc966f888b8913cfac05b78b4d4e165199",
+      "corrected_answer": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 1325,
+      "content_answer_explanation": "非空 ACL 前提避免空 ACL 不过滤导致原题歧义。",
+      "image_code": "无原题图或代码图；检查全部选项与解析。",
+      "original_sha256": "bfd9c63241b0dd5a09dc08f0bb7b3c9f99676692c4930e4b176a16cd90e39f10",
+      "corrected_answer": [
+        "B",
+        "E"
+      ]
+    },
+    {
+      "id": 1326,
+      "content_answer_explanation": "自动填充仅降低物理键盘记录暴露，原选项保证受损设备/网站安全错误。",
+      "image_code": "无原题图或代码图；检查全部选项与解析。",
+      "original_sha256": "95b6ac64bf8d85972dd69160789018cac56448f0fd7e3f54aaca9ebb6acdf054",
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": 1327,
+      "content_answer_explanation": "802.1X 常用 RADIUS，避免 TACACS+ 及绝对安全断言。",
+      "image_code": "无原题图或代码图；检查全部选项与解析。",
+      "original_sha256": "9ad881dab8c7240277c11022dcaabe9d2d760a858827aed962d827d5c8bbfe79",
+      "corrected_answer": [
+        "D",
+        "E"
+      ]
+    },
+    {
+      "id": 1328,
+      "content_answer_explanation": "区分交互式管理和不安全的 TFTP 文件传输。",
+      "image_code": "无原题图或代码图；检查全部选项与解析。",
+      "original_sha256": "67b579d81c94bc3a0cd058f238cda3e1124f3d1e7432b9cb7947c07fe0a0a0ad",
+      "corrected_answer": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": 1329,
+      "content_answer_explanation": "公钥认证非所有 SSH 必需；明确题设要求公钥和已有 VTY 配置。",
+      "image_code": "原图直接查看；白底图在暗色背景保留原色，宜使用浅色画布/缩放避免深色文字不可见。",
+      "original_sha256": "ffdcf9febb92e9f3440b2695778fe543607b992d2842b90594f3a6f892f577e0",
+      "corrected_answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "id": 1330,
+      "content_answer_explanation": "CRL 为题设 PKI 组件，状态核验和 PKI 组件不应绝对化。",
+      "image_code": "无原题图或代码图；检查全部选项与解析。",
+      "original_sha256": "4de563cf8a1d974825742e3d5f83553e7cacb27c69ab1aa296c51533aa552b52",
+      "corrected_answer": [
+        "B",
+        "D"
+      ]
+    }
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1321_agent.jpg",
+    "exhibits/q1324_agent.jpg",
+    "exhibits/q1329_agent.jpg"
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/security/ios-xe-17/security-book-xe/m-configure-port-security.pdf",
+    "https://www.cisco.com/c/en/us/td/docs/switches/datacenter/sw/4_0/dcnm/security/configuration/guide/sec_dcnm_config/sec_portsec.html",
+    "https://www.cisco.com/c/en/us/support/docs/security-vpn/remote-authentication-dial-user-service-radius/13838-10.html",
+    "https://www.rfc-editor.org/rfc/rfc5280"
+  ],
+  "limitations": "人工核对文档与原题图；未在真实 Cisco 设备执行配置实验。"
+}

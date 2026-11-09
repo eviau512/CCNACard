@@ -1,0 +1,86 @@
+{
+  "scope": "Q91–Q100 independent non-Lab review",
+  "corrections": [
+    {
+      "id": 91,
+      "before_sha256": "05e591c3a6966e2c87504c34f8052a5e2239de2d2a0e9b40e4f6793a34157d1f",
+      "reason": "SSL已淘汰且 HTTPS 不必总依赖 TCP；更正 TLS 安全属性与 HTTP/3。",
+      "updates": {
+        "prompt": "Which protocol normally uses TLS (historically SSL) to protect web traffic?",
+        "explanation": "B。HTTPS 使用 TLS 保护 HTTP 通信；SSL 是其已弃用的前身，不应在新部署中使用。常见 HTTPS 使用 TCP 443，但 HTTP/3 使用 QUIC（通常基于 UDP）且集成 TLS 1.3，不能断言 HTTPS 必须经过 TCP 三次握手。TLS 可提供对端认证、机密性和完整性，具体机制取决于版本和套件。A SSH 使用自己的安全传输协议；C 普通 HTTP 不提供同等传输加密；D Telnet 本身不加密。"
+      }
+    },
+    {
+      "id": 93,
+      "before_sha256": "823be2894f8916a003bb807f3c205219ccb19ce09374df7281a283f854a257e9",
+      "reason": "限定已成功预留且设备/供电正常，避免 static 被解释为对故障或不足预算的绝对保证。",
+      "updates": {
+        "prompt": "On a PoE-capable Cisco switch, which power mode enables powered-device detection and reserves port power before a device connects, assuming the reservation can be made?",
+        "explanation": "B。`power inline static` 启用受电设备检测，并在检测设备之前从可用预算预留端口功率；预留成功后，该预算优先于自动分配端口。A `auto` 检测到设备后，在有足够预算时按需分配；C/D 并非此处 PoE 模式。预算不足可能导致静态预留被拒绝，供电设备、线缆或电源故障也可能导致供电失败，预留不是无条件的物理供电保证。具体功率和配置范围依平台而定。"
+      }
+    },
+    {
+      "id": 94,
+      "before_sha256": "f1060042d3eff946255f54f14519091b7eacf2a0e3f23a7f84fc536d448cf7d2",
+      "reason": "修正选项中的引号和无换行，保留原有数据；精简解析并避免把子网扩展必称超网。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The 10.7.54.0 subnet must support 380 hosts, including the future-growth allowance. Which listed subnet has sufficient usable addresses and internally consistent parameters?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Subnet: 10.7.54.0\nSubnet mask: 255.255.128.0\nBroadcast address: 10.5.55.255\nUsable range: 10.7.54.1–10.7.55.254"
+          },
+          {
+            "label": "B",
+            "text": "Subnet: 10.7.54.0\nSubnet mask: 255.255.255.0\nBroadcast address: 10.7.54.255\nUsable range: 10.7.54.1–10.7.55.254"
+          },
+          {
+            "label": "C",
+            "text": "Subnet: 10.7.54.0\nSubnet mask: 255.255.254.0\nBroadcast address: 10.7.54.255\nUsable range: 10.7.54.1–10.7.55.254"
+          },
+          {
+            "label": "D",
+            "text": "Subnet: 10.7.54.0\nSubnet mask: 255.255.254.0\nBroadcast address: 10.7.55.255\nUsable range: 10.7.54.1–10.7.55.254"
+          }
+        ],
+        "explanation": "D。380 已包括未来增长，不应再次乘以 1.3。/24 只有 254 个常规可用主机地址；/23 有 512 个地址、510 个常规可用主机地址。10.7.54.0/23 的掩码为 255.255.254.0，地址范围 10.7.54.0–10.7.55.255，广播地址为 10.7.55.255，可用地址为 10.7.54.1–10.7.55.254。C 的广播地址错误；B 的 /24 容量不足且范围不一致；A 的掩码与广播及范围均不一致。"
+      }
+    },
+    {
+      "id": 95,
+      "before_sha256": "eb22e14f6731e1e308c38243e3a071cd77a879f7c7f696aa8f57472df2eda38d",
+      "reason": "明确交换机 trunk 和 PC 网关等可通信前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume the switch uplink is a trunk permitting VLANs 2 and 3, each PC uses its corresponding router address as its default gateway, and the shown VLAN 2 subinterface is operational. Which router configuration completes inter-VLAN routing for VLAN 3?",
+        "explanation": "B。图中 VLAN 2 已由 Gi0/0.2 的 dot1Q 2 和 10.10.10.10/24 服务。VLAN 3 的 PC 为 10.10.2.1/23，路由器对应地址 10.10.2.10/23 在同一网段；封装应为 dot1Q 3。子接口编号 .10 是本地标识，不必等于 VLAN 号。A 未终结 VLAN 3 标签且 /22 不符；C 设置 VLAN 3 为 native，但图中 native VLAN 为 10，且掩码不符；D 绑定 VLAN 10，/30 也不包含该 PC。还需题设的 trunk、网关和接口状态正常。"
+      }
+    },
+    {
+      "id": 97,
+      "before_sha256": "d21511365eb9553fe8c2117c61ede14b5d649a1a2354da5de805eb65859397c4",
+      "reason": "累计错误快照不能证明实时性能或线缆是唯一根因，改为询问下一步排查。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The counters are cumulative. Which issue is the most appropriate first physical-layer investigation for the displayed CRC and input errors?",
+        "explanation": "C。图示 3,612,699 次 input errors 与 CRC 错误，物理介质、连接器或接口硬件值得优先检查；线缆问题是选项中最合适的排查方向。单一累计快照不能证明错误正在增长，也不能唯一证明线缆损坏，应比较后续计数并检查两端设备。A 的广播计数只有 67；B 的 bandwidth 参考值本身不改变物理协商线速；D 两端速率是否不匹配需看对端状态。"
+      }
+    },
+    {
+      "id": 98,
+      "before_sha256": "8cb6baec2db4e7a4d9d4b031337e5bd2fd3b9797502997223ee40a5ff10e9d5f",
+      "reason": "全互联提供链路冗余，但不保证完全无单点故障或自动绕行。",
+      "updates": {
+        "prompt": "Assuming equivalent independent links and three or more sites, which listed WAN topology provides the most direct intersite path redundancy?",
+        "explanation": "C。全网状拓扑中每两个站点之间都有直接连接，N 个站点需要 N(N−1)/2 条链路；相比单链路或单中心 hub-and-spoke，通常有更多绕行选择。链路和设备是否共享运营商、供电或物理路径会影响真实可用性；节点、共享设施或多条故障仍可造成中断，备用路径也需要适当的转发和路由配置。A 点对点只有一条直接链路；D 单中心拓扑依赖中心；B 是常见 VLAN 间路由设计，不是题目所问的 WAN 拓扑。"
+      }
+    },
+    {
+      "id": 99,
+      "before_sha256": "b614b0ca1fa5491ef257dec2bf305acb8b41d0355f7eaf0f41bfbe8c84afda8f",
+      "reason": "错误禁用阈值和支持原因依平台/配置而异；手动关闭与 err-disabled 区分。",
+      "updates": {
+        "prompt": "On a Cisco switch with link-flap error detection enabled, which condition can place an interface into err-disabled state?",
+        "explanation": "B。链路频繁 up/down 达到设备的 link-flap 检测阈值，可触发 err-disabled；阈值及检测设置应按平台核对，可使用 `show errdisable flap-values` 查看。其他原因也可能包括配置了 shutdown 动作的端口安全违规、BPDU Guard 或 UDLD。A 未接线通常显示 notconnect；C 单独的延迟不是此处的标准触发条件；D 管理员执行 shutdown 是 administratively down，不能等同 err-disabled。"
+      }
+    }
+  ]
+}

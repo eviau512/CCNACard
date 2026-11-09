@@ -1,0 +1,463 @@
+{
+  "scope": "Q1221–Q1230",
+  "corrections": [
+    {
+      "id": 1221,
+      "before_sha256": "e1e153c7d23146678d3d764ea0034438029987ab2de8cab9cf159c2e0b15c0d0",
+      "reason": "修正拼写及UDP对data channel的模糊描述，核对两组判分。",
+      "updates": {
+        "prompt": "Classify the adapted TCP and UDP characteristics; items within each protocol may be placed in either order.",
+        "drag_drop_data": {
+          "sources": [
+            "sends independent datagrams without establishing a transport connection",
+            "establishes a connection before exchanging application data",
+            "used to reliably share files between devices",
+            "appropriate for streaming operations with minimal latency"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "TCP (Slot 1)",
+              "expected": "used to reliably share files between devices",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t2",
+              "label": "TCP (Slot 2)",
+              "expected": "establishes a connection before exchanging application data",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t3",
+              "label": "UDP (Slot 1)",
+              "expected": "appropriate for streaming operations with minimal latency",
+              "unordered_group": "UDP"
+            },
+            {
+              "id": "t4",
+              "label": "UDP (Slot 2)",
+              "expected": "sends independent datagrams without establishing a transport connection",
+              "unordered_group": "UDP"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "TCP 建立连接并提供可靠有序字节流；文件传输可以使用 TCP。UDP 无需先建立传输层连接，适用于一些低时延流媒体场景，但应用可另行实现可靠性；低延迟和实时性均不保证。原图“data channel”含糊且存在拼写错误，交互文字已澄清；两组内部顺序不限。"
+      },
+      "exhibit_path": "exhibits/q1221_image_agent.jpg"
+    },
+    {
+      "id": 1222,
+      "before_sha256": "4f95bcbc98cd5220110292b493a0f1f6d7826ad866cb17b70d77c7b02b7e1b17",
+      "reason": "纠正ESS/DS概念及SSID字符限定。",
+      "updates": {
+        "prompt": "Match each WLAN term to its adapted definition.",
+        "drag_drop_data": {
+          "sources": [
+            "distribution system",
+            "extended service set",
+            "independent basic service set",
+            "infrastructure mode",
+            "SSID"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "system interconnecting the access points of an extended service set",
+              "expected": "distribution system"
+            },
+            {
+              "id": "t2",
+              "label": "independent set of clients communicating without a central access point",
+              "expected": "independent basic service set"
+            },
+            {
+              "id": "t3",
+              "label": "wireless operation using one or more access points",
+              "expected": "infrastructure mode"
+            },
+            {
+              "id": "t4",
+              "label": "network identifier carried as an SSID element",
+              "expected": "SSID"
+            },
+            {
+              "id": "t5",
+              "label": "set of interconnected infrastructure basic service sets forming one logical WLAN",
+              "expected": "extended service set"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "DS 将 ESS 的多个 BSS 互连，可以是有线或无线；ESS 是通过 DS 连接的多个基础设施 BSS。IBSS 是没有集中 AP 的自组网络；基础设施模式使用 AP；SSID 是网络标识，可含非字母数字字节。原图将 ESS 说成单 AP 小区且把 DS 限定为有线，定义已修正。"
+      },
+      "exhibit_path": "exhibits/q1222_image_agent.jpg"
+    },
+    {
+      "id": 1223,
+      "before_sha256": "2155b1b43dc84366d7555b4ddf34666b313f0a94a302636b387e17220ddfe686",
+      "reason": "纠正原答案将IP要求放入二层及混淆CAPWAP。",
+      "updates": {
+        "prompt": "For legacy LWAPP deployment modes, classify the adapted characteristics; each mode has two unordered slots. CAPWAP is outside this question.",
+        "drag_drop_data": {
+          "sources": [
+            "It encapsulates LWAPP traffic between the access point and the WLC in EtherType 0xBBBB.",
+            "In legacy Layer 2 LWAPP mode, control frames travel directly over the same Layer 2 network.",
+            "It forwards only IP EtherType frames.",
+            "It requires IP addresses on the access point and the WLC.",
+            "In legacy Layer 3 LWAPP mode, AP and WLC communicate using IP transport.",
+            "It uses UDP or UDP Lite for IPv6 deployments."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Layer 2 Tunnel (Slot 1)",
+              "expected": "It encapsulates LWAPP traffic between the access point and the WLC in EtherType 0xBBBB.",
+              "unordered_group": "Layer 2 Tunnel"
+            },
+            {
+              "id": "t2",
+              "label": "Layer 2 Tunnel (Slot 2)",
+              "expected": "In legacy Layer 2 LWAPP mode, control frames travel directly over the same Layer 2 network.",
+              "unordered_group": "Layer 2 Tunnel"
+            },
+            {
+              "id": "t3",
+              "label": "Layer 3 Tunnel (Slot 1)",
+              "expected": "It requires IP addresses on the access point and the WLC.",
+              "unordered_group": "Layer 3 Tunnel"
+            },
+            {
+              "id": "t4",
+              "label": "Layer 3 Tunnel (Slot 2)",
+              "expected": "In legacy Layer 3 LWAPP mode, AP and WLC communicate using IP transport.",
+              "unordered_group": "Layer 3 Tunnel"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "旧版 LWAPP 二层模式直接使用以太网 EtherType 0xBBBB，需要二层连通；三层模式使用 IP/UDP，AP 与 WLC 需要 IP 连通。原答案图误把 IP 要求列为二层模式，同时混淆 LWAPP 与 CAPWAP；这两者并非相同协议，CAPWAP 不支持该旧版二层模式。UDP-Lite/IPv6 原选项不作为 LWAPP 二层和三层的分类依据。"
+      },
+      "exhibit_path": "exhibits/q1223_image_agent.jpg"
+    },
+    {
+      "id": 1224,
+      "before_sha256": "aad4441c9d94bacbbc0413e1542276fcd028235efb13c47c23c28894c0b7c85f",
+      "reason": "将错误的TACACS+强加密断言改成标准所述混淆。",
+      "updates": {
+        "prompt": "Classify the traditional RADIUS and TACACS+ AAA protocol characteristics. Slots within a group are unordered.",
+        "drag_drop_data": {
+          "sources": [
+            "traditionally hides the User-Password attribute in an Access-Request",
+            "traditionally obfuscates the TACACS+ packet body",
+            "separates all three AAA operations",
+            "combines authentication and authorization",
+            "uses TCP",
+            "uses UDP"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "RADIUS (Slot 1)",
+              "expected": "traditionally hides the User-Password attribute in an Access-Request",
+              "unordered_group": "RADIUS"
+            },
+            {
+              "id": "t2",
+              "label": "RADIUS (Slot 2)",
+              "expected": "uses UDP",
+              "unordered_group": "RADIUS"
+            },
+            {
+              "id": "t3",
+              "label": "RADIUS (Slot 3)",
+              "expected": "combines authentication and authorization",
+              "unordered_group": "RADIUS"
+            },
+            {
+              "id": "t4",
+              "label": "TACACS+ (Slot 1)",
+              "expected": "traditionally obfuscates the TACACS+ packet body",
+              "unordered_group": "TACACS+"
+            },
+            {
+              "id": "t5",
+              "label": "TACACS+ (Slot 2)",
+              "expected": "separates all three AAA operations",
+              "unordered_group": "TACACS+"
+            },
+            {
+              "id": "t6",
+              "label": "TACACS+ (Slot 3)",
+              "expected": "uses TCP",
+              "unordered_group": "TACACS+"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "传统 RADIUS 使用 UDP，认证应答可携带授权属性，User-Password 使用共享密钥与 MD5 隐藏；TACACS+ 使用 TCP 49，认证、授权和计费分别处理，并对报文体作可逆混淆。RFC 8907 指出 TACACS+ 混淆不满足现代加密或完整性保护要求；RADIUS 也不应被概括为所有属性都加密。不同传输扩展可能使用其他方式。"
+      },
+      "exhibit_path": "exhibits/q1224_image_agent.jpg"
+    },
+    {
+      "id": 1225,
+      "before_sha256": "3a94c8495bf0a28742f45e4c44b2f47a0a67694688f311dd278f2fec28fe26a2",
+      "reason": "区分控制器编排与逐台配置，避免技术重叠造成多解。",
+      "updates": {
+        "prompt": "Classify the adapted examples as controller-orchestrated SD-Access or device-by-device traditional configuration. Within each category, order does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "centrally orchestrate SD-Access fabric overlay and underlay",
+            "centrally provisioned SD-Access routed fabric underlay",
+            "manually configure spanning tree on a conventional Layer 2 campus",
+            "manually configure VLANs and HSRP on individual campus devices",
+            "centrally provision SD-Access VXLAN and LISP fabric",
+            "device-by-device configuration through each console"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Cisco DNA Center (Slot 1)",
+              "expected": "centrally orchestrate SD-Access fabric overlay and underlay",
+              "unordered_group": "Cisco DNA Center"
+            },
+            {
+              "id": "t2",
+              "label": "Cisco DNA Center (Slot 2)",
+              "expected": "centrally provisioned SD-Access routed fabric underlay",
+              "unordered_group": "Cisco DNA Center"
+            },
+            {
+              "id": "t3",
+              "label": "Cisco DNA Center (Slot 3)",
+              "expected": "centrally provision SD-Access VXLAN and LISP fabric",
+              "unordered_group": "Cisco DNA Center"
+            },
+            {
+              "id": "t4",
+              "label": "Traditional (Slot 1)",
+              "expected": "manually configure spanning tree on a conventional Layer 2 campus",
+              "unordered_group": "Traditional"
+            },
+            {
+              "id": "t5",
+              "label": "Traditional (Slot 2)",
+              "expected": "manually configure VLANs and HSRP on individual campus devices",
+              "unordered_group": "Traditional"
+            },
+            {
+              "id": "t6",
+              "label": "Traditional (Slot 3)",
+              "expected": "device-by-device configuration through each console",
+              "unordered_group": "Traditional"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "Cisco DNA Center（现 Cisco Catalyst Center）可集中编排 SD-Access 的 underlay、overlay、VXLAN 和 LISP；逐台操作的传统案例使用 CLI 分别配置 STP、VLAN 或 HSRP。传统网络也可以采用 routed access、VXLAN 和自动化，控制器环境也可能包含 VLAN 或 STP，因此题目限定为这两种配置场景，不能将技术本身绝对归属某一架构。"
+      },
+      "exhibit_path": "exhibits/q1225_image_agent.jpg"
+    },
+    {
+      "id": 1226,
+      "before_sha256": "84db579a7dedeac5e1029258e1ff34786ba5b913fe1ac2b430efd4d7ee70c77a",
+      "reason": "纠正ULA合并绝不冲突的断言。",
+      "updates": {
+        "prompt": "Classify these IPv6 address properties. Within each category, order does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "never used as a source address",
+            "random global IDs reduce the chance of collision when sites merge",
+            "not intended for global Internet routing",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Multicast (Slot 1)",
+              "expected": "never used as a source address",
+              "unordered_group": "Multicast"
+            },
+            {
+              "id": "t2",
+              "label": "Multicast (Slot 2)",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "id": "t3",
+              "label": "Unique Local (Slot 1)",
+              "expected": "random global IDs reduce the chance of collision when sites merge",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "id": "t4",
+              "label": "Unique Local (Slot 2)",
+              "expected": "not intended for global Internet routing",
+              "unordered_group": "Unique Local"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "IPv6 多播地址用于一对多传输，不作数据包源地址。ULA 的本地生成随机 Global ID 降低站点合并时的碰撞概率，但无法保证绝对无冲突；ULA 设计用于本地通信，不预期在全球互联网中路由。路由策略仍应落实，不能视为安全控制。"
+      },
+      "exhibit_path": "exhibits/q1226_image_agent.jpg"
+    },
+    {
+      "id": 1227,
+      "before_sha256": "157b6e5f4c5c7e6aa0a4ad3d5eb60d9d55f09f37177e5d51b23771c521f65bb4",
+      "reason": "原答案图错题且无拓扑，避免捏造PC端口。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "现有题目缺少本实验拓扑；原答案区图片属于上一题 IPv6 拖拽结果，不能用于识别 PC1、PC2 交换机端口。可确认要求：SW-1 创建 VLAN 15 并命名 OPS，SW-2 创建 VLAN 66 并命名 ENGINEERING；从拓扑确认各 PC 接口后设为对应 access VLAN 并 no shutdown。两交换机全局启用 LLDP/CDP；在 E0/2 启用 LLDP transmit/receive，在 E0/0 启用 CDP，若要求协议隔离则在各自接口禁用另一协议。使用 `show vlan brief`、`show lldp neighbors`、`show cdp neighbors` 验证并 `copy running-config startup-config`。PC 接口无法从现有材料确定，不应假定都是 E0/1。"
+      },
+      "exhibit_path": "exhibits/q1227_answer_image_agent.jpg"
+    },
+    {
+      "id": 1228,
+      "before_sha256": "68b3da7c735b7ecf0b6318a774a851fc9a0a3c34b3f99eccc1f2f880d5ec06a9",
+      "reason": "纠正原答案重复IP/重叠子网，并给出可检验网络前提。",
+      "updates": {
+        "prompt": "Refer to the topology. Use these non-overlapping subnets: DC-1 Gi1/0 is the last usable address of 209.165.202.128/30, Gi1/1 the first usable of 192.168.4.8/29, Gi1/2 the last usable of 192.168.3.0/28, and HQ-1 Gi1/3 the last usable of 192.168.3.16/29. Match the commands.",
+        "drag_drop_data": {
+          "sources": [
+            "ip address 192.168.4.9 255.255.255.248",
+            "ip address 192.168.3.14 255.255.255.240",
+            "ip address 209.165.202.129 255.255.255.252",
+            "ip address 192.168.4.13 255.255.255.240",
+            "ip address 209.165.202.130 255.255.255.252",
+            "ip address 209.165.202.131 255.255.255.252",
+            "ip address 192.168.3.22 255.255.255.248"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "DC-1 - Gi1/0",
+              "expected": "ip address 209.165.202.130 255.255.255.252"
+            },
+            {
+              "id": "t2",
+              "label": "DC-1 - Gi1/1",
+              "expected": "ip address 192.168.4.9 255.255.255.248"
+            },
+            {
+              "id": "t3",
+              "label": "DC-1 - Gi1/2",
+              "expected": "ip address 192.168.3.14 255.255.255.240"
+            },
+            {
+              "id": "t4",
+              "label": "HQ-1 - Gi1/3",
+              "expected": "ip address 192.168.3.22 255.255.255.248"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "依题设：DC-1 Gi1/0 为 209.165.202.130/30，Gi1/1 为 192.168.4.9/29，Gi1/2 为 192.168.3.14/28；HQ-1 Gi1/3 为 192.168.3.22/29。原图给两个不同接口分配 192.168.3.14，且其 /29 与 /28 重叠，已补充不重叠的网络前提并改写选项；原答案图不再适用。"
+      },
+      "exhibit_path": "exhibits/q1228_image_agent.jpg"
+    },
+    {
+      "id": 1229,
+      "before_sha256": "130bf25f35c45f440effd534177f6a8be6511adf593ca6a462e62b6308f80888",
+      "reason": "修复两个无效IPv6字面地址。",
+      "updates": {
+        "prompt": "Match the adapted valid IPv6 examples to their address descriptions.",
+        "drag_drop_data": {
+          "sources": [
+            "2001:db8:bced:1234::456d:aacc",
+            "FD00:0000:0000:1a2d:a153:3992:a19d:ccca",
+            "fe80::abcd:ffff:12de:3992",
+            "FF05::23:becf:22:1111"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "multicast address used only locally within the site",
+              "expected": "FF05::23:becf:22:1111"
+            },
+            {
+              "id": "t2",
+              "label": "address that is automatically created on a link when IPv6 is enabled on an interface",
+              "expected": "fe80::abcd:ffff:12de:3992"
+            },
+            {
+              "id": "t3",
+              "label": "address that is prohibited from routing to the Internet",
+              "expected": "FD00:0000:0000:1a2d:a153:3992:a19d:ccca"
+            },
+            {
+              "id": "t4",
+              "label": "address from the documentation prefix 2001:db8::/32",
+              "expected": "2001:db8:bced:1234::456d:aacc"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "FF05::23:becf:22:1111 为站点范围多播；fe80::abcd:ffff:12de:3992 为链路本地地址，可自动配置；fd00:0:0:1a2d:a153:3992:a19d:ccca 是 ULA；2001:db8:bced:1234::456d:aacc 属文档前缀。原题 FE80 组 abcdf 超过四个十六进制字符、文档地址组数不足，已补正；实际生产网络不应将文档前缀作为公网地址。"
+      },
+      "exhibit_path": "exhibits/q1229_image_agent.jpg"
+    },
+    {
+      "id": 1230,
+      "before_sha256": "729f29fc1b615005e5dcc3fe4eb9a29b4a6a9ed3f670aaac7a838923c37e5011",
+      "reason": "纠正链路本地地址可以作为同链路目的地址。",
+      "updates": {
+        "prompt": "Classify the adapted IPv6 address characteristics. Each category is unordered; not all examples are used.",
+        "drag_drop_data": {
+          "sources": [
+            "IPv6 addresses in the format FF02::5",
+            "IPv6 addresses that begin with FD",
+            "locally assigned ULA prefixes are intended for use within sites",
+            "private IPv6 addresses",
+            "serve as next-hop addresses",
+            "not forwarded by routers beyond the local link"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Unique Local Addresses (Slot 1)",
+              "expected": "private IPv6 addresses",
+              "unordered_group": "Unique Local Addresses"
+            },
+            {
+              "id": "t2",
+              "label": "Unique Local Addresses (Slot 2)",
+              "expected": "IPv6 addresses that begin with FD",
+              "unordered_group": "Unique Local Addresses"
+            },
+            {
+              "id": "t3",
+              "label": "Unique Local Addresses (Slot 3)",
+              "expected": "locally assigned ULA prefixes are intended for use within sites",
+              "unordered_group": "Unique Local Addresses"
+            },
+            {
+              "id": "t4",
+              "label": "Link-Local Addresses (Slot 1)",
+              "expected": "serve as next-hop addresses",
+              "unordered_group": "Link-Local Addresses"
+            },
+            {
+              "id": "t5",
+              "label": "Link-Local Addresses (Slot 2)",
+              "expected": "not forwarded by routers beyond the local link",
+              "unordered_group": "Link-Local Addresses"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "ULA 使用 FC00::/7，实际本地分配通常是 FD00::/8，适用于站点内部且不预期全球路由。链路本地单播可作为同一链路上的源或目的地址，也可作下一跳，但路由器不跨链路转发它。FF02::5 是链路范围多播，而非链路本地单播。原答案错误声称链路本地地址不能作目的地址，已修正。"
+      },
+      "exhibit_path": "exhibits/q1230_image_agent.jpg"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.rfc-editor.org/rfc/rfc4193",
+    "https://www.rfc-editor.org/rfc/rfc8907",
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/69746-lwapp-ip-subnets.html",
+    "https://www-cloud.cisco.com/site/us/en/learn/topics/networking/what-is-a-wi-fi-network.html"
+  ],
+  "limitations": "人工审查，无设备实验"
+}

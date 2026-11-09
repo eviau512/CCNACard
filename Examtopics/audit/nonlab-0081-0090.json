@@ -1,0 +1,92 @@
+{
+  "scope": "Q81–Q90 independent non-lab review",
+  "corrections": [
+    {
+      "id": 81,
+      "before_sha256": "b68da8154d5ab12867d609d9910d329ec9ab65a74a13039febe76b092177e941",
+      "reason": "修正信道频率与干扰的绝对化说法。",
+      "updates": {
+        "prompt": "In the United States, which commonly used set of 2.4 GHz Wi-Fi channels is considered nonoverlapping for conventional 20/22 MHz operation?",
+        "explanation": "D。美国常见的 2.4 GHz WLAN 信道为 1–11；对于传统 20/22 MHz 信道，1、6、11 是常用的三信道非重叠组合。A 加入了不适用于美国常规 WLAN 的 14；B 和 C 包含间隔不足以采用该三信道规划的信道组合。不同信道不保证没有所有干扰：同信道复用、相邻频段泄漏、蓝牙和微波炉等仍可能影响无线环境。40 MHz 或其他带宽的规划需另行评估。"
+      }
+    },
+    {
+      "id": 83,
+      "before_sha256": "4b40bfac7cad0718180bd75f4786b73f62de8f69081e2d4d43985439cce17ea8",
+      "reason": "非重叠不等于无干扰，选项使用无歧义频率范围。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "different security settings"
+          },
+          {
+            "label": "B",
+            "text": "nonoverlapping occupied frequency ranges"
+          },
+          {
+            "label": "C",
+            "text": "unique SSIDs"
+          },
+          {
+            "label": "D",
+            "text": "different transmission speeds"
+          }
+        ],
+        "explanation": "B。非重叠信道要求所采用的信道频率范围不重叠；实际判定取决于频段、信道宽度及发射频谱特性。A 安全策略、C SSID 和 D 速率都不能单独确定频率范围是否重叠。非重叠也不等于完全没有射频干扰，仍可能有其他发射源或邻道泄漏。"
+      }
+    },
+    {
+      "id": 85,
+      "before_sha256": "fb81db88bf3e088f6ad0209c816e45dd88fd556c9fa52515d7fc1134c2695bdd",
+      "reason": "明确已知单播、不同出端口、VLAN 和策略前提。",
+      "updates": {
+        "prompt": "A switch receives a unicast frame whose destination MAC entry for the incoming VLAN points to a different, forwarding port. How does the switch normally handle the frame?",
+        "explanation": "C。交换机先按入站 VLAN 查找目的单播 MAC：已知表项指向另一个可转发端口时，通常只从该端口发送。A 是未知单播或广播在允许范围内泛洪的描述；B 不是按 MAC 表选端口；D 不是已知单播的处理方式。若命中端口就是入端口，通常过滤而不是回发；STP、ACL、端口状态或其他安全策略也可能阻止转发。动态 MAC 老化时间依平台和配置而异。"
+      }
+    },
+    {
+      "id": 86,
+      "before_sha256": "325dd33eeb511dbf4138f20b4496b49749a5699d97334e691306dc3801419560",
+      "reason": "移除对核心层策略的绝对断言。",
+      "updates": {
+        "explanation": "A。折叠核心（collapsed core）园区设计将核心层与汇聚层的功能合并在一层，接入层仍提供终端接入；它适合不需要独立核心层的较小园区，但规模和设计取决于实际需求。B 将接入与 WAN 合并、C 将汇聚与接入合并、D 将核心与 WAN 合并，都不是 collapsed core 的定义。核心/汇聚是否实施具体 ACL、QoS 或路由策略取决于设计，不能断言核心永远不处理任何策略。"
+      }
+    },
+    {
+      "id": 87,
+      "before_sha256": "1ebf3cf7f88b481895b3f02f516b3207666089450bb40d57e0bae5fb7a481b70",
+      "reason": "SOHO 不存在通用固定人数上限，NAT不是所有方案必须。",
+      "updates": {
+        "explanation": "C。SOHO（小型办公室/家庭办公室）网络通常规模较小，常用一台综合网关让多个用户共享宽带连接；IPv4 私网可通过 NAT/PAT 共享公网地址，IPv6 等其他方案则不一定需要 NAT。A 的至少三层冗余、B 的交换机全互联和 D 的千人高吞吐规模不是 SOHO 的典型定义。SOHO 没有本题可普遍套用的严格用户人数上限，也可以根据需要部署冗余。"
+      }
+    },
+    {
+      "id": 89,
+      "before_sha256": "62e26988d8e7121103cc5220c392ad9802703170481735041dc03bf50065215d",
+      "reason": "Web 服务可以认证、承载网页邮箱；限定协议职能且说明 FTP 不保证加密。",
+      "updates": {
+        "prompt": "Which function is primarily associated with an HTTP web server?",
+        "options": [
+          {
+            "label": "A",
+            "text": "exchange mail using SMTP and IMAP"
+          },
+          {
+            "label": "B",
+            "text": "provide files through the FTP protocol"
+          },
+          {
+            "label": "C",
+            "text": "provide centralized network-device AAA via TACACS+"
+          },
+          {
+            "label": "D",
+            "text": "serve web pages or application responses over HTTP"
+          }
+        ],
+        "explanation": "D。Web 服务器处理 HTTP 请求并返回网页、应用资源或 API 响应；HTTPS 是通过 TLS 保护的 HTTP，HTTP/3 也可以运行在 QUIC 上。A 对应邮件协议，B 对应 FTP 文件传输，C 对应网络设备的集中 AAA。Web 应用本身也可以认证用户或提供网页邮箱，因此题目限定的是所列协议对应的主要服务。FTP 本身不自动提供加密；SFTP 是基于 SSH 的不同协议。"
+      }
+    }
+  ]
+}

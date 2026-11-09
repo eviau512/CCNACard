@@ -1,0 +1,57 @@
+{
+  "scope": "Independent non-lab Q101-Q110",
+  "corrections": [
+    {
+      "id": 101,
+      "before_sha256": "d9611b9822e85057cc1e13fb8a54c97a9fb48fcd599951db29b3f353937cce3d",
+      "reason": "原解析把速率或双工的后果绝对化，限定图中强制速率、端口启用且线缆正常的前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Both access ports are administratively enabled. The Cat5 cable is tested successfully, and each port is forced to the speed shown. Both physical links are down. Which pictured configuration most directly explains the failure?",
+        "explanation": "A。图中端口一端强制 100 Mb/s、另一端强制 10 Mb/s；速率不一致会妨碍建立共同的物理链路。99 米处于常见 Cat5 铜缆以太网 100 米信道长度内，题设也说线缆测试通过，因此 B 不是预期原因。C 的双工不匹配通常可能在链路已建立时产生碰撞或错误，但不能一概断言所有平台均保持 up/up；D 的 PortFast 影响生成树收敛，不是该物理速率不匹配的修复方法。排障仍需确认端口未被关闭、介质兼容和设备日志；题目给定这些条件以聚焦图中差异。"
+      }
+    },
+    {
+      "id": 103,
+      "before_sha256": "0cfb9bb805256a1d0f466d9870e9ec1c0138359e767883df8f691544e46fe3b3",
+      "reason": "保留标准介质区分，避免模块距离和具体硬件型号被误解为所有兼容设备的保证。",
+      "updates": {
+        "explanation": "C。10GBASE-SR 和 10GBASE-LR 都使用光纤作为传输介质；典型 SR 使用多模光纤，LR 使用单模光纤，因此 A 和 D 不同时适合两者。B 的双绞铜缆对应 10GBASE-T 等方案，而非 SR/LR 光接口。具体可用距离由模块、光纤等级、连接损耗和厂商规格共同决定，不能仅凭 SR/LR 名称承诺任意链路均可达某个距离。"
+      }
+    },
+    {
+      "id": 104,
+      "before_sha256": "1f91493416cde544a0307f4f1dfb21db72b327f70f31d0ec7c5e5f89e26134aa",
+      "reason": "交换机和无线设备也可配置访问控制；指定询问以安全策略过滤为主要职责的设备。",
+      "updates": {
+        "prompt": "Which device is primarily deployed to enforce a security policy by permitting or denying traffic between network security zones?",
+        "explanation": "B。防火墙以实施安全策略、按规则允许或拒绝经过安全区域的流量为核心职责。交换机主要负责二层转发，控制器用于无线网络集中管理，AP 提供无线接入；它们也可能支持 ACL 或其他安全过滤功能，因此不能说它们完全无法基于规则阻断流量。默认动作和有状态检查能力取决于产品及具体策略。"
+      }
+    },
+    {
+      "id": 107,
+      "before_sha256": "a676a93b4d0c4755a0d37edc00aaa446e29c44d8c88d2be653d5c61fdbcae57e",
+      "reason": "原题将功率分级覆盖与功率监管混为一谈；明确 PoE policing 及 errdisable 动作。",
+      "updates": {
+        "prompt": "On a Cisco switch supporting PoE power policing, an administrator configures the port to enter err-disabled state when measured power exceeds its allocated maximum. What happens if that threshold is exceeded?",
+        "explanation": "D。在题设明确启用功率监管并选择 errdisable 动作的条件下，端口超出分配功率时会关闭供电并进入错误禁用状态。不同平台及 policing 动作还可能仅记录日志，不能把这种结果推广到所有 PoE 配置；功率分类/分配与实时功率监管是不同概念。A 暂停数据、B 设备刚开始取电就记录日志，均不是题设动作；C 不能用任意“最低配置功率”替代设备维持供电签名的判断。恢复方式依平台及配置而定。"
+      }
+    },
+    {
+      "id": 108,
+      "before_sha256": "5f1fb4bc34ee56c15f63511ec4b0b790881d5d395ba68da8026078dd4719e701",
+      "reason": "原解析使用套话且遗漏不同链路负载和延迟因素，补齐逐项解释。",
+      "updates": {
+        "prompt": "What is a common benefit of a two-tier spine-and-leaf fabric for traffic between servers on different leaf switches?",
+        "explanation": "A。两层全连接 spine-leaf 架构中，跨 leaf 的服务器流量通常经过源 leaf、一个 spine 和目的 leaf，路径跳数较一致，因而更易预测路径延迟；同一 leaf 的流量可能不经过 spine。实际延迟仍受链路速率、拥塞、队列和设备处理影响，并非保证固定。B 错在仅发送组播且服务器通常接入 leaf；C 增加 leaf 本身不必然降低超售比，需结合上行带宽与连接设计；D 的帧/报文大小受 MTU 等设置控制，并非该拓扑独有功能。"
+      }
+    },
+    {
+      "id": 110,
+      "before_sha256": "2fc883612ccf092ffdf4273277e3e4b487897cc3f6b029f4f130dfa8440fa006",
+      "reason": "对控制/转发平面区分作精确说明，避免路由协议总是交换完整路由表或只由硬件处理。",
+      "updates": {
+        "explanation": "A。控制平面运行路由协议、与邻居交换路由或拓扑信息，并计算和维护路由；不同协议的交换内容和时机不同，不代表每次都传送完整路由表。B 的 CLI 访问属于管理平面；C 查询 FIB 获取出口和 D 转发到下一跳通常是数据平面功能。控制平面提供转发信息，数据平面可由硬件或软件执行实际转发。"
+      }
+    }
+  ]
+}

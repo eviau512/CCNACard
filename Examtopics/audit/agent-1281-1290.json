@@ -1,0 +1,241 @@
+{
+  "scope": "Q1281–1290 independent manual audit",
+  "corrections": [
+    {
+      "id": 1281,
+      "original_qid": "Q1281",
+      "before_sha256": "630b2892c39337e234ec94d829a6aa291c23e7fbfc1f982932aa4e2adee603b3",
+      "updates": {
+        "prompt": "On an access point that supports centralized AAA for administrator login, which two protocols can provide device-administration AAA? (Choose two.)",
+        "explanation": "B、D。RADIUS 和 TACACS+ 可用于支持相应功能的设备管理员集中 AAA；实际可用功能取决于 AP 平台及配置。TACACS+ 常支持细粒度命令授权，但其报文保护不应描述为现代强加密。802.1Q 是 VLAN 标记，802.1X 主要用于端口网络接入认证；Kerberos 是票据认证机制，不是题中所问的两种设备管理 AAA 协议。SSH/HTTPS 等用于管理会话，AAA 本身不是配置传输协议。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked"
+      }
+    },
+    {
+      "id": 1282,
+      "original_qid": "Q1282",
+      "before_sha256": "8013d9f766cbb980ca1b8fcaf8cacd6a98fe49e9691b1b4dca4471f2c43473a7",
+      "updates": {
+        "explanation": "A、C。为同一目标前缀配置管理距离高于主路由的静态路由：主路由被撤销且备用下一跳可解析时，备用路由可以进入 RIB。主路可为动态路由或静态路由；远端故障不一定导致直连下一跳不可达，必要时需追踪。收敛期间可能丢包，不能保证业务不中断。B 是策略路由；D 的等价多路径要求相同前缀和相应的同等优先级，非此主备场景；E 的远端回程由远端路由与策略决定。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked"
+      }
+    },
+    {
+      "id": 1283,
+      "original_qid": "Q1283",
+      "before_sha256": "4933aa60fba9d1d8f41221216392edaae5c7bc8d3c4b1a2278d449ab4cbc394f",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume default administrative distances, all next hops reachable, and no other competing routes. Which three displayed routes are installed in the routing table? (Choose three.)",
+        "answer": [
+          "A",
+          "C",
+          "D"
+        ],
+        "explanation": "A、C、D。图中 OSPF、RIP 和 iBGP 竞争同一 10.0.0.0/30：默认 AD 分别为 110、120、200，OSPF 胜出。OSPF 的 10.0.0.0/16 和 EIGRP 的 10.0.0.1/32 是不同前缀，在题设前提下可以同时安装；最长前缀匹配在转发具体目的地址时适用，不会让 /16 自动从 RIB 消失。原题写二选且遗漏 C，已改为三选。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked"
+      },
+      "exhibit_path": "exhibits/q1283_image_review.jpg"
+    },
+    {
+      "id": 1284,
+      "original_qid": "Q1284",
+      "before_sha256": "e8b3ba66ed334892b7a1a8586b59695278283d7c3e2b714e1a9c1fa972941dcf",
+      "updates": {
+        "prompt": "On Cisco IOS, an active IPv4 interface and an OSPF router ID are already available. Which two values identify the OSPFv2 process and area when enabling OSPF directly on the interface? (Choose two.)",
+        "explanation": "A、E。接口命令 `ip ospf <process-id> area <area-id>` 指定本地进程及接口所属区域；进程号只需本机一致，不要求与邻居相同。IPv4 接口条件与 router ID 已由题设给定。MD5 认证和 stub 区域不是所有场景的必选配置；OSPFv2 不以 IPv6 地址作为题设接口配置前提。实际邻接仍需协议参数及网络连通条件匹配。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked"
+      }
+    },
+    {
+      "id": 1285,
+      "original_qid": "Q1285",
+      "before_sha256": "bde5879bb47f456340e616e0e63035ef162611030dc9db71f08203894cb9ce91",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming both links and remote default routes shown are operational, which two next-hop static host routes on New York support traffic between Atlanta Loopback1 and Washington Loopback3? (Choose two.)",
+        "explanation": "C、E。图中纽约至 Atlanta 的对端为 `2012::1`，至 Washington 的对端为 `2023::3`；分别配置 `ipv6 route 2000::1/128 2012::1` 与 `ipv6 route 2000::3/128 2023::3`。/128 为主机前缀。A、B 出接口方向相反，D 指向纽约本端地址。两端回程仍依赖图示默认路由及链路连通；点对点接口路由可用，但题目选项中的接口方向错误。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked"
+      },
+      "exhibit_path": "exhibits/q1285_image_review.jpg"
+    },
+    {
+      "id": 1286,
+      "original_qid": "Q1286",
+      "before_sha256": "07c6cfd6382f7367cf6f9d63756b7b20aa307c5925612d565424c7e8a4750c16",
+      "updates": {
+        "prompt": "Which two statements describe EIGRP route selection and loop-free backup paths? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "The reported distance advertises only the bandwidth of the local link."
+          },
+          {
+            "label": "B",
+            "text": "The router computes a total metric to the destination through each candidate neighbor."
+          },
+          {
+            "label": "C",
+            "text": "The router must use the neighbor-reported distance alone as its own complete path metric."
+          },
+          {
+            "label": "D",
+            "text": "A feasible successor is a backup path that meets the feasibility condition."
+          },
+          {
+            "label": "E",
+            "text": "The reported distance is always the local exit-interface delay multiplied by 256."
+          }
+        ],
+        "explanation": "B、D。本地计算经各候选邻居到达目的地的复合度量；可行距离 FD 是 DUAL 用于可行性判断的距离，不能笼统称每条路径各有一个 FD。邻居报告距离 RD 严格小于 FD 时，该邻居路径满足可行性条件，可以成为可行后继。没有满足条件的备份也可能发生；切换并不保证零丢包。A/C/E 将 RD 与单链路带宽、路径完整度量或单个延迟混同。原 B/D 说法不精确，已修订。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked"
+      }
+    },
+    {
+      "id": 1287,
+      "original_qid": "Q1287",
+      "before_sha256": "1f4a762125fea08e27de76bc9f729212dcfb11c9ef0244b4cb76c3fee1da6d1d",
+      "updates": {
+        "prompt": "Two operational routers participate in the same HSRP group on one LAN and exchange hellos. Which two behaviors are expected? (Choose two.)",
+        "explanation": "A、E。两个正常交换 HSRP hello 的路由器在该组中协商 active 与 standby；主机可使用共享虚拟 IP 作为默认网关，active 响应并承担该虚拟网关的转发。故障检测和切换需要时间，分区或配置错误也可能导致异常。单组不自动在两个网关间负载均衡；多组可用于手工分担。HSRP 不负责同步完整设备配置，物理接口 IP 通常各不相同。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked"
+      }
+    },
+    {
+      "id": 1288,
+      "original_qid": "Q1288",
+      "before_sha256": "f6443f51497a1968d4fd17bdf5510745b1da1100b5632d07b38d08fdbeb4cd5c",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming Washington has the shown route to Atlanta and the primary next hop becomes unreachable when the New York–Atlanta link fails, which two IPv6 routes on New York provide the primary and floating backup paths? (Choose two.)",
+        "explanation": "A、E。主路径 `ipv6 route 2000::1/128 2012::1` 默认 AD 1；备份 `ipv6 route 2000::1/128 2023::3 5` 的 AD 为 5，主路由撤销且备用下一跳可解析时进入 RIB。图中 Washington 已有去 Atlanta 的路径；回程仍需连通。B 使主路由也为 AD 5，C/D 指向纽约自己的接口。仅远端故障而本地链路仍 up 时静态路由未必被撤销，可能需要跟踪。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked"
+      },
+      "exhibit_path": "exhibits/q1288_image_review.jpg"
+    },
+    {
+      "id": 1289,
+      "original_qid": "Q1289",
+      "before_sha256": "896e4631edc486022cc52c3807dc2b6df1e594f0ac682cb9c104e2d86ea3bbf2",
+      "updates": {
+        "prompt": "Which two listed dynamic routing protocols are distance-vector protocols? (Choose two.)",
+        "explanation": "B、E。RIP 是距离矢量协议，EIGRP 通常归类为高级距离矢量协议，使用 DUAL 并发送触发式增量更新。OSPF 与 IS-IS 属链路状态协议；BGP 常称路径矢量协议。距离矢量不意味着所有协议都周期性发送完整路由表。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked"
+      }
+    },
+    {
+      "id": 1290,
+      "original_qid": "Q1290",
+      "before_sha256": "bc81b6498b95d92ae7b4505ff076268d3d8f6b91ec9b63edb3480778ce5aa7d5",
+      "updates": {
+        "prompt": "Which two statements describe inter-autonomous-system routing in the Internet? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Interior gateway protocols are required to exchange routes between every pair of autonomous systems."
+          },
+          {
+            "label": "B",
+            "text": "Exterior routing can exchange reachability and select policy-based paths between autonomous systems."
+          },
+          {
+            "label": "C",
+            "text": "BGP is the standard protocol used for Internet inter-AS routing."
+          },
+          {
+            "label": "D",
+            "text": "The obsolete EGP protocol is required alongside BGP in every modern network."
+          },
+          {
+            "label": "E",
+            "text": "EIGRP is the standard Internet-wide inter-AS routing protocol."
+          }
+        ],
+        "explanation": "B、C。BGP 是互联网跨自治系统交换可达性和按策略选路的标准协议；最佳路径由策略及协议属性决定，不一定是物理最短路径。旧 EGP 指特定历史协议，不是所有外部协议的同义词。A 错把 IGP 设为所有 AS 间路由交换的必需协议；BGP 也可用 iBGP 在 AS 内传播路由。D 的“每个网络必须”错误，EIGRP 通常是 IGP。原题 A 不完整，已明确范围并避免对所有设备支持情况作绝对断言。"
+      },
+      "reason": "逐项核对题干、选项、答案及解析；修正错误、歧义或绝对化表述。",
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/routing/configuration-guide/routing-config-cisco8000/implementing-and-monitoring-rib/information-about-rib-configuration.html",
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/command/ire-cr-book/ire-s1.html"
+  ],
+  "limitations": "人工审题和原图核对，未运行网络设备实验。"
+}

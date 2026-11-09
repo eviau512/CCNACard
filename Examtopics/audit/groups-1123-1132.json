@@ -1,0 +1,188 @@
+{
+  "scope": "Independent review Q1123–Q1132",
+  "corrections": [
+    {
+      "id": 1127,
+      "before_sha256": "402f9e2af59e652a64892049aa4c29a2e6781f26812fbdb77810df5f9ce7e854",
+      "reason": "原图若干地址虽有相应前缀，但链路本地保留位、组播范围和 ULA 本地位不符合正常示例。",
+      "updates": {
+        "prompt": "Classify the corrected illustrative IPv6 addresses by address type. The original exhibit uses problematic scope, link-local and unique-local examples; use the interactive choices.",
+        "drag_drop_data": {
+          "sources": [
+            "ff02::1",
+            "fe80::7",
+            "fd12:3456:789a::3",
+            "2001:db8::1"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2001:db8::1"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fd12:3456:789a::3"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80::7"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff02::1"
+            }
+          ]
+        },
+        "explanation": "`2001:db8::1` 属于 2000::/3 全球单播地址格式，但 2001:db8::/32 保留供文档示例；`fd12:3456:789a::3` 为本地生成的 ULA 格式；`fe80::7` 为链路本地单播；`ff02::1` 是链路本地范围的组播。原图 fe80 后保留位非零，ff00 的范围值 0 保留，fc00 的 L 位为 0，不应作为本地生成 ULA 示例；交互选项已更正。各类别的目标不可互换。"
+      }
+    },
+    {
+      "id": 1129,
+      "before_sha256": "53dbd26e6002a0d80651b65b641d29f72bfca00d9de047e60e974c0fd113bdaa",
+      "reason": "原图将铜缆限定单根实心导体，且错误声称单模光纤消除所有光脉冲失真。",
+      "updates": {
+        "prompt": "Classify these corrected characteristics by cable type. The exhibit uses overbroad wording; use the interactive choices. Slots within each category are interchangeable.",
+        "drag_drop_data": {
+          "sources": [
+            "may use copper twisted-pair conductors",
+            "is typically used for DWDM optical systems spanning long distances",
+            "does not have multimode intermodal dispersion",
+            "is affected by electrical and magnetic interference"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "may use copper twisted-pair conductors",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "is affected by electrical and magnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "is typically used for DWDM optical systems spanning long distances",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "does not have multimode intermodal dispersion",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "铜缆可使用双绞线导体，也受电磁干扰；单模光纤常用于长距离 DWDM，并没有多模传播导致的模间色散。同组两个槽可互换，跨组不可互换。单模光纤仍可能有色度或偏振模色散；铜缆不限于单根实心导体。原答案图与修正后的交互选项不同，已隐藏并保留原图作证据。"
+      }
+    },
+    {
+      "id": 1130,
+      "before_sha256": "7230473ba4e62b611801a1056b475ff6b21982fc4e8cdefd7adc75987f02bea4",
+      "reason": "铜缆并非必定单根实心导体，明确电信号及模式含义。",
+      "updates": {
+        "prompt": "Classify the corrected characteristics by cable type. The original exhibit contains overbroad or inaccurate wording; use the interactive choices. Slots within each category are interchangeable.",
+        "drag_drop_data": {
+          "sources": [
+            "may use copper twisted-pair conductors",
+            "is typically used for DWDM optical systems spanning long distances",
+            "supports propagation in a single spatial mode",
+            "transmits data using electrical signals"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "copper (Slot 1)",
+              "expected": "may use copper twisted-pair conductors",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t2",
+              "label": "copper (Slot 2)",
+              "expected": "transmits data using electrical signals",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t3",
+              "label": "single-mode fiber (Slot 1)",
+              "expected": "is typically used for DWDM optical systems spanning long distances",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t4",
+              "label": "single-mode fiber (Slot 2)",
+              "expected": "supports propagation in a single spatial mode",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "explanation": "铜缆可使用双绞线导体并传输电信号；单模光纤常用于长距离 DWDM，传播单一空间模式。同类槽位可互换。铜缆不限于单根实心导体；单模并非单波长，DWDM 可在同一光纤上传输多个波长。原图保留作来源，交互选项已经修正。"
+      }
+    },
+    {
+      "id": 1131,
+      "before_sha256": "fc3c04f329ecc7eb25c6f349dffc3673975d9fdf0ac6a1c143cfe0638f21d7e6",
+      "reason": "小办公室和数据中心均可使用铜缆或多模光纤，场所不具排他性。",
+      "updates": {
+        "prompt": "Classify the corrected Ethernet and cable characteristics by cable type. Slots within each category accept either order; use the interactive choices rather than the original exhibit wording.",
+        "drag_drop_data": {
+          "sources": [
+            "supports 1000BASE-T Ethernet over copper twisted pairs",
+            "supports 10GBASE-SR short-reach optical Ethernet",
+            "is used by 1000BASE-SX short-reach Ethernet",
+            "is available as shielded or unshielded twisted-pair cable"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "copper (Slot 1)",
+              "expected": "supports 1000BASE-T Ethernet over copper twisted pairs",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t2",
+              "label": "copper (Slot 2)",
+              "expected": "is available as shielded or unshielded twisted-pair cable",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t3",
+              "label": "multimode fiber (Slot 1)",
+              "expected": "supports 10GBASE-SR short-reach optical Ethernet",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "id": "t4",
+              "label": "multimode fiber (Slot 2)",
+              "expected": "is used by 1000BASE-SX short-reach Ethernet",
+              "unordered_group": "multimode fiber"
+            }
+          ]
+        },
+        "explanation": "Copper 双绞线可用于 1000BASE-T，且可使用屏蔽或非屏蔽线缆；1000BASE-SX 和 10GBASE-SR 是使用多模光纤的短距离光以太网示例。同类槽位可交换。办公室和数据中心都可能使用铜缆或光纤，原图以场所作为类别特征容易造成歧义。"
+      }
+    },
+    {
+      "id": 1132,
+      "before_sha256": "2ec061add1a726356c9ee51195170f78e00436e8dcdc0c6ea3a8434fd1cda190",
+      "reason": "题干错误提及 IPv6 地址类别，而交互题实际只涉及线缆类型。",
+      "updates": {
+        "prompt": "Classify the corrected characteristics by cable type. Slots within each category accept either order; use the interactive choices rather than the original exhibit wording."
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.rfc-editor.org/rfc/rfc4193",
+    "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/10-gigabit-ethernet-transceiver-modules/data_sheet_c78-455693.html"
+  ],
+  "limitations": "独立核查和原图查看；未进行网络设备实机测试。"
+}

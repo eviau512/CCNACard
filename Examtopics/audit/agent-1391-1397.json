@@ -1,0 +1,200 @@
+{
+  "scope": "Q1391–Q1397",
+  "corrections": [
+    {
+      "id": 1391,
+      "original_qid": "Q1391",
+      "before_sha256": "1f4fdc9cb87af4078e06ace35f94ab71cb279f404637dd2230805ee271644496",
+      "reason": "物理监视是侦测措施而非必然阻止；区分管理培训。",
+      "updates": {
+        "prompt": "Which two measures support a physical security program that controls or monitors access to protected locations? (Choose two.)",
+        "explanation": "A、C。视频监控可记录或帮助检测人员进入受保护场所；工牌门禁可限制谁能进入指定区域。监控本身不一定主动阻止进入，也不保证全天有效。B、D、E 是安全政策、培训或信息宣导，属于管理性措施，而非直接的物理入口控制。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "物理监视是侦测措施而非必然阻止；区分管理培训。",
+        "reference": null
+      }
+    },
+    {
+      "id": 1392,
+      "original_qid": "Q1392",
+      "before_sha256": "d143dfdaf544edfe374b262c1c35afa27beefb868c81cf2558fe1faa61fa83f8",
+      "reason": "修复交换机/路由器混称、限定VTY，恢复CLI换行并纠正通配符解释。",
+      "updates": {
+        "prompt": "On a Cisco Catalyst switch, restrict incoming SSH or Telnet VTY connections to clients in 203.0.113.0/24 while leaving transit traffic unaffected by this restriction. Assume the switch uses VTY lines 0–15 and no other management protocols are in scope. Which two configurations meet the requirement? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface range vlan 1 - 4094\n ip access-group Management out"
+          },
+          {
+            "label": "B",
+            "text": "line vty 0 15\n access-class Management in"
+          },
+          {
+            "label": "C",
+            "text": "ip access-list standard Management\n permit 203.0.113.0 0.0.0.255"
+          },
+          {
+            "label": "D",
+            "text": "ip access-list standard Management\n permit 203.0.113.0 255.255.255.0"
+          },
+          {
+            "label": "E",
+            "text": "ip access-list extended Management\n permit tcp any range 22 23 203.0.113.0 0.0.0.255"
+          }
+        ],
+        "explanation": "B、C。标准 ACL 的通配符 `0.0.0.255` 匹配源网络 203.0.113.0/24，在 VTY 上以 `access-class Management in` 应用于入向登录，不将该限制施加给交换机转发流量。ACL 的隐式拒绝会拒绝其他来源；SSH、身份认证和网络可达性仍须另行正确配置。`access-class` 只解决题设 VTY 访问，并不自动限制 HTTPS、SNMP 或其他管理协议。\n\nA 是接口 ACL，可能影响该接口上的匹配流量；D 的通配符并非 /24（不能简单当作子网掩码）；E 将 22–23 写在源端口位置且目的地址方向不合题意。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "restored line breaks",
+        "finding": "修复交换机/路由器混称、限定VTY，恢复CLI换行并纠正通配符解释。",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html"
+      }
+    },
+    {
+      "id": 1393,
+      "original_qid": "Q1393",
+      "before_sha256": "340621c364796728aae38c9e99de954991b7588e76f1da7177157eab92482831",
+      "reason": "删除无来源的90%收益和租约必防耗尽断言，说明续租。",
+      "updates": {
+        "explanation": "B、C。DHCP 可集中分配网络参数并降低逐台维护客户端地址的工作量；动态地址租约还可设定有效期。客户端可以续租，实际能否再次使用同一地址取决于服务器策略和可用性；DHCP 不保证永不耗尽地址池，也没有固定的省时百分比。\n\nA 的逐台手工配置不是这里的主要优势；D 的最佳路径由路由机制决定；E 的名称解析由 DNS 提供，虽然 DHCP 可向客户端提供 DNS 服务器地址。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "删除无来源的90%收益和租约必防耗尽断言，说明续租。",
+        "reference": "https://www.rfc-editor.org/rfc/rfc2131"
+      }
+    },
+    {
+      "id": 1394,
+      "original_qid": "Q1394",
+      "before_sha256": "c71bdedaa8ec25e1d5e21d2148f8a15bcc0249cdea9e6281b271faca64a7e410",
+      "reason": "区分认证与记账，避免每种认证必使用同一质询流程。",
+      "updates": {
+        "prompt": "Within an AAA system, which two statements describe the authentication function rather than the accounting function? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "It primarily records user activity for audit."
+          },
+          {
+            "label": "B",
+            "text": "It verifies credentials and can return an accept or reject decision."
+          },
+          {
+            "label": "C",
+            "text": "It verifies the identity a user claims."
+          },
+          {
+            "label": "D",
+            "text": "It primarily records the duration of a user connection."
+          },
+          {
+            "label": "E",
+            "text": "It primarily supplies usage records for billing."
+          }
+        ],
+        "explanation": "B、C。认证核验用户声称的身份，可依据凭据返回接受或拒绝；不同认证协议的交互方式不同，并不总是向用户发起相同的质询。记账记录会话开始、结束、用量或其他事件，可用于审计和计费；授权决定已认证主体可以使用哪些资源。日志具体内容取决于配置与协议。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "区分认证与记账，避免每种认证必使用同一质询流程。",
+        "reference": null
+      }
+    },
+    {
+      "id": 1395,
+      "original_qid": "Q1395",
+      "before_sha256": "601047a4bcfbd67b67ad89805488c8e13e68121a130f47c4080235af9bdb6487",
+      "reason": "核对原图PSK勾选，限定MAC允许列表并说明可伪造。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On this controller, PSK and its key are already configured. An administrator will use a configured allowed-client MAC list and a suitable WPA2 cipher to restrict access to listed clients using WPA2-PSK. Which two visible settings should be enabled? (Choose two.)",
+        "explanation": "C、D。图中 PSK 已勾选而 WPA2 Policy 与 MAC Filtering 均未勾选；启用 WPA2 Policy 并开启 MAC 过滤，使配置好的本地或 RADIUS 允许列表参与客户端准入。还需要配置兼容的 WPA2 加密算法、WLAN 状态及网络连通性。MAC 地址可以被伪造，MAC 过滤不能单独保证只有预期设备接入。\n\nA 的 OSEN 面向不同安全场景；B 的 802.1X 和 E 的 CCKM 不是题设 PSK 所需的选项。不同控制器/版本可能支持不同组合。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对原图PSK勾选，限定MAC允许列表并说明可伪造。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/wlan_security.html"
+      },
+      "exhibit_path": "exhibits/q1395_image_agent.jpeg",
+      "image_sha256": "a923afa728ea45fa48387e1e358253eb08d98d030d11ec6f2ed7d01a20c954f6"
+    },
+    {
+      "id": 1396,
+      "original_qid": "Q1396",
+      "before_sha256": "d7b64740d0bd02353356eb5d8414c4239e446786688af5367e287a4261c8f21e",
+      "reason": "核对原图WPA2已选，明确题设CCMP128和PSK，避免唯一加密断言。",
+      "updates": {
+        "prompt": "Refer to the exhibit. WPA2 Policy is already selected. The WLAN must use WPA2-Personal with a preshared key and AES-CCMP128 on its 2.4 GHz and 5 GHz radios. Which two settings should be selected? (Choose two.)",
+        "explanation": "B、D。图中已勾选 WPA2 Policy；在 WPA2/WPA3 Encryption 区域选择 AES (CCMP128)，并在 Auth Key Mgmt 选择 PSK，再设置符合要求的预共享密钥。AES-CCMP128 是题设指定的加密套件，PSK 是密钥管理方式；前者不是 AKM 选项。802.1X 用于企业认证而非题设 PSK，旧 WPA Policy 不是启用 WPA2 所需的设置。双频可用性还取决于 WLAN、AP 和射频配置。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对原图WPA2已选，明确题设CCMP128和PSK，避免唯一加密断言。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/wlan_security.html"
+      },
+      "exhibit_path": "exhibits/q1396_image_agent.jpeg",
+      "image_sha256": "697b59d4d7eb72d2b72713ea8a2e515dac690a578faab3d2ed88bb6e6446d27e"
+    },
+    {
+      "id": 1397,
+      "original_qid": "Q1397",
+      "before_sha256": "46a230c0dfdefc5e387431471e4b873b3240b7fb01cce9cd183f7d860bc47b76",
+      "reason": "核对原图，修复密钥和题干拼写，限定仅AES并说明PSK格式。",
+      "updates": {
+        "prompt": "Refer to the exhibit. After selecting WPA+WPA2 under Layer 2 Security, configure the WLAN for WPA2 using AES only and the text preshared key Cisc0123456. Which two actions are required? (Choose two.)",
+        "explanation": "B、D。选择 PSK、将格式设为 ASCII 并输入题设文本密钥；再勾选 WPA2 Policy 和 AES。`Cisc0123456` 为 11 个字符，符合该界面 ASCII PSK 的 8–63 字符范围；64 个十六进制字符是另一种原始密钥格式。题设要求仅 AES，E 额外启用 TKIP，不符合条件；CCKM 不是所需 PSK，留空 AKM 也不能完成 PSK 配置。图示显示的是选择 WPA+WPA2 前的界面，题干说明所选状态。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对原图，修复密钥和题干拼写，限定仅AES并说明PSK格式。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/wlan_security.html"
+      },
+      "exhibit_path": "exhibits/q1397_image_agent.jpeg",
+      "image_sha256": "0e06bea5eb3fef02c379cd9a4b3fdfb3a4b569b9ce624d579db9d0b7a9d8f964"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/wlan_security.html",
+    "https://www.rfc-editor.org/rfc/rfc2131",
+    "https://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html"
+  ],
+  "limitations": "人工文档和图像核对，未执行设备实测。"
+}

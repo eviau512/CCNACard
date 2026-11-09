@@ -1,0 +1,164 @@
+{
+  "scope": [
+    1213,
+    1222
+  ],
+  "corrections": [
+    {
+      "id": 1213,
+      "before_sha256": "51d4ce0582e8d3100247d1b6ac6c8198657ad39fc465c671ad368b4a0ecdcf39",
+      "reason": "原图选项未明确 UDP 无连接，交互选项已改写；TCP/UDP 各两槽位组内可交换。",
+      "updates": {
+        "prompt": "Match TCP and UDP with the indicated transport-layer properties. Order within each group does not matter. The exhibit contains the original wording; use the corrected interactive labels below."
+      }
+    },
+    {
+      "id": 1214,
+      "before_sha256": "9b70c6e51eb75b2d743ddeb1cedc2b09c3bcbb6e42548cab5d8f5fc42131ea28",
+      "reason": "原图 fcba L 位未定义为本地分配，交互选项改为 fdba；两个全局单播格式与两个 ULA 槽位分别可交换。",
+      "updates": {
+        "prompt": "Classify the adapted IPv6 examples by their address-prefix category. Order within each group does not matter. The exhibit contains the original wording; use the corrected interactive labels below."
+      }
+    },
+    {
+      "id": 1216,
+      "before_sha256": "5e0b91a18364455bf25fccc722efb6c255db896db4dd21bc7a67c87ce19a58f9",
+      "reason": "原答案图错误称任播仅非主机；把任播特征改成单播格式以区分组播，并提示使用修正选项，三组各自无序。",
+      "updates": {
+        "prompt": "Match each adapted description to the IPv6 delivery type. Each type has two descriptions and group members may be placed in either order. The exhibit contains the original wording; use the corrected interactive labels below.",
+        "drag_drop_data": {
+          "sources": [
+            "includes link-local and loopback addresses",
+            "delivery is to one eligible interface selected by routing",
+            "identifies an interface on an IPv6 device",
+            "a unicast-format address assigned to multiple interfaces",
+            "derived from the FF00::/8 address range",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Anycast (Slot 1)",
+              "expected": "a unicast-format address assigned to multiple interfaces",
+              "unordered_group": "Anycast"
+            },
+            {
+              "id": "t2",
+              "label": "Anycast (Slot 2)",
+              "expected": "delivery is to one eligible interface selected by routing",
+              "unordered_group": "Anycast"
+            },
+            {
+              "id": "t3",
+              "label": "Multicast (Slot 1)",
+              "expected": "derived from the FF00::/8 address range",
+              "unordered_group": "Multicast"
+            },
+            {
+              "id": "t4",
+              "label": "Multicast (Slot 2)",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "id": "t5",
+              "label": "Unicast (Slot 1)",
+              "expected": "identifies an interface on an IPv6 device",
+              "unordered_group": "Unicast"
+            },
+            {
+              "id": "t6",
+              "label": "Unicast (Slot 2)",
+              "expected": "includes link-local and loopback addresses",
+              "unordered_group": "Unicast"
+            }
+          ]
+        },
+        "explanation": "任播地址可分配给多个接口，但报文通常送到路由意义上最近的一个接口；不能说任播只能用于路由器，RFC 4291 已移除旧限制。组播使用 ff00::/8 并可一对多；单播标识单个接口，链路本地及回环属于单播。同组内任意顺序。原题及答案图中的 non-host 专用断言错误，已改写并隐藏错误答案图。 任播使用单播格式并分配给多个接口；这一限定也将其与标识多个接口的组播地址区分。"
+      }
+    },
+    {
+      "id": 1217,
+      "before_sha256": "416f12739a4cc92b357ba5d95b9a42c25c42bacfe13adde6f088858c6a18f2d2",
+      "reason": "原图把可路由特征误分链路本地，修正后的两组各自无序；改题干提示原图旧措辞。",
+      "updates": {
+        "prompt": "Match each adapted characteristic to global unicast or link-local IPv6 addresses. Each group has two slots and order within a group does not matter. The exhibit contains the original wording; use the corrected interactive labels below."
+      }
+    },
+    {
+      "id": 1218,
+      "before_sha256": "214b5b931f8ad5315375662510ade0b1b2dacc09506cf78bfbe6b0bf63a295ce",
+      "reason": "原图关于每接口仅配置一次的说法并非通用规则，现有对应分组正确；提示原图旧措辞。",
+      "updates": {
+        "prompt": "Match the adapted IPv6 link-local and unique-local properties. Each group has two slots and group order does not matter. The exhibit contains the original wording; use the corrected interactive labels below."
+      }
+    },
+    {
+      "id": 1220,
+      "before_sha256": "5248a314e0a55bbd56cbbc67e4b36b3ff57cf10d867387122aa3c6989ddc9d94",
+      "reason": "原图 DNS 域名和关闭服务表述有误，交互定义已澄清；五项一对一，提示使用修正的互动文字。",
+      "updates": {
+        "prompt": "Match the DNS concepts and Cisco IOS client lookup command with the adapted descriptions. The exhibit contains the original wording; use the corrected interactive labels below."
+      }
+    },
+    {
+      "id": 1221,
+      "before_sha256": "e97a34abe0522f7b8d53aa467d7a28f071e877d82cf0092cad78ed8d714e9c0d",
+      "reason": "原图应用举例存在 UDP 也可可靠传文件的歧义；将 TCP 项限定 FTP、UDP 项限定无连接且优先时延的流媒体，两组各自无序。",
+      "updates": {
+        "prompt": "Classify the adapted TCP and UDP characteristics; items within each protocol may be placed in either order. The exhibit contains the original wording; use the corrected interactive labels below.",
+        "drag_drop_data": {
+          "sources": [
+            "sends independent datagrams without establishing a transport connection",
+            "establishes a connection before exchanging application data",
+            "FTP uses this transport for its file transfer connections",
+            "supports connectionless datagrams used by some low-latency streaming applications"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "TCP (Slot 1)",
+              "expected": "FTP uses this transport for its file transfer connections",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t2",
+              "label": "TCP (Slot 2)",
+              "expected": "establishes a connection before exchanging application data",
+              "unordered_group": "TCP"
+            },
+            {
+              "id": "t3",
+              "label": "UDP (Slot 1)",
+              "expected": "supports connectionless datagrams used by some low-latency streaming applications",
+              "unordered_group": "UDP"
+            },
+            {
+              "id": "t4",
+              "label": "UDP (Slot 2)",
+              "expected": "sends independent datagrams without establishing a transport connection",
+              "unordered_group": "UDP"
+            }
+          ]
+        },
+        "explanation": "TCP 建立连接并提供可靠有序字节流；文件传输可以使用 TCP。UDP 无需先建立传输层连接，适用于一些低时延流媒体场景，但应用可另行实现可靠性；低延迟和实时性均不保证。原图“data channel”含糊且存在拼写错误，交互文字已澄清；两组内部顺序不限。 可靠文件传输并非只能基于 TCP，TFTP 即使用 UDP 并在应用层处理重传；题目因此限定 FTP 的 TCP 连接。"
+      }
+    },
+    {
+      "id": 1222,
+      "before_sha256": "ae879a1bd5bb764c9facb26a3f16e796adec73afa3643299828a706fa7df8666",
+      "reason": "原图 ESS 和 DS 定义过窄，现有修订后的五项映射正确；均一对一，提示使用修正的互动文字。",
+      "updates": {
+        "prompt": "Match each WLAN term to its adapted definition. The exhibit contains the original wording; use the corrected interactive labels below."
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.rfc-editor.org/rfc/rfc768",
+    "https://www.rfc-editor.org/rfc/rfc1350",
+    "https://www.rfc-editor.org/rfc/rfc959"
+  ],
+  "images": "原题及历史答案图均已直接查看，保留原图作为证据；更正后的互动内容与原图不同时已在题干提示。",
+  "limitations": "未执行实体设备实验。"
+}

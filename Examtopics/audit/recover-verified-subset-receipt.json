@@ -1,0 +1,19 @@
+{
+  "manifest": "recover-verified-subset.json",
+  "applied_ids": [
+    1092,
+    1159,
+    1161,
+    1166,
+    1169
+  ],
+  "corrected_question_sha256": {
+    "1092": "c616ed357cfd97a2f5f694add5f5c311aa7fc4b49d1f239eda39fc96ab534da1",
+    "1159": "1003350c0024bd388c0ac8990450cae6d5f3cddd2fde35b85f9dedd1f35400d1",
+    "1161": "13a979e90cd602d3bdd61d5c41246030d68ca7eebb1df77925899fafeab00efb",
+    "1166": "585cb8e181456144ee33842c3ad7741e510f62a9afd1dbc3ae4e5721a8c00328",
+    "1169": "dc2850619405dc4025c3891c83341d9ad6682c8b0fba5fda1e2c7baceaaebb1b"
+  },
+  "source_sha256": "d08db9f9704b3db267db68914cb2fe4be792fdaf7193ee9b2371ac5163927484",
+  "app_bundle_sha256": "4f531fe5fc9049d75454870c860df32663dadd6796a06efe09b876c8e5109063"
+}

@@ -1,0 +1,72 @@
+{
+  "scope": "Q41–Q50 non-Lab independent review",
+  "corrections": [
+    {
+      "id": 44,
+      "before_sha256": "a3d87e033fb2fa876d8328c1984c45ae7a75dcea4809dd389aa3ca588f84b45c",
+      "reason": "原解释过于简略，补充各干扰项及路由前提。",
+      "updates": {
+        "explanation": "D。三层设备根据目的 IP 地址与路由表将数据包转发到不同 IP 网络；三层交换机也可以承担路由功能。需要存在匹配路由、可用出口及必要的邻接信息，才能成功转发。\n\nA 是无线接入点提供的二层无线接入功能；B 描述安全过滤或防火墙功能，路由器可以配置 ACL，但它不是所有三层设备的主要定义；C 描述同一广播域内的二层交换。"
+      }
+    },
+    {
+      "id": 45,
+      "before_sha256": "5da7ea6c8573675eb17cadc56d1a39540c9a9566a561b89f0d5932ac855583b6",
+      "reason": "避免把信道规划说成保证消除干扰；限定信道宽度与监管区域。",
+      "updates": {
+        "explanation": "A。让覆盖范围相邻的 AP 使用不同的不重叠信道，可减少同信道竞争及相邻信道重叠；在支持相应信道的常见 2.4 GHz、20 MHz 部署中通常规划 1、6、11。实际可用信道取决于地区法规，AP 位置、发射功率、客户端密度和其他无线电源也会影响结果，不能保证完全没有干扰或拥塞。\n\nB、D 使用重叠信道；C 让相邻 AP 使用同一个信道仍会共享该信道的空口。"
+      }
+    },
+    {
+      "id": 46,
+      "before_sha256": "4034a81d26a724434fc0d12c2517645511e74e7ffb9fcdb8416920f07468addd",
+      "reason": "SaaS 无需自行运行服务端不代表每种产品都无需本地客户端或用户管理。",
+      "updates": {
+        "explanation": "D。SaaS 由服务商提供并运行完整应用，用户通过浏览器或其他客户端使用；应用服务端的部署和更新通常由服务商管理，适合不想自行维护偶尔使用的应用。是否需要安装本地客户端、配置账号或维护数据取决于具体服务，不应断言所有 SaaS 都无需安装或管理。\n\nIaaS 主要提供计算、存储与网络等基础设施；PaaS 主要提供应用开发和运行平台；BPaaS 是业务流程服务，题设要求直接使用应用。"
+      }
+    },
+    {
+      "id": 47,
+      "before_sha256": "3b2ab2a4b642e0459f13a7b3d329fcb12107f2983ca67a84717142d4c28a795b",
+      "reason": "Band Select 只影响探测响应、客户端最终选择频段；修正选项拼写。",
+      "updates": {
+        "prompt": "An engineer observes high usage on the 2.4 GHz channels and lower usage on the 5 GHz channels. On a supported Cisco wireless deployment with dual-band clients and suitable 5 GHz coverage, which feature can encourage clients to use 5 GHz?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Client Band Select"
+          },
+          {
+            "label": "B",
+            "text": "Re-Anchor Roamed Clients"
+          },
+          {
+            "label": "C",
+            "text": "OEAP Split Tunnel"
+          },
+          {
+            "label": "D",
+            "text": "802.11ac MU-MIMO"
+          }
+        ],
+        "explanation": "A。Cisco Client Band Select 在初始扫描时选择性延迟或抑制部分 2.4 GHz 探测响应，鼓励兼容双频客户端发现并优先选择 5 GHz。客户端最终自行决定连接频段；覆盖不足、客户端行为、信道条件和实现限制都可能影响结果，因此该功能不能保证所有客户端转到 5 GHz。\n\nB 是漫游锚点相关功能；C 是远程接入点的分流；D 是多用户 MIMO 能力，都不是题设的频段引导功能。"
+      }
+    },
+    {
+      "id": 48,
+      "before_sha256": "38cf0d3d618792a624afdbc658fb5703fc6d17dc8cf6a2179f91a7e7debf2694",
+      "reason": "补充三种平面的区分及转发表与控制平面的关系。",
+      "updates": {
+        "explanation": "D。数据平面依据已经建立的转发表转发用户数据包；例如交换机/路由器把远端客户端与服务器之间的流量从入接口转出。控制平面可负责建立路径和相关转发状态，但数据平面执行实际转发。\n\nA SSH 登录设备属于管理平面；B OSPF Hello 与 C STP 选举用于建立邻接或拓扑，属于控制平面。具体平台可能把功能放在不同硬件或进程中，分类依据是功能而非实现位置。"
+      }
+    },
+    {
+      "id": 49,
+      "before_sha256": "4d46075fac76f784d07f196cf5dd80a42167125f9159ca365ca24df71e4de833",
+      "reason": "TCP 可靠语义不等于保证网络最终交付；UDP 上也可由应用实现可靠性。",
+      "updates": {
+        "explanation": "C。要求传输层提供按序字节流、确认和重传等机制时通常选择 TCP；能够容忍丢包或需要应用自主控制延迟的场景可以选择 UDP。TCP 无法保证故障时一定交付，UDP 应用也可以自行实现确认、重传或排序。\n\nA 提到延迟权衡，但“允许一些延迟”本身不足以确定必须用 TCP；B 把丢失容忍说反；D 把协议与实时性做了不成立的绝对对应。DNS 查询常用 UDP，并非所有 UDP 服务都只追求实时性；DNS 在需要时也使用 TCP。"
+      }
+    }
+  ]
+}

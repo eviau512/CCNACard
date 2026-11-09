@@ -1,0 +1,93 @@
+{
+  "scope": "Q71–Q80 non-lab",
+  "corrections": [
+    {
+      "id": 72,
+      "before_sha256": "7e482d7a8490cf2e731a5d52fb147df62d47c7c7c49f364c51fef5a4c4b9d624",
+      "reason": "逐题核验技术前提、选项与解析，消除绝对化和配置格式歧义。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On a DNS cache miss, the Windows PC uses the displayed DNS server configuration for a conventional DNS query for www.cisco.com. To which IP address is the DNS request addressed?",
+        "explanation": "A。图中 DNS Servers 为 192.168.1.253；在题设缓存未命中且使用该配置的传统 DNS 查询时，DNS 报文的目标 IP 是 .253。常见查询使用 UDP 53，某些情况使用 TCP；浏览器另行配置的加密 DNS 或缓存命中会改变实际行为。B 的 .100 是默认网关，若目的地址不在本地网段可作为二层下一跳，但不会替代 DNS 服务器的目的 IP；此处 .253 和 .226 在同一 /24。C 是本机地址，D 是 DHCP 服务器；同一设备可以提供多种服务，但图中 DNS 项决定本题答案。"
+      }
+    },
+    {
+      "id": 73,
+      "before_sha256": "8303cedc80bca62826943345cb4218fb786b89450422e3c17914c4b59ab1994b",
+      "reason": "逐题核验技术前提、选项与解析，消除绝对化和配置格式歧义。",
+      "updates": {
+        "explanation": "D。交换机依据同一 VLAN 中的目的 MAC 表项将已知单播帧从相应转发端口送出，称为帧交换或转发。动态源 MAC 学习与老化由平台和配置决定。A 泛洪用于未知单播等情况；B 的过滤是在需要时抑制转发，例如目标与入端口相同；C 不是此处标准交换功能。广播通常向同 VLAN 的其他转发端口泛洪，组播可能受 IGMP snooping 等约束，STP、ACL 和端口状态也会限制可用出口，不能一概说组播从全部端口送出。"
+      }
+    },
+    {
+      "id": 74,
+      "before_sha256": "cec6238164d314250a46226c21dbbb7d0a9974d02e945dddc213796a04510ff3",
+      "reason": "逐题核验技术前提、选项与解析，消除绝对化和配置格式歧义。",
+      "updates": {
+        "prompt": "Which type of IPv6 address uses unicast address syntax but is assigned to multiple interfaces, with packets normally delivered to one of them?",
+        "explanation": "C。IPv6 任播使用单播地址格式，将同一地址分配给多个接口；发送到该地址的报文通常交付给路由系统认为最近的一个接口。最近依据路由策略与度量，并不保证物理距离最短；ECMP、故障及路由变化也会影响路径。A 和 B 是单播作用域类型，并不是题目描述的地址用途；D 多播以 FF00::/8 标识接口组，报文由多播路由和成员关系决定其分发，而不是任播的一选一交付。任播节点不要求属于同一条本地链路。"
+      }
+    },
+    {
+      "id": 78,
+      "before_sha256": "545e4f4527872f0eed4c566cf9b87c809528b46cce9d7278a3a84667de257e72",
+      "reason": "逐题核验技术前提、选项与解析，消除绝对化和配置格式歧义。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "R7 (global configuration):\ninterface FastEthernet1/0\n ip address 10.88.31.127 255.255.255.192\n\nR8 (global configuration):\ninterface FastEthernet0/0\n ip address 10.19.63.95 255.255.255.240\n\nR9 (global configuration):\ninterface FastEthernet1/1\n ip address 10.23.98.159 255.255.255.224"
+          },
+          {
+            "label": "B",
+            "text": "R7 (global configuration):\ninterface FastEthernet1/0\n ip address 10.88.31.126 255.255.255.240\n\nR8 (global configuration):\ninterface FastEthernet0/0\n ip address 10.19.63.94 255.255.255.192\n\nR9 (global configuration):\ninterface FastEthernet1/1\n ip address 10.23.98.158 255.255.255.248"
+          },
+          {
+            "label": "C",
+            "text": "R7 (global configuration):\ninterface FastEthernet1/0\n ip address 10.88.31.127 255.255.255.240\n\nR8 (global configuration):\ninterface FastEthernet0/0\n ip address 10.19.63.95 255.255.255.192\n\nR9 (global configuration):\ninterface FastEthernet1/1\n ip address 10.23.98.159 255.255.255.248"
+          },
+          {
+            "label": "D",
+            "text": "R7 (global configuration):\ninterface FastEthernet1/0\n ip address 10.88.31.126 255.255.255.192\n\nR8 (global configuration):\ninterface FastEthernet0/0\n ip address 10.19.63.94 255.255.255.240\n\nR9 (global configuration):\ninterface FastEthernet1/1\n ip address 10.23.98.158 255.255.255.224"
+          }
+        ],
+        "explanation": "D。图示 R7 的 10.88.31.64/26 最后可用地址为 .126（广播 .127）；R8 的 10.19.63.80/28 为 .94（广播 .95）；R9 的 10.23.98.128/27 为 .158（广播 .159）。D 的三个地址及掩码均匹配。A 采用对应广播地址；B 的三个掩码不符合图示；C 同时存在广播地址和掩码错误。设备标题用于区分配置归属，进入各设备全局配置模式后再逐行输入 interface 和 ip address。"
+      }
+    },
+    {
+      "id": 79,
+      "before_sha256": "18b3d33f3104fadc7a82cc2da5f31b97de9a25b273e73a845b15c0307d58c651",
+      "reason": "逐题核验技术前提、选项与解析，消除绝对化和配置格式歧义。",
+      "updates": {
+        "prompt": "In a conventional query/response exchange without TCP Fast Open, how do TCP and UDP differ before application data is transferred?",
+        "options": [
+          {
+            "label": "A",
+            "text": "TCP avoids using sequencing and UDP avoids using acknowledgments"
+          },
+          {
+            "label": "B",
+            "text": "TCP establishes a connection before normal application data transfer; UDP requires no transport-layer connection setup."
+          },
+          {
+            "label": "C",
+            "text": "TCP encourages out-of-order packet delivery, and UDP prevents re-ordering"
+          },
+          {
+            "label": "D",
+            "text": "TCP uses error detection for packets, and UDP uses error recovery."
+          }
+        ],
+        "explanation": "B。通常 TCP 先建立连接，再交付应用数据；UDP 不需要传输层连接建立即可发送数据报。UDP 不保证报文立即到达、按序到达或一定送达，应用仍可自行重试。TCP 使用序列号、确认和重传实现可靠有序字节流，A/C 错误；TCP 和 UDP 均有差错检测机制，UDP 本身不提供 TCP 式重传恢复，D 错误。例外：TCP Fast Open（RFC 7413）允许在连接握手期间携带和交付数据，因此题干明确排除该机制。"
+      }
+    },
+    {
+      "id": 80,
+      "before_sha256": "f0cd4f28d8a27f3f48739c18975f0ec0f63a1a5ec4402296a9149342d145dc85",
+      "reason": "逐题核验技术前提、选项与解析，消除绝对化和配置格式歧义。",
+      "updates": {
+        "prompt": "In a controller-based enterprise WLAN using lightweight access points, which component centrally coordinates client authentication and roaming?",
+        "explanation": "B。WLC 对轻量 AP 提供集中管理，并可与 AAA/RADIUS 协同处理认证策略、协调客户端跨 AP 的移动性；具体转发与认证位置依架构和配置不同。快速漫游是否生效取决于客户端、AP、控制器和协议兼容性，不能保证毫秒级无缝切换，也不保证总能跳过完整认证。A 负责无线接入但不是本题集中协调组件；C 防火墙和 D 有线交换机有各自职责，但不是题设 WLAN 控制器。"
+      }
+    }
+  ]
+}

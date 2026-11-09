@@ -1,0 +1,341 @@
+{
+  "scope": "Q1381–Q1390",
+  "corrections": [
+    {
+      "id": 1381,
+      "before_sha256": "87bb159cbf95f1af5ab9fe00545b6ec2351eca72b69ca41e1f49a47e9a191f4d",
+      "reason": "私网范围与实际子网掩码的界限",
+      "updates": {
+        "explanation": "A、D。RFC 1918 私有地址空间是 `10.0.0.0/8`、`172.16.0.0/12` 和 `192.168.0.0/16`。A 属于第一个范围，D 属于第二个范围；B、C（172.15）及 E（192.169）均不在这三块中。私网地址用于内部寻址，通常不会在公共互联网作为全球可达地址路由；具体某个地址是否可作为主机地址还取决于部署的子网掩码。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "私网范围与实际子网掩码的界限",
+        "reference": "https://www.rfc-editor.org/rfc/rfc1918"
+      }
+    },
+    {
+      "id": 1382,
+      "before_sha256": "353cc762ce0c14903fc2dd4552e429333d606283d1f7764f2e93251a08f712c5",
+      "reason": "修正 PortFast 拓扑变更描述与题干拼写",
+      "updates": {
+        "prompt": "On a Cisco switch access port connected only to an end host, which two PortFast behaviors are useful? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "It blocks all other hosts from using the port."
+          },
+          {
+            "label": "B",
+            "text": "It allows the port to enter forwarding without the normal listening and learning delay."
+          },
+          {
+            "label": "C",
+            "text": "It disables spanning tree on the port."
+          },
+          {
+            "label": "D",
+            "text": "An ordinary PortFast edge-port link up/down does not generate a spanning-tree topology-change notification."
+          },
+          {
+            "label": "E",
+            "text": "It restricts the port to learning one MAC address."
+          }
+        ],
+        "explanation": "B、D。PortFast 边缘端口正常上线时可直接进入 forwarding，减少终端启动时等待；普通边缘端口链路上下线不触发对应拓扑变更通知。PortFast 仍运行 STP，也不能保证免受其他端口引起的拓扑变化影响；接收 BPDU、配置 BPDU Guard/Filter 或平台行为会改变处理方式。限制 MAC 数量是 port security，PortFast 本身不阻止其他主机。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "修正 PortFast 拓扑变更描述与题干拼写",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/10556-16.html"
+      }
+    },
+    {
+      "id": 1383,
+      "before_sha256": "8259f993be39f72d4c708f18851d1c59c21fd29510e5cde3b7072b43740fd5cd",
+      "reason": "消除 guest 依赖和绝对隔离歧义",
+      "updates": {
+        "prompt": "Which two characteristics describe typical virtual machines hosted by a hypervisor? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Multiple VMs can run on the same physical hardware."
+          },
+          {
+            "label": "B",
+            "text": "A VM guest uses neither virtual hardware nor a hypervisor."
+          },
+          {
+            "label": "C",
+            "text": "Every VM is automatically connected to every other VM."
+          },
+          {
+            "label": "D",
+            "text": "All VMs must receive equal physical resource allocations."
+          },
+          {
+            "label": "E",
+            "text": "Each VM can run a separate guest operating-system instance."
+          }
+        ],
+        "explanation": "A、E。Hypervisor 在同一物理主机上运行多个使用虚拟硬件的客体，客体系统实例可彼此独立启动和停止；实际通信由虚拟网络和访问策略决定。资源配额、调度和性能不必相等；共享宿主或存储故障仍可能同时影响多个 VM。客体运行依赖其虚拟硬件与虚拟化环境，不能认为彼此绝对隔离或永不受影响。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "消除 guest 依赖和绝对隔离歧义",
+        "reference": "https://www.cisco.com/c/en/us/solutions/data-center-virtualization/what-is-server-virtualization.html"
+      }
+    },
+    {
+      "id": 1384,
+      "before_sha256": "845c62144601a2774fe1c474ed5f8ba4d3dcbb85089e1f44d84e6822790d6fcf",
+      "reason": "限定冒充场景并消除电话或广告绝对分类",
+      "updates": {
+        "prompt": "Which two attacks can deceive a user into supplying credentials to an impersonated service, including by redirecting a legitimate domain to an impostor? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "A routine, nondeceptive telephone call"
+          },
+          {
+            "label": "B",
+            "text": "A noninteractive port scan"
+          },
+          {
+            "label": "C",
+            "text": "A routine software inventory"
+          },
+          {
+            "label": "D",
+            "text": "Pharming that redirects the user to a counterfeit site"
+          },
+          {
+            "label": "E",
+            "text": "Phishing that impersonates a trusted organization"
+          }
+        ],
+        "explanation": "D、E。网络钓鱼通过冒充可信方诱使用户交出信息；pharming 可结合 DNS 或终端篡改将用户引向伪造站点，其最终凭据窃取环节可使用社会工程。普通电话不必然是攻击，但欺骗性电话（vishing）可以是社会工程；恶意广告也可能使用社会工程，不应按传播渠道一概排除。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "限定冒充场景并消除电话或广告绝对分类",
+        "reference": "https://www.cisa.gov/secure-our-world/recognize-and-report-phishing"
+      }
+    },
+    {
+      "id": 1385,
+      "before_sha256": "912ae2e8caf0733457ed2cba1b50cd4ba0f8363ec2f268d0ad6a2822242d6402",
+      "reason": "ASA 多上下文远程接入 VPN 已可支持，替换错误干扰项",
+      "updates": {
+        "prompt": "A firewall supports URL filtering and site-to-site IPsec VPN. Which two capabilities can it provide when configured and licensed appropriately? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Filter web traffic using URL policy."
+          },
+          {
+            "label": "B",
+            "text": "Act as a site-to-site VPN endpoint."
+          },
+          {
+            "label": "C",
+            "text": "Guarantee that all attacks are blocked without security policies."
+          },
+          {
+            "label": "D",
+            "text": "Supply Ethernet power to all attached endpoints."
+          },
+          {
+            "label": "E",
+            "text": "Provide Wi-Fi radio access as an access point."
+          }
+        ],
+        "explanation": "A、B。支持对应特性的企业防火墙可以执行 URL 策略并作为站点间 IPsec VPN 端点，实际效果受型号、许可、配置及可见流量限制。不能假定防火墙无需策略即可阻止所有攻击；PoE 供电与无线接入点功能并非题设防火墙的这两项能力。原多上下文远程接入 VPN 干扰项并不普遍错误：Cisco ASA 从 9.5(2) 起支持部分此类功能，故已替换，不能把 standalone 等同于 single-context。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "ASA 多上下文远程接入 VPN 已可支持，替换错误干扰项",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/security/asa/asa917/configuration/general/asa-917-general-config/ha-contexts.html"
+      }
+    },
+    {
+      "id": 1386,
+      "before_sha256": "bbbf3323a7419c9de5a4c4e4211f34538e799aa03ad924ae69bc8d55dd073753",
+      "reason": "明确 VLAN 和受信上联前提，还原 CLI 与静态主机边界",
+      "updates": {
+        "prompt": "On an access switch, DHCP snooping and Dynamic ARP Inspection are required for DHCP clients in VLANs 10 and 20. Port-channel1 is the trusted uplink toward the legitimate DHCP server and trusted distribution network. Which two configurations enable these features? Assume the VLANs and port channel already exist. (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "ip dhcp snooping vlan 10,20\n!\ninterface Port-channel1\n switchport protected\n switchport port-security maximum 1"
+          },
+          {
+            "label": "B",
+            "text": "ip dhcp snooping\nip dhcp snooping vlan 10,20\n!\ninterface Port-channel1\n ip dhcp snooping trust"
+          },
+          {
+            "label": "C",
+            "text": "ip dhcp snooping\n!\ninterface Port-channel1\n switchport port-security maximum 1\n switchport port-security"
+          },
+          {
+            "label": "D",
+            "text": "ip arp inspection trust\n!\ninterface Port-channel1\n switchport port-security\n ip verify source mac-check"
+          },
+          {
+            "label": "E",
+            "text": "ip arp inspection vlan 10,20\n!\ninterface Port-channel1\n ip arp inspection trust"
+          }
+        ],
+        "explanation": "B、E。B 全局启用 DHCP snooping、在 VLAN 10 和 20 启用并信任合法 DHCP 服务器方向；E 在这两个 VLAN 启用 DAI 并信任题设可信的上行口。DAI 检查非信任端口收到的 ARP，可使用 snooping 绑定；静态地址可按平台配置 ARP ACL，不能认为只能依赖 DHCP。信任口会绕过对应检查，因此应只信任可信上游，而非所有上联都必然可信。A/C 缺少完整 snooping 条件；D 将接口级信任命令放在全局且没有对 VLAN 启用 DAI。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "明确 VLAN 和受信上联前提，还原 CLI 与静态主机边界",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/sec-crypto/fhs-sisf/fhs-and-sisf-configuration-guide/dynamic-arp-inspection.html"
+      }
+    },
+    {
+      "id": 1387,
+      "before_sha256": "ec41be534ff322dd5cf592bcce8509142a3afeff0c835877c37a83ce0f892ff7",
+      "reason": "纠正配置传播时间与 DHCP 角色",
+      "updates": {
+        "explanation": "C、D。DHCP 服务器可集中管理地址池和租约，并向客户端提供动态地址及其他配置参数。典型初始流程中客户端发送 DHCPDISCOVER，服务器回复 DHCPOFFER，客户端发送 DHCPREQUEST，服务器确认 DHCPACK；续租等流程可能不同。DHCPOFFER 是服务器消息而非客户端请求，DHCP 本身也不能阻止客户端手动设置地址；新配置通常需客户端续租或重新获取后生效。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "纠正配置传播时间与 DHCP 角色",
+        "reference": "https://www.rfc-editor.org/rfc/rfc2131"
+      }
+    },
+    {
+      "id": 1388,
+      "before_sha256": "6d5c96299c923c2a8bb73d61825c788fd65f7fa45b1433c72867d18dc4d3b986",
+      "reason": "与拓扑对齐 ACBD:FA0/127，修复地址语法、接口与 CLI",
+      "updates": {
+        "prompt": "Refer to the exhibit. Treat the WAN label as `2001:db8:0f1b:fccb:acce:fced:acbd:fa0/127` and the LAN label as `2001:db8:0:afff::/64`; ignore the stray colon before /127 in the diagram. Gi0/1 must use the first WAN address manually, and Gi0/0 must derive its interface ID with EUI-64. Assume the ISP uses the other /127 address. Which two configurations apply to R1? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface Gi0/0\n ipv6 address 2001:db8:0f1b:fccb:acce:fced:acbd:fa3/127"
+          },
+          {
+            "label": "B",
+            "text": "interface Gi0/0\n ipv6 address 2001:db8:0:afff::/64 eui-64"
+          },
+          {
+            "label": "C",
+            "text": "interface Gi0/1\n ipv6 address 2001:db8:0f1b:fccb:acce:fced:acbd:fa2/127"
+          },
+          {
+            "label": "D",
+            "text": "interface Gi0/0\n ipv6 address 2001:db8:1:afff::/64 eui-64"
+          },
+          {
+            "label": "E",
+            "text": "interface Gi0/1\n ipv6 address 2001:db8:0f1b:fccb:acce:fced:acbd:fa0/127"
+          }
+        ],
+        "explanation": "B、E。图中 LAN 为 `2001:db8:0:afff::/64`，Gi0/0 使用 B 的 EUI-64 接口 ID；WAN 图示第七组为 `acbd`，末组 `fa0`，/127 包含末组 `fa0` 和 `fa1`，E 按题设在 Gi0/1 手动使用首地址。C 的 `fa2` 属于下一个 /127；A 接口与地址不符，D 的 LAN 前缀不同。原选项误写 `abcd:fa00` 且在 / 前多出冒号，与图不符，已修正。地址冲突与 IPv6 转发还须按实际部署核验；2001:db8::/32 是文档示例地址。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked and restored where applicable",
+        "finding": "与拓扑对齐 ACBD:FA0/127，修复地址语法、接口与 CLI",
+        "reference": "https://www.rfc-editor.org/rfc/rfc6164"
+      },
+      "exhibit_path": "exhibits/q1388_image_agent.jpg",
+      "image_sha256": "a6d45a0c7ae3fe5146c25392f3761cf17f37ad25b7902eb718fc5988b21adc35"
+    },
+    {
+      "id": 1389,
+      "before_sha256": "c0e889d1c03e9c96d0d93a06bf0863bfc90756173486bc1877e7041e95c7a0c0",
+      "reason": "明确多组分担与切换边界",
+      "updates": {
+        "explanation": "A、C。VRRP 将多台路由器组织为虚拟网关，活动设备故障时可由备份设备接管，提供首跳冗余。单个虚拟路由器通常由一台活动路由器转发；通过多个 VRRP 组、不同活动路由器及主机默认网关分配可实现流量分担，但协议本身不保证均衡，切换也会有检测和收敛时间。QoS、动态路由更新和带宽优化不是 VRRP 的基本功能。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked and restored where applicable",
+        "finding": "明确多组分担与切换边界",
+        "reference": "https://www.rfc-editor.org/rfc/rfc5798"
+      }
+    },
+    {
+      "id": 1390,
+      "before_sha256": "19f678c2b4cc840382831ce3e0e3f4a69b6a38aa74728d102000f260579bad6a",
+      "reason": "Band Select 不保证客户端选择，限定 AAA 覆盖前提",
+      "updates": {
+        "prompt": "Refer to the AireOS WLAN Advanced exhibit. Which two settings encourage dual-band clients to use 5 GHz and allow supported RADIUS VLAN attributes to override the WLAN policy? (Choose two.)",
+        "explanation": "A、C。Client Band Select 通过控制 2.4 GHz 探测响应鼓励具备条件的双频客户端使用 5 GHz；最终选择仍由客户端及射频环境决定，不能保证强制关联。Allow AAA Override 允许受支持的 RADIUS 授权属性覆盖 WLAN 策略，例如在认证及 VLAN 映射均正确时动态应用 VLAN。覆盖洞检测、管理帧保护和 Aironet IE 不分别完成这两项需求；MFP 保护管理帧而非加密全部数据。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked and restored where applicable",
+        "finding": "Band Select 不保证客户端选择，限定 AAA 覆盖前提",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/configuring_band_select.html"
+      },
+      "exhibit_path": "exhibits/q1390_image_agent.jpg",
+      "image_sha256": "b76f0e127a1cba4f7dedf2e6ab9db025e360ec6e05db0f4651398cd0a0d28a73"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc1918",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/10556-16.html",
+    "https://www.cisco.com/c/en/us/solutions/data-center-virtualization/what-is-server-virtualization.html",
+    "https://www.cisa.gov/secure-our-world/recognize-and-report-phishing",
+    "https://www.cisco.com/c/en/us/td/docs/security/asa/asa917/configuration/general/asa-917-general-config/ha-contexts.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/sec-crypto/fhs-sisf/fhs-and-sisf-configuration-guide/dynamic-arp-inspection.html",
+    "https://www.rfc-editor.org/rfc/rfc2131",
+    "https://www.rfc-editor.org/rfc/rfc6164",
+    "https://www.rfc-editor.org/rfc/rfc5798",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/configuring_band_select.html"
+  ],
+  "limitations": "人工审核和文档核验；未进行网络设备实测或手机暗黑模式实测。"
+}

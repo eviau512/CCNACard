@@ -1,0 +1,184 @@
+{
+  "scope": [
+    1388,
+    1397
+  ],
+  "corrections": [],
+  "reviews": [
+    {
+      "id": 1388,
+      "original_qid": "Q1388",
+      "before_sha256": "cb452981e05726f7fb97cdfc54fd18d840aa3195ed2f5bfebe6789f6bba3e508",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": true,
+      "finding": "图示接口、LAN /64、WAN /127 两地址与 B/E 相符；题设明确修正图中文字和地址前提。",
+      "current_answer": [
+        "B",
+        "E"
+      ],
+      "image_path": "Examtopics\\audit\\exhibits\\q1388_image_agent.jpg",
+      "image_sha256": "a6d45a0c7ae3fe5146c25392f3761cf17f37ad25b7902eb718fc5988b21adc35"
+    },
+    {
+      "id": 1389,
+      "original_qid": "Q1389",
+      "before_sha256": "de990b725dcab3bbae8480ac0b22766fe74bd1c32c427c44a6ca55761df13ae1",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": false,
+      "finding": "VRRP 多组可分担流量，单组仍是活动/备份；A/C 成立。",
+      "current_answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "id": 1390,
+      "original_qid": "Q1390",
+      "before_sha256": "53633a4c3fd801aa246db54b526222ee16b27f15f1ec1caac672dc313bc76c6c",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": true,
+      "finding": "图示 AAA Override、Client Band Select 选项均未启用，A/C 满足限定任务。",
+      "current_answer": [
+        "A",
+        "C"
+      ],
+      "image_path": "Examtopics\\audit\\exhibits\\q1390_image_agent.jpg",
+      "image_sha256": "b76f0e127a1cba4f7dedf2e6ab9db025e360ec6e05db0f4651398cd0a0d28a73"
+    },
+    {
+      "id": 1391,
+      "original_qid": "Q1391",
+      "before_sha256": "bed2309ffa2516d3635482960040a7aa1115ab107c73a27991bda4509c498f01",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": false,
+      "finding": "视频监控与门禁直接监控或控制受保护场所，培训材料不直接执行访问控制；A/C。",
+      "current_answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "id": 1392,
+      "original_qid": "Q1392",
+      "before_sha256": "d6bcfc152a225a5031d8312a43c927aa8c69cf1d90bbce54d9b6ea00c9e5bec0",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": false,
+      "finding": "标准 ACL 通配符匹配来源、VTY access-class 入向控制管理会话；B/C。",
+      "current_answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": 1393,
+      "original_qid": "Q1393",
+      "before_sha256": "a85e7ae218141b521a187ac043058888cc5f5098f6af069cac2c252732d7e7d6",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": false,
+      "finding": "DHCP 租期及减少地址管理工作量与 B/C 一致；DNS 和路由干扰项不相符。",
+      "current_answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": 1394,
+      "original_qid": "Q1394",
+      "before_sha256": "919a6c697cc2d630298b42e0cb09fdc6e22dc9b3d35327ca2f16b37fad6117e8",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": false,
+      "finding": "认证核验凭据和身份；记账负责使用记录，B/C。",
+      "current_answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": 1395,
+      "original_qid": "Q1395",
+      "before_sha256": "369bf29a798527cf57905d80d7fdf2dd982094993014db1ee5c44f1aecb908b3",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": true,
+      "finding": "图示 PSK 已启用、WPA2 Policy 和 MAC Filtering 未选；给定预设密钥/清单及加密前提，C/D。",
+      "current_answer": [
+        "C",
+        "D"
+      ],
+      "image_path": "Examtopics\\audit\\exhibits\\q1395_image_agent.jpeg",
+      "image_sha256": "a923afa728ea45fa48387e1e358253eb08d98d030d11ec6f2ed7d01a20c954f6"
+    },
+    {
+      "id": 1396,
+      "original_qid": "Q1396",
+      "before_sha256": "e7fb0df34f1961a296fd54a0b12aad33f311034c1fcb7fa78a83b985810ba8b2",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": true,
+      "finding": "图示 WPA2 Policy 已选、AES CCMP128 和 PSK 未选；B/D。",
+      "current_answer": [
+        "B",
+        "D"
+      ],
+      "image_path": "Examtopics\\audit\\exhibits\\q1396_image_agent.jpeg",
+      "image_sha256": "697b59d4d7eb72d2b72713ea8a2e515dac690a578faab3d2ed88bb6e6446d27e"
+    },
+    {
+      "id": 1397,
+      "original_qid": "Q1397",
+      "before_sha256": "d33340dc316a8a3f5a30d54fbe9333a8d115b25c8f7fa100ba1f9607a66b0414",
+      "prompt_checked": true,
+      "all_options_checked": true,
+      "answer_checked": true,
+      "explanation_checked": true,
+      "cli_checked": true,
+      "image_checked": true,
+      "finding": "题设 WPA2/AES-only、文本 PSK，B/D；图为选择安全类型前，题干明确后续条件。",
+      "current_answer": [
+        "B",
+        "D"
+      ],
+      "image_path": "Examtopics\\audit\\exhibits\\q1397_image_agent.jpeg",
+      "image_sha256": "0e06bea5eb3fef02c379cd9a4b3fdfb3a4b569b9ce624d579db9d0b7a9d8f964"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/67134-wpa2-config.html"
+  ],
+  "limitations": "独立核查题目、全部选项、解析及现有原图；未运行控制器或网络设备实验。"
+}

@@ -1,0 +1,325 @@
+{
+  "scope": "Q1261–Q1270",
+  "corrections": [
+    {
+      "id": 1261,
+      "before_sha256": "2785fb7ba749b557781c3055b8f252dd527ae4339865a73baf80deff958a33d4",
+      "reason": "RFC1918并网可能产生重叠，B改为换运营商时保留内部编号；原A也存在范围不清。",
+      "updates": {
+        "prompt": "An enterprise uses RFC 1918 addressing internally and changes its Internet provider. Which two benefits can its address plan provide? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Make every private IPv4 address globally unique on the Internet"
+          },
+          {
+            "label": "B",
+            "text": "Keep internal private addresses independent of the provider-assigned public prefix"
+          },
+          {
+            "label": "C",
+            "text": "Expand the Internet routing table"
+          },
+          {
+            "label": "D",
+            "text": "Provide protection from external denial-of-service attacks"
+          },
+          {
+            "label": "E",
+            "text": "Conserve globally unique IPv4 addresses"
+          }
+        ],
+        "explanation": "B、E。私网内部地址不依赖特定ISP分配的公网前缀，换运营商时可保留内部地址并调整边界映射；在无需公网直达的场景复用私网地址可节约全球唯一地址。私网互联、企业合并若地址重叠仍需重新编号或转换。A私网地址可被不同组织重复使用；C不是目标；D私网地址本身不能抵御外部DoS。"
+      }
+    },
+    {
+      "id": 1262,
+      "before_sha256": "8d67c6bde0bd23a5ae022fadb27d44d565e48d8796edf17e302a8ebaf4587584",
+      "reason": "限定AireOS创建页面，WLAN ID亦需指定；避免误称创建仅需两项或适用所有控制器。",
+      "updates": {
+        "prompt": "On a Cisco AireOS WLC WLANs > Create New page, which two named values identify a new WLAN profile and its wireless network? The WLAN ID is also selected separately. (Choose two.)",
+        "explanation": "C、D。Profile Name是控制器上的WLAN配置标识，SSID是客户端用于识别无线网络的服务集标识；创建页面还要求选择WLAN ID，具体界面依版本而异。QoS可在配置中调整，AP地址和管理接口设置并非题目所问的两个名称。AP加入与接入安全仍有各自前提。"
+      }
+    },
+    {
+      "id": 1263,
+      "before_sha256": "51756b26a7080f63bd5d6991a0addcae40eb8c93d61ae83f3448ee44007bd796",
+      "reason": "恢复CLI逐行格式，补物理接口已为三层、对端兼容前提；E原解析误称重复switchport是语法错误。",
+      "updates": {
+        "prompt": "A switch supports routed EtherChannel and GigabitEthernet0/0/1 is already a routed port (`no switchport`). Its compatible peer is configured for LACP. Which two sequences configure a Layer 3 EtherChannel using an open-standard negotiation protocol? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface GigabitEthernet0/0/1\n channel-group 10 mode auto"
+          },
+          {
+            "label": "B",
+            "text": "interface GigabitEthernet0/0/1\n channel-group 10 mode on"
+          },
+          {
+            "label": "C",
+            "text": "interface port-channel 10\n no switchport\n ip address 172.16.0.1 255.255.255.0"
+          },
+          {
+            "label": "D",
+            "text": "interface GigabitEthernet0/0/1\n channel-group 10 mode active"
+          },
+          {
+            "label": "E",
+            "text": "interface port-channel 10\n switchport\n switchport mode trunk"
+          }
+        ],
+        "explanation": "C、D。D在成员上以LACP active主动协商；C将Port-channel 10配置为三层并配置IP。成员端口也需为三层，多个成员及对端的速率、双工等参数须兼容，对端LACP须能响应。A为PAgP auto；B为无协商的静态on；E是合法的二层trunk配置，不是三层端口。"
+      }
+    },
+    {
+      "id": 1264,
+      "before_sha256": "27fbbc1392e7186c7bc1cd3367c062e77bf57dee21f158a724a303269fc321c3",
+      "reason": "亲看LACP摘要图；原题没说明分属两台交换机，且active/active也能成功。限定两种不同模式并恢复CLI。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Two switches use Gi0/0-1 as compatible Layer 2 members. Choose one command sequence for each switch: which two different LACP modes can form port-channel 10 together? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface range GigabitEthernet0/0-1\n channel-group 10 mode active"
+          },
+          {
+            "label": "B",
+            "text": "interface range GigabitEthernet0/0-1\n channel-group 10 mode desirable"
+          },
+          {
+            "label": "C",
+            "text": "interface range GigabitEthernet0/0-1\n channel-group 10 mode passive"
+          },
+          {
+            "label": "D",
+            "text": "interface range GigabitEthernet0/0-1\n channel-group 10 mode auto"
+          },
+          {
+            "label": "E",
+            "text": "interface range GigabitEthernet0/0-1\n channel-group 10 mode on"
+          }
+        ],
+        "explanation": "A、C。图中Po10(SU)使用LACP，Gi0/0和Gi0/1均已捆绑。两端分别选active和passive可建立LACP：active发起协商，passive回应。active/active也可工作，但题设要求两种不同模式；passive/passive不能主动发起。B/D为PAgP，E为静态on；接口、VLAN等还需兼容。"
+      }
+    },
+    {
+      "id": 1265,
+      "before_sha256": "aa8217e33d73686fb429bf5a503d16bb66f49770ebe23587a673905f2f984df5",
+      "reason": "限定Cisco 3750旧版平台；不要将VLAN1的关闭或管理行为概括到所有设备。",
+      "updates": {
+        "prompt": "On a Cisco Catalyst 3750 switch running IOS 12.2(52)SE, which two listed VLAN IDs are among the VLANs defined as default by VTP? (Choose two.)",
+        "explanation": "B、C。此平台文档将VLAN 1及1002–1005列为VTP默认VLAN；1005为传统Token Ring默认项。VLAN 0是优先级标记的保留VID，1006为扩展范围的起始值，4096超出12位VID范围。具体默认项和管理功能随平台及软件版本而异；不要把VLAN 1上每种协议的行为套用于所有设备。"
+      }
+    },
+    {
+      "id": 1266,
+      "before_sha256": "65a289eb72c1aa3ebd006099cf4b8ca02c389a08398aea8b7786a06d6eb63de6",
+      "reason": "CDP可报告错配但告警不阻止流量泄漏；TLV和是否启用依设备版本接口。",
+      "updates": {
+        "prompt": "On a Cisco switch using CDPv2 on compatible directly connected interfaces, which two information fields can CDP advertise? (Choose two.)",
+        "explanation": "A、C。CDPv2可在适用接口通告native VLAN和VTP管理域；命令如`show cdp neighbors detail`可用于查看邻居细节。native VLAN不匹配可能被记录告警，告警本身不阻断错误VLAN流量，也取决于CDP及相关特性启用。B的trunk协商由DTP处理；STP优先级及STP算法状态由BPDU等机制处理，而非这里所列CDP字段。"
+      }
+    },
+    {
+      "id": 1267,
+      "before_sha256": "dbf26f7a41bc61f3a4de9a65686988dfa4aa881e53b0f16b2d86a379ca7f7e46",
+      "reason": "原题把外置负载均衡及额外VLAN/PoE说成一概必需或无需，场景不足以唯一选择；补明web门户负载与安全需求。",
+      "updates": {
+        "prompt": "A new WLC uses an existing VLAN and already-powered APs. A separate captive portal application is served by multiple web servers and requires a load-balanced front end, and the WLAN requires access control and authentication. Which two additional tasks address these stated requirements? (Choose two.)",
+        "explanation": "A、E。题设中多台独立门户Web服务器需要负载均衡前端，WLAN还需按设计配置认证和访问控制等安全策略。A并非所有WLC部署都需要外置负载均衡器，也不意味着用其分发CAPWAP；实际实现依平台及拓扑。题设已有供电和所需VLAN，B/D不针对新增需求；C的多个VRRP组也不是所述两项要求的必要条件。其他部署可能需要额外VLAN或PoE。"
+      }
+    },
+    {
+      "id": 1268,
+      "before_sha256": "1446ccbbd954197a6b51a6f63a079c0755d195c6e4b8913a9593982e5134de9e",
+      "reason": "修正英文并说明两种主动模式属不同协议，不能两端混搭。",
+      "updates": {
+        "prompt": "Which two commands place an EtherChannel interface in an active negotiation mode? (Choose two.)",
+        "explanation": "D、E。`desirable`主动发起PAgP，`active`主动发起LACP。它们属于不同协议，不应将一端设PAgP而另一端设LACP来组成同一聚合。`auto`为PAgP被动，`passive`为LACP被动；`on`静态聚合不协商。两端配置还须兼容。"
+      }
+    },
+    {
+      "id": 1269,
+      "before_sha256": "e890775dfc5e1a27baea8324e2dcc9acb862bf0caa5eb4dce543ca258175fa66",
+      "reason": "VTPv3与v2存在有限互通，不能断言所有设备必须严格相同；改问统一版本的部署。",
+      "updates": {
+        "prompt": "An administrator plans a single VTP domain with a homogeneous version on compatible switches and no version downgrade. Which two configuration choices match this design? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Participating switches use the same VTP domain name"
+          },
+          {
+            "label": "B",
+            "text": "All switches must be configured to perform trunk negotiation"
+          },
+          {
+            "label": "C",
+            "text": "All switches must be configured with a unique VTP domain name"
+          },
+          {
+            "label": "D",
+            "text": "The VTP server must have the highest revision number in the domain"
+          },
+          {
+            "label": "E",
+            "text": "Configure the participating switches for the same chosen VTP version"
+          }
+        ],
+        "explanation": "A、E。题设要求一个VTP域和统一版本，选择相同域名及统一选择的版本符合该设计；还须依配置匹配密码，并提供可承载VTP的中继。不能推广成所有版本互通都要求完全相同：Cisco文档描述VTPv3与v2有受限互操作。B静态trunk不需要DTP协商；C不同域名不符；D服务器并非天然具有最高revision，新接设备的更高revision可能影响v1/v2域。"
+      }
+    },
+    {
+      "id": 1270,
+      "before_sha256": "d5471d98749c9618a65088f053ca69717dfa177103db5a692738d1fa22a8843c",
+      "reason": "原C可指native VLAN且同样正确，明确完整VLAN数据库；CDP邻居可能缓存且IP不保证可达。",
+      "updates": {
+        "prompt": "Which two troubleshooting tasks can Cisco Discovery Protocol help with when CDP is enabled on directly connected devices? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "to verify the type of cable interconnecting two devices"
+          },
+          {
+            "label": "B",
+            "text": "to determine the status of network services on a remote device"
+          },
+          {
+            "label": "C",
+            "text": "to retrieve the complete VLAN database from directly connected switches"
+          },
+          {
+            "label": "D",
+            "text": "to verify Layer 2 connectivity between two devices when Layer 3 fails"
+          },
+          {
+            "label": "E",
+            "text": "to obtain the IP address of a connected device in order to telnet to the device"
+          },
+          {
+            "label": "F",
+            "text": "to determine the status of the routing protocols between directly connected routers"
+          }
+        ],
+        "explanation": "D、E。近期CDP邻居信息可辅助判断直连链路能否交换CDP帧；邻居缓存有保持时间，记录存在不保证当前所有二层流量正常。`show cdp neighbors detail`可能显示邻居地址，可供进一步尝试管理连接，但路由、ACL和服务许可仍需满足，通常优先使用SSH。CDP不验证线缆类别、应用服务或路由邻接状态；可通告native VLAN等有限信息，但不能据此取得完整VLAN数据库。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1261,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "RFC1918并网可能产生重叠，B改为换运营商时保留内部编号；原A也存在范围不清。",
+      "reference": "https://www.rfc-editor.org/rfc/rfc1918"
+    },
+    {
+      "id": 1262,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "限定AireOS创建页面，WLAN ID亦需指定；避免误称创建仅需两项或适用所有控制器。",
+      "reference": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wlan-security/82135-wlc-authenticate.html"
+    },
+    {
+      "id": 1263,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "恢复CLI逐行格式，补物理接口已为三层、对端兼容前提；E原解析误称重复switchport是语法错误。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/etherchannels.html"
+    },
+    {
+      "id": 1264,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "viewed",
+      "code_cli": "checked and formatted where present",
+      "finding": "亲看LACP摘要图；原题没说明分属两台交换机，且active/active也能成功。限定两种不同模式并恢复CLI。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+    },
+    {
+      "id": 1265,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "限定Cisco 3750旧版平台；不要将VLAN1的关闭或管理行为概括到所有设备。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750/software/release/12-2_52_se/command/reference/3750cr/cli3.html"
+    },
+    {
+      "id": 1266,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "CDP可报告错配但告警不阻止流量泄漏；TLV和是否启用依设备版本接口。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/system-management/system-management/m_nm-cdp-discover-xe.html"
+    },
+    {
+      "id": 1267,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "原题把外置负载均衡及额外VLAN/PoE说成一概必需或无需，场景不足以唯一选择；补明web门户负载与安全需求。",
+      "reference": "https://www.cisco.com/c/en/us/support/docs/cloud-systems-management/catalyst-center/225294-configure-central-web-authentication-on.html"
+    },
+    {
+      "id": 1268,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "修正英文并说明两种主动模式属不同协议，不能两端混搭。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+    },
+    {
+      "id": 1269,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "VTPv3与v2存在有限互通，不能断言所有设备必须严格相同；改问统一版本的部署。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3850/software/release/3se/vlan/configuration_guide/b_vlan_3se_3850_cg/b_vlan_3se_3850_cg_chapter_011.pdf"
+    },
+    {
+      "id": 1270,
+      "prompt": "checked and revised where necessary",
+      "options": "all options checked",
+      "answer": "checked and retained",
+      "explanation": "rewritten for accuracy",
+      "image": "none in source",
+      "code_cli": "checked and formatted where present",
+      "finding": "原C可指native VLAN且同样正确，明确完整VLAN数据库；CDP邻居可能缓存且IP不保证可达。",
+      "reference": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/system-management/system-management/m_nm-cdp-discover-xe.html"
+    }
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1264_review.jpg"
+  ],
+  "limitations": "人工核对官方文档和题图，未在网络设备上实测。"
+}

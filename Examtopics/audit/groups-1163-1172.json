@@ -1,0 +1,100 @@
+{
+  "scope": "Q1163–1172 independent grouping review",
+  "corrections": [
+    {
+      "id": 1163,
+      "before_sha256": "a8c9a6ffaab10c01f48a6b6a23aa7cd4e3a17424154dbabf80a509219d9d37c9",
+      "reason": "原题图保留旧选项，与修正后的互动数据不同；明确互动选项为准。",
+      "updates": {
+        "prompt": "DRAG DROP - Drag and drop the IPv6 address from the left onto the type on the right. Use the adapted interactive choices below; the exhibit shows the original wording."
+      }
+    },
+    {
+      "id": 1164,
+      "before_sha256": "69ae34a623ac0dd1913a5a1f92df25a97a5e3f0903c301fb9381de49854e9ae4",
+      "reason": "原 ULA“多个组织同时使用”也适用于组播，改为区别性的本地单播定义并标明原图旧选项。",
+      "updates": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the IPv6 address type on the right. Use the adapted interactive choices below; the exhibit shows the original wording.",
+        "drag_drop_data": {
+          "sources": [
+            "locally assigned unicast prefix intended for communication within a site",
+            "cannot be used as a source address",
+            "uses a pseudo-random global ID to reduce the chance of overlapping prefixes",
+            "identifies a group of receivers as the IPv6 packet destination"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "locally assigned unicast prefix intended for communication within a site",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "uses a pseudo-random global ID to reduce the chance of overlapping prefixes",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "cannot be used as a source address",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "identifies a group of receivers as the IPv6 packet destination",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "ULA 通常采用本地生成的 40 位伪随机 Global ID，降低合并站点时的冲突概率，但无法保证无碰撞；ULA 可由不同组织各自使用。IPv6 组播地址标识接收组，不能用作 IPv6 源地址；某些协议包可使用未指定源地址，因此不应声称所有组播包源地址必为单播。各组内顺序不限；题图旧选项已改写，隐藏原答案图。 原选项“多个组织同时使用”也可能适用于组播，已改为唯一标识 ULA 用途的描述。"
+      }
+    },
+    {
+      "id": 1168,
+      "before_sha256": "256c713ffcfbfd370c372c80390404454fe0a0ce14da089714bf3191e9e14ae3",
+      "reason": "原题图保留旧选项，与修正后的互动数据不同；明确互动选项为准。",
+      "updates": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the IPv6 address type on the right. Use the adapted interactive choices below; the exhibit shows the original wording."
+      }
+    },
+    {
+      "id": 1170,
+      "before_sha256": "08af4407bb9579160c6b1897e761103c3e7d10b251f338757d4515f737656aa3",
+      "reason": "原题图保留旧选项，与修正后的互动数据不同；明确互动选项为准。",
+      "updates": {
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the cable type on the right. Use the adapted interactive choices below; the exhibit shows the original wording."
+      }
+    },
+    {
+      "id": 1171,
+      "before_sha256": "27167918356692b45a5652a96aa10aaa3c6f997cec188eff4eea89094845e36f",
+      "reason": "原题图保留旧选项，与修正后的互动数据不同；明确互动选项为准。",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare twisted-pair copper with typical multimode glass fiber. Use the adapted interactive choices below; the exhibit shows the original wording."
+      }
+    },
+    {
+      "id": 1172,
+      "before_sha256": "7c93ea554fe6efd0843ba49b46df11926d63e214d5374811923f2dc08c2771e3",
+      "reason": "原题图保留旧选项，与修正后的互动数据不同；明确互动选项为准。",
+      "updates": {
+        "prompt": "Classify the adapted characteristics into the two shown categories. Items in the same category may be placed in either order. Compare IPv6 global unicast with multicast. Use the adapted interactive choices below; the exhibit shows the original wording."
+      }
+    },
+    {
+      "id": 1169,
+      "before_sha256": "0c444a343d4bed07c79681f1bd1f5efbc53deeaf0026f557b2bc7b693aafbc67",
+      "reason": "纠正 EtherChannel summary 的 P 是已捆绑而非 passive，且 Native VLAN 35 仅适用于题设指定链路。",
+      "updates": {
+        "explanation": "• **实验目标与场景背景**：\n在三台交换机（SW-1、SW-2、SW-3）之间配置 802.1Q Trunk、修改 Native VLAN 以及部署 LACP 动态链路聚合：\n1. SW-1 与 SW-2 互联端口 e0/0、e0/1 配置为 Trunk 允许所有 VLAN 通过。\n2. 跨交换机互联链路（SW-1 e0/2、SW-2 e0/2、SW-3 e0/0 与 e0/1）配置 Native VLAN 为 35。\n3. 在 SW-1 与 SW-2 间配置 LACP 聚合组：SW-1 配置为 `active`（主动发起协商），SW-2 配置为 `passive`（仅响应协商请求）。\n\n• **逐项任务配置命令详解**：\n1. **任务 1 & 3：在 SW-1 与 SW-2 间配置 LACP EtherChannel 并启用 Trunk**\n```text\nSW-1(config)# interface range ethernet 0/0 - 1\nSW-1(config-if-range)# channel-group 1 mode active\nSW-1(config-if-range)# exit\nSW-1(config)# interface port-channel 1\nSW-1(config-if)# switchport trunk encapsulation dot1q\nSW-1(config-if)# switchport mode trunk\nSW-1(config-if)# switchport trunk allowed vlan all\nSW-1(config-if)# exit\n\nSW-2(config)# interface range ethernet 0/0 - 1\nSW-2(config-if-range)# channel-group 1 mode passive\nSW-2(config-if-range)# exit\nSW-2(config)# interface port-channel 1\nSW-2(config-if)# switchport trunk encapsulation dot1q\nSW-2(config-if)# switchport mode trunk\nSW-2(config-if)# switchport trunk allowed vlan all\nSW-2(config-if)# exit\n```\n2. **任务 2：配置相关互联链路的 Native VLAN 为 35**\n```text\nSW-1(config)# interface ethernet 0/2\nSW-1(config-if)# switchport trunk encapsulation dot1q\nSW-1(config-if)# switchport mode trunk\nSW-1(config-if)# switchport trunk native vlan 35\nSW-1(config-if)# exit\n\nSW-2(config)# interface ethernet 0/2\nSW-2(config-if)# switchport trunk encapsulation dot1q\nSW-2(config-if)# switchport mode trunk\nSW-2(config-if)# switchport trunk native vlan 35\nSW-2(config-if)# exit\n\nSW-3(config)# interface range ethernet 0/0 - 1\nSW-3(config-if-range)# switchport trunk encapsulation dot1q\nSW-3(config-if-range)# switchport mode trunk\nSW-3(config-if-range)# switchport trunk native vlan 35\nSW-3(config-if-range)# exit\n```\n\n• **验证命令**：\n- `show etherchannel summary`：确认 Port-channel 状态为 `SU`、成员端口标记 `P`（已捆绑）；使用 `show lacp neighbor` 或平台支持的 LACP 详细命令核对协商，配置中的 active/passive 不能仅凭 summary 的 `P` 推断。\n- `show interfaces trunk`：确认题设指定的 e0/2 及 SW-3 链路 Native VLAN 为 35；SW-1/SW-2 聚合链路的 Native VLAN 应按实际配置检查，题目未要求其设为 35。\n\n原答案图片是其他 IPv6 拖拽题，已隐藏。上述仅为题干给定接口的示例：成员端口需具备兼容的二层、速率及双工设置并处于启用状态；先检查平台是否允许 `switchport trunk encapsulation dot1q` 命令。VLAN 35 须存在，相关物理链路及对端 native VLAN 配置需匹配。保存配置。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4193.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+  ]
+}

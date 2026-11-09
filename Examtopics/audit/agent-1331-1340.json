@@ -1,0 +1,294 @@
+{
+  "scope": "Q1331–1340",
+  "corrections": [
+    {
+      "id": 1331,
+      "original_qid": "Q1331",
+      "before_sha256": "672630321d3128ffe3aef84ed783693c4485f1ca62d932fb6b24c0f48323a4c7",
+      "updates": {
+        "prompt": "On a Cisco Catalyst switch, an engineer must restrict VTY access to SSH and generate an RSA key whose modulus is twice 1024 bits. Which two commands meet these requirements? (Choose two.)",
+        "explanation": "A、C。在线路配置下 `transport input ssh` 将相应 VTY 的入站协议限制为 SSH；在支持该语法的平台上 `crypto key generate rsa modulus 2048` 生成 2048 位 RSA 密钥，恰为 1024 的两倍。需另满足设备版本、主机名/域名、SSH 版本、登录认证和管理网络可达等前提；生成密钥本身不保证自动启用 SSHv2，也不保证替换既存密钥无影响。B 允许所有支持的协议；D 仍是 1024 位；E 未指定 2048 位。"
+      }
+    },
+    {
+      "id": 1332,
+      "original_qid": "Q1332",
+      "before_sha256": "4dfec785d413ba9f16690b297a80cf84986ad363c1e696c13d73e06888c4b3f5",
+      "updates": {
+        "prompt": "Which two distinct factor types could be combined to form multifactor authentication? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "single sign-on"
+          },
+          {
+            "label": "B",
+            "text": "a software authenticator that proves possession of its protected device or key"
+          },
+          {
+            "label": "C",
+            "text": "passwords that expire"
+          },
+          {
+            "label": "D",
+            "text": "shared password repository"
+          },
+          {
+            "label": "E",
+            "text": "a memorized PIN known only to the user"
+          }
+        ],
+        "explanation": "B、E。受保护设备或密钥的独立软件认证器可作为持有因素，记忆的 PIN 属于知识因素；同时验证不同类别才构成 MFA。其具体安全属性取决于设备、密钥保护及实现，单个软令牌或 PIN 自身不是多因素认证。SSO 是会话机制，密码到期不改变其知识因素属性，共享密码库是存储工具。"
+      }
+    },
+    {
+      "id": 1333,
+      "original_qid": "Q1333",
+      "before_sha256": "4321e18c806eb339969dad2031e7f14ca8229b841153e151c27a603f461254fd",
+      "updates": {
+        "prompt": "Which two practices directly reduce unused attack surface and protect network equipment from unauthorized physical access? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "Use a cryptographic keychain to authenticate to network devices."
+          },
+          {
+            "label": "B",
+            "text": "Place internal email and file servers in a designated DMZ."
+          },
+          {
+            "label": "C",
+            "text": "Leave unencrypted configuration backups on an unattended USB drive"
+          },
+          {
+            "label": "D",
+            "text": "Disable unused or unnecessary ports, interfaces, and services."
+          },
+          {
+            "label": "E",
+            "text": "Maintain network equipment in a secure location."
+          }
+        ],
+        "explanation": "D、E。禁用不使用的端口、接口与服务可减少暴露面；限制设备存放地点的物理访问可降低篡改和破坏风险，均不保证消除所有攻击。A 密钥链可用于支持的协议认证，但不直接满足题设两个目标；B 内部服务器是否放入隔离区依访问需求与架构决定；C 未加密且无人看管的备份不安全，受控加密离线备份本身可以是合理措施。"
+      }
+    },
+    {
+      "id": 1334,
+      "original_qid": "Q1334",
+      "before_sha256": "e177f9c3d47dc5ad16237113ee3464cc95200ddcc8b9445d86b22c9f723777c2",
+      "updates": {
+        "prompt": "Refer to the AireOS WLC exhibit. An engineer plans WPA2-Enterprise with AES and 802.1X through a RADIUS server that validates domain credentials against a directory. Which two selections provide the Layer 2 security framework and authentication method? Select WPA2 Policy and AES separately as part of the full configuration. (Choose two.)",
+        "explanation": "C、D。图中 Layer 2 Security 和 802.1X 尚未选择：选择 WPA+WPA2 安全框架并启用 802.1X AKM；完整部署还要勾选 WPA2 Policy 与 AES、配置可用 RADIUS 服务器和兼容的 EAP/目录认证方式。802.1X/RADIUS 可对接目录，但具体 EAP 方法与目录能力必须匹配，不能假设所有 LDAP 配置均适用。A PSK 不提供题设逐用户域凭据认证；B WEP、E WPA/TKIP 不是此场景的 WPA2/AES。此结论限定图示功能，不声称 WPA2 是所有现代无线标准中最强。"
+      }
+    },
+    {
+      "id": 1335,
+      "original_qid": "Q1335",
+      "before_sha256": "ae3b7fc0a88dc8a47a02e5481cb0b18c6dc74eae22b5862ffd2ddc3c409c6a5b",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume the existing RSA key supports SSH, the management VLAN and local authentication are reachable, and the shown privilege-1 user must enter privileged EXEC with an enable password. Which two changes permit encrypted VTY management and the required privilege escalation? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)#enable secret ccnaTest123"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)#username NEW secret R3mote123"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)# line vty 0 15\nSW1(config-line)# transport input ssh"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)# crypto key generate rsa"
+          },
+          {
+            "label": "E",
+            "text": "SW1(config)# interface f0/1\nSW1(config-if)# switchport mode trunk"
+          }
+        ],
+        "explanation": "A、C。图中 RSA 密钥已存在、VTY 已配置 local login 但只允许 Telnet；C 将指定 VTY 入站协议设为 SSH，A 提供题设权限 1 用户进入特权模式所需的 enable secret。SSH 还需兼容密钥、协议、可达管理接口与认证配置；权限 15 的登录或适当 AAA 授权可使用其他方式，不能断言 enable secret 是所有环境的唯一途径。B 新建普通用户不能替代题设的权限提升；D 已有密钥不必重复生成；E 与要求无直接关系。"
+      }
+    },
+    {
+      "id": 1336,
+      "original_qid": "Q1336",
+      "before_sha256": "261658f7f337d5caabe625d3245a0df18796d7109239fe55b0111c468c0fca24",
+      "updates": {
+        "prompt": "Which two listed Wi-Fi security certifications support CCMP for encryption and integrity in their applicable modes? (Choose two.)",
+        "explanation": "B、D。WPA2 使用 AES-CCMP；WPA3 的适用模式也支持 CCMP，但具体配置和认证套件不同，WPA3-Enterprise 192-bit 模式使用更强的 GCMP-256 等套件，不能声称所有 WPA3 都使用 CCMP。Wi-Fi 6 是无线技术代际而非此处安全认证名称；WEP 使用 RC4 和 CRC；初代 WPA 主要采用 TKIP。WPA3-Personal 使用 SAE，不能将此直接推广到所有企业认证模式。"
+      }
+    },
+    {
+      "id": 1337,
+      "original_qid": "Q1337",
+      "before_sha256": "3e9c122d2f68568ab2133be44c85f69d6e4af6dabe21a68f0d32e1c7d3eaa29c",
+      "updates": {
+        "explanation": "A、B。虚拟交换机等逻辑设备可连接 VM 虚拟网卡，并通过宿主机上联连接物理网络；hypervisor 可让多套客体操作系统及应用在同一台物理服务器上相互隔离运行。跨 VLAN 通信仍需要路由或其他三层转发，隔离和资源分配效果取决于配置。C 物理路由器并非直接插入每个软件虚拟网卡；D 互联网不是必要条件；E hypervisor 并非只用于 SNMP 监控。"
+      }
+    },
+    {
+      "id": 1338,
+      "original_qid": "Q1338",
+      "before_sha256": "706b11d78ef9619eed7d3dab667ce323a524b1962386214bc725d2f01eef65c8",
+      "updates": {
+        "prompt": "Which two direct operational benefits can well-designed network automation provide for repetitive configuration changes? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "reduced hardware footprint"
+          },
+          {
+            "label": "B",
+            "text": "reduced operational costs"
+          },
+          {
+            "label": "C",
+            "text": "faster changes with more reliable results"
+          },
+          {
+            "label": "D",
+            "text": "a guarantee that the network will never fail"
+          },
+          {
+            "label": "E",
+            "text": "security without any policies or validation"
+          }
+        ],
+        "explanation": "B、C。经过测试的模板和自动化流程可以减少重复人工操作、加快一致配置，从而有机会降低运维成本并减少人工输入差异。收益依流程与规模而定：错误脚本也可能快速传播，必须验证和回滚；自动化可以辅助安全与故障预防，但不会保证零故障或替代安全策略。硬件占地不是自动化本身的必然变化。"
+      }
+    },
+    {
+      "id": 1339,
+      "original_qid": "Q1339",
+      "before_sha256": "deea1b99ac7fcd462ccfabe9d0b01e3ddf5636aca984f6a0acecab4c6ef51779",
+      "updates": {
+        "prompt": "An API provider specifies JSON and XML as the two supported structured representations for its HTTP endpoints. Which two formats can its clients use for those representations? (Choose two.)",
+        "explanation": "C、D。JSON 与 XML 是该题设 API 明确支持的两种结构化表示；客户端可通过 API 文档规定的 Content-Type/Accept 进行协商。REST 本身不限定只能使用这些格式，也不必要求请求和响应必须包含数据体；其他具体 API 可支持 YAML、纯文本等，字符编码与数据表示格式亦是不同概念。"
+      }
+    },
+    {
+      "id": 1340,
+      "original_qid": "Q1340",
+      "before_sha256": "76ead1c88fb4db60562931e10d78552aa68869a7e1f689b0ebc903057e69ae17",
+      "updates": {
+        "prompt": "In Cisco DNA Center Platform 2.1.1, which two capabilities enable integration with external applications and supported third-party network devices? (Choose two.)",
+        "explanation": "A、C。该版本的开放 REST API 支持外部应用集成；其多厂商 SDK 可用于创建第三方设备包，实现所支持功能与南向协议的映射。设备型号、功能和软件版本均有边界，不能保证所有第三方设备都可完整配置管理，也不能断言传统管理系统从未支持多厂商。B 的“所有 IOS 系列”没有这一保证；D 模块升级不直接说明外部集成；E 企业规模版本不是题设开发接口。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1331,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "A、C。在线路配置下 `transport input ssh` 将相应 VTY 的入站协议限制为 SSH；在支持该语法的平台上 `crypto key generate rsa modulus 20"
+    },
+    {
+      "id": 1332,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "B、E。受保护设备或密钥的独立软件认证器可作为持有因素，记忆的 PIN 属于知识因素；同时验证不同类别才构成 MFA。其具体安全属性取决于设备、密钥保护及实现，单个软令牌或 PIN 自身不是多因素认证"
+    },
+    {
+      "id": 1333,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "D、E。禁用不使用的端口、接口与服务可减少暴露面；限制设备存放地点的物理访问可降低篡改和破坏风险，均不保证消除所有攻击。A 密钥链可用于支持的协议认证，但不直接满足题设两个目标；B 内部服务器是否放入"
+    },
+    {
+      "id": 1334,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "C、D。图中 Layer 2 Security 和 802.1X 尚未选择：选择 WPA+WPA2 安全框架并启用 802.1X AKM；完整部署还要勾选 WPA2 Policy 与 AES、配置可用"
+    },
+    {
+      "id": 1335,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked",
+      "finding": "A、C。图中 RSA 密钥已存在、VTY 已配置 local login 但只允许 Telnet；C 将指定 VTY 入站协议设为 SSH，A 提供题设权限 1 用户进入特权模式所需的 enable "
+    },
+    {
+      "id": 1336,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "B、D。WPA2 使用 AES-CCMP；WPA3 的适用模式也支持 CCMP，但具体配置和认证套件不同，WPA3-Enterprise 192-bit 模式使用更强的 GCMP-256 等套件，不能"
+    },
+    {
+      "id": 1337,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "A、B。虚拟交换机等逻辑设备可连接 VM 虚拟网卡，并通过宿主机上联连接物理网络；hypervisor 可让多套客体操作系统及应用在同一台物理服务器上相互隔离运行。跨 VLAN 通信仍需要路由或其他三"
+    },
+    {
+      "id": 1338,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "B、C。经过测试的模板和自动化流程可以减少重复人工操作、加快一致配置，从而有机会降低运维成本并减少人工输入差异。收益依流程与规模而定：错误脚本也可能快速传播，必须验证和回滚；自动化可以辅助安全与故障预"
+    },
+    {
+      "id": 1339,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "C、D。JSON 与 XML 是该题设 API 明确支持的两种结构化表示；客户端可通过 API 文档规定的 Content-Type/Accept 进行协商。REST 本身不限定只能使用这些格式，也不"
+    },
+    {
+      "id": 1340,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked and retained",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked",
+      "finding": "A、C。该版本的开放 REST API 支持外部应用集成；其多厂商 SDK 可用于创建第三方设备包，实现所支持功能与南向协议的映射。设备型号、功能和软件版本均有边界，不能保证所有第三方设备都可完整配置"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-6/b_Cisco_Wireless_LAN_Controller_Configuration_Best_Practices.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless/5500-series-wireless-controllers/115988-nps-wlc-config-000.html",
+    "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/dna-center-platform/2-1-1-0/user_guide/b_dnac_platform_ug_2_1_1/b_dnac_platform_ug_2_1_1_chapter_01.pdf"
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1334_review1331.jpg",
+    "exhibits/q1335_review1331.jpg"
+  ],
+  "limitations": "人工核对原图和文档；未进行网络设备实测。"
+}

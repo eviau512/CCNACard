@@ -1,0 +1,49 @@
+{
+  "scope": "Independent non-Lab review Q51–Q60",
+  "corrections": [
+    {
+      "id": 52,
+      "before_sha256": "2d1c979e09361b8f06fdf71c204fb98b303e4e4f0ce6a91a85c234c11947b51b",
+      "reason": "限定状态检查，避免把所有防火墙都视为状态防火墙。",
+      "updates": {
+        "prompt": "Which network appliance can maintain connection state and use it when deciding whether to allow packets?",
+        "explanation": "D。具有状态检测功能的防火墙维护连接状态，并结合安全策略判断报文是否属于允许的会话。防火墙也可能采用无状态规则，是否具备状态检查取决于产品和配置。二层交换机主要按 MAC/VLAN 转发；无线控制器管理无线网络；负载均衡器主要分配业务流量，它们可能具有额外安全能力，但不是题设首选。"
+      }
+    },
+    {
+      "id": 53,
+      "before_sha256": "ee667c29b1168ffe463c8d2e59e307ce16721026ed7aaaf0d82ba1029ca2ca0b",
+      "reason": "纠正 AP 拓扑、CAPWAP 数据路径及 SNMP 联动的绝对化表述。",
+      "updates": {
+        "explanation": "C。企业 AP 为无线客户端提供 802.11 接入，并通常通过桥接或受控隧道使客户端访问有线网络。轻量 AP 的无线流量可依部署经 CAPWAP 集中转发，或在支持的本地交换模式下转发；并非所有数据路径都相同。A 中 SNMP 可用于管理和监控，但防 DDoS 不是 AP 的基本角色；B 和 D 涉及安全控制或设备管理，并非本题所问的主要接入作用。AP 也可参与无线认证及其他安全功能。"
+      }
+    },
+    {
+      "id": 55,
+      "before_sha256": "a33099b4b1091ffb16e39b1260b3b163764f1724314fd3abd827d2425e4ad230",
+      "reason": "补足自动 RRM/DCA 条件，纠正手动信道也可配置的错误。",
+      "updates": {
+        "prompt": "When automatic Dynamic Channel Assignment (DCA) is enabled in a Cisco Unified Wireless Network, how can it respond to channel overlap and RF interference?",
+        "explanation": "C。启用自动 DCA 时，控制器根据 AP 提供的无线测量（包括邻居信号、噪声和 802.11 干扰）及配置的评估因素决定是否调整信道；负载可在信道变化评估中考虑。调整受版本、策略与配置影响，不能保证消除全部干扰。A 的管理员手动指定信道本身是可用管理方式，但不是题设自动 DCA 的动作；B 与厂商区分无关；D 并非 DCA 的一般规则。"
+      }
+    },
+    {
+      "id": 57,
+      "before_sha256": "846df54aa03e8aa95790e32973feb7d328c24151a1c86380cbf815b168a330fa",
+      "reason": "明确一级帧类别，并移除控制帧一律无负载等过度概括。",
+      "updates": {
+        "prompt": "A client sends an 802.11 probe request and receives a probe response. What is the response’s frame type (rather than subtype)?",
+        "explanation": "B。Probe Request 和 Probe Response 都属于 802.11 管理帧；AP 可利用响应提供网络能力等信息。Data 帧承载数据，Control 帧辅助介质访问；Action 是管理帧的另一种子类型，而不是 Probe Response 的帧类型。不同控制帧的结构和用途不同，不应一概说所有控制帧均没有负载。"
+      }
+    },
+    {
+      "id": 59,
+      "before_sha256": "8276bd641956e7e35bc0898011c28adcc2edbed004ee3ecfbea6fe04e840e30d",
+      "reason": "图中 .0 被标为 PC 地址但在 /24 下是网络地址，明确作为网段标记并补可用主机前提；纠正交换机绝不能检查IP的绝对说法。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Treat 10.10.10.0/24 and 10.10.100.0/24 as subnet labels: the .0 values shown beside the PCs are network addresses, not usable host addresses. Assume PC-A and PC-B have usable host addresses in those subnets and working default gateways. Which shown component routes PC-A’s packet toward PC-B?",
+        "explanation": "A。两台主机属于不同 /24 子网，PC-A 将目的为远端子网的报文封装到默认网关的二层帧；图中的路由器解封装后按目的 IP 查路由，递减 TTL，再经另一侧接口封装转发。图中 PC-A 的 10.10.10.0/24 与 PC-B 的 10.10.100.0/24 在普通 /24 语境下都是网段地址，不能直接当作普通主机地址；题设因此明确它们为网段标记并假定主机使用可用地址。B 二层交换机通常按 MAC/VLAN 转发，某些平台也能检查三层字段，但本图的跨网段路由角色是路由器；C/D 不是图中负责该转发的设备。"
+      }
+    }
+  ]
+}

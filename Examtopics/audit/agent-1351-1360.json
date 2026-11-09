@@ -1,0 +1,253 @@
+{
+  "scope": "Q1351–1360",
+  "corrections": [
+    {
+      "id": 1351,
+      "original_qid": "Q1351",
+      "before_sha256": "404d1abb1cbff24eac35de782c813103ea13cf1a8f021024cb889f0d188211d6",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "Compared with standard twisted-pair Ethernet links, which two advantages can fiber Ethernet links provide over supported interface and transceiver choices? (Choose two.)",
+        "explanation": "C、E。某些光模块和光纤标准提供较高接口速率及比常见双绞线以太网更远的链路预算；具体速率和距离取决于光模块、光纤类型及标准，不是所有光纤必然更快更远。A 跳线及收发器价格依产品而异，不能保证光纤更便宜；B 光纤本身不传导 PoE 电流；D 环境耐受性取决于线缆规格，不能普遍断言光纤更敏感。铜缆存在多种标准与距离，100 米不是所有铜介质的绝对上限。"
+      }
+    },
+    {
+      "id": 1352,
+      "original_qid": "Q1352",
+      "before_sha256": "f4c13fbc7df24659c3aada70d424382b9414e7b45a27071399beacbeed1a2f65",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "For a single leased point-to-point WAN circuit connecting two sites, which two characteristics apply? (Choose two.)",
+        "explanation": "A、E。题设是运营商提供给两端站点的单条专用点到点逻辑电路；线路连接两端网络，并可在运营商共享物理基础设施上实现，带宽和服务保障由具体合同规定。单条链路本身不能提供路径冗余；多路由器之间每对均有直连是全网状拓扑。点对点并不要求两个终端必然是路由器，也不必保证物理层独占。"
+      }
+    },
+    {
+      "id": 1353,
+      "original_qid": "Q1353",
+      "before_sha256": "185d09cd07b37c37ed48d12037c48e6ea3ae98428f4161bc409e7684f702e112",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "Which two architectural features characterize a logically centralized, controller-based network? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "It uses Telnet as the required system-event reporting protocol."
+          },
+          {
+            "label": "B",
+            "text": "All configuration changes must be made only through each device CLI."
+          },
+          {
+            "label": "C",
+            "text": "It uses northbound and southbound APIs to communicate between architectural layers."
+          },
+          {
+            "label": "D",
+            "text": "It decentralizes the control plane, which allows each device to make its own forwarding decisions."
+          },
+          {
+            "label": "E",
+            "text": "It moves the control plane to a central point."
+          }
+        ],
+        "explanation": "C、E。控制器架构提供逻辑集中的网络控制视图，北向接口面向应用，南向接口连接设备与基础设施。控制器可由多台节点组成，设备仍可保留本地控制功能；并不代表所有功能物理集中或设备只能转发。CLI 有时仍可用于管理，但逐设备 CLI 不是唯一管理方式；Telnet 不是事件报告的必需协议。"
+      }
+    },
+    {
+      "id": 1354,
+      "original_qid": "Q1354",
+      "before_sha256": "94f8bde184ccd4af56279c265951b5255b4a510c5d56a6c7f929c6c9ba0fcdab",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit showing an AireOS WLAN. The administrator wants to enable the WLAN and select the 802.11g-only radio policy for 2.4 GHz operation. Which two actions should be performed? (Choose two.)",
+        "explanation": "A、B。截图中 Status 未启用，先启用 WLAN；Radio Policy 当前为 All，选择 802.11g Only。该旧版策略与启用的射频和产品版本有关，802.11g 标称速率上限 54 Mb/s 不是每个客户端实际吞吐量保证，也不能据此推断所有 n 客户端或周围 b 设备的行为。802.11a 对应 5 GHz；SSID 广播及接口映射不是所问的这两项设置。"
+      }
+    },
+    {
+      "id": 1355,
+      "original_qid": "Q1355",
+      "before_sha256": "2ba6937ada8d7a6ef7a45074533acaa2fe7b795d34d3c36470e1e1b729fba0ab",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "In a typical centrally managed lightweight-AP deployment, which two functions are coordinated by the WLC rather than by each autonomous AP independently? (Choose two.)",
+        "explanation": "A、B。在典型 Split-MAC 架构中，控制器协调射频资源及客户端关联、认证和漫游策略；AP 仍负责实际无线收发及时间敏感处理。RRM、FlexConnect 本地认证/转发等能力依部署而异，不能说所有活动总在控制器或漫游必然无中断。信标发送、空口帧加解密与 CSMA/CA 在 AP/客户端实时完成；CSMA/CA 降低而非绝对防止碰撞。"
+      }
+    },
+    {
+      "id": 1356,
+      "original_qid": "Q1356",
+      "before_sha256": "acd04888b17fa1a6e4901b2a40c7209cfe57ab40500a420865a173fe7d0e0176",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "On an AireOS 8.5 WLC, SIP snooping ports are configured and the administrator is enabling WLAN media-session snooping for voice. Which two WLAN settings are needed? (Choose two.)",
+        "explanation": "C、D。Cisco AireOS 8.5 在线帮助说明 Media Session Snooping 支持 Platinum QoS profile，需在该 WLAN 启用该功能；AP 检测符合条件的 SIP 呼叫并向控制器报告。A 包含 Silver，不能满足该版本的 snooping 条件；B 与 E 不是这里所问步骤。Platinum 不保证绝对优先、零丢包或最低延迟，实际还依客户端、配置及无线容量而定；其他版本的要求可能不同。"
+      }
+    },
+    {
+      "id": 1357,
+      "original_qid": "Q1357",
+      "before_sha256": "5a9f3a4be301ef204071207433e375afce882bc3aea7343b309291496db7487c",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "For a classic Cisco STP access port configured with PortFast and connected to an end host, which two statements best describe its behavior? (Choose two.)",
+        "explanation": "C、D。PortFast 在链路上线时跳过通常的 listening 和 learning 等待，快速进入 forwarding；连接主机时不需要收到来自主机的 BPDU 才能转发。PortFast 不等于 BPDU filter：端口仍可能发送或接收 BPDU；若配置 BPDU Guard，收到 BPDU 会触发保护，具体行为依 STP 模式和配置而异。它不是上行链路冗余收敛或 BackboneFast 的替代。"
+      }
+    },
+    {
+      "id": 1358,
+      "original_qid": "Q1358",
+      "before_sha256": "23f0b39e8ba84fabf3329e6d5474a84bbb80d89a58a277169654cc33d2cbae57",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On this AireOS controller, the administrator wants the WLAN session timeout set to one hour and the maximum client count for this WLAN set to 10. Which two settings should be changed? (Choose two.)",
+        "explanation": "B、D。图中启用 Session Timeout 并设置 3600 秒；Maximum Allowed Clients 填 10，限制此控制器上该 WLAN 的客户端数量。Per AP Radio 是每个无线电粒度，不能作为整个 WLAN 的同一上限；Client Exclusion 控制暂时排除，Wi-Fi Direct 策略也不是会话时限。到期后的重新认证与密钥更新行为取决于认证方式及控制器配置，不保证在每个客户端上无差异。"
+      }
+    },
+    {
+      "id": 1359,
+      "original_qid": "Q1359",
+      "before_sha256": "fca7278893648320c4b4e51428d042ee812781f61ba7b0e956bdbca7df621d94",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "On a Cisco WLC platform that provides both a service port and a console port, which two ports can be used for out-of-band management? (Choose two.)",
+        "explanation": "A、B。Service port 可接独立的 IP 管理网络，console 是串行本地管理；两者均可用于带外管理。能否远程访问取决于管理网络、路由及启用的服务，并不保证业务网络故障时一定可达。Management interface 通常是逻辑带内接口，distribution system 承载网络业务；redundancy port 用于支持的 HA 同步。端口功能因具体型号与版本而异。"
+      }
+    },
+    {
+      "id": 1360,
+      "original_qid": "Q1360",
+      "before_sha256": "5391daaf39f11639394c0bdcd6705ceeee472442ee8339c67148cd3e64c62d1a",
+      "reason": "逐题核对选项、答案与解析，消除绝对化或缺失前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On New York, configure a primary IPv6 host route to 2000::1 via Atlanta and a floating route via Washington with administrative distance 2. Assume the shown next hops, IPv6 forwarding, Washington's onward route, and return connectivity are operational. Which two commands apply? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "ipv6 route 2000::1/128 2012::1"
+          },
+          {
+            "label": "B",
+            "text": "ipv6 route 2000::1/128 2012::1 5"
+          },
+          {
+            "label": "C",
+            "text": "ipv6 route 2000::1/128 2012::2"
+          },
+          {
+            "label": "D",
+            "text": "ipv6 route 2000::1/128 2023::2 5"
+          },
+          {
+            "label": "E",
+            "text": "ipv6 route 2000::1/128 2023::3 2"
+          }
+        ],
+        "explanation": "A、E。图中 Atlanta 与 Washington 分别是纽约直连的 2012::1 和 2023::3；目的 2000::1/128 是主机路由。A 的静态路由默认 AD 1；E 将 Washington 备份设为 AD 2。B 为 Atlanta 指定 AD 5，C 和 D 使用纽约本机地址作为下一跳。浮动路由只有在主路由被撤销时才接管；单靠静态下一跳不保证检测远端所有故障，实际可能需要跟踪机制。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1351,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "无题图及代码块。",
+      "corrected_answer": [
+        "C",
+        "E"
+      ]
+    },
+    {
+      "id": 1352,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "无题图及代码块。",
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": 1353,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "无题图及代码块。",
+      "corrected_answer": [
+        "C",
+        "E"
+      ]
+    },
+    {
+      "id": 1354,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "已直接查看原图；原图不透明白底并含彩色元素，应保留原色，适配暗色画布。",
+      "corrected_answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": 1355,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "无题图及代码块。",
+      "corrected_answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": 1356,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "无题图及代码块。",
+      "corrected_answer": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": 1357,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "无题图及代码块。",
+      "corrected_answer": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": 1358,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "已直接查看原图；原图不透明白底并含彩色元素，应保留原色，适配暗色画布。",
+      "corrected_answer": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "id": 1359,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "无题图及代码块。",
+      "corrected_answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": 1360,
+      "content_answer_explanation": "逐题核对题干、选项、答案与解析；见报告。",
+      "image_code": "已直接查看原图；原图不透明白底并含彩色元素，应保留原色，适配暗色画布。",
+      "corrected_answer": [
+        "A",
+        "E"
+      ]
+    }
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1354_review_agent.jpg",
+    "exhibits/q1358_review_agent.jpg",
+    "exhibits/q1360_review_agent.jpg"
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/olh/wlc-olh/wlansc.html",
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless/aironet-1200-series/70278-lap-faq.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless/wireless-lan-controller-software/118833-wlc-design-ftrs-faq.pdf"
+  ],
+  "limitations": "人工审题与图像核对，未进行 WLC 或路由器设备实测。"
+}

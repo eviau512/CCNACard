@@ -1,0 +1,130 @@
+{
+  "scope": "Q1283-Q1292 independent re-review",
+  "corrections": [],
+  "reviews": [
+    {
+      "id": 1283,
+      "before_sha256": "6df37b4346f4d25a77ed779d90aa79cfac6d1a346cd104b4050e3e226dc5e3c8",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "viewed",
+      "cli": "checked",
+      "finding": "三种不同前缀可并存；/30 竞争按 AD，已看原路由表图。"
+    },
+    {
+      "id": 1284,
+      "before_sha256": "d97c512ea282a80001d37b8890a031f9bdb67ff7bd8466e6efca30ac6207e30c",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "none",
+      "cli": "checked",
+      "finding": "接口进程 ID 与 area 标识命令的两个必要参数。"
+    },
+    {
+      "id": 1285,
+      "before_sha256": "a5f478c687489eebeab36fd9922d7205c7e50fede19e134a1decd79fbc6d518f",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "viewed",
+      "cli": "checked",
+      "finding": "按原拓扑核对纽约两个对端与 /128 路由；已有远端默认路由前提。"
+    },
+    {
+      "id": 1286,
+      "before_sha256": "aa664fa80534d6fba328eb288e39df5f51b7a50c5ba6c5bc565f1e62e347764a",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "none",
+      "cli": "checked",
+      "finding": "EIGRP 可行后继依 RD 严格小于 FD；路径度量不只含单段带宽。"
+    },
+    {
+      "id": 1287,
+      "before_sha256": "be16afcc02f6e4fabd477c9fd99396621ef046a7a2c23938f86b30b1f2a38449",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "none",
+      "cli": "checked",
+      "finding": "相互通信的两台 HSRP 路由器选出 active/standby，共用虚拟 IP。"
+    },
+    {
+      "id": 1288,
+      "before_sha256": "bdd9310ca495ea4734920a68038d339b82e5f1d6b7c60736e7a13f2fae7b12e2",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "viewed",
+      "cli": "checked",
+      "finding": "图示主下一跳 2012::1，浮动下一跳 2023::3 和较高 AD。"
+    },
+    {
+      "id": 1289,
+      "before_sha256": "e9fad70bb8c7790456cbf9e9f8db165bd875108eabe2e0614d2a3e49ae34c348",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "none",
+      "cli": "checked",
+      "finding": "RIP 和 EIGRP 为距离矢量类，OSPF/IS-IS 为链路状态，BGP 为路径矢量。"
+    },
+    {
+      "id": 1290,
+      "before_sha256": "fbae05fa6f34ede7e5b95d1b22f3046e95a0bb32d51bad5e556c56463218ddee",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "none",
+      "cli": "checked",
+      "finding": "BGP 面向 Internet 跨 AS 可达性和策略；IGP 并非每对 AS 的交换协议。"
+    },
+    {
+      "id": 1291,
+      "before_sha256": "c43f2459ac3ac2a7f6d9af312ba29b0926dadeb0f9d70f980ef097a299367bf0",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "viewed",
+      "cli": "checked",
+      "finding": "路由表标题为 20 masks，核对默认及多个路由的等代价双下一跳。"
+    },
+    {
+      "id": 1292,
+      "before_sha256": "7a099fb2420cadb49c72d8dce69d0e0dabec688fd6e00d5024f5553417d3caef",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked against explanation and exhibit",
+      "explanation": "checked",
+      "image": "none",
+      "cli": "checked",
+      "finding": "Hello/Dead 定时器冲突及同 Router ID 均可阻止邻接；本地进程号不必相同。"
+    }
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1283_agent.jpg",
+    "exhibits/q1285_agent.jpg",
+    "exhibits/q1288_agent.jpg",
+    "exhibits/q1291_review1291.jpg"
+  ],
+  "dark_mode_regression": {
+    "app_full_resolution_1px_red_preserved": true,
+    "generated_html_full_resolution_1px_red_preserved": true,
+    "gray_adapts": true,
+    "transparent_dark_and_large_preserved": true,
+    "image_reuse_clears_class": true,
+    "limitations": "Mock canvas used for full-resolution pixel and image-reuse tests; prior browser screenshots were based on an earlier classifier. No Android device or physical network tests."
+  }
+}

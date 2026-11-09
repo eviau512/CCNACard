@@ -1,0 +1,341 @@
+{
+  "scope": "Q1291–1300",
+  "corrections": [
+    {
+      "id": 1291,
+      "before_sha256": "98755c78cf248c453908fa453a9a887b41a7877d30ed367a3e9bd086da0e4879",
+      "original_qid": "Q1291",
+      "reason": "将“等量流量”改为路由表可直接证明的等价下一跳；BGP/外部EIGRP及掩码数核对。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "The EIGRP administrative distance was manually changed from 90 to 170."
+          },
+          {
+            "label": "B",
+            "text": "There are 20 different network masks within the 10.0.0.0/8 network."
+          },
+          {
+            "label": "C",
+            "text": "Ten displayed route entries have equal-cost next hops through Te0/1/0.100 and Te0/2/0.100."
+          },
+          {
+            "label": "D",
+            "text": "The 10.0.0.0/8 network was learned via external EIGRP."
+          },
+          {
+            "label": "E",
+            "text": "A static default route to 10.85.33.14 was defined."
+          }
+        ],
+        "explanation": "B、C。标题行中的 `20 masks` 表示该主类地址范围内显示的路由使用20种掩码。图中默认路由及9条目的前缀各有经 Te0/1/0.100、Te0/2/0.100 的两个等价下一跳，共10条；实际流量分配还取决于转发实现和流量特征。D EX 的170为外部EIGRP的常见默认管理距离，不能据此认定人工修改；B标记的10.0.0.0/8来自BGP。默认路由标记 D*EX，不能从图中认定为静态路由。"
+      }
+    },
+    {
+      "id": 1292,
+      "before_sha256": "ddc4a9151e796b207d294ad63db4158ca154d42390776f4cfbb5c50fc041ae1d",
+      "original_qid": "Q1292",
+      "reason": "修正点对点默认计时、MTU绝对断言及EIGRP组播地址解读。",
+      "updates": {
+        "explanation": "D、E。OSPF邻居的Hello/Dead间隔需匹配，直连设备使用相同Router ID也会阻碍邻接。OSPF进程号本地有效，无需相同；EIGRP AS号并非OSPF匹配参数。224.0.0.10是EIGRP组播，OSPFv2常用224.0.0.5和224.0.0.6；仅阻断题设地址不等于阻断OSPF。区域、认证、网络类型及MTU等也可能影响邻居或Full邻接，实际默认定时器依网络类型及平台而异。"
+      }
+    },
+    {
+      "id": 1293,
+      "before_sha256": "2e909e7c5ad2a719bb86159396485225b63f35f75880e993ebff91b54a9d4154",
+      "original_qid": "Q1293",
+      "reason": "区域限制类型1/2 LSA但不能保证故障绝不跨区，汇总需配置。",
+      "updates": {
+        "explanation": "A、B、E。合理划分区域可缩小单一区域LSDB和类型1/2 LSA泛洪范围，减少开销，并可能缩短SPF计算、限制局部拓扑变化的影响；区域间仍可传播可达性变化，不能保证故障绝不跨区。ABR可配置适当汇总，但汇总和毫秒级收敛并非自动保证。区域设计不会增加物理带宽，也不必然降低设备成本或配置复杂度。"
+      }
+    },
+    {
+      "id": 1294,
+      "before_sha256": "efa121e480ccabda87413ac6d251fa16e1c5b32e38ec7f18e34a792ac3737b4f",
+      "original_qid": "Q1294",
+      "reason": "原图仅有配置，补充主类边界、已启用接口与可达邻居条件；network命令并不凭空产生路由。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume RTR01 has operational EIGRP-enabled connected subnets within each of the three configured major networks, and advertises them to an established EIGRP neighbor across a different major-network boundary. Auto-summary is active and no filtering applies. Which three major-network prefixes will that neighbor receive? (Choose three.)",
+        "explanation": "A、C、D。启用 `auto-summary` 且向不同主类网络边界通告时，题设内联网段可分别汇总为 192.168.2.0/24、10.0.0.0/8、172.16.0.0/16。`network` 命令选择参与EIGRP的接口，本身不证明某条具体子网或邻接存在；同一主类网络内及外部路由的行为可能不同。192.168.0.0/16是私网地址范围，不是此处192.168.2.0的自然主类边界。"
+      }
+    },
+    {
+      "id": 1295,
+      "before_sha256": "599d1d6f8bd2895bff845ce3ae052eafbe47bfc37f51ca15288245de09ba6ff1",
+      "original_qid": "Q1295",
+      "reason": "动态BGP listen range存在；限定显式静态对等会话并修正timer描述。",
+      "updates": {
+        "prompt": "For a conventional statically configured eBGP session without dynamic BGP listen ranges, which two statements about the neighbor relationship are true? (Choose two.)",
+        "explanation": "A、B。常规eBGP使用不同的本地和远端AS号；题设静态会话的两端需配置对端及远端AS。`network` 语句用于发布符合条件的本地前缀，不能单独发现邻居。BGP通过TCP建立会话；OPEN中的Hold Time通常协商为较小值，不要求两端定时器配置完全一致。部分实现还支持基于预配置范围的动态BGP邻居，本题已明确排除。"
+      }
+    },
+    {
+      "id": 1296,
+      "before_sha256": "bded9d28ad217d106174f62b452a7cdb5fb1ef69a656044885e4334b9b7b666d",
+      "original_qid": "Q1296",
+      "reason": "多区域减少拓扑扩散不保证故障完全局限；区域汇总和过滤并非所有LSA均支持。",
+      "updates": {
+        "prompt": "Which three properties can describe a properly designed multi-area OSPF deployment? (Choose three.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "It supports VLSM."
+          },
+          {
+            "label": "B",
+            "text": "It is used to route between autonomous systems."
+          },
+          {
+            "label": "C",
+            "text": "It can limit the propagation of area-specific topology changes."
+          },
+          {
+            "label": "D",
+            "text": "It increases routing overhead on the network."
+          },
+          {
+            "label": "E",
+            "text": "It allows control of routing information through supported area design and summarization."
+          },
+          {
+            "label": "F",
+            "text": "It is simpler to configure than RIP v2."
+          }
+        ],
+        "explanation": "A、C、E。OSPF携带前缀掩码并支持VLSM；多区域将类型1和类型2 LSA限制在对应区域，可以降低局部拓扑变化向其他区域传播的影响；ABR/ASBR的汇总、区域类型等可控制部分路由信息。路径可达性变化仍可能跨区域传播；具体过滤行为依LSA类别和平台而异。OSPF主要为域内路由而设计，带宽、开销及配置难度取决于部署，不能笼统声称一定低于RIP。"
+      }
+    },
+    {
+      "id": 1297,
+      "before_sha256": "6ca021b379897e3e509468a7cd3567d7f5fefd36110e7e5eeb952d1d1c4ec7b7",
+      "original_qid": "Q1297",
+      "reason": "清理题干和接口选项空格，补接口状态和无更优匹配前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming these interfaces are operational and no more-specific OSPF interface configuration overrides this statement, which three interface IP addresses match the following command? (Choose three.)\n```cisco\nCity(config-router)# network 192.168.12.64 0.0.0.63 area 0\n```",
+        "options": [
+          {
+            "label": "A",
+            "text": "FastEthernet0/0"
+          },
+          {
+            "label": "B",
+            "text": "FastEthernet0/1"
+          },
+          {
+            "label": "C",
+            "text": "Serial0/0"
+          },
+          {
+            "label": "D",
+            "text": "Serial0/1.102"
+          },
+          {
+            "label": "E",
+            "text": "Serial0/1.103"
+          },
+          {
+            "label": "F",
+            "text": "Serial0/1.104"
+          }
+        ],
+        "explanation": "B、C、D。通配符 0.0.0.63 使前三个字节及末字节高两位固定，匹配 192.168.12.64–192.168.12.127。图中 Fa0/1 的 .65、Serial0/0 的 .121、Serial0/1.102 的 .125 均在范围内；.48、.129、.133 不匹配。命令选择本地接口，不保证对端邻接成功；具体接口配置和状态仍需核查。"
+      }
+    },
+    {
+      "id": 1298,
+      "before_sha256": "14539f482ce1649585a49720025d12802fbfafb71b2baa855773a90577e34a58",
+      "original_qid": "Q1298",
+      "reason": "明确RID选择时无显式ID或其他更大loopback，纠正现有进程不会因物理接口关闭必然更换RID。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume RouterB starts its OSPF process with no manually configured router ID and no other loopback interfaces; Lo0 is operational. Which two statements are true about RouterB’s loopback? (Choose two.)",
+        "explanation": "B、C。在题设进程启动时，活动Loopback 10.0.0.1 优先于物理接口用于自动选择 Router ID；Loopback一般不依赖单条物理链路，因而可为选择标识提供较稳定的地址。已经选定的 Router ID 不会仅因物理接口波动就必然改变，具体变更需考虑进程重启等条件。Loopback仍可被关闭或配置改变，也不能保证转发可用。DR选举还取决于接口优先级、当前选举状态与其他路由器，不能仅凭该接口保证 RouterB 当选；它也不会自动降低路由开销。"
+      }
+    },
+    {
+      "id": 1299,
+      "before_sha256": "095839c5012473628fbc91ce5b0d8617663879fa7999dcd56512c7e803873dda",
+      "original_qid": "Q1299",
+      "reason": "明确D为错误的自动更改参数，防止参数检查和协商语义歧义。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It provides dynamic neighbor discovery."
+          },
+          {
+            "label": "B",
+            "text": "It detects unreachable neighbors in 90 second intervals."
+          },
+          {
+            "label": "C",
+            "text": "It maintains neighbor relationships."
+          },
+          {
+            "label": "D",
+            "text": "It automatically changes mismatched interface timers to make them agree."
+          },
+          {
+            "label": "E",
+            "text": "It uses timers to elect the router with the fastest links as the designated router."
+          },
+          {
+            "label": "F",
+            "text": "It broadcasts hello packets throughout the internetwork to discover all routers that are running OSPF."
+          }
+        ],
+        "explanation": "A、C。Hello用于发现同一链路上的邻居并周期维护邻居关系；长时间未收到报文的判定依Dead interval和实现，而非固定90秒。Hello携带并检查若干邻接参数，但不会自动把不匹配的计时器改为一致。广播或NBMA网段中的DR/BDR选举使用优先级和Router ID等条件，不按最快链路选举；Hello也不是泛洪到整个互联网。不同网络类型的邻居发现方式可能不同。"
+      }
+    },
+    {
+      "id": 1300,
+      "before_sha256": "95b389e8fc0d49033aee7ccccd63036136d471de03f8bb7ead6bee82763242e1",
+      "original_qid": "Q1300",
+      "reason": "HSRP一个正式Standby，Listen不是多个Standby；明确健康稳定组并修正选项。",
+      "updates": {
+        "prompt": "In a healthy, converged HSRP group with at least two eligible routers that can hear each other, which two roles are elected? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "exactly one active router"
+          },
+          {
+            "label": "B",
+            "text": "exactly one standby router"
+          },
+          {
+            "label": "C",
+            "text": "one or more backup virtual routers"
+          },
+          {
+            "label": "D",
+            "text": "exactly one standby active router"
+          },
+          {
+            "label": "E",
+            "text": "exactly one backup virtual router"
+          }
+        ],
+        "explanation": "A、B。在题设正常收敛且成员互通的组中，选出一台Active转发虚拟网关流量、另一台Standby准备接替。额外参与者可处于Listen等状态，不应称为多个同时处于Standby状态的路由器。链路分区等异常期间可能出现多个Active；只有单个可用成员时可能暂时没有Standby。C/E所谓多个备用虚拟路由器不是题设角色，D混用了Active与Standby。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1291,
+      "content_answer_explanation": "将“等量流量”改为路由表可直接证明的等价下一跳；BGP/外部EIGRP及掩码数核对。",
+      "image_code": "已直接查看原图，原图为白底不透明截图，暗色背景应保留可辨白底画布。",
+      "corrected_answer": [
+        "B",
+        "C"
+      ],
+      "exhibit_path": "exhibits/q1291_review1291.jpg",
+      "image_sha256": "b2ce97d29b3669e270c70d29a6f80d141c8510b65be541ffeaa7e002118274d7"
+    },
+    {
+      "id": 1292,
+      "content_answer_explanation": "修正点对点默认计时、MTU绝对断言及EIGRP组播地址解读。",
+      "image_code": "无原题图；无必需图像。",
+      "corrected_answer": [
+        "D",
+        "E"
+      ]
+    },
+    {
+      "id": 1293,
+      "content_answer_explanation": "区域限制类型1/2 LSA但不能保证故障绝不跨区，汇总需配置。",
+      "image_code": "无原题图；无必需图像。",
+      "corrected_answer": [
+        "A",
+        "B",
+        "E"
+      ]
+    },
+    {
+      "id": 1294,
+      "content_answer_explanation": "原图仅有配置，补充主类边界、已启用接口与可达邻居条件；network命令并不凭空产生路由。",
+      "image_code": "已直接查看原图，原图为白底不透明截图，暗色背景应保留可辨白底画布。",
+      "corrected_answer": [
+        "A",
+        "C",
+        "D"
+      ],
+      "exhibit_path": "exhibits/q1294_review1291.jpg",
+      "image_sha256": "2826158f78015f08d9f6dd662c36463fdd648357575210a3741bfb5ee29415a0"
+    },
+    {
+      "id": 1295,
+      "content_answer_explanation": "动态BGP listen range存在；限定显式静态对等会话并修正timer描述。",
+      "image_code": "无原题图；无必需图像。",
+      "corrected_answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": 1296,
+      "content_answer_explanation": "多区域减少拓扑扩散不保证故障完全局限；区域汇总和过滤并非所有LSA均支持。",
+      "image_code": "无原题图；无必需图像。",
+      "corrected_answer": [
+        "A",
+        "C",
+        "E"
+      ]
+    },
+    {
+      "id": 1297,
+      "content_answer_explanation": "清理题干和接口选项空格，补接口状态和无更优匹配前提。",
+      "image_code": "已直接查看原图，原图为白底不透明截图，暗色背景应保留可辨白底画布。",
+      "corrected_answer": [
+        "B",
+        "C",
+        "D"
+      ],
+      "exhibit_path": "exhibits/q1297_review1291.jpg",
+      "image_sha256": "93be4034770d2b77bdd556eb28f6a077a02642b143a682109cc0cce58a021e67"
+    },
+    {
+      "id": 1298,
+      "content_answer_explanation": "明确RID选择时无显式ID或其他更大loopback，纠正现有进程不会因物理接口关闭必然更换RID。",
+      "image_code": "已直接查看原图，原图为白底不透明截图，暗色背景应保留可辨白底画布。",
+      "corrected_answer": [
+        "B",
+        "C"
+      ],
+      "exhibit_path": "exhibits/q1298_review1291.jpg",
+      "image_sha256": "3170104f5f148cfb0ec72cda6c08012278500f86f25044b1c2c688a5802294cd"
+    },
+    {
+      "id": 1299,
+      "content_answer_explanation": "明确D为错误的自动更改参数，防止参数检查和协商语义歧义。",
+      "image_code": "无原题图；无必需图像。",
+      "corrected_answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "id": 1300,
+      "content_answer_explanation": "HSRP一个正式Standby，Listen不是多个Standby；明确健康稳定组并修正选项。",
+      "image_code": "无原题图；无必需图像。",
+      "corrected_answer": [
+        "A",
+        "B"
+      ]
+    }
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1291_review1291.jpg",
+    "exhibits/q1294_review1291.jpg",
+    "exhibits/q1297_review1291.jpg",
+    "exhibits/q1298_review1291.jpg"
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/23862-duplicate-router-id-ospf.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.html",
+    "https://www.rfc-editor.org/rfc/rfc2328",
+    "https://www.rfc-editor.org/rfc/rfc4271"
+  ],
+  "limitations": "手工审题与原图核查，未进行网络设备实测；应用暗黑模式实际呈现需由主代理统一验证。"
+}

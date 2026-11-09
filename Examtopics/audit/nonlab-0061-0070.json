@@ -1,0 +1,40 @@
+{
+  "scope": "Q61–Q70 非 Lab 逐题独立复核",
+  "corrections": [
+    {
+      "id": 62,
+      "before_sha256": "fae8cfe8e5e503a8b3371384bd6212c85e213c2ef84828f3cf74c257796c1049",
+      "reason": "区分 FIB 与 RIB，并限定设备自身报文处理。",
+      "updates": {
+        "prompt": "For a transit IP packet, which action is performed by the forwarding (data) plane?",
+        "explanation": "D。转发平面根据目的 IP 对已安装的转发信息（如 FIB）执行最长前缀匹配，决定下一跳和出接口；选项中的 routing table 是对转发查表的概括，具体实现通常使用 FIB，未必逐包扫描控制平面的 RIB。C 运行路由协议以计算路由，属于控制平面；B 通过 NETCONF 改配置属于管理平面；A 如回显请求目的为设备本身，通常由设备本地控制处理，而非转发过境流量。具体硬件和实现可能有例外。"
+      }
+    },
+    {
+      "id": 63,
+      "before_sha256": "96c189a62bd30df6c8c8b1427e9b044b7a04501d34395c8721666275453470e5",
+      "reason": "补下一跳可达等前提并分清同前缀选路与转发最长匹配。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume the listed static-route next hops are reachable, OSPF uses its default administrative distance, and no more-specific route matches host B. Which route does R1 use to forward the packet to host B?",
+        "explanation": "B。图示 Host B 为 10.10.13.10，匹配 10.10.13.0/25。对同一 /25 目的前缀，图中静态候选通过 10.10.10.2、10.10.10.6 和 10.10.10.10 的管理距离分别是 111、112、108；默认 OSPF 为 110。题设下一跳可达时 AD 108 最小，安装经 10.10.10.10 的静态路由，即 [108/0]。A 错把显式配置 111 当成默认静态 AD 1；C/D 的 OSPF AD 110 高于 108。默认路由虽然存在，但比已安装的 /25 更短。注意先由控制平面择优并安装同前缀候选，随后转发时对已安装路由做最长前缀匹配；不能认为每个包转发时才比较 AD。"
+      }
+    },
+    {
+      "id": 64,
+      "before_sha256": "46e65fc17186d7a9f40be597315ceeb87f7ae7628cd9d3329631207413f06053",
+      "reason": "修正端点一律单 VLAN 与安全后果必然发生的绝对化。",
+      "updates": {
+        "explanation": "B。终端包括主机、手机、打印机、摄像头等连接网络并发送或接收数据的设备；被入侵的终端可能成为攻击者访问或横向移动的入口，对网络构成威胁。A 的跨 VLAN 路由通常由路由器或三层交换功能提供；C 接入运营商的路由通常是边缘路由设备的任务；D 园区整体出口策略通常由网关或安全设备执行。终端也可实施自身防火墙策略，某些终端具备多网卡或路由能力，但这不改变题目对典型终端风险的判断。"
+      }
+    },
+    {
+      "id": 65,
+      "before_sha256": "1b273bf203e3f07022373b13038807436e01dc8dc94cc8bb1a37097cc5170486",
+      "reason": "图中 auto 不能直接证明运行双工；限定回退模型及诊断证据。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The link is up but performs poorly. Assume the PC disables autonegotiation when forced to 100 Mb/s full duplex, and the switch uses parallel detection with a half-duplex fallback for this 10/100 copper link. Which condition best explains the problem?",
+        "explanation": "B。在题设的 10/100 铜缆回退行为下，手动固定 100 Mb/s 全双工的一端不参与自动协商；自动端可检测速率，但没有协商到双工能力时回退半双工，形成双工不匹配，链路仍可能 up 而性能差。图中 auto 是配置或状态的提示，不等同于对两端实际运行双工和错误计数的直接证明。应进一步查看双方实际 speed/duplex 及碰撞、FCS 等计数；具体回退行为随平台、介质与实现而异，不能仅凭 auto 或某个错误计数断定唯一原因。A 提到光纤但图示为 10/100BaseTX；C 不符合图示接口类型；D 的速率不匹配并不是题设回退解释。"
+      }
+    }
+  ]
+}

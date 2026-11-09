@@ -1,0 +1,190 @@
+{
+  "scope": "Independent review Q1353–Q1362",
+  "corrections": [
+    {
+      "id": 1355,
+      "before_sha256": "5bd8395ad0cb3b4277a989c9b623860eacb9904b82c504f0eb3c72dd656a935f",
+      "reason": "原干扰项错误称 WAP 协议族；无线安全协议应为 WPA2，AP 负责空口加解密，答案仍为 A/B。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "managing RF channels, including transmission power"
+          },
+          {
+            "label": "B",
+            "text": "handling the association, authentication, and roaming of wireless clients"
+          },
+          {
+            "label": "C",
+            "text": "sending and processing beacon frames"
+          },
+          {
+            "label": "D",
+            "text": "encrypting and decrypting WPA2 traffic on the wireless link"
+          },
+          {
+            "label": "E",
+            "text": "preventing collisions between wireless clients on the same RF channel"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1358,
+      "before_sha256": "1e8ad370f31090ee5602645ae2d91adc1c633a9a268f09f65967ffd4ca2cd654",
+      "reason": "AireOS 每 WLAN 客户端上限不支持 FlexConnect 本地认证，补充 connected 模式及认证前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On this AireOS controller, assume the WLAN uses a supported connected AP mode and does not use FlexConnect local authentication. The administrator wants the WLAN session timeout set to one hour and the maximum client count for this WLAN set to 10. Which two settings should be changed? (Choose two.)",
+        "explanation": "B、D。图中启用 Session Timeout 并设置 3600 秒；Maximum Allowed Clients 填 10，限制此控制器上该 WLAN 的客户端数量。Per AP Radio 是每个无线电粒度，不能作为整个 WLAN 的同一上限；Client Exclusion 控制暂时排除，Wi-Fi Direct 策略也不是会话时限。到期后的重新认证与密钥更新行为取决于认证方式及控制器配置，不保证在每个客户端上无差异。 Cisco AireOS 8.5 文档指出，每 WLAN 最大客户端数功能不支持 FlexConnect 本地认证，且仅支持处于 connected 模式的 AP；题干已限定。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1353,
+      "original_sha256": "898d91408d738ab13930a781310c6444779bd77b0d5b63aa952665915c3d896f",
+      "finding": "逻辑集中控制、北向和南向接口为 C/E；其他项不成立。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": false
+    },
+    {
+      "id": 1354,
+      "original_sha256": "3b648bb6818f08a35d4c99793b6064cf56b2f3f2a2efbc555fa3a899f202b520",
+      "finding": "直接看原图：Status 未启用、Radio Policy 为 All；按题设选 A/B，802.11a 为 5 GHz。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": true
+    },
+    {
+      "id": 1355,
+      "original_sha256": "5bd8395ad0cb3b4277a989c9b623860eacb9904b82c504f0eb3c72dd656a935f",
+      "finding": "Split-MAC 下 WLC 协调 RF 与关联漫游，AP 负责空口及实时帧处理；D 的 WAP 拼写修为 WPA2。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": false
+    },
+    {
+      "id": 1356,
+      "original_sha256": "594711315b7667b22eb2ea0a42dd566d9e177aea3b0f030297bdc4ebf120468f",
+      "finding": "Cisco AireOS 8.5 在线帮助确认 Media Session Snooping 仅支持 Platinum profile；选 C/D，银级不满足。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": false
+    },
+    {
+      "id": 1357,
+      "original_sha256": "f910ba3cecab2ce65cfed58597d49acc63531d84df2d048968fbfb5dd53ec482",
+      "finding": "PortFast 对边缘主机接口加速进入转发并可在未接收 BPDU 情况下工作，C/D；BPDU Guard 与链路类型条件已说明。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": false
+    },
+    {
+      "id": 1358,
+      "original_sha256": "1e8ad370f31090ee5602645ae2d91adc1c633a9a268f09f65967ffd4ca2cd654",
+      "finding": "直接看原图，3600 秒 WLAN 超时和整个 WLAN 10 客户端应选 B/D；Cisco 8.5 文档明确 connected/FlexConnect local auth 例外。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": true
+    },
+    {
+      "id": 1359,
+      "original_sha256": "1d985429b49f3427ea8c9599230621b9a4a1b217f9fa081da0ef64ae25a81574",
+      "finding": "具有相应端口的控制器可用 service 和 console 带外管理；管理接口与冗余口非同一用途。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": false
+    },
+    {
+      "id": 1360,
+      "original_sha256": "b00b1a4149cebd75b8c5ef7c2bd18dec3d381dbe8bebd951e191625de42a5035",
+      "finding": "直接看拓扑：New York 对端 Atlanta 为 2012::1、Washington 为 2023::3；主 /128 AD1 与备份 AD2 选 A/E。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": true
+    },
+    {
+      "id": 1361,
+      "original_sha256": "c367ba3ce11336f9927879aea9f63a5fae200877e55d3a126f87e6b1de83895d",
+      "finding": "直接看图：/32 静态路由与 /24 OSPF 路由；最长前缀匹配及同协议同前缀比较 metric 分属不同阶段，C/E。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": true
+    },
+    {
+      "id": 1362,
+      "original_sha256": "bd22976a4b4d70b5d432ac2514cd56f9352cfab5b5159cba0eb5c8ae97128414",
+      "finding": "HSRP 提供共享虚拟网关和冗余，不替代 DHCP 且主机仍需适当的默认路由，B/C。",
+      "fields_checked": [
+        "prompt",
+        "all options",
+        "answer",
+        "explanation",
+        "image",
+        "code"
+      ],
+      "image_directly_viewed": false
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/per_wlan_wireless_settings.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/olh/wlc-olh.pdf"
+  ],
+  "limitations": "原图、规范和题目人工核查；未在真实控制器/路由器做实验。"
+}

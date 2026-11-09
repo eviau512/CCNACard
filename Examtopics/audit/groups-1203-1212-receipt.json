@@ -1,0 +1,21 @@
+{
+  "manifest": "groups-1203-1212.json",
+  "applied_ids": [
+    1203,
+    1205,
+    1208,
+    1210,
+    1211,
+    1212
+  ],
+  "corrected_question_sha256": {
+    "1203": "c749c0b9dfc18b74d1bfe6438025c82d7f668dbdf1864a4ec99a3fb319aa2e9a",
+    "1205": "7358e26ef6398f2f28bd6e37f4415f8d780b1d7663ad9fdcff411883e0bb647e",
+    "1208": "ed60f0022cdd8c6d6ac92c94ad0d865dfc6df3c2e38c0464a9a3f6a2810c6744",
+    "1210": "32a0c691c16517a17f1ce79fc429a32d56d6661d4f6f15d87e755b947c986c3e",
+    "1211": "12fa92831d54e8ad048126247488c81630967c0ae4c41185a0c0bec3b29f77bb",
+    "1212": "0b86657dcf2795f4698231051c5cd1e16ee97c2296cfe1fbe1df13a948ddeb31"
+  },
+  "source_sha256": "d169168d85ec685a9640961b0c426fd4576cebee42437fb269eba8e6439437d0",
+  "app_bundle_sha256": "13b5cd4e538cf5bbdbf5d4504382639cea42277cfdb96fb9fcc6d6ceb12764ad"
+}

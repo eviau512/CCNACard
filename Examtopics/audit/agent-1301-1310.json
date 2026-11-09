@@ -1,0 +1,283 @@
+{
+  "scope": "Q1301–Q1310",
+  "corrections": [
+    {
+      "id": 1301,
+      "original_qid": "Q1301",
+      "before_sha256": "6e04a3ec12c56bfb77b0e7ed84d525e60badc62c44768fcca2fcff1589c5aac1",
+      "reason": "题干答案不可靠：显示AD数值不能判断是否曾手工配置，原C需改成可从路由表直接读取的数值。",
+      "updates": {
+        "prompt": "In a Cisco IOS routing-table display that includes the shown fields, which two pieces of information can be read directly from a dynamic route entry? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "whether an ACL is applied inbound or outbound on the interface"
+          },
+          {
+            "label": "B",
+            "text": "the full EIGRP or BGP autonomous-system number in every route"
+          },
+          {
+            "label": "C",
+            "text": "the administrative distance value of the route"
+          },
+          {
+            "label": "D",
+            "text": "the full neighbor adjacency state table"
+          },
+          {
+            "label": "E",
+            "text": "the displayed age of the route or its last update"
+          }
+        ],
+        "explanation": "C、E。含 `[AD/metric]` 的路由项直接显示管理距离和度量；带时间的动态路由项显示相关路由更新时间或持续时间，具体计时含义依协议和平台而异。仅凭AD数值无法确定它是否由人工配置，因为管理员也可能配置与默认值相同的距离。A 的ACL方向要检查接口；B 的AS号并非每条RIB项都显示；D 的邻居状态应查看协议邻居表。"
+      },
+      "has_exhibit": false,
+      "exhibit_path": null
+    },
+    {
+      "id": 1302,
+      "original_qid": "Q1302",
+      "before_sha256": "0360c091b1244d31a497cb3c45dbbce08ddf6ba355a025c8b0abc2ed5b2fd8a7",
+      "reason": "OSPF定时器必须兼容，原题没有默认定时器前提，C也可能必要。",
+      "updates": {
+        "prompt": "R1 and R3 have compatible OSPF authentication, unique router IDs, matching Hello/dead timers and compatible network types on their shared 192.168.1.0/30 link. OSPF is not yet enabled on either link interface. Which two configuration steps are needed? (Choose two.)",
+        "explanation": "A、B。双方接口必须参与OSPF并能收发Hello（不是passive），且处在相同区域。题设明确定时器已匹配，因此C无需再配置；否则Hello/dead不匹配会阻止邻居建立。OSPF进程ID仅本地有效，双方可以不同；Router ID应唯一，不能相同。"
+      },
+      "has_exhibit": false,
+      "exhibit_path": null
+    },
+    {
+      "id": 1303,
+      "original_qid": "Q1303",
+      "before_sha256": "16f867e9410f1f21f8955f53a51fba1be032fa98950e30b23a71bf83ef5152a3",
+      "reason": "核对原图地址，避免静态路由必须唯一下一跳等绝对化，并说明New York直连。",
+      "updates": {
+        "prompt": "Refer to the exhibit. IPv6 unicast routing is enabled and the shown links are operational. Which two IPv6 routes on the edge routers let the Atlanta and Washington serial-interface addresses reach each other? Assume no other route to the remote serial subnet. (Choose two.)",
+        "explanation": "B、D。Atlanta到`2023::/126`经New York直连接口`2012::2`；Washington到`2012::/126`经New York直连接口`2023::2`。A把本地接口当作下一跳，C不是图中New York的该链路地址；E指向Atlanta自己的直连网段而非远端。New York两条链路本身直连，不依赖题目所称静态路由；端口、IPv6转发和返回路径仍需正常。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1303_image_agent.png"
+    },
+    {
+      "id": 1304,
+      "original_qid": "Q1304",
+      "before_sha256": "a78f9243c0a7a11269648be67df438fc37d8b478e892d5ae359cdebc5a9f0c7d",
+      "reason": "核对共享链路原图，邻居与FULL状态区分并避免静态路由绝不影响的表述。",
+      "updates": {
+        "prompt": "Refer to the exhibit. R1 and R3 share the broadcast link, but do not form an OSPF neighbor relationship. Which two configuration mismatches could cause this? Assume all other physical and IP connectivity is correct. (Choose two.)",
+        "explanation": "D、F。共享链路上OSPF Hello/dead计时器和区域ID需要匹配；任一不一致均可阻止邻居建立。图中Area 0表示预期拓扑，不证明实际两端接口配置正确。DR/BDR与DROther应形成FULL；两个DROther可为2-Way邻居，不等于没有邻居。静态路由及EIGRP较低管理距离本身不阻止交换OSPF Hello；Area 1也不是骨干区域。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1304_image_agent.png"
+    },
+    {
+      "id": 1305,
+      "original_qid": "Q1305",
+      "before_sha256": "7335ac39680d4d2d3ee32d76f70e4dc175cf69041800ed6d65415357dcd3964f",
+      "reason": "图中为192.168.1.0/26，选项为地址而非前缀。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which two IPv4 addresses match the connected 192.168.1.0/26 routing prefix? (Choose two.)",
+        "explanation": "A、B。`192.168.1.0/26`包含 .0–.63，.17和.61均在范围内；.64、.127和.254都在范围外。对常规/26子网，.0是网络地址、.63是定向广播地址，.1–.62为通常可用主机地址；路由前缀匹配范围与地址是否可分配是不同问题。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1305_image_agent.png"
+    },
+    {
+      "id": 1306,
+      "original_qid": "Q1306",
+      "before_sha256": "66c20be01e9201d665f2561114126c9678a4e817b3574460d85204cef3796c9e",
+      "reason": "原解析忽略DR非抢占及BDR先继任，需明确在配置后重置共享链路参与者以重新选举。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Before a planned fresh OSPF DR election, all routers on the shared segment will be restarted together after the changes; R2 retains priority 1, R1 and R3 participate, and no other eligible router has priority 200 or greater. Which two interface configurations respectively make R3 ineligible and give R1 highest priority? (Choose two.)",
+        "options": [
+          {
+            "label": "A",
+            "text": "R3(config)# interface fastethernet 0/0\nR3(config-if)# ip ospf priority 0"
+          },
+          {
+            "label": "B",
+            "text": "R1(config)# router ospf 1\nR1(config-router)# router-id 192.168.100.1"
+          },
+          {
+            "label": "C",
+            "text": "R1(config)# interface fastethernet 0/0\nR1(config-if)# ip ospf priority 200"
+          },
+          {
+            "label": "D",
+            "text": "R1(config)# interface fastethernet 0/0\nR1(config-if)# ip ospf priority 0"
+          },
+          {
+            "label": "E",
+            "text": "R3(config)# interface fastethernet 0/0\nR3(config-if)# ip ospf priority 200"
+          }
+        ],
+        "explanation": "A、C。R3优先级0使其无DR/BDR选举资格；R1优先级200在题设新一轮选举中高于R2的1。OSPF DR选举不抢占：仅变更优先级并不能保证R1立即成为DR，现有BDR可能在DR退出后先继任，所以题目明确所有参与者重启并进行新选举。B只改Router ID，D使R1失去资格，E提高的是R3。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1306_image_agent.png"
+    },
+    {
+      "id": 1307,
+      "original_qid": "Q1307",
+      "before_sha256": "7a49a2d54722787af3d91ee1c2b658fac6e75a88a1a21c1ac88b5b06b6053f42",
+      "reason": "按原图核对下一跳；限定关闭代理ARP及仅访问图示PC，否则C/D可能借助代理ARP工作。",
+      "updates": {
+        "prompt": "Refer to the exhibit. PC1 must reach the four illustrated PCs in 10.10.10.0/24. R2 and R3 have correct local delivery and return routes; proxy ARP is disabled on their shared Ethernet link with R1. Which two next-hop static routes on R1 meet this requirement? (Choose two.)",
+        "explanation": "A、B。R1的`10.10.10.0/24`经192.168.2.3（R2）覆盖图中PC2–PC4，`10.10.10.10/32`经192.168.2.2（R3）以最长前缀匹配送往PC5。题意仅保证图示主机，其他/24地址不一定位于R2。C/D为以太网纯出接口路由，需要对最终目的地址作邻居解析，题设关闭代理ARP，因此不满足；它们并非所有以太网环境下语法都非法。E把R2后面的/29指到R3。需确保回程、接口和主机配置正确。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1307_image_agent.png"
+    },
+    {
+      "id": 1308,
+      "original_qid": "Q1308",
+      "before_sha256": "42f8152f2a61c6449c0f2184d0a09926f526b27e299908cfd4640d861cb038dd",
+      "reason": "图中R2/R3/网段核对；全网与主机R3矛盾，明确特定主机例外及next hop有效条件。",
+      "updates": {
+        "prompt": "Refer to the exhibit. On R1, traffic for 2001:db8:23::/64 must use R2 except traffic for host 2001:db8:23::14, which must use R3 while its host route is installed. Assume the next hops are reachable and the routes install. Which two commands satisfy this? (Choose two.)",
+        "explanation": "B、C。`2001:db8:23::/64`经`fd00:12::2`（R2）；主机`2001:db8:23::14/128`经`fd00:13::3`（R3），/128优先于/64。A仅匹配全零地址，D/E为/64并非针对::14的主机路由，而且将其指向R2；不同IOS版本对含主机位的前缀可能拒绝，不能一概假定被接受。若主机路由因下一跳不可达而撤销，/64可提供回退；仅下游主机故障不必然撤销该静态路由。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q1308_image_agent.png"
+    },
+    {
+      "id": 1309,
+      "original_qid": "Q1309",
+      "before_sha256": "91a77390e376e369ec08de920e6439bb70f01141d3fea7cb166be2c05f9aa196",
+      "reason": "FHRP故障倒换不保证零中断，路径故障需跟踪；GLBP角色与HSRP不同。",
+      "updates": {
+        "explanation": "D、E。FHRP让多台网关共享虚拟默认网关，并可在所监测的主用网关故障时自动切换。HSRP/VRRP通常使用主备，GLBP可实现多网关转发负载分担；上联故障是否触发切换依接口跟踪和协议配置。切换需收敛时间，不能保证业务完全不中断。A加密是其他安全机制，B二层防环属于STP等，C链路聚合属于EtherChannel/LACP等。"
+      },
+      "has_exhibit": false,
+      "exhibit_path": null
+    },
+    {
+      "id": 1310,
+      "original_qid": "Q1310",
+      "before_sha256": "33b3566be2f39a06c1a3256d8ff3240f3b76a4a83c7cfb138162c5c716f45fb5",
+      "reason": "一名多地址不是健康检查或保证高可用；DNS不总公开，且非所有部署默认明文。",
+      "updates": {
+        "explanation": "D、E。DNS使应用可按名称查找资源，同名可有多个A/AAAA记录，对应多个IPv4/IPv6地址。DNS响应和客户端缓存可能影响流量分配，多地址本身不检查服务器健康或保证高可用。A错误，DNS使用分层名称空间；B错误，普通DNS解析并不默认加密所有WAN业务，DoT/DoH只保护相应DNS传输；C错误，名字本身不保护IP地址，DNS数据也可按部署限制访问。"
+      },
+      "has_exhibit": false,
+      "exhibit_path": null
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1301,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked and restored where applicable",
+      "finding": "题干答案不可靠：显示AD数值不能判断是否曾手工配置，原C需改成可从路由表直接读取的数值。"
+    },
+    {
+      "id": 1302,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked and restored where applicable",
+      "finding": "OSPF定时器必须兼容，原题没有默认定时器前提，C也可能必要。"
+    },
+    {
+      "id": 1303,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked and restored where applicable",
+      "finding": "核对原图地址，避免静态路由必须唯一下一跳等绝对化，并说明New York直连。"
+    },
+    {
+      "id": 1304,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked and restored where applicable",
+      "finding": "核对共享链路原图，邻居与FULL状态区分并避免静态路由绝不影响的表述。"
+    },
+    {
+      "id": 1305,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked and restored where applicable",
+      "finding": "图中为192.168.1.0/26，选项为地址而非前缀。"
+    },
+    {
+      "id": 1306,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked and restored where applicable",
+      "finding": "原解析忽略DR非抢占及BDR先继任，需明确在配置后重置共享链路参与者以重新选举。"
+    },
+    {
+      "id": 1307,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked and restored where applicable",
+      "finding": "按原图核对下一跳；限定关闭代理ARP及仅访问图示PC，否则C/D可能借助代理ARP工作。"
+    },
+    {
+      "id": 1308,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "viewed",
+      "code_cli": "checked and restored where applicable",
+      "finding": "图中R2/R3/网段核对；全网与主机R3矛盾，明确特定主机例外及next hop有效条件。"
+    },
+    {
+      "id": 1309,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked and restored where applicable",
+      "finding": "FHRP故障倒换不保证零中断，路径故障需跟踪；GLBP角色与HSRP不同。"
+    },
+    {
+      "id": 1310,
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; C changed in Q1301",
+      "explanation": "corrected",
+      "image": "none",
+      "code_cli": "checked and restored where applicable",
+      "finding": "一名多地址不是健康检查或保证高可用；DNS不总公开，且非所有部署默认明文。"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/9-x/unicast/configuration/guide/l3_cli_nxos/l3_ospf.html",
+    "https://www.rfc-editor.org/rfc/rfc2328",
+    "https://www.rfc-editor.org/rfc/rfc1034"
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1303_image_agent.png",
+    "exhibits/q1304_image_agent.png",
+    "exhibits/q1305_image_agent.png",
+    "exhibits/q1306_image_agent.png",
+    "exhibits/q1307_image_agent.png",
+    "exhibits/q1308_image_agent.png"
+  ],
+  "limitations": "人工原图与题目核对；未运行真实网络设备实验。"
+}

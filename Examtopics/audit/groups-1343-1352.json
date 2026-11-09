@@ -1,0 +1,47 @@
+{
+  "scope": [
+    1343,
+    1352
+  ],
+  "corrections": [
+    {
+      "id": 1343,
+      "before_sha256": "2bdfadcf1f222a086aaf38a61dd0fd8d1a20c55d371c9474512af12e61c26e23",
+      "reason": "playbook 不可能是自身的组成部分；改问 Ansible 自动化中使用的两个相关术语。",
+      "updates": {
+        "prompt": "An engineer uses Ansible to configure a VLAN on a switch. Which two listed terms identify Ansible automation artifacts or actions? (Choose two.)",
+        "explanation": "A、E。Ansible playbook 是以 YAML 描述自动化流程的文件，task 是 play 中执行的动作，通常调用设备模块。playbook 本身并非它自己的组成部分。B、D 是 Chef 的 recipe 与 cookbook；C 在题设中不是 Ansible 的基本自动化术语。执行还需清单、连接方式、凭据及相应设备模块。"
+      }
+    },
+    {
+      "id": 1352,
+      "before_sha256": "00c71aff8776dda7cd1715de87b249d4b00565a85850226c3e531da74616c639",
+      "reason": "原 B 拼写错误，且两站点拓扑中路由器两两直连同样成立，与 A/E 产生歧义；明确为三站点以上全互联要求。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "It leverages a dedicated connection."
+          },
+          {
+            "label": "B",
+            "text": "It requires every router in a network of three or more sites to have a direct circuit to every other router."
+          },
+          {
+            "label": "C",
+            "text": "It delivers redundancy between the central office and branch offices."
+          },
+          {
+            "label": "D",
+            "text": "It uses a single router to route traffic between sites."
+          },
+          {
+            "label": "E",
+            "text": "It connects remote networks through a single line."
+          }
+        ],
+        "explanation": "A、E。题设为两个站点间的一条运营商专用点到点逻辑电路，可承载两端网络的通信；运营商可以在共享物理基础设施上实现，服务保障取决于合同。B 所描述的三站点以上每对路由器都建专用电路是全网状拓扑，不是单条电路的要求；单条路径不能提供路径冗余，D 也不是点到点链路的要求。"
+      }
+    }
+  ]
+}

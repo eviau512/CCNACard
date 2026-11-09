@@ -1,0 +1,41 @@
+{
+  "scope": "Q1193–Q1202 independent review",
+  "corrections": [
+    {
+      "id": 1193,
+      "before_sha256": "d0374a5cc5b241a07224f74fb2a153fd3a80d5ed2dc54ab75f4dc1bdf6fa6820",
+      "reason": "题目任务拼接，恢复逐项可读格式。",
+      "updates": {
+        "prompt": "SIMULATION — R1 is preconfigured and cabling is verified. Configure end-device connectivity:\n\n1. Configure SW-1 Ethernet0/1 for the Cisco IP phone and PC.\n2. Configure SW-2 Ethernet0/1 for PC2.\n3. Create VLAN 10 named Engineering on SW-1.\n4. Enable the vendor-neutral neighbor discovery protocol on the SW-1–SW-2 link.\n5. Disable Cisco neighbor discovery on the SW-1 interface facing R1."
+      }
+    },
+    {
+      "id": 1195,
+      "before_sha256": "e3be57d3e71e857f9592b99cf84dc2a2a08851809fa956f0d3c2a614ffb88c40",
+      "reason": "明确聚合前成员端口的802.1Q trunk及允许列表，满足端口级任务并降低聚合不兼容风险。",
+      "updates": {
+        "explanation": "拓扑将 SW-1 与 SW-2 的 e0/0、e0/1 聚合为 Po12；两端均采用主动 LACP，聚合 trunk 允许 VLAN 1,12,22。SW-1 e0/2 独立 trunk 仅允许 12,22。按平台支持决定是否需要或允许 dot1q 封装命令；确认已有端口配置和聚合兼容后，两端分别执行：\n\n```text\ninterface range e0/0 - 1\n switchport mode trunk\n switchport trunk allowed vlan 1,12,22\n channel-group 12 mode active\ninterface port-channel 12\n switchport mode trunk\n switchport trunk allowed vlan 1,12,22\n```\n\nSW-1 另执行：\n```text\ninterface e0/2\n switchport mode trunk\n switchport trunk allowed vlan 12,22\n```\n\n检查 VLAN 存在、对端 trunk/聚合设置一致及 STP 状态；使用 show etherchannel summary 和 show interfaces trunk 验证，必要时按实验平台补充 encapsulation dot1q。原展示图为上一题解答，现改为对应拓扑。"
+      }
+    },
+    {
+      "id": 1201,
+      "before_sha256": "3f1dff5ab1ff94535bdaeff9135c09f062b9581c79ef7b15313db73d8bc9c8d4",
+      "reason": "显式指定MD5算法，避免依赖不同平台的secret默认哈希。",
+      "updates": {
+        "explanation": "题图缺少拓扑；原答案图是另一道静态路由题，已隐藏并保留审查证据。题设的 Sw3 用户是普通 EXEC（默认 privilege 1），不是 privilege 15；Sw2 是 VLAN 5，不是 VLAN 10。以下以支持 `username algorithm-type md5` 的 IOS 平台为例；先创建 secret，再显式选择 MD5（type 5）；实际平台及现有 AAA/VTY 配置应先核对。\n\n```text\n! Sw3\nusername tech12 privilege 1 secret load1key\nusername tech12 algorithm-type md5\nline vty 0 4\n login local\n transport input telnet\nexit\n! R1: 过滤前往 ISP 的源地址\nip access-list extended ISP_ACL\n deny ip 10.0.0.0 0.255.255.255 any\n deny ip 172.16.0.0 0.15.255.255 any\n permit ip any any\nexit\ninterface <ISP-facing-interface>\n ip access-group ISP_ACL out\nexit\n! Sw2\nip arp inspection vlan 5\nip arp inspection validate src-mac dst-mac ip\nend\n```\n\n172.16.0.0/12 的通配符是 0.15.255.255；题目只要求 RFC 1918 的 A/B 范围。按拓扑和 DHCP snooping 绑定核实信任口，不能凭空指定端口；检查 `show access-lists ISP_ACL`、`show ip interface <ISP-facing-interface>`、`show ip arp inspection` 和绑定表，在各设备保存配置。`ip arp inspection validate` 后续单独执行会覆盖前一次设置，因此三项同一行指定。Telnet 为明文，本题仅按实验要求配置。"
+      }
+    },
+    {
+      "id": 1202,
+      "before_sha256": "9c63b1e6ced1debe5bf324058097be99d22482ef262490f70f15bb65db1a4eec",
+      "reason": "补齐图示PC接入口的可执行配置及准确ping目标。",
+      "updates": {
+        "explanation": "• **实验目标与场景背景**：\n在交换机 Sw1 与 Sw2 之间建立标准二层 Trunk 与 LACP 链路聚合：\n- **Task 1**：在 E0/0 和 E0/1 上配置 IEEE 802.1Q Trunk。Native VLAN 为 99（以未标记 Untagged 形式传输），且 Trunk 链路上仅允许扩展 VLAN 110 和 Untagged Native VLAN 99 通过。验证 PC1 与 PC2 互 ping 正常。\n- **Task 2**：在保留 Trunk 配置的前提下，使用 IEEE 802.3ad（LACP）将 E0/0 和 E0/1 聚合为单个逻辑链路，编号为 20。两端接口均配置为主动协商聚合。\n\n• **逐项任务配置命令详解**：\n1. **Task 1 & Task 2 综合配置**\n```text\nSw1(config)# interface range ethernet 0/0 - 1\nSw1(config-if-range)# switchport trunk encapsulation dot1q\nSw1(config-if-range)# switchport mode trunk\nSw1(config-if-range)# switchport trunk native vlan 99\nSw1(config-if-range)# switchport trunk allowed vlan 99,110\nSw1(config-if-range)# channel-group 20 mode active\nSw1(config-if-range)# exit\n\nSw1(config)# interface port-channel 20\nSw1(config-if)# switchport trunk encapsulation dot1q\nSw1(config-if)# switchport mode trunk\nSw1(config-if)# switchport trunk native vlan 99\nSw1(config-if)# switchport trunk allowed vlan 99,110\nSw1(config-if)# exit\n\nSw2(config)# interface range ethernet 0/0 - 1\nSw2(config-if-range)# switchport trunk encapsulation dot1q\nSw2(config-if-range)# switchport mode trunk\nSw2(config-if-range)# switchport trunk native vlan 99\nSw2(config-if-range)# switchport trunk allowed vlan 99,110\nSw2(config-if-range)# channel-group 20 mode active\nSw2(config-if-range)# exit\n\nSw2(config)# interface port-channel 20\nSw2(config-if)# switchport trunk encapsulation dot1q\nSw2(config-if)# switchport mode trunk\nSw2(config-if)# switchport trunk native vlan 99\nSw2(config-if)# switchport trunk allowed vlan 99,110\nSw2(config-if)# exit\n```\n\n• **验证命令**：\n- `show etherchannel 20 summary`：确认 Port-Channel 20 处于 `SU`（Layer2 & In-Use）状态。\n- `show interfaces trunk`：确认 Port-channel20 处于 trunking 状态，Native VLAN 为 99，Allowed VLANs 仅为 99,110。\n- 在 PC1 上执行 `ping 10.2.2.20` 验证同属于 VLAN 110 的两台 PC 互通正常。\n\n原题图实际上是上一道题的错误解答，拓扑原放在答案区；现将拓扑移至题干。图示两端 E0/2 接 PC，需各自置于 VLAN 110；端口应启用，VLAN 99、110 必须存在。若尚未预配置，在两端分别使用 `interface e0/2`、`switchport mode access`、`switchport access vlan 110` 和 `no shutdown`。`switchport trunk encapsulation dot1q` 只在平台允许显式选择封装时使用，固定 802.1Q 的平台可省略。交换机间 Po20 的两端 native/allowed 列表需一致，主机 IP 分别为 10.2.2.10/24 和 10.2.2.20/24。配置确认后各自 `copy running-config startup-config`。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-t2.html"
+  ],
+  "limitations": "No live IOS tests."
+}

@@ -1,0 +1,38 @@
+{
+  "scope": "Q1233–Q1242 independent review",
+  "corrections": [
+    {
+      "id": 1241,
+      "before_sha256": "42b932338a243395778d8df4e48e3a749326b68dd10bf7762b2548ee614cae95",
+      "reason": "原选项将MAC说成唯一标识设备，改成限定本地以太网域中的接口区分，避免与地址可配置、随机化及冲突相矛盾。",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "to distinguish interfaces by their Layer 2 addresses within a local Ethernet domain"
+          },
+          {
+            "label": "B",
+            "text": "to allow communication with devices on a different network"
+          },
+          {
+            "label": "C",
+            "text": "to differentiate a Layer 2 frame from a Layer 3 packet"
+          },
+          {
+            "label": "D",
+            "text": "to establish a priority system to determine which device gets to transmit first"
+          },
+          {
+            "label": "E",
+            "text": "to allow communication between different devices on the same network"
+          },
+          {
+            "label": "F",
+            "text": "to allow detection of a remote device when its physical address is unknown"
+          }
+        ]
+      }
+    }
+  ]
+}

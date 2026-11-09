@@ -1,0 +1,21 @@
+{
+  "manifest": "groups-1133-1142.json",
+  "applied_ids": [
+    1133,
+    1135,
+    1137,
+    1139,
+    1140,
+    1141
+  ],
+  "corrected_question_sha256": {
+    "1133": "5ef097cdfcc1b7e5764e68fb7ef833f085c8c5a5156f3fc9eae2f4f6241b75c7",
+    "1135": "01d94e819d680ca8499ae3ec2e74833424df332ab886eea15d85a71b66fc704f",
+    "1137": "2ad23e1a36cfb211dfcc830a56d0160764a192ce925814d4e5a38e924b1bff60",
+    "1139": "dce10e2245472a388f3ee10995af7d6778a83cb39ced86ae5aad2e4c20315e5b",
+    "1140": "71ebf20e1015f8fbdf40bdf5a95dc6c3df47627306e1ef18652889bc5934a8f9",
+    "1141": "070b50c9eb2f2f1bde8aeb04deeccc29a9206c701ed253bab233c48c17f9c0b9"
+  },
+  "source_sha256": "dff38bd5030036b8776994dc7ae2b898a0fcdd0fa9a7e20ebc7cb9605a2b48b3",
+  "app_bundle_sha256": "a87bb4243c85618e2c96a187d06574d0adb34293e911a1f345eb68a0966958c5"
+}

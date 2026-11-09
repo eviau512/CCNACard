@@ -1,0 +1,156 @@
+{
+  "scope": "Independent review Q1353–1362",
+  "corrections": [
+    {
+      "id": 1361,
+      "before_sha256": "c367ba3ce11336f9927879aea9f63a5fae200877e55d3a126f87e6b1de83895d",
+      "reason": "原题同协议未限定时，BGP 下一跳 IGP 代价也是合法选路准则，导致 A/C/E 均可能成立；限定 intra-area OSPF 以消歧。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In this OSPF example, consider choosing between eligible intra-area OSPF routes for the same prefix and forwarding packets using matching installed prefixes. Which two criteria are relevant? (Choose two.)",
+        "explanation": "C、E。相同目的前缀的同类 OSPF intra-area 候选路径按 OSPF 路径代价比较；转发时则对已安装的匹配前缀执行最长前缀匹配。图中静态 1.1.1.3/32 与 OSPF 1.1.1.0/24 重叠，目标为 1.1.1.3 时 /32 更长。图中显示的是不同前缀，不证明它们仅依据 metric 相互竞争。A 的下一跳 IGP 代价是 BGP 等其他选路情境可能使用的条件，因此题目明确限于 OSPF intra-area；B、D 的最高值不符合题设。"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1353,
+      "before_sha256": "898d91408d738ab13930a781310c6444779bd77b0d5b63aa952665915c3d896f",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": false,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1354,
+      "before_sha256": "3b648bb6818f08a35d4c99793b6064cf56b2f3f2a2efbc555fa3a899f202b520",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": true,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1355,
+      "before_sha256": "46320bcea79ff613458b0a6c5c19b556460b0c719953a2a09e93360c9dfbed03",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": false,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1356,
+      "before_sha256": "594711315b7667b22eb2ea0a42dd566d9e177aea3b0f030297bdc4ebf120468f",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": false,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1357,
+      "before_sha256": "f910ba3cecab2ce65cfed58597d49acc63531d84df2d048968fbfb5dd53ec482",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": false,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1358,
+      "before_sha256": "ce99f85eaba73bf13a834888da5497ef76f73988d898ba2c6c5014c001504fae",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": true,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1359,
+      "before_sha256": "1d985429b49f3427ea8c9599230621b9a4a1b217f9fa081da0ef64ae25a81574",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": false,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1360,
+      "before_sha256": "b00b1a4149cebd75b8c5ef7c2bd18dec3d381dbe8bebd951e191625de42a5035",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": true,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    },
+    {
+      "id": 1361,
+      "before_sha256": "c367ba3ce11336f9927879aea9f63a5fae200877e55d3a126f87e6b1de83895d",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": true,
+      "finding": "需要限定 OSPF 以排除 BGP 下一跳代价"
+    },
+    {
+      "id": 1362,
+      "before_sha256": "bd22976a4b4d70b5d432ac2514cd56f9352cfab5b5159cba0eb5c8ae97128414",
+      "fields_checked": [
+        "prompt",
+        "options",
+        "answer",
+        "explanation",
+        "image",
+        "CLI"
+      ],
+      "image_viewed": false,
+      "finding": "现有题设及答案未发现新增需修复问题"
+    }
+  ]
+}

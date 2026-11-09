@@ -1,0 +1,137 @@
+{
+  "scope": "Independent Q1293–Q1302 review",
+  "corrections": [
+    {
+      "id": 1297,
+      "before_sha256": "2b84b0df70cc73a25d4411786448d054c83f9d3d5e3befbccc659626063324f0",
+      "reason": "已查看接口地址图，.65/.121/.125属于192.168.12.64–127；B/C/D。题干原说选择IP地址但选项为接口，措辞已统一。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming these interfaces are operational and no more-specific OSPF interface configuration overrides this statement, which three interfaces have IP addresses that match the following command? (Choose three.)\n```cisco\nCity(config-router)# network 192.168.12.64 0.0.0.63 area 0\n```"
+      }
+    },
+    {
+      "id": 1301,
+      "before_sha256": "06ddb4dad81d3145f8855c6d4ed4891298b917caebae03c59b8903e98ff5e4c4",
+      "reason": "题干引用“所示字段”却没有提供图或字段；改为明确路由项含AD/metric和elapsed字段，C/E可直接读取。",
+      "updates": {
+        "prompt": "In a Cisco IOS routing-table display, a dynamic route entry includes an [administrative distance/metric] field and an elapsed-time field. Which two pieces of information can be read directly from that entry? (Choose two.)"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1293,
+      "before_sha256": "f5d569b4f3b33bcb4297ecfdb1f1b49eb2d72ef1282dfe7d30bd157480aa3f1a",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "assessment": "区域可缩小LSA泛洪范围、降低计算负荷并限制局部变化；合理设计可能改善收敛，答案 A/B/E。"
+    },
+    {
+      "id": 1294,
+      "before_sha256": "15dd5de7d7fc271318a45db38a2e0c07a2f9d3151b0153f0003222fa493542ec",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "directly viewed",
+      "code_cli": "checked",
+      "assessment": "已直接查看EIGRP配置图；跨三组主类网络的不同主类边界按题设自动汇总为192.168.2.0/24、10/8、172.16/16；A/C/D。"
+    },
+    {
+      "id": 1295,
+      "before_sha256": "ca11c89577b6184c04722f90b1491bfe96eea786ccf516c9e8a835acdd0ea6ec",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "assessment": "常规静态eBGP两端声明远端AS，网络语句不会单独发现邻居；Hold Time协商，无需配置完全一致；A/B。"
+    },
+    {
+      "id": 1296,
+      "before_sha256": "8b62c6c882251e78c50952a158d9915c41c3182418646368fd5cbd5d8e658e4b",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "assessment": "OSPF支持VLSM，区域内拓扑LSA局限区域，区域设计和汇总可控制通告；A/C/E。"
+    },
+    {
+      "id": 1297,
+      "before_sha256": "2b84b0df70cc73a25d4411786448d054c83f9d3d5e3befbccc659626063324f0",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "directly viewed",
+      "code_cli": "checked",
+      "assessment": "已查看接口地址图，.65/.121/.125属于192.168.12.64–127；B/C/D。题干原说选择IP地址但选项为接口，措辞已统一。"
+    },
+    {
+      "id": 1298,
+      "before_sha256": "afde471e705c7a428718d4967195d313a76d3c923c241859e399f87ecf4e3075",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "directly viewed",
+      "code_cli": "checked",
+      "assessment": "已查看拓扑图，RouterB Lo0为10.0.0.1；在题设无静态ID且无其他loopback的进程启动条件下选择该ID；B/C。"
+    },
+    {
+      "id": 1299,
+      "before_sha256": "8d2de864a77682f8d49be85b98f3ad638dfea4f09701bbf55fab57840339cc43",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "assessment": "Hello用于邻居发现与维护，不使用固定90秒检测间隔，也不跨整个网络泛洪；A/C。"
+    },
+    {
+      "id": 1300,
+      "before_sha256": "3515eb7b088c45bd295547736987c9eb1d367b6efbc34522e55da7d536b1003e",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "assessment": "正常收敛且至少两成员互通时，每组一个Active和一个Standby；A/B。"
+    },
+    {
+      "id": 1301,
+      "before_sha256": "06ddb4dad81d3145f8855c6d4ed4891298b917caebae03c59b8903e98ff5e4c4",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "assessment": "题干引用“所示字段”却没有提供图或字段；改为明确路由项含AD/metric和elapsed字段，C/E可直接读取。"
+    },
+    {
+      "id": 1302,
+      "before_sha256": "711aea8c1cbfdfbc83c42a868873e2d29b2eec8755ef23d7b54c23bed123c7e3",
+      "prompt": "checked",
+      "options": "all checked",
+      "answer": "checked; retained",
+      "explanation": "checked",
+      "image": "none",
+      "code_cli": "checked",
+      "assessment": "OSPF尚未在两端链路接口启用、定时器已匹配，应启用参与并使用相同area；A/B。"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/ios/iproute_eigrp/command/reference/ire_book/ire_a1.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/7039-1.html"
+  ]
+}
