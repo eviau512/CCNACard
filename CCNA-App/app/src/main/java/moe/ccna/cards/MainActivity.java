@@ -444,6 +444,13 @@ public class MainActivity extends Activity {
                                     lastProcessedOAuthCode = code;
                                     driveExecutor.submit(() -> completeOAuthWithCode(code, codeVerifier, redirectUri));
                                 }
+                                runOnUiThread(() -> {
+                                    try {
+                                        Intent frontIntent = new Intent(MainActivity.this, MainActivity.class);
+                                        frontIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(frontIntent);
+                                    } catch (Exception ignored) {}
+                                });
                                 break;
                             } else if (error != null) {
                                 String html = "<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'></head>"
@@ -691,36 +698,57 @@ public class MainActivity extends Activity {
             + "&orderBy=" + URLEncoder.encode("modifiedTime desc", "UTF-8")
             + "&pageSize=10";
 
-        HttpURLConnection conn = (HttpURLConnection) new URL(urlStr).openConnection();
-        conn.setConnectTimeout(15000);
-        conn.setReadTimeout(20000);
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        int status = -1;
+        String respText = "";
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            HttpURLConnection conn = (HttpURLConnection) new URL(urlStr).openConnection();
+            conn.setConnectTimeout(15000);
+            conn.setReadTimeout(20000);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
 
-        int status = conn.getResponseCode();
-        String respText = readStreamText(status >= 200 && status < 300 ? conn.getInputStream() : conn.getErrorStream());
-        if (status < 200 || status >= 300) {
-            throw new IOException("Drive files.list HTTP " + status + ": " + respText);
+            status = conn.getResponseCode();
+            respText = readStreamText(status >= 200 && status < 300 ? conn.getInputStream() : conn.getErrorStream());
+            if (status >= 200 && status < 300) {
+                JSONObject obj = new JSONObject(respText);
+                JSONArray files = obj.optJSONArray("files");
+                return files != null ? files : new JSONArray();
+            }
+            if ((status == 403 || status == 429 || status >= 500) && attempt < 3) {
+                try { Thread.sleep(1100L * attempt); } catch (InterruptedException ignored) {}
+                continue;
+            }
+            break;
         }
-        JSONObject obj = new JSONObject(respText);
-        JSONArray files = obj.optJSONArray("files");
-        return files != null ? files : new JSONArray();
+        throw new IOException("Drive files.list HTTP " + status + ": " + respText);
     }
 
     private String downloadDriveFile(String accessToken, String fileId) throws Exception {
         String urlStr = "https://www.googleapis.com/drive/v3/files/" + URLEncoder.encode(fileId, "UTF-8") + "?alt=media";
-        HttpURLConnection conn = (HttpURLConnection) new URL(urlStr).openConnection();
-        conn.setConnectTimeout(15000);
-        conn.setReadTimeout(25000);
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        int status = -1;
+        String respText = "";
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            HttpURLConnection conn = (HttpURLConnection) new URL(urlStr).openConnection();
+            conn.setConnectTimeout(15000);
+            conn.setReadTimeout(25000);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
 
-        int status = conn.getResponseCode();
-        String respText = readStreamText(status >= 200 && status < 300 ? conn.getInputStream() : conn.getErrorStream());
-        if (status < 200 || status >= 300) {
-            throw new IOException("Drive files.get HTTP " + status + ": " + respText);
+            status = conn.getResponseCode();
+            respText = readStreamText(status >= 200 && status < 300 ? conn.getInputStream() : conn.getErrorStream());
+            if (status >= 200 && status < 300) {
+                return respText != null ? respText.trim() : "";
+            }
+            if (status == 404) {
+                throw new IOException("FILE_NOT_FOUND_404");
+            }
+            if ((status == 403 || status == 429 || status >= 500) && attempt < 3) {
+                try { Thread.sleep(1100L * attempt); } catch (InterruptedException ignored) {}
+                continue;
+            }
+            break;
         }
-        return respText != null ? respText.trim() : "";
+        throw new IOException("Drive files.get HTTP " + status + ": " + respText);
     }
 
     private void deleteDuplicateDriveFile(String accessToken, String fileId) {
@@ -1179,23 +1207,40 @@ public class MainActivity extends Activity {
 
                     if ("drive_rest".equals(syncMode)) {
                         String accessToken = ensureValidAccessToken();
-                        JSONArray files = listDriveSyncFiles(accessToken);
-                        if (files.length() > 0) {
-                            String primaryId = files.getJSONObject(0).getString("id");
-                            prefs.edit().putString(KEY_DRIVE_FILE_ID, primaryId).apply();
-                            primaryContent = downloadDriveFile(accessToken, primaryId);
+                        String cachedFileId = prefs.getString(KEY_DRIVE_FILE_ID, "");
+                        boolean downloadedViaCache = false;
+                        if (cachedFileId != null && !cachedFileId.isEmpty()) {
+                            try {
+                                primaryContent = downloadDriveFile(accessToken, cachedFileId);
+                                downloadedViaCache = true;
+                            } catch (Exception cacheEx) {
+                                if (cacheEx.getMessage() != null && cacheEx.getMessage().contains("FILE_NOT_FOUND_404")) {
+                                    prefs.edit().remove(KEY_DRIVE_FILE_ID).apply();
+                                } else {
+                                    throw cacheEx;
+                                }
+                            }
+                        }
 
-                            // If split-brain created duplicate files across devices, merge all and clean up duplicates
-                            for (int i = 1; i < files.length(); i++) {
-                                String dupId = files.getJSONObject(i).optString("id", "");
-                                if (!dupId.isEmpty() && !dupId.equals(primaryId)) {
-                                    try {
-                                        String dupText = downloadDriveFile(accessToken, dupId);
-                                        if (dupText != null && dupText.startsWith("{")) {
-                                            extraContents.put(dupText);
-                                        }
-                                        deleteDuplicateDriveFile(accessToken, dupId);
-                                    } catch (Exception ignored) {}
+                        if (!downloadedViaCache) {
+                            JSONArray files = listDriveSyncFiles(accessToken);
+                            if (files.length() > 0) {
+                                String primaryId = files.getJSONObject(0).getString("id");
+                                prefs.edit().putString(KEY_DRIVE_FILE_ID, primaryId).apply();
+                                primaryContent = downloadDriveFile(accessToken, primaryId);
+
+                                // If split-brain created duplicate files across devices, merge all and clean up duplicates
+                                for (int i = 1; i < files.length(); i++) {
+                                    String dupId = files.getJSONObject(i).optString("id", "");
+                                    if (!dupId.isEmpty() && !dupId.equals(primaryId)) {
+                                        try {
+                                            String dupText = downloadDriveFile(accessToken, dupId);
+                                            if (dupText != null && dupText.startsWith("{")) {
+                                                extraContents.put(dupText);
+                                            }
+                                            deleteDuplicateDriveFile(accessToken, dupId);
+                                        } catch (Exception ignored) {}
+                                    }
                                 }
                             }
                         }
