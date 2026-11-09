@@ -483,7 +483,16 @@ public class MainActivity extends Activity {
             Toast.makeText(this, "请在浏览器中登录 Google 账号并点击允许", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.e("CCNA_LOG", "Failed to start OAuth loopback flow", e);
-            Toast.makeText(this, "启动 Google 授权失败: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            String msg = e.getMessage() != null ? e.getMessage() : "";
+            if (msg.contains("ECONNREFUSED")) {
+                Toast.makeText(this, "⚠️ 系统防火墙禁用了 CCNA 的联网权限，请在【应用信息 -> 移动数据与 Wi-Fi】中开启网络访问", Toast.LENGTH_LONG).show();
+                try {
+                    Intent settingsIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
+                    startActivity(settingsIntent);
+                } catch (Exception ignored) {}
+            } else {
+                Toast.makeText(this, "启动 Google 授权失败: " + msg, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -503,20 +512,38 @@ public class MainActivity extends Activity {
                 form.append("&code_verifier=").append(URLEncoder.encode(codeVerifier, "UTF-8"));
             }
 
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://oauth2.googleapis.com/token").openConnection();
-            conn.setConnectTimeout(15000);
-            conn.setReadTimeout(20000);
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             byte[] postBytes = form.toString().getBytes(StandardCharsets.UTF_8);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(postBytes);
-                os.flush();
-            }
+            int status = -1;
+            String respText = "";
+            Exception lastNetEx = null;
 
-            int status = conn.getResponseCode();
-            String respText = readStreamText(status >= 200 && status < 300 ? conn.getInputStream() : conn.getErrorStream());
+            // Retry up to 3 times across 600ms intervals in case the app is transitioning from background to foreground
+            for (int attempt = 1; attempt <= 3; attempt++) {
+                try {
+                    HttpURLConnection conn = (HttpURLConnection) new URL("https://oauth2.googleapis.com/token").openConnection();
+                    conn.setConnectTimeout(15000);
+                    conn.setReadTimeout(20000);
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    try (OutputStream os = conn.getOutputStream()) {
+                        os.write(postBytes);
+                        os.flush();
+                    }
+                    status = conn.getResponseCode();
+                    respText = readStreamText(status >= 200 && status < 300 ? conn.getInputStream() : conn.getErrorStream());
+                    lastNetEx = null;
+                    break;
+                } catch (Exception netEx) {
+                    lastNetEx = netEx;
+                    if (attempt < 3) {
+                        try { Thread.sleep(650); } catch (InterruptedException ignored) {}
+                    }
+                }
+            }
+            if (lastNetEx != null) {
+                throw lastNetEx;
+            }
             if (status < 200 || status >= 300) {
                 throw new IOException("Token exchange HTTP " + status + ": " + respText);
             }
