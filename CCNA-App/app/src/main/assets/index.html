@@ -202,15 +202,14 @@
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span>Retry interval (questions later):</span>
-            <span id="retryIntervalLabel" style="font-size:0.8rem; color:var(--primary); font-weight:700;">7 Qs (Default)</span>
+            <span>Mistake cooldown (防既视感冷却间隔):</span>
+            <span id="retryIntervalLabel" style="font-size:0.8rem; color:var(--primary); font-weight:700;">~25 Qs (Default ±35%)</span>
           </div>
           <div class="retry-pills" id="retryPills">
-            <button type="button" class="retry-pill" data-val="3" onclick="updateRetryInterval(3)">3 Qs</button>
-            <button type="button" class="retry-pill" data-val="5" onclick="updateRetryInterval(5)">5 Qs</button>
-            <button type="button" class="retry-pill active" data-val="7" onclick="updateRetryInterval(7)">7 Qs ★</button>
-            <button type="button" class="retry-pill" data-val="10" onclick="updateRetryInterval(10)">10 Qs</button>
-            <button type="button" class="retry-pill" data-val="15" onclick="updateRetryInterval(15)">15 Qs</button>
+            <button type="button" class="retry-pill" data-val="15" onclick="updateRetryInterval(15)">~15 Qs</button>
+            <button type="button" class="retry-pill active" data-val="25" onclick="updateRetryInterval(25)">~25 Qs ★</button>
+            <button type="button" class="retry-pill" data-val="40" onclick="updateRetryInterval(40)">~40 Qs</button>
+            <button type="button" class="retry-pill" data-val="60" onclick="updateRetryInterval(60)">~60 Qs</button>
           </div>
         </div>
         <hr style="border:0; border-top:1px solid var(--border-color);">

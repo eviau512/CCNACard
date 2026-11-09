@@ -18,8 +18,9 @@ let appState = {
   cardStats: {},            // qid -> { box: 0..3, streak, lapses, attempts, everWrong, lastSeenStep, nextDueStep, lastReviewedAt }
   totalSteps: 0,            // monotonic global question step counter
   history: [],              // array of { qid, domain, topic, misconception, correct, isIdk, time }
-  retryInterval: 7,         // default 7 questions later for Stage 1 review
+  retryInterval: 25,        // default ~25 questions cooldown (with ±35% random fuzz) to prevent déjà vu
   retryDefaultMigratedV2: true,
+  antiDejaVuMigratedV3: true,
   shuffleOptions: true,     // default true: randomize option order (需要乱序选项)
   hideMastered: false,      // optional: completely exclude mastered cards
   deckMode: 'smart',        // 'smart' | 'weak' | 'bookmarks' | 'domain' | 'topic' | 'type'
@@ -92,6 +93,54 @@ const SrsEngine = {
     });
   },
 
+  randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  },
+
+  applyFuzz(baseInterval, ratio = 0.35) {
+    const spread = Math.max(3, Math.round(baseInterval * ratio));
+    return Math.max(6, baseInterval + this.randomInt(-spread, spread));
+  },
+
+  getCooldownSteps() {
+    const base = parseInt(appState.retryInterval, 10) || 25;
+    return Math.max(12, Math.floor(base * 0.75));
+  },
+
+  isRecentlySeen(qid, customMinSteps = null, minMinutes = 8) {
+    const st = appState.cardStats && appState.cardStats[qid];
+    if (!st || !st.lastSeenStep) return false;
+    const stepNow = appState.totalSteps || 0;
+    const minSteps = customMinSteps !== null ? customMinSteps : this.getCooldownSteps();
+    const stepsAgo = stepNow - st.lastSeenStep;
+    const minsAgo = st.lastReviewedAt ? ((Date.now() - st.lastReviewedAt) / 60000) : 999;
+    return (stepsAgo >= 0 && stepsAgo < minSteps) || (minsAgo >= 0 && minsAgo < minMinutes);
+  },
+
+  pickHistoricalMistakeForReview(excludeQid) {
+    if (!Array.isArray(allQuestions) || allQuestions.length === 0) return null;
+    const upcomingIds = new Set(
+      (activeQueue || []).slice(currentIndex, currentIndex + 22).map(item => item && item.id)
+    );
+    upcomingIds.add(excludeQid);
+
+    const candidates = [];
+    for (let i = 0; i < allQuestions.length; i++) {
+      const q = allQuestions[i];
+      if (!q || upcomingIds.has(q.id)) continue;
+      if (appState.domainFilter && q.domain !== appState.domainFilter) continue;
+      const st = appState.cardStats && appState.cardStats[q.id];
+      const isMistake = (appState.masteredIds[q.id] === false) || (st && (st.box === 0 || st.box === 1));
+      if (!isMistake) continue;
+      if (!this.isRecentlySeen(q.id)) {
+        candidates.push(q);
+      }
+    }
+    if (candidates.length === 0) return null;
+    const shuffled = shuffle(candidates);
+    return shuffled[0];
+  },
+
   recordOutcome(question, isCorrect, isIdk) {
     const qid = question.id;
     appState.totalSteps = (appState.totalSteps || 0) + 1;
@@ -100,7 +149,7 @@ const SrsEngine = {
     st.lastSeenStep = appState.totalSteps;
     st.lastReviewedAt = Date.now();
 
-    const baseInterval = parseInt(appState.retryInterval, 10) || 7;
+    const baseInterval = Math.max(12, parseInt(appState.retryInterval, 10) || 25);
 
     if (!isCorrect || isIdk) {
       st.everWrong = true;
@@ -109,10 +158,21 @@ const SrsEngine = {
       st.box = 0;
       appState.masteredIds[qid] = false;
 
-      // Leech cards (3+ lapses) get a tighter initial reinforcement interval
-      const stepInterval = st.lapses >= 3 ? Math.max(3, Math.floor(baseInterval * 0.6)) : baseInterval;
+      // Push the just-missed card far enough ahead (with ±35% random fuzz) to prevent short-term déjà vu
+      const rawCooldown = st.lapses >= 3 ? Math.max(14, Math.floor(baseInterval * 0.8)) : baseInterval;
+      const stepInterval = this.applyFuzz(rawCooldown, 0.35);
       st.nextDueStep = appState.totalSteps + stepInterval;
       this.scheduleInActiveQueue(question, stepInterval, 1);
+
+      // Also pull a random OLDER mistake (not seen recently) into a medium randomized slot if available
+      const olderMistake = this.pickHistoricalMistakeForReview(qid);
+      if (olderMistake) {
+        const olderSt = this.ensureStat(olderMistake.id);
+        const olderStage = olderSt.box === 1 ? 2 : 1;
+        const olderGap = this.randomInt(7, 15);
+        this.scheduleInActiveQueue(olderMistake, olderGap, olderStage, true);
+      }
+
       return {
         status: 'reinforce',
         box: 0,
@@ -127,15 +187,15 @@ const SrsEngine = {
       // First-sight correct -> Box 3 (Mastered immediately)
       st.box = 3;
       appState.masteredIds[qid] = true;
-      st.nextDueStep = appState.totalSteps + 200;
-      return { status: 'mastered_first', box: 3, interval: 200 };
+      st.nextDueStep = appState.totalSteps + this.applyFuzz(240, 0.25);
+      return { status: 'mastered_first', box: 3, interval: 240 };
     }
 
     if (st.streak === 1) {
-      // Missed previously, passed Stage 1 -> Box 1 (Consolidating 1/2)
+      // Missed previously, passed Stage 1 -> Box 1 (Consolidating 1/2) with stretched fuzzed spacing
       st.box = 1;
       appState.masteredIds[qid] = false;
-      const consolidationInterval = baseInterval * 3 + 4; // e.g., 25 Qs for default 7
+      const consolidationInterval = this.applyFuzz(Math.round(baseInterval * 2.4) + 10, 0.35);
       st.nextDueStep = appState.totalSteps + consolidationInterval;
       this.scheduleInActiveQueue(question, consolidationInterval, 2);
       return {
@@ -149,7 +209,7 @@ const SrsEngine = {
     // Passed Stage 2+ consecutive review -> Graduated to Mastered (Box 2 / 3)!
     st.box = st.streak >= 3 ? 3 : 2;
     appState.masteredIds[qid] = true;
-    const longInterval = st.streak >= 3 ? 300 : 120;
+    const longInterval = this.applyFuzz(st.streak >= 3 ? 320 : 140, 0.25);
     st.nextDueStep = appState.totalSteps + longInterval;
     return {
       status: 'graduated',
@@ -159,7 +219,7 @@ const SrsEngine = {
     };
   },
 
-  scheduleInActiveQueue(question, interval, stage) {
+  scheduleInActiveQueue(question, interval, stage, isOlderRotation = false) {
     // Remove any existing future retry copy of the same question beyond currentIndex to avoid duplicates
     for (let i = activeQueue.length - 1; i > currentIndex; i--) {
       if (activeQueue[i].id === question.id && activeQueue[i].isRetry) {
@@ -170,12 +230,14 @@ const SrsEngine = {
     const retryCard = { ...question, isRetry: true, retryStage: stage };
     activeQueue.splice(insertIndex, 0, retryCard);
 
-    const banner = document.getElementById('queueBanner');
-    if (banner) {
-      banner.classList.add('active');
-      const stageLabel = stage === 2 ? 'Stage 2/2 Consolidation' : 'Stage 1/2 Reinforce';
-      document.getElementById('queueBannerText').textContent =
-        `🔁 #${question.id} (${stageLabel}) scheduled in ${interval} questions.`;
+    if (!isOlderRotation) {
+      const banner = document.getElementById('queueBanner');
+      if (banner) {
+        banner.classList.add('active');
+        const stageLabel = stage === 2 ? 'Stage 2/2 Consolidation' : 'Cooldown Review';
+        document.getElementById('queueBannerText').textContent =
+          `🔁 #${question.id} (${stageLabel}) cooled down for ~${interval} questions.`;
+      }
     }
   }
 };
@@ -199,7 +261,8 @@ const DeckScheduler = {
     const weakTopics = this.getWeakTopicsSet();
     const stepNow = appState.totalSteps || 0;
 
-    const dueCards = [];
+    const olderDue = [];
+    const recentDue = [];
     const weakUnseen = [];
     const normalUnseen = [];
     const masteredPool = [];
@@ -210,10 +273,18 @@ const DeckScheduler = {
       const isFailedOrConsolidating = (appState.masteredIds[q.id] === false) || (st && (st.box === 0 || st.box === 1));
 
       if (isFailedOrConsolidating) {
-        dueCards.push({
-          q,
-          priority: (st ? st.box : 0) * 1000 + ((st && st.nextDueStep) ? (st.nextDueStep - stepNow) : 0) - ((st ? st.lapses : 1) * 15)
-        });
+        const retryCard = {
+          ...q,
+          isRetry: true,
+          retryStage: (st && st.box === 1) ? 2 : 1,
+          _lastSeenStep: (st && st.lastSeenStep) ? st.lastSeenStep : 0,
+          _lastReviewedAt: (st && st.lastReviewedAt) ? st.lastReviewedAt : 0
+        };
+        if (SrsEngine.isRecentlySeen(q.id)) {
+          recentDue.push(retryCard);
+        } else {
+          olderDue.push(retryCard);
+        }
       } else if (isMastered) {
         if (!appState.hideMastered) {
           masteredPool.push(q);
@@ -228,41 +299,73 @@ const DeckScheduler = {
       }
     });
 
-    // Sort due cards by urgency
-    dueCards.sort((a, b) => a.priority - b.priority);
-    const orderedDue = dueCards.map(item => ({ ...item.q, isRetry: true, retryStage: (appState.cardStats[item.q.id] && appState.cardStats[item.q.id].box === 1) ? 2 : 1 }));
+    // 1. Randomly shuffle older historical mistakes so review order is never rigid or predictable
+    const shufOlderDue = shuffle(olderDue);
+    // 2. Sort recently seen mistakes from least-recently-seen to most-recently-seen
+    //    so a card missed 1 minute ago is always pushed to the very end
+    recentDue.sort((a, b) => (a._lastSeenStep - b._lastSeenStep) || (a._lastReviewedAt - b._lastReviewedAt));
+
     const shufWeakUnseen = shuffle(weakUnseen).map(q => ({ ...q, isRetry: false }));
     const shufNormalUnseen = shuffle(normalUnseen).map(q => ({ ...q, isRetry: false }));
     const shufMastered = shuffle(masteredPool).map(q => ({ ...q, isRetry: false }));
 
-    // Combine unseen with weak-topic boost (1 weak-topic card every 3 unseen cards)
+    // Combine unseen with randomized weak-topic boost (1 weak-topic card every 2~4 normal unseen cards)
     const unseenCombined = [];
     let wi = 0, ni = 0;
     while (wi < shufWeakUnseen.length || ni < shufNormalUnseen.length) {
       if (wi < shufWeakUnseen.length) unseenCombined.push(shufWeakUnseen[wi++]);
-      for (let k = 0; k < 2 && ni < shufNormalUnseen.length; k++) {
+      const normalBurst = SrsEngine.randomInt(2, 4);
+      for (let k = 0; k < normalBurst && ni < shufNormalUnseen.length; k++) {
         unseenCombined.push(shufNormalUnseen[ni++]);
       }
     }
 
-    // Interleave due reviews near the front (1 due card every 2 unseen cards) and 5% mastered review
+    // Pure Mistake Review Mode (e.g. Wrong & Weak Pool where unseenCombined is empty):
+    // Return randomized older mistakes first, and keep recently missed cards at the very back!
+    if (unseenCombined.length === 0 && (shufOlderDue.length > 0 || recentDue.length > 0)) {
+      return shufOlderDue.concat(recentDue);
+    }
+
+    // Smart Adaptive Mode: Dynamic randomized spacing between mistake reviews (no fixed frequency!)
     const result = [];
-    let di = 0, ui = 0, mi = 0;
+    let di = 0, ri = 0, ui = 0, mi = 0;
     const maxSprinkledMastered = Math.max(5, Math.floor(unseenCombined.length * 0.05));
 
-    while (di < orderedDue.length || ui < unseenCombined.length) {
-      if (di < orderedDue.length) {
-        result.push(orderedDue[di++]);
+    // Warm-up with 3~7 unseen cards at the start of the queue before the first historical mistake
+    const initialWarmup = SrsEngine.randomInt(3, 7);
+    for (let k = 0; k < initialWarmup && ui < unseenCombined.length; k++) {
+      result.push(unseenCombined[ui++]);
+    }
+
+    let nextMasteredAt = result.length + SrsEngine.randomInt(16, 28);
+
+    while (di < shufOlderDue.length || ui < unseenCombined.length) {
+      if (di < shufOlderDue.length) {
+        result.push(shufOlderDue[di++]);
       }
-      for (let k = 0; k < 2 && ui < unseenCombined.length; k++) {
+      // Dynamic stretched gap: 5 to 12 unseen cards between historical mistake reviews
+      const unseenGap = SrsEngine.randomInt(5, 12);
+      for (let k = 0; k < unseenGap && ui < unseenCombined.length; k++) {
         result.push(unseenCombined[ui++]);
+        if (result.length >= nextMasteredAt && mi < Math.min(shufMastered.length, maxSprinkledMastered)) {
+          result.push(shufMastered[mi++]);
+          nextMasteredAt = result.length + SrsEngine.randomInt(16, 28);
+        }
       }
-      if (result.length > 0 && result.length % 19 === 0 && mi < Math.min(shufMastered.length, maxSprinkledMastered)) {
-        result.push(shufMastered[mi++]);
+      if (ui >= unseenCombined.length && di < shufOlderDue.length) {
+        // Unseen cards exhausted; append remaining older due cards
+        while (di < shufOlderDue.length) {
+          result.push(shufOlderDue[di++]);
+        }
       }
     }
 
-    // Append remaining mastered cards at the end if unseen/due are exhausted (or if user mastered everything)
+    // Place recently-missed cooldown cards far down the queue (at the tail)
+    while (ri < recentDue.length) {
+      result.push(recentDue[ri++]);
+    }
+
+    // Append remaining mastered cards at the end if unseen/due are exhausted
     while (mi < shufMastered.length) {
       result.push(shufMastered[mi++]);
     }
@@ -355,6 +458,12 @@ function loadStoredState() {
           parsed.retryInterval = 7;
         }
         parsed.retryDefaultMigratedV2 = true;
+      }
+      if (!parsed.antiDejaVuMigratedV3) {
+        if (!parsed.retryInterval || parsed.retryInterval < 15) {
+          parsed.retryInterval = 25;
+        }
+        parsed.antiDejaVuMigratedV3 = true;
       }
       appState = Object.assign(appState, parsed);
     }
@@ -1744,10 +1853,10 @@ function toggleBookmark() {
 
 // SETTINGS & MODALS
 function syncRetryPillsUI() {
-  const cur = parseInt(appState.retryInterval) || 7;
+  const cur = parseInt(appState.retryInterval, 10) || 25;
   const lbl = document.getElementById('retryIntervalLabel');
   if (lbl) {
-    lbl.textContent = cur === 7 ? '7 Qs (Default)' : `${cur} Qs`;
+    lbl.textContent = cur === 25 ? '~25 Qs (Default ±35%)' : `~${cur} Qs (±35%)`;
   }
   document.querySelectorAll('.retry-pill').forEach(btn => {
     const v = parseInt(btn.dataset.val, 10);
@@ -1804,10 +1913,10 @@ function updateHideMastered(enabled) {
 window.updateHideMastered = updateHideMastered;
 
 function updateRetryInterval(val) {
-  appState.retryInterval = parseInt(val) || 7;
+  appState.retryInterval = parseInt(val, 10) || 25;
   syncRetryPillsUI();
   saveState();
-  showToast(`🔁 Retry interval set to ${appState.retryInterval} questions`);
+  showToast(`🔁 Mistake cooldown set to ~${appState.retryInterval} questions (±35% random fuzz)`);
 }
 
 function jumpToQuestion(targetId = null) {
