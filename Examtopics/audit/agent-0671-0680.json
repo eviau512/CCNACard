@@ -1,0 +1,478 @@
+{
+  "corrections": [
+    {
+      "id": 671,
+      "before_sha256": "ebe3c6c1e7916381132c88feda205607edfbdef6cce5da9629030d3384de1b39",
+      "original": {
+        "prompt": "What is the primary purpose of a console port on a Cisco WLC?",
+        "options": [
+          {
+            "label": "A",
+            "text": "in-band management via an asynchronous transport"
+          },
+          {
+            "label": "B",
+            "text": "in-band management via an IP transport"
+          },
+          {
+            "label": "C",
+            "text": "out-of-band management via an asynchronous transport"
+          },
+          {
+            "label": "D",
+            "text": "out-of-band management via an IP transport"
+          }
+        ],
+        "answer": [
+          "C"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）控制台端口（Console Port）的技术特性与管理平面通道分类。\n在网络设备管理架构中，管理接入被严格区分为两大范畴：\n1. 带内管理（In-Band Management）：管理数据与普通用户业务数据共享相同的物理以太网链路（IP 传输网络），例如通过 SSH/HTTPS 访问 WLC 的管理接口（Management Interface）或动态接口。其缺陷是一旦网络发生拥塞、VLAN 故障或路由中断，管理员将无法远程登入设备。\n2. 带外管理（Out-of-Band Management, OOBM）：管理流量完全独立于生产用户数据网络，即使整个以太网交换网络彻底瘫痪，管理员仍能维持对设备的底层控制。\n带外管理的物理传输媒介主要分为两类：\n- 异步串行传输（Asynchronous Transport）：通过物理异步串口（如 RJ-45 Console 端口或 Mini-USB 端口），使用 RS-232 串口协议与终端仿真软件（如 PuTTY、SecureCRT，波特率通常为 9600 bps）直连，无需任何 IP 协议栈即可直接进入底层 CLI 控制台。\n- IP 传输（IP Transport）：通过专门的带外网络物理网口（如 WLC 的 Service Port），配置独立网段的 IP 地址并接入隔离的带外管理交换网络。\n\n• 正确选项剖析：\n选项 C（out-of-band management via an asynchronous transport）完全符合硬件规范：\nCisco WLC 上的 Console 端口专为“基于异步传输的带外管理（OOBM via an asynchronous transport）”而设计。它是一个物理串行异步接口，允许工程师在开箱首次部署、灾难性网络中断或无需借助任何 IP 网络连接的情况下，直接通过控制台线缆连接计算机串口，实现对控制器的底层恢复与带外命令行管理。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（in-band management via an asynchronous transport）：概念严重自相矛盾。Console 物理串口直连属于绝对的带外管理（OOB），绝不可能被称为“带内管理（in-band）”。\n- 选项 B（in-band management via an IP transport）：对应的是通过主以太网分配系统端口（Distribution Port）上的 Management Interface 运行 SSH 或 HTTPS，属于带内 IP 管理，完全不是 Console 端口的职能。\n- 选项 D（out-of-band management via an IP transport）：描述的是 WLC 上的 **服务端口（Service Port）**。Service Port 运行独立 IP 地址并通过以太网提供带外管理，并非异步串行 Console 端口。\n\n• 考试要点与速记技巧：\nWLC 两种带外管理端口辨析：\n• Console 端口 -> 异步串行传输带外管理（Asynchronous OOBM）；\n• Service 端口 -> 独立 IP 以太网带外管理（IP OOBM）。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "explanation": "答案 C。Console 是异步串行的带外管理通道，可用终端程序直连以进行初始配置或故障排除，不要求 WLC 的业务 IP 路径可用。A 错在称其带内；B 是带内 IP 管理；D 可描述独立的 Ethernet service port，但它不是串行 console。实际连接方式和串口参数应以设备型号文档为准。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "异步 console 与独立 IP service port；纠正绝对化断网可用结论。",
+        "reference": null
+      }
+    },
+    {
+      "id": 672,
+      "before_sha256": "cae1637af0d1fbb553bd654c0dafa09760ff1a559858db007a54a7923bb39661",
+      "original": {
+        "prompt": "Which port type does a lightweight AP use to connect to the wired network when it is configured in local mode?",
+        "options": [
+          {
+            "label": "A",
+            "text": "EtherChannel"
+          },
+          {
+            "label": "B",
+            "text": "access"
+          },
+          {
+            "label": "C",
+            "text": "LAG"
+          },
+          {
+            "label": "D",
+            "text": "trunk"
+          }
+        ],
+        "answer": [
+          "B"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查轻量级接入点（Lightweight AP, LAP）在本地模式（Local Mode / Centralized Mode）下的二层交换机物理接口配置规范。\n1. 集中式本地模式（Local Mode）流量转发模型：\n   - 本地模式是 Cisco 集中式无线网络最经典的运行架构。在此模式下，AP 建立两条 CAPWAP 隧道与远端 WLC 相连：CAPWAP 控制隧道（UDP 5246）与 CAPWAP 数据隧道（UDP 5247）。\n   - 无论无线客户端关联的是员工 SSID、访客 SSID 还是语音 SSID（无论客户端属于哪个业务 VLAN），AP 都会在无线射频芯片接收到 802.11 帧后，直接将其整体封装到三层 CAPWAP 数据报文中（外层源 IP 为 AP 管理地址，目的 IP 为 WLC 管理地址），然后通过单播 IP 包转发给上游交换机。\n   - 所有的 802.1Q VLAN 标签打标与剥离全部在 WLC 端完成，AP 自身所在的有线链路根本不需要承载多个 VLAN 业务数据。\n2. 交换机物理端口类型选择：\n   - 由于 AP 发出的所有报文（CAPWAP 隧道报文、DHCP、DNS、NTP 等）都源自 AP 自身这一个单独的 IP 实体，AP 只需属于一个专门的 AP 管理网段（AP Management VLAN）。\n   - 因此，上游接入交换机连接本地模式轻量级 AP 的端口只需配置为标准 **Access（接入）模式** 并划入 AP 管理 VLAN，完全无需配置多 VLAN Trunk。\n\n• 正确选项剖析：\n选项 B（access）完全符合 Cisco 官方设计指南（Cisco Validated Design, CVD）：\n当轻量级 AP 配置在本地模式（Local Mode）时，所有无线客户端的业务流量均被封入 CAPWAP 隧道送往 WLC 处理。交换机面向 AP 的接口只需收发无标签（Untagged）的单播 IP 隧道流量，因此交换机端口应当配置为 **Access 模式**（接入 AP 管理 VLAN），既满足业务转发需求，又最大程度降低了二层广播风暴与安全风险。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（EtherChannel）/ 选项 C（LAG）：轻量级 AP 通常仅使用单根 PoE 双绞线与接入交换机相连，不支持也不需要配置端口聚合（LAG / EtherChannel）。端口聚合主要应用于 WLC 分配系统端口与核心交换机之间。\n- 选项 D（trunk）：Trunk 端口专用于在交换链路上传输多个打标 VLAN。在轻量级 AP 中，仅当 AP 工作在 **FlexConnect 本地转发模式（Local Switching）** 时才需要配置为 Trunk 口（以便 AP 将特定 SSID 的流量在本地以 802.1Q 打标形式直接送入本地交换机）。题干明确限定为“local mode”，因此绝不使用 Trunk。\n\n• 考试要点与速记技巧：\n“瘦 AP 连网看模式：Local Mode 走集中隧道配 Access；FlexConnect 本地交换才配 Trunk”。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "prompt": "In a basic centralized WLAN deployment, a local-mode lightweight AP uses a single untagged management VLAN and tunnels client traffic to the WLC. Which switch port type is sufficient for its wired uplink?",
+        "explanation": "答案 B。该场景中 AP 的管理 VLAN 使用无标签接入端口；本地模式的客户端流量通过 CAPWAP 隧道送 WLC，接入链路不必承载每个客户端 VLAN。D 可用于需要多个 VLAN 的其他设计，并非所有本地模式部署都绝对禁止 trunk。A/C 是链路聚合，不是此单链路的必要条件；AP 型号和具体功能可能支持其他接法。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定单无标签管理 VLAN 的集中转发场景，避免 trunk 和聚合的绝对断言。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/managing_aps.html"
+      }
+    },
+    {
+      "id": 673,
+      "before_sha256": "1ba22f839e4391f924d94d29ea2e70d0e0c78c732d619fa4ffcede3871ecd78b",
+      "original": {
+        "prompt": "Which step immediately follows receipt of the EAP success message when session resumption is disabled for an EAP-TLS connection?",
+        "options": [
+          {
+            "label": "A",
+            "text": "PMKID caching"
+          },
+          {
+            "label": "B",
+            "text": "four-way handshake"
+          },
+          {
+            "label": "C",
+            "text": "802.1X authentication"
+          },
+          {
+            "label": "D",
+            "text": "EAPOL-key frame"
+          }
+        ],
+        "answer": [
+          "D"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查无线企业级安全认证协议栈（IEEE 802.1X / EAP-TLS 与 IEEE 802.11i 四次握手）的状态机流转与数据帧传输时序。\n在禁用会话恢复（Session Resumption is disabled）的 EAP-TLS 完整认证流程中，客户端与网络经历以下严格时序步骤：\n1. 802.11 链路开销：802.11 探测（Probe）-> 开放系统认证（Open System Auth）-> 关联（Association）。此时受控端口处于阻塞状态，仅允许 EAPOL 帧通过。\n2. 802.1X / EAP-TLS 身份认证：客户端（Supplicant）与 RADIUS 认证服务器（如 Cisco ISE）之间经历双向数字证书验证、TLS 隧道协商与密钥派生，双方在内存中各自独立派生出成对主密钥（Pairwise Master Key, PMK）。\n3. EAP-Success 确认与密钥交付：认证服务器向认证者（Authenticator，如 AP / WLC）发送 RADIUS Access-Accept 报文，并在 MS-MPPE-Recv-Key 属性中安全附带 PMK 密钥。随后 AP/WLC 向客户端发送 **EAP-Success** 报文，宣告 802.1X 认证正式成功。\n4. 密钥交换启动：紧随 EAP-Success 之后，AP/WLC 必须立即启动 IEEE 802.11i 四次握手（4-Way Handshake）以派生单播瞬时密钥（PTK）和组播密钥（GTK）。四次握手的第一个物理/数据链路动作，就是由 AP/WLC 向客户端发送携带随机数 ANonce 的 **EAPOL-Key 报文（Message 1 of 4-Way Handshake）**！\n\n• 正确选项剖析：\n选项 D（EAPOL-key frame）从报文级别精确反映了协议状态机动作：\n在收到 EAP-Success 报文后，由于会话恢复被禁用，客户端与认证者必须立即执行四次握手来确认彼此持有相同的 PMK 并派生加密密钥 PTK。而四次握手所使用的底层以太网通信载体即为 **EAPOL-Key 帧**（Message 1）。因此在 EAP 成功后客户端紧接着收到的正是携带 ANonce 的首个 EAPOL-Key 帧。选项 D 准确描述了紧随 EAP-Success 之后的物理报文实体。\n（注：在考试宏观概念视角下，四次握手过程是由 EAPOL-Key 帧交互构成的，选项 D 直指第一步发送的报文类型，符合题库原题给定的官方标准判定）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（PMKID caching）：属于启用会话恢复（Session Resumption）或快速漫游时的优化机制（客户端将 PMK 标识符缓存起来以便下次快速重连），而题干前置条件已明确指出“session resumption is disabled（会话恢复被禁用）”，因此绝不会执行 PMKID caching。\n- 选项 B（four-way handshake）：四次握手是该阶段的高层宏观交互过程名称，但在严格的协议数据单元（PDU）传输序列中，立即触发的具体报文帧是“EAPOL-Key frame”。本题官方标答严格定位为具体的帧交互选项 D。\n- 选项 C（802.1X authentication）：802.1X 身份认证在收到 EAP-Success 之前就已经全部执行完毕，属于前置流程而非后续步骤。\n\n• 考试要点与速记技巧：\nEAP-TLS 认证握手时序：\n“EAPOL-Start -> TLS 证书认证 -> EAP-Success -> EAPOL-Key 帧（开启 4 次握手协商 PTK/GTK）”。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "prompt": "After successful EAP-TLS authentication on a WPA2-Enterprise WLAN, what type of frame initiates the four-way handshake?",
+        "explanation": "答案 D。EAP 成功后，认证者以第一条 EAPOL-Key 消息开始四次握手，双方根据已有 PMK 及随机数等派生并确认会话密钥。B 是整个握手阶段的名称，D 才是题目要求的帧类型；C 是此前的身份认证；A 是缓存机制，不是该第一条帧。TLS 会话恢复与 PMK 缓存属于不同机制，不能互相推断。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "原题 B 与 D 同时合理，明确要求帧类型，纠正 TLS 恢复与 PMK 缓存混同。",
+        "reference": "https://www.cisco.com/en/US/docs/wireless/wlan_adapter/secure_client/5.1.0/administration/guide/C1_Network_Security.html"
+      }
+    },
+    {
+      "id": 674,
+      "before_sha256": "d488c3cd7773982a09481422ebcdd3aed41c4cded99e5f199b2c3d25bdd0d7a6",
+      "original": {
+        "prompt": "Refer to the exhibit. All interfaces are in the same VLAN. All switches are configured with the default STP priorities. During the STP elections, which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "MDF-DC-1: 08:E0:43:42:70:13"
+          },
+          {
+            "label": "B",
+            "text": "MDF-DC-2: 08:0E:18:22:05:97"
+          },
+          {
+            "label": "C",
+            "text": "MDF-DC-4: 08:E0:19:A1:B3:19"
+          },
+          {
+            "label": "D",
+            "text": "MDF-DC-3: 08:0E:18:1A:3C:9D"
+          }
+        ],
+        "answer": [
+          "D"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP IEEE 802.1D / RSTP IEEE 802.1w）的根桥选举规则（Root Bridge Election）。\n在同一个广播域（同一个 VLAN）内，生成树算法（STA）通过选举唯一的根桥（Root Bridge）作为全网无环拓扑的逻辑逻辑中心。选举判定规则如下：\n1. 网桥 ID（Bridge ID, BID）结构：\n   BID 由 8 字节（64 比特）组成，分为两部分：\n   - 桥优先级（Bridge Priority，2 字节）：包含 4 比特优先级数值（4096 的倍数，范围 0~61440）与 12 比特系统扩展 ID（System ID Extension，通常为当前的 VLAN ID）。\n   - MAC 地址（MAC Address，6 字节 / 48 比特）：交换机背板的基础 MAC 地址。\n2. 根桥比较裁决规则：\n   - 第一准则：比对网桥优先级。整个广播域中 Bridge Priority **数值最小** 的交换机当选为根桥。\n   - 第二准则（决胜准则 Tie-Breaker）：若所有候选交换机的网桥优先级相同，则进一步比对背板 MAC 地址，**MAC 地址数值最小（Lowest MAC Address）** 的交换机胜出当选为根桥！\n\n• 正确选项剖析：\n选项 D（MDF-DC-3: 08:0E:18:1A:3C:9D）胜出当选为根桥：\n根据题干明确约束：“All interfaces are in the same VLAN. All switches are configured with the default STP priorities”（所有交换机均配置为默认 STP 优先级 32768 + VLAN ID）。此时优先级完全一致，根桥选举由背板 MAC 地址作为决胜条件。\n逐一对比各交换机的 16 进制 MAC 地址：\n- MDF-DC-1: `08:E0:43:42:70:13`（第 2 字节为 0xE0）\n- MDF-DC-2: `08:0E:18:22:05:97`（前 3 字节为 08:0E:18，第 4 字节为 0x22）\n- MDF-DC-4: `08:E0:19:A1:B3:19`（第 2 字节为 0xE0）\n- MDF-DC-3: `08:0E:18:1A:3C:9D`（前 3 字节为 08:0E:18，第 4 字节为 0x1A）\n对比分析过程：\n1. MDF-DC-1 和 MDF-DC-4 的第 2 字节为 `E0`（十进制 224），显著大于 `0E`（十进制 14），首先被淘汰。\n2. 最终在 MDF-DC-2 与 MDF-DC-3 之间比对：两者前 3 字节均为 `08:0E:18`；比对第 4 字节，MDF-DC-3 为 `1A`（十进制 26），而 MDF-DC-2 为 `22`（十进制 34）。\n由于 `0x1A < 0x22`，MDF-DC-3 拥有全网绝对最小的 MAC 地址，无可争议地胜出成为 Root Bridge！\n\n• 干扰项排除与错误陷阱：\n- 选项 A（MDF-DC-1）/ 选项 C（MDF-DC-4）：第 2 字节高位为 `E0`，数值远大于 `0E`，在第一轮十六进制比对中即被淘汰。\n- 选项 B（MDF-DC-2）：极具诱惑力，前 3 个字节与 MDF-DC-3 完全相同，但在比对第 4 字节时，`22` 大于 `1A`，功亏一篑败给 MDF-DC-3。\n\n• 考试要点与速记技巧：\n根桥选举口诀：\n“一比优先级，数值小者胜；优先级相同，MAC 最小者为王；比对 MAC 从高位往低位逐字节看，E0 远大 0E，1A 胜过 22”。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "prompt": "The following four switches are in the same connected STP instance and have equal default bridge priorities. The MAC addresses shown are their bridge IDs’ MAC components. Which switch becomes root bridge?",
+        "explanation": "答案 D。同一 STP 实例比较桥 ID：先比较优先级（含适用的系统 ID 扩展），相同后比较 MAC 数值。08:0E:18:1A:3C:9D 比 08:0E:18:22:05:97 小，也比以 08:E0 开头的两个地址小，因此 MDF-DC-3 胜出。原题提到展图，但题库未附图；本题所需比较信息已完整列于选项，题干改为独立可解。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "missing, prompt made self-contained",
+        "code_cli": "checked",
+        "finding": "原题要求展图但未附图；选项地址足够解题，补全条件并移除无图引用。",
+        "reference": null
+      }
+    },
+    {
+      "id": 675,
+      "before_sha256": "457a50d15dfd60fba56f056a95f5987b9685c5b5899dbbcec9744cf5a84c52a2",
+      "original": {
+        "prompt": "What is a reason to implement LAG on a Cisco WLC?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Allow for stateful failover between WLCs."
+          },
+          {
+            "label": "B",
+            "text": "Increase security by encrypting management frames."
+          },
+          {
+            "label": "C",
+            "text": "Increase the available throughput on the link."
+          },
+          {
+            "label": "D",
+            "text": "Enable the connected switch ports to use different Layer 2 configurations."
+          }
+        ],
+        "answer": [
+          "C"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）物理分配系统端口上的链路聚合技术（LAG，Link Aggregation / IEEE 802.3ad）。\n在传统未启用 LAG 的 WLC 架构中，每个物理分配系统端口与特定逻辑接口/动态接口独立绑定，上游交换机端口配置彼此独立。一旦某个端口流量达到 1 Gbps 瓶颈，其他物理端口的闲置带宽无法共享，且物理接口断开会引发二层通信震荡。\n启用 LAG（Link Aggregation）后的技术变革：\n1. 逻辑捆绑：将 WLC 上所有物理分配系统端口（如 4 个 1GE 端口或 2 个 10GE 端口）绑定为一个单一的高带宽 EtherChannel（以太通道）逻辑链路，对接上游交换机的单一 Port-Channel 接口。\n2. 带宽倍增（Increased Throughput）：所有物理链路的可用传输容量动态聚合。例如 4 个 1 Gbps 物理链路绑定后，WLC 与交换机之间的聚合链路可用双向吞吐量提升至 4 Gbps，极大化解了无线高密场景下的回传带宽拥塞瓶颈。\n3. 链路冗余（Link Redundancy）：当聚合组中某根物理线缆意外损毁或对端端口损坏时，流量会在毫秒内平滑重分发至剩余存活链路，无需重建 CAPWAP 隧道或踢掉客户端。\n\n• 正确选项剖析：\n选项 C（Increase the available throughput on the link）完全符合技术本质：\n实施 LAG 的首要直接动因就是消除链路瓶颈并成倍增加物理信道上的可用聚合吞吐量（Increase available throughput）。通过将多个物理接口聚合成一个逻辑通道，WLC 能够充分调度多根物理线缆的硬件转发能力，支撑高速 802.11ac / 802.11ax（Wi-Fi 6）AP 的大容量业务数据回传。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（Allow for stateful failover between WLCs）：控制器之间的状态化热备切换（Stateful Switchover, SSO HA）完全依赖控制器背板专门的 **Redundancy Port（冗余端口）** 进行心跳检测与数据同步，与分配系统端口上的 LAG 特性毫不相干。\n- 选项 B（Increase security by encrypting management frames）：LAG 属于二层链路捆绑与物理层多路复用技术，完全不具备密码学加密功能；管理帧的加密由 802.11w（PMF）提供。\n- 选项 D（Enable the connected switch ports to use different Layer 2 configurations）：严重的技术常识错误。形成 EtherChannel / LAG 的先决条件是所有物理成员端口必须具备 **完全一致（Identical）** 的二层配置（相同的速率、双工、中继模式、Native VLAN 以及 Allowed VLAN），绝不允许使用不同的二层配置。\n\n• 考试要点与速记技巧：\n“WLC 开启 LAG，多口捆成一通道，带宽吞吐成倍涨（Throughput Up），断纤容灾不掉线”。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "explanation": "答案 C。WLC 的链路聚合可把多个兼容物理端口组成一个逻辑通道，提高多条流量的总可用带宽并提供成员链路冗余；单一流通常受散列和单个成员链路速率限制，吞吐提升不保证。A 是控制器间高可用，并非 LAG 本身；B 不提供管理帧加密；D 成员端口应具备一致兼容配置，不能随意不同。支持方式取决于控制器型号。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限制 LAG 吞吐表述为多流聚合，纠正单流和成员配置误解。",
+        "reference": null
+      }
+    },
+    {
+      "id": 676,
+      "before_sha256": "9d9ea4f163a66cbb8bc2265143af11d4030b5d2bc2206c64f8842e484729fb89",
+      "original": {
+        "prompt": "A wireless access point is needed and must meet these requirements: • “zero-touch” deployed and managed by a WLC • process only real-time MAC functionality • used in a split-MAC architecture Which access point type must be used?",
+        "options": [
+          {
+            "label": "A",
+            "text": "mesh"
+          },
+          {
+            "label": "B",
+            "text": "autonomous"
+          },
+          {
+            "label": "C",
+            "text": "lightweight"
+          },
+          {
+            "label": "D",
+            "text": "cloud-based"
+          }
+        ],
+        "answer": [
+          "C"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查无线企业网架构中的“瘦接入点（Lightweight AP）”与 Split-MAC（分割 MAC 架构）设计模型。\n在现代集中式无线网络中，Cisco 采用经典的 Split-MAC 架构，将传统的 802.11 协议栈按实时性解耦为两部分：\n1. 轻量级接入点（Lightweight AP, LAP）：仅运行物理层（PHY）和强实时性 MAC 功能（Real-Time MAC Functions），包括：\n   - 802.11 射频信号调制与解调、无线帧收发；\n   - 实时信标帧（Beacons）和探测响应（Probe Responses）；\n   - 数据链路层应答帧（ACK）传输与重传控制；\n   - 硬件级数据帧加解密（AES-CCMP / TKIP）；\n   - 实时射频资源监测与干扰信号检测。\n2. 无线局域网控制器（WLC）：集中管控非实时 MAC 功能（Non-Real-Time MAC Functions），包括用户关联与解关联、802.1X 认证、跨 AP 漫游、QoS 策略下发及射频信道与功率自动调整（RRM）。\n3. 零配置即插即用（Zero-Touch Deployment）：瘦 AP 在出厂时几乎不需要预先做任何业务配置。通电后，瘦 AP 通过 DHCP Option 43、DNS 域名查询或广播自动定位局域网内的 WLC，建立 CAPWAP 隧道并自动下载最新固件与全部业务配置，真正实现零接触交付。\n\n• 正确选项剖析：\n选项 C（lightweight）完美匹配题干全部技术特征：\n1. ““zero-touch” deployed and managed by a WLC” -> 集中发现控制器并自动拉取配置，完全零接触部署；\n2. “process only real-time MAC functionality” -> 仅在物理终端硬件上处理实时性 MAC 任务；\n3. “used in a split-MAC architecture” -> Split-MAC 体系中专用于前端接入的核心硬件形态正是 Lightweight AP。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（mesh）：Mesh AP 专用于无法部署有线骨干网络的户外或跨楼宇场景，通过无线射频回传（Wireless Backhaul / AWPP 协议）形成网状自组织网络，属于 AP 的工作拓扑角色，并非 Split-MAC 架构的代名词。\n- 选项 B（autonomous）：自主式（胖）AP 在本地芯片上处理完整的全部 MAC 功能（包含实时和非实时功能），必须逐台登录单独进行手动 CLI/Web 配置，完全不具备由 WLC 统一零配置纳管和 Split-MAC 架构特性。\n- 选项 D（cloud-based）：基于云管理的 AP（如 Cisco Meraki）直接通过互联网连接公有云平台进行监控管理，并不依赖本地内网部署的硬件 WLC 进行实时 Split-MAC 控制隧道终结。\n\n• 考试要点与速记技巧：\n“Split-MAC 分工明：瘦 AP（Lightweight）专管实时 MAC 零接触，控制器（WLC）统管非实时与认证”。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "explanation": "答案 C。轻量 AP 由无线控制器集中管理，典型 split-MAC 架构把实时 MAC 职责放在 AP，将其他控制职责交给 WLC；AP 发现并加入可用控制器后可集中配置。Autonomous AP 自行承担控制功能。Mesh 是无线回程拓扑，设备也可能使用轻量架构，因此不是与 lightweight 严格互斥的硬件类别；cloud-based 描述管理方式，不直接等于题述 WLC split-MAC。零接触仍依赖供电、网络、控制器发现等前提。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "区分轻量架构、mesh 拓扑和云管理；说明零接触前提。",
+        "reference": null
+      }
+    },
+    {
+      "id": 677,
+      "before_sha256": "9dc261b7479549e35119313aa117f9a114f1bf7971ab92a5ec51b393310a4736",
+      "original": {
+        "prompt": "Which interface is used for out-of-band management on a WLC?",
+        "options": [
+          {
+            "label": "A",
+            "text": "management"
+          },
+          {
+            "label": "B",
+            "text": "virtual"
+          },
+          {
+            "label": "C",
+            "text": "dynamic"
+          },
+          {
+            "label": "D",
+            "text": "service port"
+          }
+        ],
+        "answer": [
+          "D"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）逻辑接口与物理接口架构中“带外管理（Out-of-Band Management, OOBM）”的专用设计。\nCisco WLC 预置了多种接口，职责分明：\n1. 服务端口接口（Service Port Interface）：专用于纯带外管理（OOBM）的静态逻辑接口，与控制器面板上的独立物理 **Service Port**（通常为 10/100/1000 以太网电口）一对一严格绑定。其核心特征包括：\n   - 独立路由域：拥有自身独立的非路由管理路由表（仅支持一条直连静态默认网关），与主业务路由平面完全物理和逻辑隔离；\n   - 单 VLAN 属性：只接收未标记（Untagged）的普通以太网帧，不支持 802.1Q 标签打标；\n   - 灾难应急恢复：当主数据网络、交换机中继链路或控制器核心分配接口故障瘫痪时，网络管理员可通过专用的带外网络直接登入该接口进行排错、配置恢复及固件重新刷写。\n2. 管理接口（Management Interface）：默认的带内管理（In-Band）逻辑接口，映射在分配系统端口（Trunk）上，承载 AP 的 CAPWAP 发现/加入以及正常的跨网络管理员 SSH/GUI 登录。\n3. 虚拟接口（Virtual Interface）：专用于支持二层/三层漫游移动性、DHCP 中继以及 Web-Auth 访客认证网页强制重定向（通常配置固定 IP 192.0.2.1 或 1.1.1.1），不作为物理管理接入点。\n4. 动态接口（Dynamic Interface）：类似于交换机的 VLAN SVI 接口，专用于将无线客户端业务 SSID 桥接到有线网络的特定 VLAN，用于纯用户数据转发。\n\n• 正确选项剖析：\n选项 D（service port）完全符合技术定义：\n服务端口接口（Service Port Interface）是 Cisco WLC 上唯一官方定义用于带外管理（Out-of-band management）的接口。它与独立的物理物理网络隔离连接，确保生产数据网络的拥塞或故障绝不会妨碍网络工程师对控制器的应急管理维护。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（management）：属于带内管理接口（In-band management），共享分配系统物理中继链路，不属于带外管理。\n- 选项 B（virtual）：仅用于无线终端漫游状态维护与访客 Web 网页认证重定向，无法作为带外管理控制通道。\n- 选项 C（dynamic）：专用于无线客户端业务数据流经的用户 VLAN 动态接口，属于数据平面转发路径，绝非带外管理接口。\n\n• 考试要点与速记技巧：\n“WLC 接口各司其职：带外应急插 Service Port，带内远程连 Management，访客重定向找 Virtual，业务承载配 Dynamic”。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "prompt": "Which WLC Ethernet interface is designed for out-of-band IP management?",
+        "explanation": "答案 D。具备 service port 的 WLC 可通过独立以太网管理链路进行带外 IP 管理。Management 接口通常用于控制器管理与业务网络；virtual 和 dynamic 接口分别承担虚拟服务及 WLAN/VLAN 等功能。Console 同样可用于带外管理，但属于串行通道，并不在选项中；接口名称与可用性依型号而异。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "明确 Ethernet IP 带外，避免 console 也是带外导致问题不唯一。",
+        "reference": null
+      }
+    },
+    {
+      "id": 678,
+      "before_sha256": "d5104bfafa0094072530bfbf65351c422a729dd398b773e59e67fa3c0e3ec17d",
+      "original": {
+        "prompt": "Refer to the exhibit. How does SW2 interact with other switches in this VTP domain?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It transmits and processes VTP updates from any VTP clients on the network on its trunk ports."
+          },
+          {
+            "label": "B",
+            "text": "It processes VTP updates from any VTP clients on the network on its access ports."
+          },
+          {
+            "label": "C",
+            "text": "It receives updates from all VTP servers and forwards all locally configured VLANs out all trunk ports."
+          },
+          {
+            "label": "D",
+            "text": "It forwards only the VTP advertisements that it receives on its trunk ports."
+          }
+        ],
+        "answer": [
+          "D"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 VLAN 中继协议（VTP，VLAN Trunking Protocol）在“透明模式（Transparent Mode）”下的协议处理与中继转发行为机制。\n在 Cisco VTP 域中，交换机支持三种经典工作模式（Server、Client、Transparent）：\n1. VTP 服务器模式（Server Mode）：默认模式，允许创建、修改和删除 VLAN，将更改写入 NVRAM，生成递增的配置修订号（Configuration Revision Number）并向整个域内的中继链路周期性广播 VTP 汇总通告（Summary Advertisements）。\n2. VTP 客户端模式（Client Mode）：禁止本地增删修改 VLAN，监听来自 Server 的 VTP 通告并同步本地 VLAN 数据库，同时将收到的通告转发给相邻交换机。\n3. VTP 透明模式（Transparent Mode）：\n   - 本地独立自治：允许在本地创建、修改、删除自身所需的 VLAN，但这些配置仅保存在本地存储（`vlan.dat` 或 `config.text`），其配置修订号永远固定为 0；\n   - 不处理不学习：透明模式交换机完全忽略（不处理）从其他交换机收到的任何 VTP 通告，绝不将其同步到自己的 VLAN 数据库；\n   - 不通告本地配置：绝对不会向外界宣告或同步自己本地创建的 VLAN；\n   - 透明转发（Forwarding）：在 VTPv2 中（或在 VTPv1 且域名和版本匹配时），透明交换机会在 Trunk 端口上接收到其他交换机发来的 VTP 通告时，原封不动地将其仅作为普通组播帧从自己的其他 Trunk 端口泛洪转发出去，扮演一条“透明隧道”，保证跨越透明交换机的其他 Server 和 Client 能够正常接收 VTP 更新。\n\n• 正确选项剖析：\n选项 D（It forwards only the VTP advertisements that it receives on its trunk ports）准确击中 VTP 透明模式的核心中继转发特性：\n展图显示 SW2 配置了 `vtp mode transparent`。工作在透明模式下的 SW2：\n1. 绝不处理或学习收到的 VTP 更新（排除 A 和 B）；\n2. 绝不向外广播本地创建的 VLAN（排除 C）；\n3. 唯一承担的网络协同行为，就是在其 Trunk 端口上“仅转发它所接收到的 VTP 通告（forwards only the VTP advertisements that it receives on its trunk ports）”，从而为网络中其他需要同步 VTP 的交换机提供透明传输管道。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It transmits and processes VTP updates...）：透明模式既不处理（processes）外界更新，也不会向外界传输自身的 VTP 数据库更新。\n- 选项 B（...on its access ports）：常识性技术错误。VTP 报文是二层特定组播帧（目的 MAC 01:00:0C:CC:CC:CC），只能在 Trunk 链路上进行协商和转发，绝对不会在 Access 访问端口上发送或处理。\n- 选项 C（...forwards all locally configured VLANs out all trunk ports）：透明模式交换机在本地配置的 VLAN 属于纯本地私有作用域，严格禁止向外通告或转发给其他交换机。\n\n• 考试要点与速记技巧：\nVTP 三大模式行为对比：\n• Server：能改、能存、能发、能步；\n• Client：不能改、不能存、能转发、必须步；\n• Transparent：能改、存本地、不步别人、只管转发路过的 VTP 报文（修订号恒为 0）。",
+        "type": "Single Choice",
+        "image_present": true,
+        "answer_image_present": false
+      },
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume SW2 runs VTP version 2 and its shown trunk is operational. How does SW2 handle VTP advertisements in this VTP domain?",
+        "explanation": "答案 D。图中 `vtp mode transparent`：SW2 本地维护 VLAN，不根据 VTP 广告同步自己的 VLAN 数据库，也不将本地 VLAN 变更作为域配置发布；VTP v2 下可在其他有效 trunk 上转发收到的广告，通常不从接收端口原路发回。A/B 错在把它当成处理更新的客户端且 B 使用 access；C 错在声称应用服务器更新并传播本地 VLAN。图只画出一条 trunk，若无其他 trunk 就没有转发出口。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "检查展图确认 transparent；明确 VTP v2 和转发端口前提。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750/software/release/12-2_52_se/configuration/guide/3750scg/swvtp.html"
+      }
+    },
+    {
+      "id": 679,
+      "before_sha256": "ab12b7022ef0c97ae4b836ac90a1089febe621f9d8cb529c9e4e09d8a52c0cd9",
+      "original": {
+        "prompt": "A network engineer is upgrading a small data center to host several new applications, including server backups that are expected to account for up to 90% of the bandwidth during peak times. The data center connects to the MPLS network provider via a primary circuit and a secondary circuit. How does the engineer inexpensively update the data center to avoid saturation of the primary circuit by traffic associated with the backups?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Assign traffic from the backup servers to a dedicated switch."
+          },
+          {
+            "label": "B",
+            "text": "Place the backup servers in a dedicated VLAN."
+          },
+          {
+            "label": "C",
+            "text": "Advertise a more specific route for the backup traffic via the secondary circuit."
+          },
+          {
+            "label": "D",
+            "text": "configure a dedicated circuit for the backup traffic."
+          }
+        ],
+        "answer": [
+          "C"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查数据中心广域网（WAN / MPLS）双归属链路流量工程（Traffic Engineering）及 IP 路由最长前缀匹配原则（Longest Prefix Match, LPM）。\n1. 业务痛点分析：\n   - 小型数据中心承载大量业务，其中服务器数据备份流量在峰值期间可能侵占高达 90% 的广域网带宽。\n   - 数据中心通过一条主链路（Primary Circuit）和一条备用链路（Secondary Circuit）接入服务提供商的 MPLS 骨干网。\n   - 如果不进行流量引流，海量备份流量将彻底打满主链路，导致关键生产交互业务发生严重丢包和高时延。\n2. 低成本优化方案（Inexpensive Solution）：\n   - 题目硬性约束：“How does the engineer inexpensively update the data center”（低成本改造）。购买新物理交换机或向运营商申请租用额外的物理专线（Dedicated Circuit）费用高昂且审批部署周期漫长，不符合低成本原则。\n   - 充分利用现有的双链路基础设施：在 IP 路由决策中，路由器转发报文时遵循“最长前缀匹配原则”（掩码越长、前缀越具体的路由拥有最高优先级，无视管理距离和度量值）。\n   - 如果将备份服务器规划在特定子网内，并通过次要链路（Secondary Circuit）向 MPLS 网络通告一个**更精确/掩码更长的主机或子网明细路由（More Specific Route）**，外部访问备份服务器的全部大流量将自动无条件走次要链路引流，从而以零硬件采购成本彻底消除主链路的拥塞风险。\n\n• 正确选项剖析：\n选项 C（Advertise a more specific route for the backup traffic via the secondary circuit）完全符合网络流量工程设计：\n利用现有双归属 MPLS 链路，仅通过软件路由策略在次要电路上发布针对备份服务器群的明细路由（More specific route，例如针对备份主机的 /32 主机路由或精确小网段路由）。依据全局路由最长匹配原则，所有流向备份服务器的巨量流量将精准被引流至次要电路上，既避免了主生产链路的带宽饱和，又无需增加任何硬件采购或专线租用开销，是性价比最高（Inexpensive）的解决方案。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（Assign traffic from the backup servers to a dedicated switch）：增加专用交换机仅改变了局域网内部接入层拓扑，根本无法解决广域网 MPLS 主链路上 90% 备份带宽拥塞的广域网瓶颈，且引入了额外的硬件采购成本。\n- 选项 B（Place the backup servers in a dedicated VLAN）：仅仅将备份服务器划入独立 VLAN 只是实现了二层广播域隔离，若三层路由策略未针对该 VLAN 指定广域网选路，流量仍然会按照默认路由走主链路转发，无法解决链路饱和。\n- 选项 D（configure a dedicated circuit for the backup traffic）：向运营商增订租用一条专用于备份的物理专线，不仅需要巨额的月租费用，还需要漫长的开通交付周期，完全背离了题干“低成本（inexpensively）”的前提要求。\n\n• 考试要点与速记技巧：\n“双链路分流低成本，不用买线不用买机；精准引流靠前缀，次要电路上通告明细路由（More Specific Route）”。",
+        "type": "Single Choice",
+        "image_present": false,
+        "answer_image_present": false
+      },
+      "updates": {
+        "prompt": "A data center receives backup traffic for dedicated backup-server destination prefixes over a provider MPLS network. It advertises a less-specific aggregate over the primary circuit, and the provider honors longest-prefix routing. The secondary circuit has sufficient capacity. Which low-cost change can steer the inbound backup traffic to the secondary circuit?",
+        "explanation": "答案 C。在题设条件下，经备用线路通告仅包含备份服务器的更具体目的前缀，提供商可依最长前缀匹配将发往这些地址的流量送往备用链路；其他仅匹配聚合前缀的流量仍可走主链路。备份目标必须可由目的地址区分，且备用线路、双向路由和运营商策略须支持；仅凭来源、应用或“备份”标签不能由普通目的路由自动区分。A/B 不自动改变 MPLS 路由，D 需新线路且较昂贵。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "原题未指出流量方向与可区分前缀，补充入站专用目的前缀、运营商与备用带宽前提。",
+        "reference": null
+      }
+    },
+    {
+      "id": 680,
+      "before_sha256": "941c73e9351b7108902194fbb8631a9988085f38c4c759ae6f16ae1b2acc2c3e",
+      "original": {
+        "prompt": "Refer to the exhibit. A network engineer started to configure two directly-connected routers as shown. Which command sequence must the engineer configure on R2 so that the two routers become OSPF neighbors?",
+        "options": [
+          {
+            "label": "A",
+            "text": "interface GigabitEthernet0/1 Ip ospf 1 area 1"
+          },
+          {
+            "label": "B",
+            "text": "router ospf 1 Network 192.168.12.1 0.0.0.0 area 1"
+          },
+          {
+            "label": "C",
+            "text": "interface GigabitEthernet0/1 Ip ospf 1 area 0"
+          },
+          {
+            "label": "D",
+            "text": "router ospf 1 Network 192.168.12.0 0.0.0.127 area 0"
+          }
+        ],
+        "answer": [
+          "A"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查开放式最短路径优先协议（OSPFv2）邻居关系（Neighbor Adjacency）建立的先决匹配条件以及 Cisco IOS 接口级 OSPF 配置语法。\n在 OSPF 协议状态机中，直连路由器要从 Init/2-Way 推进到 ExStart/Loading/Full 邻居邻接状态，双方发送的 OSPF Hello 报文必须严格满足以下核心匹配要素：\n1. Area ID（区域 ID）必须一致：直连接口必须划入同一个 OSPF 区域，否则收到 Hello 报文后直接丢弃并报错 `%OSPF-4-ERRRCV: Received packet with invalid Area ID`；\n2. Hello / Dead 计时器必须完全一致；\n3. 子网掩码（Subnet Mask）在以太网广播网络上必须完全匹配；\n4. 区域类型标志（如 Stub / NSSA 标志位）必须一致；\n5. 认证类型与密钥必须匹配。\n分析展图配置：\n- R1 的 `GigabitEthernet0/1` 配置为：\n  `ip address 192.168.12.1 255.255.255.128`\n  `router ospf 1`\n  ` network 192.168.12.1 0.0.0.0 area 1`（将接口精准通告进了 **Area 1**）！\n- R2 的 `GigabitEthernet0/1` 配置了同子网 IP `192.168.12.2 255.255.255.128`。\n- 因此，R2 上的 GigabitEthernet0/1 接口必须且只能宣告进 **Area 1**，绝不能配置为 Area 0！\n\n• 正确选项剖析：\n选项 A（`interface GigabitEthernet0/1`, `Ip ospf 1 area 1`）完全正确：\n在 Cisco IOS 中，现代推荐的 OSPF 启用方式是在物理接口下直接使用命令 `ip ospf <process-id> area <area-id>`。该命令直接在 R2 的 GigabitEthernet0/1 上激活 OSPF 进程 1 并指明所属区域为 `area 1`。由于 R1 侧的互联接口也在 Area 1，双方的 Area ID 完美契合，且处于同一 /25 子网（255.255.255.128），两台直连路由器将顺利交换 Hello 报文并成功建立 OSPF 邻居邻接关系。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（`router ospf 1`, `Network 192.168.12.1 0.0.0.0 area 1`）：配置中的 IP 地址 `192.168.12.1` 是对端路由器 R1 的接口 IP，而 R2 本地接口的真实 IP 是 `192.168.12.2`！在 R2 上使用精准反掩码 `0.0.0.0` 匹配 192.168.12.1，根本无法匹配到本地接口 192.168.12.2，导致 R2 的 Gi0/1 根本无法启用 OSPF。\n- 选项 C（`interface GigabitEthernet0/1`, `Ip ospf 1 area 0`）：将接口错误地划入了 Area 0。由于 R1 在 Area 1，双方 Area ID 不匹配（Area ID Mismatch），邻居关系将永久卡死无法建立。\n- 选项 D（`router ospf 1`, `Network 192.168.12.0 0.0.0.127 area 0`）：同样错误地划入了 Area 0，导致区域不一致，无法建立 OSPF 邻居。\n\n• 考试要点与速记技巧：\n“OSPF 邻居能建立，直连 Area 必相同；接口宣告认准自己 IP，敲错 IP 接口不起包”。",
+        "type": "Single Choice",
+        "image_present": true,
+        "answer_image_present": false
+      },
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "interface GigabitEthernet0/1\n ip ospf 1 area 1"
+          },
+          {
+            "label": "B",
+            "text": "router ospf 1\n network 192.168.12.1 0.0.0.0 area 1"
+          },
+          {
+            "label": "C",
+            "text": "interface GigabitEthernet0/1\n ip ospf 1 area 0"
+          },
+          {
+            "label": "D",
+            "text": "router ospf 1\n network 192.168.12.0 0.0.0.127 area 0"
+          }
+        ],
+        "explanation": "答案 A。图中 R1 的 Gi0/1 为 192.168.12.1/25，network 精确匹配该接口并放入 area 1；R2 的 Gi0/1 为 192.168.12.2/25。A 在 R2 接口启用进程 1、area 1。B 的零通配符只匹配 R1 地址而非 R2 本地地址；C/D 的 area 0 与对端 area 1 不一致。进程号只在本地有效，不需两端相同；邻接仍要求接口连通以及计时器、认证等兼容，单凭同区域不能保证成功。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "formatted",
+        "finding": "检查展图；恢复选项 CLI 换行，解释本地匹配和邻接前提。",
+        "reference": null
+      }
+    }
+  ]
+}

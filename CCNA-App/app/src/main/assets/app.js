@@ -13,16 +13,961 @@ let dndShuffledSources = []; // array of { idx, text }
 
 // Persistence State
 let appState = {
-  masteredIds: {},          // qid -> boolean
+  masteredIds: {},          // qid -> boolean (true once Box >= 2)
   bookmarkedIds: {},        // qid -> boolean
+  bookmarkUpdatedAt: {},    // qid -> epoch ms tombstone (prevents zombie bookmark resurrection)
+  cardStats: {},            // qid -> { box: 0..3, streak, lapses, attempts, everWrong, lastSeenStep, nextDueStep, lastReviewedAt }
+  totalSteps: 0,            // monotonic global question step counter
+  resetEpoch: 0,            // epoch ms of last full reset (prevents zombie progress resurrection)
+  updatedAt: 0,             // epoch ms of last local state modification
   history: [],              // array of { qid, domain, topic, misconception, correct, isIdk, time }
-  retryInterval: 7,         // default 7 questions later
+  retryInterval: 25,        // default ~25 questions cooldown scale tau to prevent déjà vu
   retryDefaultMigratedV2: true,
+  antiDejaVuMigratedV3: true,
   shuffleOptions: true,     // default true: randomize option order (需要乱序选项)
-  drillTopic: null          // active topic drill if any
+  hideMastered: false,      // optional: completely exclude mastered cards
+  deckMode: 'smart',        // 'smart' | 'weak' | 'bookmarks' | 'domain' | 'topic' | 'type'
+  domainFilter: '',         // active CCNA domain filter if any
+  drillTopic: null          // active topic/mode drill label if any
 };
 
 let currentWindow = 50; // 50 / 200 / 500
+let questionById = {};  // fast O(1) lookup map: qid -> question object
+
+// =========================================================================
+// 1. SRS & Rational Algebraic Stochastic Engine (SrsEngine)
+//    Zero transcendental functions (no exp/tanh/log/pow) — pure + - * /
+//    with O(M) activeMistakeIds Set indexing (< 5 microseconds per step)
+// =========================================================================
+const SrsEngine = {
+  activeMistakeIds: new Set(),
+  consecutiveUnseenStreak: 0,
+
+  ensureStat(qid) {
+    if (!appState.cardStats) appState.cardStats = {};
+    if (!appState.cardStats[qid]) {
+      const wasMastered = appState.masteredIds[qid] === true;
+      const wasFailed = appState.masteredIds[qid] === false;
+      appState.cardStats[qid] = {
+        box: wasMastered ? 2 : 0,
+        streak: wasMastered ? 2 : 0,
+        lapses: wasFailed ? 1 : 0,
+        attempts: (wasMastered || wasFailed) ? 1 : 0,
+        everWrong: wasFailed,
+        lastSeenStep: 0,
+        nextDueStep: 0,
+        lastReviewedAt: 0
+      };
+    }
+    return appState.cardStats[qid];
+  },
+
+  syncActiveMistakeSet() {
+    this.activeMistakeIds.clear();
+    if (!appState.cardStats) appState.cardStats = {};
+    const allIds = new Set([
+      ...Object.keys(appState.masteredIds || {}),
+      ...Object.keys(appState.cardStats || {})
+    ]);
+    allIds.forEach(rawId => {
+      const qid = parseInt(rawId, 10);
+      if (!qid) return;
+      const st = appState.cardStats[qid];
+      const isMistake = (appState.masteredIds[qid] === false) ||
+        (st && (st.box === 0 || st.box === 1) && (st.everWrong || st.lapses > 0));
+      if (isMistake && appState.masteredIds[qid] !== true) {
+        this.activeMistakeIds.add(qid);
+      }
+    });
+  },
+
+  migrateFromLegacyState() {
+    if (!appState.cardStats) appState.cardStats = {};
+    if (!appState.bookmarkUpdatedAt) appState.bookmarkUpdatedAt = {};
+    if (typeof appState.totalSteps !== 'number') {
+      appState.totalSteps = (appState.history && appState.history.length) || 0;
+    }
+    if (Object.keys(appState.cardStats).length === 0 && Array.isArray(appState.history) && appState.history.length > 0) {
+      appState.history.forEach((h, idx) => {
+        if (!h || !h.qid) return;
+        const st = this.ensureStat(h.qid);
+        st.attempts++;
+        st.lastSeenStep = idx + 1;
+        st.lastReviewedAt = h.time || Date.now();
+        if (!h.correct || h.isIdk) {
+          st.everWrong = true;
+          st.lapses++;
+          st.streak = 0;
+          st.box = 0;
+        } else {
+          st.streak++;
+          st.box = st.everWrong ? (st.streak >= 2 ? 2 : 1) : 3;
+        }
+      });
+    }
+    Object.keys(appState.masteredIds || {}).forEach(qid => {
+      const st = this.ensureStat(qid);
+      if (appState.masteredIds[qid] === true && st.box < 2) {
+        st.box = 2;
+        st.streak = Math.max(st.streak, 2);
+      } else if (appState.masteredIds[qid] === false && st.box >= 2) {
+        st.box = 0;
+        st.streak = 0;
+        st.everWrong = true;
+        st.lapses = Math.max(st.lapses, 1);
+      }
+    });
+    this.syncActiveMistakeSet();
+  },
+
+  randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  },
+
+  applyFuzz(baseInterval, ratio = 0.35) {
+    const spread = Math.max(3, Math.round(baseInterval * ratio));
+    return Math.max(6, baseInterval + this.randomInt(-spread, spread));
+  },
+
+  getTau() {
+    return Math.max(12, parseInt(appState.retryInterval, 10) || 25);
+  },
+
+  // Pure rational quadratic Hill readiness c_q = ds^2 / (ds^2 + tau^2) in [0, 1)
+  computeStepReadiness(qid, stepNow = null, tau = null) {
+    const st = appState.cardStats && appState.cardStats[qid];
+    if (!st || !st.lastSeenStep) return 1.0; // Never seen in current step epoch -> fully ready
+    const sNow = stepNow !== null ? stepNow : (appState.totalSteps || 0);
+    const tScale = tau !== null ? tau : this.getTau();
+    const ds = Math.max(0, sNow - st.lastSeenStep);
+    const ds2 = ds * ds;
+    return ds2 / (ds2 + tScale * tScale);
+  },
+
+  // Pure rational anti-deja-vu roulette weight W(q) using only + - * /
+  computeMistakeWeight(qid, stepNow = null, nowMs = null, tau = null) {
+    const st = appState.cardStats && appState.cardStats[qid];
+    const sNow = stepNow !== null ? stepNow : (appState.totalSteps || 0);
+    const nMs = nowMs !== null ? nowMs : Date.now();
+    const tScale = tau !== null ? tau : this.getTau();
+
+    const ds = (st && st.lastSeenStep) ? Math.max(0, sNow - st.lastSeenStep) : (tScale * 2);
+    const ds2 = ds * ds;
+    const cq = ds2 / (ds2 + tScale * tScale); // Step cooldown factor in [0, 1)
+
+    const dtMin = (st && st.lastReviewedAt) ? Math.max(0, (nMs - st.lastReviewedAt) / 60000) : 30;
+    const tq = (1.2 + dtMin) / (8.0 + dtMin);  // Time cooldown factor in [0.15, 1)
+
+    const ageBoost = 1.0 + (3.0 * ds) / (ds + 2.0 * tScale); // Bounded in [1, 4)
+    const lapses = (st && st.lapses) ? st.lapses : 1;
+    const box = (st && typeof st.box === 'number') ? st.box : 0;
+    const urgencyBoost = (1.0 + 0.35 * lapses) * (1.3 - 0.3 * box);
+
+    return cq * tq * ageBoost * urgencyBoost;
+  },
+
+  isRecentlySeen(qid, customMinSteps = null, minMinutes = 8) {
+    return this.computeStepReadiness(qid) < 0.36; // Equivalent to ds < 0.75 * tau
+  },
+
+  // Continuous rational hazard P_review(s) = s^2 / (s^2 + mu^2) in O(M) time
+  computeReviewProbability(s = null, candidateIds = null, seenCountOverride = null, unseenCountOverride = null) {
+    const streak = s !== null ? s : this.consecutiveUnseenStreak;
+    if (streak <= 0) return 0.0;
+
+    const stepNow = appState.totalSteps || 0;
+    const tau = this.getTau();
+    const iterSet = candidateIds || this.activeMistakeIds;
+
+    let mEff = 0.0;
+    iterSet.forEach(qid => {
+      if (appState.domainFilter && questionById[qid] && questionById[qid].domain !== appState.domainFilter) return;
+      mEff += this.computeStepReadiness(qid, stepNow, tau);
+    });
+
+    if (mEff <= 0.01) return 0.0;
+
+    const totalQ = (allQuestions && allQuestions.length) ? allQuestions.length : 1396;
+    const nSeen = seenCountOverride !== null
+      ? seenCountOverride
+      : Math.max(1, Object.keys(appState.masteredIds || {}).length);
+    const nUnseen = unseenCountOverride !== null
+      ? unseenCountOverride
+      : Math.max(0, totalQ - nSeen);
+
+    const rSeen = mEff / Math.max(25, nSeen);
+    const rRem = mEff / (mEff + Math.max(1, nUnseen));
+    const x = 3.0 * rSeen + 2.2 * rRem + 0.03 * mEff;
+
+    // Rational saturation S(x) = x / (1 + x) and Pool factor M_eff^2 / (M_eff^2 + 36)
+    const sx = x / (1.0 + x);
+    const mEff2 = mEff * mEff;
+    const poolFactor = mEff2 / (mEff2 + 36.0);
+
+    const pBase = (0.06 + 0.42 * sx) * poolFactor;
+    if (pBase <= 0.001) return 0.0;
+
+    const mu = (1.0 - pBase) / pBase;
+    const s2 = streak * streak;
+    return s2 / (s2 + mu * mu);
+  },
+
+  // O(M) Weighted Roulette Selection
+  weightedDrawMistake(excludeIdsSet = null, candidateList = null, stepNow = null, nowMs = null, tau = null) {
+    const sNow = stepNow !== null ? stepNow : (appState.totalSteps || 0);
+    const nMs = nowMs !== null ? nowMs : Date.now();
+    const tScale = tau !== null ? tau : this.getTau();
+
+    const pool = [];
+    let totalWeight = 0.0;
+
+    if (Array.isArray(candidateList)) {
+      for (let i = 0; i < candidateList.length; i++) {
+        const q = candidateList[i];
+        if (!q || (excludeIdsSet && excludeIdsSet.has(q.id))) continue;
+        const w = this.computeMistakeWeight(q.id, sNow, nMs, tScale);
+        if (w > 0) {
+          pool.push({ q, w });
+          totalWeight += w;
+        }
+      }
+    } else {
+      this.activeMistakeIds.forEach(qid => {
+        if (excludeIdsSet && excludeIdsSet.has(qid)) return;
+        const q = questionById[qid];
+        if (!q) return;
+        if (appState.domainFilter && q.domain !== appState.domainFilter) return;
+        const w = this.computeMistakeWeight(qid, sNow, nMs, tScale);
+        if (w > 0) {
+          pool.push({ q, w });
+          totalWeight += w;
+        }
+      });
+    }
+
+    if (pool.length === 0) return null;
+    let r = Math.random() * totalWeight;
+    for (let i = 0; i < pool.length; i++) {
+      r -= pool[i].w;
+      if (r <= 0) return pool[i].q;
+    }
+    return pool[pool.length - 1].q;
+  },
+
+  recordOutcome(question, isCorrect, isIdk) {
+    const qid = question.id;
+    appState.totalSteps = (appState.totalSteps || 0) + 1;
+    const st = this.ensureStat(qid);
+    st.attempts++;
+    st.lastSeenStep = appState.totalSteps;
+    st.lastReviewedAt = Date.now();
+
+    if (question.isRetry) {
+      this.consecutiveUnseenStreak = 0;
+    } else {
+      this.consecutiveUnseenStreak++;
+    }
+
+    const baseInterval = this.getTau();
+
+    if (!isCorrect || isIdk) {
+      st.everWrong = true;
+      st.lapses++;
+      st.streak = 0;
+      st.box = 0;
+      appState.masteredIds[qid] = false;
+      this.activeMistakeIds.add(qid);
+
+      const rawCooldown = st.lapses >= 3 ? Math.max(14, Math.floor(baseInterval * 0.8)) : baseInterval;
+      const stepInterval = this.applyFuzz(rawCooldown, 0.35);
+      st.nextDueStep = appState.totalSteps + stepInterval;
+      this.scheduleInActiveQueue(question, stepInterval, 1);
+
+      this.maybeInjectProbabilisticReview(qid);
+
+      return {
+        status: 'reinforce',
+        box: 0,
+        interval: stepInterval,
+        lapses: st.lapses
+      };
+    }
+
+    // Correct answer!
+    st.streak++;
+    if (!st.everWrong) {
+      st.box = 3;
+      appState.masteredIds[qid] = true;
+      this.activeMistakeIds.delete(qid);
+      st.nextDueStep = appState.totalSteps + this.applyFuzz(240, 0.25);
+      this.maybeInjectProbabilisticReview(qid);
+      return { status: 'mastered_first', box: 3, interval: 240 };
+    }
+
+    if (st.streak === 1) {
+      st.box = 1;
+      appState.masteredIds[qid] = false;
+      this.activeMistakeIds.add(qid);
+      const consolidationInterval = this.applyFuzz(Math.round(baseInterval * 2.4) + 10, 0.35);
+      st.nextDueStep = appState.totalSteps + consolidationInterval;
+      this.scheduleInActiveQueue(question, consolidationInterval, 2);
+      this.maybeInjectProbabilisticReview(qid);
+      return {
+        status: 'consolidating',
+        box: 1,
+        interval: consolidationInterval,
+        streak: 1
+      };
+    }
+
+    // Passed Stage 2+ consecutive review -> Graduated to Mastered (Box 2 / 3)!
+    st.box = st.streak >= 3 ? 3 : 2;
+    appState.masteredIds[qid] = true;
+    this.activeMistakeIds.delete(qid);
+    const longInterval = this.applyFuzz(st.streak >= 3 ? 320 : 140, 0.25);
+    st.nextDueStep = appState.totalSteps + longInterval;
+    this.maybeInjectProbabilisticReview(qid);
+    return {
+      status: 'graduated',
+      box: st.box,
+      interval: longInterval,
+      streak: st.streak
+    };
+  },
+
+  maybeInjectProbabilisticReview(justAnsweredQid) {
+    if (!activeQueue || activeQueue.length === 0) return;
+    const nextCard = activeQueue[currentIndex + 1];
+    if (nextCard && nextCard.isRetry) return; // Next card is already a review card
+
+    const pRev = this.computeReviewProbability(this.consecutiveUnseenStreak);
+    if (pRev <= 0 || Math.random() >= pRev) return;
+
+    const excludeSet = new Set([justAnsweredQid]);
+    for (let i = Math.max(0, currentIndex - 3); i <= Math.min(activeQueue.length - 1, currentIndex + 5); i++) {
+      if (activeQueue[i]) excludeSet.add(activeQueue[i].id);
+    }
+
+    const picked = this.weightedDrawMistake(excludeSet);
+    if (!picked) return;
+
+    const st = this.ensureStat(picked.id);
+    const stage = st.box === 1 ? 2 : 1;
+    // Remove any duplicate retry copy further ahead before inserting at currentIndex + 1
+    for (let i = activeQueue.length - 1; i > currentIndex + 1; i--) {
+      if (activeQueue[i].id === picked.id && activeQueue[i].isRetry) {
+        activeQueue.splice(i, 1);
+      }
+    }
+    activeQueue.splice(currentIndex + 1, 0, { ...picked, isRetry: true, retryStage: stage });
+    this.consecutiveUnseenStreak = 0;
+  },
+
+  scheduleInActiveQueue(question, interval, stage, isSilent = false) {
+    for (let i = activeQueue.length - 1; i > currentIndex; i--) {
+      if (activeQueue[i].id === question.id && activeQueue[i].isRetry) {
+        activeQueue.splice(i, 1);
+      }
+    }
+    const insertIndex = Math.min(activeQueue.length, currentIndex + interval);
+    const retryCard = { ...question, isRetry: true, retryStage: stage };
+    activeQueue.splice(insertIndex, 0, retryCard);
+
+    if (!isSilent) {
+      const banner = document.getElementById('queueBanner');
+      if (banner) {
+        banner.classList.add('active');
+        const stageLabel = stage === 2 ? 'Stage 2/2 Consolidation' : 'Cooldown Review';
+        document.getElementById('queueBannerText').textContent =
+          `🔁 #${question.id} (${stageLabel}) cooled down for ~${interval} questions.`;
+      }
+    }
+  }
+};
+
+// =========================================================================
+// 2. Continuous Probabilistic Deck Scheduler (DeckScheduler)
+// =========================================================================
+const DeckScheduler = {
+  getWeakTopicsSet() {
+    const recent = (appState.history || []).slice(-100);
+    const topics = new Set();
+    recent.forEach(h => {
+      if (h && (!h.correct || h.isIdk) && h.topic) {
+        topics.add(h.topic);
+      }
+    });
+    return topics;
+  },
+
+  buildSmartQueue(pool) {
+    SrsEngine.syncActiveMistakeSet();
+    const weakTopics = this.getWeakTopicsSet();
+    const stepNow = appState.totalSteps || 0;
+    const nowMs = Date.now();
+    const tau = SrsEngine.getTau();
+
+    const mistakePool = [];
+    const weakUnseen = [];
+    const normalUnseen = [];
+    const masteredPool = [];
+
+    pool.forEach(q => {
+      const st = appState.cardStats && appState.cardStats[q.id];
+      const isMastered = appState.masteredIds[q.id] === true;
+      const isFailedOrConsolidating = (appState.masteredIds[q.id] === false) || (st && (st.box === 0 || st.box === 1));
+
+      if (isFailedOrConsolidating) {
+        mistakePool.push({
+          ...q,
+          isRetry: true,
+          retryStage: (st && st.box === 1) ? 2 : 1,
+          _weight: SrsEngine.computeMistakeWeight(q.id, stepNow, nowMs, tau)
+        });
+      } else if (isMastered) {
+        if (!appState.hideMastered) {
+          masteredPool.push(q);
+        }
+      } else {
+        if (weakTopics.has(q.topic)) {
+          weakUnseen.push(q);
+        } else {
+          normalUnseen.push(q);
+        }
+      }
+    });
+
+    // Order mistakePool by weighted roulette without replacement (highest anti-deja-vu weight favored stochastically)
+    const orderedMistakes = [];
+    const remainingMistakes = mistakePool.slice();
+    while (remainingMistakes.length > 0) {
+      let totalW = 0.0;
+      for (let i = 0; i < remainingMistakes.length; i++) {
+        totalW += remainingMistakes[i]._weight;
+      }
+      let pickedIdx = 0;
+      if (totalW > 0) {
+        let r = Math.random() * totalW;
+        for (let i = 0; i < remainingMistakes.length; i++) {
+          r -= remainingMistakes[i]._weight;
+          if (r <= 0) {
+            pickedIdx = i;
+            break;
+          }
+        }
+      } else {
+        pickedIdx = Math.floor(Math.random() * remainingMistakes.length);
+      }
+      orderedMistakes.push(remainingMistakes[pickedIdx]);
+      remainingMistakes.splice(pickedIdx, 1);
+    }
+
+    const shufWeakUnseen = shuffle(weakUnseen).map(q => ({ ...q, isRetry: false }));
+    const shufNormalUnseen = shuffle(normalUnseen).map(q => ({ ...q, isRetry: false }));
+    const shufMastered = shuffle(masteredPool).map(q => ({ ...q, isRetry: false }));
+
+    const unseenCombined = [];
+    let wi = 0, ni = 0;
+    while (wi < shufWeakUnseen.length || ni < shufNormalUnseen.length) {
+      if (wi < shufWeakUnseen.length) unseenCombined.push(shufWeakUnseen[wi++]);
+      const normalBurst = SrsEngine.randomInt(2, 4);
+      for (let k = 0; k < normalBurst && ni < shufNormalUnseen.length; k++) {
+        unseenCombined.push(shufNormalUnseen[ni++]);
+      }
+    }
+
+    // Pure Mistake Review Mode (e.g. Wrong & Weak Pool): return roulette-ordered mistakes directly
+    if (unseenCombined.length === 0 && orderedMistakes.length > 0) {
+      return orderedMistakes;
+    }
+
+    // Continuous Probabilistic Interleaving using P_review(s) = s^2 / (s^2 + mu^2)
+    const result = [];
+    let di = 0, ui = 0, mi = 0;
+    let s = 0; // consecutive unseen streak
+    const totalSeenCount = Math.max(1, masteredPool.length + mistakePool.length);
+    const maxSprinkledMastered = Math.max(5, Math.floor(unseenCombined.length * 0.05));
+    let nextMasteredAt = SrsEngine.randomInt(16, 28);
+
+    // Precompute initial effective cooled-down mistake mass M_eff
+    let mEff = 0.0;
+    for (let i = 0; i < orderedMistakes.length; i++) {
+      mEff += SrsEngine.computeStepReadiness(orderedMistakes[i].id, stepNow, tau);
+    }
+
+    while (ui < unseenCombined.length || di < orderedMistakes.length) {
+      const remainingUnseen = unseenCombined.length - ui;
+      const remainingDue = orderedMistakes.length - di;
+
+      if (remainingUnseen === 0) {
+        while (di < orderedMistakes.length) {
+          result.push(orderedMistakes[di++]);
+        }
+        break;
+      }
+
+      let drawReview = false;
+      if (remainingDue > 0 && s > 0) {
+        const effMass = Math.max(0.2, mEff * (remainingDue / Math.max(1, orderedMistakes.length)));
+        const rSeen = effMass / Math.max(25, totalSeenCount + ui);
+        const rRem = effMass / (effMass + remainingUnseen);
+        const x = 3.0 * rSeen + 2.2 * rRem + 0.03 * effMass;
+        const sx = x / (1.0 + x);
+        const eff2 = effMass * effMass;
+        const poolFactor = eff2 / (eff2 + 36.0);
+        const pBase = Math.max(0.03, (0.06 + 0.42 * sx) * poolFactor);
+        const mu = (1.0 - pBase) / pBase;
+        const s2 = s * s;
+        const pRev = s2 / (s2 + mu * mu);
+        drawReview = (Math.random() < pRev);
+      }
+
+      if (drawReview) {
+        result.push(orderedMistakes[di++]);
+        s = 0;
+      } else {
+        result.push(unseenCombined[ui++]);
+        s++;
+        if (result.length >= nextMasteredAt && mi < Math.min(shufMastered.length, maxSprinkledMastered)) {
+          result.push(shufMastered[mi++]);
+          nextMasteredAt = result.length + SrsEngine.randomInt(16, 28);
+        }
+      }
+    }
+
+    while (mi < shufMastered.length) {
+      result.push(shufMastered[mi++]);
+    }
+
+    if (result.length === 0 && pool.length > 0) {
+      return shuffle(pool).map(q => ({ ...q, isRetry: false }));
+    }
+    return result;
+  },
+
+  saveSessionSnapshot() {
+    try {
+      if (!activeQueue || activeQueue.length === 0) return;
+      const windowSlice = activeQueue.slice(Math.max(0, currentIndex - 20), currentIndex + 120);
+      const baseOffset = Math.max(0, currentIndex - 20);
+      const snap = {
+        deckMode: appState.deckMode || 'smart',
+        drillTopic: appState.drillTopic || null,
+        domainFilter: appState.domainFilter || '',
+        savedIndex: currentIndex - baseOffset,
+        entries: windowSlice.map(q => ({
+          id: q.id,
+          r: q.isRetry ? 1 : 0,
+          s: q.retryStage || 0
+        }))
+      };
+      localStorage.setItem('ccna_session_snapshot_v1', JSON.stringify(snap));
+    } catch (e) {
+      console.error('Failed to save session snapshot', e);
+    }
+  },
+
+  restoreSessionSnapshot() {
+    try {
+      const raw = localStorage.getItem('ccna_session_snapshot_v1');
+      if (!raw) return false;
+      const snap = JSON.parse(raw);
+      if (!snap || !Array.isArray(snap.entries) || snap.entries.length === 0) return false;
+      const restored = [];
+      snap.entries.forEach(e => {
+        const baseQ = questionById[e.id];
+        if (baseQ) {
+          restored.push({
+            ...baseQ,
+            isRetry: Boolean(e.r),
+            retryStage: e.s || (e.r ? 1 : 0)
+          });
+        }
+      });
+      if (restored.length === 0) return false;
+      const inSnap = new Set(restored.map(q => q.id));
+      const tailPool = allQuestions.filter(q => !inSnap.has(q.id));
+      const tailQueue = this.buildSmartQueue(tailPool);
+      activeQueue = restored.concat(tailQueue);
+      currentIndex = Math.min(Math.max(0, snap.savedIndex || 0), restored.length - 1);
+      appState.deckMode = snap.deckMode || 'smart';
+      appState.drillTopic = snap.drillTopic || null;
+      appState.domainFilter = snap.domainFilter || '';
+      syncDrillBannerUI();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+
+// =========================================================================
+// 3. FBReader-Style Google Account & Google Drive Cloud Sync (CloudSyncEngine)
+// =========================================================================
+const CloudSyncEngine = {
+  autoPushTimer: null,
+  webFileHandle: null,
+  isSyncInFlight: false,
+  pendingPushAfterFlight: false,
+
+  getSyncState() {
+    if (window.AndroidBridge && typeof window.AndroidBridge.getGoogleSyncState === 'function') {
+      try {
+        return JSON.parse(window.AndroidBridge.getGoogleSyncState());
+      } catch (e) {
+        return { signedIn: false };
+      }
+    }
+    try {
+      const raw = localStorage.getItem('ccna_web_cloud_sync_meta');
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return { signedIn: false };
+  },
+
+  formatSyncTime(epochMs) {
+    if (!epochMs) return 'Never';
+    const diffSec = Math.max(0, Math.floor((Date.now() - epochMs) / 1000));
+    if (diffSec < 15) return 'Just now';
+    if (diffSec < 60) return `${diffSec}s ago`;
+    if (diffSec < 3600) return `${Math.floor(diffSec / 60)}m ago`;
+    return new Date(epochMs).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  },
+
+  syncSettingsCardUI(statusOverride = null) {
+    const state = this.getSyncState();
+    const badge = document.getElementById('cloudSyncBadge');
+    const signedOutBox = document.getElementById('cloudSignedOutActions');
+    const signedInBox = document.getElementById('cloudSignedInActions');
+    const emailEl = document.getElementById('cloudAccountEmail');
+    const timeEl = document.getElementById('cloudLastSyncTime');
+
+    if (!badge || !signedOutBox || !signedInBox) return;
+
+    if (state && state.signedIn) {
+      signedOutBox.style.display = 'none';
+      signedInBox.style.display = 'flex';
+      const provider = state.providerType || 'Google Drive';
+      badge.textContent = statusOverride || `✓ ${provider}`;
+      badge.style.background = 'rgba(16, 185, 129, 0.15)';
+      badge.style.color = 'var(--success)';
+      if (emailEl) emailEl.textContent = `👤 ${state.email || 'Google Drive Account'}`;
+      if (timeEl) timeEl.textContent = `Synced: ${this.formatSyncTime(state.lastSyncTime)}`;
+    } else {
+      signedOutBox.style.display = 'flex';
+      signedInBox.style.display = 'none';
+      badge.textContent = 'Optional • Offline';
+      badge.style.background = 'rgba(148, 163, 184, 0.15)';
+      badge.style.color = 'var(--text-muted)';
+    }
+  },
+
+  // CRDT Monotonic Two-Way Merge (prevents stale overwrites and zombie bookmarks/resets)
+  mergeProgressStates(local, remote) {
+    if (!remote || typeof remote !== 'object') return local;
+    const localReset = local.resetEpoch || 0;
+    const remoteReset = remote.resetEpoch || 0;
+    const effectiveResetEpoch = Math.max(localReset, remoteReset);
+
+    const filterByReset = (stateObj, stateReset) => {
+      if (stateReset >= effectiveResetEpoch) return stateObj;
+      // This side was superseded by a newer full reset on the other device
+      const cleanedStats = {};
+      Object.keys(stateObj.cardStats || {}).forEach(qid => {
+        const st = stateObj.cardStats[qid];
+        if (st && (st.lastReviewedAt || 0) > effectiveResetEpoch) {
+          cleanedStats[qid] = st;
+        }
+      });
+      const cleanedBm = {};
+      const cleanedBmTs = {};
+      Object.keys(stateObj.bookmarkUpdatedAt || {}).forEach(qid => {
+        const ts = stateObj.bookmarkUpdatedAt[qid] || 0;
+        if (ts > effectiveResetEpoch) {
+          cleanedBmTs[qid] = ts;
+          if (stateObj.bookmarkedIds && stateObj.bookmarkedIds[qid]) {
+            cleanedBm[qid] = true;
+          }
+        }
+      });
+      const cleanedHist = (stateObj.history || []).filter(h => h && (h.time || 0) > effectiveResetEpoch);
+      return {
+        ...stateObj,
+        cardStats: cleanedStats,
+        masteredIds: {},
+        bookmarkedIds: cleanedBm,
+        bookmarkUpdatedAt: cleanedBmTs,
+        history: cleanedHist,
+        totalSteps: cleanedHist.length
+      };
+    };
+
+    const L = filterByReset(local, localReset);
+    const R = filterByReset(remote, remoteReset);
+
+    const mergedStats = {};
+    const mergedMastered = {};
+    const allStatIds = new Set([
+      ...Object.keys(L.cardStats || {}),
+      ...Object.keys(R.cardStats || {}),
+      ...Object.keys(L.masteredIds || {}),
+      ...Object.keys(R.masteredIds || {})
+    ]);
+
+    allStatIds.forEach(qid => {
+      const ls = (L.cardStats && L.cardStats[qid]) || null;
+      const rs = (R.cardStats && R.cardStats[qid]) || null;
+      if (ls && !rs) {
+        mergedStats[qid] = { ...ls };
+      } else if (!ls && rs) {
+        mergedStats[qid] = { ...rs };
+      } else if (ls && rs) {
+        const lTime = ls.lastReviewedAt || 0;
+        const rTime = rs.lastReviewedAt || 0;
+        const newer = lTime >= rTime ? ls : rs;
+        mergedStats[qid] = {
+          ...newer,
+          attempts: Math.max(ls.attempts || 0, rs.attempts || 0),
+          lapses: Math.max(ls.lapses || 0, rs.lapses || 0),
+          everWrong: Boolean(ls.everWrong || rs.everWrong),
+          lastReviewedAt: Math.max(lTime, rTime)
+        };
+      }
+      const ms = mergedStats[qid];
+      if (ms) {
+        if (ms.box >= 2) {
+          mergedMastered[qid] = true;
+        } else if (ms.attempts > 0 || ms.everWrong || L.masteredIds?.[qid] === false || R.masteredIds?.[qid] === false) {
+          mergedMastered[qid] = false;
+        }
+      } else if (L.masteredIds?.[qid] !== undefined) {
+        mergedMastered[qid] = L.masteredIds[qid];
+      } else if (R.masteredIds?.[qid] !== undefined) {
+        mergedMastered[qid] = R.masteredIds[qid];
+      }
+    });
+
+    // Merge bookmarks using tombstone timestamps (bookmarkUpdatedAt)
+    const mergedBookmarks = {};
+    const mergedBookmarkTs = {};
+    const allBmIds = new Set([
+      ...Object.keys(L.bookmarkedIds || {}),
+      ...Object.keys(R.bookmarkedIds || {}),
+      ...Object.keys(L.bookmarkUpdatedAt || {}),
+      ...Object.keys(R.bookmarkUpdatedAt || {})
+    ]);
+    allBmIds.forEach(qid => {
+      const lTs = (L.bookmarkUpdatedAt && L.bookmarkUpdatedAt[qid]) || (L.bookmarkedIds && L.bookmarkedIds[qid] ? 1 : 0);
+      const rTs = (R.bookmarkUpdatedAt && R.bookmarkUpdatedAt[qid]) || (R.bookmarkedIds && R.bookmarkedIds[qid] ? 1 : 0);
+      if (lTs >= rTs) {
+        mergedBookmarkTs[qid] = lTs;
+        if (L.bookmarkedIds && L.bookmarkedIds[qid]) mergedBookmarks[qid] = true;
+      } else {
+        mergedBookmarkTs[qid] = rTs;
+        if (R.bookmarkedIds && R.bookmarkedIds[qid]) mergedBookmarks[qid] = true;
+      }
+    });
+
+    // Merge history chronologically without duplicates
+    const histMap = new Map();
+    (L.history || []).concat(R.history || []).forEach(h => {
+      if (!h || !h.qid) return;
+      const key = `${h.qid}_${h.time || 0}`;
+      if (!histMap.has(key)) histMap.set(key, h);
+    });
+    const mergedHistory = Array.from(histMap.values())
+      .sort((a, b) => (a.time || 0) - (b.time || 0))
+      .slice(-1000);
+
+    return {
+      ...local,
+      masteredIds: mergedMastered,
+      bookmarkedIds: mergedBookmarks,
+      bookmarkUpdatedAt: mergedBookmarkTs,
+      cardStats: mergedStats,
+      history: mergedHistory,
+      totalSteps: Math.max(L.totalSteps || 0, R.totalSteps || 0, mergedHistory.length),
+      resetEpoch: effectiveResetEpoch,
+      updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0, Date.now())
+    };
+  },
+
+  async signIn(linkExisting = false) {
+    if (window.AndroidBridge && typeof window.AndroidBridge.signInWithGoogle === 'function') {
+      window.AndroidBridge.signInWithGoogle(Boolean(linkExisting));
+      return;
+    }
+    // Desktop Web File System Access API fallback (Google Drive for Desktop / Cloud folder)
+    try {
+      if (linkExisting && window.showOpenFilePicker) {
+        const [handle] = await window.showOpenFilePicker({
+          types: [{ description: 'CCNA Sync JSON', accept: { 'application/json': ['.json'] } }]
+        });
+        this.webFileHandle = handle;
+      } else if (window.showSaveFilePicker) {
+        this.webFileHandle = await window.showSaveFilePicker({
+          suggestedName: 'ccna_study_progress.json',
+          types: [{ description: 'CCNA Sync JSON', accept: { 'application/json': ['.json'] } }]
+        });
+      } else {
+        showToast('💡 请在 Android 客户端或支持 File System API 的浏览器中使用 Google Drive 自动同步');
+        return;
+      }
+      const meta = {
+        signedIn: true,
+        email: this.webFileHandle.name || 'Google Drive Sync File',
+        providerType: 'Google Drive File',
+        lastSyncTime: Date.now()
+      };
+      localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+      this.syncSettingsCardUI();
+      await this.syncNow();
+    } catch (e) {
+      if (e && e.name !== 'AbortError') {
+        showToast('取消或无法绑定同步文件: ' + e.message);
+      }
+    }
+  },
+
+  rebindFile() {
+    if (window.AndroidBridge && typeof window.AndroidBridge.rebindDriveSyncFile === 'function') {
+      window.AndroidBridge.rebindDriveSyncFile(true);
+      return;
+    }
+    this.signIn(true);
+  },
+
+  signOut() {
+    if (window.AndroidBridge && typeof window.AndroidBridge.signOutGoogle === 'function') {
+      window.AndroidBridge.signOutGoogle();
+    }
+    this.webFileHandle = null;
+    localStorage.removeItem('ccna_web_cloud_sync_meta');
+    this.syncSettingsCardUI();
+  },
+
+  scheduleAutoPush() {
+    const state = this.getSyncState();
+    if (!state || !state.signedIn) return;
+    if (this.autoPushTimer) clearTimeout(this.autoPushTimer);
+    this.autoPushTimer = setTimeout(() => {
+      this.pushToCloud();
+    }, 2200);
+  },
+
+  pushToCloud() {
+    const state = this.getSyncState();
+    if (!state || !state.signedIn) return;
+    const payload = JSON.stringify(appState);
+    if (window.AndroidBridge && typeof window.AndroidBridge.cloudPushProgress === 'function') {
+      this.syncSettingsCardUI('⟳ Syncing...');
+      window.AndroidBridge.cloudPushProgress(payload);
+      return;
+    }
+    if (this.webFileHandle) {
+      this.webPush(payload);
+    }
+  },
+
+  async webPush(payload) {
+    try {
+      const writable = await this.webFileHandle.createWritable();
+      await writable.write(payload);
+      await writable.close();
+      const meta = this.getSyncState();
+      meta.lastSyncTime = Date.now();
+      localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+      this.syncSettingsCardUI();
+    } catch (e) {
+      console.warn('Web cloud push failed', e);
+    }
+  },
+
+  async syncNow() {
+    const state = this.getSyncState();
+    if (!state || !state.signedIn) return;
+    this.syncSettingsCardUI('⟳ Syncing...');
+    if (window.AndroidBridge && typeof window.AndroidBridge.cloudPullProgress === 'function') {
+      window.AndroidBridge.cloudPullProgress();
+      return;
+    }
+    if (this.webFileHandle) {
+      try {
+        const file = await this.webFileHandle.getFile();
+        const text = await file.text();
+        if (text && text.trim().startsWith('{')) {
+          const remote = JSON.parse(text);
+          appState = this.mergeProgressStates(appState, remote);
+          SrsEngine.syncActiveMistakeSet();
+          localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
+          updateHeaderStats();
+        }
+        await this.webPush(JSON.stringify(appState));
+        showToast('☁️ 已与 Google Drive 完成双向增量同步');
+      } catch (e) {
+        showToast('⚠️ 同步失败: ' + e.message);
+      }
+    }
+  },
+
+  onAppResume() {
+    const state = this.getSyncState();
+    if (state && state.signedIn && window.AndroidBridge && typeof window.AndroidBridge.cloudPullProgress === 'function') {
+      window.AndroidBridge.cloudPullProgress();
+    }
+  }
+};
+window.CloudSyncEngine = CloudSyncEngine;
+
+window.onGoogleDriveBound = function (jsonStr) {
+  try {
+    const info = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
+    CloudSyncEngine.syncSettingsCardUI('⟳ Syncing...');
+    if (info && info.isNewlyCreated) {
+      CloudSyncEngine.pushToCloud();
+      showToast(`☁️ 已绑定 ${info.email || 'Google Drive'} 并上传初始刷题进度`);
+    } else {
+      CloudSyncEngine.syncNow();
+    }
+  } catch (e) {
+    console.error('onGoogleDriveBound error', e);
+  }
+};
+
+window.onCloudPullCallback = function (jsonStr) {
+  try {
+    const res = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
+    if (res && res.ok) {
+      if (res.data && res.data.trim().startsWith('{')) {
+        const remote = JSON.parse(res.data);
+        appState = CloudSyncEngine.mergeProgressStates(appState, remote);
+        SrsEngine.syncActiveMistakeSet();
+        localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
+        updateHeaderStats();
+      }
+      // Push merged state back so cloud file also reflects any newer local progress
+      CloudSyncEngine.pushToCloud();
+    } else {
+      CloudSyncEngine.syncSettingsCardUI('⚠️ Offline');
+    }
+  } catch (e) {
+    console.error('onCloudPullCallback error', e);
+    CloudSyncEngine.syncSettingsCardUI('⚠️ Sync Error');
+  }
+};
+
+window.onCloudPushCallback = function (jsonStr) {
+  try {
+    const res = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
+    if (res && res.ok) {
+      CloudSyncEngine.syncSettingsCardUI();
+    } else {
+      CloudSyncEngine.syncSettingsCardUI('⚠️ Offline');
+    }
+  } catch (e) {
+    CloudSyncEngine.syncSettingsCardUI();
+  }
+};
 
 // Initialize
 window.addEventListener('DOMContentLoaded', async () => {
@@ -30,9 +975,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   initTheme();
   initLightboxGestures();
   await loadQuestionData();
-  setupPracticeQueue();
+  SrsEngine.migrateFromLegacyState();
+  if (!DeckScheduler.restoreSessionSnapshot()) {
+    setupPracticeQueue(appState.drillTopic);
+  }
   renderCurrentCard();
   updateHeaderStats();
+  CloudSyncEngine.syncSettingsCardUI();
+  CloudSyncEngine.onAppResume();
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && CloudSyncEngine.autoPushTimer) {
+    clearTimeout(CloudSyncEngine.autoPushTimer);
+    CloudSyncEngine.autoPushTimer = null;
+    CloudSyncEngine.pushToCloud();
+  }
 });
 
 function loadStoredState() {
@@ -46,6 +1004,12 @@ function loadStoredState() {
         }
         parsed.retryDefaultMigratedV2 = true;
       }
+      if (!parsed.antiDejaVuMigratedV3) {
+        if (!parsed.retryInterval || parsed.retryInterval < 15) {
+          parsed.retryInterval = 25;
+        }
+        parsed.antiDejaVuMigratedV3 = true;
+      }
       appState = Object.assign(appState, parsed);
     }
   } catch (e) {
@@ -55,11 +1019,14 @@ function loadStoredState() {
 
 function saveState() {
   try {
-    // Keep max 500 history items to bound storage
-    if (appState.history.length > 500) {
-      appState.history = appState.history.slice(-500);
+    appState.updatedAt = Date.now();
+    // Keep max 1000 history items to bound storage while supporting 500-window diagnostics
+    if (appState.history.length > 1000) {
+      appState.history = appState.history.slice(-1000);
     }
     localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
+    DeckScheduler.saveSessionSnapshot();
+    CloudSyncEngine.scheduleAutoPush();
   } catch (e) {
     console.error('Failed to save state to localStorage', e);
   }
@@ -69,12 +1036,22 @@ async function loadQuestionData() {
   const bundle = window.CCNA_CARDS_DATA || window.CCNA_QUESTIONS_DATA || window.ccnaCardsData || (typeof ccnaCardsData !== 'undefined' ? ccnaCardsData : null);
   if (bundle && Array.isArray(bundle) && bundle.length > 0) {
     allQuestions = bundle;
+    questionById = {};
+    allQuestions.forEach(q => {
+      enrichQuestionTaxonomy(q);
+      questionById[q.id] = q;
+    });
     console.log(`Loaded ${allQuestions.length} CCNA questions from script bundle.`);
     return true;
   }
   try {
     const res = await fetch('data/ccna_cards_tagged.json');
     allQuestions = await res.json();
+    questionById = {};
+    allQuestions.forEach(q => {
+      enrichQuestionTaxonomy(q);
+      questionById[q.id] = q;
+    });
     console.log(`Loaded ${allQuestions.length} CCNA questions from fetch.`);
     return true;
   } catch (err) {
@@ -82,6 +1059,50 @@ async function loadQuestionData() {
     document.getElementById('cardPrompt').textContent = 'Error loading question bank. Please reinstall or restart app.';
     return false;
   }
+}
+
+function enrichQuestionTaxonomy(q) {
+  if (q.domain && q.topic && q.topic !== 'General') return;
+  const optText = Array.isArray(q.options) ? q.options.map(o => o.text || '').join(' ') : '';
+  const hay = `${q.prompt || ''} ${optText} ${(q.explanation || '').slice(0, 400)}`.toLowerCase();
+
+  const rules = [
+    // 6. Automation and Programmability
+    { re: /\b(ansible|puppet|chef|restconf|netconf|json|yaml|xml|rest api|crud|dna center|sd-access|controller-based|southbound|northbound|postman|python)\b/, domain: 'Automation and Programmability', topic: 'Automation, SDN & REST APIs' },
+    // 5. Security Fundamentals
+    { re: /\b(dhcp snooping|dynamic arp inspection|\bdai\b|port-security|port security|bpdu guard|root guard|802\.1x)\b/, domain: 'Security Fundamentals', topic: 'Layer 2 Security (Port Security / DAI / Snooping)' },
+    { re: /\b(access-list|ip access-group|standard acl|extended acl|wildcard mask)\b/, domain: 'Security Fundamentals', topic: 'Access Control Lists (ACLs)' },
+    { re: /\b(wpa2|wpa3|\baaa\b|tacacs\+|radius|ipsec|vpn|cryptography|phishing|malware|ddos|firewall|ngfw|ips|ids)\b/, domain: 'Security Fundamentals', topic: 'Security, VPNs, AAA & Wireless Security' },
+    // 4. IP Services
+    { re: /\b(ip nat|nat inside|nat outside|overload|\bpat\b|inside global|inside local)\b/, domain: 'IP Services', topic: 'NAT & PAT' },
+    { re: /\b(hsrp|standby ip|standby \d|vrrp|glbp|first hop redundancy|fhrp)\b/, domain: 'IP Services', topic: 'First Hop Redundancy (HSRP / FHRP)' },
+    { re: /\b(ip dhcp|dhcp pool|ip helper-address|dora|\bdns\b|fqdn)\b/, domain: 'IP Services', topic: 'DHCP & DNS Services' },
+    { re: /\b(\bntp\b|syslog|snmp|mib|logging trap|stratum|\btftp\b|\bftp\b)\b/, domain: 'IP Services', topic: 'NTP, Syslog & SNMP' },
+    { re: /\b(\bqos\b|dscp|cos|queuing|llq|cbwfq|policing|shaping|per-hop behavior|phb)\b/, domain: 'IP Services', topic: 'QoS & Traffic Management' },
+    // 3. IP Connectivity
+    { re: /\b(ospf|router-id|dr\/bdr|designated router|area 0|wildcard|lsa|spf|passive-interface)\b/, domain: 'IP Connectivity', topic: 'OSPFv2 Dynamic Routing' },
+    { re: /\b(ip route|ipv6 route|floating static|default-information originate|gateway of last resort|administrative distance|longest match|longest prefix|routing table|show ip route)\b/, domain: 'IP Connectivity', topic: 'IP Routing & Static Routes' },
+    // 2. Network Access
+    { re: /\b(spanning-tree|stp|rstp|pvst|root bridge|root port|designated port|portfast)\b/, domain: 'Network Access', topic: 'Spanning Tree Protocol (STP / RSTP)' },
+    { re: /\b(etherchannel|lacp|pagp|channel-group|port-channel)\b/, domain: 'Network Access', topic: 'EtherChannel (LACP / PAgP)' },
+    { re: /\b(vlan|802\.1q|dot1q|trunk|native vlan|switchport|router-on-a-stick|svi|voice vlan|vtp)\b/, domain: 'Network Access', topic: 'VLANs & 802.1Q Trunking' },
+    { re: /\b(\bcdp\b|\blldp\b)\b/, domain: 'Network Access', topic: 'Layer 2 Discovery (CDP & LLDP)' },
+    { re: /\b(wlc|capwap|lwapp|ssid|802\.11|wireless|ap mode|flexconnect|autonomous ap)\b/, domain: 'Network Access', topic: 'Wireless LANs (WLC & 802.11)' },
+    // 1. Network Fundamentals
+    { re: /\b(ipv6|fe80|2001:|slaac|eui-64|solicited-node|link-local|unique local|global unicast)\b/, domain: 'Network Fundamentals', topic: 'IPv6 Addressing & Neighbor Discovery' },
+    { re: /\b(\/\d{2}\b|subnet|255\.255\.|vlsm|cidr|broadcast address|private ip|rfc 1918)\b/, domain: 'Network Fundamentals', topic: 'IPv4 Addressing & Subnetting' },
+    { re: /\b(tcp|udp|three-way handshake|syn|ack|port \d+|osi|encapsulation|pdu|mac address-table|csma\/cd|duplex|poe|fiber|utp|sfp|spine-leaf|three-tier|two-tier)\b/, domain: 'Network Fundamentals', topic: 'TCP/IP, Ethernet & Network Architecture' }
+  ];
+
+  for (const r of rules) {
+    if (r.re.test(hay)) {
+      if (!q.domain) q.domain = r.domain;
+      if (!q.topic || q.topic === 'General') q.topic = r.topic;
+      return;
+    }
+  }
+  if (!q.domain) q.domain = 'Network Fundamentals';
+  if (!q.topic) q.topic = 'TCP/IP, Ethernet & Network Architecture';
 }
 
 function shuffle(array) {
@@ -93,29 +1114,129 @@ function shuffle(array) {
   return arr;
 }
 
+function syncDrillBannerUI() {
+  const banner = document.getElementById('drillBanner');
+  const txt = document.getElementById('drillBannerText');
+  if (!banner || !txt) return;
+  if (appState.drillTopic) {
+    banner.classList.add('active');
+    txt.textContent = appState.drillTopic;
+  } else {
+    banner.classList.remove('active');
+  }
+}
+
 function setupPracticeQueue(filterTopic = null) {
   let pool = allQuestions;
   if (filterTopic) {
-    pool = allQuestions.filter(q => q.topic === filterTopic || q.domain === filterTopic);
-    if (pool.length === 0) pool = allQuestions;
-    appState.drillTopic = filterTopic;
-    document.getElementById('drillBanner').classList.add('active');
-    document.getElementById('drillBannerText').textContent = `🎯 Focused Drill: ${filterTopic} (${pool.length} Qs)`;
+    const matched = allQuestions.filter(q => q.topic === filterTopic || q.domain === filterTopic);
+    if (matched.length > 0) {
+      pool = matched;
+      appState.deckMode = 'topic';
+      appState.drillTopic = `🎯 Focused Drill: ${filterTopic} (${pool.length} Qs)`;
+    } else {
+      appState.drillTopic = null;
+      appState.deckMode = 'smart';
+    }
   } else {
     appState.drillTopic = null;
-    document.getElementById('drillBanner').classList.remove('active');
+    appState.deckMode = 'smart';
+    appState.domainFilter = '';
   }
 
-  // Shuffle pool pseudo-randomly
-  activeQueue = shuffle(pool).map(q => ({ ...q, isRetry: false }));
+  syncDrillBannerUI();
+  activeQueue = DeckScheduler.buildSmartQueue(pool);
   currentIndex = 0;
+  DeckScheduler.saveSessionSnapshot();
 }
+
+function switchDeckMode(mode) {
+  if (mode === 'bookmarks') {
+    const bIds = Object.keys(appState.bookmarkedIds || {}).filter(k => appState.bookmarkedIds[k]);
+    const pool = allQuestions.filter(q => appState.bookmarkedIds[q.id]);
+    if (pool.length === 0) {
+      showToast('⭐ No bookmarked questions yet! Tap ★ on any card to bookmark it.');
+      return;
+    }
+    appState.deckMode = 'bookmarks';
+    appState.drillTopic = `⭐ Bookmarked Pool (${pool.length} Qs)`;
+    syncDrillBannerUI();
+    activeQueue = DeckScheduler.buildSmartQueue(pool);
+    currentIndex = 0;
+    closeModals();
+    renderCurrentCard();
+    updateHeaderStats();
+    saveState();
+    showToast(`⭐ Loaded ${pool.length} bookmarked questions`);
+    return;
+  }
+
+  if (mode === 'weak') {
+    const pool = allQuestions.filter(q => {
+      const st = appState.cardStats && appState.cardStats[q.id];
+      return appState.masteredIds[q.id] === false || (st && (st.box === 0 || st.box === 1 || (st.everWrong && !appState.masteredIds[q.id])));
+    });
+    if (pool.length === 0) {
+      showToast('🎉 Zero unresolved weak/wrong questions! Keep practicing in Smart Mode.');
+      return;
+    }
+    appState.deckMode = 'weak';
+    appState.drillTopic = `📕 Wrong & Weak Pool (${pool.length} Qs)`;
+    syncDrillBannerUI();
+    activeQueue = DeckScheduler.buildSmartQueue(pool);
+    currentIndex = 0;
+    closeModals();
+    renderCurrentCard();
+    updateHeaderStats();
+    saveState();
+    showToast(`📕 Loaded ${pool.length} wrong/weak questions for targeted review`);
+    return;
+  }
+
+  // Default: 'smart'
+  setupPracticeQueue(null);
+  closeModals();
+  renderCurrentCard();
+  updateHeaderStats();
+  saveState();
+  showToast('🧠 Switched to Smart Adaptive Mode (Due + Unseen prioritized)');
+}
+window.switchDeckMode = switchDeckMode;
+
+function filterByDomain(domainName) {
+  appState.domainFilter = domainName || '';
+  if (!domainName) {
+    setupPracticeQueue(null);
+    closeModals();
+    renderCurrentCard();
+    updateHeaderStats();
+    saveState();
+    showToast('📚 Showing all 6 CCNA Domains');
+    return;
+  }
+  const pool = allQuestions.filter(q => q.domain === domainName);
+  if (pool.length === 0) {
+    showToast(`No questions found for domain ${domainName}`);
+    return;
+  }
+  appState.deckMode = 'domain';
+  appState.drillTopic = `📚 Domain: ${domainName} (${pool.length} Qs)`;
+  syncDrillBannerUI();
+  activeQueue = DeckScheduler.buildSmartQueue(pool);
+  currentIndex = 0;
+  closeModals();
+  renderCurrentCard();
+  updateHeaderStats();
+  saveState();
+  showToast(`📚 Filtered to ${domainName} (${pool.length} Qs)`);
+}
+window.filterByDomain = filterByDomain;
 
 function exitDrillMode() {
   setupPracticeQueue(null);
   renderCurrentCard();
   updateHeaderStats();
-  showToast('Exited drill mode. Resumed full random bank.');
+  showToast('Exited drill mode. Resumed Smart Adaptive Queue.');
 }
 
 function formatMarkdown(text) {
@@ -233,9 +1354,46 @@ function formatMarkdown(text) {
   }
   out = newLines.join('\n');
 
-  // 6. Markdown Headings (#, ##, ###)
-  out = out.replace(/^###\s+(.+)$/gm, '<h4 class="md-h4">$1</h4>');
-  out = out.replace(/^##\s+(.+)$/gm, '<h3 class="md-h3">$1</h3>');
+  // 5.5 Blockquotes & Callouts (> [!NOTE], > [!TIP], > ...)
+  const qLines = out.split('\n');
+  const quoteProcessed = [];
+  let qi = 0;
+  while (qi < qLines.length) {
+    const qLine = qLines[qi].trim();
+    if (qLine.startsWith('&gt;')) {
+      const bqGroup = [];
+      while (qi < qLines.length && qLines[qi].trim().startsWith('&gt;')) {
+        bqGroup.push(qLines[qi].trim().replace(/^&gt;\s?/, ''));
+        qi++;
+      }
+      const firstLine = bqGroup[0] || '';
+      const calloutMatch = firstLine.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+      if (calloutMatch) {
+        const type = calloutMatch[1].toLowerCase();
+        const iconMap = {
+          'note': 'ℹ️',
+          'tip': '💡',
+          'important': '❗',
+          'warning': '⚠️',
+          'caution': '🛑'
+        };
+        const icon = iconMap[type] || 'ℹ️';
+        const innerLines = bqGroup.slice(1);
+        quoteProcessed.push(`<div class="md-callout md-callout-${type}"><div class="callout-icon">${icon}</div><div class="callout-content">${innerLines.join('\n')}</div></div>`);
+      } else {
+        quoteProcessed.push(`<blockquote class="md-blockquote">${bqGroup.join('\n')}</blockquote>`);
+      }
+      continue;
+    }
+    quoteProcessed.push(qLines[qi]);
+    qi++;
+  }
+  out = quoteProcessed.join('\n');
+
+  // 6. Markdown Headings (#, ##, ###, ####)
+  out = out.replace(/^####\s+(.+)$/gm, '<h5 class="md-h4">$1</h5>');
+  out = out.replace(/^###\s+(.+)$/gm, '<h4 class="md-h3">$1</h4>');
+  out = out.replace(/^##\s+(.+)$/gm, '<h3 class="md-h2">$1</h3>');
   out = out.replace(/^#\s+(.+)$/gm, '<h2 class="md-h2">$1</h2>');
 
   // 7. Section Bullets (• **...**: or • ...)
@@ -294,17 +1452,51 @@ function renderCurrentCard() {
   const idkWrap = document.getElementById('idkWrap');
   const expCard = document.getElementById('explanationCard');
   const actionBtn = document.getElementById('actionBtn');
+  const card = document.getElementById('activeCard');
+  const cardContainer = document.getElementById('cardContainer') || document.querySelector('main');
+
+  // Toggle responsive lab split-view layout
+  const isLab = currentQuestion.type === 'Simulation / Lab';
+  if (isLab) {
+    if (card) card.classList.add('is-lab-card');
+    if (cardContainer) cardContainer.classList.add('is-lab-main');
+  } else {
+    if (card) card.classList.remove('is-lab-card');
+    if (cardContainer) cardContainer.classList.remove('is-lab-main');
+  }
 
   // Set top tags
   qidEl.textContent = `#${currentQuestion.id}`;
   domainEl.textContent = currentQuestion.domain || 'Network Fundamentals';
   topicEl.textContent = currentQuestion.topic || 'General';
   
+  const srsBadge = document.getElementById('cardSrsBadge');
+  const cardStat = (appState.cardStats && appState.cardStats[currentQuestion.id]) || null;
+
   if (currentQuestion.isRetry) {
     retryBadge.style.display = 'inline-block';
-    retryBadge.textContent = '🔁 Reinforce';
+    retryBadge.textContent = currentQuestion.retryStage === 2 ? '🌱 Consolidate (2/2)' : '🔁 Reinforce (1/2)';
   } else {
     retryBadge.style.display = 'none';
+  }
+
+  if (srsBadge) {
+    srsBadge.className = 'badge badge-srs';
+    if (cardStat && cardStat.lapses >= 3 && !appState.masteredIds[currentQuestion.id]) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-leech');
+      srsBadge.textContent = `🔥 Leech (${cardStat.lapses}x missed)`;
+    } else if (cardStat && cardStat.box === 1) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-learning');
+      srsBadge.textContent = '🌱 Step 1/2 Passed';
+    } else if (appState.masteredIds[currentQuestion.id] === true) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-mastered');
+      srsBadge.textContent = '✓ Mastered';
+    } else {
+      srsBadge.style.display = 'none';
+    }
   }
 
   // Bookmark state
@@ -319,7 +1511,7 @@ function renderCurrentCard() {
 
   // Handle image exhibit
   if (currentQuestion.image) {
-    exhibitImg.src = currentQuestion.image;
+    setDiagramImage(exhibitImg, currentQuestion.image);
     exhibitWrap.style.display = 'block';
   } else {
     exhibitWrap.style.display = 'none';
@@ -331,8 +1523,17 @@ function renderCurrentCard() {
   if (oldSolImg) oldSolImg.remove();
   document.getElementById('expMisconception').style.display = 'none';
   idkWrap.style.display = 'block';
+  actionBtn.style.display = 'flex';
   actionBtn.textContent = 'Check Answer';
   actionBtn.className = 'btn btn-primary';
+  const prevBtn = document.getElementById('prevBtn');
+  if (prevBtn) {
+    prevBtn.style.display = currentIndex > 0 ? 'flex' : 'none';
+  }
+  const labEvalGroup = document.getElementById('labEvalGroup');
+  if (labEvalGroup) {
+    labEvalGroup.style.display = 'none';
+  }
 
   // Render options or Interactive Drag & Drop
   optionsList.innerHTML = '';
@@ -385,7 +1586,10 @@ function renderCurrentCard() {
 
       if (window.IosSimulator) {
         const devs = IosSimulator.extractDevices(currentQuestion.prompt);
-        new IosSimulator(simWrap, { devices: devs });
+        const sim = new IosSimulator(simWrap, { questionId: currentQuestion.id, devices: devs, promptText: currentQuestion.prompt });
+        if (typeof sim.render === 'function' && (!simWrap.children || simWrap.children.length === 0)) {
+          sim.render();
+        }
       } else {
         const notice = document.createElement('div');
         notice.style.fontSize = '0.92rem';
@@ -838,18 +2042,39 @@ function submitAnswer() {
     });
   }
 
-  // Handle outcome
+  // Special handling for Simulation / Lab: reveal reference config first and let user self-evaluate
+  if (currentQuestion.type === 'Simulation / Lab') {
+    showExplanation(true, null);
+    const actionBtn = document.getElementById('actionBtn');
+    const labEvalGroup = document.getElementById('labEvalGroup');
+    if (labEvalGroup) {
+      actionBtn.style.display = 'none';
+      labEvalGroup.style.display = 'flex';
+    } else {
+      actionBtn.textContent = 'Next Question →';
+      actionBtn.className = 'btn btn-next';
+    }
+    showToast('🛠️ Compare your CLI config with the reference solution below.');
+    return;
+  }
+
+  // Handle outcome via SrsEngine (2-stage consolidation for missed questions)
   if (isCorrect) {
     triggerHaptic(true);
-    appState.masteredIds[currentQuestion.id] = true;
     logAttempt(true, false, null);
-    showToast('✨ Correct! Well done.');
+    const srsRes = SrsEngine.recordOutcome(currentQuestion, true, false);
+    if (srsRes.status === 'consolidating') {
+      showToast(`🌱 Step 1/2 Correct! Will consolidate in ${srsRes.interval} Qs.`);
+    } else if (srsRes.status === 'graduated') {
+      showToast('✨ Mastered! (2/2 consecutive reviews passed)');
+    } else {
+      showToast('✨ Correct! Well done.');
+    }
   } else {
     triggerHaptic(false);
-    appState.masteredIds[currentQuestion.id] = false;
     logAttempt(false, false, misconceptionMsg);
-    scheduleErrorReappearance();
-    showToast('⚠️ Incorrect. Question queued for review.');
+    const srsRes = SrsEngine.recordOutcome(currentQuestion, false, false);
+    showToast(`⚠️ Incorrect. Queued for reinforcement in ${srsRes.interval} Qs.`);
   }
 
   // Show explanation
@@ -863,6 +2088,25 @@ function submitAnswer() {
   updateHeaderStats();
   saveState();
 }
+
+function submitLabSelfEval(isMastered) {
+  if (!currentQuestion) return;
+  triggerHaptic(Boolean(isMastered));
+  if (isMastered) {
+    logAttempt(true, false, null);
+    SrsEngine.recordOutcome(currentQuestion, true, false);
+    showToast('✨ Lab marked as Mastered!');
+  } else {
+    const msg = `${currentQuestion.topic || 'Simulation / Lab'} (Needs CLI Practice)`;
+    logAttempt(false, false, msg);
+    const srsRes = SrsEngine.recordOutcome(currentQuestion, false, false);
+    showToast(`🔁 Lab queued for retry in ${srsRes.interval} Qs.`);
+  }
+  updateHeaderStats();
+  saveState();
+  advanceToNextCard();
+}
+window.submitLabSelfEval = submitLabSelfEval;
 
 function handleIdk() {
   if (isAnswerSubmitted) return;
@@ -888,14 +2132,11 @@ function handleIdk() {
     });
   }
 
-  // Log as IDK attempt
+  // Log as IDK attempt & schedule via SrsEngine
   const idkMsg = currentQuestion.idk_tag || `${currentQuestion.topic} (Unmastered Knowledge Point)`;
-  appState.masteredIds[currentQuestion.id] = false;
   logAttempt(false, true, idkMsg);
-
-  // Schedule reappearance
-  scheduleErrorReappearance();
-  showToast('Recorded as weak point. Explanation revealed.');
+  const srsRes = SrsEngine.recordOutcome(currentQuestion, false, true);
+  showToast(`Recorded as weak point. Will reappear in ${srsRes.interval} Qs.`);
 
   // Show explanation
   showExplanation(false, `Marked as unknown: ${idkMsg}`);
@@ -959,7 +2200,7 @@ function showExplanation(isCorrect, misconceptionMsg) {
     if (!existingImg) {
       const solImg = document.createElement('img');
       solImg.className = 'solution-img';
-      solImg.src = currentQuestion.answer_image;
+      setDiagramImage(solImg, currentQuestion.answer_image);
       solImg.style.width = '100%';
       solImg.style.borderRadius = '8px';
       solImg.style.marginTop = '12px';
@@ -981,9 +2222,20 @@ function showExplanation(isCorrect, misconceptionMsg) {
 
 function advanceToNextCard() {
   currentIndex++;
+  DeckScheduler.saveSessionSnapshot();
   renderCurrentCard();
   updateHeaderStats();
 }
+
+function goToPreviousCard() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    DeckScheduler.saveSessionSnapshot();
+    renderCurrentCard();
+    updateHeaderStats();
+  }
+}
+window.goToPreviousCard = goToPreviousCard;
 
 function logAttempt(correct, isIdk, misconception) {
   appState.history.push({
@@ -1134,6 +2386,8 @@ function startTargetedDrill(topic) {
 function toggleBookmark() {
   if (!currentQuestion) return;
   const qid = currentQuestion.id;
+  if (!appState.bookmarkUpdatedAt) appState.bookmarkUpdatedAt = {};
+  appState.bookmarkUpdatedAt[qid] = Date.now();
   if (appState.bookmarkedIds[qid]) {
     delete appState.bookmarkedIds[qid];
     document.getElementById('bookmarkBtn').classList.remove('active');
@@ -1148,10 +2402,10 @@ function toggleBookmark() {
 
 // SETTINGS & MODALS
 function syncRetryPillsUI() {
-  const cur = parseInt(appState.retryInterval) || 7;
+  const cur = parseInt(appState.retryInterval, 10) || 25;
   const lbl = document.getElementById('retryIntervalLabel');
   if (lbl) {
-    lbl.textContent = cur === 7 ? '7 Qs (Default)' : `${cur} Qs`;
+    lbl.textContent = cur === 25 ? '~25 Qs (Default ±35%)' : `~${cur} Qs (±35%)`;
   }
   document.querySelectorAll('.retry-pill').forEach(btn => {
     const v = parseInt(btn.dataset.val, 10);
@@ -1161,9 +2415,31 @@ function syncRetryPillsUI() {
 
 function openSettingsModal() {
   syncRetryPillsUI();
+  CloudSyncEngine.syncSettingsCardUI();
   const shufToggle = document.getElementById('shuffleOptionsToggle');
   if (shufToggle) {
     shufToggle.checked = (appState.shuffleOptions !== false);
+  }
+  const hideMastToggle = document.getElementById('hideMasteredToggle');
+  if (hideMastToggle) {
+    hideMastToggle.checked = Boolean(appState.hideMastered);
+  }
+  const domSelect = document.getElementById('domainFilterSelect');
+  if (domSelect) {
+    domSelect.value = appState.domainFilter || '';
+  }
+  const bmBtn = document.getElementById('modeBtnBookmarks');
+  if (bmBtn) {
+    const bmCount = Object.values(appState.bookmarkedIds || {}).filter(Boolean).length;
+    bmBtn.textContent = `⭐ Bookmarked (${bmCount})`;
+  }
+  const wkBtn = document.getElementById('modeBtnWeak');
+  if (wkBtn) {
+    const wkCount = allQuestions.filter(q => {
+      const st = appState.cardStats && appState.cardStats[q.id];
+      return appState.masteredIds[q.id] === false || (st && (st.box === 0 || st.box === 1));
+    }).length;
+    wkBtn.textContent = `📕 Wrong & Weak (${wkCount})`;
   }
   document.getElementById('settingsModal').classList.add('active');
 }
@@ -1176,11 +2452,21 @@ function updateShuffleOptions(enabled) {
 }
 window.updateShuffleOptions = updateShuffleOptions;
 
+function updateHideMastered(enabled) {
+  appState.hideMastered = Boolean(enabled);
+  saveState();
+  setupPracticeQueue(null);
+  renderCurrentCard();
+  updateHeaderStats();
+  showToast(appState.hideMastered ? '🎯 Hiding mastered cards (仅抽取未掌握题)' : '🧠 Including 5% mastered review (智能抗遗忘抽检)');
+}
+window.updateHideMastered = updateHideMastered;
+
 function updateRetryInterval(val) {
-  appState.retryInterval = parseInt(val) || 7;
+  appState.retryInterval = parseInt(val, 10) || 25;
   syncRetryPillsUI();
   saveState();
-  showToast(`🔁 Retry interval set to ${appState.retryInterval} questions`);
+  showToast(`🔁 Mistake cooldown set to ~${appState.retryInterval} questions (±35% random fuzz)`);
 }
 
 function jumpToQuestion(targetId = null) {
@@ -1336,8 +2622,15 @@ function closeResetModal(e) {
 function confirmResetAllProgress() {
   appState.masteredIds = {};
   appState.bookmarkedIds = {};
+  appState.bookmarkUpdatedAt = {};
+  appState.cardStats = {};
+  appState.totalSteps = 0;
+  appState.resetEpoch = Date.now();
   appState.history = [];
   appState.weakDiagnosed = {};
+  SrsEngine.activeMistakeIds.clear();
+  SrsEngine.consecutiveUnseenStreak = 0;
+  localStorage.removeItem('ccna_session_snapshot_v1');
   saveState();
   setupPracticeQueue(null);
   renderCurrentCard();
@@ -1387,9 +2680,40 @@ function zoomExhibit() {
   }
 }
 
+// Only invert near-neutral diagrams with a predominantly light background.
+// Color is significant in many exhibits, so colored images remain unchanged.
+function setDiagramImage(img, src) {
+  img.classList.remove('monochrome-exhibit');
+  img.onload = () => {
+    try {
+      const canvas = document.createElement('canvas');
+      const width = img.naturalWidth, height = img.naturalHeight;
+      // Preserve very large images when a full-resolution check would be costly.
+      if (!width || !height || width * height > 4000000) return;
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(img, 0, 0);
+      const pixels = ctx.getImageData(0, 0, width, height).data;
+      let light = 0, visible = 0;
+      for (let i = 0; i < pixels.length; i += 4) {
+        if (pixels[i + 3] < 250) return;
+        const r = pixels[i], g = pixels[i + 1], b = pixels[i + 2];
+        if (Math.max(r, g, b) - Math.min(r, g, b) > 8) return;
+        visible++;
+        if (Math.min(r, g, b) >= 220) light++;
+      }
+      img.classList.toggle('monochrome-exhibit', visible > 0 && light / visible > 0.55);
+    } catch (_) {
+      // Keep the original image if pixel inspection is unavailable.
+    }
+  };
+  img.src = src;
+}
+
 function openLightbox(src) {
   const img = document.getElementById('lightboxImg');
-  img.src = src;
+  setDiagramImage(img, src);
   resetLightboxState();
   document.getElementById('lightbox').classList.add('active');
 }
@@ -1542,10 +2866,6 @@ window.handleAndroidBack = function() {
   const activeModal = document.querySelector('.modal-overlay.active');
   if (activeModal) {
     closeModals();
-    return true;
-  }
-  if (appState.drillTopic) {
-    exitDrillMode();
     return true;
   }
   return false;

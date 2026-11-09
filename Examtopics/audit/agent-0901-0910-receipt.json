@@ -1,0 +1,29 @@
+{
+  "manifest": "agent-0901-0910.json",
+  "applied_ids": [
+    901,
+    902,
+    903,
+    904,
+    905,
+    906,
+    907,
+    908,
+    909,
+    910
+  ],
+  "corrected_question_sha256": {
+    "901": "9546d5787af1ae0dcb86184ad17e06440b8a33f230d864f4eeb0a34255dba9b2",
+    "902": "e9b76cca00ce8be7b65054b81f06d65b87d00459cffa6abef8e4b80a20ff0b87",
+    "903": "09ed3402f1abea4193ded7b2f0941f39b595d88094ac06e02f3dcbf3c53dab5c",
+    "904": "9970e18d7a5508140cfed8edc5ce91cd57d94567b77c1e53e1b9af9efdcead7d",
+    "905": "333c9841dd6adac48458c9b9ecd372615c17a8a10d64cbc4c62f0179d3dc879e",
+    "906": "db8e411558b40e67d284938bc74a64269423d4ede96feccc29a57aafbbdf1c2a",
+    "907": "297a21b9b19fa9c451ba7dccf72f9499497ed2609f1f47d81b49dee03af5576f",
+    "908": "5c0fb387b632d5c84ffb74ab7baaccd70cdd4566b2476de07b3fb1f7584bada2",
+    "909": "b63da8d4b131714a45747ef7135f2c38d62e54441f16225db06b48d8cfd86d5b",
+    "910": "969ecc56f590bb517b86a7bba68618d1650de061f6bbce32cdae610dc6389d94"
+  },
+  "source_sha256": "2954df846539b753ef6a522eef3d05c7d493f20d21535dbd0c30ce5395163114",
+  "app_bundle_sha256": "b8133f90a23a628eae54df74755c5ae29db1e468355a04dd5521c55bae8ef742"
+}

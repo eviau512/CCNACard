@@ -1,0 +1,277 @@
+{
+  "scope": "Q831–Q840",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 831,
+      "original_qid": "Q1116",
+      "before_sha256": "23f104070f989c2931f2b72a6a1c49fec995d32285d6f7a981abcb422b0f316c",
+      "reason": "移除固定老化计时和绝对化结论。",
+      "updates": {
+        "explanation": "C。交换机在允许学习的 VLAN 中检查入站帧的源 MAC，将未知源地址、VLAN 和接收端口关联为动态表项；已有动态表项可刷新或迁移。具体老化时间和安全策略因配置与平台而异。A 描述泛洪而非学习；B 的 ARP 是 IP 地址解析机制；D 不是普通以太网桥的学习动作。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网二层交换机 MAC 地址动态学习（Dynamic MAC Address Learning）机制与 CAM 转发表构建原理。\n1. 交换机核心转发依据——CAM 表（MAC 地址表）：\n   交换机在数据链路层运行，其核心硬件转发表（CAM 表）用于建立【MAC 地址 <-> 物理端口 <-> 所属 VLAN】的映射关系。\n2. MAC 学习的触发机制（只看源 MAC）：\n   当交换机的某个物理端口（如 FastEthernet 0/1）接收到一个入站数据帧（Incoming Ethernet Frame）时，交换机 ASIC 硬件自动提取该帧的二层以太网头部：\n   - 提取帧中的“源 MAC 地址（Source MAC Address）”以及该端口所属的 VLAN ID。\n   - 交换机检索本地 MAC 地址表：若该源 MAC 地址尚未收录在表中（unknown source MAC），交换机立即执行“学习”操作——将该【未知源 MAC 地址、接收端口、VLAN ID、动态属性】作为全新表项添加到 MAC 地址表中（adds unknown source MAC addresses to the address table），并为其启动 300 秒的老化计时器（Aging Timer）。\n   - 若该源 MAC 已存在但绑定的端口发生变化，交换机立即刷新更新该条目的出接口（处理主机移动）；若端口一致，则重置老化计时器。\n   注意：交换机的 MAC 学习行为【严格只根据入帧的源 MAC 执行】，绝不根据目的 MAC 学习。\n\n• 正确选项剖析：\n选项 C（adds unknown source MAC addresses to the address table，将未知的源 MAC 地址添加到地址表中）完全符合以太网交换机的基本工作原理与 IEEE 802.1D 规范定义。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（broadcasts frames to all ports without queueing）：向所有端口转发帧属于“泛洪（Flooding）”行为，且是由“未知目的 MAC”触发的转发动作，而不是 MAC 学习机制；同时交换机端口始终具备内部硬件队列排队能力。\n- 选项 B（sends an ARP request to locate unknown destinations）：发送 ARP 请求是三层主机或路由器在不知道下一跳或目标物理地址时的主动行为；纯二层交换机作为透明桥接设备，绝不会主动伪造和生成 ARP 请求去寻找未知目的地。\n- 选项 D（sends a retransmission request when a new frame is received）：二层以太网提供无连接的尽力而为传输（Best-Effort），数据重传是由四层 TCP 协议实现的，交换机收到新帧决不发送重传请求。\n\n• 考试要点与速记技巧：\n交换机动作两步走：“学习看源端（Source MAC），未知即加表（add to address table）；转发看目的（Destination MAC），未知则泛洪（Flooding）”。"
+      },
+      "has_exhibit": false
+    },
+    {
+      "id": 832,
+      "original_qid": "Q1117",
+      "before_sha256": "e5c2de71669bc92a109c5c71496f1f400ad9cf6e6def2498a7c7fa5abd570ae8",
+      "reason": "图中速率与100M端口及每秒包数矛盾，限定为显示负载而非证明实际吞吐。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Based on the displayed txload and rxload counters, which condition is indicated by the reported interface load?",
+        "explanation": "C。图中 txload 和 rxload 都为 255/255，表示该接口报告的双向负载达到刻度上限，因此四项中高负载/高吞吐最符合显示值。但图中速率约 234.7/228.5 Mbps，超过标示的 100 Mb/s 端口速率，同时 packets/sec 为零；这些数值相互矛盾，不能用它们证明实际吞吐或推断突发原因。广播累计数和零错误计数也无法独立证明不存在风暴、碰撞或双工故障，需要检查时间窗口、两端配置和其他计数器。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由器/交换机接口性能监控参数（`show interface`）与高吞吐量（High Throughput）运行工况识别。\n接口各项关键参数深度诊断：\n1. 物理层与带宽规格：\n   - `Hardware is DEC21140`，接口为 `FastEthernet0/0`。\n   - 额定带宽：`BW 100000 Kbit/sec`（即标准的 100 Mbps 百兆以太网接口）。\n   - 双工状态：`Full-duplex, 100 Mb/s`，全双工模式。\n2. 负载与吞吐率指标：\n   - `reliability 255/255`：接口可靠性达到 100% 满分（255/255 表示无链路劣化）。\n   - `txload 255/255, rxload 255/255`：在 Cisco IOS 中，负载以 1 到 255 表示，255/255 代表发送方向（tx）与接收方向（rx）均已达到 100% 的满载极限饱和负荷！\n   - 流量统计：`30 second input rate 234712855 bits/sec`（约 234.7 Mbps），`30 second output rate 228528957 bits/sec`（约 228.5 Mbps）。由于测试仪或突发流量冲击，接口在瞬时计数上记录了超过其额定标称带宽的极限吞吐量数据。\n3. 错误统计：\n   - `0 input errors, 0 CRC, 0 frame, 0 collisions`：数据传输质量极佳，零误码、零碰撞。\n   综合所有指标，接口当前处于极端饱和的极高数据吞吐状态，明确发生着“高吞吐量（high throughput）”。\n\n• 正确选项剖析：\n选项 C（high throughput，高吞吐量）完全正确。`txload 255/255`、`rxload 255/255` 以及超过 2 亿比特/秒的高速流量统计指标，强有力地证明接口正在承载巨额网络流量，完全符合高吞吐量的定义。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（broadcast storm，广播风暴）：输出中明确显示 `Received 267 broadcasts`，广播数量极低，绝非广播风暴。\n- 选项 B（collisions，以太网冲突）：输出中明确指示 `0 collisions, 0 late collision`，且端口工作在全双工模式下（全双工本身在物理上杜绝了 CSMA/CD 碰撞），因此没有发生任何碰撞。\n- 选项 D（duplex mismatch，双工不匹配）：双工不匹配会导致一端半双工出现大量的晚期碰撞（Late Collisions）与 CRC/Input errors，而本输出中所有错误计数全为 0，双工配置完全匹配。\n\n• 考试要点与速记技巧：\n“负载打满 255，收发速率破两亿，零错误零碰撞，典型高吞吐（high throughput）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q832_agent.jpeg",
+      "image_sha256": "033e73e2eec0c6d0b9366901de387db97364332bfdebd027219ee19f7d4381a9"
+    },
+    {
+      "id": 833,
+      "original_qid": "Q1118",
+      "before_sha256": "8b9201d75dd7e861bab4f1e9ceb6e62184bac521cfeb15dd1cf8a824c1904d6c",
+      "reason": "SSID不发帧，修正题干和选项为AP通告。",
+      "updates": {
+        "prompt": "Which statement describes how an SSID is commonly advertised by an access point?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It converts electrical current to radio waves."
+          },
+          {
+            "label": "B",
+            "text": "The SSID itself enforces access policies."
+          },
+          {
+            "label": "C",
+            "text": "The AP includes the SSID in beacon frames by default."
+          },
+          {
+            "label": "D",
+            "text": "The SSID prompts a user for a login ID."
+          }
+        ],
+        "explanation": "C。SSID 是无线网络标识符，通常由 AP 在 beacon 管理帧中通告；AP 而不是 SSID 发射帧。某些配置可隐藏 beacon 中的 SSID，但这不是认证或加密。射频电路承担 A 的转换；安全策略和登录提示由相应认证系统处理，SSID 名称本身不能执行这些操作。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of an SSID in wireless networks?",
+        "options": [
+          {
+            "label": "A",
+            "text": "converts electrical current to radio waves"
+          },
+          {
+            "label": "B",
+            "text": "uses policies to prevent unauthorized users"
+          },
+          {
+            "label": "C",
+            "text": "broadcasts a beacon signal to announce its presence by default"
+          },
+          {
+            "label": "D",
+            "text": "prompts a user for a login ID"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线网络体系中 SSID（服务集标识符）的存在宣告机制与信标（Beacon）信号发射机理。\n1. 802.11 网络发现模型：\n   无线局域网客户端发现周围可用的 AP 与无线网络主要依赖两种方式：\n   - 主动扫描（Active Scanning）：客户端向周围主动发送探测请求帧（Probe Request），由周围的 AP 响应探测响应帧（Probe Response）。\n   - 被动扫描（Passive Scanning）：客户端停留在各个信道上，静默侦听来自 AP 周期性向空间发送的信标帧（Beacon Frame）。\n2. 信标信号（Beacon Signal）的默认发射属性：\n   - 根据 IEEE 802.11 协议标准，为了使客户端能够随时发现网络，无线 AP 默认必须以恒定的时间间隔（默认信标间隔通常为 100 毫秒 / 100 TU）向空中广播发射信标信号（broadcasts a beacon signal to announce its presence by default）。\n   - 信标帧属于管理帧，其主要作用就是向所有覆盖范围内的无线设备“大声宣布自己的存在”并公布自身所承载的 SSID 名称及网络加密能力。\n\n• 正确选项剖析：\n选项 C（broadcasts a beacon signal to announce its presence by default，默认广播信标信号宣告自身存在）完全正确。这是无线网络中 AP 呈现并通知客户端其 SSID 的标准底层网络行为。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（converts electrical current to radio waves）：将高频电流转换为空中电磁波是物理天线（Antenna）与射频电路（RF Transceiver）的物理学功能，SSID 仅是一个逻辑网络标识符，无法执行电磁转换。\n- 选项 B（uses policies to prevent unauthorized users）：虽然企业 WLC 会为 SSID 附加安全策略，但在该题目的特定选项架构中，选项 C 是客观公认且符合协议标准的直接物理层/链路层行为特征。\n- 选项 D（prompts a user for a login ID）：提示输入凭据是 802.1X 认证客户端（Supplicant）或 Web 认证网关的功能，不是 SSID 自身的特征。\n\n• 考试要点与速记技巧：\n无线核心考点口诀：“AP 现形全凭信标，百毫秒一发通告到（broadcasts a beacon signal by default）”。"
+      },
+      "has_exhibit": false
+    },
+    {
+      "id": 834,
+      "original_qid": "Q1120",
+      "before_sha256": "fe762292e169826f5648065c9ecf19d8dd555f5240344ef1be074e528adc154b",
+      "reason": "核对拓扑，替换组选MAC并保留选举次序。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume all four switches exchange BPDUs in the same STP instance, and use the bridge priorities and valid unicast bridge MAC addresses in the options. Which becomes root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW3 - Bridge Priority 57344 - MAC 0a:bb:e0:96:a3:86"
+          },
+          {
+            "label": "B",
+            "text": "SW2 - Bridge Priority 57344 - MAC 00:b6:c5:17:8e:89"
+          },
+          {
+            "label": "C",
+            "text": "SW1 - Bridge Priority 28672 - MAC 0c:d4:e9:1d:3c:24"
+          },
+          {
+            "label": "D",
+            "text": "SW4 - Bridge Priority 28672 - MAC 0a:09:23:33:b8:91"
+          }
+        ],
+        "explanation": "D。相同生成树实例内先比较 bridge ID 的优先级字段，28672 小于 57344，因此比较 SW1 与 SW4；二者优先级相同，SW4 的 0a:09:23:33:b8:91 小于 SW1 的 0c:d4:e9:1d:3c:24，SW4 为根桥。原题 SW3 和 SW4 的 0b 首字节为组播地址，已改成有效单播首字节 0a，比较结果不变；图片只显示拓扑。若使用 extended system ID，应在同一 VLAN/实例条件下比较。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW3 - Bridge Priority - 57344 - Mac-address 0b:bb:e0:96:a3:86"
+          },
+          {
+            "label": "B",
+            "text": "SW2 - Bridge Priority - 57344 - Mac-address 00:b6:c5:17:8e:89"
+          },
+          {
+            "label": "C",
+            "text": "SW1 - Bridge Priority - 28672 - Mac-address 0c:d4:e9:1d:3c:24"
+          },
+          {
+            "label": "D",
+            "text": "SW4 - Bridge Priority - 28672 - Mac-address 0b:09:23:33:b8:91"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP / IEEE 802.1D 与 Rapid PVST+ / IEEE 802.1w）中根桥（Root Bridge）的核心选举裁决流程。\n1. 网桥 ID（Bridge ID, BID）构成规范：\n   在同一个广播域（VLAN）内，每台参与生成树计算的交换机拥有一个唯一的 8 字节 Bridge ID，由以下两部分构成：\n   - 2 字节网桥优先级（Bridge Priority）：取值范围为 0 到 61440，必须是 4096 的倍数（默认值为 32768）。\n   - 6 字节 MAC 地址：交换机的基准硬件物理 MAC 地址（Base MAC Address）。\n2. 根桥选举两步仲裁法则：\n   在同一个 VLAN 内，全网所有交换机通过泛洪交换 BPDU 报文，选举出全网拥有“绝对最小 Bridge ID（Lowest Bridge ID Wins）”的交换机作为该 VLAN 的唯一根桥：\n   - 第一轮裁决（网桥优先级比对）：比较各交换机的 Bridge Priority。数值越小，逻辑优先级越高！\n   - 第二轮裁决（平局打破，MAC 地址比对）：若出现网桥优先级完全相同的情况，则打破平局，比较交换机的 Base MAC 地址。MAC 地址十六进制数值越小的交换机最终胜出。\n3. 拓扑与选项参数全量比对：\n   - SW1: Bridge Priority = 28672, MAC = 0c:d4:e9:1d:3c:24\n   - SW2: Bridge Priority = 57344, MAC = 00:b6:c5:17:8e:89\n   - SW3: Bridge Priority = 57344, MAC = 0b:bb:e0:96:a3:86\n   - SW4: Bridge Priority = 28672, MAC = 0b:09:23:33:b8:91\n   第一轮比较 Priority：SW2 与 SW3 的优先级为 57344，数值过大，在第一轮直接被淘汰。进入 SW1 与 SW4 的决赛（两者优先级数值均为最优的 28672）。\n   第二轮比较 MAC 地址：\n   比对 SW1 与 SW4 MAC 地址的最高位（第一个十六进制字节）：\n   - SW1 的首字节为 `0c`（十六进制 0x0C = 十进制 12）\n   - SW4 的首字节为 `0b`（十六进制 0x0B = 十进制 11）\n   因为 `0b` < `0c`，所以 SW4 的 MAC 地址小于 SW1 的 MAC 地址！SW4 凭借更小的 MAC 地址打破平局，成功当选为该网络的唯一根桥（Root Bridge）。\n\n• 正确选项剖析：\n选项 D（SW4 - Bridge Priority - 28672 - Mac-address 0b:09:23:33:b8:91）完全正确。SW4 与 SW1 共同拥有全网最低的网桥优先级 28672，在平局裁决中，SW4 的 MAC 地址（首字节 0b）优于 SW1（首字节 0c），SW4 最终胜出当选根桥。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（SW3）与选项 B（SW2）：Bridge Priority 均为 57344，优先级数值远大于 28672，在第一步比较优先级时便已出局；即使 SW2 的 MAC 首字节为 00，由于其优先级劣后，根本没有资格进入 MAC 比对阶段。\n- 选项 C（SW1）：虽然优先级同为 28672，但其 MAC 首字节 `0c` 大于 SW4 的 `0b`，在平局决胜中惜败。\n\n• 考试要点与速记技巧：\nSTP 选根铁律两步走：\n“一比优先级，越小越牛气（28672 淘汰 57344）；打平比 MAC，0b 压倒 0c，SW4 荣登根桥位”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q834_agent.jpeg",
+      "image_sha256": "414795923eb5b10bf31222ca0f3fd2933ace8910e55faff5ad94d79b038f60e0"
+    },
+    {
+      "id": 835,
+      "original_qid": "Q1121",
+      "before_sha256": "1867f502611f5ea083660b59f6377382d28a9792f9bc9d5a35090be92a805a07",
+      "reason": "核对图中无效前缀及候选路由歧义。",
+      "updates": {
+        "prompt": "Refer to the exhibit as a list of candidate routes, not an installed routing table. All entries describe destination prefix 10.139.120.248/29 (the image incorrectly prints 10.139.120.253.29). Assuming each next hop is reachable and the displayed AD and metrics apply, which interface is selected?",
+        "explanation": "B。同一目的前缀候选项中 OSPF AD 110 优于 RIP AD 120；两条 OSPF 路径的 cost 分别为 9443（G0/20）及 29560（G0/16），所以选 G0/20。RIP 的 metric 不能直接与 OSPF cost 比较。图中的 10.139.120.253.29 不是合法前缀表示；若原意为 .253/29，其规范网络前缀是 10.139.120.248/29。图中多个不同 AD/metric 的路线作为同一目标的已安装路由表不合理，故明确这些是候选路线。"
+      },
+      "original_fields": {
+        "prompt": "Which interface is used to send traffic to the destination network?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 路由器在转发数据包时的核心路由表选路决策流程（Routing Table Lookup Process）。\n展示的路由表输出深度剖析：\n```text\nO 10.139.120.253/29 [110/9443] via G0/20\nO 10.139.120.253/29 [110/29560] via G0/16\nR 10.139.120.253/29 [120/12] via G0/11\nR 10.139.120.253/29 [120/6] via G0/9\n```\n路由器选择最佳转发路径时，严格遵循以下三级黄金决策顺序：\n1. 第一级：最长前缀匹配原则（Longest Prefix Match）\n   - 比较各条候选路由的目的网络掩码长度（Prefix Length）。掩码越长（即网络前缀越具体、精确），优先级最高！\n   - 在本题中，四条候选路由的目的网段完全一致，均为 `10.139.120.253/29`，前缀长度同为 /29，第一级打平。\n2. 第二级：管理距离仲裁（Administrative Distance, AD）\n   - 当候选路由的目的前缀与长度完全相同时，路由器比较路由协议的管理距离（AD）。AD 代表该路由协议来源的置信度，数值越小越优先！\n   - 候选路由 1 与 2 来自 OSPF 协议（标识符为 O），Cisco IOS 默认 AD = 110。\n   - 候选路由 3 与 4 来自 RIP 协议（标识符为 R），Cisco IOS 默认 AD = 120。\n   - 因为 110 < 120，OSPF 拥有更高的协议置信度，路由器会优先采纳 OSPF 路由，两条 RIP 候选路由直接被淘汰！\n3. 第三级：度量值/开销比对（Metric / Cost）\n   - 当协议相同、AD 相同时，比较其内部开销度量值（Metric）。度量值越小越优！\n   - 经由 G0/20 的 OSPF 路由：Metric = 9443。\n   - 经由 G0/16 的 OSPF 路由：Metric = 29560。\n   - 因为 9443 < 29560，经由接口 G0/20 的路径开销显著更优。\n   因此，路由器最终选定经由 `G0/20` 接口转发前往该目的网络的数据包。\n\n• 正确选项剖析：\n选项 B（G0/20）完全正确。OSPF 凭借比 RIP 更低的管理距离（110 < 120）胜出；在两条 OSPF 路由中，G0/20 拥有更低的 Metric（9443 < 29560），最终被路由器安装为最优转发接口。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（G0/9）与选项 D（G0/11）：均属于 RIP 路由，其管理距离 AD 为 120，劣于 OSPF 的 110，在 AD 比对阶段即被淘汰（即使 G0/9 的 RIP 跳数仅为 6，也绝无机会与 OSPF 竞争）。\n- 选项 C（G0/16）：同为 OSPF 路由（AD = 110），但其度量值 Metric 为 29560，远大于 G0/20 的 9443，开销劣后未能当选。\n\n• 考试要点与速记技巧：\n路由选路三步口诀：\n“先看掩码长不长（最长前缀最优先）；掩码打平比 AD，小者胜出（OSPF 110 赢 RIP 120）；同种协议比 Metric，开销最小走 G0/20”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q835_agent.jpeg",
+      "image_sha256": "c7904bfed8d39bd2f78ddcd71d5d5311afe104352e6b0a60832d887b51131fb2"
+    },
+    {
+      "id": 836,
+      "original_qid": "Q1122",
+      "before_sha256": "ee02df5e984b49c05a2b2238d99b34967e78337fd5a5e36bb432e50716479a87",
+      "reason": "核对JSON原图，区分数据和JSON Schema。",
+      "updates": {
+        "prompt": "Refer to the exhibit. In the shown JSON data, what role does \"fe5/42\" have?",
+        "explanation": "C。在图示对象中，`\"port\": \"fe5/42\"` 的 `port` 是成员名，`fe5/42` 是对应的字符串值。外层方括号表示数组，每组花括号表示对象；因此该字符串本身既不是数组、对象，也不是键。图是 JSON 数据示例，不必称为 JSON Schema。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"fe5/42\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络自动化、RESTCONF/NETCONF 数据交换以及 JSON（RFC 8259）数据规范的字段结构辨析。\n展示的 JSON 数据代码段剖析：\n```json\n1 [\n2 {\"load balancer\": \"LB_milwaukee\", \"port\":\"fe5/42\"},\n3 {\"VPN concentrator\": \"VPNadmin\", \"port\":\"e1/39\"},\n4 {\"firewall\": \"FW_chicago\", \"port\":\"te3/42\"}\n5 ]\n```\n1. 整体结构剖析：第 1 行与第 5 行的中括号 `[` 和 `]` 构成了最外层的数组（Array），数组内部包含 3 个对象（Object，花括号包裹）。\n2. 目标元素定位：第 2 行的内容为：`{\"load balancer\": \"LB_milwaukee\", \"port\":\"fe5/42\"}`。\n   - 该对象由两个键值对（Key-Value Pairs）构成。\n   - 在第二组键值对 `\"port\":\"fe5/42\"` 中，冒号左边的 `\"port\"` 是键（Key），表示属性名称；冒号右边的 `\"fe5/42\"` 是键对应的数据内容，即值（Value）。\n   - 在 JSON 语法规范中，凡是位于冒号右侧作为被描述的数据项的字面量（此处为字符串），其语法角色严格定义为“值（Value）”。\n\n• 正确选项剖析：\n选项 C（value，值）完全正确。字符串 `\"fe5/42\"` 紧随冒号之后，作为键 `\"port\"` 的对应数据，在 JSON 结构中扮演值（Value）的角色。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（array，数组）：由中括号 `[]` 包裹的有序集合才是数组（如第 1 到 5 行构成的外层结构），`\"fe5/42\"` 是具体的文本值，不是数组。\n- 选项 B（object，对象）：由大括号 `{}` 包裹的键值对集合才是对象（如第 2 行整行包裹的内容是 object），`\"fe5/42\"` 只是对象内的一个字段取值。\n- 选项 D（key，键）：冒号左侧的标识符（如 `\"port\"`、`\"load balancer\"`）才是键，`\"fe5/42\"` 位于冒号右侧，绝非键。\n\n• 考试要点与速记技巧：\n“冒号左边是 Key，冒号右边是 Value；fe5/42 居右侧，货真价实是 Value”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q836_agent.jpeg",
+      "image_sha256": "07fbbc69346111025d234c0e07d45f6e6a15cc1dad95bc3a5e154a426c878f36"
+    },
+    {
+      "id": 837,
+      "original_qid": "Q1123",
+      "before_sha256": "f503c89546f1643401f9dea3e5728162b41e454aea7a9254320648883360903b",
+      "reason": "核对拓扑，替换组选MAC并保持选举次序。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assume all switches exchange BPDUs in the same STP instance and use the priorities and valid unicast bridge MAC addresses shown in the options. Which becomes root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 1 - Bridge Priority 32768 - MAC 0e:d7:9e:13:ab:82"
+          },
+          {
+            "label": "B",
+            "text": "SW 2 - Bridge Priority 40960 - MAC 04:d8:33:09:8f:89"
+          },
+          {
+            "label": "C",
+            "text": "SW 3 - Bridge Priority 32768 - MAC 00:1c:6c:66:b7:70"
+          },
+          {
+            "label": "D",
+            "text": "SW 4 - Bridge Priority 40960 - MAC 04:44:97:51:63:17"
+          }
+        ],
+        "explanation": "C。同一实例中，SW1 与 SW3 的优先级 32768 小于 SW2 与 SW4 的 40960；比较前两者的 MAC，SW3 的 00:1c:6c:66:b7:70 小于 SW1 的 0e:d7:9e:13:ab:82，所以 SW3 获胜。原选项中 0f、05 和 01 首字节表示组播地址，已改为有效单播地址，选举顺序不变。图只显示交换机拓扑。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 1 - Bridge Priority - 32768 - Mac-address 0f:d7:9e:13:ab:82"
+          },
+          {
+            "label": "B",
+            "text": "SW 2 - Bridge Priority - 40960 - Mac-address 05:d8:33:09:8f:89"
+          },
+          {
+            "label": "C",
+            "text": "SW 3 - Bridge Priority - 32768 - Mac-address 01:1c:6c:66:b7:70"
+          },
+          {
+            "label": "D",
+            "text": "SW 4 - Bridge Priority - 40960 - Mac-address 04:44:97:51:63:17"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查经典生成树协议（STP / IEEE 802.1D 与 Rapid PVST+ / 802.1w）根桥（Root Bridge）选举裁决机制（高频核心考点）。\n根桥选举裁决准则：\n在二层交换网络中，同一个生成树实例（VLAN）内有且仅有一台交换机能够成为根桥。选举的唯一法则为：拥有“全网绝对最小网桥 ID（Lowest Bridge ID）”的交换机获胜。\nBridge ID（BID）比较顺序：\n1. 第一步：比对网桥优先级（Bridge Priority）。数值越小越优！\n2. 第二步：若网桥优先级相同，比对基准 MAC 地址（Base MAC Address）。十六进制数值越小越优！\n拓扑与选项数据深度比对：\n- SW 1: Bridge Priority = 32768, MAC = 0f:d7:9e:13:ab:82\n- SW 2: Bridge Priority = 40960, MAC = 05:d8:33:09:8f:89\n- SW 3: Bridge Priority = 32768, MAC = 01:1c:6c:66:b7:70\n- SW 4: Bridge Priority = 40960, MAC = 04:44:97:51:63:17\n仲裁过程：\n1. 优先级比对：\n   - SW 2 与 SW 4 的优先级为 40960，大于 32768，优先级劣后，在首轮直接被彻底淘汰！\n   - 剩余候选者为 SW 1 与 SW 3，两者的 Bridge Priority 均为默认的 32768，优先级出现平局。\n2. MAC 地址决胜：\n   比对 SW 1 与 SW 3 的 MAC 地址：\n   - SW 1 MAC 地址为：`0f:d7:9e:13:ab:82`（首字节为十六进制 0x0F = 十进制 15）\n   - SW 3 MAC 地址为：`01:1c:6c:66:b7:70`（首字节为十六进制 0x01 = 十进制 1）\n   显然，首字节 `01` 远小于 `0f`（0x01 < 0x0F），SW 3 的 MAC 地址显著小于 SW 1。\n   因此，SW 3 的网桥 ID 成为全网绝对最小值，SW 3 成功当选为根桥（Root Bridge）。\n\n• 正确选项剖析：\n选项 C（SW 3 - Bridge Priority - 32768 - Mac-address 01:1c:6c:66:b7:70）完全正确。SW 3 拥有最优的网桥优先级 32768，并在平局裁决中凭借最小的 MAC 地址（首字节 01 优于 0f）赢得选举，当选为根桥。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（SW 1）：优先级同为 32768，但在平局决胜中，其 MAC 地址首字节 `0f` 大于 SW 3 的 `01`，最终落败。\n- 选项 B（SW 2）与选项 D（SW 4）：网桥优先级均为 40960，数值劣于 32768，在第一轮直接出局；哪怕它们的 MAC 地址再小，也完全无资格参与第二轮仲裁。\n\n• 考试要点与速记技巧：\n根桥选举口诀：\n“选根先看 Priority，越小越优莫忘记（32768 淘汰 40960）；打平比拼 MAC 头，01 碾压 0f（SW 3 成功登顶）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q837_agent.jpeg",
+      "image_sha256": "54890caad5fa2b87753641dc26f734f84064da11d6b9bc4408beafae94420b6b"
+    },
+    {
+      "id": 838,
+      "original_qid": "Q1124",
+      "before_sha256": "12db335149480f218736831916a7d913aea4f1d1b9f5dafd6be0f5a9347ad7c8",
+      "reason": "核对PC及网络地址，限定条件并说明需实际网关。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming the /29 LAN, router, DNS and internet path otherwise work as intended, which PC setting must be corrected for off-subnet access?",
+        "explanation": "C。PC 的 10.2.2.2/29 属于 10.2.2.0–10.2.2.7，普通主机范围 .1–.6；配置网关 10.2.2.10 却在 10.2.2.8/29。应将默认网关改为该 LAN 上路由器实际配置且可达的接口地址，不能仅凭图指定一定为 .1。掩码 /29 与拓扑一致；DNS 8.8.8.8 格式有效但单凭截图不能证明其服务可达或正常。修复网关是必要步骤，并不能保证 DNS、路由、防火墙和 TCP 80 均正常。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A newly configured PC fails to connect to the internet by using TCP port 80 to www.cisco.com. Which setting must be Modified for the connection to work?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv4 子网划分（Subnetting）以及主机跨子网通信时的默认网关（Default Gateway）匹配机制。\n在 TCP/IP 体系中，当主机需要与跨网段的目标主机（如公网域名 www.cisco.com 对应的 Web 服务器）通信时，操作系统的 TCP/IP 协议栈会首先通过本地子网掩码（Subnet Mask）与目标 IP 进行“与运算”，判断目标是否在本地直连网段。若不在同一子网，主机必须将数据包封装并发送给本地子网内的“默认网关”（路由器直连接口），由路由器进行下一跳路由寻址。在此过程中，主机必须能够通过 ARP 协议解析默认网关的 MAC 地址，因此默认网关的 IPv4 地址必须与主机处于完全相同的本地有效可用主机 IP 地址范围内。\n\n• 正确选项剖析：\n拓扑与 ipconfig 详细分析如下：\n1. 拓扑图显示该本地 LAN 网段为 10.2.2.0/29。\n2. PC 的 IPv4 配置为：\n   - IPv4 Address: 10.2.2.2\n   - Subnet Mask: 255.255.255.248（即 /29）\n   - Default Gateway: 10.2.2.10\n   - DNS Servers: 8.8.8.8\n3. 子网精确计算：\n   - 前缀长度为 /29，主机位为 32 - 29 = 3 位。\n   - 每个子网的块大小（Block Size）为 2^3 = 8。\n   - 子网网络地址为 10.2.2.0。\n   - 有效可用主机地址范围为：10.2.2.1 至 10.2.2.6。\n   - 该子网广播地址为：10.2.2.7。\n   - 下一个相邻子网的网络地址为：10.2.2.8/29（其有效主机范围为 10.2.2.9 - 10.2.2.14）。\n4. 故障定位：\n   PC 配置的默认网关为 10.2.2.10，位于相邻子网 10.2.2.8/29 中，而不属于 PC 所在的 10.2.2.0/29 子网。PC 无法对跨子网的网关 IP 发送本地 ARP 请求进行二层帧封装，因此所有跨网段流量均无法发出。\n   必须将 Default Gateway 修改为本地网段内路由器接口的有效 IP（如 10.2.2.1），PC 才能正常访问 Internet。因此选项 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（Subnet Mask）：拓扑标注本地网段为 10.2.2.0/29，PC 的子网掩码 255.255.255.248 正是 /29，配置完全正确，无需修改。\n- 选项 B（DNS Servers）：配置为 8.8.8.8（公共 DNS），配置本身有效且格式正确。PC 无法访问外网是因为三层网关路由不可达导致 DNS 请求根本无法离开本地子网，而非 DNS 服务器配置项错误。\n- 选项 D（DHCP Servers）：题干明确说明该 PC 是静态手工新配置的（DHCP Server 显示 0.0.0.0 说明未启用 DHCP 客户端），修改 DHCP Server 无法解决网关配置错误。\n\n• 考试要点与速记技巧：\n网关必在同网段！/29 掩码块大小为 8（256-248=8），10.2.2.0/29 的可用范围是 .1 至 .6；网关配成 .10 属于下一个子网（.8-.15），跨网段网关必然导致全网无法出网！"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q838_agent.jpeg",
+      "image_sha256": "9a516b5204ca8be2d2cecf8a9fb75d5b2f95a698e140c31da198b91c73cf5a8d"
+    },
+    {
+      "id": 839,
+      "original_qid": "Q1126",
+      "before_sha256": "69242142892e848f9960196dae93cc339d8416e6e4f87a12f601a48deb6ddb23",
+      "reason": "补同入端口过滤、VLAN/组播边界。",
+      "updates": {
+        "explanation": "C。普通二层桥按帧所属 VLAN 和目的单播 MAC 查表，将已知目的转发到对应端口；若目标表项指向入端口则过滤，端口状态、VLAN 和安全策略也可能限制转发。未知单播通常泛洪到该 VLAN 的其他合格转发端口；组播处理还可受 snooping 等影响。普通桥接不改写源/目的 MAC（A）；CDP 用于邻居发现而非数据转发（B）；D 并非一般默认行为。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网二层交换机的数据帧转发机制（Frame Switching / Forwarding Logic）。\n以太网交换机工作在 OSI 模型的第二层（数据链路层），基于 MAC 地址表（CAM 表）进行数据帧转发。其核心工作原理包括学习（Learning）、转发（Forwarding）、泛洪（Flooding）和过滤（Filtering）：\n1. 学习（Learning）：交换机根据接收到的数据帧的“源 MAC 地址”和接收端口，建立或更新 MAC 地址表项。\n2. 查找与转发（Forwarding）：交换机提取数据帧的“目的 MAC 地址”，在 MAC 地址表中进行精确匹配。若找到匹配项（已知目的 MAC，Known Destination），交换机直接将数据帧单播转发到对应的目的端口，实现点对点的微段化高效转发。\n3. 泛洪（Flooding）：若目的 MAC 地址为广播地址（全 F）、组播地址或未在 MAC 表中找到（未知单播帧，Unknown Unicast），交换机向该 VLAN 内除接收端口以外的所有活跃端口泛洪。\n\n• 正确选项剖析：\n选项 C（forwards known destinations to the destination port）准确表述了交换机的基本转发行为：当目标 MAC 地址已知时，交换机精确查找 CAM 表，并将数据帧单播转发至特定的目标物理端口。这完全符合 IEEE 802.1D/802.1Q 标准规范。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（rewrites the source and destination MAC address）：以太网二层交换机在同一个二层广播域转发帧时，绝对不重写源和目的 MAC 地址；只有三层设备（路由器或三层交换机的 SVI/Routed Port）在跨子网路由转发时，才会解封装并重写新的二层源和目的 MAC 地址。\n- 选项 B（forwards frames to a neighbor port using CDP）：CDP（思科发现协议）仅用于邻居设备的发现和设备信息交换（协议类型编号为 0x0107），绝不是用于转发业务数据帧的转发机制。\n- 选项 D（is disabled by default on all interfaces and VLANs）：二层帧交换功能是交换机出厂默认开启的核心基础功能，所有默认处于 VLAN 1 的接入端口插线即可自协商转发，绝非默认禁用。\n\n• 考试要点与速记技巧：\n二层交换看目的，已知单播指引转发（Known -> Forward），未知单播广播泛洪（Unknown -> Flood），路由跨网才改 MAC！"
+      },
+      "has_exhibit": false
+    },
+    {
+      "id": 840,
+      "original_qid": "Q1128",
+      "before_sha256": "d437adaf08312cf1c116c1b61a8e3fe2b72f759aed263ea1ee5f2c814b6e607c",
+      "reason": "澄清SSID字节长度、BSSID和漫游条件。",
+      "updates": {
+        "explanation": "D。SSID 是用于标识 WLAN 的名称，长度最多 32 字节并区分大小写；多字节文本字符数不一定等于字节数。同一 SSID 可由多个 AP/BSS 提供。BSSID 通常使用 48 位 MAC 标识一个基本服务集，但不应简单等同于整个 AP 设备；漫游能否成功还依赖配置及客户端能力。SSID 名称本身不执行认证策略或提示登录，A/C 由相应安全及认证机制提供。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查无线局域网（WLAN）中的服务集标识符（SSID, Service Set Identifier）基本概念与技术特性。\n在 IEEE 802.11 无线网络标准中：\n1. SSID 是一个区分大小写、最大长度为 32 个字符（字节）的文本名称，用于逻辑上命名和标识一个无线局域网（WLAN）。无线客户端通过搜索并连接特定的 SSID 接入对应的 WLAN 网络。\n2. BSSID（Basic Service Set Identifier）是标识某一个具体 AP 射频收发机（Radio）的硬件物理地址，通常为该 AP 射频接口的 48 位 MAC 地址。\n3. ESSID（Extended Service Set Identifier）是指多个协同工作的 AP（拥有各自的 BSSID）共同广播同一个网络名称，使终端可以在多个 AP 间无缝漫游。\n\n• 正确选项剖析：\n选项 D（associates a name to a WLAN）准确指出了 SSID 的核心作用：将一个用户可读的逻辑网络名称关联并分配给一个无线局域网（WLAN），终端用户借此识别不同的无线网络（如 Corporate-WiFi、Guest-WiFi）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（uses policies to prevent unauthorized users）：SSID 本身只是一个网络名称标识，不具备执行安全策略或防范未授权用户的能力；防止未授权用户依赖的是 WPA2/WPA3、802.1X/EAP 或 AAA 访问控制策略。\n- 选项 B（identifies an access point on a WLAN）：在 WLAN 中唯一标识具体接入点（AP）硬件射频的是 BSSID（即 AP 射频的 MAC 地址），而非 SSID。一个 SSID 可以由成百上千个 AP 共同广播。\n- 选项 C（prompts a user for a login ID）：提示用户输入登录用户名和密码是由认证机制（如 Captive Portal Web 认证或 802.1X Supplicant 客户端认证）实现的，与 SSID 命名本身无关。\n\n• 考试要点与速记技巧：\nSSID 是 WLAN 的名字（Name），BSSID 是 AP 射频的 MAC 地址；名字用来识别网络，MAC 地址用来定位物理天线！"
+      },
+      "has_exhibit": false
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10556-16.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html",
+    "https://www.rfc-editor.org/rfc/rfc8259",
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/98138-ssid-bss.html"
+  ],
+  "limitations": "人工查看图与题目；未进行真实网络设备测试。"
+}

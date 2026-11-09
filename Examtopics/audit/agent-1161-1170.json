@@ -1,0 +1,368 @@
+{
+  "scope": "Q1161–Q1170",
+  "corrections": [
+    {
+      "id": 1161,
+      "before_sha256": "7606a856e537bbb858233d0f33bacf5d69540be5b441f80028a31806f27d2d8c",
+      "reason": "答案图属于路由题，移除；第二个 /54 应为 2001:db8:0:400::/54，原 2001:db8:1000:: 不在题设网络中。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "第二个 IPv4 子网为 `172.16.16.0/20`；首个可用地址为 `172.16.16.1/20`，最后可用地址为 `172.16.31.254/20`。\n\n将 `2001:db8::/50` 划分为 16 个 /54，第二个子网是 `2001:db8:0:400::/54`；可从其中选用 `2001:db8:0:400::/64` 给该链路。采用接口 EUI-64 的示例：\n```text\nSw101(config)# interface ethernet 0/0\nSw101(config-if)# ip address 172.16.16.1 255.255.240.0\nSw101(config-if)# ipv6 address 2001:db8:0:400::/64 eui-64\nSw101(config-if)# no shutdown\nSw102(config)# interface ethernet 0/0\nSw102(config-if)# ip address 172.16.31.254 255.255.240.0\nSw102(config-if)# ipv6 address 2001:db8:0:400::/64 eui-64\nSw102(config-if)# no shutdown\n```\n确认接口支持三层配置、MAC 不重复、连接正确后用 `show ip interface brief` 和 `show ipv6 interface brief` 验证；必要时先执行适用平台的 `no switchport`。`2001:db8::/32` 是文档示例前缀；保存配置到 NVRAM。原答案图片属于其他路由题，已隐藏。"
+      },
+      "review": {
+        "finding": "答案图属于路由题，移除；第二个 /54 应为 2001:db8:0:400::/54，原 2001:db8:1000:: 不在题设网络中。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1162,
+      "before_sha256": "0252a98b6aa33799b6b8b6ba2c92e24a73a4f72eaa0c69152ef037150fc46add",
+      "reason": "单模消除的是模间色散，不是全部失真；原文字把铜线绝对不易断和 40G 上限泛化，修改对应选项并保留双组乱序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "is typically used in small office applications",
+            "can support long-distance optical links with suitable transceivers",
+            "uses metal conductors to carry electrical signals",
+            "avoids intermodal dispersion in the fiber"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "is typically used in small office applications",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "uses metal conductors to carry electrical signals",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "can support long-distance optical links with suitable transceivers",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "avoids intermodal dispersion in the fiber",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "铜缆以金属导体承载电信号，常用于办公室接入；单模光纤适用于合适光模块下的长距离链路，并避免模间色散。它仍可能受到色度色散等影响；速率和距离由光模块、链路预算及标准共同决定，不限定 40 Gbit/s。每组内顺序不限。原题图中的绝对化选项已改写，原答案图已隐藏。"
+      },
+      "review": {
+        "finding": "单模消除的是模间色散，不是全部失真；原文字把铜线绝对不易断和 40G 上限泛化，修改对应选项并保留双组乱序。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1163,
+      "before_sha256": "a491b63df80ddd0cc235647cfb96f3a02feb7fa4f5e905e198a4b85ff5216c84",
+      "reason": "原 link-local 样例保留位非零、组播 scope 0 保留、fc00 的 L=0 无当前局部分配定义；换成有效例子。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "fe80::32a3:855f:b0d5:7",
+            "2000:4011:2a0d:d571:1976:4bab:adb7:1",
+            "ff02::1",
+            "fd00:e896:c4cd:422b:7660:59e5:dd00:3"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2000:4011:2a0d:d571:1976:4bab:adb7:1"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80::32a3:855f:b0d5:7"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff02::1"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fd00:e896:c4cd:422b:7660:59e5:dd00:3"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "2000:4011:2a0d:d571:1976:4bab:adb7:1 属于全球单播格式；fe80::32a3:855f:b0d5:7 是链路本地单播；ff02::1 是链路本地全节点组播；fd00:e896:c4cd:422b:7660:59e5:dd00:3 为本地分配 ULA。原题图中 FE80 地址保留位非零、FF00 作用域为保留值、FC00 的 L 位为 0，已改为明确可用的格式；原答案图已隐藏。"
+      },
+      "review": {
+        "finding": "原 link-local 样例保留位非零、组播 scope 0 保留、fc00 的 L=0 无当前局部分配定义；换成有效例子。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1164,
+      "before_sha256": "c955930bbdd78450a0c67ecac34cf8714f8e228e2b27acdc018ef7cffaebb37a",
+      "reason": "ULA 随机 Global ID 降低但不能保证无碰撞；组播数据包源不总是单播，故按目标组改写。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "may be used by multiple organizations at the same time",
+            "cannot be used as a source address",
+            "uses a pseudo-random global ID to reduce the chance of overlapping prefixes",
+            "identifies a group of receivers as the IPv6 packet destination"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "may be used by multiple organizations at the same time",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "uses a pseudo-random global ID to reduce the chance of overlapping prefixes",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "cannot be used as a source address",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "identifies a group of receivers as the IPv6 packet destination",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "ULA 通常采用本地生成的 40 位伪随机 Global ID，降低合并站点时的冲突概率，但无法保证无碰撞；ULA 可由不同组织各自使用。IPv6 组播地址标识接收组，不能用作 IPv6 源地址；某些协议包可使用未指定源地址，因此不应声称所有组播包源地址必为单播。各组内顺序不限；题图旧选项已改写，隐藏原答案图。"
+      },
+      "review": {
+        "finding": "ULA 随机 Global ID 降低但不能保证无碰撞；组播数据包源不总是单播，故按目标组改写。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1165,
+      "before_sha256": "6b08f6ae5bf25b7f6b77a33b092a95fcd13642846c577ecfc34299c35ab32509",
+      "reason": "答案图是其他题、拓扑缺失，原解析伪造下一跳与 LAN 前缀，改为需要现场参数的模板。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "题目拓扑及各接口地址未提供，无法可靠确定下一跳和 LAN 前缀。原答案图是其他 IPv6 拖拽题，不可作为本实验答案。\n\n根据实验实际拓扑填入以下模板：\n```text\n! R2：到 ISP 的默认路由\nip route 0.0.0.0 0.0.0.0 <R2到ISP的下一跳>\n! R1：到 ISP 的默认路由\nip route 0.0.0.0 0.0.0.0 <R1到ISP方向的下一跳>\n! R2：服务器的主机路由\nip route 10.0.41.10 255.255.255.255 <R2到服务器方向的下一跳>\n! R1：R4 LAN，首选 R3\nip route <R4的LAN网络> <LAN掩码> <R1邻接的R3地址>\n```\n若配置备用路径，选择更高管理距离并确认必要的故障检测。使用 `show ip route`、`ping` 和 `traceroute` 检查出向路径及回程；保存配置。模板中的尖括号不是可直接输入的 IOS 地址。"
+      },
+      "review": {
+        "finding": "答案图是其他题、拓扑缺失，原解析伪造下一跳与 LAN 前缀，改为需要现场参数的模板。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1166,
+      "before_sha256": "602957b7c9db966978ad3e0650d7d57a330e2c06f6e2216e21442f3961128620",
+      "reason": "答案图属于其他题且拓扑缺失，原解析擅定 PC 接口，改为条件命令模板并保留指定协议任务。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "原答案图片是另一道静态路由题；本题拓扑缺失，无法确认 PC1 和 PC2 各接在哪个端口。先由实验拓扑或设备查看接口，再在 SW-1 创建 `vlan 15`、`name OPS`，在 SW-2 创建 `vlan 66`、`name ENGINEERING`。各自连接 PC 的接口配置 `switchport mode access`、对应的 `switchport access vlan 15` 或 `switchport access vlan 66`，并 `no shutdown`。\n\n两台交换机全局启用 `lldp run` 和 `cdp run`；各自 e0/2 执行 `lldp transmit`、`lldp receive`，e0/0 执行 `cdp enable`。若要求端口只运行指定协议，则分别关闭不需的 CDP 或 LLDP 收发。使用 `show vlan brief`、`show interfaces status`、`show lldp neighbors` 和 `show cdp neighbors` 验证，并保存配置。PC 端口号及端到端可达性不能从现有材料确定。"
+      },
+      "review": {
+        "finding": "答案图属于其他题且拓扑缺失，原解析擅定 PC 接口，改为条件命令模板并保留指定协议任务。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1167,
+      "before_sha256": "926d9ba000c2f7ccd183ddc845529e2c47debabb04fa34217dda605fb6133b35",
+      "reason": "图像字段误置：原答案图为本题拓扑，原题图为前一题解答。将拓扑移入题图，按图修正 PC 接口为 e0/2。",
+      "updates": {
+        "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAHzAXcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOU1zxTqOna6umadocmoyeSJm2ShMAnHcVU/4SzxV/wBCTcf+BS/4VoKAPiO57nTh/wChmumoA4n/AIS3xT/0JNx/4FL/AIUf8Jb4p/6Em4/8Cl/wrtqKAOJ/4S3xT/0JNx/4FL/hR/wlvin/AKEm4/8AApf8K7aigDif+Et8U/8AQk3H/gUv+FH/AAlvin/oSbj/AMCl/wAK7aigDif+Et8U/wDQk3H/AIFL/hR/wlvin/oSbj/wKX/Cu2ooA4n/AIS3xT/0JNx/4FL/AIUf8Jb4p/6Em4/8Cl/wrtqKAOJ/4S3xT/0JNx/4FL/hR/wlvin/AKEm4/8AApf8K7aigDif+Et8U/8AQk3H/gUv+FH/AAlvin/oSbj/AMCl/wAK7aigDif+Es8Vf9CTcf8AgUv+FH/CWeKf+hJuf/Apf8K7aigDif8AhLPFP/Qk3P8A4FL/AIUf8JZ4p/6Em5/8Cl/wrtqKAOJ/4SzxT/0JNx/4FL/hR/wlnin/AKEm4/8AApf8K7aigDif+Es8U/8AQk3H/gUv+FH/AAlnin/oSbj/AMCl/wAK7aigDif+Es8U/wDQk3H/AIFL/hR/wlnin/oSbj/wKX/Cu2ooA4n/AISzxT/0JNx/4FL/AIUf8JZ4p/6Em4/8Cl/wrtqKAOJ/4SzxT/0JNx/4FL/hR/wlnin/AKEm4/8AApf8K7aigDif+Es8U/8AQk3H/gUv+FH/AAlnin/oSbj/AMCl/wAK7aigDif+Es8U/wDQk3H/AIFL/hR/wlnin/oSbj/wKX/Cu2ooA4n/AISzxT/0JNx/4FL/AIUf8JZ4p/6Em4/8Cl/wrtqKAOJ/4SzxT/0JNx/4FL/hR/wlnin/AKEm4/8AApf8K7aigDif+Es8U/8AQk3H/gUv+FH/AAlnin/oSbj/AMCl/wAK7aigDif+Es8U/wDQk3H/AIFL/hR/wlnin/oSbj/wKX/Cu2ooA4n/AISzxT/0JNx/4FL/AIUf8JZ4p/6Em4/8Cl/wrtqKAOf8Pa5qGqyXMeoaU+nSwkARu4YsCM5yK6Cse2AHiC/Pfan8q2KACiiigDmh/wAlGb/sHD/0Oulrmh/yUZv+wcP/AEOuloAKKKKACiiigAooooAQ9K5c+MQZXSLSb+UIxUuoTBwcd2rqa4iC8Sw0O4vHTekLSMV9fmNAF/8A4TJv+gDqX5xf/F0f8Jk3/QB1P84v/i6wtP8AGuj3WmW95PcramdWZYpcZwGIzx9KsP4u0VNUtNPa7xNcqXRhjaQOgz70Aav/AAmTf9AHU/zi/wDi6P8AhMm/6AOp/nF/8XVK38Q6VdT3ECX8Bkgz5iq2SuOTn6Vj6v8AEbQNLjR47j7Y7yKixQEd+hJOKAOl/wCEyb/oA6n+cX/xdH/CZN/0AdT/ADi/+LrPt/E+kz3EVobyMXcqhlhJGQMZx6VMNd0z+0hp7X8P2o/8ss4fJ6deKALX/CZN/wBAHU/zi/8Ai6ibxwi3EdudF1ISyAsq4j5Axn+L3qO11zTL29eytr2N7pOseR261Ddk/wDCSacOjeTPg+n3KAL/APwmDA/8gPUie/8Aqx/N6P8AhMW/6AOpfnF/8XVCHXIm1K9sp43iltoxKSSMMpzyPyqnp3i2HULuwt/sU8f29HkhZ9vCKM54PegDb/4TFv8AoA6l+cX/AMXR/wAJi/8A0AdS/OL/AOLqlr+vWnh7Spb6dGkCNhVTGXPZR9ayLvx9ptr4Ri8Q+TI9vI23YMZU9x1oA6T/AITFsE/2FqQx/wBc/wCj1H/wm6ifyW0XUQ5UsBhOQP8AgXvWRaeMrC/vtLtLaGSQahEZo5eMAAcg8+takxH9uxAdTauG+u4f0oAnHjBv+gHqRPcYj/q9L/wmD/8AQB1P/wAhf/F1z9/41tLK41eI2lzI+n+XuAKHeXwAF5/nip7DxZBeayNJm068s7ySLzY0n2EMvrlSf1oA2f8AhMH/AOgDqf8A5C/+Lo/4TB/+gDqf/kL/AOLrH8TeKrXwrYx3N3BLPvcgJCBnAGS3JHA5q23iHTI9Kh1GW6WO1lUMrycZBoAu/wDCYP8A9AHU/wDyF/8AF0f8Jg//AEAdT/8AIX/xdYWneN9Jv7W5u5JUtbe3m8kySNw59RS2fjPSbqK7me5ENtbyiETvja5IzkUAbn/CYP8A9AHU/wDyF/8AF0f8Jg//AEAdT/8AIX/xdZzeKdEWSBP7RgDXC74lc8sBwelSTeIdLt9QXT5L63F23IiLc89M+9AFz/hMHx/yAdT/APIX/wAXU1j4qF5qENk+mXls8udrShNp4J7MfSs2bxDpNtqS6dLqEQvGA2xPgMatEn+29IOSf3jf+gPQB1VFFFABRRRQAUUUUAFFFFABRRRQBkW//Ifv/wDcT+Va9ZFv/wAh+/8A9xP5Vr0AFFFFAHND/kozf9g4f+h10tc0P+SjN/2Dh/6HXS0AFFFFABRRRQAUUUUAFee3kUlx4Vv4olLO4kUKvc5NehVyGleHTPbNONTvIy8jNtRhgcngUAeT6L4VvJtSszf6a7xppLrgrwH8yXA/IirFlo17bWehvcaVJLci1kgJx/q3yMFvTivXf+EYKj/kK3n5jr+VIPDO4D/ia3o9sj9eKAPG9F8P6pHqCebaXKNaxTpNIUASVmBx9eoq2PCJh8N+H0TTT9p+1xtcZXnG7vXq7eGX8zI1a927ccsD/SnjwyQcnVLwH/eH+FAHkN3p2pSeI8R6RJCI70SApH8nljIzuPOfbpVlNJvIdTmtpdCe8unu/NXUHYqApAwMj0r1QeGtvP8Aa17t6/fGPyxS/wDCNM3I1e9JPX5hj+VAHkvhDw/qdp4og+02tzDJC8rvLs+RgSOM969FuRnxFpYBH+pm79/krUHhRcf8hS+H/Ah/hWdd+GyviDT4/wC07w7opmDbhkfcoA474i6Zq41S0vNGQyNcRG1ucDO1Sc5FO1aC40DXNAuoNOuru3s7V4HSAZYZUDp+Fd9/wi/f+1bzJ91/wpT4aJGTqt6McD5h0/KgDznW31fxhqmnWsGnS2FrCfNka4j6sPu8VhXXh7V7fT73QJ7Z54Fu45o5I0wpDE7hXs3/AAjJc5Oq3o7EKwGf0pP+EUwABq19x6uP8KAPKdB8Malo3xKtI/LkfTYoZPJcj7m5clc/XNeksz/8JDkoP+Pd9q/QrV0+Fzkf8Ta+6/3h/hVGXw3/AMT2Ff7Tu+LZznjP3l7496APP9c0a/u7/wAWiO3l2XJtxG6DBOCMkH2rqPD3g+30W6OoPd3d1eNGFDXLhigx0X2rox4Z2kEare5xjG4c/pTj4aY5H9rXe49ztP8ASgDgdb0rWPEvjG4ghVbaytYHiEkqblcuuDj8zXPTaLq9vpWmw3enyXkOlXbpJGuR5ycFSB7V663hgmPb/a17z6MKX/hGixydVvcj1cf4UAeL2+hajFpkc8mizPDFqRlezxyyENjNXU0S5vbCWM6TJbW0+rJN5BX7sfp9K9bbwwHHOrX3PVg4B/lSL4XB4/te+JGD98ZH6UAeP+JPCt2mu3cdrZXD2t1Gv2Z7dMiML15P3alvNA1Sx8UQumnXEzM8LZkUPGwBBLFxgg+2a9ePhgZ3f2reg5/vD8ulB8MlmH/E1vVBOcKQP6UAeUappWqL4ueS2sZ3eS4jkIaMPFt4yQ/UY9K9PwV1rSVyMiRgcHI+49Wv+EXO7cdVvSf94f4VVbRzp2uaVL9uuZ90zjZKRgfI3NAHVUUUUAFFFFABRRRQAUUUUAFFFFAGRb/8h+//ANxP5Vr1kW//ACH7/wD3E/lWvQAUUUUAc0P+SjN/2Dh/6HXS1zQ/5KM3/YOH/oddLQAUUUUAFFFFABRRRQAVz0GpQ6R4Ym1G4BMNuHdsdcBjXQ1x0GoabPos2nXccrxyF0dRGSMbjQBlv8SUvbeSGG0aGWW382KQPvAzxzwMGrYSbw3cXcH2uadDYNMPMbO1gyrn/wAeqpp+n6JZLKkl3qFxE0RhSOSM4RT6YFJBY6ZG26fUtRuGJUEyRk5RTnb09cflQBQW4v7nT9V1SW7mWTSPLWKMPgMdqu2fXO4iu11W2utZ0SEQXRtDIquxUZJBAOKwL630a91GS5W6v4opypuLdIjsk24xkY9hVjUZNN1GOWNr7UoVJQxeShUxbfTjvQBj2t3qV74fntYRdu66gIzEWAlSIZ79Oa6vwlPA1ncQRJdRywTFJo7mQOynAPUdsEVgpa6VHp7xx3uoLePKJjd+Wd5YevHI9q0tGvdL0iCRBNdTyzSGSWWSE7nY+uB6AUAdeORWRe/8jNpn/XGf+aUweKNOHaf/AL8tWXd+IrJvEOnS/vdiwz/8smz/AAUAZ/jt57BPt8cl4zlVWEQHCREHln9RyPyqhqd7cwavNql9DqDadGkYD20gVQcDLEHtWlrSabq907/2jqMEMsYSaKKM7XA+o4qtc6fo087AXuox2cgUTWqodkm3pnI46dqAO+tJEltY5I2LIyggnqRip6wYfEemQRLGgnCKMACFuBT/APhKdO/6b/8AflqANk9qzZMnxDCB/wA+r/8AoS1B/wAJPp56Cf8A79NVB/ENidejfE+FtWz+6P8AeWgCHXf7XTxFpbpexR6abhV8lUO+Q4OcnoKy9Ue6uJtX1IXjxyadOiRIpKqVAyQR6nNbl9qul37WzSPdKYJVlUCJsEj14rHvrbRr3UZLr7TfRxzMHlgER2Ow7kYoA6HW7d9R0aMrPLDHxNIsJw7qBnaD2rjIrrVdQ8N20cC3rhb50kQOFlEYxgMT3xWxeyWV3BIi6lqMbmbzo3EZ/d8Y2jjpVYWekrYLFHqGpR3QlM32lYzvLHGc8cjAHFAG74Tv7a702RLYXSvC5SSO6bcyN6ZqjoU2pp401iK/uklXYrQxRg4UH3PWk02bSNLjiS3nvBtcySnymzKx67uOamF9pS6peX6S3azXMYjOIm+XHcUARePW1aOwhmsbtLe3jcGYYJd/mHA9K66I5jQ5ycD+VcpeXelaho6afdT3jqCpMnlNuJBzWovibTkUAfaDgY/1LUAbtZOqf8hXSP8Ar4b/ANFtUf8AwlGndhcf9+WqnPq9tfa1pMcIlDCdj86Ef8s2/wAaAOmooooAKKKKACiiigAooooAKKKKAMi3/wCQ/f8A+4n8q16yLf8A5D9//uJ/KtegAooooA5of8lGb/sHD/0Oulrmh/yUZv8AsHD/ANDrpaACiiigAooooAKKKKACsfQgDpuSo++3J+prYrlLiO7l8E3senH/AEpkkEf1yaAN2S+tI4ZJS8ZWMEvtIO0D1rO07xTpupNcCKOaMwJ5kgniKHb6jPWvLtFtdQvN5tklhaOyZbhPJYCRlzkEnqa6W81tNankuLK0uUV7VbQmVCu1nYHOPYKc0Adc3ifSUlsomlUS3pAgjx85B7kdquanqdppNmbq6DbAcAIm5ifYVg6ppiW8/h4JCHeG5RWkC8gBSM5q5rfiG2sYrkNa3E3kMI5PLTJAYdR64oAB4v0g6Wb8eaY/M8ryxEfM3/3dvXNaWl6naavbGe2BChirJIu1lPoR2rzO2WW28PTXsCTJHb34mguHhJcg5B3L1I5rrfA8d49tqV/dSl2vbvzVJj8vjYq8L26UAddsX+6PyrGvY1HijS2wP9TPxj/crZBrIvTnxPpgH/PCf+cdAEeq+JdN0e4EFykx+UO7xwlljBPVj2qKbxfo0F+bR3YlSoeVUzGhPQM3aua8f3iTo1gBeR3CqJIBEmUuGPRW9hjv61ga1Z363d9ptmZ4n1MRtNB5GVLYGSr5+UDFAHsSbHQMApB5BFO2L/dH5VW0+Frawhgc/MiBeue3rVrNADSi/wB0flWbKo/4SCAYH/Hq/wD6EtaZNZkhH/CRQjuLZ/8A0JaAGXuvabYX9vZTyobmeQRpEvLZPtVe88VaVY6gLOcSb8gO6R7o0PozdAai8Q2qfbNNnSBTIbuMPIq/NjPrXM6tJ9iutY0h7aZ57+4SSHYuV2kYyT7YoA7jVNXs9Jsxc3EcjoSFVYY97MT6Adazj4x0cafDe4lKzOY0iERMhYdRs68VV1fxBa2+iyh47vYrG3klijy0ZII3AelcfBavbeHrO+t5LmI217IbeeSEsxRsZLL15IoA9P0/UbPVLVbm0IeMkjkYII6gjsar2Wuadf6pdadbusk9qAZdoyBntn1rmvAvnWFjvvy5m1Gd5EO0gHnPI/h61bsFFl4x1qfySlukKOQq8E4ySPU0AbWta/pmgxI97IqtIQEQD5m57CtNNjoGCjBGRxXJeLPI1Xw2t1FAZGLLsynzD5hXVw8Qp24FAEhRcfdH5Vk6iMarpJAA/ftn/v21a+4Vk6kf+JnpP/Xw3/oDUAa9FFFABRRRQAUUUUAFFFFABRRRQBkW/wDyH7//AHE/lWvWRb/8h+//ANxP5Vr0AFFFFAHND/kozf8AYOH/AKHXS1zQ/wCSjN/2Dh/6HXS0AFFFFABRRRQAUUUUAFZcGji2QpFd3CJkttVhgE/hWpRQBmjS2UnF7c4JzgMB/SgaUw63lzjrjcv+FaVFAGcdNkY5N9dY9Nw/wo/sxyT/AKbc7T6sP8K0aKAM3+y22bDeTlPQlcfTGKUaZIqgC/ugB0AYD+laNFAFD+zpO+oXf/fQ/wAKgk0QSXcVy15dGWJWVTvHRsZ7ewrWooAzDpJbAa7uCF+7kg4/Snf2Y/yk31zkd9wz/KtGigCh/Z0mf+P+6/76H+FH9nSf8/8Adf8AfQ/wq/RQBQGnSA/8f91/30P8KibRyboXAvrrzAhQHcOhI9vatSigDP8A7OkPW/uv++h/hTP7JJdXa8uCy9CSpP54rTooAzTpbMjKby4Ib3XH8qP7LkC7ft1zjHqv+FaVFAGd/Zj4/wCP2546ZYcfpSDS5MnN/dHP+0P8K0qKAM7+y2xj7dcgegIx+WKX+zZAABf3Q6k/MP8ACtCigCh/Z0uf+Qhdf99D/CmDSgbmCeS5nlaFiyB2GASMenoTWlRQAUUUUAFFFFABRRRQAUUUUAFFFFAGRb/8h+//ANxP5Vr1kW//ACH7/wD3E/lWvQAUUUUAc0P+SjN/2Dh/6HXS1zQ/5KM3/YOH/oddLQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABSZ7UtZWu67Z+H7Jbu9ZhGziNQqkksegwKANTNG4Vytv480ea6igmNxbNKwVDPC6KSenJGK2NX1zT9EgSa+uUiV3CKCeWY9ABQBp0VHDIs0SyL0YAj6VJQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAZFv/wAh+/8A9xP5Vr1kW/8AyH7/AP3E/lWvQAUUUUAc0P8Akozf9g4f+h10tc0P+SjN/wBg4f8AoddLQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFGaACuH+JvnnRtP+yrG041CLYJM7c4PpXblgOpFZWsabZaxHBFdSfLBMsy7Wwdwz/jQB514lutdvta0rQdcWysLOWRJluINziRlb7nOMGtr4j6LYNor6nLB5l3AyCJ2Odh3A5ArpNb0zStcsxb3xQ7WDRuGwyMOhB7VJqVhYavpZsLmffF8uW3cnHegC7pjFtMtif8Ankv8hVyq1u0EMKRJIu1FCjJ54qwCD0IoAWiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDIt/8AkP3/APuJ/Ktesi3/AOQ/f/7ifyrXoAKKKKAOaH/JRm/7Bw/9Drpa5of8lGb/ALBw/wDQ66WgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKp6hdm1h3KMk8VcrH8Q5Ww3KcEGgCi9w8jbnbn0zToVEr4AGfeuXj1WRZjG43c9a0orkvjyy3PagDdSUQT7HRX46AZoiY3MjqvlqPeq1qwikSR4mx35qvcXsKbmVGVyeDmgRcmUJJtO3I7ikS4eFtyOCfTNc/cawkfdmNUhrMkzFUBT3oGejWNwbm2Dnr3q1WN4Zdn0hWY5O41s0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAZFv8A8h+//wBxP5Vr1kW//Ifv/wDcT+Va9ABRRRQBzQ/5KM3/AGDh/wCh10tc0P8Akozf9g4f+h10tABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVk+IMnTWwOhrTMiBtpdQx7E80yQxOro5UjHzAntQB5Of+Po/Wt+xHzKa6G58OafeMZY1Cv6r0rF1SOPQGgQsZ5bhwkUSjkn1+lAGmx/0esW76V0w02aS3XlVYjlT2qhJ4eunBO9MigDirsdTUFpzJgdzWlJbRQ+JTpWploPMx5L9Vc12un+F9OsmD+VvkxyW5GaLAS+GkKaPGCMHJrYpihUUBQAo4wKga/tUuBbtOgmPRCeaALVFQNdQKzK0qgoMsCegp8MqSoHjcMp6EUASUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAGRb/8AIfv/APcT+Va9ZFv/AMh+/wD9xP5Vr0AFFFFAHND/AJKM3/YOH/oddLXND/kozf8AYOH/AKHXS0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFee634y1W08RX9lZRAw2gXgWzyGQkAkbhwOtehVgaj4W06+1F72USB3AWRUYqHA9cdaAOCvrq4vLHXtba5kgv7O5Rbdd/CKADjb75NbEsT6lePLNLIsF7dxW7BWK/IgOQCPcmuhuPCGk3N/8Aa3iIJIZ0B+VyOhI9qtTaDZTab9h2lUEhkRlb5kbOcg/WgDO8L4s59atDKxtba5Pll3LbQRkjJrM8OCfxH4km1y6U/ZrdmSzHb0z71B4hiFhHB4b0cOLi/YtNKTltvcmu506yj07T4LSIAJEgUY9hQBZXpS0UtAGF4l8Pwa3YnI23UXzQSjqrDkVQ8IeIpNVjlsr5DDqFqdrq/G8f3gK6sjIxXIeLdJukkj1vSxi8t/vqP+Wi+lMDGvvEviD+3tRjtSv2a1uViWIomGGRkknnnPaq14Fk0u9v7gKmqJqK4YHJQcYA9sZrp9ItdG8SJDrbWSC8yPMz95XXsfoa05tA0yXUGv3s42uMcuR1pCObGkLr+j6reXklxGlxKTH5blSY04Az6E5NbngzA8KWCjPyx7Rk5OAa1Y7WCOzFosYEKrtC47U60tYbO3SCBAkaj5VHagZZooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAMi3/5D9/8A7ifyrXrIt/8AkP3/APuJ/KtegAooooA5of8AJRm/7Bw/9Drpa5of8lGb/sHD/wBDrpaACiiigAooooAKKKKACiiigAooooAKKKKACiiigBMAdBVHVb+HS9OuLyYgJEpb6n0q93rhtcvW8QeJovDkS/6LERLdSD2520AT+DLe5v2uNe1OM+fcNi3D9UjHSuyHSo4YkihSOMbUUAKPapaACiiigApjjjpn2p9FAHn+pW114S8Qf2va7v7IuH/0qIdEJ/ixXcWlxBeQLPBIskbjIZehpL60hvrKW1nGY5VKt9K4nSLh/BerLoN07SWVwd9rKf4fVTQI77A9KXGKaOmc0ooGLRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAZFv8A8h+//wBxP5Vr1kW//Ifv/wDcT+Va9ABRRRQBzQ/5KM3/AGDh/wCh10tc0P8Akozf9g4f+h10tABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRTGcKpJOAOpoAyPEuuR6FpT3DfNK3yRIOrMaq+EdJNlpYu7lP9NuyZZSeoySQM/TFZCTJ4v8WMrx79N0z5kPZ5T/AICu5VQqgYwPSgBRS0UUAFFFFABRRRQAVkeIdEg1zTHtpVG/rG/dT7GtekagDj/CXiCaSV9C1QMmo2o25PSQDuD3rrwSSK5Txdo1wYhrGkgLqdr8y8Z3juDWl4Z1xNd0pJzhbhcrNH0KsPagDbooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAMi3/AOQ/f/7ifyrXrIt/+Q/f/wC4n8q16ACiiigDmh/yUZv+wcP/AEOulrmh/wAlGb/sHD/0OuloAKKKKACiiigAooooAKKKKACiiigAooooAK5jxfrf9n2a2NuC99enyYgO27jP4V0FxcR2sDzSsFjQZJPauN0G3/4SPxDceIJ0LW0Z8u03dsfxD8aAOh8PaNDoelR20eC2MuwH3j3Na46cUADFLQAUUUUAFFFFABRRRQAUhpaKAGOAVxXC67aXXhzXD4gsQWtpABdwrxx/e/Ku8xUVxBFcQSQyoGjkUqwPcGgCOxvYdQtY7q3bdDIu5TVqvP8ATpJvBWtmxumb+yLo4t5DyEb+7Xeo4dQykFTyCO4oAfRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBkW/8AyH7/AP3E/lWvWRb/APIfv/8AcT+Va9ABRRRQBzQ/5KM3/YOH/oddLXND/kozf9g4f+h10tABRRRQAUUUUAFFFFABRRTC+1cmgB9FUrzU7XToPPu50hizjc54zQdTtEihma4j8udgsb54YkZ/pQBdoqhb6vZXlxJb291FJLESHRW5BFLqWpQaXYS3ly4SKNdx+vpQBzfi++a/urfw5at++umzKw6og5rptMsIdM06CzgGI4l2iuX8G6XNLcXGv3y/6ReZMYbqqE5A9uK7NfuimAtFFFIAooooAKKKKACiiigAooooAKQ9KWigDK1vRrfXNNks5yVB5Vx1U+tYHhTWJbO8fwzqJ/0m1ysUh6yp1B/KuzIzXMeLNAbULVb2yCrqNqRJC/Qkg9M/SmI6cUtc94W8QjW7N1kBS8gOyeMjBB9a3mYhSRj8aT0GPoqvLOsULSyOERQWLHoBVa21mxvLeS4truOWGMEuynhfrQBo0VlxeINLlu0tFvIzcSEbUzycjIx+FalABRRRQAUUUUAFFFFABRRRQBkW/wDyH7//AHE/lWvWRb/8h+//ANxP5Vr0AFFFFAHND/kozf8AYOH/AKHXS1zQ/wCSjN/2Dh/6HXS0AFFFFABRRRQAUUUUAFcj4x1fUdPbT4LAkfaJijsmMgAE9W4HSusJ4qrd2VnfQeRdwxzRk52yAEZ9cUAecwXVzqOq6SNbZGtluJ1JkK4bptB28Z5plrDFqFrNZ2pJt9Oae5tQCSo/hX6jDNivQX0bSns1tHs7c26ncI9g2g+uKmhsbK2XbDDHGNgQhQBwOgo1FdHB6ULddY8LtbAee8DefjG77hJLe+fWr3iFX8T+IrfQoZP9CgAmunX17Ln8K09dl0/w5pd1e2lpCLqUkJ5agMXbjrSeC9IbStLc3LBrq6fzpTnnJ7VXK7XFzLY6WKJIokRBhVAAHoKkHAoHSgdKkoWiiigAooooAKKKKACiiigAooooAKKKKACmkDrTqQ0AcN4ms7rQdRXxBpEZ6YuogCQ49cDvVzxJ4kkj8GPqmkSI8jmNQ2Adu4gH+feuqdQyFWGQRgg156tqPCGtSxzqJdFv5CNhGRGx55HpVJXJbsVH1HVrjSb+2vZma2UW7B3Kbzucbh8v8OP0qa+kgj1jUbLStgS+jhgIiwVDMW3Yx/siu4s7DTYLRorW3t47eYZZFQANkdx9KS10nTLLy/s1tDH5bF12jGCRgn8qVgujirWy0+006EJtOoxarGhbI34EoHA64216TWX/AGVp39ojUPs8H2oHPmhRu/OtDzV/vClZjuiSimq2adQMKKKKACiiigAooooAyLf/AJD9/wD7ifyrXrIt/wDkP3/+4n8q16ACiiigDmh/yUZv+wcP/Q66WuaH/JRm/wCwcP8A0OuloAKKgvLuGxtJLm4kWOGMbmZjgAVzmneP9B1S8jtLe6PnSEhFZSN30PegDqqKy7PXrC++1+ROrfZHKT/7JHWm6Z4h0/V9PmvrKYSQQsyufQr1oA1qKqWGoQalZRXdu26GRdymorzWLKwura2uJlSe5cJEhPLGgCxdyGK1kkA5CmvMW1SZpWJuZuf9s16VqJ/4ls7f7BNeNm5+djgcE114ZJ3uedj5yjblNv8AtOT/AJ+p/wDvs0v2+XGftc/t85qtFYiTTlufM+duiAdau3UEn9nxYs2Xnlq3lyJnJB1ZK5UnnW5VRO7yFDuUsxOD61ds9SnjvbcrPI251Xlzjk4qje2otII5PMDbxnHpVazlH262BOB5inn61UoxcDJVKsaiuewJJlAcGo5buKGCSeSRFijBLMTwMdaxfE8t5B4VvXsS3nrF8hAyRzyfyrgdHe4fT9QVL+O7t2sDJNGJCx3c8nPQ8V5b3PoI6o9NstdsNReRLeUl4lDsrqUIHrggcVEPE2lNdW1r9sjFxc4MURPzPn2rjtR1i2v75xpLq8lzaraBhxgu3GPoAa2LvRLGwu9GmSJRdrPGhkzlsBSOtAzsQcilqMHbwBS7z6UAPopm8+lG8+lAD6KZvPpRvPpQA+imbz6Ubz6UAOY7RmozJtxuIye2aHf5DnjHevLvF087+K7yOfURZxxW6NabpGQO2CSRgfNzxigDvrvxLpllc+RPcqrjAbgkIT0yRwKml1qwgeRJrhE8uLzXJPAX1z6V5mblYLTXLTUWVr+8EZhOPvHnp9K6fR9Ng1Kx1C5u/wB6hhW3254IRRn9RQB1On6naatZJeWMyzQPnbIvQ4rz/X7trrUZ4J2LRRycLngYNdP4Kjjg8MQRxqqIryBVHYbjXB65cga3er3Eh79s104ZJy1OHHTlGF0XRqLhcLcygDoNxpf7RlzgXU/T++ap6ZajUNxMoQKM9Oav6bauIbrNs0mzhSe9dT5I7nnUnWkhn9oTZAF1Mf8AgZo/tC5HS5l/77NRrpxeznuSxjdMnYwrN85upxTShLYiU6sHqer6JcPPpULu25toya0s8Vi+Gx/xJrds9UFU7/x5oOm3ctrPdfPHjeUUsBn1Irzai9496i24Js6iis06zZi6tLbzl827jMkI/vAYz/MVEviTTW8QHQxOPt6pvMftjNSaGvRVKDUoLi+ubSJg0tvt8wem7p/KqeteJ9L0BIm1C48rzDhRgkn1OB2oA2aKz9J1ez1uwS9sJRLAxIDD2rQFAGRb/wDIfv8A/cT+Va9ZFv8A8h+//wBxP5Vr0AFFFFAHND/kozf9g4f+h10tc0P+SjN/2Dh/6HXS0AYHjLT5NV8L3dlDIiSybdm84DEMCB+OMVw17dLNFp9r4u0a60xLeePybuJ96FhgDOM4B9/WvQ9f0ca5pE1j9okt2fBWWP7yMCCD+YrnrzwXqur20Flq2viayjZXKQ2ojdypBGWLH09KAOZ1CQ+H9T8U24cYv4Emts9WLHafr1FRWoXwZo2t6OJApurcTWwfq0si7cD8RXb614Nh1nWdN1B52j+xyBmj25EigcL7c8/hUXiHwNDr/iHS9UkuTGLJwzRBciUDoCe1AE2m61omjQ2WhPfot0iKgiKsWJ9Olc54g8MpbeONI117l5JJtQQIhAAjGMY9/wAa9BNjAZhM0ERkBzv2jNUdY0Z9UutOmEoQWlws5G3O7HagC5qP/ILn/wCuZrxmG38658okLubGTXs+of8AINnH+wa8cGckZwQ3UV1YfZnnY52sdVoulxQattMysiIMLnkmuxaJTGEbha4XTmSzhW+Eu+cDGwmti48Ryi1jk+zfO5wcngVU4tsKNaChZmFqGlK11ef6QhWMllGefoawEacTwi2AMpdQmRxnPGa2tWiQIZ45iXmO51z0PpWZZbhqNmen71f/AEKt0moO5xSalUVjshJ46aPYLXTWTGMljk1DFb+NIVIjstOVT1AduR+Nd1HnaPpUnPrXm31Pdj8JwC2/jaPhLPT+uR854NTOfHbEZttOO0gg7j1rucGjBo5hnECbx+P+XTTf++jS+f4+/wCfXTf++jXbfjRijmA4nz/H3/Pppv8A30aPP8ff8+mm/wDfRrtsUYo5gOJ8/wAff8+mm/8AfRo8/wAff8+mm/8AfRrtsUYo5gOJ8/x9/wA+mm/99Gjz/H3/AD6ab/30a7bFGKOYDiDP4/P/AC66b/30ahmi8bTuJHsdN3qMA+Y3Fd7ijFHMBwRh8atKkrWWml06Nvanp/wnUQwlrp2CSSNx5ya7rFBGBRzAcKv/AAnUa7UtdOUZz98muIvxePqdwb9UW53ncE6Zr29uma8h16POv3Z7bz/OujDayODHu0ESWGmJ9mhlFwiNI2CCfevRYo1SEKo/hrzzSbaK4RvMlK7TlRXSWmvztFLm2BEY+Uq2c1pVpyuc+HqwSIPEOnCe/hAmVA33gT2rj7uD7JPJErBgDwRXS37rqcL3k7eVMoO1A1cxJuLEnnPWqpwa3MsROMnoeqeHOfD9tzjMfX8K4a3i1bQE1C1bRm1PTJ5Hdru2lGdrDn5c54x2ruPDmG0G3Q94wP0rKt/Ceq6bDc2uma4sVnM7MqTW3mPHu6gNuH8q45/Ez2KPwIxJZdLs7Hw1qem3Jeyt7gwmSQ/dDDofQ5ArNa0VfFMXjZH+T+0Wt5HP3BEMpn8x1966+fwHbP4Nfw9FcyKGyROwBbcTnOKfL4Kjk8BN4YF26qYdn2jbyGzndj681BoY3hvxFpto2ra1qF2kEOoXpFuWU/PGi4BGB71ramfD9tMniu5uWZTB5UWM4YNjgL1JNamjeGrPSNEstM8tJ0tUCh5F5LY5b2zWTrXg/UdT1611G31iG3htRiG1e18xAcdT8woAm8C2s9vpVzPPbvbrdXLzRROPmCHoT35611lZulWuoW1qY9QvY7uUtkPHD5QA9MZNaIzjmgDJt/8AkP3/APuJ/Ktesi3/AOQ/f/7ifyrXoAKKKKAOaH/JRm/7Bw/9Drpa5of8lGb/ALBw/wDQ66WgAooooAKKKKACiio5Zo4YWlldUjUZLE4AFAEN6jSWkyoMsVOBXlH9lap5j/8AEtueW44r0TVfEllpulyXsci3W11jVImBLO3Rc1mQeMWfSr65udOe3ubSZYmt2cEkscDpW1Gs6d7HLicLGva72OVTTtTU5bTbrd9KXz7+5llslt53kiALx7fu56V0Z8aXEd9EkujSrYyXItftJcffzjp1xTtBx/wsDxAMc+VF/M1v9bl2OX+zY/zM5Y6dqJznTrn24pbTS9Sa+td2nzIFkUkkcYzXrG3jpSBBnpUyxcpK1hwy2MZKSY6P7i/SnUAUtch6S0CiiigYUUUUAFFFFABRRRQAUUUUAFFFFABSHpS0hwBzQAhHBrzPWNH1CTWrl0s5WR3JUhcgjNehf2jaNM0CXMTSgZKBhkCuf03xVPqGpRQS6XJBazu6Q3JcEOVzjjryBmrpVHB3RlWoKtGzOTXRr8Y/0KYH/dpzG70wxwPG8TTtsQEH5j6CuiufGcy3csNhpE12sRfe6uFAC8E5OO4NUte1CPVpPCd7CuIp7sOAa6PrTe6OH+zoR2ZltpN+wObOck9ypqBtE1A/8uU3/fBr1fafQUoHtU/WX2BZbC97mVoFvJBpMCSoVdUAIPatYDigCn9q527u56MI8sbCYopaKRQlFLRQAlLRRQBkW/8AyH7/AP3E/lWvWRb/APIfv/8AcT+Va9ABRRRQBzQ/5KM3/YOH/oddLXND/kozf9g4f+h10tABRRRQAUUUUABrn/GGn3Op+Hbi2td/mFlb92RuwCCcZ4zj1roKKAPL/wDhFdSaC4nt4rh2WeGVY5Vjj3hc5wF4zzWna6XqF14imvbmxaG2luEYqxBO1QeoHviu8xjoKM0AcN9ivdS8T/a9RsboWVtIFtYBt2Eg/wCtbn9Pap9BH/FwPEH/AFzi/ma7I+4rjdB/5KB4g/65xfzNNAdkOlLQOlFIAooooAKKKKACiiigAooooAKKKKACiiigAooooAKhuldrWVY/vlSF5xzU1IelAHlGj+DtShurc3QvFmineQsvl7CD6t94itp7fVG0mxtU0ydZ7JnYuGXDHDKpBz7g13uB6UhUY6UAee32n63baZYaLZWkpgkG++uYyuSWYsyjnqSTzU3iKKOC68JxRW5t0W8wIjjjj2rvBgiuN8Zf8hrwx/1+047gztKKKKQBRRRQAUUUUAFFFFABRRRQBkW//Ifv/wDcT+Va9ZFv/wAh+/8A9xP5Vr0AFFFFAHND/kozf9g4f+h10tc0P+SjN/2Dh/6HXS0AFFFFABRRRQAUUUUAFFFFACHpXG6D/wAlB8Qf9cov5muyNcZoP/JQPEH/AFyi/maaA7QdKKKKQBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFI3SlpD0oAFrjPGX/Ia8M/8AX7XZrXF+Mv8AkNeGf+v3+lOO4M7WiiikAUUUUAFFFFABRRRQAUUUUAZFv/yH7/8A3E/lWvWRb/8AIfv/APcT+Va9ABRRRQBzQ/5KM3/YOH/oddLXND/kozf9g4f+h10tABRRRQAUUUUAFFFFABRRRQAhrjNB/wCSgeIf+uUX8zXZmuM0H/koHiH/AK5RfzNNAdpRRRSAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApD0paQ9KABa4vxl/yGvDP/X7/AErtFri/GX/Ia8M/9fv9KcdwZ2tFFFIAooooAKKKKACiiigAooooAyLf/kP3/wDuJ/Ktesi3/wCQ/f8A+4n8q16ACiiigDmh/wAlGb/sHD/0Oulrmh/yUZv+wcP/AEOuloAKKKKACiiigAooooAKKKKAENcZoP8AyUDxD/1yi/ma7M1xmg/8lA8Q/wDXKL+ZpoDtKKKKQBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFIelLSN0oAFri/GX/Ia8M/8AX7/SuzHSuM8Zf8hrwz/1+047gztaKKKQBRRRQAUUUUAFFFFABRRRQBkW/wDyH7//AHE/lWvWRb/8h+//ANxP5Vr0AFFFFAHND/kozf8AYOH/AKHXS1zQ/wCSjN/2Dh/6HXS0AFFFFABRRRQAUUUh4HFAC0VG8qxrudgo96i+3Wv/AD3X86ALBrjNB/5KB4g/65RfzNdV9utv+e6/nXKaM4i8ca3O42wyQxBHPcjOaaA7Wiqw1C1/57J+dH2+1/57p+dICzRTVdXUMpBB704cigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKQkDkmq7XluOTMo/GgCxXF+Mv8AkNeGf+v2us+32v8Az2X865Hxa4uNW8PPD86xXm5yOijHU00B29FVhf2v/PZfzo+32v8Az2X86QFmio454plJjcMB6VJQAUUUUAFFFFABRRRQBkW//Ifv/wDcT+Va9ZFv/wAh+/8A9xP5Vr0AFFFFAHND/kozf9g4f+h10tc0P+SjN/2Dh/6HXS0AFFIaaXAxngmgB9FMDE9CCKa0qrjc4XmgCWimbvlznrQrAjAbODg/WgDn/FM7Qi3CtgHOawlmcrnfV7x1P5CWZPcmuXF9x96mgNrzX/v/AKUvnyf3x+VY32wf3jTvtQ/vGqA1fMb+9TWmdQSXrM+1j+8aRroFCCSalgeh6FI0mmRsxyTxWpWL4Zbdodu3qM1tUgCiiigAooooAKKKKACiiigAooooAKKKKACiiigCrqLmOwmYHBC1xEc7tHzJXZ6ucaVcE9lNeYRXyFVJzzmgDdEz/wB/9KPNfOd3Q56Vj/bR6mj7aD/FVCNjzn/v0ea/9+sj7UP7xpRdDP3jT0GdX4YuHe8uIs5AGcV1dcL4MlL6pd8/w/1rc1/xNbeH/sizxzSyXUnlxJEuSTUAb1FczD4ys5NQhsbi2vbKafIj+0w7VcjqAaS58Z2cWo3FhbWt3e3FtxMLeLIj4zgmgDp6K5VPHejvo82otLLFFFL5MkbxkSK/93b61NpPjGy1PVRphhube7aMyIk8e3eo6kfnQB0lFIOlLQBkW/8AyH7/AP3E/lWvWRb/APIfv/8AcT+Va9ABRRRQBzQ/5KM3/YOH/oddLXND/kozf9g4f+h10tACHpXnXxKuIk1TQILq+mtLSaZllaOTZnj1r0U8iuS8UaDeavruh3EKxtBayM0u76elAHNwXVnp3i3T08P6pdXsbJIbqNpDKgQKSDnsc4FW/D2mP42s5tY1e7uldriWOCKCUosaK2AeOp4zzXe/ZYFQqsSKCMHaoFcZp1h4g8Ji7stOsINRsZZnmhfz/LaMsclSMHPOaAL9np/iHSNDuLW2u4by4En+jvP/AAr/ALXqaj8Cy37DVYNSnM11FdsHccLnrhR6DOK0PCum6tp9pM+sXizXEzlxGn3Yh6Cjw/pl1YahrEtwqhLi7aWIg8lT60AY/wARf9RZ/U/0rhGlIkxmu7+IYzbWh9Ca4RoUdtwmTP1poB/n+9L9pPqKgNuf+e0dH2c/89kqgJ/tJ9RSpdF2cZ6Cq/kf9No6fEixFiZEOR2pMR6x4VOfDtoT/drdHSsLwmD/AMI9bAjGFrcHSpGLRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBQ1r/kD3P+4a8Z8wpFHzxk17PrH/ACCbn/cNeLlBJEq7wpBOc0AOFwfWnef71B9m/wCm6UfZz/z3SrAsG5PqKaLw7qi+z/8ATZKQW/8A02SgDtvATltUvAey1F8TftYvvDx05YmvPtn7oTfcJ96k+H+G1G7dTldvPFdjqWhWWqXNncXKsZLSTzIiDjBqAOUh0LxNrGo2c+vvYwQWTGSJLXJLORjkntjtVjwQ1tHHqyEot9/aNwZ8n5j87bTj0xjFdptGCPWuW1j4f6FrWoPfXEc8Vw4w7wSlN/GOcdaAIp5vCrQajPKluqWs6y3DHp5mOD7mqPh6DUte8Tf8JJqEC29tAjR2EQGGZG/ibPtWldfDzw/eaJHpLwSLao+/CSEMWx1J707RPAOj6BqK3tm94ZVQoFluGdcH2NAHUISUBIwadQOBRQBkW/8AyH7/AP3E/lWvWRb/APIfv/8AcT+Va9ABRRRQBzQ/5KM3/YOH/oddLXND/kozf9g4f+h10tAAaTbS0UAJtpAoFOooATbSbe9OprAlSAcHHWgDmfEN5G86QG2juAoyd65ANYO+AdNItP8Avn/69dVJokjuzeevzHOdvP8AOk/sI/8APVP++P8A69AHLboP+gRaf98//Xo3Qf8AQItP++f/AK9dT/YR/wCeqf8AfH/16P7CP/PVP++P/r0XA5XdB/0CLT/vn/69G6D/AKBNr/3z/wDXrqv7CP8Az1T/AL4/+vSf2Ef+eqf98f8A16dwJNBv0uLcW4iWJkH3VGBitqsmz0p7W5EolUjGCAuP61rUgCiiigAooooAKKKKACiiigAooooAKKKKACkPSlpD0oAzNavhaWZXYsjPwEbvXHF7fGDo1sec5K//AF67DUNLe9nSTzQoUYwRVb+wW/57L/3z/wDXoA5fdb/9Ai0/75/+vRut/wDoEWn/AHz/APXrqP7BP/PVP++f/r0v9gn/AJ6p/wB8/wD16dwOW3W//QItP++f/r0brf8A6BFp/wB8/wD166n+wT/z1T/vn/69J/YLf89U/wC+f/r0XAzdDvo7a8CfYYLdZBjMYxmuvBBGRWH/AGE2QfNTI6fL/wDXrZjGxNtICSkxS0UAFFFFABRRRQBkW/8AyH7/AP3E/lWvWRb/APIfv/8AcT+Va9ABRRRQBzQ/5KM3/YOH/oddLXND/kozf9g4f+h10tABRRRQAUGiigCOSVIl3OyqPUnFI0yKAWZQp7k1Q1zS11XSZ7beyMQSjA4w3Y1wlxqlz4hsrXTzvBtLVri9YDHzqGVVPccqTigD0pJVkQPGysjDIIPBpFmR3ZFZSynkA8iuf8HTJH4H0eWRwAtlGzEn/ZGa5Dw3qCQ+Ik1Dz7gtqUkqziRGCA5ymCRgcAj3zQB6eZo8EhlKjOWzwMdaeXVV3FgB1yTXkNnq17pFlqwvJGk0y+uLpUfB/cyBmAGew4FeiS20V94ajgup2jikiUF/M2k/j2zQBq/aYzH5gdCgzls8CnRzLLyjIw/2TmvKrayuHg17w7GyxEzxGKKWfKeUSpJDZzzzx710/gSIWJ1PTfscdvJazKCY5GZXDLkEbiaAOzxmlHSkHSloAKKKKACiiigAooooAKKKKACiiigAooooAQnAqMTRuzKrhmU4YA8g+9PbOOCBXCajeP4d8Qam7sRFfWxkiznBlVeg/AUAdss8bthZEb2BFOklWNNzMqjOMscc1wWh2suma3pMMzMZHsHklBbqxcHvSePNQt7ie20jz5omAN2xgUswZfug4z1JFAHfGaNWVWZQzfdBOCaPMUuVyMgZIzzivIru/vvEsvhu5gmkgvYkllZApG6SLcNpHviur8N63BrPiO4uYmO42UfmRd4n3NkMOx4oA7A3MQk8oyJ5h/h3DP5ULcIZPL3Lv/u5GR+FcF4k022s9Zt9YtyXnN7EJp/OOYVLAbdvTB6fjXM6lcXOn6y8q2l62otqCbLtXPlGMkfL1we/FAHtVIRmkU5UfSnUAFFFFABRRRQAUUUUAZFv/wAh+/8A9xP5Vr1kW/8AyH7/AP3E/lWvQAUUUUAc0P8Akozf9g4f+h10tc0P+SjN/wBg4f8AoddLQAUUUUAFFFFAEN1cRWtrLcTPsijUszegFcedZ8H6bNe5u4Y5NQUTTnDZZWHB6cDrXQeJ/wDkV9T/AOvZ/wD0E15r4ftNVuNadNOe3QPpVqrvcJkD5W6cUAdlpnhvw3daej6duktJU2rsnYqR+dX9Zt9ITS4YdTKpaIyLHkkfMCAuD1qh4b0K28Opa2M940moMjucMQrEkFiB0x0x3qL4h2cMnh9J3QNJFcQlSecfOKAH6hJ4Y0yy/sS9ZFiuHLiJsk5Zick9sk1sava6adFkh1HaLJV+bcegHSuU1i906z1bXYb0qLm7tI1tNyE7/kIwD/vfzraOpWlj4dW21M+ZLbW8f2pNu8pxyT60AZtpB4O/4R69mhnQ2WVM8u87lII2knqCOK1/Cg0MWs40SXzk8zMshySWx3Jrgbf7HMNfhe7cadPdwyi/hQjYPkIX8MCul8H6nDaDUopdSa6skuUS3upc5dmHKg45weKAOwfVLNNQjsGnT7VICyxZ5IHU1Fqmu6fo0Ky6hdRwIxwCx61gXNhaW/j3TrmKMJPLBLvk7npxWd4tvYl1LTdUtJraR4i8YW4UiMnoctjgigDqrzxNpNhaQXNzexJDP/q2yTuH4Vp29xFdW6TwuHicZVh0IrxvSzf6FY2t/d/ZTNM9wypdswTy2II2nB6Y6e9ej+C454/Cdl5+BI4ZsAcAFiR+GDQB0VFIOlLQAUUUUAFFFFABRRRQAUUUUANbkda5vXJdCumcau6H+zCtw5bonoa6RgSOK828TbxqXifyyBK1pCqZHG7IoA2mbwx4s1OB0uRPe20bCPYzIVUkZx0z0FbGnaDp2kTS3NrARNIAruWJJA+prnrHw9qM+o22q6xdwLHbW7hBbrgkMBkk49q6u3jgm0tI42Mlu8YCuWPzKR+dAGTDp+hRalNqsBTzrZ3MsgfhCV5/SjQf7Au7y+1TSDEZ7natwyDBOOmaw7i0S20XXLeziKQxXSMVHoAhY+/Q1bsdU0weJ7+9gkRbOO1iSWVeFLliQM/Q0AF5b+FD4rEU8i/2m8qtsDHG8cgkdM8VKYvCbeIwhmjOoB93lljjcO+OmayfEV7ZXepQR2Uypcw30PnW3lYaZiw5B78c59qwdTNy19/ZdoLdjJqKzbmBE45BIxjpx1zQB65dXkFjbPcXMixxIMsxPFFtew3dnHdwuGhkXcrdsetYesvp2t6BeJ8lwtvkOnOAw7Gq2h3VqngzT7KWYRtcWhWNQDk8dqANey8SaTqVxLBZ30UrxZLgHpj+dO0/xDpeq3EkFjeRzSxk7lU+hwa8w07z9Vls9PMkHkWsUoeS1LeZt6DdwNv0qfw1JfXni7RBGLZreygkSR7fIyNuAXBA5z2oA9dopByKWgAooooAyLf/AJD9/wD7ifyrXrIt/wDkP3/+4n8q16ACiiigDmh/yUZv+wcP/Q66WuWaVE+I7Bjj/iXDt/tmuj+0xf3v0NAE1FQ/aof7/wCho+1Q/wB/9DQBNRUP2qH+/wDoaPtUP9/9DQA+RFkRkcBlYYIIyCKhhs4YHZ44kViACVUDgdBT/tUP9/8AQ0faof7/AOhoAT7PGZllKrvUEA7eRn3p0sEc8flyorp1wwyKT7VD/f8A0NH2qH+/+hoAhn061uZEknt4pGj+4XQEr9Kka0hYyExRkyABvlHOPX1p32qH+/8AoaPtUP8Af/Q0ARJp9qkTRC3hCN1QINp+o6U1NNtUiEQtoRGG3hQgxuz1x61P9qg/v/oaPtcH9/8AQ0ABgjZ1kZVLqCAxHIBpj2Ns6bGt4mTOdpQEZ9cU/wC1Qf3/ANDR9qh/v/oaAIrjTre7jRJoY5FQ5UOgbb9M1YRAihQAABgADAApn2qH+/8AoaPtUP8Af/Q0ATUVD9qh/v8A6Gj7VD/f/Q0ATUVD9qh/v/oaPtUP9/8AQ0ATUVD9qh/v/oaPtUP9/wDQ0ATUVD9qh/v/AKGj7VD/AH/0NAE1FQ/aof7/AOho+1Q/3/0NAE1V3s4JGdnhjLPgMSoOcdM077VD/f8A0NH2qH+/+hoAf5alNjAEYxjHGKYkIjUIgVVAwABjFH2qH+/+ho+1Q/3/ANDQAn2ePDjYvz/f+X73GOajGn2qQmJLWBUbkp5Y2n8Kl+1Q/wB/9DR9rg/v/oaAIjp9uZVlNvCZl6SFBu/OlFjbC5+0GGIz9PM2Dd+dSfa4P7/6Gj7VD/f/AENADBaRKrqI4wr53AIBk+/rSizhGw+VHmPhDsHy/T0p32qH+/8AoaPtUP8Af/Q0ARw2FrbyvJDbxRu/32RAC31pIbCC3eR4YYo2c5YqgBP1xUv2qH+/+ho+1Q/3/wBDQBKOBg0tQ/a4P7/6Gj7VD/f/AENAE1FQ/aof7/6Gj7VD/f8A0NAGdbc6/qH+4n8q16xLKVZdf1AxncAEU9sHArboAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/2Q==",
+        "answer_image": null,
+        "explanation": "现有拓扑显示 SW-1 与 SW-2 的 PC 接口均为 e0/2，而 e0/1 是交换机互联链路；原题图实际为另一道题的解答，现已将拓扑移入题图。\n\n在 SW-1 创建 `vlan 35`、`name SALES`；在 SW-2 创建 `vlan 39`、`name MARKETING`。各自的 `interface ethernet 0/2` 配置 `switchport mode access`、对应的 `switchport access vlan 35` 或 `switchport access vlan 39`，并 `no shutdown`。两台设备全局启用 `lldp run`，再在 SW-1 的 e0/2 使用 `no lldp transmit` 与 `no lldp receive`。\n\n使用 `show vlan brief` 和 `show lldp neighbors` 验证；该验证只能说明发现状态，不能保证禁止 CDP 或阻止所有拓扑信息泄露。PC 与网关通信还依赖 R1 对应链路及现有 VLAN 配置；保存配置。"
+      },
+      "review": {
+        "finding": "图像字段误置：原答案图为本题拓扑，原题图为前一题解答。将拓扑移入题图，按图修正 PC 接口为 e0/2。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1168,
+      "before_sha256": "489d70cabe744868fcc1ae3edcad61581cbaf4b8a148a79be100218222f07523",
+      "reason": "一对一通信既适用于 ULA 也适用于 GUA，使用可区分的描述；组内仍可交换。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "counterpart of private IPv4 addresses",
+            "publicly routable in the same way as IPv4 addresses",
+            "is allocated from the global unicast 2000::/3 space",
+            "uses a locally generated pseudo-random global ID"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "uses a locally generated pseudo-random global ID",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "counterpart of private IPv4 addresses",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Global Unicast Address (Slot 1)",
+              "sub_label": "",
+              "expected": "publicly routable in the same way as IPv4 addresses",
+              "unordered_group": "Global Unicast Address"
+            },
+            {
+              "label": "Global Unicast Address (Slot 2)",
+              "sub_label": "",
+              "expected": "is allocated from the global unicast 2000::/3 space",
+              "unordered_group": "Global Unicast Address"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "ULA 的本地分配前缀使用伪随机 Global ID，可类比 RFC 1918 的局部使用但分配机制不同；GUA 可使用 2000::/3 的全球单播范围，实际公网可达性依赖分配、路由与过滤策略。ULA 和 GUA 都是单播，原“一对一”并非 GUA 独有，已改成可区分选项；组内顺序不限，原答案图已隐藏。"
+      },
+      "review": {
+        "finding": "一对一通信既适用于 ULA 也适用于 GUA，使用可区分的描述；组内仍可交换。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1169,
+      "before_sha256": "153fe230184e5b09cda47b6e167712eba30a00649981af2cd4ca1b5d3fa0e84e",
+      "reason": "答案图属于其他题，移除；保留现有配置并补 LACP 成员兼容、端口启用和平台命令前提。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "• **实验目标与场景背景**：\n在三台交换机（SW-1、SW-2、SW-3）之间配置 802.1Q Trunk、修改 Native VLAN 以及部署 LACP 动态链路聚合：\n1. SW-1 与 SW-2 互联端口 e0/0、e0/1 配置为 Trunk 允许所有 VLAN 通过。\n2. 跨交换机互联链路（SW-1 e0/2、SW-2 e0/2、SW-3 e0/0 与 e0/1）配置 Native VLAN 为 35。\n3. 在 SW-1 与 SW-2 间配置 LACP 聚合组：SW-1 配置为 `active`（主动发起协商），SW-2 配置为 `passive`（仅响应协商请求）。\n\n• **逐项任务配置命令详解**：\n1. **任务 1 & 3：在 SW-1 与 SW-2 间配置 LACP EtherChannel 并启用 Trunk**\n```text\nSW-1(config)# interface range ethernet 0/0 - 1\nSW-1(config-if-range)# channel-group 1 mode active\nSW-1(config-if-range)# exit\nSW-1(config)# interface port-channel 1\nSW-1(config-if)# switchport trunk encapsulation dot1q\nSW-1(config-if)# switchport mode trunk\nSW-1(config-if)# switchport trunk allowed vlan all\nSW-1(config-if)# exit\n\nSW-2(config)# interface range ethernet 0/0 - 1\nSW-2(config-if-range)# channel-group 1 mode passive\nSW-2(config-if-range)# exit\nSW-2(config)# interface port-channel 1\nSW-2(config-if)# switchport trunk encapsulation dot1q\nSW-2(config-if)# switchport mode trunk\nSW-2(config-if)# switchport trunk allowed vlan all\nSW-2(config-if)# exit\n```\n2. **任务 2：配置相关互联链路的 Native VLAN 为 35**\n```text\nSW-1(config)# interface ethernet 0/2\nSW-1(config-if)# switchport trunk encapsulation dot1q\nSW-1(config-if)# switchport mode trunk\nSW-1(config-if)# switchport trunk native vlan 35\nSW-1(config-if)# exit\n\nSW-2(config)# interface ethernet 0/2\nSW-2(config-if)# switchport trunk encapsulation dot1q\nSW-2(config-if)# switchport mode trunk\nSW-2(config-if)# switchport trunk native vlan 35\nSW-2(config-if)# exit\n\nSW-3(config)# interface range ethernet 0/0 - 1\nSW-3(config-if-range)# switchport trunk encapsulation dot1q\nSW-3(config-if-range)# switchport mode trunk\nSW-3(config-if-range)# switchport trunk native vlan 35\nSW-3(config-if-range)# exit\n```\n\n• **验证命令**：\n- `show etherchannel summary`：确认 Port-channel 状态为 `SU`，SW-1 成员端口为 `P`（active），SW-2 成员端口为 `P`（passive）。\n- `show interfaces trunk`：确认各链路 Native VLAN 为 35。\n\n原答案图片是其他 IPv6 拖拽题，已隐藏。上述仅为题干给定接口的示例：成员端口需具备兼容的二层、速率及双工设置并处于启用状态；先检查平台是否允许 `switchport trunk encapsulation dot1q` 命令。VLAN 35 须存在，相关物理链路及对端 native VLAN 配置需匹配。保存配置。"
+      },
+      "review": {
+        "finding": "答案图属于其他题，移除；保留现有配置并补 LACP 成员兼容、端口启用和平台命令前提。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    },
+    {
+      "id": 1170,
+      "before_sha256": "f7d0abb0eec0dc1e0d8b30f510e02b34ce5d728260e41210c664c3fd4ca52cdc",
+      "reason": "铜缆窃听不保证取得明文，光脉冲及芯/包层不限多模；改为可区分的介质物理特征，保留分组。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "uses metallic conductors rather than an optical fiber core",
+            "carries signals using light in a multimode fiber",
+            "carries electrical signals over a copper medium",
+            "supports multiple propagation modes in the optical core"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "uses metallic conductors rather than an optical fiber core",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "carries electrical signals over a copper medium",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "multi-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "carries signals using light in a multimode fiber",
+              "unordered_group": "multi-mode fiber"
+            },
+            {
+              "label": "multi-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "supports multiple propagation modes in the optical core",
+              "unordered_group": "multi-mode fiber"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "铜缆以金属导体承载电信号；多模光纤以光传播，纤芯支持多个传播模式。光脉冲及纤芯、包层与涂覆层也见于单模光纤；加密流量即使被截获也不意味着能取得明文。题图中的容易取得机密信息描述已改写，组内顺序不限，原答案图隐藏。"
+      },
+      "review": {
+        "finding": "铜缆窃听不保证取得明文，光脉冲及芯/包层不限多模；改为可区分的介质物理特征，保留分组。",
+        "image": "viewed",
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "corrected",
+        "code_cli": "checked",
+        "grouping": "checked"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291.html",
+    "https://www.rfc-editor.org/rfc/rfc4193.html",
+    "https://www.cisco.com/c/en/us/td/docs/interfaces_modules/port_adapters/install_upgrade/ethernet/pa-ge_gigabit_ethernet_install_config/pa_ge.pdf"
+  ],
+  "limitations": "人工检查题图及答案图；未进行真实网络实验。"
+}

@@ -1,0 +1,382 @@
+{
+  "scope": "Q1091–Q1100",
+  "corrections": [
+    {
+      "id": 1091,
+      "original_qid": "Q1091",
+      "before_sha256": "44d7b323d216e1ab4f6d6aeedf05602c07b12d4e087542c30360c548f27dab53",
+      "reason": "修正 vital 拼写与 VM/OS 歧义、区分硬件线程；原答案图第三至五项错位。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "guest operating system",
+            "host operating system",
+            "hypervisor",
+            "multithreading",
+            "virtual machine"
+          ],
+          "targets": [
+            {
+              "label": "A virtual computer that runs a guest operating system and is abstracted from the underlying physical hardware.",
+              "sub_label": "",
+              "expected": "virtual machine"
+            },
+            {
+              "label": "A CPU core can execute more than one hardware thread concurrently when supported.",
+              "sub_label": "",
+              "expected": "multithreading"
+            },
+            {
+              "label": "Runs on a physical server, manages, and allocates the physical resources.",
+              "sub_label": "",
+              "expected": "hypervisor"
+            },
+            {
+              "label": "The software that manages the basic functions of the physical hardware.",
+              "sub_label": "",
+              "expected": "host operating system"
+            },
+            {
+              "label": "The operating system that manages the basic functions inside a virtual machine.",
+              "sub_label": "",
+              "expected": "guest operating system"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "虚拟计算机及其虚拟硬件抽象对应 virtual machine；单核同时支持多硬件线程对应 multithreading（具体实现依 CPU）；分配虚拟计算资源的软件对应 hypervisor；管理宿主物理设备的系统对应 host operating system；虚拟机内的系统对应 guest operating system。Type 1 hypervisor 可直接运行在硬件上，Type 2 则运行在宿主系统之上；虚拟机不等同于仅有客户操作系统。原图中 vital 是 virtual 的笔误，原解答图后几项与定义不符。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "修正 vital 拼写与 VM/OS 歧义、区分硬件线程；原答案图第三至五项错位。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1092,
+      "original_qid": "Q1092",
+      "before_sha256": "1e756385e48fdc30460969ce65e22ce8bb172cad74983dddc4cb5079f10aa65c",
+      "reason": "拓扑和允许 VLAN 列表缺失，原答案图为无关色块；原解析将无证据 VLAN 当成真实答案。",
+      "updates": {
+        "prompt": "SIMULATION -Guidelines -This is a lab item in which tasks will be performed on virtual devices• Refer to the Tasks tab to view the tasks for this lab item.• Refer to the Topology tab to access the device console(s) and perform the tasks.• Console access is available for all required devices by clicking the device icon or using the tab(s) above the console window.• All necessary preconfigurations have been applied.• Do not change the enable password or hostname for any device.• Save your configurations to NVRAM before moving to the next item.• Click Next at the bottom of the screen to submit this lab and move to the next question.• When Next is clicked the lab closes and cannot be reopened.Topology - Tasks -All physical cabling is in place and verified. Connectivity between all four switches must be established and operational. All ports are preconFigured as 802.1q trunks.1.. Configure both SW-1 and SW-2 ports e0/1 and e0/2 to permitOnly the allowed VLANs2.. Configure both SW-3 and SW-4 ports e0/2 to permit only the allowed VLANs3.. Configure both SW-1 and SW-2 e0/1 ports to send and receive untagged traffic over VLAN 99 4.. Configure both SW-3 and SW-4 ports e0/0 and e0/1 for link aggregation using the industry standard protocol. All ports must immediatelyNegotiate the link aggregation 5.. Permit only the allowed VLANs on the new link\n\n原题拓扑和允许 VLAN 清单未提供，无法唯一确定最终配置；以下解析提供有条件的命令示例。",
+        "answer_image": null,
+        "explanation": "原题缺少拓扑与允许 VLAN 清单，不能从现存资料证明允许列表为 10,20,99；不要将示例数值当成实际答案。已知要求：SW-1/SW-2 e0/1 的 native VLAN 为 99；SW-3/SW-4 e0/0–e0/1 使用 LACP active；其余 trunk 和 port-channel 的 allowed VLAN 需依缺失清单配置。\n\n```text\ninterface Ethernet0/1\n switchport trunk native vlan 99\n! SW-3 和 SW-4，各自执行：\ninterface range Ethernet0/0 - 1\n channel-group 1 mode active\ninterface Port-channel1\n switchport mode trunk\n switchport trunk allowed vlan <根据题目清单填写>\n```\n\n其余题设端口同样根据实际允许列表配置。聚合成员两端必须具备兼容的二层、速率、双工和 trunk 配置；native VLAN 在相应链路两端匹配。使用 `show interfaces trunk` 和 `show etherchannel summary` 核对，完成后保存配置；真实 VLAN 清单及端口连线仍需原题拓扑确认。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "拓扑和允许 VLAN 列表缺失，原答案图为无关色块；原解析将无证据 VLAN 当成真实答案。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1093,
+      "original_qid": "Q1093",
+      "before_sha256": "221fb7f3e740acff1ad09d74f9ac1bc94ac78a6f990e09bd020b1f1be6910438",
+      "reason": "限定题图预设规划；地区、可用频段与信道宽度决定实际数量。",
+      "updates": {
+        "prompt": "DROP-Drag and drop the wireless standards from the left onto the number of nonoverlapping channels they support on the right. Assume the exhibit’s simplified 20 MHz channel plan, with three 2.4 GHz and 23 5 GHz channels; actual availability varies by regulatory domain.",
+        "explanation": "按题图给定的简化规划，802.11b、802.11g 和 2.4 GHz 802.11n 对应 3 信道组；802.11a 和 5 GHz 802.11n 对应 23 信道组，同组顺序不限。2.4 GHz 常用 1、6、11 规划。实际可用 5 GHz 信道数受国家/地区规则、设备、DFS 与信道宽度影响；23 不是所有部署的固定值。802.11n 可在两个频段工作。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "限定题图预设规划；地区、可用频段与信道宽度决定实际数量。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1094,
+      "original_qid": "Q1094",
+      "before_sha256": "2ee0391a310e92b7d23b029176c2673bb2e57d7ef74e1b9b32ad94fa5169a54e",
+      "reason": "核对 NIST 五项特性和原题/答案图，保留配对，精炼解析。",
+      "updates": {
+        "explanation": "按图中顺序依次为 on-demand self-service、measured service、resource pooling、rapid elasticity、broad network access。自助服务允许消费者按需自行开通资源；计量服务监测使用量，支持透明计费；资源池按需为多个租户分配共享资源；弹性可按需扩缩；广泛网络访问经标准机制供不同类型终端使用。计费是计量的应用，并非所有云服务都必须按使用量收费。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对 NIST 五项特性和原题/答案图，保留配对，精炼解析。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1095,
+      "original_qid": "Q1095",
+      "before_sha256": "8ea3032bd0403b8cbbd97bc1a6a873c6fe04cb5c46ec406e4c2d9d5d586f5f75",
+      "reason": "原解析误把 static access 当成静态路由，明确 dot1q tunnel 可承载多客户 VLAN。",
+      "updates": {
+        "explanation": "手工指定单个接入 VLAN 为 static access；在支持相应动态分配机制的设备上自动指定接入 VLAN 为 dynamic access；trunk 可承载多个 VLAN；802.1Q tunnel 将客户流量封装进服务商 VLAN，客户侧可有多个 VLAN；private VLAN community 端口可与同一 community 成员通信，也可按配置与 promiscuous 端口通信。支持与具体行为依交换机平台和配置而定。静态 access VLAN 与静态路由是不同概念。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原解析误把 static access 当成静态路由，明确 dot1q tunnel 可承载多客户 VLAN。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1096,
+      "original_qid": "Q1096",
+      "before_sha256": "3d023cac5ffd8e4fa70c0dc12cbfd89f043cccf9911f0f7555715dfd5adc3956",
+      "reason": "发 beacon 也适用于自治 AP，并非独有区分特征；为图中 Split-MAC 目标注明上下文。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "Appropriate for a small-business environment.",
+            "Work is divided between the access point and the controller.",
+            "In this controller-based Split-MAC deployment, the AP handles beacon transmission.",
+            "Supports per device configuration and management.",
+            "Uses the CAPWAP tunneling protocol."
+          ],
+          "targets": [
+            {
+              "label": "Split-MAC (Slot 1)",
+              "sub_label": "",
+              "expected": "Work is divided between the access point and the controller.",
+              "unordered_group": "Split-MAC"
+            },
+            {
+              "label": "Split-MAC (Slot 2)",
+              "sub_label": "",
+              "expected": "Uses the CAPWAP tunneling protocol.",
+              "unordered_group": "Split-MAC"
+            },
+            {
+              "label": "Split-MAC (Slot 3)",
+              "sub_label": "",
+              "expected": "In this controller-based Split-MAC deployment, the AP handles beacon transmission.",
+              "unordered_group": "Split-MAC"
+            },
+            {
+              "label": "Autonomous (Slot 1)",
+              "sub_label": "",
+              "expected": "Appropriate for a small-business environment.",
+              "unordered_group": "Autonomous"
+            },
+            {
+              "label": "Autonomous (Slot 2)",
+              "sub_label": "",
+              "expected": "Supports per device configuration and management.",
+              "unordered_group": "Autonomous"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "按题设分类，Split-MAC 对应 AP 与控制器分工、CAPWAP，以及该控制器部署中由 AP 负责 beacon 发射；Autonomous 对应逐台管理和适用于部分小型环境。自治 AP 同样发送 beacon，因此这个行为本身不构成架构的唯一判别依据；控制器和自治设备的具体部署与管理方式会因产品而异。原答案图仍使用未限定的描述。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "发 beacon 也适用于自治 AP，并非独有区分特征；为图中 Split-MAC 目标注明上下文。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1097,
+      "original_qid": "Q1097",
+      "before_sha256": "995fd79b1744c1d81330b8268e43d20982fcbe0a8f6a400d861d52dfe9262d3b",
+      "reason": "原答案图把 virtual 与 dynamic 最后两项对调；限定传统 AireOS 模型。",
+      "updates": {
+        "prompt": "DRAG DROP - Refer to the exhibit. Drag and drop the network elements, parameters, or characteristics from the left onto the corresponding target categories on the right. Assume a classic AireOS WLC using dynamic interfaces and a virtual interface for web authentication.",
+        "answer_image": null,
+        "explanation": "WLC 管理 AP；AP 提供无线到有线的接入；service port 用于带外管理；virtual interface 支持传统 AireOS Web 认证重定向；dynamic interface 可关联 WLAN 并映射客户端 VLAN。原解答图把最后两项对调。控制器产品和版本的接口模型不同，不能推广为所有 WLC 的配置规则。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案图把 virtual 与 dynamic 最后两项对调；限定传统 AireOS 模型。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1098,
+      "original_qid": "Q1098",
+      "before_sha256": "1faf64b880b75815d1219d9e03ea429b984ef95cb53cbcc2512210181a72ff82",
+      "reason": "原 .30 与 MPLS 路由 .224/27 不匹配，应走默认 Internet；修正题目候选为 .230。",
+      "updates": {
+        "prompt": "DRAG DROP - Refer to the exhibit. Drag and drop the network elements, parameters, or characteristics from the left onto the corresponding target categories on the right. Correction: use destination 209.165.200.230 instead of 209.165.200.30; select the next hop shown in Router1’s routing table.",
+        "drag_drop_data": {
+          "sources": [
+            "1.1.1.1",
+            "10.10.13.126",
+            "10.10.13.129",
+            "10.10.13.150",
+            "10.10.13.209",
+            "209.165.200.230"
+          ],
+          "targets": [
+            {
+              "label": "Router2",
+              "sub_label": "",
+              "expected": "10.10.13.126"
+            },
+            {
+              "label": "Router3",
+              "sub_label": "",
+              "expected": "10.10.13.129"
+            },
+            {
+              "label": "Router5",
+              "sub_label": "",
+              "expected": "10.10.13.209"
+            },
+            {
+              "label": "Internet cloud",
+              "sub_label": "",
+              "expected": "1.1.1.1"
+            },
+            {
+              "label": "Router4",
+              "sub_label": "",
+              "expected": "10.10.13.150"
+            },
+            {
+              "label": "MPLS cloud",
+              "sub_label": "",
+              "expected": "209.165.200.230"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "按 Router1 最长前缀匹配：10.10.13.126 命中 .0/25 到 Router2；.129 命中 .128/28 到 Router3；.150 命中 .144/28 到 Router4；.209 命中 .208/29 到 Router5；1.1.1.1 命中默认路由至 Internet；修正后的 209.165.200.230 命中 209.165.200.224/27，经 10.10.12.2 到 MPLS。原候选 209.165.200.30 不在该 /27，图中其他明细也不匹配，应走默认 Internet，故不能作为 MPLS 的答案。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原 .30 与 MPLS 路由 .224/27 不匹配，应走默认 Internet；修正题目候选为 .230。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1099,
+      "original_qid": "Q1099",
+      "before_sha256": "60dbc122931b3cef426e9fcb616e6aa9cea92143d005c970580845d1634ffd59",
+      "reason": "原答案图四项顺序错误，按题图路由前缀核对互动答案。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "图中 10.10.13.0/25 对应 255.255.255.128；10.10.13.128/28 对应 255.255.255.240；10.10.13.160/29 对应 255.255.255.248；10.10.13.252/30 对应 255.255.255.252。255.255.248.0 是 /21、255.255.255.224 是 /27，均不用于所列四项。原答案图中的顺序与路由表不符。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案图四项顺序错误，按题图路由前缀核对互动答案。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    },
+    {
+      "id": 1100,
+      "original_qid": "Q1100",
+      "before_sha256": "5d591185558a00de5f275878bcda503ae58a3157fbf9c6b762721e6e045afb78",
+      "reason": "原答案图将 Listen 与 Speak 对调；按 Cisco HSRP 状态定义核对。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "Active 转发发送给虚拟 MAC 的报文；Learn 等待来自活动路由器的 hello 并尚未确定虚拟 IP；Listen 知道虚拟 IP 但既非活动也非备用，监听 hello；Speak 定期发送 hello 并参与选举；Standby 为下一活动路由器的候选者。故将题设五个行为分别与 Active、Learn、Listen、Speak、Standby 匹配。接管时间依定时器和网络状态而定，并非保证瞬时；原答案图的 Listen/Speak 对调。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案图将 Listen 与 Speak 对调；按 Cisco HSRP 状态定义核对。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+          "https://csrc.nist.gov/pubs/sp/800/145/final"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/technical-reference/wireless-rf-reference-guide.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-4SY/config_guide/sup6T/15_3_sy_swcg_6T/dot1q_tunneling.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/10583-62.pdf",
+    "https://csrc.nist.gov/pubs/sp/800/145/final"
+  ],
+  "limitations": "人工核对题图和解答图，未做实体设备实验。"
+}

@@ -1,0 +1,339 @@
+{
+  "scope": "Q1111–Q1120",
+  "corrections": [
+    {
+      "id": 1111,
+      "before_sha256": "924cc6c73aa338493b39e1beae3cc7f3d6922fa873fa3a46ce074e44a6f32139",
+      "reason": "核对 AAA 同类槽位乱序，删减空泛解析。",
+      "updates": {
+        "explanation": "认证（Authentication）验证身份：TACACS+ 可用于用户认证，确认用户是谁。授权（Authorization）决定认证后的资源访问与可执行命令。记录连接时长及用户访问报告属于计账（Accounting），不属于本题两个类别。两个 Authentication 槽可互换，两个 Authorization 槽也可互换；不能跨类别混放。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对 AAA 同类槽位乱序，删减空泛解析。"
+      }
+    },
+    {
+      "id": 1112,
+      "before_sha256": "bdd1f493a5d9f484ae3c6f79d795ea1cbb8e35fa9ad97e1d8c446ed008d81317",
+      "reason": "修正英文选项和错误的无线 Local 解析，隐藏不再一致的答案图。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "It assigns per-user attributes.",
+            "It restricts the CLI commands that a user is able to perform.",
+            "It permits or denies a login attempt after checking credentials.",
+            "It records the amount of network resources consumed by the user.",
+            "It supports local, PPP, RADIUS, and TACACS+ options.",
+            "It tracks the services that a user is using."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Authentication (Slot 1)",
+              "expected": "It permits or denies a login attempt after checking credentials.",
+              "unordered_group": "Authentication"
+            },
+            {
+              "id": "t2",
+              "label": "Authentication (Slot 2)",
+              "expected": "It supports local, PPP, RADIUS, and TACACS+ options.",
+              "unordered_group": "Authentication"
+            },
+            {
+              "id": "t3",
+              "label": "Authorization (Slot 1)",
+              "expected": "It assigns per-user attributes.",
+              "unordered_group": "Authorization"
+            },
+            {
+              "id": "t4",
+              "label": "Authorization (Slot 2)",
+              "expected": "It restricts the CLI commands that a user is able to perform.",
+              "unordered_group": "Authorization"
+            }
+          ]
+        },
+        "answer_image": null,
+        "prompt": "Drag each statement about AAA into its appropriate service category. Two slots belong to each category; order within a category does not matter.",
+        "explanation": "Authentication 验证凭据后允许或拒绝登录，可使用本地数据库或 RADIUS、TACACS+ 等方法，PPP 可使用认证协议。Authorization 设置用户属性和允许执行的 CLI 命令。资源消耗、服务使用记录属于 Accounting。原图中两处英文措辞不通，本题已修正；原答案图保留在审查证据中。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "修正英文选项和错误的无线 Local 解析，隐藏不再一致的答案图。"
+      }
+    },
+    {
+      "id": 1113,
+      "before_sha256": "e25c4222a8de0e1159e49be222abb3f77d941cc4ea1ff2fea693bc6041dddb31",
+      "reason": "认证被错误归入授权，修正授权两项并移除错误答案图。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "It grants access to network assets, such as FTP servers.",
+            "It limits the services available to a user.",
+            "It performs user validation via TACACS+.",
+            "It records the duration of each connection.",
+            "It supports User Access Reporting.",
+            "It verifies \"who you are\"."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Accounting (Slot 1)",
+              "expected": "It records the duration of each connection.",
+              "unordered_group": "Accounting"
+            },
+            {
+              "id": "t2",
+              "label": "Accounting (Slot 2)",
+              "expected": "It supports User Access Reporting.",
+              "unordered_group": "Accounting"
+            },
+            {
+              "id": "t3",
+              "label": "Authorization (Slot 1)",
+              "expected": "It grants access to network assets, such as FTP servers.",
+              "unordered_group": "Authorization"
+            },
+            {
+              "id": "t4",
+              "label": "Authorization (Slot 2)",
+              "expected": "It limits the services available to a user.",
+              "unordered_group": "Authorization"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "Accounting 记录连接时长并支持访问报告；Authorization 决定资源访问及允许使用的服务。验证用户身份（含 TACACS+ 认证）属于 Authentication，不应放在 Authorization。原答案图错误，已从题面解答中移除并保留审查证据；同类别的两个槽位可交换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "认证被错误归入授权，修正授权两项并移除错误答案图。"
+      }
+    },
+    {
+      "id": 1114,
+      "before_sha256": "ab0a0fa81bc9bc1e722dcf57e700ce246786d1aa4bccdcdfaf6950a6e9ded2b9",
+      "reason": "限定模糊虚拟化选项，解释北向/南向，保留组内乱序。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "supports automation",
+            "communicates between the SDN controller and the application plane",
+            "communicates between the SDN controller and the data plane",
+            "supports data sharing between systems",
+            "encapsulates tenant traffic using VXLAN on network devices",
+            "supports REST-based requirements",
+            "uses OpenFlow to interface between the data and control planes"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Northbound API Characteristic (Slot 1)",
+              "expected": "supports automation",
+              "unordered_group": "Northbound API Characteristic"
+            },
+            {
+              "id": "t2",
+              "label": "Northbound API Characteristic (Slot 2)",
+              "expected": "communicates between the SDN controller and the application plane",
+              "unordered_group": "Northbound API Characteristic"
+            },
+            {
+              "id": "t3",
+              "label": "Northbound API Characteristic (Slot 3)",
+              "expected": "supports data sharing between systems",
+              "unordered_group": "Northbound API Characteristic"
+            },
+            {
+              "id": "t4",
+              "label": "Northbound API Characteristic (Slot 4)",
+              "expected": "supports REST-based requirements",
+              "unordered_group": "Northbound API Characteristic"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "北向 API 位于控制器与应用之间，可暴露数据与控制功能，支持自动化和系统间数据共享，常用 REST 风格接口；并非所有北向 API 都必须使用 REST。OpenFlow 控制器与转发设备通信、以及设备执行 VXLAN 封装属于不同层次。原选项“supports network virtualization protocols”范围过宽，已明确为数据平面操作；四个正确项可按任意顺序放置。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "限定模糊虚拟化选项，解释北向/南向，保留组内乱序。"
+      }
+    },
+    {
+      "id": 1115,
+      "before_sha256": "f126dc794e30ffc71e085f8b67b8dbc4ac70972b5a8089efb2a8c8b2bd012fc0",
+      "reason": "答案图分组错误，限定集成前提并纠正绝对化结论。",
+      "updates": {
+        "answer_image": null,
+        "prompt": "In this comparison of legacy, separately managed campus operations and a deployment using Cisco DNA Center (now Catalyst Center) with supported security integrations, classify the statements. Order within each category does not matter.",
+        "explanation": "传统独立设备管理可使用 Cisco Prime Infrastructure，通常需要较多手工配置，且不提供题设的控制器驱动 SD-Access fabric 工作流。Cisco DNA Center 可用自动化减少重复操作、提供北向 API，并可结合支持的安全分析组件检测威胁。集成、许可证和具体版本决定可用能力；传统网络也能自动化，无法从题意推断固定节省比例。原答案图把两项分错组，已移除并保留审查证据。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "答案图分组错误，限定集成前提并纠正绝对化结论。"
+      }
+    },
+    {
+      "id": 1116,
+      "before_sha256": "f21d82c38c5a0609a0b34c50d2c2604250f1cce19898e60d9b54043109acd000",
+      "reason": "限定 Unix SSH 常规推送，补充例外。",
+      "updates": {
+        "prompt": "For an ordinary Ansible push-based deployment managing Unix-like hosts over SSH, drag the four applicable features into the slots in any order.",
+        "explanation": "Ansible Playbook 使用 YAML；常见 Unix 主机的默认 SSH 连接无需常驻 agent，控制节点主动执行任务。是否通过 SSH 取决于连接插件和目标平台，Windows 可使用其他传输；模块也可能在控制节点执行。ansible-pull 等模式存在，但题设限定常规 push 部署，因此不要求客户端从服务器拉取配置。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "限定 Unix SSH 常规推送，补充例外。"
+      }
+    },
+    {
+      "id": 1117,
+      "before_sha256": "45f2ddbe81af67c7e8745908c6070b34282d1077cd5bd8d75c28101cea55fc46",
+      "reason": "限定安全分析集成，消除传统架构绝对化。",
+      "updates": {
+        "prompt": "For this comparison, assume Cisco DNA Center is integrated with a supported flow-based security analytics system and the legacy environment is managed separately. Classify the statements; order within each group does not matter.",
+        "explanation": "题设集成的 Cisco DNA Center 方案可集中查看网络与安全分析、批量应用 CLI 模板，并结合流量分析系统分析 NetFlow，响应动作需要相应集成和策略。传统分散管理常逐设备配置、结合多个工具排障，并在边界部署安全设备；这些是题设比较，不表示传统网络不能自动化或只能做边界防护。同组槽位可交换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "限定安全分析集成，消除传统架构绝对化。"
+      }
+    },
+    {
+      "id": 1118,
+      "before_sha256": "3ba6856309d9214a913848287907e2866f8e642d5d8fda3791fc08f563fe807a",
+      "reason": "修正 agent、agentless、pull 映射及含糊描述，移除错误答案图。",
+      "updates": {
+        "prompt": "Match each configuration-management term to its description. Not all terms are used.",
+        "drag_drop_data": {
+          "sources": [
+            "agent",
+            "agentless",
+            "provision",
+            "pull",
+            "push",
+            "post"
+          ],
+          "targets": [
+            {
+              "label": "daemon that determines when the central authority has updates available",
+              "sub_label": "",
+              "expected": "agent"
+            },
+            {
+              "label": "model in which the central server sends updates to nodes on an as-needed basis",
+              "sub_label": "",
+              "expected": "push"
+            },
+            {
+              "label": "easy-to-manage deployment option that may lack scalability",
+              "sub_label": "",
+              "expected": "agentless"
+            },
+            {
+              "label": "model in which managed nodes request configuration updates from a central server",
+              "sub_label": "",
+              "expected": "pull"
+            },
+            {
+              "label": "to automatically install or deploy a configuration or update",
+              "sub_label": "",
+              "expected": "provision"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "agent 是受管节点上检查和执行管理任务的驻留程序；push 是中央控制端主动发送更新；agentless 不需安装专用代理，通常容易部署但集中连接数可能限制扩展；pull 是受管节点主动向中央服务器请求更新；provision 指准备或部署配置与资源。原题第四个描述将 agentless 与设备硬件功能混为一谈，已改为明确的 pull 描述；原答案图配对错误，已保留作审查证据。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "修正 agent、agentless、pull 映射及含糊描述，移除错误答案图。"
+      }
+    },
+    {
+      "id": 1119,
+      "before_sha256": "50f7575ec6e0b2d4ff7ec54769068d6a18256b3a97c54831cd2bbe8b06af3711",
+      "reason": "缺拓扑及 VLAN ID，删去无依据的 VLAN 50 和错误答案图。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "题目要求 SW1、SW2 的 Ethernet0/0 和 Ethernet0/1 以相同 LACP 模式组成 Port-channel 44，并配置 802.1Q trunk，MONITORING VLAN 为 native VLAN。两端均可用 `channel-group 44 mode active`；但当前材料没有拓扑或 MONITORING 的 VLAN ID，必须先从设备现有 VLAN 表确认，不能直接假定 VLAN 50。\n\n```text\nshow vlan brief\nshow etherchannel summary\nshow interfaces trunk\n```\n在两端的成员接口配置一致的 trunk 属性、加入同一 LACP 通道；在 Port-channel 44 设置 trunk 及已确认的 native VLAN ID。仅在平台支持且需要时设置 `switchport trunk encapsulation dot1q`。确认 VLAN、许可列表和两端参数一致，检查 `show etherchannel summary`、`show interfaces trunk`，最后 `copy running-config startup-config`。原答案图实际是其他题的拖拽答案，已移除并留证。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "缺拓扑及 VLAN ID，删去无依据的 VLAN 50 和错误答案图。"
+      }
+    },
+    {
+      "id": 1120,
+      "before_sha256": "0e95f14b1e627a737eeb4a2707bcd95a8436870b276f8d507986b2ec89254f47",
+      "reason": "缺拓扑及地址，移除虚构的下一跳和错位答案图。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "任务是在 R3 配置到 R1 loopback 的 IPv4 /32 主机路由，并在 R2 分别配置经 R4 的 IPv4 和 IPv6 默认路由。当前题库缺少拓扑与各接口地址，不能确定 loopback 地址、下一跳或对应接口；原解析给出的地址没有证据，不能照抄。\n\n命令模板如下（尖括号表示需从现场拓扑填写）：\n```text\nR3(config)# ip route <R1-loopback-IPv4> 255.255.255.255 <R3-next-hop>\nR2(config)# ip route 0.0.0.0 0.0.0.0 <R4-IPv4-next-hop>\nR2(config)# ipv6 route ::/0 <R4-IPv6-next-hop>\n```\nIPv6 使用链路本地下一跳时还需指定出接口；确认 IPv6 转发、下一跳可达与回程路由，使用 `show ip route`、`show ipv6 route` 和以题设源地址 `209.165.200.230` 发起的扩展 ping 验证，再保存配置。原答案图是其他题的拖拽结果，已移除并留证。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and corrected where needed",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "缺拓扑及地址，移除虚构的下一跳和错位答案图。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/security-vpn/remote-authentication-dial-user-service-radius/12433-aaa.html",
+    "https://docs.ansible.com/ansible/latest/getting_started/introduction.html",
+    "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-finance-non-fabric.html"
+  ],
+  "limitations": "手工核对题图和答案图，无真实设备实验。"
+}

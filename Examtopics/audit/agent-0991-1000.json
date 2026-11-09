@@ -1,0 +1,386 @@
+{
+  "scope": "Q991–Q1000",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 991,
+      "original_qid": "Q1326",
+      "before_sha256": "8d3b4e5cfa3e198b5e7f1c5b6f96c73aea7a6822fb117ef29edce6ad77c0a15c",
+      "reason": "查表与源地址学习、存储转发和直通边界",
+      "updates": {
+        "explanation": "A。交换机按 VLAN 和目的 MAC 查表确定已知单播的出接口；源 MAC 用于学习入接口。未知单播通常在该 VLAN 的其他合格转发端口泛洪。B 的默认禁用说法错误；C 的“少于 5 个 CRC”不是帧转发条件，存储转发交换机会检查 FCS；直通交换模式未必等收完整帧再决策。D 的 DoS 防护需要其他功能和策略。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网帧交换（Frame Switching）的硬件查表与转发流程。\n现代以太网交换机转发数据帧遵循经典的三大处理逻辑：\n1. 目的查找（Destination Lookup）：当交换机端口接收到一个完整且无差错的以太网帧时，交换机会提取帧头中的“目的 MAC 地址”（Destination MAC Address），并在硬件 CAM 表（MAC 地址表）中执行快速并发查找（Lookup），以确定该帧应当转发的目标出站接口（Destination/Egress Interface）。\n2. 单播转发与泛洪：若 CAM 表中存在匹配该目的 MAC 的表项，且关联接口不是接收端口，交换机将该帧精准单播转发至对应目标接口；若 CAM 表中不存在匹配条目（未知单播），交换机则将该帧向所在 VLAN 内除接收端口以外的所有端口进行泛洪（Flooding）。\n3. 差错校验控制：在存储转发（Store-and-Forward）模式下，交换机在接收到完整帧后会进行 FCS（帧校验序列，基于 CRC32 算法）校验。任何存在 CRC 校验错误的损坏帧都会被立即丢弃，绝不会被转发。\n\n• 正确选项剖析：\n选项 A（performs a lookup to learn the destination interface）完全正确。\n交换机在转发帧时，正是通过对目的 MAC 执行查表操作（Lookup），从而获知应该将该帧发送给哪一个目的接口（Destination Interface）。\n\n• 干扰项排除与错误陷阱：\n选项 B（disabled by default on all interfaces and VLANs）：概念颠倒。二层帧交换是交换机的核心基本功能，默认在所有二层接口和 VLAN 上全局启用，绝非“disabled by default”。\n选项 C（buffers and forwards frames with less than 5 CRCs）：荒谬的技术陷阱。在以太网规范（IEEE 802.3）中，只要帧检测到哪怕 1 次 CRC/FCS 校验错误，就表明物理链路传输过程中出现了比特畸变，交换机会果断丢弃该损坏帧，绝对不存在“容忍小于 5 个 CRC 并进行缓冲转发”的机制。\n选项 D（protects against denial of service attacks）：混淆功能。单纯的二层帧交换只是数据转发行为，本身不具备 DoS 防护功能。\n\n• 考试要点与速记技巧：\n交换机查表转发铁律：\n“入站看源学位置，出站查目找接口（Lookup Destination Interface）；坏帧 CRC 零容忍，见错即丢绝不转”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "查表与源地址学习、存储转发和直通边界"
+      }
+    },
+    {
+      "id": 992,
+      "original_qid": "Q1328",
+      "before_sha256": "9c84abe866da6a1ec23ad7e95f5473ce8ed824d1ca9f0a91a413d344628cecb5",
+      "reason": "将含糊的缓解漏洞改为在线攻击检测阻断",
+      "updates": {
+        "prompt": "What is a function of a next-generation intrusion prevention system (NGIPS) when it inspects traffic inline?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It detects and can block traffic exploiting known vulnerabilities."
+          },
+          {
+            "label": "B",
+            "text": "It serves as a controller within a controller-based network"
+          },
+          {
+            "label": "C",
+            "text": "It integrates with a RADIUS server to enforce Layer 2 device authentication rules"
+          },
+          {
+            "label": "D",
+            "text": "It makes forwarding decisions based on learned MAC addresses"
+          }
+        ],
+        "explanation": "A。部署为在线检测并配置相应策略的 NGIPS 可以检测并阻断符合入侵规则的攻击流量；这不等于自动修复主机漏洞，也不能保证识别所有零日攻击。B 是网络控制器角色；C 是网络准入认证；D 是二层交换机按 MAC 转发。实际检测和阻断取决于部署方式、规则和流量可见性。"
+      },
+      "original_fields": {
+        "prompt": "What is a function of a Next-Generation IPS?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It analyzes and mitigates observed vulnerabilities in a network."
+          },
+          {
+            "label": "B",
+            "text": "It serves as a controller within a controller-based network"
+          },
+          {
+            "label": "C",
+            "text": "It integrates with a RADIUS server to enforce Layer 2 device authentication rules"
+          },
+          {
+            "label": "D",
+            "text": "It makes forwarding decisions based on learned MAC addresses"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查下一代入侵防御系统（NGIPS，Next-Generation Intrusion Prevention System，如 Cisco Firepower NGIPS）的核心架构与安全防护职能。\n随着企业网络安全威胁的复杂化，传统基于静态特征签名的 IPS 已无法应对零日漏洞与高级持续性威胁（APT）。NGIPS 在传统 IPS 深度包检测（DPI）的基础上引入了深度的环境感知与智能化防御机制：\n1. 上下文与漏洞感知（Contextual & Vulnerability Awareness）：NGIPS 能够持续发现并被动分析网络中的主机操作系统、运行服务、移动设备和开放端口，实时评估全网资产中存在的安全漏洞（Observed Vulnerabilities）。\n2. 自动化威胁缓解（Automated Mitigation & Impact Assessment）：当针对特定漏洞的攻击流量发生时，NGIPS 不仅能够识别攻击特征，还能比对受害目标主机是否真正存在该漏洞（影响评估）。若目标确实脆弱，NGIPS 将动态调整策略并实时阻断攻击，显著减少安全团队误报，实现自动化漏洞分析与风险缓解。\n3. 高级威胁防护（AMP）：结合思科 Talos 威胁情报网络，提供文件信誉分析与网络沙箱技术。\n\n• 正确选项剖析：\n选项 A（It analyzes and mitigates observed vulnerabilities in a network.）完全正确。\n分析并缓解网络中观察到的已知脆弱性/漏洞，是 NGIPS 区别于传统 IPS 的核心标志性特征（通过网络感知和被动漏洞映射，精准识别受攻击主机的系统风险并实施动态阻断策略）。\n\n• 干扰项排除与错误陷阱：\n选项 B（It serves as a controller within a controller-based network）：混淆设备角色。在基于控制器的网络（SDN 架构）中担任集中控制平面的是 SDN 控制器（如 Cisco Catalyst Center / DNA Center、Cisco APIC），NGIPS 属于网络安全传感器和执行平面设备，绝不充当网络控制器。\n选项 C（It integrates with a RADIUS server to enforce Layer 2 device authentication rules）：混淆准入控制角色。与 RADIUS 服务器集成执行二层设备身份准入规则（802.1X 认证）是网络访问控制系统（NAC，如 Cisco ISE）以及交换机/WLC 认证者（Authenticator）的职责，而非 NGIPS。\n选项 D（It makes forwarding decisions based on learned MAC addresses）：混淆二层交换角色。基于学习到的 MAC 地址进行二层数据帧转发是标准 Layer 2 交换机的基本功能。\n\n• 考试要点与速记技巧：\n网络安全组件角色速记：\n- NGIPS：深度威胁阻断、全网漏洞感知与缓解（Mitigate observed vulnerabilities）；\n- Cisco ISE：RADIUS/TACACS+ 统一认证准入（802.1X）；\n- DNA Center / APIC：SDN 集中控制器；\n- L2 Switch：基于 MAC 表线速硬件交换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "将含糊的缓解漏洞改为在线攻击检测阻断"
+      }
+    },
+    {
+      "id": 993,
+      "original_qid": "Q1330",
+      "before_sha256": "a9c53af009fb61154deed00901b149bbe6d0987143bf819bda6d2c78c787d09f",
+      "reason": "无线保密性与完整性区别",
+      "updates": {
+        "explanation": "A。正确配置的无线加密提供机密性，使没有密钥的观察者即使捕获无线帧也难以读取受保护内容；它不阻止无线信号被接收，也不保证所有流量或帧字段都被加密。B 的单向握手不是加密特性；C 是威胁检测或阻断的职责；D 描述完整性校验，CCMP 等保护套件可以同时提供加密和完整性。认证与密钥协商方式随协议和配置而异。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线局域网（WLAN）安全体系中加密机制（Encryption Mechanisms，如 WPA2-AES/CCMP、WPA3-SAE）的核心技术目标与数学本质。\n在无线局域网中，射频（RF）信号通过开放的空气介质进行广播式传播，物理层无法像有线以太网那样通过受保护的双绞线或光纤实现物理隔离。任何处于信号覆盖范围内的黑客设备（如运行混杂模式网卡的笔记本电脑）均可被动捕获空口无线帧。\n1. 机密性保障（Confidentiality）：为防止敏感数据泄露，无线安全架构引入强加密算法（如 AES-CCMP / GCMP）。发送方使用经过四次握手协商生成的成对临时密钥（PTK）将明文有效载荷（Plaintext Payload）计算转换为无序的高熵密文（Ciphertext）。\n2. 解密限制：由于密钥只有关联的无线客户端与接入点（AP）持有，未授权的第三方即使截获了空中电磁数据帧，在没有有效密钥的情况下也无法对其进行逆向数学破解与明文读取。\n\n• 正确选项剖析：\n选项 A（prevents intercepted data from being easily read）完全正确。\n加密技术的唯一根本目的就是提供机密性（Confidentiality），即防止被非法拦截的数据能够被未授权者轻易读取和解读，将数据转换为非授权方无法理解的密文。\n\n• 干扰项排除与错误陷阱：\n选项 B（uses a unidirectional handshake for authentication）：严重技术错误。无线网络中的认证与密钥协商采用严格的双向握手机制（Bidirectional Handshake），例如 WPA2 的 4-Way Handshake（四次握手）或 802.1X/EAP 相互认证，双向验证彼此身份并推导会话密钥，绝非“单向握手”。\n选项 C（intercepts data threats before they attack a network）：混淆安全组件。在威胁进入网络前进行流量拦截是下一代防火墙（NGFW）或无线入侵防御系统（WIPS）的职能，加密算法本身没有任何流量审查或攻击拦截逻辑。\n选项 D（uses integrity checks to identify forgery attacks）：概念移花接木。虽然高级加密套件（如 CCMP）中集成了 MIC（消息完整性校验）用于防止数据伪造与重放攻击，但这属于“数据完整性（Integrity）”的定义，而题干问的是“加密（Encryption）”本身的根本特性（确保机密性，防止数据被读懂）。\n\n• 考试要点与速记技巧：\n无线安全三要素对照表：\n- 加密（Encryption）-> 保机密（防止窃听偷看，Prevent intercepted data from being read）；\n- 完整性校验（MIC/Integrity）-> 防篡改伪造；\n- 认证（Authentication）-> 验身份（双向四次握手 4-Way Handshake）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "无线保密性与完整性区别"
+      }
+    },
+    {
+      "id": 994,
+      "original_qid": "Q1331",
+      "before_sha256": "bc07ea4cde147f5bc395e8984e355a9bb6becccf5941adfa02ac26fe05f67205",
+      "reason": "原图 b4 而非原解析 b8，修正 D",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:9bb6:6bb9:C081:B6FF:FF4B:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:9bb6:6bb9:C001:6BFE:FF01:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:9bb6:6bb9:4679:824F:FE88:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:9bb6:6bb9:C801:B6FF:FEB4:1"
+          }
+        ],
+        "explanation": "D。图中 R2 的 LAN 接口 MAC 是 `ca-01-b6-b4-00-01`，不是原解析所写的 b8。中间插入 `ff:fe` 后为 `ca:01:b6:ff:fe:b4:00:01`，首字节 `ca XOR 02 = c8`，接口标识为 `c801:b6ff:feb4:0001`；结合题给 /64 前缀得到 `2001:db8:9bb6:6bb9:c801:b6ff:feb4:1`。原 D 含 `feb8`，与原图不符，已修正选项；A、B、C 均不符合该计算。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:9bb6:6bb9:C081:B6FF:FF4B:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:9bb6:6bb9:C001:6BFE:FF01:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:9bb6:6bb9:4679:824F:FE88:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:9bb6:6bb9:C801:B6FF:FEB8:1"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 4291 IPv6 寻址体系中利用 IEEE 64 位扩展唯一标识符（EUI-64）自动生成 IPv6 接口地址的算法规范与拓扑计算。\n当在路由器接口上配置 `ipv6 address <prefix>/64 eui-64` 时，路由器将结合指定的 64 位子网前缀和根据该接口 48 位物理 MAC 地址生成的 64 位接口标识符（Interface ID）拼接成完整的 128 位单播地址。\nEUI-64 生成规则遵循严格的数学步骤：\n1. 拆分 MAC 地址：将 48 位（6 字节）MAC 地址从正中间均分为两半，每半 24 位（3 字节）。\n2. 插入固定保留字段：在两部分之间插入 16 位固定十六进制数 `FF:FE`（即二进制 `11111111 11111110`），扩展为 64 位。\n3. 反转通用/本地控制位（U/L 位，Universal/Local bit）：定位第 1 个字节（最高字节），将其从左往右数的第 7 个比特位（即 b1 位，bit 6 if 0-indexed from right）进行取反（0 变为 1，1 变为 0）。\n4. 拼接网络前缀并省略前导 0：将网络前缀与 64 位接口 ID 拼接，依据 IPv6 缩写规则省略各 16 位段内部的前导零。\n\n• 正确选项剖析：\n选项 D（2001:db8:9bb6:6bb9:C801:B6FF:FEB8:1）完全正确。\n紧扣拓扑细节与推导过程：\n- 目标路由器与接口：Boston 站点的路由器 R2，其连接 LAN 的接口为 E0/1。\n- 展图信息：R2 的 LAN 网段 IPv6 前缀为 `2001:db8:9bb6:6bb9::/64`；接口 E0/1 的 MAC 地址标注为 `ca-01-b6-b8-00-01`（或 `b4` 变体，核心看首字节与插入位）。\n- 详细推导：\n  1. 拆分与填充：`ca-01-b6` 与 `b8-00-01` 中间插入 `ff-fe`，形成 `ca:01:b6:ff:fe:b8:00:01`。\n  2. 反转第 7 位（U/L 位）：\n     首字节为十六进制 `0xca`，展开为二进制：`1 1 0 0 1 0 1 0`。\n     第 7 个比特位是 `1`，反转为 `0`，得到二进制：`1 1 0 0 1 0 0 0`。\n     转换为十六进制为：`0xc8`（简易速算：`0xCA ^ 0x02 = 0xC8`）。\n  3. 组合接口 ID：`c801:b6ff:feb8:0001`。\n  4. 拼接前缀并精简：\n     `2001:db8:9bb6:6bb9:c801:b6ff:feb8:0001`，末尾 `:0001` 省略前导 0 简写为 `:1`。\n     最终得到：`2001:db8:9bb6:6bb9:C801:B6FF:FEB8:1`，与选项 D 严丝合缝匹配！\n\n• 干扰项排除与错误陷阱：\n选项 A（...:C081:B6FF:FF4B:1）：首字节反转错误算成 C0，且把 R1 的 Atlanta 接口 MAC 混淆，同时插入字段错成 FF4B。\n选项 B（...:C001:6BFE:FF01:1）：首字节反转错误，且中间插入字段与顺序错乱。\n选项 C（...:4679:824F:FE88:1）：完全由随机十六进制伪造，毫无 EUI-64 变换特征。\n\n• 考试要点与速记技巧：\nEUI-64 秒杀口诀：\n“中间塞进 FFFE，首字节与 0x02 做异或”；\n十六进制 CA 遇 02 变为 C8（10 进制 10-2=8），扫一眼首字段立刻锁定 C801，十秒出分！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原图 b4 而非原解析 b8，修正 D"
+      },
+      "exhibit_path": "exhibits/q994_agent.jpg",
+      "image_sha256": "8036bb452f85bba38cf02585d02edef0a9590c148a7b88aa6a8100dce2b5c3f7"
+    },
+    {
+      "id": 995,
+      "original_qid": "Q1332",
+      "before_sha256": "c764fc7e16edafaae4c2580ab9456d967dc21dc869b9fa382294f8f930058a10",
+      "reason": "VLAN 分段、标记及平台功能边界",
+      "updates": {
+        "explanation": "D。支持 VLAN 的二层交换机可使用 VLAN 将端口划入不同广播域，并使用 802.1Q 标签在 trunk 上传递多个 VLAN；接入端口的 VLAN 划分不要求每帧都打标签。A、B 是连接或事务状态跟踪，C 是传输层过滤，均不是基本的二层转发特征；具体交换平台也可能额外提供 ACL 等更高层功能。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查二层以太网交换机（Layer 2 Switch）的标准技术特征与 IEEE 802.1Q 虚拟局域网（VLAN）分段技术。\n根据 OSI 七层模型定义：\n1. 层次职能：标准二层交换机工作在数据链路层（Data Link Layer），仅根据以太网帧头中的 MAC 地址执行硬件线速交换，不解析三层 IP 报头或四层 TCP/UDP 传输层报头。\n2. 局域网分段（Segmentation）：交换机支持通过划分 VLAN 来打破单一庞大的广播域。为了在交换机与交换机、或交换机与路由器之间的中继链路（Trunk Link）上传输多个 VLAN 的数据流，交换机使用行业标准的标签协议（Tagging Protocols，如 IEEE 802.1Q 在以太网帧中插入 4 字节的 802.1Q Tag，包含 12 位 VLAN ID）来实现逻辑分段与隔离。\n\n• 正确选项剖析：\n选项 D（supports segmentation using tagging protocols）完全正确。\n二层交换机正是依靠打标协议（如 802.1Q 帧标签机制）在 Trunk 链路上对不同 VLAN 流量进行区分与分段隔离（segmentation），这是现代企业二层园区网络构建的基础支撑技术。\n\n• 干扰项排除与错误陷阱：\n选项 A（tracks the number of active TCP connections）：技术范畴错误。TCP 处于 OSI 第四层（传输层），跟踪活跃 TCP 连接数量是有状态防火墙（Stateful Firewall）或四层负载均衡器（Layer 4 Load Balancer）的职能，二层交换机完全不感知传输层连接。\n选项 B（maintains stateful transaction information）：技术范畴错误。维护有状态的事务信息属于应用层网关（ALG）或七层应用防火墙（WAF）的能力，纯二层设备是无状态的（Stateless）。\n选项 C（filters based on a transport layer protocol）：技术范畴错误。基于传输层协议（如 TCP/UDP 端口号）进行数据包过滤需要解析三层和四层报头（如配置扩展访问控制列表 Extended ACL），属于三层交换机、路由器或防火墙的功能，纯二层交换机无法依据四层协议进行过滤。\n\n• 考试要点与速记技巧：\n二层交换机特征对比：\n- 二层设备做二层事：认 MAC、打 802.1Q 标签分段（Tagging protocols for segmentation）；\n- 跨层越级莫选择：TCP 状态、四层端口过滤通通属于三/四层以上安全路由设备。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "VLAN 分段、标记及平台功能边界"
+      }
+    },
+    {
+      "id": 996,
+      "original_qid": "Q1333",
+      "before_sha256": "68c7451a71ffdbbcff6fd49ad8aa2545daaee84622903bba00c65885219ce679",
+      "reason": "图示 10.47.114.119/29 不是规范网络前缀，限定候选",
+      "updates": {
+        "prompt": "Refer to the exhibit, interpreted as candidate routes to the same destination prefix. The printed 10.47.114.119/29 should be normalized to 10.47.114.112/29. Assuming all next hops are reachable and one best route is installed, which interface is selected?",
+        "explanation": "A。图中四个候选都标为 10.47.114.119/29，但标准网络前缀应写作 10.47.114.112/29；题设将它们视为同一前缀的候选路由。内部 EIGRP 的 [90/6451] 和 [90/52201] 比 RIP 的 [120/9]、[120/10] 有更低管理距离；同一 EIGRP 候选间 6451 小于 52201，因此选 F0/2。不同协议的度量不宜直接比较；真实设备的已安装路由表通常不同时列出这些不同协议的未入选项，选路还依赖可达性与配置。"
+      },
+      "original_fields": {
+        "prompt": "Which interface is used to send traffic to the destination network?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 路由器转发表优选与选路决策算法（Routing Decision Process）。\n当路由器接收到目的 IPv4 数据包需要进行转发时，路由器根据转发表（FIB/Routing Table）决定最佳出接口。若存在多条可到达同一目标网络的候选路由，路由器的选路决策遵循严格的由高到低三级比对机制：\n1. 最长前缀匹配原则（Longest Prefix Match, LPM）：绝对优先比较子网掩码长度（Prefix 长度）。掩码最长（即网络号最具体、特异性最高）的路由直接胜出。\n2. 管理距离（Administrative Distance, AD）：当前缀长度完全相同时，比较路由协议的管理距离。AD 越小，表明路由来源越可信。Cisco 常见路由来源默认 AD：\n   - 直连网络（Connected）：0\n   - 静态路由（Static）：1\n   - EIGRP 内部路由（Internal EIGRP，代码 D）：90\n   - OSPF（代码 O）：110\n   - RIP（代码 R）：120\n   - 外部 EIGRP（External EIGRP）：170\n3. 度量值（Metric）：当协议类型及 AD 也完全相同时，比较路由协议内部计算的度量值（Metric / Cost）。Metric 越小越优。\n\n• 正确选项剖析：\n选项 A（F0/2）完全正确。\n深度解析展图中的 4 条候选路由条目：\n- 目标网段均为：`10.47.114.119/29`，前缀长度全为 `/29`，第一轮前缀长度完全一致，打平。\n- 第二轮比较管理距离（AD）：\n  - 路由 1: `D 10.47.114.119/29 [90/6451] via F0/2` -> 协议 EIGRP，AD = 90\n  - 路由 2: `D 10.47.114.119/29 [90/52201] via F0/20` -> 协议 EIGRP，AD = 90\n  - 路由 3: `R 10.47.114.119/29 [120/9] via F0/12` -> 协议 RIP，AD = 120\n  - 路由 4: `R 10.47.114.119/29 [120/10] via F0/10` -> 协议 RIP，AD = 120\n  因为 EIGRP 的 AD (90) 小于 RIP 的 AD (120)，所以协议可信度更高，两条 RIP 路由（出接口 F0/12 与 F0/10）在第二轮被无条件淘汰！\n- 第三轮比较 EIGRP 内部度量值（Metric）：\n  - 路由 1（via F0/2）的 Metric 为 6451；\n  - 路由 2（via F0/20）的 Metric 为 52201。\n  6451 < 52201，路由 1 的度量值显著优于路由 2。\n综上所述，路由器优选路由 1 并安装进转发表，所有发送到该目标网络的流量均通过出接口 `F0/2` 转发。\n\n• 干扰项排除与错误陷阱：\n选项 B（F0/20）：虽然也是 EIGRP 路由（AD=90），但其 Metric（52201）远大于 6451，在度量值比对中失败。\n选项 C（F0/12）：属于经典数字陷阱！部分考生看到度量值 `9` 以为是最小的，却忽略了它的协议是 RIP（AD=120），在第二轮 AD 比对阶段就已被淘汰，根本没有资格与 EIGRP 比度量。\n选项 D（F0/10）：协议为 RIP，AD=120，优先级最低。\n\n• 考试要点与速记技巧：\n路由选路金字塔三步走：\n1. 先看前缀长不长（LPM 优先）；\n2. 前缀相同看 AD，越小越优记心中（直 0 静 1 EIGRP 90，OSPF 110 RIP 120）；\n3. AD 相同比度量，度量最小走通途！"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "图示 10.47.114.119/29 不是规范网络前缀，限定候选"
+      },
+      "exhibit_path": "exhibits/q996_agent.jpg",
+      "image_sha256": "2f685e15a2dc3cc292dd6cbc032bd7b74e0796f6c5a96be6698f0ed817287484"
+    },
+    {
+      "id": 997,
+      "original_qid": "Q1335",
+      "before_sha256": "1d4cb061a406f8d83f07ee0bd9e932fa2244a6b07af373e10d657bce278d1ef8",
+      "reason": "PortFast 生效前提与终端风险",
+      "updates": {
+        "explanation": "A。PortFast 让适合连接终端的边缘端口跳过通常的生成树转发延迟，链路就绪时快速进入转发状态；设备初始化和链路协商仍需时间。端口应连接不会形成二层桥接环路的终端，服务器也可能运行桥接或产生 BPDU，因此需结合实际设计；BPDU Guard 可在收到 BPDU 时保护端口。UplinkFast 是传统 STP 上行快速恢复功能，loop guard 防止某些 BPDU 接收失效导致环路，均非本题答案。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.1w（RSTP）及 Cisco Rapid PVST+ 中边缘端口优化特性——PortFast 的机制与应用场景。\n在生成树协议（STP/RSTP）中，当交换机端口物理链路激活（Link-up）时，为防止潜在的二层环路，端口必须经历状态机的收敛评估过程（传统 STP 需历经 15 秒 Listening 和 15 秒 Learning 共 30 秒；RSTP 需进行 Proposal/Agreement 握手）。\n1. 终端接入痛点：对于直接连接终结点设备（如服务器 Server、工作站 PC、打印机）的接入层端口，这些终端设备既不会产生 BPDU 报文，也不会在交换机之间形成物理环路。如果让其等待数十秒，会导致操作系统 DHCP 请求超时、PXE 网络引导失败或服务器业务连接中断。\n2. PortFast 原理：在直连终端的交换机端口上配置 PortFast（命令为接口下的 `spanning-tree portfast` 或全局 `spanning-tree portfast default`），使该端口被标记为边缘端口（Edge Port）。边缘端口在 Link-up 后跳过所有中间状态，立即（Immediately）进入 Forwarding（转发）状态，从而允许连接的服务器在端口激活瞬间即可收发数据，并且边缘端口的插拔状态变化不会在网络中触发任何拓扑改变通知（TCN）。\n\n• 正确选项剖析：\n选项 A（portfast）完全正确。\n题目明确要求：“在交换机端口上配置哪项 Rapid PVST+ 特性，以便在连接的服务器激活时能够立即（immediately）发送流量”。这正是 PortFast 的核心设计功能——让端口绕过转发延迟，瞬间进入转发状态。\n\n• 干扰项排除与错误陷阱：\n选项 B（uplinkfast）：UplinkFast 是传统 802.1D PVST+ 中的专有特性，用于在接入层交换机的直连根端口故障时，将阻塞的备用上行链路瞬间切换为根端口（耗时约 1~3 秒）。它专门部署在交换机与上层分布层交换机之间的上行链路，绝不用于连接服务器的接入端口；且在 Rapid PVST+ 中该功能已被 RSTP 原生替代端口机制原生集成。\n选项 C（BPDU guard）：BPDU 防护是与 PortFast 配套的安全防护特性。其功能是在启用了 PortFast 的端口上，一旦意外接收到任何 BPDU 报文，立即将该端口置于 err-disabled（错误禁用）状态以切断潜在环路。BPDU Guard 本身并不负责使端口立即转发流量。\n选项 D（loop guard）：环路防护特性用于防止非指定端口由于单向链路故障或光纤单通而失去 BPDU 接收，错误转变为指定端口转发并形成严重环路。它与服务器接入立即转发流量毫无关系。\n\n• 考试要点与速记技巧：\n生成树特性功能矩阵：\n- PortFast：直连终端（PC/Server），立即进 Forwarding（秒级转发无延迟）；\n- BPDU Guard：保护 PortFast，见 BPDU 即 Error-disable；\n- UplinkFast：接入交换机上行链路快速收敛；\n- Loop Guard：防单向光纤丢 BPDU 环路。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "PortFast 生效前提与终端风险"
+      }
+    },
+    {
+      "id": 998,
+      "original_qid": "Q1339",
+      "before_sha256": "7f340299675d09f68bb7ea0324ef2f47bd9ed6c0dd1c7248182a239ddff06bde",
+      "reason": "选项 port-channel 4 与图示 1 不一致，恢复 CLI",
+      "updates": {
+        "prompt": "Refer to the exhibit. Port-channel 1 on SW2 is an LACP bundle of three active links. On a platform supporting port-channel min-links, which configuration makes it inactive when Ge0/0 and Ge0/1 on SW2 are both down, leaving only one active member?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW2# configure terminal\nSW2(config)# interface port-channel 1\nSW2(config-if)# port-channel min-links 2"
+          },
+          {
+            "label": "B",
+            "text": "SW2# configure terminal\nSW2(config)# interface port-channel 1\nSW2(config-if)# lacp port-priority 32000"
+          },
+          {
+            "label": "C",
+            "text": "SW2# configure terminal\nSW2(config)# interface port-channel 1\nSW2(config-if)# lacp max-bundle 2"
+          },
+          {
+            "label": "D",
+            "text": "SW2# configure terminal\nSW2(config)# lacp system-priority 32000"
+          }
+        ],
+        "explanation": "A。在图示 LACP Port-channel 1 上设 `port-channel min-links 2`，当活动且已捆绑成员少于 2 条时通道不再处于活动状态；题中两条失效、只剩一条时满足该条件。原选项使用 port-channel 4 与图示 1 矛盾，已更正并恢复 CLI 换行。max-bundle 控制上限，端口及系统优先级不能设定该下限。备用路径是否可用、切换时间及业务吞吐取决于其他配置；单流也不保证叠加所有成员带宽。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. PC1 regularly sends 1800 Mbps of traffic to the server. A network engineer needs to configure the EtherChannel to disable Port Channel 1 between SW1 and SW2 when the Ge0/0 and Ge0/1 ports on SW2 go down. Which configuration must the engineer apply to the Switch?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW2# configure terminal - SW2(config)# interface port-channel 4 SW2(config-if)# port-channel min-links 2"
+          },
+          {
+            "label": "B",
+            "text": "SW2# configure terminal - SW2(config)# interface port-channel 4 SW2(config-if)# lacp port-priority 32000"
+          },
+          {
+            "label": "C",
+            "text": "SW2# configure terminal - SW2(config)# interface port-channel 4 SW2(config-if)# lacp max-bundle 2"
+          },
+          {
+            "label": "D",
+            "text": "SW2# configure terminal - SW2(config)# lacp system-priority 32000"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.3ad 链路汇聚控制协议（LACP）的高级弹性保护机制——最小活动链路数（`port-channel min-links`）。\n在现代企业园区网与数据中心架构中，以太网通道（EtherChannel / Port-Channel）通常聚合多条物理链路以成倍增加带宽并提供链路级硬件冗余。\n1. 带宽饥饿与次优路径问题：拓扑中 PC1 向服务器持续发送 1800 Mbps（1.8 Gbps）的高吞吐流量。SW1 与 SW2 之间的 Port Channel 1 捆绑了 3 条千兆链路（Ge0/0, Ge0/1, Ge0/2），总聚合带宽为 3000 Mbps（3 Gbps），能够轻松承载 1800 Mbps 的业务流。\n2. 链路故障隐患：如果 Ge0/0 和 Ge0/1 两条端口发生物理断纤或故障宕机（Down），虽然 Port-Channel 仍有 1 条物理链路（Ge0/2，带宽 1000 Mbps）处于 Up 状态，按照以太网通道默认规则，该 Port-Channel 仍会保持在 Up 状态。然而，1000 Mbps 的物理带宽完全无法满足 1800 Mbps 的流量需求，必然导致高达近 50% 的严重拥塞丢包！\n3. `port-channel min-links` 机制：Cisco 交换机在 Port-Channel 逻辑接口下提供了 `port-channel min-links <number>` 特性。该特性定义了保持 Port-Channel 处于正常活动状态所需的最低活动成员链路数量。若配置 `port-channel min-links 2`，则当活动链路数跌破 2 条（即仅剩 1 条）时，交换机将自动把整个 Port-Channel 1 置为 Line Protocol Down，从而迫使生成树（STP）或三层路由协议检测到主路径中断，无缝将流量收敛重定向至经由 SW3 的备用路径。\n\n• 正确选项剖析：\n选项 A（SW2# configure terminal - SW2(config)# interface port-channel 4 SW2(config-if)# port-channel min-links 2）完全正确。\n核心命令正是 `port-channel min-links 2`。通过在以太通道接口下设定阈值为 2，确保只要有两条链路发生故障（仅存 1 条活动链路），该聚合端口立刻主动失效（disable），避免流量在单根千兆链路上严重丢包，促使全网将 1800 Mbps 流量切换到冗余路径。\n\n• 干扰项排除与错误陷阱：\n选项 B（lacp port-priority 32000）：LACP 端口优先级用于在物理端口数量超过最大捆绑数（Max-Bundle）时，决定哪些物理端口优先进入捆绑状态（数值越小越优），无法在链路减少时强制关闭整个 Port-Channel。\n选项 C（lacp max-bundle 2）：用于限制同一个 Port-Channel 中最多允许同时处于活动转发状态的物理链路数量（多余的处于热备 Standby 状态），而不是设定最低下限。\n选项 D（lacp system-priority 32000）：LACP 系统优先级用于在两端交换机之间决定哪台交换机作为 LACP 协商的“主导方”（Master），与监控链路跌死并禁用端口通道毫无关联。\n\n• 考试要点与速记技巧：\nEtherChannel 弹性调控命令对比：\n- `port-channel min-links <N>`：少于 N 根则整道全关（防止带宽不足丢包，强推冗余倒换）；\n- `lacp max-bundle <N>`：最多只捆 N 根（多余端口做热备）；\n- `lacp port-priority`：谁优先级小谁先进捆绑。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "选项 port-channel 4 与图示 1 不一致，恢复 CLI"
+      },
+      "exhibit_path": "exhibits/q998_agent.jpg",
+      "image_sha256": "d3c4e61255ad01d598ec118c58f1561729f458f3a25087a03b507edf6593a7e4"
+    },
+    {
+      "id": 999,
+      "original_qid": "Q1341",
+      "before_sha256": "f272a5dc6e69d3c961a552af6450e33dabad818db47a8a566715d9f3f181fadc",
+      "reason": "补同 VLAN、端口转发及过滤前提",
+      "updates": {
+        "prompt": "Refer to the exhibit. PC1 sends an Ethernet broadcast ARP request into S1 on G0/0. Assume all shown S1 ports belong to the same VLAN and are forwarding, with no filtering. Which action does S1 take?",
+        "explanation": "A。ARP 请求的以太网广播帧进入 G0/0 后，在同一 VLAN 的其他符合转发条件的端口泛洪，图中为 G0/1、G0/2 和 G0/3。无论解析同网段目标还是默认网关，广播帧的处理相同；若端口处于不同 VLAN、阻塞或有过滤策略，不能笼统泛洪所有物理端口。B、C、D 都不符合题设。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. PC1 tries to ping PC3 for the first time and sends out an ARP to S1. Which action is taken by S1?",
+        "explanation": "• **核心考点与原理分析**：\n本题考查以太网二层交换机对地址解析协议（ARP）广播帧的转发机制（BUM 流量泛洪原理）及经典争议剖析。\n\n1. **展图是否缺失 VLAN 信息？**\n   - **并没有缺失**。本展图描绘的是一张标准的、未经任何子网/VLAN 分割的**基础扁平二层网络**（所有端口默认均处于同一个广播域，即默认 VLAN 1）。\n   - 考生之所以怀疑“缺少 VLAN 信息”，是因为部分早期网传答案误标为 C（It forwards it out G0/3 only），并牵强附会地猜测“PC1 与网关单独在一个 VLAN 中隔离了 PC2 和 S2”。但在本题真实考卷与拓扑中，没有任何端口划分了独立 VLAN，全网处于同一物理连通的二层环境。\n\n2. **ARP 请求的二层帧本质（Layer 2 Broadcast）**：\n   - 当 PC1 首次尝试向 PC3 发送报文时，由于 PC1 本地 ARP 缓存表中尚无目标 MAC，PC1 必须向本地链路发送 **ARP 请求（ARP Request）**。\n   - 根据 RFC 826 标准，ARP 请求报文封装在以太网数据帧中，其**目的 MAC 地址恒为以太网广播地址**：`FFFF.FFFF.FFFF`。\n\n3. **二层交换机（S1）的转发规则**：\n   - 交换机 S1 从接口 `G0/0` 接收到该帧后，检查二层帧头的 Destination MAC；\n   - 识别到全 F 广播地址时，交换机的工作机制是：**除接收该帧的源接口（G0/0）之外，将该广播帧从当前 VLAN 内的所有其余处于 UP 状态的活动端口泛洪（Flood）出去**！\n   - 因此，S1 会将该 ARP 广播帧**同时**从 `G0/1`（连 PC2）、`G0/2`（连 S2）和 `G0/3`（连网关路由器）全部转发出去。\n\n• **正确选项剖析**：\n**选项 A（It is flooded out every port except G0/0）为唯一正解**（Examtopics 社区投票 100% 裁定为 A）。\n该选项严格契合 IEEE 802.1D 与 CCNA 官方教材关于交换机转发 BUM（Broadcast, Unknown unicast, Multicast）流量的基础行为准则。\n\n• **干扰项排除与错误陷阱**：\n- **选项 C（It forwards it out G0/3 only，原早期题库误标项）**：\n  - 某些早期题库错选 C，其误区在于认为“跨网段通信时 PC1 的 ARP 是发给网关的，而网关连接在 G0/3，所以交换机只转发给 G0/3”。\n  - **严重技术误区**：即便 PC1 解析的是网关 IP，ARP 请求作为数据链路层广播帧，其目的 MAC **依然是 `FFFF.FFFF.FFFF`**！二层交换机在未开启私有 VLAN（PVLAN）或特定 ACL 时，绝不可能越权透视 ARP 报文内容并定向只发给 G0/3，必然依旧泛洪。\n- **选项 B（It drops the frame）**：交换机绝不主动丢弃合法的广播帧。\n- **选项 D（It forwards it out interface G0/2 only）**：若真只发给 S2，则连网关和 PC2 都收不到，在任何理论下均不成立。\n\n• **考试要点与速记口诀**：\n- **广播帧处理法则**：“入站端口不回送，同 VLAN 其余端口全泛洪（Flood out all ports except the receiving port）”。\n- **无论 ARP 问的是同网段主机还是跨网段网关，初次 ARP 请求在二层永远是广播泛洪！**"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "补同 VLAN、端口转发及过滤前提"
+      },
+      "exhibit_path": "exhibits/q999_agent.jpg",
+      "image_sha256": "ecdaa4a763ac16ab27ceff6d6fa1b1a529e8fd865790a317264ae8aacdc1e002"
+    },
+    {
+      "id": 1000,
+      "original_qid": "Q1342",
+      "before_sha256": "b0738ddeeebe93c46e20e56cc90a976767ba77c6737ce63de128e79c5bb26987",
+      "reason": "半双工碰撞和 runts 不能证明双工不匹配，改问直接观察",
+      "updates": {
+        "prompt": "Refer to the interface output. Which condition is directly shown by the output?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The interface is half-duplex and has counted collisions."
+          },
+          {
+            "label": "B",
+            "text": "high throughput"
+          },
+          {
+            "label": "C",
+            "text": "bad NIC"
+          },
+          {
+            "label": "D",
+            "text": "queueing"
+          }
+        ],
+        "explanation": "A。图中显示 `Half-duplex, 100 Mb/s`、`480 collisions` 和 `35 runts`；这是接口模式及累计计数，并非双工不匹配的充分证明。半双工正常工作也可能发生碰撞；应查看对端双工设置、计数增长和链路状态，再判断是否有故障。B 的高吞吐无法由图中的零速率支持；C 不能由单张输出证明网卡损坏；D 排队策略虽显示 FIFO，但当前队列深度为零，不能据此断定正在排队拥塞。原题把这些计数当作确定的不匹配诊断，已改为可从图直接判断的现象。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "options": [
+          {
+            "label": "A",
+            "text": "duplex mismatch"
+          },
+          {
+            "label": "B",
+            "text": "high throughput"
+          },
+          {
+            "label": "C",
+            "text": "bad NIC"
+          },
+          {
+            "label": "D",
+            "text": "queueing"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS `show interface` 命令输出中的接口差错计数器分析与双工不匹配（Duplex Mismatch）故障排查。\n在以太网物理层与数据链路层通信中，链路两端的双工模式必须严格匹配：\n1. 双工模式机制：\n   - 全双工（Full-duplex）：双向独立物理通道同时收发，彻底废除了 CSMA/CD 冲突检测机制，理论碰撞数永远为 0。\n   - 半双工（Half-duplex）：共享介质机制，使用 CSMA/CD 监听信道。同一时刻只允许单向传输，若检测到反向信号则触发以太网碰撞（Collisions）。\n2. 双工不匹配经典表征：\n   当链路一端手动配置为 Full-duplex，而对端配置为 Half-duplex（或者由于自协商 Autonegotiation 失败，导致一端自协商降级为 Half-duplex）：\n   - Full-duplex 端由于认为信道专属，会在任意时刻随意发射数据帧，这会导致 Half-duplex 端频繁发生碰撞（Collisions）以及后期碰撞（Late Collisions）；\n   - 在 Half-duplex 端（如本展图中的 FastEthernet0/0），CSMA/CD 检测到冲突后会立即中断发送，造成传输中的数据帧被截断，产生小于 64 字节的无效残帧，即超短帧（Runts）；\n   - 与此同时，Full-duplex 端则会累积大量的 CRC 校验错误和帧校验序列（FCS）错误。\n\n• 正确选项剖析：\n选项 A（duplex mismatch）完全符合展图核心诊断数据。\n细致剖析展图 `show interface fa0/0` 的关键输出指标：\n- 端口状态与工作模式：`Half-duplex, 100 Mb/s, 100BaseTX/FX`（在现代百兆线路上被设置为半双工）；\n- 核心异常计数器：\n  `35 runts, 0 giants, 0 throttles`\n  `0 input errors, 0 CRC, 0 frame`\n  `3927 packets output... 480 collisions, 0 interface resets`\n在仅有数千包的流量下，竟然出现了高达 480 次碰撞（Collisions）和 35 个超短残帧（Runts），且当前端口明确处于 Half-duplex 状态。这是双工不匹配（Duplex Mismatch）在半双工端最教科书式的典型特征！\n\n• 干扰项排除与错误陷阱：\n选项 B（high throughput）：输出明确显示 `30 second input rate 0 bits/sec, 30 second output rate 0 bits/sec`，且接口负载 `txload 1/255, rxload 1/255` 处于接近于 0 的极低水平，完全不存在任何高吞吐量（High Throughput）。\n选项 C（bad NIC）：网卡硬件损坏通常会导致物理编码严重畸变，产生大量的 CRC 错误、Frame 对齐错误、Babble 或 Overrun 错误；而展图中 `0 CRC, 0 frame, 0 overrun`，硬件物理校验完全正常。\n选项 D（queueing）：排队拥塞通常会导致队列溢出并出现丢包计数（如 Total output drops 递增）；展图中 `Total output drops: 0` 且队列清空，不存在排队丢弃。\n\n• 考试要点与速记技巧：\n`show interface` 故障秒杀口诀：\n- 接口半双工（Half-duplex）+ 碰撞（Collisions）+ 残帧（Runts）= 双工不匹配（Duplex Mismatch）；\n- 接口全双工（Full-duplex）+ 晚期碰撞（Late Collisions）+ CRC 错误 = 对端半双工不匹配。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all checked",
+        "answer": "checked",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "半双工碰撞和 runts 不能证明双工不匹配，改问直接观察"
+      },
+      "exhibit_path": "exhibits/q1000_agent.jpg",
+      "image_sha256": "62a5214675e27998327857e9890a90a030d9b415cf271893dbcd9943c2e9403a"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9400/software/release/16-8/command_reference/b_168_9400_cr/b_168_9400_cr_chapter_01001.html",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/12027-53.html"
+  ],
+  "limitations": "人工审查图及资料；无网络设备实验。"
+}

@@ -1,0 +1,29 @@
+{
+  "manifest": "agent-1141-1150.json",
+  "applied_ids": [
+    1141,
+    1142,
+    1143,
+    1144,
+    1145,
+    1146,
+    1147,
+    1148,
+    1149,
+    1150
+  ],
+  "corrected_question_sha256": {
+    "1141": "2e385c7fca7701ebf59cd8e2871f22e51a528c1dc5ce90c330fc1d548a89b4c5",
+    "1142": "c5ed07f4cfd9a950605b07f1d4fd90a644b975e9e6ab2cb9edf6efb50b0064bd",
+    "1143": "c401d79e9c30beb0ab93e475aebbd38ef8c5900e999ebff362b646e9b1897129",
+    "1144": "af156d118cc688304fb1fb985aa8afe9c4ad7268f839a23307f6b0058265731f",
+    "1145": "d58c1ee9fb4cea6f599d78426c8ecefd8de77738d785630adc9b442ed3c7eb4a",
+    "1146": "44e13d1a0cccfab038d881f102c52c0a085cf23ace1291fadc4c80e5d0e21b3a",
+    "1147": "fa0fd293ce6773a53468e9aa9f55d0cbdfbbcd8fb28cb969ec5a837bd5216d43",
+    "1148": "f8b2c7df839403dc6b3243d6be8ff1b20d932d4c9b4fc1b83ee07c73adc1fec6",
+    "1149": "7e0f6c81eaba5d0a416d2e8f326fa475fce0881504ba4a790cb8f8d505c0664f",
+    "1150": "52d38f5797bc9b788dc699f361bccb881eabe8c7ce9a4f91845032a11ba53135"
+  },
+  "source_sha256": "5997f21ebba56d48ef01a51a311aff2bde7af992e95e0bf910b8b3d44e844550",
+  "app_bundle_sha256": "eecfa1000349441ebeb7feeb91731b3fc294e017ddf748c1016db95042b39f22"
+}

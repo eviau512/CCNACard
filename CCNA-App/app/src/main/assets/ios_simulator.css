@@ -127,18 +127,20 @@
 }
 
 /* Terminal Screen / Output Body */
-.ios-sim-screen {
+.ios-sim-screen,
+.ios-terminal-screen {
   background: #0d1117;
   color: #c9d1d9;
   padding: 10px 12px;
   font-size: 0.85rem;
   line-height: 1.45;
-  height: 230px;
+  height: 240px;
   overflow-y: auto;
   overflow-x: auto;
-  white-space: pre-wrap;
+  white-space: pre-wrap !important;
   word-break: break-all;
   flex: 1;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -148,6 +150,16 @@
   font-size: 0.92rem;
 }
 
+.ios-line-output,
+.ios-line-input,
+.ios-line-system,
+.ios-line-error,
+.ios-line-success {
+  white-space: pre-wrap !important;
+  word-break: break-word;
+  font-family: inherit;
+  margin-bottom: 2px;
+}
 .ios-line-output {
   color: #c9d1d9;
 }
@@ -164,6 +176,57 @@
 }
 .ios-line-success {
   color: #7ee787;
+}
+
+/* Aliases and Support Classes */
+.ios-sim-tabs,
+.ios-device-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 0;
+}
+
+.ios-sim-actions,
+.ios-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ios-btn-reset,
+.ios-btn-clear,
+.ios-ctrl-btn {
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.74rem;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.ios-btn-reset:active,
+.ios-btn-clear:active,
+.ios-ctrl-btn:active {
+  background: #30363d;
+}
+
+.ios-sim-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #58a6ff;
 }
 
 /* Mobile Virtual Keyboard Control Deck (Two-row keyboard) */

@@ -1,0 +1,318 @@
+{
+  "scope": "Q871–Q880",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 871,
+      "original_qid": "Q1172",
+      "before_sha256": "01b8084fb9e7b91f30f5c77e2e2200014739232d20721035b9e75a4a228fe7ef",
+      "reason": "修改组播桥 MAC 并补同实例前提",
+      "updates": {
+        "prompt": "Refer to the topology. Assume all four switches exchange BPDUs in the same STP instance and use the priorities and corrected unicast bridge MAC addresses shown in the options. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 3 — bridge priority 45056 — MAC 02:f8:c4:07:b7:69"
+          },
+          {
+            "label": "B",
+            "text": "SW 2 — bridge priority 49152 — MAC 0c:d6:43:23:ac:87"
+          },
+          {
+            "label": "C",
+            "text": "SW 4 — bridge priority 49152 — MAC 02:be:04:5e:64:58"
+          },
+          {
+            "label": "D",
+            "text": "SW 1 — bridge priority 45056 — MAC 08:e6:35:f4:38:29"
+          }
+        ],
+        "explanation": "A。假设这些交换机参与同一个 STP 实例且 BPDU 互通，先比较桥优先级：SW1 和 SW3 的 45056 小于 SW2、SW4 的 49152；再比较并列者的桥 MAC，02:f8… 小于 08:e6…，因此 SW3 的桥 ID 最小。题中已将原选项的组播地址首字节修成单播地址，并统一分隔符；结果不变。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 3 - Bridge Priority - 45056 - Mac-address 02:f8:c4:07:b7:69"
+          },
+          {
+            "label": "B",
+            "text": "SW 2 - Bridge Priority - 49152 - Mac-address 0d:d6 43:23:ac:87"
+          },
+          {
+            "label": "C",
+            "text": "SW 4 - Bridge Priority - 49152 - Mac-address 03:be 04:5e:64:58"
+          },
+          {
+            "label": "D",
+            "text": "SW 1 - Bridge Priority - 45056 - Mac-address 09:e6:35:f4:38:29"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.1D / 802.1w 生成树协议（STP/RSTP）的根桥（Root Bridge）选举算法机制。\n在交换网络初始化阶段，所有交换机向网络泛洪配置 BPDU，并通过比较网桥标识符（Bridge ID, BID）竞选根桥。\nBID 由以下三个字段组成（共 8 字节）：\n1. 网桥优先级（Bridge Priority）：2 字节（高 4 位为优先级步长 4096，低 12 位为 Extended System ID 即 VLAN ID）。\n2. MAC 地址：6 字节，来自交换机背板或主板的基准 MAC 地址。\n根桥选举规则（Lowest BID Wins）：\n- 第一步：比较网桥优先级（Priority）。全网 Priority 数值最小的交换机成为根桥。\n- 第二步：若存在多个交换机的 Priority 相同，则进一步比较 MAC 地址。MAC 地址数值最小（按十六进制逐字节从左向右比对）的交换机胜出。\n\n• 正确选项剖析：\n选项 A 完全正确。\n对比四台交换机的 BID 参数：\n- SW 1: Priority = 45056, MAC = 09:e6:35:f4:38:29\n- SW 2: Priority = 49152, MAC = 0d:d6:43:23:ac:87\n- SW 3: Priority = 45056, MAC = 02:f8:c4:07:b7:69\n- SW 4: Priority = 49152, MAC = 03:be:04:5e:64:58\n1. 优先级比较：SW1 和 SW3 的优先级均为 45056，明显优于 SW2 和 SW4 的 49152。因此 SW2、SW4 率先出局。\n2. MAC 地址比较：SW1 为 `09:e6...`，SW3 为 `02:f8...`。从首字节开始对比，`02` < `09`，SW3 的 MAC 地址更小。\n综合比较，SW3 拥有全网最小的 BID，成功当选为根桥（Root Bridge）。\n\n• 干扰项排除与错误陷阱：\n选项 B（SW 2）与选项 C（SW 4）：Priority 为 49152，数值高于 45056，第一轮直接被淘汰。\n选项 D（SW 1）：Priority 虽并列最低（45056），但其 MAC 地址首字节为 09，大于 SW3 的 02，在第二轮比对中失败。\n\n• 考试要点与速记技巧：\nSTP 选根铁律：小者为王（Lowest BID Wins）；先看优先级谁最小，同等优先比 MAC，十六进制由左向右顺位挑最小。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "修改组播桥 MAC 并补同实例前提"
+      },
+      "exhibit_path": "exhibits/q871_agent.jpg",
+      "image_sha256": "414795923eb5b10bf31222ca0f3fd2933ace8910e55faff5ad94d79b038f60e0"
+    },
+    {
+      "id": 872,
+      "original_qid": "Q1173",
+      "before_sha256": "62602c06ebf12eebd6d48371b39a8df8d22df2d4ee524657e7c1a5beb034522e",
+      "reason": "消除自动化必然消除错误和固定交付时间的断言",
+      "updates": {
+        "explanation": "A。自动化可通过模板和编排加快重复的数据服务部署，并改善配置一致性，但不能保证消除人为错误；收益取决于设计、测试和运维。B 网络分段、D QoS 本身均可手工或自动化配置；C 的“缓解防环”并不是采用自动化的合理目标。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查企业网引入网络自动化与可编程性（Network Automation and Programmability）的核心商业驱动力与技术优势。\n在传统企业网络运维中，网络变更依赖网络工程师通过 CLI（命令行接口）逐台手动键入配置。随着网络规模扩张，传统手动方式暴露出响应周期长、人工易出错（Human Error）、一致性差以及运营成本（OpEx）居高不下等问题。\n网络自动化（结合 Python、Ansible、RESTCONF/NETCONF、Cisco DNA Center 等工具）实现“基础设施即代码”（IaC）和控制器集中管控，其核心价值在于：\n1. 敏捷性与快速交付：能够在数秒或数分钟内跨全网自动化开通网络与数据服务，将业务上线时间（Time-to-Market）由数周缩短至几分钟。\n2. 消除人为失误：模板化与自动化测试确保全网配置的一致性。\n3. 降低运维成本：提高整体企业运转效率。\n\n• 正确选项剖析：\n选项 A（Provide data services faster.）准确指出了企业采纳网络自动化的根本诉求。业务部门需要网络能够如同公有云一样快速调配计算、存储与数据网络资源，网络自动化使企业能够以极高的敏捷度向分支机构、数据中心及云端快速提供数据服务。\n\n• 干扰项排除与错误陷阱：\n选项 B（Enable network segmentation）：网络分段（Segmentation）是基础网络架构设计功能（通过 VLAN、VRF、TrustSec、SGT 等技术实现），不论手动配置还是自动化配置均可实现，并非采纳自动化的特有驱动原因。\n选项 C（Mitigate spanning-tree loop avoidance）：生成树防环是 Layer 2 协议（STP/RSTP/MSTP）的原生自动状态机机制，非但不需要网络自动化去“缓解防环”，而且现代网络架构甚至通过 Routed Access 避免使用二层 STP。\n选项 D（Implement granular QoS）：细粒度 QoS 调度属于数据平面排队与拥塞管理机制，手动亦可配置，不是企业网络引入自动化的主要驱动力。\n\n• 考试要点与速记技巧：\n网络自动化核心价值：“快、准、稳”——快速交付数据服务（Faster Services）、消除人工失误（Eliminate Human Error）、全网策略一致（Policy Consistency）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "消除自动化必然消除错误和固定交付时间的断言"
+      }
+    },
+    {
+      "id": 873,
+      "original_qid": "Q1174",
+      "before_sha256": "4bb5820b3f0643fddceafa21622d97de27ccaae1cfd65ee3c6fabee66ed983b9",
+      "reason": "核对路由图及最长匹配，明确普通转发前提",
+      "updates": {
+        "prompt": "Refer to the routing table. With ordinary destination-based forwarding and no policy override, what is the subnet mask of the selected route for a packet destined for 172.16.32.8?",
+        "explanation": "C。172.16.32.8 同时匹配图中 172.16.32.0/26、172.16.32.0/24 和 172.16.32.0/19，其中 /26 最长，掩码为 255.255.255.192。172.16.32.4/30 的范围是 .4–.7，不包含 .8；图中 /32 也不匹配。普通目的查表首先比较匹配前缀长度，源地址在本题不决定该结果。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A packet sourced from 172.16.32.254 is destined for 172.16.32.8. What is the subnet mask of the preferred destination Route?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IP 路由选路的核心机制——最长前缀匹配原则（Longest Prefix Match, LPM）以及子网范围的严谨计算。\n当路由器接收到目的 IPv4 数据包时，它会在转发表（FIB/路由表）中检索所有能够匹配该目的 IP 的路由条目。\n1. 最长前缀匹配原则：若有多条路由的子网范围都涵盖了该目的 IP，路由器始终无条件优选子网掩码最长（即前缀数值 /N 最大、地址范围最具体、特异性最高）的路由条目。\n2. 匹配有效性前提：必须首先满足“目的 IP 地址必须确实落在该路由所定义的子网地址范围内”。若目的 IP 根本不在该路由的子网范围内，则无论其前缀多长，都属于无效匹配。\n\n• 正确选项剖析：\n选项 C（255.255.255.192）完全正确。\n题干中数据包目的 IP 为：`172.16.32.8`。\n分析展图中路由条目的掩码与网段范围：\n1. `C 172.16.32.4/30`（掩码 255.255.255.252）：\n   /30 块大小为 4，网段地址为 172.16.32.4，广播地址为 172.16.32.7，可用 IP 范围为 `172.16.32.5 - 172.16.32.6`。目的 IP `172.16.32.8` 根本不在此网段内，匹配失败！\n2. `C 172.16.32.32/32`（掩码 255.255.255.255）：\n   仅匹配唯一的 IP `172.16.32.32`，目的 IP `172.16.32.8` 不匹配，匹配失败！\n3. `D 172.16.32.0/26`（掩码 255.255.255.192）：\n   /26 块大小为 64，网段范围为 `172.16.32.0 - 172.16.32.63`。目的 IP `172.16.32.8` 成功落在该范围内，有效匹配！\n4. `R 172.16.32.0/24`（掩码 255.255.255.0）：\n   网段范围为 `172.16.32.0 - 172.16.32.255`。目的 IP `172.16.32.8` 落在该范围内，有效匹配。\n5. `O 172.16.32.0/19`（掩码 255.255.224.0）：\n   网段范围为 `172.16.32.0 - 172.16.63.255`。目的 IP `172.16.32.8` 落在该范围内，有效匹配。\n在所有有效匹配的路由（/26, /24, /19）中，/26 的前缀最长，因此最优路由是 `172.16.32.0/26`，其对应的子网掩码正是 `255.255.255.192`。\n\n• 干扰项排除与错误陷阱：\n选项 D（255.255.255.252，即 /30）：这是本题最大的经典陷阱！部分考生只看掩码数值最大就盲目选 /30，忽略了 `172.16.32.4/30` 的广播地址是 .7，目的地址 `172.16.32.8` 已经越界，完全不在该 /30 内。\n选项 B（255.255.255.0，即 /24）与选项 A（255.255.224.0，即 /19）：虽然涵盖了 .8，但前缀长度短于 /26，因最长匹配规则而被抑制。\n\n• 考试要点与速记技巧：\nLPM 避坑双部曲：\n1. 先算网段范围：核对目的 IP 是否“真进圈”；\n2. 再挑最长前缀：进圈的有效路由里挑前缀最长（掩码 1 数量最多）的路由。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "核对路由图及最长匹配，明确普通转发前提"
+      },
+      "exhibit_path": "exhibits/q873_agent.jpg",
+      "image_sha256": "5480e6c487cc779f899eeb326c1b17295f369fd157aeba959912b5d77856d538"
+    },
+    {
+      "id": 874,
+      "original_qid": "Q1176",
+      "before_sha256": "70db062ab519c4134fad055e48553f6c4b385dcde85e881c4c71234636564c67",
+      "reason": "图中组播 MAC 改成明确单播示例并重新计算 EUI-64",
+      "updates": {
+        "prompt": "Refer to the exhibit. For this EUI-64 calculation, use a corrected unicast MAC 12-19-be-67-00-01 for R1 E0/1 (the figure labels it 13-19-be-67-00-01). Combine its modified EUI-64 interface ID with the shown LAN /64 prefix. Which address results?",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:1006:1968:4564:877f:fe99:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:1006:1968:1019:beff:fe67:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:1006:1968:1130:abff:fecc:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:1006:1968:12d8:bafe:ff01:1"
+          }
+        ],
+        "explanation": "B。图示 R1 LAN 前缀为 2001:db8:1006:1968::/64。原图 MAC 首字节 13 的最低位为 1，表示组地址，不适合作为接口单播 MAC，因此题干明确采用修正后的 12-19-be-67-00-01。中间插入 ff:fe，首字节异或 0x02 得到 10:19:be:ff:fe:67:00:01，接口 ID 为 1019:beff:fe67:0001，拼接 /64 前缀即 B。实际设备应先验证接口 MAC 和地址配置。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. The IPv6 address for the LAN segment on router R1 must be configured using the EUI-64 format. When configured which Ipv6 Address Is produced by the router?",
+        "options": [
+          {
+            "label": "A",
+            "text": "2001:db8:1006:1968:4564:877F:FE99:1"
+          },
+          {
+            "label": "B",
+            "text": "2001:db8:1006:1968:1119:BEFF:FE67:1"
+          },
+          {
+            "label": "C",
+            "text": "2001:db8:1006:1968:1130:ABFF:FECC:1"
+          },
+          {
+            "label": "D",
+            "text": "2001:db8:1006:1968:12D8:BAFE:FF01:1"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 无状态地址自动配置（SLAAC）中的 IEEE 64 位扩展唯一标识符（EUI-64）生成规范（RFC 4291）。\n当使用 EUI-64 为接口自动生成 64 位接口标识符（Interface ID）时，利用了接口原有的 48 位 IEEE 802 MAC 地址，具体转换步骤如下：\n1. 拆分 MAC 地址：将 48 位 MAC 地址（6 字节）平均分为左右两半，每半各 3 字节（24 位）。\n2. 插入固定填充位：在两半正中间插入 16 位固定保留值 `FF:FE`（即 `11111111:11111110`），形成 64 位标识。\n3. 反转全局/局部控制位（U/L 位）：找到第 1 个字节（高 8 位），将其第 7 个比特位（从左往右数第 7 位，即 Universal/Local 位，取值 0 代表本地管理，1 代表全球唯一）反转（0 变 1，1 变 0）。\n4. 拼接网络前缀：将生成的 64 位 Interface ID 追加到指定的 /64 网络前缀后面，并应用标准 IPv6 缩写规则（省略前导 0 和连续 0 块）。\n\n• 正确选项剖析：\n选项 B（2001:db8:1006:1968:1119:BEFF:FE67:1）完全正确。\n详细推导计算过程：\n- LAN 前缀：`2001:db8:1006:1968::/64`\n- R1 接口 E0/1 的 MAC 地址：`13-19-be-67-00-01`\n- 第一步（分割插值）：\n  拆分为 `13-19-be` 与 `67-00-01`，中间插入 `FF-FE`，得到：`13:19:be:ff:fe:67:00:01`\n- 第二步（反转第 7 位）：\n  取第一个十六进制字节 `0x13`，转换为二进制：`0001 0011`\n  从左往右数第 7 位是 `1`，反转后变为 `0`：`0001 0001`\n  转换回十六进制为：`0x11`\n  因此前 4 字节变为 `1119:beff`，后 4 字节为 `fe67:0001`。\n- 第三步（拼接与省略前导 0）：\n  结合前缀得到完整 IPv6 地址：\n  `2001:db8:1006:1968:1119:beff:fe67:0001`\n  末尾字段 `:0001` 省略前导 0 缩写为 `:1`，即 `2001:db8:1006:1968:1119:BEFF:FE67:1`。\n\n• 干扰项排除与错误陷阱：\n选项 A（4564:877F...）：完全无关的随机 MAC 计算结果。\n选项 C（1130:ABFF...）：中间插入了 ABFF，且 MAC 地址数值与题干完全不符。\n选项 D（12D8:BAFE...）：第一字节及插入字段完全错误，插入了 BAFE 而非 FFFE。\n\n• 考试要点与速记技巧：\nEUI-64 三步口诀：MAC 砍半塞 FFFE，首字节第七位 0/1 反转（十六进制速记：首字节加减 2，如 13 -> 11，00 -> 02）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "图中组播 MAC 改成明确单播示例并重新计算 EUI-64"
+      },
+      "exhibit_path": "exhibits/q874_agent.jpg",
+      "image_sha256": "52df3d9ae318efd9c5dbf969727074b3a14d7a3486173bc3109afee0f7b8f5c1"
+    },
+    {
+      "id": 875,
+      "original_qid": "Q1177",
+      "before_sha256": "4b5acf2de108d54063069ab48d0d2ea764bef2750e0f433f0fed532d3a7c91a6",
+      "reason": "半双工和累计 CRC 不能单独证明根因，改为排查方向",
+      "updates": {
+        "prompt": "Refer to the interface output. The link is intended to operate full duplex and users report poor performance. Which area should be investigated first based on the displayed half-duplex setting and error counters?",
+        "explanation": "B。图中接口显示 Half-duplex、383 CRC 和 831 collisions，因此应先检查本端和对端速率/双工设置及物理链路；题设要求全双工，当前配置值得排查。计数器是累计值，不能单凭这张快照断言双工不匹配已被证明，也不能排除线缆等原因；应核对对端并观察计数变化。快照中的低五分钟平均速率和少量累计广播不足以证明过载或广播风暴。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Users at a branch office are experiencing application performance issues, poor VoIP audio quality, and slow downloads. What is the cause of the issues?",
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网接口双工模式配置（Duplex Configuration）及其对实时应用性能的影响排查。\n在以太网物理层通信中：\n1. 全双工（Full-duplex）：双向独立信道，允许同时收发，彻底消除了 CSMA/CD 碰撞域机制，理论碰撞率为 0。\n2. 半双工（Half-duplex）：共享介质机制，使用 CSMA/CD 监听信道。如果两个节点同时发送，将产生以太网碰撞（Collisions），导致数据帧损坏并触发指数退避重传。\n在现代局域网交换环境中，如果将路由器的以太网接口手动硬编码为半双工（Half-duplex），或者与对端交换机发生双工不匹配（一方 Full 一方 Half）：\n- 正常流量稍有突发就会引发海量碰撞（Collisions）和 CRC/校验错误；\n- 数据包产生不可预测的时延（Latency）和时延抖动（Jitter），并且大量重传导致有效带宽急剧下降；\n- 对网络抖动极度敏感的实时业务（VoIP 语音）将出现严重爆音、声音断续和严重丢包，文件下载速率出现断崖式下跌。\n\n• 正确选项剖析：\n选项 B（interface configuration）完全正确。\n展图诊断分析：\n`Router# show interface FastEthernet0/0`\n- 关键状态行：`Half-duplex, 100Mb/s, 100BaseTX/FX`\n- 关键计数器：`383 input errors, 383 CRC... 831 collisions`\n输出直接证明：接口被错误配置为 `Half-duplex`！对于现代企业网络中的 100Mbps 专线或网关接口，半双工配置直接激活了 CSMA/CD，产生了 831 次碰撞和 383 次 CRC 错误。因此，导致分支机构 VoIP 音质差、应用慢和下载缓慢的根本原因正是“接口配置”（interface configuration）错误。\n\n• 干扰项排除与错误陷阱：\n选项 A（QoS queuing）：输出显示 `Input queue: 0/75/0/0 (drops: 1)`, `Output queue: 0/40`，排队队列未满，QoS 队列并非大量丢包与产生物理 collisions 的根源。\n选项 C（broadcast storm）：输出显示 `Received 25 broadcasts`，在 13282 个入站包中广播仅 25 个，极其正常，不存在广播风暴。\n选项 D（overutilization）：当前速率为 `516000 bits/sec`（约 516 Kbps），占 100 Mbps 接口带宽不足 1%，接口负载 `txload 1/255, rxload 1/255` 极其轻闲，毫无过载迹象。\n\n• 考试要点与速记技巧：\n`show interface` 故障秒判技巧：\n百兆端口（100M）出 Collisions + CRC 错，必看 Duplex 状态；Half-duplex 导致冲突重传，语音下载全受害。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "半双工和累计 CRC 不能单独证明根因，改为排查方向"
+      },
+      "exhibit_path": "exhibits/q875_agent.jpg",
+      "image_sha256": "23fc7ab36c46a45b0a78feb55a3fd298341943e09516fb53b6f32faafd2e1db4"
+    },
+    {
+      "id": 876,
+      "original_qid": "Q1179",
+      "before_sha256": "6359d2b12a9eadeba9117ba4bab8cc7c77eab836b3163a3d7f99ae4da0220735",
+      "reason": "限定集中交换，修正 FlexConnect 和无线模式的绝对化说法",
+      "updates": {
+        "prompt": "In a Cisco controller-based deployment using centrally switched WLANs, which AP mode forwards client data through the wireless controller?",
+        "explanation": "A。Local 模式提供客户端接入；在题设的集中交换 WLAN 中，客户端数据通过 CAPWAP 数据通道送至控制器。Monitor 用于无线监测而非正常客户端接入；autonomous AP 独立工作；rogue detector 用于检测有线侧可疑设备。FlexConnect 在受支持配置下可本地交换或集中交换，具体行为取决于 WLAN 配置，不能一概而论。"
+      },
+      "original_fields": {
+        "prompt": "An engineer needs to configure an access point to forward all client traffic through a wireless controller. Which mode must be enabled to Accomplish this task?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 集中式无线局域网架构（Split-MAC Architecture）下轻量级接入点（Lightweight AP, LAP）的工作模式。\n在思科统一无线网络中，AP 通过 CAPWAP（Control and Provisioning of Wireless Access Points）协议与无线控制器（WLC）通信。AP 可以被配置为不同的操作模式（AP Mode）以满足不同的业务场景：\n1. Local 模式（本地模式）：LAP 的默认工作模式。AP 在特定信道上提供 BSS 服务，将所有关联无线客户端的所有数据流量通过 CAPWAP 数据隧道（Data Tunnel）统一封装并回传给中央 WLC，由 WLC 集中进行流量解封装、VLAN 标记及安全策略处理（Centralized Switching）。\n2. FlexConnect 模式（前身为 H-REAP）：专为分支机构设计，支持本地流量交换（Local Switching），避免在分支与总部 WLC 之间来回跨 WAN 绕行。\n3. Monitor 模式（监视模式）：AP 射频关闭发射功能，不为客户端提供接入，专用于射频资源管理（RRM）、无线入侵检测（WIDS/WIPS）和定位服务。\n4. Rogue Detector 模式（非法探测器模式）：AP 专注于检测有线网络上的非法 MAC 地址，不发送无线射频。\n5. Sniffer 模式（抓包模式）：将特定信道上的空中无线数据包直接重定向发送给运行 Wireshark 的主机。\n\n• 正确选项剖析：\n选项 A（local）完全符合要求。\n题目明确要求：“配置 AP 将所有客户端流量通过无线控制器转发（forward all client traffic through a wireless controller）”，这正是 Local 模式的标准定义行为——集中式转发（Centralized Switching via CAPWAP）。\n\n• 干扰项排除与错误陷阱：\n选项 B（monitor）：监视模式下 AP 彻底停止对外广播 SSID，不处理任何客户端数据流量，仅作为传感器监听无线介质。\n选项 C（autonomous）：自主 AP（胖 AP）采用单机架构，独立处理射频和数据帧，根本不需要也不连接 WLC，更不可能通过 WLC 转发流量。\n选项 D（rogue detector）：该模式专注于有线交换网络中的非法设备比对，不关联任何客户端。\n\n• 考试要点与速记技巧：\nAP 模式功能速记：\n- Local 模式：默认模式，所有流量打 CAPWAP 隧道进控制器（集中转发）。\n- FlexConnect：分支首选，本地交换不走 WAN 隧道。\n- Monitor：闭嘴只听，定位监控不接客。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定集中交换，修正 FlexConnect 和无线模式的绝对化说法"
+      }
+    },
+    {
+      "id": 877,
+      "original_qid": "Q1180",
+      "before_sha256": "0e5f3af2eb84ca7558a02a96442732e63fa9f8d7297d69d7dda765d04df75bed",
+      "reason": "限定未知单播、同 VLAN 转发端口和安全策略",
+      "updates": {
+        "prompt": "A switch receives an Ethernet frame with an unknown unicast destination on G0/1. In ordinary switching, with no feature suppressing flooding, what happens?",
+        "explanation": "D。在入站 VLAN 内，交换机通常将未知单播帧复制到除入端口之外、允许该 VLAN 且处于转发状态的端口；端口隔离、安全策略或抑制未知单播等功能可限制泛洪。它不需将目的 MAC 改为广播地址，也不因该转发表项缺失而为该帧发起 ARP。源 MAC 可按正常学习规则与入端口及 VLAN 关联。"
+      },
+      "original_fields": {
+        "prompt": "An Ethernet frame arrived at switch interface G0/1, but the destination MAC address is missing from the MAC address table. How does the switch Process the frame?",
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网二层交换机对未知单播帧（Unknown Unicast Frame）的处理流程。\n在 IEEE 802.1D 标准交换转发机制中：\n当一个以太网单播数据帧（目的 MAC 既非广播 FF:FF:FF:FF:FF:FF 也非组播 01:00:5E...）进入交换机端口 G0/1 时：\n1. 源 MAC 学习：交换机首先读取帧头部的源 MAC 地址，将其与端口 G0/1 及所在 VLAN 绑定并记录/刷新至 MAC 表（CAM 表）。\n2. 目的 MAC 查找：交换机读取目的 MAC 地址并查询 CAM 表。若 CAM 表中存在该目的 MAC 的映射条目，则直接转发至对应端口；\n3. 未知单播泛洪（Flooding）：若 CAM 表中不存在该目的 MAC 地址（即所谓“未知单播”），交换机无法得知目标主机连接在哪个端口。为确保报文不丢失并激发目标主机回复，交换机将执行未知单播泛洪——即把该帧原封不动地复制，并从该 VLAN 内除接收端口（G0/1）之外的所有其余活动端口发送出去。\n\n• 正确选项剖析：\n选项 D（It floods the frame out of the remaining switch interfaces.）完全符合规范。当目的 MAC 缺失时，交换机的标准动作就是除入端口外的同 VLAN 端口泛洪。\n\n• 干扰项排除与错误陷阱：\n选项 A（It sends an ARP request to attempt to locate the destination）：交换机是二层设备，仅对传输的数据帧进行透明交换。交换机绝不会自发代发 ARP 请求去探测终端的 MAC 地址（ARP 解析是由三层主机/网关发起的）。\n选项 B（It updates the destination to FFFF.FFFF.FFFF.）：交换机在转发二层帧时，绝对不会修改原始以太网帧的目的 MAC 地址字段。\n选项 C（It drops the frame and notifies the sending host.）：交换机绝不会丢弃未知单播帧，更不会产生任何 ICMP 或二层通知发送给源主机。\n\n• 考试要点与速记技巧：\n交换机处理三大帧（未知单播、广播、组播）：通通除接收端口外全网泛洪；绝不改帧头，绝不发 ARP 代查。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定未知单播、同 VLAN 转发端口和安全策略"
+      }
+    },
+    {
+      "id": 878,
+      "original_qid": "Q1181",
+      "before_sha256": "6c5b79f720cb718cf5d764d3bcf5242d66b394b5c961fd2e1a1473e314c36c41",
+      "reason": "纠正公网可达、ULA 路由与地址类型的绝对化断言",
+      "updates": {
+        "explanation": "D。需要直接通过 Internet 全局路由时，通常选择由网络运营方分配并正确通告的全球单播前缀；全球单播地址本身不保证防火墙放行、前缀可达或服务可用。ULA（fc00::/7，常用 fd00::/8）适于组织内寻址，与 IPv4 私有地址在用途上相似，但不是完全等同；ULA 可以在机构内部跨路由器路由。公网访问也可以经代理等方式提供，并非所有终端均必须配置 GUA。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv6 单播地址类型的设计选型——全球单播地址（GUA）与唯一本地地址（ULA）的特性对比。\n根据 RFC 4291 和 RFC 4193 的定义：\n1. 全球单播地址（Global Unicast Address, GUA）：\n   - 前缀范围：`2000::/3`（目前实际分配主要是 `2001::/16`、`2003::/16` 等）。\n   - 作用：等同于 IPv4 的公网地址（Public IP）。全球唯一且在公网 Internet 上完全可路由（Routable over the Internet）。任何需要与公网直接互通的终端或子网必须配置 GUA。\n2. 唯一本地地址（Unique Local Address, ULA）：\n   - 前缀范围：`FC00::/7`（目前规范定义使用的是 `FD00::/8`）。\n   - 作用：等同于 IPv4 的私网地址（RFC 1918 Private IP）。仅在组织机构的内部网络中私有路由，外部 Internet 路由器无条件丢弃 ULA 前缀，在公网上不可路由（Non-routable over the Internet）。\n\n• 正确选项剖析：\n选项 D（when the subnet must be routable over the internet）完全正确。\n网络架构师选择部署全球单播子网（GUA）而非唯一本地子网（ULA）的唯一核心决定性因素，就是该子网必须能够在 Internet 互联网上被全局路由互联。\n\n• 干扰项排除与错误陷阱：\n选项 A（when the subnet must be available only within an organization）：仅在机构内部使用正是 ULA（FD00::/8）的设计初衷。\n选项 B（when the subnet does not need to be routable）：如果子网不需要可路由，ULA 或链路本地地址（Link-Local, FE80::/10）即可满足，绝不需要浪费 GUA。\n选项 C（when the addresses on the subnet must be equivalent to private IPv4 addresses）：与 IPv4 私网地址等效的正是 ULA（RFC 4193），而非 GUA。\n\n• 考试要点与速记技巧：\nIPv6 地址定位对比表：\n- GUA（2000::/3）= IPv4 公网地址 -> 跨 Internet 全球路由；\n- ULA（FD00::/8）= IPv4 私网地址 -> 仅内网路由，Internet 不通；\n- Link-Local（FE80::/10）= 仅直连链路有效，不可跨路由器。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "纠正公网可达、ULA 路由与地址类型的绝对化断言"
+      }
+    },
+    {
+      "id": 879,
+      "original_qid": "Q1183",
+      "before_sha256": "b300c4242e4f47ef21d35c3311da28df8207bcd0ec23fc617225e376572349b4",
+      "reason": "限定源 MAC 动态学习与老化策略",
+      "updates": {
+        "explanation": "A。交换机通常从收到的帧学习源 MAC，并关联入端口及所属 VLAN；若后续在其他端口看到该源地址，动态表项可按设备配置更新。静态表项、端口安全、禁用学习及老化计时配置均可能改变行为，老化默认值也依平台而异。B 是改写帧头而非学习；C 泛洪与排队不同；D 的 ARP 查询不是普通二层源地址学习。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查以太网交换机 MAC 地址学习（MAC Learning）机制的运行原理。\n以太网交换机通过动态建立和维护 MAC 地址表（CAM 表）来实现二层快速转发：\n1. 基于源地址学习（Learn on Source）：每当交换机端口收到一个数据帧时，交换机都会提取该帧的源 MAC 地址（Source MAC Address）。\n2. 端口关联记录：交换机将该源 MAC 地址与其进入的物理端口（Ingress Port）以及该端口所属的 VLAN ID 建立绑定映射，存入 MAC 地址表中，并为该条目启动老化计时器（默认 300 秒）。\n3. 动态迁移更新：若日后该主机插拔更换到了交换机的另一个端口并发送数据帧，交换机会检测到同一源 MAC 出现于新端口，并立即更新端口映射条目，实现动态拓扑适应。\n\n• 正确选项剖析：\n选项 A（associates the MAC address with the port on which it is received）精准概括了 MAC 学习的定义——将接收到数据帧的源 MAC 地址与该接收端口进行关联记录。\n\n• 干扰项排除与错误陷阱：\n选项 B（rewrites the source and destination MAC address）：交换机在同一 VLAN 内进行二层桥接转发时，对数据帧完全保持透明，绝不会重写源或目的 MAC 地址（三层路由器在跨子网路由转发时才会重写 MAC 头）。\n选项 C（broadcasts frames to all ports without queueing）：泛洪未知单播不是 MAC 学习的过程，且交换机内部具有输入/输出排队缓冲区（Queuing），并非“不排队”。\n选项 D（sends an ARP request to locate unknown destinations）：交换机在二层转发层面不生成 ARP 请求，ARP 是终端协议栈的行为。\n\n• 考试要点与速记技巧：\n交换机基本功八字口诀：\n“看源学习，查目转发”——学习只看入站帧的源 MAC，记录端口进 CAM 表。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked",
+        "finding": "限定源 MAC 动态学习与老化策略"
+      }
+    },
+    {
+      "id": 880,
+      "original_qid": "Q1184",
+      "before_sha256": "bcd0537572fc32dc00c08b2a53dce7ddd5ed4492796948c6fddd489fc1367b3b",
+      "reason": "原图非规范 /29 前缀归一化并限定候选路由比较",
+      "updates": {
+        "prompt": "The exhibit lists candidate routes to the same destination prefix. Treat the displayed 10.245.54.69/29 as the normalized prefix 10.245.54.64/29, assume all next hops are usable, and assume ordinary administrative distances. Which interface wins route selection?",
+        "explanation": "D。原图把主机位非零的 10.245.54.69/29 写成目的前缀；归一化后的网络为 10.245.54.64/29。按题设将图中四行视为候选路径而非已经同时安装的路由表项：内部 EIGRP 的 AD 90 优于 RIP 的 120，再比较同协议 EIGRP 度量，9388 小于 50147，故选 G0/16。不同协议的度量不能直接跨协议比较；实际路由安装还取决于下一跳可达等条件。"
+      },
+      "original_fields": {
+        "prompt": "Which interface is used to send traffic to the destination network?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 路由器根据路由表执行数据包转发时的下一跳与出接口决策算法。\n路由决策流程严格遵从以下优先级：\n1. 最长前缀匹配（Longest Prefix Match）：优先选择子网掩码最长（Prefix 长度最大）的路由条目。\n2. 管理距离（Administrative Distance, AD）：在掩码长度相同的情况下，选择来源协议管理距离最小的路由条目。常见路由协议的 AD 为：\n   - 直连路由（Connected）：0\n   - 静态路由（Static）：1\n   - EIGRP 内部路由：90\n   - OSPF：110\n   - RIP：120\n3. 度量值（Metric）：当管理距离相同时，选择同一协议内部度量值（Metric）最小的路径。\n\n• 正确选项剖析：\n选项 D（G0/16）完全正确。\n观察展图 `q_880.jpg` 中的路由条目：\n- 目标网段均为：`10.245.54.69/29`，前缀长度均为 /29，前缀匹配完全一致。\n- 比较协议类型及 AD：\n  - 条目 1: `D 10.245.54.69/29 [90/9388] via G0/16`（EIGRP，AD=90）\n  - 条目 2: `D 10.245.54.69/29 [90/50147] via G0/21`（EIGRP，AD=90）\n  - 条目 3: `R 10.245.54.69/29 [120/15] via G0/5`（RIP，AD=120）\n  - 条目 4: `R 10.245.54.69/29 [120/13] via G0/4`（RIP，AD=120）\n  EIGRP 的 AD 为 90，优于 RIP 的 AD（120），因此条目 3 和 4 直接淘汰。\n- 比较 EIGRP 内部 Metric：\n  条目 1 的 Metric 为 9388；\n  条目 2 的 Metric 为 50147。\n  由于 9388 < 50147，条目 1 胜出！因此，接口 G0/16 被用于发送流量到目标网络。\n\n• 干扰项排除与错误陷阱：\n选项 A（G0/21）：同样是通过 EIGRP 学习的路径，但 Metric 高达 50147，大于 9388，不作为优选路径。\n选项 B（G0/4）：通过 RIP 学习，虽然在 RIP 内部其度量值 13 小于 15，但 RIP 的 AD（120）远差于 EIGRP（90），在 AD 比对阶段已被剔除。\n选项 C（G0/5）：RIP 路由，AD（120）过大，直接排除。\n\n• 考试要点与速记技巧：\n选路三字经：“长、小、低”——掩码挑最长，协议 AD 挑最小（EIGRP 90 胜 RIP 120），同协议度量挑最低。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原图非规范 /29 前缀归一化并限定候选路由比较"
+      },
+      "exhibit_path": "exhibits/q880_agent.jpg",
+      "image_sha256": "71dab3a821d1acfc1097e1b1e70ae0a5772fb7253b13946e07b13f095f0d0808"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/stp/stp-configuration-guide/m-stp.html",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/23563-143.html"
+  ],
+  "limitations": "逐题人工检查原图和相关规范；未执行真实设备实验。"
+}

@@ -1,0 +1,167 @@
+{
+  "scope": [
+    1073,
+    1082
+  ],
+  "corrections": [
+    {
+      "id": 1076,
+      "before_sha256": "595791f59edd082a60337214c8ba9a4117160d2a31d4089bc924a87bc7c7aea4",
+      "reason": "原 YAML/Ruby 通用表述不够唯一，限定到对应产品的 playbook、recipe 和 manifest；保持三个独立无序组。",
+      "updates": {
+        "prompt": "Match each description to Ansible, Chef, or Puppet for the specified examples. The Chef port refers to the legacy Push Jobs service; order within each product group does not matter. Use the clarified descriptions in the interactive board.",
+        "drag_drop_data": {
+          "sources": [
+            "resource declarations are written in Puppet manifests",
+            "uses TCP port 10002 for configuration push jobs",
+            "Chef recipes use a Ruby-based DSL",
+            "uses SSH for remote device communication",
+            "uses TCP 8140 for communication",
+            "Ansible playbooks are expressed in YAML"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Ansible (Slot 1)",
+              "expected": "uses SSH for remote device communication",
+              "unordered_group": "Ansible"
+            },
+            {
+              "id": "t2",
+              "label": "Ansible (Slot 2)",
+              "expected": "Ansible playbooks are expressed in YAML",
+              "unordered_group": "Ansible"
+            },
+            {
+              "id": "t3",
+              "label": "Chef (Slot 1)",
+              "expected": "uses TCP port 10002 for configuration push jobs",
+              "unordered_group": "Chef"
+            },
+            {
+              "id": "t4",
+              "label": "Chef (Slot 2)",
+              "expected": "Chef recipes use a Ruby-based DSL",
+              "unordered_group": "Chef"
+            },
+            {
+              "id": "t5",
+              "label": "Puppet (Slot 1)",
+              "expected": "resource declarations are written in Puppet manifests",
+              "unordered_group": "Puppet"
+            },
+            {
+              "id": "t6",
+              "label": "Puppet (Slot 2)",
+              "expected": "uses TCP 8140 for communication",
+              "unordered_group": "Puppet"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "Ansible：通常通过 SSH 无代理管理网络设备，playbook 使用 YAML。Chef：常见 recipes 和 cookbooks 使用 Ruby DSL；题目所述旧版 Chef Push Jobs 服务可使用 TCP 10002，该端口不是所有 Chef 配置管理部署的通用端口。Puppet：使用 manifest 描述配置，agent 与 Puppet Server 默认通过 TCP 8140 通信；端口可更改。\n\n同一产品的两个空位顺序可以互换；实际连接插件、运行方式和部署端口依配置而定。 原图中的语言描述较笼统，互动选项限定为 Ansible playbook、Chef recipe 与 Puppet manifest；旧答案图中的相应文本未更新，已隐藏原答案图。"
+      }
+    },
+    {
+      "id": 1079,
+      "before_sha256": "2099e34c55b1180484d8c1ddbb009da4b7d340c11790194a0b01c41f18591cc5",
+      "reason": "原题多租户仅写一个或多个客户且有拼写和残句，故障恢复暗示总能无缝迁移；修正互动目标描述。",
+      "updates": {
+        "prompt": "Match each cloud characteristic to the clarified example shown in the interactive board.",
+        "drag_drop_data": {
+          "sources": [
+            "multitenancy",
+            "on-demand",
+            "resiliency",
+            "scalability",
+            "workload movement"
+          ],
+          "targets": [
+            {
+              "label": "Multiple tenants share the same physical or virtual infrastructure while remaining logically isolated.",
+              "sub_label": "",
+              "expected": "multitenancy"
+            },
+            {
+              "label": "Resources can be added and removed as needed to support current workload and tasks",
+              "sub_label": "",
+              "expected": "scalability"
+            },
+            {
+              "label": "Tasks can be migrated to different physical locations to increase efficiency or reduce cost.",
+              "sub_label": "",
+              "expected": "workload movement"
+            },
+            {
+              "label": "Resources can be requested when needed instead of being reserved permanently.",
+              "sub_label": "",
+              "expected": "on-demand"
+            },
+            {
+              "label": "After a server failure, workloads and data can be restored or failed over to other resources.",
+              "sub_label": "",
+              "expected": "resiliency"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "多租户是多个租户共享基础设施并实施隔离；scalability 指资源随负载扩缩；workload movement 指将工作负载迁移到其他位置；on-demand 指按需申请资源；resiliency 指故障后维持或恢复服务的能力。\n\n故障恢复可能涉及重启、恢复或切换，是否无缝、是否能在线迁移及是否按用量计费取决于实现和服务合同，不由这些词本身保证。原图中 physical 拼写错误及“on a permanent”句尾缺字不改变配对。 互动描述已补充多个租户和逻辑隔离、修正不完整句子，并将无条件无缝迁移改为可恢复或故障切换；旧答案图已隐藏。"
+      }
+    },
+    {
+      "id": 1080,
+      "before_sha256": "8cdcd06ffb1bceba6f5e50382a9d7157f550ed403914ede2f66d6f85e2ddf908",
+      "reason": "原选项误暗示 API 或分布式控制为架构独有；明确比较场景，修复物理基础设施配置的模糊表述。",
+      "updates": {
+        "prompt": "Compare the specified controller-managed and traditional per-device examples. Match the clarified descriptions to each model; order within a model does not matter.",
+        "drag_drop_data": {
+          "sources": [
+            "This type allows better control over how networks work and how networks are configured.",
+            "In this controller deployment, northbound APIs expose network services to applications.",
+            "In this traditional example, operators configure each network device individually.",
+            "This type provisions resources from a centralized location.",
+            "In this traditional example, devices run distributed control-plane protocols."
+          ],
+          "targets": [
+            {
+              "label": "Controller-Based Networking (Slot 1)",
+              "sub_label": "",
+              "expected": "This type allows better control over how networks work and how networks are configured.",
+              "unordered_group": "Controller-Based Networking"
+            },
+            {
+              "label": "Controller-Based Networking (Slot 2)",
+              "sub_label": "",
+              "expected": "In this controller deployment, northbound APIs expose network services to applications.",
+              "unordered_group": "Controller-Based Networking"
+            },
+            {
+              "label": "Controller-Based Networking (Slot 3)",
+              "sub_label": "",
+              "expected": "This type provisions resources from a centralized location.",
+              "unordered_group": "Controller-Based Networking"
+            },
+            {
+              "label": "Traditional Networking (Slot 1)",
+              "sub_label": "",
+              "expected": "In this traditional example, operators configure each network device individually.",
+              "unordered_group": "Traditional Networking"
+            },
+            {
+              "label": "Traditional Networking (Slot 2)",
+              "sub_label": "",
+              "expected": "In this traditional example, devices run distributed control-plane protocols.",
+              "unordered_group": "Traditional Networking"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "按题设，控制器方案集中配置资源、提供 API 及集中可视化；传统方案逐设备配置，且本示例使用分布式控制平面。\n\n“better control”是相对题设的管理效果，并非保证；传统网络也可通过 API 或自动化部署，控制器网络仍可能保留分布式控制功能。设备初始化也不一定需要现场连接 console。 互动选项明确为题设示例；旧答案图使用原先模糊的表述，已隐藏。"
+      }
+    }
+  ],
+  "sources": [
+    "https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html",
+    "https://www.rfc-editor.org/rfc/rfc9110.html"
+  ]
+}

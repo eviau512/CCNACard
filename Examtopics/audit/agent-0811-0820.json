@@ -1,0 +1,204 @@
+{
+  "scope": "Q811–Q820",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 811,
+      "original_qid": "Q1082",
+      "before_sha256": "88907e4c662273d3d11c9b1c44614c68b1cc4aca218b783512cfd79b25e7dccf",
+      "reason": "图中 VPN11 是字符串值；JSON 数据并非 JSON Schema。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is represented by \"VPN11\" in this JSON data?",
+        "explanation": "D。第 2 行的 `\"VPN concentrator\": \"VPN11\"` 中，冒号左侧是键名，右侧 `\"VPN11\"` 是字符串值。它不是键、数组或对象；完整的一对花括号表示对象，外层方括号表示数组。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"VPN11\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON（RFC 8259）数据结构中字符串“值（Value）”的语法判断。\n1. JSON 键值对标准语法剖析：\n   - JSON 采用简洁的文本键值对格式保存结构化数据：`\"key\": value`。\n   - 冒号 `:` 是分隔符，其左边是用双引号括起来的键名称（Key），其右边是该键对应的具体内容，称为值（Value）。\n2. Exhibit 结构分析：\n   查看展示图第 2 行代码：\n   `{\"VPN concentrator\": \"VPN11\", \"port\": \"fe7/12\"}`\n   - 在键值对 `\"VPN concentrator\": \"VPN11\"` 中：\n     • `\"VPN concentrator\"` 位于冒号的左侧，属于 **键（Key）**。\n     • `\"VPN11\"` 位于冒号的右侧，是用双引号包裹的字符串数据，代表具体分配给该设备的名称，属于标准的 **值（Value）**。\n\n• 正确选项剖析：\n选项 D（value）：\n\"VPN11\" 严格处于冒号的右侧，充当对应属性的数据内容，完全符合 JSON 规范中对值（Value）的定义，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（key）：键是冒号左边的文本（在此对象中为 `\"VPN concentrator\"` 和 `\"port\"`），\"VPN11\" 位于冒号右边，不是键。\n- 选项 B（array）：数组是由方括号 `[ ]` 包裹的数据列表，\"VPN11\" 仅是单个标量字符串。\n- 选项 C（object）：对象是由花括号 `{ }` 包裹的键值对容器，\"VPN11\" 本身不是对象。\n\n• 考试要点与速记技巧：\n- 永远记住冒号两端的位置关系：\n  - 冒号左边（`\"VPN concentrator\":`）是 **Key（键）**。\n  - 冒号右边（`: \"VPN11\"`）是 **Value（值）**。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q811_agent.jpg",
+      "image_sha256": "9fdda2af8843adddd0ee857a86e32c9e0fc941c012abd4d821118f807d5e463e"
+    },
+    {
+      "id": 812,
+      "original_qid": "Q1083",
+      "before_sha256": "c8dddb68b4cfc691c99d2db108effa11e42b5fa8bcb967698927e01ba6c30fa6",
+      "reason": "限定所引用 IOS 命令语法，删除 access 天然无环等绝对说法。",
+      "updates": {
+        "prompt": "On the cited Cisco IOS implementation, which port type uses the interface command `spanning-tree portfast` for a host-facing edge port without the `trunk` keyword?",
+        "explanation": "D。该 Cisco IOS 命令用在面向终端的二层 access 端口；支持的主机侧 trunk 可使用 `spanning-tree portfast trunk`，不同平台/版本语法可能不同。三层路由主接口和子接口不属于题设二层交换端口。PortFast 不使端口天然无环，误接交换机可能产生环路；应按设计使用 BPDU Guard 等保护。"
+      },
+      "original_fields": {
+        "prompt": "Which port type supports the spanning-tree portfast command without additional configuration?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 生成树协议中 PortFast 特性的适用端口类型及配置约束。\n1. 生成树 PortFast 特性核心机制：\n   - 在标准 802.1D 生成树中，一个物理交换机端口从阻塞（Blocking）状态转换到转发（Forwarding）状态需要经历监听（Listening, 15秒）和学习（Learning, 15秒），总共引入 30 秒的转发延迟。\n   - 如果该端口连接的是主机、服务器或打印机等终端设备，终端在开机获取 DHCP 地址时极易因 30 秒链路收敛延迟而导致 DHCP 超时失败。\n   - 启用 PortFast 特性后，端口在收到载波检测（Up）时，能够**立即从阻塞状态跃迁至转发（Forwarding）状态**，彻底消除 30 秒延迟，并避免该端口状态波动向全网触发不必要的拓扑变更通告（TCN）。\n2. 端口类型与 PortFast 命令行支持规则：\n   - 在 Cisco IOS 中，在接口模式下直接输入基础命令：\n     `Switch(config-if)# spanning-tree portfast`\n     该命令**默认仅支持配置在接入模式端口（Access Ports）上**。\n   - 如果接口被配置为中继端口（Trunk Port），直接执行 `spanning-tree portfast` 会被系统告警阻止或无效；\n   - 若必须在 Trunk 端口上启用 PortFast（例如连接了运行单臂路由虚拟机的服务器），管理员**必须显式追加额外的 `trunk` 关键字参数**：\n     `Switch(config-if)# spanning-tree portfast trunk`\n   - 因此，无需任何额外配置直接原生支持 `spanning-tree portfast` 的端口类型只能是接入端口（Access Ports）。\n\n• 正确选项剖析：\n选项 D（access ports）：\n接入端口（Access Ports）天然连接单一终端主机，无环路风险，原生支持在不加任何额外关键字或参数的情况下直接配置 `spanning-tree portfast`，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（Layer 3 main interfaces）：三层路由主接口（配置了 `no switchport`）运行在三层，直接参与 IP 路由转发，根本不运行生成树（STP）协议，无法配置任何 spanning-tree 命令。\n- 选项 B（Layer 3 subinterfaces）：三层子接口同样属于三层路由范畴，不参与二层 STP 状态机。\n- 选项 C（trunk ports）：中继端口通常连接其他交换机，存在严重的环路风险。要在 Trunk 端口上启用 PortFast，必须输入附加参数 `spanning-tree portfast trunk`，题干明确强调“without additional configuration（无需额外配置）”，直接排除 Trunk 端口。\n\n• 考试要点与速记技巧：\n- PortFast 配置对比：\n  - **Access 口**：直接敲 `spanning-tree portfast`（无需额外配置）。\n  - **Trunk 口**：必须追加参数 `spanning-tree portfast trunk`（需要额外配置）。\n  - **三层路由口**：不跑 STP，不可配。"
+      }
+    },
+    {
+      "id": 813,
+      "original_qid": "Q1084",
+      "before_sha256": "d904e78e8a23296d54c85e54b0d2b9f0a975e9068ced7122758ee04db0bc6a00",
+      "reason": "图中 R29 是值；改正 JSON Schema 用词。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is represented by \"R29\" in this JSON data?",
+        "explanation": "D。图中第 4 行 `\"router\": \"R29\"` 里，`\"router\"` 是键，`\"R29\"` 是字符串值。A 数组和 C 对象是容器；B 是属性名而非属性值。"
+      },
+      "original_fields": {
+        "prompt": "What is represented by the word \"R29\" within this JSON schema?",
+        "explanation": "• 核心考点与原理分析：\n本题考查网络自动化与数据建模标准中的 JSON（JavaScript Object Notation, RFC 8259）数据结构规范及其语法元素。\n在现代网络可编程性（Network Programmability）与 RESTful API（如 Cisco DNA Center、RESTCONF）通信中，JSON 是最主流的数据交换格式。JSON 建立在两种核心数据结构之上：\n1. 对象（Object）：由大括号 `{}` 包裹的无序键值对（Key-Value Pair）集合。每个键（Key）必须是双引号包裹的字符串，键与值之间由冒号 `:` 分隔，多个键值对之间用逗号 `,` 分隔。\n2. 数组（Array）：由方括号 `[]` 包裹的有序值的集合，各元素之间用逗号分隔。\n3. 基本数据值类型（Value Types）：包括字符串（String，双引号括起）、数值（Number）、布尔值（true/false）、空值（null）、对象（Object）或数组（Array）。\n题干中第 4 行的代码为：`{\"router\": \"R29\", \"interface\":\"fe4/25\"}`。冒号左侧是键名（Key）`\"router\"`，冒号右侧则是该键对应的数据内容，即值（Value）`\"R29\"`。\n\n• 正确选项剖析：\n选项 D（value）完全正确。在键值对 `\"router\": \"R29\"` 的语法结构中，`\"router\"` 是属性名称（Key），而 `\"R29\"` 作为冒号右侧被双引号包裹的字符串，代表该属性所赋的具体数据内容，在 JSON 标准规范中被严格定义为“值（value）”。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（array）：数组是由方括号 `[]` 包裹的多个元素的集合（如第 1 行的 `[` 与第 5 行的 `]` 构成的外层结构），`\"R29\"` 只是数组内某个对象的一个字符串字段，绝非数组。\n- 选项 B（key）：键（Key）是冒号左边的字段标识符（例如第 4 行的 `\"router\"` 或 `\"interface\"`），`\"R29\"` 位于冒号右侧，属于值而非键。\n- 选项 C（object）：对象是由花括号 `{}` 包裹的键值对集合整体（例如整行 `{\"router\": \"R29\", \"interface\":\"fe4/25\"}` 是一个 object），`\"R29\"` 仅是该对象内部的一个成员值。\n\n• 考试要点与速记技巧：\nJSON 结构速记口诀：“冒号左边是 Key（键），冒号右边是 Value（值）；大括号括 Object（对象），方括号括 Array（数组）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q813_agent.jpg",
+      "image_sha256": "12782512e67db46dee0c04d96b874d4bfe44290969c4685b9050aae3a205b50b"
+    },
+    {
+      "id": 814,
+      "original_qid": "Q1085",
+      "before_sha256": "6da0af4527b658d0641b74c1248cafeaa0b9273e99035471948481b0b41bf521",
+      "reason": "对象也是 JSON value，排除同义歧义，明确询问容器类型。",
+      "updates": {
+        "prompt": "Refer to the exhibit. What is the most specific JSON container type represented by the brace-delimited item on line 2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "object"
+          },
+          {
+            "label": "B",
+            "text": "string"
+          },
+          {
+            "label": "C",
+            "text": "key"
+          },
+          {
+            "label": "D",
+            "text": "array"
+          }
+        ],
+        "explanation": "A。第 2 行花括号包含 `\"switch\": \"SW16\"` 和 `\"interface\": \"fe3/43\"`，整体为对象；最外层方括号是数组。键及其字符串值只是对象成员。注意对象本身也是合法 JSON value，因此用“value”作为排他干扰项会造成歧义，本题改为询问具体容器类型。"
+      },
+      "original_fields": {
+        "prompt": "What is represented in line 2 within this JSON schema?",
+        "options": [
+          {
+            "label": "A",
+            "text": "object"
+          },
+          {
+            "label": "B",
+            "text": "value"
+          },
+          {
+            "label": "C",
+            "text": "key"
+          },
+          {
+            "label": "D",
+            "text": "array"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查网络自动化与控制器 API 通信中 JSON（RFC 8259）数据结构的层级解析能力。\n在给出的 JSON 模式（JSON Schema/Data）中：\n- 第 1 行与第 5 行使用中括号 `[` 和 `]`，定义了一个外层的顶层数组（Array）。\n- 数组内部包含了 3 个元素，分别位于第 2 行、第 3 行与第 4 行。\n- 第 2 行的内容为：`{\"switch\": \"SW16\", \"interface\":\"fe3/43\"},`。\n根据 RFC 8259 规范，凡是由左花括号 `{` 开始、右花括号 `}` 结束，并在其中包含零个或多个由逗号分隔的键值对（name/value pairs）的独立数据结构，在 JSON 中被统称为“对象（object）”。因此第 2 行从语法实体上完整代表一个对象。\n\n• 正确选项剖析：\n选项 A（object）完全正确。第 2 行由大括号 `{}` 将两对键值对（`\"switch\": \"SW16\"` 和 `\"interface\":\"fe3/43\"`）封装为一个整体，表示一台交换机接口的设备描述单元，符合 JSON 规范对“对象（Object）”的严格定义。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（value）：虽然在广义的层级嵌套中，对象本身可以作为数组的值元素，但在 JSON 语法成分的具体辨析题中，第 2 行整行展现的独立语法容器结构是花括号包裹的 Object；若选 value 则无法体现其键值对集合的本质特征。\n- 选项 C（key）：键（Key）仅指冒号左侧的双引号字符串（如 `\"switch\"` 和 `\"interface\"`），整行数据不是 Key。\n- 选项 D（array）：数组是由方括号 `[]` 标识的有序序列（第 1 行与第 5 行构成的最外层是 Array），第 2 行两端为花括号 `{}`，绝非 Array。\n\n• 考试要点与速记技巧：\nJSON 层级判断要点：“花括号一对看整行，必是键值对集合——对象（Object）；方括号一对贯首尾，必是有序列表——数组（Array）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q814_agent.jpg",
+      "image_sha256": "3ffc29a2501de2e6700037898d31e61ed6da68b68f3b98c5d2cbaa5aaf1f41fd"
+    },
+    {
+      "id": 815,
+      "original_qid": "Q1094",
+      "before_sha256": "2db2dd6f5a757fd2ae7155d1b9b9d3a8ae423878195713ba2b4e730ef3c62c6c",
+      "reason": "纠正必须 NAT、私有地址天然安全等绝对化结论。",
+      "updates": {
+        "explanation": "A。RFC 1918 地址空间包括 10.0.0.0/8、172.16.0.0/12 与 192.168.0.0/16；组织可在内部自行使用而无须从 RIR 单独获配。B，站点间 VPN 并不要求必须使用私网地址；C，内部路由表规模取决于设计与汇总；D，地址空间有限。私网地址通常不在公共互联网全局路由；对外通信可依设计使用 NAT、代理或隧道，不是所有通信都必须 NAT。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918（Address Allocation for Private Internets）私网 IPv4 地址的管理机制与分配标准。\n1. IPv4 地址的全球治理体系：公网 IPv4 地址由互联网号码分配机构（IANA）统筹，并进一步分配给各区域互联网注册机构（RIR，如 ARIN、RIPE NCC、APNIC、LACNIC、AFRINIC），最终由各大 ISP 分配给组织或企业。公网 IP 必须经过严格的申请、注册、审批与缴费，且在全球具有唯一性。\n2. 私网 IPv4 地址（RFC 1918）：为了缓解 IPv4 地址资源的枯竭，IETF 在 RFC 1918 中永久预留了三组专用地址空间：\n   - 10.0.0.0/8（10.0.0.0 - 10.255.255.255，约 1677 万个地址）\n   - 172.16.0.0/12（172.16.0.0 - 172.31.255.255，约 104 万个地址）\n   - 192.168.0.0/16（192.168.0.0 - 192.168.255.255，共 65536 个地址）\n3. 管理特征：这些私网地址专供企业或个人在内部私有网络中独立使用，无须向 IANA、RIR 或任何互联网管理权威机构申请分配（used without allocation from a regional internet authority），任何人均可随需自主规划和部署。\n\n• 正确选项剖析：\n选项 A（is used without allocation from a regional internet authority，使用时无需区域互联网管理机构的分配）完全正确。私有 IPv4 地址的设计初衷就是让任何网络管理员可以在不受 RIR（如 APNIC、ARIN）审计和分配约束的情况下，自由在内部私网中部署使用。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（is used when traffic on the subnet must traverse a site-to-site VPN to an outside organization）：在建立跨外部机构的站点间 VPN 时，若双方使用相同的私网 IP 会导致严重网段重叠（Overlapping），通常需要复杂的 NAT 或申请专有地址，并非“必须使用私网地址”。\n- 选项 C（reduces the forwarding table on network routers）：私有地址是部署在内网中的，内网路由器的转发表大小取决于内部子网划分与路由汇总设计，私有地址本身不会自动减少路由器转发表；且公网核心路由器转发表的缩减主要依赖 CIDR（RFC 1519）超网聚合。\n- 选项 D（provides unlimited address ranges）：IPv4 整个地址空间只有 32 位（约 42.9 亿），RFC 1918 私网地址的总量是严格受限的有限子集，绝对不是“无限（unlimited）”。\n\n• 考试要点与速记技巧：\n私网 IP 特征三字经：“免审批（No RIR Allocation）、不花钱、免登记；出公网、必做 NAT、防重叠”。"
+      }
+    },
+    {
+      "id": 816,
+      "original_qid": "Q1095",
+      "before_sha256": "e6c5c1ca3101d7dd278c667607b97420d5004cc28d8a0f0124c459e2901b7030",
+      "reason": "图示队列深度为零，FIFO 是策略而非正在排队或拥塞。",
+      "updates": {
+        "prompt": "Refer to the interface output. Which feature is explicitly shown as configured, irrespective of whether packets are waiting at this instant?",
+        "explanation": "C。输出包含 `Queueing strategy: fifo`，表明接口显示了 FIFO 队列策略；`Input queue: 0/300/0/0` 和 `Output queue: 0/300` 则表示采样时队列深度为 0，不能据此说当前有报文排队或存在拥塞。30 秒输入/输出速率为 0 不支持 B 高吞吐；计数器和速率也不足以证明 A 网卡故障或 D 广播风暴，零错误不保证硬件绝无故障。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS `show interface` 命令输出中的接口队列机制（Queueing Strategy）与工作状态诊断。\n在 Cisco 路由器与交换机的物理接口上，硬件和系统维护着入站与出站数据包缓冲区（Buffer）。当接口处理数据包时，涉及以下核心排队机制：\n1. 队列调度机制（Queueing）：在展示的 CLI 输出中明确包含以下关键行：\n   - `Input queue: 0/300/0/0 (size/max/drops/flushes); Total output drops: 0`\n   - `Queueing strategy: fifo`\n   - `Output queue: 0/300 (size/max)`\n   这表明该接口当前运行着队列管理机制（排队策略为默认的先进先出 FIFO，最大队列缓冲深度为 300 个数据包）。接口在出入方向通过队列缓冲来平滑流量突发与调度数据转发。\n2. 其它运行指标比对：\n   - 吞吐率：`30 second input rate 0 bits/sec, 0 packets/sec`，输出速率亦为 `0 bits/sec`，txload 与 rxload 均为 1/255，处于近乎静止状态。\n   - 错误计数：CRC、frame、overrun、collisions、ignored 均为 0，物理层 DEC21140 芯片与双工均完全正常。\n\n• 正确选项剖析：\n选项 C（queueing，排队/队列调度）完全正确。题干询问在展示的接口输出中正在发生哪种接口工况。输出中显式给出了 `Queueing strategy: fifo` 以及 Input/Output queue 的状态定义，体现了接口活跃的队列管理特性（Queueing）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（bad NIC，坏网卡/物理网卡故障）：输出中 CRC 错误为 0、input errors 为 0，双工为 Full-duplex，物理状态与链路协议均为 up，网卡硬件运作完全正常，绝无 bad NIC 故障。\n- 选项 B（high throughput，高吞吐量）：当前 30 秒平均输入与输出速率均为 0 bits/sec，接口负载 txload/rxload 仅为 1/255，流量处于空闲状态，与高吞吐量截然相反。\n- 选项 D（broadcast storm，广播风暴）：输出中 `Received 267 broadcasts`，广播数量极少且入站流量为 0，完全没有突发风暴特征。\n\n• 考试要点与速记技巧：\n“接口输出辨工况：速率为零错误少，见到 Queueing Strategy 选排队（queueing）；满载 255 破两亿，方为高吞吐（high throughput）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q816_agent.jpg",
+      "image_sha256": "990cf41a4599ce31abc84adef8712d5d036eedbf772c6f8e37b82ce6d4ffbdbb"
+    },
+    {
+      "id": 817,
+      "original_qid": "Q1096",
+      "before_sha256": "f1d81af4e875b2c2f29d653f35f4e149fb28e2bbffec2b83b262ca7e21dacd72",
+      "reason": "明确私网复用与 NAT 的作用，不绝对化公开网络过滤。",
+      "updates": {
+        "explanation": "D。RFC 1918 私有地址可由不同组织重复使用，从而减少对全球唯一 IPv4 地址的需求；连接公共互联网时，NAT/PAT 等设计可进一步复用公网地址，但私网地址本身不会扩大 IPv4 总地址空间。A，私有前缀不作为全球可达前缀使用；B，范围有限；C，多接收端并非使用私网地址的必要条件。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址的历史设计初衷及其在网络体系中的核心作用。\n1. IPv4 地址耗尽危机：20 世纪 90 年代初，因特网的迅猛普及导致原本分配给企业与机构的公网 IPv4（A/B/C 类）地址空间迅速告急，全局可分配的公网 IP 数量逼近枯竭。\n2. 解决方案：IETF 推出了双轮驱动策略：\n   - 长期战略：开发具有 128 位超大地址空间的下一代互联网协议 IPv6。\n   - 中短期过渡方案：定义 RFC 1918 私有地址空间（10.0.0.0/8、172.16.0.0/12、192.168.0.0/16），并结合 NAT/PAT（网络地址端口转换，RFC 1631/RFC 3022）技术。\n3. 核心机制：通过允许全球数以百万计的私有企业网在内部复用相同的 RFC 1918 私网网段，并在访问外网时通过极少量的公网 IP 进行端口多路复用（PAT），极大减少了企业对全球公网 IP 地址的占用量，从而显著缓解了 IPv4 地址短缺的全球性危机（alleviates the shortage of IPv4 addresses）。\n\n• 正确选项剖析：\n选项 D（alleviates the shortage of IPv4 addresses，缓解了 IPv4 地址的匮乏短缺）完全正确。这正是 RFC 1918 结合 NAT 最根本的技术使命与历史价值。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（is used when the ISP requires the new subnet to be advertised to the internet for web services）：全球互联网路由器坚决过滤私网路由，向 Internet 宣告用于公网 Web 服务的网段必须是合法申请的公网 IP。\n- 选项 B（provides unlimited address ranges）：IPv4 是 32 位有限地址空间，RFC 1918 私网地址总数是固定的，绝非“无限”。\n- 选项 C（is used when the network has multiple endpoint listeners）：存在多个网络终结点侦听者是组播（Multicast，224.0.0.0/4）的典型应用场景，与私网单播地址无关。\n\n• 考试要点与速记技巧：\n私网 IP 核心采分点：“私网复用配 NAT，缓解匮乏延寿命（alleviates the shortage of IPv4 addresses）”。"
+      }
+    },
+    {
+      "id": 818,
+      "original_qid": "Q1097",
+      "before_sha256": "d772bdfe320511873d944fbc6fec33e89c13eb6f6d61102b598adec05662c472",
+      "reason": "内部专用主机是适用场景，私网也可经适当方案访问外网。",
+      "updates": {
+        "prompt": "Which is a suitable use of private IPv4 addresses in an organization?",
+        "explanation": "C。仅与内部主机通信的终端适合使用 RFC 1918 私网地址，但这不是私网地址的唯一用途；通过 NAT、代理或隧道，私网主机也可以与外部服务通信。A，站点间 VPN 不要求一定使用私网地址；B，私网地址不单独提供跨公共互联网的全球可达性；D，复杂度取决于实际路由、地址和转换设计。私网地址本身也不提供认证或加密。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of private IPv4 addressing?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址的使用范围与适用宿主终端类型。\n根据 RFC 1918 规范要求，主机系统根据其网络通信需求可划分为不同类别：\n1. 全局外部可达主机：需要直接接受来自公共互联网访问的主机（如对外 Web、邮件、DNS 服务器），必须配置全球唯一的公网 IPv4 地址。\n2. 纯内部主机（Internal Hosts）：仅与企业或机构内部局域网的其他主机进行数据交互、而不需要从公网直接发起到该主机的通信连接（hosts that communicate only with other internal hosts，例如企业内部数据库、打印机、ERP/OA 服务器、内网工作站等）。\n3. 部署规范：对于这类纯内部通信主机，RFC 1918 明确指出应当为其分配私有 IPv4 地址。这样做不仅节约了宝贵的公网 IP，还天然为内部主机提供了一层隔离屏障，防止外网黑客直接对内网发起非法探测与攻击。\n\n• 正确选项剖析：\n选项 C（is used on hosts that communicate only with other internal hosts，用于仅与其他内部主机通信的主机）完全符合 RFC 1918 的标准应用场景描述。对于只在内网流通业务流量的终端，使用私有 IP 是最佳实践。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（is used when traffic on the subnet must traverse a site-to-site VPN to an outside organization）：与外部机构互联时若直接使用私网 IP，极易因网段重复发生路由黑洞，并非必须使用私网 IP。\n- 选项 B（allows endpoints to communicate across public network boundaries）：私网 IP 绝不允许直接跨越公共互联网边界路由通信（公网边界路由器会无条件丢弃私网报文），必须经过 NAT 或隧道封装。\n- 选项 D（reduces network complexity）：引入私网 IP 后必须部署 NAT、PAT、静态端口映射和复杂的内网路由协议，不仅破坏了端到端通信透明性，还显著增加了网络的运维与排错复杂度，绝非“降低复杂度”。\n\n• 考试要点与速记技巧：\n私网主机适用范围：“对内通信不露头，纯属内部好帮手（communicate only with other internal hosts）”。"
+      }
+    },
+    {
+      "id": 819,
+      "original_qid": "Q1098",
+      "before_sha256": "acd38b2bda7cacf497b1a817b90d7c7d54c18b203c55011229a202431b1e5dbf",
+      "reason": "私网缓解全球唯一地址需求但不增加 IPv4 空间，也不提供安全保障。",
+      "updates": {
+        "explanation": "B。不同私有网络可以复用 RFC 1918 地址，结合适当的 NAT/PAT 等连接方案，减少所需的全球唯一 IPv4 地址数量；这缓解地址短缺而非增加 IPv4 地址总数。A，ACL 过滤数据包，本身不提供地址转换或全球路由；C，RFC 1918 前缀不用于全球公开宣告；D，私有地址自身不提供加密或认证。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址在现代网络架构中的战略地位与技术特征（官方高频核心考点）。\n1. RFC 1918 的本质：IETF 在制定 RFC 1918 时，将 10.0.0.0/8、172.16.0.0/12 以及 192.168.0.0/16 划为专供组织内部使用的非公网可路由地址。\n2. 配合 NAT 扭转乾坤：在私网地址诞生前，接入互联网的每台终端都需要一个全球唯一的公网 IP。随着个人电脑和企业内部终端爆发，公网 IP 迅速濒临枯竭。通过将内网主机置于 RFC 1918 私网空间，并利用路由器/防火墙的 NAT/PAT 技术实现数千台私网终端共享单个公网 IP 上网，从根本上极大地延缓了公网 IPv4 地址的消耗速度，有力缓解了全球 IPv4 地址短缺的严峻危机（alleviates the shortage of IPv4 addresses）。\n\n• 正确选项剖析：\n选项 B（alleviates the shortage of IPv4 addresses，缓解了 IPv4 地址的短缺）完全正确。这是 Cisco 官方考试大纲对私网 IPv4 作用的最标准、最具代表性的定义。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（traverses the internet when an outbound ACL is applied）：ACL 仅用于报文过滤与流量控制，绝无路由或地址转换功能。公网 ISP 骨干路由器在硬件转发表中直接丢弃源/目的为 RFC 1918 的数据包，出站 ACL 无法让私网报文在公共互联网上可达。\n- 选项 C（is used when the ISP requires the new subnet to be advertised to the internet for web services）：对外 Web 服务必须使用 ISP 认可并向外通告的公网 IP，向互联网宣告私有 IP 会被运营商直接按 BGP 路由过滤策略扼杀。\n- 选项 D（enables secure connectivity over the internet）：私有地址本身没有任何加密、完整性校验或防篡改的安全机制，跨公网的安全互通必须依托 IPsec、SSL/TLS 等安全协议，私有地址本身并不提供安全连接。\n\n• 考试要点与速记技巧：\n解题黄金采分词：“题干问 Private IPv4，选项必找缓解短缺（alleviates shortage）”。"
+      }
+    },
+    {
+      "id": 820,
+      "original_qid": "Q1099",
+      "before_sha256": "269b6984dd41033a8a5cc636a8e24c145f7bb7041d6103b8d0a08e3d8d45e51f",
+      "reason": "图中速率与负载支持高吞吐 C，超过 100 Mb/s 的不一致单独注明；移除无证据官方答案主张。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Based on the displayed 30-second rates and interface load, which condition is reported?",
+        "answer": [
+          "C"
+        ],
+        "explanation": "C。截图显示 30 秒输入速率 `200234873 bits/sec`、输出速率 `233830309 bits/sec`，txload 和 rxload 均为 `255/255`，因此所报告的状态是高吞吐/高负载。图中同时标有 100 Mb/s，所列速率超过该标称接口速率；这些数值相互矛盾，不能据此认定真实硬件上的实际吞吐量。FIFO 是配置的队列策略，而输入/输出队列当前深度均为 0，不能证明当前排队或拥塞。广播累计值无法单独证明风暴，单端双工与零错误也无法单独确认或排除双工不匹配。原答案 D 及声称官方判分依据的解释没有证据，现依图中所报告的速率改为 C。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "answer": [
+          "D"
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS `show interface` 命令输出中的高级排队调度机制与官方题库标准考核点辨析。\n1. 接口队列机制深度分析：\n   在 Cisco 网络设备接口上，QoS 调度机制负责控制数据包在接口缓冲区中的排队策略。输出中清晰显示：\n   - `Input queue: 0/300/0/0 (size/max/drops/flushes); Total output drops: 0`\n   - `Queueing strategy: fifo`\n   - `Output queue: 0/300 (size/max)`\n   这展示了接口的队列分配策略（FIFO）与当前的排队深度及缓冲区丢包情况。\n2. 官方题库评判基准辨析：\n   本题在 Cisco 官方 CCNA 认证历史题库中与 Q1095（816）同源对应，官方答案标准锁为 D（queueing）。虽然在输出中由于测试仿真流量输入，显示出高额的速率（`30 second input rate 200234873 bits/sec`，txload 与 rxload 均为 255/255），但该题目在试题设计意图上重点考查考生对接口 QoS 与缓冲区排队（Queueing）输出参数的识别能力，因此在官方判分系统中将 `queueing` 判定为标准正确项。\n\n• 正确选项剖析：\n选项 D（queueing，排队）是 Cisco 官方题库与认证考试的标准答案。输出中显式的 `Queueing strategy: fifo` 以及输入/输出队列计数指标，直接反映了接口内部的排队机制（Queueing）正在运作。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（broadcast storm，广播风暴）：输出中明确标明 `Received 267 broadcasts`，广播总数极低，没有任何广播风暴产生的迹象。\n- 选项 B（duplex mismatch，双工不匹配）：当前接口明确处于 `Full-duplex, 100 Mb/s`，且 collisions、CRC、late collision 计数全部为 0，完全没有双工不匹配所必然引发的单向碰撞或校验错误。\n- 选项 C（high throughput，高吞吐量）：尽管在直观上接口吞吐率超过 200 Mbps，但在官方历史题库的这一特定题目变体中，判分系统严格锚定排队策略行（Queueing strategy: fifo），因此应试时须以官方标准选项 D（queueing）为准。\n\n• 考试要点与速记技巧：\n官方题库避坑指南：“接口输出有 FIFO 策略行，题干问 Condition，官方标准认排队（queueing）”。"
+      },
+      "has_exhibit": true,
+      "exhibit_path": "exhibits/q820_agent.jpg",
+      "image_sha256": "9cd0e8fa922f7c196541ee09af790c202b6fc9fe129251243988dd219dd114bb"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc8259.html",
+    "https://www.rfc-editor.org/rfc/rfc1918.html",
+    "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_s2.pdf",
+    "https://www.cisco.com/E-Learning/bulk/public/tac/cim/cib/using_cisco_ios_software/cmdrefs/show_interfaces.htm"
+  ],
+  "limitations": "人工检查，未进行真实设备测试。"
+}

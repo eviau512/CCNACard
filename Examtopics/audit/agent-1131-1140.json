@@ -1,0 +1,561 @@
+{
+  "scope": "Q1131–Q1140",
+  "corrections": [
+    {
+      "id": 1131,
+      "before_sha256": "76bbfecd980e1dbe3269aa81d0effec7af46d5d0ce1e5b459eaf3c8326856c32",
+      "updates": {
+        "prompt": "Drag each corrected characteristic to its cable or IPv6 address category. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "is typically used in small office applications",
+            "is typically used for internal datacenter connectivity",
+            "is used by 1000BASE-SX short-reach Ethernet",
+            "is available as shielded or unshielded twisted-pair cable"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "copper (Slot 1)",
+              "expected": "is typically used in small office applications",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t2",
+              "label": "copper (Slot 2)",
+              "expected": "is available as shielded or unshielded twisted-pair cable",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t3",
+              "label": "multimode fiber (Slot 1)",
+              "expected": "is typically used for internal datacenter connectivity",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "id": "t4",
+              "label": "multimode fiber (Slot 2)",
+              "expected": "is used by 1000BASE-SX short-reach Ethernet",
+              "unordered_group": "multimode fiber"
+            }
+          ]
+        },
+        "explanation": "Copper 可为 UTP 或 STP，常见于办公室；1000BASE-SX 使用多模光纤，多模光纤也常用于数据中心。衰减和传输距离取决于介质及收发器，原选项将模间色散与光功率衰减混为一谈。",
+        "answer_image": null
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1132,
+      "before_sha256": "cf8abf69e8f795e7e924bda5cc67d456a8958445ceb78741c5464325d271cff3",
+      "updates": {
+        "prompt": "Drag each corrected characteristic to its cable or IPv6 address category. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "is commonly used by long-reach optical links",
+            "is commonly used for 100-meter Ethernet access links",
+            "may use twisted pairs of copper conductors",
+            "commonly uses a core approximately 9 micrometers wide"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "single-mode fiber (Slot 1)",
+              "expected": "is commonly used by long-reach optical links",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t2",
+              "label": "single-mode fiber (Slot 2)",
+              "expected": "commonly uses a core approximately 9 micrometers wide",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t3",
+              "label": "copper (Slot 1)",
+              "expected": "is commonly used for 100-meter Ethernet access links",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t4",
+              "label": "copper (Slot 2)",
+              "expected": "may use twisted pairs of copper conductors",
+              "unordered_group": "copper"
+            }
+          ]
+        },
+        "explanation": "单模光纤常见芯径约 9 µm，适合长距离光链路；铜缆以双绞线构造，可用于符合规格的 100 米以太网链路。原题的“单根实心导体”和“几乎不反射”并非类别定义；实际光纤模式不是是否反射的简单判断。",
+        "answer_image": null
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1133,
+      "before_sha256": "7f8a94e855046018351cfcc4d1a035475ff284f860bc3b71c4177a2e4e548efc",
+      "updates": {
+        "prompt": "Drag each corrected characteristic to its cable or IPv6 address category. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "commonly uses a core approximately 9 micrometers wide",
+            "has modal dispersion that can limit reach",
+            "is used by 100GBASE-SR4 Ethernet",
+            "is commonly used for long-reach optical links"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "single-mode fiber (Slot 1)",
+              "expected": "commonly uses a core approximately 9 micrometers wide",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t2",
+              "label": "single-mode fiber (Slot 2)",
+              "expected": "is commonly used for long-reach optical links",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t3",
+              "label": "multimode fiber (Slot 1)",
+              "expected": "has modal dispersion that can limit reach",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "id": "t4",
+              "label": "multimode fiber (Slot 2)",
+              "expected": "is used by 100GBASE-SR4 Ethernet",
+              "unordered_group": "multimode fiber"
+            }
+          ]
+        },
+        "explanation": "单模光纤通常芯径约 9 µm，适合较长光链路；多模光纤存在模间色散，100GBASE-SR4 使用多模光纤。单模指传播空间模式而非只能使用一个波长；链路速率与最大距离取决于具体标准及设备。",
+        "answer_image": null
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1134,
+      "before_sha256": "6123f91dd32bacbe24f40ca61ee4625516bc5250c0e85665ade1c535643f9a45",
+      "updates": {
+        "prompt": "Match the corrected example IPv6 addresses to their address types. The interactive addresses below replace malformed or reserved-scope examples in the original exhibit.",
+        "drag_drop_data": {
+          "sources": [
+            "ff02::1",
+            "fe80::1234:5678:9abc:def0",
+            "fd42:1234:5678:1::3",
+            "2000:2eb8:3e5f:376c:da66:bf1d:d36a:1"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Global Unicast",
+              "expected": "2000:2eb8:3e5f:376c:da66:bf1d:d36a:1"
+            },
+            {
+              "id": "t2",
+              "label": "Unique Local",
+              "expected": "fd42:1234:5678:1::3"
+            },
+            {
+              "id": "t3",
+              "label": "Link-Local Unicast",
+              "expected": "fe80::1234:5678:9abc:def0"
+            },
+            {
+              "id": "t4",
+              "label": "Multicast",
+              "expected": "ff02::1"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "`2000:2eb8:3e5f:376c:da66:bf1d:d36a:1` 属于 2000::/3 全球单播分配范围；`fd42:1234:5678:1::3` 为 FD00::/8 本地分配 ULA；`fe80::1234:5678:9abc:def0` 是链路本地地址；`ff02::1` 为链路范围的全节点组播。原图的 FE80 地址保留位非零且 FF00 组播作用域为保留值；FC00 的 L 位为 0 并非通常的本地生成 ULA，已修正。2000::/3 范围归类不代表具体示例已分配或一定可在公网使用。"
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1135,
+      "before_sha256": "baf681100e41988b70c3bdbe32ffd6bb29042f492efbc7133b4785f098cc497b",
+      "updates": {
+        "prompt": "Drag each corrected characteristic to its cable or IPv6 address category. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "commonly used for long-reach optical links",
+            "available as shielded or unshielded twisted-pair cable",
+            "can use pairs of insulated copper conductors",
+            "commonly has a core diameter of approximately 9 micrometers"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "single-mode fiber (Slot 1)",
+              "expected": "commonly used for long-reach optical links",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t2",
+              "label": "single-mode fiber (Slot 2)",
+              "expected": "commonly has a core diameter of approximately 9 micrometers",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t3",
+              "label": "copper (Slot 1)",
+              "expected": "available as shielded or unshielded twisted-pair cable",
+              "unordered_group": "copper"
+            },
+            {
+              "id": "t4",
+              "label": "copper (Slot 2)",
+              "expected": "can use pairs of insulated copper conductors",
+              "unordered_group": "copper"
+            }
+          ]
+        },
+        "explanation": "单模光纤常用于长距离链路，典型 9/125 µm 光纤芯径约 9 µm；铜网络布线可采用 UTP 或 STP 双绞线。单模描述的是传播模式，而非一根光纤只能承载一个波长。",
+        "answer_image": null
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1136,
+      "before_sha256": "a8d96854207416aabb042c9e7804a42d918a5f3a7ba97550947a4d8142237fc0",
+      "updates": {
+        "prompt": "Match the corrected example IPv6 addresses to their address types. The interactive addresses below replace malformed or reserved-scope examples in the original exhibit.",
+        "drag_drop_data": {
+          "sources": [
+            "ff02::1",
+            "fe80::1234:5678:9abc:def0",
+            "fd42:1234:5678:1::3",
+            "2000:fda9:65b0:e8c0:1d84:6369:2daa:1"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Global Unicast",
+              "expected": "2000:fda9:65b0:e8c0:1d84:6369:2daa:1"
+            },
+            {
+              "id": "t2",
+              "label": "Unique Local",
+              "expected": "fd42:1234:5678:1::3"
+            },
+            {
+              "id": "t3",
+              "label": "Link-Local Unicast",
+              "expected": "fe80::1234:5678:9abc:def0"
+            },
+            {
+              "id": "t4",
+              "label": "Multicast",
+              "expected": "ff02::1"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "`2000:fda9:65b0:e8c0:1d84:6369:2daa:1` 属于 2000::/3 全球单播分配范围；`fd42:1234:5678:1::3` 为 FD00::/8 本地分配 ULA；`fe80::1234:5678:9abc:def0` 是链路本地地址；`ff02::1` 为链路范围的全节点组播。原图的 FE80 地址保留位非零且 FF00 组播作用域为保留值；FC00 的 L 位为 0 并非通常的本地生成 ULA，已修正。2000::/3 范围归类不代表具体示例已分配或一定可在公网使用。"
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1137,
+      "before_sha256": "58ae04ee53d22eaf5d83eaf6bb96dfc64fff4e0c151dfe2304ad0830a8a8c7f5",
+      "updates": {
+        "prompt": "Drag each corrected characteristic to its cable or IPv6 address category. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "is commonly used for long-reach optical links",
+            "is typically used for long-haul DWDM optical links",
+            "commonly has a core diameter of 50 or 62.5 micrometers",
+            "is used by 100GBASE-SR4 short-reach Ethernet"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "single-mode fiber (Slot 1)",
+              "expected": "is commonly used for long-reach optical links",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t2",
+              "label": "single-mode fiber (Slot 2)",
+              "expected": "is typically used for long-haul DWDM optical links",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "id": "t3",
+              "label": "multimode fiber (Slot 1)",
+              "expected": "is used by 100GBASE-SR4 short-reach Ethernet",
+              "unordered_group": "multimode fiber"
+            },
+            {
+              "id": "t4",
+              "label": "multimode fiber (Slot 2)",
+              "expected": "commonly has a core diameter of 50 or 62.5 micrometers",
+              "unordered_group": "multimode fiber"
+            }
+          ]
+        },
+        "explanation": "单模光纤常用于长距离链路和长途 DWDM；多模光纤常见 50 或 62.5 µm 芯径，100GBASE-SR4 使用多模。原答案图错误地把长途 DWDM 划入多模，且“单模只用单一波长”不成立，故修正选项和映射。",
+        "answer_image": null
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1138,
+      "before_sha256": "66a73b5396234511a8840412f75d943414cf6112616eae616c1721799220c156",
+      "updates": {
+        "prompt": "Match the corrected example IPv6 addresses to their address types. The interactive addresses below replace malformed or reserved-scope examples in the original exhibit.",
+        "drag_drop_data": {
+          "sources": [
+            "ff02::1",
+            "fe80::1234:5678:9abc:def0",
+            "fd42:1234:5678:1::3",
+            "2000:0962:6dee:8c78:93b8:c429:c78d:1"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2000:0962:6dee:8c78:93b8:c429:c78d:1"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fd42:1234:5678:1::3"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80::1234:5678:9abc:def0"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff02::1"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "`2000:0962:6dee:8c78:93b8:c429:c78d:1` 属于 2000::/3 全球单播分配范围；`fd42:1234:5678:1::3` 为 FD00::/8 本地分配 ULA；`fe80::1234:5678:9abc:def0` 是链路本地地址；`ff02::1` 为链路范围的全节点组播。原图的 FE80 地址保留位非零且 FF00 组播作用域为保留值；FC00 的 L 位为 0 并非通常的本地生成 ULA，已修正。2000::/3 范围归类不代表具体示例已分配或一定可在公网使用。"
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1139,
+      "before_sha256": "aba2d9d4449254d712830d655fbd9179907a3e195045546a2bcef8c670e2784a",
+      "updates": {
+        "prompt": "Drag each corrected characteristic to its cable or IPv6 address category. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "may be used by multiple organizations at the same time",
+            "sends packets to a group address rather than a single address",
+            "provides one-to-many communications",
+            "reduces the chance of prefix collisions when sites are combined"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "may be used by multiple organizations at the same time",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "reduces the chance of prefix collisions when sites are combined",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "explanation": "ULA 常按 RFC 4193 使用伪随机 Global ID；不同组织可部署，合并网络时冲突概率低但并非绝对为零。组播使用组地址向一个或多个成员递送数据，其转发范围取决于配置和组播作用域。",
+        "answer_image": null
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    },
+    {
+      "id": 1140,
+      "before_sha256": "a2ad723eee8d49d22381089bf9ba8ee49040c8591503802bee68a64916ca6063",
+      "updates": {
+        "prompt": "Drag each corrected characteristic to its cable or IPv6 address category. Slots in the same category accept either order. The original exhibit uses older or ambiguous wording; use the interactive choices below.",
+        "drag_drop_data": {
+          "sources": [
+            "may be used by multiple organizations at the same time",
+            "is scoped to a single IPv6 link",
+            "is required on IPv6-enabled interfaces",
+            "is a counterpart of private IPv4 address"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Unique Local (Slot 1)",
+              "expected": "may be used by multiple organizations at the same time",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "id": "t2",
+              "label": "Unique Local (Slot 2)",
+              "expected": "is a counterpart of private IPv4 address",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "id": "t3",
+              "label": "Link-Local Address (Slot 1)",
+              "expected": "is scoped to a single IPv6 link",
+              "unordered_group": "Link-Local Address"
+            },
+            {
+              "id": "t4",
+              "label": "Link-Local Address (Slot 2)",
+              "expected": "is required on IPv6-enabled interfaces",
+              "unordered_group": "Link-Local Address"
+            }
+          ]
+        },
+        "explanation": "ULA 与 IPv4 私有地址一样通常不在公共互联网上路由，但两者并不完全相同。链路本地地址用于单一 IPv6 链路，IPv6 启用接口需具备链路本地地址；路由器不会跨链路转发此类源或目的地址。",
+        "answer_image": null
+      },
+      "reason": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。",
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all four drag sources checked",
+        "answer": "all targets checked",
+        "explanation": "corrected",
+        "image": "viewed",
+        "answer_image": "viewed; retained separately as evidence",
+        "code_cli": "not applicable",
+        "finding": "核对原题和答案图；修正不准确的技术表述、对应或不可用地址，保留各类别组内乱序。"
+      }
+    }
+  ],
+  "images_directly_viewed": [
+    "exhibits/q1131_image_agent.jpg",
+    "exhibits/q1131_answer_image_agent.jpg",
+    "exhibits/q1132_image_agent.jpg",
+    "exhibits/q1132_answer_image_agent.jpg",
+    "exhibits/q1133_image_agent.jpg",
+    "exhibits/q1133_answer_image_agent.jpg",
+    "exhibits/q1134_image_agent.jpg",
+    "exhibits/q1134_answer_image_agent.jpg",
+    "exhibits/q1135_image_agent.jpg",
+    "exhibits/q1135_answer_image_agent.jpg",
+    "exhibits/q1136_image_agent.jpg",
+    "exhibits/q1136_answer_image_agent.jpg",
+    "exhibits/q1137_image_agent.jpg",
+    "exhibits/q1137_answer_image_agent.jpg",
+    "exhibits/q1138_image_agent.jpg",
+    "exhibits/q1138_answer_image_agent.jpg",
+    "exhibits/q1139_image_agent.jpg",
+    "exhibits/q1139_answer_image_agent.jpg",
+    "exhibits/q1140_image_agent.jpg",
+    "exhibits/q1140_answer_image_agent.jpg"
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4291",
+    "https://www.rfc-editor.org/rfc/rfc4193",
+    "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/datasheet-c78-736282.html"
+  ],
+  "limitations": "人工核图与协议参考，未做真实设备/光模块实验。"
+}

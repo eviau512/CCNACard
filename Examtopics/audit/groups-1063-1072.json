@@ -1,0 +1,111 @@
+{
+  "scope": [
+    1063,
+    1072
+  ],
+  "corrections": [
+    {
+      "id": 1067,
+      "before_sha256": "7682a31d487215e40a50ad4efef5262cc14126a7051a7d82550b31a812d07ed6",
+      "reason": "原答案图把 MAC flooding 与 MITM 的缓解措施对调，显示它会和当前正确判分相矛盾。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "双标签攻击：避免将用户接入口放进 trunk 所用 native VLAN，并采用专用未用 native VLAN；仅更改默认 VLAN 编号不自动防御。MAC flooding：802.1X 限制未授权设备接入，仍需结合端口安全和限制，不能保证已认证设备不会发送大量伪源 MAC。DHCP snooping 可阻挡非信任端口伪 DHCP 响应，从而缓解该类中间人；不能单独阻止所有 ARP 欺骗，可结合 DAI。禁用 DTP、将接入口显式配置为 access 可降低交换机伪装协商 trunk 风险。原答案图将中间两项对调，以交互配对为准。 原答案图已从应用中隐藏；原图保留在审查证据中。"
+      }
+    },
+    {
+      "id": 1069,
+      "before_sha256": "9afe7ae04aee8c8704ce65542f600a77934c789c7b06e223e9f3c5a7a7ef144c",
+      "reason": "启用端口安全后，sticky、maximum 和 violation 三项接口设置没有题目约束的固定先后；组内按任意顺序评分。",
+      "updates": {
+        "prompt": "With endpoints disconnected during configuration, an interface is already a static access port. First enable port security; then configure sticky learning, a maximum of two secure MAC addresses, and shutdown on a security violation in any order. Not all commands are used.",
+        "drag_drop_data": {
+          "sources": [
+            "switchport mode access",
+            "switchport port-security",
+            "switchport port-security mac-address 0060.3EDD.77AB",
+            "switchport port-security mac-address 00D0.D3ED.622A",
+            "switchport port-security mac-address sticky",
+            "switchport port-security maximum 2",
+            "switchport port-security violation shutdown"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "1",
+              "expected": "switchport port-security"
+            },
+            {
+              "id": "t2",
+              "label": "2",
+              "expected": "switchport port-security mac-address sticky",
+              "unordered_group": "port_security_settings"
+            },
+            {
+              "id": "t3",
+              "label": "3",
+              "expected": "switchport port-security maximum 2",
+              "unordered_group": "port_security_settings"
+            },
+            {
+              "id": "t4",
+              "label": "4",
+              "expected": "switchport port-security violation shutdown",
+              "unordered_group": "port_security_settings"
+            }
+          ]
+        },
+        "explanation": "假定接口已经处于 access 模式：启用 port-security、启用 sticky 学习、设置最多两个安全源 MAC、将违规动作设置为 shutdown。Sticky 将动态学习到的地址加入运行配置；持久化需保存配置，变化的设备可能触发违规。shutdown 在违反安全源 MAC 规则时使端口进入 err-disabled；它限制不同源 MAC 数量，不是对广播、多播或未知单播的流量速率限制。阻止高流量风暴还需依平台配置 storm control。 先启用端口安全，再对接口设置 sticky、maximum 和 violation；后三条在题设无终端流量的配置条件下可交换顺序，示意答案仅为一种顺序。"
+      }
+    },
+    {
+      "id": 1072,
+      "before_sha256": "896686da29685049d987474e0dd619f96206305eda4defc77e61a136f1199998",
+      "reason": "原选项把 PPP 协议与认证数据库或 AAA 服务器并列，改为准确的认证描述。",
+      "updates": {
+        "prompt": "Match each adapted description to accounting or authentication. Answers within each category may be placed in either order; not all options are used.",
+        "drag_drop_data": {
+          "sources": [
+            "It verifies credentials against a local database or an authentication server such as RADIUS or TACACS+.",
+            "It tracks the services that a user is using.",
+            "It records the amount of network resources consumed by the user.",
+            "It assigns per-user attributes.",
+            "It permits and denies login attempts."
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "Accounting (Slot 1)",
+              "expected": "It records the amount of network resources consumed by the user.",
+              "unordered_group": "Accounting"
+            },
+            {
+              "id": "t2",
+              "label": "Accounting (Slot 2)",
+              "expected": "It tracks the services that a user is using.",
+              "unordered_group": "Accounting"
+            },
+            {
+              "id": "t3",
+              "label": "Authentication (Slot 1)",
+              "expected": "It permits and denies login attempts.",
+              "unordered_group": "Authentication"
+            },
+            {
+              "id": "t4",
+              "label": "Authentication (Slot 2)",
+              "expected": "It verifies credentials against a local database or an authentication server such as RADIUS or TACACS+.",
+              "unordered_group": "Authentication"
+            }
+          ]
+        },
+        "explanation": "Accounting：记录用户消耗的网络资源、跟踪所用服务。Authentication：核验凭据并接受或拒绝登录尝试，可使用本地数据库、RADIUS 或 TACACS+；PPP 可使用相关认证协议，但 PPP 本身不是 AAA 服务器。\n\n未使用的“assigns per-user attributes”更直接对应授权。原解析中的无线 AP local 模式与本题无关。 原图选项将 PPP 和本地数据库、RADIUS、TACACS+ 并列，交互选项已改为凭据验证及认证后端；每组内顺序不限。",
+        "answer_image": null
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-mac.html"
+  ],
+  "limitations": "直接审看原题图与答案图，未执行真实设备命令。"
+}

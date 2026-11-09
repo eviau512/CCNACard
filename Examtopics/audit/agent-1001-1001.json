@@ -1,0 +1,76 @@
+{
+  "scope": "Q1001–Q1001",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 1001,
+      "original_qid": "Q1343",
+      "before_sha256": "792ed99f99ca4f5a843ddc93efff733bbd4ef9753322c19d76def55747ab6bc5",
+      "reason": "恢复多设备 CLI 换行、修正提示符并补二层接口与兼容配置前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit. The displayed interfaces are Layer 2 ports, have compatible speed, duplex and VLAN settings, and have no conflicting channel configuration. Which command set configures an LACP EtherChannel?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode auto\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode desirable\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode on\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)# interface range f0/13 - 14\nSW1(config-if-range)# channel-group 1 mode active\nSW2(config)# interface range f0/13 - 14\nSW2(config-if-range)# channel-group 1 mode passive"
+          }
+        ],
+        "explanation": "D。图中两条链路分别连接 SW1 和 SW2 的 Fa0/13、Fa0/14。SW1 的 `active` 主动发送 LACP 报文，SW2 的 `passive` 响应，可协商同一 LACP 聚合；还需题设中的二层接口、速率、双工和 VLAN 等条件兼容。A 的 auto、B 的 desirable 属于 PAgP，不能与 passive LACP 协商；C 的 on 为静态聚合，不发起 LACP。双方均 passive 也不会主动发起协商。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which set of commands must be applied to the two switches to configure an LACP Layer 2 EtherChannel?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode auto SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+          },
+          {
+            "label": "B",
+            "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode desirable SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+          },
+          {
+            "label": "C",
+            "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode on SW2(config)#interface range f0/13 -14 SW2(config-if-range)#channel-group 1 mode passive"
+          },
+          {
+            "label": "D",
+            "text": "SW1(config)#interface range f0/13 -14 SW1(config-if-range)#channel-group 1 mode active SW2(config)#interface range f0/13 -14 SW2(config--range)#channel-group 1 mode passive"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.3ad / 802.1AX 链路汇聚控制协议（LACP）的模式配置与状态机协商匹配原则。\n在 Cisco 交换机之间构建二层以太通道（Layer 2 EtherChannel）时，管理员可以通过 `channel-group <number> mode <mode>` 命令指定聚合模式。\n1. 协议分类与模式对照：\n   - LACP（行业标准 IEEE 802.3ad）：\n     - `active`（主动模式）：端口主动定期向对端发送 LACPDU（LACP 数据单元），发起协商。\n     - `passive`（被动模式）：端口仅被动监听对端发来的 LACPDU 并做出响应，绝不主动发起协商。\n   - PAgP（思科私有协议）：\n     - `desirable`（主动模式）：主动发送 PAgP 报文。\n     - `auto`（被动模式）：被动监听 PAgP 报文。\n   - 静态无协商模式：\n     - `on`（强制模式）：不运行任何协商协议，强行捆绑成束。\n2. LACP 成功协商的充分必要条件：\n   两端交换机必须统一采用 LACP 协议，并且两端不能同时为被动模式。即以下组合可以成功建立 LACP 通道：\n   - Active <----> Active（双方主动，成功）\n   - Active <----> Passive（一方主动一方被动，成功）\n   若双方均为 Passive <----> Passive，则双方都在等待对端先开口，永远无法建立通道。\n\n• 正确选项剖析：\n选项 D 完全正确。\nSW1 接口配置为 `mode active`，SW2 接口配置为 `mode passive`。SW1 处于 Active 模式主动发送 LACPDU 协商包，SW2 处于 Passive 模式收到协商包后被动应答，双方成功协商出符合 IEEE 标准的 LACP Layer 2 EtherChannel。\n\n• 干扰项排除与错误陷阱：\n选项 A（SW1 mode auto / SW2 mode passive）：协议类型冲突。`auto` 是思科专有 PAgP 的被动模式，而 `passive` 是行业标准 LACP 的被动模式。两端协议完全不一致，根本不可能通信建立。\n选项 B（SW1 mode desirable / SW2 mode passive）：协议类型冲突。`desirable` 属于 PAgP，`passive` 属于 LACP，二者风马牛不相及。\n选项 C（SW1 mode on / SW2 mode passive）：模式冲突。`on` 属于静态强制捆绑（不发送也不接收协商报文），而 `passive` 在等待 LACPDU，由于 SW1 绝不发送 LACP 报文，SW2 永远等不到应答，通道无法形成。\n\n• 考试要点与速记技巧：\nEtherChannel 协议与模式速记矩阵：\n- LACP：Active（主动）/ Passive（被动）—— 只要有 Active 就能起（Active+Active、Active+Passive）；\n- PAgP：Desirable（主动）/ Auto（被动）—— 只要有 Desirable 就能起；\n- 协议绝不能串门：Active 绝不能配 Auto/Desirable，见到混搭直接秒杀排除！"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "all checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked and formatted where present",
+        "finding": "恢复多设备 CLI 换行、修正提示符并补二层接口与兼容配置前提。",
+        "references": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1001_agent.jpg",
+      "image_sha256": "a68713db9b5a4cdcb5f20a0578fc3129027a0fecaec1837408993ca2951a3e2e"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html",
+    "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/23563-143.html",
+    "https://www.rfc-editor.org/rfc/rfc4291#appendix-A"
+  ],
+  "limitations": "人工审查图像与题目，未进行真实网络设备实验。"
+}

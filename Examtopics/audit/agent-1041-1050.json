@@ -1,0 +1,316 @@
+{
+  "scope": "Q1041–Q1050",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 1041,
+      "original_qid": "Q1041",
+      "before_sha256": "cf3f249accb0ead21b1127718fbd8fc6420133d1424ca09705300bfc9a15a6e4",
+      "reason": "A。启用加密的 ESP 隧道模式将整个原始 IP 数据报作为受加密保护的载荷，并增加外层 IP 头；外层地址仍可见。C 混淆传输模式；D 中 TCP/UDP 头在启用加密时属于受保护载荷；B 两种模式并不单凭模式选择决定",
+      "updates": {
+        "prompt": "An IPsec VPN uses ESP with a non-NULL encryption algorithm. Which statement about ESP tunnel and transport modes is correct?",
+        "explanation": "A。启用加密的 ESP 隧道模式将整个原始 IP 数据报作为受加密保护的载荷，并增加外层 IP 头；外层地址仍可见。C 混淆传输模式；D 中 TCP/UDP 头在启用加密时属于受保护载荷；B 两种模式并不单凭模式选择决定算法强度，GRE 可按部署使用相应模式。ESP 也支持 NULL 加密或可选完整性，因此题目明确限定非 NULL 加密。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "A。启用加密的 ESP 隧道模式将整个原始 IP 数据报作为受加密保护的载荷，并增加外层 IP 头；外层地址仍可见。C 混淆传输模式；D 中 TCP/UDP 头在启用加密时属于受保护载荷；B 两种模式并不单凭模式选择决定算法强度，GRE 可按部署使用相应模式。ESP 也支持 NULL 加密或可选完整性，因此题目明确限定非 NULL 加密。"
+      },
+      "original_fields": {
+        "prompt": "Which factor must be considered during the implementation of an IPsec VPN?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPsec VPN（RFC 4301 / RFC 4303）的安全封装机制与两种核心工作模式（Tunnel Mode 与 Transport Mode）的技术差异。\nIPsec 使用封装安全有效载荷（ESP, IP 协议号 50）协议提供数据机密性、完整性和源认证。ESP 提供两种截然不同的封装模式：\n1. 隧道模式（Tunnel Mode）：\n   - 保护对象：整个原始 IP 数据包（Original IP Datagram），包括原始 IP 头部、传输层 TCP/UDP 头部和所有有效载荷。\n   - 封装结构：ESP 对整个原始 IP 报文进行加密，并在前端添加 ESP 头部，在末尾添加 ESP 尾部与认证数据（ICV），最后在外层包裹一个全新的公共 IP 头部（New IP Header）。\n   - 适用场景：站点到站点 VPN（Site-to-Site VPN，如连接两个分支机构网关）。其优势在于彻底隐藏了内网的真实拓扑与私网 IP 寻址结构。\n2. 传输模式（Transport Mode）：\n   - 保护对象：仅加密原始 IP 报文的有效载荷（Payload，即四层 TCP/UDP 头部及应用数据），保留原始 IP 头部明文可见。\n   - 适用场景：端到端主机间通信（Host-to-Host），或配合 GRE over IPsec 使用（以节省额外生成的外层 IP 头开销）。\n\n• 正确选项剖析：\n选项 A（In IPsec tunnel mode, the entire original IP datagram is encrypted.）完全符合隧道模式的技术规范。在 IPsec 隧道模式下，整个原始 IP 数据报（原 IP 头、四层头和数据）均被完整加密，公网传输只暴露新封装的外层 IP 头。\n\n• 干扰项排除与错误陷阱：\n选项 B（IPsec transport mode increases GRE tunnel security over tunnel mode）：在 GRE over IPsec 场景中，选择传输模式主要是为了消除双重 IP 头带来的 20 字节额外开销，两种模式下的加密算法强度完全相同，传输模式绝不会提高安全性。\n选项 C（In IPsec tunnel mode, only the IP payload is encrypted）：概念颠倒。“仅加密有效载荷”是传输模式（Transport Mode）的特征，隧道模式加密的是整个原始数据报。\n选项 D（IPsec transport mode leaves the Layer 4 header unencrypted for inspection）：在传输模式下，ESP 头部插入在原始 IP 头之后、四层传输层头部之前，因此四层头部（TCP/UDP 端口号等）完全处于 ESP 加密保护范围内，绝不可能保持明文以供检查。\n\n• 考试要点与速记技巧：\nIPsec 双模式核心口诀：\n“隧道模式裹全身（原头+载荷全加密，新加外层头）；传输模式护内脏（原头保留在外部，只把载荷四层包）。”"
+      }
+    },
+    {
+      "id": 1042,
+      "original_qid": "Q1042",
+      "before_sha256": "9508ff5f394618110250a40e900b8dc0855f5a0b2c74ab839f55bc213a427796",
+      "reason": "B。/29 从 /24 借 5 位，得到 32 个子网，每个 8 个地址、6 个可用单播地址，足以给 3 台 PC 和 SVI 网关。192.168.0.1 属于首个 192.168.0.0/29 子网。/30 仅 2 ",
+      "updates": {
+        "prompt": "Refer to the exhibit. Subnet 192.168.0.0/24 into equal-sized subnets for the current VLAN and at least 30 additional VLANs. Each VLAN needs three PC addresses and one gateway address. Which valid SVI command set meets these requirements?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch(config)# interface vlan 10\nSwitch(config-if)# ip address 192.168.0.1 255.255.255.252"
+          },
+          {
+            "label": "B",
+            "text": "Switch(config)# interface vlan 10\nSwitch(config-if)# ip address 192.168.0.1 255.255.255.248"
+          },
+          {
+            "label": "C",
+            "text": "Switch(config)# interface vlan 10\nSwitch(config-if)# ip address 192.168.0.1 255.255.255.0"
+          },
+          {
+            "label": "D",
+            "text": "Switch(config)# interface vlan 10\nSwitch(config-if)# ip address 192.168.0.1 255.255.255.128"
+          }
+        ],
+        "explanation": "B。/29 从 /24 借 5 位，得到 32 个子网，每个 8 个地址、6 个可用单播地址，足以给 3 台 PC 和 SVI 网关。192.168.0.1 属于首个 192.168.0.0/29 子网。/30 仅 2 个可用地址；/24 和 /25 分别只有 1、2 个子网。原选项存在空格和无效八位组，已还原成有效 CLI；网关还需 VLAN 存在及 SVI 满足平台启用条件。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "B。/29 从 /24 借 5 位，得到 32 个子网，每个 8 个地址、6 个可用单播地址，足以给 3 台 PC 和 SVI 网关。192.168.0.1 属于首个 192.168.0.0/29 子网。/30 仅 2 个可用地址；/24 和 /25 分别只有 1、2 个子网。原选项存在空格和无效八位组，已还原成有效 CLI；网关还需 VLAN 存在及 SVI 满足平台启用条件。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. An engineer assigns IP addressing to the current VLAN with three PCs. The configuration must also account for theExpansion of 30 additionalVLANS using the same Class C subnet for subnetting and host count. Which command set ful lls the request while reserving address spaceFor the expected growth?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 265 255.255.252"
+          },
+          {
+            "label": "B",
+            "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 255 255.255.248"
+          },
+          {
+            "label": "C",
+            "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 255 255.255.0"
+          },
+          {
+            "label": "D",
+            "text": "Switch(config)#interface vlan 10 Switch(con g-if)#ip address 192.168.0.1 255.255.255.128"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 IPv4 可变长子网掩码（VLSM）子网规划与地址容量计算。\n根据题干给出的网络规划工程要求：\n1. 地址空间限制：使用同一个单一的标准 C 类网段（Class C Subnet，默认前缀 /24，总地址数为 256 个）。\n2. 子网数量需求：当前已有 1 个 VLAN，且必须为未来扩展 30 个额外 VLAN（30 additional VLANs）预留地址空间，因此网络总共必须能够提供 $1 + 30 = 31$ 个独立的逻辑子网。\n3. 单子网主机容量需求：当前 VLAN 中接入了 3 台 PC，且每个 VLAN 必须为三层网关/交换机虚接口（SVI）分配 1 个可用 IP，因此每个子网至少需要容纳 3~4 个可用主机地址。\n进行 VLSM 数学推导：\n- 第一步（求子网借位数）：\n  要在单个 /24 网段中划分出至少 31 个子网，子网借位数 $s$ 必须满足：\n  $$2^s ≥ 31$$\n  若 $s = 4$，$2^4 = 16 < 31$（无法满足需求）；\n  若 $s = 5$，$2^5 = 32 ≥ 31$（正好满足，能够提供 32 个独立子网）。\n- 第二步（求子网掩码）：\n  向主机位借用 5 位，新前缀为 $24 + 5 = /29$。\n  第四八位位组的掩码二进制为 `11111000` = $128 + 64 + 32 + 16 + 8 = 248$。\n  对应的完整点分十进制子网掩码为 `255.255.255.248`。\n- 第三步（求每子网可用主机数）：\n  剩余主机位数 $h = 32 - 29 = 3$ 位。\n  每个子网的有效可用主机地址数 $= 2^h - 2 = 2^3 - 2 = 6$ 个可用 IP。\n  每个子网提供 6 个可用 IP，完全可以轻松接入 3 台 PC（加网关），且 32 个子网容量完美满足 31 个 VLAN 的扩展规划。\n\n• 正确选项剖析：\n选项 B（Switch(config)#interface vlan 10 Switch(config-if)#ip address 192.168.0.1 255.255.255.248，题中由于排版打印为 255 255.255.248）完全正确。采用 /29 掩码（255.255.255.248）正好将该 C 类网络划分为 32 个独立子网，每个子网支持 6 台主机，完美符合支持 31 个 VLAN 及每个 VLAN 3 台 PC 的要求。\n\n• 干扰项排除与错误陷阱：\n选项 A（掩码 255.255.252，即 /30）：/30 掩码每个子网仅有 2 位主机位，可用主机地址数仅为 $2^2 - 2 = 2$ 个，根本无法满足 3 台 PC 的接入需求；且命令中 `265` 超过了 IPv4 单字节最大值 255，属于无效语法。\n选项 C（掩码 255.255.255.0，即 /24）：直接把整个 C 类网段划给单个 VLAN 10，剩余子网数为 0，根本无法扩展后续 30 个 VLAN。\n选项 D（掩码 255.255.255.128，即 /25）：仅借用 1 位主机位，只能划分出 $2^1 = 2$ 个子网，无法容纳 31 个 VLAN。\n\n• 考试要点与速记技巧：\n子网扩展速算技巧：\n“31 个网段需借 5 位（$2^5=32$ 个子网），掩码后段二百四十八（/29 = 255.255.255.248）；每段可用留 6 个（$2^3-2=6$），3 台主机绰绰有余。”"
+      },
+      "exhibit_path": "exhibits\\q1042_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1042_image_agent.png"
+      ]
+    },
+    {
+      "id": 1043,
+      "original_qid": "Q1043",
+      "before_sha256": "396e16061e4fdb9abb4d46e3c90ad75600d8b16d04d7aee996afa5349d062bc2",
+      "reason": "图中 Wi-Fi 接口的主机为 192.168.1.20、默认网关 192.168.1.1、MAC 为 B8-76-3F-7C-57-DF；另一虚拟适配器的 1A-76-3F-7C-57-DF 不是该接口地址。/24 的",
+      "updates": {
+        "prompt": "DRAG DROP - Refer to the exhibit. Match the shown Wi-Fi adapter values and derived 192.168.1.0/24 subnet parameters. The default gateway and host IP are the values shown, not arbitrary addresses. Not all values are used.",
+        "explanation": "图中 Wi-Fi 接口的主机为 192.168.1.20、默认网关 192.168.1.1、MAC 为 B8-76-3F-7C-57-DF；另一虚拟适配器的 1A-76-3F-7C-57-DF 不是该接口地址。/24 的网络地址为 192.168.1.0，广播地址为 192.168.1.255，最后可分配地址为 192.168.1.254。默认网关不必普遍固定为 .1；.20 与 .1 的角色来自图示配置。MAC 不保证始终全球唯一。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "图中 Wi-Fi 接口的主机为 192.168.1.20、默认网关 192.168.1.1、MAC 为 B8-76-3F-7C-57-DF；另一虚拟适配器的 1A-76-3F-7C-57-DF 不是该接口地址。/24 的网络地址为 192.168.1.0，广播地址为 192.168.1.255，最后可分配地址为 192.168.1.254。默认网关不必普遍固定为 .1；.20 与 .1 的角色来自"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Refer to the exhibit. An engineer is required to verify that the network parameters are valid for the users' wireless LAN connectivity on a /24Subnet. Drag and drop the values from the left onto the network parameters on the right. Not all values are used.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **broadcast address** | `192.168.1.255` |\n| **default gateway** | `192.168.1.1` |\n| **host IP address** | `192.168.1.20` |\n| **last assignable IP address in the subnet** | `192.168.1.254` |\n| **MAC address** | `B8-76-3F-7C-57-DF` |\n| **Network address** | `192.168.1.0` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【broadcast address】** → **正确匹配**：`192.168.1.255`\n   - **【核心技术特征】**：广播地址是子网中主机位全部置为 1 的特殊地址，用于向本网段内的所有主机同时发送数据报文（如 ARP 请求、DHCP 广播等），不能分配给具体主机网卡使用。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `192.168.1.255` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【default gateway】** → **正确匹配**：`192.168.1.1`\n   - **【核心技术特征】**：默认网关是连接本地局域网与外部其它网络的出口路由器或三层交换机 SVI 接口地址。当终端发送目的 IP 不在本地子网的数据包时，将报文封装发往网关 MAC 地址。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `192.168.1.1` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【host IP address】** → **正确匹配**：`192.168.1.20`\n   - **【核心技术特征】**：主机 IP 地址是子网内处于可用范围内的有效单播地址，分配给终端计算机、打印机或服务器网卡，用于在 IP 网络中唯一标识该节点。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `192.168.1.20` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【last assignable IP address in the subnet】** → **正确匹配**：`192.168.1.254`\n   - **【核心技术特征】**：最后一个可用主机地址位于该子网广播地址的前一位（广播地址 - 1），是网络管理员分配给终端或路由设备接口的最大合法 IP。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `192.168.1.254` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n5. **目标定义 / 属性**：**【MAC address】** → **正确匹配**：`B8-76-3F-7C-57-DF`\n   - **【核心技术特征】**：MAC 地址（物理地址 / 硬件地址）处于 OSI 模型的第二层（数据链路层），由 48 位（6 字节）十六进制数表示，前 24 位为厂商 OUI 代码，后 24 位由厂商分配，全局唯一。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `B8-76-3F-7C-57-DF` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n6. **目标定义 / 属性**：**【Network address】** → **正确匹配**：`192.168.1.0`\n   - **【核心技术特征】**：网络地址是子网中主机位全部置为 0 的地址，用于在路由器路由表中标识该网段整体，不能分配给具体主机。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `192.168.1.0` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **values** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。"
+      },
+      "exhibit_path": "exhibits\\q1043_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1043_image_agent.png",
+        "exhibits\\q1043_answer_image_agent.png"
+      ]
+    },
+    {
+      "id": 1044,
+      "original_qid": "Q1044",
+      "before_sha256": "d5a1cdced1551010642a11144bc3a3917f2a6b2bfdee10d3403d0c2c3844c155",
+      "reason": "按 AireOS 题设：无线 LAN 控制器管理受控 AP；AP 提供无线与有线网络之间的连接；service port 用于带外管理；virtual interface 支持移动性管理；dynamic interfac",
+      "updates": {
+        "prompt": "DRAG DROP - In a Cisco AireOS WLC architecture, match each component to its described role.",
+        "explanation": "按 AireOS 题设：无线 LAN 控制器管理受控 AP；AP 提供无线与有线网络之间的连接；service port 用于带外管理；virtual interface 支持移动性管理；dynamic interface 将 WLAN 的客户端流量映射到相应 VLAN。具体平台和配置决定端口、管理和转发能力，不能把旧版 AireOS 接口模型套用于所有控制器。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "按 AireOS 题设：无线 LAN 控制器管理受控 AP；AP 提供无线与有线网络之间的连接；service port 用于带外管理；virtual interface 支持移动性管理；dynamic interface 将 WLAN 的客户端流量映射到相应 VLAN。具体平台和配置决定端口、管理和转发能力，不能把旧版 AireOS 接口模型套用于所有控制器。"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the WLAN components from the left onto the correct descriptions on the right.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **device that manages access points** | `wireless LAN controller` |\n| **device that provides Wi-Fi devices with a connection to a wired network** | `access point` |\n| **used for out of band management of a WLC** | `service port` |\n| **used to support mobility management of the WLC** | `virtual interface` |\n| **applied to the WLAN for wireless client communication** | `dynamic interface` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【device that manages access points】** → **正确匹配**：`wireless LAN controller`\n   - **【核心技术特征】**：无线局域网控制器（WLC）集中管理企业网络中的所有轻量化无线接入点（LAP），统一执行射频管理（RRM）、安全认证策略、漫游及配置下发。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `wireless LAN controller` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【device that provides Wi-Fi devices with a connection to a wired network】** → **正确匹配**：`access point`\n   - **【核心技术特征】**：无线接入点（AP）负责在二层射频层面上将 802.11 无线信号转换为 802.3 有线以太网帧，为 Wi-Fi 终端接入有线骨干网提供桥梁。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `access point` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【used for out of band management of a WLC】** → **正确匹配**：`service port`\n   - **【核心技术特征】**：Service Port 是 WLC 硬件上专用的物理带外（Out-of-Band）管理接口，完全独立于生产流量与 AP 数据隧道，即使网络拥塞也能直接接入管理。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `service port` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【used to support mobility management of the WLC】** → **正确匹配**：`virtual interface`\n   - **【核心技术特征】**：Virtual Interface（虚拟接口）通常配置为未路由的虚拟 IP（如 1.1.1.1），用于支持客户端 Web 认证重定向、DHCP 中继以及跨控制器三层移动性（Mobility）管理。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `virtual interface` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n5. **目标定义 / 属性**：**【applied to the WLAN for wireless client communication】** → **正确匹配**：`dynamic interface`\n   - **【核心技术特征】**：Dynamic Interface 是用户创建并绑定到特定 VLAN 的数据接口，专门应用于 WLAN 服务集（SSID）以承载和转发无线客户端的业务通信流量。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `dynamic interface` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **WLAN components** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。"
+      },
+      "exhibit_path": "exhibits\\q1044_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1044_image_agent.png",
+        "exhibits\\q1044_answer_image_agent.png"
+      ]
+    },
+    {
+      "id": 1045,
+      "original_qid": "Q1045",
+      "before_sha256": "7ed3aa7c7c9f1db07b4626eccc147dddf77887a34e70204c7c4b246ed2f90532",
+      "reason": "集中管理用户与 VLAN → Easy Deployment Process；RRM 动态调整功率和信道 → Dynamic RF Feature；控制器向兼容 AP 分发软件 → Easy upgrade proces",
+      "updates": {
+        "explanation": "集中管理用户与 VLAN → Easy Deployment Process；RRM 动态调整功率和信道 → Dynamic RF Feature；控制器向兼容 AP 分发软件 → Easy upgrade process；客户端负载均衡旨在改善用户性能 → Optimized user performance。实际是否自动调整、升级或改善吞吐取决于设备、策略和射频条件，并不保证全网覆盖或最大吞吐。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "集中管理用户与 VLAN → Easy Deployment Process；RRM 动态调整功率和信道 → Dynamic RF Feature；控制器向兼容 AP 分发软件 → Easy upgrade process；客户端负载均衡旨在改善用户性能 → Optimized user performance。实际是否自动调整、升级或改善吞吐取决于设备、策略和射频条件，并不保证全网覆盖或最大吞吐"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **Controller provides centralized management of users and VLANs** | `Easy Deployment Process` |\n| **Access points auto adjust signal strength and channel** | `Dynamic RF Feature` |\n| **Controller image auto deployed to access points** | `Easy upgrade process` |\n| **Controller uses loadbalancing to maximize throughput** | `Optimized user performance` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **【集中化管理用户与 VLAN】** → **`Easy Deployment Process`（简化部署流程）**：\n   - 在传统的胖 AP（Autonomous AP）架构中，每个 AP 都必须单独配置 SSID、VLAN 映射和安全策略；而引入无线局域网控制器（WLC）后，管理员只需在 WLC 上配置一次 WLAN，配置即统一下发至所有轻量级 AP（LAP），极大简化了新站点和新业务的上线部署工作量。\n2. **【AP 自动调整发射功率与信道】** → **`Dynamic RF Feature`（动态射频管理 RRM）**：\n   - 思科 WLC 具备射频资源管理（Radio Resource Management, RRM）功能。控制器实时监控射频环境，动态检测邻居干扰、同频干扰及信号盲区，自动调度调整 AP 的发射功率（TPC）与工作信道（DCA），保证全网无线覆盖质量。\n3. **【控制器固件自动统一下发至 AP】** → **`Easy upgrade process`（便捷升级过程）**：\n   - 当需要对全网 AP 进行软件版本升级时，管理员仅需将目标镜像导入 WLC。各 AP 在通过 CAPWAP 重新注册到控制器时，WLC 会检测版本差异并自动向 AP 分发新固件（Image Download），完全免除了逐台手动刷机维护的繁琐流程。\n4. **【控制器动态负载均衡最大化吞吐量】** → **`Optimized user performance`（优化用户性能）**：\n   - 当多个客户端集中在某一物理区域时，WLC 能够基于射频环境和关联数，智能引导客户端连接负载较轻的邻近 AP 或频段（Band Select 频谱导航/Client Load Balancing），从而防止单个 AP 性能瓶颈，提升用户吞吐体验。"
+      },
+      "exhibit_path": "exhibits\\q1045_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1045_image_agent.png",
+        "exhibits\\q1045_answer_image_agent.png"
+      ]
+    },
+    {
+      "id": 1046,
+      "original_qid": "Q1046",
+      "before_sha256": "b678dcbe2b2ce65d79f389cc0bf8cddf65eb5a74b9324cd5db4897438605c8e6",
+      "reason": "四个指定槽位分别为：收到 BPDU 交系统模块、处理并发送系统模块的 BPDU、处理来自相连网段的帧、响应网络管理消息。另一个候选项“Switched frames received from other ports a",
+      "updates": {
+        "prompt": "DRAG DROP - For the four slots, choose the two BPDU-handling actions, the action for frames received from the attached segment, and the network-management action of a Rapid PVST+ forwarding port. The exhibit also lists another valid forwarding action; do not select that fifth action for these four specified slots.",
+        "answer_image": "",
+        "explanation": "四个指定槽位分别为：收到 BPDU 交系统模块、处理并发送系统模块的 BPDU、处理来自相连网段的帧、响应网络管理消息。另一个候选项“Switched frames received from other ports are advanced”也是 forwarding 状态的正确行为，原题只给四槽因而有五项正确，现按题干指定行为消歧；“frames ... discarded”不属于 forwarding。原解答图把 discarded 选为正确，故已移除错误解答图，保留原题图供核对。端口管理消息的可达性仍受配置和网络条件影响。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "四个指定槽位分别为：收到 BPDU 交系统模块、处理并发送系统模块的 BPDU、处理来自相连网段的帧、响应网络管理消息。另一个候选项“Switched frames received from other ports are advanced”也是 forwarding 状态的正确行为，原题只给四槽因而有五项正确，现按题干指定行为消歧；“frames ... discarded”不属于 forwa"
+      },
+      "original_fields": {
+        "prompt": "DRAG DROP - Drag and drop the Rapid PVST+ forwarding state actions from the left to the right. Not all actions are used.",
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **action (Slot 1)** | `BPDUs received are forwarded to the system module` |\n| **action (Slot 2)** | `BPDUs received from the system module are processed and transmitted` |\n| **action (Slot 3)** | `Frames received from the attached segment are processed` |\n| **action (Slot 4)** | `The port in the forwarding state responds to network management messages` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **生成树转发状态（Forwarding State）行为规范**：\n   在 Rapid PVST+（IEEE 802.1w）与标准 802.1D 生成树中，端口处于 **Forwarding（转发）状态** 时具备如下核心行为：\n   - **处理与发送 BPDU**：端口接收到的 BPDU 会递交系统控制平面（System Module / CPU）进行拓扑计算；来自控制模块生成的 BPDU 会被正常处理并向外发送。\n   - **数据帧正常转发**：从相连物理链路接收到的用户数据帧会被**正常接收并处理转发（Processed）**，其他端口交换进来的数据帧会被正常从该端口转发出去（Advanced）。\n   - **响应网络管理协议**：转发状态端口完全参与数据和管理平面交互，正常响应 CDP、LLDP、SNMP、Telnet/SSH 等网络管理报文。\n2. **干扰项排除**：\n   - 备选项 `Frames received from the attached segment are discarded`（丢弃接收到的数据帧）是 **Discarding / Blocking 阻塞状态** 的典型行为，绝不能归入转发状态。\n\n• **速记法则**：\n“转发（Forwarding）双全能：数据帧正常过，BPDU 照常收发，网管协议不耽误；丢弃（Discard）只在阻塞期”。"
+      },
+      "exhibit_path": "exhibits\\q1046_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1046_image_agent.png",
+        "exhibits\\q1046_answer_image_agent.png"
+      ],
+      "original_answer_image_sha256": "558836d7b9c158cef2ec9c924fe01b69f807f078ace8daf17dbd38a407e4a767"
+    },
+    {
+      "id": 1047,
+      "original_qid": "Q1047",
+      "before_sha256": "b6973d65750d92e629c8f797c5cbed1ce76033440512c0b378daceed1ac67ea6",
+      "reason": "本题对应关系为：自治 AP → 通过 Telnet、SSH 或 Web GUI 管理；自治 AP → 使用管理 IP 进行 IP 远程管理。云管理 AP → 云端 Web 仪表盘；云管理 AP → 在满足供电、网络、许可",
+      "updates": {
+        "answer_image": "",
+        "explanation": "本题对应关系为：自治 AP → 通过 Telnet、SSH 或 Web GUI 管理；自治 AP → 使用管理 IP 进行 IP 远程管理。云管理 AP → 云端 Web 仪表盘；云管理 AP → 在满足供电、网络、许可及云服务前提下支持自动部署。WLC 管理通常对应轻量 AP，不能作为自治 AP 的特点。原解答图误将 WLC 管理放入自治 AP，已移除错误解答图；原题图及机器配对保留。管理 IP 也可用于其他 AP 架构，串口本地管理并非必须具备 IP。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "本题对应关系为：自治 AP → 通过 Telnet、SSH 或 Web GUI 管理；自治 AP → 使用管理 IP 进行 IP 远程管理。云管理 AP → 云端 Web 仪表盘；云管理 AP → 在满足供电、网络、许可及云服务前提下支持自动部署。WLC 管理通常对应轻量 AP，不能作为自治 AP 的特点。原解答图误将 WLC 管理放入自治 AP，已移除错误解答图；原题图及机器配对保留。管理 IP"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **Autonomous Access Point (Slot 1)** | `accessible for management via Telnet, SSH, or a web GUI` |\n| **Autonomous Access Point (Slot 2)** | `requires a management IP address` |\n| **Cloud-Based Access Point (Slot 1)** | `managed from a web-based dashboard` |\n| **Cloud-Based Access Point (Slot 2)** | `supports automatic deployment` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **胖 AP / 自治 AP（Autonomous Access Point）特征**：\n   - **独立管理 IP**：每个胖 AP 作为完全独立的网络设备，必须为其 BVI（Bridge-Group Virtual Interface）接口分配独立的管理 IP 地址才能接入网络。\n   - **就地管理交互**：管理员通过控制台线（Console）、Telnet、SSH 或 AP 自带的 Web 图形界面逐台登录并配置射频与安全策略。\n2. **云管理 AP（Cloud-Based Access Point，如 Cisco Meraki）特征**：\n   - **云端仪表盘集中管控**：通过单一的云端 Web 仪表盘（Web-based dashboard）即可监控和管理遍布全球的所有 AP。\n   - **即插即用自动开局（Zero-Touch Provisioning）**：设备上电接入网络后，自动从云端拉取配置并上线，支持零接触自动部署（Supports automatic deployment）。\n3. **干扰项剖析**：\n   - `configured and managed by a WLC`：这是**轻量级 AP（Lightweight AP / LAP）**的典型特征，属于本题特意设置的架构干扰项。"
+      },
+      "exhibit_path": "exhibits\\q1047_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1047_image_agent.png",
+        "exhibits\\q1047_answer_image_agent.png"
+      ],
+      "original_answer_image_sha256": "f88fca96560dec5582f9a57948ceab6d57bb74cd202474e4a3bd01d6d83d6223"
+    },
+    {
+      "id": 1048,
+      "original_qid": "Q1048",
+      "before_sha256": "4c4cd02570ef8d47b5f7573e5526cdd603614f543f0b79b6a0daa37a45472128",
+      "reason": "本题配对：自治 AP → 管理 IP、通过 Telnet/SSH/Web GUI 逐台管理；轻量 AP → 由 WLC 配置管理、在发现及接入条件满足时支持自动部署。管理 IP 并非自治 AP 独有，云管理和轻量 AP ",
+      "updates": {
+        "explanation": "本题配对：自治 AP → 管理 IP、通过 Telnet/SSH/Web GUI 逐台管理；轻量 AP → 由 WLC 配置管理、在发现及接入条件满足时支持自动部署。管理 IP 并非自治 AP 独有，云管理和轻量 AP 也会使用 IP；自动部署依赖供电、IP 连通性、控制器发现及兼容配置。不同运行模式也可能用于其他 AP 类型，不能仅凭此项作唯一分类。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "本题配对：自治 AP → 管理 IP、通过 Telnet/SSH/Web GUI 逐台管理；轻量 AP → 由 WLC 配置管理、在发现及接入条件满足时支持自动部署。管理 IP 并非自治 AP 独有，云管理和轻量 AP 也会使用 IP；自动部署依赖供电、IP 连通性、控制器发现及兼容配置。不同运行模式也可能用于其他 AP 类型，不能仅凭此项作唯一分类。"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **Autonomous Access Point** | `requires a management IP address` |\n| **Autonomous Access Point** | `accessible for management via Telnet, SSH, or a Web GUI` |\n| **Lightweight Access Point** | `configured and managed by a WLC` |\n| **Lightweight Access Point** | `supports automatic deployment` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【Autonomous Access Point】** → **正确匹配**：`requires a management IP address`\n   - **【核心技术特征】**：无线接入点（AP）负责在二层射频层面上将 802.11 无线信号转换为 802.3 有线以太网帧，为 Wi-Fi 终端接入有线骨干网提供桥梁。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `requires a management IP address` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【Autonomous Access Point】** → **正确匹配**：`accessible for management via Telnet, SSH, or a Web GUI`\n   - **【核心技术特征】**：无线接入点（AP）负责在二层射频层面上将 802.11 无线信号转换为 802.3 有线以太网帧，为 Wi-Fi 终端接入有线骨干网提供桥梁。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `accessible for management via Telnet, SSH, or a Web GUI` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【Lightweight Access Point】** → **正确匹配**：`configured and managed by a WLC`\n   - **【核心技术特征】**：无线接入点（AP）负责在二层射频层面上将 802.11 无线信号转换为 802.3 有线以太网帧，为 Wi-Fi 终端接入有线骨干网提供桥梁。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `configured and managed by a WLC` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【Lightweight Access Point】** → **正确匹配**：`supports automatic deployment`\n   - **【核心技术特征】**：无线接入点（AP）负责在二层射频层面上将 802.11 无线信号转换为 802.3 有线以太网帧，为 Wi-Fi 终端接入有线骨干网提供桥梁。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `supports automatic deployment` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **facts about wireless architectures** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。"
+      },
+      "exhibit_path": "exhibits\\q1048_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1048_image_agent.png",
+        "exhibits\\q1048_answer_image_agent.png"
+      ]
+    },
+    {
+      "id": 1049,
+      "original_qid": "Q1049",
+      "before_sha256": "1f85479e04dddefcdbddd58d8ae8d599f432bb0b4ecf0a4ed9d84f8d9f39d489",
+      "reason": "按图配对：ARP 欺骗 → DAI；不希望的更优 BPDU → root guard；PortFast 接口收到 BPDU → BPDU guard；双标记 → 所给选项中 VLAN ACL 对应流量过滤。DAI 常依据",
+      "updates": {
+        "explanation": "按图配对：ARP 欺骗 → DAI；不希望的更优 BPDU → root guard；PortFast 接口收到 BPDU → BPDU guard；双标记 → 所给选项中 VLAN ACL 对应流量过滤。DAI 常依据 DHCP snooping 绑定或针对静态主机配置的 ARP ACL；root guard 可进入 root-inconsistent，BPDU guard 可令端口 err-disabled。VACL 需平台支持且规则正确，不能声称任意 VACL 自动消除双标记攻击；更直接的加固包括避免用户 VLAN 与 trunk native VLAN 共用、限制接入和 trunk 允许列表。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "按图配对：ARP 欺骗 → DAI；不希望的更优 BPDU → root guard；PortFast 接口收到 BPDU → BPDU guard；双标记 → 所给选项中 VLAN ACL 对应流量过滤。DAI 常依据 DHCP snooping 绑定或针对静态主机配置的 ARP ACL；root guard 可进入 root-inconsistent，BPDU guard 可令端口 err-d"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **802.1q double tagging** | `configure a VLAN access control list` |\n| **ARP spoofing** | `configure the dynamic ARP inspection feature` |\n| **unwanted superior BPDUs** | `configure the root guard feature` |\n| **unwanted BPDUs on Port-Fast enabled interfaces** | `configure the BPDU guard feature` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **目标定义 / 属性**：**【802.1q double tagging】** → **正确匹配**：`configure a VLAN access control list`\n   - **【核心技术特征】**：802.1Q 双标记跳跃攻击（QinQ Hopping）利用原生本征 VLAN 的未标记转发特性跨 VLAN 攻击，防御措施是将未使用的 Native VLAN 隔离或启用 VLAN ACL。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `configure a VLAN access control list` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n2. **目标定义 / 属性**：**【ARP spoofing】** → **正确匹配**：`configure the dynamic ARP inspection feature`\n   - **【核心技术特征】**：动态 ARP 检查（DAI）利用 DHCP Snooping 绑定表截获并校验非信任端口上的 ARP 报文，有效防御 ARP 欺骗与中间人攻击。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `configure the dynamic ARP inspection feature` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n3. **目标定义 / 属性**：**【unwanted superior BPDUs】** → **正确匹配**：`configure the root guard feature`\n   - **【核心技术特征】**：Root Guard 防止接入交换机上的端口成为生成树根端口（Root Port），当收到更优的 BPDU 时将端口置于 root-inconsistent 阻塞状态，保护合法根桥地位。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `configure the root guard feature` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n4. **目标定义 / 属性**：**【unwanted BPDUs on Port-Fast enabled interfaces】** → **正确匹配**：`configure the BPDU guard feature`\n   - **【核心技术特征】**：BPDU Guard 部署在连接终端的 PortFast 边缘端口上，一旦收到任何生成树 BPDU 报文即刻将端口置于 err-disabled 状态，防止私接交换机影响生成树拓扑。\n   - **混淆排除**：题中备选项中存在具有相似背景或相关功能的技术参数，但仅有 `configure the BPDU guard feature` 具备该定义要求的专属性与协议标准规范，其他选项属于非匹配概念或互斥操作。\n\n• **备考要点与技术总结**：\n本题重点考查 **threat-mitigation techniques** 的概念区分与应用场景。在 Cisco CCNA 考试中，拖拽配对题重在考查对各技术模块标准术语、协议操作机制及体系分工的精准掌握。备考时建议梳理横向对比表，从协议交互时序、报文传输模式及配置影响三个维度加深记忆。"
+      },
+      "exhibit_path": "exhibits\\q1049_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1049_image_agent.png",
+        "exhibits\\q1049_answer_image_agent.png"
+      ]
+    },
+    {
+      "id": 1050,
+      "original_qid": "Q1050",
+      "before_sha256": "c56c1627ffe3daafbae961585cf174b98ea4cc6127aaff867838029c93802d5a",
+      "reason": "Telnet 提供明文远程 CLI（默认 TCP 23）；SSH 提供加密远程 CLI 及安全数据传输（默认 TCP 22）；console 是设备物理串口管理；HTTPS 通过 TLS 提供安全 Web 管理（默认 T",
+      "updates": {
+        "explanation": "Telnet 提供明文远程 CLI（默认 TCP 23）；SSH 提供加密远程 CLI 及安全数据传输（默认 TCP 22）；console 是设备物理串口管理；HTTPS 通过 TLS 提供安全 Web 管理（默认 TCP 443）。端口可配置；物理 console 可在设备 IP 网络不可用时管理，但需要设备、线缆及登录权限正常。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked including drag sources and targets",
+        "answer": "checked against exhibit and technical references",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "Telnet 提供明文远程 CLI（默认 TCP 23）；SSH 提供加密远程 CLI 及安全数据传输（默认 TCP 22）；console 是设备物理串口管理；HTTPS 通过 TLS 提供安全 Web 管理（默认 TCP 443）。端口可配置；物理 console 可在设备 IP 网络不可用时管理，但需要设备、线缆及登录权限正常。"
+      },
+      "original_fields": {
+        "explanation": "• **拖拽配对结果速览**：\n\n| 描述 / 目标特征 | 正确匹配项 |\n| :--- | :--- |\n| **supports clear-text connections to the CLI** | `Telnet` |\n| **supports encrypted access to CLI and a secure channel** | `SSH` |\n| **supports physical connections over a serial cable** | `console` |\n| **supports secure web access for management** | `HTTPS` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **`Telnet`（明文 CLI）**：运行在 TCP 23 端口，所有用户名、密码及配置指令均以明文传输，极易被中间人嗅探截获，现代网络中已被 SSH 取代。\n2. **`SSH`（加密 CLI）**：运行在 TCP 22 端口，使用对称与非对称密码学算法建立加密通道，保障远程登录管理机密性与完整性。\n3. **`console`（带外物理控制台）**：通过专用的串行线缆（RJ-45 转 DB9 / USB Type-B / Type-C）直连设备 Console 口，在设备无 IP 或断网状态下提供物理带外管理（OOBM）。\n4. **`HTTPS`（安全 Web 管理）**：运行在 TCP 443 端口，利用 TLS/SSL 加密 HTTP 流量，用于图形化 Web 管理（如访问 WLC、交换机 Web 管理界面）。"
+      },
+      "exhibit_path": "exhibits\\q1050_image_agent.png",
+      "exhibits_viewed": [
+        "exhibits\\q1050_image_agent.png",
+        "exhibits\\q1050_answer_image_agent.png"
+      ]
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc4303.html",
+    "https://www.cisco.com/c/en/us/support/docs/wireless/2500-series-wireless-controllers/113034-2500-deploy-guide-00.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-5SY/config_guide/sup2T/15_4_sy_swcg_2T/spanning_tree.html"
+  ],
+  "limitations": "原图与原解答图经直接查看；未执行真实设备实验。"
+}

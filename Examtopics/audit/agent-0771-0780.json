@@ -1,0 +1,397 @@
+{
+  "scope": "Q771–Q780",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 771,
+      "original_qid": "Q1020",
+      "before_sha256": "44e3ef59cda3455d815ebf93a4d911c75eb20d2a327357ead0ba2abf76e916cd",
+      "reason": "D",
+      "updates": {
+        "explanation": "D。展图中 `\"apple\"` 是对象成员名，JSON 对象成员名是字符串；与其关联的值 `[\"red\", 1]` 是数组，`1` 是数字，外层花括号是对象。题问 apple 本身的数据类型而非其对应值。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON（RFC 8259）数据类型分类与键值对（Key-Value Pairs）的基本语法构成。\n题目 Exhibit 所给 JSON 数据如下：\n`{\"apple\": [\"red\", 1], \"ripe\": true}`\n1. JSON 包含的基本数据类型（Data Types）：\n   - 字符串（String）：必须用双引号包围的 Unicode 字符序列（如 `\"apple\"`、`\"red\"`）；\n   - 数字（Number）：十进制整数或浮点数（如 `1`、`3.14`）；\n   - 布尔值（Boolean）：小写的 `true` 或 `false`；\n   - 空值（Null）：小写的 `null`；\n   - 数组（Array）：由方括号 `[ ... ]` 包裹的有序值列表；\n   - 对象（Object）：由花括号 `{ ... }` 包裹的无序键值对集合。\n2. 语法成分逐一剖析：\n   - 外部 `{ ... }` 表示一个 JSON 对象；\n   - 对象内部包含两个以逗号分隔的键值对：\n     - 键值对 1：键是 `\"apple\"`，对应的值是数组 `[\"red\", 1]`；\n     - 键值对 2：键是 `\"ripe\"`，对应的值是布尔值 `true`；\n   - JSON 规范严格规定：**JSON 对象中的所有“键”（Keys）在数据类型上必须且只能是字符串（String）**。\n   - 题干询问：“What does apple represent within the JSON data?”，由于 `\"apple\"` 用双引号括起并作为键出现，其在数据类型分类上代表的是一个字符串（String）。\n\n• 正确选项剖析：\n选项 D（string，字符串）完全正确。在 JSON 语法规则中，双引号包围的文本 `\"apple\"` 是标准的基础数据类型——字符串（String）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（array，数组）：`[\"red\", 1]` 是数组，它是键 `\"apple\"` 对应的值（Value），但 `\"apple\"` 本身不是数组。\n- 选项 B（object，对象）：最外层由 `{}` 括起的整体才是一个对象，`\"apple\"` 只是该对象内部的一个键，其自身不是对象。\n- 选项 C（number，数字）：`1` 是数字，`\"apple\"` 是字符文本，绝对不是数字。\n\n• 考试要点与速记技巧：\nJSON 六大类型速记：“双引全为字符串（String），方框包裹是数组（Array），花开花落成对象（Object），真假布尔加数值（Boolean & Number）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; restored where needed",
+        "finding": "D",
+        "reference": "https://www.rfc-editor.org/rfc/rfc8259"
+      },
+      "exhibit_path": "exhibits/q771_agent.jpg",
+      "image_sha256": "158898701b2e9f68939857ce24f3d7a040452dbfa15a7709755745300dd0be60"
+    },
+    {
+      "id": 772,
+      "original_qid": "Q1023",
+      "before_sha256": "cf9ad10dd0d2bb690a324d8610aeccaa05e5147f8d78f075d0b991d5622494ab",
+      "reason": "A",
+      "updates": {
+        "explanation": "A。Cisco DNA Center（现称 Catalyst Center）通过集中界面和自动化流程帮助配置、部署受支持的设备，可减少逐台操作；实际节省时间取决于设备支持、网络准备和部署方式。B 不能假定第三方设备均支持 Cisco PnP；C 减少分析需求和 D 缩减日志级别都不是题设的部署优势。PnP 发现控制器可采用多种受支持的方式，不应认定所有设备必经 DHCP option 43。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查企业园区网络自动化控制器 Cisco DNA Center（现更名为 Cisco Catalyst Center）的核心价值与传统网络管理模式的对比。\n1. 传统园区网络部署的痛点：\n   在传统基于 CLI 的网络管理模式下，网络工程师部署新交换机、路由器和无线 AP 时，必须依靠控制台线（Console）或逐台 SSH 登录各设备。管理人员需要穿梭于分散的独立系统之间（如分别登录交换机 CLI、独立无线控制器 WLC GUI、Cisco Prime Infrastructure、Cisco ISE 等）。这种碎片化、盒式（Box-by-Box）的手动部署流程极其耗时且易发人为配置失误。\n2. Cisco DNA Center 的集中化解决方案：\n   - 单一窗格管理（Single Pane of Glass）：Cisco DNA Center 作为一体化集中管理控制台，统一承载网络全生命周期的四大核心功能域：设计（Design）、策略（Policy）、配置部署（Provision）以及状态保障与排障（Assurance）。\n   - 即插即用自动化部署（Network Plug and Play, PnP）：新出厂设备开箱通电上联后，自动通过 DHCP Option 43 获取 DNA Center 地址并自动建立安全连接，DNA Center 集中将预定义的设备配置模板（Templates）和合规系统镜像（Golden Image）一键推送给设备，实现零接触上线（ZTP）。\n   - 相比传统分散管理，单一窗格管理将园区网络的设备上线周期从数天大幅缩短至数分钟。\n\n• 正确选项剖析：\n选项 A（Cisco DNA Center supports deployment with a single pane of glass.，Cisco DNA Center 支持通过单一窗格集中部署）完美概括了其核心优势。集中式的统一控制台（Single Pane of Glass）消除了在不同设备和子系统之间反复切换的开销，使得设备网络策略与批量下发能够在一套界面中集中闭环完成，大幅缩短了新网络的设备部署时间。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（Cisco DNA Center provides zero-touch provisioning to third-party devices.）：说法错误。Cisco Network PnP（即插即用）零接触部署高度依赖运行于 Cisco IOS-XE 操作系统内部的专有 PnP 客户端代理进程，第三方厂商硬件无法获得同等的原生免接触部署体验。\n- 选项 C（Cisco DNA Center reduces the need for analytics on third-party access points and devices.）：技术逻辑荒谬。DNA Center 的核心组件 Assurance（保障平台）本身就是为了强化遥测分析能力；且企业部署控制器是为了获取更深入的网络洞察，绝非减少分析需求。\n- 选项 D（Cisco DNA Center minimizes the level of syslog output when reporting on Cisco devices.）：概念失实。DNA Center 收集并整合包括 NetFlow/IPFIX、Syslog、SNMP 和遥测（Streaming Telemetry）在内的海量事件，并不会去刻意“削减”日志级别。\n\n• 考试要点与速记技巧：\nCisco DNA Center 部署核心优势：“单一窗格显神威（Single Pane of Glass），即插即用秒上线（PnP / Zero-Touch）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; restored where needed",
+        "finding": "A",
+        "reference": "https://www.cisco.com/c/en/us/products/cloud-systems-management/network-automation-management/index.html"
+      }
+    },
+    {
+      "id": 773,
+      "original_qid": "Q1025",
+      "before_sha256": "e657441dbb6fd6affc05a15299dae0bc23d6520b8ca0873d5500a9cb0ae8dabf",
+      "reason": "B",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "control and monitoring of resource consumption by the tenant"
+          },
+          {
+            "label": "B",
+            "text": "automatic adjustment of capacity based on need"
+          },
+          {
+            "label": "C",
+            "text": "pooling resources in a multitenant model based on need"
+          },
+          {
+            "label": "D",
+            "text": "self-service of computing resources by the tenant"
+          }
+        ],
+        "explanation": "B。快速弹性指容量可以随需求快速扩展和释放，部分情况下可自动化；自动伸缩是符合该特征的一个例子，并非每种实现都必须自动。A 涉及可计量服务，C 是资源池化，D 是按需自助服务。实际资源和配额有限，“无限”是消费者所感知的特性。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "control and monitoring or resource consumption by the tenant"
+          },
+          {
+            "label": "B",
+            "text": "automatic adjustment of capacity based on need"
+          },
+          {
+            "label": "C",
+            "text": "pooling resources in a multitenant model based on need"
+          },
+          {
+            "label": "D",
+            "text": "self-service of computing resources by the tenant"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查云计算基础理论标准（NIST SP 800-145）中关于五大核心特征（Essential Characteristics）的权威定义。\n美国国家标准与技术研究院（NIST）在 SP 800-145 文档中对云计算定义了五大不可或缺的必备特征：\n1. 按需自助服务（On-demand self-service）：租户无需人工与云厂商交互，即可通过 Web 控制台或 API 单方面自行调配计算资源（如 CPU、存储和网络）。\n2. 广泛的网络访问（Broad network access）：通过标准网络机制（如 Internet、REST、移动客户端）随时随地跨异构终端访问云端资源。\n3. 资源池化（Resource pooling）：服务商将物理计算资源形成多租户共享资源池，根据消费者需求动态分配和重新分配不同物理/虚拟资源。\n4. 快速弹性（Rapid elasticity）：系统的处理能力能够根据业务负载需求，弹性、快速（有时甚至自动）地向外扩展（Scale out）或向内收缩（Scale in）。对于租户而言，可供调配的资源池仿佛无限大，可在任何时间按需自动调整。典型的工业实现如公有云的自动伸缩组（Auto Scaling Groups）。\n5. 可计量的服务（Measured service）：系统根据资源类型自动监控、控制并按实际使用量透明计费（按量计费 Pay-as-you-go）。\n\n• 正确选项剖析：\n选项 B（automatic adjustment of capacity based on need，根据需求自动调整计算容量）完全吻合 NIST 标准中对快速弹性（Rapid Elasticity）的核心定义。云基础设施根据实时流量峰谷（如突发流量峰值自动增加容器/虚拟机实例，业务低谷自动销毁闲置实例），实现容量的动态自动伸缩。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（control and monitoring or resource consumption by the tenant）：描述的是云计算特征中的“可计量的服务”（Measured service / Resource monitoring）。\n- 选项 C（pooling resources in a multitenant model based on need）：描述的是云计算特征中的“资源池化”（Resource pooling，多租户共享计算资源池）。\n- 选项 D（self-service of computing resources by the tenant）：描述的是云计算特征中的“按需自助服务”（On-demand self-service）。\n\n• 考试要点与速记技巧：\nNIST 云计算五大特征速记对号入座：\n- 快速弹性（Rapid elasticity）——“容量随需求自动伸缩（Automatic adjustment of capacity）”；\n- 自助服务（Self-service）——“租户自行开通（Self-provisioning）”；\n- 资源池化（Resource pooling）——“多租户共享资源（Multitenant pooling）”；\n- 计量服务（Measured service）——“按量监控计费（Pay-as-you-go）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; restored where needed",
+        "finding": "B",
+        "reference": "https://csrc.nist.gov/glossary/term/rapid_elasticity"
+      }
+    },
+    {
+      "id": 774,
+      "original_qid": "Q1026",
+      "before_sha256": "793886ab93b01b8756c89d902e7e8b3708dc797582b3d4934c19d1910f94545c",
+      "reason": "D",
+      "updates": {
+        "options": [
+          {
+            "label": "A",
+            "text": "switch virtual interface"
+          },
+          {
+            "label": "B",
+            "text": "tunnel interface"
+          },
+          {
+            "label": "C",
+            "text": "northbound interface"
+          },
+          {
+            "label": "D",
+            "text": "southbound interface"
+          }
+        ],
+        "explanation": "D。南向接口连接控制器与网络设备，使控制器能与设备管理或控制程序交互；所用协议和能力依平台而异。北向接口 C 连接控制器与上层应用；A SVI 是交换机的 VLAN 三层逻辑接口；B 是承载流量的隧道接口，均非此处的架构方向。"
+      },
+      "original_fields": {
+        "options": [
+          {
+            "label": "A",
+            "text": "software virtual interface"
+          },
+          {
+            "label": "B",
+            "text": "tunnel interface"
+          },
+          {
+            "label": "C",
+            "text": "northbound interface"
+          },
+          {
+            "label": "D",
+            "text": "southbound interface"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 SDN（软件定义网络）分层模型中的南向接口（Southbound Interface, SBI）机制与协议交互。\nSDN 的本质是控制平面与数据平面分离：\n1. 控制器驻留软件程序：SDN 控制器作为一个集中的软件平台，运行着网络拓扑发现、集中式 SPF 算路算法、策略制定等控制软件服务。\n2. 网络设备驻留程序：底层路由器和交换机上运行着本地设备操作系统及相应的受控代理程序（Agent），例如 OpenFlow Client 进程、NETCONF 子系统、RESTCONF HTTP 服务器守护进程或 OVSDB 代理。\n3. 接口层级划分：\n   - 南向接口（Southbound Interface, SBI）：位于 SDN 控制器和底层实际网络物理/虚拟设备之间。它使得控制器上的控制程序能够与网络设备上的受控代理程序进行双向通信，控制器借此向下下发流表/转发表，设备借此向上报告接口状态、链路遥测和数据包事件。\n   - 北向接口（Northbound Interface, NBI）：位于 SDN 控制器与上层用户/运维应用程序之间，为外部软件提供对网络控制器的编程访问能力。\n\n• 正确选项剖析：\n选项 D（southbound interface，南向接口）完全正确。连接“控制器上的程序”与“网络设备上的程序”的通信通道在 SDN 体系中被权威定义为南向接口（SBI）。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（software virtual interface，交换机虚拟接口 SVI）：属于三层交换机内部连接特定 VLAN 的逻辑三层网关接口（如 `interface Vlan10`），用于跨 VLAN 路由，并非控制器与设备间的控制通信接口。\n- 选项 B（tunnel interface，隧道接口）：属于数据平面的点对点或多点虚拟封装接口（如 GRE、IPsec、VXLAN），用于承载跨越传输网络的封装数据流量，不是 SDN 的架构平面接口。\n- 选项 C（northbound interface，北向接口）：方向完全相反。北向接口是控制器与上层业务应用程序（如自动化脚本、监控系统、云平台）之间的接口，不直接与底层物理网络设备对接。\n\n• 考试要点与速记技巧：\nSDN 接口方向牢记：\n- 控制器对接网络设备（Device）：必走南向接口（Southbound Interface）；\n- 控制器对接业务软件（App）：必走北向接口（Northbound Interface）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; restored where needed",
+        "finding": "D",
+        "reference": "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html"
+      }
+    },
+    {
+      "id": 775,
+      "original_qid": "Q1027",
+      "before_sha256": "f8f2508269d36a8890c4bc059ff7c4f33e661755a6ffdd65cc94254018798c3b",
+      "reason": "B",
+      "updates": {
+        "prompt": "Refer to the exhibit. The displayed arrays have trailing commas, which are invalid in strict JSON. After removing those trailing commas, how many arrays are present?",
+        "explanation": "B。展图 `Test_Questions`、`Test_Exam_Level` 和 `Test_Response` 各有一对数组方括号，共三个数组；外层是一个对象，六个字符串是数组元素。原图每个数组的末项后有尾随逗号，不符合 RFC 8259，移除三个尾随逗号后才是有效 JSON。\n\n```json\n{\n  \"Test_Questions\": [\"Automation\", \"Configuration\"],\n  \"Test_Exam_Level\": [\"CCNA\", \"CCNP\"],\n  \"Test_Response\": [\"Correct\", \"Incorrect\"]\n}\n```"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. How many arrays are present in the JSON data?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 JSON（JavaScript Object Notation, RFC 8259）数据建模规范中的数组（Array）识别与语法界定。\n题目 Exhibit 呈现的完整 JSON 数据如下：\n```json\n{\n  \"Test_Questions\": [\n    \"Automation\",\n    \"Configuration\"\n  ],\n  \"Test_Exam_Level\": [\n    \"CCNA\",\n    \"CCNP\"\n  ],\n  \"Test_Response\": [\n    \"Correct\",\n    \"Incorrect\"\n  ]\n}\n```\n1. JSON 数组标准语法：\n   - 数组是一个有序的值集合（Ordered collection of values）。\n   - 数组的语法边界有且仅有唯一标志：以左方括号 `[`（Left square bracket）开始，以右方括号 `]`（Right square bracket）结束。方括号内的元素以逗号分隔。\n2. 逐行结构解析：\n   - 最外层由一对花括号 `{ ... }` 包裹，表示整个 JSON 文本的根元素是一个“对象”（Object）。\n   - 该对象包含 3 个顶层键（Keys）：\n     1. 键 `\"Test_Questions\"` 对应的值为：`[\"Automation\", \"Configuration\"]`，由一对 `[` 和 `]` 包裹，是第 1 个数组（包含 2 个字符串元素）；\n     2. 键 `\"Test_Exam_Level\"` 对应的值为：`[\"CCNA\", \"CCNP\"]`，由一对 `[` 和 `]` 包裹，是第 2 个数组（包含 2 个字符串元素）；\n     3. 键 `\"Test_Response\"` 对应的值为：`[\"Correct\", \"Incorrect\"]`，由一对 `[` 和 `]` 包裹，是第 3 个数组（包含 2 个字符串元素）。\n   - 统计全文本中出现的独立数组数量，恰好为 3 个。\n\n• 正确选项剖析：\n选项 B（three，三个）完全正确。数据中共有 3 对匹配的方括号 `[ ... ]`，分别作为三个键的值，因此总共存在 3 个数组。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（one）：混淆了根对象与内部数组的概念。整个数据结构仅有 1 个顶层对象（Object），但内部包含 3 个独立的数组。\n- 选项 C（six）：混淆了“数组包含的元素个数”与“数组本身的个数”。3 个数组中每个数组包含 2 个元素，总共有 6 个字符串元素（Automation, Configuration, CCNA, CCNP, Correct, Incorrect），但题目询问的是数组的个数（How many arrays），而非元素的个数。\n- 选项 D（nine）：混淆了所有的键与值的总数量（3 个键 + 6 个值 = 9 个标识符），与数组计数无关。\n\n• 考试要点与速记技巧：\n看方括号识数组：数一数文本中出现了几对方括号 `[ ... ]`，即可精准确定数组数量（本题 3 对方括号 = 3 个 Array）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; restored where needed",
+        "finding": "B",
+        "reference": "https://www.rfc-editor.org/rfc/rfc8259"
+      },
+      "exhibit_path": "exhibits/q775_agent.jpg",
+      "image_sha256": "55128a419f10da88e2b4776ed6567d601cdc206aca9405475daefcdf145ab840"
+    },
+    {
+      "id": 776,
+      "original_qid": "Q1029",
+      "before_sha256": "f9d1131030eb53cefd29b89fe87d917352801b949b7e7bc83dddbde0dcc1b691",
+      "reason": "B",
+      "updates": {
+        "prompt": "Which broad software interface category can a client application use to access a service on a server over an IP network, without assuming a particular architectural style?",
+        "explanation": "B。API 是程序访问另一软件功能所遵循的接口契约，可用于客户端访问远程服务；实现还依赖传输协议和网络栈。D REST API 是 API 的一个具体架构风格，也可用于客户端访问服务器，但题目要求不限定架构风格的上位类别。A/C 描述 SDN 控制器接口的方向，并非此处泛指的类别。原题未要求上位类别，故同时可被具体 REST API 满足。"
+      },
+      "original_fields": {
+        "prompt": "Which interface type enables an application running on a client to send data over an IP network to a server?",
+        "explanation": "• 核心考点与原理分析：\n本题考查软件架构与网络互联中的应用程序编程接口（Application Programming Interface, API）通用技术定义。\n1. API 的核心技术本质：\n   - API（Application Programming Interface）是软件系统之间的一组定义好的规范、协议与工具集。\n   - 它作为一个标准化的通信契约（Software Intermediary），允许运行在客户端（Client）上的应用程序，跨越操作系统内部进程或跨越底层 IP 计算机网络，向远程服务器（Server）发送请求数据、调用服务逻辑并接收返回结果。\n2. 广义 API 的覆盖范围：\n   - 网络中的 API 不局限于某一种单一协议，它包含跨网络 Socket 接口、RPC（远程过程调用，如 gRPC、XML-RPC）、SOAP Web Services、RESTful APIs 以及 NETCONF/RESTCONF 等。\n   - 题干表述：“Which interface type enables an application running on a client to send data over an IP network to a server?”（哪种接口类型使运行在客户端上的应用程序能够通过 IP 网络向服务器发送数据？），这正是现代计算机体系结构与 Cisco CCNA 官方教材中对 API（应用程序编程接口）的最本质、最权威的基础性统称定义。\n\n• 正确选项剖析：\n选项 B（application programming interface，应用程序编程接口 / API）准确对应题干的一般性概念定义。客户端程序通过调用服务器暴露的 API 接口，实现跨 IP 网络的数据发送与业务调用。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（northbound interface，北向接口）与选项 C（southbound interface，南向接口）：均属于软件定义网络（SDN）控制平面架构特有的方向性 API 术语，无法代表客户端与服务器之间通用的网络通信接口。\n- 选项 D（Representational State Transfer application programming interface，REST API）：属于干扰极强的迷惑选项。REST API 确实是一种具体的 API 实现模式，但题干描述的是最高层级的通用接口类型（Interface type），其上位概念是 API；且并非所有客户端向服务器发送数据的 IP 接口都是 REST 架构（还广泛存在 gRPC、SOAP、Raw Socket API 等），因此泛指的“API”是最严密、最符合 CCNA 知识大纲的标准答案。\n\n• 考试要点与速记技巧：\n跨系统软件互通灵魂之桥：应用程序之间在 IP 网络上相互调用收发数据，统称 API（Application Programming Interface）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; restored where needed",
+        "finding": "B",
+        "reference": "https://www.rfc-editor.org/rfc/rfc9110"
+      }
+    },
+    {
+      "id": 777,
+      "original_qid": "Q1031",
+      "before_sha256": "d9ac5f37aef895b721e78f62966978e4149684b6564439fa3b2dd9f2dafd612f",
+      "reason": "A",
+      "updates": {
+        "prompt": "Which QoS feature can measure traffic against a configured rate profile and immediately drop packets classified as exceeding it?",
+        "explanation": "A。Policing 用令牌桶等机制依据配置的速率和突发参数判断是否符合策略；超额动作可配置为丢弃、重新标记或其他平台支持的动作，题设是选择丢弃。它不为等待令牌而缓存超额包。Shaping C 通常把超额流量排队延后发送，但队列满时也会丢包；FIFO 和 WFQ 是排队调度方法，不是此题的速率监管功能。"
+      },
+      "original_fields": {
+        "prompt": "Which QoS feature drops traffic that exceeds the committed access rate?",
+        "explanation": "• 核心考点与原理分析：\n本题考查服务质量（QoS）流量监管（Traffic Policing）与流量整形（Traffic Shaping）的核心机制对比。\n在 Cisco MQC（模块化 QoS CLI）架构中，流量限速主要通过监管与整形两类机制实现：\n1. 流量监管（Traffic Policing）：\n   - 工作机制：使用令牌桶算法（Token Bucket，如单速率双桶 RFC 2697 或双速率三色 RFC 2698）实时度量入向或出向流量速率。\n   - 超额动作：当瞬时流量超过约定的承诺访问速率（Committed Access Rate, CAR / Committed Information Rate, CIR）时，监管机制会**直接且立即丢弃（Drop）超额流量**，或者将其 DSCP/CoS 标记降级（Mark down / Re-mark）。\n   - 缓冲特性：**监管不具备队列缓冲机制**。超出带宽极限的报文不会进内存排队等待，而是被残酷抛弃，从而迫使 TCP 端系统检测到丢包并触发拥塞控制（TCP 减窗），不会引入额外网络延迟。\n   - 部署方向：可应用于入向（Inbound / Input）和出向（Outbound / Output）接口。\n2. 流量整形（Traffic Shaping）：\n   - 超额动作：对超出速率的流量进行**内存队列缓冲（Buffering / Queuing）**，在后续时隙平滑均匀地发送出去，不丢弃数据包（除非队列溢出）。仅能应用于出向接口。\n\n• 正确选项剖析：\n选项 A（policing，流量监管）完全正确。题干明确指出“drops traffic that exceeds the committed access rate”（丢弃超出承诺访问速率的流量），这正是流量监管（Policing）与生俱来的核心工作特征。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（FIFO，先进先出队列）：属于最基础的拥塞管理排队调度机制（Queuing / Scheduling），所有数据包按照到达先后顺序存入单队列转发，不具备速率测量或承诺带宽限速功能。\n- 选项 C（shaping，流量整形）：整形的标志动作是“缓存超额数据包”（Buffer/Queue），平滑突发流量，绝不是直接把超额流量丢弃掉。\n- 选项 D（weighted fair queuing，加权公平队列 WFQ）：属于针对不同流量流（Flows）根据 IP 优先级动态分配接口带宽的调度算法，并不执行基于承诺访问速率的强行超额丢包。\n\n• 考试要点与速记技巧：\nQoS 限速对比黄金准则：\n- 超额即丢（Drops traffic）——必选流量监管（Policing）；\n- 超额排队等（Queues excess traffic）——必选流量整形（Shaping）。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; restored where needed",
+        "finding": "A",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html"
+      }
+    },
+    {
+      "id": 778,
+      "original_qid": "Q1032",
+      "before_sha256": "56df4c510c2331cb5bc0af5d4696148ec145cac59f59306e3dbcf43a4648db3d",
+      "reason": "A",
+      "updates": {
+        "explanation": "A。流量整形按照配置的速率调度报文，暂时将超出发送速率的流量放入队列等待；队列容量有限，拥塞或队满仍可能丢包，也会增加排队时延。B/D 描述标记或重新标记，C 是流量分类；实际策略可将分类、标记和整形组合使用。整形约束平均速率及突发，并不保证每个包都以严格恒定间隔发送。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 QoS 流量整形（Traffic Shaping）的工作原理及其在突发流量控制中的行为表现。\n1. 流量整形（Traffic Shaping）核心概念：\n   - 流量整形用于限制接口的出向流量速率，以适应下游服务商（ISP）的签约带宽限制（如客户侧为 1 Gbps 物理接口，但向运营商只租用了 100 Mbps 的 WAN 专线）。\n   - 核心工作过程（Leaky Bucket / 漏桶算法原理）：当突发流量产生且发送速率超过配置的承诺速率（CIR）时，流量整形组件不会将超额报文直接丢弃，而是将超额数据包推入设定的形状缓冲区（Shaping Queue / Buffer）中暂时滞留；随后，调度器以均匀、恒定的速率（以 $Tc$ 为周期的 $Bc$ 速率）逐个从队列中弹出并平滑发送出去。\n   - 结果：消除了流量突发毛刺，输出平滑规整的流量波形。\n2. 与其他 QoS 机制的区别：\n   - Classification（分类）：根据五元组、NBAR 或 ACL 识别业务类别；\n   - Marking（标记）：修改 IP 报头 TOS/DiffServ 字段（DSCP）或以太网 802.1Q（CoS）；\n   - Queuing / Congestion Management（排队拥塞管理）：决定在物理接口拥塞时哪个队列优先发出。\n\n• 正确选项剖析：\n选项 A（It queues excess traffic，它对超额流量进行排队缓冲）精准提炼了流量整形最本质的物理机制。正是通过在内存中缓存（排队）超额数据包，整形技术才得以实现既平滑流量又避免丢包的工程效果。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（It sets QoS attributes within a packet，在数据包内设置 QoS 属性）与选项 D（It modifies the QoS attributes of a packet，修改数据包的 QoS 属性）：描述的是 QoS 的“标记”（Marking / Re-marking）技术，例如通过 `set dscp ef` 修改报文 DSCP 值，整形器不负责修改 QoS 报头属性。\n- 选项 C（It organizes traffic into classes，将流量划分为不同类别）：描述的是 QoS 的“分类”（Classification）技术，通常在 `class-map` 中执行。\n\n• 考试要点与速记技巧：\n流量整形（Shaping）一句话秒杀：“专治突发流量，靠排队缓存保平安（Queues excess traffic in buffer）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; restored where needed",
+        "finding": "A",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html"
+      }
+    },
+    {
+      "id": 779,
+      "original_qid": "Q1033",
+      "before_sha256": "58854c7dd6f9096ee85ec3f71feee5b72e93c0aac10fa6aa5d79b5ad3009e27b",
+      "reason": "B",
+      "updates": {
+        "prompt": "Refer to the exhibit. Both links in this LACP channel must carry traffic normally. Switch 1 currently requires two active links; the peer permits one. On a platform supporting these commands, which change lets the channel remain up with one bundled link after the other fails?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch1(config)# interface Fa0/0\nSwitch1(config-if)# lacp port-priority 100\nSwitch1(config)# interface Fa0/1\nSwitch1(config-if)# lacp port-priority 200"
+          },
+          {
+            "label": "B",
+            "text": "Switch1(config)# interface port-channel 1\nSwitch1(config-if)# port-channel min-links 1"
+          },
+          {
+            "label": "C",
+            "text": "Switch1(config)# interface Fa0/0\nSwitch1(config-if)# lacp port-priority 200\nSwitch1(config)# interface Fa0/1\nSwitch1(config-if)# lacp port-priority 100"
+          },
+          {
+            "label": "D",
+            "text": "Switch1(config)# interface port-channel 1\nSwitch1(config-if)# lacp max-bundle 1"
+          }
+        ],
+        "explanation": "B。图中 Po1(SU) 为正在使用的二层通道，两条成员都标记 P。将 `port-channel min-links 1` 设为单条允许 Switch 1 在只剩一条已聚合成员时保持通道 up；对端门限、链路与 LACP 状态也须满足条件。A/C 的 LACP 端口优先级用于选择活动成员，不调整最小链路门限。D 限制最大活动成员数为一，在支持相应热备的情况下可提供故障切换，但不满足题设正常时两条都承载流量；不同平台的语法和支持范围应查文档。原题未给出现有限制与双链路正常使用要求，存在歧义。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A Cisco engineer is asked to update the configuration on switch 1 so that the EtherChannel stays up when one of the links fails. Which configuration meets this requirement?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Switch1(config) # interface Fa0/0 Switch1(config-if) # lacp port-priority 100 Switch1(config) # interface Fa0/1 Switch1(config-if) # lacp port-priority 200"
+          },
+          {
+            "label": "B",
+            "text": "Switch1(config) # interface port-channel 1 Switch1(config-if) # port-channel min-links 1"
+          },
+          {
+            "label": "C",
+            "text": "Switch1(config) # interface Fa0/0 Switch1(config-if) # lacp port-priority 200 Switch1(config) # interface Fa0/1 Switch1(config-if) # lacp port-priority 100"
+          },
+          {
+            "label": "D",
+            "text": "Switch1(config) # interface port-channel 1 Switch1(config-if) # lacp max-bundle 1"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查以太通道（EtherChannel / IEEE 802.3ad LACP）高可用性机制与 `port-channel min-links` 门限参数调优。\n题目 Exhibit 拓扑与输出深度解析：\n1. Switch 1 与 Switch 2 通过双链路（Fa0/0 与 Fa0/1）聚合形成 Port-channel 1（Po1）。\n2. `show etherchannel summary` 显示当前通道组 1 使用 LACP 协议，状态为 `Po1(SU)`（S 代表 Layer 2，U 代表 In-use 正在使用），两个物理端口均为 `(P)` 处于聚合转发状态。\n3. 业务需求痛点：\n   - 工程师需要对 Switch 1 进行配置更新，确保“当其中一条成员链路发生故障损坏时，整个 EtherChannel 依然能够维持在 UP 状态（EtherChannel stays up when one of the links fails）”。\n4. `port-channel min-links` 工作机制：\n   - 在 Cisco 交换机 LACP 配置中，管理员可以在逻辑聚合端口 `interface Port-channel X` 下配置保持聚合通道处于 UP 状态所必需的最小活跃物理链路数：\n     `Switch(config-if)# port-channel min-links <number>`\n   - 默认情况下（或特定高带宽保障策略下），如果配置了 `port-channel min-links 2`，意味着该聚合组至少需要 2 条物理链路同时存活才能提供服务；一旦其中 1 条链路断开，存活链路变为 1 条（小于门限 2），交换机会判定带宽达不到业务最低红线，而直接将整个 Port-channel 接口置为 line protocol is down！\n   - 为确保在一条链路失效（只剩 1 条链路正常）时，Port-channel 接口不被关闭、继续保持在线转发（Stays UP），必须在聚合接口下显式将最小链路数门限设置为 1：`port-channel min-links 1`。\n\n• 正确选项剖析：\n选项 B（Switch1(config) # interface port-channel 1; Switch1(config-if) # port-channel min-links 1）配置逻辑严谨：\n1. 配置视图正确：`port-channel min-links` 命令必须在逻辑聚合接口视图（`interface port-channel 1`）下执行，而非物理端口；\n2. 参数精准：设置阈值为 1，明确指定只要有 1 条活动链路，Port-channel 就坚挺在 UP 状态，完全满足题目要求。\n\n• 干扰项排除与错误陷阱：\n- 选项 A 与选项 C：配置的是物理接口上的 LACP 端口优先级（`lacp port-priority`）。该命令用于当物理端口总数超过 8 个时，决定哪些端口优先成为活动端口（Active Bundle），它根本无法控制链路故障后整个 Port-channel 接口的状态机维持逻辑。\n- 选项 D（interface port-channel 1; lacp max-bundle 1）：配置了最大活动链路数为 1（`lacp max-bundle 1`）。这会导致正常情况下两条链路中也只有一条链路在转发，另一条被强制置为热备闲置状态（Hot-standby），白白损失一半带宽，完全不符合正常双链路聚合设计的初衷。\n\n• 考试要点与速记技巧：\nEtherChannel 链路门限口诀：“通道保活看最小，min-links 设为 1；单链虽断通道在，降级带宽不掉线”。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked; restored where needed",
+        "finding": "B",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9400/software/release/16-8/command_reference/b_168_9400_cr/b_168_9400_cr_chapter_01001.html"
+      },
+      "exhibit_path": "exhibits/q779_agent.jpg",
+      "image_sha256": "476b89d0d4af88611c0c9db5d551a48aa89ceb1da9ca996f1379c5b66d0f7d8e"
+    },
+    {
+      "id": 780,
+      "original_qid": "Q1035",
+      "before_sha256": "153515cf53fa50689424701cf2e2c9766937c61b1496e3a99a6629316d8d41f7",
+      "reason": "B",
+      "updates": {
+        "prompt": "An organization uses RFC 1918 addresses internally and does not provide an external route or inbound NAT mapping to a host. What benefit does this provide with respect to direct access from the public Internet?",
+        "options": [
+          {
+            "label": "A",
+            "text": "to enable secure connectivity over the Internet"
+          },
+          {
+            "label": "B",
+            "text": "It limits direct reachability of the internal host from the public Internet"
+          },
+          {
+            "label": "C",
+            "text": "to provide reliable connectivity between like devices"
+          },
+          {
+            "label": "D",
+            "text": "to be routable over an external network"
+          }
+        ],
+        "explanation": "B。RFC 1918 私有地址可在不同私网重复使用，通常不在公共 Internet 上全局路由；题设无入站映射或其他外部路由时，Internet 主机无法直接按该私网地址到达内部主机。私有地址本身不加密、不代替防火墙或访问控制，也不能阻止恶意软件、内部攻击、VPN 或经映射暴露的服务被访问。A 安全连接需要其他机制；C 不保证可靠性；D 私网地址可以在受控的外部私有网络之间路由，但不是在公共 Internet 上全局路由。"
+      },
+      "original_fields": {
+        "prompt": "What is the benefit of using private IPv4 addressing?",
+        "options": [
+          {
+            "label": "A",
+            "text": "to enable secure connectivity over the Internet"
+          },
+          {
+            "label": "B",
+            "text": "to shield internal network devices from external access"
+          },
+          {
+            "label": "C",
+            "text": "to provide reliable connectivity between like devices"
+          },
+          {
+            "label": "D",
+            "text": "to be routable over an external network"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址（Private IPv4 Addressing）的安全隔离特性与规划收益。\n1. RFC 1918 预留私有地址块：\n   - 10.0.0.0/8（10.0.0.0 - 10.255.255.255）\n   - 172.16.0.0/12（172.16.0.0 - 172.31.255.255）\n   - 192.168.0.0/16（192.168.0.0 - 192.168.255.255）\n2. 路由与边界隔离机制：\n   - 全球互联网服务提供商（ISP）与公网 BGP 核心路由器在边界上强制部署了过滤策略，任何源 IP 或目的 IP 属于 RFC 1918 私网网段的数据包在到达公网边界时都会被无条件丢弃（Non-routable on the Internet）。\n   - 天然的安全屏蔽屏障：企业内部工作站、打印机、内部数据库服务器等海量终端如果配置私有 IPv4 地址，外部互联网黑客与自动化扫描探测工具在没有内部 VPN 或显式端口映射（Port Forwarding / Static NAT）的前提下，根本无法直接寻址访问这些内网设备，从而在三层网络层将内部网络节点与外部公网风险完全隔离开来（Shield internal devices from external access）。\n\n• 正确选项剖析：\n选项 B（to shield internal network devices from external access，屏蔽内部网络设备免受外部直接访问）精准反映了私网地址在网络架构安全层面的原生防护价值。由于私网地址在 Internet 上不可路由，外部主机无法直接发起针对内部私有 IP 的网络连接，起到了至关重要的第一道防护屏障作用。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（to enable secure connectivity over the Internet）：私有 IP 本身在 Internet 上根本无法直接互通，必须借助 NAT 或 IPsec VPN 才能穿越公网；提供安全连接能力的是密码学 VPN 协议，而不是私网地址本身。\n- 选项 C（to provide reliable connectivity between like devices）：网络连接的可靠性由传输层协议（如 TCP 确认与重传机制）以及物理链路冗余保障，与分配的 IP 地址是公网还是私网毫无因果关系。\n- 选项 D（to be routable over an external network）：技术事实颠倒。RFC 1918 地址的核心物理属性恰恰是“在外部公网上不可路由”（Non-routable）。\n\n• 考试要点与速记技巧：\n私有 IP（RFC 1918）两大天性：“对外不可路由以省公网 IP，天生隐身屏蔽外网攻击（Shield from external access）”。"
+      },
+      "review": {
+        "prompt": "checked and corrected",
+        "options": "checked and corrected",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none required",
+        "code_cli": "checked; restored where needed",
+        "finding": "B",
+        "reference": "https://www.rfc-editor.org/rfc/rfc1918"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc8259",
+    "https://www.cisco.com/c/en/us/products/cloud-systems-management/network-automation-management/index.html",
+    "https://csrc.nist.gov/glossary/term/rapid_elasticity",
+    "https://www.cisco.com/c/en/us/solutions/software-defined-networking/overview.html",
+    "https://www.rfc-editor.org/rfc/rfc9110",
+    "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9400/software/release/16-8/command_reference/b_168_9400_cr/b_168_9400_cr_chapter_01001.html",
+    "https://www.rfc-editor.org/rfc/rfc1918"
+  ],
+  "limitations": "人工核对题目、原图和资料；未进行真实设备实验。"
+}

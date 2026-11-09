@@ -1,0 +1,11 @@
+{
+  "manifest": "agent-1201-1201.json",
+  "applied_ids": [
+    1201
+  ],
+  "corrected_question_sha256": {
+    "1201": "3f1dff5ab1ff94535bdaeff9135c09f062b9581c79ef7b15313db73d8bc9c8d4"
+  },
+  "source_sha256": "5581cc9f785706eebe5f670b21a1c7af14a23821028d671610e58b7e65018946",
+  "app_bundle_sha256": "a3cd0d23016a5fbed51cb8b3d8d8c207af1881b4af396132ca7cf0fa0b82a2ba"
+}

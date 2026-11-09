@@ -1,0 +1,341 @@
+{
+  "scope": "Q961–Q970",
+  "corrections": [
+    {
+      "id": 961,
+      "before_sha256": "6463f4544601931889b167f5b5a370bab26ca59c1c4d57b78209746c36307caa",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "explanation": "C。SSID 是无线服务集的名称标识，区分大小写，长度上限为 32 字节，并不等同 32 个任意字符。A 文件共享依赖应用与网络策略；B 和 D 需要端点防护、认证及加密，SSID 本身不提供这些能力。隐藏 SSID 也不能替代认证。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线局域网（WLAN）基础服务集架构与服务集标识符（SSID）的技术属性。\n1. SSID 的核心技术定义：\n   - SSID（Service Set Identifier，服务集标识符）是一个区分大小写的文本字符串，最大长度为 32 个字节（字符）；\n   - 它在逻辑上作为一个无线网络的“公开名称”（Human-readable Network Name），用于将一个或多个物理接入点（AP）所覆盖的无线信号归属于同一个逻辑网络（WLAN）；\n   - AP 通过定期向外广播的信标帧（Beacon Frames）或对客户端的主动探测响应帧（Probe Response）宣示该 SSID；无线终端（笔记本、手机）据此在 Wi-Fi 列表上呈现可供用户选择的无线网络名称并建立关联（Association）。\n\n• 正确选项剖析：\n选项 C（associates a name to a wireless network，将一个名称关联到无线网络）精准道出了 SSID 最本质的功能。\nSSID 本质上就是为底层错综复杂的无线射频网络赋予一个直观、可识别的逻辑命名标识，使得用户和终端能够区分并选择加入不同的无线局域网。\n\n• 干扰项排除与错误陷阱：\n选项 A（allows easy file sharing between endpoints，允许端点之间轻松共享文件）：文件共享属于操作系统应用层服务（如 SMB、NFS、AirDrop），与数据链路层的无线网络 SSID 命名毫无关联。\n选项 B（provides protection against spyware，提供防范间谍软件的保护）：间谍软件防护属于端点安全防病毒（Anti-Malware）或下一代防火墙（NGFW）的职责，SSID 没有任何安全过滤机制。\n选项 D（eliminates network piggybacking，消除网络搭便车/蹭网行为）：SSID 仅起到标示网络名字的作用；防范未授权蹭网行为（Piggybacking）必须依赖强健的加密与认证方案（如 WPA2/WPA3-Personal 预共享密钥，或 802.1X/RADIUS 企业级认证），单纯隐藏或设置 SSID 根本无法阻挡非法入侵。\n\n• 考试要点与速记技巧：\n无线基础概念一眼辨析：\n“SSID 就是 Wi-Fi 名（Associates a name to a wireless network），32 字符信标播；安全蹭网靠加密，莫把名字当防火墙”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "C。SSID 是无线服务集的名称标识，区分大小写，长度上限为 32 字节，并不等同 32 个任意字符。A 文件共享依赖应用与网络策略；B 和 D 需要端点防护、认证及加密，SSID 本身不提供这些能力。隐藏 SSID 也不能替代认证。"
+      }
+    },
+    {
+      "id": 962,
+      "before_sha256": "31d974210221f5d04fb12353cde9ef500a8bd23f59dd33977e7323e61ecc66d4",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "On a Cisco WLC using RADIUS authentication and dynamic VLAN assignment, which selections support applying the RADIUS authorization attributes?",
+        "explanation": "C。配置 RADIUS 服务器 IP 等连接参数，并在 WLAN 上启用 Allow AAA Override，可让控制器应用服务器返回的授权属性，例如动态 VLAN。AAA Override 不是所有普通 RADIUS 认证都必需，题干限定动态授权；还需共享密钥和可达性。A/B 的 SSH 不承担客户端 RADIUS 认证；D 的服务器 MAC 不替代服务器 IP，802.1X 则是企业认证机制。"
+      },
+      "original_fields": {
+        "prompt": "Which selections must be used on the WLC when implementing a RADIUS server for wireless authentication?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）与外部 RADIUS 服务器（如 Cisco ISE）集成实现 802.1X 企业级无线认证的核心配置项。\n1. WLC 与 RADIUS 对接架构：\n   在企业级无线网络（WPA2/WPA3 Enterprise）中，AP 将无线终端的 EAP 认证报文封装在 CAPWAP 中传递给 WLC，WLC 作为网络访问服务器（NAS / RADIUS Client），通过 IP 网络与后端 AAA/RADIUS 服务器（Cisco ISE / FreeRADIUS）进行通信。\n2. WLC 上的必备核心配置参数：\n   - RADIUS 服务器的 IP 地址（Server IP Address）：WLC 必须显式配置 RADIUS 服务器的三层 IP 地址（以及标准认证端口 UDP 1812 和计费端口 UDP 1813，配以共享密钥 Shared Secret），才能发起基于 IP/UDP 的 RADIUS 报文交互；\n   - AAA Override（AAA 属性覆盖）：在 WLC 的 WLAN 高级设置（Advanced）中，必须勾选启用 `Allow AAA Override`。启用后，RADIUS 服务器在向 WLC 返回认证通过报文（Access-Accept）时，可以随路携带 IETF-VLAN-ID、Cisco-AV-Pair（动态 ACL、QoS 配置文件）等授权属性，强制 WLC 将当前接入的无线客户端动态重定向至特定的隔离 VLAN 或应用特定的安全策略，实现基于角色的精细化动态网络准入控制。\n\n• 正确选项剖析：\n选项 C（AAA Override and the IP address of the server，AAA 覆盖与服务器的 IP 地址）完全正确。\n在 WLC 上配置 RADIUS 联动，服务器的 IP 地址是建立三层通信的绝对前置基石，而启用 AAA Override 则是实现现代企业级动态授权策略控制的核心开关。\n\n• 干扰项排除与错误陷阱：\n选项 D（802.1x and the MAC address of the server）：技术常识错误。WLC 与远程 RADIUS 服务器属于跨网段的三层 IP 协议交互，WLC 指向 RADIUS 服务器必须使用 IP 地址，绝不可能通过二层 MAC 地址寻址跨路由的 AAA 服务器。\n选项 A（Client Exclusion and SSH）与选项 B（Network Access Control State and SSH）：SSH 仅用于管理员远程登录管理 WLC 的命令行，不是 WLC 与 RADIUS 服务器之间执行无线用户身份认证的协议；客户端排除（Client Exclusion）只是防暴力破解的辅助特性。\n\n• 考试要点与速记技巧：\n无线 RADIUS 对接双核心：\n“三层寻址填 IP，动态权限开 Override（AAA Override and Server IP）；跨网认证不识 MAC，SSH 只管管设备”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "C。配置 RADIUS 服务器 IP 等连接参数，并在 WLAN 上启用 Allow AAA Override，可让控制器应用服务器返回的授权属性，例如动态 VLAN。AAA Override 不是所有普通 RADIUS 认证都必需，题干限定动态授权；还需共享密钥和可达性。A/B 的 SSH 不承担客户端 RADIUS 认证；D 的服务器 MAC 不替代服务器 IP，802.1X 则是企业认证机制。"
+      }
+    },
+    {
+      "id": 963,
+      "before_sha256": "705ee1874bbd7029c628072e8a6a1f5ce3b5c344916f66618575b69127e09e83",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "On a Cisco switch, which port-security violation mode drops frames from unknown source MAC addresses, keeps the port forwarding for permitted addresses, and can send an SNMP trap?",
+        "explanation": "C。restrict 在安全 MAC 数达到限制后丢弃未知源地址帧，保留端口并记录违规、递增计数；配置相应 SNMP 通知后可发送 trap。protect 不产生同样通知；shutdown 使端口 err-disabled；shutdown VLAN 针对违规 VLAN，实际支持依平台而定。"
+      },
+      "original_fields": {
+        "prompt": "Which port-security violation mode drops traffic from unknown MAC addresses and forwards an SNMP trap?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco Catalyst 交换机端口安全（Port Security）特性中的违规处理模式（Violation Modes）对比。\n1. 端口安全违规模式触发条件：\n   当交换机接入端口收到的数据帧的源 MAC 地址不属于安全 MAC 地址（未在静态安全表中，且动态学习数量已超过 `maximum` 限制阈值），交换机会判定发生安全违规，并根据配置的模式执行相应动作。\n2. 三大违规模式详细机制对比（`switchport port-security violation {protect | restrict | shutdown}`）：\n   | 违规动作特征 | Protect（保护） | Restrict（限制） | Shutdown（关闭，默认） |\n   | :--- | :--- | :--- | :--- | \n   | **丢弃非法流量（Drop Traffic）** | **是（静默丢弃）** | **是（丢弃流量）** | **是（整个端口断开）** |\n   | **端口状态（Port Status）** | 保持 UP 转发合法帧 | 保持 UP 转发合法帧 | **直接进入 err-disabled（Down）** |\n   | **发送 SNMP Trap 告警** | **否（不告警）** | **是（立即发送 Trap）** | **是（发送 Trap）** |\n   | **记录 Syslog 日志** | **否** | **是** | **是** |\n   | **增加违规计数器（Counter）** | **否（不变）** | **是（计数器自增）** | **是（计数器自增）** |\n\n• 正确选项剖析：\n选项 C（restrict，限制模式）完全契合题干的全部特征要求：\n1. 动作一：“drops traffic from unknown MAC addresses”——静默丢弃非法未知 MAC 的流量，同时不影响原本已认证的合法 MAC 继续正常通信；\n2. 动作二：“forwards an SNMP trap”——向网络管理平台（NMS）发送 SNMP Trap 告警信息并递增违规计数器。\n\n• 干扰项排除与错误陷阱：\n选项 B（protect，保护模式）：虽然 protect 模式同样只丢弃非法帧且端口不 Down，但它属于“静默丢弃”，**绝不会发送 SNMP Trap**，也不会记录日志或增加计数器。\n选项 D（shutdown，关闭模式）：属于最为严厉的默认模式。一旦违规，交换机会立即将整个物理端口关闭并置入 `err-disabled` 状态，导致合法流量一并中断，违背题干“仅丢弃未知流量”的隐含语境。\n选项 A（shutdown VLAN）：属于在特定高端多业务平台上针对特定 VLAN 的变种动作，不是标准二层接口端口安全的三大基础违规模式之一。\n\n• 考试要点与速记技巧：\n端口安全三大模式口诀：\n“Protect 静默丢包不吱声（无 Trap 无 Log），Restrict 边丢边报 SNMP Trap（端口不 Down 计数值长），Shutdown 最狠直接 err-disabled（默认全关）”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "C。restrict 在安全 MAC 数达到限制后丢弃未知源地址帧，保留端口并记录违规、递增计数；配置相应 SNMP 通知后可发送 trap。protect 不产生同样通知；shutdown 使端口 err-disabled；shutdown VLAN 针对违规 VLAN，实际支持依平台而定。"
+      }
+    },
+    {
+      "id": 964,
+      "before_sha256": "eaf8aabe066761109fb0450757995cabd70bac8379ccfd0aaeca738a64bcb583",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "explanation": "A。ESS 通过分配系统连接多个 BSS，共用 SSID/ESSID 的 AP 可为客户端呈现相同网络名称。相同名称不保证共享二层网络、无缝漫游或会话不中断，还需匹配安全、网络与客户端条件。B 的 802.11k/v/r 是另外的能力；C 描述 BSSID；D 名称本身不提供额外加密。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 无线局域网（WLAN）架构中的拓扑服务集分类及扩展服务集标识符（ESSID）的核心功能。\n1. 802.11 拓扑服务集架构演进：\n   - 基本服务集（Basic Service Set, BSS）：由单个无线接入点（Access Point, AP）及其射频信号覆盖范围内的无线工作站（STA）组成，是 802.11 网络的基本建筑构件。其物理标识为 BSSID，通常由 AP 射频网卡的 48 位 MAC 地址直接充当。\n   - 分配系统（Distribution System, DS）：连接多个 AP 的骨干介质，通常为底层的以太网有线交换网络。\n   - 扩展服务集（Extended Service Set, ESS）：为了克服单个 AP 覆盖范围有限的物理局限性，通过分配系统（DS）将多个独立的 BSS 互联在一起，形成一个更大范围的逻辑无线网络，这就是 ESS。\n2. ESSID 的核心定义与作用：\n   - ESSID（Extended Service Set Identifier）是在扩展服务集架构下，由多个 AP 共同广播和共享的统一网络名称（即广义上我们所配置的无线 SSID）。\n   - 它允许同一个企业或组织内分布在不同物理位置的数十甚至数百个 AP 统一对外呈现为同一个网络。无线客户端只需要配置和连接该统一的 ESSID，就可以在各个 AP 之间无缝移动并自动触发漫游（Roaming），而始终保持在同一个逻辑二层/三层网络内，无需重新手动选择或切换不同的网络名称。\n\n• 正确选项剖析：\n选项 A（It allows multiple access points to provide a common network for client connections.，它允许多个接入点为客户端连接提供统一的公共网络）完全契合 IEEE 802.11 标准对 ESSID 的权威定义。\nESSID 的核心使命正是将分散在多个物理 AP 上的射频覆盖整合为一个统一标识的公共无线网络，为客户端连接提供一致的网络接入环境。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（It supports fast roaming features such as 802.11 r, 802.11k, and 802.11v.）：混淆了网络标识与快速漫游协议修正案。802.11k（射频资源测量）、802.11v（无线网络管理）和 802.11r（快速 BSS 切换）是针对漫游体验的具体协议优化扩展；ESSID 自 1997 年原始 802.11 标准确立以来就存在，它本身并不直接“支持”或等同于这些高级快速漫游协议。\n- 选项 C（It serves as the wireless MAC address of the access point.）：概念混淆。充当 AP 无线射频 MAC 地址的是基本服务集标识符（BSSID），而不是 ESSID。\n- 选项 D（It provides greater security than a standard SSID.）：技术事实错误。ESSID 本质上就是多 AP 场景下的 SSID，它是一个 1~32 字节的明文字符串名称，本身不包含任何加密或访问控制机制，安全性取决于所采用的认证与加密套件（如 WPA2/WPA3），与单 AP 的 SSID 相比并无任何更高的安全性。\n\n• 考试要点与速记技巧：\n无线标识速记法则：\n- BSSID 是 AP 射频的硬件 MAC 地址（48 位）；\n- SSID/ESSID 是网络的名字（文本名称）；\n- 多 AP 共享同一个名称漫游即为 ESSID（Multiple APs, common network）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "A。ESS 通过分配系统连接多个 BSS，共用 SSID/ESSID 的 AP 可为客户端呈现相同网络名称。相同名称不保证共享二层网络、无缝漫游或会话不中断，还需匹配安全、网络与客户端条件。B 的 802.11k/v/r 是另外的能力；C 描述 BSSID；D 名称本身不提供额外加密。"
+      }
+    },
+    {
+      "id": 965,
+      "before_sha256": "38d772e3c35f8d6ba3b3e04eeab303bd49b8d3eed908b54715305467c64a5392",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "How does a hub handle a unicast signal differently from a switch with a valid destination MAC entry on another forwarding port?",
+        "explanation": "A。集线器在物理层将输入信号重复到其他端口，并不查询 MAC 表；交换机按同一 VLAN 的目的 MAC 表项转发到相应可转发端口。B 的 FIB、C 的 MAC 和路由表不属于普通集线器；D 颠倒两者。组播可能受侦听机制约束，并非总对所有端口泛洪。"
+      },
+      "original_fields": {
+        "prompt": "How does a hub handle a frame traveling to a known destination MAC address differently than a switch?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 OSI 模型物理层（Layer 1）集线器（Hub）与数据链路层（Layer 2）交换机（Switch）的数据转发机制与冲突域微段化原理。\n1. 集线器（Hub / Multiport Repeater）工作机制：\n   - Hub 属于典型的物理层（Layer 1）硬件设备，其内部没有集成微处理器、ASIC 或内存缓冲来解析以太网帧头。\n   - 当集线器的某一端口接收到代表数据位的电信号时，它仅仅在电气物理层面将信号进行放大与整形，然后盲目地将其泛洪（Flooding）复制到除接收端口之外的所有其他端口。\n   - Hub 上的所有端口共享同一个冲突域（Collision Domain）和同一个广播域，完全无法感知数据帧的目的 MAC 地址是已知还是未知。\n2. 交换机（Switch / Multiport Bridge）工作机制：\n   - Switch 是数据链路层（Layer 2）智能设备，维护着动态学习的 MAC 地址表（CAM 表）。\n   - 当交换机接收到一个以太网数据帧时，它会提取其二层帧头的目的 MAC 地址（DMAC），在 CAM 表中执行硬件线速查找：\n     - 若目的 MAC 是已知的（MAC 表中存在对应表项），交换机会执行精准的单播转发（Point-to-Point Forwarding），仅将该帧推送到连接目标主机的具体物理端口，实现端口微段化；\n     - 仅当遇到未知单播（Unknown Unicast）、广播（Broadcast）或多播（Multicast）时，交换机才会在同 VLAN 内执行向所有其他端口的泛洪操作。\n\n• 正确选项剖析：\n选项 A（The hub forwards the frame to all ports, and a switch forwards the frame to the known destination.，集线器将帧转发到所有端口，而交换机将帧转发到已知目的端口）精准对比了二者的根本差异：\n集线器作为物理层中继器，即使面对已知目的 MAC 也只能向所有端口泛洪广播；而交换机借助 MAC 地址表能够准确将帧单播定向转发至已知目标端口。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（The hub forwards the frame to all ports in the FIB table, and a switch forwards the frame the destination MAC is known.）：概念荒谬。FIB（转发信息库）是路由器或三层交换机基于 CEF 运行的硬件转发表，纯一层集线器没有任何硬件转发表或 FIB。\n- 选项 C（The hub forwards the frame using the information in the MAC table, and a switch uses data in its routing table.）：术语彻底颠倒。Hub 根本没有 MAC 地址表；而二层交换机进行帧交换依据的是 MAC 地址表（CAM 表），依靠路由表（Routing Table）转发数据的是三层路由器。\n- 选项 D（The hub forwards the frame only to the port connected to the known MAC address, and a switch forwards the frame to all ports.）：描述完全相反。Hub 无法做到单播定向转发，交换机面对已知目的 MAC 时绝不会无脑向所有端口转发。\n\n• 考试要点与速记技巧：\n网络设备层级口诀：\n- 集线器（L1）：无脑放大盲泛洪，全员共享一冲突；\n- 交换机（L2）：查表单播微段化，各口独立冲突域。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "A。集线器在物理层将输入信号重复到其他端口，并不查询 MAC 表；交换机按同一 VLAN 的目的 MAC 表项转发到相应可转发端口。B 的 FIB、C 的 MAC 和路由表不属于普通集线器；D 颠倒两者。组播可能受侦听机制约束，并非总对所有端口泛洪。"
+      }
+    },
+    {
+      "id": 966,
+      "before_sha256": "afd8145a281a560d744fdc94ab57f3233003ca99dbec6a1dfd400738cb62403a",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "Refer to the exhibit. Assuming all links carry the same STP instance and BPDUs are exchanged, which switch is elected root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 1 - Bridge Priority - 20480 - Mac-address 00:10:a1:71:e3:35"
+          },
+          {
+            "label": "B",
+            "text": "SW 2 - Bridge Priority - 20480 - Mac-address 00:10:a1:54:4e:50"
+          },
+          {
+            "label": "C",
+            "text": "SW 3 - Bridge Priority - 57344 - Mac-address 00:10:a1:93:09:2d"
+          },
+          {
+            "label": "D",
+            "text": "SW 4 - Bridge Priority - 57344 - Mac-address 00:10:a1:57:61:80"
+          }
+        ],
+        "explanation": "B。图中四台交换机连通并参与同一 STP 实例。SW1 与 SW2 的优先级 20480 小于 SW3、SW4 的 57344；两者比较桥 MAC，00:10:a1:54:4e:50 小于 00:10:a1:71:e3:35，因此 SW2 的桥 ID 最小。系统扩展 ID 对同一实例相同；不同实例需分别选根。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "SW 1 - Bridge Priority - 20480 - Mac-address 00:10:a1:71 :e3:35"
+          },
+          {
+            "label": "B",
+            "text": "SW 2 - Bridge Priority - 20480 - Mac-address 00:10:a1:54:4e:50"
+          },
+          {
+            "label": "C",
+            "text": "SW 3 - Bridge Priority - 57344 - Mac-address 00:10:a1:93:09:2d"
+          },
+          {
+            "label": "D",
+            "text": "SW 4 - Bridge Priority - 57344 - Mac-address 00:10:a1:57:61:80"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP / IEEE 802.1D、802.1w RSTP）中根桥（Root Bridge）选举的严格比较法则。\n1. 桥 ID（Bridge ID, BID）的构成：\n   在 STP 体系中，每一台运行生成树协议的交换机都拥有一个唯一的 8 字节桥 ID，由两部分组成：\n   - 桥优先级（Bridge Priority）：2 字节（16 位）。在启用系统扩展 ID（Extended System ID）的标准模式下，高 4 位为可配置的优先级步长（以 4096 为倍数，取值范围 0~61440），低 12 位为 VLAN ID；\n   - 基础 MAC 地址（Base MAC Address）：6 字节（48 位），取自交换机主板背板的烧录 MAC。\n2. 根桥选举三步法则：\n   全网所有交换机启动后均通过交换 BPDU（网桥协议数据单元）参与根桥竞选，胜出规则为：**拥有全网最小 BID 的交换机当选为根桥（Lowest BID wins）**。\n   - 第一比较级：桥优先级（Bridge Priority）。数值越小越优先（0 优于 4096，4096 优于 32768 等）；\n   - 第二比较级（平局决胜 Tie-breaker）：当多台交换机的桥优先级完全相同时，逐字节比较 MAC 地址的数值大小，**MAC 地址越小越优**。\n\n• 正确选项剖析：\n选项 B（SW 2 - Bridge Priority - 20480 - Mac-address 00:10:a1:54:4e:50）通过严格计算胜出：\n1. 第一轮优先级比较：\n   - SW 1: 优先级 20480\n   - SW 2: 优先级 20480\n   - SW 3: 优先级 57344\n   - SW 4: 优先级 57344\n   由于 20480 < 57344，SW 3 和 SW 4 因优先级劣势首先被淘汰出局；\n2. 第二轮平局比较（SW 1 vs SW 2）：\n   - 两者优先级均为 20480，触发 Tie-breaker 比较 MAC 地址：\n     SW 1 MAC: `00:10:a1:71:e3:35`\n     SW 2 MAC: `00:10:a1:54:4e:50`\n   - 前 3 字节 OUI（`00:10:a1`）完全相同；\n   - 比较第 4 字节：SW 1 为十六进制 `71`，SW 2 为十六进制 `54`。\n     由于十六进制 `54` < `71`（十进制 84 < 113），SW 2 的 MAC 地址更小。\n综合判定，SW 2 拥有全局最小的 Bridge ID，最终成功当选为 Root Bridge。\n\n• 干扰项排除与错误陷阱：\n- 选项 A：SW 1 的优先级虽然也是 20480，但在与 SW 2 进行 MAC 地址决胜比较时，其 MAC 第四字节 `71` 大于 SW 2 的 `54`，因而在平局中落败。\n- 选项 C 和选项 D：SW 3 与 SW 4 的桥优先级配置为 57344，远高于 20480，在第一轮比较中即因优先级数值过大而被直接淘汰。\n\n• 考试要点与速记技巧：\nSTP 根桥选举黄金定律：\n- “先比优先级，数值小者胜；若遇同数值，再比小 MAC”。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "B。图中四台交换机连通并参与同一 STP 实例。SW1 与 SW2 的优先级 20480 小于 SW3、SW4 的 57344；两者比较桥 MAC，00:10:a1:54:4e:50 小于 00:10:a1:71:e3:35，因此 SW2 的桥 ID 最小。系统扩展 ID 对同一实例相同；不同实例需分别选根。"
+      },
+      "exhibit_path": "exhibits/q966_agent.jpg",
+      "image_sha256": "414795923eb5b10bf31222ca0f3fd2933ace8910e55faff5ad94d79b038f60e0"
+    },
+    {
+      "id": 967,
+      "before_sha256": "11b0413fef67ca08d6335e3ce62dbe60d0694dc3c27f3e71928cbb79550e8867",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "Refer to the exhibit. Which condition is indicated by the displayed txload and rxload fields?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The interface has conclusively diagnosed a faulty NIC."
+          },
+          {
+            "label": "B",
+            "text": "A broadcast storm has been proven."
+          },
+          {
+            "label": "C",
+            "text": "A duplex mismatch has been proven."
+          },
+          {
+            "label": "D",
+            "text": "Both displayed load values are at 255/255."
+          }
+        ],
+        "explanation": "D。原图直接显示 txload 和 rxload 都是 255/255。图中 100 Mb/s FastEthernet 同时显示 200/230 Mb/s 和每秒 40 包，数据彼此不合理，因此不能据此证明真实硬件饱和或故障根因。累计 267 个广播和零错误也不足以排除或证明其他故障；应检查真实设备、速率与时间序列。"
+      },
+      "original_fields": {
+        "prompt": "Which interface condition is occurring in this output?",
+        "options": [
+          {
+            "label": "A",
+            "text": "bad NIC"
+          },
+          {
+            "label": "B",
+            "text": "broadcast storm"
+          },
+          {
+            "label": "C",
+            "text": "duplex mismatch"
+          },
+          {
+            "label": "D",
+            "text": "high throughput"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 交换机/路由器接口状态排障与 `show interface` 核心计数器的工程诊断。\n1. 关键诊断字段深度解析（结合题图输出）：\n   - 接口状态：`FastEthernet0/0 is up, line protocol is up`（物理层与数据链路层工作正常）；\n   - 接口带宽：`BW 100000 Kbit/sec`（标称带宽为 100 Mbps）；\n   - 负荷指示器：`reliability 255/255, txload 255/255, rxload 255/255`；\n     - 在 Cisco IOS 中，`txload`（发送负荷）和 `rxload`（接收负荷）以 255 为满分分母（Fraction of 255）。`255/255` 意味着接口在发送和接收两个方向上均达到了 100% 的极度饱和与超额满载状态；\n   - 实时传输速率：`30 second input rate 230000000 bits/sec`（230 Mbps），`30 second output rate 200000000 bits/sec`（200 Mbps）；在 100 Mbps 的 FastEthernet 接口上承载超过 200 Mbps 的高突发速率，坐实了严重超载与极高吞吐量；\n   - 错误计数器：`0 input errors, 0 CRC, 0 frame, 0 collisions, 0 late collision`；所有物理层与链路层错误全部为 0，排除了物理硬件破损与双工错配。\n   - 广播报文统计：`Received 267 broadcasts`，在总计数千个数据包中仅有 267 个广播，数量极少，绝无广播风暴迹象。\n\n• 正确选项剖析：\n选项 D（high throughput，高吞吐量 / 接口高负载饱和）是唯一准确的技术诊断。\n`txload 255/255` 与 `rxload 255/255` 明确标示该接口处于极限负荷工作状态，收发速率突破两百兆比特每秒，代表发生了极高的流量吞吐（High throughput），导致链路带宽利用率达到上限。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（bad NIC，损坏的网卡）：网卡物理故障通常伴随大量 CRC 校验错误、Frame 帧对齐错误、Runts 矮小帧或输入丢弃（Input errors），图中所有错误字段均显示为 0，网卡硬件运作完全正常。\n- 选项 B（broadcast storm，广播风暴）：发生广播风暴时，广播包计数器将以线速暴增（每秒数十万个广播），本接口仅记录了 267 个广播，完全属于日常 ARP/协议正常的背景通信量。\n- 选项 C（duplex mismatch，双工不匹配）：双工错配时，半双工侧接口必然产生巨额的碰撞（collisions）与迟延碰撞（late collision），全双工侧会产生大量的 FCS/CRC 错误；图中 collisions 和 late collision 均为 0，双工协商完全正常（Full-duplex）。\n\n• 考试要点与速记技巧：\nCisco `show interface` 排障速记表：\n- `txload/rxload 255/255` -> 流量打满饱和（High throughput）；\n- `late collision` 计数增加 -> 双工不匹配（Duplex mismatch）；\n- `CRC / input errors` 激增 -> 线缆或网卡物理损坏（Cable/Bad NIC）；\n- `Broadcasts` 天文数字暴增 -> 广播风暴（Broadcast storm）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "D。原图直接显示 txload 和 rxload 都是 255/255。图中 100 Mb/s FastEthernet 同时显示 200/230 Mb/s 和每秒 40 包，数据彼此不合理，因此不能据此证明真实硬件饱和或故障根因。累计 267 个广播和零错误也不足以排除或证明其他故障；应检查真实设备、速率与时间序列。"
+      },
+      "exhibit_path": "exhibits/q967_agent.jpg",
+      "image_sha256": "6701a2f0000c78d9d031cab828154b09ec3ee6bc1915a6cc9c415b90ed741b7c"
+    },
+    {
+      "id": 968,
+      "before_sha256": "b35296ef07d08574a9ad49824dfba7e6da2c6aaf775df0264229b4d8ab85b360",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "Refer to the exhibit. Treat the four lines as candidate routes for destination 10.90.207.87, all using the normalized prefix 10.90.207.64/26. Assume the same-prefix routes are reachable and one best path is installed. Which interface is selected?",
+        "explanation": "A。图中把 10.90.207.87/26 写作路由前缀，但它有主机位，规范网络地址为 10.90.207.64/26；题设明确将四条视为候选路由，而非声称均已同时安装。两条 OSPF 的管理距离 110 低于两条 RIP 的 120；在 OSPF 中 1912 小于 28968，因此选 F0/7。跨协议 metric 单位不同，不直接比较。"
+      },
+      "original_fields": {
+        "prompt": "Which interface is used to send traffic to the destination network?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 路由表选路原则中关于最长前缀匹配（Longest Prefix Match）、管理距离（Administrative Distance, AD）与路由度量值（Metric）的三级决策优先级机制。\n当路由器收到前往特定目的网络的数据包时，路由引擎执行严格的逐级判决流水线：\n1. 第一级：最长前缀匹配（Longest Prefix Match, LPM）：\n   无论路由由何种协议生成，掩码最长的路由绝对优先匹配（例如 /28 优于 /26，/26 优于 /24）。\n2. 第二级：管理距离（Administrative Distance, AD）：\n   当来自不同路由来源（OSPF、RIP、EIGRP、静态路由）的目标网络前缀及掩码长度完全相同时，路由器比较其管理距离，**AD 越小代表协议越可信，优先级越高**。\n   - 直连路由（Connected）：AD = 0\n   - 静态路由（Static）：AD = 1\n   - EIGRP 内部路由：AD = 90\n   - OSPF 路由：AD = 110\n   - RIP 路由：AD = 120\n3. 第三级：度量值（Metric / Cost）：\n   当来自相同路由协议且 AD 相同时，路由器比较度量值，**Metric 越小越优**。\n\n• 正确选项剖析：\n选项 A（F0/7）是数据流转发的最佳出接口，判定过程如下：\n1. 观察 Exhibit 中的四条候选路由：\n   - `O 10.90.207.87/26 [110/1912] via F0/7`\n   - `O 10.90.207.87/26 [110/28968] via F0/6`\n   - `R 10.90.207.87/26 [120/14] via F0/4`\n   - `R 10.90.207.87/26 [120/11] via F0/5`\n2. 前缀长度比较：四条路由的目标网络均为 `10.90.207.87/26`，掩码长度均为 /26，第一级比较平局；\n3. 管理距离比较：\n   - 经由 F0/7 和 F0/6 的路由为 OSPF 路由（代码 O），AD = 110；\n   - 经由 F0/4 和 F0/5 的路由为 RIP 路由（代码 R），AD = 120；\n   - 因为 110 < 120，OSPF 协议胜出，两条 RIP 路由被直接淘汰，不会参与路由安装；\n4. 度量值比较（OSPF 内部对比）：\n   - F0/7 的 Metric 为 1912；\n   - F0/6 的 Metric 为 28968；\n   - 因为 1912 < 28968，经由 F0/7 的路由度量值更优，最终成为最优路由写入路由表并指导数据包转发。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（F0/6）：虽同为 OSPF 路由（AD=110），但其度量值 28968 远高于 F0/7 的 1912，属于次优路径。\n- 选项 C（F0/4）与选项 D（F0/5）：均属于 RIP 协议路由（代码 R），其管理距离 AD 为 120。在与 OSPF（AD=110）的竞争中因管理距离劣势而在第二轮被直接淘汰，即使其度量值显示为 14 或 11，由于不同协议之间的 Metric 不具备可比性，依然无法撼动 AD 的裁决。\n\n• 考试要点与速记技巧：\n路由选路黄金三部曲：\n1. 掩码比长短（长掩码无条件压倒一切）；\n2. 掩码相同比 AD（AD 越小越可信，OSPF 110 完胜 RIP 120）；\n3. 协议相同比 Metric（Metric 越小越优先）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "A。图中把 10.90.207.87/26 写作路由前缀，但它有主机位，规范网络地址为 10.90.207.64/26；题设明确将四条视为候选路由，而非声称均已同时安装。两条 OSPF 的管理距离 110 低于两条 RIP 的 120；在 OSPF 中 1912 小于 28968，因此选 F0/7。跨协议 metric 单位不同，不直接比较。"
+      },
+      "exhibit_path": "exhibits/q968_agent.jpg",
+      "image_sha256": "090207080d0ccd04b42a9b5b0ff3d4c895ad2cddc4e099887bbe4d1536ee959c"
+    },
+    {
+      "id": 969,
+      "before_sha256": "072a022f3b2805a8ae576a4c2cd31d68af33f7298a7fee1dfd85b8e36eaf5e6f",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "Which broad category of physical resources is shared among multiple virtual machines on the same hypervisor?",
+        "explanation": "D。虚拟机通过 hypervisor 分享主机硬件资源，包括 CPU、内存和 I/O；资源调度、隔离和分配取决于平台。B 的物理网络接口也可以共享，但仅是其中一类；A 外部存储可被共享却非必须；C 不概括主机资源。"
+      },
+      "original_fields": {
+        "prompt": "Which physical component is distributed among multiple virtual machines running on the same hypervisor?",
+        "explanation": "• 核心考点与原理分析：\n本题考查服务器虚拟化架构中虚拟机监控器（Hypervisor）对物理计算资源池化与共享调度的底层原理。\n1. 服务器虚拟化核心架构模型：\n   - 在现代企业数据中心中，Hypervisor（无论是 Type 1 裸金属架构如 VMware ESXi、KVM，还是 Type 2 寄居架构如 VMware Workstation、VirtualBox）直接管理宿主机（Host）底层的物理基础设施。\n   - Hypervisor 向上抽象出一层软件定义的虚拟环境，将物理服务器的实际物理硬件资源（Hardware Resources，主要包括物理 CPU、物理内存 RAM、物理网络适配器 NIC、物理主板总线与本地存储）汇聚为一个共享资源池。\n2. 资源切片与共享调度机制：\n   - Hypervisor 通过内置的 CPU 调度算法（如时间切片 Time-slicing、NUMA 亲和性）和内存管理模块（如内存气球 Ballooning、内存超配 Overcommit），将底层的物理硬件资源切分为虚拟组件（vCPU、vRAM 等），动态、按需地分配给运行在同一个 Hypervisor 上的多台独立虚拟机（Virtual Machines, VMs）。\n   - 各虚拟机在逻辑上完全隔离（独立运行各自的 Guest OS），但在物理底层高度共享并复用这些硬件资源（Hardware resources）。\n\n• 正确选项剖析：\n选项 D（hardware resources，硬件资源）是虚拟化最本质、最全面的技术定义。\nHypervisor 的核心职能正是统一调度和分配宿主机的底层物理硬件资源（计算 CPU、内存 RAM、I/O 控制器等），使同一台物理服务器上的多个虚拟机能够公平、高效地共享这些硬件资源。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（external storage，外部存储）：外部存储（如 SAN/NAS、iSCSI、光纤通道存储阵列）属于外部集中式存储网络资源，不是所有虚拟化环境的必备物理组件（单机 Hypervisor 可以仅使用本地直连磁盘 DAS），无法全面代表 Hypervisor 自身调度的核心物理资源。\n- 选项 B（network interfaces，网络接口）：网络接口仅指物理网卡（pNIC），只是硬件资源中负责网络 I/O 的一小部分，无法涵盖虚拟机运行所必需的核心计算资源（CPU）与运行内存（RAM）。\n- 选项 C（backplane network，背板网络）：背板网络通常是指大型模块化路由器/核心交换机机箱内部的高速交换网络背板（Crossbar Fabric），与宿主机 Hypervisor 对虚拟机的硬件资源调度概念无关。\n\n• 考试要点与速记技巧：\n虚拟化灵魂本质：\n- Hypervisor 的天职就是“化整为零”——将物理主机的硬件资源（Hardware resources）池化，再按需切片分配给各个虚拟机。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "D。虚拟机通过 hypervisor 分享主机硬件资源，包括 CPU、内存和 I/O；资源调度、隔离和分配取决于平台。B 的物理网络接口也可以共享，但仅是其中一类；A 外部存储可被共享却非必须；C 不概括主机资源。"
+      }
+    },
+    {
+      "id": 970,
+      "before_sha256": "c1ef59827ca2a95c6694e9fee98b2b463604a4ba65b51336d3fc1589bf387b66",
+      "reason": "逐项核对并纠正解析、缺失条件或歧义",
+      "updates": {
+        "prompt": "Which statement describes RFC 1918 private IPv4 address space?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is globally unique and allocated to one organization."
+          },
+          {
+            "label": "B",
+            "text": "It is advertised as globally reachable across the public Internet."
+          },
+          {
+            "label": "C",
+            "text": "It automatically prevents all unauthorized access."
+          },
+          {
+            "label": "D",
+            "text": "It can be reused in private networks and is not globally reachable on the public Internet."
+          }
+        ],
+        "explanation": "D。RFC 1918 定义 10/8、172.16/12、192.168/16，可在不同私网重复使用，不作为全球唯一公共地址路由。私网地址不是安全屏障，网络仍可能通过 NAT、代理、VPN 等连接；防火墙外部接口也可能使用私网地址。A/B 误称全球唯一或全球可达；C 错把地址类别当访问控制。"
+      },
+      "original_fields": {
+        "prompt": "What is a characteristic of private IPv4 addressing?",
+        "options": [
+          {
+            "label": "A",
+            "text": "used on the external interface of a firewall"
+          },
+          {
+            "label": "B",
+            "text": "used by ISP's when only one IP is needed to connect to the internet"
+          },
+          {
+            "label": "C",
+            "text": "reduces the forwarding table on network routers"
+          },
+          {
+            "label": "D",
+            "text": "address space which is isolated from the internet"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查 RFC 1918 私网 IPv4 地址规范（Private IPv4 Addressing）的安全隔离特性与路由边界规则。\n1. RFC 1918 预留私有地址块：\n   - A 类：`10.0.0.0/8`（10.0.0.0 - 10.255.255.255）\n   - B 类：`172.16.0.0/12`（172.16.0.0 - 172.31.255.255）\n   - C 类：`192.168.0.0/16`（192.168.0.0 - 192.168.255.255）\n2. 互联网边界路由丢弃规则（Blackholing on Internet）：\n   - 全球互联网服务提供商（ISP）以及公网 BGP 核心路由器在边界上均部署了严格的反欺骗与合规过滤策略：**任何源 IP 或目的 IP 属于 RFC 1918 私有地址范围的数据包，在到达公共互联网边界时都会被无条件直接丢弃（Non-routable on the Public Internet）**。\n   - 这种设计构建了一道天然的物理与逻辑安全屏障，使得企业内部使用私有地址的主机天生与外部公网环境处于隔离状态（Isolated from the internet），公网黑客无法直接发起针对内部私网 IP 的三层寻址探测，保护了内网资产。若内网主机需要访问 Internet，必须经由 NAT（网络地址转换）将私网 IP 转换为合法的公网 IP。\n\n• 正确选项剖析：\n选项 D（address space which is isolated from the internet，与互联网相隔离的地址空间）完美阐述了私有 IPv4 地址的最核心属性。\n由于私有地址在公共互联网上被强制禁止路由，因此该地址空间在没有部署 NAT 或应用代理的情况下，与外部互联网在三层路由层面是完全隔离的。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（used on the external interface of a firewall，用于防火墙的外部接口）：技术错误。防火墙的外部接口直接面向公共互联网，必须配置由 ISP 分配的合法公网可路由 IP 地址（Public IP），否则无法与互联网上的公共节点通信。\n- 选项 B（used by ISP's when only one IP is needed to connect to the internet，当只需要一个 IP 连接互联网时被 ISP 使用）：概念混淆。当客户仅需一个 IP 接入互联网时，ISP 为其分配的是单个公网静态或动态 IPv4 地址，而非私网地址。\n- 选项 C（reduces the forwarding table on network routers，缩减网络路由器的转发表）：手段混淆。缩减全网路由器转发表依靠的是无类域间路由（CIDR）和路由层次化汇总技术（Route Summarization），私有地址在企业内部网络中依然会产生大量明细路由条目，并不直接减少路由表规模。\n\n• 考试要点与速记技巧：\nRFC 1918 私网地址三要素：\n- 免费任意用（Local Uniqueness）；\n- 公网不路由（Non-routable on Internet）；\n- 天生与外网相隔离（Isolated from the Internet）。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "D。RFC 1918 定义 10/8、172.16/12、192.168/16，可在不同私网重复使用，不作为全球唯一公共地址路由。私网地址不是安全屏障，网络仍可能通过 NAT、代理、VPN 等连接；防火墙外部接口也可能使用私网地址。A/B 误称全球唯一或全球可达；C 错把地址类别当访问控制。"
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-vlan/71683-dynamicvlan-config.html",
+    "https://www.cisco.com/c/en/us/td/docs/IIOT/switches/ie35xx/sw-config-guide/26-1-1/b_ie3500_2611-cg/port_security.html",
+    "https://www.rfc-editor.org/rfc/rfc1918"
+  ],
+  "limitations": "原图和文档人工检查；没有实机测试。"
+}

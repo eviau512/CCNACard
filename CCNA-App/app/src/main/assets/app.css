@@ -335,7 +335,7 @@ main {
 
 /* EXHIBIT IMAGE */
 .exhibit-wrap {
-  background: #000;
+  background: #1f2937;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 8px;
@@ -344,12 +344,28 @@ main {
   cursor: zoom-in;
 }
 
+[data-theme="light"] .exhibit-wrap {
+  background: #fff;
+}
+
 .exhibit-img {
   max-width: 100%;
   max-height: 380px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
+}
+
+.exhibit-img,
+.solution-img,
+.lightbox-img {
+  /* Do not invert diagrams: colors and topology markings carry meaning. */
+  background-color: #fff;
+}
+
+/* Only neutral, light-background diagrams are eligible for dark rendering. */
+[data-theme="dark"] img.monochrome-exhibit {
+  filter: invert(0.88);
 }
 
 .zoom-hint {
@@ -1370,4 +1386,239 @@ main {
 .btn-confirm-reset:active {
   background: #dc2626;
   transform: scale(0.97);
+}
+
+/* CALLOUTS & BLOCKQUOTES */
+.md-callout {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-blue, #38BDF8);
+  background: rgba(56, 189, 248, 0.08);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+[data-theme="light"] .md-callout {
+  background: rgba(2, 132, 199, 0.08);
+  border-left-color: #0284c7;
+}
+.md-callout-note {
+  border-left-color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+}
+.md-callout-tip {
+  border-left-color: #10B981;
+  background: rgba(16, 185, 129, 0.08);
+}
+.md-callout-warning {
+  border-left-color: #F59E0B;
+  background: rgba(245, 158, 11, 0.08);
+}
+.md-callout .callout-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.md-callout .callout-content {
+  flex: 1;
+  min-width: 0;
+}
+.md-blockquote {
+  border-left: 3px solid var(--border, #334155);
+  margin: 10px 0;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0 6px 6px 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+[data-theme="light"] .md-blockquote {
+  background: rgba(0, 0, 0, 0.03);
+  border-left-color: #cbd5e1;
+}
+
+
+/* ==========================================================================
+   Responsive Split-Screen Adaptation for Large Screens & Tablets (Landscape)
+   Spec: When screen is large enough (8"+ / >= 900px) and in landscape mode,
+   Simulation/Lab questions split into:
+   - Left Column: Question Prompt, Checklist, and Topology Exhibit
+   - Right Column: Virtual Cisco IOS Terminal CLI (Sticky)
+   ========================================================================== */
+
+@media screen and (min-width: 900px) and (min-height: 480px) and (orientation: landscape),
+       screen and (min-width: 1024px) and (min-height: 480px) {
+
+  /* Allow main container to expand for lab split view */
+  main.is-lab-main {
+    max-width: min(1680px, 96vw) !important;
+    width: 96% !important;
+    padding: 16px 24px 32px 24px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Two-column responsive grid layout */
+  .card.is-lab-card {
+    display: grid !important;
+    grid-template-columns: minmax(380px, 1fr) minmax(500px, 1.25fr) !important;
+    column-gap: 28px !important;
+    row-gap: 16px !important;
+    align-items: start !important;
+    padding: 24px 28px !important;
+  }
+
+  /* Prevent Firefox Gecko & WebKit grid child blowout */
+  .card.is-lab-card > * {
+    min-width: 0 !important;
+  }
+
+  /* Left column: Card top, Prompt, Exhibit, IDK button, Explanation, Action button */
+  .card.is-lab-card > *:not(.options-list) {
+    grid-column: 1 !important;
+  }
+
+  /* Right column: Cisco IOS Virtual Terminal CLI */
+  .card.is-lab-card > .options-list {
+    grid-column: 2 !important;
+    grid-row: 1 / 30 !important;
+    position: sticky !important;
+    top: 76px !important;
+    align-self: start !important;
+    height: calc(100vh - 100px) !important;
+    max-height: 860px !important;
+    min-height: 520px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+  }
+
+  .card.is-lab-card #inlineSimWrapper {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .card.is-lab-card .ios-sim-container {
+    height: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45) !important;
+  }
+
+  .card.is-lab-card .ios-sim-screen,
+  .card.is-lab-card .ios-terminal-screen {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 340px !important;
+    max-height: none !important;
+    scrollbar-width: thin;
+    scrollbar-color: #30363d #0d1117;
+  }
+
+  .card.is-lab-card .ios-sim-screen::-webkit-scrollbar,
+  .card.is-lab-card .ios-terminal-screen::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .card.is-lab-card .ios-sim-screen::-webkit-scrollbar-thumb,
+  .card.is-lab-card .ios-terminal-screen::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+  }
+
+  /* Exhibit image scaling in split left column */
+  .card.is-lab-card .exhibit-wrap {
+    margin: 6px 0 !important;
+    background: #161b22;
+  }
+
+  .card.is-lab-card .exhibit-img {
+    max-height: 460px !important;
+    object-fit: contain;
+  }
+
+  .card.is-lab-card .prompt {
+    font-size: 1.02rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .card.is-lab-card .explanation-card {
+    margin-top: 12px !important;
+  }
+
+  .card.is-lab-card .action-bar {
+    margin-top: 10px !important;
+  }
+}
+
+
+/* ==========================================================================
+   SRS Badges, Previous Button, and Lab Self-Evaluation Controls
+   ========================================================================== */
+.badge-srs {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  text-transform: none;
+}
+
+.badge-srs.srs-learning {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.badge-srs.srs-mastered {
+  background: var(--success-light);
+  color: var(--success);
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.badge-srs.srs-leech {
+  background: var(--danger-light);
+  color: var(--danger);
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
+.btn-prev {
+  flex: 0 0 auto;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.92rem;
+}
+
+.btn-prev:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.lab-eval-group {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+}
+
+.btn-lab-retry {
+  background: var(--warning-light);
+  color: var(--warning);
+  border: 1.5px solid var(--warning);
+}
+
+.btn-lab-retry:active {
+  filter: brightness(0.92);
+  transform: scale(0.98);
 }

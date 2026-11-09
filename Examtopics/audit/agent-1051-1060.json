@@ -1,0 +1,342 @@
+{
+  "scope": "Q1051–Q1060",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 1051,
+      "original_qid": "Q1051",
+      "before_sha256": "8f8de53a8c3873d44d6c4315d282a32e8605040eb34af2e82a3663b3b7f6cc97",
+      "reason": "C实际为PAgP；passive会响应LACP。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Both switches use compatible Layer 2 settings and their member interfaces are up. An engineer configures LACP EtherChannel between Switch 1 and Switch 2. Which mode pairing makes only Switch 1 initiate LACP negotiation?",
+        "explanation": "A。Switch 1 的 active 模式主动发起 LACP 协商，Switch 2 的 passive 模式不主动发起，但会回应收到的 LACP PDU，协商后仍可发送协议报文。成员接口及聚合口的速率、双工和交换模式等必须兼容。B 两端 passive 不会自行发起；C 的 auto/desirable 是 PAgP 而非 LACP；D 的 on 为静态聚合，不发起 LACP，不能与 passive 构成题设协商。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "none",
+        "code_cli": "checked",
+        "finding": "C实际为PAgP；passive会响应LACP。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1051_image_agent.jpg",
+      "image_sha256": "e4e8916e7fb611e1365d95ef0389bddce0cf94c2bde197d3a874980bcc203a2a",
+      "answer_exhibit_path": null,
+      "answer_image_sha256": null
+    },
+    {
+      "id": 1052,
+      "original_qid": "Q1052",
+      "before_sha256": "6f11a3ba975886aa3370a66d7e373c40573785425fe4920b52d749694665d629",
+      "reason": "原解析模板未解释，功能可重叠。",
+      "updates": {
+        "prompt": "For the intended Cisco cloud-managed and controller-managed AP deployment examples, match the listed characteristics to Cloud-Based Access Point and Lightweight Access Point. Not all options are used; select the two characteristics associated with each example.",
+        "explanation": "按题目的典型部署归类：云管理 AP → Web dashboard 管理、支持自动部署；轻量 AP → 由 WLC 配置管理、支持所列多种运行模式。自动发现和零接触配置也可出现在控制器架构中，运行模式与管理入口取决于产品及版本，这些并非互斥的普遍定义。Telnet/SSH/Web GUI 本身并不能唯一标识这两种架构；生产中应使用受支持的安全管理方式。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "原解析模板未解释，功能可重叠。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1052_image_agent.jpg",
+      "image_sha256": "ab8e99c0ca764938353bb066c429afcbf284d6a42317508fa2c86205407f1857",
+      "answer_exhibit_path": "exhibits/q1052_answer_image_agent.jpg",
+      "answer_image_sha256": "eb3739464b0fdf5dd97676f01f7011ad9a61673b27b3dbfc5d312edf7bc41c2d"
+    },
+    {
+      "id": 1053,
+      "original_qid": "Q1053",
+      "before_sha256": "f581febb3dac5bb0392ad18b77072ee8da75c99fe335b724db7a1e826e37b865",
+      "reason": "原答案图片的Monitor/Sensor/Sniffer分配错误，交互答案正确。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "正确配对：Monitor → 增强 RFID 标签位置追踪、跨启用信道监测射频干扰与空气质量；Sensor → 为异地排障提供客户端视角的主动连接测试、无线性能分析；Sniffer → 在指定信道抓取无线帧并转发给远端分析软件。具体功能、支持的硬件及配置取决于平台。原来源答案图把若干描述放错模式，已移除，以上配对以交互题与技术含义为准。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案图片的Monitor/Sensor/Sniffer分配错误，交互答案正确。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1053_image_agent.jpg",
+      "image_sha256": "65ac9d493972ab57d683e475317c0aca1b3effbb747d81115c2b1a4ed98113a1",
+      "answer_exhibit_path": "exhibits/q1053_answer_image_agent.jpg",
+      "answer_image_sha256": "ed5ab7fc3fe42ab0c5f9035accb917ed00baf24f4298e766676cd97ff0564dac"
+    },
+    {
+      "id": 1054,
+      "original_qid": "Q1054",
+      "before_sha256": "29b9c1a6c403f25137600e65d613d4d2c9bfae81bd80d0db501690cbb6214e2c",
+      "reason": "默认AD顺序需限定内部EIGRP。",
+      "updates": {
+        "prompt": "For Cisco IOS default administrative distances, rank the listed route sources from lowest to highest. Assume EIGRP means an internal EIGRP route and no distances have been customized.",
+        "explanation": "依次为 connected 0、static 1、eBGP 20、internal EIGRP 90、OSPF 110、RIP 120。该比较用于不同来源的同一目的前缀；不同前缀转发先考虑最长匹配。EIGRP 外部路由默认为 170，手工调整距离也会改变顺序；带跟踪的静态路由可以配合故障切换。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "默认AD顺序需限定内部EIGRP。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1054_image_agent.jpg",
+      "image_sha256": "bc62a9989dc00cd0b4ff5320ba83591e6ad09d5cfb171e1266a491f8532465a2",
+      "answer_exhibit_path": "exhibits/q1054_answer_image_agent.jpg",
+      "answer_image_sha256": "15c868fad3ef3a3d41f39adec51c5b65f1bca72921e37108037fa85d0aab7bfa"
+    },
+    {
+      "id": 1055,
+      "original_qid": "Q1055",
+      "before_sha256": "1f015ccd8566ad3753407b2a09bd254f3ddb48b155d5c8b6aced31053a75fe9d",
+      "reason": "掩码条件限定广播以太网。",
+      "updates": {
+        "prompt": "For two OSPFv2 routers forming a neighbor relationship on the same broadcast Ethernet subnet, classify the displayed parameters as matching or unique. Assume default OSPF network type and no unnumbered interfaces; not all parameters are used.",
+        "explanation": "需一致：area ID、子网掩码及 Hello/Dead timers；必须不同：两个接口的 IP 地址及两台路由器的 router ID。OSPF process ID 只在本路由器有本地意义，不要求相同或全局唯一；认证与区域类型等还须兼容。此题限定广播链路，点对点或 unnumbered 情况不能不加条件地套用掩码及接口地址结论。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "掩码条件限定广播以太网。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1055_image_agent.jpg",
+      "image_sha256": "0b3332266512bd6cefa47251ce86496bc2c36e401d8c15c624b0da894a9a8f5f",
+      "answer_exhibit_path": "exhibits/q1055_answer_image_agent.jpg",
+      "answer_image_sha256": "eca0a14a792ec5ddd391095a0a28e2e78e7263d59074fcb65a8c3b0aea1bab25"
+    },
+    {
+      "id": 1056,
+      "original_qid": "Q1056",
+      "before_sha256": "ca8afb10eb5cc64dd8691e0df8180f8152826adee078a20f7c84b6332b9669a3",
+      "reason": "原答案图片、交互判分和解析均与原图路由表不一致，四项修正。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "按原图路由表读取前缀，再换算掩码：10.10.13.0/25 → 255.255.255.128；10.10.13.144/28 → 255.255.255.240；10.10.13.160/29 → 255.255.255.248；209.165.202.128/27 → 255.255.255.224（从图中 209.165.202.0/27 的路由分组读取）。255.255.255.252 /30 在此四项中未使用。原来源答案图及原解析与路由表不符，已修正交互答案并移除错误答案图。",
+        "drag_drop_data": {
+          "sources": [
+            "255.255.255.128",
+            "255.255.255.224",
+            "255.255.255.240",
+            "255.255.255.248",
+            "255.255.255.252"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "10.10.13.0",
+              "expected": "255.255.255.128"
+            },
+            {
+              "id": "t2",
+              "label": "10.10.13.144",
+              "expected": "255.255.255.240"
+            },
+            {
+              "id": "t3",
+              "label": "10.10.13.160",
+              "expected": "255.255.255.248"
+            },
+            {
+              "id": "t4",
+              "label": "209.165.202.128",
+              "expected": "255.255.255.224"
+            }
+          ]
+        }
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "corrected",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案图片、交互判分和解析均与原图路由表不一致，四项修正。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1056_image_agent.jpg",
+      "image_sha256": "925392a58c421c13f52fe1dd8280898bd5367a8443deb8077647c13868aefbee",
+      "answer_exhibit_path": "exhibits/q1056_answer_image_agent.jpg",
+      "answer_image_sha256": "4c85a33836e635ac413468cfc175888f0fe51ea3695ac540aea2d71fb65f52a4"
+    },
+    {
+      "id": 1057,
+      "original_qid": "Q1057",
+      "before_sha256": "cf2cc01c745a54521b2012f0b3b19e0b7c541d4fa9ca3e005bbbe246a26a2a98",
+      "reason": "限定VoIP RTP媒体；纠正UDP及TFTP端口绝对断言。",
+      "updates": {
+        "prompt": "Classify the listed applications by the usual transport shown here: FTP, SMTP and SSH over TCP; SNMP and TFTP over UDP; and the RTP media stream for VoIP over UDP.",
+        "explanation": "TCP 面向连接：FTP、SMTP、SSH；通常基于 UDP 的 SNMP、TFTP 及题设 VoIP RTP 媒体流归入无连接。FTP 数据连接端口依主动/被动模式而异；TFTP 先使用 UDP 69 建立传输，随后使用动态传输标识端口。UDP 本身不提供连接及可靠传输，但上层应用可自行确认重传；VoIP 的信令等其他组成不一定使用 UDP。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "限定VoIP RTP媒体；纠正UDP及TFTP端口绝对断言。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1057_image_agent.jpg",
+      "image_sha256": "e5126627e0e515ccdae5cd70d04d86781477e18d9f3dff26e891a87a083ae85c",
+      "answer_exhibit_path": "exhibits/q1057_answer_image_agent.jpg",
+      "answer_image_sha256": "fc462de847af0a3dfb7ab65397d9236744d6c05196ee0074eada659a7a0258d1"
+    },
+    {
+      "id": 1058,
+      "original_qid": "Q1058",
+      "before_sha256": "2e5b7c24f32b7818ab39eeeb6452f646dab6de6a58646709ce221ac1b6999a30",
+      "reason": "DNS解析主机名而非完整URL。",
+      "updates": {
+        "explanation": "DHCP 服务器从地址池分配地址并提供参数，可通过 DHCP option 3 提供默认路由器地址；DNS 服务器存储或查询名称相关记录，将 URL 中的主机名解析到对应地址，而不是解析完整 URL 的路径与协议部分。DNS 也可以返回 CNAME 等其他记录。题设将这两项服务分开描述，实际部署可运行于同一台服务器。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "DNS解析主机名而非完整URL。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1058_image_agent.jpg",
+      "image_sha256": "25fbd64cf375ddf8ab75dd4d2ccb1f0af95a627bd40d9204cc2c432de27d290e",
+      "answer_exhibit_path": "exhibits/q1058_answer_image_agent.jpg",
+      "answer_image_sha256": "219d3034e961d501499a1eb97f93f848fde9d9323b399cc7ea181e8755b467d2"
+    },
+    {
+      "id": 1059,
+      "original_qid": "Q1059",
+      "before_sha256": "7ff0c9167a0019d6240a69fdd964a3144a844b896a34812640990186b1726ef7",
+      "reason": "原MIB解析错贴无线Monitor模式。",
+      "updates": {
+        "explanation": "MIB 是以对象标识符组织的受管对象定义集合，代理维护可读取的对象实例；SNMP agent 在受管设备上响应管理请求；SNMP manager 通常运行在 NMS 上发起监控；SNMP trap 是设备主动发送、无需请求触发的通知。Inform 也是主动通知，但有确认机制，不能把所有 SNMP 通知都当作 Trap。常见 UDP 端口为代理 161、通知接收端 162。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "原MIB解析错贴无线Monitor模式。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1059_image_agent.jpg",
+      "image_sha256": "59233daa907242ec1b70d20e8b440f9f9343a056faf036ad61c1e3999912f5b0",
+      "answer_exhibit_path": "exhibits/q1059_answer_image_agent.jpg",
+      "answer_image_sha256": "5278fbfed9bb68222765a20870eeabeb75ba19d5cc2876da08971cfed0593449"
+    },
+    {
+      "id": 1060,
+      "original_qid": "Q1060",
+      "before_sha256": "01df01a0c26e4f03b16ec14d326762b6e2aeb3211b4acc10fc9c497fd6c2a46e",
+      "reason": "明确题设包含PAT，修复题干拼写，保留NAT命令。",
+      "updates": {
+        "prompt": "Refer to the exhibit. Configure Ethernet0 as the inside interface and Serial0 as the outside interface, publish the web server at TCP port 80, and enable PAT for the inside subnet using the existing ACL. Place each command in its configuration position. Assume reachability, addressing and the gateway are correctly configured.",
+        "explanation": "A：`ip address 172.16.1.1 255.255.255.0`；B：`ip nat inside`；C：`ip address 45.83.2.214 255.255.255.240`；D：`ip nat outside`；E：`ip nat inside source static tcp 172.16.1.2 80 45.83.2.214 80 extendable`；F：`ip nat inside source list 1 interface s0 overload`。E 是 Web 服务的静态 TCP 端口映射；F 将 ACL 1 选中的内部源地址做接口地址复用。仅发布 Web 服务不必然需要 PAT；题设额外要求它。仍需路由、服务器默认网关及安全策略允许对应流量。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "drag/drop sources and targets checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "answer_image": "viewed",
+        "code_cli": "checked",
+        "finding": "明确题设包含PAT，修复题干拼写，保留NAT命令。",
+        "reference": [
+          "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+          "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+          "https://www.rfc-editor.org/rfc/rfc2131.html",
+          "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+        ]
+      },
+      "exhibit_path": "exhibits/q1060_image_agent.jpg",
+      "image_sha256": "dd8bedeaca6325740347d9ddc599d6d3bf0f79fc3c0bede5e1cfda0516677f37",
+      "answer_exhibit_path": "exhibits/q1060_answer_image_agent.jpg",
+      "answer_image_sha256": "fafd24fd363522f46463a200210f6b7aa3ccccd6bf0a092546efcc732a70e549"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-6/configuration_guide/b_166_lyr2_lyr3_3650_cg/m-165-layer2-etherchanl-cg.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+    "https://www.rfc-editor.org/rfc/rfc2131.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/26-1/configuration-guide/wl-26-1-cg/sniffer-mode/info-sniffer.html"
+  ],
+  "limitations": "人工检查原题及答案图并查文档；未进行设备实验。"
+}

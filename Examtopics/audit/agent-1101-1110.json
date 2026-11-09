@@ -1,0 +1,465 @@
+{
+  "scope": "Q1101–Q1110",
+  "corrections": [
+    {
+      "id": 1101,
+      "original_qid": "Q1101",
+      "before_sha256": "473bca470cec7667616b2e47412d121f367b40bb6a2d32ba8004ff0a6e960ad4",
+      "reason": "原答案图与交互映射中 R1 指向自身且 R2 主机路由指向错误方向；改成可达的双向静态路由。",
+      "updates": {
+        "prompt": "Refer to the topology. Assuming the directly connected networks and host gateways work, select the network route from R1 to Host B’s subnet, the two subnet routes on R2, and the host route from R3 to Host A. Drag each command to its router.",
+        "drag_drop_data": {
+          "sources": [
+            "ip route 10.10.13.0 255.255.255.128 10.10.10.1",
+            "ip route 10.10.13.0 255.255.255.128 10.10.10.5",
+            "ip route 10.10.13.10 255.255.255.255 10.10.10.1",
+            "ip route 10.10.14.0 255.255.255.0 10.10.10.2",
+            "ip route 10.10.14.0 255.255.255.0 10.10.10.6",
+            "ip route 10.10.14.10 255.255.255.255 10.10.10.6"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "R1",
+              "expected": "ip route 10.10.13.0 255.255.255.128 10.10.10.1"
+            },
+            {
+              "id": "t2",
+              "label": "R2 (Slot 1)",
+              "expected": "ip route 10.10.13.0 255.255.255.128 10.10.10.5",
+              "unordered_group": "R2"
+            },
+            {
+              "id": "t3",
+              "label": "R2 (Slot 2)",
+              "expected": "ip route 10.10.14.0 255.255.255.0 10.10.10.2",
+              "unordered_group": "R2"
+            },
+            {
+              "id": "t4",
+              "label": "R3",
+              "expected": "ip route 10.10.14.10 255.255.255.255 10.10.10.6"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "R1 到 10.10.13.0/25 使用 R2 下一跳 10.10.10.1；R2 到该网段使用 R3 下一跳 10.10.10.5，返回 10.10.14.0/24 使用 R1 下一跳 10.10.10.2；R3 到主机 10.10.14.10/32 使用 R2 下一跳 10.10.10.6。原答案图将 R1 的自身地址当下一跳，并把 R2 的目的 10.10.13.10 指向 R1，均与拓扑矛盾。命令需直连下一跳可达，主机默认网关与回程正确。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案图与交互映射中 R1 指向自身且 R2 主机路由指向错误方向；改成可达的双向静态路由。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1101_image_agent.png",
+            "sha256": "4309a1bf1c5c6daa2424e543d18b9d3dbb51662176681e99b085fb85ffb1d3fc"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1101_answer_image_agent.png",
+            "sha256": "7b7d38714162b2a7bb168441f11eab95b228245a234eb13e0d3de7b9dfb07824"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1102,
+      "original_qid": "Q1102",
+      "before_sha256": "94fc76ff33dcba59f7f1f5bfa39eef6c48aa4a720977864f285d8f777de5fe3c",
+      "reason": "按路由表最长前缀逐一核算；原解析空泛。",
+      "updates": {
+        "prompt": "Refer to Router2’s routing table. For each destination, drag it to the Router1 or Internet path selected by longest-prefix matching. Assume the displayed routes are installed and reachable.",
+        "explanation": "10.10.13.1 命中 10.10.13.0/25；10.10.13.150 命中 10.10.13.144/28，均经 Router1。10.10.10.16、10.10.13.129 和 10.10.100.128 不在显示的更具体前缀内，命中经 10.10.10.13 的默认路由。10.0.0.0/8 的汇总标题不是可独立用于转发的路由；私有地址被指向 Internet 默认出口不代表公网上可路由。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "按路由表最长前缀逐一核算；原解析空泛。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1102_image_agent.png",
+            "sha256": "03f5e0de628eb45d0288954870d3e1b4955d687f8e46cfd79b82c6a1746d2e2e"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1102_answer_image_agent.png",
+            "sha256": "6add1f626522721c6d6c483c5e0d360fb451612d1fd5aae864d37025e4f910ff"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1103,
+      "original_qid": "Q1103",
+      "before_sha256": "ea707597cc6d815131b4a17a65847041b29fa50b26aa033f93704b24412229a9",
+      "reason": "恢复原图问题；逐一确认每个已学习前缀的掩码。",
+      "updates": {
+        "prompt": "Refer to the displayed routing table. Drag each learned prefix to its displayed subnet mask.",
+        "explanation": "按表中前缀长度直接匹配：172.16.4.0/23 → 255.255.254.0；172.16.2.128/25 → 255.255.255.128；172.16.3.64/27 → 255.255.255.224；172.16.3.128/28 → 255.255.255.240；172.16.3.192/29 → 255.255.255.248。题目要求与图中路由条目匹配，并非只凭地址自身确定掩码。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "恢复原图问题；逐一确认每个已学习前缀的掩码。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1103_image_agent.png",
+            "sha256": "d587523a96b71bc01f49a48d30617b64d517deba9d4e22dd3be11ecc605d1341"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1103_answer_image_agent.png",
+            "sha256": "c3301116346afee400d1e86448a68da078123e0ab105995114a73e72cf7c1d33"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1104,
+      "original_qid": "Q1104",
+      "before_sha256": "677591c60948ebc1f0a07937cf74b95a190b5a0d3e73750b5f7e15a112a0be41",
+      "reason": "补内部 EIGRP 与候选路由可用条件，重写无实质内容的解析。",
+      "updates": {
+        "prompt": "For the same destination prefix, assume all routes not explicitly down are eligible, EIGRP is internal, static next hop is reachable, and default administrative distances apply. Drag each condition to the selected routing source.",
+        "explanation": "默认 AD：静态 1、eBGP 20、内部 EIGRP 90、OSPF 110。全部正常或仅 OSPF/eBGP 不可用时选静态；静态及 EIGRP 不可用或静态及 OSPF 不可用时选 eBGP；静态及 eBGP 不可用时选内部 EIGRP。须比较相同前缀且路由可安装；外部 EIGRP 的默认 AD 不同。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "补内部 EIGRP 与候选路由可用条件，重写无实质内容的解析。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1104_image_agent.png",
+            "sha256": "c802ab4ae436db08101075ca3dd83a62870a7a43c5dd1e6496a27d22d92c7b2e"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1104_answer_image_agent.png",
+            "sha256": "a026c2babbb02968a3994d35712e781604e1298574f2fce88f39032cf65f725c"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1105,
+      "original_qid": "Q1105",
+      "before_sha256": "db0457562415d6c6fe6cb739fefacfb2da33225e790775fcf517c1f0c1689e51",
+      "reason": "原答案图中 managed device 与 NMS 对换，交互映射正确；保留原图证据，隐藏错误答案图。",
+      "updates": {
+        "prompt": "Drag each SNMP component to its definition.",
+        "answer_image": null,
+        "explanation": "MIB 定义可查询的受管对象及 OID；managed device 是运行代理并被管理的节点；NMS 是运行管理应用的管理站，发起 GET/SET 并接收通知；agent 在设备上维护并提供受管数据。原答案图将 managed device 与 NMS 对调，本题以交互配对为准。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案图中 managed device 与 NMS 对换，交互映射正确；保留原图证据，隐藏错误答案图。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1105_image_agent.png",
+            "sha256": "af717444b4653c699a5645660d325505952896cb847b13e947ea4779abba02b5"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1105_answer_image_agent.png",
+            "sha256": "a0e08552af1527f5b4133f8ca135cb4ebc0edee2ea47fb9c42c31151af2008f4"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1106,
+      "original_qid": "Q1106",
+      "before_sha256": "6d69666c8fedc6b27445faf71f5212417ff27bb0b127ce55c86e3737ce3aa6e5",
+      "reason": "答案图将 policing、queuing、classification 错配；修正 ToS 描述与队列绝对化说明。",
+      "updates": {
+        "answer_image": null,
+        "explanation": "policing 对超过配置速率的流量执行丢弃或重标记等策略；marking 设置 DSCP/IP precedence 等报文标记；queuing 在带宽不足时缓存并调度，缓冲有限仍可能丢包；classification 依据条件划分流量。ToS 字段中的 DSCP 与设备内部 QoS group 不应混为同一个字段。原答案图有三项错配，交互答案正确。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "答案图将 policing、queuing、classification 错配；修正 ToS 描述与队列绝对化说明。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1106_image_agent.png",
+            "sha256": "abb96cda1189447dd8a4060593b4977e8127fe2eb78e610dd643e0e6485625be"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1106_answer_image_agent.png",
+            "sha256": "4af1cf242a3bb307f9c60072cf3178195878854e6ebc5e4bfd51d0da1c20df25"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1107,
+      "original_qid": "Q1107",
+      "before_sha256": "2372e2e6ba1baae00dddfe5709bbf3ff13c43f69bbec2ba4a6cbca998d145e12",
+      "reason": "补缓存未命中及省略TLD查询的前提。",
+      "updates": {
+        "prompt": "In a simplified, uncached DNS lookup, order these listed events. Intermediate TLD referrals and resolver replies are omitted.",
+        "explanation": "终端查询递归解析器 → 解析器查询根服务器 → 解析器查询域名权威服务器 → 收到权威答复 → 回复终端。通常根服务器先引导至 TLD，之后还需查询 TLD 才能找到权威服务器；缓存命中或转发器也可改变实际步骤。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "补缓存未命中及省略TLD查询的前提。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1107_image_agent.png",
+            "sha256": "1271a1c6c4f560e91a5ae131fb5fe81d09a126ec96faacba5305b88a4eded77c"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1107_answer_image_agent.png",
+            "sha256": "3e50eba81d4a20608969681546745efdd7e0ca7a1468c91a75dda72acc0ee812"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1108,
+      "original_qid": "Q1108",
+      "before_sha256": "3e90c55d3e4e6b62db037851ac7f5788248bc9eebecac1370b93afa9cdec6e8a",
+      "reason": "原标签误称补全 DNS 服务器 FQDN；默认域名作用于未限定主机名。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "ip domain-lookup",
+            "ip domain-name",
+            "ip host switch_1 192.168.0.1",
+            "ip name-server",
+            "show hosts"
+          ],
+          "targets": [
+            {
+              "label": "adds an entry to the host table",
+              "sub_label": "",
+              "expected": "ip host switch_1 192.168.0.1"
+            },
+            {
+              "label": "sets the default domain suffix used for unqualified host names",
+              "sub_label": "",
+              "expected": "ip domain-name"
+            },
+            {
+              "label": "displays address-mapping information",
+              "sub_label": "",
+              "expected": "show hosts"
+            },
+            {
+              "label": "enables host-to-IP-address translation",
+              "sub_label": "",
+              "expected": "ip domain-lookup"
+            },
+            {
+              "label": "specifies the IP address of the DNS server",
+              "sub_label": "",
+              "expected": "ip name-server"
+            }
+          ]
+        },
+        "explanation": "`ip host switch_1 192.168.0.1` 添加静态映射；`ip domain-name` 设置未限定主机名使用的默认后缀；`show hosts` 查看映射；`ip domain-lookup` 控制 DNS 查询；`ip name-server` 配置所查询的 DNS 服务器地址。实际补全受域搜索列表及平台配置影响，上游服务器可以是递归解析器，不必是权威服务器。题图中对应标签原表述已修正。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原标签误称补全 DNS 服务器 FQDN；默认域名作用于未限定主机名。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1108_image_agent.png",
+            "sha256": "c412dbe298516abf8f29fb7824dd1ae1a6a796b7a29e38aedd5aa0694d7e3cdb"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1108_answer_image_agent.png",
+            "sha256": "abd2c8cfccada1d593f9f9dd29f7c7d3e9533405cea9aadc0029d939cb6e6493"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1109,
+      "original_qid": "Q1109",
+      "before_sha256": "9f76f3d4c9d66d50933ed0f0961f2b3b72723eaa2d21885901cccf15b9bc14a0",
+      "reason": "source-interface 指定请求源接口而非为单接口启用 DNS。",
+      "updates": {
+        "drag_drop_data": {
+          "sources": [
+            "ip dns server",
+            "ip domain list",
+            "ip domain lookup source-interface",
+            "ip domain name",
+            "ip host",
+            "ip name-server"
+          ],
+          "targets": [
+            {
+              "label": "specifies the source interface for DNS resolver queries",
+              "sub_label": "",
+              "expected": "ip domain lookup source-interface"
+            },
+            {
+              "label": "enables the DNS server on the device",
+              "sub_label": "",
+              "expected": "ip dns server"
+            },
+            {
+              "label": "identifies a DNS server to provide lookup services",
+              "sub_label": "",
+              "expected": "ip name-server"
+            },
+            {
+              "label": "specifies a sequence of domain names",
+              "sub_label": "",
+              "expected": "ip domain list"
+            },
+            {
+              "label": "specifies the default domain to append to unqualified host names",
+              "sub_label": "",
+              "expected": "ip domain name"
+            },
+            {
+              "label": "statically maps an IP address to a hostname",
+              "sub_label": "",
+              "expected": "ip host"
+            }
+          ]
+        },
+        "explanation": "`ip domain lookup source-interface` 指定解析请求源接口；`ip dns server` 启用设备 DNS 服务；`ip name-server` 指定解析服务地址；`ip domain list` 配置搜索后缀列表；`ip domain name` 设置默认后缀；`ip host` 建立静态主机映射。开启查询本身由 `ip domain lookup` 控制，指定源接口并非接口级启用开关；具体命令与平台有关。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "source-interface 指定请求源接口而非为单接口启用 DNS。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1109_image_agent.png",
+            "sha256": "1e088ae34797fb6c37c9b2775ced2435d9b5c62e586c255498cb77de2f5efd6a"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1109_answer_image_agent.png",
+            "sha256": "3fdfb715042d8628c4a6be3b03f92416adde426ed6c4a46903e0824ca0cc717e"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1110,
+      "original_qid": "Q1110",
+      "before_sha256": "ba6b701ff2e521cafa6cd477097d053d7e863a26eac2fa79fcf5a2dea5bebc00",
+      "reason": "原答案把 DHCP snooping 错配为 MAC flooding 防护、802.1X 错配为直接阻止 ARP 欺骗；替换措施并保留原图证据。",
+      "updates": {
+        "prompt": "Match each attack to the listed mitigation. For ARP-based man-in-the-middle spoofing, assume dynamic ARP inspection has valid DHCP-snooping bindings or appropriate static ARP ACLs. The interactive options below correct the original exhibit.",
+        "drag_drop_data": {
+          "sources": [
+            "Configure port security with a MAC address limit",
+            "Configure dynamic ARP inspection with valid bindings",
+            "Use an unused dedicated native VLAN and restrict trunks",
+            "Disable DTP and configure user-facing ports as access ports"
+          ],
+          "targets": [
+            {
+              "id": "t1",
+              "label": "802.1q double-tagging VLAN-hopping attack",
+              "expected": "Use an unused dedicated native VLAN and restrict trunks"
+            },
+            {
+              "id": "t2",
+              "label": "MAC flooding attack",
+              "expected": "Configure port security with a MAC address limit"
+            },
+            {
+              "id": "t3",
+              "label": "man-in-the-middle spoofing attack",
+              "expected": "Configure dynamic ARP inspection with valid bindings"
+            },
+            {
+              "id": "t4",
+              "label": "switch-spoofing VLAN-hopping attack",
+              "expected": "Disable DTP and configure user-facing ports as access ports"
+            }
+          ]
+        },
+        "answer_image": null,
+        "explanation": "双标签 VLAN hopping：使用不承载用户的专用 native VLAN 并限制 trunk；MAC flooding：在接入口配置 port security 限制 MAC；ARP 伪造中间人：正确配置 DAI 并提供有效绑定或 ARP ACL；交换机伪装：用户端口静态 access 并禁用不必要的 DTP。DHCP snooping 过滤伪造 DHCP 报文并提供绑定，本身并非 MAC flooding 防护；802.1X 是接入认证，不能单独保证阻止 ARP 欺骗。原图选项与答案存在错误，交互题已更正。"
+      },
+      "review": {
+        "prompt": "checked",
+        "options": "all drag sources and targets checked",
+        "answer": "interactive mappings compared with original question and answer images",
+        "explanation": "corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "原答案把 DHCP snooping 错配为 MAC flooding 防护、802.1X 错配为直接阻止 ARP 欺骗；替换措施并保留原图证据。",
+        "images": [
+          {
+            "field": "image",
+            "path": "exhibits\\q1110_image_agent.png",
+            "sha256": "55bfc1b0c754696f3527535ccab44110d526acfbc9a01b9e1595a9ad0b48b8d3"
+          },
+          {
+            "field": "answer_image",
+            "path": "exhibits\\q1110_answer_image_agent.png",
+            "sha256": "29a8bf02ffc602a3e4ebef27a407a668c3f3640944633a034ebcf7b78efa516c"
+          }
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html",
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr/command/ipaddr-cr-book/ipaddr-i3.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9500/software/release/26-x/command_reference/b_26x_9500_cr/ip_addressing__services_commands.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9200/software/release/17-9/configuration_guide/sec/b_179_sec_9200_cg/configuring_dynamic_arp_inspection.html"
+  ],
+  "limitations": "直接查看题图与答案图并核对拖拽映射；未进行设备实测。"
+}

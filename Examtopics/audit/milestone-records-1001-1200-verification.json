@@ -1,0 +1,25 @@
+{
+  "scope_records": [
+    1001,
+    1200
+  ],
+  "scope_question_ids": [
+    1002,
+    1201
+  ],
+  "reviewed": 200,
+  "ids_qids_unchanged": true,
+  "all_index_fingerprints_match": true,
+  "source_app_batch_html_equal": true,
+  "batch7_missing_id_1397_restored": true,
+  "formatter_prompt_explanation_checked": 400,
+  "formatter_outputs_equal": true,
+  "app_group_grading_tested": true,
+  "apk_data_matches_source": true,
+  "apk_sha256": "da86993144028e561c7541bc409021f8d50d2f7e1079e5afe4dcee761eed671c",
+  "build_status": "passed",
+  "install_status": "pending user-approved suitable device without Island installation",
+  "practice_records_read_or_cleared": false,
+  "release_created": false,
+  "limitations": "Manual review and formatter checks; no live network-device lab tests."
+}

@@ -1,0 +1,295 @@
+{
+  "scope": "Q801–Q810",
+  "preserve_question_ids": true,
+  "corrections": [
+    {
+      "id": 801,
+      "original_qid": "Q1067",
+      "before_sha256": "72c33bf20db34ec2677cead596bd21cd7d508100a34c9751ef6bfb400d61e003",
+      "reason": "纠正聚合吞吐、哈希和故障切换绝对化。",
+      "updates": {
+        "explanation": "D。链路聚合将多个成员链路组成逻辑通道，可提供成员链路故障时的冗余并提高多流总容量。负载分担一般依赖哈希，单条流通常受单个成员链路速率限制，也不保证各链路均衡或故障时会话完全无中断。A 是网关冗余，B 是单链路承载多个 VLAN 的标记机制，C 是封装技术；各自不能单独提供题设三项功能。WLC 型号与版本决定具体 LAG 和交换机端口配置。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查无线局域网控制器（WLC）与二层接入/汇聚交换机之间的链路聚合（Link Aggregation, LAG）技术。\n1. 传统多端口连接的痛点：\n   在没有启用 LAG 时，Cisco WLC 的每个物理分发端口必须独立绑定不同的接口（例如 Management、AP-Manager、Dynamic Interface）。如果某个物理端口损坏，绑定在其上的 WLAN 客户端流量将直接中断，缺乏冗余；且单端口带宽受限（如 1 Gbps），无法满足高并发吞吐。\n2. 链路聚合（LAG / EtherChannel）在 WLC 上的核心价值：\n   - **连接冗余（Connection Redundancy）**：将 WLC 上的所有物理分发端口捆绑为单一的逻辑 EtherChannel。当其中一条物理线缆断开或交换机端口故障时，流量在毫秒级内自动转移至剩余存活端口，无线 AP 与客户端会话完全不中断。\n   - **增加带宽（Increased Bandwidth）**：将多个物理端口（例如 4 个 1 Gbps 端口）聚合成一个 4 Gbps 的逻辑链路，成倍提升 WLC 与核心网络之间的吞吐容量。\n   - **负载分担（Load Sharing / Balancing）**：通过哈希算法，双向流量能够均匀分担在所有可用物理链路之上。\n   - 架构简化：所有动态接口和管理接口均映射至同一个逻辑 LAG 通道上，消除针对各个端口单独配置 AP-Manager 的复杂性。\n\n• 正确选项剖析：\n选项 D（link aggregation）：\n精准概括了将多个物理端口绑定为一个逻辑通道的技术特性，提供连接高可用冗余、带宽汇聚叠加以及动态负载均衡分担，完全符合题干全部技术描述，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（first hop redundancy）：第一跳冗余协议（FHRP，如 HSRP/VRRP）运行在三层，提供默认网关级别的冗余，不解决 WLC 与二层交换机之间的物理链路带宽倍增和逐包/逐流负载均衡。\n- 选项 B（VLAN trunking）：VLAN 中继技术（802.1Q）允许一条物理链路上承载多个 VLAN 流量，但它本身只是一条链路的帧标记协议，无法提供多链路聚合所带来的物理层带宽累加与链路级硬件冗余。\n- 选项 C（tunneling）：隧道技术（如 CAPWAP/GRE）用于在三层网络上封装二层数据，与交换机互联物理链路的冗余与带宽扩展无关。\n\n• 考试要点与速记技巧：\n- 看到三大关键词“冗余（Redundancy）+ 增加带宽（Increased Bandwidth）+ 负载分担（Load Sharing）”，二层技术唯一答案就是 **链路聚合（Link Aggregation / EtherChannel）**！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "纠正聚合吞吐、哈希和故障切换绝对化。",
+        "reference": null
+      }
+    },
+    {
+      "id": 802,
+      "original_qid": "Q1069",
+      "before_sha256": "ed29402d17151fc692ef85d04c511a0dc7ed046054cb72e2f16a06ed437af50d",
+      "reason": "图为同前缀候选路径，补充候选、单路径及排除其他前缀前提。",
+      "updates": {
+        "prompt": "Refer to the exhibit, which lists four candidate routes to 10.10.20.64/27. Assuming all candidates are valid, the router selects one path, and no other route applies, which interface is selected for this destination network?",
+        "explanation": "C。四条候选均为同一 /27 前缀，先比较管理距离：内部 EIGRP 90 优于 RIP 120；同为 EIGRP 的两条再比较度量，6881 小于 43618，故选择 F0/12。F0/5 的 EIGRP 度量更高，F0/9 与 F0/6 的 RIP 管理距离更高。图应视为候选路径而非必然同时装入转发表的输出；题设排除其他前缀和多路径影响。"
+      },
+      "original_fields": {
+        "prompt": "Which interface is used to send traffic to the destination network?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由表条目的选路优先级仲裁机制：最长前缀匹配（LPM）、管理距离（AD）与度量值（Metric）。\n1. 路由器决策路由的三层递进仲裁漏斗：\n   - 第一层：**最长前缀匹配（Longest Prefix Match）**。子网掩码越长（前缀数值越大）越优先。\n   - 第二层：**管理距离（Administrative Distance, AD）**。当目标网络及掩码完全相同时，比较学习到该路由的协议来源可信度，AD 值越小越优先。\n   - 第三层：**度量值（Metric / Cost）**。同一协议且同一网络掩码下，度量值越小越优先。\n2. Exhibit 路由表输出逐行分析：\n   展示图中通往目的网络 `10.10.20.64/27` 的条目如下：\n   `D 10.10.20.64/27 [90/6881] via F0/12`\n   `D 10.10.20.64/27 [90/43618] via F0/5`\n   `R 10.10.20.64/27 [120/7] via F0/9`\n   `R 10.10.20.64/27 [120/3] via F0/6`\n3. 选路仲裁推导：\n   - 步骤一（比掩码）：四条候选路由的前缀均为 `/27`，最长匹配平局。\n   - 步骤二（比 AD）：\n     • EIGRP 路由（代码 `D`）的 AD 为 `90`；\n     • RIP 路由（代码 `R`）的 AD 为 `120`。\n     因为 $90 < 120$，路由器直接淘汰两批 RIP 路由（排除 F0/9 与 F0/6）。\n   - 步骤三（比 Metric）：\n     • 剩余两条 EIGRP 路由的度量值分别为 `6881`（via F0/12）和 `43618`（via F0/5）。\n     • 因为 $6881 < 43618$，度量值更小的路径入选最佳路由并安装进实际转发 FIB。\n   - 结论：路由器最终选定出接口为 **F0/12** 发送流量。\n\n• 正确选项剖析：\n选项 C（F0/12）：\n通过比较 AD（EIGRP 90 胜过 RIP 120）和同协议下的 Metric（6881 胜过 43618），F0/12 是最优有效转发路径，故 C 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（F0/5）：虽然同属 EIGRP 协议（AD 90），但其度量值 43618 远高于 6881，在单路径模式下不会被优选。\n- 选项 B（F0/6）：属于 RIP 协议，管理距离 120 劣于 EIGRP 的 90，直接被协议信任度机制过滤。\n- 选项 D（F0/9）：同样属于 RIP 协议且度量值更高，完全不可能被选中。\n\n• 考试要点与速记技巧：\n- 路由选路三字经：“先看长（掩码最长），再看小（AD 最小），同协议（Metric 最小）”。\n- 本题前缀全为 /27：选 EIGRP（AD=90）里的最小度量（6881），直指 F0/12！"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "图为同前缀候选路径，补充候选、单路径及排除其他前缀前提。",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/ip/ip-routing/8651-21.html"
+      },
+      "exhibit_path": "exhibits/q802_agent.jpg",
+      "image_sha256": "d4e91809bc184882769045683cf93ad253bb4f4748f51892ed82b590a86b7e06"
+    },
+    {
+      "id": 803,
+      "original_qid": "Q1070",
+      "before_sha256": "0035ddeb2af59a097e91dc7b0231da2d17d8e44901c26e06d1ee356f74d5f2f6",
+      "reason": "消除 SSID 全局唯一及 BSSID 必然等于物理设备的误解。",
+      "updates": {
+        "explanation": "D。SSID 是无线服务集使用的网络名称，用来让客户端识别并选择 WLAN；相同名称也可能被不同网络使用，因此名称本身不保证网络唯一或可信。BSSID 标识基本服务集（常为某个 AP 射频接口的 MAC 地址），并非 SSID。SSID 可以与不同的安全策略或 VLAN 映射结合，但其本身不提供认证和加密；隐藏名称也不能替代 WPA2/WPA3 等安全机制。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查无线局域网 IEEE 802.11 服务集标识符（SSID）的核心定义与技术用途。\n1. SSID（Service Set Identifier）技术规范：\n   - SSID 是一个长度为 0 到 32 字节（Octets）的可读区分大小写的字符串。\n   - 它的根本功能是**在逻辑上唯一标识一个特定的无线局域网（Identifies a WLAN）**。\n   - 在多 AP 部署或多无线网络重叠覆盖的区域，AP 通过在 Beacon 帧和 Probe Response 帧中广播 SSID，使得无线终端（Client STA）能够发现并选择连接到正确的网络（例如企业员工网络 \"Corp-WiFi\" 与访客网络 \"Guest-WiFi\"）。\n2. 无线标识符核心概念辨析：\n   - **SSID**：标识整个无线局域网（WLAN 的逻辑名称）。\n   - **BSSID（Basic Service Set Identifier）**：标识某一个具体 AP 射频无线网卡的物理 MAC 地址（用于在二层物理帧头唯一标识具体的单台 AP 节点）。\n   - **ESSID（Extended Service Set Identifier）**：当多个 AP 采用相同 SSID 组成扩展服务集以实现漫游时，SSID 亦充当 ESSID。\n\n• 正确选项剖析：\n选项 D（It identifies a WLAN）：\n准确表达了 IEEE 802.11 标准对 SSID 的法定定义——为无线局域网提供逻辑名称标识，故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It identifies an individual access point on a WLAN）：标识局域网中某台独立 AP 的是 **BSSID**（即 AP 射频卡的 48 位 MAC 地址），而不是 SSID。同一个 SSID 下可以包含成百上千台不同的 AP。\n- 选项 B（It differentiates traffic entering access points）：区分进入 AP 流量并实施差分服务的是 QoS 机制（如 802.11e / WMM、DSCP、CoS 优先级标记）或 VLAN 标记，不是 SSID 的职能。\n- 选项 C（It provides network security）：SSID 本身没有任何加密和认证保护机制；隐藏 SSID（关闭 SSID 广播）也极易被 Sniffer 嗅探工具通过 Probe Request 捕获，绝不提供真正的网络安全。网络安全由 WPA2/WPA3、802.1X/EAP 和 AES 协议提供。\n\n• 考试要点与速记技巧：\n- 无线标识对对碰：\n  - **SSID** = 标识无线网络（Identifies a WLAN / Network Name）。\n  - **BSSID** = 标识具体 AP 节点（AP Radio MAC Address）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "消除 SSID 全局唯一及 BSSID 必然等于物理设备的误解。",
+        "reference": null
+      }
+    },
+    {
+      "id": 804,
+      "original_qid": "Q1073",
+      "before_sha256": "632dfdf21d7907deb10654812d2797b4b29cf99476cfb819be4a7042d0aa5d41",
+      "reason": "纠正南向接口不能访问管理平面的误解。",
+      "updates": {
+        "explanation": "A。SDN 控制器通过南向接口与网络设备交互，例如配置设备、收集状态或下发转发策略；北向接口连接控制器与上层应用，因此 D 描述北向方向。B 的管理平面表述不能定义接口方向，设备的管理功能也可能通过南向接口访问。HTTP 可用于某些接口，例如 RESTCONF，但并非所有南向接口都使用 HTTP，故 C 不构成定义。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查软件定义网络（SDN）控制平面体系架构中南向接口（Southbound APIs）的核心功能与职责划分。\n1. SDN 三层分层模型与接口体系：\n   - **应用层（Application Plane）**：包含网络业务自动化应用、监控报表、编排系统等。\n   - **控制层（Control Plane / SDN Controller）**：如 Cisco DNA Center、APIC 等，集中维护网络全局拓扑状态与计算转发表项。\n   - **数据转发层（Data Plane / Infrastructure Plane）**：由底层物理交换机、路由器、无线控制器及虚拟交换机组成。\n2. 南向接口（Southbound APIs, SBIs）：\n   - 位置：位于 SDN 控制器与底层数据转发网络设备之间（向下连通）。\n   - 核心功能：负责控制器与底层网络设备之间的控制交互，将控制器的策略、流表规则下发到网络硬件，并从设备收集链路状态、遥测（Telemetry）及拓扑数据。\n   - 常见南向协议包括：OpenFlow、NETCONF（基于 SSH/YANG）、RESTCONF、SNMP、BGP-LS、OVSDB 及 Cisco OpFlex。\n3. 北向接口（Northbound APIs, NBIs）：\n   - 位置：位于 SDN 控制器与上层应用程序之间（向上连通）。\n   - 核心功能：向业务层暴露可编程能力，使开发者通过统一的 REST API（基于 HTTP/HTTPS，交互 JSON/XML）编排和监控网络。\n\n• 正确选项剖析：\n选项 A（They enable communication between the controller and the network device）：\n精确描述了南向接口（Southbound API）的基本职责——实现 SDN 控制器与底层网络物理/虚拟设备之间的双向通信与配置控制，故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（They communicate with the management plane）：网络设备的管理平面由运维人员通过 SSH/Console 直接访问，南向接口主要作用于网络设备的控制与数据转发状态下发，属于控制器与设备基础设施之间的交互通道。\n- 选项 C（They use HTTP messages to communicate）：虽然部分新型南向接口（如 RESTCONF）运行在 HTTP 之上，但主流的南向接口大量采用 NETCONF（基于 SSH 传输）、OpenFlow（基于标准 TCP）、SNMP（基于 UDP），使用 HTTP 是北向 RESTful API 的普遍特征，不能用来定义南向 API 的本质功能。\n- 选项 D（They convey information from the controller to the SDN applications）：这是 **北向接口（Northbound APIs）** 的功能，完全混淆了南北向流向。\n\n• 考试要点与速记技巧：\n- SDN 接口方向记忆法则：\n  - **北向（Northbound）**：朝上，连接“控制器与应用程序（Apps）”，多用 REST/HTTP。\n  - **南向（Southbound）**：朝下，连接“控制器与网络设备（Network Devices）”，下发流表与配置。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "纠正南向接口不能访问管理平面的误解。",
+        "reference": null
+      }
+    },
+    {
+      "id": 805,
+      "original_qid": "Q1074",
+      "before_sha256": "aa58d531bea0856539071a9d612c9c5b0cea9d9ec95a4f2c376d7abd1da3df28",
+      "reason": "补充所有路由器选举前互相发现，避免同时通电必然当选的错误。",
+      "updates": {
+        "prompt": "Refer to the exhibit. All routers use default OSPF values unless indicated. For a fresh DR election, assume all four eligible routers discover one another on the shared broadcast segment before any router elects a DR or BDR. Which router is elected DR?",
+        "explanation": "D。在全新选举且四台路由器均已互相发现的前提下，先比较接口 OSPF priority：R4 为 204，R1 为 108，R3 为 106，R2 为 1，因此 R4 当选。优先级相同时才比较 router ID；0 不参与选举。DR 选举不抢占，图中现有 DR 标签或设备启动时间差可能影响实际结果；单凭同时通电不保证所有 Hello 在选举前到达。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. A network engineer is verifying the settings on a new OSPF network. All OSPF configurations use the default values unless otherwise indicated. Which router does the engineer expect will be elected as the DR when all devices boot up simultaneously?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 OSPF 广播型多路访问（Broadcast Multiaccess）网络中指定路由器（DR, Designated Router）的选举规则与判定流程。\n1. OSPF DR/BDR 选举触发机制：\n   在以太网等多路访问网络中，为减少全网建立的邻接关系总数（从 $n(n-1)/2$ 降至 $2n-3$）并控制 LSA 泛洪洪泛风暴，OSPF 必须选举一台 DR 和一台 BDR。所有普通路由器（DROTHER）仅与 DR/BDR 建立 FULL 邻接关系。\n2. DR 选举的先后裁决准则（当设备同时启动时）：\n   - 准则一：**接口 OSPF 优先级（Interface Priority）**。数值越高越优先（范围为 0~255，默认值为 1；优先级为 0 表示放弃竞选资格）。\n   - 准则二：**路由器标识符（Router ID, RID）**。在接口优先级相同的前提下，比较各路由器的 RID，RID 数值越大（IP 格式最高）者获胜。\n3. Exhibit 参数与同时启动（Boot Up Simultaneously）分析：\n   题干明确指出“All devices boot up simultaneously（所有设备同时开机启动）”，这意味着不存在历史已稳定的现任 DR，所有设备在同一起跑线上依据 OSPF 协议标准进行首轮全新选举（排除非抢占性历史干扰）。\n   比对四台路由器直连网段的接口 OSPF 优先级：\n   - R1：接口优先级 = `108`（图中文字标注的 DR 为重启前标签，非重启后必然结果）\n   - R2：接口优先级 = `1`\n   - R3：接口优先级 = `106`\n   - R4：接口优先级 = `204`\n   比较优先级大小：$204 > 108 > 106 > 1$。\n   R4 的接口优先级为 204，在所有候选路由器中绝对最高，直接赢得选举，成为该网段的 DR！\n\n• 正确选项剖析：\n选项 D（R4）：\n在所有路由器同时启动参与竞选时，OSPF 首先对比接口优先级。R4 凭借全网最高的接口优先级（Priority 204），力压 R1（108）、R3（106）和 R2（1），毫无悬念当选为指定路由器（DR），故 D 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（R1）：R1 优先级为 108，低于 R4 的 204。图中拓扑在 R1 上方标注了“DR”，这是极易诱导考生落入“经验主义陷阱”的静态标记；题干专门附加了“all devices boot up simultaneously”的前提条件，正是为了重置状态、考查考生能否依据最高优先级选出 R4。\n- 选项 B（R2）：R2 接口优先级仅为 1（默认值），在四台路由器中最低。\n- 选项 C（R3）：R3 接口优先级为 106，低于 R1（108）与 R4（204）。\n\n• 考试要点与速记技巧：\n- OSPF DR 选举口诀：“同时起跑比优先，数值最大当 DR（最高 Priority）；优先级相同再比大，RID 顶天称霸王”。\n- 看到“Boot up simultaneously”：无视拓扑历史标签，直接挑 Priority 最大的（R4: 204）！"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "补充所有路由器选举前互相发现，避免同时通电必然当选的错误。",
+        "reference": "https://www.rfc-editor.org/rfc/rfc2328.html"
+      },
+      "exhibit_path": "exhibits/q805_agent.jpg",
+      "image_sha256": "1f891fc2d9a22b529fea13e68009133212a9fdd59db4ddb7572a8b0aa8d276fe"
+    },
+    {
+      "id": 806,
+      "original_qid": "Q1075",
+      "before_sha256": "f7e77cf0942113876ba806ce1f4707979c4658975a1d3fd17cf6af3a31bc85d0",
+      "reason": "明确 DHCP 地址池命令及客户端网关前提。",
+      "updates": {
+        "explanation": "B。Cisco IOS 路由器作为 DHCP 服务器时，在 DHCP 地址池下用 `default-router <网关地址>` 为客户端提供 DHCP Router Option 3。该地址应是客户端可达的默认网关。`dns-server` 提供 DNS 信息；`ip helper-address` 在接口上配置中继；`ip default-gateway` 针对设备自身的默认网关，不是 DHCP 地址池下发命令。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco IOS 路由器作为 DHCP 服务器时，配置向客户端自动下发默认网关（Default Gateway）的标准命令。\n1. Cisco IOS DHCP 地址池配置架构：\n   当路由器担当局域网的 DHCP 服务器时，管理员通过全局配置命令 `ip dhcp pool <pool-name>` 创建并进入 DHCP 地址池配置模式。\n2. 核心网络参数下发命令规范：\n   - 分配 IP 地址网段及子网掩码：`network <network-number> <mask>`\n   - 下发客户端**默认网关（Default Gateway）**：`default-router <ip-address> [ip-address2 ...]`（DHCP Option 3）\n   - 下发域名服务器：`dns-server <ip-address> [ip-address2 ...]`（DHCP Option 6）\n   - 下发域名后缀：`domain-name <domain>`（DHCP Option 15）\n   - 下发租期时间：`lease <days> [hours] [minutes]`\n3. 命令技术要点：\n   注意在 Cisco IOS 的 DHCP 地址池配置子模式中，用来定义下发给客户端的网关地址命令关键字是 `default-router`，而非 `default-gateway`。\n\n• 正确选项剖析：\n选项 B（default-router）：\n这是 Cisco IOS DHCP Pool 模式下专门用于将指定的默认网关 IP 地址封装进 DHCP ACK 报文（Option 3 字段）自动分发给主机客户端的标准配置命令，故 B 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（dns-server）：该命令用于下发 DNS 服务器 IP 地址（DHCP Option 6），与默认网关无关。\n- 选项 C（ip helper-address）：这是在接口模式下配置的 DHCP 中继（DHCP Relay）命令，用于将客户端广播的 DHCP 请求转换为单播转发给远端 DHCP 服务器，并非地址池分配网关命令。\n- 选项 D（default-gateway）：这是二层交换机在全局配置模式下为自身管理 IP（SVI VLAN 1）配置默认网关的命令（`ip default-gateway`），在 DHCP 池配置模式下是无效语法，属于典型的概念混淆陷阱。\n\n• 考试要点与速记技巧：\n- 区别记忆两个“网关”命令：\n  - DHCP 给别人发网关：`default-router <IP>`（DHCP 池内）\n  - 交换机给自己设网关：`ip default-gateway <IP>`（全局配置模式）。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "明确 DHCP 地址池命令及客户端网关前提。",
+        "reference": null
+      }
+    },
+    {
+      "id": 807,
+      "original_qid": "Q1077",
+      "before_sha256": "7d2789cd44d0409db1d0b8e156ba93fe96b2a16548843280a323aa53878bb59e",
+      "reason": "依 AireOS 8.5 官方文档限定平台与可配置会话上限。",
+      "updates": {
+        "prompt": "On a Cisco AireOS 8.5 wireless LAN controller, what is the maximum configurable number of concurrent Telnet or SSH CLI sessions?",
+        "explanation": "B。Cisco AireOS 8.5 文档将 Telnet 或 SSH 的最大并发 CLI 会话数设置范围列为 0–5，默认值为 5；因此可配置上限是 5。设置为 0 可禁止此类会话，实际连接还受协议启用状态等配置影响。该数字不能不加限定地推广到所有 WLC 型号或软件版本；Telnet 不加密，实际管理宜优先使用 SSH。"
+      },
+      "original_fields": {
+        "prompt": "What is the maximum number of concurrent Telnet sessions that a Cisco WLC supports?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 Cisco 无线局域网控制器（WLC）的管理平面（Management Plane）并发 CLI 远程管理会话上限。\n1. Cisco WLC CLI 管理安全架构：\n   Cisco AireOS 无线控制器提供了全面的管理访问控制机制，支持 Web GUI（HTTP/HTTPS）和 CLI 命令行（Telnet/SSH）。\n2. 并发会话限制（Concurrent Sessions Limit）：\n   - 根据 Cisco 官方无线控制器配置指南（Cisco Wireless Controller Configuration Guide, Management Access）的技术规范：\n     为了防止恶意拒绝服务攻击（DoS）、资源耗尽攻击并保障控制器管理处理器的稳定性，Cisco WLC 对并发的字符型远程终端会话施加了严格的上限限制。\n   - Cisco WLC 支持的最大并发 Telnet 或 SSH 管理会话数量严格为 **5 个（Five concurrent sessions）**。\n   - 当第 6 个会话尝试发起连接时，WLC 将主动拒绝连接建立并返回会话上限拒绝提示。\n\n• 正确选项剖析：\n选项 B（5）：\nCisco WLC 操作系统（AireOS）硬件和系统默认支持的最大并发 Telnet / SSH 字符管理会话数为 5，完全符合 Cisco 官方技术标准规范，故 B 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（3）：数值过小，并非 Cisco WLC 的系统会话限制基准。\n- 选项 C（6）：第 6 个会话发起时会被 WLC 主动丢弃拒绝。\n- 选项 D（15）：在部分 Catalyst 交换机或路由器上，VTY 线路范围通常为 0 到 15（共 16 个并发会话）。很多考生容易机械照搬传统 IOS 路由交换的 `line vty 0 15` 经验，误选 15，落入跨平台机制差异陷阱。\n\n• 考试要点与速记技巧：\n- 关键设备管理会话对比速记：\n  - 传统 Cisco 路由器/交换机 VTY：默认 0~4（5条）或 0~15（16条）。\n  - **Cisco WLC CLI（Telnet/SSH）**：硬性限制最多 **5 个并发会话**！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "依 AireOS 8.5 官方文档限定平台与可配置会话上限。",
+        "reference": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/administration_of_cisco_wlc.html"
+      }
+    },
+    {
+      "id": 808,
+      "original_qid": "Q1078",
+      "before_sha256": "5bcc0160e5896e232fc94679279251fba5ebc440281acd94e6975e7da34ad710",
+      "reason": "限定重关联过程，纠正漫游必然零中断及唯一帧类型。",
+      "updates": {
+        "prompt": "In an 802.11 reassociation during a client roam within an extended service set, which management frame does the client send to the target AP?",
+        "explanation": "A。在题设的重关联过程中，客户端向目标 AP 发送 Reassociation Request，其中包含当前 AP 地址。Authentication 帧也可能参与建立连接，Probe Request 用于发现网络；普通 Association Request 常用于初次关联。漫游具体流程依客户端、认证机制和网络配置而异，不能保证零中断或断言每次 AP 切换都只出现一种帧。"
+      },
+      "original_fields": {
+        "prompt": "Which 802.11 management frame type is sent when a client roams between access points on the same SSID?",
+        "explanation": "• 核心考点与原理分析：\n本题考查 IEEE 802.11 协议标准中无线管理帧（Management Frame）子类型与客户端无线漫游（Roaming）握手机制。\n1. 802.11 帧的三大基本类型：\n   - 数据帧（Data Frames）：传输上层用户负载数据。\n   - 控制帧（Control Frames）：辅助数据传输（如 RTS、CTS、ACK、PS-Poll）。\n   - 管理帧（Management Frames）：负责无线链路的协商、建立、维护与断开。\n2. 漫游（Roaming）工作原理与重关联帧（Reassociation Frame）：\n   - 当无线客户端（Client STA）在一个扩展服务集（ESS，具有相同 SSID 的多 AP 网络）内从一台 AP 的覆盖范围移动到另一台信号更强的 AP 时，触发二层漫游。\n   - 首次接入某 AP 时：客户端与 AP 之间交互的是“认证请求/响应（Authentication Request/Response）”和“关联请求/响应（Association Request/Response）”。\n   - **发生漫游时（Client Roaming）**：\n     客户端无需断开整个网络连接从头初始化，而是向目标新 AP 发送 **重关联请求（Reassociation Request）** 帧（Management 帧子类型 0010）。\n   - 重关联请求帧的关键特征：该帧包含一个特殊的字段——“当前关联 AP 地址（Current AP Address）”。新 AP 接收到此帧后，能通过分发系统（DS）直接与客户端之前连接的旧 AP 通信，快速转移客户端的未决缓存帧并更新上游交换机的 MAC 地址表，实现极速平滑切换，避免了漫游时的掉线或卡顿。\n\n• 正确选项剖析：\n选项 A（Reassociation Request）：\n根据 IEEE 802.11 规范，客户端在同一 SSID 下的不同 AP 间执行无缝漫游切换时，发送的标准管理帧类型正是重关联请求（Reassociation Request），故 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B（Authentication Request）：认证请求用于 802.11 链路层开放系统认证或共享密钥认证，发生在关联/重关联之前，它不是指示向新 AP 漫游迁移的专用帧。\n- 选项 C（Association Request）：关联请求仅在客户端全新初次加入无线网络时发送；在同一 SSID 内部 AP 间切换漫游时，必须使用重关联请求以携带旧 AP 信息。\n- 选项 D（Probe Request）：探测请求用于主动网络发现与信道扫描，以发现周围存在的 AP，不属于确定目标 AP 后的漫游关联报文。\n\n• 考试要点与速记技巧：\n- 无线帧类型速记：\n  - 初次接入无线网：**Association Request（关联请求）**\n  - 同 SSID 跨 AP 漫游：**Reassociation Request（重关联请求）**。看到 Roam 直接选 Reassociation！"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "限定重关联过程，纠正漫游必然零中断及唯一帧类型。",
+        "reference": null
+      }
+    },
+    {
+      "id": 809,
+      "original_qid": "Q1079",
+      "before_sha256": "a3cda1925429432d01e8d4a06b19f7870eccbce26ae8d42bb2bf645d65c74af0",
+      "reason": "说明功能平面和实际实现的区别。",
+      "updates": {
+        "explanation": "C。控制平面运行路由协议并与其他路由器交换路由或拓扑信息，支持选路和建立转发表。A 的 FIB 查找以及 B 的业务报文转发属于数据平面；D 的 CLI 管理访问属于管理平面。各平面是功能划分，具体实现可以在软件、硬件或集中式控制器中。"
+      },
+      "original_fields": {
+        "explanation": "• 核心考点与原理分析：\n本题考查网络设备三大平面（数据平面、控制平面、管理平面）的体系架构职责划分与核心功能。\n1. 网络三大平面职责定义：\n   - **数据平面（Data Plane / Forwarding Plane）**：\n     又称转发平面，负责用户实际业务报文的逐跳接收、处理和高速转发。包括硬件 ASIC/NP 芯片线速查表、FIB 转发表查找、报文封装/解封装、TTL 递减与校验和重新计算。\n   - **控制平面（Control Plane）**：\n     负责网络大脑决策，生成控制信息以指引数据平面如何转发。核心任务包括运行动态路由协议（OSPF、EIGRP、BGP、IS-IS）**与其他路由器交换拓扑与路由信息**、计算最短路径生成路由表（RIB）、解析 ARP/NDP 表项、以及运行生成树（STP）协议等。\n   - **管理平面（Management Plane）**：\n     负责网络设备的远程访问控制、监控与运维管理。包括提供 CLI 控制台（Console/Telnet/SSH）、Web 界面、SNMP 网管轮询、Syslog 日志上报等。\n2. 选项与平面对应分析：\n   - 题干问的是控制平面（Control Plane）的职能：运行路由协议与其他路由器交互拓扑信息（Exchange topology information）正是最纯粹的控制平面行为。\n\n• 正确选项剖析：\n选项 C（It exchanges topology information with other routers）：\n运行 OSPF LSA 泛洪、EIGRP 更新交互等拓扑交换行为，是控制平面构建全局网络拓扑视图并计算路由表的核心工作，故 C 完全正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（It looks up an egress interface in the forwarding information base）：在转发表（FIB）中高速检索出接口是典型的 **数据平面（Data Plane）** 功能（由 CEF 硬件芯片线速完成）。\n- 选项 B（It forwards traffic to the next hop）：将数据报文实际转发至下一跳属于纯粹的 **数据平面（Data Plane）** 行为。\n- 选项 D（It provides CLI access to the network device）：提供命令行接口交互属于 **管理平面（Management Plane）** 范畴。\n\n• 考试要点与速记技巧：\n- 网络三平面速记表：\n  - **控制平面（Control Plane）**：算路、拓扑交互（OSPF/EIGRP/STP/ARP）。\n  - **数据平面（Data Plane）**：转发、查 FIB 表、切包。\n  - **管理平面（Management Plane）**：配置、CLI/SSH/SNMP。"
+      },
+      "has_exhibit": false,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "none",
+        "code_cli": "checked",
+        "finding": "说明功能平面和实际实现的区别。",
+        "reference": null
+      }
+    },
+    {
+      "id": 810,
+      "original_qid": "Q1080",
+      "before_sha256": "07021135f72d0c737cdc122008771a4c26fc37aaa60950cfbc4d7b364ae8f68d",
+      "reason": "补全 BPDU 通信条件，纠正虚构 VLAN 1 和原选项组播 MAC。",
+      "updates": {
+        "prompt": "Refer to the exhibit. All four switches participate in the same VLAN and STP instance, can exchange BPDUs, and use default STP priorities. Their bridge MAC addresses are listed below. Which switch becomes the root bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "MDF-DC-1: 0c:E0:43:96:02:30"
+          },
+          {
+            "label": "B",
+            "text": "MDF-DC-2: 0c:0E:18:1B:05:97"
+          },
+          {
+            "label": "C",
+            "text": "MDF-DC-4: 0c:E0:19:A1:B3:19"
+          },
+          {
+            "label": "D",
+            "text": "MDF-DC-3: 0c:0E:18:2A:3C:9D"
+          }
+        ],
+        "explanation": "B。相同 STP 实例中网桥优先级相同，比较桥 MAC 地址，数值最小的 MDF-DC-2 获胜。第二字节 0E 小于 E0；在 MDF-DC-2 和 MDF-DC-3 间继续比较，第四字节 1B 小于 2A。题目没有指定 VLAN 编号，因此不能断言扩展系统 ID 一定是 VLAN 1。这里将原选项 MAC 首字节 0d 修正为单播地址的 0c，比较结果不变。"
+      },
+      "original_fields": {
+        "prompt": "Refer to the exhibit. All switches are configured with the default STP priorities. During the STP elections, which switch becomes the root bridge if All interfaces are in the same VLAN?",
+        "options": [
+          {
+            "label": "A",
+            "text": "MDF-DC-1: 0d:E0:43:96:02:30"
+          },
+          {
+            "label": "B",
+            "text": "MDF-DC-2: 0d:0E:18:1B:05:97"
+          },
+          {
+            "label": "C",
+            "text": "MDF-DC-4: 0d:E0:19:A1:B3:19"
+          },
+          {
+            "label": "D",
+            "text": "MDF-DC-3: 0d:0E:18:2A:3C:9D"
+          }
+        ],
+        "explanation": "• 核心考点与原理分析：\n本题考查生成树协议（STP, IEEE 802.1D / RSTP, 802.1w）根桥（Root Bridge）选举算法及 MAC 地址十六进制比对规则。\n1. 根桥选举核心机制：\n   在二层交换网络中，同一个生成树实例内有且仅有一台交换机当选为根桥。\n   选举判据：全网拥有**最小网桥 ID（Lowest Bridge ID, BID）**的交换机成为根桥。\n2. Bridge ID（BID）的组成结构：\n   - 网桥优先级（Bridge Priority）：2 字节（默认值为 32768，结合 Extended System ID 加上 VLAN 编号）。\n   - 基础 MAC 地址（Base MAC Address）：6 字节（交换机背板物理 MAC 地址）。\n3. Exhibit 参数与选举推导：\n   - 题干明确指出：“All switches are configured with the default STP priorities（所有交换机均配置默认 STP 优先级）”且“All interfaces are in the same VLAN”。\n   - 这意味着所有 4 台交换机的 BID 优先级字段完全相同（均为 32768 + VLAN 1 = 32769）。\n   - 此时，根桥选举的唯一决定性破局点在于**比对四台交换机的 Base MAC 地址**，MAC 地址数值最小者（十六进制逐字节从高到低对比）获胜。\n4. 候选 MAC 地址逐字节对比：\n   - MDF-DC-1: `0d:E0:43:96:02:30`\n   - MDF-DC-2: `0d:0E:18:1B:05:97`\n   - MDF-DC-4: `0d:E0:19:A1:B3:19`\n   - MDF-DC-3: `0d:0E:18:2A:3C:9D`\n   - 第 1 字节：四者均为 `0d`，平局。\n   - 第 2 字节：\n     • MDF-DC-1 与 MDF-DC-4 为 `E0`（十进制 224）；\n     • MDF-DC-2 与 MDF-DC-3 为 `0E`（十进制 14）。\n     因为 `0E` < `E0`，MDF-DC-1 和 MDF-DC-4 直接被淘汰！\n   - 对比 MDF-DC-2 与 MDF-DC-3：\n     • 第 3 字节：两者均为 `18`，平局。\n     • 第 4 字节：MDF-DC-2 为 `1B`（十进制 27）；MDF-DC-3 为 `2A`（十进制 42）。\n     因为十六进制 `1B` 小于 `2A`（$27 < 42$），MDF-DC-2 的 MAC 地址更小！\n   - 最终判定：MDF-DC-2 拥有全局最低的 Bridge ID，成功当选为根桥。\n\n• 正确选项剖析：\n选项 B（MDF-DC-2: 0d:0E:18:1B:05:97）：\n在优先级一致时，MDF-DC-2 凭借全网最小的物理 MAC 地址（第二字节 0E 小于 E0，第四字节 1B 小于 2A）在选举中胜出，成为 Root Bridge，故 B 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 A（MDF-DC-1）：第二字节为 `E0`，远大于 `0E`。\n- 选项 C（MDF-DC-4）：第二字节同样为 `E0`。\n- 选项 D（MDF-DC-3）：虽然前三字节与 MDF-DC-2 旗鼓相当（0d:0E:18），但第四字节 `2A` 大于 MDF-DC-2 的 `1B`，功亏一篑。部分考生若不仔细比对十六进制高低位，容易将 0E 与 E0、1B 与 2A 混淆。\n\n• 考试要点与速记技巧：\n- 根桥选举法则：“先看优先级，小者坐江山；同为三万二（32768），MAC 最小选为王”。\n- 十六进制比大小：从左往右看，`0E`（14）秒杀 `E0`（224），`1B`（27）秒杀 `2A`（42）！"
+      },
+      "has_exhibit": true,
+      "review": {
+        "prompt": "checked",
+        "options": "checked",
+        "answer": "checked and retained",
+        "explanation": "checked and corrected",
+        "image": "viewed",
+        "code_cli": "checked",
+        "finding": "补全 BPDU 通信条件，纠正虚构 VLAN 1 和原选项组播 MAC。",
+        "reference": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10556-16.html"
+      },
+      "exhibit_path": "exhibits/q810_agent.jpg",
+      "image_sha256": "e159b7e2ad176224d3588c0518cfdf04046e8be584439f1115339060301a3609"
+    }
+  ],
+  "sources": [
+    "https://www.cisco.com/c/en/us/support/docs/ip/ip-routing/8651-21.html",
+    "https://www.rfc-editor.org/rfc/rfc2328.html",
+    "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/administration_of_cisco_wlc.html",
+    "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10556-16.html"
+  ],
+  "limitations": "人工核对；未在真实设备执行实验。"
+}

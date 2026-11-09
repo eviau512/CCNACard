@@ -404,6 +404,10 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
       position: relative;
     }}
 
+    [data-theme="dark"] .q-exhibit {{ background: #1f2937; }}
+    .q-exhibit img {{ background: #fff; }}
+    [data-theme="dark"] img.monochrome-exhibit {{ filter: invert(0.88); }}
+
     .exhibit-badge {{
       display: inline-block;
       font-size: 12px;
@@ -674,6 +678,60 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
 
     .md-h2 {{ font-size: 18px; font-weight: 700; color: var(--text-primary); margin: 16px 0 8px 0; }}
     .md-h3 {{ font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 14px 0 6px 0; }}
+    
+    /* CALLOUTS & BLOCKQUOTES */
+    .md-callout {{
+      display: flex;
+      gap: 12px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent-blue, #38BDF8);
+      background: rgba(56, 189, 248, 0.08);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-primary);
+    }}
+    [data-theme="light"] .md-callout {{
+      background: rgba(2, 132, 199, 0.08);
+      border-left-color: #0284c7;
+    }}
+    .md-callout-note {{
+      border-left-color: #38BDF8;
+      background: rgba(56, 189, 248, 0.08);
+    }}
+    .md-callout-tip {{
+      border-left-color: #10B981;
+      background: rgba(16, 185, 129, 0.08);
+    }}
+    .md-callout-warning {{
+      border-left-color: #F59E0B;
+      background: rgba(245, 158, 11, 0.08);
+    }}
+    .md-callout .callout-icon {{
+      font-size: 1.15rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }}
+    .md-callout .callout-content {{
+      flex: 1;
+      min-width: 0;
+    }}
+    .md-blockquote {{
+      border-left: 3px solid var(--border, #334155);
+      margin: 10px 0;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 0 6px 6px 0;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }}
+    [data-theme="light"] .md-blockquote {{
+      background: rgba(0, 0, 0, 0.03);
+      border-left-color: #cbd5e1;
+    }}
+
     .md-h4 {{ font-size: 14.5px; font-weight: 700; color: var(--text-primary); margin: 12px 0 4px 0; }}
 
     .md-list-item {{
@@ -1158,6 +1216,43 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
       }}
       out = newLines.join('\\n');
 
+      // 5.5 Blockquotes & Callouts
+      const qLines = out.split('\\n');
+      const quoteProcessed = [];
+      let qi = 0;
+      while (qi < qLines.length) {{
+        const qLine = qLines[qi].trim();
+        if (qLine.startsWith('&gt;')) {{
+          const bqGroup = [];
+          while (qi < qLines.length && qLines[qi].trim().startsWith('&gt;')) {{
+            bqGroup.push(qLines[qi].trim().replace(/^&gt;\\s?/, ''));
+            qi++;
+          }}
+          const firstLine = bqGroup[0] || '';
+          const calloutMatch = firstLine.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+          if (calloutMatch) {{
+            const type = calloutMatch[1].toLowerCase();
+            const iconMap = {{
+              'note': 'ℹ️',
+              'tip': '💡',
+              'important': '❗',
+              'warning': '⚠️',
+              'caution': '🛑'
+            }};
+            const icon = iconMap[type] || 'ℹ️';
+            const innerLines = bqGroup.slice(1);
+            quoteProcessed.push(`<div class="md-callout md-callout-${{type}}"><div class="callout-icon">${{icon}}</div><div class="callout-content">${{innerLines.join('\\n')}}</div></div>`);
+          }} else {{
+            quoteProcessed.push(`<blockquote class="md-blockquote">${{bqGroup.join('\\n')}}</blockquote>`);
+          }}
+          continue;
+        }}
+        quoteProcessed.push(qLines[qi]);
+        qi++;
+      }}
+      out = quoteProcessed.join('\\n');
+
+      out = out.replace(/^####\\s+(.+)$/gm, '<h5 class="md-h4">$1</h5>');
       out = out.replace(/^###\\s+(.+)$/gm, '<h4 class="md-h4">$1</h4>');
       out = out.replace(/^##\\s+(.+)$/gm, '<h3 class="md-h3">$1</h3>');
       out = out.replace(/^#\\s+(.+)$/gm, '<h2 class="md-h2">$1</h2>');
@@ -1389,7 +1484,7 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
       let solutionImgHtml = '';
       if (q.answer_image) {{
         solutionImgHtml = `
-          <div class="q-exhibit" style="margin-top: 14px; background: #ffffff;">
+          <div class="q-exhibit" style="margin-top: 14px;">
             <div class="exhibit-badge">Verified Solution Diagram</div>
             <img src="${{q.answer_image}}" alt="Solution Diagram" onclick="openLightbox('${{q.answer_image}}')">
             <div class="zoom-hint">Tap / Click to enlarge solution</div>
@@ -1442,6 +1537,7 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
         ${{answerBoxHtml}}
       `;
 
+      card.querySelectorAll('.q-exhibit img').forEach(prepareDiagramImage);
       return card;
     }}
 
@@ -1718,9 +1814,36 @@ def generate_html(json_file_path, output_html_path, title_suffix, storage_suffix
       reader.readAsText(file);
     }}
 
+    function prepareDiagramImage(img) {{
+      img.classList.remove('monochrome-exhibit');
+      const inspect = () => {{
+        try {{
+          const canvas = document.createElement('canvas');
+          const width = img.naturalWidth, height = img.naturalHeight;
+          if (!width || !height || width * height > 4000000) return;
+          canvas.width = width; canvas.height = height;
+          const ctx = canvas.getContext('2d', {{ willReadFrequently: true }});
+          ctx.drawImage(img, 0, 0);
+          const pixels = ctx.getImageData(0, 0, width, height).data;
+          let light = 0, visible = 0;
+          for (let i = 0; i < pixels.length; i += 4) {{
+            if (pixels[i + 3] < 250) return;
+            const r = pixels[i], g = pixels[i + 1], b = pixels[i + 2];
+            if (Math.max(r, g, b) - Math.min(r, g, b) > 8) return;
+            visible++;
+            if (Math.min(r, g, b) >= 220) light++;
+          }}
+          img.classList.toggle('monochrome-exhibit', visible > 0 && light / visible > 0.55);
+        }} catch (_) {{ /* Retain the original when pixels are unavailable. */ }}
+      }};
+      img.onload = inspect;
+      if (img.complete && img.naturalWidth) inspect();
+    }}
+
     function openLightbox(src) {{
       const lb = document.getElementById('lightbox');
       const img = document.getElementById('lightbox-img');
+      prepareDiagramImage(img);
       img.src = src;
       lb.classList.add('active');
     }}

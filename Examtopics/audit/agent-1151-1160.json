@@ -1,0 +1,311 @@
+{
+  "corrections": [
+    {
+      "id": 1151,
+      "before_sha256": "e7c9d0c8b29ebd0205a9eaeaf7754c5c80c040afba35cdca4a443e26b453fde7",
+      "updates": {
+        "explanation": "铜缆含导体和护套，常见于办公室接入；单模光纤支持较长距离。单模指传播模式而非只能使用一个波长，原答案图把两类颠倒，已隐藏。",
+        "drag_drop_data": {
+          "sources": [
+            "contains a conductor, bedding, and sheathing",
+            "is ideal over longer distances with little loss of integrity",
+            "is typically used in small office applications",
+            "propagates one spatial optical mode"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "contains a conductor, bedding, and sheathing",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "is typically used in small office applications",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "propagates one spatial optical mode",
+              "unordered_group": "single mode fiber"
+            },
+            {
+              "label": "single mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "is ideal over longer distances with little loss of integrity",
+              "unordered_group": "single mode fiber"
+            }
+          ]
+        },
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the cable type on the right. Some descriptions or addresses have been corrected from the exhibit.",
+        "answer_image": null
+      },
+      "reason": "铜缆含导体和护套，常见于办公室接入；单模光纤支持较长距离。单模指传播模式而非只能使用一个波长，原答案图把两类颠倒，已隐藏。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1152,
+      "before_sha256": "b4d10e8cb0f9f2c4ad6efddd3b6a4a33a6ecc89daf03f617f95e8694ae39558f",
+      "updates": {
+        "explanation": "ULA fc00::/7 通常不在公共互联网上传播；随机全局 ID 降低站点合并时冲突概率，但不保证零冲突。IPv6 组播以组地址为目的，一般由单播源发送。",
+        "drag_drop_data": {
+          "sources": [
+            "has a unicast source sent to a group",
+            "is unable to route on the internet",
+            "reduces the likelihood of conflicts when independently numbered sites merge",
+            "sends packets to a group address rather than a single address"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "is unable to route on the internet",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "reduces the likelihood of conflicts when independently numbered sites merge",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "has a unicast source sent to a group",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the IPv6 address type on the right. Some descriptions or addresses have been corrected from the exhibit.",
+        "answer_image": null
+      },
+      "reason": "ULA fc00::/7 通常不在公共互联网上传播；随机全局 ID 降低站点合并时冲突概率，但不保证零冲突。IPv6 组播以组地址为目的，一般由单播源发送。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1153,
+      "before_sha256": "07cf3bafd2c2df6a377c1c57deb83aa43d68f1d7f0f1ef421ec8f9176fe8dd31",
+      "updates": {
+        "explanation": "此题限定示例：普通网页为尽力而为，VoIP 放入优先队列，数据库同步可整形，视频流按策略监管。实际 QoS 决策取决于业务与策略，监管可能丢弃超额报文；旧答案图错误交换语音与数据库，已隐藏。",
+        "answer_image": null
+      },
+      "reason": "此题限定示例：普通网页为尽力而为，VoIP 放入优先队列，数据库同步可整形，视频流按策略监管。实际 QoS 决策取决于业务与策略，监管可能丢弃超额报文；旧答案图错误交换语音与数据库，已隐藏。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1154,
+      "before_sha256": "8245dec9367c3fad77e860c611ae6a2f7d4491bf50018610d27d63f2566fd6d3",
+      "updates": {
+        "explanation": "铜缆有金属导体与绝缘护套，常用于办公室；单模光纤适用于长距离 DWDM，消除多模光纤的模间色散，并不消除所有色散或衰减。",
+        "drag_drop_data": {
+          "sources": [
+            "contains a conductor, bedding, and sheathing",
+            "is typically used for DWDM optical systems spanning long distances",
+            "is typically used in small office applications",
+            "eliminates intermodal dispersion"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "contains a conductor, bedding, and sheathing",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "is typically used in small office applications",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "is typically used for DWDM optical systems spanning long distances",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "eliminates intermodal dispersion",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the cable type on the right. Some descriptions or addresses have been corrected from the exhibit.",
+        "answer_image": null
+      },
+      "reason": "铜缆有金属导体与绝缘护套，常用于办公室；单模光纤适用于长距离 DWDM，消除多模光纤的模间色散，并不消除所有色散或衰减。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1155,
+      "before_sha256": "b3ccd3b84021722d463dfb57a0d668b5dac241ede0d96159c129b4f0c85470ad",
+      "updates": {
+        "explanation": "在题设 API 中 POST 创建子资源，DELETE 请求删除，PUT 替换表示，PATCH 局部修改，GET 获取表示。实际响应及删除语义由服务定义；POST 不保证幂等，PUT 和 DELETE 的预期语义为幂等，但可有日志等副作用。"
+      },
+      "reason": "在题设 API 中 POST 创建子资源，DELETE 请求删除，PUT 替换表示，PATCH 局部修改，GET 获取表示。实际响应及删除语义由服务定义；POST 不保证幂等，PUT 和 DELETE 的预期语义为幂等，但可有日志等副作用。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1156,
+      "before_sha256": "e2123a3443c8fda40244dee692f80ff34c6be852173ee6d94041194028553f47",
+      "updates": {
+        "explanation": "铜缆可能受电磁干扰，存在被物理接入窃听风险；单模光纤适合高速长距离传输并避免模间色散。距离和速率取决于光模块与链路预算；光纤也可被窃听，链路仍需加密。",
+        "drag_drop_data": {
+          "sources": [
+            "can be subject to physical electrical tapping",
+            "can support high-speed long-distance optical links",
+            "is affected by electrical and magnetic interference",
+            "avoids intermodal dispersion"
+          ],
+          "targets": [
+            {
+              "label": "copper (Slot 1)",
+              "sub_label": "",
+              "expected": "can be subject to physical electrical tapping",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "copper (Slot 2)",
+              "sub_label": "",
+              "expected": "is affected by electrical and magnetic interference",
+              "unordered_group": "copper"
+            },
+            {
+              "label": "single-mode fiber (Slot 1)",
+              "sub_label": "",
+              "expected": "can support high-speed long-distance optical links",
+              "unordered_group": "single-mode fiber"
+            },
+            {
+              "label": "single-mode fiber (Slot 2)",
+              "sub_label": "",
+              "expected": "avoids intermodal dispersion",
+              "unordered_group": "single-mode fiber"
+            }
+          ]
+        },
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the cable type on the right. Some descriptions or addresses have been corrected from the exhibit.",
+        "answer_image": null
+      },
+      "reason": "铜缆可能受电磁干扰，存在被物理接入窃听风险；单模光纤适合高速长距离传输并避免模间色散。距离和速率取决于光模块与链路预算；光纤也可被窃听，链路仍需加密。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1157,
+      "before_sha256": "7e7796d65ab9b87082e2123548d882f950fa0cb3ea3d6bc61193659527ba122f",
+      "updates": {
+        "explanation": "ULA 通常不在公共互联网上路由；随机生成的全局 ID 降低站点合并时的冲突概率，但不保证零冲突。IPv6 组播向组地址分发，可实现一对多通信。",
+        "drag_drop_data": {
+          "sources": [
+            "reduces the likelihood of conflicts when independently numbered sites merge",
+            "sends packets to a group address rather than a single address",
+            "is unable to route on the internet",
+            "provides one-to-many communications"
+          ],
+          "targets": [
+            {
+              "label": "Unique Local (Slot 1)",
+              "sub_label": "",
+              "expected": "is unable to route on the internet",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Unique Local (Slot 2)",
+              "sub_label": "",
+              "expected": "reduces the likelihood of conflicts when independently numbered sites merge",
+              "unordered_group": "Unique Local"
+            },
+            {
+              "label": "Multicast (Slot 1)",
+              "sub_label": "",
+              "expected": "provides one-to-many communications",
+              "unordered_group": "Multicast"
+            },
+            {
+              "label": "Multicast (Slot 2)",
+              "sub_label": "",
+              "expected": "sends packets to a group address rather than a single address",
+              "unordered_group": "Multicast"
+            }
+          ]
+        },
+        "prompt": "DRAG DROP - Drag and drop the characteristic from the left onto the IPv6 address type on the right. Some descriptions or addresses have been corrected from the exhibit.",
+        "answer_image": null
+      },
+      "reason": "ULA 通常不在公共互联网上路由；随机生成的全局 ID 降低站点合并时的冲突概率，但不保证零冲突。IPv6 组播向组地址分发，可实现一对多通信。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1158,
+      "before_sha256": "ead3fb1c99979ba8958f397489b851d03e7a1c2b244e44b2b07f77e3b57eb6da",
+      "updates": {
+        "explanation": "按修正后的有效示例分类：2001:4860::1 为全球单播，fe80::7 为链路本地单播，ff02::1 为链路本地组播，fd00:382e::3 为唯一本地地址。原图中的 FE80 地址保留位非零、FF00 作用域为保留值；只匹配前缀不足以证明地址有效。",
+        "drag_drop_data": {
+          "sources": [
+            "fe80::7",
+            "2001:4860::1",
+            "ff02::1",
+            "fd00:382e::3"
+          ],
+          "targets": [
+            {
+              "label": "Global Unicast",
+              "sub_label": "",
+              "expected": "2001:4860::1"
+            },
+            {
+              "label": "Link-Local Unicast",
+              "sub_label": "",
+              "expected": "fe80::7"
+            },
+            {
+              "label": "Multicast",
+              "sub_label": "",
+              "expected": "ff02::1"
+            },
+            {
+              "label": "Unique Local",
+              "sub_label": "",
+              "expected": "fd00:382e::3"
+            }
+          ]
+        },
+        "prompt": "DRAG DROP - Drag and drop the IPv6 address from the left onto the type on the right. Some descriptions or addresses have been corrected from the exhibit.",
+        "answer_image": null
+      },
+      "reason": "按修正后的有效示例分类：2001:4860::1 为全球单播，fe80::7 为链路本地单播，ff02::1 为链路本地组播，fd00:382e::3 为唯一本地地址。原图中的 FE80 地址保留位非零、FF00 作用域为保留值；只匹配前缀不足以证明地址有效。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1159,
+      "before_sha256": "c5a6763d5d8230cdf69253334929789fe664e7e36a78515925e92bf62e6ffaf4",
+      "updates": {
+        "explanation": "原题拓扑缺失，所附答案图属于上一题，无法确定 VLAN 编号、接口及 R1 所连端口。按现场拓扑创建并命名 SALES VLAN，将 PC3 和 Server1 所连接口设为 access 并分配实际 VLAN；仅在连接 R1 的接口启用 CDP，在其余接口关闭 CDP，验证后保存配置。不要把未经题图确认的端口或 VLAN 数字当作答案。",
+        "answer_image": null
+      },
+      "reason": "原题拓扑缺失，所附答案图属于上一题，无法确定 VLAN 编号、接口及 R1 所连端口。按现场拓扑创建并命名 SALES VLAN，将 PC3 和 Server1 所连接口设为 access 并分配实际 VLAN；仅在连接 R1 的接口启用 CDP，在其余接口关闭 CDP，验证后保存配置。不要把未经题图确认的端口或 VLAN 数字当作答案。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    },
+    {
+      "id": 1160,
+      "before_sha256": "e1030b1b8d5d600d7a9c2e27f16740279d3c22df201567e4393a41e040c1b50f",
+      "updates": {
+        "explanation": "题图中误放上一题交换机配置，答案图实际上是本题拓扑，已移至题图。Server 为 10.0.41.10，ISP 下一跳 209.165.200.225；R1 到 R4 LAN 主路由经 R3，备份经 R2，具体 R1 邻居接口地址需查看实际配置。浮动静态路由的主路由须在 R3–R4 远端故障时被撤销（例如经动态路由或跟踪），仅设置较高管理距离不能检测远端故障。",
+        "image": "data:image/jpeg;base64,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",
+        "answer_image": null
+      },
+      "reason": "题图中误放上一题交换机配置，答案图实际上是本题拓扑，已移至题图。Server 为 10.0.41.10，ISP 下一跳 209.165.200.225；R1 到 R4 LAN 主路由经 R3，备份经 R2，具体 R1 邻居接口地址需查看实际配置。浮动静态路由的主路由须在 R3–R4 远端故障时被撤销（例如经动态路由或跟踪），仅设置较高管理距离不能检测远端故障。",
+      "exhibit_path": "exhibits/q1151_1160_contact.jpg"
+    }
+  ],
+  "limitations": "人工核对图文；无设备实测。"
+}
