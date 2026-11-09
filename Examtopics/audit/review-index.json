@@ -3,8 +3,8 @@
   "status": "active",
   "review_date": "2026-11-03",
   "source": "Examtopics\\output\\complete_q1_q1396.json",
-  "source_sha256": "35e2e6d3ede7b688420f10773fbf29c6b1747797434a17b8f415733f24952525",
-  "app_bundle_sha256": "b2ee52cada3c472deabb7917565f3d04fca0174dee489076e79dc23073c37a97",
+  "source_sha256": "e7ef292fdb9a0c1e4d4063e475207bffb0e3c05a5b26a5ea5f0653bbeb9f871f",
+  "app_bundle_sha256": "f2b77891ad1298ef6c775bfb3cf6196fefeeb2e9c9f491bf64d6ee87ead7d1b8",
   "total_questions": 1396,
   "reviewed_count": 1396,
   "status_counts": {
@@ -55,7 +55,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "已看图。Host A=10.10.13.214；.208/29 范围 .208–.215，匹配 /25、/28、/29 中 /29 最长。解析机制正确，可补出目标地址和范围使推导更完整。",
+      "assessment": "已看图。Host A=10.10.13.214；.208/29 范围 .208–.215，匹配 /25、/28、/29 中 /29 最长。解析机制正确，可补出目标地址和范围使推导更完整。 普通题再次核对并补充解析。",
       "question_sha256": "b87e1820c5240cbc2b44dfacd0b1aaafc87bbe206076d68043874380f3eaca9f",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -66,10 +66,13 @@
         "assessment": "HostA地址和路由表同图齐全；前缀选项均为单行。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "b87e1820c5240cbc2b44dfacd0b1aaafc87bbe206076d68043874380f3eaca9f",
+      "current_question_sha256": "76b138d7727e249c27378261c260a40a12329d304a88d6e130781d2330648a69",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0001-0010.json"
+      }
     },
     {
       "id": 3,
@@ -101,7 +104,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "Association Response 属管理帧子类型；Action 也属管理帧子类型，不能替代这里的类别答案。解析已说明归属。",
+      "assessment": "Association Response 属管理帧子类型；Action 也属管理帧子类型，不能替代这里的类别答案。解析已说明归属。 普通题再次核对并补充解析。",
       "question_sha256": "44a75838ed949f17d30f40115f587c23373f9c9eff717a370edd8e0d8394d0a0",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -112,10 +115,13 @@
         "assessment": "Association Response分类题，不需补图/代码块。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "44a75838ed949f17d30f40115f587c23373f9c9eff717a370edd8e0d8394d0a0",
+      "current_question_sha256": "90ed823c28e52646a55051b387e57de2370b74eefab2899f707cbf50bb24b41a",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0001-0010.json"
+      }
     },
     {
       "id": 5,
@@ -155,7 +161,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "Hypervisor 抽象 CPU、内存和存储并承载多个 VM；其他选项关于只支持单 VM、只在 L3 工作均不成立。",
+      "assessment": "Hypervisor 抽象 CPU、内存和存储并承载多个 VM；其他选项关于只支持单 VM、只在 L3 工作均不成立。 普通题再次核对并补充解析。",
       "question_sha256": "3c62ef40c2e9c5007c07f8d5092e2abfecb33db8b354b798b50c0c4411bc5e91",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -166,10 +172,13 @@
         "assessment": "VM资源虚拟化概念题，无依图/代码输出。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "3c62ef40c2e9c5007c07f8d5092e2abfecb33db8b354b798b50c0c4411bc5e91",
+      "current_question_sha256": "175a9676d126e0cb063c00aa205216d7e29a21733a18c2657766ddf1e1a79d43",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0001-0010.json"
+      }
     },
     {
       "id": 7,
@@ -178,7 +187,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "指定 /64 前缀与 eui-64 生成 MAC 派生 IID；插入 FFFE、翻转首字节 U/L 位正确；autoconfig 从 RA 学习前缀，不是此处显式前缀命令。[S2][S3]",
+      "assessment": "指定 /64 前缀与 eui-64 生成 MAC 派生 IID；插入 FFFE、翻转首字节 U/L 位正确；autoconfig 从 RA 学习前缀，不是此处显式前缀命令。[S2][S3] 普通题再次核对并补充解析。",
       "question_sha256": "cb85b2bf55ae68a5da6ba339e76fdd2cb99f71f2fd42560dfa84ca306abddbec",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -189,10 +198,13 @@
         "assessment": "四个IPv6命令各为一条，源参数文字在，不要求多行块。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "cb85b2bf55ae68a5da6ba339e76fdd2cb99f71f2fd42560dfa84ca306abddbec",
+      "current_question_sha256": "80558930f6f47a7e1887aba118be84ef0a584396c0a16d45f34f29dff17d8d25",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0001-0010.json"
+      }
     },
     {
       "id": 8,
@@ -201,7 +213,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "未知单播在同 VLAN 的可转发端口泛洪并排除入端口。解析可把 active 改成 forwarding，避免包括 STP 阻塞端口；答案无误。",
+      "assessment": "未知单播在同 VLAN 的可转发端口泛洪并排除入端口。解析可把 active 改成 forwarding，避免包括 STP 阻塞端口；答案无误。 普通题再次核对并补充解析。",
       "question_sha256": "f74fc47028f155b3bcc70b05a116e6526fe7b1150899516be7b1f10d5f27d7e9",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -212,10 +224,13 @@
         "assessment": "未知单播泛洪机制文字完整，无图依赖。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "f74fc47028f155b3bcc70b05a116e6526fe7b1150899516be7b1f10d5f27d7e9",
+      "current_question_sha256": "54eba6d7df6a4453097a68c62af0f9ecd97eb9d7ac85511f5595ba0bf688ed9e",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0001-0010.json"
+      }
     },
     {
       "id": 9,
@@ -317,7 +332,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "ULA 可在内部子网/有限站点之间路由，通常不在公网通告；link-local 不跨链路。解析涵盖了与 link-local 的差异。[S6]",
+      "assessment": "ULA 可在内部子网/有限站点之间路由，通常不在公网通告；link-local 不跨链路。解析涵盖了与 link-local 的差异。[S6] 普通题再次核对并补充解析。",
       "question_sha256": "1f2c33031afcfd3b840b833bac2b7feec2ee9c23a06db0900dc53f835b90f2c9",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -328,10 +343,13 @@
         "assessment": "IPv6 ULA作用域题，无必需图片或代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "1f2c33031afcfd3b840b833bac2b7feec2ee9c23a06db0900dc53f835b90f2c9",
+      "current_question_sha256": "bc2be702fc35c266cc28152da34a668c78390c8587ae309f0409cb9a75d9f98d",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0011-0020.json"
+      }
     },
     {
       "id": 13,
@@ -363,7 +381,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "WLC 集中配置与管理轻量 AP；不代表直接接管自主型 AP 的控制平面。解析已限定轻量 AP/CAPWAP。",
+      "assessment": "WLC 集中配置与管理轻量 AP；不代表直接接管自主型 AP 的控制平面。解析已限定轻量 AP/CAPWAP。 普通题再次核对并补充解析。",
       "question_sha256": "b68107071b49d21104566dfa0f5a22d75d63844d0d9c16bc83131f4e8f02b0de",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -374,10 +392,13 @@
         "assessment": "WLC集中管理优点题，无需补图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "b68107071b49d21104566dfa0f5a22d75d63844d0d9c16bc83131f4e8f02b0de",
+      "current_question_sha256": "0a81c0c4b4a4cb6ebfc1827217f1dd527271cdba05049f79cf88255c3991ce33",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0011-0020.json"
+      }
     },
     {
       "id": 15,
@@ -386,7 +407,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "专门查过 Cisco Catalyst 6500 的 classification override 章节：监控功耗超过 administrative maximum 时记录日志、关端口并 err-disable。不是仅凭通用 PoE 名称猜测，A 有官方依据。[S7]",
+      "assessment": "专门查过 Cisco Catalyst 6500 的 classification override 章节：监控功耗超过 administrative maximum 时记录日志、关端口并 err-disable。不是仅凭通用 PoE 名称猜测，A 有官方依据。[S7] 普通题再次核对并补充解析。",
       "question_sha256": "f087f63c78f6a670c40f94ea0cdc8cb9b985eab8538246e349b9cb93e1c655f5",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -397,10 +418,13 @@
         "assessment": "PoE超限动作概念题，无代码输出依赖。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "f087f63c78f6a670c40f94ea0cdc8cb9b985eab8538246e349b9cb93e1c655f5",
+      "current_question_sha256": "ebccc232dbcf314b04fe3f536aba91ce42e4cdbf5ece88c9274300331489e781",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0011-0020.json"
+      }
     },
     {
       "id": 16,
@@ -409,7 +433,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "泛洪限同 VLAN 且排除入端口，C 正确。补充条件：组播可能受 IGMP snooping 等限制，不应把所有组播都说成必然泛洪。",
+      "assessment": "泛洪限同 VLAN 且排除入端口，C 正确。补充条件：组播可能受 IGMP snooping 等限制，不应把所有组播都说成必然泛洪。 普通题再次核对并补充解析。",
       "question_sha256": "46dc73648fbca30c6f4557a3f2f8707edb181c78f068d7c5b1223bdf53b6eec1",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -420,10 +444,13 @@
         "assessment": "泛洪范围描述不依赖图片或配置块。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "46dc73648fbca30c6f4557a3f2f8707edb181c78f068d7c5b1223bdf53b6eec1",
+      "current_question_sha256": "d71bcd90ccb3c42b7412d020779d1d1d2ffd39d5a2b0b8a9b6c745d2986a3b86",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0011-0020.json"
+      }
     },
     {
       "id": 17,
@@ -432,7 +459,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "私网地址只须在所属互通域内唯一，不同隔离组织可复用；并不自动提供安全性或公网直接连通。[S4]",
+      "assessment": "私网地址只须在所属互通域内唯一，不同隔离组织可复用；并不自动提供安全性或公网直接连通。[S4] 普通题再次核对并补充解析。",
       "question_sha256": "cdbf1f36bb98d32a9fa455237f197cb999ef3cc1d0b0e722386104a713207629",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -443,10 +470,13 @@
         "assessment": "私网地址复用原理文字足够，无缺图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "cdbf1f36bb98d32a9fa455237f197cb999ef3cc1d0b0e722386104a713207629",
+      "current_question_sha256": "db6cb84c8af17e2ca574cd41d42cb282fb20800c7ffaca8fdbf7894179c39ca2",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0011-0020.json"
+      }
     },
     {
       "id": 18,
@@ -486,7 +516,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "B 的接收端流控描述与 TCP 窗口吻合；解析补充了序号、ACK、重传，可靠性区别清楚。[S1]",
+      "assessment": "B 的接收端流控描述与 TCP 窗口吻合；解析补充了序号、ACK、重传，可靠性区别清楚。[S1] 普通题再次核对并补充解析。",
       "question_sha256": "6890ee82275410472eab893f89ba880b1f93d28724f1f17cbda7f725a5588e6d",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -497,10 +527,13 @@
         "assessment": "TCP可靠性比较，不依赖报文图或CLI。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "6890ee82275410472eab893f89ba880b1f93d28724f1f17cbda7f725a5588e6d",
+      "current_question_sha256": "8a6bd81e2078ca76d92f64f401429de4befa242b7fc4866de0efcd2a8b96a4ed",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0011-0020.json"
+      }
     },
     {
       "id": 20,
@@ -509,7 +542,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "Local-mode AP 与 WLC 只需 IP 可达，CAPWAP 控制/数据 UDP 5246/5247；不要求同交换机或直连。",
+      "assessment": "Local-mode AP 与 WLC 只需 IP 可达，CAPWAP 控制/数据 UDP 5246/5247；不要求同交换机或直连。 普通题再次核对并补充解析。",
       "question_sha256": "570f5519817a7e61f930af45722065855c0c9b14090cd743a152a2509c893339",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -520,10 +553,13 @@
         "assessment": "CAPWAP可达性问题，IP/UDP说明在，无必需代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "570f5519817a7e61f930af45722065855c0c9b14090cd743a152a2509c893339",
+      "current_question_sha256": "ac1fadafdec2c005127b77b5d41c43f678d610e4507fc092ff671f6be529c853",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0011-0020.json"
+      }
     },
     {
       "id": 21,
@@ -532,7 +568,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "FF00::/12 确为 FF00::/8 的子集，因此题干只问哪一给定地址块是多播时 D 可成立；不能因为它不是完整 /8 就草率改答案。解析已说明包含关系。",
+      "assessment": "FF00::/12 确为 FF00::/8 的子集，因此题干只问哪一给定地址块是多播时 D 可成立；不能因为它不是完整 /8 就草率改答案。解析已说明包含关系。 普通题再次核对并补充解析。",
       "question_sha256": "1b46d4bda05eebcd06e6d3e7d8185d4746f193f59d9f6ea716251154596cf184",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -543,10 +579,13 @@
         "assessment": "FF00前缀题，单行地址不要求围栏。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "1b46d4bda05eebcd06e6d3e7d8185d4746f193f59d9f6ea716251154596cf184",
+      "current_question_sha256": "0eb2707801cf4bf515deae9084d3c7ccbe1a9f90b1d95758add0a0cab90f5d20",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0021-0030.json"
+      }
     },
     {
       "id": 22,
@@ -555,7 +594,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "TCP 面向连接、可靠字节流；UDP 无连接、不内建可靠交付。解析支持 D；“guarantees arrival”宜理解为可靠传输机制，不是网络故障时也保证送达。[S1]",
+      "assessment": "TCP 面向连接、可靠字节流；UDP 无连接、不内建可靠交付。解析支持 D；“guarantees arrival”宜理解为可靠传输机制，不是网络故障时也保证送达。[S1] 普通题再次核对并补充解析。",
       "question_sha256": "45313ec05a28a1633adfbd0b1c1d1f5f714b5af05684b4a24889ed6b15880aad",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -566,10 +605,13 @@
         "assessment": "连接/可靠性概念对照，无缺图片引用。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "45313ec05a28a1633adfbd0b1c1d1f5f714b5af05684b4a24889ed6b15880aad",
+      "current_question_sha256": "aad4d6f9e99e37ae1eb783161951dd6c8a29d7e7240f1b0ea1a93ccb929d7d14",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0021-0030.json"
+      }
     },
     {
       "id": 23,
@@ -578,7 +620,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "GUA 是可全球路由的单播类型；ULA/link-local 不满足，multicast 也不是对应公网单播的类型。",
+      "assessment": "GUA 是可全球路由的单播类型；ULA/link-local 不满足，multicast 也不是对应公网单播的类型。 普通题再次核对并补充解析。",
       "question_sha256": "5cf247433a2499de5bc7f0fb848c26e7dd3397e971ccbc3ac768b8d2739e2b39",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -589,10 +631,13 @@
         "assessment": "GUA地址类型选择，无代码块依赖。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "5cf247433a2499de5bc7f0fb848c26e7dd3397e971ccbc3ac768b8d2739e2b39",
+      "current_question_sha256": "62eb2b877f303e9f5c43e342d00543ec5427b8b22f77c7838cf7d3dd5002e3e5",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0021-0030.json"
+      }
     },
     {
       "id": 24,
@@ -601,7 +646,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "modified EUI-64 翻转首字节次低有效位，即从最高位数第七位。解析插入 FFFE 的步骤正确；更精确的名称应是 IPv6 modified EUI-64，而非笼统 IEEE EUI-64。[S3]",
+      "assessment": "modified EUI-64 翻转首字节次低有效位，即从最高位数第七位。解析插入 FFFE 的步骤正确；更精确的名称应是 IPv6 modified EUI-64，而非笼统 IEEE EUI-64。[S3] 普通题再次核对并补充解析。",
       "question_sha256": "fa0c051acfd312ec5fa49a4e08020142f82dd4c703e8eedf319e009f6a845a31",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -612,10 +657,13 @@
         "assessment": "EUI-64步骤已文字描述，无缺命令/图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "fa0c051acfd312ec5fa49a4e08020142f82dd4c703e8eedf319e009f6a845a31",
+      "current_question_sha256": "239dd5bad5ca466abd5c65024dc4e8b0d973ab3bf6cc83945a04a4c02b6b2ccf",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0021-0030.json"
+      }
     },
     {
       "id": 25,
@@ -624,7 +672,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "最大 29 用户加 1 网关恰占 /27 的 30 个可用地址；4 个不同 /27 可汇总 /25。选项中的同一前缀应理解为每层 /27 掩码示例，不能四层真的重复用同一网段。",
+      "assessment": "最大 29 用户加 1 网关恰占 /27 的 30 个可用地址；4 个不同 /27 可汇总 /25。选项中的同一前缀应理解为每层 /27 掩码示例，不能四层真的重复用同一网段。 普通题再次核对并补充解析。",
       "question_sha256": "d6461baff7a359c8f68ce387f0e6c261367d3b7e007a5b477076ab46334777a8",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -635,10 +683,13 @@
         "assessment": "四层人数均在题干，✑排版可改列表但信息未缺；子网选项不是多条CLI。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "d6461baff7a359c8f68ce387f0e6c261367d3b7e007a5b477076ab46334777a8",
+      "current_question_sha256": "8a7894c89d83727ff68b9c0a8939f4c3f573a06bf7dbfdf263b16729c21c1353",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0021-0030.json"
+      }
     },
     {
       "id": 26,
@@ -709,7 +760,7 @@
         "B"
       ],
       "status": "问题",
-      "assessment": "/23 满足最多 320 用户，掩码选择正确；但题目要求可执行的 SVI 命令，B 中 192.168.0.0/23 是网络地址，不能赋给接口。其他候选也均用该网络地址。建议命令改用 192.168.0.1；解析必须指出掩码与接口可用地址是两个条件。",
+      "assessment": "/23 满足最多 320 用户，掩码选择正确；但题目要求可执行的 SVI 命令，B 中 192.168.0.0/23 是网络地址，不能赋给接口。其他候选也均用该网络地址。建议命令改用 192.168.0.1；解析必须指出掩码与接口可用地址是两个条件。 普通题再次核对并补充解析。",
       "question_sha256": "9378bf8381a0cbcefb47e0cb2d740e9ad64dc51d7b0fcf185782839e9b0e6e0e",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -720,14 +771,15 @@
         "assessment": "每个候选均单条ip address，不缺多行块；网络地址不可赋接口是技术错误。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "7d964c87ae71e08230af9694b1aca3207bc59e66a5fca53785e8dc1fa465ae8b",
+      "current_question_sha256": "39f282771ecdfba930e4d915c0c75d53ca44b17bd0a309c370af9b0a52daa6b5",
       "resolution": {
         "status": "fixed",
         "manifest": "fixes-0001-0060.json",
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "B"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0021-0030.json"
       },
       "reviewed_answer": [
         "B"
@@ -771,7 +823,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "已看图。两 PC 均在 VLAN200，仅经 L2 switch，源/目的 MAC 不变；没有路由跳点需要重封装。",
+      "assessment": "已看图。两 PC 均在 VLAN200，仅经 L2 switch，源/目的 MAC 不变；没有路由跳点需要重封装。 普通题再次核对并补充解析。",
       "question_sha256": "b9c5e7a4ba1c6ca0838dcfcde6eb4bf69fa9b5f5cc639bfef92afaca6406b8c9",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -782,10 +834,13 @@
         "assessment": "两PC、Switch1及VLAN200图完整，没有路由跳点信息缺失。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "b9c5e7a4ba1c6ca0838dcfcde6eb4bf69fa9b5f5cc639bfef92afaca6406b8c9",
+      "current_question_sha256": "5569ee94e7cc636afdf5124f64568a00dbe4f5c0beb64c4bf3597cbafb478e6d",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0021-0030.json"
+      }
     },
     {
       "id": 31,
@@ -794,7 +849,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "DSSS 常规 22MHz 信道规划中 1/6/11 为给定选项唯一正确的非重叠组合。解析的 802.11b/g/n 总括及地区范围可收窄，不能推广成所有国家/带宽的唯一组合。",
+      "assessment": "DSSS 常规 22MHz 信道规划中 1/6/11 为给定选项唯一正确的非重叠组合。解析的 802.11b/g/n 总括及地区范围可收窄，不能推广成所有国家/带宽的唯一组合。 普通题再次核对并补充解析。",
       "question_sha256": "82149a59e71f07a26adce2d31516e7eea0b77ba5ef3813eac1bcaed081bf4783",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -805,10 +860,13 @@
         "assessment": "DSSS非重叠信道选择，数字组合非代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "82149a59e71f07a26adce2d31516e7eea0b77ba5ef3813eac1bcaed081bf4783",
+      "current_question_sha256": "72360059904741deb72b0829f6a6745da3e9594db571f3911b68a99ac282122a",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0031-0040.json"
+      }
     },
     {
       "id": 32,
@@ -817,7 +875,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "TCP 校验和、确认、重传与 UDP 无内建确认/重传的对照支持 C。建议明确 UDP IPv4 校验和可禁用，IPv6 通常必需；不影响此题答案。[S1]",
+      "assessment": "TCP 校验和、确认、重传与 UDP 无内建确认/重传的对照支持 C。建议明确 UDP IPv4 校验和可禁用，IPv6 通常必需；不影响此题答案。[S1] 普通题再次核对并补充解析。",
       "question_sha256": "1376811fe0e997dac42bdf8cc7790cda2244dbfa981c49663e2f9e8f105fdbad",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -828,10 +886,13 @@
         "assessment": "TCP/UDP确认/重传对比，不依代码或图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "1376811fe0e997dac42bdf8cc7790cda2244dbfa981c49663e2f9e8f105fdbad",
+      "current_question_sha256": "c51700c13dc7487fe033f0338f7c795154cb0c5e15946d34ec9cea4b54159da4",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0031-0040.json"
+      }
     },
     {
       "id": 33,
@@ -871,7 +932,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "广播目的 MAC 的 48 位全 1，B 正确；泛洪表述需与 Q8 一样补排除入端口和不可转发端口。",
+      "assessment": "广播目的 MAC 的 48 位全 1，B 正确；泛洪表述需与 Q8 一样补排除入端口和不可转发端口。 普通题再次核对并补充解析。",
       "question_sha256": "7246d9c89aa62bcc888be6604a33a74ce5d7a941247678f9d6621800a82ae1d9",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -882,10 +943,13 @@
         "assessment": "广播MAC选项完整，单行地址可读。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "7246d9c89aa62bcc888be6604a33a74ce5d7a941247678f9d6621800a82ae1d9",
+      "current_question_sha256": "cd1aec22a383b75cd7a409bf5eb7deab7b094dca970d293401e6dee62583977f",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0031-0040.json"
+      }
     },
     {
       "id": 35,
@@ -917,7 +981,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "接口级 ip address dhcp 启用 DHCP 客户端，其他三个路由/网关命令不分配接口地址。获取默认路由还取决于 DHCP 选项和平台行为。",
+      "assessment": "接口级 ip address dhcp 启用 DHCP 客户端，其他三个路由/网关命令不分配接口地址。获取默认路由还取决于 DHCP 选项和平台行为。 普通题再次核对并补充解析。",
       "question_sha256": "7c744a5dec42a53b7b8b84d73519d9dea571c4bfb0a5dfe1c371a3b4106e6fb3",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -928,10 +992,13 @@
         "assessment": "DHCP客户端命令单行完整，不缺配置块。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "7c744a5dec42a53b7b8b84d73519d9dea571c4bfb0a5dfe1c371a3b4106e6fb3",
+      "current_question_sha256": "9e8653f2d748125524d5263a3ccb69851396226f35dfa06799b8e26221d950c5",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0031-0040.json"
+      }
     },
     {
       "id": 37,
@@ -940,7 +1007,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "6to4 把 IPv6 封装在 IPv4 中，protocol41；dual-stack 本身不把 IPv6 穿越 IPv4-only 段。历史机制识别题可以保留，但解析宜提示其历史/弃用部署背景，勿当作新部署推荐。",
+      "assessment": "6to4 把 IPv6 封装在 IPv4 中，protocol41；dual-stack 本身不把 IPv6 穿越 IPv4-only 段。历史机制识别题可以保留，但解析宜提示其历史/弃用部署背景，勿当作新部署推荐。 普通题再次核对并补充解析。",
       "question_sha256": "4033326c8e2f67d6f27fc5d0f293404b89a6d5590fd0d5afacf478928f95fabb",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -951,10 +1018,13 @@
         "assessment": "6to4方案选择无需完整隧道CLI。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "4033326c8e2f67d6f27fc5d0f293404b89a6d5590fd0d5afacf478928f95fabb",
+      "current_question_sha256": "07b39fc2868c0c1b62a522ed134e073b9796e7c77f5308e91816013e23edbcba",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0031-0040.json"
+      }
     },
     {
       "id": 38,
@@ -963,7 +1033,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "已看图。Router1 两路由接口 .1/24 与 .2/24 同属 192.168.1.0/24，普通 IOS 同 VRF 拒绝重叠。解析应加同 VRF 限定；题图没有 VRF 或桥接例外。",
+      "assessment": "已看图。Router1 两路由接口 .1/24 与 .2/24 同属 192.168.1.0/24，普通 IOS 同 VRF 拒绝重叠。解析应加同 VRF 限定；题图没有 VRF 或桥接例外。 普通题再次核对并补充解析。",
       "question_sha256": "f31adf5e09956c53c111ccaa3e127233a440bb337cb6b3710633e7ed27808a12",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -974,10 +1044,13 @@
         "assessment": "两路由口同子网与交换机冗余图存在；无必须缺失输出。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "f31adf5e09956c53c111ccaa3e127233a440bb337cb6b3710633e7ed27808a12",
+      "current_question_sha256": "449ef9a62bde5daefda8af262eeffe7b9553cc6e7720789b3103f505ae166ce5",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0031-0040.json"
+      }
     },
     {
       "id": 39,
@@ -986,7 +1059,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "给定候选中 broadband cable 最符合 SOHO 成本/带宽需求，传统 Frame Relay、ISDN 和专线不优；不是宣称所有地区均必选有线电视接入。",
+      "assessment": "给定候选中 broadband cable 最符合 SOHO 成本/带宽需求，传统 Frame Relay、ISDN 和专线不优；不是宣称所有地区均必选有线电视接入。 普通题再次核对并补充解析。",
       "question_sha256": "6a3a476184a400d3305711a94d93693684e52163afd0e1f3b4daceffe86df516",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -997,10 +1070,13 @@
         "assessment": "SOHO接入技术选择不依图/代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "6a3a476184a400d3305711a94d93693684e52163afd0e1f3b4daceffe86df516",
+      "current_question_sha256": "1744f64466ca86bd471eac6c1291b9cdc3e97da5e15428f80f333d1d94d8ea36",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0031-0040.json"
+      }
     },
     {
       "id": 40,
@@ -1135,7 +1211,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "主要职责是跨不同 IP 网络转发；单广播域转发属于 L2，过滤未授权包不是所有 L3 设备的主要职责。",
+      "assessment": "主要职责是跨不同 IP 网络转发；单广播域转发属于 L2，过滤未授权包不是所有 L3 设备的主要职责。 普通题再次核对并补充解析。",
       "question_sha256": "a3d87e033fb2fa876d8328c1984c45ae7a75dcea4809dd389aa3ca588f84b45c",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1146,10 +1222,13 @@
         "assessment": "L3设备功能识别，文字充分。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "a3d87e033fb2fa876d8328c1984c45ae7a75dcea4809dd389aa3ca588f84b45c",
+      "current_question_sha256": "285aa24cd8795751ce2c94c46376f10ab249bff9d393fda7928be0cedd7ab61e",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0041-0050.json"
+      }
     },
     {
       "id": 45,
@@ -1158,7 +1237,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "相邻 AP 采用不同非重叠信道减少同频竞争，A 正确；解析蜂窝图案只是简化设计，不替代实际 RF 勘测/自动信道规划。",
+      "assessment": "相邻 AP 采用不同非重叠信道减少同频竞争，A 正确；解析蜂窝图案只是简化设计，不替代实际 RF 勘测/自动信道规划。 普通题再次核对并补充解析。",
       "question_sha256": "5da7ea6c8573675eb17cadc56d1a39540c9a9566a561b89f0d5932ac855583b6",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1169,10 +1248,13 @@
         "assessment": "AP非重叠信道建议题，无需实际勘测图才能答给定选项。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "5da7ea6c8573675eb17cadc56d1a39540c9a9566a561b89f0d5932ac855583b6",
+      "current_question_sha256": "7fa132b1eb4b2432a0f483f0c8efc0e26b6524bfab686a46dcdea22ac88f6926",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0041-0050.json"
+      }
     },
     {
       "id": 46,
@@ -1181,7 +1263,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "SaaS 把应用部署、更新和底层运维主要交给提供方；IaaS/PaaS 不能免除客户对自己应用的管理。解析对题。",
+      "assessment": "SaaS 把应用部署、更新和底层运维主要交给提供方；IaaS/PaaS 不能免除客户对自己应用的管理。解析对题。 普通题再次核对并补充解析。",
       "question_sha256": "4034a81d26a724434fc0d12c2517645511e74e7ffb9fcdb8416920f07468addd",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1192,10 +1274,13 @@
         "assessment": "SaaS服务模型问题，无图/代码依赖。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "4034a81d26a724434fc0d12c2517645511e74e7ffb9fcdb8416920f07468addd",
+      "current_question_sha256": "c04c71853942411a1735e47e97090f6be595646a2326e076718d50ebc89ce1b7",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0041-0050.json"
+      }
     },
     {
       "id": 47,
@@ -1204,7 +1289,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "普通双频客户端偏向 5GHz 的情境与 Band Select 相符；与 Q33 不同，此题未要求实时语音漫游。[S8]",
+      "assessment": "普通双频客户端偏向 5GHz 的情境与 Band Select 相符；与 Q33 不同，此题未要求实时语音漫游。[S8] 普通题再次核对并补充解析。",
       "question_sha256": "3b2ab2a4b642e0459f13a7b3d329fcb12107f2983ca67a84717142d4c28a795b",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1215,10 +1300,13 @@
         "assessment": "频段引导问题，没有引用缺失截图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "3b2ab2a4b642e0459f13a7b3d329fcb12107f2983ca67a84717142d4c28a795b",
+      "current_question_sha256": "5e4491a941718cab8efbf9844a1ae6bd938e0ecb1527be2d6e7878be590bd57e",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0041-0050.json"
+      }
     },
     {
       "id": 48,
@@ -1227,7 +1315,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "用户流量转发是 data plane，OSPF/STP 属控制面，SSH 属管理面；解析能排除全部干扰项。",
+      "assessment": "用户流量转发是 data plane，OSPF/STP 属控制面，SSH 属管理面；解析能排除全部干扰项。 普通题再次核对并补充解析。",
       "question_sha256": "38cf0d3d618792a624afdbc658fb5703fc6d17dc8cf6a2179f91a7e7debf2694",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1238,10 +1326,13 @@
         "assessment": "data plane动作辨认，不要求CLI。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "38cf0d3d618792a624afdbc658fb5703fc6d17dc8cf6a2179f91a7e7debf2694",
+      "current_question_sha256": "6c0a1bde55d89459325708e8a905acf47b7df417a31a69163037c4f490849691",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0041-0050.json"
+      }
     },
     {
       "id": 49,
@@ -1250,7 +1341,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "题目核心是可靠性交付，C 最直接；A 只是常见延迟权衡而非选择 TCP 的充分条件。解析的 HTTP/HTTPS 例子应注明 HTTP/3 使用基于 UDP 的 QUIC，不能概括所有现代 HTTP。",
+      "assessment": "题目核心是可靠性交付，C 最直接；A 只是常见延迟权衡而非选择 TCP 的充分条件。解析的 HTTP/HTTPS 例子应注明 HTTP/3 使用基于 UDP 的 QUIC，不能概括所有现代 HTTP。 普通题再次核对并补充解析。",
       "question_sha256": "4d46075fac76f784d07f196cf5dd80a42167125f9159ca365ca24df71e4de833",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1261,10 +1352,13 @@
         "assessment": "TCP/UDP选型题，不依图/代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "4d46075fac76f784d07f196cf5dd80a42167125f9159ca365ca24df71e4de833",
+      "current_question_sha256": "6f3e31101ff49d167de20c98cb891c87b1109c3e0e0591ac2ae59944e61f2259",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0041-0050.json"
+      }
     },
     {
       "id": 50,
@@ -1335,7 +1429,7 @@
         "D"
       ],
       "status": "问题",
-      "assessment": "firewall 答案正确，状态表解释充分；但“L2 switch 根本不解析上层 IP 报头”过度绝对化，启用 DAI、IP ACL、QoS 等功能的交换设备可检查 L3/L4 字段。改为常规 L2 转发依据 MAC，区别于会话状态检测，不要用绝对否定排除。",
+      "assessment": "firewall 答案正确，状态表解释充分；但“L2 switch 根本不解析上层 IP 报头”过度绝对化，启用 DAI、IP ACL、QoS 等功能的交换设备可检查 L3/L4 字段。改为常规 L2 转发依据 MAC，区别于会话状态检测，不要用绝对否定排除。 普通题再次核对并补充解析。",
       "question_sha256": "b34fba1d663f977a6b649b31bc249b9666e29e6e082f44d3dbbf8f5d0d49108b",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1346,14 +1440,15 @@
         "assessment": "stateful firewall概念，无必需图片/代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "2d1c979e09361b8f06fdf71c204fb98b303e4e4f0ce6a91a85c234c11947b51b",
+      "current_question_sha256": "61868a5a53501d0b25d1775f89a3b07b0f172dd8015527c1e399367a7869a7cd",
       "resolution": {
         "status": "fixed",
         "manifest": "fixes-0001-0060.json",
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "D"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0051-0060.json"
       },
       "reviewed_answer": [
         "D"
@@ -1366,7 +1461,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "AP 将无线客户端接入有线网络的核心角色正确；详细解析解释了 802.11/802.3 与轻量 AP。部分 AP 安全功能并非不存在，但不改变这些候选中 C 的主职责定位。",
+      "assessment": "AP 将无线客户端接入有线网络的核心角色正确；详细解析解释了 802.11/802.3 与轻量 AP。部分 AP 安全功能并非不存在，但不改变这些候选中 C 的主职责定位。 普通题再次核对并补充解析。",
       "question_sha256": "ee667c29b1168ffe463c8d2e59e307ce16721026ed7aaaf0d82ba1029ca2ca0b",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1377,10 +1472,13 @@
         "assessment": "AP接入桥接角色题，不依图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "ee667c29b1168ffe463c8d2e59e307ce16721026ed7aaaf0d82ba1029ca2ca0b",
+      "current_question_sha256": "f5875320e4daf33ce082f889d1f8e75073ffa8f69d7a617e87b2e309d4d80e22",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0051-0060.json"
+      }
     },
     {
       "id": 54,
@@ -1420,7 +1518,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "RRM/DCA 根据负载、噪声/干扰动态选择信道，C 与机制一致；不是按客户端厂商分信道，也不是相邻 AP 自动交替双频。[S8]",
+      "assessment": "RRM/DCA 根据负载、噪声/干扰动态选择信道，C 与机制一致；不是按客户端厂商分信道，也不是相邻 AP 自动交替双频。[S8] 普通题再次核对并补充解析。",
       "question_sha256": "a33099b4b1091ffb16e39b1260b3b163764f1724314fd3abd827d2425e4ad230",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1431,10 +1529,13 @@
         "assessment": "RRM/DCA动作题，无需配置信道块。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "a33099b4b1091ffb16e39b1260b3b163764f1724314fd3abd827d2425e4ad230",
+      "current_question_sha256": "96b6672e7d455e823d0fd96ca241414919b1b717ec12f882889cd26769d4d7a8",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0051-0060.json"
+      }
     },
     {
       "id": 56,
@@ -1474,7 +1575,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "Probe Response 是 management，Type00/Subtype0101；详细解析正确区分 Probe 与 Action/ACK/数据帧。控制帧“无负载”宜改为不承载普通上层用户数据，以免误涵盖所有控制帧格式。",
+      "assessment": "Probe Response 是 management，Type00/Subtype0101；详细解析正确区分 Probe 与 Action/ACK/数据帧。控制帧“无负载”宜改为不承载普通上层用户数据，以免误涵盖所有控制帧格式。 普通题再次核对并补充解析。",
       "question_sha256": "846df54aa03e8aa95790e32973feb7d328c24151a1c86380cbf815b168a330fa",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1485,10 +1586,13 @@
         "assessment": "Probe Response类型/子类型文字完整。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "846df54aa03e8aa95790e32973feb7d328c24151a1c86380cbf815b168a330fa",
+      "current_question_sha256": "41303fd793bdadbfd7c46321340b98278361c9a3a781e37614aaafc6440eba6e",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0051-0060.json"
+      }
     },
     {
       "id": 58,
@@ -1528,7 +1632,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "已看图。10.10.10.0/24 与10.10.100.0/24 网络经单个路由器相连，接口 e0/1、e0/0 与解析吻合。图把网络号写在 PC 下，应明确这是所在子网而非主机可配置地址，避免把 .0/24 当作主机 IP。",
+      "assessment": "已看图。10.10.10.0/24 与10.10.100.0/24 网络经单个路由器相连，接口 e0/1、e0/0 与解析吻合。图把网络号写在 PC 下，应明确这是所在子网而非主机可配置地址，避免把 .0/24 当作主机 IP。 普通题再次核对并补充解析。",
       "question_sha256": "8276bd641956e7e35bc0898011c28adcc2edbed004ee3ecfbea6fe04e840e30d",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -1539,10 +1643,13 @@
         "assessment": "PC-A/PC-B子网、router两口图完整；没有缺失路由配置声明。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "8276bd641956e7e35bc0898011c28adcc2edbed004ee3ecfbea6fe04e840e30d",
+      "current_question_sha256": "cb52a1b6376af05e5a3cd3f3cf34841eaf558b6dcf0ec775020c2474af216ab8",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0051-0060.json"
+      }
     },
     {
       "id": 60,
@@ -1613,7 +1720,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "目的 IP 查 FIB/最长匹配属于转发数据面；路由协议控制面、NETCONF 配置管理面、响应发给本机的 ping 通常属于控制面。解析有针对性。把“ICMP 必须 punt 给 CPU”限定为所讨论的平台/普通实现即可，硬件卸载并不改变逻辑分类。",
+      "assessment": "目的 IP 查 FIB/最长匹配属于转发数据面；路由协议控制面、NETCONF 配置管理面、响应发给本机的 ping 通常属于控制面。解析有针对性。把“ICMP 必须 punt 给 CPU”限定为所讨论的平台/普通实现即可，硬件卸载并不改变逻辑分类。 普通题再次核对并补充解析。",
       "question_sha256": "fae8cfe8e5e503a8b3371384bd6212c85e213c2ef84828f3cf74c257796c1049",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1624,10 +1731,13 @@
         "assessment": "控制/数据/管理动作比较，FIB查找无需实际表格才能判断。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "fae8cfe8e5e503a8b3371384bd6212c85e213c2ef84828f3cf74c257796c1049",
+      "current_question_sha256": "9c83f10ab0e80bff368b567edfa37effaed55574e3e760bd100ba14e288cb796",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0061-0070.json"
+      }
     },
     {
       "id": 63,
@@ -1636,7 +1746,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "已看图。三个同前缀静态路由 AD111/112/108，下一跳 .2/.6/.10 均在图示直连链路，OSPF默认AD110；via .10 的 [108/0] 胜出，B 正确。解析逐项引用配置并说明竞争者。可进一步区分控制面同前缀选路安装与数据面 LPM 两个阶段，不能把 AD 比较泛化到不同前缀长度。",
+      "assessment": "已看图。三个同前缀静态路由 AD111/112/108，下一跳 .2/.6/.10 均在图示直连链路，OSPF默认AD110；via .10 的 [108/0] 胜出，B 正确。解析逐项引用配置并说明竞争者。可进一步区分控制面同前缀选路安装与数据面 LPM 两个阶段，不能把 AD 比较泛化到不同前缀长度。 普通题再次核对并补充解析。",
       "question_sha256": "96c189a62bd30df6c8c8b1427e9b044b7a04501d34395c8721666275453470e5",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -1647,10 +1757,13 @@
         "assessment": "原图含静态/OSPF命令；解析九行CLI转录无围栏，可改为独立text块以保缩进/命令边界，但命令内容与图均在。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "96c189a62bd30df6c8c8b1427e9b044b7a04501d34395c8721666275453470e5",
+      "current_question_sha256": "651e089e33c8556a7cf8fe9bc56825dbb549d6bc5705aef66fe199f0e90cbe4f",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0061-0070.json"
+      }
     },
     {
       "id": 64,
@@ -1659,7 +1772,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "失陷 endpoint 可威胁网络，B 是候选中唯一合理描述；解析给出具体终端与横向移动场景。Endpoint 并非保证只在一个 VLAN/绝不能运行路由软件，应把排除 A/C/D 的理由写成非其典型角色，而非硬件绝对不能承担复合功能。",
+      "assessment": "失陷 endpoint 可威胁网络，B 是候选中唯一合理描述；解析给出具体终端与横向移动场景。Endpoint 并非保证只在一个 VLAN/绝不能运行路由软件，应把排除 A/C/D 的理由写成非其典型角色，而非硬件绝对不能承担复合功能。 普通题再次核对并补充解析。",
       "question_sha256": "46e65fc17186d7a9f40be597315ceeb87f7ae7628cd9d3329631207413f06053",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1670,10 +1783,13 @@
         "assessment": "endpoint风险角色题，无需配图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "46e65fc17186d7a9f40be597315ceeb87f7ae7628cd9d3329631207413f06053",
+      "current_question_sha256": "b2829446b68df5d34fb976c03726160320c133b8a88238547616d0a76bbc8c46",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0061-0070.json"
+      }
     },
     {
       "id": 65,
@@ -1682,7 +1798,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "已看图。PC 强制100/full、交换机auto；经典10/100并行检测可识别100但无法得知full，回退half，解释链路up而性能差，B正确。具体 CRC/late-collision 计数为预期症状，不是题图实际显示；口诀必须限定10/100，不能直接用于1000BASE-T。[T2]",
+      "assessment": "已看图。PC 强制100/full、交换机auto；经典10/100并行检测可识别100但无法得知full，回退half，解释链路up而性能差，B正确。具体 CRC/late-collision 计数为预期症状，不是题图实际显示；口诀必须限定10/100，不能直接用于1000BASE-T。[T2] 普通题再次核对并补充解析。",
       "question_sha256": "1b273bf203e3f07022373b13038807436e01dc8dc94cc8bb1a37097cc5170486",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -1693,10 +1809,13 @@
         "assessment": "PC手工100/full、交换机auto输出图在，可直接核对。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "1b273bf203e3f07022373b13038807436e01dc8dc94cc8bb1a37097cc5170486",
+      "current_question_sha256": "c5feeac84edf83883625799e59047037db72d93257336622579e67c2b6aab4f3",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0061-0070.json"
+      }
     },
     {
       "id": 66,
@@ -1891,7 +2010,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "已看ipconfig原图。DNS=.253、gateway=.100、host=.226、DHCP=.254，A精准匹配DNS查询目的IP；解析明确区分服务器功能及同子网，不把网关当DNS最终目的。",
+      "assessment": "已看ipconfig原图。DNS=.253、gateway=.100、host=.226、DHCP=.254，A精准匹配DNS查询目的IP；解析明确区分服务器功能及同子网，不把网关当DNS最终目的。 普通题再次核对并补充解析。",
       "question_sha256": "7e482d7a8490cf2e731a5d52fb147df62d47c7c7c49f364c51fef5a4c4b9d624",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -1902,10 +2021,13 @@
         "assessment": "完整ipconfig截图在；解析另转录字段时无pre/code容器，可补固定宽度块对齐，但DNS/网关/DHCP字段未缺。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "7e482d7a8490cf2e731a5d52fb147df62d47c7c7c49f364c51fef5a4c4b9d624",
+      "current_question_sha256": "8e3674c119376cdeec71e2b441fa103bd2c96f6db8bc7803c75662413f0f762c",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0071-0080.json"
+      }
     },
     {
       "id": 73,
@@ -1914,7 +2036,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "frame switching为已知目的MAC查表转发；解析区分源地址学习、未知泛洪及同入端口过滤。组播是否泛洪需考虑snooping，“frame pushing”非这里的标准交换术语即可，无须强行等同MPLS术语。",
+      "assessment": "frame switching为已知目的MAC查表转发；解析区分源地址学习、未知泛洪及同入端口过滤。组播是否泛洪需考虑snooping，“frame pushing”非这里的标准交换术语即可，无须强行等同MPLS术语。 普通题再次核对并补充解析。",
       "question_sha256": "8303cedc80bca62826943345cb4218fb786b89450422e3c17914c4b59ab1994b",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1925,10 +2047,13 @@
         "assessment": "学习/交换/泛洪机制为普通列表，不要求MAC表截图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "8303cedc80bca62826943345cb4218fb786b89450422e3c17914c4b59ab1994b",
+      "current_question_sha256": "7c56198aaf8fc3e2a2bfa17ce3dce30023be22f75237194bf7d90e3628cc79e3",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0071-0080.json"
+      }
     },
     {
       "id": 74,
@@ -1937,7 +2062,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "Anycast从单播空间取地址，配置到多个接口，路由度量选择其中一个接收，C正确。最近是路由意义，不保证地理最近；不是所有anycast都须由动态协议通告。解析已解释一对最近与一对多区别，建议收窄附带的绝对表述。[T7]",
+      "assessment": "Anycast从单播空间取地址，配置到多个接口，路由度量选择其中一个接收，C正确。最近是路由意义，不保证地理最近；不是所有anycast都须由动态协议通告。解析已解释一对最近与一对多区别，建议收窄附带的绝对表述。[T7] 普通题再次核对并补充解析。",
       "question_sha256": "cec6238164d314250a46226c21dbbb7d0a9974d02e945dddc213796a04510ff3",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -1948,10 +2073,13 @@
         "assessment": "anycast定义比较，无必须缺图或代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "cec6238164d314250a46226c21dbbb7d0a9974d02e945dddc213796a04510ff3",
+      "current_question_sha256": "e6b09c3a5fbc642315fd754acc70b3e6b89ab368ac718d90fce11ab837e6f853",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0071-0080.json"
+      }
     },
     {
       "id": 75,
@@ -2053,7 +2181,7 @@
         "D"
       ],
       "status": "问题",
-      "assessment": "技术核验仍成立：R7/R8/R9最后可用分别.126/.94/.158，掩码.192/.240/.224，D正确，原解析充分。用户新增代码块范围后补查发现四选项把三个路由器的interface/ip address配置全部压成一段，缺少分设备、多行代码布局；App与当前HTML选项普通容器不保留代码格式。应恢复命令行边界及代码显示，不改变D的技术答案。详见presentation-0001-0140.md。",
+      "assessment": "技术核验仍成立：R7/R8/R9最后可用分别.126/.94/.158，掩码.192/.240/.224，D正确，原解析充分。用户新增代码块范围后补查发现四选项把三个路由器的interface/ip address配置全部压成一段，缺少分设备、多行代码布局；App与当前HTML选项普通容器不保留代码格式。应恢复命令行边界及代码显示，不改变D的技术答案。详见presentation-0001-0140.md。 普通题再次核对并补充解析。",
       "question_sha256": "949e1ed3988757575afb7d45b4fe74c386be76df1bd1872e50f7924f8fcd77bd",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -2064,7 +2192,7 @@
         "assessment": "原图三个网段齐全；选项把R7/R8/R9的interface和ip address串成一段，缺分设备的多行代码块，影响比较/复制；技术D本身仍正确。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "545e4f4527872f0eed4c566cf9b87c809528b46cce9d7278a3a84667de257e72",
+      "current_question_sha256": "310dc60262f5560aba07662d7a0d3927a62229b29dbfc67c1560353d2902830b",
       "reviewed_answer": [
         "D"
       ],
@@ -2074,7 +2202,8 @@
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "D"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0071-0080.json"
       }
     },
     {
@@ -2084,7 +2213,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "普通TCP先建立连接、UDP没有传输层握手，B正确；解析逐一指出TCP有序号、UDP不内建排序/重传。题干query-responsible宜改query-response。TCP Fast Open允许握手携带数据，已有连接亦可复用；建议限定普通新建TCP会话，不把简化描述用于否定扩展机制。",
+      "assessment": "普通TCP先建立连接、UDP没有传输层握手，B正确；解析逐一指出TCP有序号、UDP不内建排序/重传。题干query-responsible宜改query-response。TCP Fast Open允许握手携带数据，已有连接亦可复用；建议限定普通新建TCP会话，不把简化描述用于否定扩展机制。 普通题再次核对并补充解析。",
       "question_sha256": "18b3d33f3104fadc7a82cc2da5f31b97de9a25b273e73a845b15c0307d58c651",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2095,10 +2224,13 @@
         "assessment": "query-response与TCP/UDP机制题，不依图/代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "18b3d33f3104fadc7a82cc2da5f31b97de9a25b273e73a845b15c0307d58c651",
+      "current_question_sha256": "d38317d8f19a0b7fdabcf3c0d315ed15dd37ec901b59a8c59fe9da26c4014316",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0071-0080.json"
+      }
     },
     {
       "id": 80,
@@ -2107,7 +2239,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "WLC协调轻量AP的认证与漫游，AP负责实时无线MAC，B与题意吻合；AAA可借助外部RADIUS，解析已说明。毫秒无缝漫游不是仅部署WLC就必然实现，还取决于客户端、认证/FT配置及覆盖，宜把结果改成有条件支持。",
+      "assessment": "WLC协调轻量AP的认证与漫游，AP负责实时无线MAC，B与题意吻合；AAA可借助外部RADIUS，解析已说明。毫秒无缝漫游不是仅部署WLC就必然实现，还取决于客户端、认证/FT配置及覆盖，宜把结果改成有条件支持。 普通题再次核对并补充解析。",
       "question_sha256": "f0cd4f28d8a27f3f48739c18975f0ec0f63a1a5ec4402296a9149342d145dc85",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2118,10 +2250,13 @@
         "assessment": "WLC认证/漫游角色题，无必需截图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "f0cd4f28d8a27f3f48739c18975f0ec0f63a1a5ec4402296a9149342d145dc85",
+      "current_question_sha256": "5e1446f8946ed9f53b453082ed91aea2253541bff0799ea2cc42af688fc68d62",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0071-0080.json"
+      }
     },
     {
       "id": 81,
@@ -2130,7 +2265,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "美国传统2.4GHz三信道规划1/6/11，排除包含14或相邻频段的候选。解析提供中心频率，核心结论正确；25MHz间隔和“绝无干扰”应限于所讲DSSS/常规规划，频谱掩模并非理想砖墙，带宽/调制和同频复用仍影响干扰。",
+      "assessment": "美国传统2.4GHz三信道规划1/6/11，排除包含14或相邻频段的候选。解析提供中心频率，核心结论正确；25MHz间隔和“绝无干扰”应限于所讲DSSS/常规规划，频谱掩模并非理想砖墙，带宽/调制和同频复用仍影响干扰。 普通题再次核对并补充解析。",
       "question_sha256": "b68da8154d5ab12867d609d9910d329ec9ab65a74a13039febe76b092177e941",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2141,10 +2276,13 @@
         "assessment": "美国1/6/11选择，无需RF实测图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "b68da8154d5ab12867d609d9910d329ec9ab65a74a13039febe76b092177e941",
+      "current_question_sha256": "a657ce8126be66403f1e502a858c997433812e01f1004fe0177e09381e7a8575",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0081-0090.json"
+      }
     },
     {
       "id": 82,
@@ -2184,7 +2322,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "非重叠指占用频段相互分离，与SSID、安全设置或速率本身无关，B正确；discontinuous最好解释为信道之间不同/不重叠，而不是每个信道自身必须不连续。“不重叠即绝对互不干扰”是理想化说法，可改为减少邻频干扰。",
+      "assessment": "非重叠指占用频段相互分离，与SSID、安全设置或速率本身无关，B正确；discontinuous最好解释为信道之间不同/不重叠，而不是每个信道自身必须不连续。“不重叠即绝对互不干扰”是理想化说法，可改为减少邻频干扰。 普通题再次核对并补充解析。",
       "question_sha256": "4b40bfac7cad0718180bd75f4786b73f62de8f69081e2d4d43985439cce17ea8",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2195,10 +2333,13 @@
         "assessment": "非重叠信道频率定义，文字可解释无需频谱图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "4b40bfac7cad0718180bd75f4786b73f62de8f69081e2d4d43985439cce17ea8",
+      "current_question_sha256": "7ff0a47aa4271734a511a6c55cc5ae31c9e9621cad0630ec1c8a96b5dc7e2e87",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0081-0090.json"
+      }
     },
     {
       "id": 84,
@@ -2238,7 +2379,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "已知目的MAC正常转发到表项出端口，C符合基础问题。实际若表项端口就是入端口则过滤、不反射；应在算法段补这个条件。已有组播snooping说明，比无条件所有组播泛洪更准确。",
+      "assessment": "已知目的MAC正常转发到表项出端口，C符合基础问题。实际若表项端口就是入端口则过滤、不反射；应在算法段补这个条件。已有组播snooping说明，比无条件所有组播泛洪更准确。 普通题再次核对并补充解析。",
       "question_sha256": "fb81db88bf3e088f6ad0209c816e45dd88fd556c9fa52515d7fc1134c2695bdd",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2249,10 +2390,13 @@
         "assessment": "已知MAC转发机制题不依赖实际CAM表，题干没声称给表。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "fb81db88bf3e088f6ad0209c816e45dd88fd556c9fa52515d7fc1134c2695bdd",
+      "current_question_sha256": "222a6fb2e54342cc9f36d488afa22cec3f731ca9d1190acf934e5a339cd9e989",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0081-0090.json"
+      }
     },
     {
       "id": 86,
@@ -2261,7 +2405,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "Collapsed core明确合并core/distribution，保留接入层；解析解释成本和双重职责，排除其他层组合。two-tier是两层架构，不意味着全网只能执行二层交换。",
+      "assessment": "Collapsed core明确合并core/distribution，保留接入层；解析解释成本和双重职责，排除其他层组合。two-tier是两层架构，不意味着全网只能执行二层交换。 普通题再次核对并补充解析。",
       "question_sha256": "325dd33eeb511dbf4138f20b4496b49749a5699d97334e691306dc3801419560",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2272,10 +2416,13 @@
         "assessment": "合并core/distribution层级定义，不依图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "325dd33eeb511dbf4138f20b4496b49749a5699d97334e691306dc3801419560",
+      "current_question_sha256": "cf0596968b142cadf9dd6100c9715490c10d38c60bee9ca176ea79e8a5534ef2",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0081-0090.json"
+      }
     },
     {
       "id": 87,
@@ -2284,7 +2431,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "多用户共享单条宽带为SOHO典型功能，PAT为常见IPv4实现；不要求三层分级、全mesh或千人规模。解析例子具体，20人等只是典型规模而非严格标准上限，IPv6共享宽带也不要求PAT。",
+      "assessment": "多用户共享单条宽带为SOHO典型功能，PAT为常见IPv4实现；不要求三层分级、全mesh或千人规模。解析例子具体，20人等只是典型规模而非严格标准上限，IPv6共享宽带也不要求PAT。 普通题再次核对并补充解析。",
       "question_sha256": "1ebf3cf7f88b481895b3f02f516b3207666089450bb40d57e0bae5fb7a481b70",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2295,10 +2442,13 @@
         "assessment": "SOHO共享宽带特性，无必需代码或图片。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "1ebf3cf7f88b481895b3f02f516b3207666089450bb40d57e0bae5fb7a481b70",
+      "current_question_sha256": "8f2724ddf0f62e137b7dc20cb91bb69f53b95f21a05e3eaf61b4d0dbdbe1fa56",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0081-0090.json"
+      }
     },
     {
       "id": 88,
@@ -2338,7 +2488,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "Web server通过HTTP提供内容/API/应用，D为基本角色；其他项分别邮件、FTP、AAA。解析已给协议和端口。有Web身份认证/邮件Web界面不改变主功能；端口80/443 TCP只是传统HTTP/1.1、HTTP/2例子，HTTP/3走QUIC/UDP。",
+      "assessment": "Web server通过HTTP提供内容/API/应用，D为基本角色；其他项分别邮件、FTP、AAA。解析已给协议和端口。有Web身份认证/邮件Web界面不改变主功能；端口80/443 TCP只是传统HTTP/1.1、HTTP/2例子，HTTP/3走QUIC/UDP。 普通题再次核对并补充解析。",
       "question_sha256": "62e26988d8e7121103cc5220c392ad9802703170481735041dc03bf50065215d",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2349,10 +2499,13 @@
         "assessment": "Web server功能识别，不要求HTTP请求代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "62e26988d8e7121103cc5220c392ad9802703170481735041dc03bf50065215d",
+      "current_question_sha256": "2200ca81b480bbac787125868c34424c75272574bacd19d2f74fc48398c81f94",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0081-0090.json"
+      }
     },
     {
       "id": 90,
@@ -2392,7 +2545,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "传统HTTPS使用SSL/TLS，SSH有独立协议，HTTP/Telnet不提供对应加密，B正确；解析结构清晰。SSL本身已弃用，不应指导实际部署SSL；TLS1.3主要使用AEAD而不简单概括成HMAC/SHA256保护所有记录。作为历史协议识别题可保留并更新措辞。",
+      "assessment": "传统HTTPS使用SSL/TLS，SSH有独立协议，HTTP/Telnet不提供对应加密，B正确；解析结构清晰。SSL本身已弃用，不应指导实际部署SSL；TLS1.3主要使用AEAD而不简单概括成HMAC/SHA256保护所有记录。作为历史协议识别题可保留并更新措辞。 普通题再次核对并补充解析。",
       "question_sha256": "05e591c3a6966e2c87504c34f8052a5e2239de2d2a0e9b40e4f6793a34157d1f",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2403,10 +2556,13 @@
         "assessment": "SSL/TLS使用协议题，不需握手抓包或配置。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "05e591c3a6966e2c87504c34f8052a5e2239de2d2a0e9b40e4f6793a34157d1f",
+      "current_question_sha256": "f79b94fbd35fe840606f8995c0b9dd5d15150bd3fc3cd57d1d7c245cd7adf230",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0091-0100.json"
+      }
     },
     {
       "id": 92,
@@ -2446,7 +2602,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "static预先在预算中保留端口功率并继续检测PD，auto依赖可用预算，B有Cisco文档支持。解析可将“百分百保障”限定为成功预留且电源/PD正常、需求不超过配额；不代表电源损坏或超额需求时也无限供电。[T14]",
+      "assessment": "static预先在预算中保留端口功率并继续检测PD，auto依赖可用预算，B有Cisco文档支持。解析可将“百分百保障”限定为成功预留且电源/PD正常、需求不超过配额；不代表电源损坏或超额需求时也无限供电。[T14] 普通题再次核对并补充解析。",
       "question_sha256": "823be2894f8916a003bb807f3c205219ccb19ce09374df7281a283f854a257e9",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2457,10 +2613,13 @@
         "assessment": "PoE static/auto机制文字/行内命令足够，无必需图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "823be2894f8916a003bb807f3c205219ccb19ce09374df7281a283f854a257e9",
+      "current_question_sha256": "dd505d85ecbbffe4458e5f0172f31a88589c84fc8536f3108995d052c9801e10",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0091-0100.json"
+      }
     },
     {
       "id": 94,
@@ -2469,7 +2628,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "已看图10.7.54.0/x。380已含增长，无需再乘1.3；/23提供510个主机，网络54.0、广播55.255、可用54.1–55.254，D全部正确。A第二字节错/B容量不足/C广播错，均已解释。有一处乘号转义变成imes的排版瑕疵，数学结论不受影响。",
+      "assessment": "已看图10.7.54.0/x。380已含增长，无需再乘1.3；/23提供510个主机，网络54.0、广播55.255、可用54.1–55.254，D全部正确。A第二字节错/B容量不足/C广播错，均已解释。有一处乘号转义变成imes的排版瑕疵，数学结论不受影响。 普通题再次核对并补充解析。",
       "question_sha256": "f1060042d3eff946255f54f14519091b7eacf2a0e3f23a7f84fc536d448cf7d2",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -2480,10 +2639,13 @@
         "assessment": "网络图在；每组选项四个地址字段被排成单段且有空引号，建议分行或表格、范围加连接符，所有字段值仍可读。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "f1060042d3eff946255f54f14519091b7eacf2a0e3f23a7f84fc536d448cf7d2",
+      "current_question_sha256": "8adafea2c03df489533746f4e147182642fd8f04652274556101f65909bf808a",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0091-0100.json"
+      }
     },
     {
       "id": 95,
@@ -2492,7 +2654,7 @@
         "B"
       ],
       "status": "问题",
-      "assessment": "技术核验仍成立：VLAN2已有dot1Q2及10.10.10.10/24，VLAN3为10.10.2.1/23、native10，B封装3、10.10.2.10/23正确，子接口.10不必等于VLAN号。新增完整性补查发现选项的多条配置压成一行，且解析中的ip address <ip> <mask>及dot1Q <vlan-id>模板经实际formatter生成未转义HTML标签，导致参数名在HTML文本解析中消失。需恢复选项多行代码及正确转义，不更换B的技术答案。详见presentation-0001-0140.md与formatter-evidence.json。",
+      "assessment": "技术核验仍成立：VLAN2已有dot1Q2及10.10.10.10/24，VLAN3为10.10.2.1/23、native10，B封装3、10.10.2.10/23正确，子接口.10不必等于VLAN号。新增完整性补查发现选项的多条配置压成一行，且解析中的ip address <ip> <mask>及dot1Q <vlan-id>模板经实际formatter生成未转义HTML标签，导致参数名在HTML文本解析中消失。需恢复选项多行代码及正确转义，不更换B的技术答案。详见presentation-0001-0140.md与formatter-evidence.json。 普通题再次核对并补充解析。",
       "question_sha256": "0b700f6e19a40d19d0e6d3c7a4bb766757e4d64f3d52374aa7eaeb36e27736db",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -2503,7 +2665,7 @@
         "assessment": "VLAN/PC/已有子接口截图完整；选项多条命令压平。解析行内模板<ip>/<mask>/<vlan-id>经实际formatter生成HTML标签，参数名丢失风险已用HTML解析复核，需正确转义与配置块显示。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "eb22e14f6731e1e308c38243e3a071cd77a879f7c7f696aa8f57472df2eda38d",
+      "current_question_sha256": "77e9b468f957d7f01d66463115937987d3cf957a2ed9c0e98c3a680a6add883e",
       "reviewed_answer": [
         "B"
       ],
@@ -2513,7 +2675,8 @@
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "B"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0091-0100.json"
       }
     },
     {
@@ -2554,7 +2717,7 @@
         "C"
       ],
       "status": "问题",
-      "assessment": "已看图。接口up/full1000；3,612,699 input errors与CRC同数，只有67 broadcasts、负载1/255；给定候选中线缆/物理链路故障C最合适，不能仅从单快照证明唯一根因或当前递增。解析只用一句a large number of input errors and CRC errors加整段泛用模板，没引用实际计数、没排除bandwidth参数不改变线速、没分析D速率不匹配通常导致无法up。应基于这些证据重写并说明进一步查线缆/接口诊断。[T2]",
+      "assessment": "已看图。接口up/full1000；3,612,699 input errors与CRC同数，只有67 broadcasts、负载1/255；给定候选中线缆/物理链路故障C最合适，不能仅从单快照证明唯一根因或当前递增。解析只用一句a large number of input errors and CRC errors加整段泛用模板，没引用实际计数、没排除bandwidth参数不改变线速、没分析D速率不匹配通常导致无法up。应基于这些证据重写并说明进一步查线缆/接口诊断。[T2] 普通题再次核对并补充解析。",
       "question_sha256": "13659b4d7e22c1834e1dddc188f1465e2a9d1ec38f955735605969a79acb876c",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -2565,7 +2728,7 @@
         "assessment": "show interface截图含FCS/CRC及广播等计数，完整可读；解析模板不足不是原图缺失。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "d21511365eb9553fe8c2117c61ede14b5d649a1a2354da5de805eb65859397c4",
+      "current_question_sha256": "ce3840355b49c0b52e565c9fa824f850a5b16c1573d1c59b413fd5aba66a8f1b",
       "reviewed_answer": [
         "C"
       ],
@@ -2575,7 +2738,8 @@
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "C"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0091-0100.json"
       }
     },
     {
@@ -2585,7 +2749,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "在站点数≥3、链路独立且设备能力相当的理想拓扑比较下，full mesh提供最多备选路径，N(N−1)/2正确，C合理。解析“不存在任何单点故障/任意多链路故障都能恢复”应收窄：不能承诺共享物理承载、端站自身、控制系统故障被拓扑自动消除。",
+      "assessment": "在站点数≥3、链路独立且设备能力相当的理想拓扑比较下，full mesh提供最多备选路径，N(N−1)/2正确，C合理。解析“不存在任何单点故障/任意多链路故障都能恢复”应收窄：不能承诺共享物理承载、端站自身、控制系统故障被拓扑自动消除。 普通题再次核对并补充解析。",
       "question_sha256": "8cb6baec2db4e7a4d9d4b031337e5bd2fd3b9797502997223ee40a5ff10e9d5f",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2596,10 +2760,13 @@
         "assessment": "WAN拓扑可靠性概念比较，无所称缺失图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "8cb6baec2db4e7a4d9d4b031337e5bd2fd3b9797502997223ee40a5ff10e9d5f",
+      "current_question_sha256": "01e3fb61b44dbcbc1d1a001a372b4d5317f09c559c573e72c4fed77e9819f74f",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0091-0100.json"
+      }
     },
     {
       "id": 99,
@@ -2608,7 +2775,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "link flapping可触发err-disable；未接线notconnect和管理员shutdown状态不同，B正确。5次/10秒为官方IOS示例阈值而非所有平台必然统一值，应以show errdisable flap-values核实；BPDU Guard需实际启用，普通PortFast本身不会因收到BPDU就err-disable。[T15]",
+      "assessment": "link flapping可触发err-disable；未接线notconnect和管理员shutdown状态不同，B正确。5次/10秒为官方IOS示例阈值而非所有平台必然统一值，应以show errdisable flap-values核实；BPDU Guard需实际启用，普通PortFast本身不会因收到BPDU就err-disable。[T15] 普通题再次核对并补充解析。",
       "question_sha256": "b614b0ca1fa5491ef257dec2bf305acb8b41d0355f7eaf0f41bfbe8c84afda8f",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2619,10 +2786,13 @@
         "assessment": "err-disable原因/状态区分文字完整，行内查看命令不强求完整示例块。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "b614b0ca1fa5491ef257dec2bf305acb8b41d0355f7eaf0f41bfbe8c84afda8f",
+      "current_question_sha256": "0dfec2efd0ffb1e7753655b98a3e27563af37d052419c76bf90bb9a320cb792b",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0091-0100.json"
+      }
     },
     {
       "id": 100,
@@ -2654,7 +2824,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "已看图。SwitchA speed100/half，SwitchB speed10/full，线长99m；两端硬编码速率不同足以导致无法建立物理链路，A正确。图确有双工不匹配但它不是此处down的首要原因，PortFast与速率建立无关。解析按图给出具体数值、比较双工症状，内容充分；适用经典10/100BASE-T情境，不泛化为所有PHY行为。[U1]",
+      "assessment": "已看图。SwitchA speed100/half，SwitchB speed10/full，线长99m；两端硬编码速率不同足以导致无法建立物理链路，A正确。图确有双工不匹配但它不是此处down的首要原因，PortFast与速率建立无关。解析按图给出具体数值、比较双工症状，内容充分；适用经典10/100BASE-T情境，不泛化为所有PHY行为。[U1] 普通题再次核对并补充解析。",
       "question_sha256": "d9611b9822e85057cc1e13fb8a54c97a9fb48fcd599951db29b3f353937cce3d",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -2665,10 +2835,13 @@
         "assessment": "两端speed/duplex与99m图在，可直接核对，无需另补CLI。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "d9611b9822e85057cc1e13fb8a54c97a9fb48fcd599951db29b3f353937cce3d",
+      "current_question_sha256": "f9f53f6bb4b98389443ce1da3faad243fec3ab04ceafdd07a8d2f0abad97d02c",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0101-0110.json"
+      }
     },
     {
       "id": 102,
@@ -2708,7 +2881,7 @@
         "C"
       ],
       "status": "通过",
-      "assessment": "SR为850nm多模、LR为1310nm单模，二者共同要求光纤，C正确；不是都用同一种光纤，也不使用UTP。解析规格/距离对比与干扰项排除充分。[U3]",
+      "assessment": "SR为850nm多模、LR为1310nm单模，二者共同要求光纤，C正确；不是都用同一种光纤，也不使用UTP。解析规格/距离对比与干扰项排除充分。[U3] 普通题再次核对并补充解析。",
       "question_sha256": "0cfb9bb805256a1d0f466d9870e9ec1c0138359e767883df8f691544e46fe3b3",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2719,10 +2892,13 @@
         "assessment": "SR/LR规格已用Markdown对比表表达，无必须代码块。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "0cfb9bb805256a1d0f466d9870e9ec1c0138359e767883df8f691544e46fe3b3",
+      "current_question_sha256": "65f5176ad30dabf36846c27964d1b8a80a06a564c8d2e47be2b1d014224f0e7b",
       "reviewed_answer": [
         "C"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0101-0110.json"
+      }
     },
     {
       "id": 104,
@@ -2731,7 +2907,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "防火墙以规则决定放行/拒绝是主要角色，B合理；交换机/WLC/AP也可有ACL或安全功能，但不改变本题基础设备角色区分。解析多数以“核心目的”而非绝对不具备该功能来排除；默认隐式拒绝应视为常用安全策略，不能推广为所有产品的出厂策略。",
+      "assessment": "防火墙以规则决定放行/拒绝是主要角色，B合理；交换机/WLC/AP也可有ACL或安全功能，但不改变本题基础设备角色区分。解析多数以“核心目的”而非绝对不具备该功能来排除；默认隐式拒绝应视为常用安全策略，不能推广为所有产品的出厂策略。 普通题再次核对并补充解析。",
       "question_sha256": "1f91493416cde544a0307f4f1dfb21db72b327f70f31d0ec7c5e5f89e26134aa",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2742,10 +2918,13 @@
         "assessment": "firewall规则角色题，无缺图片/命令引用。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "1f91493416cde544a0307f4f1dfb21db72b327f70f31d0ec7c5e5f89e26134aa",
+      "current_question_sha256": "c50ba1bd0954b09043736f414847160d728a27438261f82ded317b50b8ad1add",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0101-0110.json"
+      }
     },
     {
       "id": 105,
@@ -2816,7 +2995,7 @@
         "D"
       ],
       "status": "问题",
-      "assessment": "D的PoE超administrative maximum后关端口/err-disable有官方classification override章节支持；解析额外称只有电流完全归零且阻抗断开才停电，忽略PD必须持续满足Maintain Power Signature，低于规定电流/签名条件也可能被判断开。PoE class是分类电流过程，不能与25kΩ检测签名混为“硬件特征电阻宣告class”；具体syslog也不应凭空保证某一固定字符串。保留D，按MPS与本平台policing机制改写附带解释。[U5][U6]",
+      "assessment": "D的PoE超administrative maximum后关端口/err-disable有官方classification override章节支持；解析额外称只有电流完全归零且阻抗断开才停电，忽略PD必须持续满足Maintain Power Signature，低于规定电流/签名条件也可能被判断开。PoE class是分类电流过程，不能与25kΩ检测签名混为“硬件特征电阻宣告class”；具体syslog也不应凭空保证某一固定字符串。保留D，按MPS与本平台policing机制改写附带解释。[U5][U6] 普通题再次核对并补充解析。",
       "question_sha256": "ccd96846cdbe51a04811902ab87dea3bc3fbe0b033a50f656d116348f41fd777",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2827,7 +3006,7 @@
         "assessment": "概念本身不需图；解析power inline consumption default <mW>行内代码未转义，HTML解析会丢mW参数名称，需要修formatter，不是单纯无围栏。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "a676a93b4d0c4755a0d37edc00aaa446e29c44d8c88d2be653d5c61fdbcae57e",
+      "current_question_sha256": "deddd2deeebf7ddd6fe4f98c06b971daee97cc89d588515246fba38f58a03664",
       "reviewed_answer": [
         "D"
       ],
@@ -2837,7 +3016,8 @@
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "D"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0101-0110.json"
       }
     },
     {
@@ -2847,7 +3027,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "核心段已说明不同leaf之间经一个spine、同leaf例外及可预测跳数，足以支持A；不是服务器直连spine只传组播，增加leaf不自动解决超售，MTU由接口/封装决定。后续模板可删除，但不因存在模板而忽略前段已有有效解释。",
+      "assessment": "核心段已说明不同leaf之间经一个spine、同leaf例外及可预测跳数，足以支持A；不是服务器直连spine只传组播，增加leaf不自动解决超售，MTU由接口/封装决定。后续模板可删除，但不因存在模板而忽略前段已有有效解释。 普通题再次核对并补充解析。",
       "question_sha256": "5f1fb4bc34ee56c15f63511ec4b0b790881d5d395ba68da8026078dd4719e701",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2858,10 +3038,13 @@
         "assessment": "leaf-spine核心段已含同leaf例外，无明确缺失图引用。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "5f1fb4bc34ee56c15f63511ec4b0b790881d5d395ba68da8026078dd4719e701",
+      "current_question_sha256": "3163a81741b38e03e3d669ff936bb049f3693eaf3eaac8398206a44ef38bd033",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0101-0110.json"
+      }
     },
     {
       "id": 109,
@@ -2903,7 +3086,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "路由协议交换可达/拓扑信息属于控制面，CLI为管理面，FIB逐包查找和下一跳转发为数据面，A正确。解析区分RIB生成与FIB使用，充分；OSPF交换LSA而非直接交换整张路由表，文中举LSU/LSA已基本澄清。",
+      "assessment": "路由协议交换可达/拓扑信息属于控制面，CLI为管理面，FIB逐包查找和下一跳转发为数据面，A正确。解析区分RIB生成与FIB使用，充分；OSPF交换LSA而非直接交换整张路由表，文中举LSU/LSA已基本澄清。 普通题再次核对并补充解析。",
       "question_sha256": "2fc883612ccf092ffdf4273277e3e4b487897cc3f6b029f4f130dfa8440fa006",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -2914,10 +3097,13 @@
         "assessment": "控制面动作说明，未要求RIB/FIB输出截图。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "2fc883612ccf092ffdf4273277e3e4b487897cc3f6b029f4f130dfa8440fa006",
+      "current_question_sha256": "84df298568bf0cc2d7d53dd5a09942325da39f3efced164313c3b7a2ee16a0b7",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0101-0110.json"
+      }
     },
     {
       "id": 111,
@@ -3019,7 +3205,7 @@
         "B"
       ],
       "status": "通过",
-      "assessment": "小网络且增长有限适合core/distribution合并，B正确；VSS并非必要，D合并层级错误。解析交代成本与独立接入层，充分；“大型一定必须三层”“core绝不任何策略”属设计简化，宜改成通常建议/避免复杂策略而非硬限制。",
+      "assessment": "小网络且增长有限适合core/distribution合并，B正确；VSS并非必要，D合并层级错误。解析交代成本与独立接入层，充分；“大型一定必须三层”“core绝不任何策略”属设计简化，宜改成通常建议/避免复杂策略而非硬限制。 普通题再次核对并补充解析。",
       "question_sha256": "3ce9ba1d2315022041e4c3d1558a8cd800a0eccc08abc6a5d1f02fde5a277f37",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -3030,10 +3216,13 @@
         "assessment": "collapsed-core适用规模文字完整，无图引用。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "3ce9ba1d2315022041e4c3d1558a8cd800a0eccc08abc6a5d1f02fde5a277f37",
+      "current_question_sha256": "50285f9ef01295c7d596681c9c19be6f68ebf0a6ce66e980798732e75f79db6d",
       "reviewed_answer": [
         "B"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0111-0120.json"
+      }
     },
     {
       "id": 115,
@@ -3042,7 +3231,7 @@
         "B"
       ],
       "status": "问题",
-      "assessment": "已看图192.168.0.0/24和3台PC。当前+30新增=31个子网；/29给32段、每段6主机，含SVI共4地址足够，B意图正确。但B实际命令是255 255.255.248，空格不能当点分十进制“简写”，该命令不可执行；A还有265，C同样缺点号。应修复选项文本再判B为正确可执行命令，不能由解析静默补点。",
+      "assessment": "已看图192.168.0.0/24和3台PC。当前+30新增=31个子网；/29给32段、每段6主机，含SVI共4地址足够，B意图正确。但B实际命令是255 255.255.248，空格不能当点分十进制“简写”，该命令不可执行；A还有265，C同样缺点号。应修复选项文本再判B为正确可执行命令，不能由解析静默补点。 普通题再次核对并补充解析。",
       "question_sha256": "a14e12de426366fa6c88e0e194d0c6fd9f3dc674445c9fe4e7290d4f7d110219",
       "has_exhibit": true,
       "exhibit_viewed": true,
@@ -3053,7 +3242,7 @@
         "assessment": "三PC及/24图在；候选interface vlan和ip address压平，还含掩码点号丢失/265问题。应恢复多行命令与真实掩码，不把空格当合法简写。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "d5b431956537d3c4dec65258040de02fadf983a610cdbe49837437c01ba4f6e3",
+      "current_question_sha256": "1f9cf331d285ffcddcbaf10cec37ede50d4f33f2f643e8113888616ac8bff6cc",
       "reviewed_answer": [
         "B"
       ],
@@ -3063,7 +3252,8 @@
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "B"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0111-0120.json"
       }
     },
     {
@@ -3104,7 +3294,7 @@
         "D"
       ],
       "status": "通过",
-      "assessment": "Cisco LX/LH标称SMF10km、ZX约70km，D符合规格；A将mode-conditioning用途错配给ZX，B/C介质/距离错误。解析具体且可核验。末尾“七十里”应改“七十公里”，防止口诀单位与正文70km冲突；较远距离还需按型号/光预算核实。[U9]",
+      "assessment": "Cisco LX/LH标称SMF10km、ZX约70km，D符合规格；A将mode-conditioning用途错配给ZX，B/C介质/距离错误。解析具体且可核验。末尾“七十里”应改“七十公里”，防止口诀单位与正文70km冲突；较远距离还需按型号/光预算核实。[U9] 普通题再次核对并补充解析。",
       "question_sha256": "85c2d42a37837d556424631c40282edaec651b5288ea3c6f9ab8a46088b1ae3a",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -3115,10 +3305,13 @@
         "assessment": "LX/LH与ZX距离参数文字在，未要求接口输出。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "85c2d42a37837d556424631c40282edaec651b5288ea3c6f9ab8a46088b1ae3a",
+      "current_question_sha256": "d82d86c2bb92a9dbb73434c15bf3ccdf52762265ffe42599c61f8ed6dacd61a2",
       "reviewed_answer": [
         "D"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0111-0120.json"
+      }
     },
     {
       "id": 118,
@@ -3189,7 +3382,7 @@
         "A"
       ],
       "status": "歧义",
-      "assessment": "A给出标准unicast/anycast接口基数差异；但RFC4291明确要求被分配anycast的节点显式知道该地址是anycast，B前半正是此要求，普通unicast无需anycast特殊声明的后半也不能仅因“不谈接口基数”判错。解析称B不是核心区别，不构成排除依据；还误称追加anycast关键字会自动指示IGP通告主机路由，仍需相应路由配置。建议重写B为明确错误的命题，并区分地址标识、DAD和路由通告。[U12]",
+      "assessment": "A给出标准unicast/anycast接口基数差异；但RFC4291明确要求被分配anycast的节点显式知道该地址是anycast，B前半正是此要求，普通unicast无需anycast特殊声明的后半也不能仅因“不谈接口基数”判错。解析称B不是核心区别，不构成排除依据；还误称追加anycast关键字会自动指示IGP通告主机路由，仍需相应路由配置。建议重写B为明确错误的命题，并区分地址标识、DAD和路由通告。[U12] 普通题再次核对并补充解析。",
       "question_sha256": "6f7f962488c6d5dacd0a0d7584a72122d6c0c45dd5a5ef138875ac19e10cfb05",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -3200,7 +3393,7 @@
         "assessment": "单行anycast示例地址完整，A/B歧义与自动宣告说法另列，无多行配置缺失。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "a0074ca05337855afe4f066a5e52b24692f5d171faedf5cfe419986d34908e5a",
+      "current_question_sha256": "887f30624f7412c02f3805a3710e6d4ed3d413708ed5b72065e9876d494fad8f",
       "reviewed_answer": [
         "A"
       ],
@@ -3210,7 +3403,8 @@
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "A"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0111-0120.json"
       }
     },
     {
@@ -3286,7 +3480,7 @@
         "B"
       ],
       "status": "问题",
-      "assessment": "B是标准二层leaf-spine拓扑规则，但解析由全互连+ECMP直接推出无阻塞且“任何spine故障不会孤岛”，需要至少双spine、独立链路和容量前提；并把所有Cisco/VXLAN拓扑的leaf-leaf连接一概禁止，忽略vPC peer-link等产品实现。应限定抽象标准拓扑、区别冗余与无超售，以及产品例外；保留B的核心规则。",
+      "assessment": "B是标准二层leaf-spine拓扑规则，但解析由全互连+ECMP直接推出无阻塞且“任何spine故障不会孤岛”，需要至少双spine、独立链路和容量前提；并把所有Cisco/VXLAN拓扑的leaf-leaf连接一概禁止，忽略vPC peer-link等产品实现。应限定抽象标准拓扑、区别冗余与无超售，以及产品例外；保留B的核心规则。 普通题再次核对并补充解析。",
       "question_sha256": "646d926a4189a86b72cc1ba3793341947ad28b8b846914808c7a73d892ae55fa",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -3297,7 +3491,7 @@
         "assessment": "leaf-spine连接规则文字题，无必需图/代码。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "3988f53badb587368c84d6942e764a530ab1b910bdaee92966996000662f1715",
+      "current_question_sha256": "fb25c225bda038bfa7d5038bed06443aef8a8994e7700a5c738d6379f32eff49",
       "reviewed_answer": [
         "B"
       ],
@@ -3307,7 +3501,8 @@
         "verification": "milestone-0001-0200-verification.json",
         "current_answer": [
           "B"
-        ]
+        ],
+        "nonlab_followup_manifest": "nonlab-0121-0130.json"
       }
     },
     {
@@ -3379,7 +3574,7 @@
         "A"
       ],
       "status": "通过",
-      "assessment": "核心段已直接给四级映射Platinum/Voice、Gold/Video、Silver/BestEffort、Bronze/Background，足以同时支持A并排除其余三级。后续模板无新增信息可删，不因此把有效映射也判敷衍。应限定所问Cisco WLC界面/版本，配置profile不等于端到端语音QoS自动保障。[U14]",
+      "assessment": "核心段已直接给四级映射Platinum/Voice、Gold/Video、Silver/BestEffort、Bronze/Background，足以同时支持A并排除其余三级。后续模板无新增信息可删，不因此把有效映射也判敷衍。应限定所问Cisco WLC界面/版本，配置profile不等于端到端语音QoS自动保障。[U14] 普通题再次核对并补充解析。",
       "question_sha256": "3f415db831753c66f082e359ff3c257faf32a879d3e46de58790d1a59d183b9a",
       "has_exhibit": false,
       "exhibit_viewed": false,
@@ -3390,10 +3585,13 @@
         "assessment": "四级WLC QoS映射在核心文字中，不必额外GUI截图才能选择Platinum。",
         "report": "presentation-0001-0140.md"
       },
-      "current_question_sha256": "3f415db831753c66f082e359ff3c257faf32a879d3e46de58790d1a59d183b9a",
+      "current_question_sha256": "9a3186d93e5939bf22039e9009ddd029dfc6731cbd782ea04261ce818cf4b65a",
       "reviewed_answer": [
         "A"
-      ]
+      ],
+      "resolution": {
+        "nonlab_followup_manifest": "nonlab-0121-0130.json"
+      }
     },
     {
       "id": 127,
