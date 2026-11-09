@@ -603,12 +603,17 @@ const DeckScheduler = {
 
 // =========================================================================
 // 3. FBReader-Style Google Account & Google Drive Cloud Sync (CloudSyncEngine)
+//    Supports Direct Google Drive REST API v3 (OAuth 2.0 Loopback PKCE) with
+//    ZERO dependency on the local Google Drive Android App.
 // =========================================================================
 const CloudSyncEngine = {
   autoPushTimer: null,
   webFileHandle: null,
   isSyncInFlight: false,
   pendingPushAfterFlight: false,
+  defaultClientId: '202264815644.apps.googleusercontent.com',
+  defaultClientSecret: 'X4Z3ca8xfWDb1Voo-F9a7ZxJ',
+  syncFileName: 'ccna_study_progress.json',
 
   getSyncState() {
     if (window.AndroidBridge && typeof window.AndroidBridge.getGoogleSyncState === 'function') {
@@ -639,6 +644,7 @@ const CloudSyncEngine = {
     const badge = document.getElementById('cloudSyncBadge');
     const signedOutBox = document.getElementById('cloudSignedOutActions');
     const signedInBox = document.getElementById('cloudSignedInActions');
+    const manualBox = document.getElementById('cloudManualCodeBox');
     const emailEl = document.getElementById('cloudAccountEmail');
     const timeEl = document.getElementById('cloudLastSyncTime');
 
@@ -647,6 +653,7 @@ const CloudSyncEngine = {
     if (state && state.signedIn) {
       signedOutBox.style.display = 'none';
       signedInBox.style.display = 'flex';
+      if (manualBox) manualBox.style.display = 'none';
       const provider = state.providerType || 'Google Drive';
       badge.textContent = statusOverride || `✓ ${provider}`;
       badge.style.background = 'rgba(16, 185, 129, 0.15)';
@@ -656,7 +663,7 @@ const CloudSyncEngine = {
     } else {
       signedOutBox.style.display = 'flex';
       signedInBox.style.display = 'none';
-      badge.textContent = 'Optional • Offline';
+      badge.textContent = statusOverride || 'Optional • Offline';
       badge.style.background = 'rgba(148, 163, 184, 0.15)';
       badge.style.color = 'var(--text-muted)';
     }
@@ -792,31 +799,150 @@ const CloudSyncEngine = {
     };
   },
 
-  async signIn(linkExisting = false) {
+  // Primary FBReader-style one-tap Google Account OAuth 2.0 Sign-In (Zero Google Drive App dependency)
+  async signIn(unused = false) {
+    const manualBox = document.getElementById('cloudManualCodeBox');
+    if (manualBox) manualBox.style.display = 'flex';
+
     if (window.AndroidBridge && typeof window.AndroidBridge.signInWithGoogle === 'function') {
-      window.AndroidBridge.signInWithGoogle(Boolean(linkExisting));
+      window.AndroidBridge.signInWithGoogle(false);
       return;
     }
-    // Desktop Web File System Access API fallback (Google Drive for Desktop / Cloud folder)
+
+    // Desktop / Standalone Browser OAuth 2.0 Loopback Flow
+    const redirectUri = 'http://127.0.0.1:53682/';
+    localStorage.setItem('ccna_web_oauth_redirect', redirectUri);
+    const params = new URLSearchParams({
+      client_id: this.defaultClientId,
+      redirect_uri: redirectUri,
+      response_type: 'code',
+      scope: 'https://www.googleapis.com/auth/drive.file openid email',
+      access_type: 'offline',
+      prompt: 'select_account consent'
+    });
+    window.open(`https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`, '_blank');
+    showToast('☁️ 请在新标签页完成 Google 授权，并复制跳转后的 127.0.0.1 链接粘贴到下方确认框');
+  },
+
+  async submitManualCode() {
+    const inputEl = document.getElementById('cloudManualCodeInput');
+    const raw = inputEl ? inputEl.value.trim() : '';
+    if (!raw) {
+      showToast('⚠️ 请先粘贴授权跳转后的链接或 code');
+      return;
+    }
+
+    if (window.AndroidBridge && typeof window.AndroidBridge.submitManualOAuthCode === 'function') {
+      this.syncSettingsCardUI('⟳ Verifying...');
+      window.AndroidBridge.submitManualOAuthCode(raw);
+      if (inputEl) inputEl.value = '';
+      return;
+    }
+
+    // Web Browser OAuth Code Exchange
     try {
-      if (linkExisting && window.showOpenFilePicker) {
+      this.syncSettingsCardUI('⟳ Verifying...');
+      let code = raw;
+      if (raw.includes('code=')) {
+        const u = new URL(raw.startsWith('http') ? raw : `http://127.0.0.1/?${raw}`);
+        code = u.searchParams.get('code') || raw;
+      } else {
+        code = decodeURIComponent(raw);
+      }
+      const redirectUri = localStorage.getItem('ccna_web_oauth_redirect') || 'http://127.0.0.1:53682/';
+      const resp = await fetch('https://oauth2.googleapis.com/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          client_id: this.defaultClientId,
+          client_secret: this.defaultClientSecret,
+          code,
+          grant_type: 'authorization_code',
+          redirect_uri: redirectUri
+        })
+      });
+      const tokenData = await resp.json();
+      if (!resp.ok || !tokenData.access_token) {
+        throw new Error(tokenData.error_description || tokenData.error || 'Token exchange failed');
+      }
+
+      let email = 'Google Drive Account';
+      if (tokenData.id_token) {
+        try {
+          const payload = JSON.parse(atob(tokenData.id_token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+          if (payload.email) email = payload.email;
+        } catch (e) {}
+      }
+
+      const meta = {
+        signedIn: true,
+        syncMode: 'web_drive_rest',
+        email,
+        providerType: 'Google Drive',
+        accessToken: tokenData.access_token,
+        refreshToken: tokenData.refresh_token || '',
+        expiresAt: Date.now() + ((tokenData.expires_in || 3500) * 1000),
+        fileId: '',
+        lastSyncTime: 0
+      };
+      localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+      if (inputEl) inputEl.value = '';
+      this.syncSettingsCardUI();
+      await this.syncNow();
+    } catch (e) {
+      this.syncSettingsCardUI();
+      showToast('⚠️ 授权验证失败: ' + e.message);
+    }
+  },
+
+  async ensureWebAccessToken(meta) {
+    if (meta.accessToken && Date.now() < (meta.expiresAt || 0) - 60000) {
+      return meta.accessToken;
+    }
+    if (!meta.refreshToken) throw new Error('登录已过期，请重新登录 Google 账号');
+    const resp = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id: this.defaultClientId,
+        client_secret: this.defaultClientSecret,
+        refresh_token: meta.refreshToken,
+        grant_type: 'refresh_token'
+      })
+    });
+    const data = await resp.json();
+    if (!resp.ok || !data.access_token) throw new Error('刷新 Token 失败');
+    meta.accessToken = data.access_token;
+    meta.expiresAt = Date.now() + ((data.expires_in || 3500) * 1000);
+    localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+    return meta.accessToken;
+  },
+
+  async rebindFile() {
+    if (window.AndroidBridge && typeof window.AndroidBridge.rebindDriveSyncFile === 'function') {
+      window.AndroidBridge.rebindDriveSyncFile(true);
+      return;
+    }
+    try {
+      if (window.showOpenFilePicker) {
         const [handle] = await window.showOpenFilePicker({
           types: [{ description: 'CCNA Sync JSON', accept: { 'application/json': ['.json'] } }]
         });
         this.webFileHandle = handle;
       } else if (window.showSaveFilePicker) {
         this.webFileHandle = await window.showSaveFilePicker({
-          suggestedName: 'ccna_study_progress.json',
+          suggestedName: this.syncFileName,
           types: [{ description: 'CCNA Sync JSON', accept: { 'application/json': ['.json'] } }]
         });
       } else {
-        showToast('💡 请在 Android 客户端或支持 File System API 的浏览器中使用 Google Drive 自动同步');
+        showToast('💡 请直接点击左侧【登录 Google 账号开启云同步】');
         return;
       }
       const meta = {
         signedIn: true,
-        email: this.webFileHandle.name || 'Google Drive Sync File',
-        providerType: 'Google Drive File',
+        syncMode: 'web_file',
+        email: this.webFileHandle.name || this.syncFileName,
+        providerType: 'Local Sync File',
         lastSyncTime: Date.now()
       };
       localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
@@ -824,17 +950,9 @@ const CloudSyncEngine = {
       await this.syncNow();
     } catch (e) {
       if (e && e.name !== 'AbortError') {
-        showToast('取消或无法绑定同步文件: ' + e.message);
+        showToast('取消或无法绑定文件: ' + e.message);
       }
     }
-  },
-
-  rebindFile() {
-    if (window.AndroidBridge && typeof window.AndroidBridge.rebindDriveSyncFile === 'function') {
-      window.AndroidBridge.rebindDriveSyncFile(true);
-      return;
-    }
-    this.signIn(true);
   },
 
   signOut() {
@@ -864,8 +982,75 @@ const CloudSyncEngine = {
       window.AndroidBridge.cloudPushProgress(payload);
       return;
     }
+    if (state.syncMode === 'web_drive_rest') {
+      this.webDriveRestPush(payload);
+      return;
+    }
     if (this.webFileHandle) {
       this.webPush(payload);
+    }
+  },
+
+  async webDriveRestPush(payload) {
+    try {
+      this.syncSettingsCardUI('⟳ Syncing...');
+      const meta = this.getSyncState();
+      const token = await this.ensureWebAccessToken(meta);
+      let fileId = meta.fileId || '';
+
+      if (!fileId) {
+        const q = encodeURIComponent(`name='${this.syncFileName}' and trashed=false`);
+        const listResp = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&spaces=drive&fields=files(id,name,modifiedTime)&orderBy=modifiedTime%20desc`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (listResp.ok) {
+          const listJson = await listResp.json();
+          if (listJson.files && listJson.files.length > 0) {
+            fileId = listJson.files[0].id;
+          }
+        }
+      }
+
+      if (fileId) {
+        const upResp = await fetch(`https://www.googleapis.com/upload/drive/v3/files/${encodeURIComponent(fileId)}?uploadType=media`, {
+          method: 'PATCH',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json; charset=UTF-8'
+          },
+          body: payload
+        });
+        if (upResp.status === 404) {
+          fileId = '';
+        } else if (!upResp.ok) {
+          throw new Error(`Drive update HTTP ${upResp.status}`);
+        }
+      }
+
+      if (!fileId) {
+        const boundary = 'ccna_web_sync_' + Date.now();
+        const metadata = JSON.stringify({ name: this.syncFileName, mimeType: 'application/json' });
+        const multipartBody = `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${metadata}\r\n--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${payload}\r\n--${boundary}--`;
+        const createResp = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': `multipart/related; boundary=${boundary}`
+          },
+          body: multipartBody
+        });
+        if (!createResp.ok) throw new Error(`Drive create HTTP ${createResp.status}`);
+        const created = await createResp.json();
+        fileId = created.id || '';
+      }
+
+      meta.fileId = fileId;
+      meta.lastSyncTime = Date.now();
+      localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+      this.syncSettingsCardUI();
+    } catch (e) {
+      console.warn('webDriveRestPush failed', e);
+      this.syncSettingsCardUI('⚠️ Offline');
     }
   },
 
@@ -891,6 +1076,42 @@ const CloudSyncEngine = {
       window.AndroidBridge.cloudPullProgress();
       return;
     }
+    if (state.syncMode === 'web_drive_rest') {
+      try {
+        const meta = this.getSyncState();
+        const token = await this.ensureWebAccessToken(meta);
+        const q = encodeURIComponent(`name='${this.syncFileName}' and trashed=false`);
+        const listResp = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&spaces=drive&fields=files(id,name,modifiedTime)&orderBy=modifiedTime%20desc`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (listResp.ok) {
+          const listJson = await listResp.json();
+          if (listJson.files && listJson.files.length > 0) {
+            meta.fileId = listJson.files[0].id;
+            localStorage.setItem('ccna_web_cloud_sync_meta', JSON.stringify(meta));
+            const dlResp = await fetch(`https://www.googleapis.com/drive/v3/files/${encodeURIComponent(meta.fileId)}?alt=media`, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            if (dlResp.ok) {
+              const text = await dlResp.text();
+              if (text && text.trim().startsWith('{')) {
+                const remote = JSON.parse(text);
+                appState = this.mergeProgressStates(appState, remote);
+                SrsEngine.syncActiveMistakeSet();
+                localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
+                updateHeaderStats();
+              }
+            }
+          }
+        }
+        await this.webDriveRestPush(JSON.stringify(appState));
+        showToast('☁️ 已与 Google Drive 完成直连双向同步');
+      } catch (e) {
+        this.syncSettingsCardUI('⚠️ Offline');
+        showToast('⚠️ Google Drive 同步失败: ' + e.message);
+      }
+      return;
+    }
     if (this.webFileHandle) {
       try {
         const file = await this.webFileHandle.getFile();
@@ -903,7 +1124,7 @@ const CloudSyncEngine = {
           updateHeaderStats();
         }
         await this.webPush(JSON.stringify(appState));
-        showToast('☁️ 已与 Google Drive 完成双向增量同步');
+        showToast('☁️ 已完成双向增量同步');
       } catch (e) {
         showToast('⚠️ 同步失败: ' + e.message);
       }
@@ -938,14 +1159,28 @@ window.onCloudPullCallback = function (jsonStr) {
   try {
     const res = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
     if (res && res.ok) {
+      let mergedAny = false;
       if (res.data && res.data.trim().startsWith('{')) {
         const remote = JSON.parse(res.data);
         appState = CloudSyncEngine.mergeProgressStates(appState, remote);
+        mergedAny = true;
+      }
+      if (Array.isArray(res.extraDataList)) {
+        res.extraDataList.forEach(extraRaw => {
+          try {
+            if (extraRaw && extraRaw.trim().startsWith('{')) {
+              appState = CloudSyncEngine.mergeProgressStates(appState, JSON.parse(extraRaw));
+              mergedAny = true;
+            }
+          } catch (e) {}
+        });
+      }
+      if (mergedAny) {
         SrsEngine.syncActiveMistakeSet();
         localStorage.setItem('ccna_app_state_v1', JSON.stringify(appState));
         updateHeaderStats();
       }
-      // Push merged state back so cloud file also reflects any newer local progress
+      // Push merged state back so cloud file also reflects any newer local progress (or creates initial file)
       CloudSyncEngine.pushToCloud();
     } else {
       CloudSyncEngine.syncSettingsCardUI('⚠️ Offline');
