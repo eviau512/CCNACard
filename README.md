@@ -1,82 +1,88 @@
 # CCNACard — CCNA 200-301 Interactive Practice Cards & Virtual IOS Lab
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Version](https://img.shields.io/badge/Version-v1.2.0-blue.svg)](https://github.com/eviau512/CCNACard/releases/tag/v1.2.0)
+[![Version](https://img.shields.io/badge/Version-v1.3.0-blue.svg)](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0)
 [![Platform](https://img.shields.io/badge/Platform-Android%208.0%2B%20%7C%20Web-green.svg)](https://github.com/eviau512/CCNACard)
 [![Question Count](https://img.shields.io/badge/Questions-1%2C396%20Complete-orange.svg)](https://github.com/eviau512/CCNACard/releases)
 [![Releases](https://img.shields.io/badge/Download-GitHub%20Releases-brightgreen.svg)](https://github.com/eviau512/CCNACard/releases)
 
-**CCNACard** 是面向 Cisco CCNA 200-301 认证考试的智能交互式抽认卡与真实考场仿真练习平台。包含完整的 1,396 道 ExamTopics 真实题库，支持网页单文件离线秒开与原生 Android APK 安装。
+**CCNACard** 是面向 Cisco CCNA 200-301 认证考试的高性能交互式抽认卡平台与考场级 CLI 模拟器。内嵌完整的 1,396 道 ExamTopics 题库，支持零配置单文件离线网页秒开与原生 Android APK 安装。
 
 ---
 
 ## ✨ 核心特性 (Key Features)
 
-### 1. 🗂️ 1,396 道全量题库与深度解析
-- **全题型支持**：覆盖单选题、多选题、交互式拖拽题 (Drag and Drop)、CLI 配置模拟实验题 (Simulation / Lab)。
-- **高清原图还原**：内嵌所有拓扑、报文抓包与考题配图，支持点击轻触全屏放大 (Lightbox)。
-- **AI 增强与考点解析**：详细的解题思路、权威 RFC/Cisco 官方参考、易错陷阱与配置命令对照。
+### 1. 🗂️ 1,396 道全量题库与高保真考点解析
+- **全题型支持**：覆盖单选、多选、交互式拖拽题 (Drag and Drop)、CLI 配置模拟实验题 (Simulation / Lab)。
+- **100% 拖拽容错引擎**：全面支持无序分组 (Unordered Group)，同一分类或 Cisco IOS 配置块内的命令拖入任意合法槽位均正确判定，拒绝机械倒扣分。
+- **高清拓扑与抓包原图**：内嵌所有拓扑、抓包报文及考题配图，支持轻触全屏 Lightbox 缩放查看。
+- **深度解析与表格推导**：包含 CIDR 边界数学推导、RFC 规范对照、易错陷阱与官方考试注意项。
 
-### 2. 💻 内嵌虚拟 Cisco IOS 控制台模拟器 (Lab Console)
-- **严格还原真实考场**：仅在特定 `Simulation / Lab` 实验题内嵌控制台，坚决杜绝作弊快捷指令（如 `sh run` / `conf t` 按钮），模拟考试真实键盘敲击体验。
-- **触屏虚拟硬件功能键**：针对手机键盘缺少控制键的痛点，提供专属硬件触控键：
-  - `[Ctrl+C]`：打断命令 / 退出子模式返回特权模式 `#`
-  - `[Ctrl+Shift+6]`：中断 Ping / DNS 解析 / 逃逸序列
+### 2. 💻 内嵌考场级虚拟 Cisco IOS 控制台模拟器 (Lab Console)
+- **真机键盘敲击还原**：仅在 `Simulation / Lab` 实验题内嵌独立控制台，模拟真实考场无作弊按键环境。
+- **触屏专属硬件功能键**：针对移动端虚拟键盘缺失控制键的痛点，提供专属硬件触控键：
+  - `[Ctrl+C]`：中断命令 / 退出子模式返回特权模式 `#`
+  - `[Ctrl+Shift+6]`：中断 Ping / DNS 解析逃逸序列
   - `[Ctrl+A]` / `[Ctrl+E]`：光标一键跳至行首 / 行尾
-  - `[Ctrl+Z]`：直接从接口/路由配置模式退回特权模式 `#`
+  - `[Ctrl+Z]`：直接从接口/路由模式跳回特权模式 `#`
   - `[Ctrl+U]`：清空当前输入行
-  - `[Tab]`：标准 Cisco 指令自动补全
-  - `[?]`：IOS 上下文帮助
+  - `[Tab]`：标准 Cisco 关键字自动补全
+  - `[?]`：IOS 上下文实时语法提示
   - `[↑]` / `[↓]`：历史命令追溯翻页
 - **Cisco 命令前缀匹配**：原生支持常用缩写命令（如 `ena`、`conf t`、`int e0/1`、`no shut`、`sh ip int br`、`router ospf 1` 等）。
-- **多拓扑设备自适应**：自动根据考题拓扑提取对应设备选项卡（如 `SW-1`, `SW-2`, `SW-3`, `SW-4`），具备独立状态与配置会话。
+- **多拓扑设备自适应**：根据考题拓扑动态提供设备选项卡（如 `SW-1`, `SW-2`, `SW-3`, `SW-4`），各设备具备独立的配置会话与接口状态。
 
-### 3. 🎯 间隔重复记忆算法 (Spaced Repetition)
-- **莱特纳抽认卡机制**：掌握题目自动移出主复习流；答错题目自动进入错题重练队列。
-- **弱项雷达诊断**：基于 Cisco 考纲 6 大知识领域（网络基础、网络接入、IP 连通性、IP 服务、安全基准、自动化与可编程）智能归类并统计错题弱项。
-- **防误触重置保护**：配备呼吸警示徽标与确认弹窗，防止误清除学习进度。
+### 3. 🧠 有理代数自适应间隔复习引擎 (Rational SRS Engine)
+- **平滑非线性就绪函数**：采用有理代数调度曲线 $c_q(\Delta s) = \frac{\Delta s^2}{\Delta s^2 + \tau^2}$（$\tau=25$），消除传统 Leitner 盒子的阶梯式扎堆与复习饥饿，单步计算极速流畅（$< 6.4\,\mu\text{s}$）。
+- **防既视感与历史错题轮换**：对近期看过的错题施加 $>500\times$ 的权重抑制，结合历史错题动态随机轮换与步长抖动，杜绝背答案式刷题。
+- **错题池自适应调度**：根据错题积压量 $M$ 动态调节全局复习概率 $P_{\text{review}}$，自适应平衡攻坚新题与巩固旧错。
 
-### 4. 🔒 离线优先与数据自主可控
-- **零网络依赖**：无需联网、无广告、无数据收集。
-- **跨设备记录导入/导出**：学习进度 JSON 一键保存至手机公共【下载 (Download)】文件夹，或通过系统文件选择器随时恢复刷题进度。
+### 4. ☁️ 本地优先与 Google Drive 零客户端云同步 (Local-First & Cloud Sync)
+- **纯粹本地优先 (Local-First)**：默认完全离线运行，无广告、无隐私追踪、无需注册第三方私有账号，所有数据安全保存在本地。
+- **直接 Google Drive REST API v3 漫游同步**：
+  - **免安装客户端**：类似 FBReader 的轻量原生方案，直接与 Google Drive API 对接，通过 OAuth2 本地回环（Loopback）鉴权，设备无需预装庞大的 Google Drive 桌面/移动客户端。
+  - **跨设备无缝漫游**：在多台手机、平板或 PC 浏览器之间自由迁移刷题进度。
+  - **智能冲突合并**：云端同步采用保守合并策略，时间戳平局时优先保留错题未掌握状态，杜绝刷题进度丢失。
+- **冷备份导出/导入**：随时将学习进度以标准 JSON 格式导出至本地文件系统，方便永久归档与迁移。
 
 ---
 
 ## 🚀 下载与使用 (Releases & Usage)
 
-所有预编译产物均通过 **[GitHub Releases](https://github.com/eviau512/CCNACard/releases)** 发布：
+所有最新预编译工件均已发布在 **[GitHub Releases (v1.3.0)](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0)**：
 
 ### 方式 A：Android 手机 / 平板安装（推荐）
-前往 [Releases 最新发布页](https://github.com/eviau512/CCNACard/releases/latest) 下载已签名 APK：
-- **[CCNA_v1.2.0.apk (最新版本，包含虚拟 IOS 模拟器)](https://github.com/eviau512/CCNACard/releases/latest/download/CCNA_v1.2.0.apk)**
-- [CCNA_v1.1.1.apk (历史归档版本)](https://github.com/eviau512/CCNACard/releases/tag/v1.1.1)
+前往 [Releases 发布页](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0) 下载最新构建的已签名 APK：
+- **[CCNA.apk (最新 v1.3.0 Release)](https://github.com/eviau512/CCNACard/releases/download/v1.3.0/CCNA.apk)**
 
-或者通过 adb 一键安装到连接的设备：
+或通过 adb 命令直接推送到已连接的设备：
 ```bash
-adb install -r CCNA_v1.2.0.apk
+adb install -r --user 0 CCNA.apk
 ```
 
-### 方式 B：浏览器即开即用（免安装离线单文件）
-从 [Releases 资源列表](https://github.com/eviau512/CCNACard/releases/latest) 下载 `Examtopics_CCNA_200-301_Complete.html`：
-- 直接双击或用现代浏览器（Chrome、Edge、Safari、Firefox）打开。
-- 单文件聚合，包含全部 1,396 题数据与内嵌资源，断网环境亦可正常刷题。
+### 方式 B：桌面/平板浏览器即开即用（免安装离线单文件）
+从 [Releases 发布页](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0) 下载单文件网页版：
+- **[CCNA_Interactive_App.html](https://github.com/eviau512/CCNACard/releases/download/v1.3.0/CCNA_Interactive_App.html)**
+- 直接双击或使用任意现代浏览器（Chrome、Edge、Safari、Firefox）打开即可使用。
+- 单文件内聚全部 1,396 道题库数据与内嵌资源，完全断网环境亦可离线刷题。
 
 ---
 
-## 🛠️ 自主构建 Android APK (Build from Source)
+## 🛠️ 本地编译构建 (Build from Source)
 
-本项目采用**纯原生无 Gradle**的高性能极速构建脚本，直接调用 Android SDK 底层构建工具（AAPT2 + Javac + D8 + Zipalign + Apksigner），无需漫长的 Gradle 下载与依赖解析，秒级生成签名 APK。
+本项目采用**纯原生无 Gradle**的高性能极速构建脚本，直接调用 Android SDK 命令行工具链（AAPT2 + Javac + D8 + Zipalign + Apksigner），秒级生成 Release 签名 APK：
 
-### 构建环境要求：
-1. **Python 3.8+**
-2. **Android SDK Build-Tools 35+** 与 **android.jar (API 35)**
-3. **JDK 17+**
-
-### 执行编译：
 ```bash
+# 1. 编译 Android APK
 python CCNA-App/build_apk.py
+
+# 2. 重新打包单文件网页版
+python Examtopics/scripts/build_browser_app.py
+
+# 3. 运行自动化断言测试套件 (包含 154 题拖拽排列断言与 Chrome/Firefox 双浏览器测试)
+python Examtopics/scratch/test_all_154_dnd_permutations.py
+python Examtopics/scratch/test_v130_adaptive_and_sync.py
 ```
-构建成功后将在 `Examtopics/output/CCNA.apk` 生成已签名、已对齐的 Release APK。
 
 ---
 
@@ -84,6 +90,7 @@ python CCNA-App/build_apk.py
 
 ```text
 CCNACard/
+├── AGENTS.md                            # 题库审查标准与防复发工程规约
 ├── CCNA-App/                            # Android 原生应用工程
 │   ├── app/
 │   │   ├── src/main/
@@ -93,7 +100,7 @@ CCNACard/
 │   │   │   ├── res/                     # 应用图标与主题资源
 │   │   │   └── assets/                  # 移动端 WebView 核心引擎
 │   │   │       ├── index.html           # 卡片主界面
-│   │   │       ├── app.js               # 抽认卡状态机与拖拽逻辑
+│   │   │       ├── app.js               # 抽认卡状态机、拖拽与 Google Drive 同步
 │   │   │       ├── app.css              # 现代化深色/浅色自适应样式
 │   │   │       ├── ios_simulator.js     # 虚拟 Cisco IOS 实验模拟器
 │   │   │       ├── ios_simulator.css    # 终端界面与触控键盘样式
@@ -104,10 +111,9 @@ CCNACard/
 │   └── build_apk.py                     # 极速轻量编译打包工具
 │
 ├── Examtopics/                          # 题库引擎与数据处理工具链
-│   ├── batch/                           # 200 题分卷 HTML 练习册 (Batch 1-7)
-│   ├── enrichment/                      # 题目分类映射与考纲知识点标签
-│   ├── scripts/                         # 自动化处理脚本 (PDF 提取/清洗/格式化)
-│   └── output/                          # 本地编译产物目录 (由 .gitignore 忽略，通过 Releases 发布)
+│   ├── batch/                           # 200 题分卷 JSON/HTML 练习册 (Batch 1-7)
+│   ├── output/                          # 编译产物目录 (通过 Releases 发布)
+│   └── scripts/                         # 构建与数据同步脚本
 │
 ├── .gitignore                           # Git 忽略配置
 ├── LICENSE                              # CC BY-NC-SA 4.0 许可证
@@ -118,15 +124,4 @@ CCNACard/
 
 ## 📜 许可证 (License)
 
-本项目采用 **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)** 许可协议发布。
-
-您可以自由地：
-- **共享**：在任何媒介以任何形式复制、发行本作品。
-- **演绎**：修改、转换或以本作品为基础进行创作。
-
-惟须遵守下列条件：
-- **署名 (Attribution)**：必须给出适当的署名，提供指向本许可协议的链接，同时标明是否对原作品作出了修改。
-- **非商业性使用 (NonCommercial)**：不得将本作品用于商业目的。
-- **相同方式共享 (ShareAlike)**：若您修改、转换本作品，或者以本作品为基础进行创作，您必须基于与原先许可协议相同的许可协议分发您贡献的作品。
-
-详见 [LICENSE](LICENSE) 完整条款。
+本项目采用 **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)** 许可协议发布。详见 [LICENSE](LICENSE) 完整条款。
