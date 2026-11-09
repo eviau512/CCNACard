@@ -721,9 +721,28 @@ const CloudSyncEngine = {
       ...Object.keys(R.masteredIds || {})
     ]);
 
+    const resolveStat = (side, qid) => {
+      if (side.cardStats && side.cardStats[qid]) return side.cardStats[qid];
+      if (side.masteredIds && side.masteredIds[qid] !== undefined) {
+        const wasMastered = side.masteredIds[qid] === true;
+        const wasFailed = side.masteredIds[qid] === false;
+        return {
+          box: wasMastered ? 2 : 0,
+          streak: wasMastered ? 2 : 0,
+          lapses: wasFailed ? 1 : 0,
+          attempts: 1,
+          everWrong: wasFailed,
+          lastSeenStep: 0,
+          nextDueStep: 0,
+          lastReviewedAt: 0
+        };
+      }
+      return null;
+    };
+
     allStatIds.forEach(qid => {
-      const ls = (L.cardStats && L.cardStats[qid]) || null;
-      const rs = (R.cardStats && R.cardStats[qid]) || null;
+      const ls = resolveStat(L, qid);
+      const rs = resolveStat(R, qid);
       if (ls && !rs) {
         mergedStats[qid] = { ...ls };
       } else if (!ls && rs) {
@@ -731,9 +750,22 @@ const CloudSyncEngine = {
       } else if (ls && rs) {
         const lTime = ls.lastReviewedAt || 0;
         const rTime = rs.lastReviewedAt || 0;
-        const newer = lTime >= rTime ? ls : rs;
+        let winner;
+        if (lTime !== rTime) {
+          winner = lTime > rTime ? ls : rs;
+        } else {
+          // Tie-breaker protection (e.g. both lastReviewedAt === 0 from legacy records):
+          // Conservatively favor the lower box / unmastered / mistake state so no weak card is skipped.
+          const lBox = typeof ls.box === 'number' ? ls.box : 0;
+          const rBox = typeof rs.box === 'number' ? rs.box : 0;
+          if (lBox !== rBox) {
+            winner = lBox < rBox ? ls : rs;
+          } else {
+            winner = (ls.streak || 0) <= (rs.streak || 0) ? ls : rs;
+          }
+        }
         mergedStats[qid] = {
-          ...newer,
+          ...winner,
           attempts: Math.max(ls.attempts || 0, rs.attempts || 0),
           lapses: Math.max(ls.lapses || 0, rs.lapses || 0),
           everWrong: Boolean(ls.everWrong || rs.everWrong),
@@ -766,12 +798,17 @@ const CloudSyncEngine = {
     allBmIds.forEach(qid => {
       const lTs = (L.bookmarkUpdatedAt && L.bookmarkUpdatedAt[qid]) || (L.bookmarkedIds && L.bookmarkedIds[qid] ? 1 : 0);
       const rTs = (R.bookmarkUpdatedAt && R.bookmarkUpdatedAt[qid]) || (R.bookmarkedIds && R.bookmarkedIds[qid] ? 1 : 0);
-      if (lTs >= rTs) {
+      if (lTs > rTs) {
         mergedBookmarkTs[qid] = lTs;
         if (L.bookmarkedIds && L.bookmarkedIds[qid]) mergedBookmarks[qid] = true;
-      } else {
+      } else if (rTs > lTs) {
         mergedBookmarkTs[qid] = rTs;
         if (R.bookmarkedIds && R.bookmarkedIds[qid]) mergedBookmarks[qid] = true;
+      } else {
+        mergedBookmarkTs[qid] = lTs;
+        if ((L.bookmarkedIds && L.bookmarkedIds[qid]) || (R.bookmarkedIds && R.bookmarkedIds[qid])) {
+          mergedBookmarks[qid] = true;
+        }
       }
     });
 
