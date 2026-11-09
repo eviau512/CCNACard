@@ -11,7 +11,8 @@
     "answer": [
       "See Lab Solution Steps"
     ],
-    "explanation": "题图缺少拓扑；原答案图是另一道静态路由题，已隐藏并保留审查证据。题设的 Sw3 用户是普通 EXEC（默认 privilege 1），不是 privilege 15；Sw2 是 VLAN 5，不是 VLAN 10。以下以支持 `username algorithm-type md5` 的 IOS 平台为例；先创建 secret，再显式选择 MD5（type 5）；实际平台及现有 AAA/VTY 配置应先核对。\n\n```text\n! Sw3\nusername tech12 privilege 1 secret load1key\nusername tech12 algorithm-type md5\nline vty 0 4\n login local\n transport input telnet\nexit\n! R1: 过滤前往 ISP 的源地址\nip access-list extended ISP_ACL\n deny ip 10.0.0.0 0.255.255.255 any\n deny ip 172.16.0.0 0.15.255.255 any\n permit ip any any\nexit\ninterface <ISP-facing-interface>\n ip access-group ISP_ACL out\nexit\n! Sw2\nip arp inspection vlan 5\nip arp inspection validate src-mac dst-mac ip\nend\n```\n\n172.16.0.0/12 的通配符是 0.15.255.255；题目只要求 RFC 1918 的 A/B 范围。按拓扑和 DHCP snooping 绑定核实信任口，不能凭空指定端口；检查 `show access-lists ISP_ACL`、`show ip interface <ISP-facing-interface>`、`show ip arp inspection` 和绑定表，在各设备保存配置。`ip arp inspection validate` 后续单独执行会覆盖前一次设置，因此三项同一行指定。Telnet 为明文，本题仅按实验要求配置。"
+    "explanation": "题图缺少拓扑；原答案图是另一道静态路由题，已隐藏并保留审查证据。题设的 Sw3 用户是普通 EXEC（默认 privilege 1），不是 privilege 15；Sw2 是 VLAN 5，不是 VLAN 10。以下以支持 `username algorithm-type md5` 的 IOS 平台为例；先创建 secret，再显式选择 MD5（type 5）；实际平台及现有 AAA/VTY 配置应先核对。\n\n```text\n! Sw3\nusername tech12 privilege 1 secret load1key\nusername tech12 algorithm-type md5\nline vty 0 4\n login local\n transport input telnet\nexit\n! R1: 过滤前往 ISP 的源地址\nip access-list extended ISP_ACL\n deny ip 10.0.0.0 0.255.255.255 any\n deny ip 172.16.0.0 0.15.255.255 any\n permit ip any any\nexit\ninterface <ISP-facing-interface>\n ip access-group ISP_ACL out\nexit\n! Sw2\nip arp inspection vlan 5\nip arp inspection validate src-mac dst-mac ip\nend\n```\n\n172.16.0.0/12 的通配符是 0.15.255.255；题目只要求 RFC 1918 的 A/B 范围。按拓扑和 DHCP snooping 绑定核实信任口，不能凭空指定端口；检查 `show access-lists ISP_ACL`、`show ip interface <ISP-facing-interface>`、`show ip arp inspection` 和绑定表，在各设备保存配置。`ip arp inspection validate` 后续单独执行会覆盖前一次设置，因此三项同一行指定。Telnet 为明文，本题仅按实验要求配置。",
+    "drag_drop_data": null
   },
   {
     "id": 1202,
@@ -25,7 +26,8 @@
     "answer": [
       "See Lab Solution Steps"
     ],
-    "explanation": "• **实验目标与场景背景**：\n在交换机 Sw1 与 Sw2 之间建立标准二层 Trunk 与 LACP 链路聚合：\n- **Task 1**：在 E0/0 和 E0/1 上配置 IEEE 802.1Q Trunk。Native VLAN 为 99（以未标记 Untagged 形式传输），且 Trunk 链路上仅允许扩展 VLAN 110 和 Untagged Native VLAN 99 通过。验证 PC1 与 PC2 互 ping 正常。\n- **Task 2**：在保留 Trunk 配置的前提下，使用 IEEE 802.3ad（LACP）将 E0/0 和 E0/1 聚合为单个逻辑链路，编号为 20。两端接口均配置为主动协商聚合。\n\n• **逐项任务配置命令详解**：\n1. **Task 1 & Task 2 综合配置**\n```text\nSw1(config)# interface range ethernet 0/0 - 1\nSw1(config-if-range)# switchport trunk encapsulation dot1q\nSw1(config-if-range)# switchport mode trunk\nSw1(config-if-range)# switchport trunk native vlan 99\nSw1(config-if-range)# switchport trunk allowed vlan 99,110\nSw1(config-if-range)# channel-group 20 mode active\nSw1(config-if-range)# exit\n\nSw1(config)# interface port-channel 20\nSw1(config-if)# switchport trunk encapsulation dot1q\nSw1(config-if)# switchport mode trunk\nSw1(config-if)# switchport trunk native vlan 99\nSw1(config-if)# switchport trunk allowed vlan 99,110\nSw1(config-if)# exit\n\nSw2(config)# interface range ethernet 0/0 - 1\nSw2(config-if-range)# switchport trunk encapsulation dot1q\nSw2(config-if-range)# switchport mode trunk\nSw2(config-if-range)# switchport trunk native vlan 99\nSw2(config-if-range)# switchport trunk allowed vlan 99,110\nSw2(config-if-range)# channel-group 20 mode active\nSw2(config-if-range)# exit\n\nSw2(config)# interface port-channel 20\nSw2(config-if)# switchport trunk encapsulation dot1q\nSw2(config-if)# switchport mode trunk\nSw2(config-if)# switchport trunk native vlan 99\nSw2(config-if)# switchport trunk allowed vlan 99,110\nSw2(config-if)# exit\n```\n\n• **验证命令**：\n- `show etherchannel 20 summary`：确认 Port-Channel 20 处于 `SU`（Layer2 & In-Use）状态。\n- `show interfaces trunk`：确认 Port-channel20 处于 trunking 状态，Native VLAN 为 99，Allowed VLANs 仅为 99,110。\n- 在 PC1 上执行 `ping 10.2.2.20` 验证同属于 VLAN 110 的两台 PC 互通正常。\n\n原题图实际上是上一道题的错误解答，拓扑原放在答案区；现将拓扑移至题干。图示两端 E0/2 接 PC，需各自置于 VLAN 110；端口应启用，VLAN 99、110 必须存在。若尚未预配置，在两端分别使用 `interface e0/2`、`switchport mode access`、`switchport access vlan 110` 和 `no shutdown`。`switchport trunk encapsulation dot1q` 只在平台允许显式选择封装时使用，固定 802.1Q 的平台可省略。交换机间 Po20 的两端 native/allowed 列表需一致，主机 IP 分别为 10.2.2.10/24 和 10.2.2.20/24。配置确认后各自 `copy running-config startup-config`。"
+    "explanation": "• **实验目标与场景背景**：\n在交换机 Sw1 与 Sw2 之间建立标准二层 Trunk 与 LACP 链路聚合：\n- **Task 1**：在 E0/0 和 E0/1 上配置 IEEE 802.1Q Trunk。Native VLAN 为 99（以未标记 Untagged 形式传输），且 Trunk 链路上仅允许扩展 VLAN 110 和 Untagged Native VLAN 99 通过。验证 PC1 与 PC2 互 ping 正常。\n- **Task 2**：在保留 Trunk 配置的前提下，使用 IEEE 802.3ad（LACP）将 E0/0 和 E0/1 聚合为单个逻辑链路，编号为 20。两端接口均配置为主动协商聚合。\n\n• **逐项任务配置命令详解**：\n1. **Task 1 & Task 2 综合配置**\n```text\nSw1(config)# interface range ethernet 0/0 - 1\nSw1(config-if-range)# switchport trunk encapsulation dot1q\nSw1(config-if-range)# switchport mode trunk\nSw1(config-if-range)# switchport trunk native vlan 99\nSw1(config-if-range)# switchport trunk allowed vlan 99,110\nSw1(config-if-range)# channel-group 20 mode active\nSw1(config-if-range)# exit\n\nSw1(config)# interface port-channel 20\nSw1(config-if)# switchport trunk encapsulation dot1q\nSw1(config-if)# switchport mode trunk\nSw1(config-if)# switchport trunk native vlan 99\nSw1(config-if)# switchport trunk allowed vlan 99,110\nSw1(config-if)# exit\n\nSw2(config)# interface range ethernet 0/0 - 1\nSw2(config-if-range)# switchport trunk encapsulation dot1q\nSw2(config-if-range)# switchport mode trunk\nSw2(config-if-range)# switchport trunk native vlan 99\nSw2(config-if-range)# switchport trunk allowed vlan 99,110\nSw2(config-if-range)# channel-group 20 mode active\nSw2(config-if-range)# exit\n\nSw2(config)# interface port-channel 20\nSw2(config-if)# switchport trunk encapsulation dot1q\nSw2(config-if)# switchport mode trunk\nSw2(config-if)# switchport trunk native vlan 99\nSw2(config-if)# switchport trunk allowed vlan 99,110\nSw2(config-if)# exit\n```\n\n• **验证命令**：\n- `show etherchannel 20 summary`：确认 Port-Channel 20 处于 `SU`（Layer2 & In-Use）状态。\n- `show interfaces trunk`：确认 Port-channel20 处于 trunking 状态，Native VLAN 为 99，Allowed VLANs 仅为 99,110。\n- 在 PC1 上执行 `ping 10.2.2.20` 验证同属于 VLAN 110 的两台 PC 互通正常。\n\n原题图实际上是上一道题的错误解答，拓扑原放在答案区；现将拓扑移至题干。图示两端 E0/2 接 PC，需各自置于 VLAN 110；端口应启用，VLAN 99、110 必须存在。若尚未预配置，在两端分别使用 `interface e0/2`、`switchport mode access`、`switchport access vlan 110` 和 `no shutdown`。`switchport trunk encapsulation dot1q` 只在平台允许显式选择封装时使用，固定 802.1Q 的平台可省略。交换机间 Po20 的两端 native/allowed 列表需一致，主机 IP 分别为 10.2.2.10/24 和 10.2.2.20/24。配置确认后各自 `copy running-config startup-config`。",
+    "drag_drop_data": null
   },
   {
     "id": 1203,
@@ -39,7 +41,8 @@
     "answer": [
       "See Lab Solution Steps"
     ],
-    "explanation": "图中 Sw1：E0/1 数据 VLAN 77 + 语音 VLAN 177；E0/2 数据 VLAN 77；E0/3 数据 VLAN 88 + 语音 VLAN 188。Sw2：E0/1 数据 VLAN 88 + 语音 VLAN 188；E0/2 为仅语音 VLAN 177 的端口；E0/3 数据 VLAN 77。两台交换机分别创建并命名所有 VLAN，以下是对应完整示例：\n\n```text\n! Sw1\nconfigure terminal\nvlan 77\n name IT_User_VLAN\nexit\nvlan 88\n name HR_User_VLAN\nexit\nvlan 177\n name IT_Voice_VLAN\nexit\nvlan 188\n name HR_Voice_VLAN\nexit\ninterface ethernet 0/1\n switchport mode access\n switchport access vlan 77\n switchport voice vlan 177\nexit\ninterface ethernet 0/2\n switchport mode access\n switchport access vlan 77\nexit\ninterface ethernet 0/3\n switchport mode access\n switchport access vlan 88\n switchport voice vlan 188\nexit\nlldp run\ninterface ethernet 0/0\n lldp transmit\n lldp receive\nend\ncopy running-config startup-config\n\n! Sw2\nconfigure terminal\nvlan 77\n name IT_User_VLAN\nexit\nvlan 88\n name HR_User_VLAN\nexit\nvlan 177\n name IT_Voice_VLAN\nexit\nvlan 188\n name HR_Voice_VLAN\nexit\ninterface ethernet 0/1\n switchport mode access\n switchport access vlan 88\n switchport voice vlan 188\nexit\ninterface ethernet 0/2\n switchport mode access\n switchport access vlan 177\nexit\ninterface ethernet 0/3\n switchport mode access\n switchport access vlan 77\nexit\nlldp run\ninterface ethernet 0/0\n lldp transmit\n lldp receive\nend\ncopy running-config startup-config\n```\n\n题干原称每口仅一个无标记 VLAN，同时表格给同一接口指定数据及语音 VLAN；采用语音 VLAN 标记的电话接入解释，需设备及电话支持，不能把两条 `switchport access vlan` 当成同时生效。Sw2 E0/2 以上例为仅语音终端的无标签接入口；如果实际电话要求带标签，应按电话与平台支持的部署调整。LLDP 提供邻居信息；native VLAN TLV 是否发送及支持取决于具体平台和 TLV 配置，不能仅凭 `lldp run` 保证。检查 `show vlan brief`、`show interfaces ... switchport` 和 `show lldp neighbors detail`。原题图是前题解答，正确拓扑已移至题干。"
+    "explanation": "图中 Sw1：E0/1 数据 VLAN 77 + 语音 VLAN 177；E0/2 数据 VLAN 77；E0/3 数据 VLAN 88 + 语音 VLAN 188。Sw2：E0/1 数据 VLAN 88 + 语音 VLAN 188；E0/2 为仅语音 VLAN 177 的端口；E0/3 数据 VLAN 77。两台交换机分别创建并命名所有 VLAN，以下是对应完整示例：\n\n```text\n! Sw1\nconfigure terminal\nvlan 77\n name IT_User_VLAN\nexit\nvlan 88\n name HR_User_VLAN\nexit\nvlan 177\n name IT_Voice_VLAN\nexit\nvlan 188\n name HR_Voice_VLAN\nexit\ninterface ethernet 0/1\n switchport mode access\n switchport access vlan 77\n switchport voice vlan 177\nexit\ninterface ethernet 0/2\n switchport mode access\n switchport access vlan 77\nexit\ninterface ethernet 0/3\n switchport mode access\n switchport access vlan 88\n switchport voice vlan 188\nexit\nlldp run\ninterface ethernet 0/0\n lldp transmit\n lldp receive\nend\ncopy running-config startup-config\n\n! Sw2\nconfigure terminal\nvlan 77\n name IT_User_VLAN\nexit\nvlan 88\n name HR_User_VLAN\nexit\nvlan 177\n name IT_Voice_VLAN\nexit\nvlan 188\n name HR_Voice_VLAN\nexit\ninterface ethernet 0/1\n switchport mode access\n switchport access vlan 88\n switchport voice vlan 188\nexit\ninterface ethernet 0/2\n switchport mode access\n switchport access vlan 177\nexit\ninterface ethernet 0/3\n switchport mode access\n switchport access vlan 77\nexit\nlldp run\ninterface ethernet 0/0\n lldp transmit\n lldp receive\nend\ncopy running-config startup-config\n```\n\n题干原称每口仅一个无标记 VLAN，同时表格给同一接口指定数据及语音 VLAN；采用语音 VLAN 标记的电话接入解释，需设备及电话支持，不能把两条 `switchport access vlan` 当成同时生效。Sw2 E0/2 以上例为仅语音终端的无标签接入口；如果实际电话要求带标签，应按电话与平台支持的部署调整。LLDP 提供邻居信息；native VLAN TLV 是否发送及支持取决于具体平台和 TLV 配置，不能仅凭 `lldp run` 保证。检查 `show vlan brief`、`show interfaces ... switchport` 和 `show lldp neighbors detail`。原题图是前题解答，正确拓扑已移至题干。",
+    "drag_drop_data": null
   },
   {
     "id": 1204,
@@ -53,7 +56,8 @@
     "answer": [
       "See Lab Solution Steps"
     ],
-    "explanation": "图中的 R1 与 R2/R3 分别通过 10.0.22.0/29、10.0.33.0/29 相连，图未标明 R1 的 e0/1 实际地址及接口对应，须用 `show ip interface brief` 确认。原题图是上一题解答，正确拓扑移至题干。以实际地址和连到相应网络的接口代入：\n\n```text\nrouter ospf 33\n router-id <R1-Ethernet0/1-IP>\nexit\ninterface <R1-interface-to-R2>\n ip ospf 33 area 0\n ip ospf priority 255\nexit\ninterface <R1-interface-to-R3>\n ip ospf 33 area 0\n ip ospf priority 255\nend\n```\n\n不在 OSPF 进程使用 network 语句。DR 按广播/NBMA 多路访问网段逐链路选举，而非整个 area 只有一个；优先级 255 是最高值，但同优先级以 Router ID 打破平局，且已有 DR 通常不会因新路由器加入而被抢占；点到点链路不选 DR。必要时在维护窗口协调重新选举；不可从图推断不存在的地址。用 `show ip ospf neighbor`、`show ip ospf interface` 验证邻接与各接口角色；修改运行中 router ID 可能需要重启 OSPF 进程，须评估影响。保存配置。"
+    "explanation": "图中的 R1 与 R2/R3 分别通过 10.0.22.0/29、10.0.33.0/29 相连，图未标明 R1 的 e0/1 实际地址及接口对应，须用 `show ip interface brief` 确认。原题图是上一题解答，正确拓扑移至题干。以实际地址和连到相应网络的接口代入：\n\n```text\nrouter ospf 33\n router-id <R1-Ethernet0/1-IP>\nexit\ninterface <R1-interface-to-R2>\n ip ospf 33 area 0\n ip ospf priority 255\nexit\ninterface <R1-interface-to-R3>\n ip ospf 33 area 0\n ip ospf priority 255\nend\n```\n\n不在 OSPF 进程使用 network 语句。DR 按广播/NBMA 多路访问网段逐链路选举，而非整个 area 只有一个；优先级 255 是最高值，但同优先级以 Router ID 打破平局，且已有 DR 通常不会因新路由器加入而被抢占；点到点链路不选 DR。必要时在维护窗口协调重新选举；不可从图推断不存在的地址。用 `show ip ospf neighbor`、`show ip ospf interface` 验证邻接与各接口角色；修改运行中 router ID 可能需要重启 OSPF 进程，须评估影响。保存配置。",
+    "drag_drop_data": null
   },
   {
     "id": 1205,
@@ -129,7 +133,7 @@
     "answer": [
       "Refer to Solution Diagram"
     ],
-    "explanation": "对地址 `172.28.228.144` 各自使用前缀进行网络掩码运算：\n\n- /18 → 网络 172.28.192.0，主机 172.28.192.1–172.28.255.254；\n- /21 → 172.28.224.0，主机 172.28.224.1–172.28.231.254；\n- /23 → 172.28.228.0，主机 172.28.228.1–172.28.229.254；\n- /25 → 172.28.228.128，主机 172.28.228.129–172.28.228.254；\n- /29 → 172.28.228.144，主机 172.28.228.145–172.28.228.150。\n\n题目给的是地址/前缀，前四项不是规范网络地址；用对应前缀归一化后再算首尾可用地址。答案图错把同类地址排成左右两列，已隐藏；交互区的范围配对正确。",
+    "explanation": "• **拖拽配对结果速览**：\n\n| 可用主机 IP 地址范围 | 包含该地址的父网段 (CIDR) | 块大小 (Block Size) 与计算推导 |\n| :--- | :--- | :--- |\n| **172.28.228.1 - 172.28.229.254** | `172.28.228.144/23` | `/23` 掩码 `255.255.254.0`，第 3 字节块大小为 2。<br>网络号 `172.28.228.0/23`，广播地址 `172.28.229.255`。 |\n| **172.28.224.1 - 172.28.231.254** | `172.28.228.144/21` | `/21` 掩码 `255.255.248.0`，第 3 字节块大小为 8。<br>网络号 `172.28.224.0/21`，广播地址 `172.28.231.255`。 |\n| **172.28.228.129 - 172.28.228.254** | `172.28.228.144/25` | `/25` 掩码 `255.255.255.128`，第 4 字节块大小为 128。<br>网络号 `172.28.228.128/25`，广播地址 `172.28.228.255`。 |\n| **172.28.228.145 - 172.28.228.150** | `172.28.228.144/29` | `/29` 掩码 `255.255.255.248`，第 4 字节块大小为 8。<br>网络号 `172.28.228.144/29`，广播地址 `172.28.228.151`。 |\n| **172.28.192.1 - 172.28.255.254** | `172.28.228.144/18` | `/18` 掩码 `255.255.192.0`，第 3 字节块大小为 64。<br>网络号 `172.28.192.0/18`，广播地址 `172.28.255.255`。 |\n\n• **逐项核心考点与原理深度解析**：\n\n通过计算已知 IP `172.28.228.144` 在不同前缀长度下的所属子网范围：\n1. **`/29`**：$256 - 248 = 8$。144 是 8 的倍数，网络号 `172.28.228.144`，可用主机 `145 ~ 150`。\n2. **`/25`**：$256 - 128 = 128$。网络号 `172.28.228.128`，可用主机 `129 ~ 254`。\n3. **`/23`**：第 3 字节步长 2。228 是 2 的倍数，网络号 `172.28.228.0`，广播 `172.28.229.255`，可用主机 `228.1 ~ 229.254`。\n4. **`/21`**：第 3 字节步长 8。$228 / 8 = 28$（余 4），网络号 `172.28.224.0`，广播 `172.28.231.255`，可用主机 `224.1 ~ 231.254`。\n5. **`/18`**：第 3 字节步长 64。$228 / 64 = 3$（$64 \\times 3 = 192$），网络号 `172.28.192.0`，广播 `172.28.255.255`，可用主机 `192.1 ~ 255.254`。",
     "drag_drop_data": {
       "sources": [
         "172.28.228.144/18",
@@ -184,7 +188,7 @@
     "answer": [
       "Refer to Solution Diagram"
     ],
-    "explanation": "图中默认路由的下一跳为 `192.168.1.193`；接口 IPv4 地址为 `192.168.1.200/26`，掩码为 `255.255.255.192`；接口 MAC 为 `00:0C:22:83:79:A3`，前三字节 `00:0C:22` 为题目所指 OUI。网关 .193 是图中默认路由明确给出的值，不是所有网络必须使用首个可用地址。/26 下 .200 所属网络为 `192.168.1.192/26`，但图中另一条直连路由写作 `192.168.1.0/26`，与该地址不一致，应视为原图瑕疵，不能推断它是正常完整输出。接口 MAC 可由软件修改，不能仅凭输出保证出厂烧录值。答案图配对错位已隐藏，原题图保留。",
+    "explanation": "• **拖拽配对结果速览**：\n\n| 抓包/网络参数值 | 正确对应的网络参数角色 |\n| :--- | :--- |\n| **00:0C:22** | `NIC vendor OUI` (网卡厂商组织唯一标识符) |\n| **00:0C:22:83:79:A3** | `NIC MAC address` (网卡完整 48 位物理 MAC 地址) |\n| **192.168.1.193** | `default gateway` (默认网关 IP 地址) |\n| **192.168.1.200** | `host IP address` (终端主机单播 IP 地址) |\n| **255.255.255.192** | `subnet mask` (点分十进制子网掩码, /26) |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **`NIC vendor OUI` (Organizationally Unique Identifier)**：MAC 地址的前 24 位（3 字节 `00:0C:22`）由 IEEE 分配给硬件厂商。\n2. **`NIC MAC address`**：完整 48 位（6 字节）硬件烧录地址（Burned-In Address, BIA）。\n3. **`default gateway`**：网段中通常配置的第一个可用主机 IP（如网段 `192.168.1.192/26` 的首个可用地址 `192.168.1.193`）。\n4. **`host IP address`**：终端网卡被分配的具体单播 IP 地址（`192.168.1.200`）。\n5. **`subnet mask`**：划分网络位与主机位的掩码（`255.255.255.192` 对应 `/26`）。",
     "drag_drop_data": {
       "sources": [
         "default gateway",
@@ -648,7 +652,7 @@
     "answer": [
       "See Solution Diagram"
     ],
-    "explanation": "• **拖拽配对结果速览**：\n\n| IPv6 地址类型 | 标准前缀范围 | 题目匹配项 |\n| :--- | :--- | :--- |\n| **Global Unicast** (全局单播地址) | `2000::/3` | `3ffe:e54d:620:a87a::f00d`<br>`2001:db8:600d:cafe::123` |\n| **Link-Local Unicast** (链路本地单播地址) | `FE80::/10` | `fe80::a00:27ff:feeb:89aa` |\n| **Multicast** (组播地址) | `FF00::/8` | `ff05::1:3` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Global Unicast（`2000::/3`）**：\n   - `2001:db8:600d:cafe::123`（RFC 3849 文档示例前缀）与 `3ffe:e54d:620:a87a::f00d`（早期 6bone 前缀）首字节高三位均为 `001`，属于全局单播地址格式空间。\n2. **Link-Local Unicast（`FE80::/10`）**：\n   - `fe80::a00:27ff:feeb:89aa` 以 `fe80` 开头，仅在本地链路有效，路由器不予转发。\n3. **Multicast（`FF00::/8`）**：\n   - `ff05::1:3` 以 `ff` 开头，属于站点本地范围（Scope `5`）的 IPv6 组播地址（所有 DHCP 服务器）。",
+    "explanation": "• **拖拽配对结果速览**：\n\n| IPv6 地址类型 | 标准前缀范围 | 题目匹配项 |\n| :--- | :--- | :--- |\n| **Global Unicast** (全局单播地址) | `2000::/3` | `3ffe:e54d:620:a87a::f00d`<br>`2001:db8:600d:cafe::123` |\n| **Link-Local Unicast** (链路本地单播地址) | `FE80::/10` | `fe80::a00:27ff:feeb:89aa` |\n| **Multicast** (组播地址) | `FF00::/8` | `ff05::1:3` |\n\n• **逐项核心考点与原理深度解析**：\n\n1. **Global Unicast（`2000::/3`）**：\n   - `2001:db8:600d:cafe::123`（RFC 3849 文档示例前缀）与 `3ffe:e54d:620:a87a::f00d`（早期 6bone 前缀）首字节高三位均为 `001`，属于全局单播地址格式空间。\n2. **Link-Local Unicast（`FE80::/10`）**：\n   - `fe80::a00:27ff:feeb:89aa` 以 `fe80` 开头，仅在本地链路有效，路由器不予转发。\n3. **Multicast（`FF00::/8`）**：\n   - `ff05::1:3` 以 `ff` 开头，属于站点本地范围（Scope `5`）的 IPv6 组播地址（所有 DHCP 服务器）。\n\n> **补充说明**：本题右侧 Global Unicast 分配了 2 个槽位（Slot 1 与 Slot 2），支持将 2 个全局单播地址以任意次序放入；Link-Local Unicast 与 Multicast 各占 1 个独立槽位。",
     "drag_drop_data": {
       "sources": [
         "fe80::a00:27ff:feeb:89aa",
@@ -1272,7 +1276,8 @@
     "answer": [
       "See Lab Solution Steps"
     ],
-    "explanation": "拓扑缺失，不能从现有材料确定 PC 接口。分别在两台交换机使用下列模板，替换 PC 接口及 VLAN 名称/编号：\n\n```text\nconfigure terminal\nvlan <15_or_66>\n name <OPS_or_ENGINEERING>\nexit\ninterface <PC_facing_interface_from_topology>\n switchport mode access\n switchport access vlan <15_or_66>\n no shutdown\nexit\nlldp run\ncdp run\ninterface Ethernet0/2\n lldp transmit\n lldp receive\nexit\ninterface Ethernet0/0\n cdp enable\nexit\nend\ncopy running-config startup-config\n```\n\nSW-1 使用 VLAN 15 / OPS，SW-2 使用 VLAN 66 / ENGINEERING。设备须支持对应接口和命令；`lldp run`、`cdp run` 为全局启用。题目要求这两个端口各启用指定协议，并未要求在同一端口禁用另一协议。用 `show vlan brief`、`show lldp neighbors`、`show cdp neighbors` 验证，并确认邻居侧已启用。原答案图属于另一道 IPv6 题，不能用来推断 PC 接口。"
+    "explanation": "拓扑缺失，不能从现有材料确定 PC 接口。分别在两台交换机使用下列模板，替换 PC 接口及 VLAN 名称/编号：\n\n```text\nconfigure terminal\nvlan <15_or_66>\n name <OPS_or_ENGINEERING>\nexit\ninterface <PC_facing_interface_from_topology>\n switchport mode access\n switchport access vlan <15_or_66>\n no shutdown\nexit\nlldp run\ncdp run\ninterface Ethernet0/2\n lldp transmit\n lldp receive\nexit\ninterface Ethernet0/0\n cdp enable\nexit\nend\ncopy running-config startup-config\n```\n\nSW-1 使用 VLAN 15 / OPS，SW-2 使用 VLAN 66 / ENGINEERING。设备须支持对应接口和命令；`lldp run`、`cdp run` 为全局启用。题目要求这两个端口各启用指定协议，并未要求在同一端口禁用另一协议。用 `show vlan brief`、`show lldp neighbors`、`show cdp neighbors` 验证，并确认邻居侧已启用。原答案图属于另一道 IPv6 题，不能用来推断 PC 接口。",
+    "drag_drop_data": null
   },
   {
     "id": 1228,
@@ -1655,7 +1660,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。题设计数方式下，CRC 记录 FCS 检验失败，input errors 为包含此错误的输入错误总数。frame 通常涉及对齐错误，runts/giants 分别涉及长度异常；题设排除了这些额外条件。错误可由物理介质、接口等原因导致，单凭计数器不能确定根因；不同平台统计实现可能不同。"
+    "explanation": "A、D。题设计数方式下，CRC 记录 FCS 检验失败，input errors 为包含此错误的输入错误总数。frame 通常涉及对齐错误，runts/giants 分别涉及长度异常；题设排除了这些额外条件。错误可由物理介质、接口等原因导致，单凭计数器不能确定根因；不同平台统计实现可能不同。",
+    "drag_drop_data": null
   },
   {
     "id": 1236,
@@ -1691,7 +1697,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。IPv6 节点加入链路范围 all-nodes FF02::1；IPv6 路由器接口还加入 all-routers FF02::2。接口还会加入对应的 solicited-node multicast 组，供邻居发现等使用，但该组不在选项中。普通主机不因启用 IPv6 就成为 all-routers 成员；FE80::/10 是链路本地单播，而不以 FF 开头。A、B、C 均非组播地址。"
+    "explanation": "D、E。IPv6 节点加入链路范围 all-nodes FF02::1；IPv6 路由器接口还加入 all-routers FF02::2。接口还会加入对应的 solicited-node multicast 组，供邻居发现等使用，但该组不在选项中。普通主机不因启用 IPv6 就成为 all-routers 成员；FE80::/10 是链路本地单播，而不以 FF 开头。A、B、C 均非组播地址。",
+    "drag_drop_data": null
   },
   {
     "id": 1237,
@@ -1727,7 +1734,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。双工不匹配可使半双工端在发送窗口后遇到碰撞；超出相应介质和拓扑的长度/传播时延限制也可能产生迟发碰撞。10/100 Mb/s 的常见判定为超过 512 位时间（64 字节）后检测到碰撞。单纯使用 CSMA/CD 或两端都正确设为半双工不必然产生迟碰撞；15 秒及第 32 字节不是标准判据。具体距离依介质和标准而定。"
+    "explanation": "B、E。双工不匹配可使半双工端在发送窗口后遇到碰撞；超出相应介质和拓扑的长度/传播时延限制也可能产生迟发碰撞。10/100 Mb/s 的常见判定为超过 512 位时间（64 字节）后检测到碰撞。单纯使用 CSMA/CD 或两端都正确设为半双工不必然产生迟碰撞；15 秒及第 32 字节不是标准判据。具体距离依介质和标准而定。",
+    "drag_drop_data": null
   },
   {
     "id": 1238,
@@ -1763,7 +1771,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。可用的非重叠 5 GHz 信道数量取决于国家/地区、频宽、设备及 DFS 规则；题设限定存在最多 23 个 20 MHz 信道的环境。覆盖重叠的 AP 应规划非重叠信道以减少竞争，但不保证漫游不中断。B：控制器管理的 AP 也可选 5 GHz；D：重叠覆盖不要求中继；E：相邻 AP 强制同信道会增加竞争。"
+    "explanation": "A、C。可用的非重叠 5 GHz 信道数量取决于国家/地区、频宽、设备及 DFS 规则；题设限定存在最多 23 个 20 MHz 信道的环境。覆盖重叠的 AP 应规划非重叠信道以减少竞争，但不保证漫游不中断。B：控制器管理的 AP 也可选 5 GHz；D：重叠覆盖不要求中继；E：相邻 AP 强制同信道会增加竞争。",
+    "drag_drop_data": null
   },
   {
     "id": 1239,
@@ -1799,7 +1808,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。光纤的纤芯被折射率较低的包层包围，光沿纤芯导引；铜缆使用电信号。A 的 BNC 常用于同轴铜缆；E 的 RJ-45 常用于双绞线；光纤常用 LC、SC 等接口。C 将数据路径简单归于包层并不符合本题基础分类，但实际导模的电磁场可部分存在于包层中，不能说包层中绝无光场。"
+    "explanation": "B、D。光纤的纤芯被折射率较低的包层包围，光沿纤芯导引；铜缆使用电信号。A 的 BNC 常用于同轴铜缆；E 的 RJ-45 常用于双绞线；光纤常用 LC、SC 等接口。C 将数据路径简单归于包层并不符合本题基础分类，但实际导模的电磁场可部分存在于包层中，不能说包层中绝无光场。",
+    "drag_drop_data": null
   },
   {
     "id": 1240,
@@ -1835,7 +1845,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。典型三层园区设计中，汇聚层可承接二层和三层功能，核心层通过冗余设备与链路提高故障时可用性；能否保持业务取决于故障范围、冗余和收敛，不能保证任意故障零中断。C 通常跨 VLAN 策略与路由放在汇聚层，实际也可采用三层接入；D 终端主要接入接入层；E 在三层设计中核心与汇聚职责有所区分，折叠核心设计则可能合并。"
+    "explanation": "A、B。典型三层园区设计中，汇聚层可承接二层和三层功能，核心层通过冗余设备与链路提高故障时可用性；能否保持业务取决于故障范围、冗余和收敛，不能保证任意故障零中断。C 通常跨 VLAN 策略与路由放在汇聚层，实际也可采用三层接入；D 终端主要接入接入层；E 在三层设计中核心与汇聚职责有所区分，折叠核心设计则可能合并。",
+    "drag_drop_data": null
   },
   {
     "id": 1241,
@@ -1875,7 +1886,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。以太网帧使用源和目的 MAC 地址标识本链路接口并交付帧；同一二层域应避免活动单播地址冲突。MAC 地址可由软件配置、可随机化或重复，不能保证全球唯一。跨子网通常将帧发往本地网关，路由器在下一段重新封装；透明二层交换通常保留帧的源和目的 MAC。B 的跨网络选路需要网络层；C 的类型由 EtherType/Length 等字段指示；D 的访问仲裁或优先级并非由目的 MAC 本身决定；F 未知地址可通过 ARP/邻居发现等机制解析，非 MAC 字段自身功能。"
+    "explanation": "A、E。以太网帧使用源和目的 MAC 地址标识本链路接口并交付帧；同一二层域应避免活动单播地址冲突。MAC 地址可由软件配置、可随机化或重复，不能保证全球唯一。跨子网通常将帧发往本地网关，路由器在下一段重新封装；透明二层交换通常保留帧的源和目的 MAC。B 的跨网络选路需要网络层；C 的类型由 EtherType/Length 等字段指示；D 的访问仲裁或优先级并非由目的 MAC 本身决定；F 未知地址可通过 ARP/邻居发现等机制解析，非 MAC 字段自身功能。",
+    "drag_drop_data": null
   },
   {
     "id": 1242,
@@ -1907,7 +1919,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。OSI 参考模型将网络功能组织为各层，帮助理解封装、传输和排错；它是抽象框架，不是自动实现互操作或可靠交付的协议。C 的“某层任何变化都不会影响其他层”过于绝对：稳定接口可减少耦合，但依赖、性能和故障仍可影响其他层。D 的可靠性取决于具体协议、配置及端到端条件，分层本身不能保证交付。"
+    "explanation": "A、B。OSI 参考模型将网络功能组织为各层，帮助理解封装、传输和排错；它是抽象框架，不是自动实现互操作或可靠交付的协议。C 的“某层任何变化都不会影响其他层”过于绝对：稳定接口可减少耦合，但依赖、性能和故障仍可影响其他层。D 的可靠性取决于具体协议、配置及端到端条件，分层本身不能保证交付。",
+    "drag_drop_data": null
   },
   {
     "id": 1243,
@@ -1948,7 +1961,8 @@
       "D",
       "E"
     ],
-    "explanation": "A、D、E。为可靠区分同一二层域的活动接口，单播 MAC 地址应避免冲突。D 仅描述全球管理的 MA-L 地址：24 位 OUI 与组织分配的 24 位扩展，不适用于全部分配类型或本地管理地址。E 的首字节 0A 的组播位为 0、本地管理位为 1，所以是有效的本地管理单播地址示例，不能据此前缀推断厂商。B 混淆 MAC 与 IP；C 忽略出厂地址及软件地址；F 错把 MAC 的组织分配结构说成 IP 网络/主机划分。"
+    "explanation": "A、D、E。为可靠区分同一二层域的活动接口，单播 MAC 地址应避免冲突。D 仅描述全球管理的 MA-L 地址：24 位 OUI 与组织分配的 24 位扩展，不适用于全部分配类型或本地管理地址。E 的首字节 0A 的组播位为 0、本地管理位为 1，所以是有效的本地管理单播地址示例，不能据此前缀推断厂商。B 混淆 MAC 与 IP；C 忽略出厂地址及软件地址；F 错把 MAC 的组织分配结构说成 IP 网络/主机划分。",
+    "drag_drop_data": null
   },
   {
     "id": 1244,
@@ -1988,7 +2002,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。`ip route 172.16.3.0 255.255.255.0 192.168.2.4` 指向 172.16.3.0/24，192.168.2.4 是下一跳；未显式写距离时普通静态路由默认 AD 为 1。下一跳需能解析且路由须被选中才会进入转发表。B 将下一跳误认目的；C、D 是默认路由的描述，本条不是 0.0.0.0/0；D 还把下一跳地址当作本路由器出接口地址。F 的“最后使用”不是默认静态路由行为；同一前缀的候选路由通常先比较 AD，转发时还须遵循最长前缀匹配，具体优选条件依平台而定。"
+    "explanation": "A、E。`ip route 172.16.3.0 255.255.255.0 192.168.2.4` 指向 172.16.3.0/24，192.168.2.4 是下一跳；未显式写距离时普通静态路由默认 AD 为 1。下一跳需能解析且路由须被选中才会进入转发表。B 将下一跳误认目的；C、D 是默认路由的描述，本条不是 0.0.0.0/0；D 还把下一跳地址当作本路由器出接口地址。F 的“最后使用”不是默认静态路由行为；同一前缀的候选路由通常先比较 AD，转发时还须遵循最长前缀匹配，具体优选条件依平台而定。",
+    "drag_drop_data": null
   },
   {
     "id": 1245,
@@ -2024,7 +2039,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。RFC 1918 地址供组织内部使用，不要求为每台内部设备申请全球唯一公网地址；彼此独立的网络可以复用相同私有前缀，从而节省公网地址。A：私有前缀不应在公共互联网传播，但在私网内仍按 IP 路由规则转发。D：公网通信可采用 NAT、应用代理等架构，是否需要取决于连接方式；隔离网络不一定需要 NAT。E：同一网络中的地址冲突仍需管理，互联私网也可能出现地址重叠。"
+    "explanation": "B、C。RFC 1918 地址供组织内部使用，不要求为每台内部设备申请全球唯一公网地址；彼此独立的网络可以复用相同私有前缀，从而节省公网地址。A：私有前缀不应在公共互联网传播，但在私网内仍按 IP 路由规则转发。D：公网通信可采用 NAT、应用代理等架构，是否需要取决于连接方式；隔离网络不一定需要 NAT。E：同一网络中的地址冲突仍需管理，互联私网也可能出现地址重叠。",
+    "drag_drop_data": null
   },
   {
     "id": 1246,
@@ -2060,7 +2076,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。UDP 头部为 8 字节，且无需 TCP 式连接建立，因此可减少协议开销；启用时 UDP 校验和覆盖伪首部、UDP 头和数据，可检测许多传输错误。校验和并非密码学认证，也不能保证检测所有错误；IPv4 UDP 可以不发送校验和，IPv6 通常要求校验和（存在受限例外）。B：UDP 不内置确认和重传；C：UDP 没有 TCP 的控制标志或三次握手；D：UDP 本身无连接，但应用仍可自行维护会话状态。实际延迟取决于网络和应用，不能保证 UDP 一定更快。"
+    "explanation": "A、E。UDP 头部为 8 字节，且无需 TCP 式连接建立，因此可减少协议开销；启用时 UDP 校验和覆盖伪首部、UDP 头和数据，可检测许多传输错误。校验和并非密码学认证，也不能保证检测所有错误；IPv4 UDP 可以不发送校验和，IPv6 通常要求校验和（存在受限例外）。B：UDP 不内置确认和重传；C：UDP 没有 TCP 的控制标志或三次握手；D：UDP 本身无连接，但应用仍可自行维护会话状态。实际延迟取决于网络和应用，不能保证 UDP 一定更快。",
+    "drag_drop_data": null
   },
   {
     "id": 1247,
@@ -2096,7 +2113,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。在独立内部网络中复用 RFC 1918 地址可节省公网 IPv4 地址；题设明确配置的网关过滤策略可减少未经请求的入站连接暴露。私有地址或 NAT 本身不构成充分防护，不能阻止所有攻击，仍需根据风险配置防火墙、访问控制和监控。A、E 不能由地址方案自动满足法规或标准；C 内部路由规模取决于拓扑、汇总和策略，私有编址不保证路由表变小。"
+    "explanation": "B、D。在独立内部网络中复用 RFC 1918 地址可节省公网 IPv4 地址；题设明确配置的网关过滤策略可减少未经请求的入站连接暴露。私有地址或 NAT 本身不构成充分防护，不能阻止所有攻击，仍需根据风险配置防火墙、访问控制和监控。A、E 不能由地址方案自动满足法规或标准；C 内部路由规模取决于拓扑、汇总和策略，私有编址不保证路由表变小。",
+    "drag_drop_data": null
   },
   {
     "id": 1248,
@@ -2132,7 +2150,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。双宿且尽量避免共享故障点可提供替代路径；合适的动态路由可传播前缀并在满足条件时重新收敛。可靠性仍取决于实际故障域、路由策略、探测及收敛时间；双宿不必然代表两个 ISP 或毫秒级切换。A 去回程不对称本身不增加备份路径；B 缺少备用链路；D 适合小型或特定场景，但只靠人工维护在大规模变更时较难扩展。"
+    "explanation": "C、E。双宿且尽量避免共享故障点可提供替代路径；合适的动态路由可传播前缀并在满足条件时重新收敛。可靠性仍取决于实际故障域、路由策略、探测及收敛时间；双宿不必然代表两个 ISP 或毫秒级切换。A 去回程不对称本身不增加备份路径；B 缺少备用链路；D 适合小型或特定场景，但只靠人工维护在大规模变更时较难扩展。",
+    "drag_drop_data": null
   },
   {
     "id": 1249,
@@ -2168,7 +2187,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。组织可以在内部规划 RFC 1918 地址以支持内部通信；独立网络复用相同前缀可减少全球唯一 IPv4 地址需求。企业内部也可使用公网地址；私网互联时须处理可能的地址重叠。B 的 NAT 可用于特定互联设计，但并非使用私网地址的必需目的；C 应用互通仍取决于协议与实现；E 编址本身不保证降低路由开销。"
+    "explanation": "A、D。组织可以在内部规划 RFC 1918 地址以支持内部通信；独立网络复用相同前缀可减少全球唯一 IPv4 地址需求。企业内部也可使用公网地址；私网互联时须处理可能的地址重叠。B 的 NAT 可用于特定互联设计，但并非使用私网地址的必需目的；C 应用互通仍取决于协议与实现；E 编址本身不保证降低路由开销。",
+    "drag_drop_data": null
   },
   {
     "id": 1250,
@@ -2204,7 +2224,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。服务器角色是向客户端提供服务；服务端应用可接收多个客户端请求、处理数据并响应。是否能并发、支持多少客户端取决于应用和资源，普通计算机或虚拟机也可以承担服务端角色。B 冗余实现有多种方案；C 服务器可以在云、边缘或本地运行，不必专属数据中心；D 遵循兼容网络协议的不同操作系统可以通信。"
+    "explanation": "A、E。服务器角色是向客户端提供服务；服务端应用可接收多个客户端请求、处理数据并响应。是否能并发、支持多少客户端取决于应用和资源，普通计算机或虚拟机也可以承担服务端角色。B 冗余实现有多种方案；C 服务器可以在云、边缘或本地运行，不必专属数据中心；D 遵循兼容网络协议的不同操作系统可以通信。",
+    "drag_drop_data": null
   },
   {
     "id": 1251,
@@ -2240,7 +2261,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。核心层连接多个汇聚模块，以高可用和高性能转发为目标；冗余和快速收敛可以降低中断，但不保证任何故障下零中断或端到端时延。B深度安全检查通常放在适当安全边界，D终端接入通常在接入层，E边缘流量监管并非核心层的主要职责。具体设备和设计仍可能在核心应用策略。"
+    "explanation": "A、C。核心层连接多个汇聚模块，以高可用和高性能转发为目标；冗余和快速收敛可以降低中断，但不保证任何故障下零中断或端到端时延。B深度安全检查通常放在适当安全边界，D终端接入通常在接入层，E边缘流量监管并非核心层的主要职责。具体设备和设计仍可能在核心应用策略。",
+    "drag_drop_data": null
   },
   {
     "id": 1252,
@@ -2276,7 +2298,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。二层交换在所属 VLAN 内依据目的 MAC 地址与 VLAN 成员关系转发以太帧：已知单播通常定向转发，未知单播通常泛洪到该 VLAN 中允许转发的其他端口。转发还受端口状态、过滤及其他策略约束。无线关联与认证集中功能、WAN 选路及跨 VLAN 路由不是纯二层转发的基本职能；多层交换机可另行提供三层功能。"
+    "explanation": "C、E。二层交换在所属 VLAN 内依据目的 MAC 地址与 VLAN 成员关系转发以太帧：已知单播通常定向转发，未知单播通常泛洪到该 VLAN 中允许转发的其他端口。转发还受端口状态、过滤及其他策略约束。无线关联与认证集中功能、WAN 选路及跨 VLAN 路由不是纯二层转发的基本职能；多层交换机可另行提供三层功能。",
+    "drag_drop_data": null
   },
   {
     "id": 1253,
@@ -2312,7 +2335,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。符合布线要求的 Cat 5e 与 Cat 6a 都可支持 1000BASE-T 的 100 米信道。Cat 6a 额定至 500 MHz 并适合完整 100 米 10GBASE-T；不能因此把 Cat 5e 也归为该 10GBASE-T 规格。原 C 说两者能跑 55 米同样成立，现改为询问最大长度以消除歧义；55 米不是 1000BASE-T 频道上限。"
+    "explanation": "B、D。符合布线要求的 Cat 5e 与 Cat 6a 都可支持 1000BASE-T 的 100 米信道。Cat 6a 额定至 500 MHz 并适合完整 100 米 10GBASE-T；不能因此把 Cat 5e 也归为该 10GBASE-T 规格。原 C 说两者能跑 55 米同样成立，现改为询问最大长度以消除歧义；55 米不是 1000BASE-T 频道上限。",
+    "drag_drop_data": null
   },
   {
     "id": 1254,
@@ -2348,7 +2372,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。转发帧时可以按出口 VLAN 规则添加或移除 802.1Q 标签，也可以按目标 MAC 与 VLAN 查询转发表。运行路由协议属于控制平面；NETCONF 配置属于管理平面。发送给设备自身的 ICMP 请求由本地协议栈处理，其具体实现可以依平台而异；平面是功能划分，并不保证任何动作一定由专用 ASIC 完成。"
+    "explanation": "C、D。转发帧时可以按出口 VLAN 规则添加或移除 802.1Q 标签，也可以按目标 MAC 与 VLAN 查询转发表。运行路由协议属于控制平面；NETCONF 配置属于管理平面。发送给设备自身的 ICMP 请求由本地协议栈处理，其具体实现可以依平台而异；平面是功能划分，并不保证任何动作一定由专用 ASIC 完成。",
+    "drag_drop_data": null
   },
   {
     "id": 1255,
@@ -2384,7 +2409,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。SSID 长度上限为 32 个八位字节，不能把多字节字符与字节数等同；AP 可配置在信标中发布或隐藏网络名称。隐藏并非加密或认证，客户端仍可通过其他管理帧暴露名称。客户端通常用 MAC 地址标识；BSSID 标识基本服务集，同一 SSID 可用于多个 AP。"
+    "explanation": "B、E。SSID 长度上限为 32 个八位字节，不能把多字节字符与字节数等同；AP 可配置在信标中发布或隐藏网络名称。隐藏并非加密或认证，客户端仍可通过其他管理帧暴露名称。客户端通常用 MAC 地址标识；BSSID 标识基本服务集，同一 SSID 可用于多个 AP。",
+    "drag_drop_data": null
   },
   {
     "id": 1256,
@@ -2420,7 +2446,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。SSID 最长 32 字节；在题设启用 Broadcast SSID 时，AP 的信标通告该名称。SSID 不是速率控制机制，不局限控制器架构，也可以由多个 AP 使用。不同平台的默认设置可能不同，隐藏名称也不提供认证或加密。"
+    "explanation": "A、E。SSID 最长 32 字节；在题设启用 Broadcast SSID 时，AP 的信标通告该名称。SSID 不是速率控制机制，不局限控制器架构，也可以由多个 AP 使用。不同平台的默认设置可能不同，隐藏名称也不提供认证或加密。",
+    "drag_drop_data": null
   },
   {
     "id": 1257,
@@ -2456,7 +2483,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。接入层通常连接打印机等终端以及无线 AP 到有线网络；AP 需要时可使用 PoE 和 trunk，具体依部署。汇聚层通常承担接入层聚合与策略，核心强调骨干高可用；冗余也可应用于接入层，三层边界也可下移到接入层，具体取决于设计。"
+    "explanation": "B、D。接入层通常连接打印机等终端以及无线 AP 到有线网络；AP 需要时可使用 PoE 和 trunk，具体依部署。汇聚层通常承担接入层聚合与策略，核心强调骨干高可用；冗余也可应用于接入层，三层边界也可下移到接入层，具体取决于设计。",
+    "drag_drop_data": null
   },
   {
     "id": 1258,
@@ -2492,7 +2520,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。IPv6 连接使支持 IPv6 的目标可不消耗公网 IPv4；访问仅支持 IPv4 的目标仍需双栈或合适的转换机制。RFC 1918 私网配 PAT 可让多个内部会话共享一个或少量公网 IPv4，具体容量受地址、端口和实现限制。私网本身不是加密或防火墙，单独使用也不能直接在公网路由。"
+    "explanation": "A、B。IPv6 连接使支持 IPv6 的目标可不消耗公网 IPv4；访问仅支持 IPv4 的目标仍需双栈或合适的转换机制。RFC 1918 私网配 PAT 可让多个内部会话共享一个或少量公网 IPv4，具体容量受地址、端口和实现限制。私网本身不是加密或防火墙，单独使用也不能直接在公网路由。",
+    "drag_drop_data": null
   },
   {
     "id": 1259,
@@ -2528,7 +2557,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。RFC 1918 地址可以在彼此独立的网络重复使用，通常不在全球互联网中作为公网前缀路由；网络互联时地址重叠仍需规划或转换。私网本身不加密、不保证安全；公有地址也可以分层划分。原 B 将节省维护成本表述成必然效果，现改为可验证的复用优势。"
+    "explanation": "B、C。RFC 1918 地址可以在彼此独立的网络重复使用，通常不在全球互联网中作为公网前缀路由；网络互联时地址重叠仍需规划或转换。私网本身不加密、不保证安全；公有地址也可以分层划分。原 B 将节省维护成本表述成必然效果，现改为可验证的复用优势。",
+    "drag_drop_data": null
   },
   {
     "id": 1260,
@@ -2564,7 +2594,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。符合信道条件的 Cat 5e 和 Cat 6A 可用于支持 802.3bz 的 2.5G/5G 铜缆端口；实际距离、线缆质量和端口支持须核实。1000BASE-LX/LH 是 1G 光接口而非适用于此铜缆链路的线缆类别；Cat 3 和未绞合电话线不满足题设。原题将 10GBASE-T 物理层标准当线缆类别，并假设所有 10G 端口都支持 2.5G/5G，现明确端口与线缆前提。"
+    "explanation": "A、C。符合信道条件的 Cat 5e 和 Cat 6A 可用于支持 802.3bz 的 2.5G/5G 铜缆端口；实际距离、线缆质量和端口支持须核实。1000BASE-LX/LH 是 1G 光接口而非适用于此铜缆链路的线缆类别；Cat 3 和未绞合电话线不满足题设。原题将 10GBASE-T 物理层标准当线缆类别，并假设所有 10G 端口都支持 2.5G/5G，现明确端口与线缆前提。",
+    "drag_drop_data": null
   },
   {
     "id": 1261,
@@ -2600,7 +2631,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。私网内部地址不依赖特定ISP分配的公网前缀，换运营商时可保留内部地址并调整边界映射；在无需公网直达的场景复用私网地址可节约全球唯一地址。私网互联、企业合并若地址重叠仍需重新编号或转换。A私网地址可被不同组织重复使用；C不是目标；D私网地址本身不能抵御外部DoS。"
+    "explanation": "B、E。私网内部地址不依赖特定ISP分配的公网前缀，换运营商时可保留内部地址并调整边界映射；在无需公网直达的场景复用私网地址可节约全球唯一地址。私网互联、企业合并若地址重叠仍需重新编号或转换。A私网地址可被不同组织重复使用；C不是目标；D私网地址本身不能抵御外部DoS。",
+    "drag_drop_data": null
   },
   {
     "id": 1262,
@@ -2636,7 +2668,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。Profile Name是控制器上的WLAN配置标识，SSID是客户端用于识别无线网络的服务集标识；创建页面还要求选择WLAN ID，具体界面依版本而异。QoS可在配置中调整，AP地址和管理接口设置并非题目所问的两个名称。AP加入与接入安全仍有各自前提。"
+    "explanation": "C、D。Profile Name是控制器上的WLAN配置标识，SSID是客户端用于识别无线网络的服务集标识；创建页面还要求选择WLAN ID，具体界面依版本而异。QoS可在配置中调整，AP地址和管理接口设置并非题目所问的两个名称。AP加入与接入安全仍有各自前提。",
+    "drag_drop_data": null
   },
   {
     "id": 1263,
@@ -2672,7 +2705,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。D在成员上以LACP active主动协商；C将Port-channel 10配置为三层并配置IP。成员端口也需为三层，多个成员及对端的速率、双工等参数须兼容，对端LACP须能响应。A为PAgP auto；B为无协商的静态on；E是合法的二层trunk配置，不是三层端口。"
+    "explanation": "C、D。D在成员上以LACP active主动协商；C将Port-channel 10配置为三层并配置IP。成员端口也需为三层，多个成员及对端的速率、双工等参数须兼容，对端LACP须能响应。A为PAgP auto；B为无协商的静态on；E是合法的二层trunk配置，不是三层端口。",
+    "drag_drop_data": null
   },
   {
     "id": 1264,
@@ -2708,7 +2742,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。图中Po10(SU)使用LACP，Gi0/0和Gi0/1均已捆绑。两端分别选active和passive可建立LACP：active发起协商，passive回应。active/active也可工作，但题设要求两种不同模式；passive/passive不能主动发起。B/D为PAgP，E为静态on；接口、VLAN等还需兼容。"
+    "explanation": "A、C。图中Po10(SU)使用LACP，Gi0/0和Gi0/1均已捆绑。两端分别选active和passive可建立LACP：active发起协商，passive回应。active/active也可工作，但题设要求两种不同模式；passive/passive不能主动发起。B/D为PAgP，E为静态on；接口、VLAN等还需兼容。",
+    "drag_drop_data": null
   },
   {
     "id": 1265,
@@ -2744,7 +2779,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。此平台默认 VLAN 包括 Ethernet VLAN 1 和保留的 FDDI/Token Ring VLAN 1002–1005；1005 为传统 Token Ring 项。它们是交换机 VLAN 数据库中的默认项，而非由 VTP 动态创建。VLAN 0 是优先级标记的保留 VID；1006 为扩展范围的起始值；4096 超出 12 位 VID 数值范围。具体 VLAN 与管理功能应按平台和软件版本核实。"
+    "explanation": "B、C。此平台默认 VLAN 包括 Ethernet VLAN 1 和保留的 FDDI/Token Ring VLAN 1002–1005；1005 为传统 Token Ring 项。它们是交换机 VLAN 数据库中的默认项，而非由 VTP 动态创建。VLAN 0 是优先级标记的保留 VID；1006 为扩展范围的起始值；4096 超出 12 位 VID 数值范围。具体 VLAN 与管理功能应按平台和软件版本核实。",
+    "drag_drop_data": null
   },
   {
     "id": 1266,
@@ -2780,7 +2816,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。CDPv2可在适用接口通告native VLAN和VTP管理域；命令如`show cdp neighbors detail`可用于查看邻居细节。native VLAN不匹配可能被记录告警，告警本身不阻断错误VLAN流量，也取决于CDP及相关特性启用。B的trunk协商由DTP处理；STP优先级及STP算法状态由BPDU等机制处理，而非这里所列CDP字段。"
+    "explanation": "A、C。CDPv2可在适用接口通告native VLAN和VTP管理域；命令如`show cdp neighbors detail`可用于查看邻居细节。native VLAN不匹配可能被记录告警，告警本身不阻断错误VLAN流量，也取决于CDP及相关特性启用。B的trunk协商由DTP处理；STP优先级及STP算法状态由BPDU等机制处理，而非这里所列CDP字段。",
+    "drag_drop_data": null
   },
   {
     "id": 1267,
@@ -2816,7 +2853,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。题设中多台独立门户Web服务器需要负载均衡前端，WLAN还需按设计配置认证和访问控制等安全策略。A并非所有WLC部署都需要外置负载均衡器，也不意味着用其分发CAPWAP；实际实现依平台及拓扑。题设已有供电和所需VLAN，B/D不针对新增需求；C的多个VRRP组也不是所述两项要求的必要条件。其他部署可能需要额外VLAN或PoE。"
+    "explanation": "A、E。题设中多台独立门户Web服务器需要负载均衡前端，WLAN还需按设计配置认证和访问控制等安全策略。A并非所有WLC部署都需要外置负载均衡器，也不意味着用其分发CAPWAP；实际实现依平台及拓扑。题设已有供电和所需VLAN，B/D不针对新增需求；C的多个VRRP组也不是所述两项要求的必要条件。其他部署可能需要额外VLAN或PoE。",
+    "drag_drop_data": null
   },
   {
     "id": 1268,
@@ -2852,7 +2890,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。在成员物理端口的接口配置模式中，`channel-group 10 mode desirable` 主动发起 PAgP，`channel-group 10 mode active` 主动发起 LACP。它们属于不同协议，同一聚合的两端不能一端用 PAgP、另一端用 LACP。`auto` 是 PAgP 被动模式，`passive` 是 LACP 被动模式；`on` 为静态聚合，不进行协议协商。两端成员参数还须兼容。"
+    "explanation": "D、E。在成员物理端口的接口配置模式中，`channel-group 10 mode desirable` 主动发起 PAgP，`channel-group 10 mode active` 主动发起 LACP。它们属于不同协议，同一聚合的两端不能一端用 PAgP、另一端用 LACP。`auto` 是 PAgP 被动模式，`passive` 是 LACP 被动模式；`on` 为静态聚合，不进行协议协商。两端成员参数还须兼容。",
+    "drag_drop_data": null
   },
   {
     "id": 1269,
@@ -2888,7 +2927,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。题设要求一个VTP域和统一版本，选择相同域名及统一选择的版本符合该设计；还须依配置匹配密码，并提供可承载VTP的中继。不能推广成所有版本互通都要求完全相同：Cisco文档描述VTPv3与v2有受限互操作。B静态trunk不需要DTP协商；C不同域名不符；D服务器并非天然具有最高revision，新接设备的更高revision可能影响v1/v2域。"
+    "explanation": "A、E。题设要求一个VTP域和统一版本，选择相同域名及统一选择的版本符合该设计；还须依配置匹配密码，并提供可承载VTP的中继。不能推广成所有版本互通都要求完全相同：Cisco文档描述VTPv3与v2有受限互操作。B静态trunk不需要DTP协商；C不同域名不符；D服务器并非天然具有最高revision，新接设备的更高revision可能影响v1/v2域。",
+    "drag_drop_data": null
   },
   {
     "id": 1270,
@@ -2928,7 +2968,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。近期CDP邻居信息可辅助判断直连链路能否交换CDP帧；邻居缓存有保持时间，记录存在不保证当前所有二层流量正常。`show cdp neighbors detail`可能显示邻居地址，可供进一步尝试管理连接，但路由、ACL和服务许可仍需满足，通常优先使用SSH。CDP不验证线缆类别、应用服务或路由邻接状态；可通告native VLAN等有限信息，但不能据此取得完整VLAN数据库。"
+    "explanation": "D、E。近期CDP邻居信息可辅助判断直连链路能否交换CDP帧；邻居缓存有保持时间，记录存在不保证当前所有二层流量正常。`show cdp neighbors detail`可能显示邻居地址，可供进一步尝试管理连接，但路由、ACL和服务许可仍需满足，通常优先使用SSH。CDP不验证线缆类别、应用服务或路由邻接状态；可通告native VLAN等有限信息，但不能据此取得完整VLAN数据库。",
+    "drag_drop_data": null
   },
   {
     "id": 1271,
@@ -2964,7 +3005,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。兼容且配置正确的 VTP 域中，VTP 可沿适当中继链路传播支持的 VLAN 数据库信息，减少重复配置并帮助保持一致。传播取决于域名、版本、认证、模式、链路及平台；transparent 设备不按通告同步本地数据库，VTP v3 修改还需相应主服务器，不能保证所有交换机自动一致。A 读取标签与 D 多 VLAN 承载是中继/802.1Q 功能；B 的端口分配不是 VTP 数据库同步。"
+    "explanation": "C、E。兼容且配置正确的 VTP 域中，VTP 可沿适当中继链路传播支持的 VLAN 数据库信息，减少重复配置并帮助保持一致。传播取决于域名、版本、认证、模式、链路及平台；transparent 设备不按通告同步本地数据库，VTP v3 修改还需相应主服务器，不能保证所有交换机自动一致。A 读取标签与 D 多 VLAN 承载是中继/802.1Q 功能；B 的端口分配不是 VTP 数据库同步。",
+    "drag_drop_data": null
   },
   {
     "id": 1272,
@@ -3005,7 +3047,8 @@
       "D",
       "E"
     ],
-    "explanation": "B、D、E。题设常规设计中，各 VLAN 使用独立 IP 子网，跨 VLAN 的 IP 通信通常通过路由器或三层交换机路由；独立 VLAN 学习使交换机的 MAC 转发表项按 VLAN 区分，逻辑上可视作各 VLAN 桥接表。不同部署也可存在二层桥接或重叠地址等例外，VLAN 不强制一一对应唯一 IP 子网。A 新交换机常有默认 VLAN；C VLAN 改变广播域而非通常减少交换端口冲突域；F 中继可以跨交换机扩展 VLAN。"
+    "explanation": "B、D、E。题设常规设计中，各 VLAN 使用独立 IP 子网，跨 VLAN 的 IP 通信通常通过路由器或三层交换机路由；独立 VLAN 学习使交换机的 MAC 转发表项按 VLAN 区分，逻辑上可视作各 VLAN 桥接表。不同部署也可存在二层桥接或重叠地址等例外，VLAN 不强制一一对应唯一 IP 子网。A 新交换机常有默认 VLAN；C VLAN 改变广播域而非通常减少交换端口冲突域；F 中继可以跨交换机扩展 VLAN。",
+    "drag_drop_data": null
   },
   {
     "id": 1273,
@@ -3041,7 +3084,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。图中 VLAN 30 的 `protocol rstp` 在题设 Cisco IOS 每 VLAN 输出下表示 Rapid PVST+；Root ID 列出 Cost 19 和 Port 1 (FastEthernet 2/1)，所以 Fa2/1 是本交换机通向根桥的根端口，当前交换机不是根桥。B 根端口不是该实例中的指定端口；C 指传统 PVST+；D 与显示的根路径及根端口不符。Cost 19 是图中数值，具体速率不能仅凭它在所有路径成本配置下确定。"
+    "explanation": "A、E。图中 VLAN 30 的 `protocol rstp` 在题设 Cisco IOS 每 VLAN 输出下表示 Rapid PVST+；Root ID 列出 Cost 19 和 Port 1 (FastEthernet 2/1)，所以 Fa2/1 是本交换机通向根桥的根端口，当前交换机不是根桥。B 根端口不是该实例中的指定端口；C 指传统 PVST+；D 与显示的根路径及根端口不符。Cost 19 是图中数值，具体速率不能仅凭它在所有路径成本配置下确定。",
+    "drag_drop_data": null
   },
   {
     "id": 1274,
@@ -3077,7 +3121,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。触发 err-disabled 的保护机制会关闭端口；不兼容的速率或协商设置也可能使物理链路无法建立。应核查 `show interfaces status`、`show logging` 和两端设置，不能仅凭 down/down 唯一确定原因。题设 B 明确链路仍为 up，不是直接解释；但双工不匹配产生严重错误时，也可能间接触发 err-disabled，不能断言它永不导致端口关闭。C 通常显示 administratively down；A 在题设链路仍 up，不能直接说明物理 down。"
+    "explanation": "D、E。触发 err-disabled 的保护机制会关闭端口；不兼容的速率或协商设置也可能使物理链路无法建立。应核查 `show interfaces status`、`show logging` 和两端设置，不能仅凭 down/down 唯一确定原因。题设 B 明确链路仍为 up，不是直接解释；但双工不匹配产生严重错误时，也可能间接触发 err-disabled，不能断言它永不导致端口关闭。C 通常显示 administratively down；A 在题设链路仍 up，不能直接说明物理 down。",
+    "drag_drop_data": null
   },
   {
     "id": 1275,
@@ -3113,7 +3158,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。在题设传统 IOS 默认 RSA 密钥生成流程中，需支持加密/SSH 的软件镜像，配置设备 hostname 与 IP domain name 后生成 RSA 密钥；还需可达的管理 IP、合适的 VTY transport 与认证配置。镜像名称与功能依平台版本而异，已存在密钥、显式命名密钥等流程不能简单推断始终必须重新配置域名。A 二层交换机无需启用 IP routing；B 控制台密码不是 VTY 认证的必需条件；C 可以同时允许 Telnet 与 SSH，限制为 SSH 是安全配置选择。"
+    "explanation": "D、E。在题设传统 IOS 默认 RSA 密钥生成流程中，需支持加密/SSH 的软件镜像，配置设备 hostname 与 IP domain name 后生成 RSA 密钥；还需可达的管理 IP、合适的 VTY transport 与认证配置。镜像名称与功能依平台版本而异，已存在密钥、显式命名密钥等流程不能简单推断始终必须重新配置域名。A 二层交换机无需启用 IP routing；B 控制台密码不是 VTY 认证的必需条件；C 可以同时允许 Telnet 与 SSH，限制为 SSH 是安全配置选择。",
+    "drag_drop_data": null
   },
   {
     "id": 1276,
@@ -3149,7 +3195,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。对于合适的主机边缘端口，PortFast 避免传统 STP listening/learning 转发延迟，使可用端口快速进入 forwarding；普通边缘端口的状态变化不应导致不必要的拓扑变更通知。实际链路协商、保护功能和平台状态仍会影响可用时间；收到 BPDU 或违规时可能失去边缘状态、受 BPDU Guard 限制，不能把“永不产生任何通知”当成无条件保证。A、B、E 都不是此正常边缘端口行为。"
+    "explanation": "C、D。对于合适的主机边缘端口，PortFast 避免传统 STP listening/learning 转发延迟，使可用端口快速进入 forwarding；普通边缘端口的状态变化不应导致不必要的拓扑变更通知。实际链路协商、保护功能和平台状态仍会影响可用时间；收到 BPDU 或违规时可能失去边缘状态、受 BPDU Guard 限制，不能把“永不产生任何通知”当成无条件保证。A、B、E 都不是此正常边缘端口行为。",
+    "drag_drop_data": null
   },
   {
     "id": 1277,
@@ -3185,7 +3232,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。24 个可用地址需 /27（30 个可用地址），E 的网络是 10.70.155.64/27，首个可用地址 .65。472 个需 /23（510 个可用地址），A 的网络是 10.70.148.0/23，首个可用地址 10.70.148.1；两网均处于 /19 内且不重叠。B 的 /27 网络为 10.70.147.0，首址为 .1 而非 .17；C 的 /26 首址不是 .17，且不是容纳 24 个主机所需的最长掩码；D 在 10.70.158.0/23，首址是 10.70.158.1。各 SVI/对应 VLAN 还需在设备上有效创建。"
+    "explanation": "A、E。24 个可用地址需 /27（30 个可用地址），E 的网络是 10.70.155.64/27，首个可用地址 .65。472 个需 /23（510 个可用地址），A 的网络是 10.70.148.0/23，首个可用地址 10.70.148.1；两网均处于 /19 内且不重叠。B 的 /27 网络为 10.70.147.0，首址为 .1 而非 .17；C 的 /26 首址不是 .17，且不是容纳 24 个主机所需的最长掩码；D 在 10.70.158.0/23，首址是 10.70.158.1。各 SVI/对应 VLAN 还需在设备上有效创建。",
+    "drag_drop_data": null
   },
   {
     "id": 1278,
@@ -3221,7 +3269,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。RSTP 的三个数据转发状态是 discarding、learning、forwarding。Learning 可学习源 MAC 但不转发用户数据；forwarding 可学习并转发。Discarding 不学习或转发用户数据，运行的 STP 端口仍可处理 BPDU。传统 STP 的 blocking/listening 对应不转发、不学习的行为；speaking 不是 STP 端口状态。快速收敛、边缘端口或同步机制可能使状态经历时间很短，不能认为每次切换都必须等待固定时长。"
+    "explanation": "D、E。RSTP 的三个数据转发状态是 discarding、learning、forwarding。Learning 可学习源 MAC 但不转发用户数据；forwarding 可学习并转发。Discarding 不学习或转发用户数据，运行的 STP 端口仍可处理 BPDU。传统 STP 的 blocking/listening 对应不转发、不学习的行为；speaking 不是 STP 端口状态。快速收敛、边缘端口或同步机制可能使状态经历时间很短，不能认为每次切换都必须等待固定时长。",
+    "drag_drop_data": null
   },
   {
     "id": 1279,
@@ -3257,7 +3306,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。对于适宜连接终端的 PortFast 端口，传统 STP 的 listening 与 learning 等待被旁路，端口可快速转入 forwarding。disabled 表示管理关闭等非工作条件；blocking 不是这里所问两段过渡等待；forwarding 是目标状态。PortFast 不能保证端口永不被阻断，接收到 BPDU 或触发 BPDU Guard 等保护时应依实际状态处理，也不能将其当作物理环路的防护措施。"
+    "explanation": "B、C。对于适宜连接终端的 PortFast 端口，传统 STP 的 listening 与 learning 等待被旁路，端口可快速转入 forwarding。disabled 表示管理关闭等非工作条件；blocking 不是这里所问两段过渡等待；forwarding 是目标状态。PortFast 不能保证端口永不被阻断，接收到 BPDU 或触发 BPDU Guard 等保护时应依实际状态处理，也不能将其当作物理环路的防护措施。",
+    "drag_drop_data": null
   },
   {
     "id": 1280,
@@ -3293,7 +3343,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。图中 VLAN 30 显示 `protocol rstp`，题设 Cisco IOS 每 VLAN 输出对应 Rapid PVST+；Root ID 中 Cost 19、Port 1 (FastEthernet 2/1) 标识 Fa2/1 是通向根桥的根端口。B 本交换机并非该 VLAN 根桥；C 传统 PVST+ 不对应此 rstp 输出；D Fa2/1 在该实例为 root 而非 designated。路径成本依成本方法与配置而定，不能仅凭 19 普遍断定接口速率。"
+    "explanation": "A、E。图中 VLAN 30 显示 `protocol rstp`，题设 Cisco IOS 每 VLAN 输出对应 Rapid PVST+；Root ID 中 Cost 19、Port 1 (FastEthernet 2/1) 标识 Fa2/1 是通向根桥的根端口。B 本交换机并非该 VLAN 根桥；C 传统 PVST+ 不对应此 rstp 输出；D Fa2/1 在该实例为 root 而非 designated。路径成本依成本方法与配置而定，不能仅凭 19 普遍断定接口速率。",
+    "drag_drop_data": null
   },
   {
     "id": 1281,
@@ -3329,7 +3380,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。RADIUS 和 TACACS+ 可用于支持相应功能的设备管理员集中 AAA；实际可用功能取决于 AP 平台及配置。TACACS+ 常支持细粒度命令授权，但其报文保护不应描述为现代强加密。802.1Q 是 VLAN 标记，802.1X 主要用于端口网络接入认证；Kerberos 是票据认证机制，不是题中所问的两种设备管理 AAA 协议。SSH/HTTPS 等用于管理会话，AAA 本身不是配置传输协议。"
+    "explanation": "B、D。RADIUS 和 TACACS+ 可用于支持相应功能的设备管理员集中 AAA；实际可用功能取决于 AP 平台及配置。TACACS+ 常支持细粒度命令授权，但其报文保护不应描述为现代强加密。802.1Q 是 VLAN 标记，802.1X 主要用于端口网络接入认证；Kerberos 是票据认证机制，不是题中所问的两种设备管理 AAA 协议。SSH/HTTPS 等用于管理会话，AAA 本身不是配置传输协议。",
+    "drag_drop_data": null
   },
   {
     "id": 1282,
@@ -3365,7 +3417,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。为同一目标前缀配置管理距离高于主路由的静态路由：主路由被撤销且备用下一跳可解析时，备用路由可以进入 RIB。主路可为动态路由或静态路由；远端故障不一定导致直连下一跳不可达，必要时需追踪。收敛期间可能丢包，不能保证业务不中断。B 是策略路由；D 的等价多路径要求相同前缀和相应的同等优先级，非此主备场景；E 的远端回程由远端路由与策略决定。"
+    "explanation": "A、C。为同一目标前缀配置管理距离高于主路由的静态路由：主路由被撤销且备用下一跳可解析时，备用路由可以进入 RIB。主路可为动态路由或静态路由；远端故障不一定导致直连下一跳不可达，必要时需追踪。收敛期间可能丢包，不能保证业务不中断。B 是策略路由；D 的等价多路径要求相同前缀和相应的同等优先级，非此主备场景；E 的远端回程由远端路由与策略决定。",
+    "drag_drop_data": null
   },
   {
     "id": 1283,
@@ -3402,7 +3455,8 @@
       "C",
       "D"
     ],
-    "explanation": "A、C、D。图中 OSPF、RIP 和 iBGP 竞争同一 10.0.0.0/30：默认 AD 分别为 110、120、200，OSPF 胜出。OSPF 的 10.0.0.0/16 和 EIGRP 的 10.0.0.1/32 是不同前缀，在题设前提下可以同时安装；最长前缀匹配在转发具体目的地址时适用，不会让 /16 自动从 RIB 消失。原题写二选且遗漏 C，已改为三选。"
+    "explanation": "A、C、D。图中 OSPF、RIP 和 iBGP 竞争同一 10.0.0.0/30：默认 AD 分别为 110、120、200，OSPF 胜出。OSPF 的 10.0.0.0/16 和 EIGRP 的 10.0.0.1/32 是不同前缀，在题设前提下可以同时安装；最长前缀匹配在转发具体目的地址时适用，不会让 /16 自动从 RIB 消失。原题写二选且遗漏 C，已改为三选。",
+    "drag_drop_data": null
   },
   {
     "id": 1284,
@@ -3438,7 +3492,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。接口命令 `ip ospf <process-id> area <area-id>` 指定本地进程及接口所属区域；进程号只需本机一致，不要求与邻居相同。IPv4 接口条件与 router ID 已由题设给定。MD5 认证和 stub 区域不是所有场景的必选配置；OSPFv2 不以 IPv6 地址作为题设接口配置前提。实际邻接仍需协议参数及网络连通条件匹配。"
+    "explanation": "A、E。接口命令 `ip ospf <process-id> area <area-id>` 指定本地进程及接口所属区域；进程号只需本机一致，不要求与邻居相同。IPv4 接口条件与 router ID 已由题设给定。MD5 认证和 stub 区域不是所有场景的必选配置；OSPFv2 不以 IPv6 地址作为题设接口配置前提。实际邻接仍需协议参数及网络连通条件匹配。",
+    "drag_drop_data": null
   },
   {
     "id": 1285,
@@ -3474,7 +3529,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。图中纽约至 Atlanta 的对端为 `2012::1`，至 Washington 的对端为 `2023::3`；分别配置 `ipv6 route 2000::1/128 2012::1` 与 `ipv6 route 2000::3/128 2023::3`。/128 为主机前缀。A、B 出接口方向相反，D 指向纽约本端地址。两端回程仍依赖图示默认路由及链路连通；点对点接口路由可用，但题目选项中的接口方向错误。"
+    "explanation": "C、E。图中纽约至 Atlanta 的对端为 `2012::1`，至 Washington 的对端为 `2023::3`；分别配置 `ipv6 route 2000::1/128 2012::1` 与 `ipv6 route 2000::3/128 2023::3`。/128 为主机前缀。A、B 出接口方向相反，D 指向纽约本端地址。两端回程仍依赖图示默认路由及链路连通；点对点接口路由可用，但题目选项中的接口方向错误。",
+    "drag_drop_data": null
   },
   {
     "id": 1286,
@@ -3510,7 +3566,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。本地计算经各候选邻居到达目的地的复合度量；可行距离 FD 是 DUAL 用于可行性判断的距离，不能笼统称每条路径各有一个 FD。邻居报告距离 RD 严格小于 FD 时，该邻居路径满足可行性条件，可以成为可行后继。没有满足条件的备份也可能发生；切换并不保证零丢包。A/C/E 将 RD 与单链路带宽、路径完整度量或单个延迟混同。原 B/D 说法不精确，已修订。"
+    "explanation": "B、D。本地计算经各候选邻居到达目的地的复合度量；可行距离 FD 是 DUAL 用于可行性判断的距离，不能笼统称每条路径各有一个 FD。邻居报告距离 RD 严格小于 FD 时，该邻居路径满足可行性条件，可以成为可行后继。没有满足条件的备份也可能发生；切换并不保证零丢包。A/C/E 将 RD 与单链路带宽、路径完整度量或单个延迟混同。原 B/D 说法不精确，已修订。",
+    "drag_drop_data": null
   },
   {
     "id": 1287,
@@ -3546,7 +3603,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。两个正常交换 HSRP hello 的路由器在该组中协商 active 与 standby；主机可使用共享虚拟 IP 作为默认网关，active 响应并承担该虚拟网关的转发。故障检测和切换需要时间，分区或配置错误也可能导致异常。单组不自动在两个网关间负载均衡；多组可用于手工分担。HSRP 不负责同步完整设备配置，物理接口 IP 通常各不相同。"
+    "explanation": "A、E。两个正常交换 HSRP hello 的路由器在该组中协商 active 与 standby；主机可使用共享虚拟 IP 作为默认网关，active 响应并承担该虚拟网关的转发。故障检测和切换需要时间，分区或配置错误也可能导致异常。单组不自动在两个网关间负载均衡；多组可用于手工分担。HSRP 不负责同步完整设备配置，物理接口 IP 通常各不相同。",
+    "drag_drop_data": null
   },
   {
     "id": 1288,
@@ -3582,7 +3640,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。主路径 `ipv6 route 2000::1/128 2012::1` 默认 AD 1；备份 `ipv6 route 2000::1/128 2023::3 5` 的 AD 为 5，主路由撤销且备用下一跳可解析时进入 RIB。图中 Washington 已有去 Atlanta 的路径；回程仍需连通。B 使主路由也为 AD 5，C/D 指向纽约自己的接口。仅远端故障而本地链路仍 up 时静态路由未必被撤销，可能需要跟踪。"
+    "explanation": "A、E。主路径 `ipv6 route 2000::1/128 2012::1` 默认 AD 1；备份 `ipv6 route 2000::1/128 2023::3 5` 的 AD 为 5，主路由撤销且备用下一跳可解析时进入 RIB。图中 Washington 已有去 Atlanta 的路径；回程仍需连通。B 使主路由也为 AD 5，C/D 指向纽约自己的接口。仅远端故障而本地链路仍 up 时静态路由未必被撤销，可能需要跟踪。",
+    "drag_drop_data": null
   },
   {
     "id": 1289,
@@ -3618,7 +3677,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。RIP 是距离矢量协议，EIGRP 通常归类为高级距离矢量协议，使用 DUAL 并发送触发式增量更新。OSPF 与 IS-IS 属链路状态协议；BGP 常称路径矢量协议。距离矢量不意味着所有协议都周期性发送完整路由表。"
+    "explanation": "B、E。RIP 是距离矢量协议，EIGRP 通常归类为高级距离矢量协议，使用 DUAL 并发送触发式增量更新。OSPF 与 IS-IS 属链路状态协议；BGP 常称路径矢量协议。距离矢量不意味着所有协议都周期性发送完整路由表。",
+    "drag_drop_data": null
   },
   {
     "id": 1290,
@@ -3654,7 +3714,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。BGP 是互联网跨自治系统交换可达性和按策略选路的标准协议；最佳路径由策略及协议属性决定，不一定是物理最短路径。旧 EGP 指特定历史协议，不是所有外部协议的同义词。A 错把 IGP 设为所有 AS 间路由交换的必需协议；BGP 也可用 iBGP 在 AS 内传播路由。D 的“每个网络必须”错误，EIGRP 通常是 IGP。原题 A 不完整，已明确范围并避免对所有设备支持情况作绝对断言。"
+    "explanation": "B、C。BGP 是互联网跨自治系统交换可达性和按策略选路的标准协议；最佳路径由策略及协议属性决定，不一定是物理最短路径。旧 EGP 指特定历史协议，不是所有外部协议的同义词。A 错把 IGP 设为所有 AS 间路由交换的必需协议；BGP 也可用 iBGP 在 AS 内传播路由。D 的“每个网络必须”错误，EIGRP 通常是 IGP。原题 A 不完整，已明确范围并避免对所有设备支持情况作绝对断言。",
+    "drag_drop_data": null
   },
   {
     "id": 1291,
@@ -3690,7 +3751,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。标题行中的 `20 masks` 表示该主类地址范围内显示的路由使用20种掩码。图中默认路由及9条目的前缀各有经 Te0/1/0.100、Te0/2/0.100 的两个等价下一跳，共10条；实际流量分配还取决于转发实现和流量特征。D EX 的170为外部EIGRP的常见默认管理距离，不能据此认定人工修改；B标记的10.0.0.0/8来自BGP。默认路由标记 D*EX，不能从图中认定为静态路由。"
+    "explanation": "B、C。标题行中的 `20 masks` 表示该主类地址范围内显示的路由使用20种掩码。图中默认路由及9条目的前缀各有经 Te0/1/0.100、Te0/2/0.100 的两个等价下一跳，共10条；实际流量分配还取决于转发实现和流量特征。D EX 的170为外部EIGRP的常见默认管理距离，不能据此认定人工修改；B标记的10.0.0.0/8来自BGP。默认路由标记 D*EX，不能从图中认定为静态路由。",
+    "drag_drop_data": null
   },
   {
     "id": 1292,
@@ -3726,7 +3788,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。OSPF邻居的Hello/Dead间隔需匹配，直连设备使用相同Router ID也会阻碍邻接。OSPF进程号本地有效，无需相同；EIGRP AS号并非OSPF匹配参数。224.0.0.10是EIGRP组播，OSPFv2常用224.0.0.5和224.0.0.6；仅阻断题设地址不等于阻断OSPF。区域、认证、网络类型及MTU等也可能影响邻居或Full邻接，实际默认定时器依网络类型及平台而异。"
+    "explanation": "D、E。OSPF邻居的Hello/Dead间隔需匹配，直连设备使用相同Router ID也会阻碍邻接。OSPF进程号本地有效，无需相同；EIGRP AS号并非OSPF匹配参数。224.0.0.10是EIGRP组播，OSPFv2常用224.0.0.5和224.0.0.6；仅阻断题设地址不等于阻断OSPF。区域、认证、网络类型及MTU等也可能影响邻居或Full邻接，实际默认定时器依网络类型及平台而异。",
+    "drag_drop_data": null
   },
   {
     "id": 1293,
@@ -3767,7 +3830,8 @@
       "B",
       "E"
     ],
-    "explanation": "A、B、E。合理划分区域可缩小单一区域LSDB和类型1/2 LSA泛洪范围，减少开销，并可能缩短SPF计算、限制局部拓扑变化的影响；区域间仍可传播可达性变化，不能保证故障绝不跨区。ABR可配置适当汇总，但汇总和毫秒级收敛并非自动保证。区域设计不会增加物理带宽，也不必然降低设备成本或配置复杂度。"
+    "explanation": "A、B、E。合理划分区域可缩小单一区域LSDB和类型1/2 LSA泛洪范围，减少开销，并可能缩短SPF计算、限制局部拓扑变化的影响；区域间仍可传播可达性变化，不能保证故障绝不跨区。ABR可配置适当汇总，但汇总和毫秒级收敛并非自动保证。区域设计不会增加物理带宽，也不必然降低设备成本或配置复杂度。",
+    "drag_drop_data": null
   },
   {
     "id": 1294,
@@ -3808,7 +3872,8 @@
       "C",
       "D"
     ],
-    "explanation": "A、C、D。启用 `auto-summary` 且向不同主类网络边界通告时，题设内联网段可分别汇总为 192.168.2.0/24、10.0.0.0/8、172.16.0.0/16。`network` 命令选择参与EIGRP的接口，本身不证明某条具体子网或邻接存在；同一主类网络内及外部路由的行为可能不同。192.168.0.0/16是私网地址范围，不是此处192.168.2.0的自然主类边界。"
+    "explanation": "A、C、D。启用 `auto-summary` 且向不同主类网络边界通告时，题设内联网段可分别汇总为 192.168.2.0/24、10.0.0.0/8、172.16.0.0/16。`network` 命令选择参与EIGRP的接口，本身不证明某条具体子网或邻接存在；同一主类网络内及外部路由的行为可能不同。192.168.0.0/16是私网地址范围，不是此处192.168.2.0的自然主类边界。",
+    "drag_drop_data": null
   },
   {
     "id": 1295,
@@ -3844,7 +3909,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。常规eBGP使用不同的本地和远端AS号；题设静态会话的两端需配置对端及远端AS。`network` 语句用于发布符合条件的本地前缀，不能单独发现邻居。BGP通过TCP建立会话；OPEN中的Hold Time通常协商为较小值，不要求两端定时器配置完全一致。部分实现还支持基于预配置范围的动态BGP邻居，本题已明确排除。"
+    "explanation": "A、B。常规eBGP使用不同的本地和远端AS号；题设静态会话的两端需配置对端及远端AS。`network` 语句用于发布符合条件的本地前缀，不能单独发现邻居。BGP通过TCP建立会话；OPEN中的Hold Time通常协商为较小值，不要求两端定时器配置完全一致。部分实现还支持基于预配置范围的动态BGP邻居，本题已明确排除。",
+    "drag_drop_data": null
   },
   {
     "id": 1296,
@@ -3885,7 +3951,8 @@
       "C",
       "E"
     ],
-    "explanation": "A、C、E。OSPF携带前缀掩码并支持VLSM；多区域将类型1和类型2 LSA限制在对应区域，可以降低局部拓扑变化向其他区域传播的影响；ABR/ASBR的汇总、区域类型等可控制部分路由信息。路径可达性变化仍可能跨区域传播；具体过滤行为依LSA类别和平台而异。OSPF主要为域内路由而设计，带宽、开销及配置难度取决于部署，不能笼统声称一定低于RIP。"
+    "explanation": "A、C、E。OSPF携带前缀掩码并支持VLSM；多区域将类型1和类型2 LSA限制在对应区域，可以降低局部拓扑变化向其他区域传播的影响；ABR/ASBR的汇总、区域类型等可控制部分路由信息。路径可达性变化仍可能跨区域传播；具体过滤行为依LSA类别和平台而异。OSPF主要为域内路由而设计，带宽、开销及配置难度取决于部署，不能笼统声称一定低于RIP。",
+    "drag_drop_data": null
   },
   {
     "id": 1297,
@@ -3926,7 +3993,8 @@
       "C",
       "D"
     ],
-    "explanation": "B、C、D。通配符 0.0.0.63 使前三个字节及末字节高两位固定，匹配 192.168.12.64–192.168.12.127。图中 Fa0/1 的 .65、Serial0/0 的 .121、Serial0/1.102 的 .125 均在范围内；.48、.129、.133 不匹配。命令选择本地接口，不保证对端邻接成功；具体接口配置和状态仍需核查。"
+    "explanation": "B、C、D。通配符 0.0.0.63 使前三个字节及末字节高两位固定，匹配 192.168.12.64–192.168.12.127。图中 Fa0/1 的 .65、Serial0/0 的 .121、Serial0/1.102 的 .125 均在范围内；.48、.129、.133 不匹配。命令选择本地接口，不保证对端邻接成功；具体接口配置和状态仍需核查。",
+    "drag_drop_data": null
   },
   {
     "id": 1298,
@@ -3962,7 +4030,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。在题设进程启动时，活动Loopback 10.0.0.1 优先于物理接口用于自动选择 Router ID；Loopback一般不依赖单条物理链路，因而可为选择标识提供较稳定的地址。已经选定的 Router ID 不会仅因物理接口波动就必然改变，具体变更需考虑进程重启等条件。Loopback仍可被关闭或配置改变，也不能保证转发可用。DR选举还取决于接口优先级、当前选举状态与其他路由器，不能仅凭该接口保证 RouterB 当选；它也不会自动降低路由开销。"
+    "explanation": "B、C。在题设进程启动时，活动Loopback 10.0.0.1 优先于物理接口用于自动选择 Router ID；Loopback一般不依赖单条物理链路，因而可为选择标识提供较稳定的地址。已经选定的 Router ID 不会仅因物理接口波动就必然改变，具体变更需考虑进程重启等条件。Loopback仍可被关闭或配置改变，也不能保证转发可用。DR选举还取决于接口优先级、当前选举状态与其他路由器，不能仅凭该接口保证 RouterB 当选；它也不会自动降低路由开销。",
+    "drag_drop_data": null
   },
   {
     "id": 1299,
@@ -4002,7 +4071,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。Hello用于发现同一链路上的邻居并周期维护邻居关系；长时间未收到报文的判定依Dead interval和实现，而非固定90秒。Hello携带并检查若干邻接参数，但不会自动把不匹配的计时器改为一致。广播或NBMA网段中的DR/BDR选举使用优先级和Router ID等条件，不按最快链路选举；Hello也不是泛洪到整个互联网。不同网络类型的邻居发现方式可能不同。"
+    "explanation": "A、C。Hello用于发现同一链路上的邻居并周期维护邻居关系；长时间未收到报文的判定依Dead interval和实现，而非固定90秒。Hello携带并检查若干邻接参数，但不会自动把不匹配的计时器改为一致。广播或NBMA网段中的DR/BDR选举使用优先级和Router ID等条件，不按最快链路选举；Hello也不是泛洪到整个互联网。不同网络类型的邻居发现方式可能不同。",
+    "drag_drop_data": null
   },
   {
     "id": 1300,
@@ -4038,7 +4108,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。在题设正常收敛且成员互通的组中，选出一台Active转发虚拟网关流量、另一台Standby准备接替。额外参与者可处于Listen等状态，不应称为多个同时处于Standby状态的路由器。链路分区等异常期间可能出现多个Active；只有单个可用成员时可能暂时没有Standby。C/E所谓多个备用虚拟路由器不是题设角色，D混用了Active与Standby。"
+    "explanation": "A、B。在题设正常收敛且成员互通的组中，选出一台Active转发虚拟网关流量、另一台Standby准备接替。额外参与者可处于Listen等状态，不应称为多个同时处于Standby状态的路由器。链路分区等异常期间可能出现多个Active；只有单个可用成员时可能暂时没有Standby。C/E所谓多个备用虚拟路由器不是题设角色，D混用了Active与Standby。",
+    "drag_drop_data": null
   },
   {
     "id": 1301,
@@ -4074,7 +4145,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。含 `[AD/metric]` 的路由项直接显示管理距离和度量；带时间的动态路由项显示相关路由更新时间或持续时间，具体计时含义依协议和平台而异。仅凭AD数值无法确定它是否由人工配置，因为管理员也可能配置与默认值相同的距离。A 的ACL方向要检查接口；B 的AS号并非每条RIB项都显示；D 的邻居状态应查看协议邻居表。"
+    "explanation": "C、E。含 `[AD/metric]` 的路由项直接显示管理距离和度量；带时间的动态路由项显示相关路由更新时间或持续时间，具体计时含义依协议和平台而异。仅凭AD数值无法确定它是否由人工配置，因为管理员也可能配置与默认值相同的距离。A 的ACL方向要检查接口；B 的AS号并非每条RIB项都显示；D 的邻居状态应查看协议邻居表。",
+    "drag_drop_data": null
   },
   {
     "id": 1302,
@@ -4110,7 +4182,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。双方接口必须参与OSPF并能收发Hello（不是passive），且处在相同区域。题设明确定时器已匹配，因此C无需再配置；否则Hello/dead不匹配会阻止邻居建立。OSPF进程ID仅本地有效，双方可以不同；Router ID应唯一，不能相同。"
+    "explanation": "A、B。双方接口必须参与OSPF并能收发Hello（不是passive），且处在相同区域。题设明确定时器已匹配，因此C无需再配置；否则Hello/dead不匹配会阻止邻居建立。OSPF进程ID仅本地有效，双方可以不同；Router ID应唯一，不能相同。",
+    "drag_drop_data": null
   },
   {
     "id": 1303,
@@ -4146,7 +4219,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。Atlanta到`2023::/126`经New York直连接口`2012::2`；Washington到`2012::/126`经New York直连接口`2023::2`。A把本地接口当作下一跳，C不是图中New York的该链路地址；E指向Atlanta自己的直连网段而非远端。New York两条链路本身直连，不依赖题目所称静态路由；端口、IPv6转发和返回路径仍需正常。"
+    "explanation": "B、D。Atlanta到`2023::/126`经New York直连接口`2012::2`；Washington到`2012::/126`经New York直连接口`2023::2`。A把本地接口当作下一跳，C不是图中New York的该链路地址；E指向Atlanta自己的直连网段而非远端。New York两条链路本身直连，不依赖题目所称静态路由；端口、IPv6转发和返回路径仍需正常。",
+    "drag_drop_data": null
   },
   {
     "id": 1304,
@@ -4186,7 +4260,8 @@
       "D",
       "F"
     ],
-    "explanation": "D、F。共享链路上OSPF Hello/dead计时器和区域ID需要匹配；任一不一致均可阻止邻居建立。图中Area 0表示预期拓扑，不证明实际两端接口配置正确。DR/BDR与DROther应形成FULL；两个DROther可为2-Way邻居，不等于没有邻居。静态路由及EIGRP较低管理距离本身不阻止交换OSPF Hello；Area 1也不是骨干区域。"
+    "explanation": "D、F。共享链路上OSPF Hello/dead计时器和区域ID需要匹配；任一不一致均可阻止邻居建立。图中Area 0表示预期拓扑，不证明实际两端接口配置正确。DR/BDR与DROther应形成FULL；两个DROther可为2-Way邻居，不等于没有邻居。静态路由及EIGRP较低管理距离本身不阻止交换OSPF Hello；Area 1也不是骨干区域。",
+    "drag_drop_data": null
   },
   {
     "id": 1305,
@@ -4222,7 +4297,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。`192.168.1.0/26`包含 .0–.63，.17和.61均在范围内；.64、.127和.254都在范围外。对常规/26子网，.0是网络地址、.63是定向广播地址，.1–.62为通常可用主机地址；路由前缀匹配范围与地址是否可分配是不同问题。"
+    "explanation": "A、B。`192.168.1.0/26`包含 .0–.63，.17和.61均在范围内；.64、.127和.254都在范围外。对常规/26子网，.0是网络地址、.63是定向广播地址，.1–.62为通常可用主机地址；路由前缀匹配范围与地址是否可分配是不同问题。",
+    "drag_drop_data": null
   },
   {
     "id": 1306,
@@ -4258,7 +4334,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。R3优先级0使其无DR/BDR选举资格；R1优先级200在题设新一轮选举中高于R2的1。OSPF DR选举不抢占：仅变更优先级并不能保证R1立即成为DR，现有BDR可能在DR退出后先继任，所以题目明确所有参与者重启并进行新选举。B只改Router ID，D使R1失去资格，E提高的是R3。"
+    "explanation": "A、C。R3优先级0使其无DR/BDR选举资格；R1优先级200在题设新一轮选举中高于R2的1。OSPF DR选举不抢占：仅变更优先级并不能保证R1立即成为DR，现有BDR可能在DR退出后先继任，所以题目明确所有参与者重启并进行新选举。B只改Router ID，D使R1失去资格，E提高的是R3。",
+    "drag_drop_data": null
   },
   {
     "id": 1307,
@@ -4294,7 +4371,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。R1的`10.10.10.0/24`经192.168.2.3（R2）覆盖图中PC2–PC4，`10.10.10.10/32`经192.168.2.2（R3）以最长前缀匹配送往PC5。题意仅保证图示主机，其他/24地址不一定位于R2。C/D为以太网纯出接口路由，需要对最终目的地址作邻居解析，题设关闭代理ARP，因此不满足；它们并非所有以太网环境下语法都非法。E把R2后面的/29指到R3。需确保回程、接口和主机配置正确。"
+    "explanation": "A、B。R1的`10.10.10.0/24`经192.168.2.3（R2）覆盖图中PC2–PC4，`10.10.10.10/32`经192.168.2.2（R3）以最长前缀匹配送往PC5。题意仅保证图示主机，其他/24地址不一定位于R2。C/D为以太网纯出接口路由，需要对最终目的地址作邻居解析，题设关闭代理ARP，因此不满足；它们并非所有以太网环境下语法都非法。E把R2后面的/29指到R3。需确保回程、接口和主机配置正确。",
+    "drag_drop_data": null
   },
   {
     "id": 1308,
@@ -4330,7 +4408,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。`2001:db8:23::/64`经`fd00:12::2`（R2）；主机`2001:db8:23::14/128`经`fd00:13::3`（R3），/128优先于/64。A仅匹配全零地址，D/E为/64并非针对::14的主机路由，而且将其指向R2；不同IOS版本对含主机位的前缀可能拒绝，不能一概假定被接受。若主机路由因下一跳不可达而撤销，/64可提供回退；仅下游主机故障不必然撤销该静态路由。"
+    "explanation": "B、C。`2001:db8:23::/64`经`fd00:12::2`（R2）；主机`2001:db8:23::14/128`经`fd00:13::3`（R3），/128优先于/64。A仅匹配全零地址，D/E为/64并非针对::14的主机路由，而且将其指向R2；不同IOS版本对含主机位的前缀可能拒绝，不能一概假定被接受。若主机路由因下一跳不可达而撤销，/64可提供回退；仅下游主机故障不必然撤销该静态路由。",
+    "drag_drop_data": null
   },
   {
     "id": 1309,
@@ -4366,7 +4445,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。FHRP让多台网关共享虚拟默认网关，并可在所监测的主用网关故障时自动切换。HSRP/VRRP通常使用主备，GLBP可实现多网关转发负载分担；上联故障是否触发切换依接口跟踪和协议配置。切换需收敛时间，不能保证业务完全不中断。A加密是其他安全机制，B二层防环属于STP等，C链路聚合属于EtherChannel/LACP等。"
+    "explanation": "D、E。FHRP让多台网关共享虚拟默认网关，并可在所监测的主用网关故障时自动切换。HSRP/VRRP通常使用主备，GLBP可实现多网关转发负载分担；上联故障是否触发切换依接口跟踪和协议配置。切换需收敛时间，不能保证业务完全不中断。A加密是其他安全机制，B二层防环属于STP等，C链路聚合属于EtherChannel/LACP等。",
+    "drag_drop_data": null
   },
   {
     "id": 1310,
@@ -4402,7 +4482,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。DNS使应用可按名称查找资源，同名可有多个A/AAAA记录，对应多个IPv4/IPv6地址。DNS响应和客户端缓存可能影响流量分配，多地址本身不检查服务器健康或保证高可用。A错误，DNS使用分层名称空间；B错误，普通DNS解析并不默认加密所有WAN业务，DoT/DoH只保护相应DNS传输；C错误，名字本身不保护IP地址，DNS数据也可按部署限制访问。"
+    "explanation": "D、E。DNS使应用可按名称查找资源，同名可有多个A/AAAA记录，对应多个IPv4/IPv6地址。DNS响应和客户端缓存可能影响流量分配，多地址本身不检查服务器健康或保证高可用。A错误，DNS使用分层名称空间；B错误，普通DNS解析并不默认加密所有WAN业务，DoT/DoH只保护相应DNS传输；C错误，名字本身不保护IP地址，DNS数据也可按部署限制访问。",
+    "drag_drop_data": null
   },
   {
     "id": 1311,
@@ -4443,7 +4524,8 @@
       "D",
       "F"
     ],
-    "explanation": "B、D、F。`logging trap 3` 对远程日志选择严重性数值 0–3：emergency 0、alert 1、critical 2、error 3。选项中的 B、D、F 均通过门限；A informational 6、C warning 4、E debugging 7 不通过。通过门限不代表该级别消息一定产生或网络一定成功送达；服务器、路由及日志功能需正常。"
+    "explanation": "B、D、F。`logging trap 3` 对远程日志选择严重性数值 0–3：emergency 0、alert 1、critical 2、error 3。选项中的 B、D、F 均通过门限；A informational 6、C warning 4、E debugging 7 不通过。通过门限不代表该级别消息一定产生或网络一定成功送达；服务器、路由及日志功能需正常。",
+    "drag_drop_data": null
   },
   {
     "id": 1312,
@@ -4479,7 +4561,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。Cisco IOS DHCP 服务器可以动态租出 IPv4 地址，并可使用 `ip dhcp excluded-address` 将指定地址排除在动态分配之外。A 错在 always：有限租约需要续租，也可以配置无限租约。C 错在必须恰好四个：DHCP DNS 服务器选项是地址列表，数量取决于配置与实现，并无这样的统一要求。E 混淆客户端与服务端：客户端不维护服务器的可分配地址池。排除固定地址有助于避免冲突，但不能消除其他错误配置造成的冲突。"
+    "explanation": "B、D。Cisco IOS DHCP 服务器可以动态租出 IPv4 地址，并可使用 `ip dhcp excluded-address` 将指定地址排除在动态分配之外。A 错在 always：有限租约需要续租，也可以配置无限租约。C 错在必须恰好四个：DHCP DNS 服务器选项是地址列表，数量取决于配置与实现，并无这样的统一要求。E 混淆客户端与服务端：客户端不维护服务器的可分配地址池。排除固定地址有助于避免冲突，但不能消除其他错误配置造成的冲突。",
+    "drag_drop_data": null
   },
   {
     "id": 1313,
@@ -4515,7 +4598,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。图中 R1 Fa0/0 与 R2 Gi0/0 连接同一二层广播域；远端 DHCP 服务器为 198.51.100.100。R1 接口通过 `ip address dhcp` 作为客户端，并用 `no shutdown` 启用；R2 面向客户端的 Gi0/0 配置 `ip helper-address 198.51.100.100` 中继 DHCP 广播。A/E 在客户端接口设置 helper，D 将图中作为网关的 R2 接口改为 DHCP，均非题设所需。服务器必须有与中继 giaddr 对应的地址池，且双向路径可达。"
+    "explanation": "B、C。图中 R1 Fa0/0 与 R2 Gi0/0 连接同一二层广播域；远端 DHCP 服务器为 198.51.100.100。R1 接口通过 `ip address dhcp` 作为客户端，并用 `no shutdown` 启用；R2 面向客户端的 Gi0/0 配置 `ip helper-address 198.51.100.100` 中继 DHCP 广播。A/E 在客户端接口设置 helper，D 将图中作为网关的 R2 接口改为 DHCP，均非题设所需。服务器必须有与中继 giaddr 对应的地址池，且双向路径可达。",
+    "drag_drop_data": null
   },
   {
     "id": 1314,
@@ -4551,7 +4635,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。WRED 根据平均队列长度、类别阈值和概率在队列满之前选择性丢包；合理的类别配置可令较低优先级报文更早或以更高概率被丢弃。它有助缓解拥塞和降低 TCP 全局同步概率，并不保证队列永不满、严格的每包丢弃先后或高优先级必达。A 协议发现、C 细粒度流识别不是基本 WRED 的主要职责；具体平台可能另有基于流的扩展。"
+    "explanation": "D、E。WRED 根据平均队列长度、类别阈值和概率在队列满之前选择性丢包；合理的类别配置可令较低优先级报文更早或以更高概率被丢弃。它有助缓解拥塞和降低 TCP 全局同步概率，并不保证队列永不满、严格的每包丢弃先后或高优先级必达。A 协议发现、C 细粒度流识别不是基本 WRED 的主要职责；具体平台可能另有基于流的扩展。",
+    "drag_drop_data": null
   },
   {
     "id": 1315,
@@ -4587,7 +4672,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。匹配的共享密钥和客户端 trusted-key 已按题设预配置；启用 `ntp authenticate`，并用 `ntp server <address> key <id>` 指定单播服务器和相应密钥。缺少匹配密钥、受信 key ID 或网络可达性时，仅做 A/C 仍不足以完成认证。B 时区只影响本地显示；D 非对称私钥不是题设对称认证配置；E 关闭广播不是配置单播认证的必要步骤。普通未认证 NTP 客户端无需仅因服务器可信而强制启用认证。"
+    "explanation": "A、C。匹配的共享密钥和客户端 trusted-key 已按题设预配置；启用 `ntp authenticate`，并用 `ntp server <address> key <id>` 指定单播服务器和相应密钥。缺少匹配密钥、受信 key ID 或网络可达性时，仅做 A/C 仍不足以完成认证。B 时区只影响本地显示；D 非对称私钥不是题设对称认证配置；E 关闭广播不是配置单播认证的必要步骤。普通未认证 NTP 客户端无需仅因服务器可信而强制启用认证。",
+    "drag_drop_data": null
   },
   {
     "id": 1316,
@@ -4623,7 +4709,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。输出中的 `Clock is synchronized` 给出同步状态，题设 `reference is` 字段给出当前同步参考对端 IPv4 地址。其他状态或平台上的 reference 可为非 IPv4 标识；未同步时不能假定存在有效的当前对端。A 静态配置、C 全部配置服务器、E 对端协议版本不能仅从所给状态字段确定；可结合 `show ntp associations detail` 和运行配置检查。"
+    "explanation": "B、D。输出中的 `Clock is synchronized` 给出同步状态，题设 `reference is` 字段给出当前同步参考对端 IPv4 地址。其他状态或平台上的 reference 可为非 IPv4 标识；未同步时不能假定存在有效的当前对端。A 静态配置、C 全部配置服务器、E 对端协议版本不能仅从所给状态字段确定；可结合 `show ntp associations detail` 和运行配置检查。",
+    "drag_drop_data": null
   },
   {
     "id": 1317,
@@ -4659,7 +4746,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。CBWFQ 通过类队列和带宽调度管理拥塞，PQ 通过优先级队列调度；严格优先队列可能使低优先级流量饥饿。FRTS 是 Frame Relay 流量整形，CAR 是监管/标记，PBR 是基于策略选路，故 B/C/D 不属于题设排队拥塞管理。实际调度、带宽保证及队列配置随平台和策略变化。"
+    "explanation": "A、E。CBWFQ 通过类队列和带宽调度管理拥塞，PQ 通过优先级队列调度；严格优先队列可能使低优先级流量饥饿。FRTS 是 Frame Relay 流量整形，CAR 是监管/标记，PBR 是基于策略选路，故 B/C/D 不属于题设排队拥塞管理。实际调度、带宽保证及队列配置随平台和策略变化。",
+    "drag_drop_data": null
   },
   {
     "id": 1318,
@@ -4695,7 +4783,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。NTP 时间报文通常通过 IP 上的 UDP 123 交换；支持 NTP 的 Cisco 路由器可作为上游服务器的客户端，也可向下游设备提供时间。`ntp master` 可在适用配置下以本地时钟作为源，但本地时钟的准确性取决于实际条件。C/D 错在“只能”一种角色，E 的 TCP 不是常规 NTP 时间同步传输。UDP 并不保证延迟确定或无丢包。"
+    "explanation": "A、B。NTP 时间报文通常通过 IP 上的 UDP 123 交换；支持 NTP 的 Cisco 路由器可作为上游服务器的客户端，也可向下游设备提供时间。`ntp master` 可在适用配置下以本地时钟作为源，但本地时钟的准确性取决于实际条件。C/D 错在“只能”一种角色，E 的 TCP 不是常规 NTP 时间同步传输。UDP 并不保证延迟确定或无丢包。",
+    "drag_drop_data": null
   },
   {
     "id": 1319,
@@ -4731,7 +4820,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。图中已有主机名、域名、本地用户及 `line vty 0 15` 的 `login local`；题设明确没有 RSA 主机密钥。全局配置生成 RSA 密钥（C），在题设所有 VTY 线路下配置 `transport input ssh`（A）以只允许 SSH。图中 `show ssh` 没有活动连接本身不能证明 SSH 服务器关闭，须以密钥和服务器状态检查。E 可显式限定 SSHv2，是推荐的安全设置，但不能代替生成密钥；密钥长度与语法依 IOS 版本及组织安全要求调整，1024 位仅为题目示例。"
+    "explanation": "A、C。图中已有主机名、域名、本地用户及 `line vty 0 15` 的 `login local`；题设明确没有 RSA 主机密钥。全局配置生成 RSA 密钥（C），在题设所有 VTY 线路下配置 `transport input ssh`（A）以只允许 SSH。图中 `show ssh` 没有活动连接本身不能证明 SSH 服务器关闭，须以密钥和服务器状态检查。E 可显式限定 SSHv2，是推荐的安全设置，但不能代替生成密钥；密钥长度与语法依 IOS 版本及组织安全要求调整，1024 位仅为题目示例。",
+    "drag_drop_data": null
   },
   {
     "id": 1320,
@@ -4767,7 +4857,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。原图显示端口安全 violation mode 为 `Protect`；当安全 MAC 数达到上限后，来自未授权源 MAC 的帧被丢弃，端口安全违规计数器不递增。Protect 不因该违规将接口置于 err-disabled，也不按 restrict/shutdown 模式生成违规通知。图中当前是3/4，题干明确后续已达到4/4。LED 行为依平台与其他状态而异，不能用作此题判断依据；已授权流量仍依其他接口及网络条件转发。"
+    "explanation": "A、E。原图显示端口安全 violation mode 为 `Protect`；当安全 MAC 数达到上限后，来自未授权源 MAC 的帧被丢弃，端口安全违规计数器不递增。Protect 不因该违规将接口置于 err-disabled，也不按 restrict/shutdown 模式生成违规通知。图中当前是3/4，题干明确后续已达到4/4。LED 行为依平台与其他状态而异，不能用作此题判断依据；已授权流量仍依其他接口及网络条件转发。",
+    "drag_drop_data": null
   },
   {
     "id": 1321,
@@ -4803,7 +4894,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。展图显示 Aging Time 5 mins、Aging Type Inactivity、Sticky MAC Addresses 2。Protect 是违规模式，最大地址数为 3，故 B、D、E 不符。输出无法证明每个 sticky 地址均为动态学习：sticky 也可以手工配置；具体平台对 sticky 地址老化的支持不同，不能仅凭此输出断定这两个地址会在五分钟后老化。"
+    "explanation": "A、C。展图显示 Aging Time 5 mins、Aging Type Inactivity、Sticky MAC Addresses 2。Protect 是违规模式，最大地址数为 3，故 B、D、E 不符。输出无法证明每个 sticky 地址均为动态学习：sticky 也可以手工配置；具体平台对 sticky 地址老化的支持不同，不能仅凭此输出断定这两个地址会在五分钟后老化。",
+    "drag_drop_data": null
   },
   {
     "id": 1322,
@@ -4839,7 +4931,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。AireOS 的 PSK Format 使用 ASCII 或 hexadecimal。ASCII 口令通常为 8–63 个可打印字符；十六进制形式为 64 个十六进制字符表示 256 位 PSK。十六进制是输入表示法，不能据此断言密钥一定由某次 PBKDF2 运算产生。decimal、binary 和 base64 不是此界面的格式选项。具体 UI 依平台版本而异。"
+    "explanation": "B、C。AireOS 的 PSK Format 使用 ASCII 或 hexadecimal。ASCII 口令通常为 8–63 个可打印字符；十六进制形式为 64 个十六进制字符表示 256 位 PSK。十六进制是输入表示法，不能据此断言密钥一定由某次 PBKDF2 运算产生。decimal、binary 和 base64 不是此界面的格式选项。具体 UI 依平台版本而异。",
+    "drag_drop_data": null
   },
   {
     "id": 1323,
@@ -4875,7 +4968,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。将闲置接口设为 access 并划入题设的空置隔离 VLAN，再执行 shutdown，可降低意外启用时暴露生产网络的风险。VLAN 99 不是通用保留的隔离 VLAN，必须先确认它未承载业务且其路由和二层范围符合策略；同一 VLAN 内设备仍可能相互通信。trunk、CDP 和 EtherChannel 均不替代禁用闲置端口。"
+    "explanation": "C、D。将闲置接口设为 access 并划入题设的空置隔离 VLAN，再执行 shutdown，可降低意外启用时暴露生产网络的风险。VLAN 99 不是通用保留的隔离 VLAN，必须先确认它未承载业务且其路由和二层范围符合策略；同一 VLAN 内设备仍可能相互通信。trunk、CDP 和 EtherChannel 均不替代禁用闲置端口。",
+    "drag_drop_data": null
   },
   {
     "id": 1324,
@@ -4911,7 +5005,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。图中两条 deny 的源、目的网段顺序反了；改为源 10.0.10.0 0.0.0.63、目的 10.0.20.0 0.0.0.63，并分别在目的端匹配 `eq smtp` 和 `eq www`。在两条 deny 之后添加 `permit ip any any`，允许此 ACL 中其余 IPv4 流量；放在开头则会遮蔽后面的 deny。此处现有 R2 Gi0/2 入方向已经位于来源路径；移动接口不是修正这两项错误的必要条件。其他 ACL、路由及服务器策略仍会影响端到端通信。"
+    "explanation": "A、D。图中两条 deny 的源、目的网段顺序反了；改为源 10.0.10.0 0.0.0.63、目的 10.0.20.0 0.0.0.63，并分别在目的端匹配 `eq smtp` 和 `eq www`。在两条 deny 之后添加 `permit ip any any`，允许此 ACL 中其余 IPv4 流量；放在开头则会遮蔽后面的 deny。此处现有 R2 Gi0/2 入方向已经位于来源路径；移动接口不是修正这两项错误的必要条件。其他 ACL、路由及服务器策略仍会影响端到端通信。",
+    "drag_drop_data": null
   },
   {
     "id": 1325,
@@ -4947,7 +5042,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。过宽的 permit 可能匹配了不该放行的流量；permit 排在相关 deny 之前也会先命中并遮蔽后续规则。ACL 自上而下首条匹配生效。C 若未命中任何 ACE 则通常被非空 ACL 的隐式拒绝拦截；D 早匹配 deny 会丢弃而非放行。空或不存在的 ACL 的处理依设备和配置情境而异，题设明确 ACL 非空。"
+    "explanation": "B、E。过宽的 permit 可能匹配了不该放行的流量；permit 排在相关 deny 之前也会先命中并遮蔽后续规则。ACL 自上而下首条匹配生效。C 若未命中任何 ACE 则通常被非空 ACL 的隐式拒绝拦截；D 早匹配 deny 会丢弃而非放行。空或不存在的 ACL 的处理依设备和配置情境而异，题设明确 ACL 非空。",
+    "drag_drop_data": null
   },
   {
     "id": 1326,
@@ -4983,7 +5079,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。密码生成和独立保存降低弱密码及跨站复用风险；自动填充减少逐字符键入，可能降低仅记录物理击键的键盘记录器获取该站点密码的机会。它不保证在设备或网站受入侵时保护凭据：恶意扩展、屏幕/剪贴板采集、表单窃取、解锁后的密码库或被攻陷的网站仍可能泄露密码。防火墙和杀毒并非密码管理器必备功能，管理器也不会凭空产生用户未知的第二因素。"
+    "explanation": "A、E。密码生成和独立保存降低弱密码及跨站复用风险；自动填充减少逐字符键入，可能降低仅记录物理击键的键盘记录器获取该站点密码的机会。它不保证在设备或网站受入侵时保护凭据：恶意扩展、屏幕/剪贴板采集、表单窃取、解锁后的密码库或被攻陷的网站仍可能泄露密码。防火墙和杀毒并非密码管理器必备功能，管理器也不会凭空产生用户未知的第二因素。",
+    "drag_drop_data": null
   },
   {
     "id": 1327,
@@ -5019,7 +5116,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。对需要使用的办公区接入口实施 802.1X 等基于端口认证，并对未使用端口执行 shutdown，可降低未授权接入风险。802.1X 通常通过 RADIUS 与认证服务器交互；开放前允许哪些控制流量取决于设备和策略，认证也并非所有威胁的保证。PortFast 用于边缘端口快速转发，不提供身份认证；固定速率与静态 ARP 均不能替代接入控制。"
+    "explanation": "D、E。对需要使用的办公区接入口实施 802.1X 等基于端口认证，并对未使用端口执行 shutdown，可降低未授权接入风险。802.1X 通常通过 RADIUS 与认证服务器交互；开放前允许哪些控制流量取决于设备和策略，认证也并非所有威胁的保证。PortFast 用于边缘端口快速转发，不提供身份认证；固定速率与静态 ARP 均不能替代接入控制。",
+    "drag_drop_data": null
   },
   {
     "id": 1328,
@@ -5055,7 +5153,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。HTTP 和 Telnet 的交互管理会话不提供传输加密，应使用配置正确的 HTTPS 与 SSH，并限制管理来源。TFTP 也缺少传输加密，但在此题中它用于文件传输而非交互式 Web/CLI 登录；应另外限制或替换不安全的文件传输。启用加密协议不自动保证认证、证书和访问控制配置安全。"
+    "explanation": "C、D。HTTP 和 Telnet 的交互管理会话不提供传输加密，应使用配置正确的 HTTPS 与 SSH，并限制管理来源。TFTP 也缺少传输加密，但在此题中它用于文件传输而非交互式 Web/CLI 登录；应另外限制或替换不安全的文件传输。启用加密协议不自动保证认证、证书和访问控制配置安全。",
+    "drag_drop_data": null
   },
   {
     "id": 1329,
@@ -5091,7 +5190,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。`crypto key generate rsa` 生成本题 IOS SSH 服务使用的服务器 RSA 密钥；`ip ssh pubkey-chain` 进入客户端公钥链配置模式，随后仍须为正确用户导入公钥。题设已给出 VTY、域名等其他必要条件。公钥认证并非所有 SSH 登录必须：本地密码或 AAA 等也可用于 SSH；`username ... password 0 ...` 会以明文形式存在于配置中，不满足本题要求的公钥认证。Telnet 不加密，console 登录非远程 VTY 访问。"
+    "explanation": "A、C。`crypto key generate rsa` 生成本题 IOS SSH 服务使用的服务器 RSA 密钥；`ip ssh pubkey-chain` 进入客户端公钥链配置模式，随后仍须为正确用户导入公钥。题设已给出 VTY、域名等其他必要条件。公钥认证并非所有 SSH 登录必须：本地密码或 AAA 等也可用于 SSH；`username ... password 0 ...` 会以明文形式存在于配置中，不满足本题要求的公钥认证。Telnet 不加密，console 登录非远程 VTY 访问。",
+    "drag_drop_data": null
   },
   {
     "id": 1330,
@@ -5127,7 +5227,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。CA 签发证书，CRL 发布已撤销证书的信息，供依其策略使用 CRL 的验证方检查；证书状态也可通过 OCSP 等机制提供，是否检查及失败处理取决于实现和策略。预共享密钥和明文密码不构成本题要求的 CA/CRL 架构；一次性口令令牌也不是 CA 或 CRL，虽然硬件安全设备可以参与其他 PKI 部署。"
+    "explanation": "B、D。CA 签发证书，CRL 发布已撤销证书的信息，供依其策略使用 CRL 的验证方检查；证书状态也可通过 OCSP 等机制提供，是否检查及失败处理取决于实现和策略。预共享密钥和明文密码不构成本题要求的 CA/CRL 架构；一次性口令令牌也不是 CA 或 CRL，虽然硬件安全设备可以参与其他 PKI 部署。",
+    "drag_drop_data": null
   },
   {
     "id": 1331,
@@ -5163,7 +5264,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。在线路配置下 `transport input ssh` 将相应 VTY 的入站协议限制为 SSH；在支持该语法的平台上 `crypto key generate rsa modulus 2048` 生成 2048 位 RSA 密钥，恰为 1024 的两倍。需另满足设备版本、主机名/域名、SSH 版本、登录认证和管理网络可达等前提；生成密钥本身不保证自动启用 SSHv2，也不保证替换既存密钥无影响。B 允许所有支持的协议；D 仍是 1024 位；E 未指定 2048 位。"
+    "explanation": "A、C。在线路配置下 `transport input ssh` 将相应 VTY 的入站协议限制为 SSH；在支持该语法的平台上 `crypto key generate rsa modulus 2048` 生成 2048 位 RSA 密钥，恰为 1024 的两倍。需另满足设备版本、主机名/域名、SSH 版本、登录认证和管理网络可达等前提；生成密钥本身不保证自动启用 SSHv2，也不保证替换既存密钥无影响。B 允许所有支持的协议；D 仍是 1024 位；E 未指定 2048 位。",
+    "drag_drop_data": null
   },
   {
     "id": 1332,
@@ -5199,7 +5301,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。受保护设备或密钥的独立软件认证器可作为持有因素，记忆的 PIN 属于知识因素；同时验证不同类别才构成 MFA。其具体安全属性取决于设备、密钥保护及实现，单个软令牌或 PIN 自身不是多因素认证。SSO 是会话机制，密码到期不改变其知识因素属性，共享密码库是存储工具。"
+    "explanation": "B、E。受保护设备或密钥的独立软件认证器可作为持有因素，记忆的 PIN 属于知识因素；同时验证不同类别才构成 MFA。其具体安全属性取决于设备、密钥保护及实现，单个软令牌或 PIN 自身不是多因素认证。SSO 是会话机制，密码到期不改变其知识因素属性，共享密码库是存储工具。",
+    "drag_drop_data": null
   },
   {
     "id": 1333,
@@ -5235,7 +5338,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。禁用不使用的端口、接口与服务可减少暴露面；限制设备存放地点的物理访问可降低篡改和破坏风险，均不保证消除所有攻击。A 密钥链可用于支持的协议认证，但不直接满足题设两个目标；B 内部服务器是否放入隔离区依访问需求与架构决定；C 未加密且无人看管的备份不安全，受控加密离线备份本身可以是合理措施。"
+    "explanation": "D、E。禁用不使用的端口、接口与服务可减少暴露面；限制设备存放地点的物理访问可降低篡改和破坏风险，均不保证消除所有攻击。A 密钥链可用于支持的协议认证，但不直接满足题设两个目标；B 内部服务器是否放入隔离区依访问需求与架构决定；C 未加密且无人看管的备份不安全，受控加密离线备份本身可以是合理措施。",
+    "drag_drop_data": null
   },
   {
     "id": 1334,
@@ -5271,7 +5375,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。图中 Layer 2 Security 和 802.1X 尚未选择：选择 WPA+WPA2 安全框架并启用 802.1X AKM；完整部署还要勾选 WPA2 Policy 与 AES、配置可用 RADIUS 服务器和兼容的 EAP/目录认证方式。802.1X/RADIUS 可对接目录，但具体 EAP 方法与目录能力必须匹配，不能假设所有 LDAP 配置均适用。A PSK 不提供题设逐用户域凭据认证；B WEP、E WPA/TKIP 不是此场景的 WPA2/AES。此结论限定图示功能，不声称 WPA2 是所有现代无线标准中最强。"
+    "explanation": "C、D。图中 Layer 2 Security 和 802.1X 尚未选择：选择 WPA+WPA2 安全框架并启用 802.1X AKM；完整部署还要勾选 WPA2 Policy 与 AES、配置可用 RADIUS 服务器和兼容的 EAP/目录认证方式。802.1X/RADIUS 可对接目录，但具体 EAP 方法与目录能力必须匹配，不能假设所有 LDAP 配置均适用。A PSK 不提供题设逐用户域凭据认证；B WEP、E WPA/TKIP 不是此场景的 WPA2/AES。此结论限定图示功能，不声称 WPA2 是所有现代无线标准中最强。",
+    "drag_drop_data": null
   },
   {
     "id": 1335,
@@ -5307,7 +5412,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。图中 RSA 密钥已存在、VTY 已配置 local login 但只允许 Telnet；C 将指定 VTY 入站协议设为 SSH，A 提供题设权限 1 用户进入特权模式所需的 enable secret。SSH 还需兼容密钥、协议、可达管理接口与认证配置；权限 15 的登录或适当 AAA 授权可使用其他方式，不能断言 enable secret 是所有环境的唯一途径。B 新建普通用户不能替代题设的权限提升；D 已有密钥不必重复生成；E 与要求无直接关系。"
+    "explanation": "A、C。图中 RSA 密钥已存在、VTY 已配置 local login 但只允许 Telnet；C 将指定 VTY 入站协议设为 SSH，A 提供题设权限 1 用户进入特权模式所需的 enable secret。SSH 还需兼容密钥、协议、可达管理接口与认证配置；权限 15 的登录或适当 AAA 授权可使用其他方式，不能断言 enable secret 是所有环境的唯一途径。B 新建普通用户不能替代题设的权限提升；D 已有密钥不必重复生成；E 与要求无直接关系。",
+    "drag_drop_data": null
   },
   {
     "id": 1336,
@@ -5343,7 +5449,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。题设的 WPA3-Personal 配置使用 CCMP-128，WPA2 配置使用 CCMP；CCMP 使用 AES 提供数据保密与完整性。E 明确限定只使用 TKIP，因此该配置不使用 CCMP。部分 Cisco 平台也允许在 WPA1 下配置 AES，故不能把所有 WPA1 实现一概排除。WPA3 的其他模式和平台可能使用 GCMP 等套件。A Wi-Fi 6 是无线技术代际而非具体加密配置；C WEP 使用 RC4 而非 CCMP。"
+    "explanation": "B、D。题设的 WPA3-Personal 配置使用 CCMP-128，WPA2 配置使用 CCMP；CCMP 使用 AES 提供数据保密与完整性。E 明确限定只使用 TKIP，因此该配置不使用 CCMP。部分 Cisco 平台也允许在 WPA1 下配置 AES，故不能把所有 WPA1 实现一概排除。WPA3 的其他模式和平台可能使用 GCMP 等套件。A Wi-Fi 6 是无线技术代际而非具体加密配置；C WEP 使用 RC4 而非 CCMP。",
+    "drag_drop_data": null
   },
   {
     "id": 1337,
@@ -5379,7 +5486,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。虚拟交换机等逻辑设备可连接 VM 虚拟网卡，并通过宿主机上联连接物理网络；hypervisor 可让多套客体操作系统及应用在同一台物理服务器上相互隔离运行。跨 VLAN 通信仍需要路由或其他三层转发，隔离和资源分配效果取决于配置。C 物理路由器并非直接插入每个软件虚拟网卡；D 互联网不是必要条件；E hypervisor 并非只用于 SNMP 监控。"
+    "explanation": "A、B。虚拟交换机等逻辑设备可连接 VM 虚拟网卡，并通过宿主机上联连接物理网络；hypervisor 可让多套客体操作系统及应用在同一台物理服务器上相互隔离运行。跨 VLAN 通信仍需要路由或其他三层转发，隔离和资源分配效果取决于配置。C 物理路由器并非直接插入每个软件虚拟网卡；D 互联网不是必要条件；E hypervisor 并非只用于 SNMP 监控。",
+    "drag_drop_data": null
   },
   {
     "id": 1338,
@@ -5415,7 +5523,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。经过测试的模板和自动化流程可以减少重复人工操作、加快一致配置，从而有机会降低运维成本并减少人工输入差异。收益依流程与规模而定：错误脚本也可能快速传播，必须验证和回滚；自动化可以辅助安全与故障预防，但不会保证零故障或替代安全策略。硬件占地不是自动化本身的必然变化。"
+    "explanation": "B、C。经过测试的模板和自动化流程可以减少重复人工操作、加快一致配置，从而有机会降低运维成本并减少人工输入差异。收益依流程与规模而定：错误脚本也可能快速传播，必须验证和回滚；自动化可以辅助安全与故障预防，但不会保证零故障或替代安全策略。硬件占地不是自动化本身的必然变化。",
+    "drag_drop_data": null
   },
   {
     "id": 1339,
@@ -5451,7 +5560,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。JSON 与 XML 是该题设 API 明确支持的两种结构化表示；客户端可通过 API 文档规定的 Content-Type/Accept 进行协商。REST 本身不限定只能使用这些格式，也不必要求请求和响应必须包含数据体；其他具体 API 可支持 YAML、纯文本等，字符编码与数据表示格式亦是不同概念。"
+    "explanation": "C、D。JSON 与 XML 是该题设 API 明确支持的两种结构化表示；客户端可通过 API 文档规定的 Content-Type/Accept 进行协商。REST 本身不限定只能使用这些格式，也不必要求请求和响应必须包含数据体；其他具体 API 可支持 YAML、纯文本等，字符编码与数据表示格式亦是不同概念。",
+    "drag_drop_data": null
   },
   {
     "id": 1340,
@@ -5487,7 +5597,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。该版本的开放 REST API 支持外部应用集成；其多厂商 SDK 可用于创建第三方设备包，实现所支持功能与南向协议的映射。设备型号、功能和软件版本均有边界，不能保证所有第三方设备都可完整配置管理，也不能断言传统管理系统从未支持多厂商。B 的“所有 IOS 系列”没有这一保证；D 模块升级不直接说明外部集成；E 企业规模版本不是题设开发接口。"
+    "explanation": "A、C。该版本的开放 REST API 支持外部应用集成；其多厂商 SDK 可用于创建第三方设备包，实现所支持功能与南向协议的映射。设备型号、功能和软件版本均有边界，不能保证所有第三方设备都可完整配置管理，也不能断言传统管理系统从未支持多厂商。B 的“所有 IOS 系列”没有这一保证；D 模块升级不直接说明外部集成；E 企业规模版本不是题设开发接口。",
+    "drag_drop_data": null
   },
   {
     "id": 1341,
@@ -5523,7 +5634,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。控制器可集中定义策略和编排设备配置，从而降低大规模逐台操作的工作量和人为配置不一致风险。实际收益取决于平台、设备支持和设计；传统网络也可集中管理或通过脚本自动化，控制器并不保证消除故障或人为错误。A 和 E 描述成本或带宽变化而非必然收益；C 将减少故障当作保证。"
+    "explanation": "B、D。控制器可集中定义策略和编排设备配置，从而降低大规模逐台操作的工作量和人为配置不一致风险。实际收益取决于平台、设备支持和设计；传统网络也可集中管理或通过脚本自动化，控制器并不保证消除故障或人为错误。A 和 E 描述成本或带宽变化而非必然收益；C 将减少故障当作保证。",
+    "drag_drop_data": null
   },
   {
     "id": 1342,
@@ -5559,7 +5671,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。在 Cisco Catalyst Center 成功添加、导入或发现设备的默认情形下，Cisco 文档说明设备进入 Managed 状态，并归属 Global 站点。之后可将设备分配到具体站点并进行供应。凭据、可达性和设备支持等异常须另外诊断，不能把“已发现”当作已完成供应或保证所有功能均正常。B 与默认状态不符；C 不是文档所列默认站点；E 是不同的供应阶段。"
+    "explanation": "A、D。在 Cisco Catalyst Center 成功添加、导入或发现设备的默认情形下，Cisco 文档说明设备进入 Managed 状态，并归属 Global 站点。之后可将设备分配到具体站点并进行供应。凭据、可达性和设备支持等异常须另外诊断，不能把“已发现”当作已完成供应或保证所有功能均正常。B 与默认状态不符；C 不是文档所列默认站点；E 是不同的供应阶段。",
+    "drag_drop_data": null
   },
   {
     "id": 1343,
@@ -5595,7 +5708,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。Ansible playbook 是以 YAML 描述自动化流程的文件，task 是 play 中执行的动作，通常调用设备模块。playbook 本身并非它自己的组成部分。B、D 是 Chef 的 recipe 与 cookbook；C 在题设中不是 Ansible 的基本自动化术语。执行还需清单、连接方式、凭据及相应设备模块。"
+    "explanation": "A、E。Ansible playbook 是以 YAML 描述自动化流程的文件，task 是 play 中执行的动作，通常调用设备模块。playbook 本身并非它自己的组成部分。B、D 是 Chef 的 recipe 与 cookbook；C 在题设中不是 Ansible 的基本自动化术语。执行还需清单、连接方式、凭据及相应设备模块。",
+    "drag_drop_data": null
   },
   {
     "id": 1344,
@@ -5631,7 +5745,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。NETCONF 可供控制器通过设备配置与状态模型管理网络设备；OpenFlow 可供控制器与支持该协议的交换设备交换流表规则，二者均是常见南向协议。Thrift、DSC 和 CORBA 属通用 RPC、配置管理或对象通信技术，并非此题所列的典型专用网络南向协议。南向是接口相对于控制器的方向，具体产品也可能采用其他协议或通用接口。"
+    "explanation": "D、E。NETCONF 可供控制器通过设备配置与状态模型管理网络设备；OpenFlow 可供控制器与支持该协议的交换设备交换流表规则，二者均是常见南向协议。Thrift、DSC 和 CORBA 属通用 RPC、配置管理或对象通信技术，并非此题所列的典型专用网络南向协议。南向是接口相对于控制器的方向，具体产品也可能采用其他协议或通用接口。",
+    "drag_drop_data": null
   },
   {
     "id": 1345,
@@ -5667,7 +5782,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。HTTP 状态 4xx 为客户端错误类别，例如 400、401 或 404；5xx 为服务器错误类别，例如 500、502 或 503。状态类别描述服务器对请求的响应，并不总能单凭首位确定组织或人员的责任：网关和上游故障也可能产生 5xx。1xx 为信息响应、2xx 为成功类别、3xx 为重定向类别；各类别中具体码的语义仍须分别查看。"
+    "explanation": "D、E。HTTP 状态 4xx 为客户端错误类别，例如 400、401 或 404；5xx 为服务器错误类别，例如 500、502 或 503。状态类别描述服务器对请求的响应，并不总能单凭首位确定组织或人员的责任：网关和上游故障也可能产生 5xx。1xx 为信息响应、2xx 为成功类别、3xx 为重定向类别；各类别中具体码的语义仍须分别查看。",
+    "drag_drop_data": null
   },
   {
     "id": 1346,
@@ -5703,7 +5819,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。公有云由服务提供方为广泛客户提供资源，多组织可共享基础设施；服务通常可经互联网访问。实际也可经专线或其他私有连接访问，不要求所有用户都走公网，也不能仅因多租户便假设隔离绝对无风险。B 的“完全自定义”超出一般托管资源的控制范围；D 是单一组织使用的描述；E 混合公有与私有资源更接近混合云。"
+    "explanation": "A、C。公有云由服务提供方为广泛客户提供资源，多组织可共享基础设施；服务通常可经互联网访问。实际也可经专线或其他私有连接访问，不要求所有用户都走公网，也不能仅因多租户便假设隔离绝对无风险。B 的“完全自定义”超出一般托管资源的控制范围；D 是单一组织使用的描述；E 混合公有与私有资源更接近混合云。",
+    "drag_drop_data": null
   },
   {
     "id": 1347,
@@ -5739,7 +5856,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。对自动诊断/按策略执行修复的需求，以及按策略快速一致地配置资源，是网络自动化的合理驱动。它们依赖数据、规则、权限与人工监督，不能保证零故障、毫秒级恢复或替代所有人工操作。B 消除培训并不现实；D 硬件占地并非自动化固有结果；E 仍需明确配置策略与权限。"
+    "explanation": "A、C。对自动诊断/按策略执行修复的需求，以及按策略快速一致地配置资源，是网络自动化的合理驱动。它们依赖数据、规则、权限与人工监督，不能保证零故障、毫秒级恢复或替代所有人工操作。B 消除培训并不现实；D 硬件占地并非自动化固有结果；E 仍需明确配置策略与权限。",
+    "drag_drop_data": null
   },
   {
     "id": 1348,
@@ -5775,7 +5893,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。按题设的教学规模模型，SOHO 覆盖 1–50 名用户，路由器可通过 WAN 接口连接宽带接入设备。1–50 是本题采用的分类边界，不是全球统一的技术上限；接入介质、路由器和运营商方案也可不同。A 要求所有上行均为 10Gb、E 要求独立三层架构都不是 SOHO 的必要条件；C 超出题设定义的范围。"
+    "explanation": "B、D。按题设的教学规模模型，SOHO 覆盖 1–50 名用户，路由器可通过 WAN 接口连接宽带接入设备。1–50 是本题采用的分类边界，不是全球统一的技术上限；接入介质、路由器和运营商方案也可不同。A 要求所有上行均为 10Gb、E 要求独立三层架构都不是 SOHO 的必要条件；C 超出题设定义的范围。",
+    "drag_drop_data": null
   },
   {
     "id": 1349,
@@ -5811,7 +5930,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。控制器可通过模板或 API 自动执行配置任务，并提供集中策略、管理和规模化操作能力。容量和自动化效果受产品、网络与设计限制；传统网络同样可自动化，控制器不会天然防止 DoS，也不会保证所有虚拟机无缝连通。A、B、C 均不是区分两种架构的普遍保证。"
+    "explanation": "D、E。控制器可通过模板或 API 自动执行配置任务，并提供集中策略、管理和规模化操作能力。容量和自动化效果受产品、网络与设计限制；传统网络同样可自动化，控制器不会天然防止 DoS，也不会保证所有虚拟机无缝连通。A、B、C 均不是区分两种架构的普遍保证。",
+    "drag_drop_data": null
   },
   {
     "id": 1350,
@@ -5847,7 +5967,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。N 个节点若每对节点各建一条独立双向链路，需要 N(N−1)/2 条；例如 4 个节点需 6 条，10 个需 45 条。链路和邻接关系随节点数按平方量级增长，通常增加端口、隧道或线路成本及配置维护负担。成本依物理/逻辑实现而异；全互联不要求专用高 MTU，也不限于 BGP。E 的逐对连接是拓扑特征而非本题所问的成本和运维缺点。"
+    "explanation": "A、D。N 个节点若每对节点各建一条独立双向链路，需要 N(N−1)/2 条；例如 4 个节点需 6 条，10 个需 45 条。链路和邻接关系随节点数按平方量级增长，通常增加端口、隧道或线路成本及配置维护负担。成本依物理/逻辑实现而异；全互联不要求专用高 MTU，也不限于 BGP。E 的逐对连接是拓扑特征而非本题所问的成本和运维缺点。",
+    "drag_drop_data": null
   },
   {
     "id": 1351,
@@ -5883,7 +6004,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。某些光模块和光纤标准提供较高接口速率及比常见双绞线以太网更远的链路预算；具体速率和距离取决于光模块、光纤类型及标准，不是所有光纤必然更快更远。A 跳线及收发器价格依产品而异，不能保证光纤更便宜；B 光纤本身不传导 PoE 电流；D 环境耐受性取决于线缆规格，不能普遍断言光纤更敏感。铜缆存在多种标准与距离，100 米不是所有铜介质的绝对上限。"
+    "explanation": "C、E。某些光模块和光纤标准提供较高接口速率及比常见双绞线以太网更远的链路预算；具体速率和距离取决于光模块、光纤类型及标准，不是所有光纤必然更快更远。A 跳线及收发器价格依产品而异，不能保证光纤更便宜；B 光纤本身不传导 PoE 电流；D 环境耐受性取决于线缆规格，不能普遍断言光纤更敏感。铜缆存在多种标准与距离，100 米不是所有铜介质的绝对上限。",
+    "drag_drop_data": null
   },
   {
     "id": 1352,
@@ -5919,7 +6041,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。题设为两个站点间的一条运营商专用点到点逻辑电路，可承载两端网络的通信；运营商可以在共享物理基础设施上实现，服务保障取决于合同。B 所描述的三站点以上每对路由器都建专用电路是全网状拓扑，不是单条电路的要求；单条路径不能提供路径冗余，D 也不是点到点链路的要求。"
+    "explanation": "A、E。题设为两个站点间的一条运营商专用点到点逻辑电路，可承载两端网络的通信；运营商可以在共享物理基础设施上实现，服务保障取决于合同。B 所描述的三站点以上每对路由器都建专用电路是全网状拓扑，不是单条电路的要求；单条路径不能提供路径冗余，D 也不是点到点链路的要求。",
+    "drag_drop_data": null
   },
   {
     "id": 1353,
@@ -5955,7 +6078,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。控制器架构提供逻辑集中的网络控制视图，北向接口面向应用，南向接口连接设备与基础设施。控制器可由多台节点组成，设备仍可保留本地控制功能；并不代表所有功能物理集中或设备只能转发。CLI 有时仍可用于管理，但逐设备 CLI 不是唯一管理方式；Telnet 不是事件报告的必需协议。"
+    "explanation": "C、E。控制器架构提供逻辑集中的网络控制视图，北向接口面向应用，南向接口连接设备与基础设施。控制器可由多台节点组成，设备仍可保留本地控制功能；并不代表所有功能物理集中或设备只能转发。CLI 有时仍可用于管理，但逐设备 CLI 不是唯一管理方式；Telnet 不是事件报告的必需协议。",
+    "drag_drop_data": null
   },
   {
     "id": 1354,
@@ -5991,7 +6115,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。截图中 Status 未启用，先启用 WLAN；Radio Policy 当前为 All，选择 802.11g Only。该旧版策略与启用的射频和产品版本有关，802.11g 标称速率上限 54 Mb/s 不是每个客户端实际吞吐量保证，也不能据此推断所有 n 客户端或周围 b 设备的行为。802.11a 对应 5 GHz；SSID 广播及接口映射不是所问的这两项设置。"
+    "explanation": "A、B。截图中 Status 未启用，先启用 WLAN；Radio Policy 当前为 All，选择 802.11g Only。该旧版策略与启用的射频和产品版本有关，802.11g 标称速率上限 54 Mb/s 不是每个客户端实际吞吐量保证，也不能据此推断所有 n 客户端或周围 b 设备的行为。802.11a 对应 5 GHz；SSID 广播及接口映射不是所问的这两项设置。",
+    "drag_drop_data": null
   },
   {
     "id": 1355,
@@ -6027,7 +6152,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。在典型 Split-MAC 架构中，控制器协调射频资源及客户端关联、认证和漫游策略；AP 仍负责实际无线收发及时间敏感处理。RRM、FlexConnect 本地认证/转发等能力依部署而异，不能说所有活动总在控制器或漫游必然无中断。信标发送、空口帧加解密与 CSMA/CA 在 AP/客户端实时完成；CSMA/CA 降低而非绝对防止碰撞。"
+    "explanation": "A、B。在典型 Split-MAC 架构中，控制器协调射频资源及客户端关联、认证和漫游策略；AP 仍负责实际无线收发及时间敏感处理。RRM、FlexConnect 本地认证/转发等能力依部署而异，不能说所有活动总在控制器或漫游必然无中断。信标发送、空口帧加解密与 CSMA/CA 在 AP/客户端实时完成；CSMA/CA 降低而非绝对防止碰撞。",
+    "drag_drop_data": null
   },
   {
     "id": 1356,
@@ -6063,7 +6189,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。Cisco AireOS 8.5 在线帮助说明 Media Session Snooping 支持 Platinum QoS profile，需在该 WLAN 启用该功能；AP 检测符合条件的 SIP 呼叫并向控制器报告。A 包含 Silver，不能满足该版本的 snooping 条件；B 与 E 不是这里所问步骤。Platinum 不保证绝对优先、零丢包或最低延迟，实际还依客户端、配置及无线容量而定；其他版本的要求可能不同。"
+    "explanation": "C、D。Cisco AireOS 8.5 在线帮助说明 Media Session Snooping 支持 Platinum QoS profile，需在该 WLAN 启用该功能；AP 检测符合条件的 SIP 呼叫并向控制器报告。A 包含 Silver，不能满足该版本的 snooping 条件；B 与 E 不是这里所问步骤。Platinum 不保证绝对优先、零丢包或最低延迟，实际还依客户端、配置及无线容量而定；其他版本的要求可能不同。",
+    "drag_drop_data": null
   },
   {
     "id": 1357,
@@ -6099,7 +6226,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。PortFast 在链路上线时跳过通常的 listening 和 learning 等待，快速进入 forwarding；连接主机时不需要收到来自主机的 BPDU 才能转发。PortFast 不等于 BPDU filter：端口仍可能发送或接收 BPDU；若配置 BPDU Guard，收到 BPDU 会触发保护，具体行为依 STP 模式和配置而异。它不是上行链路冗余收敛或 BackboneFast 的替代。"
+    "explanation": "C、D。PortFast 在链路上线时跳过通常的 listening 和 learning 等待，快速进入 forwarding；连接主机时不需要收到来自主机的 BPDU 才能转发。PortFast 不等于 BPDU filter：端口仍可能发送或接收 BPDU；若配置 BPDU Guard，收到 BPDU 会触发保护，具体行为依 STP 模式和配置而异。它不是上行链路冗余收敛或 BackboneFast 的替代。",
+    "drag_drop_data": null
   },
   {
     "id": 1358,
@@ -6135,7 +6263,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。图中启用 Session Timeout 并设置 3600 秒；Maximum Allowed Clients 填 10，限制此控制器上该 WLAN 的客户端数量。Per AP Radio 是每个无线电粒度，不能作为整个 WLAN 的同一上限；Client Exclusion 控制暂时排除，Wi-Fi Direct 策略也不是会话时限。到期后的重新认证与密钥更新行为取决于认证方式及控制器配置，不保证在每个客户端上无差异。 Cisco AireOS 8.5 文档指出，每 WLAN 最大客户端数功能不支持 FlexConnect 本地认证，且仅支持处于 connected 模式的 AP；题干已限定。"
+    "explanation": "B、D。图中启用 Session Timeout 并设置 3600 秒；Maximum Allowed Clients 填 10，限制此控制器上该 WLAN 的客户端数量。Per AP Radio 是每个无线电粒度，不能作为整个 WLAN 的同一上限；Client Exclusion 控制暂时排除，Wi-Fi Direct 策略也不是会话时限。到期后的重新认证与密钥更新行为取决于认证方式及控制器配置，不保证在每个客户端上无差异。 Cisco AireOS 8.5 文档指出，每 WLAN 最大客户端数功能不支持 FlexConnect 本地认证，且仅支持处于 connected 模式的 AP；题干已限定。",
+    "drag_drop_data": null
   },
   {
     "id": 1359,
@@ -6171,7 +6300,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。Service port 可接独立的 IP 管理网络，console 是串行本地管理；两者均可用于带外管理。能否远程访问取决于管理网络、路由及启用的服务，并不保证业务网络故障时一定可达。Management interface 通常是逻辑带内接口，distribution system 承载网络业务；redundancy port 用于支持的 HA 同步。端口功能因具体型号与版本而异。"
+    "explanation": "A、B。Service port 可接独立的 IP 管理网络，console 是串行本地管理；两者均可用于带外管理。能否远程访问取决于管理网络、路由及启用的服务，并不保证业务网络故障时一定可达。Management interface 通常是逻辑带内接口，distribution system 承载网络业务；redundancy port 用于支持的 HA 同步。端口功能因具体型号与版本而异。",
+    "drag_drop_data": null
   },
   {
     "id": 1360,
@@ -6207,7 +6337,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。图中 Atlanta 与 Washington 分别是纽约直连的 2012::1 和 2023::3；目的 2000::1/128 是主机路由。A 的静态路由默认 AD 1；E 将 Washington 备份设为 AD 2。B 为 Atlanta 指定 AD 5，C 和 D 使用纽约本机地址作为下一跳。浮动路由只有在主路由被撤销时才接管；单靠静态下一跳不保证检测远端所有故障，实际可能需要跟踪机制。"
+    "explanation": "A、E。图中 Atlanta 与 Washington 分别是纽约直连的 2012::1 和 2023::3；目的 2000::1/128 是主机路由。A 的静态路由默认 AD 1；E 将 Washington 备份设为 AD 2。B 为 Atlanta 指定 AD 5，C 和 D 使用纽约本机地址作为下一跳。浮动路由只有在主路由被撤销时才接管；单靠静态下一跳不保证检测远端所有故障，实际可能需要跟踪机制。",
+    "drag_drop_data": null
   },
   {
     "id": 1361,
@@ -6243,7 +6374,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。相同目的前缀的同类 OSPF intra-area 候选路径按 OSPF 路径代价比较；转发时则对已安装的匹配前缀执行最长前缀匹配。图中静态 1.1.1.3/32 与 OSPF 1.1.1.0/24 重叠，目标为 1.1.1.3 时 /32 更长。图中显示的是不同前缀，不证明它们仅依据 metric 相互竞争。A 的下一跳 IGP 代价是 BGP 等其他选路情境可能使用的条件，因此题目明确限于 OSPF intra-area；B、D 的最高值不符合题设。"
+    "explanation": "C、E。相同目的前缀的同类 OSPF intra-area 候选路径按 OSPF 路径代价比较；转发时则对已安装的匹配前缀执行最长前缀匹配。图中静态 1.1.1.3/32 与 OSPF 1.1.1.0/24 重叠，目标为 1.1.1.3 时 /32 更长。图中显示的是不同前缀，不证明它们仅依据 metric 相互竞争。A 的下一跳 IGP 代价是 BGP 等其他选路情境可能使用的条件，因此题目明确限于 OSPF intra-area；B、D 的最高值不符合题设。",
+    "drag_drop_data": null
   },
   {
     "id": 1362,
@@ -6279,7 +6411,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。HSRP 将同一局域网的多台路由器抽象为共享虚拟 IP 和虚拟 MAC 的网关组；活动路由器转发，备用路由器在符合故障检测和选举条件时可接管，以减少网关单点故障。切换并非必然毫秒级或完全无中断，时间取决于定时器和网络环境。A 描述 BOOTP/DHCP 的地址配置；D 为 DHCP 等配置服务；E 错在声称不需要网关，主机仍使用虚拟网关或其他合适路由。"
+    "explanation": "B、C。HSRP 将同一局域网的多台路由器抽象为共享虚拟 IP 和虚拟 MAC 的网关组；活动路由器转发，备用路由器在符合故障检测和选举条件时可接管，以减少网关单点故障。切换并非必然毫秒级或完全无中断，时间取决于定时器和网络环境。A 描述 BOOTP/DHCP 的地址配置；D 为 DHCP 等配置服务；E 错在声称不需要网关，主机仍使用虚拟网关或其他合适路由。",
+    "drag_drop_data": null
   },
   {
     "id": 1363,
@@ -6315,7 +6448,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。RFC 1918 地址可用于不需要全球唯一地址的内部设备，从而节省公有 IPv4 地址；不同的隔离网络也可以复用相同地址。网络互联时地址重叠仍可能需要重新编址或转换。私网地址本身不提供网关冗余、互联网连接或安全防护；防火墙、访问策略和互联网出口等需要单独设计。原 C 选项把私有地址当成天然安全层，现改为明确的地址复用优势。"
+    "explanation": "B、C。RFC 1918 地址可用于不需要全球唯一地址的内部设备，从而节省公有 IPv4 地址；不同的隔离网络也可以复用相同地址。网络互联时地址重叠仍可能需要重新编址或转换。私网地址本身不提供网关冗余、互联网连接或安全防护；防火墙、访问策略和互联网出口等需要单独设计。原 C 选项把私有地址当成天然安全层，现改为明确的地址复用优势。",
+    "drag_drop_data": null
   },
   {
     "id": 1364,
@@ -6351,7 +6485,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。RFC 1918 地址可在彼此独立的私有网络中复用，从而减少对全球唯一 IPv4 地址的需求。若这些网络后来直连，重叠地址可能造成路由歧义，需规划或转换。A 不成立：私有地址可以在企业 WAN 上传递路由，但不应在公共互联网作为全球可达前缀传播。B 私网地址范围有限；E 本身不提供互联网访问，还需要适当的出口及转换等机制。"
+    "explanation": "C、D。RFC 1918 地址可在彼此独立的私有网络中复用，从而减少对全球唯一 IPv4 地址的需求。若这些网络后来直连，重叠地址可能造成路由歧义，需规划或转换。A 不成立：私有地址可以在企业 WAN 上传递路由，但不应在公共互联网作为全球可达前缀传播。B 私网地址范围有限；E 本身不提供互联网访问，还需要适当的出口及转换等机制。",
+    "drag_drop_data": null
   },
   {
     "id": 1365,
@@ -6387,7 +6522,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。`fe80::2/64` 是可用于链路本地通信的单播地址；`2001:701:104b:1111::1/64` 是全球单播形式。链路两端通信还需使用相应作用域、兼容前缀与正确接口；题目是分别判断地址类型，并非声称这两个不同作用域地址互为一对。A、B 是组播；E 是用于表示 IPv4 端点的 IPv4-mapped IPv6 形式，不应将它当作普通路由器 IPv6 链路接口地址。原 C 含两个 `::` 且一个字段超过四位，已改成有效链路本地地址；原将 E 作为普通接口答案有误。"
+    "explanation": "C、D。`fe80::2/64` 是可用于链路本地通信的单播地址；`2001:701:104b:1111::1/64` 是全球单播形式。链路两端通信还需使用相应作用域、兼容前缀与正确接口；题目是分别判断地址类型，并非声称这两个不同作用域地址互为一对。A、B 是组播；E 是用于表示 IPv4 端点的 IPv4-mapped IPv6 形式，不应将它当作普通路由器 IPv6 链路接口地址。原 C 含两个 `::` 且一个字段超过四位，已改成有效链路本地地址；原将 E 作为普通接口答案有误。",
+    "drag_drop_data": null
   },
   {
     "id": 1366,
@@ -6423,7 +6559,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。题设中，OSPF 比较同一前缀的候选路径时使用 OSPF metric；路由表在该前缀的合格静态路由与 OSPF 最佳路由之间比较管理距离。图中静态路由 `[1/0]` 的 1 为管理距离、0 为度量；图本身未显示所有 OSPF 候选，因此题干给出假设。不能直接用不同协议的 metric 比较优劣。B、D 的最高值不是该题设的优选规则；A 的递归下一跳代价可用于某些协议的选路（例如部分 BGP 场景），并非本题所限定的静态与 OSPF 比较项。"
+    "explanation": "C、E。题设中，OSPF 比较同一前缀的候选路径时使用 OSPF metric；路由表在该前缀的合格静态路由与 OSPF 最佳路由之间比较管理距离。图中静态路由 `[1/0]` 的 1 为管理距离、0 为度量；图本身未显示所有 OSPF 候选，因此题干给出假设。不能直接用不同协议的 metric 比较优劣。B、D 的最高值不是该题设的优选规则；A 的递归下一跳代价可用于某些协议的选路（例如部分 BGP 场景），并非本题所限定的静态与 OSPF 比较项。",
+    "drag_drop_data": null
   },
   {
     "id": 1367,
@@ -6459,7 +6596,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。在 Cisco IOS 常见部署中，DHCP relay 配在接收客户端广播的三层接口，可用 `ip helper-address` 将请求转送给远程服务器；这让一个集中服务器能够服务多个子网，但不意味着必须只使用一台服务器或 relay 必须是默认网关。relay 通常填写 `giaddr`，供服务器确定作用域；具体来源地址、转发目的及策略依部署而定。A 的 DNS 参数通常由 DHCP 服务器提供；C 错在限制为一个 helper，同一接口可配置多个；E 错在只依据 MAC 保留项确定子网。"
+    "explanation": "B、D。在 Cisco IOS 常见部署中，DHCP relay 配在接收客户端广播的三层接口，可用 `ip helper-address` 将请求转送给远程服务器；这让一个集中服务器能够服务多个子网，但不意味着必须只使用一台服务器或 relay 必须是默认网关。relay 通常填写 `giaddr`，供服务器确定作用域；具体来源地址、转发目的及策略依部署而定。A 的 DNS 参数通常由 DHCP 服务器提供；C 错在限制为一个 helper，同一接口可配置多个；E 错在只依据 MAC 保留项确定子网。",
+    "drag_drop_data": null
   },
   {
     "id": 1368,
@@ -6495,7 +6633,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。Syslog 可以通过 UDP 或 TCP 承载。传统 UDP syslog 常用 UDP 514；TLS 保护的 syslog 使用 TCP，标准端口为 6514，明文 TCP 的端口依实现和配置而定。TCP 的重传和顺序交付不能保证应用、服务器故障或连接中断时每条日志都被持久保存。IP 为网络层，ARP 用于地址解析；RTP 常用于实时媒体，不是此处的 syslog 传输协议。"
+    "explanation": "C、D。Syslog 可以通过 UDP 或 TCP 承载。传统 UDP syslog 常用 UDP 514；TLS 保护的 syslog 使用 TCP，标准端口为 6514，明文 TCP 的端口依实现和配置而定。TCP 的重传和顺序交付不能保证应用、服务器故障或连接中断时每条日志都被持久保存。IP 为网络层，ARP 用于地址解析；RTP 常用于实时媒体，不是此处的 syslog 传输协议。",
+    "drag_drop_data": null
   },
   {
     "id": 1369,
@@ -6531,7 +6670,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。GetBulk 可在一条请求中请求多项连续变量，降低遍历大表所需的往返次数；响应仍受消息大小、设备实现等限制。Inform 是需要接收方以 Response 确认的通知，与无需确认的 Trap 是不同 PDU；超时可按配置重试，但重试有限且无法保证 100% 送达。Get、GetNext、Set 已在 SNMPv1 使用，分别用于读取、按字典序读取下一项及写入；单次 Get 或 GetNext 也可包含多个变量绑定。"
+    "explanation": "D、E。GetBulk 可在一条请求中请求多项连续变量，降低遍历大表所需的往返次数；响应仍受消息大小、设备实现等限制。Inform 是需要接收方以 Response 确认的通知，与无需确认的 Trap 是不同 PDU；超时可按配置重试，但重试有限且无法保证 100% 送达。Get、GetNext、Set 已在 SNMPv1 使用，分别用于读取、按字典序读取下一项及写入；单次 Get 或 GetNext 也可包含多个变量绑定。",
+    "drag_drop_data": null
   },
   {
     "id": 1370,
@@ -6567,7 +6707,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。按题设通过 IP 访问、使用本地认证建立 SSH，外部 DNS name-server 与 `service password-encryption` 不是 SSH 建立所必需；本地用户、VTY 认证和 RSA 密钥等仍需按平台配置。该题只判断设置 SSH 的必要性，不建议在已有网络中盲目删除安全相关配置：`service password-encryption` 对某些明文口令提供可逆的 Type 7 混淆，关闭前必须评估其他配置。已生成密钥后，删除 domain/hostname 并不必然立即令现有密钥失效；题干明确比较初始密钥生成前提。密钥长度与算法应遵循设备版本及当前安全策略。"
+    "explanation": "A、C。按题设通过 IP 访问、使用本地认证建立 SSH，外部 DNS name-server 与 `service password-encryption` 不是 SSH 建立所必需；本地用户、VTY 认证和 RSA 密钥等仍需按平台配置。该题只判断设置 SSH 的必要性，不建议在已有网络中盲目删除安全相关配置：`service password-encryption` 对某些明文口令提供可逆的 Type 7 混淆，关闭前必须评估其他配置。已生成密钥后，删除 domain/hostname 并不必然立即令现有密钥失效；题干明确比较初始密钥生成前提。密钥长度与算法应遵循设备版本及当前安全策略。",
+    "drag_drop_data": null
   },
   {
     "id": 1371,
@@ -6603,7 +6744,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。policer 根据令牌桶和配置动作可对超限流量丢弃或重标记，也可能允许符合条件的报文通过；具体动作依策略和平台。它不以排队等待令牌的方式整形。E 的缓存属于整形机制；整形队列也可能溢出并丢包，不能保证零丢失。A 是突发流量特性，D 不是 policing 的动作。"
+    "explanation": "B、C。policer 根据令牌桶和配置动作可对超限流量丢弃或重标记，也可能允许符合条件的报文通过；具体动作依策略和平台。它不以排队等待令牌的方式整形。E 的缓存属于整形机制；整形队列也可能溢出并丢包，不能保证零丢失。A 是突发流量特性，D 不是 policing 的动作。",
+    "drag_drop_data": null
   },
   {
     "id": 1372,
@@ -6639,7 +6781,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。权威服务器回答其负责区域的 DNS 数据；递归解析器可使用缓存或根据委派向其他服务器查询并返回结果。记录可能是 A、AAAA、CNAME 或否定回答，权威服务器并不保证每个名字都直接对应 IP。B、C 是其他服务角色，E 是虚拟化主机角色，三者本身不是 DNS 服务器角色；同一设备另行部署 DNS 的情况不改变角色分类。"
+    "explanation": "A、D。权威服务器回答其负责区域的 DNS 数据；递归解析器可使用缓存或根据委派向其他服务器查询并返回结果。记录可能是 A、AAAA、CNAME 或否定回答，权威服务器并不保证每个名字都直接对应 IP。B、C 是其他服务角色，E 是虚拟化主机角色，三者本身不是 DNS 服务器角色；同一设备另行部署 DNS 的情况不改变角色分类。",
+    "drag_drop_data": null
   },
   {
     "id": 1373,
@@ -6675,7 +6818,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。图中 Gi0/1 已配置 access 与 port-security。`switchport port-security mac-address sticky` 动态学习并将 sticky 条目加入 running-config；如需重启后保留，还须保存配置。`violation restrict` 对违反安全 MAC 规则的流量丢弃、计数并按设备配置记录日志，端口保持启用。B 是手工指定 MAC；C 只调整上限；D 会使端口 err-disabled。普通动态安全 MAC 无需 sticky 也可学习，因此题目特别要求写入运行配置。"
+    "explanation": "A、E。图中 Gi0/1 已配置 access 与 port-security。`switchport port-security mac-address sticky` 动态学习并将 sticky 条目加入 running-config；如需重启后保留，还须保存配置。`violation restrict` 对违反安全 MAC 规则的流量丢弃、计数并按设备配置记录日志，端口保持启用。B 是手工指定 MAC；C 只调整上限；D 会使端口 err-disabled。普通动态安全 MAC 无需 sticky 也可学习，因此题目特别要求写入运行配置。",
+    "drag_drop_data": null
   },
   {
     "id": 1374,
@@ -6711,7 +6855,8 @@
       "C",
       "E"
     ],
-    "explanation": "C、E。ESP（IP 协议号 50）可按安全关联配置提供机密性、完整性、数据源认证和防重放；并非每项均无条件启用。AH（IP 协议号 51）提供完整性及数据源认证等保护，但自身不提供加密；它验证 IP 头中不可变的部分，通常与改写地址的 NAT 不兼容。AES 和 3DES 是算法，TLS 是另一安全协议。IKE 也属于 IPsec 密钥管理，不应把整个 IPsec 架构简化为只有两个协议。"
+    "explanation": "C、E。ESP（IP 协议号 50）可按安全关联配置提供机密性、完整性、数据源认证和防重放；并非每项均无条件启用。AH（IP 协议号 51）提供完整性及数据源认证等保护，但自身不提供加密；它验证 IP 头中不可变的部分，通常与改写地址的 NAT 不兼容。AES 和 3DES 是算法，TLS 是另一安全协议。IKE 也属于 IPsec 密钥管理，不应把整个 IPsec 架构简化为只有两个协议。",
+    "drag_drop_data": null
   },
   {
     "id": 1375,
@@ -6747,7 +6892,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。WPA3-Enterprise 192-bit 安全套件使用 AES-256-GCMP 等算法；192-bit 指套件的安全级别，不是 AES 的 192 位密钥。WPA3-Personal 使用 SAE，WPA2-Personal 使用 PSK；两者都可使用 AES 数据加密，认证方式不能直接与 AES 对比。SAE 可缓解被动抓包后的离线字典攻击，但不能保证弱密码或所有实现绝对安全；迁移模式可同时支持 WPA2。A/B/E 混淆密钥位数、认证与密码算法或将 TKIP 作为 WPA2 唯一方式。"
+    "explanation": "C、D。WPA3-Enterprise 192-bit 安全套件使用 AES-256-GCMP 等算法；192-bit 指套件的安全级别，不是 AES 的 192 位密钥。WPA3-Personal 使用 SAE，WPA2-Personal 使用 PSK；两者都可使用 AES 数据加密，认证方式不能直接与 AES 对比。SAE 可缓解被动抓包后的离线字典攻击，但不能保证弱密码或所有实现绝对安全；迁移模式可同时支持 WPA2。A/B/E 混淆密钥位数、认证与密码算法或将 TKIP 作为 WPA2 唯一方式。",
+    "drag_drop_data": null
   },
   {
     "id": 1376,
@@ -6783,7 +6929,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。DMVPN 可结合 mGRE、NHRP 与 IPsec，为适当配置的分支提供动态 spoke-to-spoke 通信；GET VPN 适合私有可路由 WAN，以密钥服务器管理组加密并保留 IP 头用于底层路由。两者仍有封装、平台、密钥和路由开销及规模限制。C 是更宽泛的站点互联类别，题设要具体命名技术；D/E 通常面向远程用户。普通 site-to-site 的扩展性取决于架构，不能一概排除其用于分支。"
+    "explanation": "A、B。DMVPN 可结合 mGRE、NHRP 与 IPsec，为适当配置的分支提供动态 spoke-to-spoke 通信；GET VPN 适合私有可路由 WAN，以密钥服务器管理组加密并保留 IP 头用于底层路由。两者仍有封装、平台、密钥和路由开销及规模限制。C 是更宽泛的站点互联类别，题设要具体命名技术；D/E 通常面向远程用户。普通 site-to-site 的扩展性取决于架构，不能一概排除其用于分支。",
+    "drag_drop_data": null
   },
   {
     "id": 1377,
@@ -6819,7 +6966,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。在控制器提供相应接口时，应用可通过 REST 风格的 HTTP API 或 SOAP Web 服务请求控制器。北向/南向描述的是系统中的接口位置，不是协议天生固定属性；NETCONF 常用于控制器对设备的配置，OpenFlow 常用于控制转发，OpFlex 用于策略控制。不同产品的可用接口和方向应以具体实现为准。REST 是架构风格，SOAP 是消息协议，并非每个控制器都同时支持二者。"
+    "explanation": "A、C。在控制器提供相应接口时，应用可通过 REST 风格的 HTTP API 或 SOAP Web 服务请求控制器。北向/南向描述的是系统中的接口位置，不是协议天生固定属性；NETCONF 常用于控制器对设备的配置，OpenFlow 常用于控制转发，OpFlex 用于策略控制。不同产品的可用接口和方向应以具体实现为准。REST 是架构风格，SOAP 是消息协议，并非每个控制器都同时支持二者。",
+    "drag_drop_data": null
   },
   {
     "id": 1378,
@@ -6855,7 +7003,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。GET 请求获取目标资源的表示；POST 向资源提交数据，由服务定义处理语义，可用于创建或触发操作。GET 的安全性指客户端未请求状态更改，服务器仍可能记录日志；POST 不保证幂等但特定 API 可实现幂等。A、B、E 不是通常使用的标准 HTTP 核心方法；HTTP 支持扩展方法。REST 是架构风格，不限于 HTTP。"
+    "explanation": "C、D。GET 请求获取目标资源的表示；POST 向资源提交数据，由服务定义处理语义，可用于创建或触发操作。GET 的安全性指客户端未请求状态更改，服务器仍可能记录日志；POST 不保证幂等但特定 API 可实现幂等。A、B、E 不是通常使用的标准 HTTP 核心方法；HTTP 支持扩展方法。REST 是架构风格，不限于 HTTP。",
+    "drag_drop_data": null
   },
   {
     "id": 1379,
@@ -6891,7 +7040,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。PUT 通常替换目标资源的表示，语义上幂等；PATCH 应用补丁文档，通常用于部分更新，是否幂等取决于补丁及 API。GET 常用于读取，DELETE 常用于删除；POST 常用于创建或提交处理，也可被特定 API 设计用于更新，因此映射并非严格一一对应。具体支持的操作和字段应以服务契约为准。"
+    "explanation": "A、E。PUT 通常替换目标资源的表示，语义上幂等；PATCH 应用补丁文档，通常用于部分更新，是否幂等取决于补丁及 API。GET 常用于读取，DELETE 常用于删除；POST 常用于创建或提交处理，也可被特定 API 设计用于更新，因此映射并非严格一一对应。具体支持的操作和字段应以服务契约为准。",
+    "drag_drop_data": null
   },
   {
     "id": 1380,
@@ -6927,7 +7077,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。Cisco AireOS 8.7 的 service-port 支持列表包含 SSH 与 Telnet，也列出 HTTP(S)、SNMP、FTP/TFTP/SFTP、syslog、ICMP 和 NTP，并说明该版本不支持经 service-port 使用 TACACS+ 和 RADIUS。SCP 不在该版本所列协议中。该服务端口不能配置默认网关，访问远端网络可按文档配置静态路由。限制取决于平台与版本：Catalyst 9800 IOS XE 17.6 及以后列有 RADIUS/TACACS+ 支持，不能将 AireOS 的限制推广到全部 WLC。Telnet 为明文，实际管理优先使用 SSH。"
+    "explanation": "A、D。Cisco AireOS 8.7 的 service-port 支持列表包含 SSH 与 Telnet，也列出 HTTP(S)、SNMP、FTP/TFTP/SFTP、syslog、ICMP 和 NTP，并说明该版本不支持经 service-port 使用 TACACS+ 和 RADIUS。SCP 不在该版本所列协议中。该服务端口不能配置默认网关，访问远端网络可按文档配置静态路由。限制取决于平台与版本：Catalyst 9800 IOS XE 17.6 及以后列有 RADIUS/TACACS+ 支持，不能将 AireOS 的限制推广到全部 WLC。Telnet 为明文，实际管理优先使用 SSH。",
+    "drag_drop_data": null
   },
   {
     "id": 1381,
@@ -6963,7 +7114,8 @@
       "A",
       "D"
     ],
-    "explanation": "A、D。RFC 1918 私有地址空间是 `10.0.0.0/8`、`172.16.0.0/12` 和 `192.168.0.0/16`。A 属于第一个范围，D 属于第二个范围；B、C（172.15）及 E（192.169）均不在这三块中。私网地址用于内部寻址，通常不会在公共互联网作为全球可达地址路由；具体某个地址是否可作为主机地址还取决于部署的子网掩码。"
+    "explanation": "A、D。RFC 1918 私有地址空间是 `10.0.0.0/8`、`172.16.0.0/12` 和 `192.168.0.0/16`。A 属于第一个范围，D 属于第二个范围；B、C（172.15）及 E（192.169）均不在这三块中。私网地址用于内部寻址，通常不会在公共互联网作为全球可达地址路由；具体某个地址是否可作为主机地址还取决于部署的子网掩码。",
+    "drag_drop_data": null
   },
   {
     "id": 1382,
@@ -6999,7 +7151,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。PortFast 边缘端口正常上线时可直接进入 forwarding，减少终端启动时等待；普通边缘端口链路上下线不触发对应拓扑变更通知。PortFast 仍运行 STP，也不能保证免受其他端口引起的拓扑变化影响；接收 BPDU、配置 BPDU Guard/Filter 或平台行为会改变处理方式。限制 MAC 数量是 port security，PortFast 本身不阻止其他主机。"
+    "explanation": "B、D。PortFast 边缘端口正常上线时可直接进入 forwarding，减少终端启动时等待；普通边缘端口链路上下线不触发对应拓扑变更通知。PortFast 仍运行 STP，也不能保证免受其他端口引起的拓扑变化影响；接收 BPDU、配置 BPDU Guard/Filter 或平台行为会改变处理方式。限制 MAC 数量是 port security，PortFast 本身不阻止其他主机。",
+    "drag_drop_data": null
   },
   {
     "id": 1383,
@@ -7035,7 +7188,8 @@
       "A",
       "E"
     ],
-    "explanation": "A、E。Hypervisor 在同一物理主机上运行多个使用虚拟硬件的客体，客体系统实例可彼此独立启动和停止；实际通信由虚拟网络和访问策略决定。资源配额、调度和性能不必相等；共享宿主或存储故障仍可能同时影响多个 VM。客体运行依赖其虚拟硬件与虚拟化环境，不能认为彼此绝对隔离或永不受影响。"
+    "explanation": "A、E。Hypervisor 在同一物理主机上运行多个使用虚拟硬件的客体，客体系统实例可彼此独立启动和停止；实际通信由虚拟网络和访问策略决定。资源配额、调度和性能不必相等；共享宿主或存储故障仍可能同时影响多个 VM。客体运行依赖其虚拟硬件与虚拟化环境，不能认为彼此绝对隔离或永不受影响。",
+    "drag_drop_data": null
   },
   {
     "id": 1384,
@@ -7071,7 +7225,8 @@
       "D",
       "E"
     ],
-    "explanation": "D、E。网络钓鱼通过冒充可信方诱使用户交出信息；pharming 可结合 DNS 或终端篡改将用户引向伪造站点，其最终凭据窃取环节可使用社会工程。普通电话不必然是攻击，但欺骗性电话（vishing）可以是社会工程；恶意广告也可能使用社会工程，不应按传播渠道一概排除。"
+    "explanation": "D、E。网络钓鱼通过冒充可信方诱使用户交出信息；pharming 可结合 DNS 或终端篡改将用户引向伪造站点，其最终凭据窃取环节可使用社会工程。普通电话不必然是攻击，但欺骗性电话（vishing）可以是社会工程；恶意广告也可能使用社会工程，不应按传播渠道一概排除。",
+    "drag_drop_data": null
   },
   {
     "id": 1385,
@@ -7107,7 +7262,8 @@
       "A",
       "B"
     ],
-    "explanation": "A、B。支持对应特性的企业防火墙可以执行 URL 策略并作为站点间 IPsec VPN 端点，实际效果受型号、许可、配置及可见流量限制。不能假定防火墙无需策略即可阻止所有攻击；PoE 供电与无线接入点功能并非题设防火墙的这两项能力。原多上下文远程接入 VPN 干扰项并不普遍错误：Cisco ASA 从 9.5(2) 起支持部分此类功能，故已替换，不能把 standalone 等同于 single-context。"
+    "explanation": "A、B。支持对应特性的企业防火墙可以执行 URL 策略并作为站点间 IPsec VPN 端点，实际效果受型号、许可、配置及可见流量限制。不能假定防火墙无需策略即可阻止所有攻击；PoE 供电与无线接入点功能并非题设防火墙的这两项能力。原多上下文远程接入 VPN 干扰项并不普遍错误：Cisco ASA 从 9.5(2) 起支持部分此类功能，故已替换，不能把 standalone 等同于 single-context。",
+    "drag_drop_data": null
   },
   {
     "id": 1386,
@@ -7143,7 +7299,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。B 全局启用 DHCP snooping、在 VLAN 10 和 20 启用并信任合法 DHCP 服务器方向；E 在这两个 VLAN 启用 DAI 并信任题设可信的上行口。DAI 检查非信任端口收到的 ARP，可使用 snooping 绑定；静态地址可按平台配置 ARP ACL，不能认为只能依赖 DHCP。信任口会绕过对应检查，因此应只信任可信上游，而非所有上联都必然可信。A/C 缺少完整 snooping 条件；D 将接口级信任命令放在全局且没有对 VLAN 启用 DAI。"
+    "explanation": "B、E。B 全局启用 DHCP snooping、在 VLAN 10 和 20 启用并信任合法 DHCP 服务器方向；E 在这两个 VLAN 启用 DAI 并信任题设可信的上行口。DAI 检查非信任端口收到的 ARP，可使用 snooping 绑定；静态地址可按平台配置 ARP ACL，不能认为只能依赖 DHCP。信任口会绕过对应检查，因此应只信任可信上游，而非所有上联都必然可信。A/C 缺少完整 snooping 条件；D 将接口级信任命令放在全局且没有对 VLAN 启用 DAI。",
+    "drag_drop_data": null
   },
   {
     "id": 1387,
@@ -7179,7 +7336,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。DHCP 服务器可集中管理地址池和租约，并向客户端提供动态地址及其他配置参数。典型初始流程中客户端发送 DHCPDISCOVER，服务器回复 DHCPOFFER，客户端发送 DHCPREQUEST，服务器确认 DHCPACK；续租等流程可能不同。DHCPOFFER 是服务器消息而非客户端请求，DHCP 本身也不能阻止客户端手动设置地址；新配置通常需客户端续租或重新获取后生效。"
+    "explanation": "C、D。DHCP 服务器可集中管理地址池和租约，并向客户端提供动态地址及其他配置参数。典型初始流程中客户端发送 DHCPDISCOVER，服务器回复 DHCPOFFER，客户端发送 DHCPREQUEST，服务器确认 DHCPACK；续租等流程可能不同。DHCPOFFER 是服务器消息而非客户端请求，DHCP 本身也不能阻止客户端手动设置地址；新配置通常需客户端续租或重新获取后生效。",
+    "drag_drop_data": null
   },
   {
     "id": 1388,
@@ -7215,7 +7373,8 @@
       "B",
       "E"
     ],
-    "explanation": "B、E。图中 LAN 为 `2001:db8:0:afff::/64`，Gi0/0 使用 B 的 EUI-64 接口 ID；WAN 图示第七组为 `acbd`，末组 `fa0`，/127 包含末组 `fa0` 和 `fa1`，E 按题设在 Gi0/1 手动使用首地址。C 的 `fa2` 属于下一个 /127；A 接口与地址不符，D 的 LAN 前缀不同。原选项误写 `abcd:fa00` 且在 / 前多出冒号，与图不符，已修正。地址冲突与 IPv6 转发还须按实际部署核验；2001:db8::/32 是文档示例地址。"
+    "explanation": "B、E。图中 LAN 为 `2001:db8:0:afff::/64`，Gi0/0 使用 B 的 EUI-64 接口 ID；WAN 图示第七组为 `acbd`，末组 `fa0`，/127 包含末组 `fa0` 和 `fa1`，E 按题设在 Gi0/1 手动使用首地址。C 的 `fa2` 属于下一个 /127；A 接口与地址不符，D 的 LAN 前缀不同。原选项误写 `abcd:fa00` 且在 / 前多出冒号，与图不符，已修正。地址冲突与 IPv6 转发还须按实际部署核验；2001:db8::/32 是文档示例地址。",
+    "drag_drop_data": null
   },
   {
     "id": 1389,
@@ -7251,7 +7410,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。VRRP 将多台路由器组织为虚拟网关，活动设备故障时可由备份设备接管，提供首跳冗余。单个虚拟路由器通常由一台活动路由器转发；通过多个 VRRP 组、不同活动路由器及主机默认网关分配可实现流量分担，但协议本身不保证均衡，切换也会有检测和收敛时间。QoS、动态路由更新和带宽优化不是 VRRP 的基本功能。"
+    "explanation": "A、C。VRRP 将多台路由器组织为虚拟网关，活动设备故障时可由备份设备接管，提供首跳冗余。单个虚拟路由器通常由一台活动路由器转发；通过多个 VRRP 组、不同活动路由器及主机默认网关分配可实现流量分担，但协议本身不保证均衡，切换也会有检测和收敛时间。QoS、动态路由更新和带宽优化不是 VRRP 的基本功能。",
+    "drag_drop_data": null
   },
   {
     "id": 1390,
@@ -7287,7 +7447,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。Client Band Select 通过控制 2.4 GHz 探测响应鼓励具备条件的双频客户端使用 5 GHz；最终选择仍由客户端及射频环境决定，不能保证强制关联。Allow AAA Override 允许受支持的 RADIUS 授权属性覆盖 WLAN 策略，例如在认证及 VLAN 映射均正确时动态应用 VLAN。覆盖洞检测、管理帧保护和 Aironet IE 不分别完成这两项需求；MFP 保护管理帧而非加密全部数据。"
+    "explanation": "A、C。Client Band Select 通过控制 2.4 GHz 探测响应鼓励具备条件的双频客户端使用 5 GHz；最终选择仍由客户端及射频环境决定，不能保证强制关联。Allow AAA Override 允许受支持的 RADIUS 授权属性覆盖 WLAN 策略，例如在认证及 VLAN 映射均正确时动态应用 VLAN。覆盖洞检测、管理帧保护和 Aironet IE 不分别完成这两项需求；MFP 保护管理帧而非加密全部数据。",
+    "drag_drop_data": null
   },
   {
     "id": 1391,
@@ -7323,7 +7484,8 @@
       "A",
       "C"
     ],
-    "explanation": "A、C。视频监控可记录或帮助检测人员进入受保护场所；工牌门禁可限制谁能进入指定区域。监控本身不一定主动阻止进入，也不保证全天有效。B、D、E 是安全政策、培训或信息宣导，属于管理性措施，而非直接的物理入口控制。"
+    "explanation": "A、C。视频监控可记录或帮助检测人员进入受保护场所；工牌门禁可限制谁能进入指定区域。监控本身不一定主动阻止进入，也不保证全天有效。B、D、E 是安全政策、培训或信息宣导，属于管理性措施，而非直接的物理入口控制。",
+    "drag_drop_data": null
   },
   {
     "id": 1392,
@@ -7359,7 +7521,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。标准 ACL 的通配符 `0.0.0.255` 匹配源网络 203.0.113.0/24，在 VTY 上以 `access-class Management in` 应用于入向登录，不将该限制施加给交换机转发流量。ACL 的隐式拒绝会拒绝其他来源；SSH、身份认证和网络可达性仍须另行正确配置。`access-class` 只解决题设 VTY 访问，并不自动限制 HTTPS、SNMP 或其他管理协议。\n\nA 是接口 ACL，可能影响该接口上的匹配流量；D 的通配符并非 /24（不能简单当作子网掩码）；E 将 22–23 写在源端口位置且目的地址方向不合题意。"
+    "explanation": "B、C。标准 ACL 的通配符 `0.0.0.255` 匹配源网络 203.0.113.0/24，在 VTY 上以 `access-class Management in` 应用于入向登录，不将该限制施加给交换机转发流量。ACL 的隐式拒绝会拒绝其他来源；SSH、身份认证和网络可达性仍须另行正确配置。`access-class` 只解决题设 VTY 访问，并不自动限制 HTTPS、SNMP 或其他管理协议。\n\nA 是接口 ACL，可能影响该接口上的匹配流量；D 的通配符并非 /24（不能简单当作子网掩码）；E 将 22–23 写在源端口位置且目的地址方向不合题意。",
+    "drag_drop_data": null
   },
   {
     "id": 1393,
@@ -7395,7 +7558,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。DHCP 可集中分配网络参数并降低逐台维护客户端地址的工作量；动态地址租约还可设定有效期。客户端可以续租，实际能否再次使用同一地址取决于服务器策略和可用性；DHCP 不保证永不耗尽地址池，也没有固定的省时百分比。\n\nA 的逐台手工配置不是这里的主要优势；D 的最佳路径由路由机制决定；E 的名称解析由 DNS 提供，虽然 DHCP 可向客户端提供 DNS 服务器地址。"
+    "explanation": "B、C。DHCP 可集中分配网络参数并降低逐台维护客户端地址的工作量；动态地址租约还可设定有效期。客户端可以续租，实际能否再次使用同一地址取决于服务器策略和可用性；DHCP 不保证永不耗尽地址池，也没有固定的省时百分比。\n\nA 的逐台手工配置不是这里的主要优势；D 的最佳路径由路由机制决定；E 的名称解析由 DNS 提供，虽然 DHCP 可向客户端提供 DNS 服务器地址。",
+    "drag_drop_data": null
   },
   {
     "id": 1394,
@@ -7431,7 +7595,8 @@
       "B",
       "C"
     ],
-    "explanation": "B、C。认证核验用户声称的身份，可依据凭据返回接受或拒绝；不同认证协议的交互方式不同，并不总是向用户发起相同的质询。记账记录会话开始、结束、用量或其他事件，可用于审计和计费；授权决定已认证主体可以使用哪些资源。日志具体内容取决于配置与协议。"
+    "explanation": "B、C。认证核验用户声称的身份，可依据凭据返回接受或拒绝；不同认证协议的交互方式不同，并不总是向用户发起相同的质询。记账记录会话开始、结束、用量或其他事件，可用于审计和计费；授权决定已认证主体可以使用哪些资源。日志具体内容取决于配置与协议。",
+    "drag_drop_data": null
   },
   {
     "id": 1395,
@@ -7467,7 +7632,8 @@
       "C",
       "D"
     ],
-    "explanation": "C、D。图中 PSK 已勾选而 WPA2 Policy 与 MAC Filtering 均未勾选；启用 WPA2 Policy 并开启 MAC 过滤，使配置好的本地或 RADIUS 允许列表参与客户端准入。还需要配置兼容的 WPA2 加密算法、WLAN 状态及网络连通性。MAC 地址可以被伪造，MAC 过滤不能单独保证只有预期设备接入。\n\nA 的 OSEN 面向不同安全场景；B 的 802.1X 和 E 的 CCKM 不是题设 PSK 所需的选项。不同控制器/版本可能支持不同组合。"
+    "explanation": "C、D。图中 PSK 已勾选而 WPA2 Policy 与 MAC Filtering 均未勾选；启用 WPA2 Policy 并开启 MAC 过滤，使配置好的本地或 RADIUS 允许列表参与客户端准入。还需要配置兼容的 WPA2 加密算法、WLAN 状态及网络连通性。MAC 地址可以被伪造，MAC 过滤不能单独保证只有预期设备接入。\n\nA 的 OSEN 面向不同安全场景；B 的 802.1X 和 E 的 CCKM 不是题设 PSK 所需的选项。不同控制器/版本可能支持不同组合。",
+    "drag_drop_data": null
   },
   {
     "id": 1396,
@@ -7503,7 +7669,8 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。图中已勾选 WPA2 Policy；在 WPA2/WPA3 Encryption 区域选择 AES (CCMP128)，并在 Auth Key Mgmt 选择 PSK，再设置符合要求的预共享密钥。AES-CCMP128 是题设指定的加密套件，PSK 是密钥管理方式；前者不是 AKM 选项。802.1X 用于企业认证而非题设 PSK，旧 WPA Policy 不是启用 WPA2 所需的设置。双频可用性还取决于 WLAN、AP 和射频配置。"
+    "explanation": "B、D。图中已勾选 WPA2 Policy；在 WPA2/WPA3 Encryption 区域选择 AES (CCMP128)，并在 Auth Key Mgmt 选择 PSK，再设置符合要求的预共享密钥。AES-CCMP128 是题设指定的加密套件，PSK 是密钥管理方式；前者不是 AKM 选项。802.1X 用于企业认证而非题设 PSK，旧 WPA Policy 不是启用 WPA2 所需的设置。双频可用性还取决于 WLAN、AP 和射频配置。",
+    "drag_drop_data": null
   },
   {
     "id": 1397,
@@ -7539,6 +7706,7 @@
       "B",
       "D"
     ],
-    "explanation": "B、D。选择 PSK、将格式设为 ASCII 并输入题设文本密钥；再勾选 WPA2 Policy 和 AES。`Cisc0123456` 为 11 个字符，符合该界面 ASCII PSK 的 8–63 字符范围；64 个十六进制字符是另一种原始密钥格式。题设要求仅 AES，E 额外启用 TKIP，不符合条件；CCKM 不是所需 PSK，留空 AKM 也不能完成 PSK 配置。图示显示的是选择 WPA+WPA2 前的界面，题干说明所选状态。"
+    "explanation": "B、D。选择 PSK、将格式设为 ASCII 并输入题设文本密钥；再勾选 WPA2 Policy 和 AES。`Cisc0123456` 为 11 个字符，符合该界面 ASCII PSK 的 8–63 字符范围；64 个十六进制字符是另一种原始密钥格式。题设要求仅 AES，E 额外启用 TKIP，不符合条件；CCKM 不是所需 PSK，留空 AKM 也不能完成 PSK 配置。图示显示的是选择 WPA+WPA2 前的界面，题干说明所选状态。",
+    "drag_drop_data": null
   }
 ]
