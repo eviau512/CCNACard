@@ -26,9 +26,11 @@ let appState = {
   antiDejaVuMigratedV3: true,
   shuffleOptions: true,     // default true: randomize option order (需要乱序选项)
   hideMastered: false,      // optional: completely exclude mastered cards
+  excludeSimLabs: false,    // optional: skip Simulation / Lab questions
   deckMode: 'smart',        // 'smart' | 'weak' | 'bookmarks' | 'domain' | 'topic' | 'type'
   domainFilter: '',         // active CCNA domain filter if any
-  drillTopic: null          // active topic/mode drill label if any
+  drillTopic: null,         // active topic/mode drill label if any
+  hapticDuration: 80        // custom haptic intensity 0-100% (0 = disabled, 80 = crisp standard active-braked)
 };
 
 let currentWindow = 50; // 50 / 200 / 500
@@ -187,7 +189,7 @@ const SrsEngine = {
 
     if (mEff <= 0.01) return 0.0;
 
-    const totalQ = (allQuestions && allQuestions.length) ? allQuestions.length : 1396;
+    const totalQ = (allQuestions && allQuestions.length) ? allQuestions.length : 1395;
     const nSeen = seenCountOverride !== null
       ? seenCountOverride
       : Math.max(1, Object.keys(appState.masteredIds || {}).length);
@@ -389,6 +391,22 @@ const SrsEngine = {
 // 2. Continuous Probabilistic Deck Scheduler (DeckScheduler)
 // =========================================================================
 const DeckScheduler = {
+  drawLog: [],
+  logDrawEvent(ev) {
+    if (!Array.isArray(this.drawLog)) this.drawLog = [];
+    if (this.drawLog.length > 0) {
+      const last = this.drawLog[this.drawLog.length - 1];
+      if (last.qid === ev.qid && last.cardIndex === ev.cardIndex && last.mode === ev.mode) {
+        return;
+      }
+    }
+    this.drawLog.push(ev);
+    if (this.drawLog.length > 100) {
+      this.drawLog = this.drawLog.slice(-100);
+    }
+    console.log(`[DeckScheduler] Card #${ev.qid} drawn (${ev.reason}) - Mode: ${ev.mode}, Pos: ${ev.cardIndex}/${ev.queueLen}`);
+  },
+
   getWeakTopicsSet() {
     const recent = (appState.history || []).slice(-100);
     const topics = new Set();
@@ -401,6 +419,9 @@ const DeckScheduler = {
   },
 
   buildSmartQueue(pool) {
+    if (appState.excludeSimLabs && Array.isArray(pool)) {
+      pool = pool.filter(q => q.type !== 'Simulation / Lab');
+    }
     SrsEngine.syncActiveMistakeSet();
     const weakTopics = this.getWeakTopicsSet();
     const stepNow = appState.totalSteps || 0;
@@ -528,18 +549,28 @@ const DeckScheduler = {
       } else {
         result.push(unseenCombined[ui++]);
         s++;
-        if (result.length >= nextMasteredAt && mi < Math.min(shufMastered.length, maxSprinkledMastered)) {
-          result.push(shufMastered[mi++]);
+        if (!appState.hideMastered && result.length >= nextMasteredAt && mi < Math.min(shufMastered.length, maxSprinkledMastered)) {
+          const probeQ = { ...shufMastered[mi++], _drawSource: 'mastered_probe' };
+          result.push(probeQ);
           nextMasteredAt = result.length + SrsEngine.randomInt(16, 28);
         }
       }
     }
 
-    while (mi < shufMastered.length) {
-      result.push(shufMastered[mi++]);
+    if (!appState.hideMastered) {
+      while (mi < shufMastered.length) {
+        result.push(shufMastered[mi++]);
+      }
     }
 
     if (result.length === 0 && pool.length > 0) {
+      if (appState.hideMastered) {
+        const unmasteredPool = pool.filter(q => appState.masteredIds[q.id] !== true);
+        if (unmasteredPool.length > 0) {
+          return shuffle(unmasteredPool).map(q => ({ ...q, isRetry: false }));
+        }
+        return [];
+      }
       return shuffle(pool).map(q => ({ ...q, isRetry: false }));
     }
     return result;
@@ -577,6 +608,8 @@ const DeckScheduler = {
       snap.entries.forEach(e => {
         const baseQ = questionById[e.id];
         if (baseQ) {
+          if (appState.excludeSimLabs && baseQ.type === 'Simulation / Lab') return;
+          if (appState.hideMastered && appState.masteredIds[baseQ.id] === true) return;
           restored.push({
             ...baseQ,
             isRetry: Boolean(e.r),
@@ -586,7 +619,13 @@ const DeckScheduler = {
       });
       if (restored.length === 0) return false;
       const inSnap = new Set(restored.map(q => q.id));
-      const tailPool = allQuestions.filter(q => !inSnap.has(q.id));
+      let tailPool = allQuestions.filter(q => !inSnap.has(q.id));
+      if (appState.excludeSimLabs) {
+        tailPool = tailPool.filter(q => q.type !== 'Simulation / Lab');
+      }
+      if (appState.hideMastered) {
+        tailPool = tailPool.filter(q => appState.masteredIds[q.id] !== true);
+      }
       const tailQueue = this.buildSmartQueue(tailPool);
       activeQueue = restored.concat(tailQueue);
       currentIndex = Math.min(Math.max(0, snap.savedIndex || 0), restored.length - 1);
@@ -1246,6 +1285,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   loadStoredState();
   initTheme();
   initLightboxGestures();
+  IdkHoldManager.init();
   await loadQuestionData();
   SrsEngine.migrateFromLegacyState();
   if (!DeckScheduler.restoreSessionSnapshot()) {
@@ -1281,6 +1321,13 @@ function loadStoredState() {
           parsed.retryInterval = 25;
         }
         parsed.antiDejaVuMigratedV3 = true;
+      }
+      if (!parsed.hapticMigratedNative) {
+        parsed.hapticDuration = 80;
+        parsed.hapticMigratedNative = true;
+      }
+      if (parsed.excludeSimLabs !== undefined) {
+        parsed.excludeSimLabs = Boolean(parsed.excludeSimLabs);
       }
       appState = Object.assign(appState, parsed);
     }
@@ -1400,8 +1447,11 @@ function syncDrillBannerUI() {
 
 function setupPracticeQueue(filterTopic = null) {
   let pool = allQuestions;
+  if (appState.excludeSimLabs) {
+    pool = pool.filter(q => q.type !== 'Simulation / Lab');
+  }
   if (filterTopic) {
-    const matched = allQuestions.filter(q => q.topic === filterTopic || q.domain === filterTopic);
+    const matched = pool.filter(q => q.topic === filterTopic || q.domain === filterTopic);
     if (matched.length > 0) {
       pool = matched;
       appState.deckMode = 'topic';
@@ -1424,8 +1474,10 @@ function setupPracticeQueue(filterTopic = null) {
 
 function switchDeckMode(mode) {
   if (mode === 'bookmarks') {
-    const bIds = Object.keys(appState.bookmarkedIds || {}).filter(k => appState.bookmarkedIds[k]);
-    const pool = allQuestions.filter(q => appState.bookmarkedIds[q.id]);
+    let pool = allQuestions.filter(q => appState.bookmarkedIds[q.id]);
+    if (appState.excludeSimLabs) {
+      pool = pool.filter(q => q.type !== 'Simulation / Lab');
+    }
     if (pool.length === 0) {
       showToast('⭐ No bookmarked questions yet! Tap ★ on any card to bookmark it.');
       return;
@@ -1444,10 +1496,13 @@ function switchDeckMode(mode) {
   }
 
   if (mode === 'weak') {
-    const pool = allQuestions.filter(q => {
+    let pool = allQuestions.filter(q => {
       const st = appState.cardStats && appState.cardStats[q.id];
       return appState.masteredIds[q.id] === false || (st && (st.box === 0 || st.box === 1 || (st.everWrong && !appState.masteredIds[q.id])));
     });
+    if (appState.excludeSimLabs) {
+      pool = pool.filter(q => q.type !== 'Simulation / Lab');
+    }
     if (pool.length === 0) {
       showToast('🎉 Zero unresolved weak/wrong questions! Keep practicing in Smart Mode.');
       return;
@@ -1462,6 +1517,29 @@ function switchDeckMode(mode) {
     updateHeaderStats();
     saveState();
     showToast(`📕 Loaded ${pool.length} wrong/weak questions for targeted review`);
+    return;
+  }
+
+  if (mode === 'random') {
+    let pool = [...allQuestions];
+    if (appState.excludeSimLabs) {
+      pool = pool.filter(q => q.type !== 'Simulation / Lab');
+    }
+    if (appState.hideMastered) {
+      pool = pool.filter(q => appState.masteredIds[q.id] !== true);
+    }
+    pool = shuffle(pool).map(q => ({ ...q, isRetry: false }));
+    appState.deckMode = 'random';
+    const label = appState.hideMastered ? '仅未掌握' : '全题库';
+    appState.drillTopic = `🎲 Pure Random (${label} ${pool.length.toLocaleString()} Qs)`;
+    syncDrillBannerUI();
+    activeQueue = pool;
+    currentIndex = 0;
+    closeModals();
+    renderCurrentCard();
+    updateHeaderStats();
+    saveState();
+    showToast(`🎲 真随机模式已就绪 (${label})！共 ${pool.length.toLocaleString()} 题`);
     return;
   }
 
@@ -1486,7 +1564,10 @@ function filterByDomain(domainName) {
     showToast('📚 Showing all 6 CCNA Domains');
     return;
   }
-  const pool = allQuestions.filter(q => q.domain === domainName);
+  let pool = allQuestions.filter(q => q.domain === domainName);
+  if (appState.excludeSimLabs) {
+    pool = pool.filter(q => q.type !== 'Simulation / Lab');
+  }
   if (pool.length === 0) {
     showToast(`No questions found for domain ${domainName}`);
     return;
@@ -1536,12 +1617,20 @@ function formatMarkdown(text) {
 
   // 3. Escape HTML
   out = out.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // Allow safe formatting tags in markdown and tables: <br>, <br/>, <br />
+  out = out.replace(/&lt;br\s*\/?&gt;/gi, '<br>');
+
+  // Normalize common LaTeX arrow sequences and fix corrupted \r+ightarrow
+  out = out.replace(/\\rightarrow/g, '→')
+           .replace(/\\to/g, '→')
+           .replace(/\r?ightarrow/g, '→');
 
   // 4. LaTeX & Math parsing
   function renderLatex(tex) {
     let t = tex.trim();
-    // Symbol replacements
+    // Symbol replacements (including \rightarrow and malformed \r+ightarrow)
     t = t.replace(/\\rightarrow/g, '→').replace(/\\to/g, '→')
+         .replace(/\r?ightarrow/g, '→')
          .replace(/\\leftarrow/g, '←')
          .replace(/\\Rightarrow/g, '⇒').replace(/\\Leftarrow/g, '⇐')
          .replace(/\\leftrightarrow/g, '↔').replace(/\\Leftrightarrow/g, '⇔')
@@ -1568,6 +1657,9 @@ function formatMarkdown(text) {
     t = t.replace(/\^([0-9a-zA-Z+=-]+)/g, '<sup>$1</sup>');
     t = t.replace(/_\{([^}]+)\}/g, '<sub>$1</sub>');
     t = t.replace(/_([0-9a-zA-Z+=-]+)/g, '<sub>$1</sub>');
+    if (t === '→' || t === '←' || t === '⇒' || t === '⇐' || t === '↔' || t === '⇔') {
+      return t;
+    }
     return `<span class="math-tex">${t}</span>`;
   }
 
@@ -1701,15 +1793,116 @@ function formatMarkdown(text) {
   return out;
 }
 
+function updateActiveCardStatusBadges() {
+  if (!currentQuestion) return;
+  const srsBadge = document.getElementById('cardSrsBadge');
+  const retryBadge = document.getElementById('cardRetryBadge');
+  const cardStat = (appState.cardStats && appState.cardStats[currentQuestion.id]) || null;
+
+  if (retryBadge) {
+    if (currentQuestion.isRetry) {
+      retryBadge.style.display = 'inline-block';
+      retryBadge.textContent = currentQuestion.retryStage === 2 ? '🌱 Consolidate (2/2)' : '🔁 Reinforce (1/2)';
+    } else {
+      retryBadge.style.display = 'none';
+    }
+  }
+
+  if (srsBadge) {
+    srsBadge.className = 'badge badge-srs';
+    if (cardStat && cardStat.lapses >= 3 && !appState.masteredIds[currentQuestion.id]) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-leech');
+      srsBadge.textContent = `🔥 Leech (${cardStat.lapses}x missed)`;
+    } else if (appState.masteredIds[currentQuestion.id] === true) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-mastered');
+      if (appState.hideMastered) {
+        srsBadge.textContent = '✓ Mastered';
+        srsBadge.title = '此题已掌握 (当前已开启【仅刷未掌握】)';
+      } else if (appState.deckMode === 'random') {
+        srsBadge.textContent = '✓ Mastered (全随机)';
+        srsBadge.title = '全题库随机模式：直接从全库抽取，包含已掌握题目';
+      } else if (currentQuestion && currentQuestion._drawSource === 'mastered_probe') {
+        srsBadge.textContent = '🔍 5% 抗遗忘抽检';
+        srsBadge.title = '系统每隔 ~20 题随机抽查一道已掌握题以防遗忘。可在调度Log或设置中开启【仅刷未掌握】';
+      } else {
+        srsBadge.textContent = '✓ Mastered';
+      }
+    } else if (cardStat && cardStat.box === 1) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-learning');
+      srsBadge.textContent = '🌱 Step 1/2 Passed';
+    } else if (cardStat && (cardStat.everWrong || cardStat.lapses > 0 || appState.masteredIds[currentQuestion.id] === false)) {
+      srsBadge.style.display = 'inline-block';
+      srsBadge.classList.add('srs-weak');
+      srsBadge.textContent = '⚠️ Weak Point';
+    } else {
+      srsBadge.style.display = 'none';
+    }
+  }
+}
+window.updateActiveCardStatusBadges = updateActiveCardStatusBadges;
+
 function renderCurrentCard() {
+  if (appState.hideMastered && Array.isArray(activeQueue)) {
+    while (currentIndex < activeQueue.length && appState.masteredIds[activeQueue[currentIndex].id] === true) {
+      currentIndex++;
+    }
+  }
+
   if (currentIndex >= activeQueue.length) {
-    // Reshuffle unmastered or repeat
-    setupPracticeQueue(appState.drillTopic);
+    if (appState.deckMode === 'random') {
+      switchDeckMode('random');
+      return;
+    } else {
+      setupPracticeQueue(appState.drillTopic);
+      if (appState.hideMastered && Array.isArray(activeQueue)) {
+        while (currentIndex < activeQueue.length && appState.masteredIds[activeQueue[currentIndex].id] === true) {
+          currentIndex++;
+        }
+      }
+    }
+  }
+
+  if (currentIndex >= activeQueue.length) {
+    return;
   }
 
   currentQuestion = activeQueue[currentIndex];
   isAnswerSubmitted = false;
   currentSelectedOptions.clear();
+
+  // Log draw event for transparent scheduling visibility
+  if (currentQuestion) {
+    const isMastered = appState.masteredIds[currentQuestion.id] === true;
+    const weakTopics = DeckScheduler.getWeakTopicsSet();
+    let reason = '📚 Unseen Normal (常规新题探索)';
+    if (appState.deckMode === 'random') {
+      reason = isMastered ? '🎲 Pure Random (全随机池 - 已掌握题)' : '🎲 Pure Random (全随机池 - 未掌握题)';
+    } else if (currentQuestion.isRetry) {
+      reason = currentQuestion.retryStage === 2 ? '🌱 Retry Stage 2 (错题巩固 2/2)' : '🔁 Retry Stage 1 (错题强化 1/2)';
+    } else if (isMastered) {
+      if (currentQuestion._drawSource === 'mastered_probe' && !appState.hideMastered) {
+        reason = '🔍 Mastered 5% Probe (5% 智能抗遗忘抽检)';
+      } else {
+        reason = '✓ Mastered Review (已掌握题回顾)';
+      }
+    } else if (weakTopics && weakTopics.has(currentQuestion.topic)) {
+      reason = '🎯 Unseen Priority (薄弱考点新题优先)';
+    }
+
+    DeckScheduler.logDrawEvent({
+      qid: currentQuestion.id,
+      topic: currentQuestion.topic || 'General',
+      mode: appState.deckMode || 'smart',
+      isMastered: isMastered,
+      cardIndex: currentIndex + 1,
+      queueLen: activeQueue.length,
+      reason: reason,
+      timestamp: new Date().toLocaleTimeString('zh-CN', { hour12: false })
+    });
+  }
 
   // Elements
   const qidEl = document.getElementById('cardQid');
@@ -1742,34 +1935,7 @@ function renderCurrentCard() {
   domainEl.textContent = currentQuestion.domain || 'Network Fundamentals';
   topicEl.textContent = currentQuestion.topic || 'General';
   
-  const srsBadge = document.getElementById('cardSrsBadge');
-  const cardStat = (appState.cardStats && appState.cardStats[currentQuestion.id]) || null;
-
-  if (currentQuestion.isRetry) {
-    retryBadge.style.display = 'inline-block';
-    retryBadge.textContent = currentQuestion.retryStage === 2 ? '🌱 Consolidate (2/2)' : '🔁 Reinforce (1/2)';
-  } else {
-    retryBadge.style.display = 'none';
-  }
-
-  if (srsBadge) {
-    srsBadge.className = 'badge badge-srs';
-    if (cardStat && cardStat.lapses >= 3 && !appState.masteredIds[currentQuestion.id]) {
-      srsBadge.style.display = 'inline-block';
-      srsBadge.classList.add('srs-leech');
-      srsBadge.textContent = `🔥 Leech (${cardStat.lapses}x missed)`;
-    } else if (cardStat && cardStat.box === 1) {
-      srsBadge.style.display = 'inline-block';
-      srsBadge.classList.add('srs-learning');
-      srsBadge.textContent = '🌱 Step 1/2 Passed';
-    } else if (appState.masteredIds[currentQuestion.id] === true) {
-      srsBadge.style.display = 'inline-block';
-      srsBadge.classList.add('srs-mastered');
-      srsBadge.textContent = '✓ Mastered';
-    } else {
-      srsBadge.style.display = 'none';
-    }
-  }
+  updateActiveCardStatusBadges();
 
   // Bookmark state
   if (appState.bookmarkedIds[currentQuestion.id]) {
@@ -1795,6 +1961,7 @@ function renderCurrentCard() {
   if (oldSolImg) oldSolImg.remove();
   document.getElementById('expMisconception').style.display = 'none';
   idkWrap.style.display = 'block';
+  if (window.IdkHoldManager) IdkHoldManager.resetUI();
   actionBtn.style.display = 'flex';
   actionBtn.textContent = 'Check Answer';
   actionBtn.className = 'btn btn-primary';
@@ -1894,6 +2061,55 @@ function renderCurrentCard() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function shouldShuffleDndTargets(targets) {
+  if (!Array.isArray(targets) || targets.length <= 1) return false;
+  const labels = targets.map(t => (t.label || '').trim());
+  const isPureNum = labels.every(l => /^\d+$/.test(l));
+  const isStep = labels.every(l => /^step\s*\d+$/i.test(l));
+  const isOrdinal = labels.every(l => /^(first|second|third|fourth|fifth|sixth)$/i.test(l));
+  const isPos = labels.every(l => /^position\s+[a-z]$/i.test(l));
+  return !(isPureNum || isStep || isOrdinal || isPos);
+}
+
+function getDndTargetClusterKey(tgt) {
+  if (tgt.unordered_group) return tgt.unordered_group;
+  const match = (tgt.label || '').match(/^(.*?)\s*\(Slot\s*\d+\)$/i);
+  if (match) return match[1].trim();
+  return (tgt.id || '') + '_' + (tgt.label || '');
+}
+
+function getShuffledDndTargets(targets) {
+  if (!Array.isArray(targets)) return [];
+  // Ensure every target has a persistent id first
+  targets.forEach((tgt, idx) => {
+    if (!tgt.id) tgt.id = `t${idx + 1}`;
+  });
+
+  if (appState.shuffleOptions === false || !shouldShuffleDndTargets(targets)) {
+    return targets;
+  }
+
+  // Cluster targets by category/group to keep same-category slots cleanly grouped
+  const clusters = [];
+  const clusterMap = {};
+  targets.forEach(t => {
+    const key = getDndTargetClusterKey(t);
+    if (!clusterMap[key]) {
+      clusterMap[key] = [];
+      clusters.push(clusterMap[key]);
+    }
+    clusterMap[key].push(t);
+  });
+
+  // Shuffle the clusters (randomizes category blocks and all distinct concept rows)
+  const shuffledClusters = shuffle(clusters);
+  const result = [];
+  shuffledClusters.forEach(cluster => {
+    cluster.forEach(item => result.push(item));
+  });
+  return result;
+}
+
 function renderDragDropBoard(container, dndData) {
   const rawSources = dndData.sources.map((text, idx) => ({ idx, text }));
   dndShuffledSources = (appState.shuffleOptions !== false) ? shuffle(rawSources) : rawSources;
@@ -1940,9 +2156,10 @@ function renderDragDropBoard(container, dndData) {
   tgtList.className = 'dnd-targets-list';
   tgtList.id = 'dndTargetsList';
 
-  dndData.targets.forEach((tgt, idx) => {
-    const tid = tgt.id || `t${idx + 1}`;
-    tgt.id = tid;
+  const targetsToRender = getShuffledDndTargets(dndData.targets);
+
+  targetsToRender.forEach((tgt, idx) => {
+    const tid = tgt.id;
 
     const row = document.createElement('div');
     row.className = 'dnd-target-row';
@@ -2009,6 +2226,7 @@ function updateDndBoardUI() {
 
 function handleDndSourceTap(sourceIdx) {
   if (isAnswerSubmitted) return;
+  triggerHaptic('click');
   if (dndSelectedSourceIdx === sourceIdx) {
     dndSelectedSourceIdx = null;
   } else {
@@ -2019,6 +2237,7 @@ function handleDndSourceTap(sourceIdx) {
 
 function handleDndSlotTap(targetId) {
   if (isAnswerSubmitted) return;
+  triggerHaptic('click');
 
   if (dndSelectedSourceIdx !== null) {
     // Remove this source from any previous slot if already placed
@@ -2133,6 +2352,7 @@ function initTokenTouchDrag(tokenEl, sourceIdx, text) {
 
 function selectOption(label, isMulti) {
   if (isAnswerSubmitted) return;
+  triggerHaptic('click');
 
   if (isMulti) {
     if (currentSelectedOptions.has(label)) {
@@ -2250,6 +2470,7 @@ function evaluateDndBoard(revealCorrectOnIdk = false) {
 
 function submitAnswer() {
   if (isAnswerSubmitted) {
+    triggerHaptic('click');
     // Move to next card
     advanceToNextCard();
     return;
@@ -2349,6 +2570,14 @@ function submitAnswer() {
     showToast(`⚠️ Incorrect. Queued for reinforcement in ${srsRes.interval} Qs.`);
   }
 
+  // Update card status badges, stats, and snapshot immediately on answer submission
+  updateActiveCardStatusBadges();
+  updateHeaderStats();
+  saveState();
+  if (document.getElementById('weaknessModal').classList.contains('active')) {
+    renderWeaknessAssessment(currentWindow);
+  }
+
   // Show explanation
   showExplanation(isCorrect, misconceptionMsg);
 
@@ -2356,9 +2585,6 @@ function submitAnswer() {
   const actionBtn = document.getElementById('actionBtn');
   actionBtn.textContent = 'Next Question →';
   actionBtn.className = 'btn btn-next';
-
-  updateHeaderStats();
-  saveState();
 }
 
 function submitLabSelfEval(isMastered) {
@@ -2374,16 +2600,217 @@ function submitLabSelfEval(isMastered) {
     const srsRes = SrsEngine.recordOutcome(currentQuestion, false, false);
     showToast(`🔁 Lab queued for retry in ${srsRes.interval} Qs.`);
   }
+  updateActiveCardStatusBadges();
   updateHeaderStats();
   saveState();
   advanceToNextCard();
 }
 window.submitLabSelfEval = submitLabSelfEval;
 
+// ==========================================
+// IDK LONG-PRESS (750ms) WITH GLOWING CIRCULAR PROGRESS
+// ==========================================
+const IdkHoldManager = {
+  duration: 750,
+  circumference: 2 * Math.PI * 23, // ~144.513
+  holdStartTime: 0,
+  holdRafId: null,
+  isHolding: false,
+  holdTriggered: false,
+  activePointerId: null,
+
+  init() {
+    const idkBtn = document.getElementById('idkBtn');
+    const idkWrap = document.getElementById('idkWrap');
+    if (!idkBtn || !idkWrap) return;
+
+    const ringBar = document.getElementById('idkRingBar');
+    const ringGlow = document.getElementById('idkRingGlow');
+    if (ringBar) {
+      ringBar.style.strokeDasharray = `${this.circumference} ${this.circumference}`;
+      ringBar.style.strokeDashoffset = this.circumference;
+    }
+    if (ringGlow) {
+      ringGlow.style.strokeDasharray = `${this.circumference} ${this.circumference}`;
+      ringGlow.style.strokeDashoffset = this.circumference;
+    }
+
+    // Pointer events for mobile touch + desktop mouse
+    idkBtn.addEventListener('pointerdown', (e) => this.onPointerDown(e), { passive: false });
+    idkBtn.addEventListener('pointerup', (e) => this.onPointerUp(e));
+    idkBtn.addEventListener('pointercancel', (e) => this.onPointerCancel(e));
+    idkBtn.addEventListener('pointerleave', (e) => this.onPointerLeave(e));
+
+    // Prevent context menu (long press default on mobile)
+    idkBtn.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    // Neutralize standard click
+    idkBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
+    // Keyboard support: Hold Space or Enter
+    idkBtn.addEventListener('keydown', (e) => {
+      if ((e.key === ' ' || e.key === 'Enter') && !this.isHolding && !e.repeat) {
+        e.preventDefault();
+        this.startHold();
+      }
+    });
+    idkBtn.addEventListener('keyup', (e) => {
+      if ((e.key === ' ' || e.key === 'Enter') && this.isHolding) {
+        e.preventDefault();
+        this.cancelHold(true);
+      }
+    });
+  },
+
+  onPointerDown(e) {
+    if (isAnswerSubmitted) return;
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+    e.preventDefault();
+    this.activePointerId = e.pointerId;
+    const idkBtn = document.getElementById('idkBtn');
+    if (idkBtn && idkBtn.setPointerCapture) {
+      try {
+        idkBtn.setPointerCapture(e.pointerId);
+      } catch (_) {}
+    }
+    this.startHold();
+  },
+
+  onPointerUp(e) {
+    if (this.activePointerId !== null && e.pointerId !== this.activePointerId) return;
+    const wasHolding = this.isHolding;
+    this.activePointerId = null;
+    if (wasHolding) {
+      this.cancelHold(true);
+    }
+  },
+
+  onPointerCancel(e) {
+    if (this.activePointerId !== null && e.pointerId !== this.activePointerId) return;
+    this.activePointerId = null;
+    if (this.isHolding) {
+      this.cancelHold(false);
+    }
+  },
+
+  onPointerLeave(e) {
+    // Only cancel if mouse leaves without capture
+    if (e.pointerType === 'mouse' && this.isHolding) {
+      this.cancelHold(false);
+    }
+  },
+
+  startHold() {
+    if (isAnswerSubmitted || this.isHolding) return;
+
+    this.isHolding = true;
+    this.holdTriggered = false;
+    this.holdStartTime = performance.now();
+
+    const idkWrap = document.getElementById('idkWrap');
+    const circleWrap = document.getElementById('idkCircleWrap');
+    const ringBar = document.getElementById('idkRingBar');
+    const ringGlow = document.getElementById('idkRingGlow');
+
+    if (idkWrap) idkWrap.classList.add('is-holding');
+    if (circleWrap) circleWrap.classList.remove('burst');
+    if (ringBar) ringBar.style.strokeDashoffset = this.circumference;
+    if (ringGlow) ringGlow.style.strokeDashoffset = this.circumference;
+
+    // Mechanical switch "Ka" (Heavy impact on press down)
+    triggerHaptic('heavy');
+
+    const animate = (now) => {
+      if (!this.isHolding || this.holdTriggered) return;
+      const elapsed = now - this.holdStartTime;
+      const progress = Math.min(1, elapsed / this.duration);
+      const offset = this.circumference * (1 - progress);
+
+      if (ringBar) ringBar.style.strokeDashoffset = offset;
+      if (ringGlow) ringGlow.style.strokeDashoffset = offset;
+
+      if (progress >= 1) {
+        this.completeHold();
+        return;
+      }
+      this.holdRafId = requestAnimationFrame(animate);
+    };
+
+    this.holdRafId = requestAnimationFrame(animate);
+  },
+
+  completeHold() {
+    this.holdTriggered = true;
+    this.isHolding = false;
+    if (this.holdRafId) {
+      cancelAnimationFrame(this.holdRafId);
+      this.holdRafId = null;
+    }
+
+    const circleWrap = document.getElementById('idkCircleWrap');
+    if (circleWrap) circleWrap.classList.add('burst');
+
+    setTimeout(() => {
+      this.resetUI();
+      handleIdk();
+    }, 120);
+  },
+
+  cancelHold(isRelease = false) {
+    if (this.holdTriggered) return;
+    const elapsed = performance.now() - this.holdStartTime;
+    const wasHolding = this.isHolding;
+
+    this.isHolding = false;
+    if (this.holdRafId) {
+      cancelAnimationFrame(this.holdRafId);
+      this.holdRafId = null;
+    }
+
+    this.resetUI();
+
+    // Mechanical switch "Da" (50% intensity release click when lifting finger)
+    if (wasHolding && isRelease && !isAnswerSubmitted) {
+      triggerHaptic('click');
+    }
+
+    // Subtle shake feedback if tapped briefly (< 350ms) without triggering
+    if (wasHolding && isRelease && elapsed < 350 && !isAnswerSubmitted) {
+      const idkBtn = document.getElementById('idkBtn');
+      if (idkBtn) {
+        idkBtn.classList.remove('btn-tap-shake');
+        void idkBtn.offsetWidth; // trigger reflow
+        idkBtn.classList.add('btn-tap-shake');
+        setTimeout(() => idkBtn.classList.remove('btn-tap-shake'), 350);
+      }
+    }
+  },
+
+  resetUI() {
+    this.isHolding = false;
+    this.activePointerId = null;
+    const idkWrap = document.getElementById('idkWrap');
+    const ringBar = document.getElementById('idkRingBar');
+    const ringGlow = document.getElementById('idkRingGlow');
+    const circleWrap = document.getElementById('idkCircleWrap');
+
+    if (idkWrap) idkWrap.classList.remove('is-holding');
+    if (circleWrap) circleWrap.classList.remove('burst');
+    if (ringBar) ringBar.style.strokeDashoffset = this.circumference;
+    if (ringGlow) ringGlow.style.strokeDashoffset = this.circumference;
+  }
+};
+window.IdkHoldManager = IdkHoldManager;
+
 function handleIdk() {
   if (isAnswerSubmitted) return;
 
   isAnswerSubmitted = true;
+  if (window.IdkHoldManager) IdkHoldManager.resetUI();
   document.getElementById('idkWrap').style.display = 'none';
   triggerHaptic(false);
 
@@ -2410,6 +2837,14 @@ function handleIdk() {
   const srsRes = SrsEngine.recordOutcome(currentQuestion, false, true);
   showToast(`Recorded as weak point. Will reappear in ${srsRes.interval} Qs.`);
 
+  // Update card status badges, stats, and snapshot immediately on answer submission
+  updateActiveCardStatusBadges();
+  updateHeaderStats();
+  saveState();
+  if (document.getElementById('weaknessModal').classList.contains('active')) {
+    renderWeaknessAssessment(currentWindow);
+  }
+
   // Show explanation
   showExplanation(false, `Marked as unknown: ${idkMsg}`);
 
@@ -2417,9 +2852,6 @@ function handleIdk() {
   const actionBtn = document.getElementById('actionBtn');
   actionBtn.textContent = 'Next Question →';
   actionBtn.className = 'btn btn-next';
-
-  updateHeaderStats();
-  saveState();
 }
 
 function scheduleErrorReappearance() {
@@ -2501,6 +2933,7 @@ function advanceToNextCard() {
 
 function goToPreviousCard() {
   if (currentIndex > 0) {
+    triggerHaptic('click');
     currentIndex--;
     DeckScheduler.saveSessionSnapshot();
     renderCurrentCard();
@@ -2523,8 +2956,11 @@ function logAttempt(correct, isIdk, misconception) {
 
 function updateHeaderStats() {
   const masteredCount = Object.values(appState.masteredIds).filter(Boolean).length;
+  const totalCount = appState.excludeSimLabs
+    ? allQuestions.filter(q => q.type !== 'Simulation / Lab').length
+    : allQuestions.length;
   document.getElementById('sessionStats').textContent = 
-    `Mastered: ${masteredCount} / 1,396 (Card ${currentIndex + 1})`;
+    `Mastered: ${masteredCount} / ${totalCount.toLocaleString()} (Card ${currentIndex + 1})`;
 
   // Calculate weak points count in recent 50
   const recent = appState.history.slice(-50);
@@ -2545,9 +2981,116 @@ function updateHeaderStats() {
   }
 }
 
-// TOP-LEFT WEAKNESS ASSESSMENT MODAL
+// ==========================================
+// TOP-LEFT PRACTICE HISTORY & WEAKNESS ASSESSMENT MODAL
+// ==========================================
+let currentWeakView = 'history'; // default to history stream so user immediately sees their recent question flow
+
+function switchWeakView(view) {
+  currentWeakView = view;
+  const btnHist = document.getElementById('viewBtnHistory');
+  const btnTop = document.getElementById('viewBtnTopics');
+  const btnDeck = document.getElementById('viewBtnDeckLog');
+  const secHist = document.getElementById('historySection');
+  const secTop = document.getElementById('topicsSection');
+  const secDeck = document.getElementById('deckLogSection');
+
+  if (btnHist) btnHist.classList.toggle('active', view === 'history');
+  if (btnTop) btnTop.classList.toggle('active', view === 'topics');
+  if (btnDeck) btnDeck.classList.toggle('active', view === 'decklog');
+
+  if (secHist) secHist.style.display = (view === 'history') ? 'block' : 'none';
+  if (secTop) secTop.style.display = (view === 'topics') ? 'block' : 'none';
+  if (secDeck) secDeck.style.display = (view === 'decklog') ? 'block' : 'none';
+
+  if (view === 'decklog') {
+    renderDeckLog();
+  }
+}
+window.switchWeakView = switchWeakView;
+
+function renderDeckLog() {
+  const toggle = document.getElementById('deckLogHideMasteredToggle');
+  if (toggle) {
+    toggle.checked = Boolean(appState.hideMastered);
+  }
+
+  const logList = document.getElementById('deckLogList');
+  if (!logList) return;
+
+  const logs = DeckScheduler.drawLog || [];
+  if (logs.length === 0) {
+    logList.innerHTML = `
+      <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 25px;">
+        暂无抽题调度日志，开始刷题后将实时记录抽题原因。
+      </div>`;
+    return;
+  }
+
+  const revLogs = [...logs].reverse();
+  const html = revLogs.map(item => {
+    let tagColor = 'var(--accent, #6366f1)';
+    if (item.isMastered) {
+      tagColor = '#10b981';
+    } else if (item.reason.includes('Retry') || item.reason.includes('错题')) {
+      tagColor = '#f59e0b';
+    } else if (item.reason.includes('Priority')) {
+      tagColor = '#8b5cf6';
+    }
+
+    const modeLabel = item.mode === 'smart' ? '🧠 智能推荐' : (item.mode === 'random' ? '🎲 全随机' : item.mode);
+    const masteredBadge = item.isMastered 
+      ? '<span style="font-size:0.68rem; background:rgba(16,185,129,0.15); color:#10b981; padding:2px 6px; border-radius:4px; border:1px solid rgba(16,185,129,0.3); margin-left:6px; font-weight:700;">✓ Mastered</span>'
+      : '<span style="font-size:0.68rem; background:rgba(100,116,139,0.15); color:var(--text-muted); padding:2px 6px; border-radius:4px; border:1px solid rgba(100,116,139,0.3); margin-left:6px;">未掌握</span>';
+
+    return `
+      <div class="history-item" onclick="closeModals(); jumpToQuestion(${item.qid});" style="cursor:pointer; display:flex; flex-direction:column; gap:4px; padding:10px 12px; border-bottom:1px solid var(--border-color);">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center;">
+            <strong style="color:var(--text-primary); font-size:0.92rem;">#${item.qid}</strong>
+            ${masteredBadge}
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+            <span>[${modeLabel}]</span>
+            <span>${item.timestamp || ''}</span>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
+          <div style="font-size:0.78rem; font-weight:600; color:${tagColor};">
+            ${item.reason}
+          </div>
+          <div style="font-size:0.72rem; color:var(--text-muted);">
+            队列位置: ${item.cardIndex}/${item.queueLen}
+          </div>
+        </div>
+        <div style="font-size:0.72rem; color:var(--text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+          考点: ${item.topic}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  logList.innerHTML = html;
+}
+window.renderDeckLog = renderDeckLog;
+
+function formatRelativeTime(ts) {
+  if (!ts) return '';
+  const diffSec = Math.floor((Date.now() - ts) / 1000);
+  if (diffSec < 60) return '刚刚';
+  if (diffSec < 3600) return `${Math.floor(diffSec / 60)}分钟前`;
+  const diffHours = Math.floor(diffSec / 3600);
+  if (diffHours < 24) return `${diffHours}小时前`;
+  const d = new Date(ts);
+  return `${d.getMonth() + 1}-${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+}
+
 function openWeaknessModal() {
+  switchWeakView(currentWeakView);
   renderWeaknessAssessment(currentWindow);
+  if (currentWeakView === 'decklog') {
+    renderDeckLog();
+  }
   document.getElementById('weaknessModal').classList.add('active');
 }
 
@@ -2556,26 +3099,38 @@ function switchWindow(w) {
   document.getElementById('tab50').classList.toggle('active', w === 50);
   document.getElementById('tab200').classList.toggle('active', w === 200);
   document.getElementById('tab500').classList.toggle('active', w === 500);
+  const tabAll = document.getElementById('tabAll');
+  if (tabAll) tabAll.classList.toggle('active', w === 'all');
   renderWeaknessAssessment(w);
 }
 
 function renderWeaknessAssessment(windowSize) {
-  const subset = appState.history.slice(-windowSize);
+  const allHist = appState.history || [];
+  const subset = (windowSize === 'all') ? allHist.slice() : allHist.slice(-windowSize);
   const total = subset.length;
 
   const statAttempts = document.getElementById('statAttempts');
   const statAccuracy = document.getElementById('statAccuracy');
   const statIdk = document.getElementById('statIdk');
   const weakList = document.getElementById('weakList');
+  const historyList = document.getElementById('historyList');
 
   if (total === 0) {
-    statAttempts.textContent = '0';
-    statAccuracy.textContent = '0%';
-    statIdk.textContent = '0';
-    weakList.innerHTML = `
-      <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 20px;">
-        No attempts in the last ${windowSize} questions yet. Start answering cards!
-      </div>`;
+    if (statAttempts) statAttempts.textContent = '0';
+    if (statAccuracy) statAccuracy.textContent = '0%';
+    if (statIdk) statIdk.textContent = '0';
+    if (weakList) {
+      weakList.innerHTML = `
+        <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 20px;">
+          暂无答题记录，做几道题后将生成薄弱考点分析。
+        </div>`;
+    }
+    if (historyList) {
+      historyList.innerHTML = `
+        <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 25px;">
+          暂无答题流水记录，开始做题后将实时显示。
+        </div>`;
+    }
     return;
   }
 
@@ -2583,67 +3138,110 @@ function renderWeaknessAssessment(windowSize) {
   const idkCount = subset.filter(h => h.isIdk).length;
   const accuracy = Math.round((correctCount / total) * 100);
 
-  statAttempts.textContent = total;
-  statAccuracy.textContent = `${accuracy}%`;
-  statIdk.textContent = idkCount;
+  if (statAttempts) statAttempts.textContent = total;
+  if (statAccuracy) statAccuracy.textContent = `${accuracy}%`;
+  if (statIdk) statIdk.textContent = idkCount;
 
-  // Aggregate by topic
-  const topicStats = {};
-  subset.forEach(h => {
-    const t = h.topic || 'General';
-    if (!topicStats[t]) {
-      topicStats[t] = { topic: t, domain: h.domain, tested: 0, failed: 0 };
-    }
-    topicStats[t].tested++;
-    if (!h.correct || h.isIdk) {
-      topicStats[t].failed++;
-    }
-  });
+  // 1. Render History Stream (Reverse Chronological: newest first)
+  if (historyList) {
+    historyList.innerHTML = '';
+    const reversed = subset.slice().reverse();
+    reversed.forEach(h => {
+      const row = document.createElement('div');
+      row.className = 'history-item';
+      row.onclick = () => {
+        closeModals();
+        jumpToQuestion(h.qid);
+      };
 
-  // Calculate error rate and filter topics with at least 1 failure
-  const sortedTopics = Object.values(topicStats)
-    .filter(t => t.failed > 0)
-    .map(t => ({
-      ...t,
-      errorRate: Math.round((t.failed / t.tested) * 100)
-    }))
-    .sort((a, b) => b.errorRate - a.errorRate || b.failed - a.failed)
-    .slice(0, 5); // Top 5
+      let badgeClass = 'hist-correct';
+      let badgeText = '✓ 正确';
+      if (h.isIdk) {
+        badgeClass = 'hist-idk';
+        badgeText = '? 不会';
+      } else if (!h.correct) {
+        badgeClass = 'hist-wrong';
+        badgeText = '✗ 错误';
+      }
 
-  if (sortedTopics.length === 0) {
-    weakList.innerHTML = `
-      <div style="color: var(--success); font-size: 0.9rem; text-align: center; padding: 20px;">
-        🌟 Exceptional performance! Zero weak topics detected in the last ${windowSize} attempts.
-      </div>`;
-    return;
+      const timeStr = formatRelativeTime(h.time);
+      let detailHtml = '';
+      if (h.misconception) {
+        const cleanMsg = h.misconception.replace(/^`+|`+$/g, '');
+        detailHtml = `<div class="hist-detail">${formatMarkdown(cleanMsg)}</div>`;
+      }
+
+      row.innerHTML = `
+        <div class="hist-badge ${badgeClass}">${badgeText}</div>
+        <div class="hist-body">
+          <div class="hist-header">
+            <span class="hist-qid">#${h.qid}</span>
+            <span class="hist-topic">${h.topic || 'General'}</span>
+            <span class="hist-time">${timeStr}</span>
+          </div>
+          ${detailHtml}
+        </div>
+        <div class="hist-arrow">›</div>
+      `;
+      historyList.appendChild(row);
+    });
   }
 
-  weakList.innerHTML = '';
-  sortedTopics.forEach((item, idx) => {
-    const card = document.createElement('div');
-    card.className = 'weak-item';
+  // 2. Render Weak Topics (Top Vulnerable Knowledge Points)
+  if (weakList) {
+    const topicStats = {};
+    subset.forEach(h => {
+      const t = h.topic || 'General';
+      if (!topicStats[t]) {
+        topicStats[t] = { topic: t, domain: h.domain, tested: 0, failed: 0 };
+      }
+      topicStats[t].tested++;
+      if (!h.correct || h.isIdk) {
+        topicStats[t].failed++;
+      }
+    });
 
-    const color = item.errorRate >= 50 ? 'var(--danger)' : item.errorRate >= 30 ? 'var(--warning)' : 'var(--primary)';
+    const sortedTopics = Object.values(topicStats)
+      .filter(t => t.failed > 0)
+      .map(t => ({
+        ...t,
+        errorRate: Math.round((t.failed / t.tested) * 100)
+      }))
+      .sort((a, b) => b.errorRate - a.errorRate || b.failed - a.failed)
+      .slice(0, 5);
 
-    card.innerHTML = `
-      <div class="weak-item-top">
-        <span class="weak-name">${idx + 1}. ${item.topic}</span>
-        <span class="weak-rate" style="color: ${color}">${item.errorRate}% Error</span>
-      </div>
-      <div style="font-size: 0.78rem; color: var(--text-muted);">
-        Domain: ${item.domain} • ${item.failed} missed / ${item.tested} tested
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" style="width: ${item.errorRate}%; background: ${color};"></div>
-      </div>
-      <div class="weak-actions">
-        <button class="drill-btn" onclick="startTargetedDrill('${item.topic.replace(/'/g, "\\'")}')">
-          🎯 Drill This Topic
-        </button>
-      </div>
-    `;
-    weakList.appendChild(card);
-  });
+    if (sortedTopics.length === 0) {
+      weakList.innerHTML = `
+        <div style="color: var(--success); font-size: 0.9rem; text-align: center; padding: 20px;">
+          🌟 表现极其优异！在最近的 ${total} 次做题中未检测到薄弱考点。
+        </div>`;
+    } else {
+      weakList.innerHTML = '';
+      sortedTopics.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'weak-item';
+        const color = item.errorRate >= 50 ? 'var(--danger)' : item.errorRate >= 30 ? 'var(--warning)' : 'var(--primary)';
+        card.innerHTML = `
+          <div class="weak-item-top">
+            <span class="weak-name">${idx + 1}. ${item.topic}</span>
+            <span class="weak-rate" style="color: ${color}">${item.errorRate}% Error</span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--text-muted);">
+            Domain: ${item.domain} • ${item.failed} missed / ${item.tested} tested
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width: ${item.errorRate}%; background: ${color};"></div>
+          </div>
+          <div class="weak-actions">
+            <button class="drill-btn" onclick="startTargetedDrill('${item.topic.replace(/'/g, "\\'")}')">
+              🎯 Drill This Topic
+            </button>
+          </div>
+        `;
+        weakList.appendChild(card);
+      });
+    }
+  }
 }
 
 function startTargetedDrill(topic) {
@@ -2657,6 +3255,7 @@ function startTargetedDrill(topic) {
 // BOOKMARKS
 function toggleBookmark() {
   if (!currentQuestion) return;
+  triggerHaptic('click');
   const qid = currentQuestion.id;
   if (!appState.bookmarkUpdatedAt) appState.bookmarkUpdatedAt = {};
   appState.bookmarkUpdatedAt[qid] = Date.now();
@@ -2696,6 +3295,10 @@ function openSettingsModal() {
   if (hideMastToggle) {
     hideMastToggle.checked = Boolean(appState.hideMastered);
   }
+  const excludeSimToggle = document.getElementById('excludeSimLabsToggle');
+  if (excludeSimToggle) {
+    excludeSimToggle.checked = Boolean(appState.excludeSimLabs);
+  }
   const domSelect = document.getElementById('domainFilterSelect');
   if (domSelect) {
     domSelect.value = appState.domainFilter || '';
@@ -2713,6 +3316,36 @@ function openSettingsModal() {
     }).length;
     wkBtn.textContent = `📕 Wrong & Weak (${wkCount})`;
   }
+  const hapticSlider = document.getElementById('hapticDurationSlider');
+  const hapticLabel = document.getElementById('hapticDurationLabel');
+  const curHaptic = (typeof appState.hapticDuration === 'number') ? appState.hapticDuration : 80;
+  if (hapticSlider) {
+    hapticSlider.value = curHaptic;
+  }
+  if (hapticLabel) {
+    if (curHaptic === 0) hapticLabel.textContent = 'Off (关闭)';
+    else if (curHaptic <= 35) hapticLabel.textContent = `${curHaptic}% (轻柔)`;
+    else if (curHaptic <= 70) hapticLabel.textContent = `${curHaptic}% (微动)`;
+    else if (curHaptic <= 85) hapticLabel.textContent = `${curHaptic}% (标准)`;
+    else hapticLabel.textContent = `${curHaptic}% (强劲)`;
+  }
+  const modeBtns = {
+    smart: document.getElementById('modeBtnSmart'),
+    random: document.getElementById('modeBtnRandom'),
+    weak: document.getElementById('modeBtnWeak'),
+    bookmarks: document.getElementById('modeBtnBookmarks')
+  };
+  Object.keys(modeBtns).forEach(m => {
+    const btn = modeBtns[m];
+    if (!btn) return;
+    if (appState.deckMode === m) {
+      btn.style.borderColor = 'var(--primary)';
+      btn.style.boxShadow = '0 0 0 2px var(--primary)';
+    } else {
+      btn.style.borderColor = (m === 'weak') ? 'var(--warning)' : 'var(--border-color)';
+      btn.style.boxShadow = 'none';
+    }
+  });
   document.getElementById('settingsModal').classList.add('active');
 }
 
@@ -2727,12 +3360,60 @@ window.updateShuffleOptions = updateShuffleOptions;
 function updateHideMastered(enabled) {
   appState.hideMastered = Boolean(enabled);
   saveState();
-  setupPracticeQueue(null);
+  if (appState.deckMode === 'random') {
+    switchDeckMode('random');
+  } else if (appState.deckMode === 'weak') {
+    switchDeckMode('weak');
+  } else if (appState.deckMode === 'bookmarks') {
+    switchDeckMode('bookmarks');
+  } else if (appState.deckMode === 'domain') {
+    filterByDomain(appState.domainFilter);
+  } else {
+    setupPracticeQueue(appState.drillTopic || null);
+  }
+
+  if (appState.hideMastered && Array.isArray(activeQueue)) {
+    while (currentIndex < activeQueue.length && appState.masteredIds[activeQueue[currentIndex].id] === true) {
+      currentIndex++;
+    }
+    if (currentIndex >= activeQueue.length) {
+      setupPracticeQueue(appState.drillTopic || null);
+    }
+  }
+
   renderCurrentCard();
   updateHeaderStats();
-  showToast(appState.hideMastered ? '🎯 Hiding mastered cards (仅抽取未掌握题)' : '🧠 Including 5% mastered review (智能抗遗忘抽检)');
+  const t1 = document.getElementById('hideMasteredToggle');
+  if (t1) t1.checked = appState.hideMastered;
+  const t2 = document.getElementById('deckLogHideMasteredToggle');
+  if (t2) t2.checked = appState.hideMastered;
+  if (currentWeakView === 'decklog') {
+    renderDeckLog();
+  }
+  showToast(appState.hideMastered ? '🎯 仅抽取未掌握题 (已完全排除Mastered)' : '🧠 智能抗遗忘模式 (含 5% Mastered抽检)');
 }
 window.updateHideMastered = updateHideMastered;
+
+function updateExcludeSimLabs(enabled) {
+  appState.excludeSimLabs = Boolean(enabled);
+  saveState();
+  if (appState.deckMode === 'smart' || !appState.drillTopic) {
+    setupPracticeQueue(null);
+  } else if (appState.deckMode === 'weak') {
+    switchDeckMode('weak');
+  } else if (appState.deckMode === 'bookmarks') {
+    switchDeckMode('bookmarks');
+  } else if (appState.deckMode === 'domain') {
+    filterByDomain(appState.domainFilter);
+  } else {
+    setupPracticeQueue(null);
+  }
+  renderCurrentCard();
+  updateHeaderStats();
+  const count = appState.excludeSimLabs ? (allQuestions.length - 37) : allQuestions.length;
+  showToast(appState.excludeSimLabs ? `🛠️ Skipped Lab Sims (已跳过实验题，题库共 ${count.toLocaleString()} 题)` : `🛠️ Included Lab Sims (已包含实验题，题库共 ${count.toLocaleString()} 题)`);
+}
+window.updateExcludeSimLabs = updateExcludeSimLabs;
 
 function updateRetryInterval(val) {
   appState.retryInterval = parseInt(val, 10) || 25;
@@ -2740,6 +3421,46 @@ function updateRetryInterval(val) {
   saveState();
   showToast(`🔁 Mistake cooldown set to ~${appState.retryInterval} questions (±35% random fuzz)`);
 }
+window.updateRetryInterval = updateRetryInterval;
+
+function updateHapticDuration(val) {
+  const num = parseInt(val, 10);
+  appState.hapticDuration = isNaN(num) ? 80 : Math.max(0, Math.min(100, num));
+  const hapticLabel = document.getElementById('hapticDurationLabel');
+  if (hapticLabel) {
+    if (appState.hapticDuration === 0) {
+      hapticLabel.textContent = 'Off (关闭)';
+    } else if (appState.hapticDuration <= 35) {
+      hapticLabel.textContent = `${appState.hapticDuration}% (轻柔)`;
+    } else if (appState.hapticDuration <= 70) {
+      hapticLabel.textContent = `${appState.hapticDuration}% (微动)`;
+    } else if (appState.hapticDuration <= 85) {
+      hapticLabel.textContent = `${appState.hapticDuration}% (标准)`;
+    } else {
+      hapticLabel.textContent = `${appState.hapticDuration}% (强劲)`;
+    }
+  }
+  // Real-time preview vibration as user drags (pure active-braked system haptic)
+  if (appState.hapticDuration > 0) {
+    triggerHaptic('click');
+  }
+  saveState();
+}
+window.updateHapticDuration = updateHapticDuration;
+
+function testHapticFeedback() {
+  const cur = (typeof appState.hapticDuration === 'number') ? appState.hapticDuration : 80;
+  if (cur === 0) {
+    showToast('触感震动已关闭 (0%)');
+    return;
+  }
+  // Mechanical switch demo: Heavy press "Ka", followed by 50% release "Da"
+  triggerHaptic('heavy');
+  setTimeout(() => {
+    triggerHaptic('click');
+  }, 130);
+}
+window.testHapticFeedback = testHapticFeedback;
 
 function jumpToQuestion(targetId = null) {
   let val = targetId;
@@ -2757,6 +3478,11 @@ function jumpToQuestion(targetId = null) {
   }
   const targetIdx = allQuestions.findIndex(q => q.id === val);
   if (targetIdx === -1) {
+    if (val === 1210) {
+      showToast('第 1210 题与第 1057 题完全重复，已自动跳转至 #1057');
+      jumpToQuestion(1057);
+      return;
+    }
     showToast(`Question #${val} not found`);
     return;
   }
@@ -3111,17 +3837,67 @@ function showToast(msg) {
   }, 2100);
 }
 
-function triggerHaptic(success) {
+function triggerHaptic(type = 'click') {
+  if (type === true) type = 'success';
+  if (type === false) type = 'error';
+
+  const intensity = (appState && typeof appState.hapticDuration === 'number')
+    ? appState.hapticDuration
+    : 80;
+
+  if (intensity <= 0) return; // 0% = Disabled
+
+  // Compute scale from 0.05 to 1.0
+  const scale = Math.max(0.05, Math.min(1.0, intensity / 100.0));
+
   if (window.AndroidBridge) {
-    if (success && window.AndroidBridge.vibrateSuccess) {
-      window.AndroidBridge.vibrateSuccess();
-    } else if (!success && window.AndroidBridge.vibrateError) {
-      window.AndroidBridge.vibrateError();
-    }
-  } else if (navigator.vibrate) {
-    navigator.vibrate(success ? 25 : [0, 40, 60, 40]);
+    try {
+      if (type === 'tick' && typeof window.AndroidBridge.vibrateNativeTick === 'function') {
+        window.AndroidBridge.vibrateNativeTick(scale);
+        return;
+      }
+      if (type === 'heavy' && typeof window.AndroidBridge.vibrateNativeHeavy === 'function') {
+        window.AndroidBridge.vibrateNativeHeavy(scale);
+        return;
+      }
+      if (type === 'success' && typeof window.AndroidBridge.vibrateNativeSuccess === 'function') {
+        window.AndroidBridge.vibrateNativeSuccess(scale);
+        return;
+      }
+      if (type === 'error' && typeof window.AndroidBridge.vibrateNativeError === 'function') {
+        window.AndroidBridge.vibrateNativeError(scale);
+        return;
+      }
+      if (typeof window.AndroidBridge.vibrateNativeClick === 'function') {
+        window.AndroidBridge.vibrateNativeClick(scale);
+        return;
+      }
+      // Fallback for older AndroidBridge bindings
+      if (typeof window.AndroidBridge.vibrateClick === 'function') {
+        window.AndroidBridge.vibrateClick();
+        return;
+      }
+    } catch (_) {}
+  }
+
+  if (navigator.vibrate) {
+    try {
+      const browserMs = Math.max(8, Math.round(intensity * 0.18));
+      if (type === 'success') {
+        navigator.vibrate([browserMs, 40, Math.round(browserMs * 1.2)]);
+      } else if (type === 'error') {
+        navigator.vibrate([Math.round(browserMs * 1.2), 40, browserMs]);
+      } else if (type === 'heavy') {
+        navigator.vibrate([browserMs, 30, browserMs]);
+      } else if (type === 'tick') {
+        navigator.vibrate(Math.max(5, Math.round(browserMs * 0.6)));
+      } else {
+        navigator.vibrate(browserMs);
+      }
+    } catch (_) {}
   }
 }
+window.triggerHaptic = triggerHaptic;
 
 // Android Back handler
 window.handleAndroidBack = function() {

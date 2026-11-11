@@ -22,6 +22,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.DisplayCutout;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowInsets;
@@ -993,46 +994,155 @@ public class MainActivity extends Activity {
             this.context = context;
         }
 
+        private Vibrator getVibrator() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                VibratorManager vm = (VibratorManager) context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
+                if (vm != null) {
+                    return vm.getDefaultVibrator();
+                }
+            }
+            return (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        }
+
         @JavascriptInterface
-        public void vibrateSuccess() {
+        public void vibrateNativeClick(float scale) {
+            if (scale <= 0.001f) return;
             try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    VibratorManager vm = (VibratorManager) context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
-                    if (vm != null) {
-                        vm.getDefaultVibrator().vibrate(VibrationEffect.createOneShot(25, VibrationEffect.DEFAULT_AMPLITUDE));
-                    }
-                } else {
-                    Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                    if (v != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            v.vibrate(VibrationEffect.createOneShot(25, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            v.vibrate(25);
+                MainActivity.this.runOnUiThread(() -> {
+                    if (webView != null) {
+                        int constant = (scale <= 0.50f)
+                            ? HapticFeedbackConstants.CLOCK_TICK
+                            : HapticFeedbackConstants.KEYBOARD_TAP;
+                        webView.performHapticFeedback(constant, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                    } else {
+                        Vibrator v = getVibrator();
+                        if (v != null && v.hasVibrator() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            int effect = (scale <= 0.50f)
+                                ? VibrationEffect.EFFECT_TICK
+                                : VibrationEffect.EFFECT_CLICK;
+                            v.vibrate(VibrationEffect.createPredefined(effect));
                         }
                     }
-                }
+                });
             } catch (Exception ignored) {}
         }
 
         @JavascriptInterface
-        public void vibrateError() {
+        public void vibrateNativeTick(float scale) {
+            if (scale <= 0.001f) return;
             try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    VibratorManager vm = (VibratorManager) context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
-                    if (vm != null) {
-                        vm.getDefaultVibrator().vibrate(VibrationEffect.createWaveform(new long[]{0, 40, 60, 40}, -1));
-                    }
-                } else {
-                    Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                    if (v != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            v.vibrate(VibrationEffect.createWaveform(new long[]{0, 40, 60, 40}, -1));
-                        } else {
-                            v.vibrate(new long[]{0, 40, 60, 40}, -1);
+                MainActivity.this.runOnUiThread(() -> {
+                    if (webView != null) {
+                        webView.performHapticFeedback(
+                            HapticFeedbackConstants.CLOCK_TICK,
+                            HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+                        );
+                    } else {
+                        Vibrator v = getVibrator();
+                        if (v != null && v.hasVibrator() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_TICK));
                         }
                     }
-                }
+                });
             } catch (Exception ignored) {}
+        }
+
+        @JavascriptInterface
+        public void vibrateNativeHeavy(float scale) {
+            if (scale <= 0.001f) return;
+            try {
+                MainActivity.this.runOnUiThread(() -> {
+                    if (webView != null) {
+                        int constant = (scale <= 0.50f)
+                            ? HapticFeedbackConstants.KEYBOARD_TAP
+                            : HapticFeedbackConstants.LONG_PRESS;
+                        webView.performHapticFeedback(constant, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                    } else {
+                        Vibrator v = getVibrator();
+                        if (v != null && v.hasVibrator() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            int effect = (scale <= 0.50f)
+                                ? VibrationEffect.EFFECT_CLICK
+                                : VibrationEffect.EFFECT_HEAVY_CLICK;
+                            v.vibrate(VibrationEffect.createPredefined(effect));
+                        }
+                    }
+                });
+            } catch (Exception ignored) {}
+        }
+
+        @JavascriptInterface
+        public void vibrateNativeSuccess(float scale) {
+            if (scale <= 0.001f) return;
+            try {
+                MainActivity.this.runOnUiThread(() -> {
+                    if (webView != null) {
+                        int constant = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                            ? HapticFeedbackConstants.CONFIRM
+                            : HapticFeedbackConstants.KEYBOARD_TAP;
+                        webView.performHapticFeedback(constant, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                    } else {
+                        Vibrator v = getVibrator();
+                        if (v != null && v.hasVibrator() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+                        }
+                    }
+                });
+            } catch (Exception ignored) {}
+        }
+
+        @JavascriptInterface
+        public void vibrateNativeError(float scale) {
+            if (scale <= 0.001f) return;
+            try {
+                MainActivity.this.runOnUiThread(() -> {
+                    if (webView != null) {
+                        int constant = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                            ? HapticFeedbackConstants.REJECT
+                            : HapticFeedbackConstants.LONG_PRESS;
+                        webView.performHapticFeedback(constant, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                    } else {
+                        Vibrator v = getVibrator();
+                        if (v != null && v.hasVibrator() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_DOUBLE_CLICK));
+                        }
+                    }
+                });
+            } catch (Exception ignored) {}
+        }
+
+        @JavascriptInterface
+        public void vibrateClick() {
+            vibrateNativeClick(0.8f);
+        }
+
+        @JavascriptInterface
+        public void vibrateTick() {
+            vibrateNativeTick(0.6f);
+        }
+
+        @JavascriptInterface
+        public void vibrateHeavy() {
+            vibrateNativeHeavy(0.9f);
+        }
+
+        @JavascriptInterface
+        public void vibrateSuccess() {
+            vibrateNativeSuccess(0.85f);
+        }
+
+        @JavascriptInterface
+        public void vibrateError() {
+            vibrateNativeError(0.85f);
+        }
+
+        @JavascriptInterface
+        public void vibrateCustom(int durationMs) {
+            vibrateNativeClick(Math.max(0.1f, Math.min(1.0f, durationMs / 20.0f)));
+        }
+
+        @JavascriptInterface
+        public void vibrateDouble(int durationMs) {
+            vibrateNativeSuccess(Math.max(0.1f, Math.min(1.0f, durationMs / 20.0f)));
         }
 
         @JavascriptInterface

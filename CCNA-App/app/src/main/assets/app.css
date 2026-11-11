@@ -462,10 +462,14 @@ main {
   flex: 1;
 }
 
-/* IDK BUTTON */
+/* IDK BUTTON & LONG-PRESS CIRCULAR PROGRESS */
 .idk-wrap {
-  margin-top: 4px;
+  position: relative;
+  margin-top: 8px;
   text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .idk-btn {
@@ -477,18 +481,149 @@ main {
   background: transparent;
   border: 1.5px dashed var(--border-color);
   color: var(--text-muted);
-  padding: 12px;
+  padding: 12px 16px;
   border-radius: var(--radius-sm);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.idk-btn:active {
-  background: rgba(248, 113, 113, 0.1);
-  border-color: var(--danger);
-  color: var(--danger);
+/* Hover on desktop */
+@media (hover: hover) and (pointer: fine) {
+  .idk-btn:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    color: var(--text-secondary);
+  }
+}
+
+/* While actively holding */
+.idk-wrap.is-holding .idk-btn {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+  transform: scale(0.985);
+}
+
+/* Tap shake animation when user clicks without holding 1s */
+.idk-btn.btn-tap-shake {
+  animation: idkShake 0.35s ease;
+}
+
+@keyframes idkShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+/* Floating Circular Progress Popup (Directly above the button) */
+.idk-progress-popup {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px) scale(0.88);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 60;
+}
+
+.idk-wrap.is-holding .idk-progress-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* Circle Capsule with Backdrop Blur */
+.idk-circle-wrap {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.45), 0 8px 24px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG Circular Ring */
+.idk-svg-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.idk-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 4;
+}
+
+/* Sky-blue ambient glow layer */
+.idk-ring-glow {
+  fill: none;
+  stroke: #38bdf8;
+  stroke-width: 6;
+  stroke-linecap: round;
+  filter: blur(3.5px);
+  opacity: 0.85;
+  stroke-dasharray: 144.513;
+  stroke-dashoffset: 144.513;
+  transition: stroke-dashoffset 0.03s linear;
+}
+
+/* Sky-blue sharp foreground ring */
+.idk-ring-bar {
+  fill: none;
+  stroke: #38bdf8;
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.95));
+  stroke-dasharray: 144.513;
+  stroke-dashoffset: 144.513;
+  transition: stroke-dashoffset 0.03s linear;
+}
+
+/* Center icon */
+.idk-ring-icon {
+  position: relative;
+  font-size: 1.2rem;
+  line-height: 1;
+  user-select: none;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));
+}
+
+/* Completion burst pulse */
+.idk-circle-wrap.burst {
+  animation: idkBurst 0.3s ease-out forwards;
+}
+
+@keyframes idkBurst {
+  0% { transform: scale(1); box-shadow: 0 0 24px rgba(56, 189, 248, 0.45); }
+  50% { transform: scale(1.15); box-shadow: 0 0 40px rgba(56, 189, 248, 0.9), 0 0 60px #38bdf8; }
+  100% { transform: scale(1); opacity: 0; }
 }
 
 /* CARD BOTTOM / EXPLANATION */
@@ -1592,6 +1727,12 @@ main {
   border-color: rgba(248, 113, 113, 0.4);
 }
 
+.badge-srs.srs-weak {
+  background: var(--warning-light, rgba(251, 191, 36, 0.15));
+  color: var(--warning, #f59e0b);
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
 .btn-prev {
   flex: 0 0 auto;
   padding: 14px 16px;
@@ -1622,3 +1763,149 @@ main {
   filter: brightness(0.92);
   transform: scale(0.98);
 }
+
+/* ==========================================================================
+   Practice History Stream & Segmented Toggle View
+   ========================================================================== */
+.weak-view-toggle {
+  display: flex;
+  background: var(--bg-secondary);
+  padding: 3px;
+  border-radius: 8px;
+  gap: 4px;
+  margin: 10px 0 12px 0;
+  border: 1px solid var(--border-color);
+}
+
+.weak-toggle-btn {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.weak-toggle-btn.active {
+  background: var(--bg-card);
+  color: var(--primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.history-item:hover, .history-item:active {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.hist-badge {
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.hist-correct {
+  background: rgba(52, 211, 153, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+.hist-wrong {
+  background: rgba(248, 113, 113, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.hist-idk {
+  background: rgba(251, 191, 36, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.hist-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.hist-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hist-qid {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.86rem;
+}
+
+.hist-topic {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hist-time {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.hist-detail {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.hist-arrow {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  flex: 0 0 auto;
+  margin-left: 2px;
+}
+

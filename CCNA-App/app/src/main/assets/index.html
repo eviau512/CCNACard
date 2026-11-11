@@ -37,7 +37,7 @@
         </svg>
         <span class="app-title">CCNA</span>
       </div>
-      <div class="session-stats" id="sessionStats">Mastered: 0 / 1,396</div>
+      <div class="session-stats" id="sessionStats">Mastered: 0 / 1,395</div>
     </div>
 
     <div class="header-right">
@@ -84,9 +84,21 @@
       <!-- Options List -->
       <div class="options-list" id="cardOptionsList"></div>
 
-      <!-- IDK Button -->
+      <!-- IDK Button with Hold-to-Trigger Circular Progress -->
       <div class="idk-wrap" id="idkWrap">
-        <button class="idk-btn" id="idkBtn" onclick="handleIdk()">
+        <!-- 750ms Sky-Blue Glowing Circular Progress Popup (Directly above the button) -->
+        <div class="idk-progress-popup" id="idkProgressPopup" aria-hidden="true">
+          <div class="idk-circle-wrap" id="idkCircleWrap">
+            <svg class="idk-svg-ring" viewBox="0 0 56 56">
+              <circle class="idk-ring-bg" cx="28" cy="28" r="23" />
+              <circle class="idk-ring-glow" id="idkRingGlow" cx="28" cy="28" r="23" />
+              <circle class="idk-ring-bar" id="idkRingBar" cx="28" cy="28" r="23" />
+            </svg>
+            <span class="idk-ring-icon">❓</span>
+          </div>
+        </div>
+
+        <button class="idk-btn" id="idkBtn" type="button">
           <span>❓ I Don't Know (Mark as Weak Topic)</span>
         </button>
       </div>
@@ -116,19 +128,20 @@
     </div>
   </main>
 
-  <!-- WEAKNESS ASSESSMENT MODAL -->
+  <!-- WEAKNESS & PRACTICE HISTORY ASSESSMENT MODAL -->
   <div class="modal-overlay" id="weaknessModal">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="modal-title">📊 Weakness Assessment</div>
+        <div class="modal-title">📊 Practice & Weakness (答题分析)</div>
         <button class="modal-close" onclick="closeModals()">✕</button>
       </div>
       <div class="modal-body">
-        <!-- 50 / 200 / 500 Window Tabs -->
+        <!-- 50 / 200 / 500 / All Window Tabs -->
         <div class="window-tabs">
           <button class="window-tab active" id="tab50" onclick="switchWindow(50)">Last 50</button>
           <button class="window-tab" id="tab200" onclick="switchWindow(200)">Last 200</button>
           <button class="window-tab" id="tab500" onclick="switchWindow(500)">Last 500</button>
+          <button class="window-tab" id="tabAll" onclick="switchWindow('all')">All</button>
         </div>
 
         <!-- Metric Cards -->
@@ -147,10 +160,51 @@
           </div>
         </div>
 
-        <div style="font-weight: 700; font-size: 0.95rem; margin-top: 4px;">Top Vulnerable Knowledge Points</div>
-        <div class="weak-list" id="weakList">
-          <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 20px;">
-            Answer a few questions to generate your diagnostic profile.
+        <!-- Segmented View Toggle: History Stream vs Weak Topics vs Deck Log -->
+        <div class="weak-view-toggle">
+          <button class="weak-toggle-btn active" id="viewBtnHistory" onclick="switchWeakView('history')">
+            📝 答题流水
+          </button>
+          <button class="weak-toggle-btn" id="viewBtnTopics" onclick="switchWeakView('topics')">
+            ⚠️ 薄弱考点
+          </button>
+          <button class="weak-toggle-btn" id="viewBtnDeckLog" onclick="switchWeakView('decklog')">
+            🧭 题目调度Log
+          </button>
+        </div>
+
+        <!-- Section 1: History Stream -->
+        <div id="historySection" class="weak-section">
+          <div class="history-list" id="historyList">
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 25px;">
+              暂无答题流水记录，开始做题后将实时显示。
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Top Vulnerable Knowledge Points -->
+        <div id="topicsSection" class="weak-section" style="display:none;">
+          <div style="font-weight: 700; font-size: 0.88rem; margin: 6px 0 8px 2px; color: var(--text-secondary);">Top Vulnerable Knowledge Points</div>
+          <div class="weak-list" id="weakList">
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 20px;">
+              Answer a few questions to generate your diagnostic profile.
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Deck Scheduler Log -->
+        <div id="deckLogSection" class="weak-section" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-secondary); padding:8px 12px; border-radius:8px; border:1px solid var(--border-color); margin-bottom:10px;">
+            <div style="font-size:0.82rem; color:var(--text-secondary);">
+              <strong>仅刷未掌握题 (Hide Mastered)</strong>
+              <div style="font-size:0.72rem; color:var(--text-muted);">开启后彻底排除已掌握题目，不再进行 5% 抽检</div>
+            </div>
+            <input type="checkbox" id="deckLogHideMasteredToggle" onchange="updateHideMastered(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
+          </div>
+          <div class="history-list" id="deckLogList">
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 25px;">
+              暂无抽题调度日志，开始刷题后将实时记录抽题原因。
+            </div>
           </div>
         </div>
       </div>
@@ -174,22 +228,11 @@
         </div>
         <div style="display:flex; gap:8px; margin-bottom: 10px; flex-wrap: wrap;">
           <button class="btn btn-primary" id="modeBtnSmart" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%;" onclick="switchDeckMode('smart')">🧠 Smart Adaptive</button>
+          <button class="btn btn-primary" id="modeBtnRandom" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="switchDeckMode('random')">🎲 Pure Random (全随机)</button>
           <button class="btn btn-primary" id="modeBtnWeak" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--warning); border:1px solid var(--warning);" onclick="switchDeckMode('weak')">📕 Wrong & Weak Pool</button>
           <button class="btn btn-primary" id="modeBtnBookmarks" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="switchDeckMode('bookmarks')">⭐ Bookmarked (0)</button>
           <button class="btn btn-primary" id="modeBtnDrag" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--primary); border:1px solid var(--primary);" onclick="jumpToType('drag')">🧩 Drag & Drop</button>
-          <button class="btn btn-primary" id="modeBtnSim" style="padding:8px 10px; font-size:0.8rem; flex:1 1 100%; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="jumpToType('sim')">🛠️ Practice Lab Sims (37)</button>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; gap: 8px;">
-          <span style="font-size:0.85rem; font-weight:600;">CCNA Domain:</span>
-          <select id="domainFilterSelect" onchange="filterByDomain(this.value)" style="flex:1; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:0.82rem;">
-            <option value="">All 6 Domains (1,396 Qs)</option>
-            <option value="Network Fundamentals">1. Network Fundamentals</option>
-            <option value="Network Access">2. Network Access</option>
-            <option value="IP Connectivity">3. IP Connectivity</option>
-            <option value="IP Services">4. IP Services</option>
-            <option value="Security Fundamentals">5. Security Fundamentals</option>
-            <option value="Automation and Programmability">6. Automation & Programmability</option>
-          </select>
+          <button class="btn btn-primary" id="modeBtnSim" style="padding:8px 10px; font-size:0.8rem; flex:1 1 45%; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="jumpToType('sim')">🛠️ Practice Lab Sims</button>
         </div>
         <hr style="border:0; border-top:1px solid var(--border-color); margin-bottom: 12px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
@@ -199,6 +242,10 @@
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
           <span>Hide Mastered Qs (仅刷未掌握):</span>
           <input type="checkbox" id="hideMasteredToggle" onchange="updateHideMastered(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+          <span>Skip Lab Sims (跳过实验题):</span>
+          <input type="checkbox" id="excludeSimLabsToggle" onchange="updateExcludeSimLabs(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -210,6 +257,26 @@
             <button type="button" class="retry-pill active" data-val="25" onclick="updateRetryInterval(25)">~25 Qs ★</button>
             <button type="button" class="retry-pill" data-val="40" onclick="updateRetryInterval(40)">~40 Qs</button>
             <button type="button" class="retry-pill" data-val="60" onclick="updateRetryInterval(60)">~60 Qs</button>
+          </div>
+        </div>
+        <!-- Hardware Active-Braked Native System Haptic Intensity Slider -->
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top: 14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.86rem; font-weight:600;">Haptic Feedback (系统原生触感强度):</span>
+            <span id="hapticDurationLabel" style="font-size:0.82rem; color:var(--primary); font-weight:700; font-variant-numeric:tabular-nums;">80% (标准)</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <input type="range" id="hapticDurationSlider" min="0" max="100" step="5" value="80"
+                   oninput="updateHapticDuration(this.value)"
+                   style="flex:1; height:6px; accent-color:var(--primary); cursor:pointer;">
+            <button type="button" class="btn btn-primary" style="padding:4px 10px; width:auto; font-size:0.75rem; border-radius:6px;" onclick="testHapticFeedback()">测试</button>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-muted); margin-top:-3px;">
+            <span>0% (关闭)</span>
+            <span>25% (轻柔)</span>
+            <span>50% (微动)</span>
+            <span>80% (标准)</span>
+            <span>100% (强劲)</span>
           </div>
         </div>
         <hr style="border:0; border-top:1px solid var(--border-color); margin: 12px 0;">
