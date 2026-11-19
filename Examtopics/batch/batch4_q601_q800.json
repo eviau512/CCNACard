@@ -28,7 +28,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。RFC 1918地址可在相互隔离的机构网络中重复使用，减少对全局唯一IPv4地址的需求。若这些网络随后通过VPN、合并或其他方式互联，重叠地址可能产生路由或身份冲突，需要重新编址、转换或其他设计。\n\nB私有地址通常不能作为公网可路由地址直接访问，C也不能仅靠私有地址进行普通公网端到端路由；NAT是常见方案，代理、应用网关、VPN及双栈等场景也可能提供访问，不应说NAT是唯一途径。D私有地址不自动提供加密或安全。三个RFC 1918范围是10.0.0.0/8、172.16.0.0/12和192.168.0.0/16。"
+    "explanation": "A。RFC 1918地址可在相互隔离的机构网络中重复使用，减少对全局唯一IPv4地址的需求。若这些网络随后通过VPN、合并或其他方式互联，重叠地址可能产生路由或身份冲突，需要重新编址、转换或其他设计。\n\nB私有地址通常不能作为公网可路由地址直接访问，C也不能仅靠私有地址进行普通公网端到端路由；NAT是常见方案，代理、应用网关、VPN及双栈等场景也可能提供访问，不应说NAT是唯一途径。D私有地址不自动提供加密或安全。三个RFC 1918范围是10.0.0.0/8、172.16.0.0/12和192.168.0.0/16。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv4 & Subnetting"
   },
   {
     "id": 602,
@@ -59,7 +61,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "• 核心考点与原理分析：\n本题考查操作系统（macOS/Unix）网络接口配置输出中的十六进制子网掩码（Hexadecimal Netmask）换算与子网网段（Subnet ID）计算。\n在 macOS / Linux 的 `ifconfig` 输出中，子网掩码经常显示为十六进制格式（如 `0xffffe000`）。\n1. **十六进制掩码换算**：\n   - `0xff` = 255 = 11111111（8 位 1）\n   - `0xff` = 255 = 11111111（8 位 1）\n   - `0xe0` = 224 = 11100000（3 位 1，5 位 0）\n   - `0x00` = 0   = 00000000（8 位 0）\n   - 点分十进制掩码为 `255.255.224.0`。\n   - 前缀长度（Prefix Length）= 8 + 8 + 3 = **/19**。\n2. **子网计算（Magic Number 块大小法）**：\n   - 掩码变化的“趣味字节（Interesting Octet）”位于第 3 字节，数值为 224。\n   - 块大小（Block Size）= 256 - 224 = **32**。\n   - 第三字节的子网基准增量为：0, 32, 64, 96, **128**, 160...\n   - 主机 IP 为 `10.8.138.14`，其第三字节为 `138`。由于 138 介于 128 与 160 之间，因此该 IP 所属的**子网网络号为 10.8.128.0/19**。\n   - 验证广播地址：10.8.(128 + 32 - 1).255 = `10.8.159.255`，与输出中的 `broadcast 10.8.159.255` 完全吻合！\n\n• 正确选项剖析：\n根据精确计算，en0 接口配置的子网网络号与前缀掩码正是 **10.8.128.0/19**，选项 C 完全吻合。\n\n• 干扰项排除与错误陷阱：\n选项 A（10.8.0.0/16）：/16 对应掩码 `0xffff0000`（255.255.0.0），与 `0xffffe000` 不符。\n选项 B（10.8.64.0/18）：/18 对应掩码 `0xffffc000`（255.255.192.0），且 138 不在 64 网段（64~127）内。\n选项 D（10.8.138.0/24）：掩码直接看成了标准的 255.255.255.0（`0xffffff00`），完全没有转换十六进制掩码。\n\n• 考试要点与速记技巧：\n【十六进制掩码速查表】：\n• `0x80` = 128 (/17 或 /25)\n• `0xc0` = 192 (/18 或 /26)\n• `0xe0` = 224 (/19 或 /27) -> **本题 e0 = /19**！\n• `0xf0` = 240 (/20 或 /28)\n• `0xf8` = 248 (/21 或 /29)\n• `0xfc` = 252 (/22 或 /30)\n记住 `e0` 对应 224 步长 32，138 属于 128~159，直接锁定 `10.8.128.0/19`！"
+    "explanation": "• 核心考点与原理分析：\n本题考查操作系统（macOS/Unix）网络接口配置输出中的十六进制子网掩码（Hexadecimal Netmask）换算与子网网段（Subnet ID）计算。\n在 macOS / Linux 的 `ifconfig` 输出中，子网掩码经常显示为十六进制格式（如 `0xffffe000`）。\n1. **十六进制掩码换算**：\n   - `0xff` = 255 = 11111111（8 位 1）\n   - `0xff` = 255 = 11111111（8 位 1）\n   - `0xe0` = 224 = 11100000（3 位 1，5 位 0）\n   - `0x00` = 0   = 00000000（8 位 0）\n   - 点分十进制掩码为 `255.255.224.0`。\n   - 前缀长度（Prefix Length）= 8 + 8 + 3 = **/19**。\n2. **子网计算（Magic Number 块大小法）**：\n   - 掩码变化的“趣味字节（Interesting Octet）”位于第 3 字节，数值为 224。\n   - 块大小（Block Size）= 256 - 224 = **32**。\n   - 第三字节的子网基准增量为：0, 32, 64, 96, **128**, 160...\n   - 主机 IP 为 `10.8.138.14`，其第三字节为 `138`。由于 138 介于 128 与 160 之间，因此该 IP 所属的**子网网络号为 10.8.128.0/19**。\n   - 验证广播地址：10.8.(128 + 32 - 1).255 = `10.8.159.255`，与输出中的 `broadcast 10.8.159.255` 完全吻合！\n\n• 正确选项剖析：\n根据精确计算，en0 接口配置的子网网络号与前缀掩码正是 **10.8.128.0/19**，选项 C 完全吻合。\n\n• 干扰项排除与错误陷阱：\n选项 A（10.8.0.0/16）：/16 对应掩码 `0xffff0000`（255.255.0.0），与 `0xffffe000` 不符。\n选项 B（10.8.64.0/18）：/18 对应掩码 `0xffffc000`（255.255.192.0），且 138 不在 64 网段（64~127）内。\n选项 D（10.8.138.0/24）：掩码直接看成了标准的 255.255.255.0（`0xffffff00`），完全没有转换十六进制掩码。\n\n• 考试要点与速记技巧：\n【十六进制掩码速查表】：\n• `0x80` = 128 (/17 或 /25)\n• `0xc0` = 192 (/18 或 /26)\n• `0xe0` = 224 (/19 或 /27) -> **本题 e0 = /19**！\n• `0xf0` = 240 (/20 或 /28)\n• `0xf8` = 248 (/21 或 /29)\n• `0xfc` = 252 (/22 或 /30)\n记住 `e0` 对应 224 步长 32，138 属于 128~159，直接锁定 `10.8.128.0/19`！",
+    "domain": "Network Fundamentals",
+    "topic": "IPv4 & Subnetting"
   },
   {
     "id": 603,
@@ -90,7 +94,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。Hypervisor提供虚拟机资源管理与隔离机制，虚拟交换软件可将虚拟网卡与宿主机的物理网络上联连接；具体实现可能由不同组件承担。\n\nB仅有网络应用不足以完成题设两项职责；C虚拟机是运行工作负载的实例，本身不是所问宿主管理及交换组件；D物理硬件提供基础资源，但题设的管理和虚拟连接通常由软件配合实现。原选项仅称software过于宽泛，现明确组件。"
+    "explanation": "A。Hypervisor提供虚拟机资源管理与隔离机制，虚拟交换软件可将虚拟网卡与宿主机的物理网络上联连接；具体实现可能由不同组件承担。\n\nB仅有网络应用不足以完成题设两项职责；C虚拟机是运行工作负载的实例，本身不是所问宿主管理及交换组件；D物理硬件提供基础资源，但题设的管理和虚拟连接通常由软件配合实现。",
+    "domain": "Network Fundamentals",
+    "topic": "Virtualization & IOS"
   },
   {
     "id": 604,
@@ -121,7 +127,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。2.4 GHz信道1、6、11中心频率相隔25 MHz，是常用的三个非重叠信道选择；其他选项至少有一组仅间隔20 MHz，在题设约22 MHz的802.11b信道模型中重叠。实际频谱形状、信道宽度、地区许可和其他射频源均会影响干扰，非重叠不保证完全无干扰。\n\n题设限定802.11b以明确带宽比较。原题把802.11ac列入2.4 GHz不准确；802.11n/ax可有不同带宽配置，不能将所有部署一概视为相同宽度。"
+    "explanation": "B。2.4 GHz信道1、6、11中心频率相隔25 MHz，是常用的三个非重叠信道选择；其他选项至少有一组仅间隔20 MHz，在题设约22 MHz的802.11b信道模型中重叠。实际频谱形状、信道宽度、地区许可和其他射频源均会影响干扰，非重叠不保证完全无干扰。\n\n题设限定802.11b以明确带宽比较。需注意 802.11ac 仅工作在 5 GHz 频段，而 802.11n/ax 可采用不同信道宽度配置，不能将所有部署一概视为相同宽度。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 605,
@@ -152,14 +160,16 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。具备路由能力并正确配置的三层交换机可通过SVI或路由端口在不同VLAN/IP子网间转发；二层接口仍可在各自VLAN内交换帧。是否支持特定功能及硬件加速取决于平台、许可和配置。\n\nB不是三层交换机仅有的功能；C不能用IP地址概括所有二层帧转发；D仅按MAC地址转发不能描述通常的跨子网IP路由。路由通常不原样转发二层广播，但协议中继等配置可能转发相关请求，不能绝对断言广播相关流量永不跨越边界。"
+    "explanation": "A。具备路由能力并正确配置的三层交换机可通过SVI或路由端口在不同VLAN/IP子网间转发；二层接口仍可在各自VLAN内交换帧。是否支持特定功能及硬件加速取决于平台、许可和配置。\n\nB不是三层交换机仅有的功能；C不能用IP地址概括所有二层帧转发；D仅按MAC地址转发不能描述通常的跨子网IP路由。路由通常不原样转发二层广播，但协议中继等配置可能转发相关请求，不能绝对断言广播相关流量永不跨越边界。",
+    "domain": "Network Access",
+    "topic": "Inter-VLAN Routing"
   },
   {
     "id": 606,
     "qid": "Q800",
     "page_num": 143,
     "type": "Single Choice",
-    "prompt": "Two compatible 1000BASE-SX optical modules must be connected directly with multimode fiber. The GBIC has an SC connector and the SFP has an LC connector. Which duplex patch cable connector pair fits?",
+    "prompt": "Two compatible standard 1000BASE-SX optical modules (one GBIC and one SFP) must be connected directly with multimode fiber. Which duplex patch cable connector pair is required?",
     "image": null,
     "answer_image": null,
     "options": [
@@ -183,7 +193,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。题设明确一端SC、一端LC，故需要SC-to-LC双工多模跳线，方向写作LC-to-SC相同。两端还需匹配光模块规格、光纤类型、长度和收发极性，接口形状本身不能保证链路正常。\n\nB、C各自两端相同，D含ST接头，均与题设直连端口不匹配。GBIC和SFP常见分别使用SC与LC，但具体接头应查模块型号，不能仅凭外形或1000BASE-SX名称保证。"
+    "explanation": "A。标准的 1000BASE-SX GBIC 光模块通常使用 SC 双工接口，而标准的 SFP（Mini-GBIC）光模块通常使用小型化的 LC 双工接口。因此，直连 GBIC 与 SFP 模块需要一端为 LC、另一端为 SC 的双工多模光纤跳线（LC to SC，与 SC to LC 等效）。两端还需匹配光模块波长、光纤类型、长度和收发极性。\n\nB（SC to SC）、C（LC to LC）两端接头相同，D 包含 ST 接头，均与题设直连端口不匹配。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 607,
@@ -214,7 +226,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。点到点租用电路连接两个固定端点，相比某些多点连接方案通常较容易理解和配置；具体仍需配置接口、寻址、封装和服务商参数。\n\nA成本因地区、速率、距离和合同而异，不能保证便宜或总是最贵；B可以由多条点到点线路组成全网状，但n个站点需n(n-1)/2条链路，扩展成本增加；D增减站点通常受电路交付约束。服务可能提供专用逻辑容量或SLA，但不必然物理独占、永不拥塞或保证特定时延。"
+    "explanation": "C。点到点租用电路连接两个固定端点，相比某些多点连接方案通常较容易理解和配置；具体仍需配置接口、寻址、封装和服务商参数。\n\nA成本因地区、速率、距离和合同而异，不能保证便宜或总是最贵；B可以由多条点到点线路组成全网状，但n个站点需n(n-1)/2条链路，扩展成本增加；D增减站点通常受电路交付约束。服务可能提供专用逻辑容量或SLA，但不必然物理独占、永不拥塞或保证特定时延。",
+    "domain": "Network Fundamentals",
+    "topic": "Network Architectures"
   },
   {
     "id": 608,
@@ -245,7 +259,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。TCP使用字节序列号、累计确认、重传和流量控制等机制提供可靠有序字节流；确认可以延迟或累计，不能说每个收到的数据包都必须单独发送ACK。异常断连仍可能导致交付失败，应用仍需处理错误。\n\nUDP本身不提供确认、排序或重传，但应用层可以自行实现这些功能；A颠倒排序职责，B错误地给UDP赋予内建流控，C错误宣称UDP保证交付。传统HTTP/1.1和HTTP/2常用TCP，而HTTP/3使用基于UDP的QUIC可靠传输，因此不能把HTTPS一律等同TCP。"
+    "explanation": "D。TCP使用字节序列号、累计确认、重传和流量控制等机制提供可靠有序字节流；确认可以延迟或累计，不能说每个收到的数据包都必须单独发送ACK。异常断连仍可能导致交付失败，应用仍需处理错误。\n\nUDP本身不提供确认、排序或重传，但应用层可以自行实现这些功能；A颠倒排序职责，B错误地给UDP赋予内建流控，C错误宣称UDP保证交付。传统HTTP/1.1和HTTP/2常用TCP，而HTTP/3使用基于UDP的QUIC可靠传输，因此不能把HTTPS一律等同TCP。",
+    "domain": "Network Fundamentals",
+    "topic": "TCP/IP & OSI Model"
   },
   {
     "id": 609,
@@ -276,7 +292,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。Hypervisor或虚拟机监视器负责抽象、分配和调度虚拟机所需的计算、内存与其他资源。具体实现可能直接运行在硬件上，也可能与宿主操作系统协作；设备直通等配置会改变具体控制路径。\n\nB OS可能提供虚拟化支持，但题目所问的专门VM管理组件是hypervisor；C CPU是被管理资源之一，D机箱是物理承载结构，二者均不能单独完成VM资源分配。资源隔离和性能仍受配置及实现影响。"
+    "explanation": "A。Hypervisor或虚拟机监视器负责抽象、分配和调度虚拟机所需的计算、内存与其他资源。具体实现可能直接运行在硬件上，也可能与宿主操作系统协作；设备直通等配置会改变具体控制路径。\n\nB OS可能提供虚拟化支持，但题目所问的专门VM管理组件是hypervisor；C CPU是被管理资源之一，D机箱是物理承载结构，二者均不能单独完成VM资源分配。资源隔离和性能仍受配置及实现影响。",
+    "domain": "Network Fundamentals",
+    "topic": "Virtualization & IOS"
   },
   {
     "id": 610,
@@ -307,7 +325,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。为相邻覆盖区域选择合适的非重叠信道，有助于减少信道间的频谱重叠和相互干扰，从而改善频谱复用；它不保证完全消除邻道泄漏、同频竞争或其他射频干扰。可用信道及宽度取决于地区、设备和配置。\n\nA信道宽度不会仅因选择非重叠而自动增加；B环境可能因此改善，但D更直接描述设计目的；C绑定信道是另一项配置，可能减少可用的独立信道。"
+    "explanation": "D。为相邻覆盖区域选择合适的非重叠信道，有助于减少信道间的频谱重叠和相互干扰，从而改善频谱复用；它不保证完全消除邻道泄漏、同频竞争或其他射频干扰。可用信道及宽度取决于地区、设备和配置。\n\nA信道宽度不会仅因选择非重叠而自动增加；B环境可能因此改善，但D更直接描述设计目的；C绑定信道是另一项配置，可能减少可用的独立信道。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 611,
@@ -338,7 +358,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。SSID标识无线服务集，客户端可依据该名称选择要连接的无线网络。多个AP可以使用相同SSID，SSID本身不是唯一设备身份，也不提供身份认证或加密。网络名称可被隐藏或伪造，连接仍需依据实际安全配置进行认证。\n\nA将SSID误当成无条件认证机制；B、C描述有线网络而非SSID所标识的无线服务。BSSID通常用于标识具体基本服务集，不能简单把它等同于整个SSID；实际无线接口和虚拟AP配置会影响其地址。"
+    "explanation": "D。SSID标识无线服务集，客户端可依据该名称选择要连接的无线网络。多个AP可以使用相同SSID，SSID本身不是唯一设备身份，也不提供身份认证或加密。网络名称可被隐藏或伪造，连接仍需依据实际安全配置进行认证。\n\nA将SSID误当成无条件认证机制；B、C描述有线网络而非SSID所标识的无线服务。BSSID通常用于标识具体基本服务集，不能简单把它等同于整个SSID；实际无线接口和虚拟AP配置会影响其地址。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 612,
@@ -369,7 +391,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。FTP使用独立的TCP控制连接与按需建立的数据连接：控制连接通常使用服务器TCP 21，数据连接用于文件或目录数据。主动模式下服务器通常从TCP 20建立数据连接，被动模式下客户端连接服务器提供的数据端口；具体部署和端口可能有所不同。\n\nA FTP支持账号认证，也可配置匿名访问，因此不是始终无认证；B块编号和确认是TFTP等协议机制，FTP数据的可靠传输主要由TCP提供；D UDP 69是TFTP初始请求的常见端口。普通FTP的命令和数据默认不提供加密保护。"
+    "explanation": "C。FTP使用独立的TCP控制连接与按需建立的数据连接：控制连接通常使用服务器TCP 21，数据连接用于文件或目录数据。主动模式下服务器通常从TCP 20建立数据连接，被动模式下客户端连接服务器提供的数据端口；具体部署和端口可能有所不同。\n\nA FTP支持账号认证，也可配置匿名访问，因此不是始终无认证；B块编号和确认是TFTP等协议机制，FTP数据的可靠传输主要由TCP提供；D UDP 69是TFTP初始请求的常见端口。普通FTP的命令和数据默认不提供加密保护。",
+    "domain": "IP Services",
+    "topic": "DNS & File Transfer"
   },
   {
     "id": 613,
@@ -400,7 +424,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。STP包含额外金属屏蔽，可在正确设计、端接和接地的系统中帮助降低外部电磁干扰；UTP没有该屏蔽层，但其双绞结构和差分传输也能抑制干扰。实际效果取决于线缆类别、连接、布线和环境。\n\nA速率并非由有无屏蔽单独决定；C屏蔽线常有额外安装要求，但成本和施工难度依产品而异；D笼统地把UTP说成一定更不易受干扰与屏蔽作用相反。屏蔽不是消除所有串扰或保证性能的万能措施。"
+    "explanation": "B。STP包含额外金属屏蔽，可在正确设计、端接和接地的系统中帮助降低外部电磁干扰；UTP没有该屏蔽层，但其双绞结构和差分传输也能抑制干扰。实际效果取决于线缆类别、连接、布线和环境。\n\nA速率并非由有无屏蔽单独决定；C屏蔽线常有额外安装要求，但成本和施工难度依产品而异；D笼统地把UTP说成一定更不易受干扰与屏蔽作用相反。屏蔽不是消除所有串扰或保证性能的万能措施。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 614,
@@ -431,7 +457,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。服务器虚拟化通过hypervisor等组件抽象和分配计算、内存及I/O资源，使一台物理主机能够同时运行多个具有各自客户操作系统的虚拟机。隔离有助于减少相互影响，但硬件、管理面或实现漏洞仍可能成为共享故障点。\n\nA VRF隔离路由表，B VDC将支持的平台划分为逻辑设备上下文，C NPIV允许光纤通道物理端口使用多个虚拟N端口身份；这些并不是题目所问的通用多客户OS技术。不同hypervisor实现与宿主操作系统的关系不同，例如KVM依赖Linux内核，不宜把所有产品简单视为完全相同的裸机结构。"
+    "explanation": "D。服务器虚拟化通过hypervisor等组件抽象和分配计算、内存及I/O资源，使一台物理主机能够同时运行多个具有各自客户操作系统的虚拟机。隔离有助于减少相互影响，但硬件、管理面或实现漏洞仍可能成为共享故障点。\n\nA VRF隔离路由表，B VDC将支持的平台划分为逻辑设备上下文，C NPIV允许光纤通道物理端口使用多个虚拟N端口身份；这些并不是题目所问的通用多客户OS技术。不同hypervisor实现与宿主操作系统的关系不同，例如KVM依赖Linux内核，不宜把所有产品简单视为完全相同的裸机结构。",
+    "domain": "Network Fundamentals",
+    "topic": "Virtualization & IOS"
   },
   {
     "id": 615,
@@ -462,7 +490,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。自动化可减少重复的人工操作并帮助提高配置一致性，从而有机会降低运营成本；实际结果取决于部署规模、开发维护、许可与培训成本，不能保证所有组织都节省费用。\n\nB降低密码复杂度不是自动化目标；C逐台手工处理不是此处的主要收益；D自动化中的错误配置也可能批量传播，不能保证零错误。原D“限制经常性管理成本”与A可能同时成立，现更换干扰项；原解析的70%故障比例缺少依据，已删除。"
+    "explanation": "A。自动化可减少重复的人工操作并帮助提高配置一致性，从而有机会降低运营成本；实际结果取决于部署规模、开发维护、许可与培训成本，不能保证所有组织都节省费用。\n\nB降低密码复杂度不是自动化目标；C逐台手工处理不是此处的主要收益；D自动化中的错误配置也可能批量传播，不能保证零错误。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 616,
@@ -493,7 +523,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。折叠核心将核心层和汇聚层功能合并到同一层或同一组设备，接入层仍负责终端接入；这一组可以是单设备或冗余设备，具体取决于规模及可用性要求。\n\nA HSRP用于默认网关冗余，不能定义折叠核心；B将核心和汇聚作为独立层级不符合本题所述合并；D不要求必须同时部署IPv4和IPv6。设备对、链路类型和具体协议均由设计决定。"
+    "explanation": "C。折叠核心将核心层和汇聚层功能合并到同一层或同一组设备，接入层仍负责终端接入；这一组可以是单设备或冗余设备，具体取决于规模及可用性要求。\n\nA HSRP用于默认网关冗余，不能定义折叠核心；B将核心和汇聚作为独立层级不符合本题所述合并；D不要求必须同时部署IPv4和IPv6。设备对、链路类型和具体协议均由设计决定。",
+    "domain": "Network Fundamentals",
+    "topic": "Network Architectures"
   },
   {
     "id": 617,
@@ -524,7 +556,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。部署虚拟机前应核对宿主或集群可用CPU、内存以及工作负载需求，并结合存储、网络、余量与超配策略规划。资源争用可能影响性能，实际阈值依平台和负载而定。\n\nB外设支持和D部署位置在特定场景也可能重要，例如设备直通、延迟、数据驻留或故障域；它们不是本题所问的CPU/内存容量项。C所述VSM映射不是通用虚拟CPU分配前提。"
+    "explanation": "A。部署虚拟机前应核对宿主或集群可用CPU、内存以及工作负载需求，并结合存储、网络、余量与超配策略规划。资源争用可能影响性能，实际阈值依平台和负载而定。\n\nB外设支持和D部署位置在特定场景也可能重要，例如设备直通、延迟、数据驻留或故障域；它们不是本题所问的CPU/内存容量项。C所述VSM映射不是通用虚拟CPU分配前提。",
+    "domain": "Network Fundamentals",
+    "topic": "Virtualization & IOS"
   },
   {
     "id": 618,
@@ -555,7 +589,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。`ff02:0:0:0:0:0:0:1`压缩为`ff02::1`，是链路本地所有节点组播地址；`ff02::2`为链路本地所有路由器。IPv6没有广播地址，某些本地发现功能使用组播，但不能把所有组播与IPv4广播视为完全相同。\n\nB以2000::/3开头，属于全局单播范围；D以fe80::/10开头，属于链路本地单播范围；C以`ff`开头，属于组播地址格式，其后标志和作用域与`ff02::1`不同，不能因为开头为fffe就说没有组播前缀。"
+    "explanation": "A。`ff02:0:0:0:0:0:0:1`压缩为`ff02::1`，是链路本地所有节点组播地址；`ff02::2`为链路本地所有路由器。IPv6没有广播地址，某些本地发现功能使用组播，但不能把所有组播与IPv4广播视为完全相同。\n\nB以2000::/3开头，属于全局单播范围；D以fe80::/10开头，属于链路本地单播范围；C以`ff`开头，属于组播地址格式，其后标志和作用域与`ff02::1`不同，不能因为开头为fffe就说没有组播前缀。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 619,
@@ -586,7 +622,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。相互隔离的网络可以重复使用RFC 1918私有地址，减少对全球唯一IPv4地址的需求；当网络互联时，重叠地址仍可能产生路由冲突，需要规划。私网地址通常不在公共互联网中全球路由，但本身不加密、不认证，也不能替代防火墙或访问控制。\n\nA支付行业合规、D地方规定都不能从题设推断；B内部路由表大小取决于拓扑与汇总，不会仅因为地址私有就必然缩小。原答案将私有编址本身等同于降低入侵风险，忽略暴露服务、配置和其他攻击路径，现改为其明确的地址复用用途。"
+    "explanation": "C。相互隔离的组织网络可以重复使用 RFC 1918 私有地址，减少对全球唯一公网 IPv4 地址的需求；当网络互联时，重叠地址仍可能产生路由冲突，需要提前规划。私网地址通常不在公共互联网中全球路由，但本身不提供加密或认证，也不能替代防火墙或访问控制。\n\nA 支付行业合规、D 地方规定都不能从题设推断；B 内部路由表大小取决于拓扑与路由汇总设计，不会仅因地址私有就必然缩小。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv4 & Subnetting"
   },
   {
     "id": 620,
@@ -617,7 +655,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "• 核心考点与原理分析：\n本题考查以太网物理层基础物理信号参数中频率（Frequency）的定义及标准国际单位换算。\n在物理学和通信工程中，赫兹（Hertz，符号为 Hz）是表示信号周期性变化快慢的标准国际单位：\n$1 Hz = 1 次/秒 = 1 周期/秒（cycle per second）$\n当一个周期性交变信号以恒定频率振荡时：\n- 每秒钟振荡 1 次，其频率为 1 Hz。\n- 时间单位换算中：1 分钟（minute）恒等于 60 秒（seconds）。\n题干中给出的条件为：该信号频率在每分钟内出现 60 次（appears 60 times per minute）。\n根据频率定义计算其每秒出现次数：\n$f = (60 次 / 60 秒) = 1 次/秒 = 1 Hz$\n因此，每分钟振荡 60 次的信号等价于每秒振荡 1 次，其对应的标准物理频率为 1 Hz。\n\n• 正确选项剖析：\n选项 A（1 Hz signal）计算结果精准无误。每分钟包含 60 秒，60 次除以 60 秒即为 1 次/秒，对应频率即为 1 Hz，因此选项 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B 错误：1 GHz 代表吉赫兹（Giga Hertz），1 GHz = 10^9 Hz = 1,000,000,000 次/秒。若信号为 1 GHz，则其每分钟将出现 $6 × 10^{10}$ 次，与题干数量级相差 9 个数量级。\n- 选项 C 错误：60 Hz 代表每秒钟振荡 60 次（如中国常见家用交流电为 50 Hz，北美家用交流电为 60 Hz）。在 60 Hz 频率下，该信号每分钟出现的次数为 60 次/秒 × 60 秒 = 3600 次/分钟。考生若粗心将“60 次/分钟”误读为“60 次/秒”将误选此项，是典型审题陷阱。\n- 选项 D 错误：60 GHz 代表 60 吉赫兹，属于毫米波极高频频段（如 802.11ad/ay WiGig 无线传输），其每分钟振荡次数为 $3.6 × 10^{12}$ 次。\n\n• 考试要点与速记技巧：\n频率计算避坑：\n$频率(Hz) = (振动总次数 / 总时间(秒))$\n题干说“每分钟 60 次” → 60 ÷ 60 = 1 Hz；题干若说“每秒 60 次” → 才是 $60 Hz$！仔细审题秒破陷阱。"
+    "explanation": "• 核心考点与原理分析：\n本题考查以太网物理层基础物理信号参数中频率（Frequency）的定义及标准国际单位换算。\n在物理学和通信工程中，赫兹（Hertz，符号为 Hz）是表示信号周期性变化快慢的标准国际单位：\n$1 Hz = 1 次/秒 = 1 周期/秒（cycle per second）$\n当一个周期性交变信号以恒定频率振荡时：\n- 每秒钟振荡 1 次，其频率为 1 Hz。\n- 时间单位换算中：1 分钟（minute）恒等于 60 秒（seconds）。\n题干中给出的条件为：该信号频率在每分钟内出现 60 次（appears 60 times per minute）。\n根据频率定义计算其每秒出现次数：\n$f = (60 次 / 60 秒) = 1 次/秒 = 1 Hz$\n因此，每分钟振荡 60 次的信号等价于每秒振荡 1 次，其对应的标准物理频率为 1 Hz。\n\n• 正确选项剖析：\n选项 A（1 Hz signal）计算结果精准无误。每分钟包含 60 秒，60 次除以 60 秒即为 1 次/秒，对应频率即为 1 Hz，因此选项 A 正确。\n\n• 干扰项排除与错误陷阱：\n- 选项 B 错误：1 GHz 代表吉赫兹（Giga Hertz），1 GHz = 10^9 Hz = 1,000,000,000 次/秒。若信号为 1 GHz，则其每分钟将出现 $6 × 10^{10}$ 次，与题干数量级相差 9 个数量级。\n- 选项 C 错误：60 Hz 代表每秒钟振荡 60 次（如中国常见家用交流电为 50 Hz，北美家用交流电为 60 Hz）。在 60 Hz 频率下，该信号每分钟出现的次数为 60 次/秒 × 60 秒 = 3600 次/分钟。考生若粗心将“60 次/分钟”误读为“60 次/秒”将误选此项，是典型审题陷阱。\n- 选项 D 错误：60 GHz 代表 60 吉赫兹，属于毫米波极高频频段（如 802.11ad/ay WiGig 无线传输），其每分钟振荡次数为 $3.6 × 10^{12}$ 次。\n\n• 考试要点与速记技巧：\n频率计算避坑：\n$频率(Hz) = (振动总次数 / 总时间(秒))$\n题干说“每分钟 60 次” → 60 ÷ 60 = 1 Hz；题干若说“每秒 60 次” → 才是 $60 Hz$！仔细审题秒破陷阱。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 621,
@@ -648,7 +688,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。在规则的两层spine-leaf拓扑中，不同leaf下的主机通常经源leaf、spine、目的leaf通信，路径跳数规律，有助于规划和预测延迟。实际时延仍受距离、设备处理、拥塞、故障及路径选择影响，不能保证固定数值或完全无阻塞。\n\nB单纯增加leaf不必然降低超订；C流量不局限组播，终端连接方式也依设计；D负载和MTU由具体配置与封装决定，不是该架构的固有目的。"
+    "explanation": "A。在规则的两层spine-leaf拓扑中，不同leaf下的主机通常经源leaf、spine、目的leaf通信，路径跳数规律，有助于规划和预测延迟。实际时延仍受距离、设备处理、拥塞、故障及路径选择影响，不能保证固定数值或完全无阻塞。\n\nB单纯增加leaf不必然降低超订；C流量不局限组播，终端连接方式也依设计；D负载和MTU由具体配置与封装决定，不是该架构的固有目的。",
+    "domain": "Network Fundamentals",
+    "topic": "Network Architectures"
   },
   {
     "id": 622,
@@ -679,7 +721,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。用户直接使用的电脑或手机可作为endpoint访问网络服务。endpoint是通信的发起或终止一端，服务器、打印机和传感器也可能是endpoint，不要求一定由人直接操作。\n\nA和B更接近交换或路由设备中继流量，C更接近防火墙的区域访问控制职责。角色按具体通信和功能划分，一台设备也可能同时承担多个角色，基础设施设备自身亦可发起管理连接。"
+    "explanation": "D。用户直接使用的电脑或手机可作为endpoint访问网络服务。endpoint是通信的发起或终止一端，服务器、打印机和传感器也可能是endpoint，不要求一定由人直接操作。\n\nA和B更接近交换或路由设备中继流量，C更接近防火墙的区域访问控制职责。角色按具体通信和功能划分，一台设备也可能同时承担多个角色，基础设施设备自身亦可发起管理连接。",
+    "domain": "Network Fundamentals",
+    "topic": "Network Architectures"
   },
   {
     "id": 623,
@@ -710,14 +754,16 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。交换机动态学习收到帧的源MAC地址，并结合VLAN和入口接口建立或更新转发表项，供后续目的MAC查找使用；动态条目可按平台和配置老化。\n\nA trunk并非默认一律禁用学习；B学习本身不是管理VLAN认证机制；D攻击者可能利用动态学习填满表项，但那不是学习功能的目的。学习是否开启及老化时间依平台、接口和配置而定，不能说所有设备的全部端口都无例外启用。"
+    "explanation": "C。交换机动态学习收到帧的源MAC地址，并结合VLAN和入口接口建立或更新转发表项，供后续目的MAC查找使用；动态条目可按平台和配置老化。\n\nA trunk并非默认一律禁用学习；B学习本身不是管理VLAN认证机制；D攻击者可能利用动态学习填满表项，但那不是学习功能的目的。学习是否开启及老化时间依平台、接口和配置而定，不能说所有设备的全部端口都无例外启用。",
+    "domain": "Network Fundamentals",
+    "topic": "Ethernet & MAC Switching"
   },
   {
     "id": 624,
     "qid": "Q824",
     "page_num": 144,
     "type": "Single Choice",
-    "prompt": "For a documentation example of IPv6 anycast, which listed host address is drawn from the documentation-only unicast prefix 2001:db8::/32?",
+    "prompt": "Which listed address is a valid IPv6 unicast host address from the documentation-only prefix that could be configured as an anycast address?",
     "image": null,
     "answer_image": null,
     "options": [
@@ -741,7 +787,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。`2001:db8:0234:ca3e::1/128`属于文档示例前缀，适合用来说明任播配置而不宣称它可在公网生产环境路由。IPv6任播从单播地址空间分配，语法本身通常无法区分任播与单播，取决于配置和路由。\n\nA以ff开头表示组播；C为链路本地单播，不在题设文档前缀；D为2002开头的6to4前缀，也不在题设文档范围。任播通常选择路由意义上的近端，不保证最低时延或服务器健康；/128常用于通告单个服务地址，但不是所有任播设计的普遍强制要求。原D缺少必要的`::`，现修正地址语法。"
+    "explanation": "B。`2001:db8:0234:ca3e::1/128`属于文档示例前缀（`2001:db8::/32`），适合用来说明任播配置而不宣称它可在公网生产环境路由。IPv6任播从单播地址空间分配，语法本身通常无法区分任播与单播，取决于配置和路由。\n\nA以ff开头表示组播；C为链路本地单播，不在文档前缀范围内；D为2002开头的6to4前缀，也不在文档前缀范围内。任播通常选择路由意义上的近端，不保证最低时延或服务器健康；/128常用于通告单个服务地址，但不是所有任播设计的普遍强制要求。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 625,
@@ -772,7 +820,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。OM3与OM4都是50/125微米多模光纤，即标称纤芯50微米、包层125微米；它们在有效模式带宽等指标上有所区别。实际可达距离依速率、光模块、链路损耗及标准而变，不能单凭OM类别保证某一距离。\n\nA的62.5微米常见于OM1；D的约9微米常见于单模光纤；B不是OM3/OM4的标称纤芯直径。外护套颜色也不能替代对线缆规格和链路预算的核对。"
+    "explanation": "C。OM3与OM4都是50/125微米多模光纤，即标称纤芯50微米、包层125微米；它们在有效模式带宽等指标上有所区别。实际可达距离依速率、光模块、链路损耗及标准而变，不能单凭OM类别保证某一距离。\n\nA的62.5微米常见于OM1；D的约9微米常见于单模光纤；B不是OM3/OM4的标称纤芯直径。外护套颜色也不能替代对线缆规格和链路预算的核对。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 626,
@@ -803,7 +853,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。防火墙可作为不同安全区域之间的策略执行边界，根据配置控制跨区域流量。区域模型、状态检查和默认规则依产品及配置不同；不能泛称所有设备默认阻断所有跨区流量，例如某些ASA配置默认允许高安全级别向低安全级别发起的流量。\n\nA IPS主要检测或阻断威胁；B交换机可通过VLAN和ACL等参与分段；C接入点提供无线接入，也可配合无线策略。这里防火墙最直接承担题设的跨安全域策略控制，设备功能实际可组合。"
+    "explanation": "D。防火墙可作为不同安全区域之间的策略执行边界，根据配置控制跨区域流量。区域模型、状态检查和默认规则依产品及配置不同；不能泛称所有设备默认阻断所有跨区流量，例如某些ASA配置默认允许高安全级别向低安全级别发起的流量。\n\nA IPS主要检测或阻断威胁；B交换机可通过VLAN和ACL等参与分段；C接入点提供无线接入，也可配合无线策略。这里防火墙最直接承担题设的跨安全域策略控制，设备功能实际可组合。",
+    "domain": "Security Fundamentals",
+    "topic": "VPNs, Firewall & IPS"
   },
   {
     "id": 627,
@@ -834,7 +886,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。RFC 1918地址可以在彼此隔离的网络中复用，减少对全球唯一IPv4地址的需求。私网互联时地址重叠可能增加规划复杂度；公网访问可采用NAT、代理或其他架构，不能说每个出口都必须使用NAT。\n\nA限制直接公网可达性可能是部署效果，但不等同安全防护；B、D简化编址或复杂度取决于网络规模、重叠和设计，不是普遍保证。地址本身不提供加密或身份认证。"
+    "explanation": "C。RFC 1918地址可以在彼此隔离的网络中复用，减少对全球唯一IPv4地址的需求。私网互联时地址重叠可能增加规划复杂度；公网访问可采用NAT、代理或其他架构，不能说每个出口都必须使用NAT。\n\nA限制直接公网可达性可能是部署效果，但不等同安全防护；B、D简化编址或复杂度取决于网络规模、重叠和设计，不是普遍保证。地址本身不提供加密或身份认证。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv4 & Subnetting"
   },
   {
     "id": 628,
@@ -865,7 +919,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。折叠核心将核心层与汇聚层功能合并为一个组合层，接入层通常仍提供终端接入；组合层可以由单设备或多台冗余设备实现。选择该设计取决于规模、性能、成本及可靠性需求，没有题目给出的固定终端数量阈值。\n\nA单交换机SOHO描述不足以定义该结构；B并非合并核心与汇聚的表述；C无线接入路径和性能并非该拓扑定义，不能据此保证更快。"
+    "explanation": "D。折叠核心将核心层与汇聚层功能合并为一个组合层，接入层通常仍提供终端接入；组合层可以由单设备或多台冗余设备实现。选择该设计取决于规模、性能、成本及可靠性需求，没有题目给出的固定终端数量阈值。\n\nA单交换机SOHO描述不足以定义该结构；B并非合并核心与汇聚的表述；C无线接入路径和性能并非该拓扑定义，不能据此保证更快。",
+    "domain": "Network Fundamentals",
+    "topic": "Network Architectures"
   },
   {
     "id": 629,
@@ -896,7 +952,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。当覆盖区域内的无线信号使用重叠信道时，射频干扰可能增加，导致接收失败、重传和吞吐下降；实际影响取决于信号强度、距离、信道宽度、负载和环境，不是每次重叠都必然严重故障。\n\nB重叠不会从协议上消除SSID区别，但强干扰可能妨碍客户端接收信标；C未授权访问和D窃听风险主要取决于认证、加密与其他安全条件，不能仅由信道重叠推出。合理信道规划可降低干扰，但不保证无线环境完全无干扰。"
+    "explanation": "A。当覆盖区域内的无线信号使用重叠信道时，射频干扰可能增加，导致接收失败、重传和吞吐下降；实际影响取决于信号强度、距离、信道宽度、负载和环境，不是每次重叠都必然严重故障。\n\nB重叠不会从协议上消除SSID区别，但强干扰可能妨碍客户端接收信标；C未授权访问和D窃听风险主要取决于认证、加密与其他安全条件，不能仅由信道重叠推出。合理信道规划可降低干扰，但不保证无线环境完全无干扰。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 630,
@@ -927,7 +985,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。图示有累计15000次collisions、14278次CRC以及179次deferred，值得检查两端速率/双工协商、线缆和物理链路，并在业务时段观察计数器增量。图中late collision为0，且未显示两端实际双工状态；仅凭累计计数不能证明双工不匹配，也不能确定错误何时发生。\n\nA图示MTU 1500，但默认值因接口与平台而异；C输出队列丢包为0不证明不存在其他QoS丢弃；D五分钟平均速率较低，仅表示该观察窗口内平均负载较低，不能排除先前短时拥塞。确认原因需要两端配置、实时计数变化及进一步测试。"
+    "explanation": "B。图示有累计15000次collisions、14278次CRC以及179次deferred，值得检查两端速率/双工协商、线缆和物理链路，并在业务时段观察计数器增量。图中late collision为0，且未显示两端实际双工状态；仅凭累计计数不能证明双工不匹配，也不能确定错误何时发生。\n\nA图示MTU 1500，但默认值因接口与平台而异；C输出队列丢包为0不证明不存在其他QoS丢弃；D五分钟平均速率较低，仅表示该观察窗口内平均负载较低，不能排除先前短时拥塞。确认原因需要两端配置、实时计数变化及进一步测试。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 631,
@@ -958,7 +1018,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。Cisco DNA Center（现称Catalyst Center）为支持的园区网络设备和服务提供集中管理、自动配置、策略及网络保障等能力；具体功能依设备、版本及许可而异。\n\nA地址池管理只是相关功能的一部分；B数据中心ACI策略控制通常由APIC承担；C串口控制台服务器提供不同的带外访问功能。传统网管也可能提供配置、自动化与监控，不能说传统工具只能被动监控。"
+    "explanation": "D。Cisco DNA Center（现称Catalyst Center）为支持的园区网络设备和服务提供集中管理、自动配置、策略及网络保障等能力；具体功能依设备、版本及许可而异。\n\nA地址池管理只是相关功能的一部分；B数据中心ACI策略控制通常由APIC承担；C串口控制台服务器提供不同的带外访问功能。传统网管也可能提供配置、自动化与监控，不能说传统工具只能被动监控。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 632,
@@ -989,7 +1051,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。SW1的active与SW2的passive使用LACP动态协商，且成员链路设为trunk以承载题设允许的多个VLAN；题设已经保证R1路由、网关、VLAN与链路兼容等其他连通条件。实际平台对port-channel接口配置及成员一致性仍有要求。\n\nA混用LACP active和PAgP desirable，且access不能承载题设多VLAN；B `on`是静态汇聚而非动态协商；D auto/desirable使用Cisco PAgP，不符合题设行业标准LACP。原题未给出跨VLAN路由、允许列表等条件，不能仅凭trunk本身保证所有PC互通。"
+    "explanation": "C。SW1的active与SW2的passive使用LACP动态协商，且成员链路设为trunk以承载题设允许的多个VLAN；题设已经保证R1路由、网关、VLAN与链路兼容等其他连通条件。实际平台对port-channel接口配置及成员一致性仍有要求。\n\nA混用LACP active和PAgP desirable，且access不能承载题设多VLAN；B `on`是静态汇聚而非动态协商；D auto/desirable使用Cisco PAgP，不符合题设行业标准LACP。",
+    "domain": "Network Access",
+    "topic": "EtherChannel"
   },
   {
     "id": 633,
@@ -1020,7 +1084,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。WLC物理console连接提供独立于生产IP转发路径的带外管理入口，适合初始配置或部分网络故障排查。它仍依赖设备供电、console硬件和软件状态，不能保证所有崩溃场景均可恢复。\n\nA HTTP GUI需要相应网络服务；B和D明确描述带内连接，不符合串行console的题设。专用管理以太网接口若接入独立管理网络也可构成带外管理，不能只按“是否使用IP”判断。"
+    "explanation": "C。WLC物理console连接提供独立于生产IP转发路径的带外管理入口，适合初始配置或部分网络故障排查。它仍依赖设备供电、console硬件和软件状态，不能保证所有崩溃场景均可恢复。\n\nA HTTP GUI需要相应网络服务；B和D明确描述带内连接，不符合串行console的题设。专用管理以太网接口若接入独立管理网络也可构成带外管理，不能只按“是否使用IP”判断。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 634,
@@ -1051,7 +1117,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中VLAN 2表项位于e0/1、e0/2和e0/3，未见A的目的MAC。题设明确D发送的是A的MAC且交换机无该项，因此交换机在VLAN 2的合格转发端口中除入口e0/3外泛洪未知单播；端口状态和过滤策略仍影响实际出口。\n\nB单次未知单播泛洪本身不是广播风暴；C正常未知单播不自动触发err-disable；D MAC表保存地址映射而非待删除的帧。原题仅给目的IP不足以推断二层目的MAC，跨网段时可能是网关MAC，因此补全同网段及目的MAC前提。"
+    "explanation": "A。图中VLAN 2表项位于e0/1、e0/2和e0/3，未见A的目的MAC。题设明确D发送的是A的MAC且交换机无该项，因此交换机在VLAN 2的合格转发端口中除入口e0/3外泛洪未知单播；端口状态和过滤策略仍影响实际出口。\n\nB单次未知单播泛洪本身不是广播风暴；C正常未知单播不自动触发err-disable；D MAC表保存地址映射而非待删除的帧。",
+    "domain": "Network Fundamentals",
+    "topic": "Ethernet & MAC Switching"
   },
   {
     "id": 635,
@@ -1082,7 +1150,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。Rapid PVST+为各VLAN运行独立的快速生成树实例；不同VLAN可有不同根桥和转发拓扑。其快速收敛依赖RSTP机制及链路条件，而不是仅因为实例按VLAN划分，也不能保证固定的毫秒收敛时间。\n\nC描述MST将多个VLAN映射到同一实例；B多条核心链路不是运行前提；A同一生成树实例避免二层环路，不能把多条同时活动路径当作其定义。不同VLAN的树可使用不同链路，实际效果依配置与拓扑而异。"
+    "explanation": "D。Rapid PVST+为各VLAN运行独立的快速生成树实例；不同VLAN可有不同根桥和转发拓扑。其快速收敛依赖RSTP机制及链路条件，而不是仅因为实例按VLAN划分，也不能保证固定的毫秒收敛时间。\n\nC描述MST将多个VLAN映射到同一实例；B多条核心链路不是运行前提；A同一生成树实例避免二层环路，不能把多条同时活动路径当作其定义。不同VLAN的树可使用不同链路，实际效果依配置与拓扑而异。",
+    "domain": "Network Access",
+    "topic": "STP & RSTP"
   },
   {
     "id": 636,
@@ -1113,7 +1183,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。原图显示Layer 2 Security为WPA+WPA2且启用802.1X；题设明确要求开放二层访客网络，因此将Layer 2 Security设为None，再按平台配置Web Passthrough。开放二层不提供链路层加密，门户也不能替代加密保护。\n\nA、B、C保留或增加二层认证/加密，不符合本题明确的开放设计。Web Passthrough并非普遍要求Layer 2 None：Cisco兼容矩阵列出WPA/WPA2-PSK与Web Passthrough可组合，其他802.1X/Web认证组合也受平台版本和策略限制；不能将全部情况一概视为互斥。"
+    "explanation": "D。原图显示Layer 2 Security为WPA+WPA2且启用802.1X；题设明确要求开放二层访客网络，因此将Layer 2 Security设为None，再按平台配置Web Passthrough。开放二层不提供链路层加密，门户也不能替代加密保护。\n\nA、B、C保留或增加二层认证/加密，不符合本题明确的开放设计。Web Passthrough并非普遍要求Layer 2 None：Cisco兼容矩阵列出WPA/WPA2-PSK与Web Passthrough可组合，其他802.1X/Web认证组合也受平台版本和策略限制；不能将全部情况一概视为互斥。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 637,
@@ -1144,7 +1216,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。应对齐认证、授权及访问控制等安全策略，使同等身份在各分支获得预期权限；还要检查AAA返回属性、VLAN/角色映射、路由与资源可达性。仅SSID或策略名称相同不能保证实际效果相同。\n\nA射频策略主要影响无线接入条件；B配置名称本身不决定权限；C NAS-ID可能被RADIUS策略用于区分站点并影响授权，但单独把它设为相同不能代替完整策略与验证。"
+    "explanation": "D。应对齐认证、授权及访问控制等安全策略，使同等身份在各分支获得预期权限；还要检查AAA返回属性、VLAN/角色映射、路由与资源可达性。仅SSID或策略名称相同不能保证实际效果相同。\n\nA射频策略主要影响无线接入条件；B配置名称本身不决定权限；C NAS-ID可能被RADIUS策略用于区分站点并影响授权，但单独把它设为相同不能代替完整策略与验证。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 638,
@@ -1175,7 +1249,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中Static IP Tunneling未勾选；启用该功能可在支持的移动性组内为静态IPv4客户端选择支持其子网的控制器并隧道转发。需满足平台版本、移动性和网络条件，不保证所有DHCP客户端、所有漫游路径或业务零中断。\n\nB覆盖盲区检测属于射频管理；C P2P转发策略控制客户端间流量；D DHCP Addr. Assignment要求DHCP地址分配，与题设静态IPv4客户端不符。客户端排除或黑名单行为不能仅凭该选项一概断定。"
+    "explanation": "A。图中Static IP Tunneling未勾选；启用该功能可在支持的移动性组内为静态IPv4客户端选择支持其子网的控制器并隧道转发。需满足平台版本、移动性和网络条件，不保证所有DHCP客户端、所有漫游路径或业务零中断。\n\nB覆盖盲区检测属于射频管理；C P2P转发策略控制客户端间流量；D DHCP Addr. Assignment要求DHCP地址分配，与题设静态IPv4客户端不符。客户端排除或黑名单行为不能仅凭该选项一概断定。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 639,
@@ -1206,7 +1282,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。先用`lldp run`全局启用，再在Gi1/0/1启用`lldp transmit`和`lldp receive`；题设明确其他接口已单独禁用，故其设置保持。原B没有全局启用，不能保证LLDP运行；许多平台全局启用后支持接口默认收发，因此也不能凭仅配置目标接口就假设其他接口关闭。\n\nA关闭目标接口收发；C全局关闭LLDP；D配置的是CDP而非LLDP。具体默认值和接口范围应查所用平台，必要时逐接口显式关闭LLDP。"
+    "explanation": "B。配置 LLDP 需先在全局配置模式下执行 `lldp run` 全局启用，再进入 `GigabitEthernet1/0/1` 启用 `lldp transmit` 和 `lldp receive`；题设明确其他接口已单独禁用，因此其余接口会保持禁用状态。\n\nA 会关闭目标接口的收发；C 会全局关闭 LLDP；D 配置的是 CDP 而非 LLDP。许多平台在全局启用 LLDP 后会默认开启支持接口的收发功能，实际部署时应按需在不需要的接口上显式关闭 LLDP。",
+    "domain": "Network Access",
+    "topic": "CDP & LLDP"
   },
   {
     "id": 640,
@@ -1237,7 +1315,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中R2 Gi0/2连接R3、Gi0/1连接R1；在Gi0/2执行`no cdp enable`可仅禁用该接口CDP，而全局CDP及Gi0/1保持。\n\nB全局关闭CDP会影响R1侧；A操作Gi0/1的LLDP接收，D全局关闭LLDP，均不能完成题设CDP目标。原题仅凭IP、平台和版本信息不足以唯一辨别CDP或LLDP；现明确协议及其他发现协议状态，不能声称禁用CDP就阻止所有其他信息共享。"
+    "explanation": "C。图中R2 Gi0/2连接R3、Gi0/1连接R1；在Gi0/2执行`no cdp enable`可仅禁用该接口CDP，而全局CDP及Gi0/1保持。\n\nB全局关闭CDP会影响R1侧；A操作Gi0/1的LLDP接收，D全局关闭LLDP，均不能完成题设CDP目标。需要注意，禁用CDP仅停止该接口的CDP邻居发现，并不会自动阻止其他信息共享或发现协议。",
+    "domain": "Network Access",
+    "topic": "CDP & LLDP"
   },
   {
     "id": 641,
@@ -1268,7 +1348,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。原图显示trunk、native VLAN 321、允许100、200、300，且native VLAN tagging enabled；题设明确对端也已匹配标记策略。A静态trunk并指定相同native与精确允许列表。\n\nB动态协商不满足静态要求且缺VLAN300；C的100-300是连续范围而非三个离散VLAN；D为access。两端允许列表不必在所有网络设计中完全相同，但本题明确要求精确匹配；native不一致可能导致告警或流量问题，不能保证必然触发STP阻断。"
+    "explanation": "A。原图显示trunk、native VLAN 321、允许100、200、300，且native VLAN tagging enabled；题设明确对端也已匹配标记策略。A静态trunk并指定相同native与精确允许列表。\n\nB动态协商不满足静态要求且缺VLAN300；C的100-300是连续范围而非三个离散VLAN；D为access。两端允许列表不必在所有网络设计中完全相同，但本题明确要求精确匹配；native不一致可能导致告警或流量问题，不能保证必然触发STP阻断。",
+    "domain": "Network Access",
+    "topic": "802.1Q Trunking"
   },
   {
     "id": 642,
@@ -1299,7 +1381,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。`config network webmode enable`启用AireOS的HTTP web管理；`secureweb`控制HTTPS，具体服务状态和默认值依版本与配置而异。明文HTTP可暴露凭据和管理流量，实际管理通常宜使用正确配置且可信证书的HTTPS及访问控制。\n\nA启用Telnet；B启用HTTPS；C涉及Web管理证书而非启用HTTP。Cisco不同控制器操作系统命令可能不同。"
+    "explanation": "D。`config network webmode enable`启用AireOS的HTTP web管理；`secureweb`控制HTTPS，具体服务状态和默认值依版本与配置而异。明文HTTP可暴露凭据和管理流量，实际管理通常宜使用正确配置且可信证书的HTTPS及访问控制。\n\nA启用Telnet；B启用HTTPS；C涉及Web管理证书而非启用HTTP。Cisco不同控制器操作系统命令可能不同。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 643,
@@ -1330,14 +1414,16 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。Rapid PVST+采用快速生成树的discarding、learning、forwarding状态。处于活动生成树实例中的discarding端口不转发用户数据帧、不学习源MAC，但可接收和处理BPDU以参与拓扑计算。\n\nB learning会学习源MAC并更新地址表，虽然尚不转发用户帧，因此不符合题设；C listening是传统802.1D状态，不是RSTP三种状态之一；D管理员关闭的接口不能正常处理BPDU。原题缺少discarding且错误选择learning，现补选项并将答案由B改为A。"
+    "explanation": "A。Rapid PVST+ 采用快速生成树（RSTP）的 discarding、learning、forwarding 三种端口状态。处于活动生成树实例中的 discarding 端口不转发用户数据帧、不学习源 MAC，但可接收和处理 BPDU 以参与拓扑计算。\n\nB learning 会学习源 MAC 并更新地址表，虽然尚不转发用户帧，因此不符合题设；C listening 是传统 802.1D 状态，不是 RSTP 三种状态之一；D 管理员关闭（disabled）的接口不能正常处理 BPDU。",
+    "domain": "Network Access",
+    "topic": "STP & RSTP"
   },
   {
     "id": 644,
     "qid": "Q849",
     "page_num": 150,
     "type": "Single Choice",
-    "prompt": "A switch floods an unknown unicast frame to all eligible forwarding ports in the same VLAN except the ingress port. What is this process called?",
+    "prompt": "A switch forwards an unknown unicast frame out all eligible forwarding ports in the same VLAN except the ingress port. What is this process called?",
     "image": null,
     "answer_image": null,
     "options": [
@@ -1361,7 +1447,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。未知单播目的MAC没有可用表项时，交换机通常在同VLAN内的合格转发端口泛洪，排除入端口；端口状态、隔离和安全策略可限制实际出口。广播也可能泛洪；组播是否泛洪可受IGMP snooping等机制影响。\n\nA ARP是地址解析协议，B CDP是邻居发现协议，D组播是寻址/分发方式，均不是题设复制转发行为的名称。"
+    "explanation": "C。未知单播目的MAC没有可用表项时，交换机通常在同VLAN内的合格转发端口泛洪，排除入端口；端口状态、隔离和安全策略可限制实际出口。广播也可能泛洪；组播是否泛洪可受IGMP snooping等机制影响。\n\nA ARP是地址解析协议，B CDP是邻居发现协议，D组播是寻址/分发方式，均不是题设复制转发行为的名称。",
+    "domain": "Network Fundamentals",
+    "topic": "Ethernet & MAC Switching"
   },
   {
     "id": 645,
@@ -1392,7 +1480,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中SW4优先级8192，SW3为32768；题设补充SW1和SW2也为32768。同VLAN内先比较桥ID的优先级部分，数值较小的SW4获胜，不需要使用MAC地址打破平局。\n\nB、C、D都未选择最小桥ID；只有优先级相同时才比较MAC，且选择数值较小者。图中未标明SW1/SW2优先级，原题无法仅凭图片保证SW4当选，现明确这一条件。"
+    "explanation": "A。图中SW4优先级8192，SW3为32768；题设说明SW1和SW2也为32768。同VLAN内先比较桥ID的优先级部分，数值较小的SW4获胜，不需要使用MAC地址打破平局。\n\nB、C、D都未选择最小桥ID；只有优先级相同时才比较MAC，且选择数值较小者。",
+    "domain": "Network Access",
+    "topic": "STP & RSTP"
   },
   {
     "id": 646,
@@ -1423,7 +1513,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。题设5520/AireOS静态LAG不协商LACP或PAgP，交换机侧应配置`channel-group <id> mode on`并保证成员配置兼容。B passive和C active属于LACP，D auto属于PAgP，均不满足该静态对端条件。\n\n不能将此限制推广到所有WLC：Catalyst 9800在支持的版本和部署中支持LACP等动态聚合。端口数量、跨交换机连接及失效行为还需依具体型号和设计确认。"
+    "explanation": "A。题设5520/AireOS静态LAG不协商LACP或PAgP，交换机侧应配置`channel-group <id> mode on`并保证成员配置兼容。B passive和C active属于LACP，D auto属于PAgP，均不满足该静态对端条件。\n\n不能将此限制推广到所有WLC：Catalyst 9800在支持的版本和部署中支持LACP等动态聚合。端口数量、跨交换机连接及失效行为还需依具体型号和设计确认。",
+    "domain": "Network Access",
+    "topic": "EtherChannel"
   },
   {
     "id": 647,
@@ -1454,7 +1546,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。VLAN在二层交换网络中划分逻辑广播域，广播帧通常限制在其所属VLAN的合格转发端口；跨VLAN IP通信一般需要路由或其他明确配置的连接。\n\nA STP主要防止二层环路；B VTP用于传播部分VLAN配置信息而不是广播域转发机制；D CSMA/CD用于半双工以太网介质访问。一个VLAN常规划为一个IP子网，但二者不是强制一一对应关系；广播中继等功能也可改变应用层行为。"
+    "explanation": "C。VLAN在二层交换网络中划分逻辑广播域，广播帧通常限制在其所属VLAN的合格转发端口；跨VLAN IP通信一般需要路由或其他明确配置的连接。\n\nA STP主要防止二层环路；B VTP用于传播部分VLAN配置信息而不是广播域转发机制；D CSMA/CD用于半双工以太网介质访问。一个VLAN常规划为一个IP子网，但二者不是强制一一对应关系；广播中继等功能也可改变应用层行为。",
+    "domain": "Network Access",
+    "topic": "VLANs, Voice & DTP/VTP"
   },
   {
     "id": 648,
@@ -1485,7 +1579,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。题设要求在同一链路承载多个打标VLAN，交换机端口应配置trunk并允许相应VLAN；AP管理VLAN的标记或native设置还需与对端匹配。\n\nA access仅提供单个普通未标记接入VLAN，不满足题设多VLAN；B EtherChannel是链路聚合而非多VLAN模式；C PoE提供电力，可与trunk同时使用。FlexConnect并非一律要求trunk：Cisco文档允许符合单VLAN需求的access连接。"
+    "explanation": "D。题设要求在同一链路承载多个打标VLAN，交换机端口应配置trunk并允许相应VLAN；AP管理VLAN的标记或native设置还需与对端匹配。\n\nA access仅提供单个普通未标记接入VLAN，不满足题设多VLAN；B EtherChannel是链路聚合而非多VLAN模式；C PoE提供电力，可与trunk同时使用。FlexConnect并非一律要求trunk：Cisco文档允许符合单VLAN需求的access连接。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 649,
@@ -1516,7 +1612,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。非根交换机选出的根端口提供通向根桥的最佳路径；首先比较根路径开销，代价相同再按发送桥ID、发送端口ID和必要的本地端口ID等规则打破平局。根桥自身没有根端口。\n\nA仅说最高优先级而未说明路径代价及平局规则，不是完整定义；B根端口不在根桥上；C所述根桥端口数量不是选举前提。每个生成树实例独立计算，异常或隔离拓扑需按实际状态判断。"
+    "explanation": "D。非根交换机选出的根端口提供通向根桥的最佳路径；首先比较根路径开销，代价相同再按发送桥ID、发送端口ID和必要的本地端口ID等规则打破平局。根桥自身没有根端口。\n\nA仅说最高优先级而未说明路径代价及平局规则，不是完整定义；B根端口不在根桥上；C所述根桥端口数量不是选举前提。每个生成树实例独立计算，异常或隔离拓扑需按实际状态判断。",
+    "domain": "Network Access",
+    "topic": "STP & RSTP"
   },
   {
     "id": 650,
@@ -1547,7 +1645,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。交换机通常将源MAC、所属VLAN和入端口关联为动态表项；该项可能老化、移动或受配置限制。之后是否单播转发、过滤或泛洪由目的地址及转发状态决定。\n\nA不存在向“未知源MAC端口”转发这一规则；B泛洪通常限同VLAN合格端口且排除入口；D学习不需要向源主机发送探测帧。端口安全、禁用学习或资源限制可改变行为，因此题干明确给出正常学习条件。"
+    "explanation": "C。交换机通常将源MAC、所属VLAN和入端口关联为动态表项；该项可能老化、移动或受配置限制。之后是否单播转发、过滤或泛洪由目的地址及转发状态决定。\n\nA不存在向“未知源MAC端口”转发这一规则；B泛洪通常限同VLAN合格端口且排除入口；D学习不需要向源主机发送探测帧。端口安全、禁用学习或资源限制可改变行为，因此题干明确给出正常学习条件。",
+    "domain": "Network Fundamentals",
+    "topic": "Ethernet & MAC Switching"
   },
   {
     "id": 651,
@@ -1578,7 +1678,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。对题设AireOS 5508的全局LAG模式变更，保存配置并重启控制器以使新模式生效；应安排维护窗口并核对交换机侧配置。\n\nB清空MAC、C重启接口或D手动重新关联AP不能替代该平台要求的重启。不同WLC型号和操作系统的聚合配置机制不同，例如Catalyst 9800的port-channel不应一概套用此重启规则。"
+    "explanation": "A。对题设AireOS 5508的全局LAG模式变更，保存配置并重启控制器以使新模式生效；应安排维护窗口并核对交换机侧配置。\n\nB清空MAC、C重启接口或D手动重新关联AP不能替代该平台要求的重启。不同WLC型号和操作系统的聚合配置机制不同，例如Catalyst 9800的port-channel不应一概套用此重启规则。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 652,
@@ -1609,7 +1711,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。原图显示SW1 Fa0/2缺少VLAN300；在该成员接口使用`switchport trunk allowed vlan add 300`使其与题设兼容，再核查port-channel及成员状态。平台可能对成员配置或修改顺序有额外限制，需依实际设备操作并验证。\n\nA与D不带add会替换列表，可能移除原有VLAN；B操作的是已经包含300的SW2成员。原解析假定对逻辑接口重复添加已存在的VLAN必然同步修复挂起成员，图示不足以支持该保证。"
+    "explanation": "C。图中显示 SW1 Fa0/2 缺少 VLAN 300；在该成员接口使用 `switchport trunk allowed vlan add 300` 使其与题设兼容，再核查 port-channel 及成员状态。平台可能对成员配置或修改顺序有额外限制，需依实际设备操作并验证。\n\nA 与 D 不带 `add` 会替换整个允许列表，从而移除原有 VLAN 100 和 200；B 操作的是已经包含 VLAN 300 的 SW2 成员接口。注意在逻辑接口 Port-Channel 上重复添加已存在的 VLAN 并不一定能同步修复处于挂起状态的物理成员端口，应直接在配置不一致的成员接口上进行修正。",
+    "domain": "Network Access",
+    "topic": "EtherChannel"
   },
   {
     "id": 653,
@@ -1640,7 +1744,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。原图显示允许列表为1,22；`switchport trunk allowed vlan add 23`将23追加而保留已有VLAN。跨交换机实际通信还依赖对端trunk、VLAN及端口状态，题设已给出这些条件。\n\nA替换为2–1001，移除VLAN1；B只允许23，移除1和22；D替换为22–23，虽然保留22但移除1。原题只要求不影响VLAN22，D也可能满足，故现明确保留整个原列表；原选项vian拼写已修正。"
+    "explanation": "C。图示显示当前 Trunk 允许列表为 VLAN 1 和 22；`switchport trunk allowed vlan add 23` 可将 VLAN 23 追加到现有列表中，同时保留所有已允许的 VLAN。\n\nA 会将列表替换为 2–1001，导致 VLAN 1 被移除；B 只允许 VLAN 23，会移除 VLAN 1 和 22；D 将列表替换为 22–23，虽保留了 VLAN 22，但移除了 VLAN 1。",
+    "domain": "Network Access",
+    "topic": "802.1Q Trunking"
   },
   {
     "id": 654,
@@ -1671,14 +1777,16 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。创建WLAN/SSID并将其映射到所需动态接口或接口组，使客户端流量能进入相应网络；还需根据设计配置安全、认证、VLAN、DHCP及启用状态。步骤顺序和具体要求依部署而异。\n\nB高可用可按需求设计但非此处创建WLAN的必要下一步；C不应为此要求启用明文Telnet；D管理接口通常在控制器初始部署中配置，并非题设所问的WLAN映射。"
+    "explanation": "A。创建WLAN/SSID并将其映射到所需动态接口或接口组，使客户端流量能进入相应网络；还需根据设计配置安全、认证、VLAN、DHCP及启用状态。步骤顺序和具体要求依部署而异。\n\nB高可用可按需求设计但非此处创建WLAN的必要下一步；C不应为此要求启用明文Telnet；D管理接口通常在控制器初始部署中配置，并非题设所问的WLAN映射。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 655,
     "qid": "Q862",
     "page_num": 153,
     "type": "Single Choice",
-    "prompt": "Refer to the exhibit. A supported FlexConnect AP at a branch must locally switch client data for this WLAN instead of centrally tunneling that data to the WLC. Which WLAN option should be enabled?",
+    "prompt": "Refer to the exhibit. Client data traffic at a remote branch must be forwarded directly onto the local branch LAN instead of being tunneled back to the central WLC. Which WLAN option should be enabled?",
     "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADfAikDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD0CW9eRmlkRJHOSSy5NcLD8ToBGz3Omx5JXbHANzLkMcMSAARtIx68e9ejR6DcyRq4uIgGAIBU/wCNNPhiQhgZLY7jk/ujya9WVajpyyt8jhVOp1Rws/xIsoElZ9Km+STYuET5/mkXPXjmJuvtT3+IdnG1sG011FzO0ERKJyQ4QtgHpuIrtz4YlIIMlsQeoMZ5pT4ZlOMyWxwcj92eDS9tT/m/Afs5/wAv4mNo+rPqOj2d81vFE88SyEIv3SRng1cXUJrpRLOFkfkZYZ6cVfHh25UAC4gAHQBD/jTY/DdzGgUXMJ5J+4fX61oq+H6sj2VXseev8SI7W7vIbrTIv3MvloIMOW5YAk/dGdp4znPFW5PiJp0UbySWYSNWdRu8vcSoY425yM7TjPWu2PhiUhgZLYhjlh5Z5PvQfDEhJJktiTycxHms1Wp/z/gX7Of8v4nDXHj4xSxGPSF8l3ZN0hRc7ZliLZzwMseuOlbWjeI4taFyYrIxfZ5PJk8yMD5x95fw4/OugPhmYjBltyPQxmmweFpLZXWCS3jDuXYKhGWJySeeppxrUk9ZfgJ0520RU/tGdnNsxBhUBgh6ZPt+Fc7r3i59G1GO2WxtZAY1kO87Wky4XbGMHcwznH0rrx4buRM0n2mHJUDGw9s+/vSt4bnYgtNASvIJQ8frVSrULe67fISp1b6o88ufiTGIUlttLj2bwHM20bVIyDhckn1GMiu0N/JbxmeFUSRF3AquK0P+Eeuf+fiH/vg/40knhu5kjZDcwjcCM7D/AI0o1qOvNK/yG6dTorGZd6i8NnPdPFHK6RtIdwyWIGetcnZ/EFza2kmoaL9na7IMW0DDIdg3ANgnmTGAOgJ6V6B/wjtztwbiEjGPuH/GkPhqY7cy252/d/dnj6USrUXtK3yBU6nVHA6b8QRdmOOXTI/PkClVTYo5RGwCxGTlwABzU83jyN9Al1Ox0mWUAfuvMh2o5yFILYOOSR+Fdt/wjEvH7y24OR+7PBpkHhR7a2S3he2SFBhUEZwP1qVWp7c34D9nP+X8ThLb4jwtOkN5pDW8kt15EcZQbwuEwzA9P9YOKIPiZp84iK6aw8xgBxH0Oz35P7wcDng13zeGJXOWktieuTGarw+C47fyPKWzTyFKRbYvuA4yB+Q/Kl7an/N+Aezl/L+JxEXxJtREDPpjZ2ZLKqbd23djk8cHqeK6bSdai1fTYr6G3jRJN2AQpPBI6jjtWrL4TM8LRStbNGwwy+WeR+dOtvCr2dulvbyW8UKDCokZAH61Ua1JPWV/kKVOb2Rp6S326xE1yBK4ZkBcZwAcCuUvvH+m6d4h1LTptLBgtQqxXCgATS7kDrlgFG3zFyc9mz0rsdNs5bCzEDOjnczZAI6nNWGgVhhoYiMk4I9eteZNpzbWx2Rvyq5wNr8R9NNgkl3pDJcG2FyyxqpTYWCghu+WO36g04fErRSgk/sa4ETRK4crGBkoj7Tzxw4yTwMGu88hSu3yYcY2429vSjyExjyYcYx938Kko4SX4kaNFc3FudJkMkIQFsxeWWYoB8+cY/eD5s44PtnqfD9xFrXhzTtTktIYnu7dJiigYUsM4BrR+zR/88IOm37vb06dKkVWVQqqgUcADtQBbsmZ7KFmJJK8k96nrPgkmggSLbGdoxnJqT7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACj7TP/zzj/76P+FAFyiqf2mf/nnH/wB9H/Cj7TP/AM84/wDvo/4UAXKKp/aZ/wDnnH/30f8ACsz/AISKT/n2X/vv/wCtQBYQSNp6iJgshiG0noDjiuVbS/E8sWBezxYQ4HnhmL7VBOfQncQO3tXW24zaRDJGYxyPpSfZ/wDptL/31VRlYmUbmHqVlrL3EotZpinkqsLrMFCsAdxYdyeOf8lir4q88oXhEezaHwvJ3D5seu3PHStIX+n+bLGb90MT7HZ2KqG9AxGCfYGnxXVhPIkcWppJI+dipOpLY64HfGKfMLkMh18W+USslvv2AY2rwfkyR7/6zrx0p1za+IJNGkVJmF604cbXAG3aOOvAznofzq/HqmmS7sakU2sF/eOUySSBjcBnJB5HoaLbVNKu4o5YdVQrJjbmYAnPTg889vWjmFyeZn/8VUrRACI4mHmHKldme2eenc85pVj8UkKHlg4ILYCjIOzI9sZk59hV9tV0xJpoX1IpJCcOrsV554GR83Q9M0+TUNMiBL6ogw2zAnBOeMjA9MjPpRzeQ+TzZi3L+K7Oz3ptlIRV2IodwQF6Hvk7s59Ku3kGuzXlpLbSFAIo/MzIAgbJLgr3yOBitO2mtLxFe2vvOV13KUlByOOf1H51P9n/AOm0v/fVHMLk8zmBb+LWTz2nQTqm0INoU5YZOM4JxnGa3tLXURC7ai6GQt8qooAUfhVn7P8A9Npf++qPs/8A02l/76pOVxqNiaiqF9NBp9sZ7iecJuCgLliSTgAAdeTSrLbvp4vluZmtzH5oYEnK4znGM9KVupV9bF6iqcLRXFnHdxTztFJGJFIJyVIyOOtR2M8Go25mt5rjarsjB8qQwOCCCKLBc0KKzbC7ttSE32ee4zBJ5cgcFSrYBxyPcUtvdWl1e3NnDdyvNbbfNAY4XOcc/gaLC5kaNFZkV7aTapNpyXM5uYVDOvOADg9fxFDXtmmqpphupftbp5gQE/d57/gaLMOZGnRWddXVvZ3FvBNLchrh/LjIBILemQOOhrQVdqgZJx3PWiw0xaKKKQwooooAKKKKACiiigAooooAKKKZLKkELyyMFjRSzMewHJNAD65l4PEc08oe5aKHzf3ZhVA2zziOd2c/u+eAPzrea/tFwGuoVJTzMM4B2+uD2pn9p2JkSNbqF3dgihGDHJBI6ewNOzFdGPBZ6+uowZ1CU2yyyNIZfLO5Ay7BgL3Xd6Y/So2HimGa4kjeKWJnkMcboGKqGO3GCvVSODn7vXnjWfXtNRnU3I+RirEIxGQCSAcc42np6VYOo2IODeW4O7Zgyj73p16+1FmHMjmT/wAJcXeb+/krEAgC4Rcdz1Yt37VMupeIoNSsoLq1QxTyYLRRZ2r8uQTu4xlue+K2ZNc0yK1huXvI/ImJCOMkHHXp6VJLq2nQxtI99bhVDMf3gJwOvHtRysOZFyis6LXtMmK7boDdz8ylcDnrkcfdP5VZjvrSZ0SK6gd3G5VWQEsPUevQ0WYXTLFFFFIYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAx8fLnO3d82M9PwpRsMjeWWKYHXPX8adRQAUUUUAFFFFABRRRQAUUUUAFFFFABXLV1NctQB0lt/x6w/7g/lUtRW3/AB6w/wC4P5VLQBjy+GrCXUGvyZVuS24OrAY4IPbngkc5x2xSaf4X03TJVlgSQyKwYM75OQrKP0Y1s0UAYb+E9MkZHkWV2RsoXfdtHPygEYx8x7Z9+KfbeGNMtbyO6iiYSR7SuTnBCBAfX7oHtxmtmigDLk8PaZK8ztbjfMztI4+8xZSp5+jHHpUCeFdLR2by5GJAHzOeAGVgB7AqK26KAM3TtEt9Mup7iJnZ5Ujjyx6KgwPx9T7D0rSoooAKKKKAKeo21ve25trmFpIyQ3yvtIIOQQQQQQfSkEUC6eLNYHW2EflBVfGFxjAIOelXAWSUOqhsAjBOPT/CmruRw+ATuJxu9fendistyrbxQ2tglpDDItvGnlqPNyQOmMls/rTNPtbbTLP7NZwSJCpLYaXfjPXlmJq8dxcybRksGxn+tJIGldnICkqABnPQk/1ouwsijYWlrp/nfZbeQGVt8heXeWOMZyzE9BVSGfR7PWgLe3VL+/BH7sDLhcsSecDr17kj2rZmDXBO4BBsK8NnrXPaP4VTTNXk1AzSSSMCB5kpfaDnKrkfKMknGT+gqlZp3ZLVmkkTyXGk2msxXLLIb66byI/nLZOMkAZwOFySPSk1CbR7PUI9Tu4mW6RlhRgxOWJKqNoOCfmI6Z5NQWXhRLXXhqjTSSOudgeUsqZGDtUj5c4Gee1JceE0uNfTU3mkbZJ5ixmU7A2fvbMY3YJGc96r3b7k622NmWOCS7huZIGM0AYRkuMLnrxnGfergJIBII9jSHf5UsYUEPnndjGRjpinVkahRRRQAUUUUAFFFFABRRRQAUUUUAFRXUUc9pNFNnynQq+OuCMGpaKAOcfQtGlYNK9y7BQoLM+eOh6dRUkGkaRb3ovFadpwwfc5Y8gEDt7mt+uX/wCEg1T7a8UdiLhRNIhCRshjCswGWJwSQAeP6iq5mRyItSaRpEqSRu1wYnd38vc+1Swbdgds7jUceg6FGzlUk+Zi3O7gk59Kop4h1y4ggMFpEbuV9ptWgcFBsJDFywGCQPpnuRWjc6tq0OrzQxacs1ojJGrklcswU5zzkDLfw9hzRzMOREg0zR/ItYHjaWK1YtEkiswBP4c9agl0HQpQAySgBChA3DOd3Xjr87fnVFvFGrzFZoNMCQYClSrsxYqzeg4G3afenP4xurazW4udIdFKg7i7AZC7jkbDt54HXJ64o5mHIi9Lo2izM5dZfnJJxu7hge3+21Nt9H0611mPUIZpECBj5QRsFm3ZP/jxroqKOZhyIr/bYP7zf98N/hR9tg/vN/3w3+FWKKWhWpX+2wf3m/74b/Cj7bB/eb/vhv8ACrFFGgalf7bB/eb/AL4b/Cj7bB/eb/vhv8KsUUaBqV/tsH95v++G/wAKPtsH95v++G/wqxRRoGpX+2wf3m/74b/Cj7bB/eb/AL4b/CrFFGgalf7bB/eb/vhv8KPtsH95v++G/wAKsUUaBqV/tsH95v8Avhv8KPtsH95v++G/wqxRRoGpX+2wf3m/74b/AAo+2wf3m/74b/CpnzlRu27mAJ9KXG2Rk37wADnj+lGgakH22D+83/fDf4UfbYP7zf8AfDf4VYoo0DUr/bYP7zf98N/hR9tg/vN/3w3+FWKKNA1K/wBtg/vN/wB8N/hR9tg/vN/3w3+FWKKNA1K/22D+83/fDf4UfbYP7zf98N/hViijQNSv9tg/vN/3w3+FH22D+83/AHw3+FWKKNA1I4pkmzsJOOuQR/Ouarqa5akM6S2/49Yf9wfyqWorb/j1h/3B/KpaAEyCcZGRS1zUnhq7/tWe7gvlijml8xolVgX69XBDdwcZxx0FO0rw9qNldRT3Wsz3JjbOws+0jDAjBbBySDz0xQB0QIPQ5oBBGQQR7Vyg8JXiOGh1P7OPMDOLdTH5gyxyxB5PzD8vyk0/wpc2Nxb/APE2uWtYdn7hZHUHamCPvd2y344NAHThgTgEZ+tLWBc+GVkvp7mCcW7TTCRzEpViu0AruBB5wTn3qi3hXUlQqmuXLp5TKI5JHILFNuSSSSCecdu1AHW5yMiiuYm8M3srSTRarc27SDiJJX2xjDDaBux3XoP4femQeGdVjbdLrk03K5BeRRwCOMNx19TnHOaAOqyM4zRWLomlXenTObm48/8AcrH5hJLSEM5yc+gYD/DitqgBp3lwqJuOM9cUu2cf8s1/77FQXtv9rsrq13ohngeMM4yATxmsO88KPeXEkx1C3BfOQYidxKbfm5529V9KAOk8u4/54j/vumsJkG5ogFyATuq4ksSoq+aDgYyT1qO4ljeEqrgnI4B96AIaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKqTanYWwBnvbeIE4BeVRznGOT6girdY0fhuziuJJkeQPJJ5jHjk+b5v8APj6UAXItY0yeRY4tQtZHclVVZlJJ9Bz1qeK8tp3kSK4ikaI7XVXBKn0Pp0NUBoFmb6O6kMkjRySSKpYhdzsrZIHXBUYzVS48H6dcPJIxk812kYux3YLNu4ByAASeB6n1oA1m1KxSd4WvIBKmAyGQZGRkZH05qZ0hmAWRUcA5AYA8j+tc8vguxVNonmDHO5lCgklFX07BePTNNXwfHb6jZ3NrclEhk3yKyA7vu9OOCdvJ96AOnooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAEbbj5hkHjGM5pF2jIUbcdRjFDA5UrjKnPNLlmcuwAJAGBQAtFFFABRRRQAUUUUAFFFFABRRRQAVy1dTXLUAdFG4isEkIyFiDY+grBi8ZWvlxvc2lxAJUVo12lmYNu7YHZSa34f+PKP5d37scevFV3iEihZNNjZQAAG2nGOlUrdSZX6Gf/AMJVayzrDbRPI/mPG29hGFKY3cnqeRRH4v0uRowvnnewUHy+mSoBPsd6/nV826EAHTIsA5H3evrSrCq/d02Ic5429cg5/QflT93sT73czR4x0rCbvtC7snBiOQAAcn2ww/Or2nazFqVzLDHDKnlor7nxyGz6H2qQwKSpOmxEryv3eOMfyFLFH5BzDp8cZxj5Co464pOw1zX1Zdoqv51x/wA+p/77FHnXH/Pqf++xSsVcsUVX864/59T/AN9ijzrj/n1P/fYosFyxRVfzrj/n1P8A32KPOuP+fU/99iiwXLFFV/OuP+fU/wDfYo864/59T/32KLBcsUVX864/59T/AN9ijzrj/n1P/fYosFyxRVfzrj/n1P8A32KPOuP+fU/99iiwXLFFV/OuP+fU/wDfYo864/59T/32KLBcsUVX864/59T/AN9ijzrj/n1P/fYosFyxRVfzrj/n1P8A32KPOuP+fU/99iiwXLFFQpJMzgNblR67wcVNSGFFFFABRRRQAUUUUAFQXryxWFxJAu6ZYmaNcZywBwMfWp6Q5wcEA9iRmgDlJtR8TwDb9kWRmgDKyR52tuY8/wDAVxj1Iq/pt1rVxqWLiJY7VQ27cm0n5nAx+AX8DWtsu/8AnvB/35P/AMVUSyytIY1vLUuDgqIzkH0+/VuS7Gai11Zcoqms8jOqLe2hZuVUJyfp89OVp2IC3VsS2SMRHnHX+KpLuWqKqeZNt3fa7bG7bnyz16Y+91pw+0ldwuLcj1ER/wDiqAuWaKqRPNOm+G7tpFzjckZI/wDQqk2Xf/PeD/vyf/iqAuT0VBsu/wDnvB/35P8A8VRsu/8AnvB/35P/AMVQFyeioNl3/wA94P8Avyf/AIqjZd/894P+/J/+KoC5PRUGy7/57wf9+T/8VRsu/wDnvB/35P8A8VQFyeioNl3/AM94P+/J/wDiqNl3/wA94P8Avyf/AIqgLk9FQbLv/nvB/wB+T/8AFUbLv/nvB/35P/xVAXJ6Kg2Xf/PeD/vyf/iqNl3/AM94P+/J/wDiqAuT0VBsu/8AnvB/35P/AMVRsu/+e8H/AH5P/wAVQFyeiq5F0oyZ4B/2xP8A8VQBdNnE8HH/AExP/wAVQFyxRUGy7/57wf8Afk//ABVGy7/57wf9+T/8VQFyeioNl3/z3g/78n/4qjZd/wDPeD/vyf8A4qgLk9FQbLv/AJ7wf9+T/wDFUbLv/nvB/wB+T/8AFUBcnoqDZd/894P+/J/+Ko2Xf/PeD/vyf/iqAuT0VBsu/wDnvB/35P8A8VRsu/8AnvB/35P/AMVQFyeuWrpoxKM+a6N6bUK/1NczSGdJbf8AHrD/ALg/lUtRW3/HrD/uD+VS0Acte6f4ijmuLmxvMu8zFY2ckLHkYwCducZxwPekFv4llkX7bmSBTwltMIWJxwSQexzxnoR1INOuT4ohvrxrKNZoy/7r7QVVQvPAAOfQ5OPpSK/ilZw0kYKOF3Kio2w/NnGWHfaPpnvQAnl+L2jkYTQq4B2KQhDHAHPHQHcR36ZpWTxalzIDNG9uuQpRYw7Df1yeA232xUcP/CYRxxo3kOyoMyMF+Y+XnBG7rv8Alz6c04xav4j0HUrG522krS+UGlt8qV4LYBPIzkBqqnFSkoydl3BlxE1uC0syRJPOkkgm3SIMgg7ScYBA4461RYeMBaybSpmKjyjmLg5+bdxyfTHGOvNdTbxeRbRRcfIgXjpwMd6kpPcCjpMd5HYAX7BrgySM2DkAFyVA/Air1FFIAooooATLFwirliCeuKgubyKzsp7ufKxwKzyY5wF6/wAqmIO4MrlWAxkYqOa2juLaW3mBeOVSrgnG4Hr0oAzU8UaO0Jla8RAqeYwbkquQM8ZHcfnTT4r0YMwa7C7WKsSDgYJGfcEjAx1qWbw5pU8ZSa2Z8nJZpXLZ4/izn+Fe/amnwxo5zmzBzjB8xsrg5GOeOTnjvQBZsdYsdSnkis5xN5aK5ZR8pDEgYPf7pq9VOx0qy06SR7WIo0mA2XZuhJ7k45JPHcmrlABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFYE3hWGSZp0upY7gyvIJV6ruLHA9OGYfjW/XNSeINQgu5DLp5e0Wd4wyKdxClhwMnPO3njqfSgCbTPCttpt2s4lZxGAI0xtC4UKPrwP1qAeEFjcPHfyAqGVFK/KoZlZhwQcEg5570uk69qeoahFBJYpGgUGYqDhcqDwSR3OOhz7VG3im7jBV9OYzDaxVFZsxktlhx/dX/vr2pgT23hd7fg6lM48wSHIPzEEn5ueTk9eOlS6ZoMunX4Zblnt8M7Ak5eQ9CRk9AW+uR6U99Uu/s9pdJGnlv5hkjEZLEKCflORjOO4PWqk/jK3hV2FlcSKuCNmCSCFKkjsCGGM+9ILDrvw/dNiO1ufLiBDEbiAzGXceARwFLjrzkelXdI0aXS555JNRuLsSqihZf4NoxxzWqp3KDgjIzg0tABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQA1gcqygEqc4JxmlyzyF2UKSAMA5oKLI8asMqW5FYK+I7WOWCO60uWPzxFsIwQSxcdc9Pl78+1AG/RXOS+LtJUFY7GUyGEyKH2qBzjDEnj/I606PxTpssMmLGRZIw+dwAGVHIGTkn0HXHNAHQ0VgXHinTbS3knn0u5SNVLKcKd+NvT5uuHHWt3TlhvbCO4a3VC+eB7Ej+lADqKsfY7f/nktVnij2RyLAYm34wevQ0ALRRRQAUUUUAFctXU1y1AHSW3/HrD/uD+VS1Fbf8AHrD/ALg/lUtAFdL+zkuHt0uoWnThoxICy/UU64vLa0QPc3EUKscAyOFBPpzWLfeErK9EpMsyPLM0zkNwSSDgj04plr4Risrj7RbX06S9AWVWABGCACOOx+uT3OQDotw9RRuHqK5f/hBrFkcPcTFmBAbaoKggA446kDk98mnHwTZC4eVJ5BuPyoyhkUb9+3b029sYoA6QTRNsxIh3khcMPmx1xTty+o/OsaPw7HBZ2tvb3LQi3eRlKRqMhwQRgfXrWc3gW1NtJB9skCyKqsfLTgA5wvHyg98dTzQB0xurdVVjPGFZ/LBLDl842/XIIxSyTwxECSVEJ6BmAzyB/MgfjWLN4Vtp7C2tHurkLbyvPGysAfMLFgx9cEnFQ/8ACHWjiMXE7XATA/eRqcqDGQvT/pmPrk0Aa97qtrYTJFMX3vE8oCqSNqY3HPQdR+dTWd3HfWUF3CGEUyCRN6lTgjIyD0rPl8M6VdQwR3dv9oaGAW4d2IJQdjg9607eCK1t47eFdkUahUXOcAdBW0vZezXLfm69ha3H55wASajmuIre3kuJm2RRKWdj/CB1p7KSQQcEVDdWcd5Yz2k2THOjI+OuCMGsRkSavpzx7/tkKALvIkbYQucZIOCBn1po1rTCzL9ugyrMrZcfKV659PxrPl8H6XNC0beaNwwWQquR8vGAMY+UcY9aY3gvSXzu84njblx8uGLDtz8xJ5z+VAG1DfWtzcSQQXEcksSqzqjZ2g5xn64NWKzdK0O00d5Da+Zh1C7WIwoBJwMD1Yn8a0qACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKiFzA0piE0ZkB2lAwyDjOMfTmpawLzwtDdXRu0upYrnzzMsqjJT5WAAH/AAI/WgDZF1btIsYniLtnaocZOOuBT45opgxikRwpKttYHB9D71g6d4TtbC7jm813WIlo48YAPy4+uNtB8KokbeTeSpIzMzElsMS4bBAI4wCPxNAG0721wJLZ3ikz8jxkg9RnBH0qRIkj3bEVdxycDGTgD+QH5Vzx8KMtq8UWpTpIz+YZcZJbBBJ5755retYTbWkMDSNI0aBS7dWwMZNAE1FFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQA1mZShVSW3cAVJ5l0f+WB/If400ECWMkgAN3rEbQ9QhaT7Hqqxo7FgCxBUszE4Ppkq2O5BHQ0Abpkuv8An3/Qf40ebdf8+5/If41kx6bqseoW8v8AbZe3WQvLGzct7D2wMY989a6DzY/76/nQBUMt0ASYDgew/wAacLiUgEFef9mpWKbnfz8grgJkYHvVZfuj6UAS+fL6r+VMd3kxuIwDngUlFABRRRQAUUUUAFctXU1y1AHSW3/HrD/uD+VS1Fbf8esP+4P5VLQBj3HiWxtGVZxKGad4QFTd90gFjjoOR+dVl8Z6Y0HnLHdMoUs2Ifu439efSNz9B71qvpWnPM0z2Fq0rMHZzCpYsOhJx1p8enWMMXlRWdukeMbFiUDHPbHufzPrQBQvtd+yXEiLbGSOIR+Y/mBSN5wMDqaqQ+NNLmjVlS5IJUEiI7RkEnn2wc1ty2NpPMk0trBJKgwrvGCyj0Bpq6bYIzMtlbKzAAkRKM4GB29OKAMq68Tpb6Va6gLOQx3ETS7WYBlwM44znNLdeKrSxTTmvIZYPtilyH4MQA/iHXkkAfWtU6fZERg2duRHnYPLHy56444z3qWS3hmz5sMb7gAdyg5AOR+vNAGAPGVmXRTa3ILSGMjaCVO4qoxnqSPwzTh4z0sjIS6wS4U+SRu2jJx6+2PQ+lasek6dEyNHYWqFBhCsKjaM544455+tI2kaY7MzadaMzFixMK5JbqenfvQBnyatez6xpUdlBv065iMk0xjLbQRlcMDgdPfqK3aaiJFGscaqiKMKqjAA9BTquclJJJWt+IhPmZwqsBkZyaq6ne/YNKvL1EDm3ieQKTgMVBPXt0q0yq33lB+ooAAGAAB6VAzlG8cwW9o01zaN8qZLRyKyM2V+UEE/3xz061E3j6BC5azcojEEq4PG4qufQ8ZOeg55rsMD0FGB6CgDG0TxFHrd1cRwwmNIURvmcFsksCCATj7v45zW1RgCigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKRmVFLMQFAySegFAC1zt34nks9Skhlsj9ljuBC9wGPyjyy5bG3BxjsTxW6txC6O6yoyp94hsgcZ5/Ag08bHUMNpB5B9aAOftPElzd3dtAunEGV3DjcSYwpUZOFx/F3I6YGaYvi+GK6kgvLZ48TtFGUycgMRuOQMDjqM9/Q10gVQcgAGoPPs3EL+ZCRKf3RJHzHk8evegDFg8XW1zGksNpcyJIcIFC7s79nOSB94gde9b1vOlzbRTx52SoHXPXBGRUEd5YNbNcR3FsYE4Miuu1fx6DtVgSRiQRBlD7dwXPOOmaLCuPopokQyNGGBdQCVzyAen8jTFuIHneBZo2lQZZAw3KPcUDJaKKRnVFLMwVR1JOAKAFooooAKKKKACiiigAooooAKKKKACiiigBCgkeNW6FueasfYoP7h/76NQchgwxkHPNSfaJfVP8Avn/69AEn2OD+6f8Avo0fY4P7p/76NR/aJfVP++f/AK9H2iX1T/vn/wCvQBJ9jg/un/vo0fY4f7p/76NR/aJfVP8Avn/69H2iX1T/AL5/+vQA/wCxQf3T/wB9Gj7FB/dP/fRpn2iX1T/vn/69H2iX1T/vn/69AD/sUH90/wDfRo+xQf3T/wB9GmfaJfVP++f/AK9H2iX1T/vn/wCvQBJ9jg/uH/vo0yS0hETkKQQDj5jSfaJfVP8Avn/69I00rKVJXBGOn/16AIx0FcvXU1y1AHSW3/HrD/uD+VS1Fbf8esP+4P5VLQBzF94e1KW8nntb9UAkL26sWHl7lbfyPViCPTFPt9D1YWF3Ddao08k9q8OS7EKxRQre3Ickjk5qO50jxB9uvJrDUI4FlfchlcyYHPGMYA9ufrSJpPiNJxIdRVwwXzFE20cbs4+Q45I59BigCF9B8SkAR6wFURlQvnOefM3AE4ycLxngkfnThousw3CXF/rKyWsVx5z75WVQoZWHb0BGCcc5oh0PxJDHHGusghEADFssSI+hyvI8zn1xU0Ol6pq+jajp+rzywiWXasg2sWQAZwMcAnPBzj1q4KLklJ2QuhFNpd5d3F2NO1G1SYXBaWaKU+aVOSI24O3bxj129Bk1Inh/VxcRu+rSOvAc+c4ON0ZbH12sPbdxWno+i/2VNeTNdSXM124d3dQDwMAcdq1aKihGVoO6BeZhaJpWp2d08+o3wuCVZVAZjtBKnv24PrjNbtFFQMKKKKAEJO4AY6Z5qte3i2OnXN46F1gjZyq9W2jOB+VWWUN1/Q014Y5IWikRXjcEMjDIYHqCD1oAwj4vsIomNzFcQyIm5kMR/wBngZAyfmU496ibxtpqPh45wNxAOzO4biqkeuSMe1bJ0jTTD5J0+0MX9zyV29u2PYflR/ZGm4cf2faYk++PJX5vrxzQBBpmuW2rXEsdskuyNFfzHXaGyWGADzwVIrTqC3sbS0d2trWGFnxvMcYUtjpnHWp6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqOdEkt5I5DiNlKsc4wCKkooA5r+wLAjLamxk/vh1HZR29lA/OhtA09nVv7Tk+VywHnDA9vzyfxNdLWLL4jt4GYSwyHa0oIj+ZhsJGce4BNVzsj2aKr6FYMoVNTKKGRvldc5UY69cd/rn1qWTSLCSOyX+0Sv2NQItsi9cg5P5Ypz+K9OiX51mLiQpsjjLHjPP5A/8AfJ9KSXxZp0ON6TqWZVXKddxwCBnOPU9s0c7DkQh0XSv7JXThdBYSytKRKN0m0YGSfoPyqs/hzT5GZpNVd2ZNpYuuT8uM5/WrF54ojs4LdzbF2ltPtGAxwpK7lUkA9cNz7dDmpZvEltZwWjX0MsMtyrERhS23HrnBGccZA98Uc7QciK/9hafuB/tJsL90eYPl+ZmGPpu/SnXuj2d5czzjVGhM3VY3UDO0rnHc4PX6Ukfi6zaEu9vOhUkE7cqCCByR/vJ/31Wnpuqwan5nkpIvl9d64B5IyPbKkfhT5nuHIjBHh+JpAz6qoDTM77ZBwuWK49/mHPsMdKnbw9pjxSxy6gZA6uBudTgtj5vrx1966aijnYvZogS5tkRV+0RcDH3xS/a7b/n4i/77FTUVJepD9rtv+fiL/vsUfa7b/n4i/wC+xU1FINSH7Xbf8/EX/fYo+123/PxF/wB9ipqKA1Iftdt/z8Rf99ij7Xbf8/EX/fYqaigNSH7Xbf8APxF/32KPtdt/z8Rf99ipqKA1Iftdt/z8Rf8AfYo+123/AD8Rf99ipqKA1Iftdt/z8Rf99ij7Xbf8/EX/AH2KkOcqowCzYzilKlJGRiDgA5xigNSL7Xbf8/EX/fYo+123/PxF/wB9ipqKA1Iftdt/z8Rf99ij7Xbf8/EX/fYqaigNSH7Xbf8APxF/32KPtdt/z8Rf99ipqKA1Iftdt/z8Rf8AfYo+123/AD8Rf99ipqKA1Iftdt/z8Rf99ij7Xbf8/EX/AH2KmooDUYkscufLkV8ddpziuZrqa5agZ0lt/wAesP8AuD+VS1Fbf8esP+4P5VLQBiXHia1tGdriKVIBM0CyjDF3XqAo57N27fTLV8V6e7hUS6YH+IQnrlAOOvPmLitGXStOmleWWxtnkc5Z2iBJ+pxT/wCzrLej/ZINycqfLGV6dPyH5CgDMi8VWFyl29uJJFtYXlfAxnaAcD1yCDnpzVebxnZWpmS5trqOSDHmKE3hc5/iXI6DPXvjrxW1FplhCkiRWVuiSAh1WMAMD1B9elKmnWUcflpaQKnHyiMAcEkfqSfxoAzofEBfVodOksJ45ZUEmQyuEU7sE4PT5CPqR61XtvGNjOhL293GScIPKLBxlRkEcdWA+tbVtY2lkCLW2hgBAB8tAuQOnT6miSws5YvKktYXj27djRgjGc4x6ZAP4UAZR8XaSBEQ8zLLu8tlhYhgpAYjjsSBTB4y0htuySRs9ghJ6E8Dv0xx3rTOj6azbjp9qWznPlL1/KlTSNNjbKWFsp9REo/pQBBp+vWOqXBhtmkLhNx3RlR/CSOe43L+dadUrfSLC11CS+gt1S4kQIzAnG3jgDoOg6VdoAQn5gOBxnmq97eLY6dc3jqzrBGzsqdSFGeKsEKeTTXiilhaKRFeNwQysMhgeoNAGEfF+nRRM1ylxA6puZHiYEcjjkDJ+ZTj3qM+NdLR8Os6jcQCUPzDcVUj1yRj+dbDaRprReU1hbGP+6Ylx27Y9h+VJ/Y+m4cf2fa/P9790vP14oAh0zXLXVriWO1WUpGiv5joVDZLDjPPBUitOq9vY2lo7tbW0MLPjeY0ClsdM4qxQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFIxIUlRk44GcZoAWovs0G938mPe/wB9toy3GOfXisgeIvLhhnuLUpC9v5zMjbivzBSMccDdnP6VDqXid7G9gt1sw3m2/nASSBCDhjg9v4cde9VyMjnibr2tvIpV4ImBwSCgPQ5H6mmtZWjPva1hLZByYxnjp+VZOna++pSTRxxRB0hEqfOSGyB1445455pkfimFLaGS7t5EeQR58vBUFxkDkgnA68UcjDnibphiK7TEhGAMbR26U2W2gnYNLDHIQCAXUHAPUfjWG3i60KKEt7hZHBKh1XH3Q3Y+jU2Dxdbu4Wa2ljLOECjaSDkg55+nA59uKOSQe0j3N4WtuqbFgiC/3Qgx2/wH5U9I0T7iKv0GP89axJvEsY0l7+G3YBJFRlnYLgFQ2eM54I4HNNPi7Tw6p5c5YvsOAvByR657dOtHLIOePc36K5+Pxfp8uzEVx87YHC/7P+1z94cDkc5xV/TNWGpyTqLeSHyghHmFcsGUMDgE460OLQ1OL0Ro0UUVJQUUUUAFFFFABRRRQAUUUUAFFFFACFQwwQCPehVVfugD6UtFABRRRQAUUUUAFFFFABRRRQAUUUUAFctXU1y1AHSW3/HrD/uD+VS1Fbf8esP+4P5VLQBzNxoms/b7i4s72KB2LlJWdm3hmUgMhGAFAYDB5z25pqaN4i86bzNZbyyzGPa3OCy442cYUMMZPODS33jaz0+e7hmtpvMgLYXIzIAyrlfxLf8AfJ9qtN4kSKDUJ5bciK1BKMj7/NxGJOMDjKkdaAMybQPEnmu0GqoAAwjPmsDtLKcY2EA8H5uTzjHereq6FqV9dPJDdJHutljEvnOGVgHB+UDGDuHPbHTpTB40iYzRrYyieK2a4aN3C5CnkDPOduGGRyCK6aNnaJWkQI5ALKDnB9M0AcvYeHtVtNXguJr1Z4o3YFnlYny+Qo27fvYxk7ufQ8V1VFFABRRRQAUUUUAMbIYELu46VV1C2mu9IvLaFhFNNE6I2cbSQcHIzirZJ3ADHTPNV769FjptzeMhcQRtIVXq20ZwPyoA5xtD8RR2jR2upJG2zYqNMSF5U5DBBzw/OO4qJvD/AIly7R6rGjbiy/vWOSWJb+H5cg474xkVot4wsYIma6huInRNzLsPX5flGcEn5lOMd6hbxxp0bYkinA3EAhc7huKqR9SMc4xQBc0TTtUtLq4m1K6W4LoiKwkJ6FjnG0BeGA464z7Vt1l6Xrtvq9xMltHKI40VxI67d2SwIx1GCp61qUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABSNu2naAT2BOKWigCHM//PGL/v4f/iaD556ww/8Afw//ABNTVyy3Ov8A2ybf9o8oXZCKsS8puYDnb0C7T7/3geKBHRgzjpDF/wB/D/8AE0fv/wDnjD/38P8A8TWRD/as2mWbNPcxzifEp2IDImepBTgfgD9etQJqviBpSh0pABGrFjnGdhZlHPrhc+/SmBvfvv8AnjD/AN9n/wCJo/f/APPGH/vs/wDxNYC6jr8l1GfsLJCchl2dTuOME8gYHU+3SrVjqGsT3EQn09Y4SQHYgg8hsnGeMEAe+c0rhY1f3+MeTD/38P8A8TUbQu8qStbwF0ztbeeM9f4atUUwsVoYnghSKK3hWNBhVDngf980/M46RRf9/D/8TU1FFwsRbrj/AJ5Rf9/D/wDE0brj/nlF/wB/D/8AE1LRSAi3XH/PKL/v4f8A4mjdcf8APKL/AL+H/wCJqWigCLdcf88ov+/h/wDiaN1x/wA8ov8Av4f/AImpaKAIt1x/zyi/7+H/AOJo3XH/ADyi/wC/h/8AialooAi3XH/PKL/v4f8A4mjdcf8APKL/AL+H/wCJqWigCLdcf88ov+/h/wDiaN1x/wA8ov8Av4f/AImpaKAIt1x/zyi/7+H/AOJo3XH/ADyi/wC/h/8Aiae54GW2jIyfQUDb5rBH3pgc5zzz/wDWoAZuuP8AnlF/38P/AMTRuuP+eUX/AH8P/wATUtFAEW64/wCeUX/fw/8AxNG64/55Rf8Afw//ABNS0UARbrj/AJ5Rf9/D/wDE0brj/nlF/wB/D/8AE1LRQBFuuP8AnlF/38P/AMTRuuP+eUX/AH8P/wATUtFAEW64/wCeUX/fw/8AxNG64/55Rf8Afw//ABNS0UAMQyHPmKq+m1s/0FczXU1y1AzpLb/j1h/3B/Kpaitv+PWH/cH8qloAhNrbmVZTBF5i5w+wZGevPvSrbQLE0SwxiNhhkCjBGMYI+gA+lc7c6FqpnZ7S6ihY3LStOsjCSVCSQjfKQAuRjrnb2pI/D2sLMrPrErqQoZvOcEAbC2PqQ/pgNQB0bW0D53QxtuOTlQcnG3+XH0qWue0nSNYs1uZLu/Se5eIpExJYIeo6gHGcn9M1THh3XLa1htbXViY4g4DNKyMwJyM8HnJIzk4HbPIAOtormrDSNeguoZLvUlnjVwXQSuobknd09MDb0OM5ya6WgAooooAKKKKAGuF6sce+cUjRxSwtGyq8bghlYZDA9c+tL0mRyu5QCCKq6jayXmmX1tEwieeN1Qk/dJGB0oAU6Xp5h8k2Nt5X9zylx27Y9h+VH9l6fhx9htsSffHlL83145rnpNA1wWrLa6kLdimxY1lO1BleQQoweG5296hbwzru53j1YIwYsuJG5JYlu3yZB28A9M0AdXBZ2tqztb28UTPjcY0ClsdM4qesTRNL1CxuribULv7S0kaIrbyxOCx5GAB94DjrjPetugAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACqCazYvLJH5xQoWBMiFAdpIYgkYIBByRV+sp/D1jKZC/msWZ2G587N+S20dOSSfy9KALZ1KwGc3tuMZz+9XjAye/pzQ2p2KqzG8gwpwcSA84yB9cdqyx4R0sO7gT73BDMZMk8Y5J69e/t6CpR4Y05SSPPzgrkyknac5XnsckmgC6dW08SiL7ZCZDn5A4JGCAc+mNw/OpIr+znZViuoJGZSyhJASQO4x2rMHhPSgJR5cpErFnzIfmyVPP/fI/KrVrolnaSiVFdpQ24uzZJOGGT/30aAJI9X06RQVvrfld+DIAQMZyQeRxS/2tp23d9ut9n9/zBt7d+ncVU/4RnS/KWPyW2rwPmOejD/2Y0N4a0xpRIYW3AEfeOORg0AXX1OwjyHvbdSCVIMoyCOo+oqaGaK5gjnhdZIpFDI6nIYHoayovC2lQszLCcsxP3vVlb+aj9a1LaBLW2it4yxSNAi7jk4AxQBLRRRQAUUUUAFFFFABRRRQAUUUUAFFFFADJZUhjLyHCjvVSz1e1v767tLcuz2u3zW24UFgSFz64wT9RT9SsotRsJbSbHlyDDBhwR6VT0HRLXQLV7e2fKsdxLMSxPOSSSSTz1qrR5fMm7v5GvRSb1/vD86N6/3h+dSULRRRQAUUUUAFFFFABRRRQAVy1dTXLUAdJb8WkX/XMfyrEi8Ss0UCmzeSeSIOwj4AOdpHPTBK/nW3b5+yRYxnyxjP0qMQyiYzBbcSkBS+w5IHbNNW6kyv0K+mar/aLyKbaSAoqkiTqcjPT07Z9jWjUOLn1i/I/wCNGLn1i/I/40Mav1JqKhxc+sX5H/GjFz6xfkf8aAuTUVDi59YvyP8AjRi59YvyP+NAXJqKhxc+sX5H/GjFz6xfkf8AGgLk1FQ4ufWL8j/jTWedMbnhGfUH/GgLliiqvnS/89YPyNHnS/8APWD8jQFy1RVXzpf+esH5GlEspIAkgyfY0Bcs0VDi59YvyP8AjRi59YvyP+NAXJqKhxc+sX5H/GjFz6xfkf8AGgLk1FQ4ufWL8j/jRi59YvyP+NAXJqKhxc+sX5H/ABoxc+sX5H/GgLk1FRL5+4bzHt74BzUtIYUUUUAFFFFABRRRQAUUUUAFc4ZdeimnaKOWUB5flmCbereXtxgkY25z7e9dHVYX9obl7cXEfmpncuemMZ/mPzoAwf7T8Tl3/wCJVGq87CRk/d4yA/qOx7/jUhv/ABGyuP7OVMg4O0Eg4OB9/nPHzds4wetbq3Vu7MqzRkqdpw3Q+n1pwuISSPNTP+97Z/lQBzn23xQ0rt/Z8YjVmCJgZcApgk7uON//ANar1hc61NcRi7too4DkMwXa38WGxuOOi8c/e61oy31rCzrJOimOPzG56L606K7t5ohLHMjIRkHPvj+fFAGEreIrYCONRcZJJkuAp43PgYUr/CE/OpbO78Qy34iurG3htwygyjJJG3LEDd/e49vetozRDrIvXHX/AD604SRsQA6nPTB60AY9rdavJfPE8A+z/vMSMuMEE4789hjHI5zTNOudbkikS/tghW3yHjQKxkwOnzEHJ3dhjHfNadvqVndAmG4RwOTzjA7Gp/Nj/wCeif8AfQ+lAHJ7/FW0ZE4+TDbRFnO1dpGe+7du9sYq/EmuTaZcCWWeK581NhUR5xkbgvBG3GcZ5rdaaJRkyL1x170z7XbmQxieMuBuKhhkDnn9D+VAHP2kOvy3RW4uLmOFbtvmHl8xYfHb2T860tH+3JmK8kllKxRsXkC53nduHygDsv51oNPEiO5cYRdzY5wKZDe21xEssUylGGQTxkYz3oAnopvmJnG9c5xjNVk1SwkErJdxFYlDOd3Cg9DmgC3RUUtzBDBJPLKixRgl3J4UDrmoDqtiIppftKFIDiUjnb9fyP5GgC5RVD+2tOLbRcqW3BMAHOTnjp7H8jU9rfW16CbeUSY64BHcjv7g/lQBYooooAZJtC5YZUHJ+XP6d6586vqBMe21tyjY3P8AZHO1Cx+cgHsAAVznJznFdC5YY2DLbgBzjvT914W2gx59N/8A9agB9nGs1lBLPbJHK8as6bcbWI5FTG2gx/qU/wC+RUH+neif99f/AFqMX3on/fX/ANagCJBiNR7CnU2M5jUkY46U6gAooooAKKKKACiiigArlq6muWoA6S2/49Yf9wfyqWvP4fjL4BSCNG17lVAP+hz+n+5T/wDhc/gD/oPH/wAA5/8A4igDoby51iG5eG2hDmWVhGXAKhdgIPB4GQRzjlhUkB1pmuI7raqiJhFJCi5LZODy3Bxjjp6mua/4XP4A/wCg8f8AwDn/APiKP+Fz+AP+g8f/AADn/wDiKANiFvFHmpCIbeOAKAZpG3vnfySM/wB3nGT9TT1m8UPdxhre0igYLuIO4r8/Pfn5efxrE/4XP4A/6Dx/8A5//iKP+Fz+AP8AoPH/AMA5/wD4igDvaK4L/hc/gD/oPH/wDn/+Io/4XP4A/wCg8f8AwDn/APiKAO9orgv+Fz+AP+g8f/AOf/4ij/hc/gD/AKDx/wDAOf8A+IoA72q18Lg2r/ZhKZfl/wBTjft3ruxnjO3NcX/wufwB/wBB4/8AgHP/APEUf8Ln8AZyNfYH2tJx/wCyUAdGbrxPbRssenrcn5thlK7sYXbuwwHds47jioxdeLFt2kGnRtKpLCNyoByTxkMcgDGOnTHvWD/wujwF/wBDC/8A4C3H/wARR/wujwF/0ML/APgLcf8AxFAHZaTLq813K2p26QoI1CqgG3dk5wdxJ7dh+PWr84kMD+YEHzjbt9Mjr7159/wujwF/0ML/APgLcf8AxFIfjP4BIwfEDEe9pcf/ABFAHe0VwX/C5/AH/QeP/gHP/wDEUf8AC5/AH/QeP/gHP/8AEUAd7RXBf8Ln8Af9B4/+Ac//AMRR/wALn8Af9B4/+Ac//wARQB3tFcF/wufwB/0Hj/4Bz/8AxFH/AAufwB/0Hj/4Bz//ABFAHe0VwX/C5/AH/QeP/gHP/wDEUf8AC5/AH/QeP/gHP/8AEUAd7RXBf8Ln8Af9B4/+Ac//AMRR/wALn8Af9B4/+Ac//wARQB3tFcF/wufwB/0Hj/4Bz/8AxFH/AAufwB/0Hj/4Bz//ABFAHe0VwX/C5/AH/QeP/gHP/wDEUf8AC5/AH/QeP/gHP/8AEUAd7RXBf8Ln8Af9B4/+Ac//AMRR/wALn8Af9B4/+Ac//wARQB3tFcF/wufwB/0Hj/4Bz/8AxFH/AAufwB/0Hj/4Bz//ABFAHe1j3vh+G7z+/kCmXzQhCsqsWBYgEd8Hrkcmua/4XP4A/wCg8f8AwDn/APiKP+Fz+AP+g8f/AADn/wDiKAN4eD9L2hSrsoGAp24+6Vz068k0kng/TpFkTfMqOWO1So2khRwcZHCjp7+tYX/C5/AH/QeP/gHP/wDEUf8AC5/AH/QeP/gHP/8AEUAdFb+FdPto7iNDKUnh8hgxH3frjJ/HNQzeDdOnjeMyXCI67MIyggccZxnGFHB+vXmsP/hc/gD/AKDx/wDAOf8A+Io/4XP4A/6Dx/8AAOf/AOIoA328I6W2SFdWb7zKQC3zbuTjnmlg8Nw2mrW91bMEhhydmBkkhhgccD5yf6d65/8A4XP4A/6Dx/8AAOf/AOIo/wCFz+AP+g8f/AOf/wCIoA6F/C1nLGqyT3DFY1jViVyqqQQBx2x168moV8G6eu/9/ckscklgTnIOc49R+p9axP8Ahc/gD/oPH/wDn/8AiKP+Fz+AP+g8f/AOf/4igDoI/ClhGcrJNnj+72xj+Hg/KOep75qOLwbpsKbVknJyDuYqSSCxGcjnljx0rD/4XP4A/wCg8f8AwDn/APiKP+F0eAP+g6f/AADn/wDiKAOqsdCstOkMkAYOUMbMcZIwo54/2Rj0yarSeFNMmYNKjOQgQbsHACqvp6KK57/hdHgD/oOn/wAA5/8A4ij/AIXR4A/6Dp/8A5//AIigDpNO8M2GmXT3EPmvI5c5kfdjcQTj06U6Pw9bizmtpZZJFli8o5Awo7kDHc885rmf+Fz+AP8AoPH/AMA5/wD4ij/hc/gD/oPH/wAA5/8A4igDpB4YsPsFxZsZjFOQW2vsPHTlcZ69TnPep4dEt4ba5gEkzJcKVbcwJVSWOAcerN1z1rlP+Fz+AP8AoPH/AMA5/wD4ij/hc/gD/oPH/wAA5/8A4igDqbfQLS2u5rlC++WYTN0A3Asew5+8evPSrFrpyWk7SI5IK7Qp7ZZmP6t+lcd/wufwB/0Hj/4Bz/8AxFH/AAufwB/0Hj/4Bz//ABFAHe0VwX/C5/AH/QeP/gHP/wDEUf8AC5/AH/QeP/gHP/8AEUAd24JAAYryPmAzj3rJ0vQF07UIrhtQFwELNukhxISd/wDEOMHeSeOSBXNf8Ln8Af8AQeP/AIBz/wDxFH/C5/AH/QeP/gHP/wDEUAej/aIv736Gj7RF/e/Q15x/wufwB/0Hj/4Bz/8AxFH/AAufwB/0Hj/4Bz//ABFAHdpwgp1cF/wufwB/0Hj/AOAc/wD8RR/wufwB/wBB4/8AgHP/APEUAd7RXBf8Ln8Af9B4/wDgHP8A/EUf8Lo8Af8AQdP/AIBz/wDxFAHe0VwX/C6PAH/QdP8A4Bz/APxFH/C6PAH/AEHT/wCAc/8A8RQB3tFcF/wujwB/0HT/AOAc/wD8RR/wujwB/wBB0/8AgHP/APEUAd7XLVl/8Lo8Af8AQdP/AIBz/wDxFYP/AAtbwX/0Gf8AyVm/+IoA/9k=",
     "answer_image": null,
     "options": [
@@ -1702,7 +1810,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。图中FlexConnect Local Switching选项未勾选；在受支持的FlexConnect部署中启用后，该WLAN的相关客户端数据可在AP所在分支本地转发。仍需AP模式、VLAN映射、上联和认证等配置；控制与管理流量及特定例外不因此保证完全不经过WLC。\n\nA HTTP profiling与C DHCP profiling用于客户端识别；D Disassociation Imminent用于无线客户端管理，均不是该本地数据交换选项。"
+    "explanation": "B。图中FlexConnect Local Switching选项未勾选；在受支持的FlexConnect部署中启用后，该WLAN的相关客户端数据可在AP所在分支本地转发。仍需AP模式、VLAN映射、上联和认证等配置；控制与管理流量及特定例外不因此保证完全不经过WLC。\n\nA HTTP profiling与C DHCP profiling用于客户端识别；D Disassociation Imminent用于无线客户端管理，均不是该本地数据交换选项。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 656,
@@ -1733,7 +1843,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。题设单链路需要承载不同VLAN，交换机端口应配置trunk并允许相应VLAN，AP与交换机的管理VLAN标记/native配置也应匹配。B在管理流量未打标的设计中可能是必要条件，但题目询问端口模式，不能把它当作所有部署都必须相同的普遍规则。\n\nA多链路LAG不是多VLAN的必要条件；D关闭trunk不满足题设。若所有本地流量和管理流量使用同一VLAN，支持的FlexConnect部署也可使用access端口。"
+    "explanation": "C。题设单链路需要承载不同VLAN，交换机端口应配置trunk并允许相应VLAN，AP与交换机的管理VLAN标记/native配置也应匹配。B在管理流量未打标的设计中可能是必要条件，但题目询问端口模式，不能把它当作所有部署都必须相同的普遍规则。\n\nA多链路LAG不是多VLAN的必要条件；D关闭trunk不满足题设。若所有本地流量和管理流量使用同一VLAN，支持的FlexConnect部署也可使用access端口。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 657,
@@ -1764,7 +1876,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。`config serial timeout 0`将串口会话空闲超时设为0；Cisco AireOS 8.5文档给出范围0–160分钟，默认也是0。该设置只取消对应空闲超时，不能保证设备重启、连接故障或其他策略下会话永不中断。\n\nA会话数量限制不是串口超时；B的9600超出所列超时范围且容易与波特率混淆；D针对其他会话超时配置，不是题设串口命令。"
+    "explanation": "C。`config serial timeout 0`将串口会话空闲超时设为0；Cisco AireOS 8.5文档给出范围0–160分钟，默认也是0。该设置只取消对应空闲超时，不能保证设备重启、连接故障或其他策略下会话永不中断。\n\nA会话数量限制不是串口超时；B的9600超出所列超时范围且容易与波特率混淆；D针对其他会话超时配置，不是题设串口命令。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 658,
@@ -1795,14 +1909,16 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。FlexConnect配合本地交换可使符合条件的客户端数据在分支转发，并在与控制器失联时提供一定独立工作能力。能否维持现有会话或允许新客户端接入取决于本地认证、RADIUS/DHCP可用性及WLAN配置，不能保证WAN故障时所有业务完全不受影响。\n\nA关闭本地交换不满足数据本地转发要求；C OfficeExtend用于不同远程场景，题设选项不满足所述方案；D仅启用fallback不能替代FlexConnect本地交换和离线认证设计。"
+    "explanation": "B。FlexConnect配合本地交换可使符合条件的客户端数据在分支转发，并在与控制器失联时提供一定独立工作能力。能否维持现有会话或允许新客户端接入取决于本地认证、RADIUS/DHCP可用性及WLAN配置，不能保证WAN故障时所有业务完全不受影响。\n\nA关闭本地交换不满足数据本地转发要求；C OfficeExtend用于不同远程场景，题设选项不满足所述方案；D仅启用fallback不能替代FlexConnect本地交换和离线认证设计。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 659,
     "qid": "Q866",
     "page_num": 153,
     "type": "Single Choice",
-    "prompt": "On a Cisco switch where auto allocates PoE power after detection and static pre-reserves a port budget, what is the resource-allocation advantage of auto for an empty port?",
+    "prompt": "On a Cisco PoE-capable switch, what is the power-budget advantage of configuring an empty port in auto mode rather than static mode?",
     "image": null,
     "answer_image": null,
     "options": [
@@ -1826,7 +1942,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。题设平台的auto模式在检测受电设备且预算足够后分配功率，而static可在检测前为端口预留预算；auto因此不必为题设空端口预留同一静态额度。具体功率等级、协商、预算释放与限额依平台配置而异。\n\nA功率监管并非此模式切换必然启用；C线对数量由PoE标准和设备能力决定；D两种模式都可进行受电设备检测。原B“使用默认级别”不能准确区分两种模式，已改为明确的预算差异。"
+    "explanation": "B。在 Cisco PoE 交换机上，`auto` 模式在检测到受电设备（PD）且电源预算充足后才动态分配功率，而 `static` 模式会在检测前即为端口预先保留固定功率预算；因此对空端口而言，`auto` 模式不会预先占用宝贵的电源预算。具体功率等级、协商、预算释放与限额依平台配置而异。\n\nA 功率监管并非切换到 `auto` 模式时必然启用；C 使用的线对数量由 PoE 标准和设备能力决定；D 两种模式均可进行受电设备检测。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 660,
@@ -1857,7 +1975,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。原图中Guest User已勾选，Lifetime为86400秒；取消Guest User可将该账户配置为普通本地用户，从而不使用图示的访客账户寿命字段。还需按WLAN配置、认证策略及适用版本验证账户与接入。\n\nA Guest User Role不是移除访客寿命的操作；C与D依输入校验和版本行为而定，不能仅凭图片断言0或空值的结果。账户寿命与WLAN会话超时是不同设置，因此取消访客身份不能保证用户连接永远不中断或所有访问时间限制都消失。"
+    "explanation": "B。原图中Guest User已勾选，Lifetime为86400秒；取消Guest User可将该账户配置为普通本地用户，从而不使用图示的访客账户寿命字段。还需按WLAN配置、认证策略及适用版本验证账户与接入。\n\nA Guest User Role不是移除访客寿命的操作；C与D依输入校验和版本行为而定，不能仅凭图片断言0或空值的结果。账户寿命与WLAN会话超时是不同设置，因此取消访客身份不能保证用户连接永远不中断或所有访问时间限制都消失。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 661,
@@ -1888,7 +2008,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。SSID区分大小写；例如 `Company` 与 `company` 是不同的SSID值。SSID元素最多包含32个八位字节，长度以字节而非显示字符计算；可用字符及编码受设备实现限制。SSID是网络名称，本身不提供认证或加密。\n\nA没有必须同时包含数字和字母的通用要求；B不是Cisco专有安全特性；D无线网络可映射到VLAN，但SSID本身不定义交换机VLAN。"
+    "explanation": "C。SSID区分大小写；例如 `Company` 与 `company` 是不同的SSID值。SSID元素最多包含32个八位字节，长度以字节而非显示字符计算；可用字符及编码受设备实现限制。SSID是网络名称，本身不提供认证或加密。\n\nA没有必须同时包含数字和字母的通用要求；B不是Cisco专有安全特性；D无线网络可映射到VLAN，但SSID本身不定义交换机VLAN。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 662,
@@ -1919,14 +2041,16 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。交换机与WLC分配系统端口之间的802.1Q trunk可在同一链路的数据路径上承载多个允许的VLAN；具体SSID、接口和VLAN映射取决于无线架构与配置，不要求每个SSID都映射到不同VLAN。\n\nA链路冗余需要其他设计而非trunk本身；C带外管理不是配置数据trunk的目的；D配置trunk不提供或消除物理冗余。"
+    "explanation": "B。交换机与WLC分配系统端口之间的802.1Q trunk可在同一链路的数据路径上承载多个允许的VLAN；具体SSID、接口和VLAN映射取决于无线架构与配置，不要求每个SSID都映射到不同VLAN。\n\nA链路冗余需要其他设计而非trunk本身；C带外管理不是配置数据trunk的目的；D配置trunk不提供或消除物理冗余。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 663,
     "qid": "Q872",
     "page_num": 154,
     "type": "Single Choice",
-    "prompt": "Refer to the exhibit. An administrator wants to disable the SSID name in beacon broadcasts and select a 2.4 GHz 802.11g radio policy with a maximum nominal PHY rate of 54 Mbps. Assume the WLC supports the listed policies. Which tasks meet these settings?",
+    "prompt": "Refer to the exhibit. An administrator wants to disable the SSID name in beacon broadcasts and restrict the WLAN to 2.4 GHz clients supporting a maximum nominal PHY rate of 54 Mbps. Assume the WLC supports the listed policies. Which tasks meet these settings?",
     "image": "data:image/jpeg;base64,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",
     "answer_image": null,
     "options": [
@@ -1950,7 +2074,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中Broadcast SSID已启用、Radio Policy为All；取消该勾选并选择802.11g only满足题设。802.11g工作于2.4 GHz，最高标称物理速率54 Mbps，并非应用吞吐量的保证。\n\nA包含5 GHz的802.11a；B仍广播SSID；D选择802.11a且仍广播SSID。隐藏SSID不构成有效认证或加密，不能代替WPA2/WPA3等安全机制；图中显示的WPA2/802.1X配置才与接入保护有关。"
+    "explanation": "C。图中Broadcast SSID已启用、Radio Policy为All；取消该勾选并选择802.11g only满足题设。802.11g工作于2.4 GHz，最高标称物理速率54 Mbps，并非应用吞吐量的保证。\n\nA包含5 GHz的802.11a；B仍广播SSID；D选择802.11a且仍广播SSID。隐藏SSID不构成有效认证或加密，不能代替WPA2/WPA3等安全机制；图中显示的WPA2/802.1X配置才与接入保护有关。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 664,
@@ -1981,7 +2107,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。交换机对动态学习的源MAC地址表项设置老化机制，长期没有被刷新时可删除相应条目，为其他动态条目腾出空间。老化时间依平台和配置而异，静态表项通常不按动态表项老化。老化本身不能保证表永不满，也不能阻止持续生成活跃源地址的MAC flooding攻击。\n\nB MAC move是地址所学习端口改变；C不是这里所问的机制；D dynamic learning负责学习源MAC，而非删除超时记录。"
+    "explanation": "A。交换机对动态学习的源MAC地址表项设置老化机制，长期没有被刷新时可删除相应条目，为其他动态条目腾出空间。老化时间依平台和配置而异，静态表项通常不按动态表项老化。老化本身不能保证表永不满，也不能阻止持续生成活跃源地址的MAC flooding攻击。\n\nB MAC move是地址所学习端口改变；C不是这里所问的机制；D dynamic learning负责学习源MAC，而非删除超时记录。",
+    "domain": "Network Fundamentals",
+    "topic": "Ethernet & MAC Switching"
   },
   {
     "id": 665,
@@ -2012,7 +2140,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中SW1 Gi0/1与SW2 Gi0/7互联，SW1 Gi0/2连接R1；这三个端口均为trunk，允许VLAN 5、7、9、108，native VLAN设为5。SW2 Gi0/1为VLAN 7的access口。已假定路由器子接口、主机与其余接入口配置正确。\n\nA未在SW2互联口配置native VLAN 5或允许VLAN 5；B把路由器链路设为access且SW2 trunk未允许VLAN 5；D把PC口设为trunk并漏配必要VLAN，且含`vian`拼写错误。原C漏了SW1 Gi0/2的native VLAN设置，已补齐。将VLAN 1排除出用户数据的trunk允许列表不意味着所有控制协议帧都被禁用。"
+    "explanation": "C。图中SW1 Gi0/1与SW2 Gi0/7互联，SW1 Gi0/2连接R1；这三个端口均为trunk，允许VLAN 5、7、9、108，native VLAN设为5。SW2 Gi0/1为VLAN 7的access口。已假定路由器子接口、主机与其余接入口配置正确。\n\nA未在SW2互联口配置native VLAN 5或允许VLAN 5；B把路由器链路设为access且SW2 trunk未允许VLAN 5；D把PC口设为trunk并漏配必要VLAN，且含`vian`拼写错误。将VLAN 1排除出用户数据的trunk允许列表不意味着所有控制协议帧都被禁用。",
+    "domain": "Network Access",
+    "topic": "802.1Q Trunking"
   },
   {
     "id": 666,
@@ -2043,7 +2173,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。图中Router A的Gi0/0/0通向B，Gi0/0/1通向C。全局启用CDP并在Gi0/0/0接口执行 `no cdp enable`，题设已经启用的Gi0/0/1仍可向C发送。\n\nA关闭全局CDP，接口启用无法代替全局启用；C未关闭通往B的接口；D使通往B的接口保持启用。CDP为直连发现协议，配置禁用该接口上的收发。"
+    "explanation": "B。图中Router A的Gi0/0/0通向B，Gi0/0/1通向C。全局启用CDP并在Gi0/0/0接口执行 `no cdp enable`，题设已经启用的Gi0/0/1仍可向C发送。\n\nA关闭全局CDP，接口启用无法代替全局启用；C未关闭通往B的接口；D使通往B的接口保持启用。CDP为直连发现协议，配置禁用该接口上的收发。",
+    "domain": "Network Access",
+    "topic": "CDP & LLDP"
   },
   {
     "id": 667,
@@ -2074,7 +2206,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中10.0.0.252/30的网络地址为.252，可用主机为.253和.254，广播地址为.255；最后可用地址.254位于ISP设备Gi0/1，因此在该设备的接口配置模式输入 `no cdp enable`。图中R1 Gi0/0为.253。\n\nB和C指向另一接口，且全局CDP命令不能替代接口禁用；D清除邻居表并不持续关闭CDP。原题写10.0.0.0/30，与图不符，已更正。"
+    "explanation": "A。图中10.0.0.252/30的网络地址为.252，可用主机为.253和.254，广播地址为.255；最后可用地址.254位于ISP设备Gi0/1，因此在该设备的接口配置模式输入 `no cdp enable`。图中R1 Gi0/0为.253。\n\nB和C指向另一接口，且全局CDP命令不能替代接口禁用；D清除邻居表并不持续关闭CDP。",
+    "domain": "Network Access",
+    "topic": "CDP & LLDP"
   },
   {
     "id": 668,
@@ -2105,7 +2239,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。在题设传统WLC端口分类中，distribution system端口连接有线交换网络，承载正常AP与控制器之间的控制及集中转发数据。具体端口功能与平台架构有关；例如FlexConnect本地交换业务并不都穿过控制器。\n\nA redundancy端口用于高可用同步；B service端口用于带外管理；C console端口用于本地管理，均非此题所需的普通AP业务连接。"
+    "explanation": "D。在题设传统WLC端口分类中，distribution system端口连接有线交换网络，承载正常AP与控制器之间的控制及集中转发数据。具体端口功能与平台架构有关；例如FlexConnect本地交换业务并不都穿过控制器。\n\nA redundancy端口用于高可用同步；B service端口用于带外管理；C console端口用于本地管理，均非此题所需的普通AP业务连接。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 669,
@@ -2136,7 +2272,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。Cisco AireOS 8.5.164.0文档说明：启用控制器加密后控制与数据流量默认均加密，但数据加密可依网络需要另行禁用。特性本身并非所有设备默认启用，且有平台、对端及版本限制。\n\nA此功能使用CAPWAP DTLS而非题设所述IPsec；C加密模式的数据使用UDP 16667替代旧的EoIP；D不是此功能所列端口。具体控制与数据端口行为应按设备及版本文档和配置核验。"
+    "explanation": "B。Cisco AireOS 8.5.164.0文档说明：启用控制器加密后控制与数据流量默认均加密，但数据加密可依网络需要另行禁用。特性本身并非所有设备默认启用，且有平台、对端及版本限制。\n\nA此功能使用CAPWAP DTLS而非题设所述IPsec；C加密模式的数据使用UDP 16667替代旧的EoIP；D不是此功能所列端口。具体控制与数据端口行为应按设备及版本文档和配置核验。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 670,
@@ -2167,7 +2305,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。将Wi-Fi Direct Client Policy设为Not-Allow可拒绝Wi-Fi Direct客户端关联该WLAN；图中该策略当前为Disabled。Cisco说明该策略的能力和适用条件取决于控制器版本及AP模式。\n\nD的P2P Blocking Action=Drop是限制受支持路径中的客户端间数据转发，不等于拒绝Wi-Fi Direct客户端关联，也不保证阻止所有直接无线链路；B的ACL取决于具体规则，不能由题目推断实现该功能；C的MFP针对管理帧保护，与Wi-Fi Direct客户端的关联策略不同。原答案D混淆设备关联控制与流量隔离，已改为A。"
+    "explanation": "A。将 Wi-Fi Direct Client Policy 设为 `Not-Allow` 可拒绝 Wi-Fi Direct 客户端关联该 WLAN（图中该策略当前为 Disabled），其具体能力与适用条件取决于控制器版本及 AP 模式。\n\nD 的 `P2P Blocking Action = Drop` 用于限制受支持路径中无线客户端之间的数据转发，不等于拒绝 Wi-Fi Direct 客户端关联；B 的二层 ACL 取决于具体规则，并非专门针对 Wi-Fi Direct 的控制器策略；C 的 MFP 用于管理帧保护，与 Wi-Fi Direct 关联策略不同。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 671,
@@ -2198,7 +2338,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "答案 C。Console 是异步串行的带外管理通道，可用终端程序直连以进行初始配置或故障排除，不要求 WLC 的业务 IP 路径可用。A 错在称其带内；B 是带内 IP 管理；D 可描述独立的 Ethernet service port，但它不是串行 console。实际连接方式和串口参数应以设备型号文档为准。"
+    "explanation": "答案 C。Console 是异步串行的带外管理通道，可用终端程序直连以进行初始配置或故障排除，不要求 WLC 的业务 IP 路径可用。A 错在称其带内；B 是带内 IP 管理；D 可描述独立的 Ethernet service port，但它不是串行 console。实际连接方式和串口参数应以设备型号文档为准。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 672,
@@ -2229,7 +2371,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "答案 B。该场景中 AP 的管理 VLAN 使用无标签接入端口；本地模式的客户端流量通过 CAPWAP 隧道送 WLC，接入链路不必承载每个客户端 VLAN。D 可用于需要多个 VLAN 的其他设计，并非所有本地模式部署都绝对禁止 trunk。A/C 是链路聚合，不是此单链路的必要条件；AP 型号和具体功能可能支持其他接法。"
+    "explanation": "答案 B。该场景中 AP 的管理 VLAN 使用无标签接入端口；本地模式的客户端流量通过 CAPWAP 隧道送 WLC，接入链路不必承载每个客户端 VLAN。D 可用于需要多个 VLAN 的其他设计，并非所有本地模式部署都绝对禁止 trunk。A/C 是链路聚合，不是此单链路的必要条件；AP 型号和具体功能可能支持其他接法。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 673,
@@ -2260,7 +2404,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "答案 D。EAP 成功后，认证者以第一条 EAPOL-Key 消息开始四次握手，双方根据已有 PMK 及随机数等派生并确认会话密钥。B 是整个握手阶段的名称，D 才是题目要求的帧类型；C 是此前的身份认证；A 是缓存机制，不是该第一条帧。TLS 会话恢复与 PMK 缓存属于不同机制，不能互相推断。"
+    "explanation": "答案 D。EAP 成功后，认证者以第一条 EAPOL-Key 消息开始四次握手，双方根据已有 PMK 及随机数等派生并确认会话密钥。B 是整个握手阶段的名称，D 才是题目要求的帧类型；C 是此前的身份认证；A 是缓存机制，不是该第一条帧。TLS 会话恢复与 PMK 缓存属于不同机制，不能互相推断。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 674,
@@ -2291,7 +2437,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "答案 D。同一 STP 实例比较桥 ID：先比较优先级（含适用的系统 ID 扩展），相同后比较 MAC 数值。08:0E:18:1A:3C:9D 比 08:0E:18:22:05:97 小，也比以 08:E0 开头的两个地址小，因此 MDF-DC-3 胜出。原题提到展图，但题库未附图；本题所需比较信息已完整列于选项，题干改为独立可解。"
+    "explanation": "答案 D。同一 STP 实例比较桥 ID：先比较优先级（含适用的系统 ID 扩展），相同后比较 MAC 数值。08:0E:18:1A:3C:9D 比 08:0E:18:22:05:97 小，也比以 08:E0 开头的两个地址小，因此 MDF-DC-3 胜出。",
+    "domain": "Network Access",
+    "topic": "STP & RSTP"
   },
   {
     "id": 675,
@@ -2322,7 +2470,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "答案 C。WLC 的链路聚合可把多个兼容物理端口组成一个逻辑通道，提高多条流量的总可用带宽并提供成员链路冗余；单一流通常受散列和单个成员链路速率限制，吞吐提升不保证。A 是控制器间高可用，并非 LAG 本身；B 不提供管理帧加密；D 成员端口应具备一致兼容配置，不能随意不同。支持方式取决于控制器型号。"
+    "explanation": "答案 C。WLC 的链路聚合可把多个兼容物理端口组成一个逻辑通道，提高多条流量的总可用带宽并提供成员链路冗余；单一流通常受散列和单个成员链路速率限制，吞吐提升不保证。A 是控制器间高可用，并非 LAG 本身；B 不提供管理帧加密；D 成员端口应具备一致兼容配置，不能随意不同。支持方式取决于控制器型号。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 676,
@@ -2353,7 +2503,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "答案 C。轻量 AP 由无线控制器集中管理，典型 split-MAC 架构把实时 MAC 职责放在 AP，将其他控制职责交给 WLC；AP 发现并加入可用控制器后可集中配置。Autonomous AP 自行承担控制功能。Mesh 是无线回程拓扑，设备也可能使用轻量架构，因此不是与 lightweight 严格互斥的硬件类别；cloud-based 描述管理方式，不直接等于题述 WLC split-MAC。零接触仍依赖供电、网络、控制器发现等前提。"
+    "explanation": "答案 C。轻量 AP 由无线控制器集中管理，典型 split-MAC 架构把实时 MAC 职责放在 AP，将其他控制职责交给 WLC；AP 发现并加入可用控制器后可集中配置。Autonomous AP 自行承担控制功能。Mesh 是无线回程拓扑，设备也可能使用轻量架构，因此不是与 lightweight 严格互斥的硬件类别；cloud-based 描述管理方式，不直接等于题述 WLC split-MAC。零接触仍依赖供电、网络、控制器发现等前提。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 677,
@@ -2384,7 +2536,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "答案 D。具备 service port 的 WLC 可通过独立以太网管理链路进行带外 IP 管理。Management 接口通常用于控制器管理与业务网络；virtual 和 dynamic 接口分别承担虚拟服务及 WLAN/VLAN 等功能。Console 同样可用于带外管理，但属于串行通道，并不在选项中；接口名称与可用性依型号而异。"
+    "explanation": "答案 D。具备 service port 的 WLC 可通过独立以太网管理链路进行带外 IP 管理。Management 接口通常用于控制器管理与业务网络；virtual 和 dynamic 接口分别承担虚拟服务及 WLAN/VLAN 等功能。Console 同样可用于带外管理，但属于串行通道，并不在选项中；接口名称与可用性依型号而异。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 678,
@@ -2415,7 +2569,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "答案 D。图中 `vtp mode transparent`：SW2 本地维护 VLAN，不根据 VTP 广告同步自己的 VLAN 数据库，也不将本地 VLAN 变更作为域配置发布；VTP v2 下可在其他有效 trunk 上转发收到的广告，通常不从接收端口原路发回。A/B 错在把它当成处理更新的客户端且 B 使用 access；C 错在声称应用服务器更新并传播本地 VLAN。图只画出一条 trunk，若无其他 trunk 就没有转发出口。"
+    "explanation": "答案 D。图中 `vtp mode transparent`：SW2 本地维护 VLAN，不根据 VTP 广告同步自己的 VLAN 数据库，也不将本地 VLAN 变更作为域配置发布；VTP v2 下可在其他有效 trunk 上转发收到的广告，通常不从接收端口原路发回。A/B 错在把它当成处理更新的客户端且 B 使用 access；C 错在声称应用服务器更新并传播本地 VLAN。图只画出一条 trunk，若无其他 trunk 就没有转发出口。",
+    "domain": "Network Access",
+    "topic": "VLANs, Voice & DTP/VTP"
   },
   {
     "id": 679,
@@ -2446,7 +2602,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "答案 C。在题设条件下，经备用线路通告仅包含备份服务器的更具体目的前缀，提供商可依最长前缀匹配将发往这些地址的流量送往备用链路；其他仅匹配聚合前缀的流量仍可走主链路。备份目标必须可由目的地址区分，且备用线路、双向路由和运营商策略须支持；仅凭来源、应用或“备份”标签不能由普通目的路由自动区分。A/B 不自动改变 MPLS 路由，D 需新线路且较昂贵。"
+    "explanation": "答案 C。在题设条件下，经备用线路通告仅包含备份服务器的更具体目的前缀，提供商可依最长前缀匹配将发往这些地址的流量送往备用链路；其他仅匹配聚合前缀的流量仍可走主链路。备份目标必须可由目的地址区分，且备用线路、双向路由和运营商策略须支持；仅凭来源、应用或“备份”标签不能由普通目的路由自动区分。A/B 不自动改变 MPLS 路由，D 需新线路且较昂贵。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 680,
@@ -2477,7 +2635,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "答案 A。图中 R1 的 Gi0/1 为 192.168.12.1/25，network 精确匹配该接口并放入 area 1；R2 的 Gi0/1 为 192.168.12.2/25。A 在 R2 接口启用进程 1、area 1。B 的零通配符只匹配 R1 地址而非 R2 本地地址；C/D 的 area 0 与对端 area 1 不一致。进程号只在本地有效，不需两端相同；邻接仍要求接口连通以及计时器、认证等兼容，单凭同区域不能保证成功。"
+    "explanation": "答案 A。图中 R1 的 Gi0/1 为 192.168.12.1/25，network 精确匹配该接口并放入 area 1；R2 的 Gi0/1 为 192.168.12.2/25。A 在 R2 接口启用进程 1、area 1。B 的零通配符只匹配 R1 地址而非 R2 本地地址；C/D 的 area 0 与对端 area 1 不一致。进程号只在本地有效，不需两端相同；邻接仍要求接口连通以及计时器、认证等兼容，单凭同区域不能保证成功。",
+    "domain": "IP Connectivity",
+    "topic": "OSPFv2 Routing"
   },
   {
     "id": 681,
@@ -2508,7 +2668,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。图中 O 10.0.1.3/32 [110/100] via 10.0.1.100 是 OSPF 学到的主机路由；/32 将全部 32 位固定，匹配唯一目的地址 10.0.1.3。10.0.1.100 是下一跳，不是此项的源地址。A 的整个子网需要较短前缀，D 的 10.0.0.0 网络也不是该 /32 目的。"
+    "explanation": "B。图中 O 10.0.1.3/32 [110/100] via 10.0.1.100 是 OSPF 学到的主机路由；/32 将全部 32 位固定，匹配唯一目的地址 10.0.1.3。10.0.1.100 是下一跳，不是此项的源地址。A 的整个子网需要较短前缀，D 的 10.0.0.0 网络也不是该 /32 目的。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 682,
@@ -2539,7 +2701,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。在 R14 上，目的主机 PC10 为 10.80.65.10，/32 掩码为 255.255.255.255；图中 R86 的互联接口为 10.73.65.66，因此 B 以其作为下一跳。需确保下一跳可达、R86 有目的网段路由且回程可用。A 的 /31 非主机路由；C 的掩码是通配符且目的与下一跳不符；D 的目标和掩码也不满足要求。"
+    "explanation": "B。在 R14 上，目的主机 PC10 为 10.80.65.10，/32 掩码为 255.255.255.255；图中 R86 的互联接口为 10.73.65.66，因此 B 以其作为下一跳。需确保下一跳可达、R86 有目的网段路由且回程可用。A 的 /31 非主机路由；C 的掩码是通配符且目的与下一跳不符；D 的目标和掩码也不满足要求。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 683,
@@ -2570,7 +2734,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中两条 OSPF 项的 [AD/metric] 分别是经 10.10.10.3 的 [110/100] 和经 10.10.10.2 的 [110/5]；100 大于 5。10.10.10.4 是 RIP 路由的下一跳，10.10.10.5 未显示。不同路由协议度量的单位和计算方法不同，不能把 RIP 的 10 与 OSPF 的 100 当成可直接比较的路径优劣；它们也指向不同目的前缀。"
+    "explanation": "C。图中两条 OSPF 项的 [AD/metric] 分别是经 10.10.10.3 的 [110/100] 和经 10.10.10.2 的 [110/5]；100 大于 5。10.10.10.4 是 RIP 路由的下一跳，10.10.10.5 未显示。不同路由协议度量的单位和计算方法不同，不能把 RIP 的 10 与 OSPF 的 100 当成可直接比较的路径优劣；它们也指向不同目的前缀。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 684,
@@ -2601,7 +2767,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中 R2 工作站网络为 172.16.2.0/27（255.255.255.224），R1 的为 172.16.1.0/24。备用链路上 R1 是 172.16.0.5、R2 是 172.16.0.6，因此 R1 指向 .6、R2 指向 .5。假设图中 OSPF 路由采用默认管理距离 110，静态路由的 111 和 112 均较高，在相同目标前缀的 OSPF 主路由消失且备用下一跳可解析时可接替。故障检测、收敛和返回路径仍影响恢复时间。A 目标掩码及方向有误；B 使用主链路下一跳且掩码不符；D 的 89 低于默认 OSPF 距离且掩码不符。"
+    "explanation": "C。图中 R2 工作站网络为 172.16.2.0/27（255.255.255.224），R1 的为 172.16.1.0/24。备用链路上 R1 是 172.16.0.5、R2 是 172.16.0.6，因此 R1 指向 .6、R2 指向 .5。假设图中 OSPF 路由采用默认管理距离 110，静态路由的 111 和 112 均较高，在相同目标前缀的 OSPF 主路由消失且备用下一跳可解析时可接替。故障检测、收敛和返回路径仍影响恢复时间。A 目标掩码及方向有误；B 使用主链路下一跳且掩码不符；D 的 89 低于默认 OSPF 距离且掩码不符。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 685,
@@ -2632,7 +2800,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。命令配置普通 IPv6 单播地址；A、D 是链路本地形式，B 标注 anycast。图示采用 2001:db8::/32 文档前缀，C 只用于说明，不能作为实际公网分配地址使用；真实互联网连接应使用运营商分配的可全球路由前缀，还需要正确的上游路由及其他连接配置。任播有其合法用途，但题目要求普通接口单播地址。"
+    "explanation": "C。命令配置普通 IPv6 单播地址；A、D 是链路本地形式，B 标注 anycast。图示采用 2001:db8::/32 文档前缀，C 只用于说明，不能作为实际公网分配地址使用；真实互联网连接应使用运营商分配的可全球路由前缀，还需要正确的上游路由及其他连接配置。任播有其合法用途，但题目要求普通接口单播地址。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 686,
@@ -2663,7 +2833,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中服务器为 10.10.10.10，R2 面向 R1 的地址为 192.168.0.2；`ip route 10.10.10.10 255.255.255.255 192.168.0.2` 指定到单个 IPv4 地址的 /32 主机路由。B 是 /24 网段路由，C 是默认路由，D 将目标和下一跳颠倒。路由实际生效需要下一跳可达，并需有通往服务器及返回源网络的路径。"
+    "explanation": "A。图中服务器为 10.10.10.10，R2 面向 R1 的地址为 192.168.0.2；`ip route 10.10.10.10 255.255.255.255 192.168.0.2` 指定到单个 IPv4 地址的 /32 主机路由。B 是 /24 网段路由，C 是默认路由，D 将目标和下一跳颠倒。路由实际生效需要下一跳可达，并需有通往服务器及返回源网络的路径。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 687,
@@ -2694,7 +2866,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中分配的前缀是 2001:DB8:FFFF:FCF3::/64；`ipv6 address 2001:DB8:FFFF:FCF3::/64 eui-64` 按 EUI-64 生成接口标识符并配置 R1 接口。原选项的 `::64` 缺少斜线，已修正。B 是同前缀的手工接口地址，并不自动生成接口标识符；但它在适当 RA 配置下也可支持主机 SLAAC，所以题目明确要求 EUI-64，而不把它误称为 SLAAC 的唯一方式。A 把 2001:db8 地址标为链路本地；D 的 autoconfig 语法和题设方向不符。2001:db8::/32 为文档示例。"
+    "explanation": "C。图中分配的前缀是 2001:DB8:FFFF:FCF3::/64；`ipv6 address 2001:DB8:FFFF:FCF3::/64 eui-64` 按 EUI-64 自动生成接口标识符并配置 R1 接口。B 是同前缀的手工接口地址，并不自动生成接口标识符；虽然它在适当 RA 配置下也可支持主机 SLAAC，但题目明确要求通过 EUI-64 派生接口标识符。A 将 2001:db8 全局单播文档地址误标为链路本地地址；D 的 autoconfig 用于接口作为客户端自动配置地址，与题设方向不符。2001:db8::/32 为 RFC 3849 文档示例前缀。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 688,
@@ -2725,7 +2899,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中 172.16.0.192/29 覆盖 .192–.199，不包含目的 .202；172.16.0.128/25 覆盖 .128–.255，包含 .202；172.16.0.0/24 也包含 .202。按最长匹配选 /25 OSPF 路由，其 [110/32445] 中 110 是管理距离、32445 是度量；90 和 3184439 属于未匹配的 EIGRP /29 条目。"
+    "explanation": "C。图中 172.16.0.192/29 覆盖 .192–.199，不包含目的 .202；172.16.0.128/25 覆盖 .128–.255，包含 .202；172.16.0.0/24 也包含 .202。按最长匹配选 /25 OSPF 路由，其 [110/32445] 中 110 是管理距离、32445 是度量；90 和 3184439 属于未匹配的 EIGRP /29 条目。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 689,
@@ -2756,7 +2932,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。两个接口已用 2 个地址，另需至少 2 个；常规 IPv4 多主机子网 /30 仅有 2 个可用地址，/29 有 6 个可用地址，是选项中满足要求的最小地址块。10.10.10.0/29 可用 .1–.6，所给 .1 与 .4 同属该子网且剩余 4 个。/28、/24 满足数量但分配空间更大。实际增加设备还需物理或二层连接；/31 点对点特例没有满足本题的额外地址。"
+    "explanation": "C。两个接口已用 2 个地址，另需至少 2 个；常规 IPv4 多主机子网 /30 仅有 2 个可用地址，/29 有 6 个可用地址，是选项中满足要求的最小地址块。10.10.10.0/29 可用 .1–.6，所给 .1 与 .4 同属该子网且剩余 4 个。/28、/24 满足数量但分配空间更大。实际增加设备还需物理或二层连接；/31 点对点特例没有满足本题的额外地址。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv4 & Subnetting"
   },
   {
     "id": 690,
@@ -2787,7 +2965,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。图中 R14 的互联地址是 10.73.65.65，R86 是 10.73.65.66；R86 到目标 172.16.34.0/29 的选项为 `ip route 172.16.34.0 255.255.255.248 10.73.65.65`。A 交换了目的与下一跳；C 使用了通配符而非子网掩码且以网络号作下一跳；D 的 /19 不符合 /29，且指向本端地址。静态路由还须下一跳可达并有可用回程。"
+    "explanation": "B。图中 R14 的互联地址是 10.73.65.65，R86 是 10.73.65.66；R86 到目标 172.16.34.0/29 的选项为 `ip route 172.16.34.0 255.255.255.248 10.73.65.65`。A 交换了目的与下一跳；C 使用了通配符而非子网掩码且以网络号作下一跳；D 的 /19 不符合 /29，且指向本端地址。静态路由还须下一跳可达并有可用回程。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 691,
@@ -2818,7 +2998,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。外部 EIGRP 的默认管理距离为 170；C 对同一目的前缀使用 /29 掩码、R86 下一跳 10.73.65.66，并指定 171，因此在 EIGRP 同前缀路由存在时作为备份。A 为 /21 且 AD 1；B 为 /28 且 AD 89，均不是所需同前缀备份。D 目的、掩码和下一跳错误。静态路由只有在下一跳可解析时才能使用；若它与主路由共用故障链路，不保证链路故障后仍可转发。"
+    "explanation": "C。外部 EIGRP 的默认管理距离为 170；C 对同一目的前缀使用 /29 掩码、R86 下一跳 10.73.65.66，并指定 171，因此在 EIGRP 同前缀路由存在时作为备份。A 为 /21 且 AD 1；B 为 /28 且 AD 89，均不是所需同前缀备份。D 目的、掩码和下一跳错误。静态路由只有在下一跳可解析时才能使用；若它与主路由共用故障链路，不保证链路故障后仍可转发。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 692,
@@ -2849,7 +3031,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。图中 R2 的路由表显示 `D 192.168.30.0/24 [90/30720] via 10.10.10.6`；服务器 192.168.30.30 属于该网段，D 表示 EIGRP，下一跳是 10.10.10.6（R3 接口）。A 是目标 LAN 的网关，C 是 R2 的互联接口地址，D 是 PC2 的网关，均不是 R2 到服务器网段的下一跳。"
+    "explanation": "B。图中 R2 的路由表显示 `D 192.168.30.0/24 [90/30720] via 10.10.10.6`；服务器 192.168.30.30 属于该网段，D 表示 EIGRP，下一跳是 10.10.10.6（R3 接口）。A 是目标 LAN 的网关，C 是 R2 的互联接口地址，D 是 PC2 的网关，均不是 R2 到服务器网段的下一跳。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 693,
@@ -2880,7 +3064,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。`ipv6 address autoconfig` 在支持的平台接口上使用链路的 Router Advertisement 前缀进行 SLAAC。B 从 DHCPv6 获取地址，也是自动方式，但不满足题设 SLAAC；因此必须明确题设机制与可用 RA，图中的 DHCPv6 server 本身不证明存在可用 RA。C 不是本题的 SLAAC 命令；D 是手动配置地址。实际默认路由获取还取决于 RA 和设备配置。"
+    "explanation": "A。`ipv6 address autoconfig` 在支持的平台接口上使用链路的 Router Advertisement 前缀进行 SLAAC。B 从 DHCPv6 获取地址，也是自动方式，但不满足题设 SLAAC；因此必须明确题设机制与可用 RA，图中的 DHCPv6 server 本身不证明存在可用 RA。C 不是本题的 SLAAC 命令；D 是手动配置地址。实际默认路由获取还取决于 RA 和设备配置。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 694,
@@ -2911,7 +3097,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。R1 到新办公室网络需要 `172.25.25.0/24` 路由，图中 R2 互联地址为 192.168.2.2，因此使用 `ip route 172.25.25.0 255.255.255.0 192.168.2.2`。C 指向 R1 自己的 .1；A、D 都只匹配 172.25.25.1/32，不能覆盖整个 /24。完整双向通信还依赖接口、网关与回程路由等条件；题设给出 R2 已配置正确。"
+    "explanation": "B。R1 到新办公室网络需要 `172.25.25.0/24` 路由，图中 R2 互联地址为 192.168.2.2，因此使用 `ip route 172.25.25.0 255.255.255.0 192.168.2.2`。C 指向 R1 自己的 .1；A、D 都只匹配 172.25.25.1/32，不能覆盖整个 /24。完整双向通信还依赖接口、网关与回程路由等条件；题设给出 R2 已配置正确。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 695,
@@ -2942,7 +3130,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。IPv6 地址为 128 位，/128 固定全部位，因此只匹配一个地址；IPv4 /32 同样只匹配一个 IPv4 地址。/64、/96 和 /124 分别留下 64、32 和 4 个可变位。`::ffff:a36:4901` 是 IPv4-mapped 表示，用于 IPv4 节点的 IPv6 API 表示；不能据此推断它适合作为路由器 IPv6 接口的普通单播地址。"
+    "explanation": "D。IPv6 地址为 128 位，/128 固定全部位，因此只匹配一个地址；IPv4 /32 同样只匹配一个 IPv4 地址。/64、/96 和 /124 分别留下 64、32 和 4 个可变位。`::ffff:a36:4901` 是 IPv4-mapped 表示，用于 IPv4 节点的 IPv6 API 表示；不能据此推断它适合作为路由器 IPv6 接口的普通单播地址。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 696,
@@ -2973,7 +3163,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。两端均设置 `ip ospf network point-to-point`，让直连段按点对点类型工作，不执行 DR/BDR 选举，因而可避免广播网络选举等待。A 的 40 秒为常见默认 dead interval，B 保持 broadcast；C 的 priority 0 只是禁止该接口参与 DR/BDR 选举，两端均设 0 会使这个广播段无合格 DR。邻接仍需要匹配的 OSPF 参数、可达链路及数据库同步，不能保证固定建邻耗时。"
+    "explanation": "D。两端均设置 `ip ospf network point-to-point`，让直连段按点对点类型工作，不执行 DR/BDR 选举，因而可避免广播网络选举等待。A 的 40 秒为常见默认 dead interval，B 保持 broadcast；C 的 priority 0 只是禁止该接口参与 DR/BDR 选举，两端均设 0 会使这个广播段无合格 DR。邻接仍需要匹配的 OSPF 参数、可达链路及数据库同步，不能保证固定建邻耗时。",
+    "domain": "IP Connectivity",
+    "topic": "OSPFv2 Routing"
   },
   {
     "id": 697,
@@ -3004,7 +3196,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。检查 Router Y 已安装的路由：目的 10.227.225.255 落在 10.224.0.0/11（10.224.0.0–10.255.255.255）中，该项经 10.224.1.5 指向 Router D。10.224.0.0/15 只到 10.225.255.255；图中的 /24 和 /27 项也不匹配。/8 与 /9 虽匹配，却比 /11 短，因此按最长前缀选择 D；A、B、C 不是所选下一跳。末字节为 255 不自动意味着它是所用子网的广播地址。"
+    "explanation": "D。检查 Router Y 已安装的路由：目的 10.227.225.255 落在 10.224.0.0/11（10.224.0.0–10.255.255.255）中，该项经 10.224.1.5 指向 Router D。10.224.0.0/15 只到 10.225.255.255；图中的 /24 和 /27 项也不匹配。/8 与 /9 虽匹配，却比 /11 短，因此按最长前缀选择 D；A、B、C 不是所选下一跳。末字节为 255 不自动意味着它是所用子网的广播地址。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 698,
@@ -3035,7 +3229,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。满足题设时，路由表的静态默认路由 `S* 0.0.0.0/0 [1/0] via 172.16.2.2` 被选中；`[1/0]` 中前面的 1 是管理距离，后面的 0 是度量。源地址不决定普通目的路由查表；0、2、32 均不是这条路由显示的 AD。静态路由可配置非默认管理距离，且若有更具体匹配路由，应优先使用更长前缀。"
+    "explanation": "B。满足题设时，路由表的静态默认路由 `S* 0.0.0.0/0 [1/0] via 172.16.2.2` 被选中；`[1/0]` 中前面的 1 是管理距离，后面的 0 是度量。源地址不决定普通目的路由查表；0、2、32 均不是这条路由显示的 AD。静态路由可配置非默认管理距离，且若有更具体匹配路由，应优先使用更长前缀。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 699,
@@ -3066,7 +3262,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。图中接口 MAC 为 50:00:00:04:00:00。将其拆成 50:00:00 和 04:00:00，中间插入 ff:fe，再将首字节与 0x02 异或：0x50 → 0x52，得到接口标识符 `5200:00ff:fe04:0000`。结合 `2001:db8::/64` 得 D。A 插入了 ff:fe 但未翻转 U/L 位；B 地址格式及内容不符合；C 不含正确的接口标识符。应使用异或而非总是加 2，原位置为 1 时会变为 0。"
+    "explanation": "D。图中接口 MAC 为 50:00:00:04:00:00。将其拆成 50:00:00 和 04:00:00，中间插入 ff:fe，再将首字节与 0x02 异或：0x50 → 0x52，得到接口标识符 `5200:00ff:fe04:0000`。结合 `2001:db8::/64` 得 D。A 插入了 ff:fe 但未翻转 U/L 位；B 地址格式及内容不符合；C 不含正确的接口标识符。应使用异或而非总是加 2，原位置为 1 时会变为 0。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 700,
@@ -3097,7 +3295,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。FHRP 让多台路由器提供冗余的默认网关服务，网关故障时可由另一台接管，提升可用性。A 减少 ARP 不是共同目的；B 不是所有 FHRP 都会按实时负载比例分配，部分协议如 GLBP 可以提供不同形式的负载分担；D 不保证降低管理工作。实际切换时间、虚拟 MAC 行为和上联故障检测取决于协议及配置，也不保证所有故障均无缝。"
+    "explanation": "C。FHRP 让多台路由器提供冗余的默认网关服务，网关故障时可由另一台接管，提升可用性。A 减少 ARP 不是共同目的；B 不是所有 FHRP 都会按实时负载比例分配，部分协议如 GLBP 可以提供不同形式的负载分担；D 不保证降低管理工作。实际切换时间、虚拟 MAC 行为和上联故障检测取决于协议及配置，也不保证所有故障均无缝。",
+    "domain": "IP Connectivity",
+    "topic": "FHRP (HSRP / VRRP)"
   },
   {
     "id": 701,
@@ -3128,7 +3328,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。FHRP 使用共享的虚拟网关地址，由网关设备在故障时接替转发，降低单一默认网关故障的影响；切换仍可能造成短暂中断，且不能覆盖所有上游故障。A 是堆叠等设备虚拟化；B 是链路聚合用途（部分 FHRP 也能负载分担，但不是此处的主要目标）；C 是 STP 的环路防护。"
+    "explanation": "D。FHRP 使用共享的虚拟网关地址，由网关设备在故障时接替转发，降低单一默认网关故障的影响；切换仍可能造成短暂中断，且不能覆盖所有上游故障。A 是堆叠等设备虚拟化；B 是链路聚合用途（部分 FHRP 也能负载分担，但不是此处的主要目标）；C 是 STP 的环路防护。",
+    "domain": "IP Connectivity",
+    "topic": "FHRP (HSRP / VRRP)"
   },
   {
     "id": 702,
@@ -3159,7 +3361,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。目的网段由 A 经同一 EIGRP 100 传播至 B，再经 B 的 10.0.0.1 传给 D，属于内部 EIGRP，默认管理距离 90；竞争的 OSPF 路由默认管理距离 110。相同前缀情况下，90 更小，选择经 10.0.0.1 的内部 EIGRP。A 和 C 把 10.0.2.1 当成所选下一跳；B 以更高度量解释选择，且不能直接比较不同协议的度量。原题把 OSPF 链路状态属性当作选路依据并错误标 C；仅凭图示不能排除过滤或距离修改，因此题干明确前提。"
+    "explanation": "D。目的网段由 A 经同一 EIGRP 100 传播至 B，再经 B 的 10.0.0.1 传给 D，属于内部 EIGRP，默认管理距离 90；竞争的 OSPF 路由默认管理距离 110。相同前缀情况下，90 更小，选择经 10.0.0.1 的内部 EIGRP。A 和 C 把 10.0.2.1 当成所选下一跳；B 以更高度量解释选择，且不能直接比较不同协议的度量。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 703,
@@ -3190,7 +3394,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。GUA 与 ULA 都是 IPv6 单播地址，可按前缀位进行子网规划。例如在各自拥有 /48 前缀时，均可使用后续 16 位划分 /64 子网；GUA 的分配长度不一定是 /48。B 的组播地址为 ff00::/8；C 的 ULA 不设计为在全球互联网路由；D 的 ULA 通常由组织自行生成，不能说两者都由同一机构分配。"
+    "explanation": "A。GUA 与 ULA 都是 IPv6 单播地址，可按前缀位进行子网规划。例如在各自拥有 /48 前缀时，均可使用后续 16 位划分 /64 子网；GUA 的分配长度不一定是 /48。B 的组播地址为 ff00::/8；C 的 ULA 不设计为在全球互联网路由；D 的 ULA 通常由组织自行生成，不能说两者都由同一机构分配。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 704,
@@ -3221,7 +3427,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。去掉每段前导零，将连续两个零段压缩为 ::，得到 2001:db8::700:3:400F:572B/64。内部和尾部的零不能删除；B 将 400F 改为 4F，C 有两个 ::，D 把 0700 改为 7 且把 400F 改为 4F。:: 最多出现一次，也可以完全不出现。原选项缺少接口命令所需的前缀长度，现均补 /64。"
+    "explanation": "A。去掉每段前导零，将连续两个零段压缩为 ::，得到 2001:db8::700:3:400F:572B/64。内部和尾部的零不能删除；B 将 400F 改为 4F，C 有两个 ::，D 把 0700 改为 7 且把 400F 改为 4F。:: 最多出现一次，也可以完全不出现。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 705,
@@ -3252,7 +3460,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。图中本地路由 L 10.10.10.3/32 对应 GigabitEthernet0/0/0 自身地址；/32 掩码是 255.255.255.255，最长前缀匹配优先于 C 10.10.10.0/24。来源地址 172.16.3.254 不改变目的路由掩码。A 为 /0，B 为 /23，C 为 /24。"
+    "explanation": "D。图中本地路由 L 10.10.10.3/32 对应 GigabitEthernet0/0/0 自身地址；/32 掩码是 255.255.255.255，最长前缀匹配优先于 C 10.10.10.0/24。来源地址 172.16.3.254 不改变目的路由掩码。A 为 /0，B 为 /23，C 为 /24。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 706,
@@ -3283,7 +3493,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。R2 MAC 12-a0-ab-cc-00-01 中间插入 ff:fe，并将首字节 0x12 与 0x02 异或为 0x10，得到接口 ID 10a0:abff:fecc:0001；与图中的 /64 前缀组合为 2001:db8:d8d2:1009:10a0:abff:fecc:1。B、C、D 的接口 ID 不符合该计算。原选项把完整地址与 eui-64 拼成缺少前缀长度的命令，现改为询问地址；Cisco 自动生成接口 ID 的命令形式是 ipv6 address 2001:DB8:D8D2:1009::/64 eui-64。"
+    "explanation": "A。R2 MAC 12-a0-ab-cc-00-01 中间插入 ff:fe，并将首字节 0x12 与 0x02 异或为 0x10，得到接口 ID 10a0:abff:fecc:0001；与图中的 /64 前缀组合为 2001:db8:d8d2:1009:10a0:abff:fecc:1。B、C、D 的接口 ID 不符合该计算。在 Cisco IOS 接口上自动生成 EUI-64 接口 ID 的命令形式为 `ipv6 address 2001:DB8:D8D2:1009::/64 eui-64`。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 707,
@@ -3314,7 +3526,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。图中 B* 0.0.0.0/0 指示已安装的默认路由；D EX 表示进入 EIGRP 的外部路由，但仅凭该代码不能确定原始协议是否为 BGP。10.90.8.0/24 没有更具体表项，匹配 B 10.90.0.0/16 指向 Null0，因而丢弃；/16 比默认 /0 更具体。A、C 错称没有默认路由，B 错称没有 EIGRP 外部路由。为避免把未知来源推断为一定不是 BGP，B 选项已改为可由图证伪的陈述。"
+    "explanation": "D。图中 `B* 0.0.0.0/0` 指示已安装的默认路由（Gateway of last resort）；`D EX` 表示重分发进入 EIGRP 的外部路由（仅凭该代码不能确定原始来源协议是否为 BGP）。发往 `10.90.8.0/24` 的流量没有更具体表项，依据最长前缀匹配原则命中 `B 10.90.0.0/16`（比默认 `/0` 更具体），其下一跳指向 `Null0`，因而数据包将被丢弃。A、C 错称没有默认路由，B 错称没有 EIGRP 外部路由。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 708,
@@ -3345,7 +3559,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。RFC 1918 私有地址可在多个互不相连的网络中重复使用；有公网通信需要时，NAT/PAT 可让多个私有主机共享较少的公网 IPv4 地址。A 是本机环回，B 是组播地址，D 本身使用公网地址。它们不是本题所问的私有地址复用机制。"
+    "explanation": "C。RFC 1918 私有地址可在多个互不相连的网络中重复使用；有公网通信需要时，NAT/PAT 可让多个私有主机共享较少的公网 IPv4 地址。A 是本机环回，B 是组播地址，D 本身使用公网地址。它们不是本题所问的私有地址复用机制。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv4 & Subnetting"
   },
   {
     "id": 709,
@@ -3376,7 +3592,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。静态路由目的 192.168.23.0/24、下一跳 R3 的 192.168.13.3，指定管理距离 121，大于 RIP 默认 120。在 RIP 路由撤销且下一跳可解析时该静态路由可被安装；切换取决于故障检测和路由收敛，不能保证立即发生。A 的 100 优于 RIP，不能浮动；B 的 /32 仅指单个地址；D 默认为距离 1。"
+    "explanation": "C。静态路由目的 192.168.23.0/24、下一跳 R3 的 192.168.13.3，指定管理距离 121，大于 RIP 默认 120。在 RIP 路由撤销且下一跳可解析时该静态路由可被安装；切换取决于故障检测和路由收敛，不能保证立即发生。A 的 100 优于 RIP，不能浮动；B 的 /32 仅指单个地址；D 默认为距离 1。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 710,
@@ -3407,7 +3625,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。VRRP 是开放标准的第一跳网关冗余协议，支持相同版本和配置的不同厂商设备可组成虚拟路由器；切换可有短暂中断，具体互通性需查设备。FHRP 是协议类别，HSRP 与 GLBP 是 Cisco 提出的协议，不能假定所有第三方设备支持。"
+    "explanation": "A。VRRP 是开放标准的第一跳网关冗余协议，支持相同版本和配置的不同厂商设备可组成虚拟路由器；切换可有短暂中断，具体互通性需查设备。FHRP 是协议类别，HSRP 与 GLBP 是 Cisco 提出的协议，不能假定所有第三方设备支持。",
+    "domain": "IP Connectivity",
+    "topic": "FHRP (HSRP / VRRP)"
   },
   {
     "id": 711,
@@ -3438,7 +3658,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。HSRP 是 Cisco 的第一跳冗余协议：同组设备提供虚拟网关 IP 和虚拟 MAC，活动网关失效后备份设备可接管，主机通常无需修改默认网关。故障检测和收敛需要时间，不能保证立即恢复或零丢包。对于活动路由器本身仍运行但上游链路失效的情况，需根据设计配置接口或对象跟踪、优先级变化和抢占；不能假定任何故障都自动触发切换。\n\nA 是第一跳冗余协议类别，B VRRP 是开放标准协议，D SLB 是服务器负载均衡。"
+    "explanation": "C。HSRP 是 Cisco 的第一跳冗余协议：同组设备提供虚拟网关 IP 和虚拟 MAC，活动网关失效后备份设备可接管，主机通常无需修改默认网关。故障检测和收敛需要时间，不能保证立即恢复或零丢包。对于活动路由器本身仍运行但上游链路失效的情况，需根据设计配置接口或对象跟踪、优先级变化和抢占；不能假定任何故障都自动触发切换。\n\nA 是第一跳冗余协议类别，B VRRP 是开放标准协议，D SLB 是服务器负载均衡。",
+    "domain": "IP Connectivity",
+    "topic": "FHRP (HSRP / VRRP)"
   },
   {
     "id": 712,
@@ -3469,7 +3691,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B（条目 2）。对目的地址 192.168.10.5 做掩码匹配：条目 1 的 /23 为 192.168.10.0–192.168.11.255；条目 2 的 /26 为 192.168.10.0–192.168.10.63；条目 3 的 /16 为 192.168.0.0–192.168.255.255；条目 4 的 /19 为 192.168.0.0–192.168.31.255。四条均匹配，/26 最长，因此选 2。图中 192.168.10.0 与 /16、/19 组合的主机位非零，此处按地址与掩码相与得到各自网络前缀。"
+    "explanation": "B（条目 2）。对目的地址 192.168.10.5 做掩码匹配：条目 1 的 /23 为 192.168.10.0–192.168.11.255；条目 2 的 /26 为 192.168.10.0–192.168.10.63；条目 3 的 /16 为 192.168.0.0–192.168.255.255；条目 4 的 /19 为 192.168.0.0–192.168.31.255。四条均匹配，/26 最长，因此选 2。图中 192.168.10.0 与 /16、/19 组合的主机位非零，此处按地址与掩码相与得到各自网络前缀。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 713,
@@ -3500,7 +3724,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。图中同一前缀 172.16.1.4/30 的两条已安装 EIGRP 路由均为 [90/7445]，下一跳分别为 172.16.9.5 和 172.16.4.4，因此路由器可在这两条等价路径之间分担流量。实际分配取决于平台和转发方式，按流哈希时单一流通常只走一条路径，不能保证每条链路流量完全相等。A/C 忽略了其中一条已安装路径；B 的 10.0.1.100 属于另一前缀的路由。"
+    "explanation": "D。图中同一前缀 172.16.1.4/30 的两条已安装 EIGRP 路由均为 [90/7445]，下一跳分别为 172.16.9.5 和 172.16.4.4，因此路由器可在这两条等价路径之间分担流量。实际分配取决于平台和转发方式，按流哈希时单一流通常只走一条路径，不能保证每条链路流量完全相等。A/C 忽略了其中一条已安装路径；B 的 10.0.1.100 属于另一前缀的路由。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 714,
@@ -3531,7 +3757,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。图中直连 10.10.10.0/28 的范围是 10.10.10.0–10.10.10.15，目的 10.10.10.16 不属于该前缀；图中其他前缀也不匹配，并显示 gateway of last resort is not set。因此路由器没有匹配路由，丢弃该包。路由器可按适用规则向源端发送目的不可达消息，但这会受 ICMP 抑制、策略和速率限制等影响，不保证每包都有响应。A 不是普通三层单播的未知目的处理，B 的相似地址不能代替掩码匹配，C 不会为等未来学到路由而一直排队。"
+    "explanation": "D。图中直连 10.10.10.0/28 的范围是 10.10.10.0–10.10.10.15，目的 10.10.10.16 不属于该前缀；图中其他前缀也不匹配，并显示 gateway of last resort is not set。因此路由器没有匹配路由，丢弃该包。路由器可按适用规则向源端发送目的不可达消息，但这会受 ICMP 抑制、策略和速率限制等影响，不保证每包都有响应。A 不是普通三层单播的未知目的处理，B 的相似地址不能代替掩码匹配，C 不会为等未来学到路由而一直排队。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 715,
@@ -3562,7 +3790,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。`ip route 0.0.0.0 0.0.0.0 10.200.0.2 10` 配置默认路由，管理距离 10 大于题设主默认静态路由的 1，因此主路由有效时作为备份；主路由撤销且备用下一跳仍可解析时才有资格安装。故障发现和收敛时间由接口状态、跟踪与协议等决定，不保证毫秒级。A 和 C 的静态管理距离都是 1，不高于题设主路由；D 的 `floating` 不是该位置的 IOS 距离参数。若主路由是 AD 20 的 eBGP，备份 AD 10 反而更优，必须另选更高距离。"
+    "explanation": "B。`ip route 0.0.0.0 0.0.0.0 10.200.0.2 10` 配置默认路由，管理距离 10 大于题设主默认静态路由的 1，因此主路由有效时作为备份；主路由撤销且备用下一跳仍可解析时才有资格安装。故障发现和收敛时间由接口状态、跟踪与协议等决定，不保证毫秒级。A 和 C 的静态管理距离都是 1，不高于题设主路由；D 的 `floating` 不是该位置的 IOS 距离参数。若主路由是 AD 20 的 eBGP，备份 AD 10 反而更优，必须另选更高距离。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 716,
@@ -3593,7 +3823,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中静态默认路由 `ip route 0.0.0.0 0.0.0.0 203.0.113.1 21` 的管理距离为 21；当前 eBGP 默认路由显示 `[20/0]`，优先级更高。若 eBGP 默认路由失效，且静态下一跳 203.0.113.1 仍可解析、没有其他更优默认路由，浮动静态路由才可安装。图中下一跳所在 203.0.113.0/30 直连，且 ping 成功。A 单独学到一条通往下一跳的路由不能证明 eBGP 默认路由消失；B 下一跳不可达会使静态路由无法解析；D 只改变 eBGP 下一跳不必然使该路由失效。"
+    "explanation": "C。图中静态默认路由 `ip route 0.0.0.0 0.0.0.0 203.0.113.1 21` 的管理距离为 21；当前 eBGP 默认路由显示 `[20/0]`，优先级更高。若 eBGP 默认路由失效，且静态下一跳 203.0.113.1 仍可解析、没有其他更优默认路由，浮动静态路由才可安装。图中下一跳所在 203.0.113.0/30 直连，且 ping 成功。A 单独学到一条通往下一跳的路由不能证明 eBGP 默认路由消失；B 下一跳不可达会使静态路由无法解析；D 只改变 eBGP 下一跳不必然使该路由失效。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 717,
@@ -3624,14 +3856,16 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。目的地址 192.168.20.75 不在图中的 192.168.20.0/26（.0–.63）或 /27（.0–.31）内；它匹配 192.168.20.0/25（.0–.127）、/24、192.168.0.0/19 以及默认路由。已安装匹配前缀中 /25 最长，图中其下一跳是 10.10.10.11。A 对应不匹配的 /26，C 对应不匹配的 /27，D 是较短的默认路由。管理距离和协议度量主要用于确定同一前缀的候选路由；数据包转发时在已安装路由中使用最长前缀匹配。"
+    "explanation": "B。目的地址 192.168.20.75 不在图中的 192.168.20.0/26（.0–.63）或 /27（.0–.31）内；它匹配 192.168.20.0/25（.0–.127）、/24、192.168.0.0/19 以及默认路由。已安装匹配前缀中 /25 最长，图中其下一跳是 10.10.10.11。A 对应不匹配的 /26，C 对应不匹配的 /27，D 是较短的默认路由。管理距离和协议度量主要用于确定同一前缀的候选路由；数据包转发时在已安装路由中使用最长前缀匹配。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 718,
     "qid": "Q942",
     "page_num": 171,
     "type": "Single Choice",
-    "prompt": "A router has selected and installed three valid OSPF external routes for 10.0.0.0/8, 10.0.0.0/16, and 10.0.0.0/24. Which output shows all three distinct prefixes in the routing table?",
+    "prompt": "A router receives three valid OSPF external routes for 10.0.0.0/8, 10.0.0.0/16, and 10.0.0.0/24, all with reachable next hops. Which output represents the resulting routing table?",
     "image": null,
     "answer_image": null,
     "options": [
@@ -3655,7 +3889,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。/8、/16、/24 虽共享地址开头，却是三个不同的路由前缀；题设已明确它们均已安装，因此输出包含三条记录。B 只列 /8；C 只列 /24；D 只列 /16 和 /24。转发某个目的地址时才在匹配的已安装前缀中进行最长前缀匹配，不会因为 /24 存在就必然从路由表移除 /8 或 /16。实际收到路由通告并不自动保证其入表，还需满足有效性、下一跳解析及路由选择等条件。"
+    "explanation": "A。/8、/16、/24 虽共享地址开头，却是三个不同的路由前缀；在路由有效且下一跳均可达的前提下，三条前缀会同时安装进路由表，因此输出包含三条记录。B 只列 /8；C 只列 /24；D 只列 /16 和 /24。转发某个目的地址时才在匹配的已安装前缀中进行最长前缀匹配，不会因为 /24 存在就从路由表移除 /8 或 /16。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 719,
@@ -3686,7 +3922,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。Router2 的图示路由表没有覆盖 192.168.0.10 的已安装前缀，并注明 gateway of last resort is not set，因此到达 Router2 的该目的报文无匹配路由。可通过合适的更具体路由、汇总路由或默认路由提供下一跳；仅添加默认路由不保证下一跳可达、Router1 正确转发及回程正常。路由表不能单独证明 ACL 拒绝（A）、Router1 必须添加指定静态路由（C）或主机网关配置错误（D）。"
+    "explanation": "B。Router2 的图示路由表没有覆盖 192.168.0.10 的已安装前缀，并注明 gateway of last resort is not set，因此到达 Router2 的该目的报文无匹配路由。可通过合适的更具体路由、汇总路由或默认路由提供下一跳；仅添加默认路由不保证下一跳可达、Router1 正确转发及回程正常。路由表不能单独证明 ACL 拒绝（A）、Router1 必须添加指定静态路由（C）或主机网关配置错误（D）。",
+    "domain": "IP Connectivity",
+    "topic": "Routing Fundamentals"
   },
   {
     "id": 720,
@@ -3717,7 +3955,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。SNMPv1/v2c 使用 community string 作为共享口令式标识，设备依据配置将其关联到允许访问的管理对象及读写权限。它随报文以明文携带，不能提供加密或强身份认证，应限制管理网络访问；更安全的 SNMPv3 可使用基于用户的认证及隐私保护。A 是 MIB 名称/OID 的解析，B 不是传递 AD 账户凭据，C 则属于请求标识等报文字段的作用。错误字符串是否触发认证失败通知取决于设备配置，不能保证一定发送。"
+    "explanation": "D。SNMPv1/v2c 使用 community string 作为共享口令式标识，设备依据配置将其关联到允许访问的管理对象及读写权限。它随报文以明文携带，不能提供加密或强身份认证，应限制管理网络访问；更安全的 SNMPv3 可使用基于用户的认证及隐私保护。A 是 MIB 名称/OID 的解析，B 不是传递 AD 账户凭据，C 则属于请求标识等报文字段的作用。错误字符串是否触发认证失败通知取决于设备配置，不能保证一定发送。",
+    "domain": "IP Services",
+    "topic": "Syslog & SNMP"
   },
   {
     "id": 721,
@@ -3748,7 +3988,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。Syslog 严重级别 0 为 Emergency，标准描述为系统不可用；1 Alert 表示必须立即采取行动，2 Critical 为严重状况，3 Error 为错误状况。数字越小严重性越高。事件实际影响仍需结合设备日志判断，不能由举例推断每条日志的级别。"
+    "explanation": "B。Syslog 严重级别 0 为 Emergency，标准描述为系统不可用；1 Alert 表示必须立即采取行动，2 Critical 为严重状况，3 Error 为错误状况。数字越小严重性越高。事件实际影响仍需结合设备日志判断，不能由举例推断每条日志的级别。",
+    "domain": "IP Services",
+    "topic": "Syslog & SNMP"
   },
   {
     "id": 722,
@@ -3779,7 +4021,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。在接收客户端广播的三层接口配置 `ip helper-address 192.168.10.1`，中继可将 DHCP 请求转发给指定服务器，并使用 giaddr 识别客户端子网；服务器返回中继后再交付客户端。还需要双向路由、服务器地址池和必要的 ACL 放行。A 是不完整的静态路由命令，不能代替中继；B 非此用途；C 不处理中继。"
+    "explanation": "D。在接收客户端广播的三层接口配置 `ip helper-address 192.168.10.1`，中继可将 DHCP 请求转发给指定服务器，并使用 giaddr 识别客户端子网；服务器返回中继后再交付客户端。还需要双向路由、服务器地址池和必要的 ACL 放行。A 是不完整的静态路由命令，不能代替中继；B 非此用途；C 不处理中继。",
+    "domain": "IP Services",
+    "topic": "DHCP & Relay"
   },
   {
     "id": 723,
@@ -3810,7 +4054,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。单地址池使用 209.165.202.129，ACL 10 以通配符 0.0.0.255 匹配 192.168.1.0/24，`overload` 启用 PAT。池的 /27 掩码与题设外网一致；还依赖已配置的 inside/outside、路由及外部回程。A/C 的地址池与要求不符，B 使用错误的 ACL 通配符。原图两条路由接口重复标为同一子网，故以题干明确的单一内网假设解题。"
+    "explanation": "D。单地址池使用 209.165.202.129，ACL 10 以通配符 0.0.0.255 匹配 192.168.1.0/24，`overload` 启用 PAT。池的 /27 掩码与题设外网一致；还依赖已配置的 inside/outside、路由及外部回程。A/C 的地址池与要求不符，B 使用错误的 ACL 通配符。原图两条路由接口重复标为同一子网，故以题干明确的单一内网假设解题。",
+    "domain": "IP Services",
+    "topic": "NAT & PAT"
   },
   {
     "id": 724,
@@ -3841,7 +4087,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。RFC 791 将该八位组称为 Type of Service；现代 DiffServ 将其重新定义为 DS 字段，高 6 位为 DSCP，低 2 位为 ECN。D 是其中的六位 DSCP 字段，同样是有效的现代字段名称，故题干特意询问旧名称和完整八位组；修改 IPv4 头部时还要更新校验和。不能笼统说 QoS 标记总会修改全部 8 位或 ECN。"
+    "explanation": "C。RFC 791 将该八位组称为 Type of Service；现代 DiffServ 将其重新定义为 DS 字段，高 6 位为 DSCP，低 2 位为 ECN。D 是其中的六位 DSCP 字段，同样是有效的现代字段名称，故题干特意询问旧名称和完整八位组；修改 IPv4 头部时还要更新校验和。不能笼统说 QoS 标记总会修改全部 8 位或 ECN。",
+    "domain": "IP Services",
+    "topic": "QoS"
   },
   {
     "id": 725,
@@ -3872,7 +4120,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。Assured Forwarding（AF）定义 4 个独立转发类别，每类有 3 个 drop precedence 等级，记为 AFxy；相同类内较高丢弃优先级在拥塞时更易被丢弃。实际调度、缓冲和丢包依配置及负载，AF 标记本身不保证固定带宽或无丢包。EF 是另一 PHB，默认行为是 best effort，class selector 用于与 IP precedence 兼容。"
+    "explanation": "C。Assured Forwarding（AF）定义 4 个独立转发类别，每类有 3 个 drop precedence 等级，记为 AFxy；相同类内较高丢弃优先级在拥塞时更易被丢弃。实际调度、缓冲和丢包依配置及负载，AF 标记本身不保证固定带宽或无丢包。EF 是另一 PHB，默认行为是 best effort，class selector 用于与 IP precedence 兼容。",
+    "domain": "IP Services",
+    "topic": "QoS"
   },
   {
     "id": 726,
@@ -3897,13 +4147,15 @@
       },
       {
         "label": "D",
-        "text": "ip detault-network 192.168.52.253"
+        "text": "ip default-network 192.168.52.253"
       }
     ],
     "answer": [
       "A"
     ],
-    "explanation": "A。在连接 192.168.52.0/24 的三层网关接口配置 `ip helper-address 172.16.32.15`；该服务器的地址池和双向连通性必须可用。/24 的可用地址为 .1 至 .254，因此倒数第二个为 .253。B 设置设备默认网关而不是 DHCP 中继；C 指定其他 UDP 协议，不提供此服务器地址；D 拼写错误且不配置中继。"
+    "explanation": "A。在连接 192.168.52.0/24 的三层网关接口配置 `ip helper-address 172.16.32.15`；该服务器的地址池和双向连通性必须可用。/24 的可用地址为 .1 至 .254，因此倒数第二个为 .253。B 设置设备默认网关而不是 DHCP 中继；C 指定其他 UDP 协议，不提供此服务器地址；D 用于设置默认网络路由，不配置 DHCP 中继。",
+    "domain": "IP Services",
+    "topic": "DHCP & Relay"
   },
   {
     "id": 727,
@@ -3934,7 +4186,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。分类根据 IP 地址、端口、协议、已有标记等特征识别属于某个类别的流量，以便应用对应策略。A 是定义匹配规则的配置手段；B 是分类后的队列或其他处理；D 是把标识写入报头的标记动作。分类和标记可结合使用，但分类本身不必修改报头。"
+    "explanation": "C。分类根据 IP 地址、端口、协议、已有标记等特征识别属于某个类别的流量，以便应用对应策略。A 是定义匹配规则的配置手段；B 是分类后的队列或其他处理；D 是把标识写入报头的标记动作。分类和标记可结合使用，但分类本身不必修改报头。",
+    "domain": "IP Services",
+    "topic": "QoS"
   },
   {
     "id": 728,
@@ -3965,7 +4219,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。在接收客户端广播的 Fa0/1 设置 helper，并在 Fa0/0 入站 ACL 的 deny-all 之前允许来自 DHCP 服务器 UDP 源端口 bootps（67）的回复。A 是 TCP；B 的源端口 68 不符；C 将 helper 放到 WAN 接口。原题 B 的数字 67 与 D 的 bootps 等价，造成两个正确答案；本题将 B 改为 68。ACL 自上而下匹配，直接把 permit 追加在已存在的 deny-all 后面无效，因此题设明确重建顺序。仍须保证路由与 DHCP 地址池配置正确。"
+    "explanation": "D。在接收客户端广播的 Fa0/1 设置 helper，并在 Fa0/0 入站 ACL 的 deny-all 之前允许来自 DHCP 服务器 UDP 源端口 bootps（67）的回复。A 是 TCP；B 的源端口 68 不符；C 将 helper 放到 WAN 接口。ACL 自上而下匹配，直接把 permit 追加在已存在的 deny-all 后面无效，因此题设明确重建顺序。仍须保证路由与 DHCP 地址池配置正确。",
+    "domain": "IP Services",
+    "topic": "DHCP & Relay"
   },
   {
     "id": 729,
@@ -3996,7 +4252,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。设置发送远程服务器的严重性阈值后，设备发送该等级及更严重（数值更小）的消息。例如阈值 warning（4）包括 0–4，不包括 5–7。阈值筛选消息，并不重新定义单条事件的严重性；可能影响消息数量但不能设定固定条数，来源识别和速率限制也属于不同配置。"
+    "explanation": "A。设置发送远程服务器的严重性阈值后，设备发送该等级及更严重（数值更小）的消息。例如阈值 warning（4）包括 0–4，不包括 5–7。阈值筛选消息，并不重新定义单条事件的严重性；可能影响消息数量但不能设定固定条数，来源识别和速率限制也属于不同配置。",
+    "domain": "IP Services",
+    "topic": "Syslog & SNMP"
   },
   {
     "id": 730,
@@ -4027,7 +4285,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中 DHCP 服务器是 192.168.20.2，客户端位于 VLAN 10，SW1 的 VLAN 10 三层接口为 192.168.10.1；因此在该 SVI 配置 `ip helper-address 192.168.20.2`。服务器需有正确地址池、可达的回程和适当的访问控制。图中 Net10 的 default-router 为 192.168.10.2，与所示 SW1 SVI .1 不一致：如 SW1 是唯一网关应修正地址池为 .1，否则客户端拿到地址也不一定能跨网段通信。A/D 指向 VLAN 10 地址，B 指向 VLAN 20 的交换机接口，均非题设服务器。"
+    "explanation": "C。图中 DHCP 服务器是 192.168.20.2，客户端位于 VLAN 10，SW1 的 VLAN 10 三层接口为 192.168.10.1；因此在该 SVI 配置 `ip helper-address 192.168.20.2`。服务器需有正确地址池、可达的回程和适当的访问控制。图中 Net10 的 default-router 为 192.168.10.2，与所示 SW1 SVI .1 不一致：如 SW1 是唯一网关应修正地址池为 .1，否则客户端拿到地址也不一定能跨网段通信。A/D 指向 VLAN 10 地址，B 指向 VLAN 20 的交换机接口，均非题设服务器。",
+    "domain": "IP Services",
+    "topic": "DHCP & Relay"
   },
   {
     "id": 731,
@@ -4058,7 +4318,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。按所给前提配置主机名、域名、RSA 密钥及 SSHv2，并在 VTY 下仅允许 SSH。题目假定本地用户及 login local 已配置；这些认证配置对实际登录仍必需。B 缺少域名及非默认主机名，C 缺少域名和 SSHv2 指定，D 没有限制仅 SSH。1024 位沿用考试选项，实际部署应使用平台支持的更强密钥，例如 2048 位或更高。原题引用的展图缺失，因此改为完整文字前提。"
+    "explanation": "A。按所给前提配置主机名、域名、RSA 密钥及 SSHv2，并在 VTY 下仅允许 SSH。题目假定本地用户及 login local 已配置；这些认证配置对实际登录仍必需。B 缺少域名及非默认主机名，C 缺少域名和 SSHv2 指定，D 没有限制仅 SSH。1024 位沿用考试选项，实际部署应使用平台支持的更强密钥，例如 2048 位或更高。",
+    "domain": "Security Fundamentals",
+    "topic": "Device Hardening & SSH"
   },
   {
     "id": 732,
@@ -4089,7 +4351,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。流量整形通过限制长期平均发送速率并缓存突发流量，使输出更符合速率契约；队列满时仍可能丢包，也不是保证恒定速率。监管通常对超额流量执行丢弃或重标记。A 是策略路由，B 是识别流，C 的尽力而为不是整形的特定目的。"
+    "explanation": "D。流量整形通过限制长期平均发送速率并缓存突发流量，使输出更符合速率契约；队列满时仍可能丢包，也不是保证恒定速率。监管通常对超额流量执行丢弃或重标记。A 是策略路由，B 是识别流，C 的尽力而为不是整形的特定目的。",
+    "domain": "IP Services",
+    "topic": "QoS"
   },
   {
     "id": 733,
@@ -4120,7 +4384,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。logging trap 4 包括 0–4，覆盖 error 3 和 warning 4 以及更严重的消息。logging trap 5 也包含 warning 和 error，但额外包含 notification 5，故不满足排除较低严重性消息的要求；2 和 3 均漏掉 warning。假设已配置可达的日志服务器及相应日志设施。"
+    "explanation": "D。logging trap 4 包括 0–4，覆盖 error 3 和 warning 4 以及更严重的消息。logging trap 5 也包含 warning 和 error，但额外包含 notification 5，故不满足排除较低严重性消息的要求；2 和 3 均漏掉 warning。假设已配置可达的日志服务器及相应日志设施。",
+    "domain": "IP Services",
+    "topic": "Syslog & SNMP"
   },
   {
     "id": 734,
@@ -4151,7 +4417,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。Telnet 通常以明文传输，也缺少保护会话的密码学完整性和对端认证，因此容易被路径上的攻击者窃听或篡改。SSH 和 HTTPS 配合正确验证主机密钥或证书提供加密和对端认证；忽略验证仍可能遭受中间人攻击。console 是本地物理管理接口，其安全取决于物理访问及部署方式。"
+    "explanation": "B。Telnet 通常以明文传输，也缺少保护会话的密码学完整性和对端认证，因此容易被路径上的攻击者窃听或篡改。SSH 和 HTTPS 配合正确验证主机密钥或证书提供加密和对端认证；忽略验证仍可能遭受中间人攻击。console 是本地物理管理接口，其安全取决于物理访问及部署方式。",
+    "domain": "Security Fundamentals",
+    "topic": "Device Hardening & SSH"
   },
   {
     "id": 735,
@@ -4182,7 +4450,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。privilege 15 为本地用户指定特权级，login local 使 VTY 使用本地用户数据库；连接后进入特权 EXEC（R1#），仍需 configure terminal 才进入全局配置模式。A、D 配置线路密码而非本地用户认证；C 默认用户级别不足以直接进入特权 EXEC。展图含管理接口及 VTY login，但不保证 Telnet 可用或网络可达，因此题干明确这些前提。Telnet 明文传输，实际管理应优先使用 SSH。"
+    "explanation": "B。privilege 15 为本地用户指定特权级，login local 使 VTY 使用本地用户数据库；连接后进入特权 EXEC（R1#），仍需 configure terminal 才进入全局配置模式。A、D 配置线路密码而非本地用户认证；C 默认用户级别不足以直接进入特权 EXEC。展图含管理接口及 VTY login，但不保证 Telnet 可用或网络可达，因此题干明确这些前提。Telnet 明文传输，实际管理应优先使用 SSH。",
+    "domain": "Security Fundamentals",
+    "topic": "Device Hardening & SSH"
   },
   {
     "id": 736,
@@ -4213,7 +4483,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。传统 WPA 使用 TKIP 保护数据；TKIP 是基于 RC4 的数据保护方案，并不等同于单独的加密算法。PEAP 是 EAP 认证方法，EAP 是认证框架；AES 通常与 WPA2 的 CCMP 等方案相关。TKIP 已过时，现代部署应采用支持的 WPA2-AES 或 WPA3。"
+    "explanation": "B。传统 WPA 使用 TKIP 保护数据；TKIP 是基于 RC4 的数据保护方案，并不等同于单独的加密算法。PEAP 是 EAP 认证方法，EAP 是认证框架；AES 通常与 WPA2 的 CCMP 等方案相关。TKIP 已过时，现代部署应采用支持的 WPA2-AES 或 WPA3。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 737,
@@ -4244,7 +4516,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中最后一行使用 ip access-list 10 in；接口方向绑定命令应为 ip access-group 10 in 或 out，因此所示命令不会完成预期的接口绑定。已定义的 ACL 10 匹配的是 10.0.0.0/24，而非题目前版本所述 10.10.0.0/24；若要允许内网到 WAN 应同时修正网段并按接口流向选择方向。未绑定此 ACL 不代表其他安全功能或其他接口 ACL 必然不存在。"
+    "explanation": "C。图中最后一行使用 `ip access-list 10 in`；接口方向绑定 ACL 的正确命令应为 `ip access-group 10 in` 或 `out`，因此所示命令无法完成预期的接口绑定。此外，已定义的 ACL 10 匹配的是 `10.0.0.0/24`，若要允许特定内网访问 WAN，应核实网段并按接口流向选择正确方向。未绑定此 ACL 不代表其他安全功能或其他接口 ACL 必然不存在。",
+    "domain": "Security Fundamentals",
+    "topic": "ACLs"
   },
   {
     "id": 738,
@@ -4275,7 +4549,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。源 /20 的通配符为 0.0.15.255，目标 /27 为 0.0.0.31，10/8 为 0.255.255.255。序号 10 先拒绝指定目标的 TCP 80，序号 20 再允许源网到 10/8，其余流量由序号 30 拒绝并记录。A/C 使用子网掩码且匹配 TCP 443，A 还先放行；D 先拒绝到任意地址的 HTTP，范围过宽。ACL 还需在正确接口和方向绑定，允许回程和其他需求需另行设计。"
+    "explanation": "B。源 /20 的通配符为 0.0.15.255，目标 /27 为 0.0.0.31，10/8 为 0.255.255.255。序号 10 先拒绝指定目标的 TCP 80，序号 20 再允许源网到 10/8，其余流量由序号 30 拒绝并记录。A/C 使用子网掩码且匹配 TCP 443，A 还先放行；D 先拒绝到任意地址的 HTTP，范围过宽。ACL 还需在正确接口和方向绑定，允许回程和其他需求需另行设计。",
+    "domain": "Security Fundamentals",
+    "topic": "ACLs"
   },
   {
     "id": 739,
@@ -4306,7 +4582,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。后门提供绕过正常访问控制的途径，使未授权者得以访问系统；具体实现可能是代码、账户或配置，不必然监听端口、提权或具备持久化能力。B 侧重启动其他恶意程序，C 侧重发送垃圾邮件，D 是下载其他恶意代码。"
+    "explanation": "A。后门提供绕过正常访问控制的途径，使未授权者得以访问系统；具体实现可能是代码、账户或配置，不必然监听端口、提权或具备持久化能力。B 侧重启动其他恶意程序，C 侧重发送垃圾邮件，D 是下载其他恶意代码。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 740,
@@ -4337,7 +4615,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。WPA3-Personal 的 SAE 用于基于密码的认证，比传统 WPA2-PSK 对被动捕获后的离线密码猜测更有抵抗力；仍应使用强口令并保持设备更新，不能声称完全杜绝所有暴力攻击或实现漏洞。过渡模式可允许 WPA2 客户端共存，但不意味着兼容旧 WPA；C 的复杂配置并非必要特征，WPA3 模式要求保护管理帧而非可选。"
+    "explanation": "B。WPA3-Personal 的 SAE 用于基于密码的认证，比传统 WPA2-PSK 对被动捕获后的离线密码猜测更有抵抗力；仍应使用强口令并保持设备更新，不能声称完全杜绝所有暴力攻击或实现漏洞。过渡模式可允许 WPA2 客户端共存，但不意味着兼容旧 WPA；C 的复杂配置并非必要特征，WPA3 模式要求保护管理帧而非可选。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 741,
@@ -4368,7 +4648,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。`service password-encryption` 对支持该功能的明文口令应用可逆的 Type 7 混淆，降低配置被随手查看时的明文暴露风险；它不是强密码存储，也不保证处理所有应用的凭据。`enable secret` 等 secret 使用独立的哈希方案，具体类型依平台和配置而定。B、D 不是此全局命令；C 设置特权口令而非全局转换支持的明文口令。"
+    "explanation": "A。`service password-encryption` 对支持该功能的明文口令应用可逆的 Type 7 混淆，降低配置被随手查看时的明文暴露风险；它不是强密码存储，也不保证处理所有应用的凭据。`enable secret` 等 secret 使用独立的哈希方案，具体类型依平台和配置而定。B、D 不是此全局命令；C 设置特权口令而非全局转换支持的明文口令。",
+    "domain": "Security Fundamentals",
+    "topic": "Device Hardening & SSH"
   },
   {
     "id": 742,
@@ -4399,7 +4681,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中 VTY 已配置 `login local` 和 `transport input ssh`；`username CCUser secret NA!2$cc` 创建本地用户并以该平台支持的 secret 类型保存验证值。题目明确要求 secret 哈希：A 的 password 在现有 service password-encryption 下也会以可逆 Type 7 保存，因此若只要求“加密”则 A 也可能满足；这里限定以消除歧义。B、D 输入的口令字符不同，还额外修改 enable 口令。SSH 实际可用还要求密钥等配置和网络连通；图中未完整证明。"
+    "explanation": "C。图中 VTY 已配置 `login local` 和 `transport input ssh`；`username CCUser secret NA!2$cc` 创建本地用户并以该平台支持的 secret 类型保存验证值。题目明确要求 secret 哈希：A 的 password 在现有 service password-encryption 下也会以可逆 Type 7 保存，因此若只要求“加密”则 A 也可能满足；这里限定以消除歧义。B、D 输入的口令字符不同，还额外修改 enable 口令。SSH 实际可用还要求密钥等配置和网络连通；图中未完整证明。",
+    "domain": "Security Fundamentals",
+    "topic": "Device Hardening & SSH"
   },
   {
     "id": 743,
@@ -4430,7 +4714,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。多人随一人刷卡进入受控建筑，绕过个人身份核验和门禁记录，属于物理访问控制中的尾随或搭便车问题。A 是检测入侵的类别；B 是网络资源授权；D 的安全意识培训可能帮助预防，但直接被绕过的是物理门禁控制。实际组织的政策可能另有规定。"
+    "explanation": "C。多人随一人刷卡进入受控建筑，绕过个人身份核验和门禁记录，属于物理访问控制中的尾随或搭便车问题。A 是检测入侵的类别；B 是网络资源授权；D 的安全意识培训可能帮助预防，但直接被绕过的是物理门禁控制。实际组织的政策可能另有规定。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 744,
@@ -4461,7 +4747,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中 R4 是远端管理目标；本地账号配置 `privilege 15` 才使其登录后直接获得相应权限，`enable secret level 15 0 Test123` 以明文输入并由设备存储为 secret，`login local` 使用本地账户，`transport input telnet` 只允许 Telnet。B 允许其他传输且使用 enable password；C 的级别、认证和传输不符；D 的 secret 是 level 1 且未使用本地登录。题目特意要求 Telnet，但 Telnet 不加密网络传输；实际部署应优先使用 SSH。"
+    "explanation": "A。图中 R4 是远端管理目标；本地账号配置 `privilege 15` 才使其登录后直接获得相应权限，`enable secret level 15 0 Test123` 以明文输入并由设备存储为 secret，`login local` 使用本地账户，`transport input telnet` 只允许 Telnet。B 允许其他传输且使用 enable password；C 的级别、认证和传输不符；D 的 secret 是 level 1 且未使用本地登录。题目特意要求 Telnet，但 Telnet 不加密网络传输；实际部署应优先使用 SSH。",
+    "domain": "Security Fundamentals",
+    "topic": "Device Hardening & SSH"
   },
   {
     "id": 745,
@@ -4492,7 +4780,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。RSA 是公钥密码算法，使用数学关联的公钥和私钥；可配合安全填充方案实现加密或数字签名。A 与 D 描述共享对称密钥，而 RSA 的公私钥不同；C 将它误称为对称算法。验证公钥的真实性和正确实现填充同样重要；签名并非简单地将消息用私钥加密。"
+    "explanation": "B。RSA 是公钥密码算法，使用数学关联的公钥和私钥；可配合安全填充方案实现加密或数字签名。A 与 D 描述共享对称密钥，而 RSA 的公私钥不同；C 将它误称为对称算法。验证公钥的真实性和正确实现填充同样重要；签名并非简单地将消息用私钥加密。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 746,
@@ -4523,7 +4813,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。WPA3 连接要求协商受保护管理帧（PMF），可帮助抵御伪造的解除认证和解除关联管理帧。PMF 保护指定的健壮管理帧，不能保证无线环境免于所有拒绝服务或干扰；WPA2 也可支持 PMF。A 的 802.1X 和 AES 已见于 WPA2 企业网络；B 并非这里的 WPA3 增强；C 的 TKIP 属于旧 WPA 机制。"
+    "explanation": "D。WPA3 连接要求协商受保护管理帧（PMF），可帮助抵御伪造的解除认证和解除关联管理帧。PMF 保护指定的健壮管理帧，不能保证无线环境免于所有拒绝服务或干扰；WPA2 也可支持 PMF。A 的 802.1X 和 AES 已见于 WPA2 企业网络；B 并非这里的 WPA3 增强；C 的 TKIP 属于旧 WPA 机制。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 747,
@@ -4554,7 +4846,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。较长、独特且未泄露的密码通常更难被猜中，配合密码管理器及可用的多因素认证更有帮助。A 长度不足，C 将共享个人凭据当作监督，D 将口令放入普通联系人记录，都不合适。并非必须包含特定特殊字符或使用允许的最大长度；NIST SP 800-63B-4 对其适用范围内的验证系统不允许强制字符类别组合规则，并要求阻止常见或已泄露密码。"
+    "explanation": "B。较长、独特且未泄露的密码通常更难被猜中，配合密码管理器及可用的多因素认证更有帮助。A 长度不足，C 将共享个人凭据当作监督，D 将口令放入普通联系人记录，都不合适。并非必须包含特定特殊字符或使用允许的最大长度；NIST SP 800-63B-4 对其适用范围内的验证系统不允许强制字符类别组合规则，并要求阻止常见或已泄露密码。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 748,
@@ -4585,7 +4879,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。`username engineer2 algorithm-type scrypt secret test2021` 使用 scrypt，即 Type 9，属于选项中较强的密码哈希方案；需要设备和软件版本支持。A 的 Type 7 可逆；B 的 Type 4 已弃用；D 使用较弱的 Type 5 且其命令形式有问题。哈希算法强并不能使 `test2021` 这个可预测示例口令本身变强，实际应使用独特且足够长的密码；不同平台也可能提供其他安全类型。"
+    "explanation": "C。`username engineer2 algorithm-type scrypt secret test2021` 使用 scrypt，即 Type 9，属于选项中较强的密码哈希方案；需要设备和软件版本支持。A 的 Type 7 可逆；B 的 Type 4 已弃用；D 使用较弱的 Type 5 且其命令形式有问题。哈希算法强并不能使 `test2021` 这个可预测示例口令本身变强，实际应使用独特且足够长的密码；不同平台也可能提供其他安全类型。",
+    "domain": "Security Fundamentals",
+    "topic": "Device Hardening & SSH"
   },
   {
     "id": 749,
@@ -4616,7 +4912,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。RSA 是使用关联公钥与私钥的公钥密码系统，可用于合适方案中的加密和签名。A 与 D 的共享同一秘密密钥属于对称密码的典型特征；C 的 private-key cryptosystem 指对称体系，并非 RSA 的分类。公钥仍需可靠地绑定到其持有者，RSA 本身不能自动解决密钥真实性问题。"
+    "explanation": "B。RSA 是使用关联公钥与私钥的公钥密码系统，可用于合适方案中的加密和签名。A 与 D 的共享同一秘密密钥属于对称密码的典型特征；C 的 private-key cryptosystem 指对称体系，并非 RSA 的分类。公钥仍需可靠地绑定到其持有者，RSA 本身不能自动解决密钥真实性问题。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 750,
@@ -4647,7 +4945,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。防病毒软件通常在端点运行，可检测或阻止部分恶意软件，因此是所列直接保护单台终端的方案。无线控制器主要管理 WLAN，路由器主要转发和控制网络流量，Cisco DNA Center 主要负责网络管理与自动化。防病毒不能保证拦截所有攻击或零日漏洞，仍需补丁、备份与其他纵深防护。"
+    "explanation": "A。防病毒软件通常在端点运行，可检测或阻止部分恶意软件，因此是所列直接保护单台终端的方案。无线控制器主要管理 WLAN，路由器主要转发和控制网络流量，Cisco DNA Center 主要负责网络管理与自动化。防病毒不能保证拦截所有攻击或零日漏洞，仍需补丁、备份与其他纵深防护。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 751,
@@ -4678,7 +4978,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。正确验证通信对端身份（例如验证 TLS 服务器证书及主机名）可降低攻击者冒充对端实施中间人攻击的风险；还需要保护会话完整性、保管密钥并处理证书错误。认证并非保证所有中间人攻击不可能发生，预共享密钥认证也不要求 CA 证书。B 抗重放限制重复使用旧报文；C 授权决定允许的操作；D 记账/审计记录活动，都不能替代对端认证。"
+    "explanation": "A。正确验证通信对端身份（例如验证 TLS 服务器证书及主机名）可降低攻击者冒充对端实施中间人攻击的风险；还需要保护会话完整性、保管密钥并处理证书错误。认证并非保证所有中间人攻击不可能发生，预共享密钥认证也不要求 CA 证书。B 抗重放限制重复使用旧报文；C 授权决定允许的操作；D 记账/审计记录活动，都不能替代对端认证。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 752,
@@ -4709,7 +5011,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。WPA2 常用的 CCMP-128 使用 AES-128；CCMP 是保护协议，AES 是其底层分组密码。AES 并非 WPA2 独有，其他安全标准也可使用 AES；旧设备的 WPA2 迁移配置也可能提供 TKIP，不能说所有 WPA2 会话都使用 CCMP。A RC4 用于 WEP 和 TKIP；C SHA 与 D MD5 是散列算法，不是本题要求的数据加密密码。"
+    "explanation": "B。WPA2 常用的 CCMP-128 使用 AES-128；CCMP 是保护协议，AES 是其底层分组密码。AES 并非 WPA2 独有，其他安全标准也可使用 AES；旧设备的 WPA2 迁移配置也可能提供 TKIP，不能说所有 WPA2 会话都使用 CCMP。A RC4 用于 WEP 和 TKIP；C SHA 与 D MD5 是散列算法，不是本题要求的数据加密密码。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 753,
@@ -4740,7 +5044,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。原图中序号 30 允许 UDP DNS，序号 40 明确拒绝其他 IP 流量；在已有 ACL 下插入序号 35 的 TCP 53 许可，位于拒绝项之前且保留既有 HTTP/HTTPS 规则。C 不指定序号会追加到 40 之后，无法命中；A、D 删除并重建 ACL，遗漏既有规则且不是高效的就地编辑。TCP DNS 不仅用于区域传送，也用于其他需要 TCP 的 DNS 查询；配置生效仍取决于 ACL 应用方向及路由等条件。"
+    "explanation": "B。原图中序号 30 允许 UDP DNS，序号 40 明确拒绝其他 IP 流量；在已有 ACL 下插入序号 35 的 TCP 53 许可，位于拒绝项之前且保留既有 HTTP/HTTPS 规则。C 不指定序号会追加到 40 之后，无法命中；A、D 删除并重建 ACL，遗漏既有规则且不是高效的就地编辑。TCP DNS 不仅用于区域传送，也用于其他需要 TCP 的 DNS 查询；配置生效仍取决于 ACL 应用方向及路由等条件。",
+    "domain": "Security Fundamentals",
+    "topic": "ACLs"
   },
   {
     "id": 754,
@@ -4771,7 +5077,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。WPA-Personal 与 WPA2-Personal 可使用预共享密钥，不需要每位用户单独通过 802.1X 服务器认证。WPA3-Personal 使用 SAE，不能把它简单等同于 WPA2-PSK 四次握手。A Local 与 D Client 不是此处的 WPA 安全模式；C Enterprise 通常使用 802.1X/EAP 与 AAA 服务器。"
+    "explanation": "B。WPA-Personal 与 WPA2-Personal 可使用预共享密钥，不需要每位用户单独通过 802.1X 服务器认证。WPA3-Personal 使用 SAE，不能把它简单等同于 WPA2-PSK 四次握手。A Local 与 D Client 不是此处的 WPA 安全模式；C Enterprise 通常使用 802.1X/EAP 与 AAA 服务器。",
+    "domain": "Security Fundamentals",
+    "topic": "Wireless Security"
   },
   {
     "id": 755,
@@ -4802,7 +5110,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。/28 源地址对应反掩码 0.0.0.15；扩展 ACL 110 在入接口匹配到本机 10.122.49.1 的 TCP 22。SSH 登录还依赖路由、返回路径、VTY 认证和其他策略，题设已满足。B 的接口调用缺少 ip 且反掩码不匹配目标源网段；C 与 D 把传输层和目的条件写进标准 ACL，且其掩码或协议也不符合要求。显式 permit 之外的流量会受 ACL 隐式拒绝影响，应评估完整策略。"
+    "explanation": "A。/28 源地址对应反掩码 0.0.0.15；扩展 ACL 110 在入接口匹配到本机 10.122.49.1 的 TCP 22。SSH 登录还依赖路由、返回路径、VTY 认证和其他策略，题设已满足。B 的接口调用缺少 ip 且反掩码不匹配目标源网段；C 与 D 把传输层和目的条件写进标准 ACL，且其掩码或协议也不符合要求。显式 permit 之外的流量会受 ACL 隐式拒绝影响，应评估完整策略。",
+    "domain": "Security Fundamentals",
+    "topic": "ACLs"
   },
   {
     "id": 756,
@@ -4833,7 +5143,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。通过工牌限制人员进入数据中心，控制的是对物理空间的进入，因此属于物理访问控制。A 安全意识和 B 培训帮助人员识别并遵守安全要求；D 漏洞验证用于发现或确认弱点；这些都不是题设门禁的主要类别。门禁设计仍需考虑凭证遗失与尾随等情况。"
+    "explanation": "C。通过工牌限制人员进入数据中心，控制的是对物理空间的进入，因此属于物理访问控制。A 安全意识和 B 培训帮助人员识别并遵守安全要求；D 漏洞验证用于发现或确认弱点；这些都不是题设门禁的主要类别。门禁设计仍需考虑凭证遗失与尾随等情况。",
+    "domain": "Security Fundamentals",
+    "topic": "Threats & Crypto"
   },
   {
     "id": 757,
@@ -4864,7 +5176,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。Cisco DNA Center（现称 Cisco Catalyst Center）可集中收集设备信息并通过 API 向应用提供数据，减少逐台登录和人工汇总的工作。传统网络也可以使用 API、脚本和集中管理工具，因此不能说所有传统管理都必须手工收集。A、B、D 的 HTTPS、SNMPv3 与 SSH 均不是该平台独有的协议。"
+    "explanation": "C。Cisco DNA Center（现称 Cisco Catalyst Center）可集中收集设备信息并通过 API 向应用提供数据，减少逐台登录和人工汇总的工作。传统网络也可以使用 API、脚本和集中管理工具，因此不能说所有传统管理都必须手工收集。A、B、D 的 HTTPS、SNMPv3 与 SSH 均不是该平台独有的协议。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 758,
@@ -4895,7 +5209,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。在常见的 Chef Infra Client/Server 模型中，节点上的 Chef Infra Client 主动联系服务器，取得节点的 run-list、所需 cookbook 等策略内容并在节点本地执行资源收敛。服务器响应客户端请求并不意味着它主动向节点推送配置。A、C、D 描述服务器主动推送或通知，不能准确说明此常见拉取模型；具体运行也可由调度器或其他机制触发，Chef 并非所有使用方式都要求常驻客户端。"
+    "explanation": "B。在常见的 Chef Infra Client/Server 模型中，节点上的 Chef Infra Client 主动联系服务器，取得节点的 run-list、所需 cookbook 等策略内容并在节点本地执行资源收敛。服务器响应客户端请求并不意味着它主动向节点推送配置。A、C、D 描述服务器主动推送或通知，不能准确说明此常见拉取模型；具体运行也可由调度器或其他机制触发，Chef 并非所有使用方式都要求常驻客户端。",
+    "domain": "Automation and Programmability",
+    "topic": "Ansible, Puppet & Chef"
   },
   {
     "id": 759,
@@ -4926,7 +5242,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。HTTP PUT 请求以所提交的表示创建或替换目标资源的状态；服务器是否接受以及实际处理取决于资源约束。PUT 的预期效果具有幂等性：相同请求重复执行与一次执行的预期效果相同，但日志、版本记录等附带效果仍可能每次发生。B 非幂等不符合 PUT 语义；C 只读不符合写操作；D 展示网页不是 PUT 的定义。"
+    "explanation": "A。HTTP PUT 请求以所提交的表示创建或替换目标资源的状态；服务器是否接受以及实际处理取决于资源约束。PUT 的预期效果具有幂等性：相同请求重复执行与一次执行的预期效果相同，但日志、版本记录等附带效果仍可能每次发生。B 非幂等不符合 PUT 语义；C 只读不符合写操作；D 展示网页不是 PUT 的定义。",
+    "domain": "Automation and Programmability",
+    "topic": "REST APIs & HTTP"
   },
   {
     "id": 760,
@@ -4957,7 +5275,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。Assurance 可汇聚并关联网络遥测及其他数据，呈现健康状况和问题线索，减少人工关联工作的负担。数据可用性、设备支持和配置会影响分析；系统不能保证发现所有故障，也不意味着不再需要工程师判断。A 传统系统也可使用数据模型及 API；B 管理和遥测仍会消耗设备资源；C 对自动识别及修复的保证过于绝对。"
+    "explanation": "D。Assurance 可汇聚并关联网络遥测及其他数据，呈现健康状况和问题线索，减少人工关联工作的负担。数据可用性、设备支持和配置会影响分析；系统不能保证发现所有故障，也不意味着不再需要工程师判断。A 传统系统也可使用数据模型及 API；B 管理和遥测仍会消耗设备资源；C 对自动识别及修复的保证过于绝对。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 761,
@@ -4988,7 +5308,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。原图中 `\"warning\"` 是 `myCar.wheels` 数组的第四个元素，其直接容器为方括号内的数组；它本身的数据类型是字符串。数组又作为值嵌套在 `myCar` 对象中，因此对象是更外层的容器；布尔值只包含 `true` 或 `false`。题目问直接容器，故不是字符串类型或外层对象。"
+    "explanation": "A。原图中 `\"warning\"` 是 `myCar.wheels` 数组的第四个元素，其直接容器为方括号内的数组；它本身的数据类型是字符串。数组又作为值嵌套在 `myCar` 对象中，因此对象是更外层的容器；布尔值只包含 `true` 或 `false`。题目问直接容器，故不是字符串类型或外层对象。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 762,
@@ -5019,7 +5341,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。控制器通过南向接口与物理或虚拟网络设备通信，按所选协议管理配置、策略或采集状态；例如可使用 NETCONF 或 OpenFlow，具体功能依实现而定。A、B 中应用与开发者使用的是面向应用的北向接口；C 的编排系统通常通过北向接口集成。控制器架构并不意味着所有设备的控制平面都被完全移除，也不保证所有策略都直接写入硬件。"
+    "explanation": "D。控制器通过南向接口与物理或虚拟网络设备通信，按所选协议管理配置、策略或采集状态；例如可使用 NETCONF 或 OpenFlow，具体功能依实现而定。A、B 中应用与开发者使用的是面向应用的北向接口；C 的编排系统通常通过北向接口集成。控制器架构并不意味着所有设备的控制平面都被完全移除，也不保证所有策略都直接写入硬件。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 763,
@@ -5050,7 +5374,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。在题设集中计算并编程转发表的 SDN 设计中，控制器承担路径选择及更新转发表的控制职能。B 的帧封装、C 的逐包 NAT 重写、D 的 VPN 加解密通常属于转发或服务数据路径，不能仅因引入控制器就认定移到了控制器。不同 SDN 产品的分工不同，许多设备仍可运行本地控制协议或保留本地控制逻辑。"
+    "explanation": "A。在题设集中计算并编程转发表的 SDN 设计中，控制器承担路径选择及更新转发表的控制职能。B 的帧封装、C 的逐包 NAT 重写、D 的 VPN 加解密通常属于转发或服务数据路径，不能仅因引入控制器就认定移到了控制器。不同 SDN 产品的分工不同，许多设备仍可运行本地控制协议或保留本地控制逻辑。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 764,
@@ -5081,7 +5407,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。北向接口面向控制器上方的应用；REST 风格的 HTTP API 可以提供 GET、POST、PUT、DELETE 等方法，具体资源和支持的方法要看 API 文档。A、D 面向网络设备，方向属于南向；B 的 SNMP GET 不是 HTTP GET，不能据此称为 REST API。REST 是架构风格，JSON/XML 和 HTTPS 是常见选择，并非 REST 唯一可能的表示或传输方式。"
+    "explanation": "C。北向接口面向控制器上方的应用；REST 风格的 HTTP API 可以提供 GET、POST、PUT、DELETE 等方法，具体资源和支持的方法要看 API 文档。A、D 面向网络设备，方向属于南向；B 的 SNMP GET 不是 HTTP GET，不能据此称为 REST API。REST 是架构风格，JSON/XML 和 HTTPS 是常见选择，并非 REST 唯一可能的表示或传输方式。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 765,
@@ -5112,7 +5440,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。若该 API 将 DNS 服务器配置作为资源并支持 PUT，可向该资源 URI 发送表示以创建或替换其状态；具体操作和载荷以 API 文档为准。PUT 的幂等性是指重复相同请求的预期效果与一次请求相同，不排除逐次记录日志或其他客户端的并发修改。B 要求非幂等语义，与 PUT 不符；C 显示网页和 D 只读检索通常使用 GET。POST 的具体行为也由资源定义，不能断言每次调用必定新建资源。"
+    "explanation": "A。若该 API 将 DNS 服务器配置作为资源并支持 PUT，可向该资源 URI 发送表示以创建或替换其状态；具体操作和载荷以 API 文档为准。PUT 的幂等性是指重复相同请求的预期效果与一次请求相同，不排除逐次记录日志或其他客户端的并发修改。B 要求非幂等语义，与 PUT 不符；C 显示网页和 D 只读检索通常使用 GET。POST 的具体行为也由资源定义，不能断言每次调用必定新建资源。",
+    "domain": "Automation and Programmability",
+    "topic": "REST APIs & HTTP"
   },
   {
     "id": 766,
@@ -5143,7 +5473,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。在这些选项中，分离控制和数据平面可使控制器提供统一抽象及集中策略管理，从而降低部分网络配置和运维复杂度。它不保证每个部署的整体复杂度或费用都下降；控制器集群、可用性和现有协议也需要管理。B 可能是收益但并非必然；A 不是该架构的定义，D 的虚拟机创建通常由计算/云管理系统负责。"
+    "explanation": "C。在这些选项中，分离控制和数据平面可使控制器提供统一抽象及集中策略管理，从而降低部分网络配置和运维复杂度。它不保证每个部署的整体复杂度或费用都下降；控制器集群、可用性和现有协议也需要管理。B 可能是收益但并非必然；A 不是该架构的定义，D 的虚拟机创建通常由计算/云管理系统负责。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 767,
@@ -5174,7 +5506,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。图中最外层 `{` 启动对象，而数组的 `]` 之后没有关闭该对象；补上末尾 `}` 才能配平结构。A 的 `\"Cisco Devices\"` 已有双引号，B 的 `!` 不是 JSON 注释，C 开头无需额外 `[`。图中内部对象还重复使用三个 `name` 键：RFC 8259 要求同一对象成员名应当唯一，重复键在不同解析器中的处理可能不同；若想可靠保留三个设备，应改成包含三个对象的数组。JSON 是数据文本，解析不等于执行代码。"
+    "explanation": "D。图中最外层 `{` 启动对象，而数组的 `]` 之后没有关闭该对象；补上末尾 `}` 才能配平结构。A 的 `\"Cisco Devices\"` 已有双引号，B 的 `!` 不是 JSON 注释，C 开头无需额外 `[`。图中内部对象还重复使用三个 `name` 键：RFC 8259 要求同一对象成员名应当唯一，重复键在不同解析器中的处理可能不同；若想可靠保留三个设备，应改成包含三个对象的数组。JSON 是数据文本，解析不等于执行代码。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 768,
@@ -5205,7 +5539,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。北向 API 把控制器能力暴露给应用或编排器，使应用可以读取网络状态、提交策略并实现网络自动化；API 本身不一定包含完整编排引擎。A 不是接口的一般功能定义；B 是某些管理应用可能提供的具体功能；C 的分布式处理与是否使用北向接口并不等价，控制器也可以由分布式集群实现。"
+    "explanation": "D。北向 API 把控制器能力暴露给应用或编排器，使应用可以读取网络状态、提交策略并实现网络自动化；API 本身不一定包含完整编排引擎。A 不是接口的一般功能定义；B 是某些管理应用可能提供的具体功能；C 的分布式处理与是否使用北向接口并不等价，控制器也可以由分布式集群实现。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 769,
@@ -5236,7 +5572,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。静态 inventory 文件定义 Ansible 的目标主机/设备，通常还可分组并提供变量；常见格式有 INI 和 YAML。A 指模块等执行单元，C 是控制节点，D 是包含 plays 和 tasks 的 YAML playbook。Inventory 并不限于单一静态文件，也可来自动态 inventory 插件或脚本；网络模块也不一定以 Python 代码推送到设备上运行。"
+    "explanation": "B。静态 inventory 文件定义 Ansible 的目标主机/设备，通常还可分组并提供变量；常见格式有 INI 和 YAML。A 指模块等执行单元，C 是控制节点，D 是包含 plays 和 tasks 的 YAML playbook。Inventory 并不限于单一静态文件，也可来自动态 inventory 插件或脚本；网络模块也不一定以 Python 代码推送到设备上运行。",
+    "domain": "Automation and Programmability",
+    "topic": "Ansible, Puppet & Chef"
   },
   {
     "id": 770,
@@ -5267,7 +5605,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。北向 API 连接 SDN 控制器与网络应用，使应用读取状态或请求策略；南向接口则连接控制器与基础设施。A 不描述接口的核心作用，B 只是某些管理应用可能具备的功能，C 也无法定义接口方向。逻辑集中的 SDN 控制可以由多台控制器分布式实现。"
+    "explanation": "D。北向 API 连接 SDN 控制器与网络应用，使应用读取状态或请求策略；南向接口则连接控制器与基础设施。A 不描述接口的核心作用，B 只是某些管理应用可能具备的功能，C 也无法定义接口方向。逻辑集中的 SDN 控制可以由多台控制器分布式实现。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 771,
@@ -5298,7 +5638,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。展图中 `\"apple\"` 是对象成员名，JSON 对象成员名是字符串；与其关联的值 `[\"red\", 1]` 是数组，`1` 是数字，外层花括号是对象。题问 apple 本身的数据类型而非其对应值。"
+    "explanation": "D。展图中 `\"apple\"` 是对象成员名，JSON 对象成员名是字符串；与其关联的值 `[\"red\", 1]` 是数组，`1` 是数字，外层花括号是对象。题问 apple 本身的数据类型而非其对应值。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 772,
@@ -5329,7 +5671,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。Cisco DNA Center（现称 Catalyst Center）通过集中界面和自动化流程帮助配置、部署受支持的设备，可减少逐台操作；实际节省时间取决于设备支持、网络准备和部署方式。B 不能假定第三方设备均支持 Cisco PnP；C 减少分析需求和 D 缩减日志级别都不是题设的部署优势。PnP 发现控制器可采用多种受支持的方式，不应认定所有设备必经 DHCP option 43。"
+    "explanation": "A。Cisco DNA Center（现称 Catalyst Center）通过集中界面和自动化流程帮助配置、部署受支持的设备，可减少逐台操作；实际节省时间取决于设备支持、网络准备和部署方式。B 不能假定第三方设备均支持 Cisco PnP；C 减少分析需求和 D 缩减日志级别都不是题设的部署优势。PnP 发现控制器可采用多种受支持的方式，不应认定所有设备必经 DHCP option 43。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 773,
@@ -5360,7 +5704,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。快速弹性指容量可以随需求快速扩展和释放，部分情况下可自动化；自动伸缩是符合该特征的一个例子，并非每种实现都必须自动。A 涉及可计量服务，C 是资源池化，D 是按需自助服务。实际资源和配额有限，“无限”是消费者所感知的特性。"
+    "explanation": "B。快速弹性指容量可以随需求快速扩展和释放，部分情况下可自动化；自动伸缩是符合该特征的一个例子，并非每种实现都必须自动。A 涉及可计量服务，C 是资源池化，D 是按需自助服务。实际资源和配额有限，“无限”是消费者所感知的特性。",
+    "domain": "Network Fundamentals",
+    "topic": "Virtualization & IOS"
   },
   {
     "id": 774,
@@ -5391,7 +5737,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。南向接口连接控制器与网络设备，使控制器能与设备管理或控制程序交互；所用协议和能力依平台而异。北向接口 C 连接控制器与上层应用；A SVI 是交换机的 VLAN 三层逻辑接口；B 是承载流量的隧道接口，均非此处的架构方向。"
+    "explanation": "D。南向接口连接控制器与网络设备，使控制器能与设备管理或控制程序交互；所用协议和能力依平台而异。北向接口 C 连接控制器与上层应用；A SVI 是交换机的 VLAN 三层逻辑接口；B 是承载流量的隧道接口，均非此处的架构方向。",
+    "domain": "Automation and Programmability",
+    "topic": "SDN & DNA Center"
   },
   {
     "id": 775,
@@ -5422,7 +5770,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。展图 `Test_Questions`、`Test_Exam_Level` 和 `Test_Response` 各有一对数组方括号，共三个数组；外层是一个对象，六个字符串是数组元素。原图每个数组的末项后有尾随逗号，不符合 RFC 8259，移除三个尾随逗号后才是有效 JSON。\n\n```json\n{\n  \"Test_Questions\": [\"Automation\", \"Configuration\"],\n  \"Test_Exam_Level\": [\"CCNA\", \"CCNP\"],\n  \"Test_Response\": [\"Correct\", \"Incorrect\"]\n}\n```"
+    "explanation": "B。展图 `Test_Questions`、`Test_Exam_Level` 和 `Test_Response` 各有一对数组方括号，共三个数组；外层是一个对象，六个字符串是数组元素。原图每个数组的末项后有尾随逗号，不符合 RFC 8259，移除三个尾随逗号后才是有效 JSON。\n\n```json\n{\n  \"Test_Questions\": [\"Automation\", \"Configuration\"],\n  \"Test_Exam_Level\": [\"CCNA\", \"CCNP\"],\n  \"Test_Response\": [\"Correct\", \"Incorrect\"]\n}\n```",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 776,
@@ -5453,7 +5803,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。API 是程序访问另一软件功能所遵循的接口契约，可用于客户端访问远程服务；实现还依赖传输协议和网络栈。D REST API 是 API 的一个具体架构风格，也可用于客户端访问服务器，但题目要求不限定架构风格的上位类别。A/C 描述 SDN 控制器接口的方向，并非此处泛指的类别。原题未要求上位类别，故同时可被具体 REST API 满足。"
+    "explanation": "B。API（应用程序编程接口）是程序访问另一软件功能所遵循的通用接口契约，可用于客户端通过 IP 网络访问远程服务，且不限定具体的架构风格。D（REST API）是 API 下的一种具体架构风格，而非不限定风格的上位类别；A（北向接口）和 C（南向接口）描述的是 SDN 控制器接口的方向，并非此处泛指的软件接口类别。",
+    "domain": "Automation and Programmability",
+    "topic": "REST APIs & HTTP"
   },
   {
     "id": 777,
@@ -5484,7 +5836,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。Policing 用令牌桶等机制依据配置的速率和突发参数判断是否符合策略；超额动作可配置为丢弃、重新标记或其他平台支持的动作，题设是选择丢弃。它不为等待令牌而缓存超额包。Shaping C 通常把超额流量排队延后发送，但队列满时也会丢包；FIFO 和 WFQ 是排队调度方法，不是此题的速率监管功能。"
+    "explanation": "A。Policing 用令牌桶等机制依据配置的速率和突发参数判断是否符合策略；超额动作可配置为丢弃、重新标记或其他平台支持的动作，题设是选择丢弃。它不为等待令牌而缓存超额包。Shaping C 通常把超额流量排队延后发送，但队列满时也会丢包；FIFO 和 WFQ 是排队调度方法，不是此题的速率监管功能。",
+    "domain": "IP Services",
+    "topic": "QoS"
   },
   {
     "id": 778,
@@ -5515,7 +5869,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。流量整形按照配置的速率调度报文，暂时将超出发送速率的流量放入队列等待；队列容量有限，拥塞或队满仍可能丢包，也会增加排队时延。B/D 描述标记或重新标记，C 是流量分类；实际策略可将分类、标记和整形组合使用。整形约束平均速率及突发，并不保证每个包都以严格恒定间隔发送。"
+    "explanation": "A。流量整形按照配置的速率调度报文，暂时将超出发送速率的流量放入队列等待；队列容量有限，拥塞或队满仍可能丢包，也会增加排队时延。B/D 描述标记或重新标记，C 是流量分类；实际策略可将分类、标记和整形组合使用。整形约束平均速率及突发，并不保证每个包都以严格恒定间隔发送。",
+    "domain": "IP Services",
+    "topic": "QoS"
   },
   {
     "id": 779,
@@ -5546,7 +5902,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。图中 Po1(SU) 为正在使用的二层通道，两条成员都标记 P。将 `port-channel min-links 1` 设为单条允许 Switch 1 在只剩一条已聚合成员时保持通道 up；对端门限、链路与 LACP 状态也须满足条件。A/C 的 LACP 端口优先级用于选择活动成员，不调整最小链路门限。D 限制最大活动成员数为一，在支持相应热备的情况下可提供故障切换，但不满足题设正常时两条都承载流量；不同平台的语法和支持范围应查文档。原题未给出现有限制与双链路正常使用要求，存在歧义。"
+    "explanation": "B。图中 Po1(SU) 为正在使用的二层通道，两条成员都标记 P。将 `port-channel min-links 1` 设为单条允许 Switch 1 在只剩一条已聚合成员时保持通道 up；对端门限、链路与 LACP 状态也须满足条件。A/C 的 LACP 端口优先级用于选择活动成员，不调整最小链路门限。D 限制最大活动成员数为一，在支持相应热备的情况下可提供故障切换，但不满足题设正常时两条都承载流量；不同平台的语法和支持范围应查文档。",
+    "domain": "Network Access",
+    "topic": "EtherChannel"
   },
   {
     "id": 780,
@@ -5577,7 +5935,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。RFC 1918 私有地址可在不同私网重复使用，通常不在公共 Internet 上全局路由；题设无入站映射或其他外部路由时，Internet 主机无法直接按该私网地址到达内部主机。私有地址本身不加密、不代替防火墙或访问控制，也不能阻止恶意软件、内部攻击、VPN 或经映射暴露的服务被访问。A 安全连接需要其他机制；C 不保证可靠性；D 私网地址可以在受控的外部私有网络之间路由，但不是在公共 Internet 上全局路由。"
+    "explanation": "B。RFC 1918 私有地址可在不同私网重复使用，通常不在公共 Internet 上全局路由；题设无入站映射或其他外部路由时，Internet 主机无法直接按该私网地址到达内部主机。私有地址本身不加密、不代替防火墙或访问控制，也不能阻止恶意软件、内部攻击、VPN 或经映射暴露的服务被访问。A 安全连接需要其他机制；C 不保证可靠性；D 私网地址可以在受控的外部私有网络之间路由，但不是在公共 Internet 上全局路由。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv4 & Subnetting"
   },
   {
     "id": 781,
@@ -5608,7 +5968,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。先在支持封装选择且默认 negotiate 的平台指定 dot1q，再设 trunk 与 allowed vlan 1-10；两端配置须兼容。B 未明确选择封装且 native 11 不在允许列表；A 没有显式选择标准封装且聚合无关；D 使用 Cisco ISL。只限制题设用户 VLAN，部分控制协议可能仍在 VLAN 1 交换；仅支持 dot1q 的平台可能没有 encapsulation 命令。"
+    "explanation": "C。先在支持封装选择且默认 negotiate 的平台指定 dot1q，再设 trunk 与 allowed vlan 1-10；两端配置须兼容。B 未明确选择封装且 native 11 不在允许列表；A 没有显式选择标准封装且聚合无关；D 使用 Cisco ISL。只限制题设用户 VLAN，部分控制协议可能仍在 VLAN 1 交换；仅支持 dot1q 的平台可能没有 encapsulation 命令。",
+    "domain": "Network Access",
+    "topic": "802.1Q Trunking"
   },
   {
     "id": 782,
@@ -5639,7 +6001,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中 Full Duplex、10000 Mbps，累计 collisions 为 8662416065，计数器从未清零；单张快照无法证明数值何时增加或确定原因。检查平台/驱动计数器含义、软件版本与对端链路，并在记录基线后观察增量，结合 CRC、丢包、接口及流量排查。全双工万兆链路不应直接假设对端回退半双工；5 分钟平均速率与零累计 output drops 也不能排除短暂拥塞。原题把巨大计数直接归因双工不匹配，证据不足。"
+    "explanation": "C。图中 Full Duplex、10000 Mbps，累计 collisions 为 8662416065，计数器从未清零；单张快照无法证明数值何时增加或确定原因。检查平台/驱动计数器含义、软件版本与对端链路，并在记录基线后观察增量，结合 CRC、丢包、接口及流量排查。全双工万兆链路不应直接假设对端回退半双工；5 分钟平均速率与零累计 output drops 也不能排除短暂拥塞。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 783,
@@ -5670,7 +6034,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图示 R2 MAC 为 12-a0-ab-cc-00-01；首字节异或 02 得 10，中间插入 ff:fe，接口 ID 得 10a0:abff:fecc:0001，与 2001:db8:d8d2:1009::/64 拼接为 A。B 未正确翻转首字节及第二字节，C、D 的接口 ID 也不符合。若在 IOS 生成地址，应按平台支持使用 `ipv6 address 2001:DB8:D8D2:1009::/64 eui-64`；图中标示的 MAC 需确为所配置 LAN 接口使用的地址。"
+    "explanation": "A。图示 R2 MAC 为 12-a0-ab-cc-00-01；首字节异或 02 得 10，中间插入 ff:fe，接口 ID 得 10a0:abff:fecc:0001，与 2001:db8:d8d2:1009::/64 拼接为 A。B 未正确翻转首字节及第二字节，C、D 的接口 ID 也不符合。若在 IOS 生成地址，应按平台支持使用 `ipv6 address 2001:DB8:D8D2:1009::/64 eui-64`；图中标示的 MAC 需确为所配置 LAN 接口使用的地址。",
+    "domain": "Network Fundamentals",
+    "topic": "IPv6 & NDP"
   },
   {
     "id": 784,
@@ -5701,7 +6067,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。Syslog severity/level 表示事件严重程度，0 为 Emergency、7 为 Debug；服务器可依级别规则将消息写入不同文件。facility 表示消息类别或来源，message body 是文本，process ID 标识进程，均非题目所求级别。Cisco 消息中的 FACILITY 标签与 RFC syslog priority 中的 facility 术语相关但不是简单一一对应；服务器过滤与文件去向取决于具体配置。"
+    "explanation": "B。Syslog severity/level 表示事件严重程度，0 为 Emergency、7 为 Debug；服务器可依级别规则将消息写入不同文件。facility 表示消息类别或来源，message body 是文本，process ID 标识进程，均非题目所求级别。Cisco 消息中的 FACILITY 标签与 RFC syslog priority 中的 facility 术语相关但不是简单一一对应；服务器过滤与文件去向取决于具体配置。",
+    "domain": "IP Services",
+    "topic": "Syslog & SNMP"
   },
   {
     "id": 785,
@@ -5732,7 +6100,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。AireOS 管理接口用于控制器带内管理，并通常承担轻量 AP 的发现与控制通信。console 是本地串行管理，service port 用于带外维护，virtual interface 用于部分客户端相关功能。具体 AP-manager 接口、端口与软件型号可影响部署，不能把默认设计说成所有 WLC 的唯一实现。"
+    "explanation": "B。AireOS 管理接口用于控制器带内管理，并通常承担轻量 AP 的发现与控制通信。console 是本地串行管理，service port 用于带外维护，virtual interface 用于部分客户端相关功能。具体 AP-manager 接口、端口与软件型号可影响部署，不能把默认设计说成所有 WLC 的唯一实现。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 786,
@@ -5767,7 +6137,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。0.0.0.0/1 和 128.0.0.0/1 分别匹配目的地址的两半，优先于 /0；两条 /0 作为更不具体的备用。链路失效时在题设明确的下一跳撤销条件下，受影响的 /1 与对应 /0 撤销，另一条 /0 可承载流量。实际分流量不保证 50/50；单靠静态路由未必发现上游故障，递归解析及 IP SLA/track 等需按设计处理。C 为等价默认路由但不按最高位拆分；D 没有备份 /0；E 仅主备；A 的 AD 255 不可安装且缺对另一半的有效主路由。原题同时把 C、D 当成两个必须共同配置的答案，与冗余条件不符。"
+    "explanation": "B。0.0.0.0/1 和 128.0.0.0/1 分别匹配目的地址的两半，优先于 /0；两条 /0 作为更不具体的备用。链路失效时在题设明确的下一跳撤销条件下，受影响的 /1 与对应 /0 撤销，另一条 /0 可承载流量。实际分流量不保证 50/50；单靠静态路由未必发现上游故障，递归解析及 IP SLA/track 等需按设计处理。C 为等价默认路由但不按最高位拆分；D 没有备份 /0；E 仅主备；A 的 AD 255 不可安装且缺对另一半的有效主路由。",
+    "domain": "IP Connectivity",
+    "topic": "Static & Default Routes"
   },
   {
     "id": 787,
@@ -5798,7 +6170,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图示原 group 2 为 PAgP；清除不兼容旧配置后，物理成员接口 `channel-group 2 mode active` 使用 LACP，另端需支持并兼容 active 或 passive，成员配置须匹配。A/D 在逻辑接口上配置成员且是 PAgP 模式；B 是静态 on，可与兼容静态聚合互通但不进行 LACP 协商，故不满足题设。组号为本地标识，不必与对端相同。"
+    "explanation": "C。图示原 group 2 为 PAgP；清除不兼容旧配置后，物理成员接口 `channel-group 2 mode active` 使用 LACP，另端需支持并兼容 active 或 passive，成员配置须匹配。A/D 在逻辑接口上配置成员且是 PAgP 模式；B 是静态 on，可与兼容静态聚合互通但不进行 LACP 协商，故不满足题设。组号为本地标识，不必与对端相同。",
+    "domain": "Network Access",
+    "topic": "EtherChannel"
   },
   {
     "id": 788,
@@ -5829,7 +6203,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。Cisco 的 AireOS 部署指南通常推荐交换机对发往 WLC 的流量使用 source-destination IP 哈希。多个不同源/目的 IP 组合有助分散流，但成员选择取决于设备、流量和哈希实现；单流一般仍落在一条链路上，均匀分配并无保证。仅使用目的 IP 在大量流都指向同一 WLC IP 时可能集中；MAC 哈希效果也取决于二层路径和 MAC 分布。"
+    "explanation": "A。Cisco 的 AireOS 部署指南通常推荐交换机对发往 WLC 的流量使用 source-destination IP 哈希。多个不同源/目的 IP 组合有助分散流，但成员选择取决于设备、流量和哈希实现；单流一般仍落在一条链路上，均匀分配并无保证。仅使用目的 IP 在大量流都指向同一 WLC IP 时可能集中；MAC 哈希效果也取决于二层路径和 MAC 分布。",
+    "domain": "Network Access",
+    "topic": "EtherChannel"
   },
   {
     "id": 789,
@@ -5860,7 +6236,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。802.11a 工作在 5 GHz，通常比 2.4 GHz 的 802.11b/g 有更多可用不重叠的 20 MHz 信道，适合需要更多信道的规划；实际数量受地区法规、设备及 DFS 限制。A 成本受设备和部署影响；B 所述 2.4 GHz 干扰源并非 802.11a 的同频干扰；C 单一 802.11a 无线电不直接兼容 2.4 GHz 的 b/g，但双频设备可以分别支持。更多信道不保证消除干扰。"
+    "explanation": "D。802.11a 工作在 5 GHz，通常比 2.4 GHz 的 802.11b/g 有更多可用不重叠的 20 MHz 信道，适合需要更多信道的规划；实际数量受地区法规、设备及 DFS 限制。A 成本受设备和部署影响；B 所述 2.4 GHz 干扰源并非 802.11a 的同频干扰；C 单一 802.11a 无线电不直接兼容 2.4 GHz 的 b/g，但双频设备可以分别支持。更多信道不保证消除干扰。",
+    "domain": "Network Access",
+    "topic": "Wireless & WLC"
   },
   {
     "id": 790,
@@ -5891,7 +6269,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。两端采用 dot1q trunk，允许业务 VLAN 100 和 105，并将两端 native VLAN 设置为 3。VLAN 3 未列入 allowed 列表，因此不能据此宣称普通 native VLAN 数据可在该链路通过；题设明确无需此类流量。B 使用 ISL 且 native 仍为 1；C/D 的 access vlan 不能一次指定多个 VLAN，D 也不是 trunk。更换 native VLAN 是安全加固的一部分，不能单独保证阻止所有 VLAN 攻击；部分控制流量有平台特定行为。"
+    "explanation": "A。两端采用 dot1q trunk，允许业务 VLAN 100 和 105，并将两端 native VLAN 设置为 3。VLAN 3 未列入 allowed 列表，因此不能据此宣称普通 native VLAN 数据可在该链路通过；题设明确无需此类流量。B 使用 ISL 且 native 仍为 1；C/D 的 access vlan 不能一次指定多个 VLAN，D 也不是 trunk。更换 native VLAN 是安全加固的一部分，不能单独保证阻止所有 VLAN 攻击；部分控制流量有平台特定行为。",
+    "domain": "Network Access",
+    "topic": "802.1Q Trunking"
   },
   {
     "id": 791,
@@ -5904,25 +6284,27 @@
     "options": [
       {
         "label": "A",
-        "text": "switch port mode dynamic Channel group 1 mode active Switchport trunk allowed vlan 5,10,15, 20"
+        "text": "switchport mode dynamic\nchannel-group 1 mode active\nswitchport trunk allowed vlan 5,10,15,20"
       },
       {
         "label": "B",
-        "text": "no switchport mode trunk Switchport trunk encapsulation isl Switchport mode access vlan 20"
+        "text": "no switchport mode trunk\nswitchport trunk encapsulation isl\nswitchport mode access vlan 20"
       },
       {
         "label": "C",
-        "text": "switchport nonegotiate No switchport trunk allowed vlan 5,10 Switchport trunk allowed vlan 5,10,15,20"
+        "text": "switchport nonegotiate\nno switchport trunk allowed vlan 5,10\nswitchport trunk allowed vlan 5,10,15,20"
       },
       {
         "label": "D",
-        "text": "no switchport trunk encapsulation isl Switchport trunk encapsulation dot1q Switchport trunk allowed vlan add 20"
+        "text": "no switchport trunk encapsulation isl\nswitchport trunk encapsulation dot1q\nswitchport trunk allowed vlan add 20"
       }
     ],
     "answer": [
       "D"
     ],
-    "explanation": "D。图中 NewSwitch 以 ISL 封装并只允许 VLAN 5、10。将封装改为 802.1Q，再使用 `switchport trunk allowed vlan add 20`，保留现有列表并增加 20；对端也必须允许这些 VLAN 且封装和 native VLAN 配置匹配。图中旧配置尚未允许 VLAN 20，因此题设明确说明对端已先完成更改。A 的 channel-group 与要求无关且命令错误；B 使用 ISL 和 access；C 未切换为 dot1q。各型号命令支持与变更顺序应以实际版本为准。"
+    "explanation": "D。图中 NewSwitch 以 ISL 封装并只允许 VLAN 5、10。将封装改为 802.1Q，再使用 `switchport trunk allowed vlan add 20`，保留现有列表并增加 20；对端也必须允许这些 VLAN 且封装和 native VLAN 配置匹配。图中旧配置尚未允许 VLAN 20，因此题设明确说明对端已先完成更改。A 的 channel-group 与要求无关且命令错误；B 使用 ISL 和 access；C 未切换为 dot1q。各型号命令支持与变更顺序应以实际版本为准。",
+    "domain": "Network Access",
+    "topic": "802.1Q Trunking"
   },
   {
     "id": 792,
@@ -5953,7 +6335,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中 Po1(RU) 的 R 表示三层，U 表示使用中；协议为 LACP，Et0/0 和 Et0/1 的 P 表示已加入通道。在支持这些命令的交换机上，新成员可用 `no switchport` 配置为三层，再用 `channel-group 1 mode active` 加入 LACP 组；还需确保物理属性及对端 LACP 配置兼容。B 是静态 on 模式；C 是二层 trunk；D 没有加入通道。"
+    "explanation": "A。图中 Po1(RU) 的 R 表示三层，U 表示使用中；协议为 LACP，Et0/0 和 Et0/1 的 P 表示已加入通道。在支持这些命令的交换机上，新成员可用 `no switchport` 配置为三层，再用 `channel-group 1 mode active` 加入 LACP 组；还需确保物理属性及对端 LACP 配置兼容。B 是静态 on 模式；C 是二层 trunk；D 没有加入通道。",
+    "domain": "Network Access",
+    "topic": "EtherChannel"
   },
   {
     "id": 793,
@@ -5984,7 +6368,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中的日志显示 excessive collisions 和 retry limit exceeded，表示半双工发送遭遇过多冲突，达到重试限制后放弃该帧。排查双工不匹配或半双工介质上的争用；全双工正常运行不使用 CSMA/CD 冲突退避。B 是发送队列问题，C 是过短帧，D 是过长帧，均不是该日志的直接含义。"
+    "explanation": "A。图中的日志显示 excessive collisions 和 retry limit exceeded，表示半双工发送遭遇过多冲突，达到重试限制后放弃该帧。排查双工不匹配或半双工介质上的争用；全双工正常运行不使用 CSMA/CD 冲突退避。B 是发送队列问题，C 是过短帧，D 是过长帧，均不是该日志的直接含义。",
+    "domain": "Network Fundamentals",
+    "topic": "Cabling, PoE & Interfaces"
   },
   {
     "id": 794,
@@ -6015,7 +6401,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中的端口当前为 access，管理封装为 ISL，且 trunk VLAN 列表限制为 5、6；选项 A 将封装设为 IEEE 802.1Q、设置静态 trunk 并显式允许所有 VLAN。对端需使用其厂商等效配置，且 native VLAN、允许列表和实际 VLAN 均需一致；允许全部 VLAN 并不保证其它协议或链路条件已正确。B 的 0800 不是普通 802.1Q 标签的标准 TPID；C 依赖 DTP 且未明确设定 dot1q；D 既未静态设 trunk，也未允许全部 VLAN。具体封装命令依硬件型号而定。"
+    "explanation": "A。图中的端口当前为 access，管理封装为 ISL，且 trunk VLAN 列表限制为 5、6；选项 A 将封装设为 IEEE 802.1Q、设置静态 trunk 并显式允许所有 VLAN。对端需使用其厂商等效配置，且 native VLAN、允许列表和实际 VLAN 均需一致；允许全部 VLAN 并不保证其它协议或链路条件已正确。B 的 0800 不是普通 802.1Q 标签的标准 TPID；C 依赖 DTP 且未明确设定 dot1q；D 既未静态设 trunk，也未允许全部 VLAN。具体封装命令依硬件型号而定。",
+    "domain": "Network Access",
+    "topic": "802.1Q Trunking"
   },
   {
     "id": 795,
@@ -6046,7 +6434,9 @@
     "answer": [
       "B"
     ],
-    "explanation": "B。所限定平台的 Cisco 配置示例使用 `switchport port-security mac-address <MAC> vlan voice` 手工配置语音 VLAN 的静态安全 MAC；接口须已设置 voice VLAN 和端口安全，并根据话机及连接设备数量设置可用的安全地址上限。C 不明确指定 voice VLAN；D 使用 sticky 而非普通静态条目；A 的数字 VLAN 语法与该题所要求的 voice 关键字及端口情境不同。不同 Catalyst 平台和版本对 voice VLAN 静态安全地址的支持存在差异，不能推广为通用语法。原题 abcd.abcd.abcd 首字节的组播位为 1，已改成单播地址。"
+    "explanation": "B。所限定平台的 Cisco 配置示例使用 `switchport port-security mac-address <MAC> vlan voice` 手工配置语音 VLAN 的静态安全 MAC；接口须已设置 voice VLAN 和端口安全，并根据话机及连接设备数量设置可用的安全地址上限。C 不明确指定 voice VLAN；D 使用 sticky 而非普通静态条目；A 的数字 VLAN 语法与该题所要求的 voice 关键字及端口情境不同。不同 Catalyst 平台和版本对 voice VLAN 静态安全地址的支持存在差异，不能推广为通用语法。",
+    "domain": "Security Fundamentals",
+    "topic": "L2 Security"
   },
   {
     "id": 796,
@@ -6077,7 +6467,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中 `\"load balancer\": \"LB20\"` 中，LB20 是冒号右侧的字符串值；`load balancer` 是键。它不是对象或数组。JSON 数据与 JSON Schema 是不同概念，本题展示的是 JSON 数据。"
+    "explanation": "A。图中 `\"load balancer\": \"LB20\"` 中，LB20 是冒号右侧的字符串值；`load balancer` 是键。它不是对象或数组。JSON 数据与 JSON Schema 是不同概念，本题展示的是 JSON 数据。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 797,
@@ -6108,7 +6500,9 @@
     "answer": [
       "C"
     ],
-    "explanation": "C。图中第 1 行 `[` 和第 5 行 `]` 围成一个数组，里面按顺序包含 firewall、switch 和 IDS 三个对象。数组本身也是 JSON value，但在给定选项中 array 更具体；各 `{...}` 是内部对象，key 是对象中的成员名称。"
+    "explanation": "C。图中第 1 行 `[` 和第 5 行 `]` 围成一个数组，里面按顺序包含 firewall、switch 和 IDS 三个对象。数组本身也是 JSON value，但在给定选项中 array 更具体；各 `{...}` 是内部对象，key 是对象中的成员名称。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 798,
@@ -6139,7 +6533,9 @@
     "answer": [
       "D"
     ],
-    "explanation": "D。图中第二个对象含 `\"IDS\": \"IPS31\"`：IDS 在冒号左侧，是成员名（key），IPS31 是字符串值。对象由花括号表示，数组由方括号表示。"
+    "explanation": "D。图中第二个对象含 `\"IDS\": \"IPS31\"`：IDS 在冒号左侧，是成员名（key），IPS31 是字符串值。对象由花括号表示，数组由方括号表示。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 799,
@@ -6170,7 +6566,9 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中第 4 行为 `{\"router\": \"R_frankfurt\", \"interface\": \"te8/30\"}`，花括号包含两个键值对，整体是对象。对象也可以作为数组元素或 JSON value，但 object 是这行容器类型的最具体选项；单独的 router 和 interface 才是键。"
+    "explanation": "A。图中第 4 行为 `{\"router\": \"R_frankfurt\", \"interface\": \"te8/30\"}`，花括号包含两个键值对，整体是对象。对象也可以作为数组元素或 JSON value，但 object 是这行容器类型的最具体选项；单独的 router 和 interface 才是键。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   },
   {
     "id": 800,
@@ -6201,6 +6599,8 @@
     "answer": [
       "A"
     ],
-    "explanation": "A。图中每个对象的 `\"port\": ...` 中，port 在冒号左侧，是成员名称（key）；右侧如 `\"te6/21\"` 是字符串值。对象为花括号结构，数组为外层方括号结构。图中行号用于说明，不属于 JSON 文本本身；此图是数据而非 JSON Schema。"
+    "explanation": "A。图中每个对象的 `\"port\": ...` 中，port 在冒号左侧，是成员名称（key）；右侧如 `\"te6/21\"` 是字符串值。对象为花括号结构，数组为外层方括号结构。图中行号用于说明，不属于 JSON 文本本身；此图是数据而非 JSON Schema。",
+    "domain": "Automation and Programmability",
+    "topic": "JSON, XML & YAML"
   }
 ]

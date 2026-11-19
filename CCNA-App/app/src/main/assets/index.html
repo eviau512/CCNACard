@@ -247,6 +247,10 @@
           <span>Skip Lab Sims (跳过实验题):</span>
           <input type="checkbox" id="excludeSimLabsToggle" onchange="updateExcludeSimLabs(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
         </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+          <span>Prioritize Newer Qs (优先较新题号):</span>
+          <input type="checkbox" id="prioritizeNewerToggle" checked onchange="updatePrioritizeNewer(this.checked)" style="width:20px; height:20px; accent-color:var(--primary); cursor:pointer;">
+        </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <span>Mistake cooldown (防既视感冷却间隔):</span>
@@ -320,7 +324,7 @@
         <button class="btn btn-primary" style="background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color);" onclick="triggerImportProgress()">📥 Import Records (JSON)</button>
         <input type="file" id="importFile" accept=".json,application/json,text/plain" style="display:none;" onchange="importProgress(event)">
         <button class="btn btn-primary" style="background:var(--danger-light); color:var(--danger); border:1px solid var(--danger);" onclick="openResetModal()">⚠️ Reset All Progress</button>
-        <div style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 12px;">CCNA Practice Cards v1.3.0 • IOS Lab &amp; Cloud Sync Ready</div>
+        <div style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 12px;">CCNA Practice Cards v1.4.0 • IOS Lab &amp; Cloud Sync Ready</div>
       </div>
     </div>
   </div>

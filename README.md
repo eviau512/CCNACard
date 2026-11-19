@@ -1,7 +1,7 @@
 # CCNACard — CCNA 200-301 Interactive Practice Cards & Virtual IOS Lab
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Version](https://img.shields.io/badge/Version-v1.3.0-blue.svg)](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0)
+[![Version](https://img.shields.io/badge/Version-v1.4.0-blue.svg)](https://github.com/eviau512/CCNACard/releases/tag/v1.4.0)
 [![Platform](https://img.shields.io/badge/Platform-Android%208.0%2B%20%7C%20Web-green.svg)](https://github.com/eviau512/CCNACard)
 [![Question Count](https://img.shields.io/badge/Questions-1%2C396%20Complete-orange.svg)](https://github.com/eviau512/CCNACard/releases)
 [![Releases](https://img.shields.io/badge/Download-GitHub%20Releases-brightgreen.svg)](https://github.com/eviau512/CCNACard/releases)
@@ -49,11 +49,11 @@
 
 ## 🚀 下载与使用 (Releases & Usage)
 
-所有最新预编译工件均已发布在 **[GitHub Releases (v1.3.0)](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0)**：
+所有最新预编译工件均已发布在 **[GitHub Releases (v1.4.0)](https://github.com/eviau512/CCNACard/releases/tag/v1.4.0)**：
 
 ### 方式 A：Android 手机 / 平板安装（推荐）
-前往 [Releases 发布页](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0) 下载最新构建的已签名 APK：
-- **[CCNA.apk (最新 v1.3.0 Release)](https://github.com/eviau512/CCNACard/releases/download/v1.3.0/CCNA.apk)**
+前往 [Releases 发布页](https://github.com/eviau512/CCNACard/releases/tag/v1.4.0) 下载最新构建的已签名 APK：
+- **[CCNA.apk (最新 v1.4.0 Release)](https://github.com/eviau512/CCNACard/releases/download/v1.4.0/CCNA.apk)**
 
 或通过 adb 命令直接推送到已连接的设备：
 ```bash
@@ -61,8 +61,8 @@ adb install -r --user 0 CCNA.apk
 ```
 
 ### 方式 B：桌面/平板浏览器即开即用（免安装离线单文件）
-从 [Releases 发布页](https://github.com/eviau512/CCNACard/releases/tag/v1.3.0) 下载单文件网页版：
-- **[CCNA_Interactive_App.html](https://github.com/eviau512/CCNACard/releases/download/v1.3.0/CCNA_Interactive_App.html)**
+从 [Releases 发布页](https://github.com/eviau512/CCNACard/releases/tag/v1.4.0) 下载单文件网页版：
+- **[CCNA_Interactive_App.html](https://github.com/eviau512/CCNACard/releases/download/v1.4.0/CCNA_Interactive_App.html)**
 - 直接双击或使用任意现代浏览器（Chrome、Edge、Safari、Firefox）打开即可使用。
 - 单文件内聚全部 1,396 道题库数据与内嵌资源，完全断网环境亦可离线刷题。
 

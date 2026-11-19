@@ -27,6 +27,7 @@ let appState = {
   shuffleOptions: true,     // default true: randomize option order (需要乱序选项)
   hideMastered: false,      // optional: completely exclude mastered cards
   excludeSimLabs: false,    // optional: skip Simulation / Lab questions
+  prioritizeNewer: true,    // default true: weight Smart Mode toward recent higher-ID questions
   deckMode: 'smart',        // 'smart' | 'weak' | 'bookmarks' | 'domain' | 'topic' | 'type'
   domainFilter: '',         // active CCNA domain filter if any
   drillTopic: null,         // active topic/mode drill label if any
@@ -418,6 +419,36 @@ const DeckScheduler = {
     return topics;
   },
 
+  orderUnseenByRecency(items) {
+    if (!Array.isArray(items) || items.length <= 1) return (items || []).slice();
+    if (appState.prioritizeNewer === false) {
+      return shuffle(items);
+    }
+    let minId = Infinity;
+    let maxId = -Infinity;
+    for (let i = 0; i < items.length; i++) {
+      const id = Number(items[i].id) || 0;
+      if (id < minId) minId = id;
+      if (id > maxId) maxId = id;
+    }
+    const span = maxId - minId;
+    if (span <= 0) return shuffle(items);
+
+    // Weighted sampling without replacement (Efraimidis-Spirakis):
+    // Strongly prioritizes newer higher-ID questions (~80%+ of early draws from Q1000+)
+    // while keeping local randomized variety instead of a strict reverse countdown.
+    const keyed = items.map(q => {
+      const id = Number(q.id) || 0;
+      const u = (id - minId) / span; // 0 (oldest) -> 1 (newest)
+      const u2 = u * u;
+      const weight = 0.02 + u2 * u2 * u; // 0.02 + u^5 (51:1 newest-vs-oldest ratio)
+      const key = -Math.log(Math.max(1e-12, Math.random())) / weight;
+      return { q, key };
+    });
+    keyed.sort((a, b) => a.key - b.key);
+    return keyed.map(entry => entry.q);
+  },
+
   buildSmartQueue(pool) {
     if (appState.excludeSimLabs && Array.isArray(pool)) {
       pool = pool.filter(q => q.type !== 'Simulation / Lab');
@@ -483,8 +514,8 @@ const DeckScheduler = {
       remainingMistakes.splice(pickedIdx, 1);
     }
 
-    const shufWeakUnseen = shuffle(weakUnseen).map(q => ({ ...q, isRetry: false }));
-    const shufNormalUnseen = shuffle(normalUnseen).map(q => ({ ...q, isRetry: false }));
+    const shufWeakUnseen = this.orderUnseenByRecency(weakUnseen).map(q => ({ ...q, isRetry: false }));
+    const shufNormalUnseen = this.orderUnseenByRecency(normalUnseen).map(q => ({ ...q, isRetry: false }));
     const shufMastered = shuffle(masteredPool).map(q => ({ ...q, isRetry: false }));
 
     const unseenCombined = [];
@@ -582,6 +613,8 @@ const DeckScheduler = {
       const windowSlice = activeQueue.slice(Math.max(0, currentIndex - 20), currentIndex + 120);
       const baseOffset = Math.max(0, currentIndex - 20);
       const snap = {
+        schedulerVersion: 2,
+        prioritizeNewer: appState.prioritizeNewer !== false,
         deckMode: appState.deckMode || 'smart',
         drillTopic: appState.drillTopic || null,
         domainFilter: appState.domainFilter || '',
@@ -604,6 +637,10 @@ const DeckScheduler = {
       if (!raw) return false;
       const snap = JSON.parse(raw);
       if (!snap || !Array.isArray(snap.entries) || snap.entries.length === 0) return false;
+      // Rebuild legacy v1 smart snapshots once so existing users immediately get newer-question priority
+      if ((snap.deckMode || 'smart') === 'smart' && appState.prioritizeNewer !== false && snap.schedulerVersion !== 2) {
+        return false;
+      }
       const restored = [];
       snap.entries.forEach(e => {
         const baseQ = questionById[e.id];
@@ -1329,6 +1366,9 @@ function loadStoredState() {
       if (parsed.excludeSimLabs !== undefined) {
         parsed.excludeSimLabs = Boolean(parsed.excludeSimLabs);
       }
+      if (parsed.prioritizeNewer !== undefined) {
+        parsed.prioritizeNewer = Boolean(parsed.prioritizeNewer);
+      }
       appState = Object.assign(appState, parsed);
     }
   } catch (e) {
@@ -1844,8 +1884,9 @@ function updateActiveCardStatusBadges() {
 }
 window.updateActiveCardStatusBadges = updateActiveCardStatusBadges;
 
-function renderCurrentCard() {
-  if (appState.hideMastered && Array.isArray(activeQueue)) {
+function renderCurrentCard(options = {}) {
+  const skipMastered = options.skipMastered !== false;
+  if (skipMastered && appState.hideMastered && Array.isArray(activeQueue)) {
     while (currentIndex < activeQueue.length && appState.masteredIds[activeQueue[currentIndex].id] === true) {
       currentIndex++;
     }
@@ -1877,7 +1918,10 @@ function renderCurrentCard() {
   if (currentQuestion) {
     const isMastered = appState.masteredIds[currentQuestion.id] === true;
     const weakTopics = DeckScheduler.getWeakTopicsSet();
-    let reason = '📚 Unseen Normal (常规新题探索)';
+    const isNewerQ = Number(currentQuestion.id) >= 1000 && appState.prioritizeNewer !== false;
+    let reason = isNewerQ
+      ? '🆕 Unseen Recent Priority (较新题号优先)'
+      : '📚 Unseen Normal (常规新题探索)';
     if (appState.deckMode === 'random') {
       reason = isMastered ? '🎲 Pure Random (全随机池 - 已掌握题)' : '🎲 Pure Random (全随机池 - 未掌握题)';
     } else if (currentQuestion.isRetry) {
@@ -1889,7 +1933,9 @@ function renderCurrentCard() {
         reason = '✓ Mastered Review (已掌握题回顾)';
       }
     } else if (weakTopics && weakTopics.has(currentQuestion.topic)) {
-      reason = '🎯 Unseen Priority (薄弱考点新题优先)';
+      reason = isNewerQ
+        ? '🎯 Unseen Priority (薄弱考点 + 较新题优先)'
+        : '🎯 Unseen Priority (薄弱考点新题优先)';
     }
 
     DeckScheduler.logDrawEvent({
@@ -2936,7 +2982,7 @@ function goToPreviousCard() {
     triggerHaptic('click');
     currentIndex--;
     DeckScheduler.saveSessionSnapshot();
-    renderCurrentCard();
+    renderCurrentCard({ skipMastered: false });
     updateHeaderStats();
   }
 }
@@ -3299,6 +3345,10 @@ function openSettingsModal() {
   if (excludeSimToggle) {
     excludeSimToggle.checked = Boolean(appState.excludeSimLabs);
   }
+  const prioritizeNewerToggle = document.getElementById('prioritizeNewerToggle');
+  if (prioritizeNewerToggle) {
+    prioritizeNewerToggle.checked = (appState.prioritizeNewer !== false);
+  }
   const domSelect = document.getElementById('domainFilterSelect');
   if (domSelect) {
     domSelect.value = appState.domainFilter || '';
@@ -3414,6 +3464,28 @@ function updateExcludeSimLabs(enabled) {
   showToast(appState.excludeSimLabs ? `🛠️ Skipped Lab Sims (已跳过实验题，题库共 ${count.toLocaleString()} 题)` : `🛠️ Included Lab Sims (已包含实验题，题库共 ${count.toLocaleString()} 题)`);
 }
 window.updateExcludeSimLabs = updateExcludeSimLabs;
+
+function updatePrioritizeNewer(enabled) {
+  appState.prioritizeNewer = Boolean(enabled);
+  saveState();
+  if (appState.deckMode === 'weak') {
+    switchDeckMode('weak');
+  } else if (appState.deckMode === 'bookmarks') {
+    switchDeckMode('bookmarks');
+  } else if (appState.deckMode === 'domain') {
+    filterByDomain(appState.domainFilter);
+  } else if (appState.deckMode !== 'random') {
+    setupPracticeQueue(null);
+  }
+  renderCurrentCard();
+  updateHeaderStats();
+  const toggle = document.getElementById('prioritizeNewerToggle');
+  if (toggle) toggle.checked = appState.prioritizeNewer;
+  showToast(appState.prioritizeNewer
+    ? '🆕 Prioritize Newer Qs enabled (已开启较新题目优先)'
+    : '📚 Balanced Unseen Order (已恢复全库均匀乱序新题)');
+}
+window.updatePrioritizeNewer = updatePrioritizeNewer;
 
 function updateRetryInterval(val) {
   appState.retryInterval = parseInt(val, 10) || 25;
